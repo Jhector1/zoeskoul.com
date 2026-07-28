@@ -1,11 +1,18 @@
 import {
-  buildReviewProgressPayload,
   fetchReviewProgressGET,
-  saveReviewProgressPUT,
+  type LearningLessonCard,
 } from "@zoeskoul/learning-client";
 import {
   useLessonContent,
 } from "@zoeskoul/learning-client/react";
+import {
+  LessonActivityProgress,
+  LessonFloatingNavigation,
+  LessonReviewShell,
+  LessonTopicStage,
+  type LessonReviewProgressStatus,
+  type LessonReviewSectionItem,
+} from "@zoeskoul/lesson-shell";
 import {
   buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
@@ -38,6 +45,9 @@ import {
   StudentEmbeddedTryItCard,
 } from "./StudentEmbeddedTryItCard";
 import {
+  saveStudentReviewProgress,
+} from "./studentProgressPersistence";
+import {
   StudentSimpleQuizCard,
 } from "./StudentSimpleQuizCard";
 
@@ -67,6 +77,49 @@ function errorMessage(error: unknown): string {
   return error instanceof Error
     ? error.message
     : "Saved progress could not be loaded.";
+}
+
+function runtimeActivityLabel(
+  kind: string,
+): string {
+  const normalized = String(kind ?? "activity")
+    .replace(/_/g, " ")
+    .trim();
+
+  return normalized || "activity";
+}
+
+function runtimeActionLabel(
+  kind: string,
+): string {
+  const label = runtimeActivityLabel(kind);
+  return `Open ${label}`;
+}
+
+function completionMessage(
+  card: LearningLessonCard | null,
+): string {
+  if (!card) {
+    return "Complete this activity to continue.";
+  }
+
+  if (card.type === "runtime") {
+    return (
+      `Complete this ${runtimeActivityLabel(
+        card.runtimeKind,
+      )} to continue.`
+    );
+  }
+
+  if (card.type === "video") {
+    return "Mark this video as watched to continue.";
+  }
+
+  if (card.runtimeRequired) {
+    return "Complete this Try It to continue.";
+  }
+
+  return "Mark this lesson as read to continue.";
 }
 
 const LessonMarkdown = lazy(async () => {
@@ -362,16 +415,12 @@ export function StudentLessonHost(props: {
 
     try {
       const saved =
-        await saveReviewProgressPUT({
+        await saveStudentReviewProgress({
           apiOrigin: props.apiOrigin,
-          payload: buildReviewProgressPayload({
-            subjectSlug: props.subjectSlug,
-            moduleSlug: props.moduleSlug,
-            locale: "en",
-            state: next,
-            activeTopicId:
-              next.activeTopicId,
-          }),
+          subjectSlug: props.subjectSlug,
+          moduleSlug: props.moduleSlug,
+          locale: "en",
+          state: next,
         });
 
       setProgressState({
@@ -613,7 +662,7 @@ export function StudentLessonHost(props: {
   ) {
     return (
       <section
-        className="lesson-host-state"
+        className="lesson-review-state-page"
         aria-busy="true"
       >
         <div
@@ -622,7 +671,7 @@ export function StudentLessonHost(props: {
         />
         <strong>Loading lesson</strong>
         <p>
-          Loading the module outline and your saved progress.
+          Loading the lesson and your saved progress.
         </p>
       </section>
     );
@@ -630,7 +679,7 @@ export function StudentLessonHost(props: {
 
   if (lessonState.status === "error") {
     return (
-      <section className="lesson-host-state">
+      <section className="lesson-review-state-page">
         <strong>Lesson unavailable</strong>
         <p>{lessonState.error}</p>
         <a
@@ -653,291 +702,199 @@ export function StudentLessonHost(props: {
         activeTopicIndex,
     );
 
+  const shellSections: LessonReviewSectionItem[] =
+    lessonState.data.sections.map((section) => ({
+      id: section.slug,
+      label: section.title,
+      topics: section.topics.map((topic) => {
+        const topicIndex = topics.findIndex(
+          (candidate) =>
+            candidate.slug === topic.slug,
+        );
+        const state = getTopicProgressState(
+          progress?.topics,
+          topic.slug,
+        ).topic;
+
+        return {
+          id: topic.slug,
+          label: topic.title,
+          summary: topic.summary,
+          done: isLessonTopicComplete(
+            topic.cards,
+            state,
+          ),
+          active:
+            activeTopic?.slug === topic.slug,
+          disabled: !isLessonTopicUnlocked({
+            topics,
+            topicIndex,
+            progress,
+          }),
+        };
+      }),
+    }));
+
+  const activityStatuses: LessonReviewProgressStatus[] =
+    activeTopic
+      ? activeTopic.cards.map((card, index) => {
+          if (
+            isLessonCardComplete(
+              card,
+              topicProgress,
+            )
+          ) {
+            return "complete";
+          }
+
+          return index === activeCardIndex
+            ? "active"
+            : "upcoming";
+        })
+      : [];
+
+  const navigationMessage =
+    saveError ??
+    (
+      !canGoNext &&
+      !topicCompleteAfterAction
+        ? completionMessage(activeCard)
+        : null
+    );
+
   return (
-    <div className="lesson-host">
-      <nav
-        className="course-reader-breadcrumbs"
-        aria-label="Breadcrumb"
-      >
-        <a
-          href={backHref}
-          onClick={(event) =>
-            navigateStudentApp(event, backHref)
+    <LessonReviewShell
+      homeHref="/learning"
+      onHome={(event) =>
+        navigateStudentApp(event, "/learning")
+      }
+      moduleHref={backHref}
+      onModule={(event) =>
+        navigateStudentApp(event, backHref)
+      }
+      moduleTitle={lessonState.data.module.title}
+      moduleDescription={
+        lessonState.data.module.description
+      }
+      sections={shellSections}
+      activeTopicId={activeTopic?.slug ?? null}
+      onSelectTopic={(topicId) => {
+        const topicIndex = topics.findIndex(
+          (topic) => topic.slug === topicId,
+        );
+
+        if (topicIndex >= 0) {
+          void selectTopic(topicIndex);
+        }
+      }}
+      saveStatus={saveState}
+      saveError={saveError}
+      navigation={
+        activeTopic && activeCard ? (
+          <LessonFloatingNavigation
+            previousDisabled={!previousPosition}
+            nextDisabled={!canGoNext}
+            busy={isSaving}
+            message={navigationMessage}
+            onPrevious={() => void goPrevious()}
+            onNext={() => void goNext()}
+            nextLabel={
+              nextCrossesTopic
+                ? "Next topic"
+                : "Next"
+            }
+            nextTestId="lesson-next-button"
+          />
+        ) : null
+      }
+    >
+      {activeTopic && activeCard ? (
+        <LessonTopicStage
+          title={activeTopic.title}
+          subtitle={
+            activeTopic.summary ??
+            "Work through each lesson card in order."
+          }
+          progress={
+            <LessonActivityProgress
+              label="Lesson"
+              activeIndex={activeCardIndex}
+              statuses={activityStatuses}
+            />
           }
         >
-          Module outline
-        </a>
-        <span>/</span>
-        <span>{lessonState.data.module.title}</span>
-      </nav>
-
-      <header className="lesson-host-header">
-        <div>
-          <span className="course-reader-kicker">
-            Vite lesson host
-          </span>
-          <h2>{lessonState.data.module.title}</h2>
-          {lessonState.data.module.description ? (
-            <p>
-              {lessonState.data.module.description}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="lesson-host-status-group">
-          <span className="lesson-host-live-pill">
-            {progress
-              ? "Progress connected"
-              : "Progress temporarily unavailable"}
-          </span>
-
-          <span
-            className={[
-              "lesson-save-status",
-              saveState === "error"
-                ? "is-error"
-                : "",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            aria-live="polite"
-          >
-            {saveState === "saving"
-              ? "Saving…"
-              : saveState === "saved"
-                ? "Saved"
-                : saveState === "error"
-                  ? "Save failed"
-                  : ""}
-          </span>
-        </div>
-      </header>
-
-      <div className="lesson-host-layout">
-        <aside
-          className="lesson-host-topics"
-          aria-label="Lesson topics"
-        >
-          {lessonState.data.sections.map(
-            (section) => (
-              <section key={section.slug}>
-                <span>{section.title}</span>
-
-                {section.topics.map((topic) => {
-                  const topicIndex =
-                    topics.findIndex(
-                      (candidate) =>
-                        candidate.slug === topic.slug,
-                    );
-                  const state =
-                    getTopicProgressState(
-                      progress?.topics,
-                      topic.slug,
-                    ).topic;
-                  const completed =
-                    isLessonTopicComplete(
-                      topic.cards,
-                      state,
-                    );
-                  const active =
-                    activeTopic?.slug === topic.slug;
-                  const unlocked =
-                    isLessonTopicUnlocked({
-                      topics,
-                      topicIndex,
-                      progress,
-                    });
-
-                  return (
-                    <button
-                      key={topic.slug}
-                      type="button"
-                      className={[
-                        "lesson-topic-button",
-                        active ? "is-active" : "",
-                        completed
-                          ? "is-complete"
-                          : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                      disabled={
-                        !unlocked || isSaving
-                      }
-                      title={
-                        unlocked
-                          ? undefined
-                          : "Complete the previous topic first."
-                      }
-                      onClick={() =>
-                        void selectTopic(topicIndex)
-                      }
-                    >
-                      <span aria-hidden="true">
-                        {completed
-                          ? "✓"
-                          : unlocked
-                            ? "•"
-                            : "○"}
-                      </span>
-                      <span>{topic.title}</span>
-                    </button>
-                  );
-                })}
-              </section>
-            ),
-          )}
-        </aside>
-
-        <main className="lesson-host-stage">
-          {activeTopic && activeCard ? (
-            <>
-              <div className="lesson-topic-heading">
-                <span>
-                  {activeTopic.sectionTitle}
-                </span>
-                <h3>{activeTopic.title}</h3>
-                <p>
-                  {activeTopic.summary ??
-                    "Work through each lesson card in order."}
-                </p>
-              </div>
-
-              <div className="lesson-card-progress">
-                <span>
-                  Card {activeCardIndex + 1} of{" "}
-                  {activeTopic.cards.length}
-                </span>
-                <progress
-                  value={activeCardIndex + 1}
-                  max={Math.max(
-                    1,
-                    activeTopic.cards.length,
-                  )}
-                />
-              </div>
-
-              <article
-                className="lesson-content-card"
-                data-testid="lesson-content-card"
-                data-card-id={activeCard.id}
-              >
-                <header className="lesson-card-header">
-                  <div>
-                    <span>
-                      {activeCard.type === "runtime"
-                        ? activeCard.runtimeKind
-                        : activeCard.type}
-                    </span>
-                    {activeCard.title ? (
-                      <h4>{activeCard.title}</h4>
-                    ) : null}
-                  </div>
-
-                  <strong
-                    data-testid="lesson-card-status"
-                    className={
-                      activeCardComplete
-                        ? "is-complete"
-                        : undefined
-                    }
-                  >
-                    {activeCardComplete
-                      ? "Complete"
-                      : "In progress"}
-                  </strong>
+          <div className="student-review-topic-content">
+            <article
+              className="lesson-content-card"
+              data-testid="lesson-content-card"
+              data-card-id={activeCard.id}
+            >
+              {activeCard.title ? (
+                <header className="lesson-card-title">
+                  <h4>{activeCard.title}</h4>
+                  {activeCardComplete ? (
+                    <span aria-label="Complete">✓</span>
+                  ) : null}
                 </header>
+              ) : null}
 
-                {activeCard.type === "text" ? (
-                  <>
-                    <RenderedLessonMarkdown
-                      content={activeCard.markdown}
+              <span
+                data-testid="lesson-card-status"
+                className="lesson-card-status-sr"
+              >
+                {activeCardComplete
+                  ? "Complete"
+                  : "In progress"}
+              </span>
+
+              {activeCard.type === "text" ? (
+                <>
+                  <RenderedLessonMarkdown
+                    content={activeCard.markdown}
+                  />
+
+                  {activeCard.runtimeRequired &&
+                  activeCard.runtime?.targetKind ===
+                    "embedded_try_it" &&
+                  activeCard.runtime.runtimeKind ===
+                    "try_it" ? (
+                    <StudentEmbeddedTryItCard
+                      apiOrigin={props.apiOrigin}
+                      subjectSlug={props.subjectSlug}
+                      moduleSlug={props.moduleSlug}
+                      card={activeCard}
+                      passed={
+                        activeEmbeddedTryItPassed
+                      }
+                      disabled={isSaving}
+                      onPass={
+                        completeCurrentEmbeddedTryIt
+                      }
+                      onOpenLegacy={
+                        openCurrentRuntime
+                      }
                     />
-
-                    {activeCard.runtimeRequired &&
-                    activeCard.runtime?.targetKind ===
-                      "embedded_try_it" &&
-                    activeCard.runtime.runtimeKind ===
-                      "try_it" ? (
-                      <StudentEmbeddedTryItCard
-                        apiOrigin={props.apiOrigin}
-                        subjectSlug={props.subjectSlug}
-                        moduleSlug={props.moduleSlug}
-                        card={activeCard}
-                        passed={
-                          activeEmbeddedTryItPassed
+                  ) : activeCard.runtimeRequired ? (
+                    <div className="lesson-runtime-handoff">
+                      <div>
+                        <strong>Try It</strong>
+                        <span>
+                          Continue this activity in the full
+                          ZoeSkoul workspace.
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        className="is-primary"
+                        onClick={() =>
+                          void openCurrentRuntime()
                         }
                         disabled={isSaving}
-                        onPass={
-                          completeCurrentEmbeddedTryIt
-                        }
-                        onOpenLegacy={
-                          openCurrentRuntime
-                        }
-                      />
-                    ) : activeCard.runtimeRequired ? (
-                      <div className="lesson-runtime-handoff">
-                        <span>
-                          Complete the embedded Try It in
-                          the current interactive runtime.
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            void openCurrentRuntime()
-                          }
-                          disabled={isSaving}
-                        >
-                          Open Try It
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="lesson-card-actions">
-                        <button
-                          type="button"
-                          className={
-                            activeCardComplete
-                              ? "is-complete"
-                              : undefined
-                          }
-                          onClick={() =>
-                            void markCurrentCardDone()
-                          }
-                          disabled={
-                            activeCardComplete ||
-                            isSaving ||
-                            !progress
-                          }
-                        >
-                          {activeCardComplete
-                            ? "✓ Read"
-                            : "Mark as read"}
-                        </button>
-                      </div>
-                    )}
-                  </>
-                ) : activeCard.type === "video" ? (
-                  <>
-                    <div className="lesson-video-frame">
-                      <iframe
-                        src={activeCard.url}
-                        title={
-                          activeCard.title ??
-                          "Lesson video"
-                        }
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
+                      >
+                        Open Try It
+                      </button>
                     </div>
-
-                    {activeCard.captionMarkdown ? (
-                      <RenderedLessonMarkdown
-                        content={
-                          activeCard.captionMarkdown
-                        }
-                      />
-                    ) : null}
-
+                  ) : (
                     <div className="lesson-card-actions">
                       <button
                         type="button"
@@ -956,115 +913,124 @@ export function StudentLessonHost(props: {
                         }
                       >
                         {activeCardComplete
-                          ? "✓ Watched"
-                          : "Mark watched"}
+                          ? "✓ Read"
+                          : "Mark as read"}
                       </button>
                     </div>
-                  </>
-                ) : activeCard.type === "runtime" &&
-                  activeCard.runtimeKind === "quiz" ? (
-                  <StudentSimpleQuizCard
-                    apiOrigin={props.apiOrigin}
-                    subjectSlug={props.subjectSlug}
-                    moduleSlug={props.moduleSlug}
-                    card={activeCard}
-                    completed={activeCardComplete}
-                    disabled={isSaving}
-                    onComplete={completeCurrentQuiz}
-                    onOpenLegacy={openCurrentRuntime}
-                  />
-                ) : (
-                  <div className="lesson-runtime-handoff">
-                    <span>
-                      This {activeCard.runtimeKind} card
-                      uses the current interactive runtime.
-                      Your completion returns here through
-                      saved progress.
-                    </span>
+                  )}
+                </>
+              ) : activeCard.type === "video" ? (
+                <>
+                  <div className="lesson-video-frame">
+                    <iframe
+                      src={activeCard.url}
+                      title={
+                        activeCard.title ??
+                        "Lesson video"
+                      }
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+
+                  {activeCard.captionMarkdown ? (
+                    <RenderedLessonMarkdown
+                      content={
+                        activeCard.captionMarkdown
+                      }
+                    />
+                  ) : null}
+
+                  <div className="lesson-card-actions">
                     <button
                       type="button"
-                      onClick={() =>
-                        void openCurrentRuntime()
+                      className={
+                        activeCardComplete
+                          ? "is-complete"
+                          : undefined
                       }
-                      disabled={isSaving}
+                      onClick={() =>
+                        void markCurrentCardDone()
+                      }
+                      disabled={
+                        activeCardComplete ||
+                        isSaving ||
+                        !progress
+                      }
                     >
-                      Open {activeCard.runtimeKind}
+                      {activeCardComplete
+                        ? "✓ Watched"
+                        : "Mark watched"}
                     </button>
                   </div>
-                )}
-              </article>
-
-              {topicComplete &&
-              !nextPosition ? (
-                <section className="lesson-topic-complete">
-                  <strong>Topic complete</strong>
-                  <p>
-                    You completed every activity in this
-                    topic.
-                  </p>
-                </section>
-              ) : null}
-
-              <nav
-                className="lesson-card-navigation"
-                aria-label="Lesson card navigation"
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    void goPrevious()
-                  }
-                  disabled={
-                    !previousPosition || isSaving
-                  }
-                >
-                  ← Previous
-                </button>
-
-                <span>
-                  {saveError ??
-                    (
-                      !canGoNext &&
-                      nextPosition === null &&
-                      !topicCompleteAfterAction
-                        ? "Complete this activity to continue."
-                        : ""
+                </>
+              ) : activeCard.type === "runtime" &&
+                activeCard.runtimeKind === "quiz" ? (
+                <StudentSimpleQuizCard
+                  apiOrigin={props.apiOrigin}
+                  subjectSlug={props.subjectSlug}
+                  moduleSlug={props.moduleSlug}
+                  card={activeCard}
+                  completed={activeCardComplete}
+                  disabled={isSaving}
+                  onComplete={completeCurrentQuiz}
+                  onOpenLegacy={openCurrentRuntime}
+                />
+              ) : (
+                <div className="lesson-runtime-handoff">
+                  <div>
+                    <strong>
+                      {runtimeActivityLabel(
+                        activeCard.runtimeKind,
+                      )}
+                    </strong>
+                    <span>
+                      Continue this activity in the full
+                      ZoeSkoul workspace.
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    className="is-primary"
+                    onClick={() =>
+                      void openCurrentRuntime()
+                    }
+                    disabled={isSaving}
+                  >
+                    {runtimeActionLabel(
+                      activeCard.runtimeKind,
                     )}
-                </span>
-
-                <button
-                  type="button"
-                  className="is-primary"
-                  data-testid="lesson-next-button"
-                  onClick={() => void goNext()}
-                  disabled={
-                    !canGoNext || isSaving
-                  }
-                >
-                  {nextCrossesTopic
-                    ? "Next topic"
-                    : "Next"}{" "}
-                  →
-                </button>
-              </nav>
-
-              {progressState.status === "error" ? (
-                <div className="lesson-progress-warning">
-                  {progressState.message}
+                  </button>
                 </div>
-              ) : null}
-            </>
-          ) : (
-            <section className="lesson-host-state">
-              <strong>
-                {activeTopic
-                  ? "No lesson cards found"
-                  : "No topics found"}
-              </strong>
-            </section>
-          )}
-        </main>
-      </div>
-    </div>
+              )}
+            </article>
+
+            {topicComplete && !nextPosition ? (
+              <section className="lesson-topic-complete">
+                <strong>Topic complete</strong>
+                <p>
+                  You completed every activity in this
+                  topic.
+                </p>
+              </section>
+            ) : null}
+
+            {progressState.status === "error" ? (
+              <div className="lesson-progress-warning">
+                {progressState.message}
+              </div>
+            ) : null}
+          </div>
+        </LessonTopicStage>
+      ) : (
+        <section className="lesson-host-state">
+          <strong>
+            {activeTopic
+              ? "No lesson cards found"
+              : "No topics found"}
+          </strong>
+        </section>
+      )}
+    </LessonReviewShell>
   );
 }

@@ -84,12 +84,7 @@ export function StudentAppShell(props: {
               "Review sections and topics before opening the interactive lesson.",
           }
         : location.kind === "lesson"
-          ? {
-              eyebrow: "Lesson",
-              title: "Interactive lesson",
-              description:
-                "The lesson route and saved progress now run in the Vite student app.",
-            }
+          ? null
           : routeHeadings[location.route.id];
 
   const displayName =
@@ -125,6 +120,12 @@ export function StudentAppShell(props: {
         routeId={location.route.id}
       />
     );
+
+  if (location.kind === "lesson") {
+    return content;
+  }
+
+  const visibleHeading = heading ?? routeHeadings.learning;
 
   return (
     <div className="student-layout">
@@ -185,10 +186,10 @@ export function StudentAppShell(props: {
       <main className="student-main">
         <header className="student-topbar student-real-topbar">
           <div>
-            <p>{heading.eyebrow}</p>
-            <h1>{heading.title}</h1>
+            <p>{visibleHeading.eyebrow}</p>
+            <h1>{visibleHeading.title}</h1>
             <span className="student-page-description">
-              {heading.description}
+              {visibleHeading.description}
             </span>
           </div>
         </header>

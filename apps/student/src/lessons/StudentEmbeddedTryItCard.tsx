@@ -105,7 +105,7 @@ export function StudentEmbeddedTryItCard(
       setLoadState({
         status: "unsupported",
         message:
-          "This Try It still uses the current interactive runtime.",
+          "This activity opens in the full ZoeSkoul workspace.",
       });
 
       return () => {
@@ -139,7 +139,7 @@ export function StudentEmbeddedTryItCard(
           setLoadState({
             status: "unsupported",
             message:
-              "This Try It still uses the current interactive runtime.",
+              "This activity opens in the full ZoeSkoul workspace.",
           });
           return;
         }
@@ -165,7 +165,7 @@ export function StudentEmbeddedTryItCard(
           setLoadState({
             status: "unsupported",
             message:
-              "This Try It still uses the current interactive runtime.",
+              "This activity opens in the full ZoeSkoul workspace.",
           });
           return;
         }
@@ -263,7 +263,7 @@ export function StudentEmbeddedTryItCard(
             }
             disabled={props.disabled}
           >
-            Open current runtime
+            Open workspace
           </button>
         </div>
       </section>
@@ -363,7 +363,7 @@ export function StudentEmbeddedTryItCard(
       <div className="student-embedded-try-it-filebar">
         <strong>main.py</strong>
         <span>
-          Protected Python practice
+          Python practice
         </span>
       </div>
 
@@ -479,14 +479,13 @@ export function StudentEmbeddedTryItCard(
             submitting
           }
         >
-          Open current runtime
+          Open workspace
         </button>
       </div>
 
       {props.passed ? (
         <p className="student-embedded-try-it-next">
-          Try It passed. Select Next to
-          complete this reading card.
+          Complete. Select Next to continue.
         </p>
       ) : null}
     </form>

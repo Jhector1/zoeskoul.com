@@ -136,7 +136,7 @@ export function StudentSimpleQuizCard(props: {
           setLoadState({
             status: "unsupported",
             message:
-              "This quiz still uses the current interactive runtime.",
+              "This quiz opens in the full ZoeSkoul workspace.",
           });
           return;
         }
@@ -158,7 +158,7 @@ export function StudentSimpleQuizCard(props: {
           setLoadState({
             status: "unsupported",
             message:
-              "This quiz still uses the current interactive runtime.",
+              "This quiz opens in the full ZoeSkoul workspace.",
           });
           return;
         }
@@ -242,7 +242,7 @@ export function StudentSimpleQuizCard(props: {
             }
             disabled={props.disabled}
           >
-            Open current runtime
+            Open workspace
           </button>
         </div>
       </section>
@@ -491,7 +491,7 @@ export function StudentSimpleQuizCard(props: {
           }
           disabled={props.disabled || submitting}
         >
-          Open current runtime
+          Open workspace
         </button>
       </div>
     </form>

@@ -16,6 +16,7 @@
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
     "@zoeskoul/lesson-renderer": "workspace:*",
+    "@zoeskoul/lesson-shell": "workspace:*",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
