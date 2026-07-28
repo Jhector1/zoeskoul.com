@@ -48,7 +48,8 @@
     "test:e2e:runner": "RUNNER_E2E=1 playwright test --workers=1 tests/e2e/review/linux-terminal-session-reuse.spec.ts tests/e2e/review/linux-terminal-workspace-smoke.spec.ts tests/e2e/review/review-module-workspace-sync.spec.ts tests/e2e/review/curriculum-i18n-workspace-regression.spec.ts",
     "test:e2e:ide": "RUN_IDE_E2E=1 playwright test --workers=1 tests/e2e/full-ide-terminal-workspace-sync.spec.ts",
     "test:e2e:legacy": "RUN_E2E_LEGACY=1 playwright test --workers=1 tests/e2e/review/fill-answer-code-tool-pane.spec.ts tests/e2e/review/project-question-workspace-isolation.spec.ts tests/e2e/review/python-file-io-workspace-fixtures.spec.ts tests/e2e/review/python-project-exercise-route-navigation.spec.ts tests/e2e/review/reset-completion-regression.spec.ts tests/e2e/review/review-code-input-tools-workspace-persistence.spec.ts tests/e2e/review/review-dev-clone-project-back-forward-persistence.spec.ts tests/e2e/review/review-real-code-tools-back-forward-persistence.spec.ts tests/e2e/review/workspace-saved-beats-starter.spec.ts tests/e2e/review-module-clone/review-module-clone-hardening.spec.ts tests/e2e/review-module-clone/review-module-clone-navigation-workspace.spec.ts tests/e2e/review-module-clone/review-module-clone-production-safety.spec.ts",
-    "test:e2e:all": "RUN_E2E_LEGACY=1 RUNNER_E2E=1 RUN_IDE_E2E=1 playwright test --workers=1"
+    "test:e2e:all": "RUN_E2E_LEGACY=1 RUNNER_E2E=1 RUN_IDE_E2E=1 playwright test --workers=1",
+    "test:e2e:student-runtime": "playwright test --config playwright.student-runtime.config.ts --workers=1"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",

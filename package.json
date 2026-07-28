@@ -46,7 +46,8 @@
     "build:student": "turbo run build --filter=@zoeskoul/student",
     "build:teacher": "turbo run build --filter=@zoeskoul/teacher",
     "build:vite-apps": "turbo run build --filter=@zoeskoul/student --filter=@zoeskoul/teacher",
-    "typecheck:vite-apps": "turbo run typecheck --filter=@zoeskoul/student --filter=@zoeskoul/teacher"
+    "typecheck:vite-apps": "turbo run typecheck --filter=@zoeskoul/student --filter=@zoeskoul/teacher",
+    "test:e2e:student-runtime": "pnpm --filter @zoeskoul/web test:e2e:student-runtime"
   },
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {

@@ -90,3 +90,6 @@ apps/runner/Archive.zip
 .env*
 
 .curriculum-backups/
+
+# Playwright generated auth state
+apps/web/.playwright/
