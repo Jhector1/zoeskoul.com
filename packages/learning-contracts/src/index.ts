@@ -261,12 +261,81 @@ export function isLearningModuleOverviewResponse(
   );
 }
 
+export type LearningRuntimeKind =
+  | "sketch"
+  | "quiz"
+  | "project"
+  | "try_it";
+
+export type LearningRuntimeTarget = {
+  version: 1;
+  sectionSlug: string;
+  topicSlug: string;
+  ownerCardId: string;
+  targetKind: "card" | "embedded_try_it";
+  targetId: string;
+  runtimeKind: LearningRuntimeKind;
+};
+
+/**
+ * These fields are intentionally forbidden from the lesson-outline response.
+ *
+ * Runtime payloads are fetched through a separate protected boundary later.
+ * The lesson response may expose stable target identity, but never authored
+ * answers, solutions, validation recipes, hidden tests, or starter workspaces.
+ */
+export const LEARNING_LESSON_FORBIDDEN_FIELDS = [
+  "answerKey",
+  "checkSql",
+  "correctAnswer",
+  "expectedSolution",
+  "hiddenTests",
+  "recipe",
+  "revealAnswer",
+  "solutionCode",
+  "solutionFiles",
+  "sourceChecks",
+  "spec",
+  "starterCode",
+  "starterFiles",
+  "tests",
+  "tryIt",
+  "workspace",
+] as const;
+
+const learningLessonForbiddenFieldSet = new Set<string>(
+  LEARNING_LESSON_FORBIDDEN_FIELDS,
+);
+
+export function hasForbiddenLearningLessonFields(
+  value: unknown,
+): boolean {
+  if (Array.isArray(value)) {
+    return value.some(hasForbiddenLearningLessonFields);
+  }
+
+  if (!isRecord(value)) return false;
+
+  for (const [key, nested] of Object.entries(value)) {
+    if (learningLessonForbiddenFieldSet.has(key)) {
+      return true;
+    }
+
+    if (hasForbiddenLearningLessonFields(nested)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export type LearningLessonTextCard = {
   type: "text";
   id: string;
   title: string | null;
   markdown: string;
   runtimeRequired: boolean;
+  runtime: LearningRuntimeTarget | null;
 };
 
 export type LearningLessonVideoCard = {
@@ -285,6 +354,7 @@ export type LearningLessonRuntimeCard = {
   id: string;
   title: string | null;
   runtimeKind: "sketch" | "quiz" | "project";
+  runtime: LearningRuntimeTarget;
 };
 
 export type LearningLessonCard =
@@ -321,6 +391,29 @@ function isNullableString(
   return value === null || typeof value === "string";
 }
 
+function isLearningRuntimeTarget(
+  value: unknown,
+): value is LearningRuntimeTarget {
+  return (
+    isRecord(value) &&
+    value.version === 1 &&
+    typeof value.sectionSlug === "string" &&
+    typeof value.topicSlug === "string" &&
+    typeof value.ownerCardId === "string" &&
+    (
+      value.targetKind === "card" ||
+      value.targetKind === "embedded_try_it"
+    ) &&
+    typeof value.targetId === "string" &&
+    (
+      value.runtimeKind === "sketch" ||
+      value.runtimeKind === "quiz" ||
+      value.runtimeKind === "project" ||
+      value.runtimeKind === "try_it"
+    )
+  );
+}
+
 function isLearningLessonCard(
   value: unknown,
 ): value is LearningLessonCard {
@@ -334,9 +427,22 @@ function isLearningLessonCard(
   }
 
   if (value.type === "text") {
+    if (
+      typeof value.markdown !== "string" ||
+      typeof value.runtimeRequired !== "boolean"
+    ) {
+      return false;
+    }
+
+    if (!value.runtimeRequired) {
+      return value.runtime === null;
+    }
+
     return (
-      typeof value.markdown === "string" &&
-      typeof value.runtimeRequired === "boolean"
+      isLearningRuntimeTarget(value.runtime) &&
+      value.runtime.ownerCardId === value.id &&
+      value.runtime.targetKind === "embedded_try_it" &&
+      value.runtime.runtimeKind === "try_it"
     );
   }
 
@@ -354,10 +460,20 @@ function isLearningLessonCard(
   }
 
   if (value.type === "runtime") {
+    if (
+      value.runtimeKind !== "sketch" &&
+      value.runtimeKind !== "quiz" &&
+      value.runtimeKind !== "project"
+    ) {
+      return false;
+    }
+
     return (
-      value.runtimeKind === "sketch" ||
-      value.runtimeKind === "quiz" ||
-      value.runtimeKind === "project"
+      isLearningRuntimeTarget(value.runtime) &&
+      value.runtime.ownerCardId === value.id &&
+      value.runtime.targetKind === "card" &&
+      value.runtime.targetId === value.id &&
+      value.runtime.runtimeKind === value.runtimeKind
     );
   }
 
@@ -367,6 +483,10 @@ function isLearningLessonCard(
 export function isLearningLessonContentResponse(
   value: unknown,
 ): value is LearningLessonContentResponse {
+  if (hasForbiddenLearningLessonFields(value)) {
+    return false;
+  }
+
   if (
     !isRecord(value) ||
     !isRecord(value.subject) ||

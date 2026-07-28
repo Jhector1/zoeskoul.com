@@ -18,16 +18,75 @@ function nullableString(
     : null;
 }
 
-function projectCard(
+function embeddedTryItId(
   card: ReviewCard,
-): LearningLessonCard {
+): string | null {
+  const value = (
+    card as {
+      tryIt?: {
+        id?: unknown;
+      } | null;
+    }
+  ).tryIt;
+
+  return typeof value?.id === "string" &&
+    value.id.trim()
+    ? value.id.trim()
+    : null;
+}
+
+function runtimeTarget(args: {
+  sectionSlug: string;
+  topicSlug: string;
+  ownerCardId: string;
+  targetKind: "card" | "embedded_try_it";
+  targetId: string;
+  runtimeKind:
+    | "sketch"
+    | "quiz"
+    | "project"
+    | "try_it";
+}) {
+  return {
+    version: 1 as const,
+    sectionSlug: args.sectionSlug,
+    topicSlug: args.topicSlug,
+    ownerCardId: args.ownerCardId,
+    targetKind: args.targetKind,
+    targetId: args.targetId,
+    runtimeKind: args.runtimeKind,
+  };
+}
+
+function projectCard(args: {
+  card: ReviewCard;
+  sectionSlug: string;
+  topicSlug: string;
+}): LearningLessonCard {
+  const {
+    card,
+    sectionSlug,
+    topicSlug,
+  } = args;
   if (card.type === "text") {
+    const tryItId = embeddedTryItId(card);
+
     return {
       type: "text",
       id: card.id,
       title: nullableString(card.title),
       markdown: card.markdown,
-      runtimeRequired: Boolean(card.tryIt),
+      runtimeRequired: Boolean(tryItId),
+      runtime: tryItId
+        ? runtimeTarget({
+            sectionSlug,
+            topicSlug,
+            ownerCardId: card.id,
+            targetKind: "embedded_try_it",
+            targetId: tryItId,
+            runtimeKind: "try_it",
+          })
+        : null,
     };
   }
 
@@ -54,6 +113,14 @@ function projectCard(
     id: card.id,
     title: nullableString(card.title),
     runtimeKind: card.type,
+    runtime: runtimeTarget({
+      sectionSlug,
+      topicSlug,
+      ownerCardId: card.id,
+      targetKind: "card",
+      targetId: card.id,
+      runtimeKind: card.type,
+    }),
   };
 }
 
@@ -133,8 +200,13 @@ export function buildStudentLessonContent(args: {
               ),
             order: topic.order,
             cards:
-              reviewTopic?.cards.map(projectCard) ??
-              [],
+              reviewTopic?.cards.map((card) =>
+                projectCard({
+                  card,
+                  sectionSlug: section.slug,
+                  topicSlug: topic.slug,
+                }),
+              ) ?? [],
           };
         }),
       }),
