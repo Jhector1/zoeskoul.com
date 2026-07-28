@@ -37,6 +37,37 @@ type LaunchCandidate = TargetRef & {
   lesson: unknown;
 };
 
+type CoveredQuizKind =
+  | "single_choice"
+  | "multi_choice";
+
+type QuizCoverageCase = {
+  expectedKind: CoveredQuizKind;
+  subjectSlug: string;
+  moduleSlug: string;
+  topicSlug: string;
+  correctOptionIds: readonly string[];
+};
+
+const quizCoverageCases: readonly QuizCoverageCase[] = [
+  {
+    expectedKind: "single_choice",
+    subjectSlug: "python-v2",
+    moduleSlug: "python-v2-0",
+    topicSlug: "what-python-is",
+    correctOptionIds: ["b"],
+  },
+  {
+    expectedKind: "multi_choice",
+    subjectSlug: "applied-python-projects",
+    moduleSlug:
+      "python-8-object-oriented-foundations",
+    topicSlug:
+      "class-files-and-instances",
+    correctOptionIds: ["a", "c"],
+  },
+];
+
 type LessonCardSnapshot = {
   id: string;
   type: string | null;
@@ -518,9 +549,9 @@ test.describe.configure({
 });
 
 test(
-  "Vite student renders, validates, and persists a protected simple quiz",
+  "Vite student renders, validates, and persists protected simple quizzes",
   async ({ page }) => {
-    test.setTimeout(180_000);
+    test.setTimeout(360_000);
 
     await page.goto("/learning", {
       waitUntil: "domcontentloaded",
@@ -652,36 +683,26 @@ test(
         "to expose at least one quiz target.",
     ).toBeGreaterThan(0);
 
-    let ready: LaunchCandidate | null =
-      null;
     let unsupported:
-      | JsonResult
-      | null = null;
+    | JsonResult
+    | null = null;
 
-    const diagnostics: Array<{
-      subjectSlug: string;
-      moduleSlug: string;
-      cardId: string;
-      status: number;
-      reason: unknown;
-    }> = [];
-
-    // Keep discovery bounded. Once a supported launch is found,
-    // the real browser repeats that exact request below.
+    /**
+     * Preserve one explicit legacy-fallback assertion independently from
+     * the deterministic migrated coverage cases below.
+     */
     for (
-      let start = 0;
-      start < Math.min(targets.length, 48);
-      start += 6
+    let start = 0;
+    start < Math.min(targets.length, 48);
+    start += 6
     ) {
       const batch = targets.slice(
         start,
         start + 6,
       );
-
       const launched = await Promise.all(
         batch.map(
           async (targetRef) => ({
-            targetRef,
             response: await apiJson(
               page.request,
               launchUrl(targetRef),
@@ -696,59 +717,17 @@ test(
             ? item.response.body.reason
             : null;
 
-        diagnostics.push({
-          subjectSlug:
-            item.targetRef.subjectSlug,
-          moduleSlug:
-            item.targetRef.moduleSlug,
-          cardId:
-            item.targetRef.target
-              .ownerCardId,
-          status:
-            item.response.status,
-          reason,
-        });
-
         if (
           item.response.status === 409 &&
           reason ===
-            "requires_exact_single_exercise" &&
-          unsupported === null
+            "requires_exact_single_exercise"
         ) {
           unsupported = item.response;
-        }
-
-        if (
-          item.response.status === 200 &&
-          isRecord(item.response.body) &&
-          isRecord(
-            item.response.body.exercise,
-          ) &&
-          item.response.body.exercise.kind ===
-            "single_choice"
-        ) {
-          const lessonResult =
-            lessonResults.find(
-              (result) =>
-                result.subjectSlug ===
-                  item.targetRef.subjectSlug &&
-                result.moduleSlug ===
-                  item.targetRef.moduleSlug,
-            );
-
-          ready = {
-            ...item.targetRef,
-            launch:
-              item.response.body,
-            lesson:
-              lessonResult?.response.body ??
-              null,
-          };
           break;
         }
       }
 
-      if (ready) break;
+      if (unsupported) break;
     }
 
     expect(
@@ -764,179 +743,126 @@ test(
         "requires_exact_single_exercise",
     });
 
-    expect(
-      ready,
-      "No exact single-exercise simple quiz " +
-        "was available in the first 48 quiz targets.\n" +
-        "Gateway scan:\n" +
-        JSON.stringify(
-          diagnostics,
-          null,
-          2,
-        ),
-    ).not.toBeNull();
+    const covered = await Promise.all(
+      quizCoverageCases.map(
+        async (coverageCase) => {
+          const targetRef = targets.find(
+            (candidate) =>
+              candidate.subjectSlug ===
+                coverageCase.subjectSlug &&
+              candidate.moduleSlug ===
+                coverageCase.moduleSlug &&
+              (
+                candidate.target.topicSlug
+                  .split(".")
+                  .filter(Boolean)
+                  .at(-1) ??
+                candidate.target.topicSlug
+              ) === coverageCase.topicSlug,
+          );
 
-    const browserLaunch = await browserJson(
-      page,
-      launchUrl(ready!),
-    );
+          if (!targetRef) {
+            throw new Error(
+              "Expected learner-safe lesson target for " +
+                `${coverageCase.expectedKind}: ` +
+                `${coverageCase.subjectSlug}/` +
+                `${coverageCase.moduleSlug}/` +
+                `${coverageCase.topicSlug}`,
+            );
+          }
 
-    expect(browserLaunch.status).toBe(200);
-    expect(
-      collectForbiddenPaths(
-        browserLaunch.body,
-      ),
-    ).toEqual([]);
-    expect(
-      isRecord(browserLaunch.body),
-    ).toBe(true);
+          const response = await apiJson(
+            page.request,
+            launchUrl(targetRef),
+          );
 
-    const launch =
-      browserLaunch.body as Record<
-        string,
-        unknown
-      >;
+          expect(
+            response.status,
+            `Expected ${coverageCase.expectedKind} launch to succeed.`,
+          ).toBe(200);
+          expect(isRecord(response.body)).toBe(true);
+          expect(
+            isRecord(response.body) &&
+              isRecord(response.body.exercise)
+              ? response.body.exercise.kind
+              : null,
+          ).toBe(coverageCase.expectedKind);
 
-    expect(typeof launch.key).toBe("string");
-    expect(
-      String(launch.key).length,
-    ).toBeGreaterThanOrEqual(16);
-    expect(launch.validationPath).toBe(
-      "/api/student/runtime/practice/validate",
-    );
-    expect(isRecord(launch.exercise)).toBe(true);
+          const lessonResult =
+            lessonResults.find(
+              (result) =>
+                result.subjectSlug ===
+                  targetRef.subjectSlug &&
+                result.moduleSlug ===
+                  targetRef.moduleSlug,
+            );
 
-    const exercise =
-      launch.exercise as Record<
-        string,
-        unknown
-      >;
-
-    expect(exercise.kind).toBe(
-      "single_choice",
-    );
-
-    const resetProgress = await browserJson(
-      page,
-      `${websiteOrigin}/api/review/progress?` +
-        new URLSearchParams({
-          subjectSlug:
-            ready!.subjectSlug,
-          moduleSlug:
-            ready!.moduleSlug,
-          locale: "en",
-        }).toString(),
-      {
-        method: "DELETE",
-      },
-    );
-
-    expect(resetProgress.status).toBe(200);
-    expect(resetProgress.body).toMatchObject({
-      ok: true,
-    });
-
-    const prerequisiteCards =
-      lessonCardsBeforeTarget(
-        ready!.lesson,
-        ready!.target,
-      );
-
-    expect(
-      prerequisiteCards,
-      "Expected to find the discovered quiz in its learner-safe lesson response.",
-    ).not.toBeNull();
-
-    expect(
-      prerequisiteCards!.length,
-      "Expected the migrated quiz to have prerequisite lesson cards.",
-    ).toBeGreaterThan(0);
-
-    const readingPrerequisiteIds =
-      prerequisiteCards!
-        .filter(
-          (card) =>
-            card.type !== "runtime" ||
-            card.runtimeKind === "sketch",
-        )
-        .map((card) => card.id);
-    const assessmentPrerequisiteIds =
-      prerequisiteCards!
-        .filter(
-          (card) =>
-            card.type === "runtime" &&
-            (
-              card.runtimeKind === "quiz" ||
-              card.runtimeKind === "project"
-            ),
-        )
-        .map((card) => card.id);
-
-    const readingPrerequisiteDone =
-      Object.fromEntries(
-        readingPrerequisiteIds.map(
-          (cardId) => [cardId, true],
-        ),
-      );
-    const assessmentPrerequisiteDone =
-      Object.fromEntries(
-        assessmentPrerequisiteIds.map(
-          (cardId) => [cardId, true],
-        ),
-      );
-    const canonicalTopicKey =
-      ready!.target.topicSlug
-        .split(".")
-        .filter(Boolean)
-        .at(-1) ??
-      ready!.target.topicSlug;
-
-    const seededProgress =
-      await browserJson(
-        page,
-        `${websiteOrigin}/api/review/progress`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-          body: {
-            subjectSlug:
-              ready!.subjectSlug,
-            moduleSlug:
-              ready!.moduleSlug,
-            locale: "en",
-            state: {
-              activeTopicId:
-                canonicalTopicKey,
-              moduleCompleted: false,
-              topics: {
-                [canonicalTopicKey]: {
-                  completed: false,
-                  readingDone:
-                    readingPrerequisiteDone,
-                  cardsDone:
-                    readingPrerequisiteDone,
-                  quizzesDone:
-                    assessmentPrerequisiteDone,
-                },
-              },
-              __saveRevision:
-                Date.now(),
-            },
-          },
+          return {
+            coverageCase,
+            ready: {
+              ...targetRef,
+              launch:
+                response.body as Record<
+                  string,
+                  unknown
+                >,
+              lesson:
+                lessonResult?.response.body ??
+                null,
+            } satisfies LaunchCandidate,
+          };
         },
+      ),
+    );
+
+    for (const coverage of covered) {
+      const {
+        expectedKind,
+        correctOptionIds,
+      } = coverage.coverageCase;
+      const ready = coverage.ready;
+
+      const browserLaunch = await browserJson(
+        page,
+        launchUrl(ready!),
       );
 
-    expect(seededProgress.status).toBe(200);
+      expect(browserLaunch.status).toBe(200);
+      expect(
+        collectForbiddenPaths(
+          browserLaunch.body,
+        ),
+      ).toEqual([]);
+      expect(
+        isRecord(browserLaunch.body),
+      ).toBe(true);
 
-    /**
-     * Verify that the exact learner-safe prerequisite card ids survive
-     * PUT -> GET before StudentLessonHost hydrates the lesson.
-     */
-    const restoredProgress =
-      await browserJson(
+      const launch =
+        browserLaunch.body as Record<
+          string,
+          unknown
+        >;
+
+      expect(typeof launch.key).toBe("string");
+      expect(
+        String(launch.key).length,
+      ).toBeGreaterThanOrEqual(16);
+      expect(launch.validationPath).toBe(
+        "/api/student/runtime/practice/validate",
+      );
+      expect(isRecord(launch.exercise)).toBe(true);
+
+      const exercise =
+        launch.exercise as Record<
+          string,
+          unknown
+        >;
+
+      expect(exercise.kind).toBe(
+        expectedKind,
+      );
+
+      const resetProgress = await browserJson(
         page,
         `${websiteOrigin}/api/review/progress?` +
           new URLSearchParams({
@@ -946,306 +872,461 @@ test(
               ready!.moduleSlug,
             locale: "en",
           }).toString(),
+        {
+          method: "DELETE",
+        },
       );
 
-    expect(restoredProgress.status).toBe(200);
-    expect(isRecord(restoredProgress.body)).toBe(true);
+      expect(resetProgress.status).toBe(200);
+      expect(resetProgress.body).toMatchObject({
+        ok: true,
+      });
 
-    const restoredState =
-      isRecord(restoredProgress.body) &&
-      isRecord(
-        restoredProgress.body.progress,
-      )
-        ? restoredProgress.body.progress
-        : null;
+      const prerequisiteCards =
+        lessonCardsBeforeTarget(
+          ready!.lesson,
+          ready!.target,
+        );
 
-    expect(
-      restoredState,
-      "Expected review-progress GET to return the seeded state.",
-    ).not.toBeNull();
+      expect(
+        prerequisiteCards,
+        "Expected to find the discovered quiz in its learner-safe lesson response.",
+      ).not.toBeNull();
 
-    const restoredTopics =
-      isRecord(restoredState) &&
-      isRecord(restoredState.topics)
-        ? restoredState.topics
-        : null;
-    const restoredTopic =
-      restoredTopics &&
-      isRecord(
-        restoredTopics[
-          canonicalTopicKey
-        ],
-      )
-        ? restoredTopics[
+      expect(
+        prerequisiteCards!.length,
+        "Expected the migrated quiz to have prerequisite lesson cards.",
+      ).toBeGreaterThan(0);
+
+      const readingPrerequisiteIds =
+        prerequisiteCards!
+          .filter(
+            (card) =>
+              card.type !== "runtime" ||
+              card.runtimeKind === "sketch",
+          )
+          .map((card) => card.id);
+      const assessmentPrerequisiteIds =
+        prerequisiteCards!
+          .filter(
+            (card) =>
+              card.type === "runtime" &&
+              (
+                card.runtimeKind === "quiz" ||
+                card.runtimeKind === "project"
+              ),
+          )
+          .map((card) => card.id);
+
+      const readingPrerequisiteDone =
+        Object.fromEntries(
+          readingPrerequisiteIds.map(
+            (cardId) => [cardId, true],
+          ),
+        );
+      const assessmentPrerequisiteDone =
+        Object.fromEntries(
+          assessmentPrerequisiteIds.map(
+            (cardId) => [cardId, true],
+          ),
+        );
+      const canonicalTopicKey =
+        ready!.target.topicSlug
+          .split(".")
+          .filter(Boolean)
+          .at(-1) ??
+        ready!.target.topicSlug;
+
+      const seededProgress =
+        await browserJson(
+          page,
+          `${websiteOrigin}/api/review/progress`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: {
+              subjectSlug:
+                ready!.subjectSlug,
+              moduleSlug:
+                ready!.moduleSlug,
+              locale: "en",
+              state: {
+                activeTopicId:
+                  canonicalTopicKey,
+                moduleCompleted: false,
+                topics: {
+                  [canonicalTopicKey]: {
+                    completed: false,
+                    readingDone:
+                      readingPrerequisiteDone,
+                    cardsDone:
+                      readingPrerequisiteDone,
+                    quizzesDone:
+                      assessmentPrerequisiteDone,
+                  },
+                },
+                __saveRevision:
+                  Date.now(),
+              },
+            },
+          },
+        );
+
+      expect(seededProgress.status).toBe(200);
+
+      /**
+       * Verify that the exact learner-safe prerequisite card ids survive
+       * PUT -> GET before StudentLessonHost hydrates the lesson.
+       */
+      const restoredProgress =
+        await browserJson(
+          page,
+          `${websiteOrigin}/api/review/progress?` +
+            new URLSearchParams({
+              subjectSlug:
+                ready!.subjectSlug,
+              moduleSlug:
+                ready!.moduleSlug,
+              locale: "en",
+            }).toString(),
+        );
+
+      expect(restoredProgress.status).toBe(200);
+      expect(isRecord(restoredProgress.body)).toBe(true);
+
+      const restoredState =
+        isRecord(restoredProgress.body) &&
+        isRecord(
+          restoredProgress.body.progress,
+        )
+          ? restoredProgress.body.progress
+          : null;
+
+      expect(
+        restoredState,
+        "Expected review-progress GET to return the seeded state.",
+      ).not.toBeNull();
+
+      const restoredTopics =
+        isRecord(restoredState) &&
+        isRecord(restoredState.topics)
+          ? restoredState.topics
+          : null;
+      const restoredTopic =
+        restoredTopics &&
+        isRecord(
+          restoredTopics[
             canonicalTopicKey
-          ]
-        : null;
+          ],
+        )
+          ? restoredTopics[
+              canonicalTopicKey
+            ]
+          : null;
 
-    expect(
-      restoredTopic,
-      `Expected restored topic ${canonicalTopicKey}.`,
-    ).not.toBeNull();
-
-    const restoredReadingDone =
-      restoredTopic &&
-      isRecord(restoredTopic.readingDone)
-        ? restoredTopic.readingDone
-        : null;
-    const restoredCardsDone =
-      restoredTopic &&
-      isRecord(restoredTopic.cardsDone)
-        ? restoredTopic.cardsDone
-        : null;
-
-    for (const cardId of readingPrerequisiteIds) {
       expect(
-        restoredReadingDone?.[cardId],
-        `Expected readingDone[${cardId}] after PUT -> GET.`,
-      ).toBe(true);
-      expect(
-        restoredCardsDone?.[cardId],
-        `Expected cardsDone[${cardId}] after PUT -> GET.`,
-      ).toBe(true);
-    }
+        restoredTopic,
+        `Expected restored topic ${canonicalTopicKey}.`,
+      ).not.toBeNull();
 
-    const lessonUrl =
-      `/courses/${encodeURIComponent(
-        ready!.subjectSlug,
-      )}` +
-      `/modules/${encodeURIComponent(
-        ready!.moduleSlug,
-      )}/learn`;
+      const restoredReadingDone =
+        restoredTopic &&
+        isRecord(restoredTopic.readingDone)
+          ? restoredTopic.readingDone
+          : null;
+      const restoredCardsDone =
+        restoredTopic &&
+        isRecord(restoredTopic.cardsDone)
+          ? restoredTopic.cardsDone
+          : null;
 
-    await page.goto(lessonUrl, {
-      waitUntil: "domcontentloaded",
-    });
+      for (const cardId of readingPrerequisiteIds) {
+        expect(
+          restoredReadingDone?.[cardId],
+          `Expected readingDone[${cardId}] after PUT -> GET.`,
+        ).toBe(true);
+        expect(
+          restoredCardsDone?.[cardId],
+          `Expected cardsDone[${cardId}] after PUT -> GET.`,
+        ).toBe(true);
+      }
 
-    expect(new URL(page.url()).origin).toBe(
-      studentOrigin,
-    );
+      const lessonUrl =
+        `/courses/${encodeURIComponent(
+          ready!.subjectSlug,
+        )}` +
+        `/modules/${encodeURIComponent(
+          ready!.moduleSlug,
+        )}/learn`;
 
-    const lessonContentCard =
-      page.getByTestId(
-        "lesson-content-card",
+      await page.goto(lessonUrl, {
+        waitUntil: "domcontentloaded",
+      });
+
+      expect(new URL(page.url()).origin).toBe(
+        studentOrigin,
       );
 
-    await expect(
-      lessonContentCard,
-    ).toBeVisible();
+      const lessonContentCard =
+        page.getByTestId(
+          "lesson-content-card",
+        );
 
-    const visibleCardId =
-      await lessonContentCard.getAttribute(
-        "data-card-id",
-      );
+      await expect(
+        lessonContentCard,
+      ).toBeVisible();
 
-    expect(
-      visibleCardId,
-      "Expected the lesson to open on the first prerequisite card.",
-    ).toBe(prerequisiteCards![0]?.id);
-
-    await expect(
-      page.getByTestId(
-        "lesson-card-status",
-      ),
-      `Expected StudentLessonHost to hydrate completion for ${String(
-        visibleCardId,
-      )}.`,
-    ).toHaveText("Complete");
-
-    const quiz = page.getByTestId(
-      "student-simple-quiz",
-    );
-    const nextButton = page.getByTestId(
-      "lesson-next-button",
-    );
-
-    for (
-      let step = 0;
-      step < 32;
-      step += 1
-    ) {
-      const currentCardId =
+      const visibleCardId =
         await lessonContentCard.getAttribute(
           "data-card-id",
         );
 
-      /**
-       * Break as soon as the semantic target card is active.
-       * The quiz component may still be mounting, while its Next button is
-       * already correctly disabled until the learner answers.
-       */
-      if (
-        currentCardId ===
-          ready!.target.ownerCardId ||
-        await quiz
-          .isVisible()
-          .catch(() => false)
-      ) {
-        break;
-      }
-
-      const completionButton =
-        page.getByRole("button", {
-          name: /Mark as read|Mark watched/,
-        });
-
-      if (
-        await completionButton
-          .isVisible()
-          .catch(() => false)
-      ) {
-        await completionButton.click();
-      }
-
-      await expect(nextButton).toBeEnabled();
-      await nextButton.click();
-
-      /**
-       * Wait for the visible card to change before checking the next step.
-       * The destination can be the migrated quiz, whose Next button is
-       * correctly disabled until the learner answers it.
-       */
-      await expect
-        .poll(
-          async () => {
-            if (
-              await quiz
-                .isVisible()
-                .catch(() => false)
-            ) {
-              return "quiz";
-            }
-
-            const nextCardId =
-              await lessonContentCard.getAttribute(
-                "data-card-id",
-              );
-
-            return (
-              nextCardId &&
-              nextCardId !== currentCardId
-                ? nextCardId
-                : null
-            );
-          },
-          {
-            message:
-              "Expected Next to display a different lesson card.",
-          },
-        )
-        .not.toBeNull();
-    }
-
-    await expect(
-      lessonContentCard,
-    ).toHaveAttribute(
-      "data-card-id",
-      ready!.target.ownerCardId,
-    );
-    await expect(quiz).toBeVisible();
-    await expect(quiz).toHaveAttribute(
-      "data-owner-card-id",
-      ready!.target.ownerCardId,
-    );
-    await expect(quiz).toHaveAttribute(
-      "data-exercise-kind",
-      "single_choice",
-    );
-
-    const visibleOptions =
-      quiz.locator(
-        'input[type="radio"]',
-      );
-    const optionCount =
-      await visibleOptions.count();
-
-    expect(
-      optionCount,
-      "The migrated single-choice quiz must expose learner-visible options.",
-    ).toBeGreaterThan(0);
-
-    const progressSaveStatuses:
-      number[] = [];
-
-    page.on("response", (response) => {
-      const request = response.request();
-      const url = new URL(response.url());
-
-      if (
-        request.method() === "PUT" &&
-        url.origin === websiteOrigin &&
-        url.pathname ===
-          "/api/review/progress"
-      ) {
-        progressSaveStatuses.push(
-          response.status(),
-        );
-      }
-    });
-
-    let correctValidation:
-      Record<string, unknown> | null = null;
-    let duplicateRequestBody:
-      Record<string, unknown> | null = null;
-
-    for (
-      let optionIndex = 0;
-      optionIndex < optionCount;
-      optionIndex += 1
-    ) {
-      await visibleOptions
-        .nth(optionIndex)
-        .check();
-
-      const validationResponsePromise =
-        page.waitForResponse(
-          (response) => {
-            const request =
-              response.request();
-            const url =
-              new URL(response.url());
-
-            return (
-              request.method() ===
-                "POST" &&
-              url.origin ===
-                websiteOrigin &&
-              url.pathname ===
-                "/api/student/runtime/practice/validate"
-            );
-          },
-        );
-
-      await page
-        .getByTestId(
-          "student-simple-quiz-submit",
-        )
-        .click();
-
-      const validationResponse =
-        await validationResponsePromise;
       expect(
-        validationResponse.status(),
-      ).toBe(200);
+        visibleCardId,
+        "Expected the lesson to open on the first prerequisite card.",
+      ).toBe(prerequisiteCards![0]?.id);
 
-      const validationBody =
-        await validationResponse.json();
-
-      expect(
-        collectForbiddenPaths(
-          validationBody,
+      await expect(
+        page.getByTestId(
+          "lesson-card-status",
         ),
-      ).toEqual([]);
-      expect(validationBody).toMatchObject({
-        finalized: expect.any(Boolean),
-        duplicate: false,
-        sessionComplete: expect.any(Boolean),
+        `Expected StudentLessonHost to hydrate completion for ${String(
+          visibleCardId,
+        )}.`,
+      ).toHaveText("Complete");
+
+      const quiz = page.getByTestId(
+        "student-simple-quiz",
+      );
+      const nextButton = page.getByTestId(
+        "lesson-next-button",
+      );
+
+      for (
+        let step = 0;
+        step < 32;
+        step += 1
+      ) {
+        const currentCardId =
+          await lessonContentCard.getAttribute(
+            "data-card-id",
+          );
+
+        /**
+         * Break as soon as the semantic target card is active.
+         * The quiz component may still be mounting, while its Next button is
+         * already correctly disabled until the learner answers.
+         */
+        if (
+          currentCardId ===
+            ready!.target.ownerCardId ||
+          await quiz
+            .isVisible()
+            .catch(() => false)
+        ) {
+          break;
+        }
+
+        const completionButton =
+          page.getByRole("button", {
+            name: /Mark as read|Mark watched/,
+          });
+
+        if (
+          await completionButton
+            .isVisible()
+            .catch(() => false)
+        ) {
+          await completionButton.click();
+        }
+
+        await expect(nextButton).toBeEnabled();
+        await nextButton.click();
+
+        /**
+         * Wait for the visible card to change before checking the next step.
+         * The destination can be the migrated quiz, whose Next button is
+         * correctly disabled until the learner answers it.
+         */
+        await expect
+          .poll(
+            async () => {
+              if (
+                await quiz
+                  .isVisible()
+                  .catch(() => false)
+              ) {
+                return "quiz";
+              }
+
+              const nextCardId =
+                await lessonContentCard.getAttribute(
+                  "data-card-id",
+                );
+
+              return (
+                nextCardId &&
+                nextCardId !== currentCardId
+                  ? nextCardId
+                  : null
+              );
+            },
+            {
+              message:
+                "Expected Next to display a different lesson card.",
+            },
+          )
+          .not.toBeNull();
+      }
+
+      await expect(
+        lessonContentCard,
+      ).toHaveAttribute(
+        "data-card-id",
+        ready!.target.ownerCardId,
+      );
+      await expect(quiz).toBeVisible();
+      await expect(quiz).toHaveAttribute(
+        "data-owner-card-id",
+        ready!.target.ownerCardId,
+      );
+      await expect(quiz).toHaveAttribute(
+        "data-exercise-kind",
+        expectedKind,
+      );
+
+      const inputType =
+        expectedKind === "single_choice"
+          ? "radio"
+          : "checkbox";
+      const visibleOptions =
+        quiz.locator(
+          `input[type="${inputType}"]`,
+        );
+      const optionCount =
+        await visibleOptions.count();
+
+      expect(
+        optionCount,
+        `The migrated ${expectedKind} quiz must expose learner-visible options.`,
+      ).toBeGreaterThan(0);
+
+      const progressSaveStatuses:
+        number[] = [];
+
+      page.on("response", (response) => {
+        const request = response.request();
+        const url = new URL(response.url());
+
+        if (
+          request.method() === "PUT" &&
+          url.origin === websiteOrigin &&
+          url.pathname ===
+            "/api/review/progress"
+        ) {
+          progressSaveStatuses.push(
+            response.status(),
+          );
+        }
       });
 
-      if (
-        isRecord(validationBody) &&
-        validationBody.ok === true
-      ) {
+      const visibleOptionIds =
+      await visibleOptions.evaluateAll(
+          (nodes) =>
+            nodes.flatMap((node) => {
+              const optionId =
+                node.getAttribute(
+                  "data-option-id",
+                );
+              return optionId
+                ? [optionId]
+                : [];
+            }),
+        );
+
+      expect(
+        visibleOptionIds,
+      ).toEqual(
+        expect.arrayContaining([
+          ...correctOptionIds,
+        ]),
+      );
+
+      const setVisibleAnswer = async (
+        optionIds: readonly string[],
+      ) => {
+        if (expectedKind === "multi_choice") {
+          for (
+            let index = 0;
+            index < optionCount;
+            index += 1
+          ) {
+            const option =
+              visibleOptions.nth(index);
+            if (await option.isChecked()) {
+              await option.uncheck();
+            }
+          }
+        }
+
+        for (const optionId of optionIds) {
+          await quiz
+            .locator(
+              `input[data-option-id="${optionId}"]`,
+            )
+            .check();
+        }
+      };
+
+      const submitVisibleAnswer = async () => {
+        const validationResponsePromise =
+          page.waitForResponse(
+            (response) => {
+              const request =
+                response.request();
+              const url =
+                new URL(response.url());
+
+              return (
+                request.method() ===
+                  "POST" &&
+                url.origin ===
+                  websiteOrigin &&
+                url.pathname ===
+                  "/api/student/runtime/practice/validate"
+              );
+            },
+          );
+
+        await page
+          .getByTestId(
+            "student-simple-quiz-submit",
+          )
+          .click();
+
+        const validationResponse =
+          await validationResponsePromise;
+        expect(
+          validationResponse.status(),
+        ).toBe(200);
+
+        const validationBody =
+          await validationResponse.json();
+
+        expect(
+          collectForbiddenPaths(
+            validationBody,
+          ),
+        ).toEqual([]);
+        expect(validationBody).toMatchObject({
+          finalized: expect.any(Boolean),
+          duplicate: false,
+          sessionComplete: expect.any(Boolean),
+        });
+
         const posted =
           validationResponse
             .request()
@@ -1253,151 +1334,201 @@ test(
 
         expect(isRecord(posted)).toBe(true);
 
-        correctValidation =
-          validationBody;
-        duplicateRequestBody =
-          posted as Record<
-            string,
-            unknown
-          >;
-        break;
-      }
+        return {
+          body:
+            validationBody as Record<
+              string,
+              unknown
+            >,
+          posted:
+            posted as Record<
+              string,
+              unknown
+            >,
+        };
+      };
+
+      const wrongOptionIds =
+        expectedKind === "single_choice"
+          ? [
+              visibleOptionIds.find(
+                (optionId) =>
+                  !correctOptionIds.includes(
+                    optionId,
+                  ),
+              ),
+            ].filter(
+              (optionId):
+                optionId is string =>
+                  typeof optionId === "string",
+            )
+          : [correctOptionIds[0]].filter(
+              (optionId):
+                optionId is string =>
+                  typeof optionId === "string",
+            );
+
+      expect(
+        wrongOptionIds.length,
+        `Expected a safe incorrect ${expectedKind} answer fixture.`,
+      ).toBeGreaterThan(0);
+
+      await setVisibleAnswer(
+        wrongOptionIds,
+      );
+      const incorrect =
+        await submitVisibleAnswer();
+
+      expect(incorrect.body).toMatchObject({
+        ok: false,
+      });
+      await expect(
+        page.getByTestId(
+          "student-simple-quiz-feedback",
+        ),
+      ).toContainText("Try again");
+
+      await setVisibleAnswer(
+        correctOptionIds,
+      );
+      const correct =
+        await submitVisibleAnswer();
+
+      expect(correct.body).toMatchObject({
+        ok: true,
+      });
+
+      const correctValidation =
+        correct.body;
+      const duplicateRequestBody =
+        correct.posted;
+
+      expect(
+        correctValidation,
+        `Expected the visible ${expectedKind} answer to validate correctly.`,
+      ).not.toBeNull();
+      expect(
+        duplicateRequestBody,
+      ).not.toBeNull();
 
       await expect(
         page.getByTestId(
           "student-simple-quiz-feedback",
         ),
-      ).toContainText(
-        "Try again",
-      );
-    }
+      ).toContainText("Correct");
 
-    expect(
-      correctValidation,
-      "Expected one visible option to validate correctly.",
-    ).not.toBeNull();
-    expect(
-      duplicateRequestBody,
-    ).not.toBeNull();
+      await expect(
+        page.getByTestId(
+          "student-simple-quiz-submit",
+        ),
+      ).toContainText("Complete");
 
-    await expect(
-      page.getByTestId(
-        "student-simple-quiz-feedback",
-      ),
-    ).toContainText("Correct");
+      await expect(
+        page.getByTestId(
+          "lesson-card-status",
+        ),
+      ).toHaveText("Complete");
 
-    await expect(
-      page.getByTestId(
-        "student-simple-quiz-submit",
-      ),
-    ).toContainText("Complete");
+      await expect(nextButton).toBeEnabled();
 
-    await expect(
-      page.getByTestId(
-        "lesson-card-status",
-      ),
-    ).toHaveText("Complete");
+      await expect
+        .poll(
+          () =>
+            progressSaveStatuses.some(
+              (status) => status === 200,
+            ),
+          {
+            message:
+              "Expected the visible correct answer to persist review progress.",
+          },
+        )
+        .toBe(true);
 
-    await expect(nextButton).toBeEnabled();
+      await expect
+        .poll(
+          async () => {
+            const progressResult =
+              await browserJson(
+                page,
+                `${websiteOrigin}/api/review/progress?` +
+                  new URLSearchParams({
+                    subjectSlug:
+                      ready!.subjectSlug,
+                    moduleSlug:
+                      ready!.moduleSlug,
+                    locale: "en",
+                  }).toString(),
+              );
 
-    await expect
-      .poll(
-        () =>
-          progressSaveStatuses.some(
-            (status) => status === 200,
-          ),
-        {
-          message:
-            "Expected the visible correct answer to persist review progress.",
-        },
-      )
-      .toBe(true);
+            if (
+              progressResult.status !==
+                200 ||
+              !isRecord(
+                progressResult.body,
+              ) ||
+              !isRecord(
+                progressResult.body
+                  .progress,
+              )
+            ) {
+              return false;
+            }
 
-    await expect
-      .poll(
-        async () => {
-          const progressResult =
-            await browserJson(
-              page,
-              `${websiteOrigin}/api/review/progress?` +
-                new URLSearchParams({
-                  subjectSlug:
-                    ready!.subjectSlug,
-                  moduleSlug:
-                    ready!.moduleSlug,
-                  locale: "en",
-                }).toString(),
-            );
-
-          if (
-            progressResult.status !==
-              200 ||
-            !isRecord(
-              progressResult.body,
-            ) ||
-            !isRecord(
+            const topics =
               progressResult.body
-                .progress,
-            )
-          ) {
-            return false;
-          }
+                .progress.topics;
 
-          const topics =
-            progressResult.body
-              .progress.topics;
+            if (!isRecord(topics)) {
+              return false;
+            }
 
-          if (!isRecord(topics)) {
-            return false;
-          }
+            const topic =
+              topics[
+                canonicalTopicKey
+              ];
 
-          const topic =
-            topics[
-              canonicalTopicKey
-            ];
+            return (
+              isRecord(topic) &&
+              isRecord(
+                topic.quizzesDone,
+              ) &&
+              topic.quizzesDone[
+                ready!.target.ownerCardId
+              ] === true
+            );
+          },
+          {
+            message:
+              "Expected quizzesDone to contain the visible runtime card id.",
+          },
+        )
+        .toBe(true);
 
-          return (
-            isRecord(topic) &&
-            isRecord(
-              topic.quizzesDone,
-            ) &&
-            topic.quizzesDone[
-              ready!.target.ownerCardId
-            ] === true
-          );
-        },
+      const duplicate = await browserJson(
+        page,
+        `${websiteOrigin}` +
+          `${String(
+            launch.validationPath,
+          )}`,
         {
-          message:
-            "Expected quizzesDone to contain the visible runtime card id.",
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body:
+            duplicateRequestBody!,
         },
-      )
-      .toBe(true);
+      );
 
-    const duplicate = await browserJson(
-      page,
-      `${websiteOrigin}` +
-        `${String(
-          launch.validationPath,
-        )}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body:
-          duplicateRequestBody!,
-      },
-    );
-
-    expect(duplicate.status).toBe(200);
-    expect(
-      collectForbiddenPaths(
-        duplicate.body,
-      ),
-    ).toEqual([]);
-    expect(duplicate.body).toMatchObject({
-      duplicate: true,
-    });
-  },
+      expect(duplicate.status).toBe(200);
+      expect(
+        collectForbiddenPaths(
+          duplicate.body,
+        ),
+      ).toEqual([]);
+      expect(duplicate.body).toMatchObject({
+        duplicate: true,
+      });
+    }  },
 );

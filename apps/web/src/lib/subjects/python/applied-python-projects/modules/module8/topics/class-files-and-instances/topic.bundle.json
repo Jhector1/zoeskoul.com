@@ -87,6 +87,7 @@
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.cards.quiz.title",
+      "studentRuntimeExerciseKey": "mc-class-files-and-instances-class-role",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
