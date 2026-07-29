@@ -56,6 +56,9 @@ const topicBundleFiles = [
   "python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json",
   "python/python-data-functions/modules/module7/topics/working-with-paths/topic.bundle.json",
   "python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json",
+  "python/python-data-functions/modules/module7/topics/module-7-clean-student-records/topic.bundle.json",
+  "python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json",
+  "python/python-data-functions/modules/module8/topics/community-event-registration-cleaner/topic.bundle.json",
   "python/python-v2/modules/module0/topics/values-types-and-literals/topic.bundle.json",
   "python/python-v2/modules/module1/topics/f-strings-and-formatting/topic.bundle.json",
   "python/python-v2/modules/module1/topics/input-and-type-conversion/topic.bundle.json",
@@ -255,13 +258,23 @@ const outputFileEligibleIds = [
   ["python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json", "try-writing-text-files-sketch2"],
 ] as const;
 
+const companionFileEligibleIds = [
+  ["python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json", "try-reading-text-files-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json", "try-reading-text-files-sketch1"],
+  ["python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json", "try-reading-text-files-sketch2"],
+  ["python/python-data-functions/modules/module7/topics/working-with-paths/topic.bundle.json", "try-working-with-paths-sketch2"],
+  ["python/python-data-functions/modules/module8/topics/community-event-registration-cleaner/topic.bundle.json", "try-community-event-registration-cleaner-sketch0"],
+] as const;
+
 const complexFallbackIds = [
   ["python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json", "try-module-6-name-badge-package-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch1"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch2"],
-  ["python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json", "try-reading-text-files-sketch0"],
-  ["python/python-data-functions/modules/module7/topics/working-with-paths/topic.bundle.json", "try-working-with-paths-sketch2"],
+  ["python/python-data-functions/modules/module7/topics/module-7-clean-student-records/topic.bundle.json", "try-module-7-clean-student-records-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch1"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch2"],
   ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch0"],
 ] as const;
 
@@ -283,6 +296,29 @@ function fixedTestStdinValues(
       ? [test.stdin]
       : [];
   });
+}
+
+function starterFilePaths(
+  exerciseValue: unknown,
+): string[] {
+  const exercise =
+    record(exerciseValue);
+
+  return Array.isArray(
+    exercise?.starterFiles,
+  )
+    ? exercise.starterFiles.flatMap(
+        (value) => {
+          const file = record(value);
+          const path =
+            stringValue(file?.path);
+
+          return path
+            ? [path]
+            : [];
+        },
+      )
+    : [];
 }
 
 function fixedTestFiles(
@@ -480,6 +516,52 @@ describe(
           content: "",
           readOnly: false,
         });
+        expect(
+          isEligibleStudentEmbeddedPythonTryIt(
+            pair?.exercise,
+          ),
+        ).toBe(true);
+      },
+    );
+
+    it("locks the learner-visible companion-file inventory", () => {
+      expect(
+        companionFileEligibleIds,
+      ).toHaveLength(5);
+    });
+
+    it.each(
+      companionFileEligibleIds,
+    )(
+      "keeps companion-file exercise %s / %s in the direct Vite editor",
+      (relativePath, exerciseKey) => {
+        const pair =
+          joined.get(
+            exerciseInventoryKey(
+              relativePath,
+              exerciseKey,
+            ),
+          );
+        const paths =
+          starterFilePaths(
+            pair?.exercise,
+          );
+
+        expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(paths).toHaveLength(2);
+        expect(paths).toContain(
+          "main.py",
+        );
+        expect(
+          paths.some(
+            (path) =>
+              path.endsWith(".txt") ||
+              path.endsWith(".csv"),
+          ),
+        ).toBe(true);
         expect(
           isEligibleStudentEmbeddedPythonTryIt(
             pair?.exercise,

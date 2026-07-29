@@ -6,10 +6,16 @@ import {
   isRecord,
 } from "./studentPracticeUi";
 
+export type StudentPythonTryItFile = {
+  path: string;
+  content: string;
+  language: "python" | "text" | "csv";
+};
+
 export type StudentPythonTryItStarter = {
   language: "python";
   entry: "main.py";
-  code: string;
+  files: StudentPythonTryItFile[];
   editorHeight: number;
 };
 
@@ -24,31 +30,135 @@ function nonBlankString(
     : null;
 }
 
-function starterFileContent(
+function isSafeRelativePath(
   value: unknown,
+): value is string {
+  return (
+    typeof value === "string" &&
+    Boolean(value) &&
+    !value.startsWith("/") &&
+    !value.includes("\\") &&
+    value
+      .split("/")
+      .every(
+        (part) =>
+          Boolean(part) &&
+          part !== "." &&
+          part !== "..",
+      )
+  );
+}
+
+function fileLanguage(
   path: string,
-): string | null {
-  if (!Array.isArray(value)) {
-    return null;
+  value: unknown,
+): StudentPythonTryItFile["language"] | null {
+  const authored =
+    typeof value === "string"
+      ? value.trim()
+      : "";
+
+  if (path.endsWith(".py")) {
+    return (
+      !authored ||
+      authored === "python"
+    )
+      ? "python"
+      : null;
   }
 
-  for (const entry of value) {
-    if (
-      !isRecord(entry) ||
-      entry.path !== path
-    ) {
-      continue;
-    }
+  if (path.endsWith(".txt")) {
+    return (
+      !authored ||
+      authored === "text" ||
+      authored === "plaintext"
+    )
+      ? "text"
+      : null;
+  }
 
-    const content =
-      nonBlankString(entry.content);
-
-    if (content !== null) {
-      return content;
-    }
+  if (path.endsWith(".csv")) {
+    return (
+      !authored ||
+      authored === "csv" ||
+      authored === "text" ||
+      authored === "plaintext"
+    )
+      ? "csv"
+      : null;
   }
 
   return null;
+}
+
+function readStarterFiles(
+  value: unknown,
+): StudentPythonTryItFile[] | null {
+  if (
+    !Array.isArray(value) ||
+    value.length < 1 ||
+    value.length > 2
+  ) {
+    return null;
+  }
+
+  const paths = new Set<string>();
+  const files: StudentPythonTryItFile[] = [];
+
+  for (const valueEntry of value) {
+    if (!isRecord(valueEntry)) {
+      return null;
+    }
+
+    const path = valueEntry.path;
+
+    if (
+      !isSafeRelativePath(path) ||
+      paths.has(path) ||
+      typeof valueEntry.content !== "string"
+    ) {
+      return null;
+    }
+
+    const language =
+      fileLanguage(
+        path,
+        valueEntry.language,
+      );
+
+    if (!language) return null;
+
+    paths.add(path);
+    files.push({
+      path,
+      content: valueEntry.content,
+      language,
+    });
+  }
+
+  const entryFile =
+    files.find(
+      (file) =>
+        file.path === "main.py",
+    );
+  const companionFiles =
+    files.filter(
+      (file) =>
+        file.path !== "main.py",
+    );
+
+  if (
+    !entryFile ||
+    entryFile.language !== "python" ||
+    companionFiles.some(
+      (file) =>
+        file.language === "python",
+    )
+  ) {
+    return null;
+  }
+
+  return files;
 }
 
 function boundedEditorHeight(
@@ -71,9 +181,8 @@ function boundedEditorHeight(
 }
 
 /**
- * Reads the strict one-file Python workspace projected by the protected
- * server boundary. Validation recipes and authored checks stay server-side;
- * unsupported or ambiguous exercises remain on the full workspace runtime.
+ * Reads the bounded Python workspace projected by the protected server.
+ * Grading recipes and hidden test-file overrides stay server-side.
  */
 export function readStudentPythonTryItStarter(
   launch: LearningPracticeLaunchResponse,
@@ -111,30 +220,47 @@ export function readStudentPythonTryItStarter(
     return null;
   }
 
-  const code =
-    starterFileContent(
-      workspace?.starterFiles,
-      entry,
-    ) ??
-    starterFileContent(
-      payload.starterFiles,
-      entry,
-    ) ??
-    nonBlankString(
-      workspace?.starterCode,
-    ) ??
-    nonBlankString(
-      payload.starterCode,
-    );
+  const workspaceStarterFiles =
+    workspace?.starterFiles;
+  const payloadStarterFiles =
+    payload.starterFiles;
+  const files =
+    workspaceStarterFiles !== undefined
+      ? readStarterFiles(
+          workspaceStarterFiles,
+        )
+      : payloadStarterFiles !== undefined
+        ? readStarterFiles(
+            payloadStarterFiles,
+          )
+        : typeof workspace?.starterCode === "string"
+          ? [
+              {
+                path: "main.py",
+                content:
+                  workspace.starterCode,
+                language:
+                  "python" as const,
+              },
+            ]
+          : typeof payload.starterCode === "string"
+            ? [
+                {
+                  path: "main.py",
+                  content:
+                    payload.starterCode,
+                  language:
+                    "python" as const,
+                },
+              ]
+            : null;
 
-  if (code === null) {
-    return null;
-  }
+  if (!files) return null;
 
   return {
     language: "python",
     entry: "main.py",
-    code,
+    files,
     editorHeight:
       boundedEditorHeight(
         payload.editorHeight,

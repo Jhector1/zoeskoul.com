@@ -269,6 +269,123 @@ describe("student embedded Try It practice launch", () => {
         ],
       }),
     ).toBe(false);
+    const companionEligible = {
+      ...eligible,
+      starterFiles: [
+        ...eligible.starterFiles,
+        {
+          path: "data/names.csv",
+          content:
+            "@:examples.namesCsv",
+          language: "csv",
+          isEntry: false,
+        },
+      ],
+      workspaceExpectations: {
+        requiredFiles: [
+          "data/names.csv",
+        ],
+        requiredFolders: [
+          "data",
+        ],
+      },
+      workspace: {
+        ...eligible.workspace,
+        starterFiles: [
+          ...eligible.workspace.starterFiles,
+          {
+            path: "data/names.csv",
+            content:
+              "@:examples.namesCsv",
+            language: "csv",
+            isEntry: false,
+          },
+        ],
+        files: [
+          {
+            path: "data/names.csv",
+            content:
+              "name\nAva\n",
+            language: "csv",
+            isEntry: false,
+          },
+        ],
+        workspaceExpectations: {
+          requiredFiles: [
+            "data/names.csv",
+          ],
+          requiredFolders: [
+            "data",
+          ],
+        },
+      },
+    };
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(
+        companionEligible,
+      ),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...companionEligible,
+        recipe: {
+          ...companionEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path:
+                    "data/names.csv",
+                  content:
+                    "name\nAva\n",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...companionEligible,
+        starterFiles: [
+          eligible.starterFiles[0],
+          {
+            path: "helper.py",
+            content:
+              "VALUE = 1\n",
+            language: "python",
+          },
+        ],
+        workspace: {
+          ...companionEligible.workspace,
+          starterFiles: [
+            eligible.workspace
+              .starterFiles[0],
+            {
+              path: "helper.py",
+              content:
+                "VALUE = 1\n",
+              language: "python",
+            },
+          ],
+          files: [],
+          workspaceExpectations: {
+            requiredFiles: [],
+            requiredFolders: [],
+          },
+        },
+        workspaceExpectations: {
+          requiredFiles: [],
+          requiredFolders: [],
+        },
+      }),
+    ).toBe(false);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,
@@ -561,6 +678,56 @@ describe("student embedded Try It practice launch", () => {
             entryFilePath: "main.py",
             starterFiles: [
               { path: "main.py", content: "profile = {}\n" },
+            ],
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id: "try-reading-file",
+        exerciseKey:
+          "try-reading-file",
+        kind: "code_input",
+        topic: "reading-files",
+        difficulty: "easy",
+        title: "Read a file",
+        prompt:
+          "Read names.csv.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            {
+              path: "main.py",
+              content:
+                "print('todo')\n",
+              language: "python",
+            },
+            {
+              path:
+                "data/names.csv",
+              content:
+                "name\nAva\n",
+              language: "csv",
+            },
+          ],
+          workspace: {
+            entryFilePath:
+              "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('todo')\n",
+                language: "python",
+              },
+              {
+                path:
+                  "data/names.csv",
+                content:
+                  "name\nAva\n",
+                language: "csv",
+              },
             ],
           },
         },

@@ -7,6 +7,18 @@ import {
   runtimeString,
 } from "./studentRuntimePracticeDescriptorShared";
 
+type EmbeddedStarterFile = {
+  path: string;
+  content: string;
+  language: "python" | "text" | "csv";
+};
+
+type EmbeddedStarterWorkspace = {
+  entry: "main.py";
+  files: EmbeddedStarterFile[];
+  paths: Set<string>;
+};
+
 function hasNoEntries(value: unknown): boolean {
   if (value == null) return true;
   if (Array.isArray(value)) return value.length === 0;
@@ -37,32 +49,6 @@ function hasNamedEntries(
   );
 }
 
-function isMainPythonStarterFile(
-  value: unknown,
-): boolean {
-  const file = asJsonRecord(value);
-  if (!file) return false;
-
-  return (
-    runtimeString(file.path) === "main.py" &&
-    typeof file.content === "string" &&
-    (
-      file.language == null ||
-      runtimeString(file.language) === "python"
-    )
-  );
-}
-
-function oneMainPythonStarterFile(
-  value: unknown,
-): boolean {
-  return (
-    Array.isArray(value) &&
-    value.length === 1 &&
-    isMainPythonStarterFile(value[0])
-  );
-}
-
 function isSafeRelativeWorkspacePath(
   value: unknown,
 ): boolean {
@@ -70,7 +56,6 @@ function isSafeRelativeWorkspacePath(
 
   return Boolean(
     path &&
-    path !== "main.py" &&
     !path.startsWith("/") &&
     !path.includes("\\") &&
     path
@@ -84,23 +69,278 @@ function isSafeRelativeWorkspacePath(
   );
 }
 
-function isSafeEmbeddedOutputFile(
+function starterFileLanguage(
+  path: string,
   value: unknown,
+): EmbeddedStarterFile["language"] | null {
+  const authored = runtimeString(value);
+
+  if (path.endsWith(".py")) {
+    return (
+      !authored ||
+      authored === "python"
+    )
+      ? "python"
+      : null;
+  }
+
+  if (path.endsWith(".txt")) {
+    return (
+      !authored ||
+      authored === "text" ||
+      authored === "plaintext"
+    )
+      ? "text"
+      : null;
+  }
+
+  if (path.endsWith(".csv")) {
+    return (
+      !authored ||
+      authored === "csv" ||
+      authored === "text" ||
+      authored === "plaintext"
+    )
+      ? "csv"
+      : null;
+  }
+
+  return null;
+}
+
+function readStarterFiles(
+  value: unknown,
+  options: {
+    min: number;
+    max: number;
+  },
+): EmbeddedStarterFile[] | null {
+  if (
+    !Array.isArray(value) ||
+    value.length < options.min ||
+    value.length > options.max
+  ) {
+    return null;
+  }
+
+  const files: EmbeddedStarterFile[] = [];
+  const paths = new Set<string>();
+
+  for (const valueEntry of value) {
+    const file = asJsonRecord(valueEntry);
+    const path = runtimeString(file?.path);
+
+    if (
+      !file ||
+      !isSafeRelativeWorkspacePath(path) ||
+      paths.has(path) ||
+      typeof file.content !== "string"
+    ) {
+      return null;
+    }
+
+    const language = starterFileLanguage(
+      path,
+      file.language,
+    );
+
+    if (!language) return null;
+
+    paths.add(path);
+    files.push({
+      path,
+      content: file.content,
+      language,
+    });
+  }
+
+  return files;
+}
+
+function sameStarterFiles(
+  left: EmbeddedStarterFile[],
+  right: EmbeddedStarterFile[],
 ): boolean {
-  const file = asJsonRecord(value);
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  const rightByPath = new Map(
+    right.map((file) => [
+      file.path,
+      file,
+    ]),
+  );
+
+  return left.every((file) => {
+    const match =
+      rightByPath.get(file.path);
+
+    return Boolean(
+      match &&
+      match.content === file.content &&
+      match.language === file.language,
+    );
+  });
+}
+
+function sameStarterFileShapes(
+  left: EmbeddedStarterFile[],
+  right: EmbeddedStarterFile[],
+): boolean {
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  const rightByPath = new Map(
+    right.map((file) => [
+      file.path,
+      file,
+    ]),
+  );
+
+  return left.every((file) => {
+    const match =
+      rightByPath.get(file.path);
+
+    return Boolean(
+      match &&
+      match.language ===
+        file.language,
+    );
+  });
+}
+
+function workspaceCompanionFilesMatch(
+  value: unknown,
+  starterFiles: EmbeddedStarterFile[],
+): boolean {
+  if (hasNoEntries(value)) {
+    return true;
+  }
+
+  const companionFiles =
+    starterFiles.filter(
+      (file) =>
+        file.path !== "main.py",
+    );
+  const workspaceFiles =
+    readStarterFiles(value, {
+      min: companionFiles.length,
+      max: companionFiles.length,
+    });
 
   return Boolean(
-    file &&
-    isSafeRelativeWorkspacePath(
-      file.path,
-    ) &&
-    file.content === "" &&
-    file.readOnly === false
+    workspaceFiles &&
+    sameStarterFileShapes(
+      companionFiles,
+      workspaceFiles,
+    ),
+  );
+}
+
+function readEmbeddedStarterWorkspace(
+  exercise: Record<string, unknown>,
+  workspace: Record<string, unknown> | null,
+): EmbeddedStarterWorkspace | null {
+  const topFiles =
+    readStarterFiles(
+      exercise.starterFiles,
+      { min: 1, max: 2 },
+    );
+  const workspaceFiles =
+    readStarterFiles(
+      workspace?.starterFiles,
+      { min: 1, max: 2 },
+    );
+  const entry =
+    runtimeString(
+      workspace?.entryFilePath,
+    );
+
+  if (
+    !topFiles ||
+    !workspaceFiles ||
+    entry !== "main.py" ||
+    !sameStarterFiles(
+      topFiles,
+      workspaceFiles,
+    )
+  ) {
+    return null;
+  }
+
+  const entryFile =
+    topFiles.find(
+      (file) =>
+        file.path === entry,
+    );
+
+  if (
+    !entryFile ||
+    entryFile.language !== "python"
+  ) {
+    return null;
+  }
+
+  const companions =
+    topFiles.filter(
+      (file) =>
+        file.path !== entry,
+    );
+
+  if (
+    companions.some(
+      (file) =>
+        file.language === "python",
+    ) ||
+    !workspaceCompanionFilesMatch(
+      workspace?.files,
+      topFiles,
+    )
+  ) {
+    return null;
+  }
+
+  return {
+    entry: "main.py",
+    files: topFiles,
+    paths: new Set(
+      topFiles.map(
+        (file) => file.path,
+      ),
+    ),
+  };
+}
+
+function isSafeEmbeddedTestFile(
+  value: unknown,
+  workspace: EmbeddedStarterWorkspace,
+): boolean {
+  const file = asJsonRecord(value);
+  const path = runtimeString(
+    file?.path,
+  );
+
+  if (
+    !file ||
+    !isSafeRelativeWorkspacePath(path) ||
+    typeof file.content !== "string" ||
+    file.readOnly !== false ||
+    path === workspace.entry
+  ) {
+    return false;
+  }
+
+  return (
+    workspace.paths.has(path) ||
+    file.content === ""
   );
 }
 
 function isSafeEmbeddedFixedTest(
   value: unknown,
+  workspace: EmbeddedStarterWorkspace,
 ): boolean {
   const test = asJsonRecord(value);
   const files = test?.files;
@@ -123,28 +363,21 @@ function isSafeEmbeddedFixedTest(
         Array.isArray(files) &&
         files.length > 0 &&
         files.every(
-          isSafeEmbeddedOutputFile,
+          (file) =>
+            isSafeEmbeddedTestFile(
+              file,
+              workspace,
+            ),
         )
       )
     )
   );
 }
 
-function fixedTestsUseOutputFiles(
-  tests: unknown[],
-): boolean {
-  return tests.some((value) => {
-    const test = asJsonRecord(value);
-
-    return !hasNoEntries(
-      test?.files,
-    );
-  });
-}
-
-function sourceChecksUseOnlyMainPython(
+function sourceChecksUseOnlyLearnerFiles(
   exercise: Record<string, unknown>,
   recipe: Record<string, unknown> | null,
+  workspace: EmbeddedStarterWorkspace,
 ): boolean {
   for (const value of [
     exercise.sourceChecks,
@@ -158,7 +391,10 @@ function sourceChecksUseOnlyMainPython(
       const path =
         runtimeString(check?.path);
 
-      if (path && path !== "main.py") {
+      if (
+        path &&
+        !workspace.paths.has(path)
+      ) {
         return false;
       }
     }
@@ -167,10 +403,39 @@ function sourceChecksUseOnlyMainPython(
   return true;
 }
 
-function hasNoWorkspaceFileRequirements(
+function expectationList(
+  value: unknown,
+): string[] | null {
+  if (hasNoEntries(value)) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    return null;
+  }
+
+  const result: string[] = [];
+
+  for (const item of value) {
+    const path = runtimeString(item);
+
+    if (
+      !isSafeRelativeWorkspacePath(path)
+    ) {
+      return null;
+    }
+
+    result.push(path);
+  }
+
+  return result;
+}
+
+function workspaceRequirementsAreSatisfied(
   exercise: Record<string, unknown>,
   recipe: Record<string, unknown> | null,
-  workspace: Record<string, unknown> | null,
+  workspaceRecord: Record<string, unknown> | null,
+  workspace: EmbeddedStarterWorkspace,
 ): boolean {
   const expectations = [
     asJsonRecord(
@@ -180,34 +445,71 @@ function hasNoWorkspaceFileRequirements(
       recipe?.workspaceExpectations,
     ),
     asJsonRecord(
-      workspace?.workspaceExpectations,
+      workspaceRecord?.workspaceExpectations,
     ),
   ];
 
-  return hasNoNamedEntries(
-    expectations,
-    [
-      "requiredFiles",
-      "requiredFolders",
-      "forbiddenFiles",
-    ],
-  );
+  for (const expectation of expectations) {
+    if (!expectation) continue;
+
+    const requiredFiles =
+      expectationList(
+        expectation.requiredFiles,
+      );
+    const requiredFolders =
+      expectationList(
+        expectation.requiredFolders,
+      );
+    const forbiddenFiles =
+      expectationList(
+        expectation.forbiddenFiles,
+      );
+
+    if (
+      !requiredFiles ||
+      !requiredFolders ||
+      !forbiddenFiles ||
+      forbiddenFiles.length > 0 ||
+      requiredFiles.some(
+        (path) =>
+          !workspace.paths.has(path),
+      ) ||
+      requiredFolders.some(
+        (folder) =>
+          !workspace.files.some(
+            (file) =>
+              file.path.startsWith(
+                `${folder}/`,
+              ),
+          ),
+      )
+    ) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 /**
- * Learner-safe one-file Vite code-input contract. The authored validation
- * recipe, semantic checks, source checks, fixed-test stdin values, tests, and
- * solutions remain behind the protected server boundary. Multi-file,
- * fixture-backed, terminal, SQL, and learner-editable stdin workspaces
- * continue through the full workspace runtime.
+ * Learner-safe embedded Python contract.
+ *
+ * The current direct runtime accepts either main.py alone or main.py plus one
+ * learner-visible text/CSV companion file. Validation recipes, semantic
+ * checks, source checks, fixed-test stdin values, hidden test-file overrides,
+ * and solutions remain behind the protected server boundary. Workspaces that
+ * require learners to create files/folders or edit Python helper modules stay
+ * on the full workspace runtime.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,
 ): boolean {
   const exercise = asJsonRecord(value);
   const recipe = asJsonRecord(exercise?.recipe);
-  const workspace = asJsonRecord(exercise?.workspace);
-  const recipeType = runtimeString(recipe?.type);
+  const workspaceRecord =
+    asJsonRecord(exercise?.workspace);
+  const recipeType =
+    runtimeString(recipe?.type);
 
   if (
     !exercise ||
@@ -218,13 +520,10 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       recipeType !== "fixed_tests" &&
       recipeType !== "semantic"
     ) ||
-    !oneMainPythonStarterFile(exercise.starterFiles) ||
-    runtimeString(workspace?.entryFilePath) !== "main.py" ||
-    !oneMainPythonStarterFile(workspace?.starterFiles) ||
     runtimeString(exercise.stdin) !== "" ||
     runtimeString(exercise.starterStdin) !== "" ||
     !hasNoNamedEntries(
-      [exercise, recipe, workspace],
+      [exercise, recipe],
       [
         "fixtureFiles",
         "fixtures",
@@ -234,6 +533,40 @@ export function isEligibleStudentEmbeddedPythonTryIt(
         "initialFiles",
         "workspaceFiles",
       ],
+    ) ||
+    !hasNoNamedEntries(
+      [workspaceRecord],
+      [
+        "fixtureFiles",
+        "fixtures",
+        "fileFixtures",
+        "supportFiles",
+        "initialFiles",
+        "workspaceFiles",
+      ],
+    )
+  ) {
+    return false;
+  }
+
+  const starterWorkspace =
+    readEmbeddedStarterWorkspace(
+      exercise,
+      workspaceRecord,
+    );
+
+  if (
+    !starterWorkspace ||
+    !sourceChecksUseOnlyLearnerFiles(
+      exercise,
+      recipe,
+      starterWorkspace,
+    ) ||
+    !workspaceRequirementsAreSatisfied(
+      exercise,
+      recipe,
+      workspaceRecord,
+      starterWorkspace,
     )
   ) {
     return false;
@@ -242,30 +575,15 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   const tests = recipe?.tests;
 
   if (recipeType === "fixed_tests") {
-    if (
-      !Array.isArray(tests) ||
-      tests.length === 0 ||
-      !tests.every(
-        isSafeEmbeddedFixedTest,
-      )
-    ) {
-      return false;
-    }
-
     return (
-      !fixedTestsUseOutputFiles(
-        tests,
-      ) ||
-      (
-        sourceChecksUseOnlyMainPython(
-          exercise,
-          recipe,
-        ) &&
-        hasNoWorkspaceFileRequirements(
-          exercise,
-          recipe,
-          workspace,
-        )
+      Array.isArray(tests) &&
+      tests.length > 0 &&
+      tests.every(
+        (test) =>
+          isSafeEmbeddedFixedTest(
+            test,
+            starterWorkspace,
+          ),
       )
     );
   }
@@ -282,18 +600,22 @@ export function isEligibleStudentEmbeddedPythonTryIt(
 export function isProjectedStudentEmbeddedPythonTryIt(
   exercise: LearningPracticeExercise,
 ): boolean {
-  if (exercise.kind !== "code_input") return false;
+  if (exercise.kind !== "code_input") {
+    return false;
+  }
 
   const payload = exercise.payload;
   const language =
     runtimeString(payload.language) ||
     runtimeString(payload.lang);
-  const workspace = asJsonRecord(payload.workspace);
+  const workspace =
+    asJsonRecord(payload.workspace);
 
-  return (
+  return Boolean(
     language === "python" &&
-    oneMainPythonStarterFile(payload.starterFiles) &&
-    runtimeString(workspace?.entryFilePath) === "main.py" &&
-    oneMainPythonStarterFile(workspace?.starterFiles)
+    readEmbeddedStarterWorkspace(
+      payload,
+      workspace,
+    ),
   );
 }

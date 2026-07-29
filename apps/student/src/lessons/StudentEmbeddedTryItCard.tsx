@@ -17,6 +17,7 @@ import {
 
 import {
   readStudentPythonTryItStarter,
+  type StudentPythonTryItFile,
   type StudentPythonTryItStarter,
 } from "./studentEmbeddedTryItData";
 import {
@@ -25,6 +26,40 @@ import {
   practiceFeedbackText,
   studentSubmissionId,
 } from "./studentPracticeUi";
+
+function cloneStarterFiles(
+  files: StudentPythonTryItFile[],
+): StudentPythonTryItFile[] {
+  return files.map((file) => ({
+    ...file,
+  }));
+}
+
+function sameWorkspaceFiles(
+  left: StudentPythonTryItFile[],
+  right: StudentPythonTryItFile[],
+): boolean {
+  return (
+    left.length === right.length &&
+    left.every(
+      (file, index) =>
+        file.path ===
+          right[index]?.path &&
+        file.content ===
+          right[index]?.content &&
+        file.language ===
+          right[index]?.language,
+    )
+  );
+}
+
+function editorLanguage(
+  file: StudentPythonTryItFile,
+): string {
+  return file.language === "python"
+    ? "python"
+    : "plaintext";
+}
 
 type LoadState =
   | {
@@ -75,7 +110,9 @@ export function StudentEmbeddedTryItCard(
     useState<LoadState>({
       status: "loading",
     });
-  const [code, setCode] =
+  const [files, setFiles] =
+    useState<StudentPythonTryItFile[]>([]);
+  const [activePath, setActivePath] =
     useState("");
   const [validation, setValidation] =
     useState<LearningPracticeValidationResponse | null>(
@@ -93,7 +130,8 @@ export function StudentEmbeddedTryItCard(
     setLoadState({
       status: "loading",
     });
-    setCode("");
+    setFiles([]);
+    setActivePath("");
     setValidation(null);
     setSubmitError(null);
     setSubmitting(false);
@@ -149,7 +187,14 @@ export function StudentEmbeddedTryItCard(
           return;
         }
 
-        setCode(starter.code);
+        setFiles(
+          cloneStarterFiles(
+            starter.files,
+          ),
+        );
+        setActivePath(
+          starter.entry,
+        );
         setLoadState({
           status: "ready",
           launch,
@@ -284,6 +329,23 @@ export function StudentEmbeddedTryItCard(
     props.passed ||
     submitting ||
     validation?.ok === true;
+  const activeFile =
+    files.find(
+      (file) =>
+        file.path === activePath,
+    ) ??
+    files[0] ??
+    starter.files[0];
+  const entryFile =
+    files.find(
+      (file) =>
+        file.path === starter.entry,
+    );
+  const changed =
+    !sameWorkspaceFiles(
+      files,
+      starter.files,
+    );
   const modelKey = [
     props.subjectSlug,
     props.moduleSlug,
@@ -298,6 +360,13 @@ export function StudentEmbeddedTryItCard(
 
     if (locked) return;
 
+    if (!entryFile) {
+      setSubmitError(
+        "The entry file is missing from this workspace.",
+      );
+      return;
+    }
+
     setSubmitting(true);
     setSubmitError(null);
 
@@ -308,17 +377,22 @@ export function StudentEmbeddedTryItCard(
           answer: {
             kind: "code_input",
             language: "python",
-            code,
-            source: code,
+            code:
+              entryFile.content,
+            source:
+              entryFile.content,
             stdin: "",
-            entry: "main.py",
-            files: [
-              {
-                kind: "file",
-                path: "main.py",
-                content: code,
-              },
-            ],
+            entry:
+              starter.entry,
+            files: files.map(
+              (file) => ({
+                kind:
+                  "file" as const,
+                path: file.path,
+                content:
+                  file.content,
+              }),
+            ),
           },
           submissionId:
             studentSubmissionId(),
@@ -366,28 +440,77 @@ export function StudentEmbeddedTryItCard(
       </div>
 
       <div className="student-embedded-try-it-filebar">
-        <strong>main.py</strong>
+        <div>
+          <strong>
+            {activeFile.path}
+          </strong>
+          {files.length > 1 ? (
+            <>
+              {" "}
+              <select
+                data-testid="student-embedded-try-it-file-select"
+                aria-label="Open workspace file"
+                value={activeFile.path}
+                onChange={(event) =>
+                  setActivePath(
+                    event.target.value,
+                  )
+                }
+                disabled={submitting}
+              >
+                {files.map((file) => (
+                  <option
+                    key={file.path}
+                    value={file.path}
+                  >
+                    {file.path}
+                    {file.path ===
+                    starter.entry
+                      ? " (entry)"
+                      : ""}
+                  </option>
+                ))}
+              </select>
+            </>
+          ) : null}
+        </div>
         <span>
-          Python practice
+          {files.length > 1
+            ? `${files.length} files · Entry ${starter.entry}`
+            : "Python practice"}
         </span>
       </div>
 
       <ControlledCodeEditor
-        value={code}
+        value={activeFile.content}
         onChange={(next) => {
-          setCode(next);
+          setFiles((current) =>
+            current.map((file) =>
+              file.path ===
+              activeFile.path
+                ? {
+                    ...file,
+                    content: next,
+                  }
+                : file,
+            ),
+          );
           setValidation(null);
           setSubmitError(null);
         }}
-        language="python"
+        language={
+          editorLanguage(
+            activeFile,
+          )
+        }
         modelKey={modelKey}
-        fileName="main.py"
+        fileName={activeFile.path}
         height={
           starter.editorHeight
         }
         readOnly={locked}
         ariaLabel={
-          `${launch.exercise.title} code editor`
+          `${launch.exercise.title} ${activeFile.path} editor`
         }
       />
 
@@ -461,13 +584,20 @@ export function StudentEmbeddedTryItCard(
           type="button"
           className="is-secondary"
           onClick={() => {
-            setCode(starter.code);
+            setFiles(
+              cloneStarterFiles(
+                starter.files,
+              ),
+            );
+            setActivePath(
+              starter.entry,
+            );
             setValidation(null);
             setSubmitError(null);
           }}
           disabled={
             locked ||
-            code === starter.code
+            !changed
           }
         >
           Reset

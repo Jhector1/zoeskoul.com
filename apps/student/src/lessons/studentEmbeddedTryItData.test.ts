@@ -75,13 +75,64 @@ describe("student embedded Try It data", () => {
     ).toEqual({
       language: "python",
       entry: "main.py",
-      code:
-        "print('workspace')\n",
+      files: [
+        {
+          path: "main.py",
+          content:
+            "print('workspace')\n",
+          language: "python",
+        },
+      ],
       editorHeight: 360,
     });
   });
 
-  it("rejects exercises outside the one-file Python workspace contract", () => {
+  it("reads main.py plus one learner-visible companion file", () => {
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print(open('data/names.csv').read())\n",
+                language: "python",
+              },
+              {
+                path: "data/names.csv",
+                content:
+                  "name\nAva\n",
+                language: "csv",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toEqual({
+      language: "python",
+      entry: "main.py",
+      files: [
+        {
+          path: "main.py",
+          content:
+            "print(open('data/names.csv').read())\n",
+          language: "python",
+        },
+        {
+          path: "data/names.csv",
+          content:
+            "name\nAva\n",
+          language: "csv",
+        },
+      ],
+      editorHeight: 360,
+    });
+  });
+
+  it("rejects workspaces outside the bounded companion-file contract", () => {
     expect(
       readStudentPythonTryItStarter(
         launch({
@@ -101,6 +152,52 @@ describe("student embedded Try It data", () => {
               "solution.py",
             starterCode:
               "print('x')",
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from helper import value\n",
+              },
+              {
+                path: "helper.py",
+                content:
+                  "value = 1\n",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+              {
+                path: "../secret.txt",
+                content:
+                  "secret\n",
+              },
+            ],
           },
         }),
       ),
