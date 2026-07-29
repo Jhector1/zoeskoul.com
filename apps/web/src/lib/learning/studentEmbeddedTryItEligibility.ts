@@ -10,6 +10,9 @@ import {
 const MAX_EMBEDDED_PYTHON_WORKSPACE_FILES = 9;
 const MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS =
   64 * 1024;
+const MAX_EMBEDDED_PYTHON_CREATED_FILES = 2;
+const MAX_EMBEDDED_PYTHON_PACKAGE_MARKER_CHARACTERS =
+  1024;
 
 type EmbeddedStarterFile = {
   path: string;
@@ -17,10 +20,20 @@ type EmbeddedStarterFile = {
   language: "python" | "text" | "csv";
 };
 
+type EmbeddedWorkspaceRequirements = {
+  requiredFiles: string[];
+  requiredFolders: string[];
+  forbiddenFiles: string[];
+};
+
 type EmbeddedStarterWorkspace = {
   entry: string;
   files: EmbeddedStarterFile[];
+  visiblePaths: Set<string>;
   paths: Set<string>;
+  creatableFiles: string[];
+  creatablePaths: Set<string>;
+  packageMarkerPaths: Set<string>;
   exactTestOverlayFiles: Map<string, string>;
 };
 
@@ -349,9 +362,229 @@ function mergeLearnerWorkspaceFiles(
   };
 }
 
+function readWorkspaceRequirements(
+  exercise: Record<string, unknown>,
+  recipe: Record<string, unknown> | null,
+  workspaceRecord: Record<string, unknown> | null,
+): EmbeddedWorkspaceRequirements | null {
+  const requiredFiles =
+    new Set<string>();
+  const requiredFolders =
+    new Set<string>();
+  const forbiddenFiles =
+    new Set<string>();
+
+  for (const expectation of [
+    asJsonRecord(
+      exercise.workspaceExpectations,
+    ),
+    asJsonRecord(
+      recipe?.workspaceExpectations,
+    ),
+    asJsonRecord(
+      workspaceRecord?.workspaceExpectations,
+    ),
+  ]) {
+    if (!expectation) continue;
+
+    const files =
+      expectationList(
+        expectation.requiredFiles,
+      );
+    const folders =
+      expectationList(
+        expectation.requiredFolders,
+      );
+    const forbidden =
+      expectationList(
+        expectation.forbiddenFiles,
+      );
+
+    if (
+      !files ||
+      !folders ||
+      !forbidden
+    ) {
+      return null;
+    }
+
+    files.forEach(
+      (path) =>
+        requiredFiles.add(path),
+    );
+    folders.forEach(
+      (path) =>
+        requiredFolders.add(path),
+    );
+    forbidden.forEach(
+      (path) =>
+        forbiddenFiles.add(path),
+    );
+  }
+
+  return {
+    requiredFiles:
+      [...requiredFiles].sort(),
+    requiredFolders:
+      [...requiredFolders].sort(),
+    forbiddenFiles:
+      [...forbiddenFiles].sort(),
+  };
+}
+
+function folderContainsPath(
+  folder: string,
+  path: string,
+): boolean {
+  return path.startsWith(
+    `${folder}/`,
+  );
+}
+
+function visibleWorkspaceFolders(
+  paths: Set<string>,
+): Set<string> {
+  const folders =
+    new Set<string>();
+
+  for (const path of paths) {
+    const parts =
+      path.split("/");
+    let current = "";
+
+    for (
+      const part
+      of parts.slice(0, -1)
+    ) {
+      current =
+        current
+          ? `${current}/${part}`
+          : part;
+      folders.add(current);
+    }
+  }
+
+  return folders;
+}
+
+function readCreatablePythonFiles(
+  args: {
+    requirements:
+      EmbeddedWorkspaceRequirements;
+    visibleFiles:
+      EmbeddedStarterFile[];
+    entry: string;
+    allowCreation: boolean;
+  },
+): {
+  creatableFiles: string[];
+  packageMarkerPaths: Set<string>;
+} | null {
+  const visiblePaths =
+    new Set(
+      args.visibleFiles.map(
+        (file) => file.path,
+      ),
+    );
+  const visibleFolders =
+    visibleWorkspaceFolders(
+      visiblePaths,
+    );
+  const missingFiles =
+    args.requirements.requiredFiles
+      .filter(
+        (path) =>
+          !visiblePaths.has(path),
+      );
+  const missingFolders =
+    args.requirements.requiredFolders
+      .filter(
+        (folder) =>
+          !visibleFolders.has(folder),
+      );
+
+  if (missingFiles.length === 0) {
+    return missingFolders.length === 0
+      ? {
+          creatableFiles: [],
+          packageMarkerPaths:
+            new Set<string>(),
+        }
+      : null;
+  }
+
+  if (
+    !args.allowCreation ||
+    missingFiles.length >
+      MAX_EMBEDDED_PYTHON_CREATED_FILES ||
+    args.visibleFiles.length +
+      missingFiles.length >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_FILES ||
+    args.requirements.requiredFolders
+      .length === 0 ||
+    missingFiles.some(
+      (path) =>
+        path === args.entry ||
+        !path.endsWith(".py") ||
+        !path.includes("/") ||
+        !args.requirements
+          .requiredFolders
+          .some(
+            (folder) =>
+              folderContainsPath(
+                folder,
+                path,
+              ),
+          ),
+    ) ||
+    missingFolders.some(
+      (folder) =>
+        !missingFiles.some(
+          (path) =>
+            folderContainsPath(
+              folder,
+              path,
+            ),
+        ),
+    )
+  ) {
+    return null;
+  }
+
+  const creationFolders =
+    args.requirements.requiredFolders
+      .filter(
+        (folder) =>
+          missingFiles.some(
+            (path) =>
+              folderContainsPath(
+                folder,
+                path,
+              ),
+          ),
+      );
+
+  return {
+    creatableFiles:
+      [...missingFiles].sort(),
+    packageMarkerPaths:
+      new Set(
+        creationFolders.map(
+          (folder) =>
+            `${folder}/__init__.py`,
+        ),
+      ),
+  };
+}
+
 function readEmbeddedStarterWorkspace(
   exercise: Record<string, unknown>,
   workspace: Record<string, unknown> | null,
+  requirements:
+    EmbeddedWorkspaceRequirements,
+  options: {
+    allowCreation: boolean;
+  },
 ): EmbeddedStarterWorkspace | null {
   const topFiles =
     readStarterFiles(
@@ -414,19 +647,65 @@ function readEmbeddedStarterWorkspace(
     return null;
   }
 
+  const creation =
+    readCreatablePythonFiles({
+      requirements,
+      visibleFiles:
+        learnerWorkspace.files,
+      entry,
+      allowCreation:
+        options.allowCreation,
+    });
+
+  if (!creation) {
+    return null;
+  }
+
+  const visiblePaths =
+    new Set(
+      learnerWorkspace.files.map(
+        (file) => file.path,
+      ),
+    );
+  const creatablePaths =
+    new Set(
+      creation.creatableFiles,
+    );
+
   return {
     entry,
     files:
       learnerWorkspace.files,
-    paths: new Set(
-      learnerWorkspace.files.map(
-        (file) => file.path,
-      ),
-    ),
+    visiblePaths,
+    paths: new Set([
+      ...visiblePaths,
+      ...creatablePaths,
+    ]),
+    creatableFiles:
+      creation.creatableFiles,
+    creatablePaths,
+    packageMarkerPaths:
+      creation.packageMarkerPaths,
     exactTestOverlayFiles:
       learnerWorkspace
         .exactTestOverlayFiles,
   };
+}
+
+function isCommentOnlyPython(
+  content: string,
+): boolean {
+  return content
+    .split(/\r?\n/)
+    .every((line) => {
+      const trimmed =
+        line.trim();
+
+      return (
+        !trimmed ||
+        trimmed.startsWith("#")
+      );
+    });
 }
 
 function isSafeEmbeddedTestFile(
@@ -442,9 +721,18 @@ function isSafeEmbeddedTestFile(
     !file ||
     !isSafeRelativeWorkspacePath(path) ||
     typeof file.content !== "string" ||
-    file.readOnly !== false ||
     path === workspace.entry
   ) {
+    return false;
+  }
+
+  const language =
+    starterFileLanguage(
+      path,
+      file.language,
+    );
+
+  if (!language) {
     return false;
   }
 
@@ -453,13 +741,50 @@ function isSafeEmbeddedTestFile(
       .get(path);
 
   if (exactOverlay !== undefined) {
-    return file.content ===
-      exactOverlay;
+    return (
+      file.readOnly === false &&
+      file.content === exactOverlay
+    );
+  }
+
+  if (
+    workspace.creatablePaths.has(path)
+  ) {
+    return (
+      language === "python" &&
+      (
+        file.readOnly === undefined ||
+        file.readOnly === false
+      )
+    );
+  }
+
+  if (
+    workspace.packageMarkerPaths
+      .has(path)
+  ) {
+    return (
+      language === "python" &&
+      file.content.length <=
+        MAX_EMBEDDED_PYTHON_PACKAGE_MARKER_CHARACTERS &&
+      isCommentOnlyPython(
+        file.content,
+      ) &&
+      (
+        file.readOnly === undefined ||
+        file.readOnly === false
+      )
+    );
   }
 
   return (
-    workspace.paths.has(path) ||
-    file.content === ""
+    file.readOnly === false &&
+    (
+      workspace.visiblePaths.has(
+        path,
+      ) ||
+      file.content === ""
+    )
   );
 }
 
@@ -470,10 +795,10 @@ function isSafeEmbeddedFixedTest(
   const test = asJsonRecord(value);
   const files = test?.files;
 
-  return Boolean(
-    test &&
-    typeof test.stdin === "string" &&
-    hasNoNamedEntries(
+  if (
+    !test ||
+    typeof test.stdin !== "string" ||
+    !hasNoNamedEntries(
       [test],
       [
         "fixtureFiles",
@@ -481,20 +806,67 @@ function isSafeEmbeddedFixedTest(
         "fileFixtures",
         "supportFiles",
       ],
-    ) &&
-    (
-      hasNoEntries(files) ||
-      (
-        Array.isArray(files) &&
-        files.length > 0 &&
-        files.every(
-          (file) =>
-            isSafeEmbeddedTestFile(
-              file,
-              workspace,
-            ),
-        )
-      )
+    )
+  ) {
+    return false;
+  }
+
+  if (hasNoEntries(files)) {
+    return (
+      workspace.creatableFiles
+        .length === 0
+    );
+  }
+
+  if (
+    !Array.isArray(files) ||
+    files.length === 0 ||
+    files.some(
+      (file) =>
+        !isSafeEmbeddedTestFile(
+          file,
+          workspace,
+        ),
+    )
+  ) {
+    return false;
+  }
+
+  const paths =
+    files.map((fileValue) =>
+      runtimeString(
+        asJsonRecord(fileValue)?.path,
+      ),
+    );
+  const uniquePaths =
+    new Set(paths);
+
+  if (
+    uniquePaths.size !==
+      paths.length
+  ) {
+    return false;
+  }
+
+  if (
+    workspace.creatableFiles
+      .length === 0
+  ) {
+    return true;
+  }
+
+  const expectedPaths =
+    new Set([
+      ...workspace.creatableFiles,
+      ...workspace.packageMarkerPaths,
+    ]);
+
+  return (
+    uniquePaths.size ===
+      expectedPaths.size &&
+    [...expectedPaths].every(
+      (path) =>
+        uniquePaths.has(path),
     )
   );
 }
@@ -552,6 +924,50 @@ function validationChecksUseOnlyLearnerFiles(
   return true;
 }
 
+function sourceChecksCoverCreatableFiles(
+  exercise: Record<string, unknown>,
+  recipe: Record<string, unknown> | null,
+  workspace: EmbeddedStarterWorkspace,
+): boolean {
+  if (
+    workspace.creatableFiles
+      .length === 0
+  ) {
+    return true;
+  }
+
+  const checkedPaths =
+    new Set<string>();
+
+  for (const value of [
+    exercise.sourceChecks,
+    recipe?.sourceChecks,
+  ]) {
+    if (!Array.isArray(value)) {
+      continue;
+    }
+
+    for (const checkValue of value) {
+      const path =
+        runtimeString(
+          asJsonRecord(
+            checkValue,
+          )?.path,
+        );
+
+      if (path) {
+        checkedPaths.add(path);
+      }
+    }
+  }
+
+  return workspace.creatableFiles
+    .every(
+      (path) =>
+        checkedPaths.has(path),
+    );
+}
+
 function expectationList(
   value: unknown,
 ): string[] | null {
@@ -581,63 +997,31 @@ function expectationList(
 }
 
 function workspaceRequirementsAreSatisfied(
-  exercise: Record<string, unknown>,
-  recipe: Record<string, unknown> | null,
-  workspaceRecord: Record<string, unknown> | null,
+  requirements:
+    EmbeddedWorkspaceRequirements,
   workspace: EmbeddedStarterWorkspace,
 ): boolean {
-  const expectations = [
-    asJsonRecord(
-      exercise.workspaceExpectations,
-    ),
-    asJsonRecord(
-      recipe?.workspaceExpectations,
-    ),
-    asJsonRecord(
-      workspaceRecord?.workspaceExpectations,
-    ),
-  ];
-
-  for (const expectation of expectations) {
-    if (!expectation) continue;
-
-    const requiredFiles =
-      expectationList(
-        expectation.requiredFiles,
-      );
-    const requiredFolders =
-      expectationList(
-        expectation.requiredFolders,
-      );
-    const forbiddenFiles =
-      expectationList(
-        expectation.forbiddenFiles,
-      );
-
-    if (
-      !requiredFiles ||
-      !requiredFolders ||
-      !forbiddenFiles ||
-      forbiddenFiles.length > 0 ||
-      requiredFiles.some(
+  return (
+    requirements
+      .forbiddenFiles.length === 0 &&
+    requirements
+      .requiredFiles.every(
         (path) =>
-          !workspace.paths.has(path),
-      ) ||
-      requiredFolders.some(
+          workspace.paths.has(path),
+      ) &&
+    requirements
+      .requiredFolders.every(
         (folder) =>
-          !workspace.files.some(
-            (file) =>
-              file.path.startsWith(
-                `${folder}/`,
-              ),
-          ),
+          [...workspace.paths]
+            .some(
+              (path) =>
+                folderContainsPath(
+                  folder,
+                  path,
+                ),
+            ),
       )
-    ) {
-      return false;
-    }
-  }
-
-  return true;
+  );
 }
 
 /**
@@ -650,8 +1034,8 @@ function workspaceRequirementsAreSatisfied(
  * entry and up to nine learner-visible Python/text/CSV files. Validation
  * recipes, semantic checks, source checks, fixed-test stdin values, hidden
  * test-file overrides, and solutions remain behind the protected server
- * boundary. Exercises that require creating files or folders stay on the full
- * workspace runtime.
+ * boundary. Fixed-test exercises may additionally declare up to two exact
+ * learner-created Python paths under authored required folders.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,
@@ -701,10 +1085,27 @@ export function isEligibleStudentEmbeddedPythonTryIt(
     return false;
   }
 
+  const requirements =
+    readWorkspaceRequirements(
+      exercise,
+      recipe,
+      workspaceRecord,
+    );
+
+  if (!requirements) {
+    return false;
+  }
+
   const starterWorkspace =
     readEmbeddedStarterWorkspace(
       exercise,
       workspaceRecord,
+      requirements,
+      {
+        allowCreation:
+          recipeType ===
+          "fixed_tests",
+      },
     );
 
   const pythonFileCount =
@@ -712,6 +1113,11 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       (file) =>
         file.language === "python",
     ).length ?? 0;
+  const hasCreatedFiles =
+    Boolean(
+      starterWorkspace
+        ?.creatableFiles.length,
+    );
 
   if (
     !starterWorkspace ||
@@ -719,7 +1125,13 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       recipeType === "fixed_tests" &&
       (
         pythonFileCount !== 1 ||
-        starterWorkspace.files.length > 2
+        (
+          hasCreatedFiles
+            ? starterWorkspace
+                .files.length !== 1
+            : starterWorkspace
+                .files.length > 2
+        )
       )
     ) ||
     !validationChecksUseOnlyLearnerFiles(
@@ -727,10 +1139,13 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       recipe,
       starterWorkspace,
     ) ||
-    !workspaceRequirementsAreSatisfied(
+    !sourceChecksCoverCreatableFiles(
       exercise,
       recipe,
-      workspaceRecord,
+      starterWorkspace,
+    ) ||
+    !workspaceRequirementsAreSatisfied(
+      requirements,
       starterWorkspace,
     )
   ) {
@@ -748,6 +1163,8 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   }
 
   return (
+    starterWorkspace
+      .creatableFiles.length === 0 &&
     embeddedTestsAreSafe(
       tests,
       starterWorkspace,
@@ -774,11 +1191,23 @@ export function isProjectedStudentEmbeddedPythonTryIt(
   const workspace =
     asJsonRecord(payload.workspace);
 
+  const requirements =
+    readWorkspaceRequirements(
+      payload,
+      null,
+      workspace,
+    );
+
   return Boolean(
     language === "python" &&
+    requirements &&
     readEmbeddedStarterWorkspace(
       payload,
       workspace,
+      requirements,
+      {
+        allowCreation: true,
+      },
     ),
   );
 }

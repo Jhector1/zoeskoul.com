@@ -114,6 +114,12 @@ export function StudentEmbeddedTryItCard(
     useState<StudentPythonTryItFile[]>([]);
   const [activePath, setActivePath] =
     useState("");
+  const [newFilePath, setNewFilePath] =
+    useState("");
+  const [
+    fileActionError,
+    setFileActionError,
+  ] = useState<string | null>(null);
   const [validation, setValidation] =
     useState<LearningPracticeValidationResponse | null>(
       null,
@@ -132,6 +138,8 @@ export function StudentEmbeddedTryItCard(
     });
     setFiles([]);
     setActivePath("");
+    setNewFilePath("");
+    setFileActionError(null);
     setValidation(null);
     setSubmitError(null);
     setSubmitting(false);
@@ -341,6 +349,16 @@ export function StudentEmbeddedTryItCard(
       (file) =>
         file.path === starter.entry,
     );
+  const creatableFiles =
+    starter.creatableFiles ?? [];
+  const remainingCreatableFiles =
+    creatableFiles.filter(
+      (path) =>
+        !files.some(
+          (file) =>
+            file.path === path,
+        ),
+    );
   const changed =
     !sameWorkspaceFiles(
       files,
@@ -352,6 +370,46 @@ export function StudentEmbeddedTryItCard(
     launch.target.topicSlug,
     launch.target.targetId,
   ].join("/");
+
+  function createRequiredFile() {
+    if (locked) return;
+
+    const path =
+      newFilePath.trim();
+
+    if (!path) {
+      setFileActionError(
+        "Enter the required file path.",
+      );
+      return;
+    }
+
+    if (
+      !remainingCreatableFiles
+        .includes(path)
+    ) {
+      setFileActionError(
+        remainingCreatableFiles.length > 0
+          ? `Create one of the required files: ${remainingCreatableFiles.join(", ")}.`
+          : "All required files have already been created.",
+      );
+      return;
+    }
+
+    setFiles((currentFiles) => [
+      ...currentFiles,
+      {
+        path,
+        content: "",
+        language: "python",
+      },
+    ]);
+    setActivePath(path);
+    setNewFilePath("");
+    setFileActionError(null);
+    setValidation(null);
+    setSubmitError(null);
+  }
 
   async function submit(
     event: FormEvent<HTMLFormElement>,
@@ -481,6 +539,66 @@ export function StudentEmbeddedTryItCard(
         </span>
       </div>
 
+      {remainingCreatableFiles.length > 0 ? (
+        <div className="student-embedded-try-it-file-create">
+          <div>
+            <strong>
+              Create required file
+            </strong>
+            <small>
+              {remainingCreatableFiles.join(
+                " · ",
+              )}
+            </small>
+          </div>
+          <div className="student-embedded-try-it-file-create-controls">
+            <input
+              type="text"
+              aria-label="New workspace file path"
+              value={newFilePath}
+              placeholder={
+                remainingCreatableFiles[0]
+              }
+              onChange={(event) => {
+                setNewFilePath(
+                  event.target.value,
+                );
+                setFileActionError(null);
+              }}
+              onKeyDown={(event) => {
+                if (
+                  event.key === "Enter"
+                ) {
+                  event.preventDefault();
+                  createRequiredFile();
+                }
+              }}
+              disabled={locked}
+              autoComplete="off"
+              spellCheck={false}
+            />
+            <button
+              type="button"
+              className="is-secondary"
+              onClick={
+                createRequiredFile
+              }
+              disabled={locked}
+            >
+              Create file
+            </button>
+          </div>
+          {fileActionError ? (
+            <small
+              className="student-embedded-try-it-file-error"
+              role="alert"
+            >
+              {fileActionError}
+            </small>
+          ) : null}
+        </div>
+      ) : null}
+
       <ControlledCodeEditor
         value={activeFile.content}
         onChange={(next) => {
@@ -497,6 +615,7 @@ export function StudentEmbeddedTryItCard(
           );
           setValidation(null);
           setSubmitError(null);
+          setFileActionError(null);
         }}
         language={
           editorLanguage(
@@ -592,6 +711,8 @@ export function StudentEmbeddedTryItCard(
             setActivePath(
               starter.entry,
             );
+            setNewFilePath("");
+            setFileActionError(null);
             setValidation(null);
             setSubmitError(null);
           }}

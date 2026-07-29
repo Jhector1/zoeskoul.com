@@ -179,6 +179,50 @@ describe("student embedded Try It data", () => {
     });
   });
 
+  it("reads exact learner-created Python package paths", () => {
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from tools.names import clean_name\n",
+                language: "python",
+              },
+            ],
+            workspaceExpectations: {
+              requiredFiles: [
+                "tools/names.py",
+              ],
+              requiredFolders: [
+                "tools",
+              ],
+            },
+          },
+        }),
+      ),
+    ).toEqual({
+      language: "python",
+      entry: "main.py",
+      files: [
+        {
+          path: "main.py",
+          content:
+            "from tools.names import clean_name\n",
+          language: "python",
+        },
+      ],
+      creatableFiles: [
+        "tools/names.py",
+      ],
+      editorHeight: 360,
+    });
+  });
+
   it("reads main.py plus one nested Python helper module", () => {
     expect(
       readStudentPythonTryItStarter(
@@ -465,6 +509,60 @@ describe("student embedded Try It data", () => {
                 readOnly: false,
               },
             ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+            ],
+            workspaceExpectations: {
+              requiredFiles: [
+                "tools/names.py",
+              ],
+              requiredFolders: [
+                "helpers",
+              ],
+            },
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+            ],
+            workspaceExpectations: {
+              requiredFiles: [
+                "tools/a.py",
+                "tools/b.py",
+                "tools/c.py",
+              ],
+              requiredFolders: [
+                "tools",
+              ],
+            },
           },
         }),
       ),

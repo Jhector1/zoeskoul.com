@@ -20,6 +20,7 @@ export type StudentPythonTryItStarter = {
   language: "python";
   entry: string;
   files: StudentPythonTryItFile[];
+  creatableFiles?: string[];
   editorHeight: number;
 };
 
@@ -277,6 +278,161 @@ function mergeLearnerWorkspaceFiles(
   return files;
 }
 
+function readExpectationPaths(
+  value: unknown,
+): string[] | null {
+  if (
+    value == null ||
+    (
+      Array.isArray(value) &&
+      value.length === 0
+    )
+  ) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    return null;
+  }
+
+  const paths: string[] = [];
+
+  for (const item of value) {
+    if (!isSafeRelativePath(item)) {
+      return null;
+    }
+
+    paths.push(item);
+  }
+
+  return [...new Set(paths)]
+    .sort();
+}
+
+function visibleFolders(
+  files: StudentPythonTryItFile[],
+): Set<string> {
+  const folders =
+    new Set<string>();
+
+  for (const file of files) {
+    const parts =
+      file.path.split("/");
+    let current = "";
+
+    for (
+      const part
+      of parts.slice(0, -1)
+    ) {
+      current =
+        current
+          ? `${current}/${part}`
+          : part;
+      folders.add(current);
+    }
+  }
+
+  return folders;
+}
+
+function readCreatablePythonFiles(
+  workspace: Record<string, unknown> | null,
+  files: StudentPythonTryItFile[],
+  entry: string,
+): string[] | null {
+  const expectations =
+    isRecord(
+      workspace
+        ?.workspaceExpectations,
+    )
+      ? workspace
+          .workspaceExpectations
+      : null;
+
+  if (!expectations) {
+    return [];
+  }
+
+  const requiredFiles =
+    readExpectationPaths(
+      expectations.requiredFiles,
+    );
+  const requiredFolders =
+    readExpectationPaths(
+      expectations.requiredFolders,
+    );
+  const forbiddenFiles =
+    readExpectationPaths(
+      expectations.forbiddenFiles,
+    );
+
+  if (
+    !requiredFiles ||
+    !requiredFolders ||
+    !forbiddenFiles ||
+    forbiddenFiles.length > 0
+  ) {
+    return null;
+  }
+
+  const filePaths =
+    new Set(
+      files.map(
+        (file) => file.path,
+      ),
+    );
+  const folders =
+    visibleFolders(files);
+  const missingFiles =
+    requiredFiles.filter(
+      (path) =>
+        !filePaths.has(path),
+    );
+  const missingFolders =
+    requiredFolders.filter(
+      (folder) =>
+        !folders.has(folder),
+    );
+
+  if (missingFiles.length === 0) {
+    return missingFolders.length === 0
+      ? []
+      : null;
+  }
+
+  if (
+    missingFiles.length > 2 ||
+    files.length +
+      missingFiles.length > 9 ||
+    requiredFolders.length === 0 ||
+    missingFiles.some(
+      (path) =>
+        path === entry ||
+        !path.endsWith(".py") ||
+        !path.includes("/") ||
+        !requiredFolders.some(
+          (folder) =>
+            path.startsWith(
+              `${folder}/`,
+            ),
+        ),
+    ) ||
+    missingFolders.some(
+      (folder) =>
+        !missingFiles.some(
+          (path) =>
+            path.startsWith(
+              `${folder}/`,
+            ),
+        ),
+    )
+  ) {
+    return null;
+  }
+
+  return [...missingFiles].sort();
+}
+
 function boundedEditorHeight(
   value: unknown,
 ): number {
@@ -299,9 +455,9 @@ function boundedEditorHeight(
 /**
  * Reads the bounded Python workspace projected by the protected server.
  * It supports a bounded learner-visible Python package, including alternate
- * entry files, text/CSV companions, and learner-visible workspace data files.
- * Grading recipes and hidden test-file
- * overrides stay server-side.
+ * entry files, text/CSV companions, learner-visible workspace data files,
+ * and up to two authored learner-created Python paths. Grading recipes and
+ * hidden test-file overrides stay server-side.
  */
 export function readStudentPythonTryItStarter(
   launch: LearningPracticeLaunchResponse,
@@ -402,10 +558,26 @@ export function readStudentPythonTryItStarter(
     return null;
   }
 
+  const creatableFiles =
+    readCreatablePythonFiles(
+      workspace,
+      files,
+      entry,
+    );
+
+  if (!creatableFiles) {
+    return null;
+  }
+
   return {
     language: "python",
     entry,
     files,
+    ...(creatableFiles.length > 0
+      ? {
+          creatableFiles,
+        }
+      : {}),
     editorHeight:
       boundedEditorHeight(
         payload.editorHeight,

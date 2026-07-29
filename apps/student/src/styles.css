@@ -96,3 +96,48 @@ dd {
   color: #196a3d;
   font-weight: 700;
 }
+
+.student-embedded-try-it-file-create {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid #e4e8f0;
+  border-bottom: 1px solid #e4e8f0;
+  background: #f8fafc;
+  padding: 12px 14px;
+}
+
+.student-embedded-try-it-file-create > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 14px;
+}
+
+.student-embedded-try-it-file-create small {
+  color: #667085;
+  overflow-wrap: anywhere;
+}
+
+.student-embedded-try-it-file-create-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.student-embedded-try-it-file-create-controls input {
+  min-width: min(280px, 100%);
+  flex: 1 1 220px;
+  border: 1px solid #cfd6e3;
+  border-radius: 10px;
+  background: #fff;
+  padding: 9px 11px;
+  color: #172033;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.student-embedded-try-it-file-error {
+  color: #b42318 !important;
+  font-weight: 650;
+}

@@ -439,6 +439,167 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(false);
+    const learnerCreatedPackageEligible = {
+      ...eligible,
+      workspaceExpectations: {
+        requiredFiles: [
+          "tools/names.py",
+        ],
+        requiredFolders: [
+          "tools",
+        ],
+      },
+      workspace: {
+        ...eligible.workspace,
+        workspaceExpectations: {
+          requiredFiles: [
+            "tools/names.py",
+          ],
+          requiredFolders: [
+            "tools",
+          ],
+        },
+      },
+      recipe: {
+        ...eligible.recipe,
+        tests: [
+          {
+            stdin: "",
+            stdout: "Ava\n",
+            match: "exact",
+            files: [
+              {
+                path:
+                  "tools/__init__.py",
+                content:
+                  "# tools package\n",
+                language:
+                  "python",
+              },
+              {
+                path:
+                  "tools/names.py",
+                content:
+                  "def clean_name(text):\n    return text.strip().title()\n",
+                language:
+                  "python",
+              },
+            ],
+          },
+        ],
+        sourceChecks: [
+          {
+            type:
+              "source_regex",
+            path:
+              "tools/names.py",
+            pattern:
+              "def\\s+clean_name\\s*\\(",
+          },
+        ],
+      },
+      sourceChecks: [
+        {
+          type:
+            "source_regex",
+          path:
+            "tools/names.py",
+          pattern:
+            "def\\s+clean_name\\s*\\(",
+        },
+      ],
+    };
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(
+        learnerCreatedPackageEligible,
+      ),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...learnerCreatedPackageEligible,
+        sourceChecks: [],
+        recipe: {
+          ...learnerCreatedPackageEligible.recipe,
+          sourceChecks: [],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...learnerCreatedPackageEligible,
+        recipe: {
+          ...learnerCreatedPackageEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path:
+                    "tools/__init__.py",
+                  content:
+                    "print('hidden')\n",
+                  language:
+                    "python",
+                },
+                {
+                  path:
+                    "tools/names.py",
+                  content:
+                    "def clean_name(text):\n    return text.strip().title()\n",
+                  language:
+                    "python",
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...learnerCreatedPackageEligible,
+        recipe: {
+          ...learnerCreatedPackageEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path:
+                    "tools/__init__.py",
+                  content:
+                    "# tools package\n",
+                  language:
+                    "python",
+                },
+                {
+                  path:
+                    "tools/names.py",
+                  content:
+                    "def clean_name(text):\n    return text.strip().title()\n",
+                  language:
+                    "python",
+                },
+                {
+                  path:
+                    "tools/secret.py",
+                  content:
+                    "SECRET = True\n",
+                  language:
+                    "python",
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...companionEligible,
@@ -1144,6 +1305,54 @@ describe("student embedded Try It practice launch", () => {
                 readOnly: false,
               },
             ],
+          },
+        },
+      }),
+    ).toBe(true);
+
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id:
+          "try-create-package-file",
+        exerciseKey:
+          "try-create-package-file",
+        kind: "code_input",
+        topic:
+          "using-imports",
+        difficulty: "easy",
+        title:
+          "Create a helper module",
+        prompt:
+          "Create tools/names.py.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            {
+              path: "main.py",
+              content:
+                "from tools.names import clean_name\n",
+              language: "python",
+            },
+          ],
+          workspace: {
+            entryFilePath:
+              "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from tools.names import clean_name\n",
+                language: "python",
+              },
+            ],
+            workspaceExpectations: {
+              requiredFiles: [
+                "tools/names.py",
+              ],
+              requiredFolders: [
+                "tools",
+              ],
+            },
           },
         },
       }),

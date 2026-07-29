@@ -338,7 +338,7 @@ const dataOverlayEligibleIds = [
   ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch2"],
 ] as const;
 
-const complexFallbackIds = [
+const learnerCreatedPackageEligibleIds = [
   ["python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json", "try-module-6-name-badge-package-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch1"],
@@ -436,6 +436,36 @@ function learnerWorkspaceFiles(
             : [];
         },
       )
+    : [];
+}
+
+function workspaceExpectationPaths(
+  exerciseValue: unknown,
+  field:
+    | "requiredFiles"
+    | "requiredFolders",
+): string[] {
+  const exercise =
+    record(exerciseValue);
+  const workspace =
+    record(exercise?.workspace);
+  const expectations =
+    record(
+      workspace
+        ?.workspaceExpectations,
+    );
+  const value =
+    expectations?.[field];
+
+  return Array.isArray(value)
+    ? value.flatMap((item) => {
+        const path =
+          stringValue(item);
+
+        return path
+          ? [path]
+          : [];
+      })
     : [];
 }
 
@@ -829,16 +859,16 @@ describe(
       },
     );
 
-    it("locks the remaining file-creation fallback inventory", () => {
+    it("locks the final learner-created package inventory", () => {
       expect(
-        complexFallbackIds,
+        learnerCreatedPackageEligibleIds,
       ).toHaveLength(4);
     });
 
     it.each(
-      complexFallbackIds,
+      learnerCreatedPackageEligibleIds,
     )(
-      "keeps complex exercise %s / %s on the full workspace fallback",
+      "keeps learner-created package exercise %s / %s in the direct Vite editor",
       (relativePath, exerciseKey) => {
         const pair =
           joined.get(
@@ -847,13 +877,62 @@ describe(
               exerciseKey,
             ),
           );
+        const requiredFiles =
+          workspaceExpectationPaths(
+            pair?.exercise,
+            "requiredFiles",
+          );
+        const requiredFolders =
+          workspaceExpectationPaths(
+            pair?.exercise,
+            "requiredFolders",
+          );
+        const testPaths =
+          fixedTestFiles(
+            pair?.exercise,
+          )
+            .map(
+              (file) =>
+                stringValue(
+                  file.path,
+                ),
+            )
+            .filter(Boolean)
+            .sort();
 
         expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(
+          starterFilePaths(
+            pair?.exercise,
+          ),
+        ).toEqual([
+          "main.py",
+        ]);
+        expect(
+          requiredFolders,
+        ).toEqual([
+          "tools",
+        ]);
+        expect(
+          requiredFiles.length,
+        ).toBeGreaterThanOrEqual(1);
+        expect(
+          requiredFiles.length,
+        ).toBeLessThanOrEqual(2);
+        expect(testPaths).toEqual(
+          [
+            "tools/__init__.py",
+            ...requiredFiles,
+          ].sort(),
+        );
         expect(
           isEligibleStudentEmbeddedPythonTryIt(
             pair?.exercise,
           ),
-        ).toBe(false);
+        ).toBe(true);
       },
     );
   },
