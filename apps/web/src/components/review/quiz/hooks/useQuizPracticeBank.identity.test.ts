@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
     doesPracticeStateMatchQuestion,
     getPracticeQuestionIdentity,
@@ -30,27 +30,33 @@ describe("useQuizPracticeBank practice identity guards", () => {
     ].join(":");
 
     it("reads the current Monaco workspace directly for submit", () => {
-        const win = getReviewSubmitBridgeHost();
-        if (!win) throw new Error("Expected a browser window for this test.");
+        vi.stubGlobal("window", {});
 
-        win.__zoeGetWorkspaceBeforeSubmit = {
-            [stableKey]: () => ({
+        try {
+            const win = getReviewSubmitBridgeHost();
+            if (!win) throw new Error("Expected a browser window for this test.");
+
+            win.__zoeGetWorkspaceBeforeSubmit = {
+                [stableKey]: () => ({
+                    ownerKey: stableKey,
+                    workspace: { version: 2, nodes: [] },
+                    code: "SELECT 1;",
+                    stdin: "",
+                    language: "sql",
+                }),
+            };
+
+            expect(getLiveWorkspaceForPracticeSubmit([stableKey])).toMatchObject({
                 ownerKey: stableKey,
-                workspace: { version: 2, nodes: [] },
                 code: "SELECT 1;",
-                stdin: "",
                 language: "sql",
-            }),
-        };
+            });
 
-        expect(getLiveWorkspaceForPracticeSubmit([stableKey])).toMatchObject({
-            ownerKey: stableKey,
-            code: "SELECT 1;",
-            language: "sql",
-        });
-
-        delete win.__zoeGetWorkspaceBeforeSubmit;
-        delete win.__zoeGetAnyWorkspaceBeforeSubmit;
+            delete win.__zoeGetWorkspaceBeforeSubmit;
+            delete win.__zoeGetAnyWorkspaceBeforeSubmit;
+        } finally {
+            vi.unstubAllGlobals();
+        }
     });
 
     it("rejects a signed practice exercise that does not match the visible exercise", () => {

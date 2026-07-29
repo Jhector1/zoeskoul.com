@@ -222,12 +222,10 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     // Run button. Editor + terminal exercises still need Run for
                     // PTY-backed code execution and workspace sync tests.
                     showTerminalDockToggle: !terminalWorkspaceMode,
-                    ...(typeof ideConfig?.showOpenTerminalButton === "boolean"
-                        ? { showOpenTerminalButton: ideConfig.showOpenTerminalButton }
-                        : {}),
-                    ...(typeof ideConfig?.showRestartTerminalButton === "boolean"
-                        ? { showRestartTerminalButton: ideConfig.showRestartTerminalButton }
-                        : {}),
+                    showOpenTerminalButton:
+                        ideConfig?.showOpenTerminalButton ?? true,
+                    showRestartTerminalButton:
+                        ideConfig?.showRestartTerminalButton ?? true,
                     allowRun: !terminalWorkspaceMode,
                     terminalSessionScope,
                     ...(terminalCwd ? { terminalCwd } : {}),

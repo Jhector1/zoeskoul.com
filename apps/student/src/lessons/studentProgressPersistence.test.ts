@@ -9,6 +9,19 @@ import {
   saveStudentReviewProgress,
 } from "./studentProgressPersistence";
 
+type SaveStudentReviewProgressArgs =
+  Parameters<
+    typeof saveStudentReviewProgress
+  >[0];
+type FetchProgress =
+  NonNullable<
+    SaveStudentReviewProgressArgs["fetchProgress"]
+  >;
+type SaveProgress =
+  NonNullable<
+    SaveStudentReviewProgressArgs["saveProgress"]
+  >;
+
 describe(
   "student review progress conflict retry",
   () => {
@@ -16,7 +29,7 @@ describe(
       "fetches, merges, and retries after a 409 conflict",
       async () => {
         const saveProgress = vi
-          .fn()
+          .fn<SaveProgress>()
           .mockRejectedValueOnce(
             Object.assign(
               new Error(
@@ -47,7 +60,7 @@ describe(
           });
 
         const fetchProgress = vi
-          .fn()
+          .fn<FetchProgress>()
           .mockResolvedValue({
             activeTopicId:
               "list-intro",
@@ -78,10 +91,8 @@ describe(
               },
               __saveRevision: 49,
             },
-            fetchProgress:
-              fetchProgress as any,
-            saveProgress:
-              saveProgress as any,
+            fetchProgress,
+            saveProgress,
           });
 
         expect(fetchProgress)
@@ -122,7 +133,7 @@ describe(
       "does not retry a non-conflict failure",
       async () => {
         const saveProgress = vi
-          .fn()
+          .fn<SaveProgress>()
           .mockRejectedValue(
             Object.assign(
               new Error("Server error"),
@@ -131,7 +142,8 @@ describe(
               },
             ),
           );
-        const fetchProgress = vi.fn();
+        const fetchProgress =
+          vi.fn<FetchProgress>();
 
         await expect(
           saveStudentReviewProgress({
@@ -143,10 +155,8 @@ describe(
             state: {
               topics: {},
             },
-            fetchProgress:
-              fetchProgress as any,
-            saveProgress:
-              saveProgress as any,
+            fetchProgress,
+            saveProgress,
           }),
         ).rejects.toThrow(
           "Server error",

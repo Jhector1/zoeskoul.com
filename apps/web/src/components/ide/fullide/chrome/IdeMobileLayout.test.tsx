@@ -4,6 +4,11 @@ import { describe, expect, it, vi } from "vitest";
 
 import IdeMobileLayout from "./IdeMobileLayout";
 
+vi.mock("next-intl", () => ({
+    useTranslations: () => (key: string) =>
+        key === "openFileExplorer" ? "Open file explorer" : key,
+}));
+
 describe("IdeMobileLayout", () => {
     it("keeps a visible file explorer rail when the mobile explorer is closed", () => {
         const html = renderToStaticMarkup(

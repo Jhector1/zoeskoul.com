@@ -43,8 +43,16 @@ describe("buildProjectRunRequest", () => {
             language: "python",
             entry: "main.py",
             files: [
-                { path: "main.py", content: nodes[0].content },
-                { path: "data.txt", content: "hello\n" },
+                {
+                    kind: "file",
+                    path: "main.py",
+                    content: nodes[0].content,
+                },
+                {
+                    kind: "file",
+                    path: "data.txt",
+                    content: "hello\n",
+                },
             ],
         });
     });
@@ -101,7 +109,13 @@ describe("buildProjectRunRequest", () => {
             kind: "code",
             language: "python",
             entry: "main.py",
-            files: [{ path: "main.py", content: 'print("hello")\n' }],
+            files: [
+                {
+                    kind: "file",
+                    path: "main.py",
+                    content: 'print("hello")\n',
+                },
+            ],
         });
     });
 
@@ -141,8 +155,16 @@ describe("buildProjectRunRequest", () => {
             language: "cpp",
             entry: "main.cpp",
             files: expect.arrayContaining([
-                { path: "main.cpp", content: liveCode },
-                { path: "helper.txt", content: "supporting file\n" },
+                {
+                    kind: "file",
+                    path: "main.cpp",
+                    content: liveCode,
+                },
+                {
+                    kind: "file",
+                    path: "helper.txt",
+                    content: "supporting file\n",
+                },
             ]),
         });
     });

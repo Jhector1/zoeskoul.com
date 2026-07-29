@@ -72,7 +72,7 @@ describe("practice experience policy", () => {
     expect(subscriber.filters).toEqual({
       topicEditable: true,
       difficultyEditable: true,
-      purposeEditable: false,
+      purposeEditable: true,
       countEditable: true,
     });
   });

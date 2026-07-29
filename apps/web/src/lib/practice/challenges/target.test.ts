@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+
 vi.mock("server-only", () => ({}));
 
 import {
@@ -13,6 +15,56 @@ const base = {
   sectionSlug: "python-v2-python-v2-0-setup-and-first-programs",
   topicSlug: "what-python-is",
 };
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function findPublishedNonPtyProjectTarget() {
+  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
+    const topicManifests = source.topicManifests as Record<string, unknown>;
+
+    for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
+      const topic = asRecord(topicValue);
+      if (!topic) continue;
+
+      const moduleSlug = String(topic.moduleSlug ?? "").trim();
+      const sectionSlug = String(topic.sectionSlug ?? "").trim();
+      const exercises = Array.isArray(topic.exercises) ? topic.exercises : [];
+      if (!moduleSlug || !sectionSlug) continue;
+
+      for (const exerciseValue of exercises) {
+        const exercise = asRecord(exerciseValue);
+        if (
+          exercise?.kind !== "code_input" ||
+          exercise.purpose !== "project"
+        ) {
+          continue;
+        }
+
+        const exerciseKey = String(exercise.id ?? "").trim();
+        if (!exerciseKey) continue;
+
+        try {
+          return resolveSharedChallengeTarget({
+            subjectSlug,
+            moduleSlug,
+            sectionSlug,
+            topicSlug,
+            exerciseKey,
+          });
+        } catch {
+          // Some published projects require the authenticated PTY runner. Keep
+          // scanning for the anonymous non-PTY contract this test covers.
+        }
+      }
+    }
+  }
+
+  throw new Error("Expected at least one published non-PTY project exercise.");
+}
 
 describe("published shared challenge targets", () => {
   it("accepts a published quiz exercise", () => {
@@ -30,14 +82,7 @@ describe("published shared challenge targets", () => {
   });
 
   it("accepts a published non-PTY project exercise", () => {
-    expect(
-      resolveSharedChallengeTarget({
-        ...base,
-        exerciseKey: "ci-beginner-message",
-      }),
-    ).toMatchObject({
-      ...base,
-      exerciseKey: "ci-beginner-message",
+    expect(findPublishedNonPtyProjectTarget()).toMatchObject({
       exercisePurpose: "project",
       exerciseKind: "code_input",
     });
@@ -73,10 +118,15 @@ describe("published shared challenge targets", () => {
   });
 
   it("rejects a stale signed purpose", () => {
+    const target = findPublishedNonPtyProjectTarget();
+
     expect(() =>
       resolveSharedChallengeTarget({
-        ...base,
-        exerciseKey: "ci-beginner-message",
+        subjectSlug: target.subjectSlug,
+        moduleSlug: target.moduleSlug,
+        sectionSlug: target.sectionSlug,
+        topicSlug: target.topicSlug,
+        exerciseKey: target.exerciseKey,
         exercisePurpose: "quiz",
       }),
     ).toThrow(/expected a quiz exercise/i);

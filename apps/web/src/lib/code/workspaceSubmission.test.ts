@@ -69,8 +69,16 @@ int main() {
         expect(submission!.entry).toBe("src/main.cpp");
         expect(files).toEqual(
             expect.arrayContaining([
-                { path: "src/main.cpp", content: editedCode },
-                { path: "src/helper.txt", content: "helper\n" },
+                {
+                    kind: "file",
+                    path: "src/main.cpp",
+                    content: editedCode,
+                },
+                {
+                    kind: "file",
+                    path: "src/helper.txt",
+                    content: "helper\n",
+                },
             ]),
         );
     });

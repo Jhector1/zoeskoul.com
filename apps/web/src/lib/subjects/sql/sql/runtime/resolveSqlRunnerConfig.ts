@@ -170,6 +170,7 @@ export function resolveSqlRunnerConfig(
         sqlInitialTableSnapshots: resolvedSnapshots,
         sqlPaneOptions: isSql
             ? {
+                defaultTab: "tables",
                 showTables: effectiveRuntime.showTables,
                 showErd: effectiveRuntime.showErd,
                 showChen: effectiveRuntime.showChen,

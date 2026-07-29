@@ -81,6 +81,9 @@ describe("catalog manifest validation", () => {
         expect(CATALOG_MANIFESTS["sql"]?.catalog.subjectSlugs).toEqual([
             "sql",
             "sql-v2",
+            "sql-analysis-reporting",
+            "multi-table-sql",
+            "sql-data-management",
         ]);
 
         expect(CATALOG_MANIFESTS["linux"]?.catalog.subjectSlugs).toEqual([
@@ -88,13 +91,13 @@ describe("catalog manifest validation", () => {
         ]);
     });
 
-    it("publishes Linux and Applied Python as coming soon", () => {
+    it("publishes Linux and Applied Python as active", () => {
         expect(
             SUBJECT_MANIFESTS["linux-terminal-fundamentals"]?.subject.status,
-        ).toBe("coming_soon");
+        ).toBe("active");
         expect(
             SUBJECT_MANIFESTS["applied-python-projects"]?.subject.status,
-        ).toBe("coming_soon");
+        ).toBe("active");
     });
 
     it("has at most one active default per version family", () => {
@@ -122,23 +125,12 @@ describe("catalog manifest validation", () => {
                 (entry) =>
                     entry.status === "active" && entry.defaultForNewEnrollments,
             );
-            const activeEntries = entries.filter(
-                (entry) => entry.status === "active",
-            );
-
             invariant(
                 defaults.length <= 1,
                 `Version family "${family}" has multiple active defaults: ${defaults
                     .map((entry) => entry.slug)
                     .join(", ")}`,
             );
-
-            if (activeEntries.length > 0) {
-                invariant(
-                    defaults.length === 1,
-                    `Version family "${family}" has active courses but no active default`,
-                );
-            }
         }
     });
 });

@@ -49,6 +49,7 @@ describe("parseRunReq captureWorkspace", () => {
 
         expect("files" in req ? req.files : null).toEqual([
             {
+                kind: "file",
                 path: "main.py",
                 content: "print('old')\n",
             },

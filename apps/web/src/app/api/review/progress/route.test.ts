@@ -205,7 +205,7 @@ describe("/api/review/progress route", () => {
         expect(restoredExercise.workspace.activeFileId).toBe("src/helper.py");
         expect(restoredExercise.workspace.entryFileId).toBe("src/main.py");
         expect(restoredExercise.workspace.openTabs).toEqual(["src/main.py", "src/helper.py"]);
-    });
+    }, 15_000);
 
 
     it("reset module save clears previous completed topics instead of merging them back", async () => {

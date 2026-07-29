@@ -2,6 +2,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import type {
     ReviewProgressState,
@@ -32,6 +33,17 @@ import {
 } from "./progressKeys";
 
 import ReviewTopicCompletion from "./components/content/ReviewTopicCompletion";
+
+function renderCompletionWithInlineCta(element: React.ReactElement) {
+    const previousCompactLearnerUi = learnerUiFlags.compactLearnerUi;
+    (learnerUiFlags as any).compactLearnerUi = false;
+
+    try {
+        return renderToStaticMarkup(element);
+    } finally {
+        (learnerUiFlags as any).compactLearnerUi = previousCompactLearnerUi;
+    }
+}
 
 type CardOverrides =
     | (Partial<Extract<ReviewCard, { type: "text" }>> & {
@@ -567,7 +579,7 @@ describe("review module completion/navigation source of truth", () => {
     });
 
     it("renders exactly one Next topic CTA when the current topic is complete and a next topic exists", () => {
-        const html = renderToStaticMarkup(
+        const html = renderCompletionWithInlineCta(
             <ReviewTopicCompletion
                 viewIsComplete={true}
                 viewTopic={{
@@ -597,7 +609,7 @@ describe("review module completion/navigation source of truth", () => {
     });
 
     it("renders exactly one Next module CTA when the module is complete and a next module exists", () => {
-        const html = renderToStaticMarkup(
+        const html = renderCompletionWithInlineCta(
             <ReviewTopicCompletion
                 viewIsComplete={true}
                 viewTopic={{

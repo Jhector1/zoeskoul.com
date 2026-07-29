@@ -43,7 +43,7 @@ describe("buildPracticeTutorPrompt", () => {
     const userMessage = prompt.messages.at(-1)?.content ?? "";
     expect(userMessage).toContain("git mv schedule.txt events.txt");
     expect(userMessage).toContain("PRIVATE REFERENCE");
-    expect(prompt.system).toContain("never reveal");
+    expect(prompt.system).toContain("Never quote, reproduce, closely paraphrase, or expose");
     expect(prompt.system).toContain("resulting workspace or repository state");
   });
 });

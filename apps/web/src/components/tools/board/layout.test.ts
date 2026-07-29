@@ -54,15 +54,17 @@ describe("getBoardTextEditorRect", () => {
 
   it("uses an expanded viewport without stretching the text editor", () => {
     const viewport = getBoardViewport({ width: 800, height: 800 });
-    expect(getBoardTextEditorRect(
+    const rect = getBoardTextEditorRect(
       { x: 600, y: 900 },
       { width: 800, height: 800 },
       { viewport, logicalWidth: 400, logicalHeight: 120, logicalFontSize: 30 },
-    )).toMatchObject({
+    );
+
+    expect(rect).toMatchObject({
       left: 400,
-      width: 800 / 3,
       height: 80,
     });
+    expect(rect?.width).toBeCloseTo(800 / 3, 12);
   });
 
   it("returns null before the board surface has been measured", () => {

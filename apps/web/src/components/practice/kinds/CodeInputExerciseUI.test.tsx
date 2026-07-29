@@ -158,16 +158,19 @@ describe("CodeInputExerciseUI", () => {
                     {...baseProps({
                         variant: "tools",
                         toolsBound: true,
-                        expectedExample: {
-                            kind: "sql_result",
-                            columns: ["id", "id"],
-                            rows: [[1, 2]],
+                        exercise: {
+                            ...baseProps().exercise,
+                            expectedExample: {
+                                kind: "sql_result",
+                                columns: ["id", "id"],
+                                rows: [[1, 2]],
+                            },
                         },
                     })}
                 />,
             );
 
-            expect(html.match(/<th/g)).toHaveLength(2);
+            expect(html.match(/<th(?:\s|>)/g)).toHaveLength(2);
             expect(html).toContain(">1</td>");
             expect(html).toContain(">2</td>");
             expect(

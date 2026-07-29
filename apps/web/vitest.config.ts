@@ -8,6 +8,11 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": resolve(rootDir, "src"),
+            "@zoeskoul-code-input-expected": resolve(
+                rootDir,
+                "../../packages/curriculum-profiles/src/base/codeInputExpected.ts",
+            ),
+            "server-only": resolve(rootDir, "src/test/serverOnly.ts"),
         },
     },
     test: {

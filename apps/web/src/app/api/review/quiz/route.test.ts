@@ -113,6 +113,10 @@ vi.mock("@/lib/subjects/registry", () => ({
     hasReviewModule: vi.fn(() => true),
 }));
 
+vi.mock("@/lib/tutoring/sessionWorkspaceMutationAccess", () => ({
+    enforceTutoringWorkspaceMutationAccess: vi.fn(async () => null),
+}));
+
 vi.mock("@/serverUtils", () => ({
     getLocaleFromCookie: vi.fn(async () => "en"),
 }));
