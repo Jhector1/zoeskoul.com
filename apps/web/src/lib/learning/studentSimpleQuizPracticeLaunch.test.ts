@@ -416,6 +416,130 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Done\n",
+              match: "exact",
+              files: [
+                {
+                  path: "note.txt",
+                  content: "",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+          sourceChecks: [
+            {
+              type: "source_contains",
+              pattern: "note.txt",
+            },
+          ],
+        },
+        sourceChecks: [
+          {
+            type: "source_contains",
+            pattern: "note.txt",
+          },
+        ],
+        workspaceExpectations: {
+          requiredFiles: [],
+          requiredFolders: [],
+        },
+        workspace: {
+          ...eligible.workspace,
+          workspaceExpectations: {
+            requiredFiles: [],
+            requiredFolders: [],
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path: "tools/names.py",
+                  content:
+                    "def clean_name(value):\n    return value.strip()\n",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path: "note.txt",
+                  content: "",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+          sourceChecks: [
+            {
+              type: "source_regex",
+              path: "note.txt",
+              pattern: "Done",
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path: "note.txt",
+                  content: "",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+        },
+        workspaceExpectations: {
+          requiredFiles: [
+            "note.txt",
+          ],
+        },
+      }),
+    ).toBe(false);
   });
 
   it("accepts the learner-safe projected starter workspace", () => {

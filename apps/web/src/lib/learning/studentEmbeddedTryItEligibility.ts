@@ -63,10 +63,47 @@ function oneMainPythonStarterFile(
   );
 }
 
+function isSafeRelativeWorkspacePath(
+  value: unknown,
+): boolean {
+  const path = runtimeString(value);
+
+  return Boolean(
+    path &&
+    path !== "main.py" &&
+    !path.startsWith("/") &&
+    !path.includes("\\") &&
+    path
+      .split("/")
+      .every(
+        (part) =>
+          Boolean(part) &&
+          part !== "." &&
+          part !== "..",
+      )
+  );
+}
+
+function isSafeEmbeddedOutputFile(
+  value: unknown,
+): boolean {
+  const file = asJsonRecord(value);
+
+  return Boolean(
+    file &&
+    isSafeRelativeWorkspacePath(
+      file.path,
+    ) &&
+    file.content === "" &&
+    file.readOnly === false
+  );
+}
+
 function isSafeEmbeddedFixedTest(
   value: unknown,
 ): boolean {
   const test = asJsonRecord(value);
+  const files = test?.files;
 
   return Boolean(
     test &&
@@ -78,9 +115,82 @@ function isSafeEmbeddedFixedTest(
         "fixtures",
         "fileFixtures",
         "supportFiles",
-        "files",
       ],
+    ) &&
+    (
+      hasNoEntries(files) ||
+      (
+        Array.isArray(files) &&
+        files.length > 0 &&
+        files.every(
+          isSafeEmbeddedOutputFile,
+        )
+      )
     )
+  );
+}
+
+function fixedTestsUseOutputFiles(
+  tests: unknown[],
+): boolean {
+  return tests.some((value) => {
+    const test = asJsonRecord(value);
+
+    return !hasNoEntries(
+      test?.files,
+    );
+  });
+}
+
+function sourceChecksUseOnlyMainPython(
+  exercise: Record<string, unknown>,
+  recipe: Record<string, unknown> | null,
+): boolean {
+  for (const value of [
+    exercise.sourceChecks,
+    recipe?.sourceChecks,
+  ]) {
+    if (!Array.isArray(value)) continue;
+
+    for (const checkValue of value) {
+      const check =
+        asJsonRecord(checkValue);
+      const path =
+        runtimeString(check?.path);
+
+      if (path && path !== "main.py") {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+function hasNoWorkspaceFileRequirements(
+  exercise: Record<string, unknown>,
+  recipe: Record<string, unknown> | null,
+  workspace: Record<string, unknown> | null,
+): boolean {
+  const expectations = [
+    asJsonRecord(
+      exercise.workspaceExpectations,
+    ),
+    asJsonRecord(
+      recipe?.workspaceExpectations,
+    ),
+    asJsonRecord(
+      workspace?.workspaceExpectations,
+    ),
+  ];
+
+  return hasNoNamedEntries(
+    expectations,
+    [
+      "requiredFiles",
+      "requiredFolders",
+      "forbiddenFiles",
+    ],
   );
 }
 
@@ -132,11 +242,30 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   const tests = recipe?.tests;
 
   if (recipeType === "fixed_tests") {
-    return (
-      Array.isArray(tests) &&
-      tests.length > 0 &&
-      tests.every(
+    if (
+      !Array.isArray(tests) ||
+      tests.length === 0 ||
+      !tests.every(
         isSafeEmbeddedFixedTest,
+      )
+    ) {
+      return false;
+    }
+
+    return (
+      !fixedTestsUseOutputFiles(
+        tests,
+      ) ||
+      (
+        sourceChecksUseOnlyMainPython(
+          exercise,
+          recipe,
+        ) &&
+        hasNoWorkspaceFileRequirements(
+          exercise,
+          recipe,
+          workspace,
+        )
       )
     );
   }

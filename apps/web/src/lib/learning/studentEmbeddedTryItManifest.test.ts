@@ -50,7 +50,10 @@ const topicBundleFiles = [
   "python/python-data-functions/modules/module6/topics/parameters-and-return-values/topic.bundle.json",
   "python/python-data-functions/modules/module6/topics/print-vs-return/topic.bundle.json",
   "python/python-data-functions/modules/module6/topics/scope-and-local-variables/topic.bundle.json",
+  "python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json",
+  "python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json",
   "python/python-data-functions/modules/module7/topics/validating-and-cleaning-input/topic.bundle.json",
+  "python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json",
   "python/python-data-functions/modules/module7/topics/working-with-paths/topic.bundle.json",
   "python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json",
   "python/python-v2/modules/module0/topics/values-types-and-literals/topic.bundle.json",
@@ -246,7 +249,17 @@ const stdinFixedTestEligibleIds = [
   ["python/python-v2/modules/module4/topics/mini-gradebook-capstone/topic.bundle.json", "try-mini-gradebook-capstone-sketch0"],
 ] as const;
 
+const outputFileEligibleIds = [
+  ["python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json", "try-writing-text-files-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json", "try-writing-text-files-sketch1"],
+  ["python/python-data-functions/modules/module7/topics/writing-text-files/topic.bundle.json", "try-writing-text-files-sketch2"],
+] as const;
+
 const complexFallbackIds = [
+  ["python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json", "try-module-6-name-badge-package-sketch0"],
+  ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch0"],
+  ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch1"],
+  ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch2"],
   ["python/python-data-functions/modules/module7/topics/reading-text-files/topic.bundle.json", "try-reading-text-files-sketch0"],
   ["python/python-data-functions/modules/module7/topics/working-with-paths/topic.bundle.json", "try-working-with-paths-sketch2"],
   ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch0"],
@@ -268,6 +281,35 @@ function fixedTestStdinValues(
     const test = record(value);
     return typeof test?.stdin === "string"
       ? [test.stdin]
+      : [];
+  });
+}
+
+function fixedTestFiles(
+  exerciseValue: unknown,
+): JsonRecord[] {
+  const exercise =
+    record(exerciseValue);
+  const recipe =
+    record(exercise?.recipe);
+  const tests =
+    Array.isArray(recipe?.tests)
+      ? recipe.tests
+      : [];
+
+  return tests.flatMap((value) => {
+    const test = record(value);
+
+    return Array.isArray(test?.files)
+      ? test.files.flatMap(
+          (fileValue) => {
+            const file =
+              record(fileValue);
+            return file
+              ? [file]
+              : [];
+          },
+        )
       : [];
   });
 }
@@ -398,6 +440,46 @@ describe(
               value.length > 0,
           ),
         ).toBe(true);
+        expect(
+          isEligibleStudentEmbeddedPythonTryIt(
+            pair?.exercise,
+          ),
+        ).toBe(true);
+      },
+    );
+
+    it("locks the audited writable-output-file inventory", () => {
+      expect(
+        outputFileEligibleIds,
+      ).toHaveLength(3);
+    });
+
+    it.each(
+      outputFileEligibleIds,
+    )(
+      "keeps writable-output exercise %s / %s eligible without exposing its runtime file",
+      (relativePath, exerciseKey) => {
+        const pair =
+          joined.get(
+            exerciseInventoryKey(
+              relativePath,
+              exerciseKey,
+            ),
+          );
+        const files =
+          fixedTestFiles(
+            pair?.exercise,
+          );
+
+        expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(files.length).toBe(1);
+        expect(files[0]).toMatchObject({
+          content: "",
+          readOnly: false,
+        });
         expect(
           isEligibleStudentEmbeddedPythonTryIt(
             pair?.exercise,
