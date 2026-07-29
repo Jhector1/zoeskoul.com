@@ -99,7 +99,7 @@ export async function loadTutoringSessionPage(args: {
       frozenModule: selected.module,
       currentModule: currentSourceModule,
     });
-  const module = access.canViewSolutions
+  const resolvedModule = access.canViewSolutions
     ? moduleWithCurrentToolPresentation
     : redactReviewModuleSolutions(moduleWithCurrentToolPresentation);
   const [workspaceMeta, participants] = await Promise.all([
@@ -118,7 +118,7 @@ export async function loadTutoringSessionPage(args: {
     snapshot,
     selected: {
       ...selected,
-      module: module as ReviewModule,
+      module: resolvedModule as ReviewModule,
     },
     canEdit: access.canEditOwnProgress,
     canEditBoard: access.canEditSharedDocuments,

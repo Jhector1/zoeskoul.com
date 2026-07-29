@@ -61,12 +61,12 @@ function initialStepIndex(
   );
   if (!course) return 1;
 
-  const module = course.modules.find(
+  const selectedModule = course.modules.find(
     (item) => item.slug === selection.moduleSlug,
   );
-  if (!module) return 2;
+  if (!selectedModule) return 2;
 
-  const section = module.sections.find(
+  const section = selectedModule.sections.find(
     (item) => item.slug === selection.sectionSlug,
   );
   if (!section) return 2;
@@ -219,16 +219,17 @@ export default function PracticePathWizard(props: {
       null,
     [catalog, selection.subjectSlug],
   );
-  const module = useMemo(
+  const selectedModule = useMemo(
     () =>
       course?.modules.find((item) => item.slug === selection.moduleSlug) ?? null,
     [course, selection.moduleSlug],
   );
   const section = useMemo(
     () =>
-      module?.sections.find((item) => item.slug === selection.sectionSlug) ??
-      null,
-    [module, selection.sectionSlug],
+      selectedModule?.sections.find(
+        (item) => item.slug === selection.sectionSlug,
+      ) ?? null,
+    [selectedModule, selection.sectionSlug],
   );
   const topic = useMemo(
     () =>
@@ -328,7 +329,7 @@ export default function PracticePathWizard(props: {
     if (step === "catalog") return props.catalogs;
     if (step === "course") return catalog?.courses ?? [];
     if (step === "module") return course?.modules ?? [];
-    if (step === "section") return module?.sections ?? [];
+    if (step === "section") return selectedModule?.sections ?? [];
     return section?.topics ?? [];
   })();
 
@@ -370,7 +371,7 @@ export default function PracticePathWizard(props: {
   const canStart = Boolean(
     catalog &&
       course &&
-      module?.availability === "available" &&
+      selectedModule?.availability === "available" &&
       section &&
       topic &&
       effectiveTargetCount > 0,
@@ -378,11 +379,11 @@ export default function PracticePathWizard(props: {
   const canMoveForward = Boolean(
     (step === "catalog" && catalog) ||
       (step === "course" && course) ||
-      (step === "module" && module?.availability === "available") ||
+      (step === "module" && selectedModule?.availability === "available") ||
       (step === "section" && section),
   );
 
-  const breadcrumb = [catalog, course, module, section]
+  const breadcrumb = [catalog, course, selectedModule, section]
     .map(resolveTitle)
     .filter(Boolean)
     .join(" · ");
@@ -509,7 +510,7 @@ export default function PracticePathWizard(props: {
                   const count = countForMode(props.mode, item);
                   const isModule = step === "module";
                   const moduleItem = isModule
-                    ? (item as NonNullable<typeof module>)
+                    ? (item as NonNullable<typeof selectedModule>)
                     : null;
                   const locked = moduleItem?.availability === "locked";
                   const countRequired = step === "section" || step === "topic";

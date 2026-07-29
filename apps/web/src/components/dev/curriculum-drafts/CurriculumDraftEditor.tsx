@@ -323,28 +323,30 @@ export default function CurriculumDraftEditor() {
   const selectCatalog = (value: string) => {
     const catalog = catalogs.find((item) => item.catalog === value);
     const subject = catalog?.subjects[0];
-    const module = subject?.modules[0];
-    const topic = module?.topics[0];
+    const firstModule = subject?.modules[0];
+    const topic = firstModule?.topics[0];
     setSelectedCatalog(value);
     setSelectedSubject(subject?.subject ?? "");
-    setSelectedModule(module?.moduleDir ?? "");
+    setSelectedModule(firstModule?.moduleDir ?? "");
     setSelectedTopic(topic?.topicDir ?? "");
     setLoadedTopic(null);
   };
 
   const selectSubject = (value: string) => {
     const subject = selectedCatalogData?.subjects.find((item) => item.subject === value);
-    const module = subject?.modules[0];
-    const topic = module?.topics[0];
+    const firstModule = subject?.modules[0];
+    const topic = firstModule?.topics[0];
     setSelectedSubject(value);
-    setSelectedModule(module?.moduleDir ?? "");
+    setSelectedModule(firstModule?.moduleDir ?? "");
     setSelectedTopic(topic?.topicDir ?? "");
     setLoadedTopic(null);
   };
 
   const selectModule = (value: string) => {
-    const module = selectedSubjectData?.modules.find((item) => item.moduleDir === value);
-    const topic = module?.topics[0];
+    const selectedModuleSummary = selectedSubjectData?.modules.find(
+      (item) => item.moduleDir === value,
+    );
+    const topic = selectedModuleSummary?.topics[0];
     setSelectedModule(value);
     setSelectedTopic(topic?.topicDir ?? "");
     setLoadedTopic(null);

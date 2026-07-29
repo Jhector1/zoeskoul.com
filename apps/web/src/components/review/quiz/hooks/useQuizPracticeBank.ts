@@ -917,7 +917,7 @@ function getRuntimePracticePatchForQuestion(
       ])
       : null;
 
-  let terminalEvidence =
+  const terminalEvidence =
       liveTerminalEvidence ??
       normalizeTerminalEvidenceForPracticeSubmit(estate.terminalEvidence);
 

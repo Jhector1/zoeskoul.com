@@ -160,7 +160,7 @@ export default function ProgrammingIdeSandbox({
     const [surfaceMode, setSurfaceMode] = useState<SurfaceMode>(initialSurfaceMode);
 
     const readyTimerRef = useRef<number | null>(null);
-    const loadingStartedAtRef = useRef<number>(Date.now());
+    const loadingStartedAtRef = useRef<number>(0);
 
     const clearReadyTimer = () => {
         if (readyTimerRef.current != null) {
@@ -170,10 +170,13 @@ export default function ProgrammingIdeSandbox({
     };
 
     useEffect(() => {
-        loadingStartedAtRef.current = Date.now();
         setLang(initialLanguage);
-        setIdeReady(false);
     }, [initialLanguage]);
+
+    useEffect(() => {
+        loadingStartedAtRef.current = Date.now();
+        setIdeReady(false);
+    }, [lang]);
 
     useEffect(() => {
         setSurfaceMode(initialSurfaceMode);
@@ -209,7 +212,6 @@ export default function ProgrammingIdeSandbox({
         if (next === lang && surfaceMode === "code") return;
 
         clearReadyTimer();
-        loadingStartedAtRef.current = Date.now();
         setIdeReady(false);
         setLang(next);
 

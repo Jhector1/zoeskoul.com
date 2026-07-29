@@ -71,12 +71,18 @@ export function selectAllCatalogSubjectsForAdmin<
  * Elevated roles may inspect additional public lifecycle versions, but private
  * delivery remains available only through assignment and tutoring tooling.
  */
-export function selectPublicCatalogSubjects<
-    T extends { visibility?: CatalogSubjectVisibility },
->(subjects: readonly T[]): T[] {
-    return subjects.filter(
-        (subject) => (subject.visibility ?? "public") === "public",
-    );
+export function selectPublicCatalogSubjects<T extends object>(
+    subjects: readonly T[],
+): T[] {
+    return subjects.filter((subject) => {
+        const visibility = (
+            subject as {
+                visibility?: CatalogSubjectVisibility;
+            }
+        ).visibility;
+
+        return (visibility ?? "public") === "public";
+    });
 }
 
 export function selectCatalogSubjectsForMode<

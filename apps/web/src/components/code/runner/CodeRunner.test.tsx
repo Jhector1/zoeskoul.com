@@ -1,12 +1,13 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import CodeRunner, {
     restartWorkspaceTerminalSession,
     resolveMobileKeyboardViewport,
     resolveSqlMobilePaneDefault,
     resolveRunnerPaneDefaultTab,
     resolveWorkspaceTerminalPresentation,
+    resolveWorkspaceTerminalLeaseKey,
     resolveWorkspaceTerminalTabStrip,
     shouldAttachWorkspaceTerminalTab,
     workspaceTerminalRuntimeBridgePropsEqual,
@@ -14,8 +15,6 @@ import CodeRunner, {
     shouldAutoOpenWorkspaceTerminal,
     shouldOpenEditorForWorkspaceFileSelection,
 } from "@/components/code/runner/CodeRunner";
-
-const mockedWorkspaceTerminalControllerCalls: any[] = [];
 
 vi.mock("next-intl", () => ({
     useTranslations: () => (key: string) => key,
@@ -72,7 +71,6 @@ vi.mock("@/components/code/runner/hooks/controller/useResolvedRuntime", () => ({
 
 vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () => ({
     useWorkspaceTerminalController: (args: any) => {
-        mockedWorkspaceTerminalControllerCalls.push(args);
         return {
             available: true,
             terminalFeed: [],
@@ -494,11 +492,7 @@ describe("CodeRunner narrow-screen file navigation", () => {
 });
 
 describe("CodeRunner terminal-only mode", () => {
-    beforeEach(() => {
-        mockedWorkspaceTerminalControllerCalls.length = 0;
-    });
-
-    it("renders terminal-only workspace mode without editor or tab switcher", () => {
+    it("renders terminal-only workspace mode without an editor or Output switcher", () => {
         const html = renderToStaticMarkup(
             <CodeRunner
                 language="python"
@@ -520,9 +514,9 @@ describe("CodeRunner terminal-only mode", () => {
         expect(html).not.toContain('data-testid="mock-output-surface"');
         expect(html).not.toContain('data-testid="editor-pane"');
         expect(html).not.toContain('data-testid="mock-editor-pane"');
-        expect(html).not.toContain("aria-pressed");
+        expect(html).toContain('aria-pressed="true"');
+        expect(html).toContain(">Terminal 1<");
         expect(html).not.toContain(">Output<");
-        expect(html).not.toContain(">Terminal<");
     });
 
     it("keeps terminal selected for terminal-only mode across exercise identities", () => {
@@ -562,93 +556,48 @@ describe("CodeRunner terminal-only mode", () => {
         expect(second).not.toContain('data-testid="mock-output-surface"');
     });
 
-    it("passes the same topic workspace lease key across different bound exercises", () => {
-        renderToStaticMarkup(
-            <CodeRunner
-                language="bash"
-                code="echo hi"
-                onChangeCode={vi.fn()}
-                onChangeLanguage={vi.fn()}
-                showEditor={false}
-                showTerminal
-                workspaceTerminal={{
-                    enabled: true,
-                    workspaceKey: "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
-                }}
-                isAuthenticated
-                exerciseStateKey="linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start"
-                showHeaderBar={false}
-            />,
-        );
+    it("uses the same topic workspace lease key across different bound exercises", () => {
+        const workspaceKey =
+            "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is";
 
-        renderToStaticMarkup(
-            <CodeRunner
-                language="bash"
-                code="echo hi"
-                onChangeCode={vi.fn()}
-                onChangeLanguage={vi.fn()}
-                showEditor={false}
-                showTerminal
-                workspaceTerminal={{
-                    enabled: true,
-                    workspaceKey: "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
-                }}
-                isAuthenticated
-                exerciseStateKey="linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card-2:ci-make-command-practice"
-                showHeaderBar={false}
-            />,
-        );
+        const first = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey: workspaceKey,
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start",
+        });
+        const second = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey: workspaceKey,
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card-2:ci-make-command-practice",
+        });
 
-        expect(mockedWorkspaceTerminalControllerCalls).toHaveLength(2);
-        expect(mockedWorkspaceTerminalControllerCalls[0]?.workspaceKey).toBe(
-            "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
-        );
-        expect(mockedWorkspaceTerminalControllerCalls[1]?.workspaceKey).toBe(
-            "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
-        );
+        expect(first).toBe(workspaceKey);
+        expect(second).toBe(workspaceKey);
     });
 
-    it("passes a new workspace lease key when the topic changes", () => {
-        renderToStaticMarkup(
-            <CodeRunner
-                language="bash"
-                code="echo hi"
-                onChangeCode={vi.fn()}
-                onChangeLanguage={vi.fn()}
-                showEditor={false}
-                showTerminal
-                workspaceTerminal={{
-                    enabled: true,
-                    workspaceKey: "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
-                }}
-                isAuthenticated
-                exerciseStateKey="linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start"
-                showHeaderBar={false}
-            />,
-        );
+    it("falls back to the exercise identity without an authored workspace key", () => {
+        expect(
+            resolveWorkspaceTerminalLeaseKey({
+                exerciseStateKey: "exercise-a",
+            }),
+        ).toBe("exercise-a");
+    });
 
-        renderToStaticMarkup(
-            <CodeRunner
-                language="bash"
-                code="echo hi"
-                onChangeCode={vi.fn()}
-                onChangeLanguage={vi.fn()}
-                showEditor={false}
-                showTerminal
-                workspaceTerminal={{
-                    enabled: true,
-                    workspaceKey: "linux-terminal-fundamentals:linux-1-terminal-navigation:where-am-i",
-                }}
-                isAuthenticated
-                exerciseStateKey="linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:where-am-i:try-it-card:ci-pwd-practice"
-                showHeaderBar={false}
-            />,
-        );
+    it("uses a new workspace lease key when the topic changes", () => {
+        const first = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start",
+        });
+        const second = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:where-am-i",
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:where-am-i:try-it-card:ci-pwd-practice",
+        });
 
-        expect(mockedWorkspaceTerminalControllerCalls).toHaveLength(2);
-        expect(mockedWorkspaceTerminalControllerCalls[0]?.workspaceKey).not.toBe(
-            mockedWorkspaceTerminalControllerCalls[1]?.workspaceKey,
-        );
+        expect(first).not.toBe(second);
     });
 
     it("shows open and restart terminal actions for workspace terminal mode", () => {

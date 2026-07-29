@@ -65,10 +65,6 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
         },
         ref,
     ) {
-        if (!show) {
-            return null;
-        }
-
         const t = useTranslations("reviewNav");
         const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
         const [isDragging, setIsDragging] = React.useState(false);
@@ -216,6 +212,10 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             },
             [],
         );
+
+        if (!show) {
+            return null;
+        }
 
         return (
             <div

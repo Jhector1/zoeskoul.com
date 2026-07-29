@@ -27,17 +27,19 @@ function resolveScopeTitles(
     );
     if (!course) continue;
 
-    const module = course.modules.find((item) => item.slug === scope.moduleSlug);
-    const section = module?.sections.find(
+    const selectedModule = course.modules.find(
+      (item) => item.slug === scope.moduleSlug,
+    );
+    const section = selectedModule?.sections.find(
       (item) => item.slug === scope.sectionSlug,
     );
     const topic = section?.topics.find((item) => item.slug === scope.topicSlug);
-    if (!module || !section || !topic) return null;
+    if (!selectedModule || !section || !topic) return null;
 
     return {
       catalog,
       course,
-      module,
+      module: selectedModule,
       section,
       topic,
     };

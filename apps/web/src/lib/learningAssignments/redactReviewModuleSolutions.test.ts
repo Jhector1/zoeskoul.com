@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { redactReviewModuleSolutions } from "./redactReviewModuleSolutions";
 
 it("removes nested code solutions and reveal flags without changing starter files", () => {
-  const module = {
+  const reviewModule = {
     id: "m1",
     title: "Private course",
     startPracticeSectionSlug: "s1",
@@ -33,7 +33,7 @@ it("removes nested code solutions and reveal flags without changing starter file
     ],
   } as any;
 
-  const redacted = redactReviewModuleSolutions(module) as any;
+  const redacted = redactReviewModuleSolutions(reviewModule) as any;
   expect(redacted.topics[0].cards[0].spec.allowReveal).toBe(false);
   expect(redacted.topics[0].cards[0].spec.steps[0].solutionCode).toBeUndefined();
   expect(redacted.topics[0].cards[0].spec.steps[0].solutionFiles).toBeUndefined();

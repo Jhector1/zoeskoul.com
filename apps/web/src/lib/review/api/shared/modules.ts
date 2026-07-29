@@ -39,12 +39,12 @@ export async function loadReviewModulesForSubject(
     const devCloneModules = DEV_REVIEW_CLONE_MODULE_ROWS[subjectSlug] ?? [];
     const bySlug = new Map<string, ReviewModuleRow>();
 
-    for (const module of modules) {
-        bySlug.set(module.slug, module);
+    for (const reviewModule of modules) {
+        bySlug.set(reviewModule.slug, reviewModule);
     }
 
-    for (const module of devCloneModules) {
-        bySlug.set(module.slug, module);
+    for (const reviewModule of devCloneModules) {
+        bySlug.set(reviewModule.slug, reviewModule);
     }
 
     return {

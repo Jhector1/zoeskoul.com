@@ -82,6 +82,10 @@ export default function StandaloneReviewExerciseCard({
     props.topic,
   ]);
 
+  const questionExerciseKey = (
+    question as { exerciseKey?: string } | null
+  )?.exerciseKey;
+
   const practiceState = useMemo<PracticeState | undefined>(() => {
     if (!props.exercise || !props.current) return undefined;
 
@@ -100,7 +104,7 @@ export default function StandaloneReviewExerciseCard({
           ? props.current.result.ok
           : null,
       helpPolicy: props.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
-      exerciseKey: (question as any)?.exerciseKey,
+      exerciseKey: questionExerciseKey,
       topicId: firstText(props.exercise.topic, props.topic, "all"),
       subjectSlug: props.subjectSlug || "practice",
       moduleSlug: props.moduleSlug || props.experienceMode,
@@ -120,7 +124,7 @@ export default function StandaloneReviewExerciseCard({
     props.subjectSlug,
     props.submitBusy,
     props.topic,
-    (question as any)?.exerciseKey,
+    questionExerciseKey,
   ]);
 
   if (!question) {

@@ -35,6 +35,7 @@ describe("IdeEditorPane", () => {
                 tabFiles={[]}
                 activeFileId={null}
                 activeFile={null}
+                workspace={null}
                 runnerHeight={320}
                 title="Linux terminal"
                 isSql={false}

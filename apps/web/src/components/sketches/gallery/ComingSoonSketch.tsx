@@ -51,7 +51,7 @@ export default function ComingSoonSketch(props: {
                 "dark:border-amber-300/25 dark:bg-amber-200/10 dark:text-amber-200"
             )}>
                 Tip: Once you implement the archetype renderer, swap this custom entry to{" "}
-                <span className="font-mono">kind: "archetype"</span>.
+                <span className="font-mono">{"kind: \"archetype\""}</span>.
             </div>
         </div>
     );

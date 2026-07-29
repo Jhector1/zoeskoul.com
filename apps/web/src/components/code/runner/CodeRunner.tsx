@@ -100,6 +100,13 @@ export function resolveWorkspaceTerminalPresentation(args: {
     };
 }
 
+export function resolveWorkspaceTerminalLeaseKey(args: {
+    authoredWorkspaceKey?: string | null;
+    exerciseStateKey: string;
+}) {
+    return args.authoredWorkspaceKey ?? args.exerciseStateKey;
+}
+
 export function resolveWorkspaceTerminalTabStrip(args: {
     tabs: WorkspaceTerminalTab[];
     pendingTerminalStartId: string | null;
@@ -1126,8 +1133,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }
 
         const requestHostKey = resolvedTerminalHostKey;
-        let request: Promise<TerminalCapacity | null>;
-        request = readTerminalCapacity(requestHostKey)
+        const request: Promise<TerminalCapacity | null> =
+            readTerminalCapacity(requestHostKey)
             .then((next) => {
                 if (currentTerminalHostKeyRef.current !== requestHostKey) {
                     return null;
@@ -2961,8 +2968,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                               cwd: workspaceTerminal?.cwd,
                               bootstrap: workspaceTerminal?.bootstrap,
                               workspaceKey:
-                                  workspaceTerminal?.workspaceKey ??
-                                  effectiveExerciseStateKey,
+                                  resolveWorkspaceTerminalLeaseKey({
+                                      authoredWorkspaceKey:
+                                          workspaceTerminal?.workspaceKey,
+                                      exerciseStateKey:
+                                          effectiveExerciseStateKey,
+                                  }),
                               terminalHostKey: resolvedTerminalHostKey,
                               terminalOwnerKey: buildWorkspaceTerminalOwnerKey({
                                   hostKey: resolvedTerminalHostKey,

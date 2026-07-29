@@ -132,9 +132,10 @@ export default function TutoringSessionEditor({
   );
   const modules = course?.modules ?? [];
   const selectedModuleSlug = state.sourceModuleSlug || modules[0]?.slug || "";
-  const module = modules.find((item) => item.slug === selectedModuleSlug) ?? null;
-  const sections = module?.sections ?? [];
-  const topics = module?.topics ?? [];
+  const selectedModule =
+    modules.find((item) => item.slug === selectedModuleSlug) ?? null;
+  const sections = selectedModule?.sections ?? [];
+  const topics = selectedModule?.topics ?? [];
   const selectedSectionSlug = state.sourceSectionSlug || sections[0]?.slug || "";
   const selectedTopicId = state.sourceTopicId || topics[0]?.id || "";
   const invites = initialSession?.invites ?? [];

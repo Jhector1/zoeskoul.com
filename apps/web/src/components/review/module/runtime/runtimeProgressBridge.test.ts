@@ -84,7 +84,12 @@ describe("mergeRuntimeIntoProgress", () => {
             } as unknown as RuntimeLike,
         );
 
-        const topic = next.topics?.["topic-a"]!;
+        const topic = next.topics?.["topic-a"];
+        expect(topic).toBeDefined();
+        if (!topic) {
+            throw new Error("Expected topic-a progress to be persisted.");
+        }
+
         expect(topic.runtimeStateV2!.exercises![exerciseKey].workspace).toEqual(workspace);
         expect(topic.runtimeStateV2!.exercises![exerciseKey].codeWorkspace).toEqual(workspace);
         expect(topic.runtimeStateV2!.exercises![exerciseKey].ideWorkspace).toEqual(workspace);
@@ -162,7 +167,12 @@ describe("mergeRuntimeIntoProgress", () => {
             } as unknown as RuntimeLike,
         );
 
-        const topic = next.topics?.["what-update-does"]!;
+        const topic = next.topics?.["what-update-does"];
+        expect(topic).toBeDefined();
+        if (!topic) {
+            throw new Error("Expected what-update-does progress to be persisted.");
+        }
+
         expect(topic.runtimeStateV2!.cards!["sql:sql_module_12:section_12_1:what-update-does:sk1"].toolWorkspace).toEqual(workspace);
         expect(topic.toolState!["card:sql:sql_module_12:section_12_1:what-update-does:sk1"].workspace).toEqual(workspace);
         expect(topic.toolState!["card:sk1"]).toBeUndefined();

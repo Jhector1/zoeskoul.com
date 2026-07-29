@@ -2,6 +2,9 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
+import {
+    DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
+} from "../../workspaceCapabilities";
 import ReviewTopicStage from "./ReviewTopicStage";
 
 vi.mock("@/lib/config/learnerUiFlags", () => ({
@@ -36,6 +39,7 @@ function renderStage(card: any, desktopToolsVisible = false) {
             viewCards: [card],
             viewTid: "topic-1",
             activeCardIndex: 0,
+            workspaceCapabilities: DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
             navModes: { cards: "scroll", quiz: "scroll" },
             reduceMotion: true,
             tp: {} as any,

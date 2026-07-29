@@ -43,10 +43,10 @@ export async function loadPracticeChooser(args: {
     }
   >();
 
-  for (const module of model.modules) {
-    if (!visibleSubjectSlugs.has(module.subjectSlug)) continue;
+  for (const subjectModule of model.modules) {
+    if (!visibleSubjectSlugs.has(subjectModule.subjectSlug)) continue;
 
-    const subject = subjectBySlug.get(module.subjectSlug) ?? null;
+    const subject = subjectBySlug.get(subjectModule.subjectSlug) ?? null;
     const decision = resolveModuleAccess({
       subject: subject
         ? {
@@ -58,10 +58,10 @@ export async function loadPracticeChooser(args: {
           }
         : null,
       module: {
-        id: module.id,
-        slug: module.slug,
-        accessOverride: module.accessOverride,
-        entitlementKey: module.entitlementKey ?? null,
+        id: subjectModule.id,
+        slug: subjectModule.slug,
+        accessOverride: subjectModule.accessOverride,
+        entitlementKey: subjectModule.entitlementKey ?? null,
       },
       snapshot: model.snapshot,
       requireAll: model.requireAll,
@@ -70,12 +70,12 @@ export async function loadPracticeChooser(args: {
     const nextPath =
       `/${encodeURIComponent(args.locale)}/practice/daily?` +
       new URLSearchParams({
-        subject: module.subjectSlug,
-        module: module.slug,
+        subject: subjectModule.subjectSlug,
+        module: subjectModule.slug,
       }).toString();
 
     moduleAccessByKey.set(
-      practiceModuleAccessKey(module.subjectSlug, module.slug),
+      practiceModuleAccessKey(subjectModule.subjectSlug, subjectModule.slug),
       {
         availability: decision.ok ? "available" : "locked",
         billingHref: decision.ok
@@ -85,8 +85,8 @@ export async function loadPracticeChooser(args: {
               next: nextPath,
               back: `/${encodeURIComponent(args.locale)}/practice/daily`,
               reason: "module",
-              subject: module.subjectSlug,
-              module: module.slug,
+              subject: subjectModule.subjectSlug,
+              module: subjectModule.slug,
             }),
       },
     );

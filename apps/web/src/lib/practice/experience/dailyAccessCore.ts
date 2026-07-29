@@ -48,10 +48,10 @@ export function selectAccessibleDailyPracticeOptions(args: {
   );
   const allowedModuleKeys = new Set<string>();
 
-  for (const module of args.modules) {
-    if (!visibleSubjectSlugs.has(module.subjectSlug)) continue;
+  for (const subjectModule of args.modules) {
+    if (!visibleSubjectSlugs.has(subjectModule.subjectSlug)) continue;
 
-    const subject = subjectBySlug.get(module.subjectSlug) ?? null;
+    const subject = subjectBySlug.get(subjectModule.subjectSlug) ?? null;
     const decision = resolveModuleAccess({
       subject: subject
         ? {
@@ -63,10 +63,10 @@ export function selectAccessibleDailyPracticeOptions(args: {
           }
         : null,
       module: {
-        id: module.id,
-        slug: module.slug,
-        accessOverride: module.accessOverride,
-        entitlementKey: module.entitlementKey ?? null,
+        id: subjectModule.id,
+        slug: subjectModule.slug,
+        accessOverride: subjectModule.accessOverride,
+        entitlementKey: subjectModule.entitlementKey ?? null,
       },
       snapshot: args.snapshot,
       requireAll: args.requireAll,
@@ -74,7 +74,7 @@ export function selectAccessibleDailyPracticeOptions(args: {
 
     if (decision.ok) {
       allowedModuleKeys.add(
-        practiceModuleAccessKey(module.subjectSlug, module.slug),
+        practiceModuleAccessKey(subjectModule.subjectSlug, subjectModule.slug),
       );
     }
   }

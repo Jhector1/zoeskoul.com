@@ -138,15 +138,15 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
         (a, b) => a.order - b.order || a.slug.localeCompare(b.slug),
       );
 
-      for (const module of modules) {
-        const sections = [...module.sections].sort(
+      for (const subjectModule of modules) {
+        const sections = [...subjectModule.sections].sort(
           (a, b) => a.order - b.order || a.slug.localeCompare(b.slug),
         );
 
         for (const section of sections) {
           if (
             !availableSections.has(
-              `${subjectSlug}|${module.slug}|${section.slug}`,
+              `${subjectSlug}|${subjectModule.slug}|${section.slug}`,
             )
           ) {
             continue;
@@ -176,7 +176,7 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
                 );
                 const target = resolvePublishedPracticeTarget({
                   subjectSlug,
-                  moduleSlug: module.slug,
+                  moduleSlug: subjectModule.slug,
                   sectionSlug: section.slug,
                   topicSlug: topicId,
                   exerciseKey: String(exercise.id ?? ""),
@@ -185,7 +185,7 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
 
                 const id = [
                   subjectSlug,
-                  module.slug,
+                  subjectModule.slug,
                   section.slug,
                   target.topicSlug,
                   target.exerciseKey,
@@ -199,9 +199,9 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
                   subjectTitle: titleFromKey(subject.titleKey, subjectSlug),
                   subjectTitleKey: authoredTitleKey(subject.titleKey),
                   releaseStatus,
-                  moduleSlug: module.slug,
-                  moduleTitle: titleFromKey(module.titleKey, module.slug),
-                  moduleTitleKey: authoredTitleKey(module.titleKey),
+                  moduleSlug: subjectModule.slug,
+                  moduleTitle: titleFromKey(subjectModule.titleKey, subjectModule.slug),
+                  moduleTitleKey: authoredTitleKey(subjectModule.titleKey),
                   sectionSlug: section.slug,
                   sectionTitle: titleFromKey(section.titleKey, section.slug),
                   sectionTitleKey: authoredTitleKey(section.titleKey),
@@ -221,7 +221,7 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
                   sortKey: [
                     String(catalog.order).padStart(4, "0"),
                     String(subject.order).padStart(4, "0"),
-                    String(module.order).padStart(4, "0"),
+                    String(subjectModule.order).padStart(4, "0"),
                     String(section.order).padStart(4, "0"),
                     String(topicIndex).padStart(4, "0"),
                     String(exerciseIndex).padStart(4, "0"),

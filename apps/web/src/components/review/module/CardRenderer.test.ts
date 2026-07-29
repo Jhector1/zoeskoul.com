@@ -6,6 +6,9 @@ import type { ReviewCard } from "@/lib/subjects/types";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 import { buildQuizBlockRuntimeDefaultsProps } from "./runtime/cardRuntimeDefaults";
+import {
+    DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
+} from "./workspaceCapabilities";
 import CardRenderer from "./CardRenderer";
 
 
@@ -19,6 +22,14 @@ const mocked = vi.hoisted(() => ({
     quizBlockProps: [] as Array<Record<string, unknown>>,
     sketchBlockProps: [] as Array<Record<string, unknown>>,
     ensureCard: vi.fn(),
+}));
+
+vi.mock("next-intl", () => ({
+    useTranslations: () => {
+        const translate = (key: string) => key;
+        translate.has = () => false;
+        return translate;
+    },
 }));
 
 vi.mock("@/components/review/QuizBlock", () => ({
@@ -73,6 +84,7 @@ function baseProps(card: ReviewCard) {
         cardKey: `${card.id}:key`,
         topicId: "topic-1",
         tp: {},
+        workspaceCapabilities: DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
     };
 }
 

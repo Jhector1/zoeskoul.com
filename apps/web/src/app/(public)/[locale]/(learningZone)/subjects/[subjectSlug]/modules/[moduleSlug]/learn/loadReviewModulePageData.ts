@@ -88,10 +88,13 @@ export async function loadReviewModulePageData(args: {
         isAvailable: publication.isAvailable && audienceAvailable,
         moduleExists: hasReviewModule(subjectSlug, moduleSlug),
         resolveModule: async () => {
-            const module = await getResolvedReviewModule(subjectSlug, moduleSlug);
-            return module && !canViewSolutions
-                ? redactReviewModuleSolutions(module)
-                : module;
+            const resolvedModule = await getResolvedReviewModule(
+                subjectSlug,
+                moduleSlug,
+            );
+            return resolvedModule && !canViewSolutions
+                ? redactReviewModuleSolutions(resolvedModule)
+                : resolvedModule;
         },
     });
 }
