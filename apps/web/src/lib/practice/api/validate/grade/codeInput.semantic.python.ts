@@ -199,7 +199,30 @@ function resolveSemanticCheckGroups(args: {
                         normalizeSemanticCheckPath(candidate.path) === path,
                 );
 
-                if (!file || !isTextWorkspaceFileEntry(file)) {
+                if (!file) {
+                    return {
+                        error: {
+                            ok: false,
+                            explanation: `Missing file: ${path}`,
+                            feedback: {
+                                area: "code",
+                                source: "check",
+                                kind: "logic",
+                                tone: "warning",
+                                title: "File missing",
+                                message: `Create or restore ${path}, then check your answer again.`,
+                                raw: args.showDebug
+                                    ? debugRaw({
+                                          index,
+                                          path,
+                                      })
+                                    : null,
+                            },
+                        },
+                    };
+                }
+
+                if (!isTextWorkspaceFileEntry(file)) {
                     return {
                         error: {
                             ok: false,
@@ -215,7 +238,7 @@ function resolveSemanticCheckGroups(args: {
                                     ? debugRaw({
                                           index,
                                           path,
-                                          binary: Boolean(file),
+                                          binary: true,
                                       })
                                     : null,
                             },
