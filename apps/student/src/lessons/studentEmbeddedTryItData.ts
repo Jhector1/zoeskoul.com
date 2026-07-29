@@ -6,6 +6,10 @@ import {
   isRecord,
 } from "./studentPracticeUi";
 
+const MAX_EMBEDDED_PYTHON_WORKSPACE_FILES = 9;
+const MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS =
+  64 * 1024;
+
 export type StudentPythonTryItFile = {
   path: string;
   content: string;
@@ -14,7 +18,7 @@ export type StudentPythonTryItFile = {
 
 export type StudentPythonTryItStarter = {
   language: "python";
-  entry: "main.py";
+  entry: string;
   files: StudentPythonTryItFile[];
   editorHeight: number;
 };
@@ -97,13 +101,15 @@ function readStarterFiles(
   if (
     !Array.isArray(value) ||
     value.length < 1 ||
-    value.length > 2
+    value.length >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_FILES
   ) {
     return null;
   }
 
   const paths = new Set<string>();
   const files: StudentPythonTryItFile[] = [];
+  let totalCharacters = 0;
 
   for (const valueEntry of value) {
     if (!isRecord(valueEntry)) {
@@ -128,39 +134,22 @@ function readStarterFiles(
 
     if (!language) return null;
 
+    totalCharacters +=
+      valueEntry.content.length;
+
+    if (
+      totalCharacters >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS
+    ) {
+      return null;
+    }
+
     paths.add(path);
     files.push({
       path,
       content: valueEntry.content,
       language,
     });
-  }
-
-  const entryFile =
-    files.find(
-      (file) =>
-        file.path === "main.py",
-    );
-  const companionFiles =
-    files.filter(
-      (file) =>
-        file.path !== "main.py",
-    );
-  const pythonHelpers =
-    companionFiles.filter(
-      (file) =>
-        file.language === "python",
-    );
-
-  if (
-    !entryFile ||
-    entryFile.language !== "python" ||
-    pythonHelpers.some(
-      (file) =>
-        !file.path.includes("/"),
-    )
-  ) {
-    return null;
   }
 
   return files;
@@ -187,8 +176,9 @@ function boundedEditorHeight(
 
 /**
  * Reads the bounded Python workspace projected by the protected server.
- * It supports main.py plus one text/CSV companion or one nested Python helper.
- * Grading recipes and hidden test-file overrides stay server-side.
+ * It supports a bounded learner-visible Python package, including alternate
+ * entry files and text/CSV companions. Grading recipes and hidden test-file
+ * overrides stay server-side.
  */
 export function readStudentPythonTryItStarter(
   launch: LearningPracticeLaunchResponse,
@@ -222,7 +212,7 @@ export function readStudentPythonTryItStarter(
     ) ??
     "main.py";
 
-  if (entry !== "main.py") {
+  if (!isSafeRelativePath(entry)) {
     return null;
   }
 
@@ -239,7 +229,10 @@ export function readStudentPythonTryItStarter(
         ? readStarterFiles(
             payloadStarterFiles,
           )
-        : typeof workspace?.starterCode === "string"
+        : (
+            entry === "main.py" &&
+            typeof workspace?.starterCode === "string"
+          )
           ? [
               {
                 path: "main.py",
@@ -249,7 +242,10 @@ export function readStudentPythonTryItStarter(
                   "python" as const,
               },
             ]
-          : typeof payload.starterCode === "string"
+          : (
+              entry === "main.py" &&
+              typeof payload.starterCode === "string"
+            )
             ? [
                 {
                   path: "main.py",
@@ -261,11 +257,23 @@ export function readStudentPythonTryItStarter(
               ]
             : null;
 
-  if (!files) return null;
+  const entryFile =
+    files?.find(
+      (file) =>
+        file.path === entry,
+    );
+
+  if (
+    !files ||
+    !entryFile ||
+    entryFile.language !== "python"
+  ) {
+    return null;
+  }
 
   return {
     language: "python",
-    entry: "main.py",
+    entry,
     files,
     editorHeight:
       boundedEditorHeight(

@@ -501,6 +501,171 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(false);
+    const packageEligible = {
+      ...helperEligible,
+      starterFiles: [
+        eligible.starterFiles[0],
+        {
+          path:
+            "models/catalog_item.py",
+          content:
+            "class CatalogItem:\n    pass\n",
+          language: "python",
+        },
+        {
+          path: "models/book.py",
+          content:
+            "class Book(CatalogItem):\n    pass\n",
+          language: "python",
+        },
+        {
+          path:
+            "services/catalog_report.py",
+          content:
+            "def build_report(items):\n    return []\n",
+          language: "python",
+        },
+      ],
+      workspace: {
+        ...helperEligible.workspace,
+        starterFiles: [
+          eligible.workspace
+            .starterFiles[0],
+          {
+            path:
+              "models/catalog_item.py",
+            content:
+              "class CatalogItem:\n    pass\n",
+            language: "python",
+          },
+          {
+            path:
+              "models/book.py",
+            content:
+              "class Book(CatalogItem):\n    pass\n",
+            language: "python",
+          },
+          {
+            path:
+              "services/catalog_report.py",
+            content:
+              "def build_report(items):\n    return []\n",
+            language: "python",
+          },
+        ],
+      },
+      recipe: {
+        type: "semantic",
+        semanticChecks: [
+          {
+            type:
+              "defines_function",
+            path:
+              "services/catalog_report.py",
+            functionName:
+              "build_report",
+          },
+        ],
+      },
+    };
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(
+        packageEligible,
+      ),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...packageEligible,
+        starterFiles: [
+          {
+            path:
+              "tests/check_book.py",
+            content:
+              "from models.book import Book\n",
+            language: "python",
+          },
+          ...packageEligible.starterFiles.slice(
+            1,
+          ),
+        ],
+        workspace: {
+          ...packageEligible.workspace,
+          entryFilePath:
+            "tests/check_book.py",
+          starterFiles: [
+            {
+              path:
+                "tests/check_book.py",
+              content:
+                "from models.book import Book\n",
+              language: "python",
+            },
+            ...packageEligible.workspace.starterFiles.slice(
+              1,
+            ),
+          ],
+        },
+        recipe: {
+          type: "semantic",
+          semanticChecks: [
+            {
+              type:
+                "imports_symbol",
+              path:
+                "tests/check_book.py",
+              module:
+                "models.book",
+              symbol: "Book",
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...packageEligible,
+        starterFiles: [
+          ...packageEligible.starterFiles,
+          {
+            path:
+              "data/books.csv",
+            content:
+              "title\nClean Code\n",
+            language: "text",
+          },
+        ],
+        workspace: {
+          ...packageEligible.workspace,
+          starterFiles: [
+            ...packageEligible.workspace.starterFiles,
+            {
+              path:
+                "data/books.csv",
+              content:
+                "title\nClean Code\n",
+              language: "text",
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...packageEligible,
+        recipe: {
+          type: "fixed_tests",
+          tests: [
+            {
+              stdin: "",
+              stdout: "",
+              match: "exact",
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,
@@ -889,6 +1054,75 @@ describe("student embedded Try It practice launch", () => {
                 path: "models/car.py",
                 content:
                   "class Car:\n    pass\n",
+                language: "python",
+              },
+            ],
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id:
+          "try-package-workspace",
+        exerciseKey:
+          "try-package-workspace",
+        kind: "code_input",
+        topic:
+          "package-workspace",
+        difficulty: "easy",
+        title:
+          "Check a package",
+        prompt:
+          "Update the package files.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            {
+              path:
+                "tests/check_book.py",
+              content:
+                "from models.book import Book\n",
+              language: "python",
+            },
+            {
+              path:
+                "models/catalog_item.py",
+              content:
+                "class CatalogItem:\n    pass\n",
+              language: "python",
+            },
+            {
+              path:
+                "models/book.py",
+              content:
+                "class Book:\n    pass\n",
+              language: "python",
+            },
+          ],
+          workspace: {
+            entryFilePath:
+              "tests/check_book.py",
+            starterFiles: [
+              {
+                path:
+                  "tests/check_book.py",
+                content:
+                  "from models.book import Book\n",
+                language: "python",
+              },
+              {
+                path:
+                  "models/catalog_item.py",
+                content:
+                  "class CatalogItem:\n    pass\n",
+                language: "python",
+              },
+              {
+                path:
+                  "models/book.py",
+                content:
+                  "class Book:\n    pass\n",
                 language: "python",
               },
             ],

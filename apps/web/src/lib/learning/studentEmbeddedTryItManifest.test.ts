@@ -309,7 +309,7 @@ const pythonHelperEligibleIds = [
   ["python/applied-python-projects/modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json", "try-inheritance-for-shared-behavior-sketch0"],
 ] as const;
 
-const pythonHelperFallbackIds = [
+const semanticPackageEligibleIds = [
   ["python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json", "try-testing-inheritance-and-polymorphism-sketch0"],
   ["python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json", "try-testing-inheritance-and-polymorphism-sketch1"],
   ["python/applied-python-projects/modules/module10/topics/testing-object-state/topic.bundle.json", "try-testing-object-state-sketch0"],
@@ -689,16 +689,16 @@ describe(
       },
     );
 
-    it("locks larger and alternate-entry Python workspaces to fallback", () => {
+    it("locks the audited semantic package-workspace inventory", () => {
       expect(
-        pythonHelperFallbackIds,
+        semanticPackageEligibleIds,
       ).toHaveLength(19);
     });
 
     it.each(
-      pythonHelperFallbackIds,
+      semanticPackageEligibleIds,
     )(
-      "keeps broader Python workspace %s / %s on the full workspace fallback",
+      "keeps semantic package workspace %s / %s in the direct Vite editor",
       (relativePath, exerciseKey) => {
         const pair =
           joined.get(
@@ -707,13 +707,37 @@ describe(
               exerciseKey,
             ),
           );
+        const exercise =
+          record(pair?.exercise);
+        const workspace =
+          record(exercise?.workspace);
+        const entry =
+          stringValue(
+            workspace?.entryFilePath,
+          );
+        const paths =
+          starterFilePaths(
+            pair?.exercise,
+          );
 
         expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(paths.length).toBeGreaterThanOrEqual(1);
+        expect(paths.length).toBeLessThanOrEqual(9);
+        expect(paths).toContain(entry);
+        expect(entry).toMatch(/\.py$/);
+        expect(
+          semanticChecks(
+            pair?.exercise,
+          ).length,
+        ).toBeGreaterThan(0);
         expect(
           isEligibleStudentEmbeddedPythonTryIt(
             pair?.exercise,
           ),
-        ).toBe(false);
+        ).toBe(true);
       },
     );
 

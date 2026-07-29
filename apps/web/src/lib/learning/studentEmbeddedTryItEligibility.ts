@@ -7,6 +7,10 @@ import {
   runtimeString,
 } from "./studentRuntimePracticeDescriptorShared";
 
+const MAX_EMBEDDED_PYTHON_WORKSPACE_FILES = 9;
+const MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS =
+  64 * 1024;
+
 type EmbeddedStarterFile = {
   path: string;
   content: string;
@@ -14,7 +18,7 @@ type EmbeddedStarterFile = {
 };
 
 type EmbeddedStarterWorkspace = {
-  entry: "main.py";
+  entry: string;
   files: EmbeddedStarterFile[];
   paths: Set<string>;
 };
@@ -125,6 +129,7 @@ function readStarterFiles(
 
   const files: EmbeddedStarterFile[] = [];
   const paths = new Set<string>();
+  let totalCharacters = 0;
 
   for (const valueEntry of value) {
     const file = asJsonRecord(valueEntry);
@@ -145,6 +150,16 @@ function readStarterFiles(
     );
 
     if (!language) return null;
+
+    totalCharacters +=
+      file.content.length;
+
+    if (
+      totalCharacters >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS
+    ) {
+      return null;
+    }
 
     paths.add(path);
     files.push({
@@ -214,6 +229,7 @@ function sameStarterFileShapes(
 function workspaceCompanionFilesMatch(
   value: unknown,
   starterFiles: EmbeddedStarterFile[],
+  entry: string,
 ): boolean {
   if (hasNoEntries(value)) {
     return true;
@@ -222,7 +238,7 @@ function workspaceCompanionFilesMatch(
   const companionFiles =
     starterFiles.filter(
       (file) =>
-        file.path !== "main.py",
+        file.path !== entry,
     );
   const workspaceFiles =
     readStarterFiles(value, {
@@ -239,17 +255,6 @@ function workspaceCompanionFilesMatch(
   );
 }
 
-function isNestedPythonHelper(
-  file: EmbeddedStarterFile,
-  entry: string,
-): boolean {
-  return (
-    file.path !== entry &&
-    file.language === "python" &&
-    file.path.includes("/")
-  );
-}
-
 function readEmbeddedStarterWorkspace(
   exercise: Record<string, unknown>,
   workspace: Record<string, unknown> | null,
@@ -257,12 +262,20 @@ function readEmbeddedStarterWorkspace(
   const topFiles =
     readStarterFiles(
       exercise.starterFiles,
-      { min: 1, max: 2 },
+      {
+        min: 1,
+        max:
+          MAX_EMBEDDED_PYTHON_WORKSPACE_FILES,
+      },
     );
   const workspaceFiles =
     readStarterFiles(
       workspace?.starterFiles,
-      { min: 1, max: 2 },
+      {
+        min: 1,
+        max:
+          MAX_EMBEDDED_PYTHON_WORKSPACE_FILES,
+      },
     );
   const entry =
     runtimeString(
@@ -272,7 +285,9 @@ function readEmbeddedStarterWorkspace(
   if (
     !topFiles ||
     !workspaceFiles ||
-    entry !== "main.py" ||
+    !isSafeRelativeWorkspacePath(
+      entry,
+    ) ||
     !sameStarterFiles(
       topFiles,
       workspaceFiles,
@@ -294,36 +309,18 @@ function readEmbeddedStarterWorkspace(
     return null;
   }
 
-  const companions =
-    topFiles.filter(
-      (file) =>
-        file.path !== entry,
-    );
-
-  const pythonHelpers =
-    companions.filter(
-      (file) =>
-        file.language === "python",
-    );
-
   if (
-    pythonHelpers.some(
-      (file) =>
-        !isNestedPythonHelper(
-          file,
-          entry,
-        ),
-    ) ||
     !workspaceCompanionFilesMatch(
       workspace?.files,
       topFiles,
+      entry,
     )
   ) {
     return null;
   }
 
   return {
-    entry: "main.py",
+    entry,
     files: topFiles,
     paths: new Set(
       topFiles.map(
@@ -538,12 +535,13 @@ function workspaceRequirementsAreSatisfied(
 /**
  * Learner-safe embedded Python contract.
  *
- * The current direct runtime accepts main.py alone, main.py plus one
- * learner-visible text/CSV companion, or a semantic workspace containing
- * main.py plus one nested Python helper module. Validation recipes, semantic
- * checks, source checks, fixed-test stdin values, hidden test-file overrides,
- * and solutions remain behind the protected server boundary. Larger package
- * workspaces, alternate entries, and file-creation exercises stay on the full
+ * The current direct runtime accepts bounded learner-visible Python
+ * workspaces. Fixed-test exercises remain limited to one Python entry plus at
+ * most one text/CSV companion. Semantic exercises may use an alternate Python
+ * entry and up to nine learner-visible Python/text/CSV files. Validation
+ * recipes, semantic checks, source checks, fixed-test stdin values, hidden
+ * test-file overrides, and solutions remain behind the protected server
+ * boundary. Exercises that require creating files or folders stay on the full
  * workspace runtime.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
@@ -600,20 +598,20 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       workspaceRecord,
     );
 
-  const hasPythonHelper =
-    starterWorkspace?.files.some(
+  const pythonFileCount =
+    starterWorkspace?.files.filter(
       (file) =>
-        isNestedPythonHelper(
-          file,
-          starterWorkspace.entry,
-        ),
-    ) ?? false;
+        file.language === "python",
+    ).length ?? 0;
 
   if (
     !starterWorkspace ||
     (
-      hasPythonHelper &&
-      recipeType !== "semantic"
+      recipeType === "fixed_tests" &&
+      (
+        pythonFileCount !== 1 ||
+        starterWorkspace.files.length > 2
+      )
     ) ||
     !validationChecksUseOnlyLearnerFiles(
       exercise,

@@ -177,7 +177,86 @@ describe("student embedded Try It data", () => {
     });
   });
 
-  it("rejects workspaces outside the bounded companion-file contract", () => {
+  it("reads bounded semantic package workspaces and alternate entries", () => {
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath:
+              "tests/check_book.py",
+            starterFiles: [
+              {
+                path:
+                  "tests/check_book.py",
+                content:
+                  "from models.book import Book\n",
+                language: "python",
+              },
+              {
+                path:
+                  "models/catalog_item.py",
+                content:
+                  "class CatalogItem:\n    pass\n",
+                language: "python",
+              },
+              {
+                path:
+                  "models/book.py",
+                content:
+                  "class Book:\n    pass\n",
+                language: "python",
+              },
+              {
+                path:
+                  "data/books.csv",
+                content:
+                  "title\nClean Code\n",
+                language: "text",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toEqual({
+      language: "python",
+      entry:
+        "tests/check_book.py",
+      files: [
+        {
+          path:
+            "tests/check_book.py",
+          content:
+            "from models.book import Book\n",
+          language: "python",
+        },
+        {
+          path:
+            "models/catalog_item.py",
+          content:
+            "class CatalogItem:\n    pass\n",
+          language: "python",
+        },
+        {
+          path:
+            "models/book.py",
+          content:
+            "class Book:\n    pass\n",
+          language: "python",
+        },
+        {
+          path:
+            "data/books.csv",
+          content:
+            "title\nClean Code\n",
+          language: "csv",
+        },
+      ],
+      editorHeight: 360,
+    });
+  });
+
+  it("rejects workspaces outside the bounded package contract", () => {
     expect(
       readStudentPythonTryItStarter(
         launch({
@@ -207,17 +286,13 @@ describe("student embedded Try It data", () => {
         launch({
           language: "python",
           workspace: {
-            entryFilePath: "main.py",
+            entryFilePath:
+              "models/missing.py",
             starterFiles: [
               {
                 path: "main.py",
                 content:
-                  "from helper import value\n",
-              },
-              {
-                path: "helper.py",
-                content:
-                  "value = 1\n",
+                  "print('x')\n",
               },
             ],
           },
@@ -231,23 +306,20 @@ describe("student embedded Try It data", () => {
           language: "python",
           workspace: {
             entryFilePath: "main.py",
-            starterFiles: [
-              {
-                path: "main.py",
-                content:
-                  "from models.car import Car\n",
-              },
-              {
-                path: "models/car.py",
-                content:
-                  "class Car:\n    pass\n",
-              },
-              {
-                path: "models/truck.py",
-                content:
-                  "class Truck:\n    pass\n",
-              },
-            ],
+            starterFiles:
+              Array.from(
+                { length: 10 },
+                (_, index) => ({
+                  path:
+                    index === 0
+                      ? "main.py"
+                      : `models/model_${index}.py`,
+                  content:
+                    `VALUE_${index} = ${index}\n`,
+                  language:
+                    "python",
+                }),
+              ),
           },
         }),
       ),
@@ -269,6 +341,29 @@ describe("student embedded Try It data", () => {
                 path: "../secret.txt",
                 content:
                   "secret\n",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+              {
+                path: "README.md",
+                content:
+                  "# Unsupported\n",
               },
             ],
           },
