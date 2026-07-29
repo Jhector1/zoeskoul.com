@@ -1,3 +1,4 @@
+import { resolveTaggedOnServer } from "@/i18n/server";
 import { getCurrentUserAccess } from "@/lib/access/currentUserAccess";
 import {
   appCorsJson,
@@ -5,8 +6,8 @@ import {
   isAppOriginAllowed,
 } from "@/lib/http/appCors";
 import {
-  projectStudentPracticeValidation,
-} from "@/lib/learning/studentPracticeValidationData";
+  localizeStudentPracticeValidation,
+} from "@/lib/learning/studentPracticeValidationLocalization";
 import { prisma } from "@/lib/prisma";
 import {
   buildPracticeValidateContext,
@@ -47,8 +48,10 @@ async function projectedResponse(
   response: Response,
 ) {
   const body =
-    projectStudentPracticeValidation(
+    await localizeStudentPracticeValidation(
       await readPayload(response),
+      (value) =>
+        resolveTaggedOnServer(value),
     );
 
   const output = appCorsJson(
