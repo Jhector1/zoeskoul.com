@@ -71,9 +71,9 @@ function boundedEditorHeight(
 }
 
 /**
- * Reads only the strict first-slice workspace projected by the protected
- * server boundary. Unsupported or ambiguous code exercises stay on the
- * legacy runtime instead of being guessed by the Vite client.
+ * Reads the strict one-file Python workspace projected by the protected
+ * server boundary. Validation recipes and authored checks stay server-side;
+ * unsupported or ambiguous exercises remain on the full workspace runtime.
  */
 export function readStudentPythonTryItStarter(
   launch: LearningPracticeLaunchResponse,

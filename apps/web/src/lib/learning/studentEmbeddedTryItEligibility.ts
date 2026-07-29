@@ -26,6 +26,17 @@ function hasNoNamedEntries(
   );
 }
 
+function hasNamedEntries(
+  records: Array<Record<string, unknown> | null>,
+  names: readonly string[],
+): boolean {
+  return records.some((record) =>
+    names.some((name) =>
+      !hasNoEntries(record?.[name]),
+    ),
+  );
+}
+
 function isMainPythonStarterFile(
   value: unknown,
 ): boolean {
@@ -53,10 +64,10 @@ function oneMainPythonStarterFile(
 }
 
 /**
- * Learner-safe one-file Vite code-input slice. Source checks may remain
- * authored and server-side; semantic-check arrays, fixtures, stdin-driven
- * exercises, and multi-file workspaces continue through the legacy runtime.
- * The learner projection strips every grading field before launch.
+ * Learner-safe one-file Vite code-input contract. The authored validation
+ * recipe, semantic checks, source checks, tests, and solutions remain behind
+ * the protected server boundary. Multi-file, fixture-backed, stdin-driven,
+ * terminal, and SQL exercises continue through the full workspace runtime.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,
@@ -64,45 +75,69 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   const exercise = asJsonRecord(value);
   const recipe = asJsonRecord(exercise?.recipe);
   const workspace = asJsonRecord(exercise?.workspace);
+  const recipeType = runtimeString(recipe?.type);
 
   if (
     !exercise ||
     runtimeString(exercise.kind) !== "code_input" ||
     runtimeString(exercise.purpose) !== "try_it" ||
     runtimeString(exercise.language) !== "python" ||
-    runtimeString(recipe?.type) !== "fixed_tests" ||
+    (
+      recipeType !== "fixed_tests" &&
+      recipeType !== "semantic"
+    ) ||
     !oneMainPythonStarterFile(exercise.starterFiles) ||
     runtimeString(workspace?.entryFilePath) !== "main.py" ||
-    !oneMainPythonStarterFile(workspace?.starterFiles)
+    !oneMainPythonStarterFile(workspace?.starterFiles) ||
+    runtimeString(exercise.stdin) !== "" ||
+    runtimeString(exercise.starterStdin) !== "" ||
+    !hasNoNamedEntries(
+      [exercise, recipe, workspace],
+      [
+        "fixtureFiles",
+        "fixtures",
+        "fileFixtures",
+        "supportFiles",
+        "files",
+        "initialFiles",
+        "workspaceFiles",
+      ],
+    )
   ) {
     return false;
   }
 
   const tests = recipe?.tests;
-  if (!Array.isArray(tests) || tests.length !== 1) {
-    return false;
+
+  if (recipeType === "fixed_tests") {
+    if (!Array.isArray(tests) || tests.length !== 1) {
+      return false;
+    }
+
+    const test = asJsonRecord(tests[0]);
+
+    return Boolean(
+      test &&
+      runtimeString(test.stdin) === "" &&
+      hasNoNamedEntries(
+        [test],
+        [
+          "fixtureFiles",
+          "fixtures",
+          "fileFixtures",
+          "supportFiles",
+          "files",
+        ],
+      )
+    );
   }
 
-  const test = asJsonRecord(tests[0]);
-  if (!test || runtimeString(test.stdin) !== "") {
-    return false;
-  }
-
-  if (
-    runtimeString(exercise.stdin) !== "" ||
-    runtimeString(exercise.starterStdin) !== ""
-  ) {
-    return false;
-  }
-
-  return hasNoNamedEntries(
-    [exercise, recipe, workspace],
-    [
-      "fixtureFiles",
-      "fixtures",
-      "fileFixtures",
-      "semanticChecks",
-    ],
+  return (
+    hasNoEntries(tests) &&
+    hasNamedEntries(
+      [recipe, exercise],
+      ["semanticChecks"],
+    )
   );
 }
 

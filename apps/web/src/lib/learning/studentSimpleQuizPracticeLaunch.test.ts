@@ -179,7 +179,7 @@ function moduleWithEmbeddedTryIt() {
   };
 }
 
-function eligibleEmbeddedTryIt() {
+function fixedTestEmbeddedTryIt() {
   return {
     id: "try-dictionary-basics-sketch0",
     kind: "code_input",
@@ -254,8 +254,8 @@ describe("student embedded Try It practice launch", () => {
     ).toBeNull();
   });
 
-  it("accepts only the narrow one-file Python fixed-test slice", () => {
-    const eligible = eligibleEmbeddedTryIt();
+  it("accepts the one-file Python fixed-test and semantic contract", () => {
+    const eligible = fixedTestEmbeddedTryIt();
 
     expect(
       isEligibleStudentEmbeddedPythonTryIt(eligible),
@@ -280,9 +280,93 @@ describe("student embedded Try It practice launch", () => {
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,
+        supportFiles: [
+          { path: "helper.py", content: "VALUE = 1\n" },
+        ],
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
         recipe: {
           ...eligible.recipe,
-          semanticChecks: [{ type: "custom" }],
+          tests: [
+            {
+              stdin: "",
+              stdout: "ok\n",
+              files: [
+                {
+                  path: "input.txt",
+                  content: "secret",
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          semanticChecks: [
+            {
+              type: "variable_equals",
+              name: "profile",
+              expected: {},
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          type: "semantic",
+          language: "python",
+          semanticChecks: [
+            {
+              type: "function_returns",
+              functionName: "greet",
+              args: ["Ava"],
+              expected: "Hello, Ava",
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          type: "semantic",
+          language: "python",
+          semanticChecks: [],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          type: "semantic",
+          language: "python",
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+            },
+          ],
+          semanticChecks: [
+            {
+              type: "function_returns",
+              functionName: "greet",
+              args: ["Ava"],
+              expected: "Hello, Ava",
+            },
+          ],
         },
       }),
     ).toBe(false);

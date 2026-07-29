@@ -81,7 +81,7 @@ describe("student embedded Try It data", () => {
     });
   });
 
-  it("rejects exercises outside the first migrated slice", () => {
+  it("rejects exercises outside the one-file Python workspace contract", () => {
     expect(
       readStudentPythonTryItStarter(
         launch({
