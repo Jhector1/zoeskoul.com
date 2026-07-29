@@ -76,6 +76,22 @@ const topicBundleFiles = [
   "python/python-v2/modules/module3/topics/for-loops-over-text/topic.bundle.json",
   "python/python-v2/modules/module4/topics/mini-gradebook-capstone/topic.bundle.json",
   "python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json",
+  "python/applied-python-projects/modules/module10/topics/debugging-imports-and-state/topic.bundle.json",
+  "python/applied-python-projects/modules/module10/topics/refactoring-oop-services/topic.bundle.json",
+  "python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json",
+  "python/applied-python-projects/modules/module10/topics/testing-object-state/topic.bundle.json",
+  "python/applied-python-projects/modules/module11/topics/capstone-domain-model/topic.bundle.json",
+  "python/applied-python-projects/modules/module11/topics/capstone-scope-and-architecture/topic.bundle.json",
+  "python/applied-python-projects/modules/module11/topics/capstone-storage-and-reports/topic.bundle.json",
+  "python/applied-python-projects/modules/module11/topics/capstone-tests-and-polish/topic.bundle.json",
+  "python/applied-python-projects/modules/module8/topics/constructors-and-object-state/topic.bundle.json",
+  "python/applied-python-projects/modules/module8/topics/encapsulation-and-validation/topic.bundle.json",
+  "python/applied-python-projects/modules/module8/topics/methods-and-responsibility/topic.bundle.json",
+  "python/applied-python-projects/modules/module8/topics/thinking-in-objects/topic.bundle.json",
+  "python/applied-python-projects/modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json",
+  "python/applied-python-projects/modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json",
+  "python/applied-python-projects/modules/module9/topics/overriding-and-specialization/topic.bundle.json",
+  "python/applied-python-projects/modules/module9/topics/polymorphic-collections/topic.bundle.json",
 ] as const;
 
 function loadTopicBundle(
@@ -266,6 +282,55 @@ const companionFileEligibleIds = [
   ["python/python-data-functions/modules/module8/topics/community-event-registration-cleaner/topic.bundle.json", "try-community-event-registration-cleaner-sketch0"],
 ] as const;
 
+const pythonHelperEligibleIds = [
+  ["python/applied-python-projects/modules/module10/topics/debugging-imports-and-state/topic.bundle.json", "try-debugging-imports-and-state-sketch0"],
+  ["python/applied-python-projects/modules/module10/topics/debugging-imports-and-state/topic.bundle.json", "try-debugging-imports-and-state-sketch1"],
+  ["python/applied-python-projects/modules/module10/topics/debugging-imports-and-state/topic.bundle.json", "try-debugging-imports-and-state-sketch2"],
+  ["python/applied-python-projects/modules/module10/topics/refactoring-oop-services/topic.bundle.json", "try-refactoring-oop-services-sketch0"],
+  ["python/applied-python-projects/modules/module10/topics/refactoring-oop-services/topic.bundle.json", "try-refactoring-oop-services-sketch1"],
+  ["python/applied-python-projects/modules/module10/topics/refactoring-oop-services/topic.bundle.json", "try-refactoring-oop-services-sketch2"],
+  ["python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json", "try-testing-inheritance-and-polymorphism-sketch2"],
+  ["python/applied-python-projects/modules/module11/topics/capstone-domain-model/topic.bundle.json", "try-capstone-domain-model-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch1"],
+  ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch2"],
+  ["python/applied-python-projects/modules/module8/topics/constructors-and-object-state/topic.bundle.json", "try-constructors-and-object-state-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/constructors-and-object-state/topic.bundle.json", "try-constructors-and-object-state-sketch1"],
+  ["python/applied-python-projects/modules/module8/topics/constructors-and-object-state/topic.bundle.json", "try-constructors-and-object-state-sketch2"],
+  ["python/applied-python-projects/modules/module8/topics/encapsulation-and-validation/topic.bundle.json", "try-encapsulation-and-validation-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/encapsulation-and-validation/topic.bundle.json", "try-encapsulation-and-validation-sketch1"],
+  ["python/applied-python-projects/modules/module8/topics/encapsulation-and-validation/topic.bundle.json", "try-encapsulation-and-validation-sketch2"],
+  ["python/applied-python-projects/modules/module8/topics/methods-and-responsibility/topic.bundle.json", "try-methods-and-responsibility-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/methods-and-responsibility/topic.bundle.json", "try-methods-and-responsibility-sketch1"],
+  ["python/applied-python-projects/modules/module8/topics/methods-and-responsibility/topic.bundle.json", "try-methods-and-responsibility-sketch2"],
+  ["python/applied-python-projects/modules/module8/topics/thinking-in-objects/topic.bundle.json", "try-thinking-in-objects-sketch0"],
+  ["python/applied-python-projects/modules/module8/topics/thinking-in-objects/topic.bundle.json", "try-thinking-in-objects-sketch1"],
+  ["python/applied-python-projects/modules/module8/topics/thinking-in-objects/topic.bundle.json", "try-thinking-in-objects-sketch2"],
+  ["python/applied-python-projects/modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json", "try-inheritance-for-shared-behavior-sketch0"],
+] as const;
+
+const pythonHelperFallbackIds = [
+  ["python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json", "try-testing-inheritance-and-polymorphism-sketch0"],
+  ["python/applied-python-projects/modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json", "try-testing-inheritance-and-polymorphism-sketch1"],
+  ["python/applied-python-projects/modules/module10/topics/testing-object-state/topic.bundle.json", "try-testing-object-state-sketch0"],
+  ["python/applied-python-projects/modules/module10/topics/testing-object-state/topic.bundle.json", "try-testing-object-state-sketch1"],
+  ["python/applied-python-projects/modules/module10/topics/testing-object-state/topic.bundle.json", "try-testing-object-state-sketch2"],
+  ["python/applied-python-projects/modules/module11/topics/capstone-scope-and-architecture/topic.bundle.json", "try-capstone-scope-and-architecture-sketch0"],
+  ["python/applied-python-projects/modules/module11/topics/capstone-storage-and-reports/topic.bundle.json", "try-capstone-storage-and-reports-sketch0"],
+  ["python/applied-python-projects/modules/module11/topics/capstone-tests-and-polish/topic.bundle.json", "try-capstone-tests-and-polish-sketch0"],
+  ["python/applied-python-projects/modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json", "try-abstraction-with-base-interfaces-sketch0"],
+  ["python/applied-python-projects/modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json", "try-abstraction-with-base-interfaces-sketch1"],
+  ["python/applied-python-projects/modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json", "try-abstraction-with-base-interfaces-sketch2"],
+  ["python/applied-python-projects/modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json", "try-inheritance-for-shared-behavior-sketch1"],
+  ["python/applied-python-projects/modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json", "try-inheritance-for-shared-behavior-sketch2"],
+  ["python/applied-python-projects/modules/module9/topics/overriding-and-specialization/topic.bundle.json", "try-overriding-and-specialization-sketch0"],
+  ["python/applied-python-projects/modules/module9/topics/overriding-and-specialization/topic.bundle.json", "try-overriding-and-specialization-sketch1"],
+  ["python/applied-python-projects/modules/module9/topics/overriding-and-specialization/topic.bundle.json", "try-overriding-and-specialization-sketch2"],
+  ["python/applied-python-projects/modules/module9/topics/polymorphic-collections/topic.bundle.json", "try-polymorphic-collections-sketch0"],
+  ["python/applied-python-projects/modules/module9/topics/polymorphic-collections/topic.bundle.json", "try-polymorphic-collections-sketch1"],
+  ["python/applied-python-projects/modules/module9/topics/polymorphic-collections/topic.bundle.json", "try-polymorphic-collections-sketch2"],
+] as const;
+
 const complexFallbackIds = [
   ["python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json", "try-module-6-name-badge-package-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch0"],
@@ -275,7 +340,6 @@ const complexFallbackIds = [
   ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch0"],
   ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch1"],
   ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch2"],
-  ["python/applied-python-projects/modules/module8/topics/class-files-and-instances/topic.bundle.json", "try-class-files-and-instances-sketch0"],
 ] as const;
 
 function fixedTestStdinValues(
@@ -567,6 +631,89 @@ describe(
             pair?.exercise,
           ),
         ).toBe(true);
+      },
+    );
+
+    it("locks the strict two-file Python-helper inventory", () => {
+      expect(
+        pythonHelperEligibleIds,
+      ).toHaveLength(24);
+    });
+
+    it.each(
+      pythonHelperEligibleIds,
+    )(
+      "keeps Python-helper exercise %s / %s in the direct Vite editor",
+      (relativePath, exerciseKey) => {
+        const pair =
+          joined.get(
+            exerciseInventoryKey(
+              relativePath,
+              exerciseKey,
+            ),
+          );
+        const paths =
+          starterFilePaths(
+            pair?.exercise,
+          );
+        const helperPaths =
+          paths.filter(
+            (path) =>
+              path !== "main.py",
+          );
+
+        expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(paths).toHaveLength(2);
+        expect(paths).toContain(
+          "main.py",
+        );
+        expect(helperPaths).toHaveLength(1);
+        expect(
+          helperPaths[0],
+        ).toMatch(
+          /^[^/]+\/.+\.py$/,
+        );
+        expect(
+          semanticChecks(
+            pair?.exercise,
+          ).length,
+        ).toBeGreaterThan(0);
+        expect(
+          isEligibleStudentEmbeddedPythonTryIt(
+            pair?.exercise,
+          ),
+        ).toBe(true);
+      },
+    );
+
+    it("locks larger and alternate-entry Python workspaces to fallback", () => {
+      expect(
+        pythonHelperFallbackIds,
+      ).toHaveLength(19);
+    });
+
+    it.each(
+      pythonHelperFallbackIds,
+    )(
+      "keeps broader Python workspace %s / %s on the full workspace fallback",
+      (relativePath, exerciseKey) => {
+        const pair =
+          joined.get(
+            exerciseInventoryKey(
+              relativePath,
+              exerciseKey,
+            ),
+          );
+
+        expect(pair).toBeDefined();
+        expect(
+          isEligibleStudentEmbeddedPythonTryIt(
+            pair?.exercise,
+          ),
+        ).toBe(false);
       },
     );
 

@@ -146,13 +146,18 @@ function readStarterFiles(
       (file) =>
         file.path !== "main.py",
     );
+  const pythonHelpers =
+    companionFiles.filter(
+      (file) =>
+        file.language === "python",
+    );
 
   if (
     !entryFile ||
     entryFile.language !== "python" ||
-    companionFiles.some(
+    pythonHelpers.some(
       (file) =>
-        file.language === "python",
+        !file.path.includes("/"),
     )
   ) {
     return null;
@@ -182,6 +187,7 @@ function boundedEditorHeight(
 
 /**
  * Reads the bounded Python workspace projected by the protected server.
+ * It supports main.py plus one text/CSV companion or one nested Python helper.
  * Grading recipes and hidden test-file overrides stay server-side.
  */
 export function readStudentPythonTryItStarter(

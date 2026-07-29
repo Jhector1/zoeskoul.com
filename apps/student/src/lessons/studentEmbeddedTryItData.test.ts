@@ -132,6 +132,51 @@ describe("student embedded Try It data", () => {
     });
   });
 
+  it("reads main.py plus one nested Python helper module", () => {
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from models.car import Car\nprint(Car())\n",
+                language: "python",
+              },
+              {
+                path: "models/car.py",
+                content:
+                  "class Car:\n    pass\n",
+                language: "python",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toEqual({
+      language: "python",
+      entry: "main.py",
+      files: [
+        {
+          path: "main.py",
+          content:
+            "from models.car import Car\nprint(Car())\n",
+          language: "python",
+        },
+        {
+          path: "models/car.py",
+          content:
+            "class Car:\n    pass\n",
+          language: "python",
+        },
+      ],
+      editorHeight: 360,
+    });
+  });
+
   it("rejects workspaces outside the bounded companion-file contract", () => {
     expect(
       readStudentPythonTryItStarter(
@@ -173,6 +218,34 @@ describe("student embedded Try It data", () => {
                 path: "helper.py",
                 content:
                   "value = 1\n",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from models.car import Car\n",
+              },
+              {
+                path: "models/car.py",
+                content:
+                  "class Car:\n    pass\n",
+              },
+              {
+                path: "models/truck.py",
+                content:
+                  "class Truck:\n    pass\n",
               },
             ],
           },

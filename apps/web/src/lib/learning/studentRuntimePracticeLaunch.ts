@@ -6,7 +6,7 @@ import type {
   LearningRuntimeTarget,
 } from "@zoeskoul/learning-contracts";
 
-import { resolveTaggedOnServer } from "@/i18n/server";
+import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import { prisma } from "@/lib/prisma";

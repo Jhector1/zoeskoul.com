@@ -239,6 +239,17 @@ function workspaceCompanionFilesMatch(
   );
 }
 
+function isNestedPythonHelper(
+  file: EmbeddedStarterFile,
+  entry: string,
+): boolean {
+  return (
+    file.path !== entry &&
+    file.language === "python" &&
+    file.path.includes("/")
+  );
+}
+
 function readEmbeddedStarterWorkspace(
   exercise: Record<string, unknown>,
   workspace: Record<string, unknown> | null,
@@ -289,10 +300,19 @@ function readEmbeddedStarterWorkspace(
         file.path !== entry,
     );
 
-  if (
-    companions.some(
+  const pythonHelpers =
+    companions.filter(
       (file) =>
         file.language === "python",
+    );
+
+  if (
+    pythonHelpers.some(
+      (file) =>
+        !isNestedPythonHelper(
+          file,
+          entry,
+        ),
     ) ||
     !workspaceCompanionFilesMatch(
       workspace?.files,
@@ -374,7 +394,29 @@ function isSafeEmbeddedFixedTest(
   );
 }
 
-function sourceChecksUseOnlyLearnerFiles(
+function embeddedTestsAreSafe(
+  value: unknown,
+  workspace: EmbeddedStarterWorkspace,
+  allowEmpty: boolean,
+): boolean {
+  if (hasNoEntries(value)) {
+    return allowEmpty;
+  }
+
+  return (
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every(
+      (test) =>
+        isSafeEmbeddedFixedTest(
+          test,
+          workspace,
+        ),
+    )
+  );
+}
+
+function validationChecksUseOnlyLearnerFiles(
   exercise: Record<string, unknown>,
   recipe: Record<string, unknown> | null,
   workspace: EmbeddedStarterWorkspace,
@@ -382,6 +424,8 @@ function sourceChecksUseOnlyLearnerFiles(
   for (const value of [
     exercise.sourceChecks,
     recipe?.sourceChecks,
+    exercise.semanticChecks,
+    recipe?.semanticChecks,
   ]) {
     if (!Array.isArray(value)) continue;
 
@@ -494,12 +538,13 @@ function workspaceRequirementsAreSatisfied(
 /**
  * Learner-safe embedded Python contract.
  *
- * The current direct runtime accepts either main.py alone or main.py plus one
- * learner-visible text/CSV companion file. Validation recipes, semantic
+ * The current direct runtime accepts main.py alone, main.py plus one
+ * learner-visible text/CSV companion, or a semantic workspace containing
+ * main.py plus one nested Python helper module. Validation recipes, semantic
  * checks, source checks, fixed-test stdin values, hidden test-file overrides,
- * and solutions remain behind the protected server boundary. Workspaces that
- * require learners to create files/folders or edit Python helper modules stay
- * on the full workspace runtime.
+ * and solutions remain behind the protected server boundary. Larger package
+ * workspaces, alternate entries, and file-creation exercises stay on the full
+ * workspace runtime.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,
@@ -555,9 +600,22 @@ export function isEligibleStudentEmbeddedPythonTryIt(
       workspaceRecord,
     );
 
+  const hasPythonHelper =
+    starterWorkspace?.files.some(
+      (file) =>
+        isNestedPythonHelper(
+          file,
+          starterWorkspace.entry,
+        ),
+    ) ?? false;
+
   if (
     !starterWorkspace ||
-    !sourceChecksUseOnlyLearnerFiles(
+    (
+      hasPythonHelper &&
+      recipeType !== "semantic"
+    ) ||
+    !validationChecksUseOnlyLearnerFiles(
       exercise,
       recipe,
       starterWorkspace,
@@ -575,21 +633,19 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   const tests = recipe?.tests;
 
   if (recipeType === "fixed_tests") {
-    return (
-      Array.isArray(tests) &&
-      tests.length > 0 &&
-      tests.every(
-        (test) =>
-          isSafeEmbeddedFixedTest(
-            test,
-            starterWorkspace,
-          ),
-      )
+    return embeddedTestsAreSafe(
+      tests,
+      starterWorkspace,
+      false,
     );
   }
 
   return (
-    hasNoEntries(tests) &&
+    embeddedTestsAreSafe(
+      tests,
+      starterWorkspace,
+      true,
+    ) &&
     hasNamedEntries(
       [recipe, exercise],
       ["semanticChecks"],

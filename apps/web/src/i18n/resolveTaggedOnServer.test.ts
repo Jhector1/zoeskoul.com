@@ -8,6 +8,8 @@ vi.mock("next-intl/server", () => ({
             "review.tryIt.prompt":
                 "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`.",
             "review.tryIt.interpolated": "Hello {name}",
+            "review.tryIt.pythonSource":
+                'profile = {"name": "Ava"}\nprint(f"{profile[\'name\']} ready")\n',
         } as const;
 
         const translate = ((key: string, values?: Record<string, unknown>) => {
@@ -47,6 +49,29 @@ describe("resolveTaggedOnServer", () => {
         expect(resolved).toEqual({
             prompt:
                 "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`.",
+        });
+    });
+
+    it("preserves Python braces and f-strings as literal source", async () => {
+        const { resolveTaggedOnServer } = await import("@/i18n/resolveTaggedOnServer");
+
+        const resolved = await resolveTaggedOnServer({
+            starterFiles: [
+                {
+                    path: "main.py",
+                    content: "@:review.tryIt.pythonSource",
+                },
+            ],
+        });
+
+        expect(resolved).toEqual({
+            starterFiles: [
+                {
+                    path: "main.py",
+                    content:
+                        'profile = {"name": "Ava"}\nprint(f"{profile[\'name\']} ready")\n',
+                },
+            ],
         });
     });
 

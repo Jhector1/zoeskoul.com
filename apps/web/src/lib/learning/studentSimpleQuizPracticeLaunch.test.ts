@@ -386,6 +386,121 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(false);
+    const helperEligible = {
+      ...eligible,
+      starterFiles: [
+        eligible.starterFiles[0],
+        {
+          path: "models/car.py",
+          content:
+            "class Car:\n    pass\n",
+          language: "python",
+          isEntry: false,
+        },
+      ],
+      workspace: {
+        ...eligible.workspace,
+        starterFiles: [
+          eligible.workspace
+            .starterFiles[0],
+          {
+            path: "models/car.py",
+            content:
+              "class Car:\n    pass\n",
+            language: "python",
+            isEntry: false,
+          },
+        ],
+      },
+      recipe: {
+        type: "semantic",
+        semanticChecks: [
+          {
+            type: "defines_class",
+            path: "models/car.py",
+            className: "Car",
+          },
+        ],
+      },
+      sourceChecks: [],
+    };
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(
+        helperEligible,
+      ),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...helperEligible,
+        recipe: {
+          ...helperEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout:
+                "Car object ready\n",
+              match: "exact",
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...helperEligible,
+        recipe: {
+          ...helperEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "",
+              match: "exact",
+              files: [
+                {
+                  path:
+                    "models/secret.py",
+                  content:
+                    "SECRET = True\n",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...helperEligible,
+        recipe: {
+          ...helperEligible.recipe,
+          semanticChecks: [
+            {
+              type: "defines_class",
+              path:
+                "models/secret.py",
+              className: "Secret",
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...helperEligible,
+        recipe: {
+          type: "fixed_tests",
+          tests: [
+            {
+              stdin: "",
+              stdout: "",
+              match: "exact",
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,
@@ -486,7 +601,7 @@ describe("student embedded Try It practice launch", () => {
           ],
         },
       }),
-    ).toBe(false);
+    ).toBe(true);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,
@@ -727,6 +842,54 @@ describe("student embedded Try It practice launch", () => {
                 content:
                   "name\nAva\n",
                 language: "csv",
+              },
+            ],
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id: "try-class-file",
+        exerciseKey:
+          "try-class-file",
+        kind: "code_input",
+        topic: "class-files",
+        difficulty: "easy",
+        title: "Define a class",
+        prompt:
+          "Define Car in models/car.py.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            {
+              path: "main.py",
+              content:
+                "from models.car import Car\n",
+              language: "python",
+            },
+            {
+              path: "models/car.py",
+              content:
+                "class Car:\n    pass\n",
+              language: "python",
+            },
+          ],
+          workspace: {
+            entryFilePath:
+              "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "from models.car import Car\n",
+                language: "python",
+              },
+              {
+                path: "models/car.py",
+                content:
+                  "class Car:\n    pass\n",
+                language: "python",
               },
             ],
           },
