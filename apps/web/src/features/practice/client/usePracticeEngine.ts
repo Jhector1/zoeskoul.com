@@ -68,6 +68,9 @@ function applyAnswerPayloadToItem(item: QItem, payload: any) {
     case "matrix_input":
       if (Array.isArray(payload.raw)) (item as any).mat = payload.raw;
       break;
+    case "pseudocode_input":
+      (item as any).pseudocode = String(payload.value ?? payload.solution ?? "");
+      break;
     case "code_input": {
       const code =
           typeof payload.code === "string"

@@ -24,7 +24,9 @@
       "Every choice exercise must have explicit answer metadata",
       "Every reorder exercise must have explicit order metadata",
       "Every code input must have runtime and checker metadata",
-      "Every code input must be covered by golden validation before release"
+      "Every code input must be covered by golden validation before release",
+      "Every pseudocode input must declare a supported mode, dialect, semantic rules, and deterministic scenarios when the mode is write or trace",
+      "Pseudocode validation must not rely on exact prose matching or AI-only pass/fail"
     ]
   }
 }

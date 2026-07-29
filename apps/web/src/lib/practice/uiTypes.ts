@@ -56,6 +56,7 @@ export type QItem = {
     terminalEvidence?: TerminalEvidence;
 
     text: string;
+    pseudocode?: string;
 
     reorder?: string[];
     reorderIds?: string[]; // legacy only

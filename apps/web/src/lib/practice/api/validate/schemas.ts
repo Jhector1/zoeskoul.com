@@ -65,6 +65,11 @@ const KeySchema = z.union([
 /*                               answer schemas                               */
 /* -------------------------------------------------------------------------- */
 
+const PseudocodeInputAnswerSchema = z.object({
+    kind: z.literal("pseudocode_input"),
+    value: z.string().min(1),
+});
+
 const TextInputAnswerSchema = z.object({
     kind: z.literal("text_input"),
     value: z.string().min(1),
@@ -180,6 +185,7 @@ const SubmitAnswerSchema = z.discriminatedUnion("kind", [
     }),
 
     CodeInputAnswerSchema,
+    PseudocodeInputAnswerSchema,
 
     TextInputAnswerSchema,
     DragReorderAnswerSchema,

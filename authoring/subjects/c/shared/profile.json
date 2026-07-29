@@ -12,5 +12,12 @@
     "defaultRecipe": "fixed_tests",
     "compileAllWorkspaceFiles": true,
     "goldenValidation": "execute_official_solution"
+  },
+  "pseudocode": {
+    "policyId": "c-pseudocode-policy",
+    "inputKind": "pseudocode_input",
+    "dialect": "zoeskoul-v1",
+    "validator": "deterministic_ir",
+    "defaultStrategy": "hybrid"
   }
 }

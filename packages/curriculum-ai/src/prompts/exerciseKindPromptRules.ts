@@ -59,6 +59,19 @@ const GENERIC_EXERCISE_KIND_RULES: ExerciseKindRule[] = [
         ],
     },
     {
+        kind: "pseudocode_input",
+        description:
+            "algorithm-logic exercise graded by deterministic structure, semantic-operation, and trace rules without compiling a programming language.",
+        requiredFields: ["mode", "solutionPseudocode", "validation"],
+        shapeRules: [
+            "use dialect zoeskoul-v1.",
+            "starterPseudocode must be incomplete scaffolding when provided.",
+            "solutionPseudocode must be a complete valid solution.",
+            "validation must define deterministic rules and trace scenarios; AI cannot decide pass or fail.",
+            "accept equivalent variable names and harmless formatting differences.",
+        ],
+    },
+    {
         kind: "code_input",
         description:
             "implementation exercise whose runtime/recipe details may vary by profile, language, and execution model.",

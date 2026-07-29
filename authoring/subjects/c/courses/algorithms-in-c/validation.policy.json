@@ -1,0 +1,117 @@
+{
+  "policyId": "algorithms-in-c-validation",
+  "allowedConcepts": [
+    "algorithm correctness",
+    "searching",
+    "sorting",
+    "merge sort",
+    "quicksort",
+    "heap sort",
+    "quickselect",
+    "graphs",
+    "BFS",
+    "DFS",
+    "topological sort",
+    "greedy algorithms",
+    "Huffman coding",
+    "minimum spanning tree",
+    "Dijkstra",
+    "Bellman-Ford",
+    "backtracking",
+    "dynamic programming"
+  ],
+  "disallowedConcepts": [
+    "red-black trees",
+    "B-trees",
+    "network flow",
+    "NP-completeness proofs",
+    "advanced approximation algorithms"
+  ],
+  "validationRequirements": {
+    "profileId": "c",
+    "language": "c",
+    "recipeType": "fixed_tests",
+    "pseudocodeInputKind": "pseudocode_input",
+    "pseudocodeDialect": "zoeskoul-v1",
+    "pseudocodeValidation": "hybrid_structure_and_trace",
+    "moduleCount": 10,
+    "technicalTopicCount": 50,
+    "moduleProjectCount": 9,
+    "capstoneCount": 1,
+    "algorithmAnimationForStatefulOperations": true,
+    "completeSolutionFiles": true,
+    "c11GoldenExecution": true
+  },
+  "globalRules": [
+    "Every standard module contains one module_project section with exactly one progressive project topic.",
+    "The final capstone module contains one section and one topic.",
+    "Every algorithmic technical topic includes pseudocode_input before the C translation exercise.",
+    "Pseudocode pass/fail uses normalized structure rules plus deterministic scenarios; exact prose matching is forbidden.",
+    "Every stateful operation includes a manual algorithm_animation with stable layout and predict-next-step interaction.",
+    "Every C code_input supplies deterministic main.c tests and complete matching starterFiles and solutionFiles.",
+    "Official C solutions compile as C11 and pass goldens with memory cleanup.",
+    "Module project workspaces accumulate; later steps must preserve earlier tests."
+  ],
+  "moduleRules": {
+    "1": {
+      "title": "Algorithm Design Foundations",
+      "role": "standard",
+      "requiredTopicCount": 5,
+      "sectionCount": 2
+    },
+    "2": {
+      "title": "Searching Algorithms",
+      "role": "standard",
+      "requiredTopicCount": 5,
+      "sectionCount": 2
+    },
+    "3": {
+      "title": "Elementary Sorting",
+      "role": "standard",
+      "requiredTopicCount": 6,
+      "sectionCount": 2
+    },
+    "4": {
+      "title": "Divide-and-Conquer Sorting",
+      "role": "standard",
+      "requiredTopicCount": 6,
+      "sectionCount": 2
+    },
+    "5": {
+      "title": "Heap Sort and Selection",
+      "role": "standard",
+      "requiredTopicCount": 5,
+      "sectionCount": 2
+    },
+    "6": {
+      "title": "Graph Representation and Traversal",
+      "role": "standard",
+      "requiredTopicCount": 6,
+      "sectionCount": 2
+    },
+    "7": {
+      "title": "Greedy Algorithms",
+      "role": "standard",
+      "requiredTopicCount": 5,
+      "sectionCount": 2
+    },
+    "8": {
+      "title": "Shortest Paths",
+      "role": "standard",
+      "requiredTopicCount": 5,
+      "sectionCount": 2
+    },
+    "9": {
+      "title": "Backtracking and Dynamic Programming",
+      "role": "standard",
+      "requiredTopicCount": 6,
+      "sectionCount": 2
+    },
+    "10": {
+      "title": "Algorithms in C Capstone",
+      "role": "capstone",
+      "requiredTopicCount": 1,
+      "sectionCount": 1
+    }
+  }
+}

@@ -104,6 +104,24 @@ export function buildExerciseFromManifest(def: any, args: any, profileId: string
         hint: resolved.hint,
       };
 
+    case "pseudocode_input":
+      return {
+        kind: "pseudocode_input",
+        archetype: def.id,
+        id: args.id,
+        topic: args.topic,
+        diff: args.diff,
+        title: resolved.title,
+        prompt: resolved.prompt,
+        mode: def.mode,
+        dialect: def.dialect ?? "zoeskoul-v1",
+        starterPseudocode: def.starterPseudocode ?? maybeT(`${def.messageBase}.starterPseudocode`) ?? "",
+        editor: def.editor,
+        expected: def.expected,
+        help: resolved.help,
+        hint: resolved.hint,
+      };
+
     case "code_input":
       return buildCodeInput(def, args, profileId);
 

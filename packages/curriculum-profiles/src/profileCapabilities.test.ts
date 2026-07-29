@@ -118,8 +118,12 @@ describe("profile code_input capabilities", () => {
         expect(gitShape.profileId).toBe("git");
     });
 
-    it("keeps the C shape code-capable and profile-specific", () => {
+    it("keeps the C shape code-capable, pseudocode-capable, and profile-specific", () => {
         expect(cShape.topicBundle.allowedExerciseKinds).toContain("code_input");
+        expect(cShape.topicBundle.allowedExerciseKinds).toContain("pseudocode_input");
+        expect(getCurriculumProfile("c").allowedExerciseKinds).toContain(
+            "pseudocode_input",
+        );
         expect(cShape.profileId).toBe("c");
     });
 

@@ -12,6 +12,7 @@ import type {
     Vec3,
 } from "@zoeskoul/practice-contracts";
 import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
+import type { PseudocodeMode } from "@zoeskoul/practice-checks";
 import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
 
 // src/lib/practice/types.ts
@@ -132,6 +133,20 @@ export type CodeInputExercise = ExerciseBase & {
     ideConfig?: LearningIdeConfig | null;
 };
 
+
+export type PseudocodeInputExercise = ExerciseBase & {
+    kind: "pseudocode_input";
+    mode: PseudocodeMode;
+    dialect: "zoeskoul-v1";
+    starterPseudocode?: string;
+    editor?: {
+        showLineNumbers?: boolean;
+        allowIndentation?: boolean;
+        showKeywordReference?: boolean;
+        minRows?: number;
+    };
+};
+
 export type TextInputExercise = ExerciseBase & {
     kind: "text_input";
     placeholder?: string;
@@ -224,6 +239,7 @@ export type Exercise =
     | VectorDragDotExercise
     | MatrixInputExercise
     | CodeInputExercise
+    | PseudocodeInputExercise
     | TextInputExercise
     | DragReorderExercise
     | VoiceInputExercise
@@ -238,6 +254,7 @@ export type SubmitAnswer =
     | { kind: "vector_drag_target"; a: Vec3; b: Vec3 }
     | { kind: "vector_drag_dot"; a: Vec3 }
     | { kind: "matrix_input"; values: number[][] }
+    | { kind: "pseudocode_input"; value: string }
     | {
     kind: "code_input";
     language?: WorkspaceLanguage;

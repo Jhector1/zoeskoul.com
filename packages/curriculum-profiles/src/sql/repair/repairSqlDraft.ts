@@ -53,7 +53,7 @@ function commonHelp(seed: TopicSeed, goals: string[]) {
 
 function makeSqlFallbackExercise(args: {
     seed: TopicSeed;
-    kind: Exclude<ExerciseKindKey, "code_input">;
+    kind: Exclude<ExerciseKindKey, "code_input" | "pseudocode_input">;
     index: number;
 }): DraftExercise {
     const goals = topicGoals(args.seed);
@@ -766,14 +766,14 @@ export async function repairSqlDraft(args: {
         );
 
         while (keptCounts[kind] < expected) {
-            if (kind === "code_input") {
+            if (kind === "code_input" || kind === "pseudocode_input") {
                 repairs.push(
                     makePolicyRepair({
                         code: "SQL_EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
                         field: "quizDraft",
                         severity: "high",
                         message:
-                            `SQL generation is missing code_input ${keptCounts[kind] + 1} of ${expected}; executable SQL recipes must be regenerated rather than invented by policy repair.`,
+                            `SQL generation is missing ${kind} ${keptCounts[kind] + 1} of ${expected}; unsupported executable or pseudocode exercises must be regenerated rather than invented by SQL policy repair.`,
                     }),
                 );
                 break;

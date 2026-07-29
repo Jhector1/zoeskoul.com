@@ -1,5 +1,6 @@
 import { PracticeKind } from "@zoeskoul/db";
 import { normalizeCodeExpectedForSave } from "./codeExpected";
+import { PseudocodeExpectedSchema } from "@zoeskoul/practice-checks";
 
 function toNumberGrid(x: any): number[][] | null {
     if (!x) return null;
@@ -118,6 +119,7 @@ function normalizeTextualAnswerExpected(kind: PracticeKind, expected: any) {
 }
 
 const EXPECTED_NORMALIZERS: Partial<Record<PracticeKind, ExpectedNormalizer>> = {
+    [PracticeKind.pseudocode_input]: (expected) => PseudocodeExpectedSchema.parse(expected),
     [PracticeKind.drag_reorder]: normalizeDragReorderExpected,
     [PracticeKind.matrix_input]: normalizeMatrixInputExpected,
     [PracticeKind.code_input]: normalizeCodeExpectedForSave,

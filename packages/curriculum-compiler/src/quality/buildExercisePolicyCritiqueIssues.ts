@@ -10,6 +10,7 @@ const KINDS = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "pseudocode_input",
     "code_input",
 ] as const;
 
@@ -34,6 +35,7 @@ function countKinds(draft: TopicAuthoringDraft): Record<Kind, number> {
         multi_choice: 0,
         drag_reorder: 0,
         fill_blank_choice: 0,
+        pseudocode_input: 0,
         code_input: 0,
     };
 
@@ -55,6 +57,7 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
             multi_choice: 0,
             drag_reorder: 0,
             fill_blank_choice: 0,
+            pseudocode_input: 0,
             code_input: 0,
         };
     }
@@ -64,6 +67,7 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
         multi_choice: counts.multi_choice / total,
         drag_reorder: counts.drag_reorder / total,
         fill_blank_choice: counts.fill_blank_choice / total,
+        pseudocode_input: counts.pseudocode_input / total,
         code_input: counts.code_input / total,
     };
 }

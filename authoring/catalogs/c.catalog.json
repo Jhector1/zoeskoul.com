@@ -2,23 +2,27 @@
   "catalog": {
     "slug": "c",
     "order": 50,
-    "title": "C Programming",
-    "defaultSubjectSlug": "c-data-structures",
-    "description": "A systems-programming path for implementing data structures, tracing pointer-based state, and analyzing efficient algorithms in C.",
-    "imageAlt": "C programming and data structures catalog cover",
+    "title": "C Programming, Data Structures, and Algorithms",
+    "defaultSubjectSlug": "c",
+    "description": "A cumulative C pathway from memory and pointers to data structures, runtime analysis, sorting, graphs, greedy algorithms, backtracking, and dynamic programming.",
+    "imageAlt": "C programming, data structures, and algorithms catalog cover",
     "status": "active",
     "subjectSlugs": [
-      "c-data-structures",
-      "c-runtime-analysis-asymptotics"
+      "c",
+      "c-data-structures-v1"
     ],
     "meta": {
       "family": "programming",
-      "featured": true
+      "featured": true,
+      "pathway": "c-data-structures-algorithms"
     }
   },
   "subjectSlugs": [
-    "c-data-structures",
-    "c-runtime-analysis-asymptotics"
+    "c",
+    "c-data-structures-v1"
   ],
-  "defaultSubjectSlug": "c-data-structures"
+  "defaultSubjectSlug": "c",
+  "legacySubjectSlugs": [
+    "c-data-structures-v1"
+  ]
 }

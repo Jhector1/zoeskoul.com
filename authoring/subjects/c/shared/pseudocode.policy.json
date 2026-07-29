@@ -1,0 +1,17 @@
+{
+  "policyId": "c-pseudocode-policy",
+  "extends": "zoeskoul-pseudocode-v1",
+  "translationSequence": [
+    "visual_invariant",
+    "pseudocode_input",
+    "worked_trace",
+    "algorithm_animation",
+    "c_code_input"
+  ],
+  "cSpecificRules": [
+    "Pseudocode must not require malloc, free, casts, headers, semicolons, or C type declarations unless memory ownership itself is the lesson objective.",
+    "The following C exercise translates the accepted algorithm into structs, pointers, arrays, allocation, and cleanup.",
+    "Keep accepted pseudocode visible in a read-only reference panel beside the C editor.",
+    "Validate duplicate policy, NULL termination, parent updates, boundary checks, and invariant restoration when relevant."
+  ]
+}

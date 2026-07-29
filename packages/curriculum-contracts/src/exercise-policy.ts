@@ -3,6 +3,7 @@ export type ExerciseKindKey =
     | "multi_choice"
     | "drag_reorder"
     | "fill_blank_choice"
+    | "pseudocode_input"
     | "code_input";
 
 export type ExerciseKindMix = Partial<Record<ExerciseKindKey, number>>;

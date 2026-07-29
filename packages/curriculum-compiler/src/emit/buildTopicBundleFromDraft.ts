@@ -560,6 +560,27 @@ export function buildTopicBundleFromDraft(args: {
             };
         }
 
+        if (exercise.kind === "pseudocode_input") {
+            return {
+                id: exercise.id,
+                kind: "pseudocode_input" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
+                weight: 1,
+                messageBase,
+                mode: exercise.mode,
+                dialect: exercise.dialect ?? "zoeskoul-v1",
+                starterPseudocode: exercise.starterPseudocode ?? "",
+                editor: exercise.editor,
+                expected: {
+                    kind: "pseudocode_input" as const,
+                    dialect: exercise.dialect ?? "zoeskoul-v1",
+                    mode: exercise.mode,
+                    solution: exercise.solutionPseudocode,
+                    ...exercise.validation,
+                },
+            };
+        }
+
         if (exercise.kind === "code_input") {
             return (codeInputProfile ?? assertProfileSupportsCodeInput(profile)).buildManifest({
                 exercise,

@@ -1,10 +1,49 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { clearCodeRunner, setCodeRunner } from "@zoeskoul/curriculum-runtime";
-import { validateCGolden } from "./validateCGolden.js";
+import { validateCGolden, validateCStaticMemoryContract } from "./validateCGolden.js";
 
 describe("validateCGolden", () => {
     afterEach(() => {
         clearCodeRunner();
+    });
+
+
+    it("rejects allocated official solutions without cleanup", () => {
+        const issues = validateCStaticMemoryContract({
+            quizDraft: [
+                {
+                    id: "leaky-list",
+                    kind: "code_input",
+                    solutionCode: "Node *node = malloc(sizeof(Node));\nreturn node;",
+                    solutionFiles: [],
+                },
+            ],
+        } as any);
+
+        expect(issues.map((issue) => issue.code)).toEqual(
+            expect.arrayContaining([
+                "C_DYNAMIC_MEMORY_CLEANUP_MISSING",
+                "C_ALLOCATION_FAILURE_CHECK_MISSING",
+            ]),
+        );
+    });
+
+    it("accepts explicit allocation checks and cleanup ownership", () => {
+        const issues = validateCStaticMemoryContract({
+            quizDraft: [
+                {
+                    id: "safe-list",
+                    kind: "code_input",
+                    solutionCode: `Node *node = malloc(sizeof(Node));
+if (node == NULL) return NULL;
+free(node);
+return NULL;`,
+                    solutionFiles: [],
+                },
+            ],
+        } as any);
+
+        expect(issues).toEqual([]);
     });
 
     it("executes the complete official multi-file C solution", async () => {
@@ -160,6 +199,8 @@ describe("validateCGolden", () => {
                             ],
                             tests: [
                                 { stdin: "", stdout: "minimum=2\n", match: "exact" },
+                                { stdin: "boundary", stdout: "minimum=2\n", match: "exact" },
+                                { stdin: "repeat", stdout: "minimum=2\n", match: "exact" },
                             ],
                         },
                     },

@@ -1,0 +1,116 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-data-structures-linear",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "title": "C Data Structures I: Linear Structures",
+  "subtitle": "Build the representation, animate the invariant, and preserve every link.",
+  "level": "intermediate",
+  "moduleCount": 8,
+  "description": "A cumulative C course on abstract data types, dynamic arrays, linked lists, stacks, queues, deques, ownership, and operation tradeoffs.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners following the cumulative C data-structures and algorithms pathway."
+  ],
+  "prerequisites": [
+    "C Programming Foundations or equivalent.",
+    "Runtime Analysis and Asymptotics recommended."
+  ],
+  "goals": [
+    "Implement linear structures from first principles.",
+    "Trace array shifts, pointer links, and circular indices.",
+    "Preserve invariants and memory ownership.",
+    "Compare operation costs by representation."
+  ],
+  "teachingStyle": {
+    "tone": "Visual, precise, book-like, cumulative, and implementation-focused.",
+    "pseudocodeBeforeC": true,
+    "manualAnimations": true,
+    "quizWeight": 0.2,
+    "pseudocodeWeight": 0.2,
+    "projectWeight": 0.2,
+    "codeInputWeight": 0.4
+  },
+  "constraints": {
+    "moduleCount": 8,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<moduleSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>",
+    "requireModuleProject": true,
+    "finalCapstoneSingleTopic": true
+  },
+  "seedModules": [
+    "c-data-structures-linear-module-1-foundations",
+    "c-data-structures-linear-module-2-dynamic-arrays",
+    "c-data-structures-linear-module-3-singly-linked-lists",
+    "c-data-structures-linear-module-4-advanced-lists",
+    "c-data-structures-linear-module-5-stacks",
+    "c-data-structures-linear-module-6-queues",
+    "c-data-structures-linear-module-7-deques",
+    "c-data-structures-linear-module-8-capstone"
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "runtimePolicy": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file",
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false,
+    "pseudocodeRuntime": "deterministic_ir"
+  }
+}

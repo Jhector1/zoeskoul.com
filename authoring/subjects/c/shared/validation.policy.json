@@ -15,17 +15,23 @@
     "fixedTestsRequired": true,
     "completeSolutionFilesRequired": true,
     "c11CompilationRequired": true,
-    "multiFileWorkspaceRequired": true
+    "multiFileWorkspaceRequired": true,
+    "pseudocodeDeterministicValidationRequired": true,
+    "pseudocodeBeforeCForAlgorithms": true
   },
   "rules": {
     "executionValidation": [
       "Every C code_input has deterministic fixed tests and complete starterFiles and solutionFiles.",
       "The official solution must compile and pass the same tests published to learners.",
-      "The entry file is main.c and reusable data structures are implemented in named .h/.c pairs."
+      "The entry file is main.c and reusable data structures are implemented in named .h/.c pairs.",
+      "Every authored pseudocode_input uses dialect zoeskoul-v1 and deterministic IR validation.",
+      "Full-write pseudocode exercises include structure rules and at least two bounded trace scenarios."
     ],
     "pedagogy": [
       "Use algorithm_animation for recursive trees, pointer links, tree balancing, stack transfers, and heap insertion paths.",
-      "Do not hide memory ownership or pointer invariants when they are central to the lesson."
+      "Do not hide memory ownership or pointer invariants when they are central to the lesson.",
+      "Teach algorithm intent in pseudocode before pointer syntax, allocation, or compiler details.",
+      "Keep the learner pseudocode available beside the next C implementation exercise."
     ]
   }
 }

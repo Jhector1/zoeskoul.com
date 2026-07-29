@@ -40,6 +40,7 @@ export const cShape: SubjectShapePack = {
             "multi_choice",
             "drag_reorder",
             "fill_blank_choice",
+            "pseudocode_input",
             "code_input",
         ],
     },
@@ -63,6 +64,7 @@ export const cShape: SubjectShapePack = {
         multiChoice: { requiredFields: ["id", "kind", "purpose", "weight", "messageBase", "optionIds", "expected"] },
         dragReorder: { requiredFields: ["id", "kind", "purpose", "weight", "messageBase", "tokenIds", "expected"] },
         fillBlankChoice: { requiredFields: ["id", "kind", "purpose", "weight", "messageBase", "choiceCount", "expected"] },
+        pseudocodeInput: { requiredFields: ["id", "kind", "purpose", "weight", "messageBase", "mode", "expected"] },
     },
     aiContract: {
         description: "C draft content compiles into multi-file C topic bundles with runnable fixed tests.",
@@ -72,6 +74,7 @@ export const cShape: SubjectShapePack = {
             "Before every algorithm_animation, add a paragraph sketch that states the exact problem, translates it into plain English, lists the constraints, and tells the learner what to watch for.",
             "Give every algorithm_animation a contextKey so the question and the animation goal remain visible while the learner steps through it.",
             "Place the matching single-step project card immediately after its problem sketch and animation; do not group unrelated animations before all exercises.",
+            "Use pseudocode_input for algorithm logic before C implementation, with deterministic semantic and trace rules.",
             "Use code_input with fixed_tests for C implementation tasks.",
             "Provide main.c, headers, implementation files, and complete solutionFiles explicitly.",
         ],

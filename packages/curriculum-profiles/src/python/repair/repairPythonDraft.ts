@@ -3701,6 +3701,7 @@ function countKinds(draft: TopicAuthoringDraft) {
             multi_choice: 0,
             drag_reorder: 0,
             fill_blank_choice: 0,
+            pseudocode_input: 0,
             code_input: 0,
         },
     );
@@ -7124,6 +7125,13 @@ function normalizePolicyExerciseSignature(exercise: PythonDraftExercise): string
                 template: exercise.template ?? "",
                 choices: exercise.choices ?? [],
                 correctValue: exercise.correctValue ?? "",
+            });
+        case "pseudocode_input":
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                mode: exercise.mode,
+                solutionPseudocode: exercise.solutionPseudocode,
             });
     }
 }

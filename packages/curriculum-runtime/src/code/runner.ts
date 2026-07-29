@@ -1,5 +1,7 @@
 export type RunCodeLimits = {
     timeoutMs?: number;
+    /** C-only compile policy. Custom metadata is consumed before Judge0 submission. */
+    cCompilerMode?: "learner" | "strict" | "sanitized";
 
     cpu_time_limit?: number;
     cpu_extra_time?: number;

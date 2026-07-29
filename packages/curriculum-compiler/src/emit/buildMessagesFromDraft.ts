@@ -447,6 +447,12 @@ export function buildMessagesFromDraft(args: {
             continue;
         }
 
+        if (exercise.kind === "pseudocode_input") {
+            setNested(out, [...quizBase, "starterPseudocode"], exercise.starterPseudocode ?? "");
+            setNested(out, [...quizBase, "solutionPseudocode"], exercise.solutionPseudocode);
+            continue;
+        }
+
         if (exercise.kind === "code_input") {
             setNested(out, [...quizBase, "starterCode"], exercise.starterCode);
 

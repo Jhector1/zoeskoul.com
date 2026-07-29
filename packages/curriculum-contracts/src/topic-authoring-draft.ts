@@ -3,6 +3,9 @@ import {
     SemanticCheckSchema,
     type SemanticCheck,
     type TerminalExpectations,
+    PseudocodeExpectedSchema,
+    type PseudocodeExpected,
+    type PseudocodeMode,
 } from "@zoeskoul/practice-checks";
 import {
     type GitExpectations,
@@ -127,6 +130,20 @@ export type TopicAuthoringDraft = {
         correctValue: string;
     })
         | (DraftCommon & {
+        kind: "pseudocode_input";
+        mode: PseudocodeMode;
+        dialect?: "zoeskoul-v1";
+        starterPseudocode?: string;
+        solutionPseudocode: string;
+        validation: Omit<PseudocodeExpected, "kind" | "mode" | "dialect" | "solution">;
+        editor?: {
+            showLineNumbers?: boolean;
+            allowIndentation?: boolean;
+            showKeywordReference?: boolean;
+            minRows?: number;
+        };
+    })
+        | (DraftCommon & {
         kind: "code_input";
         starterCode: string;
         fixedLanguage?: WorkspaceLanguage;
@@ -183,6 +200,7 @@ const EXERCISE_KIND_ENUM = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "pseudocode_input",
     "code_input",
 ] satisfies ExerciseKind[];
 
@@ -250,7 +268,7 @@ const draftCommonSchema = {
 } satisfies JsonSchema;
 
 export const TOPIC_AUTHORING_DRAFT_SCHEMA_VERSION =
-    "2026-07-16-topic-authoring-draft-v2";
+    "2026-07-27-topic-authoring-draft-v3";
 
 export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
     type: "object",
@@ -368,6 +386,36 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                             template: { type: "string" },
                             choices: { type: "array", items: { type: "string" } },
                             correctValue: { type: "string" },
+                        },
+                    },
+                    {
+                        type: "object",
+                        additionalProperties: false,
+                        required: [
+                            "id",
+                            "kind",
+                            "title",
+                            "prompt",
+                            "hint",
+                            "help",
+                            "mode",
+                            "solutionPseudocode",
+                            "validation",
+                        ],
+                        properties: {
+                            ...draftCommonSchema,
+                            kind: { const: "pseudocode_input" },
+                            mode: { type: "string", enum: ["complete", "fill_blanks", "reorder", "trace", "write"] },
+                            dialect: { const: "zoeskoul-v1" },
+                            starterPseudocode: { type: "string" },
+                            solutionPseudocode: { type: "string" },
+                            validation: { type: "object", additionalProperties: true },
+                            editor: { type: "object", additionalProperties: false, properties: {
+                                showLineNumbers: { type: "boolean" },
+                                allowIndentation: { type: "boolean" },
+                                showKeywordReference: { type: "boolean" },
+                                minRows: { type: "integer", minimum: 4, maximum: 40 },
+                            } },
                         },
                     },
                     {
@@ -1078,6 +1126,59 @@ export function assertTopicAuthoringDraft(
                 fail(`${label} fill_blank_choice correctValue must be included in choices`);
             }
 
+            return;
+        }
+
+        if (exercise.kind === "pseudocode_input") {
+            assertOnlyKeys(
+                exercise,
+                [
+                    "id",
+                    "kind",
+                    "title",
+                    "prompt",
+                    "hint",
+                    "help",
+                    "mode",
+                    "dialect",
+                    "starterPseudocode",
+                    "solutionPseudocode",
+                    "validation",
+                    "editor",
+                ],
+                label,
+            );
+            if (!isNonEmptyString(exercise.solutionPseudocode)) {
+                fail(`${label} pseudocode_input needs solutionPseudocode`);
+            }
+            const parsed = PseudocodeExpectedSchema.safeParse({
+                kind: "pseudocode_input",
+                dialect: exercise.dialect ?? "zoeskoul-v1",
+                mode: exercise.mode,
+                solution: exercise.solutionPseudocode,
+                ...(isRecord(exercise.validation) ? exercise.validation : {}),
+            });
+            if (!parsed.success) {
+                fail(`${label} pseudocode_input validation contract is invalid: ${parsed.error.issues.map((issue: { message: string }) => issue.message).join("; ")}`);
+            }
+            if (exercise.editor !== undefined && !isRecord(exercise.editor)) {
+                fail(`${label} pseudocode_input editor must be an object when provided`);
+            }
+            if (isRecord(exercise.editor)) {
+                assertOnlyKeys(
+                    exercise.editor,
+                    ["showLineNumbers", "allowIndentation", "showKeywordReference", "minRows"],
+                    `${label}.editor`,
+                );
+                if (
+                    exercise.editor.minRows !== undefined &&
+                    (!Number.isInteger(exercise.editor.minRows) ||
+                        Number(exercise.editor.minRows) < 4 ||
+                        Number(exercise.editor.minRows) > 40)
+                ) {
+                    fail(`${label} pseudocode_input editor.minRows must be an integer from 4 to 40`);
+                }
+            }
             return;
         }
 

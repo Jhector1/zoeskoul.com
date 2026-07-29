@@ -247,6 +247,185 @@ function sanitizeNonCodeExercise(
 
     return exercise;
 }
+
+const VALID_PSEUDOCODE_MODES = new Set([
+    "complete",
+    "fill_blanks",
+    "reorder",
+    "trace",
+    "write",
+]);
+const VALID_PSEUDOCODE_STRATEGIES = new Set([
+    "required_structure",
+    "semantic_rules",
+    "trace_output",
+    "hybrid",
+]);
+const VALID_PSEUDOCODE_RULE_KINDS = new Set([
+    "structure",
+    "operation",
+    "pattern",
+    "forbidden_pattern",
+    "ordered_operations",
+]);
+
+function sanitizePseudocodeValidation(value: unknown, mode: string): Record<string, unknown> {
+    const raw = isRecord(value) ? value : {};
+    const strategy = normalizeText(raw.strategy);
+    const rules = Array.isArray(raw.rules)
+        ? raw.rules
+              .filter(isRecord)
+              .map((rule, index) => {
+                  const kind = normalizeText(rule.kind);
+                  if (!VALID_PSEUDOCODE_RULE_KINDS.has(kind)) return null;
+                  const base: Record<string, unknown> = {
+                      id: normalizeText(rule.id) || `rule-${index + 1}`,
+                      kind,
+                  };
+                  if (kind === "structure") {
+                      const structure = normalizeText(rule.structure);
+                      if (!structure) return null;
+                      base.structure = structure;
+                  } else if (kind === "operation") {
+                      const operation = normalizeText(rule.operation);
+                      if (!operation) return null;
+                      base.operation = operation;
+                  } else if (kind === "pattern" || kind === "forbidden_pattern") {
+                      const pattern = normalizeText(rule.pattern);
+                      if (!pattern) return null;
+                      base.pattern = pattern;
+                      const flags = normalizeText(rule.flags);
+                      if (flags) base.flags = flags;
+                  } else {
+                      const operations = Array.isArray(rule.operations)
+                          ? rule.operations.map(normalizeText).filter(Boolean)
+                          : [];
+                      if (operations.length < 2) return null;
+                      base.operations = operations;
+                  }
+                  if (typeof rule.min === "number" && Number.isFinite(rule.min)) {
+                      base.min = Math.max(0, Math.floor(rule.min));
+                  }
+                  if (typeof rule.max === "number" && Number.isFinite(rule.max)) {
+                      base.max = Math.max(0, Math.floor(rule.max));
+                  }
+                  const message = normalizeText(rule.message);
+                  if (message) base.message = message;
+                  return base;
+              })
+              .filter((rule): rule is Record<string, unknown> => Boolean(rule))
+        : [];
+    const scenarios = Array.isArray(raw.scenarios)
+        ? raw.scenarios
+              .filter(isRecord)
+              .map((scenario, index) => {
+                  const expectedLines = Array.isArray(scenario.expectedLines)
+                      ? scenario.expectedLines.map(normalizeText).filter(Boolean)
+                      : [];
+                  if (expectedLines.length < 1) return null;
+                  const match = normalizeText(scenario.match);
+                  return {
+                      id: normalizeText(scenario.id) || `scenario-${index + 1}`,
+                      expectedLines,
+                      ...(match === "exact" || match === "contains" ? { match } : {}),
+                      ...(normalizeText(scenario.message)
+                          ? { message: normalizeText(scenario.message) }
+                          : {}),
+                  };
+              })
+              .filter((scenario) => scenario !== null) as Record<string, unknown>[]
+        : [];
+
+    const effectiveRules = rules.length > 0
+        ? rules
+        : mode === "trace"
+            ? []
+            : [{
+                  id: "has-algorithm-step",
+                  kind: "pattern",
+                  pattern: "\\b(PROCEDURE|IF|WHILE|FOR|RETURN|SET|SWAP|ENQUEUE|DEQUEUE|PUSH|POP|VISIT)\\b",
+                  min: 1,
+                  message: "Include at least one recognized ZoeSkoul pseudocode step.",
+              }];
+    const effectiveStrategy = VALID_PSEUDOCODE_STRATEGIES.has(strategy)
+        ? strategy
+        : mode === "trace" && scenarios.length > 0
+            ? "trace_output"
+            : "semantic_rules";
+
+    return {
+        strategy: effectiveStrategy,
+        rules: effectiveRules,
+        ...(scenarios.length > 0 ? { scenarios } : {}),
+        ignoreFormatting:
+            typeof raw.ignoreFormatting === "boolean" ? raw.ignoreFormatting : true,
+        allowEquivalentNames:
+            typeof raw.allowEquivalentNames === "boolean" ? raw.allowEquivalentNames : true,
+    };
+}
+
+function sanitizePseudocodeExercise(
+    exercise: Record<string, unknown>,
+): Record<string, unknown> {
+    const base = sanitizeExerciseBase(exercise);
+    const mode = normalizeText(exercise.mode);
+    const starterPseudocode = normalizeText(exercise.starterPseudocode);
+    const solutionPseudocode =
+        normalizeText(exercise.solutionPseudocode) ||
+        normalizeText(exercise.solution) ||
+        starterPseudocode ||
+        "PROCEDURE SOLVE\n    RETURN";
+    const normalizedMode = VALID_PSEUDOCODE_MODES.has(mode) ? mode : "write";
+    const validation = sanitizePseudocodeValidation(exercise.validation, normalizedMode);
+    if (
+        normalizedMode === "trace" &&
+        (!Array.isArray(validation.scenarios) || validation.scenarios.length < 1)
+    ) {
+        const expectedLines = solutionPseudocode
+            .split(/(?:\r?\n|→|->|,)/)
+            .map((line) => line.trim())
+            .filter(Boolean);
+        validation.strategy = "trace_output";
+        validation.rules = [];
+        validation.scenarios = [{
+            id: "expected-trace",
+            expectedLines: expectedLines.length > 0 ? expectedLines : [solutionPseudocode],
+            match: "exact",
+            message: "Follow the complete execution trace in order.",
+        }];
+    }
+    const editorRaw = isRecord(exercise.editor) ? exercise.editor : {};
+    const minRows =
+        typeof editorRaw.minRows === "number" && Number.isFinite(editorRaw.minRows)
+            ? Math.max(4, Math.min(40, Math.floor(editorRaw.minRows)))
+            : 12;
+
+    return {
+        ...base,
+        kind: "pseudocode_input",
+        mode: normalizedMode,
+        dialect: "zoeskoul-v1",
+        starterPseudocode,
+        solutionPseudocode,
+        validation,
+        editor: {
+            showLineNumbers:
+                typeof editorRaw.showLineNumbers === "boolean"
+                    ? editorRaw.showLineNumbers
+                    : true,
+            allowIndentation:
+                typeof editorRaw.allowIndentation === "boolean"
+                    ? editorRaw.allowIndentation
+                    : true,
+            showKeywordReference:
+                typeof editorRaw.showKeywordReference === "boolean"
+                    ? editorRaw.showKeywordReference
+                    : true,
+            minRows,
+        },
+    };
+}
+
 function sanitizeFixtureList(
     files: unknown,
 ): Record<string, unknown>[] | undefined {
@@ -963,6 +1142,9 @@ function sanitizeGeneratedTopicAuthoringDraftBase(
 
             if (kind === "code_input") {
                 return sanitizeCodeInputExercise(exercise, options);
+            }
+            if (kind === "pseudocode_input") {
+                return sanitizePseudocodeExercise(exercise);
             }
 
             return sanitizeNonCodeExercise(exercise);

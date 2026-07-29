@@ -769,3 +769,90 @@ describe("TopicAuthoringDraft binary workspace files", () => {
         );
     });
 });
+
+describe("TopicAuthoringDraft pseudocode_input", () => {
+    it("accepts deterministic pseudocode authoring", () => {
+        const draft: TopicAuthoringDraft = {
+            title: "BST search",
+            summary: "Trace and write BST search.",
+            minutes: 15,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "bst-search-pseudocode",
+                    kind: "pseudocode_input",
+                    title: "Write BST search",
+                    prompt: "Write iterative pseudocode for BST search.",
+                    hint: "Follow one child pointer per comparison.",
+                    help: {
+                        concept: "BST search follows one ordered path.",
+                        hint_1: "Continue while the current node exists.",
+                        hint_2: "Return NULL after the traversal reaches an empty child.",
+                    },
+                    mode: "write",
+                    dialect: "zoeskoul-v1",
+                    starterPseudocode: "PROCEDURE SEARCH(root, key)\n    current <- root",
+                    solutionPseudocode: "PROCEDURE SEARCH(root, key)\n    WHILE current != NULL\n        RETURN current\n    RETURN NULL",
+                    validation: {
+                        strategy: "semantic_rules",
+                        rules: [
+                            {
+                                id: "has-loop",
+                                kind: "structure",
+                                structure: "while",
+                                min: 1,
+                            },
+                            {
+                                id: "handles-not-found",
+                                kind: "operation",
+                                operation: "return_null",
+                                min: 1,
+                            },
+                        ],
+                        ignoreFormatting: true,
+                        allowEquivalentNames: true,
+                    },
+                    editor: {
+                        showLineNumbers: true,
+                        allowIndentation: true,
+                        showKeywordReference: true,
+                        minRows: 12,
+                    },
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
+
+    it("rejects semantic pseudocode validation without rules", () => {
+        const draft = {
+            title: "BST search",
+            summary: "Trace and write BST search.",
+            minutes: 15,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "invalid-pseudocode",
+                    kind: "pseudocode_input" as const,
+                    title: "Write BST search",
+                    prompt: "Write iterative pseudocode for BST search.",
+                    hint: "Follow one path.",
+                    help: {
+                        concept: "BST search follows one path.",
+                        hint_1: "Use a loop.",
+                        hint_2: "Handle NULL.",
+                    },
+                    mode: "write" as const,
+                    solutionPseudocode: "PROCEDURE SEARCH\n    RETURN NULL",
+                    validation: {
+                        strategy: "semantic_rules" as const,
+                        rules: [],
+                    },
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft)).toThrow(/requires at least one deterministic rule/i);
+    });
+});

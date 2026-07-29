@@ -31,6 +31,7 @@ function seed() {
 describe("cProfile", () => {
     it("is shape-consistent and uses a multi-file C runtime", () => {
         expect(validateProfileShapeConsistency(cProfile)).toEqual([]);
+        expect(cProfile.allowedExerciseKinds).toContain("pseudocode_input");
         expect(cProfile.buildModuleRuntimeDefaults()).toMatchObject({
             kind: "code",
             language: "c",
@@ -54,7 +55,11 @@ describe("cProfile", () => {
                 solutionCode: "int main(void) { return 0; }",
                 fixedLanguage: "c",
                 recipeType: "fixed_tests",
-                tests: [{ stdin: "", stdout: "ok\n", match: "exact" }],
+                tests: [
+                    { stdin: "", stdout: "ok\n", match: "exact" },
+                    { stdin: "boundary", stdout: "ok\n", match: "exact" },
+                    { stdin: "repeat", stdout: "ok\n", match: "exact" },
+                ],
             },
         });
 
@@ -62,4 +67,58 @@ describe("cProfile", () => {
         expect(manifest.workspace?.entryFilePath).toBe("main.c");
         expect(manifest.recipe.type).toBe("fixed_tests");
     });
+
+    it("requires three deterministic C tests", () => {
+        expect(() =>
+            cProfile.codeInput!.buildManifest({
+                seed: seed(),
+                messageBase: "topics.c.lab.tooFewTests",
+                exercise: {
+                    id: "too-few-tests",
+                    kind: "code_input",
+                    title: "Compile C",
+                    prompt: "Complete the function.",
+                    hint: "Use the helper.",
+                    help: { concept: "Compile all files.", hint_1: "Edit helper.c.", hint_2: "Run it." },
+                    starterCode: "int main(void) { return 0; }",
+                    solutionCode: "int main(void) { return 0; }",
+                    fixedLanguage: "c",
+                    recipeType: "fixed_tests",
+                    tests: [{ stdin: "", stdout: "ok\n", match: "exact" }],
+                },
+            }),
+        ).toThrow(/at least 3 fixed tests/i);
+    });
+
+    it("rejects duplicate multi-file workspace paths", () => {
+        expect(() =>
+            cProfile.codeInput!.buildManifest({
+                seed: seed(),
+                messageBase: "topics.c.lab.duplicatePaths",
+                exercise: {
+                    id: "duplicate-paths",
+                    kind: "code_input",
+                    title: "Compile C",
+                    prompt: "Complete the function.",
+                    hint: "Use the helper.",
+                    help: { concept: "Compile all files.", hint_1: "Edit helper.c.", hint_2: "Run it." },
+                    starterCode: "int main(void) { return 0; }",
+                    solutionCode: "int main(void) { return 0; }",
+                    fixedLanguage: "c",
+                    recipeType: "fixed_tests",
+                    entryFilePath: "main.c",
+                    starterFiles: [
+                        { path: "main.c", content: "int main(void) { return 0; }" },
+                        { path: "main.c", content: "int main(void) { return 1; }" },
+                    ],
+                    tests: [
+                        { stdin: "", stdout: "ok\n", match: "exact" },
+                        { stdin: "boundary", stdout: "ok\n", match: "exact" },
+                        { stdin: "repeat", stdout: "ok\n", match: "exact" },
+                    ],
+                },
+            }),
+        ).toThrow(/duplicate compiled-language workspace path/i);
+    });
+
 });

@@ -128,6 +128,7 @@ export type TopicBundleShape = {
         | "drag_reorder"
         | "fill_blank_choice"
         | "code_input"
+        | "pseudocode_input"
     )[];
 };
 
@@ -165,6 +166,9 @@ export type QuizShape = {
     };
     fillBlankChoice: {
         requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "choiceCount", "expected"];
+    };
+    pseudocodeInput?: {
+        requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "mode", "expected"];
     };
 };
 

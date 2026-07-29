@@ -724,9 +724,20 @@ export function repairTopicAuthoringDraft(
                     }),
                 });
 
+                if (exercise.kind === "single_choice") {
+                    return {
+                        ...base,
+                        kind: "single_choice" as const,
+                        options,
+                        correctOptionIds,
+                        hint: sanitized.hint,
+                        help: sanitized.help,
+                    };
+                }
+
                 return {
                     ...base,
-                    kind: exercise.kind,
+                    kind: "multi_choice" as const,
                     options,
                     correctOptionIds,
                     hint: sanitized.hint,
@@ -823,44 +834,69 @@ export function repairTopicAuthoringDraft(
                 };
             }
 
-            const starterCode = normalizeText(exercise.starterCode);
-            const solutionCode = normalizeText(exercise.solutionCode);
-            const bannedAnswers = extractBannedCodeFragments(solutionCode);
+            if (exercise.kind === "pseudocode_input") {
+                const starterPseudocode = normalizeText(
+                    exercise.starterPseudocode,
+                );
+                const solutionPseudocode = normalizeText(
+                    exercise.solutionPseudocode,
+                );
 
-            const sanitized = stripAnswerLeakFromTexts({
-                hint: base.hint,
-                help: {
-                    concept: base.help.concept,
-                    hint_1: base.help.hint_1,
-                    hint_2: base.help.hint_2,
-                },
-                bannedAnswers,
+                return {
+                    ...base,
+                    kind: "pseudocode_input" as const,
+                    mode: exercise.mode,
+                    dialect: exercise.dialect ?? "zoeskoul-v1",
+                    ...(starterPseudocode ? { starterPseudocode } : {}),
+                    solutionPseudocode,
+                    validation: exercise.validation,
+                    ...(exercise.editor ? { editor: exercise.editor } : {}),
+                };
+            }
+
+            if (exercise.kind === "code_input") {
+                const starterCode = normalizeText(exercise.starterCode);
+                const solutionCode = normalizeText(exercise.solutionCode);
+                const bannedAnswers = extractBannedCodeFragments(solutionCode);
+
+                const sanitized = stripAnswerLeakFromTexts({
+                    hint: base.hint,
+                    help: {
+                        concept: base.help.concept,
+                        hint_1: base.help.hint_1,
+                        hint_2: base.help.hint_2,
+                    },
+                    bannedAnswers,
                     fallback: makeSafeCodeHelp({
                         title: base.title,
                         prompt: base.prompt,
                         seed,
                     }),
                 });
-            const fallback = makeSafeCodeHelp({
-                title: base.title,
-                prompt: base.prompt,
-                seed,
-            });
+                const fallback = makeSafeCodeHelp({
+                    title: base.title,
+                    prompt: base.prompt,
+                    seed,
+                });
 
-            return {
-                ...base,
-                kind: "code_input" as const,
-                starterCode,
-                solutionCode,
-                datasetId: normalizeText(exercise.datasetId) || undefined,
-                recipeType: exercise.recipeType,
-                hint: sanitized.hint || fallback.hint,
-                help: {
-                    concept: sanitized.help.concept || fallback.help.concept,
-                    hint_1: sanitized.help.hint_1 || fallback.help.hint_1,
-                    hint_2: sanitized.help.hint_2 || fallback.help.hint_2,
-                },
-            };
+                return {
+                    ...base,
+                    kind: "code_input" as const,
+                    starterCode,
+                    solutionCode,
+                    datasetId: normalizeText(exercise.datasetId) || undefined,
+                    recipeType: exercise.recipeType,
+                    hint: sanitized.hint || fallback.hint,
+                    help: {
+                        concept: sanitized.help.concept || fallback.help.concept,
+                        hint_1: sanitized.help.hint_1 || fallback.help.hint_1,
+                        hint_2: sanitized.help.hint_2 || fallback.help.hint_2,
+                    },
+                };
+            }
+
+            const exhaustive: never = exercise;
+            return exhaustive;
         }),
         projectDraft: draft.projectDraft
             ? {

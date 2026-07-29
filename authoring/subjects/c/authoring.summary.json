@@ -1,0 +1,48 @@
+{
+  "activeCourses": [
+    "c-programming-foundations",
+    "c-runtime-analysis-asymptotics",
+    "c-data-structures-linear",
+    "c-trees-heaps-hashing",
+    "algorithms-in-c"
+  ],
+  "legacyCourses": [
+    "c-data-structures"
+  ],
+  "courseCounts": {
+    "c-programming-foundations": {
+      "modules": 9,
+      "topics": 41,
+      "moduleProjects": 8,
+      "capstones": 1
+    },
+    "c-runtime-analysis-asymptotics": {
+      "modules": 6,
+      "topics": 30,
+      "moduleProjects": 5,
+      "capstones": 1
+    },
+    "c-data-structures-linear": {
+      "modules": 8,
+      "topics": 36,
+      "moduleProjects": 7,
+      "capstones": 1
+    },
+    "c-trees-heaps-hashing": {
+      "modules": 7,
+      "topics": 36,
+      "moduleProjects": 6,
+      "capstones": 1
+    },
+    "algorithms-in-c": {
+      "modules": 10,
+      "topics": 50,
+      "moduleProjects": 9,
+      "capstones": 1
+    }
+  },
+  "totalActiveModules": 40,
+  "totalActiveTopics": 193,
+  "totalModuleProjects": 35,
+  "totalCapstones": 5
+}

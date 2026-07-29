@@ -1,0 +1,2031 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "c-trees-heaps-hashing",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "courseNumber": 4,
+  "title": "C Data Structures II: Trees, Heaps, and Hashing",
+  "subtitle": "Search by order, process by priority, and look up by key.",
+  "description": "A cumulative C course on binary trees, traversals, binary search trees, deletion and balance, binary heaps, priority queues, and hash tables.",
+  "level": "intermediate",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 7,
+  "moduleRange": {
+    "start": 1,
+    "end": 7,
+    "label": "C Data Structures II: Trees, Heaps, and Hashing"
+  },
+  "prerequisites": [
+    "C Data Structures I or equivalent.",
+    "Comfort with recursion, pointers, dynamic memory, stacks, and queues."
+  ],
+  "intendedFor": "Learners following the cumulative C data-structures and algorithms pathway.",
+  "learningGoals": [
+    "Implement recursive and iterative tree algorithms.",
+    "Trace BST insertion and deletion.",
+    "Build heaps and priority queues.",
+    "Design collision-safe hash tables.",
+    "Maintain synchronized indexes without duplicate ownership."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Follow modules in order. Each standard module extends the same cumulative workspace and ends with a module project. The final module is one cumulative capstone topic.",
+    "summary": "A cumulative C course on binary trees, traversals, binary search trees, deletion and balance, binary heaps, priority queues, and hash tables.",
+    "cumulativeProject": "Campus Search and Priority Engine",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Binary Tree Foundations",
+        "coreSkill": "Represent hierarchical data recursively and reason about shape, height, and ownership.",
+        "outputFocus": "Initialize the campus index tree library."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Tree Traversals",
+        "coreSkill": "Visit every node in a deliberate order using recursion, stacks, or queues.",
+        "outputFocus": "Add traversal implementations and visual trace outputs."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Binary Search Trees",
+        "coreSkill": "Use the ordering invariant to search and insert along one root-to-leaf path.",
+        "outputFocus": "Add a BST index by request ID."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "BST Deletion and Balance",
+        "coreSkill": "Handle the three deletion cases and understand why unbalanced shape changes performance.",
+        "outputFocus": "Make the BST index fully mutable and rebuildable."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Binary Heaps and Priority Queues",
+        "coreSkill": "Maintain completeness and heap order in synchronized tree and array views.",
+        "outputFocus": "Add a priority heap for urgent requests."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Hash Tables",
+        "coreSkill": "Map keys to table locations while handling collisions, load, resizing, and ownership.",
+        "outputFocus": "Add the hash-table index by request name."
+      },
+      {
+        "moduleNumber": 7,
+        "title": "Trees, Heaps, and Hashing Capstone",
+        "coreSkill": "Maintain three synchronized indexes over one set of owned records.",
+        "outputFocus": "Build a record engine with a BST by ID, max-heap by urgency, and hash table by name, including insertion, deletion, lookup, extraction, rebuild, and consistency validation."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "c-trees-heaps-hashing-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 7
+    },
+    "releases": [
+      {
+        "name": "c-trees-heaps-hashing-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 7
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.08,
+        "multi_choice": 0.05,
+        "drag_reorder": 0.07,
+        "fill_blank_choice": 0.08,
+        "pseudocode_input": 0.22,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "technicalTopicPseudocodeInputMin": 1,
+        "topicExerciseMin": 5
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 5,
+      "capstoneRequired": true,
+      "cumulativeWorkspaceRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": true,
+      "finalCapstoneSingleTopic": true
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug c-trees-heaps-hashing, profileId c, and the shared C multi-file workspace policy.",
+    "Teach the idea in language-neutral pseudocode before showing the complete C implementation.",
+    "Use pseudocode_input for algorithm completion, reorder, trace, or full-write activities; never validate raw prose by exact string matching.",
+    "Validate pseudocode through normalized structure rules and deterministic trace scenarios. AI may explain failures but is not the primary pass/fail checker.",
+    "Every pointer-heavy, recursive, tree, heap, sorting, or graph operation begins with a manual algorithm_animation using stable layouts and one state change per frame.",
+    "Place a predict-next-step interaction before important animation transitions.",
+    "Every C code_input uses fixedLanguage c, recipeType fixed_tests, entryFilePath main.c, and complete starterFiles and solutionFiles.",
+    "Keep learner TODOs in named implementation .c files and preserve supplied headers and deterministic main.c harnesses.",
+    "Compile all authored .c files as C11 and free official-solution allocations before exit.",
+    "Complexity is graded with counts, choices, traces, or structured pseudocode\u2014not exact Big-O prose.",
+    "Every standard module ends with one progressive module project; the final module contains exactly one cumulative capstone topic."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "assessmentAndDelivery": {
+    "recommendedRhythm": "Two or three traced lessons plus one hands-on implementation session each week.",
+    "deliverables": [
+      "pseudocode traces",
+      "animation predictions",
+      "multi-file C exercises",
+      "module projects",
+      "cumulative capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul pseudocode editor",
+      "algorithm animation",
+      "browser C editor",
+      "Run button",
+      "output panel"
+    ],
+    "closingNote": "Learners complete C Data Structures II: Trees, Heaps, and Hashing with an executable cumulative project and an analysis record."
+  },
+  "allowedConcepts": [
+    "binary tree",
+    "traversal",
+    "binary search tree",
+    "BST deletion",
+    "inorder predecessor",
+    "inorder successor",
+    "heap",
+    "priority queue",
+    "heap sort",
+    "hash table",
+    "collision resolution",
+    "load factor"
+  ],
+  "disallowedConcepts": [
+    "red-black tree implementation",
+    "B-tree implementation",
+    "graph algorithms",
+    "dynamic programming"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "c-trees-heaps-hashing-module-1-binary-trees",
+      "order": 1,
+      "prefix": "c_trees_heaps_hashing_module_1_binary_trees",
+      "title": "Binary Tree Foundations",
+      "purpose": "Represent hierarchical data recursively and reason about shape, height, and ownership.",
+      "description": "Represent hierarchical data recursively and reason about shape, height, and ownership.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain tree vocabulary and shapes using the governing invariant or execution rule.",
+        "Explain binary tree node representation using the governing invariant or execution rule.",
+        "Explain recursive tree thinking using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace tree vocabulary and shapes",
+        "Trace binary tree node representation",
+        "Trace recursive tree thinking"
+      ],
+      "quizFocus": [
+        "tree vocabulary and shapes",
+        "binary tree node representation",
+        "recursive tree thinking",
+        "count nodes and compute height"
+      ],
+      "moduleProject": "Initialize the campus index tree library.",
+      "workspaceIncrement": [
+        "structures/tree.h",
+        "structures/tree.c",
+        "tests/tree_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Initialize the campus index tree library.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-1-binary-trees-concepts",
+          "title": "Binary Tree Foundations",
+          "description": "Represent hierarchical data recursively and reason about shape, height, and ownership.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "binary-tree-vocabulary-and-shapes",
+              "title": "Tree Vocabulary and Shapes",
+              "summary": "Distinguish root, parent, leaf, depth, height, full, perfect, complete, balanced, and skewed trees.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain tree vocabulary and shapes using the governing invariant or execution rule.",
+                "Trace a representative tree vocabulary and shapes example by hand.",
+                "Apply tree vocabulary and shapes in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.1"
+            },
+            {
+              "topicId": "binary-tree-node-representation",
+              "title": "Binary Tree Node Representation",
+              "summary": "Store left and right child pointers with explicit ownership.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain binary tree node representation using the governing invariant or execution rule.",
+                "Trace a representative binary tree node representation example by hand.",
+                "Apply binary tree node representation in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.2"
+            },
+            {
+              "topicId": "recursive-tree-thinking",
+              "title": "Recursive Tree Thinking",
+              "summary": "Treat each child pointer as the root of a smaller tree.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain recursive tree thinking using the governing invariant or execution rule.",
+                "Trace a representative recursive tree thinking example by hand.",
+                "Apply recursive tree thinking in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.3"
+            },
+            {
+              "topicId": "binary-tree-count-and-height",
+              "title": "Count Nodes and Compute Height",
+              "summary": "Combine left and right subtree results with correct base cases.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain count nodes and compute height using the governing invariant or execution rule.",
+                "Trace a representative count nodes and compute height example by hand.",
+                "Apply count nodes and compute height in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-1-binary-trees-project",
+          "title": "Module Project",
+          "description": "Initialize the campus index tree library.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-1-tree-library",
+              "title": "Module 1 Project: Binary Tree Library",
+              "summary": "Create tree nodes, count nodes, compute height, validate parent-child ownership, and free the tree.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Implement recursive base cases.",
+                "Visualize call-stack state.",
+                "Free every subtree exactly once."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "1.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "c-trees-heaps-hashing-module-2-traversals",
+      "order": 2,
+      "prefix": "c_trees_heaps_hashing_module_2_traversals",
+      "title": "Tree Traversals",
+      "purpose": "Visit every node in a deliberate order using recursion, stacks, or queues.",
+      "description": "Visit every node in a deliberate order using recursion, stacks, or queues.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain preorder and inorder traversal using the governing invariant or execution rule.",
+        "Explain postorder traversal using the governing invariant or execution rule.",
+        "Explain level-order traversal using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace preorder and inorder traversal",
+        "Trace postorder traversal",
+        "Trace level-order traversal"
+      ],
+      "quizFocus": [
+        "preorder and inorder traversal",
+        "postorder traversal",
+        "level-order traversal",
+        "iterative tree traversals"
+      ],
+      "moduleProject": "Add traversal implementations and visual trace outputs.",
+      "workspaceIncrement": [
+        "algorithms/traversal.h",
+        "algorithms/traversal.c",
+        "tests/traversal_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add traversal implementations and visual trace outputs.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-2-traversals-concepts",
+          "title": "Tree Traversals",
+          "description": "Visit every node in a deliberate order using recursion, stacks, or queues.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "preorder-and-inorder-traversal",
+              "title": "Preorder and Inorder Traversal",
+              "summary": "Contrast root-first and left-root-right visitation.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain preorder and inorder traversal using the governing invariant or execution rule.",
+                "Trace a representative preorder and inorder traversal example by hand.",
+                "Apply preorder and inorder traversal in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.1"
+            },
+            {
+              "topicId": "postorder-traversal",
+              "title": "Postorder Traversal",
+              "summary": "Visit children before the root and connect the order to safe deletion.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain postorder traversal using the governing invariant or execution rule.",
+                "Trace a representative postorder traversal example by hand.",
+                "Apply postorder traversal in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.2"
+            },
+            {
+              "topicId": "level-order-traversal",
+              "title": "Level-Order Traversal",
+              "summary": "Use a queue to visit nodes by depth.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain level-order traversal using the governing invariant or execution rule.",
+                "Trace a representative level-order traversal example by hand.",
+                "Apply level-order traversal in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.3"
+            },
+            {
+              "topicId": "iterative-tree-traversals",
+              "title": "Iterative Tree Traversals",
+              "summary": "Replace recursive call frames with explicit stack state.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain iterative tree traversals using the governing invariant or execution rule.",
+                "Trace a representative iterative tree traversals example by hand.",
+                "Apply iterative tree traversals in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.4"
+            },
+            {
+              "topicId": "tree-traversal-applications",
+              "title": "Traversal Applications",
+              "summary": "Choose an order for copying, sorting, evaluating, serializing, or freeing trees.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain traversal applications using the governing invariant or execution rule.",
+                "Trace a representative traversal applications example by hand.",
+                "Apply traversal applications in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-2-traversals-project",
+          "title": "Module Project",
+          "description": "Add traversal implementations and visual trace outputs.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-2-traversal-explorer",
+              "title": "Module 2 Project: Traversal Explorer",
+              "summary": "Print recursive and iterative traversal sequences and verify they agree.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Synchronize tree, call stack, queue, and visited sequence.",
+                "Handle empty and one-node trees.",
+                "Select traversal by application."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "2.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "c-trees-heaps-hashing-module-3-bsts",
+      "order": 3,
+      "prefix": "c_trees_heaps_hashing_module_3_bsts",
+      "title": "Binary Search Trees",
+      "purpose": "Use the ordering invariant to search and insert along one root-to-leaf path.",
+      "description": "Use the ordering invariant to search and insert along one root-to-leaf path.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain bst invariant and search using the governing invariant or execution rule.",
+        "Explain recursive and iterative bst search using the governing invariant or execution rule.",
+        "Explain bst insertion and the trailing pointer using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace bst invariant and search",
+        "Trace recursive and iterative bst search",
+        "Trace bst insertion and the trailing pointer"
+      ],
+      "quizFocus": [
+        "bst invariant and search",
+        "recursive and iterative bst search",
+        "bst insertion and the trailing pointer",
+        "construct a bst from insertion order"
+      ],
+      "moduleProject": "Add a BST index by request ID.",
+      "workspaceIncrement": [
+        "structures/bst.h",
+        "structures/bst.c",
+        "tests/bst_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add a BST index by request ID.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-3-bsts-concepts",
+          "title": "Binary Search Trees",
+          "description": "Use the ordering invariant to search and insert along one root-to-leaf path.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "bst-invariant-and-search",
+              "title": "BST Invariant and Search",
+              "summary": "Move left, right, or stop based on one key comparison.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain bst invariant and search using the governing invariant or execution rule.",
+                "Trace a representative bst invariant and search example by hand.",
+                "Apply bst invariant and search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.1"
+            },
+            {
+              "topicId": "bst-recursive-and-iterative-search",
+              "title": "Recursive and Iterative BST Search",
+              "summary": "Compare tail recursion with a loop and preserve unsuccessful-search behavior.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain recursive and iterative bst search using the governing invariant or execution rule.",
+                "Trace a representative recursive and iterative bst search example by hand.",
+                "Apply recursive and iterative bst search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.2"
+            },
+            {
+              "topicId": "bst-insertion-trailing-pointer",
+              "title": "BST Insertion and the Trailing Pointer",
+              "summary": "Remember the parent when the traversal pointer reaches NULL.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain bst insertion and the trailing pointer using the governing invariant or execution rule.",
+                "Trace a representative bst insertion and the trailing pointer example by hand.",
+                "Apply bst insertion and the trailing pointer in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.3"
+            },
+            {
+              "topicId": "bst-construction-insertion-order",
+              "title": "Construct a BST from Insertion Order",
+              "summary": "Trace 9, 15, 5, 20, 16, 8, 12, 3, 6 and show how order determines shape.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain construct a bst from insertion order using the governing invariant or execution rule.",
+                "Trace a representative construct a bst from insertion order example by hand.",
+                "Apply construct a bst from insertion order in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.4"
+            },
+            {
+              "topicId": "bst-min-max-inorder-height",
+              "title": "Minimum, Maximum, Inorder Order, and Height",
+              "summary": "Connect sorted traversal and operation cost to tree height.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain minimum, maximum, inorder order, and height using the governing invariant or execution rule.",
+                "Trace a representative minimum, maximum, inorder order, and height example by hand.",
+                "Apply minimum, maximum, inorder order, and height in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-3-bsts-project",
+          "title": "Module Project",
+          "description": "Add a BST index by request ID.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-3-bst-index",
+              "title": "Module 3 Project: BST Record Index",
+              "summary": "Index campus requests by numeric ID with search, insertion, inorder listing, and duplicate policy.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve the BST invariant.",
+                "Return updated roots safely.",
+                "Compare balanced and skewed traces."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "3.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "c-trees-heaps-hashing-module-4-bst-deletion-balance",
+      "order": 4,
+      "prefix": "c_trees_heaps_hashing_module_4_bst_deletion_balance",
+      "title": "BST Deletion and Balance",
+      "purpose": "Handle the three deletion cases and understand why unbalanced shape changes performance.",
+      "description": "Handle the three deletion cases and understand why unbalanced shape changes performance.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain delete a leaf or one-child node using the governing invariant or execution rule.",
+        "Explain delete a node with two children using the governing invariant or execution rule.",
+        "Explain inorder predecessor and successor using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace delete a leaf or one-child node",
+        "Trace delete a node with two children",
+        "Trace inorder predecessor and successor"
+      ],
+      "quizFocus": [
+        "delete a leaf or one-child node",
+        "delete a node with two children",
+        "inorder predecessor and successor",
+        "recursive deletion and root changes"
+      ],
+      "moduleProject": "Make the BST index fully mutable and rebuildable.",
+      "workspaceIncrement": [
+        "structures/bst_rebuild.h",
+        "structures/bst_rebuild.c",
+        "tests/bst_delete_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Make the BST index fully mutable and rebuildable.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-4-bst-deletion-balance-concepts",
+          "title": "BST Deletion and Balance",
+          "description": "Handle the three deletion cases and understand why unbalanced shape changes performance.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "bst-delete-leaf-one-child",
+              "title": "Delete a Leaf or One-Child Node",
+              "summary": "Reconnect the parent to NULL or directly to the surviving child.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain delete a leaf or one-child node using the governing invariant or execution rule.",
+                "Trace a representative delete a leaf or one-child node example by hand.",
+                "Apply delete a leaf or one-child node in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.1"
+            },
+            {
+              "topicId": "bst-delete-two-children",
+              "title": "Delete a Node with Two Children",
+              "summary": "Replace the key with a valid predecessor or successor and remove the replacement node.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain delete a node with two children using the governing invariant or execution rule.",
+                "Trace a representative delete a node with two children example by hand.",
+                "Apply delete a node with two children in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.2"
+            },
+            {
+              "topicId": "bst-predecessor-successor",
+              "title": "Inorder Predecessor and Successor",
+              "summary": "Find the rightmost node of the left subtree or leftmost node of the right subtree.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain inorder predecessor and successor using the governing invariant or execution rule.",
+                "Trace a representative inorder predecessor and successor example by hand.",
+                "Apply inorder predecessor and successor in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.3"
+            },
+            {
+              "topicId": "bst-recursive-root-deletion",
+              "title": "Recursive Deletion and Root Changes",
+              "summary": "Return the updated subtree root through every recursive frame.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain recursive deletion and root changes using the governing invariant or execution rule.",
+                "Trace a representative recursive deletion and root changes example by hand.",
+                "Apply recursive deletion and root changes in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.4"
+            },
+            {
+              "topicId": "bst-skew-balance-avl-intro",
+              "title": "Skewed Trees, Balanced Construction, and AVL Introduction",
+              "summary": "Build from sorted midpoints and preview rotations without implementing a full AVL tree.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain skewed trees, balanced construction, and avl introduction using the governing invariant or execution rule.",
+                "Trace a representative skewed trees, balanced construction, and avl introduction example by hand.",
+                "Apply skewed trees, balanced construction, and avl introduction in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-4-bst-deletion-balance-project",
+          "title": "Module Project",
+          "description": "Make the BST index fully mutable and rebuildable.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-4-mutable-bst-index",
+              "title": "Module 4 Project: Mutable BST Index",
+              "summary": "Add complete deletion, root replacement, height reporting, and rebuild-from-sorted support.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Pass all three deletion cases.",
+                "Preserve parent and ownership invariants.",
+                "Demonstrate O(h) behavior."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "4.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "c-trees-heaps-hashing-module-5-heaps",
+      "order": 5,
+      "prefix": "c_trees_heaps_hashing_module_5_heaps",
+      "title": "Binary Heaps and Priority Queues",
+      "purpose": "Maintain completeness and heap order in synchronized tree and array views.",
+      "description": "Maintain completeness and heap order in synchronized tree and array views.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain heap properties and array mapping using the governing invariant or execution rule.",
+        "Explain heap insertion and bubble-up using the governing invariant or execution rule.",
+        "Explain root deletion and sift-down using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace heap properties and array mapping",
+        "Trace heap insertion and bubble-up",
+        "Trace root deletion and sift-down"
+      ],
+      "quizFocus": [
+        "heap properties and array mapping",
+        "heap insertion and bubble-up",
+        "root deletion and sift-down",
+        "repeated insertion versus bottom-up heapify"
+      ],
+      "moduleProject": "Add a priority heap for urgent requests.",
+      "workspaceIncrement": [
+        "structures/heap.h",
+        "structures/heap.c",
+        "tests/heap_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add a priority heap for urgent requests.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-5-heaps-concepts",
+          "title": "Binary Heaps and Priority Queues",
+          "description": "Maintain completeness and heap order in synchronized tree and array views.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "heap-properties-array-mapping",
+              "title": "Heap Properties and Array Mapping",
+              "summary": "Map parent and child indices while preserving complete-tree shape.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain heap properties and array mapping using the governing invariant or execution rule.",
+                "Trace a representative heap properties and array mapping example by hand.",
+                "Apply heap properties and array mapping in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.1"
+            },
+            {
+              "topicId": "heap-insertion-bubble-up",
+              "title": "Heap Insertion and Bubble-Up",
+              "summary": "Insert at the next free slot and move the key toward the root.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain heap insertion and bubble-up using the governing invariant or execution rule.",
+                "Trace a representative heap insertion and bubble-up example by hand.",
+                "Apply heap insertion and bubble-up in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.2"
+            },
+            {
+              "topicId": "heap-root-deletion-sift-down",
+              "title": "Root Deletion and Sift-Down",
+              "summary": "Move the last item to the root and swap with the correct child.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain root deletion and sift-down using the governing invariant or execution rule.",
+                "Trace a representative root deletion and sift-down example by hand.",
+                "Apply root deletion and sift-down in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.3"
+            },
+            {
+              "topicId": "heap-construction-methods",
+              "title": "Repeated Insertion versus Bottom-Up Heapify",
+              "summary": "Compare O(n log n) construction with O(n) bottom-up heapify.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain repeated insertion versus bottom-up heapify using the governing invariant or execution rule.",
+                "Trace a representative repeated insertion versus bottom-up heapify example by hand.",
+                "Apply repeated insertion versus bottom-up heapify in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.4"
+            },
+            {
+              "topicId": "priority-queues-and-heapsort",
+              "title": "Priority Queues and Heap Sort",
+              "summary": "Use root access for priority processing and a shrinking boundary for in-place sorting.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain priority queues and heap sort using the governing invariant or execution rule.",
+                "Trace a representative priority queues and heap sort example by hand.",
+                "Apply priority queues and heap sort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-5-heaps-project",
+          "title": "Module Project",
+          "description": "Add a priority heap for urgent requests.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-5-priority-index",
+              "title": "Module 5 Project: Priority Index",
+              "summary": "Add a max-heap priority index with insertion, extraction, heapify, and synchronized array traces.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve complete-tree and heap-order invariants.",
+                "Handle duplicates.",
+                "Compare construction methods empirically and asymptotically."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "5.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "c-trees-heaps-hashing-module-6-hashing",
+      "order": 6,
+      "prefix": "c_trees_heaps_hashing_module_6_hashing",
+      "title": "Hash Tables",
+      "purpose": "Map keys to table locations while handling collisions, load, resizing, and ownership.",
+      "description": "Map keys to table locations while handling collisions, load, resizing, and ownership.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain hash functions and collisions using the governing invariant or execution rule.",
+        "Explain separate chaining using the governing invariant or execution rule.",
+        "Explain linear, quadratic, and double-hash probing using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace hash functions and collisions",
+        "Trace separate chaining",
+        "Trace linear, quadratic, and double-hash probing"
+      ],
+      "quizFocus": [
+        "hash functions and collisions",
+        "separate chaining",
+        "linear, quadratic, and double-hash probing",
+        "load factor, resizing, and deletion markers"
+      ],
+      "moduleProject": "Add the hash-table index by request name.",
+      "workspaceIncrement": [
+        "structures/hash_table.h",
+        "structures/hash_table.c",
+        "tests/hash_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add the hash-table index by request name.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-6-hashing-concepts",
+          "title": "Hash Tables",
+          "description": "Map keys to table locations while handling collisions, load, resizing, and ownership.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "hash-functions-and-collisions",
+              "title": "Hash Functions and Collisions",
+              "summary": "Choose a deterministic index and explain why collisions remain possible.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain hash functions and collisions using the governing invariant or execution rule.",
+                "Trace a representative hash functions and collisions example by hand.",
+                "Apply hash functions and collisions in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.1"
+            },
+            {
+              "topicId": "hash-separate-chaining",
+              "title": "Separate Chaining",
+              "summary": "Store colliding entries in owned bucket lists.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain separate chaining using the governing invariant or execution rule.",
+                "Trace a representative separate chaining example by hand.",
+                "Apply separate chaining in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.2"
+            },
+            {
+              "topicId": "hash-open-addressing",
+              "title": "Linear, Quadratic, and Double-Hash Probing",
+              "summary": "Follow a probe sequence without terminating too early.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain linear, quadratic, and double-hash probing using the governing invariant or execution rule.",
+                "Trace a representative linear, quadratic, and double-hash probing example by hand.",
+                "Apply linear, quadratic, and double-hash probing in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.3"
+            },
+            {
+              "topicId": "hash-load-resize-deletion",
+              "title": "Load Factor, Resizing, and Deletion Markers",
+              "summary": "Rehash entries and preserve open-address probe chains.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain load factor, resizing, and deletion markers using the governing invariant or execution rule.",
+                "Trace a representative load factor, resizing, and deletion markers example by hand.",
+                "Apply load factor, resizing, and deletion markers in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.4"
+            },
+            {
+              "topicId": "hash-complexity-and-key-ownership",
+              "title": "Expected Complexity and Key Ownership",
+              "summary": "State the assumptions behind expected O(1) lookup and define copied versus borrowed keys.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain expected complexity and key ownership using the governing invariant or execution rule.",
+                "Trace a representative expected complexity and key ownership example by hand.",
+                "Apply expected complexity and key ownership in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-trees-heaps-hashing-section-6-hashing-project",
+          "title": "Module Project",
+          "description": "Add the hash-table index by request name.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds2-module-6-name-index",
+              "title": "Module 6 Project: Hash Name Index",
+              "summary": "Add a name-to-request hash index and keep it consistent with BST and heap mutations.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Resolve collisions correctly.",
+                "Resize without losing entries.",
+                "Define key ownership and cleanup."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "6.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "c-trees-heaps-hashing-module-7-capstone",
+      "order": 7,
+      "prefix": "c_trees_heaps_hashing_module_7_capstone",
+      "title": "Trees, Heaps, and Hashing Capstone",
+      "purpose": "Maintain three synchronized indexes over one set of owned records.",
+      "description": "Maintain three synchronized indexes over one set of owned records.",
+      "role": "capstone",
+      "learningObjectives": [
+        "Preserve every structure invariant after shared mutations.",
+        "Avoid duplicate record ownership.",
+        "Pass cross-index, edge-case, and cleanup tests."
+      ],
+      "guidedExercises": [],
+      "quizFocus": [],
+      "moduleProject": "Search and Priority Engine Capstone",
+      "workspaceIncrement": [
+        "main.c",
+        "models/request.c",
+        "structures/bst.c",
+        "structures/heap.c",
+        "structures/hash_table.c",
+        "engine/index_engine.h",
+        "engine/index_engine.c",
+        "tests/capstone_tests.c"
+      ],
+      "recommendedPacing": "Complete the capstone in progressive steps; every step must preserve all earlier behavior.",
+      "typicalOutcome": "Build a record engine with a BST by ID, max-heap by urgency, and hash table by name, including insertion, deletion, lookup, extraction, rebuild, and consistency validation.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-trees-heaps-hashing-section-7-capstone",
+          "title": "Trees, Heaps, and Hashing Capstone",
+          "description": "Maintain three synchronized indexes over one set of owned records.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "search-priority-engine-capstone",
+              "title": "Search and Priority Engine Capstone",
+              "summary": "Build a record engine with a BST by ID, max-heap by urgency, and hash table by name, including insertion, deletion, lookup, extraction, rebuild, and consistency validation.",
+              "minutes": 180,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "capstone",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve every structure invariant after shared mutations.",
+                "Avoid duplicate record ownership.",
+                "Pass cross-index, edge-case, and cleanup tests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ],
+                "capstone": true
+              },
+              "topicNumber": "7.1",
+              "projectBrief": {
+                "scenario": "A request platform needs synchronized lookup and priority indexes.",
+                "role": "Indexing and data structures engineer",
+                "workspace": "One cumulative C workspace containing BST, heap, hash-table, model, engine, and test modules.",
+                "deliverable": "A consistent record engine supporting ID search, name lookup, priority extraction, deletion, rebuild, and invariant checks.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Preserve every structure invariant after shared mutations.",
+                  "Avoid duplicate record ownership.",
+                  "Pass cross-index, edge-case, and cleanup tests."
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sectionCount": 1,
+      "topicCount": 1
+    }
+  ]
+}

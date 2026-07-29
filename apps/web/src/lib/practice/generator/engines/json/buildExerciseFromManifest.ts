@@ -13,6 +13,7 @@ import type { GenOut } from "@/lib/practice/generator/shared/expected";
 import type {
     ManifestExercise,
     ManifestCodeInput,
+    ManifestPseudocodeInput,
     TopicBundleManifest,
 } from "@/lib/subjects/_core/manifestTypes";
 import {
@@ -153,6 +154,32 @@ export function buildExerciseFromManifest(
                 help: resolved.help,
                 hint: resolved.hint,
             });
+
+        case "pseudocode_input": {
+            const pseudocode = def as ManifestPseudocodeInput;
+            const exercise = {
+                id: args.id,
+                topic: args.topic,
+                difficulty: args.diff,
+                kind: "pseudocode_input" as const,
+                title: resolved.title,
+                prompt: resolved.prompt,
+                mode: pseudocode.mode,
+                dialect: pseudocode.dialect ?? "zoeskoul-v1" as const,
+                starterPseudocode:
+                    pseudocode.starterPseudocode ??
+                    cleanRuntimeCode(maybeT(`${pseudocode.messageBase}.starterPseudocode`)),
+                editor: pseudocode.editor,
+                ...(resolved.help ? { help: resolved.help } : {}),
+                ...(resolved.hint ? { hint: resolved.hint } : {}),
+                ...(pseudocode.tools ? { tools: pseudocode.tools } : {}),
+            };
+            return {
+                archetype: pseudocode.id,
+                exercise,
+                expected: pseudocode.expected,
+            };
+        }
 
         case "code_input":
             return buildCodeInput(

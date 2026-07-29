@@ -2,20 +2,44 @@
   "subjectSlug": "c",
   "catalogSlug": "c",
   "profileId": "c",
-  "title": "C Programming",
-  "summary": "Implement and analyze recursive algorithms, hashing, trees, stacks, priority queues, and pointer-based heaps in multi-file C workspaces.",
+  "title": "C Programming, Data Structures, and Algorithms",
+  "summary": "A cumulative five-course pathway from C memory fundamentals through runtime analysis, linear and nonlinear data structures, sorting, graphs, greedy methods, backtracking, and dynamic programming.",
   "courseOrder": [
-    "c-data-structures",
-    "c-runtime-analysis-asymptotics"
+    "c-programming-foundations",
+    "c-runtime-analysis-asymptotics",
+    "c-data-structures-linear",
+    "c-trees-heaps-hashing",
+    "algorithms-in-c"
+  ],
+  "legacyCourses": [
+    "c-data-structures"
+  ],
+  "pathwayRules": [
+    "Use C for executable implementation and ZoeSkoul pseudocode for language-neutral algorithm reasoning.",
+    "Each course owns one cumulative workspace and every standard module ends with a progressive project.",
+    "The final capstone of each course is a single topic and reuses earlier workspace files.",
+    "The legacy c-data-structures assignment lab remains private and discoverable for existing assignments but is not a default new-enrollment course."
   ],
   "milestones": [
     {
-      "courseSlug": "c-data-structures",
-      "outcome": "Implement core data structures in C, explain their invariants, and justify tight runtime bounds."
+      "courseSlug": "c-programming-foundations",
+      "outcome": "Build and test a cumulative record-management project."
     },
     {
       "courseSlug": "c-runtime-analysis-asymptotics",
-      "outcome": "Trace C code, derive exact runtime functions, compare growth rates, and prove asymptotic bounds."
+      "outcome": "Prove bounds and state all assumptions."
+    },
+    {
+      "courseSlug": "c-data-structures-linear",
+      "outcome": "Compare operation costs by representation."
+    },
+    {
+      "courseSlug": "c-trees-heaps-hashing",
+      "outcome": "Maintain synchronized indexes without duplicate ownership."
+    },
+    {
+      "courseSlug": "algorithms-in-c",
+      "outcome": "Choose algorithms from constraints and justify time and space."
     }
   ]
 }

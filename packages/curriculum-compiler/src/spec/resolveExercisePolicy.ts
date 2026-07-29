@@ -11,6 +11,7 @@ const KIND_KEYS: ExerciseKindKey[] = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "pseudocode_input",
     "code_input",
 ];
 
@@ -19,6 +20,7 @@ const DEFAULT_MIX: Record<ExerciseKindKey, number> = {
     multi_choice: 0.15,
     drag_reorder: 0.1,
     fill_blank_choice: 0.25,
+    pseudocode_input: 0,
     code_input: 0.35,
 };
 
@@ -28,6 +30,7 @@ function normalizeMix(mix: ExerciseKindMix): Record<ExerciseKindKey, number> {
         multi_choice: Math.max(0, mix.multi_choice ?? 0),
         drag_reorder: Math.max(0, mix.drag_reorder ?? 0),
         fill_blank_choice: Math.max(0, mix.fill_blank_choice ?? 0),
+        pseudocode_input: Math.max(0, mix.pseudocode_input ?? 0),
         code_input: Math.max(0, mix.code_input ?? 0),
     };
 
@@ -42,6 +45,7 @@ function normalizeMix(mix: ExerciseKindMix): Record<ExerciseKindKey, number> {
         multi_choice: safe.multi_choice / total,
         drag_reorder: safe.drag_reorder / total,
         fill_blank_choice: safe.fill_blank_choice / total,
+        pseudocode_input: safe.pseudocode_input / total,
         code_input: safe.code_input / total,
     };
 }

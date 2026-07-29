@@ -51,6 +51,15 @@ export async function buildRevealForInstance(args: {
                 explanation: "Solution shown.",
             };
 
+        case "pseudocode_input":
+            return {
+                revealAnswer: {
+                    kind: "pseudocode_input",
+                    value: String(expectedCanon?.solution ?? ""),
+                },
+                explanation: "Here is one valid pseudocode solution.",
+            };
+
         case "code_input":
             return {
                 revealAnswer: {

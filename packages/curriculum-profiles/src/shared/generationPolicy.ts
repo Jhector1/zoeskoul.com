@@ -63,6 +63,7 @@ export const baseCourseGenerationPolicy: BaseCourseGenerationPolicy = {
             "multi_choice",
             "drag_reorder",
             "fill_blank_choice",
+            "pseudocode_input",
         ],
     },
     projects: {

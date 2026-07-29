@@ -1,0 +1,65 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-trees-heaps-hashing",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "title": "C Data Structures II: Trees, Heaps, and Hashing",
+  "description": "A cumulative C course on binary trees, traversals, binary search trees, deletion and balance, binary heaps, priority queues, and hash tables.",
+  "moduleOrder": [
+    "c-trees-heaps-hashing-module-1-binary-trees",
+    "c-trees-heaps-hashing-module-2-traversals",
+    "c-trees-heaps-hashing-module-3-bsts",
+    "c-trees-heaps-hashing-module-4-bst-deletion-balance",
+    "c-trees-heaps-hashing-module-5-heaps",
+    "c-trees-heaps-hashing-module-6-hashing",
+    "c-trees-heaps-hashing-module-7-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-1-binary-trees",
+      "moduleNumber": 1,
+      "title": "Binary Tree Foundations",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-2-traversals",
+      "moduleNumber": 2,
+      "title": "Tree Traversals",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-3-bsts",
+      "moduleNumber": 3,
+      "title": "Binary Search Trees",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-4-bst-deletion-balance",
+      "moduleNumber": 4,
+      "title": "BST Deletion and Balance",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-5-heaps",
+      "moduleNumber": 5,
+      "title": "Binary Heaps and Priority Queues",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-6-hashing",
+      "moduleNumber": 6,
+      "title": "Hash Tables",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-trees-heaps-hashing-module-7-capstone",
+      "moduleNumber": 7,
+      "title": "Trees, Heaps, and Hashing Capstone",
+      "role": "capstone"
+    }
+  ]
+}

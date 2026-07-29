@@ -13,7 +13,7 @@ import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
 } from "@zoeskoul/curriculum-profiles";
-import { SemanticCheckSchema } from "@zoeskoul/practice-checks";
+import { PseudocodeExpectedSchema, SemanticCheckSchema } from "@zoeskoul/practice-checks";
 
 type DraftQuizItem = TopicAuthoringDraft["quizDraft"][number];
 type DraftHelp = DraftQuizItem["help"];
@@ -318,6 +318,8 @@ function fallbackHint(title: string, kind: DraftQuizItem["kind"]): string {
             return "Think about the logical order of the steps.";
         case "fill_blank_choice":
             return "Focus on the missing concept or keyword.";
+        case "pseudocode_input":
+            return "Trace the algorithm state first, then express each required step clearly.";
         case "code_input":
             return "Break the task into the main code steps first.";
         default:
@@ -345,6 +347,12 @@ function fallbackHelp(title: string, kind: DraftQuizItem["kind"]): DraftHelp {
                 concept: `This task checks the key idea behind ${title.toLowerCase()}.`,
                 hint_1: "Look for the word or phrase that best matches the lesson concept.",
                 hint_2: "Compare the blank with the meaning of each choice, not just the wording.",
+            };
+        case "pseudocode_input":
+            return {
+                concept: `This task checks the algorithm structure behind ${title.toLowerCase()}.`,
+                hint_1: "Identify the required decisions, state changes, and termination condition before writing every line.",
+                hint_2: "Trace a small example and verify that each branch moves the algorithm toward completion.",
             };
         case "code_input":
             return {
@@ -973,6 +981,117 @@ function normalizeCodeInput(
     };
 }
 
+
+function normalizePseudocodeInput(
+    item: Record<string, unknown>,
+): Extract<DraftQuizItem, { kind: "pseudocode_input" }> {
+    const title =
+        asOptionalString(item.title) ??
+        asOptionalString(item.messageBase) ??
+        asOptionalString(item.prompt) ??
+        "Pseudocode practice";
+    const prompt =
+        asOptionalString(item.prompt) ??
+        asOptionalString(item.messageBase) ??
+        title;
+    const rawMode = asOptionalString(item.mode);
+    const mode =
+        rawMode === "complete" ||
+        rawMode === "fill_blanks" ||
+        rawMode === "reorder" ||
+        rawMode === "trace" ||
+        rawMode === "write"
+            ? rawMode
+            : "write";
+    const dialect = "zoeskoul-v1" as const;
+    const starterPseudocode = asOptionalString(item.starterPseudocode);
+    const solutionPseudocode =
+        asOptionalString(item.solutionPseudocode) ??
+        asOptionalString(item.solution) ??
+        starterPseudocode ??
+        "PROCEDURE SOLVE\n    RETURN";
+    const rawValidation =
+        item.validation && typeof item.validation === "object" && !Array.isArray(item.validation)
+            ? (item.validation as Record<string, unknown>)
+            : {};
+
+    const parsed = PseudocodeExpectedSchema.safeParse({
+        kind: "pseudocode_input",
+        dialect,
+        mode,
+        strategy:
+            rawValidation.strategy === "required_structure" ||
+            rawValidation.strategy === "semantic_rules" ||
+            rawValidation.strategy === "trace_output" ||
+            rawValidation.strategy === "hybrid"
+                ? rawValidation.strategy
+                : "semantic_rules",
+        solution: solutionPseudocode,
+        rules: Array.isArray(rawValidation.rules) ? rawValidation.rules : [],
+        ...(Array.isArray(rawValidation.scenarios)
+            ? { scenarios: rawValidation.scenarios }
+            : {}),
+        ignoreFormatting:
+            typeof rawValidation.ignoreFormatting === "boolean"
+                ? rawValidation.ignoreFormatting
+                : true,
+        allowEquivalentNames:
+            typeof rawValidation.allowEquivalentNames === "boolean"
+                ? rawValidation.allowEquivalentNames
+                : true,
+    });
+
+    if (!parsed.success) {
+        const detail = parsed.error.issues
+            .map((issue: { path: PropertyKey[]; message: string }) => `${issue.path.join(".") || "validation"}: ${issue.message}`)
+            .join("; ");
+        throw new Error(`Invalid pseudocode_input validation for ${String(item.id ?? title)}: ${detail}`);
+    }
+
+    const expected = parsed.data;
+    const editorRaw =
+        item.editor && typeof item.editor === "object" && !Array.isArray(item.editor)
+            ? (item.editor as Record<string, unknown>)
+            : null;
+    const editor = editorRaw
+        ? {
+              ...(typeof editorRaw.showLineNumbers === "boolean"
+                  ? { showLineNumbers: editorRaw.showLineNumbers }
+                  : {}),
+              ...(typeof editorRaw.allowIndentation === "boolean"
+                  ? { allowIndentation: editorRaw.allowIndentation }
+                  : {}),
+              ...(typeof editorRaw.showKeywordReference === "boolean"
+                  ? { showKeywordReference: editorRaw.showKeywordReference }
+                  : {}),
+              ...(typeof editorRaw.minRows === "number" && Number.isFinite(editorRaw.minRows)
+                  ? { minRows: Math.max(4, Math.min(40, Math.floor(editorRaw.minRows))) }
+                  : {}),
+          }
+        : undefined;
+
+    return {
+        id: String(item.id ?? "").trim(),
+        kind: "pseudocode_input",
+        title,
+        prompt,
+        mode,
+        dialect,
+        ...(starterPseudocode ? { starterPseudocode } : {}),
+        solutionPseudocode,
+        validation: {
+            strategy: expected.strategy,
+            rules: expected.rules,
+            ...(expected.scenarios ? { scenarios: expected.scenarios } : {}),
+            ignoreFormatting: expected.ignoreFormatting,
+            allowEquivalentNames: expected.allowEquivalentNames,
+        },
+        ...(editor ? { editor } : {}),
+        hint: asOptionalString(item.hint) ?? fallbackHint(title, "pseudocode_input"),
+        help: normalizeHelp(item, title, "pseudocode_input"),
+    };
+}
+
 function normalizeQuizItem(
     item: Record<string, unknown>,
     context?: { profileId?: string },
@@ -983,6 +1102,7 @@ function normalizeQuizItem(
     if (rawKind === "multi_choice") return normalizeMultiChoice(item);
     if (rawKind === "drag_reorder") return normalizeDragReorder(item);
     if (rawKind === "fill_blank_choice") return normalizeFillBlankChoice(item);
+    if (rawKind === "pseudocode_input") return normalizePseudocodeInput(item);
     if (rawKind === "code_input") return normalizeCodeInput(item, context);
 
     const title =

@@ -14,6 +14,7 @@ export function toPracticeKindOrThrow(kind: unknown): PracticeKind {
         PracticeKind.vector_drag_dot,
         PracticeKind.matrix_input,
         PracticeKind.code_input,
+        PracticeKind.pseudocode_input,
         PracticeKind.text_input,
         PracticeKind.drag_reorder,
         PracticeKind.voice_input,

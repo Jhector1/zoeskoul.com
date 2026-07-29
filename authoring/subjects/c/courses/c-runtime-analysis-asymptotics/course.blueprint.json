@@ -2,54 +2,58 @@
   "subjectSlug": "c",
   "courseSlug": "c-runtime-analysis-asymptotics",
   "catalogSlug": "c",
-  "trackSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
   "profileId": "c",
   "workspaceProfileId": "browser-code-runner",
   "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
   "title": "Runtime Analysis and Asymptotics in C",
-  "subtitle": "Trace it, count it, simplify it, and prove it.",
+  "subtitle": "Trace, count, sum, simplify, classify, and prove.",
   "level": "intermediate",
-  "moduleCount": 4,
-  "description": "A private, animation-supported C course that turns loop traces and recursive call chains into exact execution counts, limit comparisons, growth ordering, and formal O, Ω, and Θ proofs.",
+  "moduleCount": 6,
+  "description": "A cumulative runtime-analysis course covering exact frequency counts, loop sums, asymptotic notation, formal proofs, recurrences, space, and amortized analysis.",
   "sourceLocale": "en",
   "targetLocales": [],
   "accessPolicy": "paid",
   "visibility": "private",
   "moduleAccessOverrideDefault": null,
   "audience": [
-    "Learners who know basic C syntax and want a rigorous introduction to runtime analysis.",
-    "Students preparing for data-structures and algorithms coursework."
+    "Learners following the cumulative C data-structures and algorithms pathway."
   ],
   "prerequisites": [
-    "Comfort reading C loops, functions, arrays, and simple recursion.",
-    "Basic algebra, including powers, logarithms, and finite sums."
+    "C Programming Foundations or equivalent.",
+    "Comfort tracing loops and function calls."
   ],
   "goals": [
-    "Trace loop variables and recursive arguments.",
-    "Build exact frequency-count runtime functions.",
-    "Classify growth with limits.",
-    "Order standard complexity classes.",
-    "Prove asymptotic bounds with explicit constants and thresholds."
+    "Derive exact execution-count functions.",
+    "Classify growth using O, Ω, and Θ.",
+    "Solve recursive recurrences by substitution and trees.",
+    "Prove bounds and state all assumptions."
   ],
   "teachingStyle": {
-    "tone": "Tutor-style, visual, precise, and step-by-step. Trace concrete values before introducing a formula.",
-    "quizWeight": 0.35,
+    "tone": "Visual, precise, book-like, cumulative, and implementation-focused.",
+    "pseudocodeBeforeC": true,
+    "manualAnimations": true,
+    "quizWeight": 0.2,
+    "pseudocodeWeight": 0.2,
     "projectWeight": 0.2,
-    "codeInputWeight": 0.45
+    "codeInputWeight": 0.4
   },
   "constraints": {
-    "moduleCount": 4,
-    "topicsPerModuleMin": 1,
-    "topicsPerModuleMax": 5,
+    "moduleCount": 6,
     "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
-    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
-    "prefixFormat": "<course_slug_with_underscores>_module_<number>"
+    "sectionSlugFormat": "<moduleSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>",
+    "requireModuleProject": true,
+    "finalCapstoneSingleTopic": true
   },
   "seedModules": [
     "c-runtime-analysis-asymptotics-module-1-frequency-counting",
     "c-runtime-analysis-asymptotics-module-2-limit-method",
     "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
-    "c-runtime-analysis-asymptotics-module-4-capstone"
+    "c-runtime-analysis-asymptotics-module-4-recurrences",
+    "c-runtime-analysis-asymptotics-module-5-applied-analysis",
+    "c-runtime-analysis-asymptotics-module-6-capstone"
   ],
   "courseGenerationPolicy": {
     "studentActionStyle": "full-ide",
@@ -59,11 +63,37 @@
       "run button": "Run",
       "implementation file": "the named .c file"
     },
-    "notes": [
-      "Follow the teaching sequence: predict, trace values, count executions, form T(n), simplify, then classify.",
-      "Keep exact runtime analysis and asymptotic classification conceptually distinct even when they appear in the same topic.",
-      "Use manual animations for loop tables, triangular sums, moving bounds, recursive call chains, ratio limits, and proof thresholds.",
-      "Use C11-compatible code and deterministic fixed tests."
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
     ]
   },
   "practiceDefaults": {
@@ -78,6 +108,7 @@
     "supportsMultiFile": true,
     "supportsFileSystem": true,
     "supportsStdInStdOut": true,
-    "supportsPackageInstall": false
+    "supportsPackageInstall": false,
+    "pseudocodeRuntime": "deterministic_ir"
   }
 }

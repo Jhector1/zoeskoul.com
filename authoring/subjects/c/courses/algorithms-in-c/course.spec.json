@@ -1,0 +1,2778 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "algorithms-in-c",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "courseNumber": 5,
+  "title": "Algorithms in C",
+  "subtitle": "Specify, trace, prove, implement, and compare.",
+  "description": "A cumulative algorithms course covering correctness, searching, sorting, divide and conquer, graph traversal, greedy design, shortest paths, backtracking, and dynamic programming in C.",
+  "level": "advanced",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 10,
+  "moduleRange": {
+    "start": 1,
+    "end": 10,
+    "label": "Algorithms in C"
+  },
+  "prerequisites": [
+    "C Data Structures II or equivalent.",
+    "Runtime Analysis and Asymptotics in C."
+  ],
+  "intendedFor": "Learners following the cumulative C data-structures and algorithms pathway.",
+  "learningGoals": [
+    "Design algorithms from explicit contracts.",
+    "Trace and prove correctness with invariants.",
+    "Implement searching, sorting, graph, greedy, backtracking, and dynamic-programming algorithms.",
+    "Choose algorithms from constraints and justify time and space."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Follow modules in order. Each standard module extends the same cumulative workspace and ends with a module project. The final module is one cumulative capstone topic.",
+    "summary": "A cumulative algorithms course covering correctness, searching, sorting, divide and conquer, graph traversal, greedy design, shortest paths, backtracking, and dynamic programming in C.",
+    "cumulativeProject": "Campus Routing and Scheduling Engine",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Algorithm Design Foundations",
+        "coreSkill": "Specify an algorithm, identify its invariant, and improve a correct baseline deliberately.",
+        "outputFocus": "Initialize the campus routing and scheduling algorithm notebook."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Searching Algorithms",
+        "coreSkill": "Choose and implement a search based on ordering, access model, and required result.",
+        "outputFocus": "Add reusable search algorithms."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Elementary Sorting",
+        "coreSkill": "Trace simple in-place sorting algorithms and compare stability, writes, and adaptiveness.",
+        "outputFocus": "Add instrumented elementary sorting."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Divide-and-Conquer Sorting",
+        "coreSkill": "Split problems recursively, combine results, and connect shape to recurrence cost.",
+        "outputFocus": "Add merge sort and quicksort."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Heap Sort and Selection",
+        "coreSkill": "Use heap order and partitioning to sort or select only the ranks needed.",
+        "outputFocus": "Add ranking and selection algorithms."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Graph Representation and Traversal",
+        "coreSkill": "Represent sparse relationships and explore them systematically with queues and stacks.",
+        "outputFocus": "Add graph storage and traversal."
+      },
+      {
+        "moduleNumber": 7,
+        "title": "Greedy Algorithms",
+        "coreSkill": "Recognize when a locally best safe choice can build a global optimum.",
+        "outputFocus": "Add greedy compression and network planning."
+      },
+      {
+        "moduleNumber": 8,
+        "title": "Shortest Paths",
+        "coreSkill": "Improve distance estimates through relaxation and choose an algorithm based on edge constraints.",
+        "outputFocus": "Add weighted route planning."
+      },
+      {
+        "moduleNumber": 9,
+        "title": "Backtracking and Dynamic Programming",
+        "coreSkill": "Explore decision trees, prune impossible branches, and cache repeated subproblems.",
+        "outputFocus": "Add backtracking and dynamic-programming solvers."
+      },
+      {
+        "moduleNumber": 10,
+        "title": "Algorithms in C Capstone",
+        "coreSkill": "Select, combine, justify, and implement algorithms for one integrated routing and scheduling system.",
+        "outputFocus": "Sort reports, rank urgent tasks, validate dependencies, produce legal schedules, compute routes, and solve constrained selections in one tested C system."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "algorithms-in-c-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 10
+    },
+    "releases": [
+      {
+        "name": "algorithms-in-c-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 10
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.08,
+        "multi_choice": 0.05,
+        "drag_reorder": 0.07,
+        "fill_blank_choice": 0.08,
+        "pseudocode_input": 0.22,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "technicalTopicPseudocodeInputMin": 1,
+        "topicExerciseMin": 5
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 8,
+      "capstoneRequired": true,
+      "cumulativeWorkspaceRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": true,
+      "finalCapstoneSingleTopic": true
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug algorithms-in-c, profileId c, and the shared C multi-file workspace policy.",
+    "Teach the idea in language-neutral pseudocode before showing the complete C implementation.",
+    "Use pseudocode_input for algorithm completion, reorder, trace, or full-write activities; never validate raw prose by exact string matching.",
+    "Validate pseudocode through normalized structure rules and deterministic trace scenarios. AI may explain failures but is not the primary pass/fail checker.",
+    "Every pointer-heavy, recursive, tree, heap, sorting, or graph operation begins with a manual algorithm_animation using stable layouts and one state change per frame.",
+    "Place a predict-next-step interaction before important animation transitions.",
+    "Every C code_input uses fixedLanguage c, recipeType fixed_tests, entryFilePath main.c, and complete starterFiles and solutionFiles.",
+    "Keep learner TODOs in named implementation .c files and preserve supplied headers and deterministic main.c harnesses.",
+    "Compile all authored .c files as C11 and free official-solution allocations before exit.",
+    "Complexity is graded with counts, choices, traces, or structured pseudocode\u2014not exact Big-O prose.",
+    "Every standard module ends with one progressive module project; the final module contains exactly one cumulative capstone topic."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "assessmentAndDelivery": {
+    "recommendedRhythm": "Two or three traced lessons plus one hands-on implementation session each week.",
+    "deliverables": [
+      "pseudocode traces",
+      "animation predictions",
+      "multi-file C exercises",
+      "module projects",
+      "cumulative capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul pseudocode editor",
+      "algorithm animation",
+      "browser C editor",
+      "Run button",
+      "output panel"
+    ],
+    "closingNote": "Learners complete Algorithms in C with an executable cumulative project and an analysis record."
+  },
+  "allowedConcepts": [
+    "algorithm correctness",
+    "searching",
+    "sorting",
+    "merge sort",
+    "quicksort",
+    "heap sort",
+    "quickselect",
+    "graphs",
+    "BFS",
+    "DFS",
+    "topological sort",
+    "greedy algorithms",
+    "Huffman coding",
+    "minimum spanning tree",
+    "Dijkstra",
+    "Bellman-Ford",
+    "backtracking",
+    "dynamic programming"
+  ],
+  "disallowedConcepts": [
+    "red-black trees",
+    "B-trees",
+    "network flow",
+    "NP-completeness proofs",
+    "advanced approximation algorithms"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "algorithms-in-c-module-1-design-foundations",
+      "order": 1,
+      "prefix": "algorithms_in_c_module_1_design_foundations",
+      "title": "Algorithm Design Foundations",
+      "purpose": "Specify an algorithm, identify its invariant, and improve a correct baseline deliberately.",
+      "description": "Specify an algorithm, identify its invariant, and improve a correct baseline deliberately.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain inputs, outputs, preconditions, and postconditions using the governing invariant or execution rule.",
+        "Explain loop invariants and correctness using the governing invariant or execution rule.",
+        "Explain from brute force to optimization using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace inputs, outputs, preconditions, and postconditions",
+        "Trace loop invariants and correctness",
+        "Trace from brute force to optimization"
+      ],
+      "quizFocus": [
+        "inputs, outputs, preconditions, and postconditions",
+        "loop invariants and correctness",
+        "from brute force to optimization",
+        "space-time tradeoffs"
+      ],
+      "moduleProject": "Initialize the campus routing and scheduling algorithm notebook.",
+      "workspaceIncrement": [
+        "algorithms/contracts.h",
+        "algorithms/contracts.c",
+        "reports/design_notes.txt"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Initialize the campus routing and scheduling algorithm notebook.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-1-design-foundations-concepts",
+          "title": "Algorithm Design Foundations",
+          "description": "Specify an algorithm, identify its invariant, and improve a correct baseline deliberately.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algorithm-input-output-contracts",
+              "title": "Inputs, Outputs, Preconditions, and Postconditions",
+              "summary": "State exactly what an algorithm receives and guarantees.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain inputs, outputs, preconditions, and postconditions using the governing invariant or execution rule.",
+                "Trace a representative inputs, outputs, preconditions, and postconditions example by hand.",
+                "Apply inputs, outputs, preconditions, and postconditions in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.1"
+            },
+            {
+              "topicId": "loop-invariants-and-correctness",
+              "title": "Loop Invariants and Correctness",
+              "summary": "Use initialization, maintenance, and termination to justify a result.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain loop invariants and correctness using the governing invariant or execution rule.",
+                "Trace a representative loop invariants and correctness example by hand.",
+                "Apply loop invariants and correctness in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.2"
+            },
+            {
+              "topicId": "brute-force-to-optimization",
+              "title": "From Brute Force to Optimization",
+              "summary": "Start with a correct direct method and identify repeated or unnecessary work.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain from brute force to optimization using the governing invariant or execution rule.",
+                "Trace a representative from brute force to optimization example by hand.",
+                "Apply from brute force to optimization in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.3"
+            },
+            {
+              "topicId": "space-time-tradeoffs",
+              "title": "Space-Time Tradeoffs",
+              "summary": "Decide when auxiliary storage reduces runtime or simplifies correctness.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain space-time tradeoffs using the governing invariant or execution rule.",
+                "Trace a representative space-time tradeoffs example by hand.",
+                "Apply space-time tradeoffs in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-1-design-foundations-project",
+          "title": "Module Project",
+          "description": "Initialize the campus routing and scheduling algorithm notebook.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-1-design-notebook",
+              "title": "Module 1 Project: Algorithm Design Notebook",
+              "summary": "Document contracts, invariants, baseline algorithms, improved designs, and cost assumptions.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Write complete algorithm contracts.",
+                "Justify correctness with invariants.",
+                "Compare time and space choices."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "1.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "algorithms-in-c-module-2-searching",
+      "order": 2,
+      "prefix": "algorithms_in_c_module_2_searching",
+      "title": "Searching Algorithms",
+      "purpose": "Choose and implement a search based on ordering, access model, and required result.",
+      "description": "Choose and implement a search based on ordering, access model, and required result.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain linear and sentinel search using the governing invariant or execution rule.",
+        "Explain iterative and recursive binary search using the governing invariant or execution rule.",
+        "Explain lower bound and upper bound using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace linear and sentinel search",
+        "Trace iterative and recursive binary search",
+        "Trace lower bound and upper bound"
+      ],
+      "quizFocus": [
+        "linear and sentinel search",
+        "iterative and recursive binary search",
+        "lower bound and upper bound",
+        "compare array, bst, heap, and hash search"
+      ],
+      "moduleProject": "Add reusable search algorithms.",
+      "workspaceIncrement": [
+        "algorithms/search.h",
+        "algorithms/search.c",
+        "tests/search_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add reusable search algorithms.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-2-searching-concepts",
+          "title": "Searching Algorithms",
+          "description": "Choose and implement a search based on ordering, access model, and required result.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "linear-and-sentinel-search",
+              "title": "Linear and Sentinel Search",
+              "summary": "Scan unsorted data and compare boundary-check strategies.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain linear and sentinel search using the governing invariant or execution rule.",
+                "Trace a representative linear and sentinel search example by hand.",
+                "Apply linear and sentinel search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.1"
+            },
+            {
+              "topicId": "binary-search-iterative-recursive",
+              "title": "Iterative and Recursive Binary Search",
+              "summary": "Maintain a shrinking candidate interval in sorted data.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain iterative and recursive binary search using the governing invariant or execution rule.",
+                "Trace a representative iterative and recursive binary search example by hand.",
+                "Apply iterative and recursive binary search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.2"
+            },
+            {
+              "topicId": "lower-and-upper-bound",
+              "title": "Lower Bound and Upper Bound",
+              "summary": "Find insertion boundaries and duplicate ranges.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain lower bound and upper bound using the governing invariant or execution rule.",
+                "Trace a representative lower bound and upper bound example by hand.",
+                "Apply lower bound and upper bound in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.3"
+            },
+            {
+              "topicId": "search-structure-comparison",
+              "title": "Compare Array, BST, Heap, and Hash Search",
+              "summary": "Select a representation based on the actual query required.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain compare array, bst, heap, and hash search using the governing invariant or execution rule.",
+                "Trace a representative compare array, bst, heap, and hash search example by hand.",
+                "Apply compare array, bst, heap, and hash search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-2-searching-project",
+          "title": "Module Project",
+          "description": "Add reusable search algorithms.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-2-search-toolkit",
+              "title": "Module 2 Project: Search Toolkit",
+              "summary": "Implement search variants and return comparison counts and boundary positions.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve candidate intervals.",
+                "Handle duplicates and absent keys.",
+                "Compare structure-dependent search guarantees."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "2.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "algorithms-in-c-module-3-elementary-sorting",
+      "order": 3,
+      "prefix": "algorithms_in_c_module_3_elementary_sorting",
+      "title": "Elementary Sorting",
+      "purpose": "Trace simple in-place sorting algorithms and compare stability, writes, and adaptiveness.",
+      "description": "Trace simple in-place sorting algorithms and compare stability, writes, and adaptiveness.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain sorting contracts, stability, and in-place work using the governing invariant or execution rule.",
+        "Explain bubble sort using the governing invariant or execution rule.",
+        "Explain selection sort using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace sorting contracts, stability, and in-place work",
+        "Trace bubble sort",
+        "Trace selection sort"
+      ],
+      "quizFocus": [
+        "sorting contracts, stability, and in-place work",
+        "bubble sort",
+        "selection sort",
+        "insertion sort"
+      ],
+      "moduleProject": "Add instrumented elementary sorting.",
+      "workspaceIncrement": [
+        "algorithms/elementary_sort.h",
+        "algorithms/elementary_sort.c",
+        "tests/elementary_sort_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add instrumented elementary sorting.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-3-elementary-sorting-concepts",
+          "title": "Elementary Sorting",
+          "description": "Trace simple in-place sorting algorithms and compare stability, writes, and adaptiveness.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "sorting-contracts-stability",
+              "title": "Sorting Contracts, Stability, and In-Place Work",
+              "summary": "Define sorted order, records, keys, stability, and auxiliary storage.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain sorting contracts, stability, and in-place work using the governing invariant or execution rule.",
+                "Trace a representative sorting contracts, stability, and in-place work example by hand.",
+                "Apply sorting contracts, stability, and in-place work in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.1"
+            },
+            {
+              "topicId": "bubble-sort",
+              "title": "Bubble Sort",
+              "summary": "Move out-of-order adjacent pairs and stop early when no swap occurs.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain bubble sort using the governing invariant or execution rule.",
+                "Trace a representative bubble sort example by hand.",
+                "Apply bubble sort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.2"
+            },
+            {
+              "topicId": "selection-sort",
+              "title": "Selection Sort",
+              "summary": "Select the smallest remaining key and minimize swaps.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain selection sort using the governing invariant or execution rule.",
+                "Trace a representative selection sort example by hand.",
+                "Apply selection sort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.3"
+            },
+            {
+              "topicId": "insertion-sort",
+              "title": "Insertion Sort",
+              "summary": "Grow a sorted prefix by shifting larger keys.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain insertion sort using the governing invariant or execution rule.",
+                "Trace a representative insertion sort example by hand.",
+                "Apply insertion sort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.4"
+            },
+            {
+              "topicId": "elementary-sort-comparison",
+              "title": "Compare Elementary Sorts",
+              "summary": "Choose based on stability, writes, near-sorted input, and data size.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain compare elementary sorts using the governing invariant or execution rule.",
+                "Trace a representative compare elementary sorts example by hand.",
+                "Apply compare elementary sorts in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-3-elementary-sorting-project",
+          "title": "Module Project",
+          "description": "Add instrumented elementary sorting.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-3-sort-lab",
+              "title": "Module 3 Project: Elementary Sort Lab",
+              "summary": "Implement three sorts with counters for comparisons, swaps, and shifts.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve each algorithm invariant.",
+                "Report operation counts.",
+                "Verify stability with keyed records."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "3.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "algorithms-in-c-module-4-divide-conquer-sorting",
+      "order": 4,
+      "prefix": "algorithms_in_c_module_4_divide_conquer_sorting",
+      "title": "Divide-and-Conquer Sorting",
+      "purpose": "Split problems recursively, combine results, and connect shape to recurrence cost.",
+      "description": "Split problems recursively, combine results, and connect shape to recurrence cost.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain merge two sorted ranges using the governing invariant or execution rule.",
+        "Explain merge sort trace and recurrence using the governing invariant or execution rule.",
+        "Explain quicksort partitioning using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace merge two sorted ranges",
+        "Trace merge sort trace and recurrence",
+        "Trace quicksort partitioning"
+      ],
+      "quizFocus": [
+        "merge two sorted ranges",
+        "merge sort trace and recurrence",
+        "quicksort partitioning",
+        "quicksort cases and pivot selection"
+      ],
+      "moduleProject": "Add merge sort and quicksort.",
+      "workspaceIncrement": [
+        "algorithms/merge_sort.h",
+        "algorithms/merge_sort.c",
+        "algorithms/quick_sort.h",
+        "algorithms/quick_sort.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add merge sort and quicksort.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-4-divide-conquer-sorting-concepts",
+          "title": "Divide-and-Conquer Sorting",
+          "description": "Split problems recursively, combine results, and connect shape to recurrence cost.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "merge-two-sorted-ranges",
+              "title": "Merge Two Sorted Ranges",
+              "summary": "Advance left, right, and output cursors while preserving sorted output.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain merge two sorted ranges using the governing invariant or execution rule.",
+                "Trace a representative merge two sorted ranges example by hand.",
+                "Apply merge two sorted ranges in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.1"
+            },
+            {
+              "topicId": "merge-sort-trace-recurrence",
+              "title": "Merge Sort Trace and Recurrence",
+              "summary": "Split to one-element ranges and merge in postorder with T(n)=2T(n/2)+\u0398(n).",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain merge sort trace and recurrence using the governing invariant or execution rule.",
+                "Trace a representative merge sort trace and recurrence example by hand.",
+                "Apply merge sort trace and recurrence in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.2"
+            },
+            {
+              "topicId": "quicksort-partitioning",
+              "title": "Quicksort Partitioning",
+              "summary": "Place values around a pivot using a stated partition invariant.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain quicksort partitioning using the governing invariant or execution rule.",
+                "Trace a representative quicksort partitioning example by hand.",
+                "Apply quicksort partitioning in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.3"
+            },
+            {
+              "topicId": "quicksort-cases-pivots",
+              "title": "Quicksort Cases and Pivot Selection",
+              "summary": "Relate partition balance to average and worst-case recurrence depth.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain quicksort cases and pivot selection using the governing invariant or execution rule.",
+                "Trace a representative quicksort cases and pivot selection example by hand.",
+                "Apply quicksort cases and pivot selection in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.4"
+            },
+            {
+              "topicId": "divide-conquer-sort-comparison",
+              "title": "Compare Merge Sort and Quicksort",
+              "summary": "Choose based on stability, memory, locality, and worst-case guarantees.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain compare merge sort and quicksort using the governing invariant or execution rule.",
+                "Trace a representative compare merge sort and quicksort example by hand.",
+                "Apply compare merge sort and quicksort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-4-divide-conquer-sorting-project",
+          "title": "Module Project",
+          "description": "Add merge sort and quicksort.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-4-divide-conquer-sorter",
+              "title": "Module 4 Project: Divide-and-Conquer Sorter",
+              "summary": "Implement merge sort and quicksort with recursive trace output and deterministic record tests.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Visualize recursive ranges.",
+                "Preserve partition and merge invariants.",
+                "Report time and auxiliary-space costs."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "4.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "algorithms-in-c-module-5-heap-selection",
+      "order": 5,
+      "prefix": "algorithms_in_c_module_5_heap_selection",
+      "title": "Heap Sort and Selection",
+      "purpose": "Use heap order and partitioning to sort or select only the ranks needed.",
+      "description": "Use heap order and partitioning to sort or select only the ranks needed.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain heap sort using the governing invariant or execution rule.",
+        "Explain the shrinking heap boundary using the governing invariant or execution rule.",
+        "Explain quickselect using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace heap sort",
+        "Trace the shrinking heap boundary",
+        "Trace quickselect"
+      ],
+      "quizFocus": [
+        "heap sort",
+        "the shrinking heap boundary",
+        "quickselect",
+        "kth-order statistics and top-k"
+      ],
+      "moduleProject": "Add ranking and selection algorithms.",
+      "workspaceIncrement": [
+        "algorithms/selection.h",
+        "algorithms/selection.c",
+        "tests/selection_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add ranking and selection algorithms.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-5-heap-selection-concepts",
+          "title": "Heap Sort and Selection",
+          "description": "Use heap order and partitioning to sort or select only the ranks needed.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "heap-sort",
+              "title": "Heap Sort",
+              "summary": "Build a max-heap and move each maximum into the shrinking sorted suffix.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain heap sort using the governing invariant or execution rule.",
+                "Trace a representative heap sort example by hand.",
+                "Apply heap sort in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.1"
+            },
+            {
+              "topicId": "heap-boundary-analysis",
+              "title": "The Shrinking Heap Boundary",
+              "summary": "Keep active heap indices separate from sorted output indices.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain the shrinking heap boundary using the governing invariant or execution rule.",
+                "Trace a representative the shrinking heap boundary example by hand.",
+                "Apply the shrinking heap boundary in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.2"
+            },
+            {
+              "topicId": "quickselect",
+              "title": "Quickselect",
+              "summary": "Recurse only into the partition containing the target rank.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain quickselect using the governing invariant or execution rule.",
+                "Trace a representative quickselect example by hand.",
+                "Apply quickselect in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.3"
+            },
+            {
+              "topicId": "kth-and-top-k",
+              "title": "Kth-Order Statistics and Top-K",
+              "summary": "Compare sorting, selection, and bounded heaps for rank queries.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain kth-order statistics and top-k using the governing invariant or execution rule.",
+                "Trace a representative kth-order statistics and top-k example by hand.",
+                "Apply kth-order statistics and top-k in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-5-heap-selection-project",
+          "title": "Module Project",
+          "description": "Add ranking and selection algorithms.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-5-ranking-engine",
+              "title": "Module 5 Project: Ranking Engine",
+              "summary": "Add heap sort, quickselect, kth-smallest, and top-k reports.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve heap and partition invariants.",
+                "Avoid sorting unnecessary data.",
+                "Compare expected and worst-case behavior."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "5.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "algorithms-in-c-module-6-graphs",
+      "order": 6,
+      "prefix": "algorithms_in_c_module_6_graphs",
+      "title": "Graph Representation and Traversal",
+      "purpose": "Represent sparse relationships and explore them systematically with queues and stacks.",
+      "description": "Represent sparse relationships and explore them systematically with queues and stacks.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain graph vocabulary and representations using the governing invariant or execution rule.",
+        "Explain breadth-first search using the governing invariant or execution rule.",
+        "Explain depth-first search using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace graph vocabulary and representations",
+        "Trace breadth-first search",
+        "Trace depth-first search"
+      ],
+      "quizFocus": [
+        "graph vocabulary and representations",
+        "breadth-first search",
+        "depth-first search",
+        "connected components and cycle detection"
+      ],
+      "moduleProject": "Add graph storage and traversal.",
+      "workspaceIncrement": [
+        "structures/graph.h",
+        "structures/graph.c",
+        "algorithms/graph_search.h",
+        "algorithms/graph_search.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add graph storage and traversal.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-6-graphs-concepts",
+          "title": "Graph Representation and Traversal",
+          "description": "Represent sparse relationships and explore them systematically with queues and stacks.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "graph-vocabulary-representations",
+              "title": "Graph Vocabulary and Representations",
+              "summary": "Compare directed, undirected, weighted, matrix, and adjacency-list models.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain graph vocabulary and representations using the governing invariant or execution rule.",
+                "Trace a representative graph vocabulary and representations example by hand.",
+                "Apply graph vocabulary and representations in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.1"
+            },
+            {
+              "topicId": "breadth-first-search",
+              "title": "Breadth-First Search",
+              "summary": "Track current vertex, queue, visited set, parent, and distance.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain breadth-first search using the governing invariant or execution rule.",
+                "Trace a representative breadth-first search example by hand.",
+                "Apply breadth-first search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.2"
+            },
+            {
+              "topicId": "depth-first-search",
+              "title": "Depth-First Search",
+              "summary": "Explore deeply with recursive or explicit stack state.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain depth-first search using the governing invariant or execution rule.",
+                "Trace a representative depth-first search example by hand.",
+                "Apply depth-first search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.3"
+            },
+            {
+              "topicId": "components-and-cycle-detection",
+              "title": "Connected Components and Cycle Detection",
+              "summary": "Restart traversal and recognize graph-specific cycle evidence.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain connected components and cycle detection using the governing invariant or execution rule.",
+                "Trace a representative connected components and cycle detection example by hand.",
+                "Apply connected components and cycle detection in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.4"
+            },
+            {
+              "topicId": "topological-sorting",
+              "title": "Topological Sorting",
+              "summary": "Order a directed acyclic graph by dependencies and detect impossible cycles.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain topological sorting using the governing invariant or execution rule.",
+                "Trace a representative topological sorting example by hand.",
+                "Apply topological sorting in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-6-graphs-project",
+          "title": "Module Project",
+          "description": "Add graph storage and traversal.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-6-dependency-graph",
+              "title": "Module 6 Project: Dependency Graph",
+              "summary": "Model campus tasks as a graph and implement BFS, DFS, component, cycle, and topological reports.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Manage adjacency-list memory.",
+                "Synchronize traversal state.",
+                "Reject topological order when a cycle exists."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "6.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "algorithms-in-c-module-7-greedy",
+      "order": 7,
+      "prefix": "algorithms_in_c_module_7_greedy",
+      "title": "Greedy Algorithms",
+      "purpose": "Recognize when a locally best safe choice can build a global optimum.",
+      "description": "Recognize when a locally best safe choice can build a global optimum.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain greedy strategy and correctness using the governing invariant or execution rule.",
+        "Explain activity selection and fractional knapsack using the governing invariant or execution rule.",
+        "Explain huffman coding using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace greedy strategy and correctness",
+        "Trace activity selection and fractional knapsack",
+        "Trace huffman coding"
+      ],
+      "quizFocus": [
+        "greedy strategy and correctness",
+        "activity selection and fractional knapsack",
+        "huffman coding",
+        "kruskal and prim minimum spanning trees"
+      ],
+      "moduleProject": "Add greedy compression and network planning.",
+      "workspaceIncrement": [
+        "algorithms/huffman.h",
+        "algorithms/huffman.c",
+        "structures/union_find.h",
+        "structures/union_find.c",
+        "algorithms/mst.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add greedy compression and network planning.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-7-greedy-concepts",
+          "title": "Greedy Algorithms",
+          "description": "Recognize when a locally best safe choice can build a global optimum.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "greedy-strategy-correctness",
+              "title": "Greedy Strategy and Correctness",
+              "summary": "State the greedy choice, feasibility rule, and exchange-style justification.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain greedy strategy and correctness using the governing invariant or execution rule.",
+                "Trace a representative greedy strategy and correctness example by hand.",
+                "Apply greedy strategy and correctness in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.1"
+            },
+            {
+              "topicId": "activity-selection-fractional-knapsack",
+              "title": "Activity Selection and Fractional Knapsack",
+              "summary": "Sort by the right criterion and commit to compatible choices.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain activity selection and fractional knapsack using the governing invariant or execution rule.",
+                "Trace a representative activity selection and fractional knapsack example by hand.",
+                "Apply activity selection and fractional knapsack in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.2"
+            },
+            {
+              "topicId": "huffman-coding",
+              "title": "Huffman Coding",
+              "summary": "Repeatedly combine the two least-frequent nodes using a min-heap.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain huffman coding using the governing invariant or execution rule.",
+                "Trace a representative huffman coding example by hand.",
+                "Apply huffman coding in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.3"
+            },
+            {
+              "topicId": "minimum-spanning-trees",
+              "title": "Kruskal and Prim Minimum Spanning Trees",
+              "summary": "Grow a minimum connector by safe light edges.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain kruskal and prim minimum spanning trees using the governing invariant or execution rule.",
+                "Trace a representative kruskal and prim minimum spanning trees example by hand.",
+                "Apply kruskal and prim minimum spanning trees in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-7-greedy-project",
+          "title": "Module Project",
+          "description": "Add greedy compression and network planning.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-7-network-planner",
+              "title": "Module 7 Project: Network Planner",
+              "summary": "Build Huffman and minimum-spanning-tree reports using heaps and disjoint-set support.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Identify the greedy invariant.",
+                "Use the correct supporting structure.",
+                "Verify total cost and connectivity."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "7.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "algorithms-in-c-module-8-shortest-paths",
+      "order": 8,
+      "prefix": "algorithms_in_c_module_8_shortest_paths",
+      "title": "Shortest Paths",
+      "purpose": "Improve distance estimates through relaxation and choose an algorithm based on edge constraints.",
+      "description": "Improve distance estimates through relaxation and choose an algorithm based on edge constraints.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain edge relaxation using the governing invariant or execution rule.",
+        "Explain dijkstra with a priority queue using the governing invariant or execution rule.",
+        "Explain bellman-ford using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace edge relaxation",
+        "Trace dijkstra with a priority queue",
+        "Trace bellman-ford"
+      ],
+      "quizFocus": [
+        "edge relaxation",
+        "dijkstra with a priority queue",
+        "bellman-ford",
+        "negative cycles and path reconstruction"
+      ],
+      "moduleProject": "Add weighted route planning.",
+      "workspaceIncrement": [
+        "algorithms/shortest_path.h",
+        "algorithms/shortest_path.c",
+        "tests/shortest_path_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add weighted route planning.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-8-shortest-paths-concepts",
+          "title": "Shortest Paths",
+          "description": "Improve distance estimates through relaxation and choose an algorithm based on edge constraints.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "edge-relaxation",
+              "title": "Edge Relaxation",
+              "summary": "Update distance and parent only when a path improves.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain edge relaxation using the governing invariant or execution rule.",
+                "Trace a representative edge relaxation example by hand.",
+                "Apply edge relaxation in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.1"
+            },
+            {
+              "topicId": "dijkstra-priority-queue",
+              "title": "Dijkstra with a Priority Queue",
+              "summary": "Finalize nearest unsettled vertices and handle stale heap entries.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain dijkstra with a priority queue using the governing invariant or execution rule.",
+                "Trace a representative dijkstra with a priority queue example by hand.",
+                "Apply dijkstra with a priority queue in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.2"
+            },
+            {
+              "topicId": "bellman-ford",
+              "title": "Bellman-Ford",
+              "summary": "Relax every edge repeatedly to support negative weights.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain bellman-ford using the governing invariant or execution rule.",
+                "Trace a representative bellman-ford example by hand.",
+                "Apply bellman-ford in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.3"
+            },
+            {
+              "topicId": "negative-cycles-path-reconstruction",
+              "title": "Negative Cycles and Path Reconstruction",
+              "summary": "Detect further improvements and rebuild a path from parent links.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain negative cycles and path reconstruction using the governing invariant or execution rule.",
+                "Trace a representative negative cycles and path reconstruction example by hand.",
+                "Apply negative cycles and path reconstruction in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-8-shortest-paths-project",
+          "title": "Module Project",
+          "description": "Add weighted route planning.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-8-route-planner",
+              "title": "Module 8 Project: Route Planner",
+              "summary": "Compute routes with Dijkstra or Bellman-Ford based on graph constraints.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Select the valid algorithm.",
+                "Reconstruct paths.",
+                "Detect unreachable vertices and negative cycles."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "8.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 9,
+      "moduleSlug": "algorithms-in-c-module-9-backtracking-dp",
+      "order": 9,
+      "prefix": "algorithms_in_c_module_9_backtracking_dp",
+      "title": "Backtracking and Dynamic Programming",
+      "purpose": "Explore decision trees, prune impossible branches, and cache repeated subproblems.",
+      "description": "Explore decision trees, prune impossible branches, and cache repeated subproblems.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain choose, explore, and unchoose using the governing invariant or execution rule.",
+        "Explain subsets and permutations using the governing invariant or execution rule.",
+        "Explain n-queens and pruning using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace choose, explore, and unchoose",
+        "Trace subsets and permutations",
+        "Trace n-queens and pruning"
+      ],
+      "quizFocus": [
+        "choose, explore, and unchoose",
+        "subsets and permutations",
+        "n-queens and pruning",
+        "memoization and tabulation"
+      ],
+      "moduleProject": "Add backtracking and dynamic-programming solvers.",
+      "workspaceIncrement": [
+        "algorithms/backtracking.h",
+        "algorithms/backtracking.c",
+        "algorithms/dp.h",
+        "algorithms/dp.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add backtracking and dynamic-programming solvers.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-9-backtracking-dp-concepts",
+          "title": "Backtracking and Dynamic Programming",
+          "description": "Explore decision trees, prune impossible branches, and cache repeated subproblems.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "backtracking-choose-explore-unchoose",
+              "title": "Choose, Explore, and Unchoose",
+              "summary": "Maintain partial-solution state across recursive branching.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain choose, explore, and unchoose using the governing invariant or execution rule.",
+                "Trace a representative choose, explore, and unchoose example by hand.",
+                "Apply choose, explore, and unchoose in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "9.1"
+            },
+            {
+              "topicId": "subsets-permutations",
+              "title": "Subsets and Permutations",
+              "summary": "Trace inclusion choices and used-element state.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain subsets and permutations using the governing invariant or execution rule.",
+                "Trace a representative subsets and permutations example by hand.",
+                "Apply subsets and permutations in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "9.2"
+            },
+            {
+              "topicId": "n-queens-and-pruning",
+              "title": "N-Queens and Pruning",
+              "summary": "Reject unsafe branches before deeper recursion.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain n-queens and pruning using the governing invariant or execution rule.",
+                "Trace a representative n-queens and pruning example by hand.",
+                "Apply n-queens and pruning in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "9.3"
+            },
+            {
+              "topicId": "memoization-and-tabulation",
+              "title": "Memoization and Tabulation",
+              "summary": "Turn overlapping recursive subproblems into cached or ordered table work.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain memoization and tabulation using the governing invariant or execution rule.",
+                "Trace a representative memoization and tabulation example by hand.",
+                "Apply memoization and tabulation in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "9.4"
+            },
+            {
+              "topicId": "knapsack-lcs-state-design",
+              "title": "Knapsack, LCS, and State Design",
+              "summary": "Define what each DP state means and reduce storage when dependencies allow.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain knapsack, lcs, and state design using the governing invariant or execution rule.",
+                "Trace a representative knapsack, lcs, and state design example by hand.",
+                "Apply knapsack, lcs, and state design in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "9.5"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "algorithms-in-c-section-9-backtracking-dp-project",
+          "title": "Module Project",
+          "description": "Add backtracking and dynamic-programming solvers.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "algo-module-9-optimization-engine",
+              "title": "Module 9 Project: Optimization Engine",
+              "summary": "Solve scheduling subsets and resource allocation with backtracking and dynamic programming.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Define state and choices explicitly.",
+                "Prune or cache correctly.",
+                "Compare exponential and polynomial formulations."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "9.6"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 6
+    },
+    {
+      "moduleNumber": 10,
+      "moduleSlug": "algorithms-in-c-module-10-capstone",
+      "order": 10,
+      "prefix": "algorithms_in_c_module_10_capstone",
+      "title": "Algorithms in C Capstone",
+      "purpose": "Select, combine, justify, and implement algorithms for one integrated routing and scheduling system.",
+      "description": "Select, combine, justify, and implement algorithms for one integrated routing and scheduling system.",
+      "role": "capstone",
+      "learningObjectives": [
+        "Select algorithms from stated constraints.",
+        "Preserve correctness invariants across modules.",
+        "Produce executable results plus a complete runtime and space analysis."
+      ],
+      "guidedExercises": [],
+      "quizFocus": [],
+      "moduleProject": "Campus Routing and Scheduling Engine",
+      "workspaceIncrement": [
+        "main.c",
+        "models/task.c",
+        "algorithms/search.c",
+        "algorithms/merge_sort.c",
+        "algorithms/quick_sort.c",
+        "structures/graph.c",
+        "algorithms/graph_search.c",
+        "algorithms/shortest_path.c",
+        "algorithms/dp.c",
+        "tests/capstone_tests.c"
+      ],
+      "recommendedPacing": "Complete the capstone in progressive steps; every step must preserve all earlier behavior.",
+      "typicalOutcome": "Sort reports, rank urgent tasks, validate dependencies, produce legal schedules, compute routes, and solve constrained selections in one tested C system.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "algorithms-in-c-section-10-capstone",
+          "title": "Algorithms in C Capstone",
+          "description": "Select, combine, justify, and implement algorithms for one integrated routing and scheduling system.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "campus-routing-scheduling-capstone",
+              "title": "Campus Routing and Scheduling Engine",
+              "summary": "Sort reports, rank urgent tasks, validate dependencies, produce legal schedules, compute routes, and solve constrained selections in one tested C system.",
+              "minutes": 180,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "capstone",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Select algorithms from stated constraints.",
+                "Preserve correctness invariants across modules.",
+                "Produce executable results plus a complete runtime and space analysis."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ],
+                "capstone": true
+              },
+              "topicNumber": "10.1",
+              "projectBrief": {
+                "scenario": "A campus operations platform needs sorting, dependency scheduling, route planning, and constrained selection.",
+                "role": "Algorithms engineer",
+                "workspace": "One cumulative C workspace containing searching, sorting, graph, shortest-path, dynamic-programming, and test modules.",
+                "deliverable": "A tested routing and scheduling engine with documented algorithm choices and complexity tradeoffs.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Select algorithms from stated constraints.",
+                  "Preserve correctness invariants across modules.",
+                  "Produce executable results plus a complete runtime and space analysis."
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sectionCount": 1,
+      "topicCount": 1
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
 import type { GoldenValidationIssue } from "./profileServices.js";
+import type { RunCodeLimits } from "@zoeskoul/curriculum-runtime";
 
 
 
@@ -369,6 +370,9 @@ export async function validateCodeProfileGolden(args: {
     allowedRecipeTypes: Array<ManifestCodeInput["recipe"]["type"]>;
     topicBundle: TopicBundleManifest;
     draft?: TopicAuthoringDraft;
+    minimumFixedTests?: number;
+    runLimits?: RunCodeLimits;
+    additionalRunLimits?: RunCodeLimits | null;
 }): Promise<GoldenValidationIssue[]> {
     const issues: GoldenValidationIssue[] = [];
 
@@ -466,6 +470,17 @@ export async function validateCodeProfileGolden(args: {
         }
 
         const expected = parsedExpected.data;
+        const minimumFixedTests = Math.max(1, Math.trunc(args.minimumFixedTests ?? 1));
+        if (expected.strategy === "programming" && expected.checkMode !== "semantic" && (expected.tests?.length ?? 0) < minimumFixedTests) {
+            issues.push({
+                code: "CODE_PROFILE_MINIMUM_FIXED_TESTS",
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message: `Exercise "${exercise.id}" needs at least ${minimumFixedTests} deterministic fixed tests.`,
+            });
+            continue;
+        }
         const solutionCode = String(expected.solutionCode ?? "").trim();
 
         if (!solutionCode) {
@@ -520,7 +535,12 @@ export async function validateCodeProfileGolden(args: {
             solutionCode,
             tests: expected.tests,
             files: collectExerciseWorkspaceFiles(exercise),
-            limits: { cpu_time_limit: 2, wall_time_limit: 6, memory_limit: 256000 },
+            limits: {
+                cpu_time_limit: 2,
+                wall_time_limit: 6,
+                memory_limit: 256000,
+                ...(args.runLimits ?? {}),
+            },
             ...(sharedCodeRunner ? { runner: sharedCodeRunner } : {}),
         });
         if (!run.ok) {
@@ -541,6 +561,29 @@ export async function validateCodeProfileGolden(args: {
                         ? `Exercise "${exercise.id}" solutionCode does not satisfy its published tests.`
                         : `Exercise "${exercise.id}" solutionCode could not be validated against its published tests: ${run.message}`,
             });
+        } else if (args.additionalRunLimits) {
+            const additionalRun = await validateCodeAgainstTests({
+                language: exercise.language,
+                solutionCode,
+                tests: expected.tests,
+                files: collectExerciseWorkspaceFiles(exercise),
+                limits: {
+                    cpu_time_limit: 3,
+                    wall_time_limit: 10,
+                    memory_limit: 384000,
+                    ...args.additionalRunLimits,
+                },
+                ...(sharedCodeRunner ? { runner: sharedCodeRunner } : {}),
+            });
+            if (!additionalRun.ok) {
+                issues.push({
+                    code: "CODE_PROFILE_SOLUTION_SANITIZER_FAILED",
+                    category: "tests",
+                    severity: "error",
+                    exerciseId: exercise.id,
+                    message: `Exercise "${exercise.id}" official solution failed strict memory/undefined-behavior validation: ${additionalRun.message}`,
+                });
+            }
         }
     }
 

@@ -1,0 +1,13 @@
+{
+  "policyId": "shared-validation-pseudocode-input",
+  "appliesTo": "pseudocode_input",
+  "requirements": [
+    "Every pseudocode_input declares mode, dialect, validation strategy, and stable semantic rule ids.",
+    "Write mode requires at least one required-structure rule and two deterministic scenarios.",
+    "Trace mode requires expected path, state sequence, output, or operation count.",
+    "Reorder mode validates stable step ids rather than displayed strings.",
+    "Fill-blanks mode validates semantic operations rather than exact whitespace or variable names.",
+    "Hybrid validation combines structure and scenario execution.",
+    "AI feedback may elaborate deterministic failures but may not override them."
+  ]
+}

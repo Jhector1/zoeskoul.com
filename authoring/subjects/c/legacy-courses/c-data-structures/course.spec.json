@@ -7,7 +7,7 @@
   "profileId": "c",
   "workspaceProfileId": "browser-code-runner",
   "workspacePolicyId": "c-multifile-workspace",
-  "courseNumber": 1,
+  "courseNumber": 99,
   "title": "C Data Structures and Algorithm Analysis",
   "subtitle": "Animate the invariant, implement it in C, and prove the runtime.",
   "description": "A five-part intermediate C lab based on recursive runtime analysis, equal pair sums, balanced BSTs, priority queues built from stacks, and logarithmic insertion into pointer-based heaps.",
@@ -349,5 +349,11 @@
       "sectionCount": 1,
       "topicCount": 5
     }
-  ]
+  ],
+  "legacyStatus": {
+    "status": "legacy_private_assignment_lab",
+    "defaultForNewEnrollments": false,
+    "supersededBy": "c-data-structures-linear",
+    "preserveCourseSlugAndTopicIds": true
+  }
 }

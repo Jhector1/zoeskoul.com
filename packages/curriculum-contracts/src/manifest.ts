@@ -3,6 +3,8 @@ import type {
   HiddenShellCheck,
   SemanticCheck,
   TerminalExpectations,
+  PseudocodeExpected,
+  PseudocodeMode,
 } from "@zoeskoul/practice-checks";
 import type { WorkspaceExpectations } from "./workspace-path.js";
 import type { ToolPresentationPolicy } from "./tool-presentation.js";
@@ -12,7 +14,8 @@ export type ExerciseKind =
   | "multi_choice"
   | "drag_reorder"
   | "fill_blank_choice"
-  | "code_input";
+  | "code_input"
+  | "pseudocode_input";
 
 export type SqlDialect = "sqlite" | "postgres" | "mysql" | "mssql";
 export type WorkspaceLanguage =
@@ -498,11 +501,27 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   hiddenShellCheck?: HiddenShellCheck;
   workspace?: ManifestWorkspaceSeed | null;
 };
+
+export type ManifestPseudocodeInput = ManifestBaseExercise & {
+  kind: "pseudocode_input";
+  mode: PseudocodeMode;
+  dialect?: "zoeskoul-v1";
+  starterPseudocode?: string;
+  editor?: {
+    showLineNumbers?: boolean;
+    allowIndentation?: boolean;
+    showKeywordReference?: boolean;
+    minRows?: number;
+  };
+  expected: PseudocodeExpected;
+};
+
 export type ManifestExercise =
   | ManifestSingleChoice
   | ManifestMultiChoice
   | ManifestDragReorder
   | ManifestFillBlankChoice
+  | ManifestPseudocodeInput
   | ManifestCodeInput;
 
 export type TopicBundleManifest = {
