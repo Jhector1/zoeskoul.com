@@ -254,7 +254,7 @@ describe("student embedded Try It practice launch", () => {
     ).toBeNull();
   });
 
-  it("accepts the one-file Python fixed-test and semantic contract", () => {
+  it("accepts one-file Python fixed, stdin-test, and semantic recipes", () => {
     const eligible = fixedTestEmbeddedTryIt();
 
     expect(
@@ -376,7 +376,42 @@ describe("student embedded Try It practice launch", () => {
         recipe: {
           ...eligible.recipe,
           tests: [
-            { stdin: "Ava\n", stdout: "Ava\n" },
+            {
+              stdin: "Ava\n",
+              stdout: "Ava\n",
+              match: "exact",
+            },
+            {
+              stdin: "Noah\n",
+              stdout: "Noah\n",
+              match: "exact",
+            },
+          ],
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        starterStdin: "Ava\n",
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        stdin: "Ava\n",
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            {
+              stdout: "Ava\n",
+              match: "exact",
+            },
           ],
         },
       }),

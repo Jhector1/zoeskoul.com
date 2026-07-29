@@ -63,11 +63,33 @@ function oneMainPythonStarterFile(
   );
 }
 
+function isSafeEmbeddedFixedTest(
+  value: unknown,
+): boolean {
+  const test = asJsonRecord(value);
+
+  return Boolean(
+    test &&
+    typeof test.stdin === "string" &&
+    hasNoNamedEntries(
+      [test],
+      [
+        "fixtureFiles",
+        "fixtures",
+        "fileFixtures",
+        "supportFiles",
+        "files",
+      ],
+    )
+  );
+}
+
 /**
  * Learner-safe one-file Vite code-input contract. The authored validation
- * recipe, semantic checks, source checks, tests, and solutions remain behind
- * the protected server boundary. Multi-file, fixture-backed, stdin-driven,
- * terminal, and SQL exercises continue through the full workspace runtime.
+ * recipe, semantic checks, source checks, fixed-test stdin values, tests, and
+ * solutions remain behind the protected server boundary. Multi-file,
+ * fixture-backed, terminal, SQL, and learner-editable stdin workspaces
+ * continue through the full workspace runtime.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,
@@ -110,24 +132,11 @@ export function isEligibleStudentEmbeddedPythonTryIt(
   const tests = recipe?.tests;
 
   if (recipeType === "fixed_tests") {
-    if (!Array.isArray(tests) || tests.length !== 1) {
-      return false;
-    }
-
-    const test = asJsonRecord(tests[0]);
-
-    return Boolean(
-      test &&
-      runtimeString(test.stdin) === "" &&
-      hasNoNamedEntries(
-        [test],
-        [
-          "fixtureFiles",
-          "fixtures",
-          "fileFixtures",
-          "supportFiles",
-          "files",
-        ],
+    return (
+      Array.isArray(tests) &&
+      tests.length > 0 &&
+      tests.every(
+        isSafeEmbeddedFixedTest,
       )
     );
   }
