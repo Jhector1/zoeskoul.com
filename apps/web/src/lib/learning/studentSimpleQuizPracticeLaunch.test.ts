@@ -350,6 +350,95 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(true);
+    const dataOverlayEligible = {
+      ...eligible,
+      workspaceExpectations: {
+        requiredFiles: [
+          "scores.csv",
+        ],
+        requiredFolders: [],
+      },
+      workspace: {
+        ...eligible.workspace,
+        files: [
+          {
+            path: "scores.csv",
+            content:
+              "name,score\nAva,92\n",
+            readOnly: false,
+          },
+        ],
+        workspaceExpectations: {
+          requiredFiles: [
+            "scores.csv",
+          ],
+          requiredFolders: [],
+        },
+      },
+      recipe: {
+        ...eligible.recipe,
+        tests: [
+          {
+            stdin: "",
+            stdout: "Ava\n",
+            match: "exact",
+            files: [
+              {
+                path: "scores.csv",
+                content:
+                  "name,score\nAva,92\n",
+                readOnly: false,
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(
+        dataOverlayEligible,
+      ),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...dataOverlayEligible,
+        recipe: {
+          ...dataOverlayEligible.recipe,
+          tests: [
+            {
+              stdin: "",
+              stdout: "Ava\n",
+              match: "exact",
+              files: [
+                {
+                  path: "scores.csv",
+                  content:
+                    "name,score\nMia,85\n",
+                  readOnly: false,
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...dataOverlayEligible,
+        workspace: {
+          ...dataOverlayEligible.workspace,
+          files: [
+            {
+              path: "scores.csv",
+              content:
+                "name,score\nAva,92\n",
+              readOnly: true,
+            },
+          ],
+        },
+      }),
+    ).toBe(false);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...companionEligible,
@@ -1013,6 +1102,53 @@ describe("student embedded Try It practice launch", () => {
         },
       }),
     ).toBe(true);
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id:
+          "try-data-overlay",
+        exerciseKey:
+          "try-data-overlay",
+        kind: "code_input",
+        topic: "csv-processing",
+        difficulty: "easy",
+        title: "Read scores",
+        prompt:
+          "Read scores.csv.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            {
+              path: "main.py",
+              content:
+                "print('todo')\n",
+              language: "python",
+            },
+          ],
+          workspace: {
+            entryFilePath:
+              "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('todo')\n",
+                language: "python",
+              },
+            ],
+            files: [
+              {
+                path:
+                  "scores.csv",
+                content:
+                  "name,score\nAva,92\n",
+                readOnly: false,
+              },
+            ],
+          },
+        },
+      }),
+    ).toBe(true);
+
     expect(
       isProjectedStudentEmbeddedPythonTryIt({
         id: "try-class-file",

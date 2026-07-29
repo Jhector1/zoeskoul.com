@@ -132,6 +132,53 @@ describe("student embedded Try It data", () => {
     });
   });
 
+  it("reads learner-visible workspace CSV data files", () => {
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print(open('scores.csv').read())\n",
+                language: "python",
+              },
+            ],
+            files: [
+              {
+                path: "scores.csv",
+                content:
+                  "name,score\nAva,92\n",
+                readOnly: false,
+              },
+            ],
+          },
+        }),
+      ),
+    ).toEqual({
+      language: "python",
+      entry: "main.py",
+      files: [
+        {
+          path: "main.py",
+          content:
+            "print(open('scores.csv').read())\n",
+          language: "python",
+        },
+        {
+          path: "scores.csv",
+          content:
+            "name,score\nAva,92\n",
+          language: "csv",
+        },
+      ],
+      editorHeight: 360,
+    });
+  });
+
   it("reads main.py plus one nested Python helper module", () => {
     expect(
       readStudentPythonTryItStarter(
@@ -364,6 +411,58 @@ describe("student embedded Try It data", () => {
                 path: "README.md",
                 content:
                   "# Unsupported\n",
+              },
+            ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+            ],
+            files: [
+              {
+                path: "scores.csv",
+                content:
+                  "name,score\nAva,92\n",
+                readOnly: true,
+              },
+            ],
+          },
+        }),
+      ),
+    ).toBeNull();
+
+    expect(
+      readStudentPythonTryItStarter(
+        launch({
+          language: "python",
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              {
+                path: "main.py",
+                content:
+                  "print('x')\n",
+              },
+            ],
+            files: [
+              {
+                path: "tools/hidden.py",
+                content:
+                  "VALUE = 1\n",
+                readOnly: false,
               },
             ],
           },

@@ -331,15 +331,18 @@ const semanticPackageEligibleIds = [
   ["python/applied-python-projects/modules/module9/topics/polymorphic-collections/topic.bundle.json", "try-polymorphic-collections-sketch2"],
 ] as const;
 
+const dataOverlayEligibleIds = [
+  ["python/python-data-functions/modules/module7/topics/module-7-clean-student-records/topic.bundle.json", "try-module-7-clean-student-records-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch0"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch1"],
+  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch2"],
+] as const;
+
 const complexFallbackIds = [
   ["python/python-data-functions/modules/module6/topics/module-6-name-badge-package/topic.bundle.json", "try-module-6-name-badge-package-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch0"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch1"],
   ["python/python-data-functions/modules/module6/topics/using-imports-and-helper-files/topic.bundle.json", "try-using-imports-and-helper-files-sketch2"],
-  ["python/python-data-functions/modules/module7/topics/module-7-clean-student-records/topic.bundle.json", "try-module-7-clean-student-records-sketch0"],
-  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch0"],
-  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch1"],
-  ["python/python-data-functions/modules/module7/topics/simple-csv-processing/topic.bundle.json", "try-simple-csv-processing-sketch2"],
 ] as const;
 
 function fixedTestStdinValues(
@@ -412,6 +415,28 @@ function fixedTestFiles(
         )
       : [];
   });
+}
+
+function learnerWorkspaceFiles(
+  exerciseValue: unknown,
+): JsonRecord[] {
+  const exercise =
+    record(exerciseValue);
+  const workspace =
+    record(exercise?.workspace);
+
+  return Array.isArray(workspace?.files)
+    ? workspace.files.flatMap(
+        (value) => {
+          const file =
+            record(value);
+
+          return file
+            ? [file]
+            : [];
+        },
+      )
+    : [];
 }
 
 function semanticChecks(
@@ -740,6 +765,75 @@ describe(
         ).toBe(true);
       },
     );
+
+    it("locks the learner-visible fixed-test data-overlay inventory", () => {
+      expect(
+        dataOverlayEligibleIds,
+      ).toHaveLength(4);
+    });
+
+    it.each(
+      dataOverlayEligibleIds,
+    )(
+      "keeps data-overlay exercise %s / %s in the direct Vite editor",
+      (relativePath, exerciseKey) => {
+        const pair =
+          joined.get(
+            exerciseInventoryKey(
+              relativePath,
+              exerciseKey,
+            ),
+          );
+        const workspaceFiles =
+          learnerWorkspaceFiles(
+            pair?.exercise,
+          );
+        const tests =
+          fixedTestFiles(
+            pair?.exercise,
+          );
+
+        expect(pair).toBeDefined();
+        expect(
+          pair?.ownerCardId,
+        ).toMatch(/^sketch\d+$/);
+        expect(
+          starterFilePaths(
+            pair?.exercise,
+          ),
+        ).toEqual([
+          "main.py",
+        ]);
+        expect(
+          workspaceFiles,
+        ).toHaveLength(1);
+        expect(tests).toHaveLength(1);
+        expect(
+          workspaceFiles[0],
+        ).toMatchObject({
+          readOnly: false,
+        });
+        expect(
+          stringValue(
+            workspaceFiles[0]?.path,
+          ),
+        ).toMatch(/\.csv$/);
+        expect(tests[0]).toEqual(
+          workspaceFiles[0],
+        );
+        expect(
+          isEligibleStudentEmbeddedPythonTryIt(
+            pair?.exercise,
+          ),
+        ).toBe(true);
+      },
+    );
+
+    it("locks the remaining file-creation fallback inventory", () => {
+      expect(
+        complexFallbackIds,
+      ).toHaveLength(4);
+    });
 
     it.each(
       complexFallbackIds,

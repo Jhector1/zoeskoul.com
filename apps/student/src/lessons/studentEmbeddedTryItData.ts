@@ -155,6 +155,128 @@ function readStarterFiles(
   return files;
 }
 
+function totalStarterCharacters(
+  files: StudentPythonTryItFile[],
+): number {
+  return files.reduce(
+    (total, file) =>
+      total + file.content.length,
+    0,
+  );
+}
+
+function mergeLearnerWorkspaceFiles(
+  value: unknown,
+  starterFiles: StudentPythonTryItFile[],
+  entry: string,
+): StudentPythonTryItFile[] | null {
+  if (
+    value == null ||
+    (
+      Array.isArray(value) &&
+      value.length === 0
+    ) ||
+    (
+      isRecord(value) &&
+      Object.keys(value).length === 0
+    )
+  ) {
+    return starterFiles;
+  }
+
+  if (!Array.isArray(value)) {
+    return null;
+  }
+
+  const workspaceFiles =
+    readStarterFiles(value);
+
+  if (!workspaceFiles) {
+    return null;
+  }
+
+  const companionFiles =
+    starterFiles.filter(
+      (file) =>
+        file.path !== entry,
+    );
+  const companionByPath =
+    new Map(
+      companionFiles.map(
+        (file) => [
+          file.path,
+          file,
+        ],
+      ),
+    );
+
+  if (
+    workspaceFiles.every(
+      (file) =>
+        companionByPath.has(file.path),
+    )
+  ) {
+    return (
+      workspaceFiles.length ===
+        companionFiles.length &&
+      workspaceFiles.every((file) => {
+        const match =
+          companionByPath.get(
+            file.path,
+          );
+
+        return (
+          match?.language ===
+          file.language
+        );
+      })
+    )
+      ? starterFiles
+      : null;
+  }
+
+  const starterPaths =
+    new Set(
+      starterFiles.map(
+        (file) => file.path,
+      ),
+    );
+
+  if (
+    workspaceFiles.some(
+      (file) =>
+        starterPaths.has(file.path) ||
+        file.language === "python",
+    ) ||
+    value.some((fileValue) => {
+      if (!isRecord(fileValue)) {
+        return true;
+      }
+
+      return fileValue.readOnly !==
+        false;
+    })
+  ) {
+    return null;
+  }
+
+  const files = [
+    ...starterFiles,
+    ...workspaceFiles,
+  ];
+
+  if (
+    files.length >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_FILES ||
+    totalStarterCharacters(files) >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS
+  ) {
+    return null;
+  }
+
+  return files;
+}
+
 function boundedEditorHeight(
   value: unknown,
 ): number {
@@ -177,7 +299,8 @@ function boundedEditorHeight(
 /**
  * Reads the bounded Python workspace projected by the protected server.
  * It supports a bounded learner-visible Python package, including alternate
- * entry files and text/CSV companions. Grading recipes and hidden test-file
+ * entry files, text/CSV companions, and learner-visible workspace data files.
+ * Grading recipes and hidden test-file
  * overrides stay server-side.
  */
 export function readStudentPythonTryItStarter(
@@ -220,7 +343,7 @@ export function readStudentPythonTryItStarter(
     workspace?.starterFiles;
   const payloadStarterFiles =
     payload.starterFiles;
-  const files =
+  const starterFiles =
     workspaceStarterFiles !== undefined
       ? readStarterFiles(
           workspaceStarterFiles,
@@ -256,6 +379,14 @@ export function readStudentPythonTryItStarter(
                 },
               ]
             : null;
+  const files =
+    starterFiles
+      ? mergeLearnerWorkspaceFiles(
+          workspace?.files,
+          starterFiles,
+          entry,
+        )
+      : null;
 
   const entryFile =
     files?.find(

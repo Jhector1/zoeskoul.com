@@ -21,6 +21,7 @@ type EmbeddedStarterWorkspace = {
   entry: string;
   files: EmbeddedStarterFile[];
   paths: Set<string>;
+  exactTestOverlayFiles: Map<string, string>;
 };
 
 function hasNoEntries(value: unknown): boolean {
@@ -226,13 +227,45 @@ function sameStarterFileShapes(
   });
 }
 
-function workspaceCompanionFilesMatch(
+function totalStarterCharacters(
+  files: EmbeddedStarterFile[],
+): number {
+  return files.reduce(
+    (total, file) =>
+      total + file.content.length,
+    0,
+  );
+}
+
+function mergeLearnerWorkspaceFiles(
   value: unknown,
   starterFiles: EmbeddedStarterFile[],
   entry: string,
-): boolean {
+): {
+  files: EmbeddedStarterFile[];
+  exactTestOverlayFiles: Map<string, string>;
+} | null {
   if (hasNoEntries(value)) {
-    return true;
+    return {
+      files: starterFiles,
+      exactTestOverlayFiles:
+        new Map<string, string>(),
+    };
+  }
+
+  if (!Array.isArray(value)) {
+    return null;
+  }
+
+  const workspaceFiles =
+    readStarterFiles(value, {
+      min: 1,
+      max:
+        MAX_EMBEDDED_PYTHON_WORKSPACE_FILES,
+    });
+
+  if (!workspaceFiles) {
+    return null;
   }
 
   const companionFiles =
@@ -240,19 +273,80 @@ function workspaceCompanionFilesMatch(
       (file) =>
         file.path !== entry,
     );
-  const workspaceFiles =
-    readStarterFiles(value, {
-      min: companionFiles.length,
-      max: companionFiles.length,
-    });
+  const companionPaths =
+    new Set(
+      companionFiles.map(
+        (file) => file.path,
+      ),
+    );
 
-  return Boolean(
-    workspaceFiles &&
-    sameStarterFileShapes(
+  if (
+    workspaceFiles.every(
+      (file) =>
+        companionPaths.has(file.path),
+    )
+  ) {
+    return sameStarterFileShapes(
       companionFiles,
       workspaceFiles,
-    ),
-  );
+    )
+      ? {
+          files: starterFiles,
+          exactTestOverlayFiles:
+            new Map<string, string>(),
+        }
+      : null;
+  }
+
+  const starterPaths =
+    new Set(
+      starterFiles.map(
+        (file) => file.path,
+      ),
+    );
+
+  if (
+    workspaceFiles.some(
+      (file) =>
+        starterPaths.has(file.path) ||
+        file.language === "python",
+    ) ||
+    value.some((fileValue) => {
+      const file =
+        asJsonRecord(fileValue);
+
+      return file?.readOnly !== false;
+    })
+  ) {
+    return null;
+  }
+
+  const files = [
+    ...starterFiles,
+    ...workspaceFiles,
+  ];
+
+  if (
+    files.length >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_FILES ||
+    totalStarterCharacters(files) >
+      MAX_EMBEDDED_PYTHON_WORKSPACE_CHARACTERS
+  ) {
+    return null;
+  }
+
+  return {
+    files,
+    exactTestOverlayFiles:
+      new Map(
+        workspaceFiles.map(
+          (file) => [
+            file.path,
+            file.content,
+          ],
+        ),
+      ),
+  };
 }
 
 function readEmbeddedStarterWorkspace(
@@ -309,24 +403,29 @@ function readEmbeddedStarterWorkspace(
     return null;
   }
 
-  if (
-    !workspaceCompanionFilesMatch(
+  const learnerWorkspace =
+    mergeLearnerWorkspaceFiles(
       workspace?.files,
       topFiles,
       entry,
-    )
-  ) {
+    );
+
+  if (!learnerWorkspace) {
     return null;
   }
 
   return {
     entry,
-    files: topFiles,
+    files:
+      learnerWorkspace.files,
     paths: new Set(
-      topFiles.map(
+      learnerWorkspace.files.map(
         (file) => file.path,
       ),
     ),
+    exactTestOverlayFiles:
+      learnerWorkspace
+        .exactTestOverlayFiles,
   };
 }
 
@@ -347,6 +446,15 @@ function isSafeEmbeddedTestFile(
     path === workspace.entry
   ) {
     return false;
+  }
+
+  const exactOverlay =
+    workspace.exactTestOverlayFiles
+      .get(path);
+
+  if (exactOverlay !== undefined) {
+    return file.content ===
+      exactOverlay;
   }
 
   return (
@@ -537,7 +645,8 @@ function workspaceRequirementsAreSatisfied(
  *
  * The current direct runtime accepts bounded learner-visible Python
  * workspaces. Fixed-test exercises remain limited to one Python entry plus at
- * most one text/CSV companion. Semantic exercises may use an alternate Python
+ * most one learner-visible text/CSV companion, including a bounded
+ * workspace-file data overlay. Semantic exercises may use an alternate Python
  * entry and up to nine learner-visible Python/text/CSV files. Validation
  * recipes, semantic checks, source checks, fixed-test stdin values, hidden
  * test-file overrides, and solutions remain behind the protected server
