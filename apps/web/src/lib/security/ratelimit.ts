@@ -29,6 +29,15 @@ const DEFAULT_CONFIG: RateLimitConfig = {
     window: "60 s",
 };
 
+function windowToMs(window: RateLimitConfig["window"]): number {
+    const [amountText, unit] = window.split(" ");
+    const amount = Number(amountText);
+
+    if (unit === "h") return amount * 60 * 60 * 1000;
+    if (unit === "m") return amount * 60 * 1000;
+    return amount * 1000;
+}
+
 function getRatelimit(config: RateLimitConfig = DEFAULT_CONFIG): Ratelimit {
     const cacheKey = `${config.bucket}:${config.limit}:${config.window}`;
     const cached = ratelimitCache.get(cacheKey);
@@ -76,6 +85,20 @@ export async function rateLimit(
         limit: config?.limit ?? DEFAULT_CONFIG.limit,
         window: config?.window ?? DEFAULT_CONFIG.window,
     };
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+    // Local development may run without Upstash. Production remains fail-closed
+    // through getRatelimit(), which requires both environment variables.
+    if (process.env.NODE_ENV !== "production" && (!url || !token)) {
+        return {
+            ok: true,
+            limit: mergedConfig.limit,
+            remaining: mergedConfig.limit,
+            resetMs: Date.now() + windowToMs(mergedConfig.window),
+        };
+    }
+
     const rl = getRatelimit(mergedConfig);
     const out = await rl.limit(key);
 

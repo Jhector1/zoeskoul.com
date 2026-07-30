@@ -213,7 +213,7 @@
       "generic": "Expected data available."
     },
     "errors": {
-      "incompleteAnswer": "Answer is incomplete or invalid.",
+      "incompleteAnswer": "Complétez votre réponse avant de la vérifier.",
       "failedToSubmit": "Failed to submit",
       "failedToLoad": "Failed to load question"
     },

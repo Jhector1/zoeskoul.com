@@ -231,7 +231,7 @@
       "generic": "Expected data available."
     },
     "errors": {
-      "incompleteAnswer": "Answer is incomplete or invalid.",
+      "incompleteAnswer": "Complete your answer before checking it.",
       "failedToSubmit": "Failed to submit",
       "failedToLoad": "Failed to load question"
     },

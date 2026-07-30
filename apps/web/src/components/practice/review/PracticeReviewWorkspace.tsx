@@ -326,6 +326,10 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
     },
   });
 
+  const showExerciseTools = tools.codeToolEnabled;
+  const showDesktopExerciseTools =
+    showExerciseTools && panels.showDesktopRight;
+
   const headerGamification = gamificationSummary
     ? {
         totalXp: gamificationSummary.totalXp,
@@ -363,15 +367,15 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
       onResetCurrentExercise={handleResetCurrentExercise}
     />
   );
-  const mobileToolsPanel = (
+  const mobileToolsPanel = showExerciseTools ? (
     <ReviewModuleStackedTools
-      showDesktopRight={panels.showDesktopRight}
+      showDesktopRight={showDesktopExerciseTools}
       rightCollapsed={panels.rightCollapsedEff}
       shouldRenderStackedTools
       displayMode="tab"
       toolsPanelProps={tools.panelProps}
     />
-  );
+  ) : null;
 
   const page = (
     <ReviewModuleLayout
@@ -381,16 +385,18 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
       showSkeleton={false}
       isNavigating={false}
       leftCollapsed={panels.leftCollapsedEff}
-      rightCollapsed={panels.rightCollapsedEff}
+      rightCollapsed={
+        showExerciseTools ? panels.rightCollapsedEff : true
+      }
       leftW={panels.leftW}
       rightW={panels.rightW}
       header={
         <ReviewModuleHeader
           locale={props.locale || "en"}
-          toolsUiEnabled
-          toolsToggleAllowed={panels.showDesktopRight}
+          toolsUiEnabled={showExerciseTools}
+          toolsToggleAllowed={showDesktopExerciseTools}
           showDesktopLeft={panels.showDesktopLeft}
-          showDesktopRight={panels.showDesktopRight}
+          showDesktopRight={showDesktopExerciseTools}
           leftCollapsed={panels.leftCollapsedEff}
           rightCollapsed={panels.rightCollapsedEff}
           modulesHref={safeReturnHref(props)}
@@ -398,7 +404,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
           showResetButton={false}
           onToggleLeftPanel={panels.handleToggleLeftPanel}
           onToggleRightPanel={() => {
-            if (panels.showDesktopRight) panels.handleToggleRightPanel();
+            if (showDesktopExerciseTools) panels.handleToggleRightPanel();
           }}
           resetOptions={[
             {
@@ -434,7 +440,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
       }
       rightRail={
         <ReviewModuleRightRail
-          showDesktopRight={panels.showDesktopRight}
+          showDesktopRight={showDesktopExerciseTools}
           rightCollapsed={panels.rightCollapsedEff}
           rightW={panels.rightW}
           onResizeStart={panels.onMouseDownRightHandle}
@@ -458,7 +464,9 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         <PracticeStage
           props={props}
           reduceMotion={reduceMotion}
-          showMobileWorkspaceTabs={!panels.showDesktopRight}
+          showMobileWorkspaceTabs={
+            showExerciseTools && !showDesktopExerciseTools
+          }
           mobileToolsPanel={mobileToolsPanel}
         />
       }

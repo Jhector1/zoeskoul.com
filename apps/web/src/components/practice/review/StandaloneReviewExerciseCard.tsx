@@ -123,7 +123,7 @@ export default function StandaloneReviewExerciseCard({
     (question as any)?.exerciseKey,
   ]);
 
-  if (!question) {
+  if (!question || !props.exercise) {
     return (
       <div className="ui-page-surface p-6">
         <div className="ui-title-sm">
@@ -145,8 +145,17 @@ export default function StandaloneReviewExerciseCard({
     );
   }
 
+  const isCodeExercise = props.exercise.kind === "code_input";
+
   return (
-    <div className="ui-page-surface" data-testid="practice-review-exercise-card">
+    <div
+      className={
+        isCodeExercise
+          ? "ui-page-surface"
+          : "ui-page-surface mx-auto w-full max-w-4xl"
+      }
+      data-testid="practice-review-exercise-card"
+    >
       <QuizPracticeCard
         q={question}
         ownerCardId={`standalone-${props.experienceMode}`}

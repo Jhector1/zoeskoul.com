@@ -9,12 +9,50 @@ import { useToolCodeRunnerState } from "@/components/review/module/hooks/useTool
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
+import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 function firstText(...values: unknown[]) {
   for (const value of values) {
     if (typeof value === "string" && value.trim()) return value.trim();
   }
   return null;
+}
+
+export function buildStandalonePracticeToolsResetKey(args: {
+  experienceMode: PracticeShellProps["experienceMode"];
+  subjectSlug?: string | null;
+  moduleSlug?: string | null;
+  runtimeResetRevision: number;
+}) {
+  return [
+    "standalone-practice-tools",
+    args.experienceMode,
+    args.subjectSlug ?? "practice",
+    args.moduleSlug ?? args.experienceMode,
+    args.runtimeResetRevision,
+  ].join(":");
+}
+
+export function isStandalonePracticeCodeExercise(
+  exerciseKind: string | null | undefined,
+) {
+  return exerciseKind === "code_input";
+}
+
+export function shouldShowStandalonePracticeCodeTool(args: {
+  busy: boolean;
+  exerciseKind?: string | null;
+  currentExerciseKind?: string | null;
+}) {
+  if (args.busy) return true;
+
+  return isStandalonePracticeCodeExercise(
+    args.exerciseKind ?? args.currentExerciseKind,
+  );
+}
+
+export function resolveStandalonePracticeTopicId(...values: unknown[]) {
+  return normalizeTopicProgressKey(firstText(...values, "all") ?? "all");
 }
 
 export function useStandalonePracticeTools(args: {
@@ -40,12 +78,11 @@ export function useStandalonePracticeTools(args: {
 
   const topicId = useMemo(
     () =>
-      firstText(
+      resolveStandalonePracticeTopicId(
         props.exercise?.topic,
         props.topic,
         (props.current as any)?.topic,
-        "all",
-      ) ?? "all",
+      ),
     [props.current, props.exercise?.topic, props.topic],
   );
 
@@ -80,6 +117,22 @@ export function useStandalonePracticeTools(args: {
   const codeInputId = useMemo(
     () => `standalone-code:${exerciseStateKey}`,
     [exerciseStateKey],
+  );
+
+  const providerResetKey = useMemo(
+    () =>
+      buildStandalonePracticeToolsResetKey({
+        experienceMode: props.experienceMode,
+        subjectSlug: props.subjectSlug,
+        moduleSlug: props.moduleSlug,
+        runtimeResetRevision,
+      }),
+    [
+      props.experienceMode,
+      props.moduleSlug,
+      props.subjectSlug,
+      runtimeResetRevision,
+    ],
   );
 
   const tool = useToolCodeRunnerState({
@@ -117,22 +170,35 @@ export function useStandalonePracticeTools(args: {
     () => ({
       enabled: true,
       mode: "manual" as const,
-      resetKey: `${exerciseStateKey}:${runtimeResetRevision}`,
+      // Keep the provider stable while moving between questions. The rendered
+      // ExerciseRenderer already unregisters the previous input and registers
+      // the new one. Resetting the provider on every exercise can run after the
+      // child registration effect and erase the new registry entry, leaving
+      // Tools permanently stuck on "Editor is waiting for the exercise."
+      resetKey: providerResetKey,
       ensureVisible,
       onBindToToolsPanel: bind,
       onUnbindFromToolsPanel: unbind,
     }),
-    [bind, ensureVisible, exerciseStateKey, runtimeResetRevision, unbind],
+    [bind, ensureVisible, providerResetKey, unbind],
   );
+
+  const exerciseLoading = props.busy && !props.exercise;
+  const codeToolEnabled = shouldShowStandalonePracticeCodeTool({
+    busy: props.busy,
+    exerciseKind: props.exercise?.kind,
+    currentExerciseKind: props.current?.exercise?.kind,
+  });
 
   const panelProps = useMemo<ComponentProps<typeof ToolsPanel>>(
     () => ({
       onCollapse,
       onUnbind: unbind,
-      boundId: tool.boundId ?? exerciseStateKey,
+      boundId: codeToolEnabled ? tool.boundId ?? exerciseStateKey : null,
       pendingExerciseBinding:
-        props.exercise?.kind === "code_input" && !tool.boundId,
-      editorOwnerKey: exerciseStateKey,
+        codeToolEnabled &&
+        (exerciseLoading || tool.boundId !== exerciseStateKey),
+      editorOwnerKey: codeToolEnabled ? exerciseStateKey : null,
       toolScopeKey: exerciseStateKey,
       rightBodyRef: tool.rightBodyRef,
       codeRunnerRegionH: tool.codeRunnerRegionH,
@@ -150,7 +216,12 @@ export function useStandalonePracticeTools(args: {
       subjectSlug: props.subjectSlug ?? "practice",
       moduleId: props.moduleSlug ?? props.experienceMode,
       locale: props.locale ?? "en",
-      codeEnabled: true,
+      codeEnabled: codeToolEnabled,
+      // While the exercise payload is still loading, keep the code surface
+      // active and disable Notes so the panel cannot fall back to a blank
+      // notes document. Once a code exercise is ready, Notes are available
+      // again from the normal tools menu.
+      notesEnabled: !exerciseLoading,
       // Only the standard review/practice experience exposes Notes and the
       // collapse menu. Daily Practice and public challenges stay task-focused.
       showHeader:
@@ -164,7 +235,10 @@ export function useStandalonePracticeTools(args: {
       sqlInitialTableSnapshots: tool.toolSqlInitialTableSnapshots,
     }),
     [
+      codeToolEnabled,
+      exerciseLoading,
       exerciseStateKey,
+      providerResetKey,
       onCollapse,
       props.experienceMode,
       props.locale,
@@ -180,6 +254,8 @@ export function useStandalonePracticeTools(args: {
     exerciseStateKey,
     codeInputId,
     cardId,
+    codeToolEnabled,
+    exerciseLoading,
     providerProps,
     panelProps,
   };

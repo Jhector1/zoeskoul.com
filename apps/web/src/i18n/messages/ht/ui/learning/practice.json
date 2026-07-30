@@ -213,7 +213,7 @@
       "generic": "Gen done atann disponib."
     },
     "errors": {
-      "incompleteAnswer": "Repons lan pa konplè oswa li pa valab.",
+      "incompleteAnswer": "Ranpli repons ou anvan ou verifye li.",
       "failedToSubmit": "Nou pa t ka soumèt",
       "failedToLoad": "Nou pa t ka chaje kesyon an"
     },

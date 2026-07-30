@@ -30,6 +30,7 @@ import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { emitSfx } from "@/lib/sfx/bus";
 import {
   buildLocalMissed,
+  buildPracticeAnswer,
   computePracticeCounts,
   computePracticePct,
   historyRowToQItem,
@@ -913,8 +914,30 @@ export function usePracticeEngine(args: {
     if (current.submitted) return;
     if (isLockedRun && (current.attempts ?? 0) >= maxAttempts) return;
 
-    submitLockRef.current = true;
     setActionErr(null);
+
+    const pendingSubmission = buildPracticeAnswer({
+      item: current,
+      exercise,
+      padRef,
+    });
+
+    if (!pendingSubmission.answer) {
+      updateCurrent({
+        ...(pendingSubmission.statePatch ?? {}),
+        result: {
+          ok: false,
+          expected: null,
+          explanation: t("errors.incompleteAnswer"),
+          finalized: false,
+        },
+        submitted: false,
+        feedbackDismissed: false,
+      });
+      return;
+    }
+
+    submitLockRef.current = true;
 
     try {
       setSubmitBusy(true);
