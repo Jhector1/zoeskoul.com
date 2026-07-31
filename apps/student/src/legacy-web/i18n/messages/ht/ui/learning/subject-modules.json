@@ -1,0 +1,40 @@
+{
+  "subjectModulesUi": {
+    "kickerSubject": "Sijè",
+    "unlockEnabled": "DEBLOKAJ AKTIF",
+    "overallProgress": "Pwogrè jeneral",
+    "syncing": "Ap senkronize…",
+    "topicsRatio": "{done}/{total} tèm",
+    "modulesRatio": "• {done}/{total} modil",
+    "changeSubject": "← Chanje sijè",
+    "kickerModule": "Modil",
+    "pillCompleted": "✓ Fini",
+    "pillLocked": "🔒 Fèmen",
+    "pillPremium": "💎 Prim",
+    "pillInProgress": "↻ An kou",
+    "pillNotStarted": "• Pa kòmanse",
+    "weeksLabel": "Semèn",
+    "sectionsLabel": "Seksyon",
+    "topicsLabel": "Tèm",
+    "noTopics": "Pa gen tèm",
+    "topicsComplete": "{done}/{total} tèm fini",
+    "completedShort": "Fini",
+    "cta": {
+      "signInToUnlock": "Konekte pou debloke →",
+      "unlock": "Debloke →",
+      "review": "Revize modil la →",
+      "continue": "Kontinye →",
+      "start": "Kòmanse →"
+    },
+    "empty": {
+      "title": "Pa gen modil ankò",
+      "desc": "Ajoute omwen yon modil pou sijè sa a pou pèmèt navigasyon."
+    },
+    "errors": {
+      "missingSubjectTitle": "Sijè pa la",
+      "missingSubjectDesc": "Paramèt subjectSlug pa la.",
+      "notFoundTitle": "Nou pa jwenn sijè a",
+      "notFoundDesc": "Pa gen sijè ak slug “{slug}”."
+    }
+  }
+}

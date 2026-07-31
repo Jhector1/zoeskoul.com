@@ -1,0 +1,345 @@
+{
+  "topicId": "tuple-records-and-unpacking",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python-data-functions-python-5-list-basics",
+  "prefix": "py5",
+  "minutes": 28,
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-tuple-records-sketch0",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.prompt",
+        "exerciseKey": "try-tuple-records-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-tuple-unpacking-sketch1",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.prompt",
+        "exerciseKey": "try-tuple-unpacking-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-2.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-tuple-records-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Austin\nTX\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\blocation\\s*=\\s*\\(\\s*[\\'\\\"]Austin[\\'\\\"]\\s*,\\s*[\\'\\\"]TX[\\'\\\"]\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "location[0]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\blocation\\s*=\\s*\\(\\s*[\\'\\\"]Austin[\\'\\\"]\\s*,\\s*[\\'\\\"]TX[\\'\\\"]\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "location[0]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "try-tuple-unpacking-sketch1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Workshop\n24\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btitle\\s*,\\s*seats\\s*=\\s*event\\b",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.sourceChecks.0.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btitle\\s*,\\s*seats\\s*=\\s*event\\b",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "sc-tuple-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-tuple-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-tuple-facts",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.mc-tuple-facts",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-tuple-index",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.fb-tuple-index",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "fill_blank_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-tuple-unpack",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.dr-tuple-unpack",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+@layer components {
+    .ui-skel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        background: rgba(228, 228, 231, 0.7); /* zinc-200/70 */
+    }
+
+    .dark .ui-skel {
+        background: rgba(255, 255, 255, 0.10);
+    }
+
+    .ui-skel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.55),
+                transparent
+        );
+        animation: ui-skel-shimmer 1.15s infinite;
+    }
+
+    .dark .ui-skel::after {
+        background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.12),
+                transparent
+        );
+    }
+
+    @keyframes ui-skel-shimmer {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ui-skel::after {
+            animation: none;
+        }
+    }
+    /* add once: src/styles/ui/reviewModuleSkeleton.css (or wherever you keep tokens) */
+    @layer utilities {
+        @keyframes ui-shimmer {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    }
+}

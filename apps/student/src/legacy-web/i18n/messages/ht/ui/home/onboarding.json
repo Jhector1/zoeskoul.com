@@ -1,0 +1,200 @@
+{
+  "homeOnboarding": {
+    "common": {
+      "notSet": "Pa defini",
+      "featured": "Mete an avan",
+      "guide": "Gid",
+      "mvp": ""
+    },
+    "labels": {
+      "language": {
+        "english": "English",
+        "french": "Français",
+        "haitian-creole": "Kreyòl"
+      },
+      "level": {
+        "beginner": "Debitan",
+        "intermediate": "Entèmedyè",
+        "advanced": "Avanse"
+      },
+      "studyTime": {
+        "1-2-hours": "1 a 2 èdtan",
+        "3-5-hours": "3 a 5 èdtan",
+        "6-plus-hours": "6+ èdtan"
+      },
+      "theme": {
+        "light": "Klè",
+        "dark": "Fonse"
+      }
+    },
+    "welcome": {
+      "fallbackGoals": "objektif aprantisaj ou yo",
+      "new": "Ou pare pou kòmanse ak {interestText}. Fè yon ti leson, eseye yon defi, epi kontinye bati sou sa.",
+      "returning": "Byen retounen. Kontinye ak {interestText}, eseye dènye defi a, oswa dekouvri yon bagay nouvo."
+    },
+    "interestSummary": {
+      "empty": "Chwazi yon sijè epi n ap ede w jwenn yon bon kote pou kòmanse.",
+      "focused": "W ap aprann {interests}. Ann kontinye ak menm elan an."
+    },
+    "gate": {
+      "kicker": "Byenveni",
+      "title": "Ann konfigire paj dakèy {appName} ou a.",
+      "description": "Reponn kèk kestyon rapid pou pèsonalize lang, sijè, nivo, ritm, ak tèm nan. Ou ka chanje tout bagay pita."
+    },
+    "hero": {
+      "kicker": "Espas aprantisaj ou",
+      "title": "Aprann nan pratike, yon etap klè alafwa.",
+      "descriptionFresh": "Chwazi sa ou vle aprann, mete yon ritm ki mache ak semèn ou, epi antre nan yon leson oswa yon defi lè ou pare.",
+      "chooseSubject": "Chwazi yon sijè pou eseye",
+      "continueLearning": "Kontinye aprann",
+      "try3Questions": "Kòmanse 3 kestyon",
+      "startingTrial": "N ap kòmanse esè a...",
+      "openGuide": "Konfigire aprantisaj mwen",
+      "exploreSubjects": "Gade sijè yo",
+      "editPreferences": "Ajiste konfigirasyon mwen",
+      "editAnswers": "Modifye repons mwen yo",
+      "currentTheme": "Tèm: {theme}",
+      "continueLesson": "Kontinye leson an",
+      "startLearning": "Kòmanse aprann",
+      "exploreLessons": "Eksplore leson yo",
+      "learningOpening": "Ap ouvri leson ou an…"
+    },
+    "practiceCard": {
+      "guestKicker": "Pratik gratis",
+      "dailyKicker": "Pratik chak jou",
+      "guestTitle": "Kòmanse ak {count} kestyon gratis.",
+      "dailyTitle": "Pran yon ti tan pou pratike jodi a.",
+      "guestDescription": "Dekouvri ZoeSkoul ak yon ti seri kesyon gide. Ou pa bezwen yon kont.",
+      "dailyDescription": "Travay sou {count} kesyon ki konsantre epi kontinye avanse nan aprantisaj ou.",
+      "guestCta": "Kòmanse {count} kestyon gratis",
+      "dailyCta": "Kòmanse pratik jodi a",
+      "opening": "Ap ouvri pratik la…",
+      "unlimitedKicker": "Pratik san limit",
+      "unlimitedTitle": "Pratike egzakteman sa ou bezwen.",
+      "unlimitedDescription": "Chwazi yon katalòg, yon kou, yon modil, yon seksyon ak yon sijè, epi pratike kantite ou vle avèk plan ou.",
+      "unlimitedCta": "Chwazi pratik"
+    },
+    "steps": {
+      "preferredLanguage": {
+        "title": "Ki lang {appName} dwe itilize pou eksperyans ou a?",
+        "description": "Sa fikse lang pa default pou akey, navigasyon, ak tèks pratik yo kote tradiksyon disponib."
+      },
+      "learningInterests": {
+        "title": "Sou ki sa ou vle konsantre an premye?",
+        "description": "{appName} ap bay priyorite a bon sijè yo, bon pwen depa yo, ak bon sijesyon pratik sou paj dakèy ou.",
+        "catalogPicker": {
+          "catalogLabel": "Chwazi yon katalòg",
+          "catalogHelp": "Kou ki anba yo ap chanje lè ou chwazi yon lòt katalòg.",
+          "coursesTitle": "Kou nan {catalog}",
+          "oneCourse": "1 kou",
+          "manyCourses": "{count} kou",
+          "oneSelected": "1 chwazi",
+          "manySelected": "{count} chwazi",
+          "showMore": "Montre {count} anplis",
+          "showLess": "Montre mwens"
+        }
+      },
+      "level": {
+        "title": "Ki nivo ou ye kounye a?",
+        "description": "Sa ede {appName} deside si l ap kòmanse ak baz yo, pratik melanje, oswa materyèl ki pi avanse."
+      },
+      "studyTime": {
+        "title": "Konbyen tan ou vle etidye chak semèn?",
+        "description": "Ritm etid ou chak semèn ede rekòmandasyon yo rete reyalis epi pa twò chaje."
+      },
+      "discoverySource": {
+        "title": "Kijan ou te tande pale de {appName}?",
+        "description": "Sa ede nou konprann ki chanèl k ap mennen bon aprenan yo vin jwenn nou epi amelyore onboarding la sou tan."
+      },
+      "themePreference": {
+        "title": "Ki tèm ou ta renmen itilize?",
+        "description": "Chwazi aparans ki pi konfòtab pou lekti, kòd, ak pratik chak jou."
+      },
+      "trialIntent": {
+        "title": "Èske ou ta renmen eseye 3 kestyon apre sa?",
+        "description": "Kòmanse yon ti esè kounye a, oswa retounen sou li pita depi paj dakèy la."
+      },
+      "choices": {
+        "themeLightHint": "Klè ak pwòp pou etid lajounen.",
+        "themeDarkHint": "Pi dous pou je yo nan limyè fèb oswa pandan sesyon ki long.",
+        "trialNowLabel": "Wi, kite m eseye kounye a",
+        "trialNowHint": "N ap lanse yon ti esè pratik 3 kestyon apre konfigirasyon an.",
+        "trialLaterLabel": "Pita",
+        "trialLaterHint": "Ou ka kòmanse depi paj dakèy la nenpòt lè ou pare.",
+        "search": "Rechèch",
+        "friend": "Zanmi oswa kolèg",
+        "social": "Rezo sosyal",
+        "school-work": "Lekòl oswa travay",
+        "other": "Lòt"
+      }
+    },
+    "panel": {
+      "title": "Pèsonalize espas ou a",
+      "description": "Reponn kèk kestyon rapid. Ou ka modifye tout bagay pita.",
+      "skip": "Sote",
+      "step": "Etap {current} sou {total}",
+      "back": "Retounen",
+      "continue": "Kontinye",
+      "finish": "Fini konfigirasyon an"
+    },
+    "guideCard": {
+      "personalized": "Nou pare lè ou pare",
+      "ready": "Ann jwenn bon kote pou w kòmanse",
+      "start": "Kòmanse",
+      "updatePreferences": "Ajiste konfigirasyon an"
+    },
+    "highlights": {
+      "kicker": "Fèt pou ou",
+      "title": "Yon chemen aprantisaj ki adapte ak objektif ou yo.",
+      "description": "Lang ou, nivo eksperyans ou, ak ritm chak semèn ou ede ZoeSkoul rekòmande bon pwochen etap la.",
+      "cards": {
+        "language": {
+          "title": "Lang",
+          "text": "Aprann nan lang ki pi konfòtab pou ou."
+        },
+        "level": {
+          "title": "Nivo",
+          "text": "Kòmanse nan bon nivo a san w pa repete sa ou deja konnen."
+        },
+        "pace": {
+          "title": "Ritm chak semèn",
+          "text": "Chwazi yon ritm chak semèn ou kapab kenbe toutbon."
+        }
+      }
+    },
+    "recommended": {
+      "kicker": "Chwazi pwochen chemen ou",
+      "title": "Kòmanse ak yon bagay ou anvi bati.",
+      "titleWithCurrent": "Kontinye aprann oswa chwazi sa k ap vini apre.",
+      "viewAll": "Gade tout sijè yo",
+      "current": "Aktyèl",
+      "recommendation": "Rekòmande",
+      "continueSubject": "Kontinye kou a",
+      "exploreSubject": "Eksplore sijè a"
+    },
+    "floatingAssistant": {
+      "title": "Ou vle chanje konfigirasyon ou?",
+      "subtitle": "Lang, nivo, ritm, ak plis ankò"
+    },
+    "trial": {
+      "chooseSubjectError": "Chwazi yon sijè anvan.",
+      "startError": "Nou pa t ka kòmanse esè a kounye a.",
+      "overlayTitle": "N ap prepare premye sesyon pratik ou a.",
+      "overlayDescription": "Sa ap pran yon ti moman sèlman."
+    },
+    "entry": {
+      "kicker": "Byenvini",
+      "title": "Byenvini sou {appName}",
+      "description": "Ann ede w ale nan bon kote a. Èske ou nouvo isit la, oswa èske ou deja gen yon kont?",
+      "avatarText": "Bonjou, mwen se gid ou. Èske ou nouvo isit la, oswa èske ou deja gen yon kont?",
+      "newUser": "Mwen nouvo isit la",
+      "returningUser": "Mwen deja gen yon kont",
+      "helper": "Nouvo itilizatè yo kòmanse ak onboarding. Itilizatè ki deja egziste yo ale konekte."
+    },
+    "latestChallenge": {
+      "eyebrow": "Dènye defi chak jou",
+      "noAccount": "Ou pa bezwen kont",
+      "cta": "Ouvri defi a"
+    }
+  }
+}

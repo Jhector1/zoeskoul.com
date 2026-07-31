@@ -1,0 +1,30 @@
+{
+  "ExerciseRenderer": {
+    "singleChoice": {
+      "chooseOne": "Chwazi youn"
+    }
+  },
+  "practiceUi": {
+    "singleChoice": {
+      "chooseOne": "Chwazi youn",
+      "storedAsPrefix": "Sove kòm",
+      "storedAsSuffix": "pou voye."
+    },
+    "codeInput": {
+      "tools": {
+        "title": "Modifye epi kouri nan Zouti",
+        "language": "Langaj",
+        "stdin": "Stdin",
+        "bindTitle": "Mare kestyon sa a ak panèl Zouti",
+        "bound": "Mare ✓",
+        "open": "Ouvri nan Zouti",
+        "codeSnapshot": "Kòd ou a (snapshot)",
+        "stdinSnapshot": "Stdin (snapshot)",
+        "emptyCode": "// Ouvri Zouti → pou ekri kòd"
+      },
+      "correctSolution": "Solisyon kòrèk",
+      "yes": "wi",
+      "no": "non"
+    }
+  }
+}

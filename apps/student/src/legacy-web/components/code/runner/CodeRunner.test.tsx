@@ -1,0 +1,800 @@
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it, vi } from "vitest";
+import CodeRunner, {
+    restartWorkspaceTerminalSession,
+    resolveMobileKeyboardViewport,
+    resolveSqlMobilePaneDefault,
+    resolveRunnerPaneDefaultTab,
+    resolveWorkspaceTerminalPresentation,
+    resolveWorkspaceTerminalLeaseKey,
+    resolveWorkspaceTerminalTabStrip,
+    shouldAttachWorkspaceTerminalTab,
+    workspaceTerminalRuntimeBridgePropsEqual,
+    shouldCollapseIdleOutputPanel,
+    shouldAutoOpenWorkspaceTerminal,
+    shouldOpenEditorForWorkspaceFileSelection,
+} from "@/components/code/runner/CodeRunner";
+
+vi.mock("next-intl", () => ({
+    useTranslations: () => (key: string) => key,
+}));
+
+vi.mock("next-themes", () => ({
+    useTheme: () => ({
+        resolvedTheme: "dark",
+    }),
+}));
+
+vi.mock("@/components/markdown/MathMarkdown", () => ({
+    default: () => null,
+}));
+
+vi.mock("@/components/code/runner/components/EditorPane", () => ({
+    default: () => <div data-testid="mock-editor-pane" />,
+}));
+
+vi.mock("@/components/code/runner/components/OutputSurface", () => ({
+    default: () => <div data-testid="mock-output-surface" />,
+}));
+
+vi.mock("@/components/code/runner/components/XtermTerminal", () => ({
+    default: () => <div data-testid="mock-xterm-terminal" />,
+}));
+
+vi.mock("@/components/code/runner/hooks/useSplitSizing", () => ({
+    useSplitSizing: () => ({
+        mainH: 320,
+        bottomEditorH: 160,
+        bottomTermH: 160,
+        rightTotalH: 320,
+        termW: 240,
+        separatorProps: {},
+        onPointerDownSplit: vi.fn(),
+    }),
+}));
+
+vi.mock("@/components/code/runner/hooks/controller/useCodeRunnerController", () => ({
+    useCodeRunnerController: () => ({
+        busy: false,
+        runState: "idle",
+        lastResult: null,
+        cancelRun: vi.fn(),
+        resetTerminal: vi.fn(),
+        startRun: vi.fn(),
+    }),
+}));
+
+vi.mock("@/components/code/runner/hooks/controller/useResolvedRuntime", () => ({
+    resolveRuntime: (runtime: unknown) => runtime,
+}));
+
+vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () => ({
+    useWorkspaceTerminalController: (args: any) => {
+        return {
+            available: true,
+            terminalFeed: [],
+            terminalEvidence: { commands: [], outputText: "" },
+            getTerminalEvidenceNow: () => ({ commands: [], outputText: "" }),
+            inputEnabled: true,
+            interactiveReady: true,
+            disconnectedInputGuardActive: false,
+            busy: false,
+            syncStatus: "idle",
+            recoverState: "none",
+            recoverMessage: null,
+            restarting: false,
+            stopping: false,
+            connectionState: "connected",
+            socketReadyState: 1,
+            lastSocketMessageAt: Date.now(),
+            sendData: vi.fn(),
+            resize: vi.fn(),
+            beforeSubmitEnter: vi.fn(),
+            afterSubmitEnter: vi.fn(),
+            handleDisconnectedInputAttempt: vi.fn(),
+            sessionId: "session-1",
+            attachedOwnerKey: args.terminalOwnerKey ?? null,
+            displayedOwnerKey: args.terminalOwnerKey ?? null,
+            started: true,
+            starting: false,
+            state: "ready",
+            open: vi.fn(),
+            stop: vi.fn(),
+            reset: vi.fn(),
+            restart: vi.fn(),
+            replaceFiles: vi.fn(),
+            snapshotFiles: vi.fn(),
+            syncWorkspaceNow: vi.fn(),
+        };
+    },
+}));
+
+describe("CodeRunner persistent terminal controllers", () => {
+    const ownerKey = "terminal-host:window:owner:terminal-1";
+    const DUMMY_CONTROLLER = {
+        starting: false,
+        stopping: false,
+        restarting: false,
+    };
+
+    function controller(overrides: Record<string, unknown> = {}) {
+        return {
+            ...DUMMY_CONTROLLER,
+            available: true,
+            sessionId: "session-1",
+            attachedOwnerKey: ownerKey,
+            interactiveReady: true,
+            ...overrides,
+        } as any;
+    }
+
+    it("does not reattach a terminal whose own persistent controller is already interactive", () => {
+        expect(
+            shouldAttachWorkspaceTerminalTab({
+                ownerKey,
+                controller: controller(),
+            }),
+        ).toBe(false);
+    });
+
+    it("reattaches only when that terminal has no live interactive controller", () => {
+        expect(
+            shouldAttachWorkspaceTerminalTab({
+                ownerKey,
+                controller: controller({
+                    sessionId: null,
+                    attachedOwnerKey: null,
+                    interactiveReady: false,
+                }),
+            }),
+        ).toBe(true);
+    });
+
+    it("does not republish a runtime when only the controller config object is recreated", () => {
+        const getWorkspaceFiles = vi.fn(() => []);
+        const onTerminalSnapshotFiles = vi.fn();
+        const onControllerChange = vi.fn();
+        const base = {
+            terminalId: "primary",
+            runtimeKey: "host\0owner\0workspace",
+            onControllerChange,
+            controllerConfig: {
+                enabled: true,
+                getWorkspaceFiles,
+                onTerminalSnapshotFiles,
+            },
+        } as any;
+
+        expect(
+            workspaceTerminalRuntimeBridgePropsEqual(base, {
+                ...base,
+                controllerConfig: { ...base.controllerConfig },
+            }),
+        ).toBe(true);
+    });
+
+    it("rerenders the bridge when a live workspace callback changes", () => {
+        const base = {
+            terminalId: "primary",
+            runtimeKey: "host\0owner\0workspace",
+            onControllerChange: vi.fn(),
+            controllerConfig: {
+                enabled: true,
+                getWorkspaceFiles: vi.fn(() => []),
+                onTerminalSnapshotFiles: vi.fn(),
+            },
+        } as any;
+
+        expect(
+            workspaceTerminalRuntimeBridgePropsEqual(base, {
+                ...base,
+                controllerConfig: {
+                    ...base.controllerConfig,
+                    getWorkspaceFiles: vi.fn(() => []),
+                },
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("CodeRunner terminal tab presentation", () => {
+    const tabs = [
+        { id: "primary", label: "Terminal 1" },
+        { id: "terminal-2", label: "Terminal 2" },
+    ];
+
+    it("shows a creating terminal as a placeholder until its shell is ready", () => {
+        expect(
+            resolveWorkspaceTerminalTabStrip({
+                tabs,
+                pendingTerminalStartId: "terminal-2",
+                pendingTerminalStartMode: "create",
+            }),
+        ).toEqual({
+            visibleTabs: [{ id: "primary", label: "Terminal 1" }],
+            pendingTab: { id: "terminal-2", label: "Terminal 2" },
+        });
+    });
+
+    it("keeps an existing tab visible while it reattaches", () => {
+        expect(
+            resolveWorkspaceTerminalTabStrip({
+                tabs,
+                pendingTerminalStartId: "terminal-2",
+                pendingTerminalStartMode: "attach",
+            }),
+        ).toEqual({
+            visibleTabs: tabs,
+            pendingTab: null,
+        });
+    });
+
+    it("keeps an existing terminal transcript visible while its socket reattaches", () => {
+        expect(
+            resolveWorkspaceTerminalPresentation({
+                activationPending: true,
+                mode: "attach",
+                displayMatches: true,
+                controllerMatches: false,
+            }),
+        ).toEqual({
+            showOpening: false,
+            showTranscript: true,
+            inputAttached: false,
+        });
+    });
+
+    it("keeps new-terminal startup messaging out of the terminal viewport", () => {
+        expect(
+            resolveWorkspaceTerminalPresentation({
+                activationPending: true,
+                mode: "create",
+                displayMatches: true,
+                controllerMatches: false,
+            }),
+        ).toEqual({
+            showOpening: false,
+            showTranscript: true,
+            inputAttached: false,
+        });
+    });
+});
+
+
+describe("CodeRunner SQL narrow-pane defaults", () => {
+    it("opens the output surface when a SQL lesson authors a default data tab", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("output");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { defaultTab: "erd" },
+            }),
+        ).toBe("output");
+    });
+
+
+    it("lets the explicit outer surface override legacy SQL tab inference", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                defaultSurface: "editor",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                defaultSurface: "results",
+            }),
+        ).toBe("output");
+    });
+
+    it("also honors a compact SQL default and preserves normal editor behavior otherwise", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { compactDefaultTab: "results" },
+            }),
+        ).toBe("output");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+            }),
+        ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "python",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "bash",
+                runnerPaneOptions: { defaultTab: "terminal" },
+            }),
+        ).toBe("output");
+    });
+});
+
+describe("CodeRunner runner-pane defaults", () => {
+    it("selects the authored terminal tab only when a workspace terminal is available", () => {
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy: { defaultTab: "terminal" },
+                compact: false,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("terminal");
+
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy: { defaultTab: "terminal" },
+                compact: false,
+                terminalAvailable: false,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("output");
+    });
+
+    it("resolves compact overrides without changing the desktop default", () => {
+        const policy = {
+            defaultTab: "output" as const,
+            compactDefaultTab: "terminal" as const,
+        };
+
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy,
+                compact: false,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("output");
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy,
+                compact: true,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("terminal");
+    });
+
+    it("opens the terminal tab for an editor-and-terminal workspace when authored", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="bash"
+                code="git status"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal
+                workspaceTerminal={{ enabled: true }}
+                runnerPaneOptions={{ defaultTab: "terminal" }}
+                isAuthenticated
+                showHeaderBar={false}
+            />,
+        );
+
+        expect(html).toContain('data-testid="mock-xterm-terminal"');
+        expect(html).not.toContain('data-testid="mock-output-surface"');
+    });
+});
+
+describe("CodeRunner mobile keyboard viewport", () => {
+    it("detects a focused editor keyboard and returns the visible height below the runner", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 390,
+                visualViewportOffsetTop: 0,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 210,
+                editorHasTextFocus: true,
+            }),
+        ).toMatchObject({
+            keyboardOpen: true,
+            availableHeight: 172,
+        });
+    });
+
+    it("does not enter keyboard mode for a viewport resize without editor focus", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 390,
+                visualViewportOffsetTop: 0,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 210,
+                editorHasTextFocus: false,
+            }).keyboardOpen,
+        ).toBe(false);
+    });
+
+    it("accounts for the visual viewport offset when the browser pans the page", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 360,
+                visualViewportOffsetTop: 40,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 120,
+                editorHasTextFocus: true,
+                bottomPadding: 10,
+            }).availableHeight,
+        ).toBe(270);
+    });
+});
+
+describe("CodeRunner narrow-screen file navigation", () => {
+    it("opens the editor when the selected workspace file changes", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "models/car.py",
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(true);
+    });
+
+    it("opens the editor when the learner reselects the active file", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "main.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 3,
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(true);
+    });
+
+    it("does not change panes on desktop or without a selection", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "models/car.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 3,
+                isNarrowScreen: false,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(false);
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "main.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 2,
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("CodeRunner terminal-only mode", () => {
+    it("renders terminal-only workspace mode without an editor or Output switcher", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="python"
+                code="print('hi')"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor={false}
+                showTerminal
+                workspaceTerminal={{ enabled: true }}
+                isAuthenticated
+                editorTestId="editor-pane"
+                outputTestId="output-pane"
+                showHeaderBar={false}
+            />,
+        );
+
+        expect(html).toContain('data-testid="output-pane"');
+        expect(html).toContain('data-testid="mock-xterm-terminal"');
+        expect(html).not.toContain('data-testid="mock-output-surface"');
+        expect(html).not.toContain('data-testid="editor-pane"');
+        expect(html).not.toContain('data-testid="mock-editor-pane"');
+        expect(html).toContain('aria-pressed="true"');
+        expect(html).toContain(">Terminal 1<");
+        expect(html).not.toContain(">Output<");
+    });
+
+    it("keeps terminal selected for terminal-only mode across exercise identities", () => {
+        const first = renderToStaticMarkup(
+            <CodeRunner
+                language="python"
+                code="print('hi')"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor={false}
+                showTerminal
+                workspaceTerminal={{ enabled: true }}
+                isAuthenticated
+                exerciseStateKey="exercise-a"
+                showHeaderBar={false}
+            />,
+        );
+
+        const second = renderToStaticMarkup(
+            <CodeRunner
+                language="python"
+                code="print('hi')"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor={false}
+                showTerminal
+                workspaceTerminal={{ enabled: true }}
+                isAuthenticated
+                exerciseStateKey="exercise-b"
+                showHeaderBar={false}
+            />,
+        );
+
+        expect(first).toContain('data-testid="mock-xterm-terminal"');
+        expect(first).not.toContain('data-testid="mock-output-surface"');
+        expect(second).toContain('data-testid="mock-xterm-terminal"');
+        expect(second).not.toContain('data-testid="mock-output-surface"');
+    });
+
+    it("uses the same topic workspace lease key across different bound exercises", () => {
+        const workspaceKey =
+            "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is";
+
+        const first = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey: workspaceKey,
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start",
+        });
+        const second = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey: workspaceKey,
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card-2:ci-make-command-practice",
+        });
+
+        expect(first).toBe(workspaceKey);
+        expect(second).toBe(workspaceKey);
+    });
+
+    it("falls back to the exercise identity without an authored workspace key", () => {
+        expect(
+            resolveWorkspaceTerminalLeaseKey({
+                exerciseStateKey: "exercise-a",
+            }),
+        ).toBe("exercise-a");
+    });
+
+    it("uses a new workspace lease key when the topic changes", () => {
+        const first = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is",
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:what-the-terminal-is:try-it-card:ci-create-linux-start",
+        });
+        const second = resolveWorkspaceTerminalLeaseKey({
+            authoredWorkspaceKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:where-am-i",
+            exerciseStateKey:
+                "linux-terminal-fundamentals:linux-1-terminal-navigation:linux-1-orientation:where-am-i:try-it-card:ci-pwd-practice",
+        });
+
+        expect(first).not.toBe(second);
+    });
+
+    it("shows open and restart terminal actions for workspace terminal mode", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="bash"
+                code="echo hi"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal
+                workspaceTerminal={{ enabled: true, workspaceKey: "linux:module:topic" }}
+                isAuthenticated
+                showHeaderBar
+            />,
+        );
+
+        expect(html).toContain('aria-label="Open terminal"');
+        expect(html).toContain('aria-label="Restart terminal"');
+    });
+
+    it("can hide open and restart terminal actions independently", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="bash"
+                code="echo hi"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal
+                workspaceTerminal={{ enabled: true, workspaceKey: "linux:module:topic" }}
+                isAuthenticated
+                showHeaderBar
+                showOpenTerminalButton={false}
+                showRestartTerminalButton={false}
+            />,
+        );
+
+        expect(html).not.toContain('aria-label="Open terminal"');
+        expect(html).not.toContain('aria-label="Restart terminal"');
+    });
+
+    it("restarts the workspace terminal by stopping and reopening the same session scope", async () => {
+        const steps: string[] = [];
+        const stop = vi.fn(async () => {
+            steps.push("stop");
+        });
+        const open = vi.fn(async () => {
+            steps.push("open");
+        });
+        const resetAutoOpen = vi.fn(() => {
+            steps.push("reset");
+        });
+
+        await restartWorkspaceTerminalSession({
+            resetAutoOpen,
+            workspaceTerm: { stop, open },
+        });
+
+        expect(steps).toEqual(["reset", "stop", "open"]);
+        expect(stop).toHaveBeenCalledTimes(1);
+        expect(open).toHaveBeenCalledTimes(1);
+    });
+
+    it("keeps normal editor mode rendering the editor", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="python"
+                code="print('hi')"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal={false}
+                editorTestId="editor-pane"
+                showHeaderBar={false}
+            />,
+        );
+
+        expect(html).toContain('data-testid="editor-pane"');
+        expect(html).toContain('data-testid="mock-editor-pane"');
+        expect(html).not.toContain('data-testid="mock-xterm-terminal"');
+    });
+});
+
+describe("shouldCollapseIdleOutputPanel", () => {
+    const baseArgs = {
+        compactLearnerUi: true,
+        showEditor: true,
+        showTerminal: true,
+        terminalOnlyMode: false,
+        isWeb: false,
+        language: "python" as const,
+        outputTab: "output" as const,
+        runner: {
+            busy: false,
+            runState: "idle" as const,
+            lastResult: null,
+            transcript: null,
+            stream: null,
+        },
+        workspaceTerminalEnabled: false,
+        workspaceTerminal: {
+            busy: false,
+            starting: false,
+            started: false,
+            sessionId: null,
+            inputEnabled: false,
+            terminalFeed: [],
+        },
+    };
+
+    it("collapses the output panel for compact idle runner state", () => {
+        expect(shouldCollapseIdleOutputPanel(baseArgs)).toBe(true);
+    });
+
+    it("keeps the output panel open after a run result exists", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                runner: {
+                    ...baseArgs.runner,
+                    lastResult: {
+                        ok: true,
+                        status: "Accepted",
+                        stdout: "",
+                    },
+                },
+            }),
+        ).toBe(false);
+    });
+
+    it("keeps the output panel open when workspace terminal output exists", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                workspaceTerminalEnabled: true,
+                workspaceTerminal: {
+                    ...baseArgs.workspaceTerminal,
+                    started: true,
+                    terminalFeed: [{ id: 1, kind: "pty", data: "ls\n" }],
+                },
+            }),
+        ).toBe(false);
+    });
+
+    it("preserves legacy idle behavior outside compact learner mode", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                compactLearnerUi: false,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("shouldAutoOpenWorkspaceTerminal", () => {
+    const baseArgs = {
+        outputTab: "terminal" as const,
+        workspaceTerminalEnabled: true,
+        recoverState: "none",
+        state: "idle",
+        restarting: false,
+        stopping: false,
+        sessionId: null,
+        started: false,
+        starting: false,
+        autoOpenAlreadyRequested: false,
+    };
+
+    it("allows the first automatic open for an idle visible terminal", () => {
+        expect(shouldAutoOpenWorkspaceTerminal(baseArgs)).toBe(true);
+    });
+
+    it("does not auto-retry the same terminal scope after one automatic attempt", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                autoOpenAlreadyRequested: true,
+            }),
+        ).toBe(false);
+    });
+
+    it("lets an explicit terminal-tab activation own the open transaction", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                activationPending: true,
+            }),
+        ).toBe(false);
+    });
+
+    it("does not auto-open after a failed terminal state", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                state: "failed",
+            }),
+        ).toBe(false);
+    });
+});

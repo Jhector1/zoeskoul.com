@@ -7,12 +7,12 @@ import {
 
 import { StudentAccessGate } from "./app/StudentAccessGate";
 import { StudentAppShell } from "./app/StudentAppShell";
+import { StudentThemeProvider } from "./platform/StudentThemeProvider";
+import { LegacyProviders } from "./compat/LegacyProviders";
+import { LegacyApiBridge } from "./compat/LegacyApiBridge";
 import "./shell.css";
-import "./learning/learning.css";
-import "./learning/shell-overrides.css";
-import "./courses/course-reader.css";
-import "./lessons/lesson-host.css";
 
+import "./legacy-web/styles/globals.css";
 export function App() {
   const apiOrigin =
     import.meta.env.VITE_API_ORIGIN ??
@@ -23,17 +23,23 @@ export function App() {
     getLocalAppOrigin("website");
 
   return (
-    <StudentAccessGate
-      apiOrigin={apiOrigin}
-      websiteOrigin={websiteOrigin}
-    >
-      {(session) => (
-        <StudentAppShell
-          apiOrigin={apiOrigin}
-          websiteOrigin={websiteOrigin}
-          session={session}
-        />
-      )}
-    </StudentAccessGate>
+    <StudentThemeProvider>
+      <StudentAccessGate
+        apiOrigin={apiOrigin}
+        websiteOrigin={websiteOrigin}
+      >
+        {(session) => (
+          <LegacyProviders session={session}>
+            <LegacyApiBridge apiOrigin={apiOrigin}>
+              <StudentAppShell
+                apiOrigin={apiOrigin}
+                websiteOrigin={websiteOrigin}
+                session={session}
+              />
+            </LegacyApiBridge>
+          </LegacyProviders>
+        )}
+      </StudentAccessGate>
+    </StudentThemeProvider>
   );
 }

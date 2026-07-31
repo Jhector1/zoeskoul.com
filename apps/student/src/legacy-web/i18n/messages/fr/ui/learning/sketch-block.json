@@ -1,0 +1,17 @@
+{
+  "sketchBlockUi": {
+    "finishPrereqs": "Terminez d’abord les éléments “Marquer comme lu” dans ce sujet.",
+    "locked": "Verrouillé.",
+    "autosave": "La progression est enregistrée automatiquement.",
+    "reset": "Réinitialiser",
+    "markRead": "Marquer comme lu",
+    "markedRead": "✓ Marqué comme lu",
+    "markReadTitle": "Marquer cette carte comme lue",
+    "resetDialog": {
+      "title": "Réinitialiser ce sketch ?",
+      "confirm": "Réinitialiser",
+      "line1": "Cela effacera vos saisies pour cette carte.",
+      "line2": "Action irréversible."
+    }
+  }
+}

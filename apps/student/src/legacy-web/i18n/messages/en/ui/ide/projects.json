@@ -1,0 +1,59 @@
+{
+  "ide": {
+    "projects": {
+      "scope": {
+        "module": "Module",
+        "assignment": "Assignment",
+        "template": "Template",
+        "personal": "Personal"
+      },
+      "language": {
+        "javascript": "JavaScript",
+        "cpp": "C++",
+        "c": "C",
+        "python": "Python",
+        "java": "Java",
+        "sql": "SQL"
+      },
+      "drawer": {
+        "closePanel": "Close projects panel",
+        "title": "Projects",
+        "close": "Close",
+        "searchPlaceholder": "Search projects…",
+        "refresh": "Refresh",
+        "current": "Current",
+        "allLanguages": "All languages",
+        "filters": {
+          "all": "All",
+          "recent": "Recent",
+          "personal": "Personal",
+          "module": "Module",
+          "assignment": "Assignment",
+          "template": "Template"
+        },
+        "newProject": "New Project",
+        "saveAs": "Save As",
+        "cloudSaveRequired": "Cloud save required",
+        "loading": "Loading projects…",
+        "emptyCurrent": "No saved {language} projects found.",
+        "emptyAll": "No saved projects found.",
+        "reload": "Reload",
+        "open": "Open",
+        "rename": "Rename",
+        "archive": "Archive",
+        "updatedAt": "Updated {time}"
+      },
+      "modals": {
+        "defaultPlaceholder": "Enter project name",
+        "cancel": "Cancel",
+        "working": "Working…",
+        "unsavedTitle": "You have unsaved changes.",
+        "unsavedDescription": "Save the current project before switching, or discard local changes and continue.",
+        "discardAndContinue": "Discard and continue",
+        "saveAndContinue": "Save and continue",
+        "saving": "Saving…",
+        "save": "Save"
+      }
+    }
+  }
+}

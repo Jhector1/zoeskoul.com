@@ -1,0 +1,507 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "search_and_cleanup_practice": {
+          "label": "Practice",
+          "summary": "Practice searching names, filtering customer groups, finding missing data, and combining text matching with NULL checks.",
+          "cards": {
+            "search_names": {
+              "title": "How do you search names?"
+            },
+            "filter_categories": {
+              "title": "How do you filter categories or groups?"
+            },
+            "find_missing_data": {
+              "title": "How do you find missing data?"
+            },
+            "combine_text_and_null_filters": {
+              "title": "How do you combine text and NULL filters?"
+            },
+            "project": {
+              "title": "Project: Search and Clean Customer Data"
+            },
+            "quiz": {
+              "title": "Quiz: Practice"
+            }
+          },
+          "projectSteps": {
+            "search_names_contains_li": {
+              "title": "Search names containing li"
+            },
+            "filter_status_groups": {
+              "title": "Filter status groups"
+            },
+            "find_missing_email": {
+              "title": "Find the missing email"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "search_and_cleanup_practice": {
+          "search_names": {
+            "title": "Searching names often uses LIKE and partial text patterns.",
+            "bodyMarkdown": "When customer names are searched, often only part of the text is known.\n\nThat makes tools like:\n\n- `LIKE`\n- `%`\n- `_`\n\nvery useful.\n\nCode example:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%li%';\n~~~\n\nThis keeps names that contain `li` somewhere inside them.\n\nSo the key idea is:\n\n> name search is often a text-pattern problem\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'Test%';\n~~~\n\nAsk yourself:\n\n- which part of the name is fixed?\n- which part can vary?\n- what kind of names should appear in the result?"
+          },
+          "filter_categories": {
+            "title": "Filtering categories or groups means keeping only the customer groups that matter.",
+            "bodyMarkdown": "In this dataset, customer groups can be things like:\n\n- status values such as `active`, `inactive`, or `draft`\n- city groups like `Chicago` or `Miami`\n- test versus non-test rows\n\nCode example:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');\n~~~\n\nThis keeps only rows from the chosen status groups.\n\nSo the main idea is:\n\n> filtering groups means keeping only the rows that belong to the right set\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n~~~\n\nAsk yourself:\n\n- which rows are allowed to stay?\n- what makes this a group filter instead of a text-pattern search?\n- how would the result change if `NOT IN` were used instead?"
+          },
+          "find_missing_data": {
+            "title": "Finding missing data means checking which important fields have no value.",
+            "bodyMarkdown": "Missing data can appear in columns like:\n\n- `email`\n- `city`\n\nThat matters because missing fields can affect reporting, communication, or cleanup tasks.\n\nCode example:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n~~~\n\nThis finds rows where the email field is missing.\n\nSo the idea is:\n\n> missing-data filters help find rows that need attention\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IS NULL;\n~~~\n\nAsk yourself:\n\n- which field is being checked?\n- what kind of rows should come back?\n- why is this useful in a cleanup task?"
+          },
+          "combine_text_and_null_filters": {
+            "title": "Combining text and NULL filters helps answer more realistic cleanup questions.",
+            "bodyMarkdown": "Real queries often mix two ideas at once.\n\nFor example, rows may be needed where:\n\n- the city starts with `Chi` and the email exists\n- the name starts with `Test` or the email is missing\n\nThat means text matching is combined with missing-data logic.\n\nCode example:\n\n~~~sql\nSELECT full_name, city, email\nFROM customers\nWHERE city LIKE 'Chi%' AND email IS NOT NULL;\n~~~\n\nThis keeps rows where the city matches the text pattern and the email is present.\n\nSo the big idea is:\n\n> realistic filtering often mixes pattern checks and NULL checks\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, email, status\nFROM customers\nWHERE full_name LIKE 'Test%' OR email IS NULL;\n~~~\n\nAsk yourself:\n\n- what are the two separate rules?\n- is one rule enough, or do both need to match?\n- what kind of rows should appear in the result?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m4_s04_search_names_contains_li": {
+      "title": "Search names",
+      "prompt": "The SQLite workspace already has a table named `customers`.\n\nWrite a query that shows only the `full_name` column for customers whose `full_name` contains `li` somewhere inside it.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Searching inside a text value usually uses `LIKE` with `%` around the known text.",
+        "hint_1": "Select only `full_name`, then search for names containing `li`.",
+        "hint_2": "Build a one-column query on `customers`, then use a pattern that allows any text before and after the letters `li`."
+      },
+      "hint": "Use `%` around the known text.",
+      "starterCode": "-- Show names that contain li\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_filter_status_groups": {
+      "title": "Filter customer groups",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `status` is either `active` or `inactive`.\n\nThen run it.",
+      "help": {
+        "concept": "When rows from one of several known groups are needed, list-based filtering works well.",
+        "hint_1": "Select `full_name` and `status`, then keep two allowed status values.",
+        "hint_2": "Write a two-column query on `customers`, then keep only rows whose status belongs to the allowed group list containing `active` and `inactive`."
+      },
+      "hint": "Use a list-style status filter.",
+      "starterCode": "-- Show active or inactive customers\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_find_missing_email": {
+      "title": "Find missing data",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `email` columns for customers whose `email` is missing.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Missing values are checked with NULL-specific syntax.",
+        "hint_1": "Select `full_name` and `email`, then check for missing email values.",
+        "hint_2": "Build a two-column query on `customers`, then keep only rows where the email field has no stored value."
+      },
+      "hint": "Use the missing-value check on email.",
+      "starterCode": "-- Show customers with missing email\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_combine_city_and_email_present": {
+      "title": "Combine text and NULL filters",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name`, `city`, and `email` columns for customers whose `city` starts with `Chi` and whose `email` is present.\n\nThen run it.",
+      "help": {
+        "concept": "Real filtering often combines text matching with a presence check for missing data.",
+        "hint_1": "Select the three requested columns, then write one text-pattern condition and one present-value condition.",
+        "hint_2": "Write a three-column query on `customers`, then keep only rows where the city matches the `Chi` prefix pattern and the email field contains a real value."
+      },
+      "hint": "Use a text pattern plus a non-missing email check.",
+      "starterCode": "-- Show Chicago-style city matches with present email\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_combine_test_or_missing": {
+      "title": "Combine another text and NULL filter",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name`, `email`, and `status` columns for customers whose `full_name` starts with `Test` or whose `email` is missing.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Text matching and NULL logic can also be combined with `OR` when either rule is enough.",
+        "hint_1": "Select the three requested columns, then write one text-pattern rule and one missing-email rule.",
+        "hint_2": "Build a three-column query on `customers`, then keep rows that either match the `Test` name prefix or have no stored email value."
+      },
+      "hint": "Use a text prefix rule and a missing-email rule with OR.",
+      "starterCode": "-- Show test-style names or missing-email customers\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_practice_project": {
+      "title": "Practice combined filtering",
+      "prompt": "Use the SQL workspace on the right to practice text matching, group filtering, and missing-data checks on the `customers` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. verify that the returned rows really match the intended logic\n\nTasks:\n\n1. Show only `full_name` for customers whose `full_name` contains `li`\n2. Show `full_name` and `status` for customers whose `status` is `active` or `inactive`\n3. Show `full_name` and `email` for customers whose `email` is missing\n4. Show `full_name`, `city`, and `email` for customers whose `city` starts with `Chi` and whose `email` is present\n5. Show `full_name`, `email`, and `status` for customers whose `full_name` starts with `Test` or whose `email` is missing\n\nRun one query at a time.\nThis project is about combining the main ideas from Module 4 in clear, realistic ways.",
+      "help": {
+        "concept": "This project combines name search, group filtering, missing-data checks, and mixed-condition logic into one realistic practice set.",
+        "hint_1": "Some tasks are pure text search, some are list-based group filters, some are NULL checks, and some mix both ideas together.",
+        "hint_2": "Before writing each query, decide which tools the task needs: text matching, list filtering, missing-data checks, or a combination of those."
+      },
+      "hint": "Choose the right filtering tools for each task.",
+      "starterCode": "-- Task 1\n-- Show names that contain li\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s04_search_names_meaning": {
+      "title": "What does searching names usually involve?",
+      "prompt": "In this dataset, what is a common way to search names?",
+      "help": {
+        "concept": "Name search often uses text-pattern matching rather than full exact matching.",
+        "hint_1": "Think partial text.",
+        "hint_2": "Often only part of the name is known, so pattern matching is useful."
+      },
+      "hint": "Think text patterns.",
+      "options": {
+        "a": "Using text pattern matching like LIKE",
+        "b": "Sorting all names descending",
+        "c": "Only checking numeric ids",
+        "d": "Ignoring the name column"
+      }
+    },
+    "m4_s04_filter_groups_meaning": {
+      "title": "What does filtering groups mean here?",
+      "prompt": "In this dataset, what is a good example of filtering customer groups?",
+      "help": {
+        "concept": "Groups in this dataset can be things like status values or city groups.",
+        "hint_1": "Think status categories or city groups.",
+        "hint_2": "Filtering groups means keeping rows that belong to a chosen set of customer labels."
+      },
+      "hint": "Think keeping chosen status or city groups.",
+      "options": {
+        "a": "Keeping customers from chosen status or city groups",
+        "b": "Renaming every customer",
+        "c": "Removing all filters",
+        "d": "Only checking NULL values"
+      }
+    },
+    "m4_s04_missing_data_meaning": {
+      "title": "What does finding missing data mean?",
+      "prompt": "What is the main idea of finding missing data in this dataset?",
+      "help": {
+        "concept": "Finding missing data means locating rows where important fields have no stored value.",
+        "hint_1": "Think email or city gaps.",
+        "hint_2": "It is about locating rows where a field is absent, not matching text patterns."
+      },
+      "hint": "Think rows with absent values.",
+      "options": {
+        "a": "Finding rows where fields like email or city have no stored value",
+        "b": "Sorting rows by id",
+        "c": "Only finding the newest customers",
+        "d": "Matching text prefixes only"
+      }
+    },
+    "m4_s04_combine_text_null_meaning": {
+      "title": "Why combine text and NULL filters?",
+      "prompt": "Why is it useful to combine text matching and NULL filters in one query?",
+      "help": {
+        "concept": "Real cleanup or analysis questions often depend on both text patterns and missing-data logic together.",
+        "hint_1": "Think more realistic filtering questions.",
+        "hint_2": "Combining both tools helps answer queries that are more specific than either one alone."
+      },
+      "hint": "Think realistic mixed filtering questions.",
+      "options": {
+        "a": "Because real questions often need both text patterns and missing-data logic",
+        "b": "Because NULL removes the need for LIKE",
+        "c": "Because LIKE automatically finds NULL values",
+        "d": "Because mixed filters always return every row"
+      }
+    },
+    "m4_s04_combined_result_check": {
+      "title": "How should you check a combined filter result?",
+      "prompt": "After running a query that mixes text matching and NULL checks, what is a strong habit?",
+      "help": {
+        "concept": "You should verify both parts of the condition against the returned rows.",
+        "hint_1": "Think pattern check and NULL check.",
+        "hint_2": "Do not only check one side of the logic. Confirm that the returned rows fit the full combined rule."
+      },
+      "hint": "Check both parts of the combined rule.",
+      "options": {
+        "a": "Verify that the rows fit the full combined condition",
+        "b": "Only check the text pattern and ignore the NULL logic",
+        "c": "Only count rows",
+        "d": "Assume the combined logic worked without checking"
+      }
+    },
+    "m4_s04_search_names_true": {
+      "title": "What is true about searching names?",
+      "prompt": "Select all true statements about searching names in this dataset.",
+      "help": {
+        "concept": "Name search often uses pattern matching and partial text logic.",
+        "hint_1": "Think starts with, contains, or partial match.",
+        "hint_2": "Choose the statements about text-pattern searching, not numeric filtering."
+      },
+      "hint": "Think partial text search.",
+      "options": {
+        "a": "Searching names often uses text matching",
+        "b": "You can search for part of a name",
+        "c": "LIKE is often useful for name search",
+        "d": "Name search only works with numeric comparisons",
+        "e": "Wildcards can help name search"
+      }
+    },
+    "m4_s04_filter_groups_true": {
+      "title": "What is true about filtering groups?",
+      "prompt": "Select all true statements about filtering groups in this dataset.",
+      "help": {
+        "concept": "Groups can be formed by fields like status, city, or test-flag style categories.",
+        "hint_1": "Think set membership.",
+        "hint_2": "Choose the statements about keeping only the rows that belong to the chosen set."
+      },
+      "hint": "Think keep the right group.",
+      "options": {
+        "a": "Status values can define groups of customers",
+        "b": "City values can define groups of customers",
+        "c": "Group filtering often keeps only a chosen set of rows",
+        "d": "Group filtering removes the need for WHERE",
+        "e": "List-based filters can help group filtering"
+      }
+    },
+    "m4_s04_missing_data_true": {
+      "title": "What is true about finding missing data?",
+      "prompt": "Select all true statements about missing-data checks in this dataset.",
+      "help": {
+        "concept": "Missing-data checks focus on columns where values may be absent, like email or city.",
+        "hint_1": "Think absent value detection.",
+        "hint_2": "Choose the statements about finding rows with no stored value in the target field."
+      },
+      "hint": "Think finding absent values.",
+      "options": {
+        "a": "Missing-data checks can be used on `email`",
+        "b": "Missing-data checks can be used on `city`",
+        "c": "Missing-data checks help find rows that need attention",
+        "d": "Missing-data checks are the same as partial text search",
+        "e": "NULL-specific syntax is important here"
+      }
+    },
+    "m4_s04_combine_text_null_true": {
+      "title": "What is true about combining text and NULL filters?",
+      "prompt": "Select all true statements about combining text matching and NULL checks.",
+      "help": {
+        "concept": "Combined filters can answer more realistic questions than a single text or NULL condition alone.",
+        "hint_1": "Think text pattern plus missing-data logic together.",
+        "hint_2": "Choose the statements about mixing both ideas into one query."
+      },
+      "hint": "Think mixed filtering logic.",
+      "options": {
+        "a": "A query can use both text matching and NULL checks",
+        "b": "Combining them can answer more specific questions",
+        "c": "You may need AND or OR to connect them",
+        "d": "LIKE automatically replaces NULL checks",
+        "e": "The returned rows should satisfy the full combined logic"
+      }
+    },
+    "m4_s04_practice_workflow_true": {
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for this practice section.",
+      "help": {
+        "concept": "A good workflow is to identify the filter type, write the right condition or combination, run the query, and verify the rows.",
+        "hint_1": "Think text, group, missing, or mixed filter.",
+        "hint_2": "Choose the steps that help connect the task meaning to the correct SQL tools."
+      },
+      "hint": "Identify the filter type first, then verify the result.",
+      "options": {
+        "a": "Decide whether the task is about text search, groups, missing data, or a combination",
+        "b": "Choose the SQL tools that match that task type",
+        "c": "Run the query and inspect the returned rows",
+        "d": "Check that the rows really fit the intended logic",
+        "e": "Ignore the actual returned values after running"
+      }
+    },
+    "m4_s04_reorder_name_search_logic": {
+      "title": "Searching names",
+      "prompt": "Reorder the ideas to explain name search.",
+      "help": {
+        "concept": "Name search often uses partial text patterns.",
+        "hint_1": "Think only part of the name is known.",
+        "hint_2": "Then pattern matching helps."
+      },
+      "hint": "Think partial text.",
+      "tokens": {
+        "t1": "sometimes you know only part of a customer's name",
+        "t2": "text pattern matching can search for that known piece",
+        "t3": "name search often becomes a partial-text problem"
+      }
+    },
+    "m4_s04_reorder_group_filter_logic": {
+      "title": "Filtering groups",
+      "prompt": "Put the group-filter idea in order.",
+      "help": {
+        "concept": "Group filtering keeps only the rows that belong to the chosen set.",
+        "hint_1": "Think chosen customer groups.",
+        "hint_2": "Then keep only matching rows."
+      },
+      "hint": "Think chosen set of rows.",
+      "tokens": {
+        "t1": "customers can be grouped by values like status or city",
+        "t2": "you choose which group values should be kept",
+        "t3": "the filter keeps only rows from that chosen set"
+      }
+    },
+    "m4_s04_reorder_missing_data_logic": {
+      "title": "Finding missing data",
+      "prompt": "Reorder the ideas to explain missing-data checks.",
+      "help": {
+        "concept": "Missing-data checks help find rows where important fields have no value.",
+        "hint_1": "Think absent field values.",
+        "hint_2": "Then think attention-needed rows."
+      },
+      "hint": "Think missing fields.",
+      "tokens": {
+        "t1": "some important fields can have no stored value",
+        "t2": "missing-data checks find those rows",
+        "t3": "those rows often need attention or cleanup"
+      }
+    },
+    "m4_s04_reorder_text_null_combo": {
+      "title": "Combining text and NULL filters",
+      "prompt": "Put the mixed-filter idea in order.",
+      "help": {
+        "concept": "Real filtering often mixes text patterns and missing-data logic together.",
+        "hint_1": "Think two filter ideas in one query.",
+        "hint_2": "Then think more realistic questions."
+      },
+      "hint": "Think mixed conditions.",
+      "tokens": {
+        "t1": "real questions can involve text patterns and missing-data checks together",
+        "t2": "those checks can be connected in one query",
+        "t3": "the result answers a more realistic filtering question"
+      }
+    },
+    "m4_s04_reorder_practice_workflow": {
+      "title": "Good practice workflow",
+      "prompt": "Reorder the workflow for this practice section.",
+      "help": {
+        "concept": "A good workflow is identify the filter type, choose the tool, run, verify.",
+        "hint_1": "Filter type comes first.",
+        "hint_2": "Verification comes last."
+      },
+      "hint": "Identify the filter type first.",
+      "tokens": {
+        "t1": "decide whether the task is text search, group filtering, missing-data, or mixed logic",
+        "t2": "choose the SQL tools that match that task type",
+        "t3": "run the query and verify that the rows fit the intended logic"
+      }
+    },
+    "m4_s04_fill_like_tool": {
+      "title": "Tool for text patterns",
+      "prompt": "Fill in the blank with the correct SQL tool.",
+      "help": {
+        "concept": "LIKE is commonly used for text-pattern matching.",
+        "hint_1": "Think partial text search.",
+        "hint_2": "The answer is LIKE."
+      },
+      "hint": "Think text-pattern tool.",
+      "template": "A common SQL tool for searching text patterns is ____.",
+      "choices": [
+        "LIKE",
+        "LIMIT",
+        "BETWEEN",
+        "ORDER BY"
+      ],
+      "correct": "LIKE"
+    },
+    "m4_s04_fill_group_filter_tool": {
+      "title": "Tool for chosen groups",
+      "prompt": "Choose the best SQL tool to complete the sentence.",
+      "help": {
+        "concept": "IN is commonly used when one of several known group values should be kept.",
+        "hint_1": "Think list of allowed values.",
+        "hint_2": "The answer is IN."
+      },
+      "hint": "Think list-based filter.",
+      "template": "A common SQL tool for keeping one of several known group values is ____.",
+      "choices": [
+        "IN",
+        "NULL",
+        "DESC",
+        "AS"
+      ],
+      "correct": "IN"
+    },
+    "m4_s04_fill_missing_data_tool": {
+      "title": "Tool for missing data",
+      "prompt": "Fill in the blank with the correct SQL phrase.",
+      "help": {
+        "concept": "IS NULL is the standard missing-data check.",
+        "hint_1": "Think no stored value.",
+        "hint_2": "The answer is IS NULL."
+      },
+      "hint": "Think missing-value check.",
+      "template": "A common SQL phrase for checking missing values is ____.",
+      "choices": [
+        "IS NULL",
+        "ORDER BY",
+        "IN",
+        "LIKE"
+      ],
+      "correct": "IS NULL"
+    },
+    "m4_s04_fill_combo_logic_word": {
+      "title": "Mixed filtering",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "This practice section includes combined filtering ideas.",
+        "hint_1": "Think more than one filter type together.",
+        "hint_2": "The answer is combined."
+      },
+      "hint": "Think mixed filters.",
+      "template": "Realistic cleanup questions often need ____ filtering logic.",
+      "choices": [
+        "combined",
+        "random",
+        "numeric-only",
+        "visual"
+      ],
+      "correct": "combined"
+    },
+    "m4_s04_fill_practice_check": {
+      "title": "What to do after running",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "After running a practice query, you should verify the returned rows.",
+        "hint_1": "Think check the result.",
+        "hint_2": "The word is verify."
+      },
+      "hint": "Think check the result.",
+      "template": "After running a practice query, always ____ that the rows match the intended logic.",
+      "choices": [
+        "verify",
+        "rename",
+        "drop",
+        "paint"
+      ],
+      "correct": "verify"
+    }
+  }
+}

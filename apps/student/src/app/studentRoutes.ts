@@ -1,141 +1,430 @@
-import type { MouseEvent } from "react";
+import type {
+  MouseEvent,
+} from "react";
 
-export type StudentRouteId =
-  | "learning"
-  | "assignments"
-  | "tutoring";
-
-export type StudentRoute = {
-  id: StudentRouteId;
-  href: string;
-  label: string;
-  description: string;
-};
+import {
+  isNextOwnedPath,
+  normalizeStudentPathname,
+  studentLocaleFromPath,
+} from "../compat/app-route-ownership";
 
 export type StudentLocation =
   | {
-      kind: "page";
-      route: StudentRoute;
+      kind: "my-learning";
+      locale: string;
+    }
+  | {
+      kind: "catalogs";
+      locale: string;
+    }
+  | {
+      kind: "catalog-detail";
+      locale: string;
+      catalogSlug: string;
+    }
+  | {
+      kind: "assignments";
+      locale: string;
+    }
+  | {
+      kind: "tutoring";
+      locale: string;
+    }
+  | {
+      kind: "daily-practice";
+      locale: string;
+    }
+  | {
+      kind: "module-practice";
+      locale: string;
+      subjectSlug: string;
+      moduleSlug: string;
     }
   | {
       kind: "course";
+      locale: string;
       subjectSlug: string;
     }
   | {
       kind: "module";
+      locale: string;
       subjectSlug: string;
       moduleSlug: string;
     }
   | {
       kind: "lesson";
+      locale: string;
       subjectSlug: string;
       moduleSlug: string;
+    }
+  | {
+      kind: "not-found";
+      locale: string;
+      path: string;
+    }
+  | {
+      kind: "website";
+      locale: string;
+      path: string;
     };
 
-export const studentRoutes: readonly StudentRoute[] = [
-  {
-    id: "learning",
-    href: "/learning",
-    label: "My Learning",
-    description: "Continue enrolled, assigned, and recently opened courses.",
-  },
-  {
-    id: "assignments",
-    href: "/assignments",
-    label: "Assignments",
-    description: "Review assigned courses, due dates, and completion status.",
-  },
-  {
-    id: "tutoring",
-    href: "/tutoring",
-    label: "Tutoring",
-    description: "Open upcoming and previous tutoring sessions.",
-  },
-] as const;
-
-function cleanPathSegments(pathname: string): string[] {
+function segments(
+  pathname: string,
+) {
   return pathname
     .split("/")
-    .map((segment) => segment.trim())
     .filter(Boolean)
-    .map((segment) => decodeURIComponent(segment));
+    .map(decodeURIComponent);
 }
 
 export function resolveStudentLocation(
-  pathname: string,
+  rawPathname: string,
 ): StudentLocation {
-  const segments = cleanPathSegments(pathname);
+  const pathname =
+    normalizeStudentPathname(
+      rawPathname,
+    );
+  const locale =
+    studentLocaleFromPath(
+      pathname,
+    );
+  const parts =
+    segments(pathname);
 
   if (
-    segments.length === 5 &&
-    segments[0] === "courses" &&
-    segments[2] === "modules" &&
-    segments[4] === "learn"
+    /^(en|es|fr|ht)$/.test(
+      parts[0] ?? "",
+    )
+  ) {
+    parts.shift();
+  }
+
+  if (
+    isNextOwnedPath(pathname)
+  ) {
+    return {
+      kind: "website",
+      locale,
+      path: pathname,
+    };
+  }
+
+  if (
+    parts[0] === "practice" &&
+    parts[1] === "daily"
+  ) {
+    return {
+      kind: "daily-practice",
+      locale,
+    };
+  }
+
+  if (
+    parts[0] === "catalogs" &&
+    parts[1]
+  ) {
+    return {
+      kind: "catalog-detail",
+      locale,
+      catalogSlug: parts[1],
+    };
+  }
+
+  if (parts[0] === "catalogs") {
+    return {
+      kind: "catalogs",
+      locale,
+    };
+  }
+
+  if (
+    parts[0] === "assignments"
+  ) {
+    return {
+      kind: "assignments",
+      locale,
+    };
+  }
+
+  if (
+    (
+      parts[0] === "tutoring" ||
+      parts[0] === "tutoring-sessions"
+    ) &&
+    !parts[1]
+  ) {
+    return {
+      kind: "tutoring",
+      locale,
+    };
+  }
+
+  const subjectRoot =
+    parts[0] === "subjects" &&
+    Boolean(parts[1]);
+
+  if (
+    subjectRoot &&
+    parts[2] === "assignments"
+  ) {
+    return {
+      kind: "assignments",
+      locale,
+    };
+  }
+
+  if (
+    subjectRoot &&
+    parts[2] === "modules" &&
+    parts[3] &&
+    parts[4] === "practice"
+  ) {
+    return {
+      kind: "module-practice",
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
+    };
+  }
+
+  if (
+    subjectRoot &&
+    parts[2] === "modules" &&
+    parts[3] &&
+    parts[4] === "learn"
   ) {
     return {
       kind: "lesson",
-      subjectSlug: segments[1],
-      moduleSlug: segments[3],
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
     };
   }
 
   if (
-    segments.length === 4 &&
-    segments[0] === "courses" &&
-    segments[2] === "modules"
+    subjectRoot &&
+    parts[2] === "modules" &&
+    parts[3]
   ) {
     return {
       kind: "module",
-      subjectSlug: segments[1],
-      moduleSlug: segments[3],
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
     };
   }
 
   if (
-    segments.length === 2 &&
-    segments[0] === "courses"
+    subjectRoot &&
+    parts[2] === "modules"
   ) {
     return {
       kind: "course",
-      subjectSlug: segments[1],
+      locale,
+      subjectSlug: parts[1],
     };
   }
 
-  const route =
-    studentRoutes.find(
-      (item) => pathname === item.href,
-    ) ?? studentRoutes[0];
+  // Original subject-first learning routes.
+  if (
+    parts[0] &&
+    parts[1] === "modules" &&
+    parts[2] &&
+    parts[3] === "practice"
+  ) {
+    return {
+      kind: "module-practice",
+      locale,
+      subjectSlug: parts[0],
+      moduleSlug: parts[2],
+    };
+  }
 
+  if (
+    parts[0] &&
+    parts[1] === "modules" &&
+    parts[2] &&
+    parts[3] === "learn"
+  ) {
+    return {
+      kind: "lesson",
+      locale,
+      subjectSlug: parts[0],
+      moduleSlug: parts[2],
+    };
+  }
+
+  if (
+    parts[0] &&
+    parts[1] === "modules" &&
+    parts[2]
+  ) {
+    return {
+      kind: "module",
+      locale,
+      subjectSlug: parts[0],
+      moduleSlug: parts[2],
+    };
+  }
+
+  if (
+    parts.length === 2 &&
+    parts[0] &&
+    parts[1] === "modules"
+  ) {
+    return {
+      kind: "course",
+      locale,
+      subjectSlug: parts[0],
+    };
+  }
+
+  // Temporary courses/* compatibility routes.
+  if (
+    parts[0] === "courses" &&
+    parts[1] &&
+    parts[2] === "modules" &&
+    parts[3] &&
+    parts[4] === "practice"
+  ) {
+    return {
+      kind: "module-practice",
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
+    };
+  }
+
+  if (
+    parts[0] === "courses" &&
+    parts[1] &&
+    parts[2] === "modules" &&
+    parts[3] &&
+    parts[4] === "learn"
+  ) {
+    return {
+      kind: "lesson",
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
+    };
+  }
+
+  if (
+    parts[0] === "courses" &&
+    parts[1] &&
+    parts[2] === "modules" &&
+    parts[3]
+  ) {
+    return {
+      kind: "module",
+      locale,
+      subjectSlug: parts[1],
+      moduleSlug: parts[3],
+    };
+  }
+
+  if (
+    parts[0] === "courses" &&
+    parts[1]
+  ) {
+    return {
+      kind: "course",
+      locale,
+      subjectSlug: parts[1],
+    };
+  }
+
+  if (
+    parts[0] === "subjects" ||
+    parts[0] === "learning" ||
+    parts[0] === "my-learning"
+  ) {
+    return {
+      kind: "my-learning",
+      locale,
+    };
+  }
+
+  /*
+   * Known cross-app routes leave through their registered owner. Unknown
+   * student paths stay on this origin and render the student 404 page.
+   */
   return {
-    kind: "page",
-    route,
+    kind: "not-found",
+    locale,
+    path: pathname,
   };
 }
 
-export function activeStudentRouteId(
-  location: StudentLocation,
-): StudentRouteId {
-  return location.kind === "page"
-    ? location.route.id
-    : "learning";
+export function resolveStudentShellLocation(
+  pathname: string,
+): StudentLocation {
+  const normalizedPathname =
+    normalizeStudentPathname(
+      pathname,
+    );
+  const resolved =
+    resolveStudentLocation(
+      normalizedPathname,
+    );
+
+  /*
+   * The shell may redirect only routes explicitly owned by Next.
+   * A localized root or an unknown student URL must never flash
+   * "Opening the website" and leave the student origin.
+   */
+  if (
+    resolved.kind === "website" &&
+    !isNextOwnedPath(
+      normalizedPathname,
+    )
+  ) {
+    return {
+      kind: "not-found",
+      locale:
+        studentLocaleFromPath(
+          normalizedPathname,
+        ),
+      path: normalizedPathname,
+    };
+  }
+
+  return resolved;
 }
 
-export function coursePath(subjectSlug: string): string {
-  return `/courses/${encodeURIComponent(subjectSlug)}`;
+export function coursePath(
+  subjectSlug: string,
+  locale = "en",
+) {
+  return `/${locale}/subjects/${encodeURIComponent(
+    subjectSlug,
+  )}/modules`;
 }
 
 export function modulePath(
   subjectSlug: string,
   moduleSlug: string,
-): string {
-  return `${coursePath(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}`;
+  locale = "en",
+) {
+  return `${coursePath(
+    subjectSlug,
+    locale,
+  )}/${encodeURIComponent(
+    moduleSlug,
+  )}`;
 }
 
 export function lessonPath(
   subjectSlug: string,
   moduleSlug: string,
-): string {
-  return `${modulePath(subjectSlug, moduleSlug)}/learn`;
+  locale = "en",
+) {
+  return `${modulePath(
+    subjectSlug,
+    moduleSlug,
+    locale,
+  )}/learn`;
 }
 
 export function navigateStudentApp(
@@ -154,11 +443,14 @@ export function navigateStudentApp(
   }
 
   event.preventDefault();
-
-  if (window.location.pathname === href) {
-    return;
-  }
-
-  window.history.pushState({}, "", href);
-  window.dispatchEvent(new PopStateEvent("popstate"));
+  window.history.pushState(
+    {},
+    "",
+    href,
+  );
+  window.dispatchEvent(
+    new Event(
+      "zoeskoul:vite-navigation",
+    ),
+  );
 }

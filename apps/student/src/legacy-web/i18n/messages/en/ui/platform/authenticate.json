@@ -1,0 +1,75 @@
+{
+  "auth": {
+    "brand": {
+      "name": "{appName}",
+      "tagline": "Secure sign-in"
+    },
+    "card": {
+      "eyebrow": "Secure access",
+      "title": "Sign in",
+      "subtitle": "Choose a sign-in method to continue."
+    },
+    "providers": {
+      "sso": "Continue with SSO",
+      "google": "Continue with Google",
+      "recommended": "Single Sign-On"
+    },
+    "status": {
+      "redirecting": "Redirecting..."
+    },
+    "notes": {
+      "redirect": "You'll be redirected back after login.",
+      "trouble": "Having trouble?",
+      "support": "Contact support."
+    },
+    "legal": {
+      "prefix": "By continuing, you agree to our",
+      "terms": "Terms",
+      "and": "and",
+      "privacy": "Privacy Policy"
+    },
+    "errors": {
+      "title": "Sign-in issue",
+      "OAuthSignin": "Couldn't start the sign-in flow. Please try again.",
+      "OAuthCallback": "Sign-in failed while validating the response. Please try again.",
+      "OAuthAccountNotLinked": "That account is already linked to a different sign-in method. Use the originally linked method.",
+      "CredentialsSignin": "Invalid credentials. Please try again.",
+      "SessionRequired": "Please sign in to continue.",
+      "Default": "Something went wrong. Please try again."
+    },
+    "context": {
+      "courseInvite": {
+        "title": "You were invited to a classroom",
+        "body": "Create an account or sign in with the email that received the invitation for {resource}. You will be taken directly to the classroom afterward.",
+        "fallbackResource": "this assigned course"
+      },
+      "paymentRequired": {
+        "title": "Sign in to continue",
+        "body": "Sign in first so ZoeSkoul can check your access. If the course was assigned by a teacher, no personal subscription is required."
+      },
+      "privateCourse": {
+        "title": "Sign in to open this private course",
+        "body": "Sign in so ZoeSkoul can confirm that a teacher or admin assigned this course to you. Assigned courses do not require a personal subscription."
+      },
+      "tutoringSession": {
+        "title": "Sign in to join this tutoring session",
+        "body": "Create an account or sign in with the invited email. After signing in, ZoeSkoul will take you directly to your tutoring session."
+      },
+      "tutoringInvite": {
+        "title": "You are invited to a ZoeSkoul tutoring session",
+        "body": "Create an account or sign in using the email address that received this invitation. You will be taken directly to your tutoring session."
+      }
+    },
+    "marketingPrompt": {
+      "eyebrow": "Email preferences",
+      "title": "Would you like ZoeSkoul updates?",
+      "description": "Get occasional emails about new courses, product improvements, and learning resources.",
+      "optionalNote": "This is optional. Account verification, receipts, tutoring invitations, and security emails remain separate.",
+      "accept": "Yes, send me updates",
+      "decline": "Not now",
+      "saving": "Saving…",
+      "loadError": "We could not check your email preference.",
+      "saveError": "We could not save your choice. Please try again."
+    }
+  }
+}

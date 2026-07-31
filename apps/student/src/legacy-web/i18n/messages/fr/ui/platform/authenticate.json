@@ -1,0 +1,75 @@
+{
+  "auth": {
+    "brand": {
+      "name": "{appName}",
+      "tagline": "Connexion sécurisée"
+    },
+    "card": {
+      "title": "Se connecter",
+      "subtitle": "Choisissez une méthode de connexion pour continuer.",
+      "eyebrow": "Accès sécurisé"
+    },
+    "providers": {
+      "sso": "Continuer avec le SSO",
+      "google": "Continuer avec Google",
+      "recommended": "Recommandé"
+    },
+    "status": {
+      "redirecting": "Redirection..."
+    },
+    "notes": {
+      "redirect": "Vous serez redirigé(e) après la connexion.",
+      "trouble": "Un problème ?",
+      "support": "Contacter l’assistance."
+    },
+    "legal": {
+      "prefix": "En continuant, vous acceptez nos",
+      "terms": "Conditions",
+      "and": "et",
+      "privacy": "Politique de confidentialité"
+    },
+    "errors": {
+      "title": "Problème de connexion",
+      "OAuthSignin": "Impossible de démarrer la connexion. Veuillez réessayer.",
+      "OAuthCallback": "Échec de la connexion lors de la validation. Veuillez réessayer.",
+      "OAuthAccountNotLinked": "Ce compte est déjà lié à une autre méthode de connexion. Utilisez la méthode initialement liée.",
+      "CredentialsSignin": "Identifiants invalides. Veuillez réessayer.",
+      "SessionRequired": "Veuillez vous connecter pour continuer.",
+      "Default": "Une erreur s’est produite. Veuillez réessayer."
+    },
+    "context": {
+      "courseInvite": {
+        "title": "Vous avez été invité(e) dans une classe",
+        "body": "Créez un compte ou connectez-vous avec l’adresse qui a reçu l’invitation pour {resource}. Vous serez ensuite redirigé(e) directement vers la classe.",
+        "fallbackResource": "ce cours attribué"
+      },
+      "paymentRequired": {
+        "title": "Connectez-vous pour continuer",
+        "body": "Connectez-vous afin que ZoeSkoul vérifie votre accès. Si le cours vous a été attribué par un enseignant, aucun abonnement personnel n’est requis."
+      },
+      "privateCourse": {
+        "title": "Connectez-vous pour ouvrir ce cours privé",
+        "body": "Connectez-vous afin que ZoeSkoul confirme qu’un enseignant ou un administrateur vous a attribué ce cours. Les cours attribués ne nécessitent aucun abonnement personnel."
+      },
+      "tutoringSession": {
+        "title": "Connectez-vous pour rejoindre cette séance de tutorat",
+        "body": "Créez un compte ou connectez-vous avec l’adresse invitée. Après votre connexion, ZoeSkoul vous conduira directement à votre séance de tutorat."
+      },
+      "tutoringInvite": {
+        "title": "Vous êtes invité à une séance de tutorat ZoeSkoul",
+        "body": "Créez un compte ou connectez-vous avec l’adresse e-mail qui a reçu cette invitation. Vous serez conduit directement à votre séance de tutorat."
+      }
+    },
+    "marketingPrompt": {
+      "eyebrow": "Préférences e-mail",
+      "title": "Souhaitez-vous recevoir les actualités ZoeSkoul ?",
+      "description": "Recevez occasionnellement des e-mails sur les nouveaux cours, les améliorations du produit et les ressources pédagogiques.",
+      "optionalNote": "Ce choix est facultatif. La vérification du compte, les reçus, les invitations de tutorat et les e-mails de sécurité restent séparés.",
+      "accept": "Oui, envoyez-moi les actualités",
+      "decline": "Pas maintenant",
+      "saving": "Enregistrement…",
+      "loadError": "Nous n’avons pas pu vérifier votre préférence e-mail.",
+      "saveError": "Nous n’avons pas pu enregistrer votre choix. Veuillez réessayer."
+    }
+  }
+}

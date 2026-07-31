@@ -142,18 +142,36 @@ importers:
 
   apps/student:
     dependencies:
+      '@monaco-editor/react':
+        specifier: ^4.7.0
+        version: 4.7.0(monaco-editor@0.55.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@zoeskoul/app-config':
         specifier: workspace:*
         version: link:../../packages/app-config
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@zoeskoul/code-contracts':
+        specifier: workspace:*
+        version: link:../../packages/code-contracts
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../../packages/curriculum-contracts
+      '@zoeskoul/curriculum-profiles':
+        specifier: workspace:*
+        version: link:../../packages/curriculum-profiles
+      '@zoeskoul/curriculum-runtime':
+        specifier: workspace:*
+        version: link:../../packages/curriculum-runtime
       '@zoeskoul/editor-surface':
         specifier: workspace:*
         version: link:../../packages/editor-surface
       '@zoeskoul/learning-client':
         specifier: workspace:*
         version: link:../../packages/learning-client
+      '@zoeskoul/learning-contracts':
+        specifier: workspace:*
+        version: link:../../packages/learning-contracts
       '@zoeskoul/learning-runtime':
         specifier: workspace:*
         version: link:../../packages/learning-runtime
@@ -163,13 +181,70 @@ importers:
       '@zoeskoul/lesson-shell':
         specifier: workspace:*
         version: link:../../packages/lesson-shell
+      '@zoeskoul/permissions':
+        specifier: workspace:*
+        version: link:../../packages/permissions
+      '@zoeskoul/practice-checks':
+        specifier: workspace:*
+        version: link:../../packages/practice-checks
+      '@zoeskoul/practice-contracts':
+        specifier: workspace:*
+        version: link:../../packages/practice-contracts
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../../packages/workspace-contracts
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      framer-motion:
+        specifier: ^12.34.0
+        version: 12.38.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      lucide-react:
+        specifier: ^0.563.0
+        version: 0.563.0(react@19.2.3)
+      monaco-editor:
+        specifier: ^0.55.1
+        version: 0.55.1
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      p5:
+        specifier: ^2.1.2
+        version: 2.2.3
       react:
         specifier: 19.2.3
         version: 19.2.3
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.6.0(react@19.2.3)
+      react-markdown:
+        specifier: ^10.1.0
+        version: 10.1.0(@types/react@19.2.14)(react@19.2.3)
+      remark-gfm:
+        specifier: ^4.0.1
+        version: 4.0.1
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.5.0
+      xterm:
+        specifier: ^5.3.0
+        version: 5.3.0
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
+      zustand:
+        specifier: ^5.0.12
+        version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.2
+      '@types/p5':
+        specifier: ^1.7.7
+        version: 1.7.7
       '@types/react':
         specifier: ^19
         version: 19.2.14
@@ -179,6 +254,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.0.4
         version: 6.0.4(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+      tailwindcss:
+        specifier: ^4
+        version: 4.2.2
       vite:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)

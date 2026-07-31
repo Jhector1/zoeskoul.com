@@ -1,0 +1,109 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "label": "Projet : Organisateur de notes",
+          "summary": "Organisez un dossier en désordre en différentes catégories (notes, devoirs, code et sauvegardes) à l'aide des commandes de base du terminal Linux.",
+          "cards": {
+            "sketch0": {
+              "title": "Résumé de l'organisateur des notes du groupe d'étude"
+            },
+            "project": {
+              "title": "Organisateur de notes de groupe d'étude"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module-2-notes-organizer-project-terminal-task-1": {
+                "title": "Créer les dossiers de réception des notes",
+                "prompt": "Un groupe d'étude va déposer deux fichiers de notes brutes à trier. Créez les dossiers `student-notes-organizer/inbox/math.txt` et `student-notes-organizer/inbox/history.txt` afin que les deux notes soient prêtes dans le dossier de réception.",
+                "hint": "Il s'agit d'une étape cumulative du projet. Partez de l'espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées entre elles. Conservez les livrables antérieurs et ajoutez-y un nouvel élément utile.",
+                  "hint_1": "Utilisez les commandes « ls » ou « find » pour vérifier l'espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers créés lors des étapes précédentes, sauf si un message vous demande explicitement de supprimer un fichier temporaire."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-2": {
+                "title": "Trier les notes et créer une sauvegarde",
+                "prompt": "Le groupe d'étude souhaite que les notes soient classées avant le transfert. Déplacez les fichiers `math.txt` et `history.txt` du dossier `student-notes-organizer/inbox` vers le dossier `student-notes-organizer/classes`, puis effectuez une copie de sauvegarde du fichier `history.txt` à l'adresse `student-notes-organizer/backups/history.txt`.",
+                "hint": "Il s'agit d'une étape cumulative du projet. Partez de l'espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées entre elles. Conservez les livrables antérieurs et ajoutez-y un nouvel élément utile.",
+                  "hint_1": "Utilisez les commandes « ls » ou « find » pour vérifier l'espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers créés lors des étapes précédentes, sauf si un message vous demande explicitement de supprimer un fichier temporaire."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "student_notes_organizer_inbox_math_txt": {
+                    "content": "Math review notes\n"
+                  },
+                  "student_notes_organizer_inbox_history_txt": {
+                    "content": "History reading notes\n"
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-3": {
+                "title": "Finaliser le transfert de l'organisateur",
+                "prompt": "Les notes sont classées et sauvegardées. Laissez une indication claire pour la passation de relais en créant un fichier « `student-notes-organizer/handoff/notes-ready.txt` », tout en conservant les notes de cours et leur sauvegarde à leur place.",
+                "hint": "Il s'agit d'une étape cumulative du projet. Partez de l'espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées entre elles. Conservez les livrables antérieurs et ajoutez-y un nouvel élément utile.",
+                  "hint_1": "Utilisez les commandes « ls » ou « find » pour vérifier l'espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers créés lors des étapes précédentes, sauf si un message vous demande explicitement de supprimer un fichier temporaire."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "student_notes_organizer_classes_math_txt": {
+                    "content": "Math review notes\n"
+                  },
+                  "student_notes_organizer_classes_history_txt": {
+                    "content": "History reading notes\n"
+                  },
+                  "student_notes_organizer_backups_history_txt": {
+                    "content": "History reading notes\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "project-synopsis": {
+            "title": "Organisateur de notes de groupe d'étude",
+            "bodyMarkdown": "Vous préparez un transfert de fichiers en bon état pour un groupe d'étude. Créez un espace de réception, triez les notes dans des dossiers par cours, conservez une sauvegarde et indiquez clairement que le travail est prêt.\n\nVous réaliserez cette tâche en suivant les étapes d'un projet interconnecté. Chaque étape s'appuie sur l'espace de travail de l'étape précédente ; veillez donc à ne pas supprimer les livrables antérieurs."
+          }
+        }
+      }
+    }
+  }
+}

@@ -22,10 +22,83 @@
     "types": [
       "vite/client",
       "node"
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "./src/legacy-web/*"
+      ],
+      "next/navigation": [
+        "./src/compat/next-navigation.ts"
+      ],
+      "next/image": [
+        "./src/compat/next-image.tsx"
+      ],
+      "next/link": [
+        "./src/compat/next-link.tsx"
+      ],
+      "next-auth/react": [
+        "./src/compat/next-auth-react.tsx"
+      ],
+      "next-auth": [
+        "./src/compat/next-auth.ts"
+      ],
+      "next-intl": [
+        "./src/compat/next-intl.tsx"
+      ],
+      "next-intl/navigation": [
+        "./src/compat/next-intl-navigation.tsx"
+      ],
+      "@zoeskoul-code-input-expected": [
+        "../../packages/curriculum-profiles/src/base/codeInputExpected.ts"
+      ],
+      "@zoeskoul/db": [
+        "./src/compat/zoeskoul-db-browser.ts"
+      ],
+      "next/dynamic": [
+        "./src/compat/next-dynamic.tsx"
+      ],
+      "next/server": [
+        "./src/compat/next-server.ts"
+      ],
+      "next/headers": [
+        "./src/compat/next-headers.ts"
+      ],
+      "next-intl/server": [
+        "./src/compat/next-intl-server.ts"
+      ],
+      "next-auth/providers/google": [
+        "./src/compat/next-auth-provider-google.ts"
+      ],
+      "next-auth/providers/keycloak": [
+        "./src/compat/next-auth-provider-keycloak.ts"
+      ],
+      "@auth/prisma-adapter": [
+        "./src/compat/auth-prisma-adapter.ts"
+      ],
+      "server-only": [
+        "./src/compat/server-only.ts"
+      ],
+      "@/lib/auth": [
+        "./src/compat/server-auth.ts"
+      ],
+      "@/lib/prisma": [
+        "./src/compat/server-prisma.ts"
+      ],
+      "@/lib/practice/actor": [
+        "./src/compat/server-practice-actor.ts"
+      ],
+      "@/lib/learningAssignments/assignmentAccessServer": [
+        "./src/compat/server-assignment-access.ts"
+      ],
+      "@/components/practice/kinds/KindHelper": [
+        "./src/compat/practice-kind-helper.tsx"
+      ]
+    }
   },
   "include": [
-    "src",
-    "vite.config.ts"
+    "src/main.tsx",
+    "src/vite-env.d.ts",
+    "vite.config.ts",
+    "src/compat/**/*.d.ts"
   ]
 }

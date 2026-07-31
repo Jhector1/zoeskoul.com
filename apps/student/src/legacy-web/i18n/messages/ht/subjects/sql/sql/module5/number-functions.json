@@ -1,0 +1,108 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "number-functions": {
+          "label": "Fonksyon nimewo",
+          "summary": "Fonksyon nimewo nan Kolòn Kalkile ak Ekspresyon SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa fonksyon nimewo yo ye nan SQL?"
+            },
+            "sketch1": {
+              "title": "Itilize fonksyon aritmetik ak fonksyon nimewo ansanm"
+            },
+            "quiz": {
+              "title": "Kesyon"
+            }
+          },
+          "quiz": {
+            "q1-code-input": {
+              "title": "Kalkile ak awondi valè total lòd la",
+              "prompt": "Ekri yon demann SQL pou chwazi `id` ak valè total chak lòd (kantite miltipliye ak unit_price), awondi ak pi pre nimewo antye a. Bay kolòn awondi a non `rounded_total`.",
+              "hint": "Konsantre sou konsèp egzamen an.",
+              "help": {
+                "concept": "Panse ak wòl oswa lide egzamen an olye pou repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, \n       -- mete kòd ou la\nFROM orders;"
+            },
+            "q2-code-input": {
+              "title": "Jwenn pri inite ki pi ba",
+              "prompt": "Ekri yon demann SQL pou jwenn pri inite ki pi ba nan tab `orders`. Bay kolòn rezilta a non `min_price`.",
+              "hint": "Konsantre sou konsèp egzamen an.",
+              "help": {
+                "concept": "Panse ak wòl oswa lide egzamen an olye pou repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT -- mete kòd ou la\nFROM orders;"
+            },
+            "q3-single-choice": {
+              "title": "Ki fonksyon SQL ki retounen valè absoli yon nimewo?",
+              "prompt": "Ki nan fonksyon SQL sa yo ki retounen valè absoli yon nimewo?",
+              "hint": "Panse ak ki fonksyon ki retire siy sou yon nimewo.",
+              "help": {
+                "concept": "Fonksyon ABS() retounen valè ki pa negatif yon nimewo, kèlkeswa siy orijinal li.",
+                "hint_1": "Chèche fonksyon ki toujou bay yon rezilta pozitif.",
+                "hint_2": "Yo itilize l souvan pou tounen nimewo negatif an pozitif."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q4-multi-choice": {
+              "title": "Ki nan sa yo ki fonksyon nimewo nan SQL?",
+              "prompt": "Chwazi tout opsyon ki se fonksyon nimewo nan SQL.",
+              "hint": "Panse ak fonksyon ki travay sou done nimerik.",
+              "help": {
+                "concept": "Fonksyon nimewo yo fè kalkil oswa transfòmasyon sou valè nimerik, tankou awondi, jwenn minimòm, oswa pran valè absoli.",
+                "hint_1": "Konsidere fonksyon tankou ROUND, MIN, ak ABS.",
+                "hint_2": "Eksepte fonksyon ki travay sèlman ak tèks oswa dat."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q5-fill-blank-choice": {
+              "title": "Ranpli vid la: Awondi yon kolòn kalkile",
+              "prompt": "Konplete ekspresyon SQL la pou awondi rezilta miltiplikasyon ant quantity ak unit_price.",
+              "hint": "Mete miltiplikasyon an andedan yon fonksyon awondi.",
+              "help": {
+                "concept": "Pou awondi yon valè kalkile, itilize fonksyon ROUND() epi mete ekspresyon an andedan parantèz yo.",
+                "hint_1": "Fonksyon an dwe sanble ak ROUND(expresyon).",
+                "hint_2": "Ekspresyon ki andedan an dwe quantity * unit_price."
+              },
+              "template": "SELECT id, _____ AS rounded_total FROM orders;",
+              "choices": [
+                "ROUND(quantity * unit_price)",
+                "MIN(quantity * unit_price)",
+                "ABS(quantity * unit_price)",
+                "SUM(quantity * unit_price)"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "number-functions": {
+          "sketch-1": {
+            "title": "Kisa fonksyon nimewo yo ye nan SQL?",
+            "bodyMarkdown": "Fonksyon nimewo nan SQL se fonksyon ki deja entegre ki fè operasyon sou done nimerik. Ou ka itilize yo pou awondi nimewo, jwenn valè minimòm oswa maksimòm, kalkile mwayèn, elatriye. Pa egzanp, ou ka itilize `ROUND()` pou awondi yon valè, oswa `ABS()` pou jwenn valè absoli yon nimewo. Fonksyon sa yo souvan itilize nan deklarasyon SELECT pou transfòme oswa rezime done yo.\n\nEgzanp:\n\n```sql\nSELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;\n```\n\nDemann sa a chwazi id lòd la, pri inite orijinal la, ak pri inite awondi pou chak lòd."
+          },
+          "sketch-2": {
+            "title": "Itilize fonksyon aritmetik ak fonksyon nimewo ansanm",
+            "bodyMarkdown": "Ou ka konbine operasyon aritmetik ak fonksyon nimewo pou kreye kolòn kalkile ki pi konplèks. Pa egzanp, ou ka vle kalkile pri total pou chak lòd epi awondi li ak pi pre nimewo antye a.\n\nEgzanp:\n\n```sql\nSELECT id, quantity * unit_price AS total, ROUND(quantity * unit_price) AS rounded_total\nFROM orders;\n```\n\nDemann sa a miltipliye `quantity` ak `unit_price` pou jwenn total la, epi li itilize `ROUND()` pou awondi rezilta a."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@layer components {
+  /* =========================
+   * Section text
+   * ========================= */
+  .ui-section-kicker {
+    @apply mb-2 text-xs font-semibold tracking-wider text-emerald-700;
+  }
+
+  .dark .ui-section-kicker {
+    @apply text-emerald-300/90;
+  }
+
+  .ui-section-title {
+    @apply text-2xl font-semibold text-neutral-900 sm:text-3xl;
+  }
+
+  .dark .ui-section-title {
+    @apply text-white;
+  }
+
+  .ui-section-subtitle {
+    @apply mt-3 max-w-2xl text-sm leading-6 text-neutral-600 sm:text-base;
+  }
+
+  .dark .ui-section-subtitle {
+    @apply text-white/70;
+  }
+}

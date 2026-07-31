@@ -1,0 +1,76 @@
+{
+  "subjects": {
+    "sql": {
+      "title": "SQL para principiantes",
+      "description": "Aprende SQL desde cero con práctica práctica.",
+      "moreComingSoon": "Pronto habrá más lecciones de SQL para principiantes."
+    }
+  },
+  "modules": {
+    "sql": {
+      "sql_module_5": {
+        "title": "Columnas calculadas y expresiones SQL",
+        "description": "Enseña a los estudiantes a crear nuevos valores a partir de datos existentes para que las tablas en bruto se conviertan en informes útiles.",
+        "outcomes": [
+          "Usar aritmética y expresiones dentro de SELECT.",
+          "Renombrar salidas con alias para mayor legibilidad.",
+          "Aplicar funciones integradas simples de forma segura."
+        ],
+        "why": [
+          "Genera confianza con columnas calculadas y expresiones SQL.",
+          "Prepara a los estudiantes para las siguientes habilidades del curso."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql": {
+      "sql_module_5": {
+        "section_5_1": {
+          "title": "Creando nuevos valores en consultas",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Qué son las expresiones",
+            "Matemáticas en SQL",
+            "Sumar y restar",
+            "Multiplicar y dividir"
+          ]
+        },
+        "section_5_2": {
+          "title": "Alias de columnas",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Qué son los alias",
+            "AS",
+            "Renombrar columnas de resultados",
+            "Escribir salidas legibles"
+          ]
+        },
+        "section_5_3": {
+          "title": "Funciones simples",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Introducción a las funciones",
+            "Funciones de cadenas",
+            "Funciones numéricas",
+            "Conocimiento de funciones de fecha"
+          ]
+        },
+        "section_5_4": {
+          "title": "Práctica de expresiones",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Cálculos de precio total",
+            "Cálculos de descuento",
+            "Renombrar salidas",
+            "Consultas de informes simples"
+          ]
+        }
+      }
+    }
+  }
+}

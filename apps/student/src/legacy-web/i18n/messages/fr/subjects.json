@@ -1,0 +1,26 @@
+{
+  "subjects": {
+    "python": {
+      "title": "Python",
+      "description": "Pratique de programmation Python.",
+      "imageAlt": "Couverture du sujet Python"
+    }
+  },
+  "subjectsUi": {
+    "headerTitle": "Choisir un cours",
+    "headerSubtitle": "Commencez en quelques minutes. Choisissez un cours pour ouvrir ses modules.",
+    "searchPlaceholder": "Rechercher des cours…",
+    "searchClear": "Effacer",
+    "resultsCount": "{count, plural, =0 {Aucun cours} one {# cours} other {# cours}}",
+
+      "noSubjectsFound": "Aucun cours trouvé.",
+      "enrolled": "Inscrit",
+      "enrolling": "Inscription…",
+      "continue": "Continuer",
+      "openModules": "Ouvrir les modules",
+      "noModulesYet": "Aucun module pour l’instant"
+
+
+
+  }
+}

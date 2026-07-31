@@ -1,0 +1,82 @@
+.student-platform-layout {
+  min-height: 100vh;
+}
+
+.student-platform-main {
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.student-platform-main.is-lesson {
+  padding: 0;
+}
+
+.student-platform-main > .student-topbar {
+  margin: 0 auto 1.5rem;
+  max-width: 96rem;
+}
+
+.student-platform-main > :not(.student-topbar) {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 96rem;
+}
+
+.student-platform-main.is-lesson > * {
+  max-width: none;
+}
+
+.student-platform-main .student-page-description {
+  color: #737373;
+}
+
+html.dark .student-platform-main .student-page-description {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+html.dark .student-state-page,
+html.dark .student-layout {
+  color: #f5f5f5;
+}
+
+html.dark .student-state-card,
+html.dark .learning-card,
+html.dark .learning-summary,
+html.dark .course-reader-hero,
+html.dark .course-module-card,
+html.dark .course-section-card,
+html.dark .course-outcome-list,
+html.dark .learning-empty,
+html.dark .learning-error,
+html.dark .learning-loading,
+html.dark .course-reader-state {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(23, 23, 23, 0.94);
+  color: #f5f5f5;
+}
+
+html.dark .learning-summary p,
+html.dark .learning-card-copy > p,
+html.dark .course-reader-hero p,
+html.dark .course-module-copy > p,
+html.dark .course-section-heading p,
+html.dark .learning-empty p,
+html.dark .learning-error p,
+html.dark .learning-loading p,
+html.dark .course-reader-state p {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+html.dark .course-topic-list li {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 767px) {
+  .student-platform-main {
+    padding: 1rem;
+  }
+
+  .student-platform-main.is-lesson {
+    padding: 0;
+  }
+}

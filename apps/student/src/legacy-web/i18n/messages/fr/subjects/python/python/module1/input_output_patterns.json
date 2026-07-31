@@ -1,0 +1,140 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "input_output_patterns": {
+          "label": "Schémas d’entrée + sortie : de vrais mini-programmes",
+          "summary": "Combine `input()`, la conversion de type, les opérateurs et les f-strings dans de vrais mini-programmes comme l’âge l’année prochaine, un calculateur de pourboire et un convertisseur de température.",
+          "cards": {
+            "sketch": {
+              "title": "Schémas d’entrée + sortie (Demander → Convertir → Calculer → Afficher)"
+            },
+            "quiz": {
+              "title": "Projet : 3 mini-programmes (Demander → Convertir → Calculer → Afficher)"
+            }
+          },
+          "projectSteps": {
+            "age_next_year": {
+              "title": "Âge l’année prochaine"
+            },
+            "tip_calc": {
+              "title": "Calculateur de pourboire"
+            },
+            "temp_convert": {
+              "title": "Convertisseur de température (C → F)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "io": {
+        "patterns": {
+          "title": "Schémas d’entrée + sortie : des réponses aux vrais mini-programmes",
+          "bodyMarkdown": "Jusqu’ici, tu as appris les briques de base de Python :\n\n- Les **variables** stockent des valeurs.\n- Les **types** décrivent ce que sont ces valeurs.\n- Les **opérateurs + expressions** calculent de nouveaux résultats.\n- Les **chaînes de caractères** représentent du texte (et `input()` renvoie des chaînes).\n\nMaintenant, nous allons combiner tout cela dans la structure de base d’un programme.\n\nLa plupart des programmes pour débutants suivent la même boucle :\n\n### Demander → Convertir → Calculer → Afficher\n\n1. **Demander** une information à l’utilisateur\n2. **Convertir** cette information dans le bon type\n3. **Calculer** quelque chose avec elle\n4. **Afficher** le résultat\n\nUne fois que tu comprends ce schéma, tu peux construire beaucoup de petits programmes.\n\n---\n\n## L’outil « Demander » : `input()`\n\n`input()` met le programme en pause et attend que l’utilisateur saisisse quelque chose.\n\nExemple :\n\n~~~python\nname = input(\"Quel est ton nom ? \")\nprint(\"Bonjour\", name)\n~~~\n\nMais il y a une règle importante :\n\n> ✅ **`input()` renvoie toujours une chaîne de caractères (`str`).**\n\nMême si l’utilisateur tape un nombre.\n\n---\n\n## Essaie-le (pour le vérifier)\n\nLance ceci et tape quelque chose comme `25`.\n\n~~~python\nx = input(\"Tape quelque chose : \")\n\nprint(\"Tu as tapé :\", x)\nprint(\"type :\", type(x))\n~~~\n\nMême quand tu tapes un nombre, Python le stocke toujours comme du **texte**.\n\n---\n\n## L’étape « Convertir » : le cast\n\nSi tu veux faire des calculs, tu dois convertir le texte en nombre.\n\nConversions courantes :\n\n- `int(...)` → nombres entiers\n- `float(...)` → nombres décimaux\n\nExemple :\n\n~~~python\nage = int(input(\"Âge : \"))\nprint(\"L’année prochaine :\", age + 1)\n~~~\n\nMaintenant, Python peut faire de l’arithmétique.\n\n---\n\n## Essaie-le\n\n~~~python\nage = int(input(\"Âge : \"))\nprint(f\"L’année prochaine tu auras {age + 1} ans.\")\n~~~\n\nLance-le deux fois avec des nombres différents.\n\n---\n\n## Petit avertissement : les conversions peuvent échouer\n\nSi l’utilisateur tape quelque chose qui **n’est pas un nombre**, la conversion échoue.\n\n~~~python\nage = int(\"hello\")  # 🚫 ValueError\n~~~\n\nPython dit en substance :\n\n> « J’ai essayé de convertir ce texte en nombre, mais ce n’est pas valide. »\n\nPour l’instant, il suffit de comprendre **pourquoi cette erreur arrive**.\nPlus tard, tu apprendras à gérer cela correctement.\n\n---\n\n## L’étape « Afficher » : une sortie claire\n\nTu as déjà vu les **f-strings** dans la leçon sur les chaînes de caractères.\n\nC’est la façon la plus propre d’afficher un résultat.\n\n~~~python\nname = \"Maya\"\nage = 16\n\nprint(f\"Bonjour {name}, tu as {age} ans.\")\n~~~\n\nLes f-strings combinent naturellement **texte + variables**.\n\n---\n\n## Schéma 1 : Demander → Convertir → Calculer → Afficher\n\nMettons tout le schéma ensemble.\n\n~~~python\nvalue = float(input(\"Entre un nombre : \"))\nresult = value * 2\n\nprint(f\"Le double est {result}\")\n~~~\n\nLe programme fait quatre choses :\n\n1️⃣ Demander une entrée\n2️⃣ La convertir en nombre\n3️⃣ Calculer un résultat\n4️⃣ Afficher le résultat\n\n---\n\n## Essaie de modifier le calcul\n\nChange le calcul et relance.\n\n~~~python\nvalue = float(input(\"Entre un nombre : \"))\n\nprint(\"plus dix :\", value + 10)\nprint(\"fois trois :\", value * 3)\nprint(\"moitié :\", value / 2)\n~~~\n\nRemarque qu’une même entrée peut produire des résultats différents.\n\n---\n\n## Une petite calculatrice\n\nVoici un vrai petit programme qui utilise le même schéma.\n\n~~~python\na = float(input(\"Premier nombre : \"))\nb = float(input(\"Deuxième nombre : \"))\n\nsum_result = a + b\nprint(f\"La somme est {sum_result}\")\n~~~\n\nTu viens de construire une **calculatrice à deux nombres**.\n\n---\n\n## L’idée clé\n\nBeaucoup de programmes pour débutants suivent la même structure :\n\n**Entrée → Traitement → Sortie**\n\nou, plus concrètement :\n\n**Demander → Convertir → Calculer → Afficher**\n\nUne fois que ce schéma devient naturel, programmer devient beaucoup plus simple.\n\n---\n\n## Ce qui vient ensuite\n\nPour l’instant, tes programmes exécutent toujours les mêmes instructions.\n\nEnsuite, nous allons débloquer les **conditions**, pour que ton programme puisse décider :\n\n> *« Si ceci arrive… fais cela à la place. »*"
+        }
+      }
+    }
+  },
+  "common": {
+    "terminalInputLabel": "entrée",
+    "terminalOutputLabel": "sortie"
+  },
+  "quiz": {
+    "m1_io_age_next_year": {
+      "title": "Âge l’année prochaine",
+      "prompt": "Lis DEUX entrées :\n1) nom\n2) âge\n\nAffiche exactement :\nBonjour <name> ! L’année prochaine, tu auras <age+1> ans.",
+      "hint": "Convertis l’âge avec `int(...)`.",
+      "starterCode": "# TODO\n",
+      "runtime": {
+        "outputTemplate": "Bonjour {name} ! L’année prochaine, tu auras {age_next} ans."
+      }
+    },
+    "m1_io_tip_total": {
+      "title": "Pourboire + total",
+      "prompt": "Lis DEUX entiers :\n1) addition\n2) pourcentage du pourboire\n\nCalcule :\ntip = bill * pct // 100\ntotal = bill + tip\n\nAffiche exactement :\nPourboire = <tip>\nTotal = <total>",
+      "hint": "Utilise les maths entières : `// 100`.",
+      "starterCode": "bill = int(input())\npct = int(input())\n# TODO\n",
+      "runtime": {
+        "tipLineTemplate": "Pourboire = {tip}",
+        "totalLineTemplate": "Total = {total}"
+      }
+    },
+    "m1_io_c_to_f": {
+      "title": "Celsius → Fahrenheit",
+      "prompt": "Lis UN entier C.\n\nCalcule :\nF = C * 9/5 + 32\n\nAffiche UNIQUEMENT F.",
+      "hint": "f = int(c * 9 / 5 + 32)",
+      "starterCode": "c = int(input())\n# TODO\n"
+    },
+    "m1_io_input_returns_str": {
+      "title": "Que renvoie `input()` ?",
+      "prompt": "Regarde ce code :\n\n~~~python\nx = input()\n~~~\n\nSi l’utilisateur tape `42`, quel est le type de `x` ?",
+      "hint": "`input()` renvoie toujours du texte.",
+      "options": {
+        "a": "int",
+        "b": "float",
+        "c": "str",
+        "d": "bool"
+      }
+    },
+    "m1_io_tip_integer_math": {
+      "title": "Maths entières pour le pourboire",
+      "prompt": "Quelle ligne calcule correctement le pourboire avec des maths entières ?",
+      "hint": "Utilise `//` pour la division entière.",
+      "options": {
+        "a": "tip = bill * pct / 100",
+        "b": "tip = bill * pct // 100",
+        "c": "tip = bill + pct // 100",
+        "d": "tip = pct - bill"
+      }
+    },
+    "m1_io_c_to_f_formula": {
+      "title": "Formule de température",
+      "prompt": "Quelle expression correspond au calcul Celsius → Fahrenheit de la leçon pour un entier `c` ?",
+      "hint": "Multiplie par 9, divise par 5, puis ajoute 32.",
+      "options": {
+        "a": "int(c * 9 / 5 + 32)",
+        "b": "int(c + 32 * 9 / 5)",
+        "c": "int(c * 5 / 9 + 32)",
+        "d": "int(c * 9 / (5 + 32))"
+      }
+    },
+    "m1_io_age_next_year_parts": {
+      "title": "Construire la solution « âge l’année prochaine »",
+      "prompt": "Sélectionne toutes les lignes qui appartiennent à une solution correcte pour le programme **Âge l’année prochaine**.",
+      "hint": "Tu as besoin d’une entrée, d’une conversion et d’un format de sortie exact.",
+      "options": {
+        "a": "name = input()",
+        "b": "age = int(input())",
+        "c": "print(f\"Bonjour {name} ! L’année prochaine, tu auras {age + 1} ans.\")",
+        "d": "age = input() + 1",
+        "e": "print(name, age, 1)"
+      }
+    },
+    "m1_io_tip_output_lines": {
+      "title": "Lignes de sortie exactes",
+      "prompt": "Après avoir calculé `tip` et `total`, sélectionne toutes les lignes qui correspondent exactement à la sortie demandée.",
+      "hint": "Les libellés doivent correspondre exactement : `Pourboire =` et `Total =`.",
+      "options": {
+        "a": "print(f\"Pourboire = {tip}\")",
+        "b": "print(f\"Total = {total}\")",
+        "c": "print(f\"Pourboire : {tip}\")",
+        "d": "print(f\"total = {total}\")"
+      }
+    },
+    "m1_io_convert_then_compute_truths": {
+      "title": "Convertir, puis calculer",
+      "prompt": "Sélectionne toutes les affirmations vraies à propos du programme de conversion de température.",
+      "hint": "Pense au schéma : Demander → Convertir → Calculer → Afficher.",
+      "options": {
+        "a": "`input()` donne une chaîne de caractères.",
+        "b": "`int(input())` peut convertir un texte entier valide en entier.",
+        "c": "`print()` ne peut pas afficher de variables.",
+        "d": "`c * 9 / 5 + 32` est l’étape de calcul.",
+        "e": "Tu dois garder `c` comme texte brut si tu veux faire des maths avec."
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-2-limit-method": {
+        "exponential-limits-and-growth-order": {
+          "label": "Exponential Comparisons and Growth Ordering",
+          "summary": "Finish the limit problems and order the major growth classes.",
+          "cards": {
+            "exponential-and-ordering": {
+              "title": "Exponential Limits and the Standard Growth Hierarchy"
+            },
+            "growth-order-animation": {
+              "title": "Watch Growth Classes Separate"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "exp-poly": {
+              "title": "Exponential over polynomial",
+              "prompt": "What is the relation between f=2ⁿ and g=10n²?",
+              "hint": "Exponentials eventually dominate fixed-degree polynomials.",
+              "help": {
+                "concept": "The ratio 2ⁿ/(10n²) tends to infinity.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g)",
+                "b": "f=Θ(g)",
+                "c": "f=Ω(g)",
+                "d": "Both are logarithmic"
+              }
+            },
+            "two-vs-four": {
+              "title": "Subtract exponents",
+              "prompt": "What is 2ⁿ relative to 2²ⁿ?",
+              "hint": "Simplify the ratio by subtracting exponents.",
+              "help": {
+                "concept": "2ⁿ/2²ⁿ=2⁻ⁿ tends to zero.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Θ",
+                "b": "O",
+                "c": "Ω",
+                "d": "Equal for every n"
+              }
+            },
+            "correct-order": {
+              "title": "Growth order",
+              "prompt": "Which order is correct from slowest to fastest?",
+              "hint": "Use logarithm, powers, polynomial, exponential, factorial.",
+              "help": {
+                "concept": "The standard hierarchy places factorial last and logarithm first.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "n < log n < n² < 2ⁿ",
+                "b": "log n < √n < n < n log n < n² < 2ⁿ < n!",
+                "c": "n! < 2ⁿ < n² < n",
+                "d": "√n < log n < n! < n"
+              }
+            },
+            "factorial-reason": {
+              "title": "Why factorial wins",
+              "prompt": "Why does n! eventually outgrow 2ⁿ?",
+              "hint": "Compare the factors in the product n!.",
+              "help": {
+                "concept": "As n grows, multiplying by 3,4,5,... beats multiplying by 2 at every step.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Factorials are constants",
+                "b": "Most later factors in n! exceed 2",
+                "c": "2ⁿ decreases",
+                "d": "n! equals n²"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-2-limit-method": {
+        "exponential-limits-and-growth-order": {
+          "exponential-and-ordering": {
+            "title": "Exponential Limits and the Standard Growth Hierarchy",
+            "bodyMarkdown": "### Exponential comparisons\n\n9. `2ⁿ / (10n²) → ∞`, so `2ⁿ = Ω(10n²)`. A correct two-step L’Hôpital calculation includes the factors `ln 2` and the derivative `20n`.\n\n10. `2ⁿ / 2²ⁿ = 2⁻ⁿ → 0`, so `2ⁿ = O(2²ⁿ)`.\n\n11. `2ⁿ / 3ⁿ = (2/3)ⁿ → 0`, so `2ⁿ = O(3ⁿ)`.\n\n### Order the functions\n\nFrom slowest to fastest as `n → ∞`:\n\n$$\n\\log n < \\sqrt n < n < n\\log n < n^2 < 2^n < n!.\n$$\n\nNo two functions in this list share the same `Θ` class.\n\n### Why the hierarchy works\n\n- Every positive power of `n` eventually dominates every logarithm.\n- Multiplying `n` by `log n` makes it grow faster than linear but slower than `n²`.\n- An exponential with base greater than `1` eventually dominates every fixed-degree polynomial.\n- `n!` eventually dominates `2ⁿ` because its later factors are all larger than `2`."
+          },
+          "growth-order-animation": {
+            "title": "Watch Growth Classes Separate",
+            "context": "The animation emphasizes eventual growth, not which function happens to be largest at one small input.",
+            "steps": [
+              {
+                "title": "Polynomial versus exponential",
+                "body": "A fixed-degree polynomial may be larger for small n, but 2ⁿ eventually accelerates past it."
+              },
+              {
+                "title": "Compare exponentials by their bases",
+                "body": "2ⁿ/3ⁿ=(2/3)ⁿ. A repeated factor below 1 drives the ratio to zero."
+              },
+              {
+                "title": "Place the standard classes",
+                "body": "Read left to right from slowest growth to fastest growth."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

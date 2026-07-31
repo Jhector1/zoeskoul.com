@@ -1,0 +1,34 @@
+{
+  "SketchesVectorPart1": {
+    "common": {
+      "grid": "Grille",
+      "snap": "Accroche",
+      "autoStep": "Pas auto",
+      "angle": "Angle",
+      "projection": "Projection",
+      "components": "Composantes",
+      "reset": "Réinitialiser",
+      "zoom": "Zoom",
+      "gridStep": "Pas de grille",
+      "on": "ON",
+      "off": "off"
+    },
+    "dot": {
+      "title": "Produit scalaire",
+      "sign": {
+        "zero": "≈ 0 (orthogonaux)",
+        "pos": "> 0",
+        "neg": "< 0"
+      },
+      "overlayLine": "a·b = {dot}   |   θ = {theta}°",
+      "hud": {
+        "header": "**Produit scalaire**",
+        "dot": "Produit:",
+        "sign": "**Signe :** {sign}",
+        "angle": "Angle :",
+        "scalarProj": "Projection scalaire (“longueur d’ombre” sur $\\vec b$) :",
+        "projection": "Projection :"
+      }
+    }
+  }
+}

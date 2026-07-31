@@ -1,0 +1,108 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "number-functions": {
+          "label": "Fonctions numériques",
+          "summary": "Fonctions numériques dans les colonnes calculées et les expressions SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Quelles sont les fonctions numériques en SQL ?"
+            },
+            "sketch1": {
+              "title": "Utiliser les opérations arithmétiques et les fonctions numériques ensemble"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1-code-input": {
+              "title": "Calculer et arrondir la valeur totale de la commande",
+              "prompt": "Écrivez une requête SQL pour sélectionner l'`id` et la valeur totale de chaque commande (quantité multipliée par unit_price), arrondie à l'entier le plus proche. Nommez la colonne arrondie `rounded_total`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id, \n       -- votre code ici\nFROM orders;"
+            },
+            "q2-code-input": {
+              "title": "Trouver le prix unitaire minimum",
+              "prompt": "Écrivez une requête SQL pour trouver le prix unitaire minimum dans la table `orders`. Nommez la colonne résultat `min_price`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT -- votre code ici\nFROM orders;"
+            },
+            "q3-single-choice": {
+              "title": "Quelle fonction SQL retourne la valeur absolue d'un nombre ?",
+              "prompt": "Laquelle des fonctions SQL suivantes retourne la valeur absolue d'un nombre ?",
+              "hint": "Réfléchissez à la fonction qui enlève le signe d'un nombre.",
+              "help": {
+                "concept": "La fonction ABS() retourne la valeur non négative d'un nombre, quel que soit son signe d'origine.",
+                "hint_1": "Cherchez la fonction qui donne toujours un résultat positif.",
+                "hint_2": "Elle est souvent utilisée pour transformer des nombres négatifs en positifs."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q4-multi-choice": {
+              "title": "Lesquelles des fonctions suivantes sont des fonctions numériques en SQL ?",
+              "prompt": "Sélectionnez toutes les options qui sont des fonctions numériques en SQL.",
+              "hint": "Pensez aux fonctions qui opèrent sur des données numériques.",
+              "help": {
+                "concept": "Les fonctions numériques effectuent des calculs ou des transformations sur des valeurs numériques, comme l'arrondi, la recherche de minimums ou l'obtention de valeurs absolues.",
+                "hint_1": "Considérez des fonctions comme ROUND, MIN et ABS.",
+                "hint_2": "Écartez les fonctions qui ne travaillent qu'avec du texte ou des dates."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q5-fill-blank-choice": {
+              "title": "Complétez : Arrondir une colonne calculée",
+              "prompt": "Complétez l'expression SQL pour arrondir le résultat de la multiplication de quantity par unit_price.",
+              "hint": "Encapsulez la multiplication dans une fonction d'arrondi.",
+              "help": {
+                "concept": "Pour arrondir une valeur calculée, utilisez la fonction ROUND() et placez l'expression à l'intérieur des parenthèses.",
+                "hint_1": "La fonction doit ressembler à ROUND(expression).",
+                "hint_2": "L'expression à l'intérieur doit être quantity * unit_price."
+              },
+              "template": "SELECT id, _____ AS rounded_total FROM orders;",
+              "choices": [
+                "ROUND(quantity * unit_price)",
+                "MIN(quantity * unit_price)",
+                "ABS(quantity * unit_price)",
+                "SUM(quantity * unit_price)"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "number-functions": {
+          "sketch-1": {
+            "title": "Quelles sont les fonctions numériques en SQL ?",
+            "bodyMarkdown": "Les fonctions numériques en SQL sont des fonctions intégrées qui effectuent des opérations sur des données numériques. Elles peuvent être utilisées pour arrondir des nombres, trouver des valeurs minimales ou maximales, calculer des moyennes, et plus encore. Par exemple, vous pouvez utiliser `ROUND()` pour arrondir une valeur, ou `ABS()` pour obtenir la valeur absolue d'un nombre. Ces fonctions sont souvent utilisées dans les instructions SELECT pour transformer ou résumer les données.\n\nExemple :\n\n```sql\nSELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;\n```\n\nCette requête sélectionne l'identifiant de la commande, le prix unitaire original et le prix unitaire arrondi pour chaque commande."
+          },
+          "sketch-2": {
+            "title": "Utiliser les opérations arithmétiques et les fonctions numériques ensemble",
+            "bodyMarkdown": "Vous pouvez combiner des opérations arithmétiques avec des fonctions numériques pour créer des colonnes calculées plus complexes. Par exemple, vous pourriez vouloir calculer le prix total de chaque commande puis l'arrondir à l'entier le plus proche.\n\nExemple :\n\n```sql\nSELECT id, quantity * unit_price AS total, ROUND(quantity * unit_price) AS rounded_total\nFROM orders;\n```\n\nCette requête multiplie `quantity` par `unit_price` pour obtenir le total, puis utilise `ROUND()` pour arrondir le résultat."
+          }
+        }
+      }
+    }
+  }
+}

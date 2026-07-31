@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "marketingPrompt": {
+      "eyebrow": "Preferencias de correo",
+      "title": "¿Quieres recibir novedades de ZoeSkoul?",
+      "description": "Recibe correos ocasionales sobre nuevos cursos, mejoras del producto y recursos de aprendizaje.",
+      "optionalNote": "Es opcional. La verificación de cuenta, los recibos, las invitaciones de tutoría y los correos de seguridad se mantienen por separado.",
+      "accept": "Sí, envíame novedades",
+      "decline": "Ahora no",
+      "saving": "Guardando…",
+      "loadError": "No pudimos consultar tu preferencia de correo.",
+      "saveError": "No pudimos guardar tu elección. Inténtalo de nuevo."
+    }
+  }
+}

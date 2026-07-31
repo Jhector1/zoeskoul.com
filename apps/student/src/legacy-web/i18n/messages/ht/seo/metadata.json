@@ -1,0 +1,227 @@
+{
+  "seo": {
+    "site": {
+      "name": "{appName}",
+      "shortName": "{appName}",
+      "defaultOgAlt": "Platfòm aprantisaj {appName}"
+    },
+    "shared": {
+      "keywords": [
+        "{appName}",
+        "Learnoir",
+        "pwogramasyon",
+        "python",
+        "aljèb lineyè",
+        "matematik",
+        "IA",
+        "sekirite enfòmatik",
+        "lang",
+        "aprantisaj entèaktif",
+        "aprantisaj sou entènèt",
+        "egzèsis kodaj"
+      ]
+    },
+    "routes": {
+      "home": {
+        "title": "{appName} — Aprann pwogramasyon, matematik, IA, lang ak plis toujou",
+        "description": "{appName} se yon platfòm aprantisaj miltilang pou pwogramasyon, matematik, IA, sekirite enfòmatik ak lang, ak leson entèaktif, modil pratik ak chemen aprantisaj gide.",
+        "ogTitle": "{appName} — Aprann pwogramasyon, matematik, IA, lang ak plis toujou",
+        "ogDescription": "Platfòm aprantisaj miltilang ak leson entèaktif, pratik gide ak chemen aprantisaj estriktire.",
+        "twitterTitle": "{appName} — Aprann pwogramasyon, matematik, IA, lang ak plis toujou",
+        "twitterDescription": "Leson entèaktif, pratik gide ak chemen aprantisaj miltilang."
+      },
+      "billing": {
+        "title": "Pri yo — {appName}",
+        "description": "Gade plan {appName} yo pou elèv yo epi ouvri chemen aprantisaj gide, modil pratik ak kontni edikatif miltilang.",
+        "ogTitle": "Pri {appName}",
+        "ogDescription": "Konpare plan {appName} yo epi ouvri chemen aprantisaj gide ak modil pratik.",
+        "twitterTitle": "Pri yo — {appName}",
+        "twitterDescription": "Gade plan {appName} yo pou elèv yo."
+      },
+      "sandbox": {
+        "title": "Sandbox — {appName}",
+        "description": "Eksplore demonstrasyon piblik ak eksperyans {appName} yo.",
+        "ogTitle": "Sandbox — {appName}",
+        "ogDescription": "Demonstrasyon piblik ak eksperyans {appName} yo.",
+        "twitterTitle": "Sandbox — {appName}",
+        "twitterDescription": "Eksplore demonstrasyon piblik ak eksperyans yo."
+      },
+      "contact": {
+        "title": "Kontak — {appName}",
+        "description": "Kontakte {appName} pou sipò, patenarya ak kestyon sou platfòm aprantisaj la.",
+        "ogTitle": "Kontakte {appName}",
+        "ogDescription": "Antre an kontak ak {appName}.",
+        "twitterTitle": "Kontak — {appName}",
+        "twitterDescription": "Antre an kontak ak {appName}."
+      },
+      "legal-index": {
+        "title": "Mentions légales — {appName}",
+        "description": "Consultez les politiques légales, les informations de confidentialité, les conditions et les règles de la plateforme {appName}.",
+        "ogTitle": "Mentions légales — {appName}",
+        "ogDescription": "Politiques légales et règles de la plateforme {appName}.",
+        "twitterTitle": "Mentions légales — {appName}",
+        "twitterDescription": "Politiques légales et règles de la plateforme {appName}."
+      },
+      "terms": {
+        "title": "Conditions d’utilisation — {appName}",
+        "description": "Consultez les conditions d’utilisation de {appName} concernant la plateforme, le contenu, les abonnements et les outils d’apprentissage.",
+        "ogTitle": "Conditions d’utilisation — {appName}",
+        "ogDescription": "Consultez les conditions d’utilisation de {appName}.",
+        "twitterTitle": "Conditions d’utilisation — {appName}",
+        "twitterDescription": "Consultez les conditions d’utilisation de {appName}."
+      },
+      "privacy": {
+        "title": "Politique de confidentialité — {appName}",
+        "description": "Consultez la politique de confidentialité de {appName} et découvrez comment les données personnelles sont collectées, utilisées et protégées.",
+        "ogTitle": "Politique de confidentialité — {appName}",
+        "ogDescription": "Découvrez comment {appName} traite les données des utilisateurs.",
+        "twitterTitle": "Politique de confidentialité — {appName}",
+        "twitterDescription": "Découvrez comment {appName} traite les données des utilisateurs."
+      },
+      "cookies": {
+        "title": "Politique relative aux cookies — {appName}",
+        "description": "Découvrez comment {appName} utilise les cookies, le stockage local et les technologies similaires.",
+        "ogTitle": "Politique relative aux cookies — {appName}",
+        "ogDescription": "Découvrez comment les cookies et technologies similaires sont utilisés sur {appName}.",
+        "twitterTitle": "Politique relative aux cookies — {appName}",
+        "twitterDescription": "Découvrez comment les cookies sont utilisés sur {appName}."
+      },
+      "refund": {
+        "title": "Politique de remboursement — {appName}",
+        "description": "Consultez les règles d’annulation, de renouvellement et de remboursement pour les offres payantes et achats sur {appName}.",
+        "ogTitle": "Politique de remboursement — {appName}",
+        "ogDescription": "Consultez la politique de remboursement et d’annulation de {appName}.",
+        "twitterTitle": "Politique de remboursement — {appName}",
+        "twitterDescription": "Consultez la politique de remboursement et d’annulation de {appName}."
+      },
+      "acceptable-use": {
+        "title": "Politique d’utilisation acceptable — {appName}",
+        "description": "Consultez les règles d’utilisation légale et sécurisée de {appName}, y compris l’utilisation des comptes, du contenu et des systèmes.",
+        "ogTitle": "Politique d’utilisation acceptable — {appName}",
+        "ogDescription": "Consultez les règles d’utilisation acceptable de {appName}.",
+        "twitterTitle": "Politique d’utilisation acceptable — {appName}",
+        "twitterDescription": "Consultez les règles d’utilisation acceptable de {appName}."
+      },
+      "community": {
+        "title": "Règles de la communauté — {appName}",
+        "description": "Découvrez les attentes de la communauté pour une participation respectueuse et constructive sur {appName}.",
+        "ogTitle": "Règles de la communauté — {appName}",
+        "ogDescription": "Règles et attentes de la communauté sur {appName}.",
+        "twitterTitle": "Règles de la communauté — {appName}",
+        "twitterDescription": "Règles et attentes de la communauté sur {appName}."
+      },
+      "dmca": {
+        "title": "Politique de droit d’auteur et DMCA — {appName}",
+        "description": "Consultez la politique de droit d’auteur et DMCA pour l’envoi de notifications et le traitement des réclamations pour atteinte aux droits sur {appName}.",
+        "ogTitle": "Politique de droit d’auteur et DMCA — {appName}",
+        "ogDescription": "Politique de droit d’auteur et DMCA de {appName}.",
+        "twitterTitle": "Politique de droit d’auteur et DMCA — {appName}",
+        "twitterDescription": "Politique de droit d’auteur et DMCA de {appName}."
+      },
+      "ai-policy": {
+        "title": "Politique d’utilisation de l’IA — {appName}",
+        "description": "Découvrez comment les fonctionnalités basées sur l’IA de {appName} peuvent être utilisées et quelles limites s’appliquent.",
+        "ogTitle": "Politique d’utilisation de l’IA — {appName}",
+        "ogDescription": "Règles d’utilisation des fonctionnalités d’IA sur {appName}.",
+        "twitterTitle": "Politique d’utilisation de l’IA — {appName}",
+        "twitterDescription": "Règles d’utilisation des fonctionnalités d’IA sur {appName}."
+      },
+      "academic-integrity": {
+        "title": "Politique d’intégrité académique — {appName}",
+        "description": "Consultez les attentes en matière d’honnêteté pour les évaluations, devoirs et certifications sur {appName}.",
+        "ogTitle": "Politique d’intégrité académique — {appName}",
+        "ogDescription": "Attentes d’intégrité pour les apprenants sur {appName}.",
+        "twitterTitle": "Politique d’intégrité académique — {appName}",
+        "twitterDescription": "Attentes d’intégrité pour les apprenants sur {appName}."
+      },
+      "data-rights": {
+        "title": "Politique relative aux droits sur les données — {appName}",
+        "description": "Découvrez les droits à la vie privée, les demandes d’accès, les demandes de suppression et les droits liés aux données sur {appName}.",
+        "ogTitle": "Politique relative aux droits sur les données — {appName}",
+        "ogDescription": "Informations sur la confidentialité et les droits sur les données pour {appName}.",
+        "twitterTitle": "Politique relative aux droits sur les données — {appName}",
+        "twitterDescription": "Informations sur la confidentialité et les droits sur les données pour {appName}."
+      },
+      "online-python-compiler": {
+        "title": "Konpilatè Python sou entènèt — {appName}",
+        "description": "Ekri, kouri, epi teste kòd Python sou entènèt ak {appName}.",
+        "ogTitle": "Konpilatè Python sou entènèt — {appName}",
+        "ogDescription": "Ekri, kouri, epi teste kòd Python sou entènèt ak {appName}.",
+        "twitterTitle": "Konpilatè Python sou entènèt — {appName}",
+        "twitterDescription": "Ekri, kouri, epi teste kòd Python sou entènèt ak {appName}."
+      },
+      "online-java-compiler": {
+        "title": "Konpilatè Java sou entènèt — {appName}",
+        "description": "Ekri, konpile, epi kouri kòd Java sou entènèt ak {appName}.",
+        "ogTitle": "Konpilatè Java sou entènèt — {appName}",
+        "ogDescription": "Ekri, konpile, epi kouri kòd Java sou entènèt ak {appName}.",
+        "twitterTitle": "Konpilatè Java sou entènèt — {appName}",
+        "twitterDescription": "Ekri, konpile, epi kouri kòd Java sou entènèt ak {appName}."
+      },
+      "online-javascript-editor": {
+        "title": "Editè JavaScript sou entènèt — {appName}",
+        "description": "Ekri epi kouri JavaScript sou entènèt ak editè kòd {appName}.",
+        "ogTitle": "Editè JavaScript sou entènèt — {appName}",
+        "ogDescription": "Ekri epi kouri JavaScript sou entènèt ak editè kòd {appName}.",
+        "twitterTitle": "Editè JavaScript sou entènèt — {appName}",
+        "twitterDescription": "Ekri epi kouri JavaScript sou entènèt ak editè kòd {appName}."
+      },
+      "online-c-compiler": {
+        "title": "Konpilatè C sou entènèt — {appName}",
+        "description": "Ekri, konpile, epi kouri kòd C sou entènèt ak {appName}.",
+        "ogTitle": "Konpilatè C sou entènèt — {appName}",
+        "ogDescription": "Ekri, konpile, epi kouri kòd C sou entènèt ak {appName}.",
+        "twitterTitle": "Konpilatè C sou entènèt — {appName}",
+        "twitterDescription": "Ekri, konpile, epi kouri kòd C sou entènèt ak {appName}."
+      },
+      "online-cpp-compiler": {
+        "title": "Konpilatè C++ sou entènèt — {appName}",
+        "description": "Ekri, konpile, epi kouri kòd C++ sou entènèt ak {appName}.",
+        "ogTitle": "Konpilatè C++ sou entènèt — {appName}",
+        "ogDescription": "Ekri, konpile, epi kouri kòd C++ sou entènèt ak {appName}.",
+        "twitterTitle": "Konpilatè C++ sou entènèt — {appName}",
+        "twitterDescription": "Ekri, konpile, epi kouri kòd C++ sou entènèt ak {appName}."
+      },
+      "online-sql-editor": {
+        "title": "Editè SQL sou entènèt — {appName}",
+        "description": "Ekri epi kouri kestyon SQL sou entènèt ak editè SQL {appName}.",
+        "ogTitle": "Editè SQL sou entènèt — {appName}",
+        "ogDescription": "Ekri epi kouri kestyon SQL sou entènèt ak editè SQL {appName}.",
+        "twitterTitle": "Editè SQL sou entènèt — {appName}",
+        "twitterDescription": "Ekri epi kouri kestyon SQL sou entènèt ak editè SQL {appName}."
+      }
+    },
+    "subjects": {
+      "python": {
+        "title": "Aprann Python — {appName}",
+        "description": "Kòmanse aprann Python ak leson entèaktif, pratik gide ak modil estriktire pou debutan.",
+        "ogTitle": "Aprann Python — {appName}",
+        "ogDescription": "Aprantisaj Python ak leson entèaktif ak pratik gide."
+      },
+      "linear-algebra": {
+        "title": "Aprann Aljèb Lineyè — {appName}",
+        "description": "Bati bon baz nan vektè, matris, transfòmasyon ak rezolisyon pwoblèm ak leson gide ak pratik.",
+        "ogTitle": "Aprann Aljèb Lineyè — {appName}",
+        "ogDescription": "Leson aljèb lineyè ak pratik estriktire."
+      },
+      "cybersecurity": {
+        "title": "Aprann Sekirite Enfòmatik — {appName}",
+        "description": "Dekouvri baz sekirite enfòmatik ak leson estriktire, pratik gide ak chemen aprantisaj pratik.",
+        "ogTitle": "Aprann Sekirite Enfòmatik — {appName}",
+        "ogDescription": "Baz sekirite enfòmatik ak pratik estriktire."
+      },
+      "haitian-creole": {
+        "title": "Aprann Kreyòl Ayisyen — {appName}",
+        "description": "Pratike Kreyòl Ayisyen ak leson gide, vokabilè, koute ak chemen aprantisaj estriktire.",
+        "ogTitle": "Aprann Kreyòl Ayisyen — {appName}",
+        "ogDescription": "Aprantisaj Kreyòl Ayisyen ak pratik gide."
+      },
+      "ai-chatgpt-kickstart": {
+        "title": "Aprann IA ak ChatGPT — {appName}",
+        "description": "Bati konpetans pratik nan IA ak leson gide sou ChatGPT, prompting, itilizasyon an sekirite ak workflow reyèl.",
+        "ogTitle": "Aprann IA ak ChatGPT — {appName}",
+        "ogDescription": "Aprantisaj pratik sou IA ak leson gide ak workflow an sekirite."
+      }
+    }
+  }
+}

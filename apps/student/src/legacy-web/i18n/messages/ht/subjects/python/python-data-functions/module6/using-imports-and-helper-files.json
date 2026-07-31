@@ -1,0 +1,485 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "using-imports-and-helper-files": {
+          "label": "Bati yon Aplikasyon Python ki gen plizyè fichye",
+          "summary": "Kreye fichye modil yo andedan yon dosye, enpòte pwòp fonksyon ou yo nan main.py, epi konekte moso yo pou fè yon ti aplikasyon.",
+          "cards": {
+            "sketch0": {
+              "title": "Aplikasyon ou an ka genyen plis pase yon fichye."
+            },
+            "sketch1": {
+              "title": "Enpòte soti nan yon fichye ki nan yon dosye"
+            },
+            "sketch2": {
+              "title": "Fè yon ti klasè zouti"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Kreyatè Aplikasyon Mission Control"
+            }
+          },
+          "projectSteps": {
+            "q9": {
+              "title": "Kreye yon modil pou netwaye non"
+            },
+            "q10": {
+              "title": "Ajoute yon modil badj"
+            },
+            "q11": {
+              "title": "Bati yon modil rapò misyon"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Poukisa divize kòd nan fichye?",
+              "prompt": "Poukisa yon pwojè Python ta mete fonksyon ki ka reitilize nan fichye tankou `tools/names.py` olye pou mete chak liy nan `main.py`?",
+              "hint": "Panse pou kenbe aplikasyon prensipal la fasil pou li epi reitilize menm lojik la pita.",
+              "help": {
+                "concept": "Yon fichye modil ka gen fonksyon ki ka itilize ankò. `main.py` ka rete konsantre sou koule aplikasyon an: li antre, rele fonksyon, epi enprime rezilta yo.",
+                "hint_1": "Chèche opsyon sou òganizasyon ak reyitilizasyon.",
+                "hint_2": "Objektif la se pa pou fè plis travay. Objektif la se pou kenbe chak fichye responsab pou yon travay klè."
+              },
+              "options": {
+                "a": "Li kenbe kòd ki ka itilize ankò òganize epi pèmèt`main.py` enpòte li.",
+                "b": "Sa fè Python inyore erè ki nan fichye enpòte a.",
+                "c": "Sa vle di pwojè a ka sèlman fonksyone ak yon sèl valè antre.",
+                "d": "Li anpeche fonksyon yo retounen valè"
+              }
+            },
+            "q2": {
+              "title": "Chwazi enpòtasyon dirèk la",
+              "prompt": "Ou kreye `tools/names.py` ak yon fonksyon ki rele `clean_name`. Ki liy ki enpòte fonksyon sa a nan `main.py`?",
+              "hint": "Chemen an itilize non dosye a, apre sa non fichye a san `.py`, epi non fonksyon an.",
+              "help": {
+                "concept": "Pou enpòte soti nan yon modil ki nan yon dosye, itilize `from folder.file import function`. Pou `tools/names.py`, chemen modil la se `tools.names`.",
+                "hint_1": "Pa mete `.py` nan liy enpòtasyon an.",
+                "hint_2": "Fòm kòrèk la kòmanse ak `from tools.names import ...`."
+              },
+              "options": {
+                "a": "from tools.names import clean_name",
+                "b": "Enpòte clean_name soti nan tools/names.py",
+                "c": "import clean_name from tools.names",
+                "d": "from clean_name import tools.names"
+              }
+            },
+            "q3": {
+              "title": "Bon responsablite modil",
+              "prompt": "Chwazi tout egzanp ki bon travay pou yon ti fichye modil nan leson sa a.",
+              "hint": "Chwazi travay ki ka reitilize epi ki byen konsantre.",
+              "help": {
+                "concept": "Bon fichye modil yo anjeneral gen fonksyon ki gen rapò, tankou netwayaj tèks, fòmataj, evalyasyon, oswa kreyasyon rapò.",
+                "hint_1": "Yon modil ta dwe gen yon objektif klè.",
+                "hint_2": "Evite chwazi mete kòd o aza ki pa gen rapò nan yon sèl fichye."
+              },
+              "options": {
+                "a": "`tools/names.py` Netwaye epi fòmate non yo",
+                "b": "`tools/badges.py` Bati tèks badj la apati yon non ak yon wòl.",
+                "c": "`tools/random_everything.py` Melanje kòd ki pa gen rapò san okenn travay klè.",
+                "d": "`main.py` Li dwe kopye tout fonksyon ki nan chak modil anvan li ka fonksyone."
+              }
+            },
+            "q4": {
+              "title": "Apèl enpòte ki valab",
+              "prompt": "Ki apèl ki valab apre enpòtasyon ki koresponn lan? Chwazi tout repons ki kòrèk.",
+              "hint": "Koresponn stil apèl la ak stil enpòtasyon an.",
+              "help": {
+                "concept": "Apre `from tools.names import clean_name`, rele `clean_name(...)` dirèkteman. Apre `import tools.badges as badges`, rele `badges.make_badge(...)`.",
+                "hint_1": "Enpòtasyon dirèk yo itilize non fonksyon an dirèkteman.",
+                "hint_2": "Enpòtasyon alias yo itilize alias la anvan pwen an."
+              },
+              "options": {
+                "a": "Apre `from tools.names import clean_name`, itilize `clean_name(\" ava \")`",
+                "b": "Apre `import tools.badges as badges`, itilize `badges.make_badge(\"Ava\", \"coder\")`",
+                "c": "Apre `from tools.names import clean_name`, itilize `tools.names.clean_name(\"Ava\")` san enpòte `tools`",
+                "d": "Apre `import tools.badges as badges`, itilize `make_badge.badges(\"Ava\")`"
+              }
+            },
+            "q5": {
+              "title": "Kòmande modil workflow la",
+              "prompt": "Mete etap sa yo nan lòd ou ta itilize lè w ap ajoute pwòp fichye modil ou nan yon ti aplikasyon.",
+              "hint": "Kreye fichye a anvan ou enpòte ladan l.",
+              "help": {
+                "concept": "Python ka enpòte yon modil sèlman apre fichye a egziste nan chemen katab ki espere a. Apre sa,`main.py` ka rele fonksyon ki nan fichye sa a.",
+                "hint_1": "Dosye a ak fichye a vini anvan enpòtasyon an.",
+                "hint_2": "Apèl fonksyon an fèt apre liy enpòtasyon an."
+              },
+              "tokens": {
+                "t1": "Kreye dosye `tools` la",
+                "t2": "Kreye yon fichye modil tankou `tools/names.py`",
+                "t3": "Defini yon fonksyon andedan fichye modil sa a.",
+                "t4": "Enpòte epi rele fonksyon an ki soti nan `main.py`"
+              }
+            },
+            "q6": {
+              "title": "Bati koule enpòtasyon an",
+              "prompt": "Aranje liy sa yo pou`main.py` enpòte yon fòmatè epi enprime rezilta retounen an.",
+              "hint": "Enpòte an premye, apre sa rele, epi enprime.",
+              "help": {
+                "concept": "Yon fichye prensipal anjeneral enpòte fonksyon li bezwen an, rele li ak done, epi enprime oswa sere valè li retounen an.",
+                "hint_1": "Liy enpòtasyon an dwe kouri anvan apèl fonksyon an.",
+                "hint_2": "Enprime mesaj ki estoke a apre fonksyon an fin retounen li."
+              },
+              "tokens": {
+                "t1": "from tools.reports import mission_report",
+                "t2": "message = mission_report(\"badj EKIPYE: Zoe\", 18)",
+                "t3": "print(message)"
+              }
+            },
+            "q7": {
+              "title": "Konplete enpòtasyon fonksyon an",
+              "prompt": "Ranpli non fonksyon ki manke a pou enpòte li soti nan `tools.names`.",
+              "hint": "Sa a se fonksyon ki netwaye espas sipèfl ak kapitalizasyon.",
+              "help": {
+                "concept": "`from tools.names import clean_name` Enpòte fonksyon `clean_name` la ki soti nan fichye `names.py` la ki nan dosye `tools` an.",
+                "hint_1": "Mo ki manke a se non fonksyon an, pa non dosye a.",
+                "hint_2": "Chwazi non ki dekri netwayaj yon non."
+              },
+              "template": "from tools.names import [blank1]",
+              "choices": [
+                "non pwòp",
+                "Zouti",
+                "non.py",
+                "Antre"
+              ]
+            },
+            "q8": {
+              "title": "Konplete chemen modil la",
+              "prompt": "Ranpli non dosye ki manke a nan liy enpòtasyon sa a.",
+              "hint": "Fichye modil pou pwojè sa a yo nan yon sèl dosye.",
+              "help": {
+                "concept": "Chemen enpòte `tools.badges` vle di Python ta dwe chèche `badges.py` andedan katab `tools`.",
+                "hint_1": "Pa tape `.py` nan chemen enpòtasyon an.",
+                "hint_2": "Chwazi dosye ki genyen `badges.py`."
+              },
+              "template": "soti nan [blank1].badges enpòte make_badge",
+              "choices": [
+                "Zouti",
+                "badj.py",
+                "prensipal",
+                "Enprime"
+              ]
+            },
+            "q9": {
+              "title": "Kreye yon modil pou netwaye non",
+              "prompt": "Pwojè sa a ap kòmanse yon ti pake èd. Kreye yon dosye ki rele `tools`, ajoute `tools/names.py`, epi defini `clean_name(text)` ladan l. Apre sa, enpòte `clean_name` ki soti nan `tools.names` nan `main.py`, netwaye non antre a, epi enprime l.\n\nPa egzanp, si antre a se `aVA`, pwogram ou an ta dwe enprime:\n`Ava`.",
+              "hint": "Chemen ki nesesè a se `tools/names.py`. Liy enpòtasyon an nan `main.py` ta dwe `from tools.names import clean_name`.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an kouri epi konpare sòti a ak egzanp ki te atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan tools.names."
+                },
+                "1": {
+                  "message": "Defini clean_name(text) andedan tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name ta dwe retire espas vid yo."
+                },
+                "3": {
+                  "message": "clean_name ta dwe mete non an an majiskil tit."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+            },
+            "q10": {
+              "title": "Ajoute yon modil badj",
+              "prompt": "Dosye èd la bezwen yon zouti anplis. Kreye '`tools/badges.py`', enpòte '`make_badge`' ki soti nan '`tools.badges`', netwaye non antre a, konstwi tèks badj la, epi enprime l.\n\nPa egzanp, si antre yo se `lina` ak `artist`, pwogram ou an ta dwe enprime:\n`ARTIST badge: Lina`.",
+              "hint": "Kreye `tools/badges.py`, epi enpòte ak `from tools.badges import make_badge`.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyònman epi konpare sòti a ak egzanp ki te atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan zouti.badges."
+                },
+                "1": {
+                  "message": "Defini make_badge nan tools/badges.py."
+                },
+                "2": {
+                  "message": "make_badge ta dwe mete wòl la an majiskil."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+            },
+            "q11": {
+              "title": "Bati yon modil rapò misyon",
+              "prompt": "Kounye a, konekte modil èd yo pou fè yon sèl rapò final. Kreye yon '`tools/reports.py`', enpòte yon '`mission_report`' ki soti nan '`tools.reports`', epi enprime rapò misyon ki fini an.\n\nPa egzanp, si antre yo se `zoe`, `scout`, ak `18`, pwogram ou an ta dwe enprime:\n`Mission report: SCOUT badge: Zoe has 18 points`.",
+              "hint": "Etap sa a konbine twa fichye: `tools/names.py`, `tools/badges.py`, ak nouvo `tools/reports.py` ou a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                },
+                "tools_reports_py": {
+                  "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan tools.reports."
+                },
+                "1": {
+                  "message": "Defini mission_report nan tools/reports.py."
+                },
+                "2": {
+                  "message": "Apèl mission_report() soti nan main.py."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
+            },
+            "try-using-imports-and-helper-files-checkpoint": {
+              "title": "Enpòte soti nan yon fichye èd",
+              "prompt": "Bati sa a kòm yon ti pwogram ki gen de fichye.\n\n1. Kreye `tools/names.py`.\n2. Nan `tools/names.py`, defini `clean_name(text)`.\n3. Nan `main.py`, enpòte `clean_name` avèk `from tools.names import clean_name`.\n4. Li yon non avèk `input()`, netwaye l, epi enprime rezilta a.",
+              "hint": "Kreye `tools/names.py` an premye, epi enpòte `clean_name` nan `main.py`.",
+              "help": {
+                "concept": "Yon modil èd pèmèt `main.py` rete kout pandan yon lòt fichye okipe yon sèl travay konsantre.",
+                "hint_1": "Mete `clean_name(text)` nan `tools/names.py`.",
+                "hint_2": "Nan `main.py`, enpòte `clean_name`, rele li ak done brit yo, epi enprime non ki netwaye a."
+              },
+              "starterCode": "raw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan tools.names."
+                },
+                "1": {
+                  "message": "Defini clean_name(text) andedan tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name ta dwe retire espas vid yo."
+                },
+                "3": {
+                  "message": "clean_name ta dwe mete non an an majiskil tit."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+            },
+            "try-using-imports-and-helper-files-sketch0": {
+              "title": "Kreye epi enpòte yon èd non",
+              "prompt": "Bati sa a kòm yon pwogram ki gen de fichye.\n\n1. Kreye yon dosye ki rele `tools`.\n2. Kreye `tools/names.py`.\n3. Nan `tools/names.py`, defini `clean_name(text)`.\n4. Nan `main.py`, enpòte `clean_name`.\n5. Enprime `clean_name(\"  ava  \")`.",
+              "hint": "Mete `clean_name` nan `tools/names.py`, epi enpòte li nan `main.py`.",
+              "help": {
+                "concept": "Kat sa a se pou deplase edè a soti nan `main.py`, pa pou kenbe tout bagay nan yon sèl dosye.",
+                "hint_1": "Nan `tools/names.py`, retounen `text.strip().title()` soti nan `clean_name(text)`.",
+                "hint_2": "Nan `main.py`, itilize `from tools.names import clean_name`, epi enprime `clean_name(\"  ava  \")`."
+              },
+              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte clean_name soti nan tools.names."
+                },
+                "1": {
+                  "message": "Defini clean_name nan tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name ta dwe retire espas yo."
+                },
+                "3": {
+                  "message": "clean_name ta dwe mete non an an titil-case."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+            },
+            "try-using-imports-and-helper-files-sketch1": {
+              "title": "Kreye epi enpòte yon èd pou badj",
+              "prompt": "Bati sa a kòm yon pwogram de fichye.\n\n1. Kreye `tools/badges.py`.\n2. Nan `tools/badges.py`, defini `make_badge(name, role)`.\n3. Retounen `ROLE badge: Name` avèk wòl la an lèt majiskil.\n4. Nan `main.py`, enpòte `make_badge`.\n5. Enprime yon bad etidyan pou Ava.",
+              "hint": "Kreye `tools/badges.py`, epi enpòte `make_badge` nan `main.py`.",
+              "help": {
+                "concept": "Ede fòma a dwe nan pwòp modil li, kidonk `main.py` konekte sèlman moso yo.",
+                "hint_1": "Nan `tools/badges.py`, retounen `f\"{role.upper()} badge: {name}\"`.",
+                "hint_2": "Nan `main.py`, enpòte `make_badge` epi enprime `make_badge(\"Ava\", \"student\")`."
+              },
+              "starterCode": "# Create a folder named tools.\n# Create tools/badges.py with make_badge(name, role).\n# Then import make_badge from tools.badges and print a student badge for Ava.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte make_badge nan tools.badges."
+                },
+                "1": {
+                  "message": "Defini make_badge nan tools/badges.py."
+                },
+                "2": {
+                  "message": "Mete wòl la an majiskil andedan make_badge."
+                }
+              },
+              "solutionCode": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n"
+            },
+            "try-using-imports-and-helper-files-sketch2": {
+              "title": "Konekte de modil èd",
+              "prompt": "Bati sa a kòm yon ti pwogram ki gen plizyè fichye.\n\n1. Kreye `tools/names.py` ak `clean_name(text)`.\n2. Kreye `tools/badges.py` ak `make_badge(name, role)`.\n3. Nan `main.py`, enpòte toude èd yo.\n4. Netwaye `\"  mia  \"`.\n5. Bati yon bad mentor apati non ki netwaye a epi enprime l.",
+              "hint": "Enpòte toude helper yo nan `main.py`, epi netwaye non an anvan ou rele `make_badge`.",
+              "help": {
+                "concept": "Kat sa a pratike tout modèl la: fichye ede yo fè travay la, epi k`main.py`e yo ansanm.",
+                "hint_1": "Itilize `from tools.names import clean_name` ak `from tools.badges import make_badge`.",
+                "hint_2": "Netwaye `\"  mia  \"`, pase rezilta a nan `make_badge(..., \"mentor\")`, epi enprime badj la."
+              },
+              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Create tools/badges.py with make_badge(name, role).\n# Then import both helpers, clean \"  mia  \", and print a mentor badge.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte clean_name soti nan tools.names."
+                },
+                "1": {
+                  "message": "Enpòte make_badge soti nan tools.badges."
+                },
+                "2": {
+                  "message": "Defini clean_name nan tools/names.py."
+                },
+                "3": {
+                  "message": "Defini make_badge nan tools/badges.py."
+                },
+                "4": {
+                  "message": "Rele clean_name nan main.py."
+                },
+                "5": {
+                  "message": "Rele make_badge nan main.py."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n"
+            }
+          },
+          "tryIt": {
+            "try_using_imports_and_helper_files_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Bati sa a kòm yon ti pwogram ki gen de fichye.\n\n1. Kreye `tools/names.py`.\n2. Nan `tools/names.py`, defini `clean_name(text)`.\n3. Nan `main.py`, enpòte `clean_name` avèk `from tools.names import clean_name`.\n4. Li yon non avèk `input()`, netwaye l, epi enprime rezilta a."
+            },
+            "try_using_imports_and_helper_files_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Bati sa a kòm yon pwogram ki gen de fichye.\n\n1. Kreye yon dosye ki rele `tools`.\n2. Kreye `tools/names.py`.\n3. Nan `tools/names.py`, defini `clean_name(text)`.\n4. Nan `main.py`, enpòte `clean_name`.\n5. Enprime `clean_name(\"  ava  \")`."
+            },
+            "try_using_imports_and_helper_files_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Bati sa a kòm yon pwogram de fichye.\n\n1. Kreye `tools/badges.py`.\n2. Nan `tools/badges.py`, defini `make_badge(name, role)`.\n3. Retounen `ROLE badge: Name` avèk wòl la an lèt majiskil.\n4. Nan `main.py`, enpòte `make_badge`.\n5. Enprime yon bad etidyan pou Ava."
+            },
+            "try_using_imports_and_helper_files_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Bati sa a kòm yon ti pwogram ki gen plizyè fichye.\n\n1. Kreye `tools/names.py` ak `clean_name(text)`.\n2. Kreye `tools/badges.py` ak `make_badge(name, role)`.\n3. Nan `main.py`, enpòte toude èd yo.\n4. Netwaye `\"  mia  \"`.\n5. Bati yon bad mentor apati non ki netwaye a epi enprime l."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "using-imports-and-helper-files": {
+          "sk1": {
+            "title": "Aplikasyon ou an ka gen plis pase yon fichye.",
+            "bodyMarkdown": "A Python project does not have to keep every function in `main.py`. When a program grows, it is cleaner to move focused functions into small module files.\n\nFor this lesson, imagine a tiny **Mission Control** app:\n\n```text\nmain.py\ntools/\n  names.py\n  badges.py\n  reports.py\n```\n\nEach file has a job:\n\n- `main.py` reads input and connects the pieces.\n- `tools/names.py` cleans names.\n- `tools/badges.py` builds badge text.\n- `tools/reports.py` formats the final report.\n\nThe folder name and file name become the import path. A function inside `tools/names.py` can be imported like this:\n\n```python\nfrom tools.names import clean_name\n```\n\nNotice that the import uses `tools.names`, not `tools/names.py`. Python import paths use dots and leave off `.py`.\n\nIn the project, you will create module files in a folder and import your own functions into `main.py`."
+          },
+          "sk2": {
+            "title": "Enpòte soti nan yon fichye ki nan yon dosye",
+            "bodyMarkdown": "Suppose you create this file:\n\n```text\ntools/names.py\n```\n\nInside `tools/names.py`, you can define a function:\n\n```python\ndef clean_name(text):\n    return text.strip().title()\n```\n\nThen `main.py` can import and use it:\n\n```python\nfrom tools.names import clean_name\n\nraw_name = input()\nname = clean_name(raw_name)\nprint(name)\n```\n\nStep by step:\n\n1. Python looks inside the `tools` folder.\n2. It finds the `names.py` module.\n3. It imports the `clean_name` function.\n4. `main.py` calls that function like any other function.\n\nThis keeps your main app clean. Instead of filling `main.py` with every detail, you give each module a focused job."
+          },
+          "sk3": {
+            "title": "Fè yon ti klasè zouti",
+            "bodyMarkdown": "A nice multi-file project is not just random files. Each module should have a clear purpose.\n\nExample:\n\n```text\ntools/\n  names.py     # clean and format names\n  badges.py    # build badge labels\n  reports.py   # format final messages\n```\n\nThe files can work together through imports:\n\n```python\nfrom tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nname = clean_name(\"  zoe  \")\nbadge = make_badge(name, \"scout\")\nprint(mission_report(badge, 18))\n```\n\nOutput:\n\n```python\nMission report: SCOUT badge: Zoe has 18 points\n```\n\nThis is the main idea of the project: create small module files, put reusable functions inside them, import those functions into `main.py`, and connect them into one clean app."
+          }
+        }
+      }
+    }
+  }
+}

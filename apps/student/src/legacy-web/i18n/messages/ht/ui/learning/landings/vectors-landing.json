@@ -1,0 +1,51 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vektè",
+    "pageIntro": "Gen 2 pati: Pati 1 mete fondasyon yo; Pati 2 bati kè aljèb lineyè a (konbinezon → endepandans → span/sou-espas → baz).",
+    "quickStartPart1Easy": "Kòmanse vit • Pati 1 • Fasil",
+    "jumpPart2Easy": "Sote • Pati 2 • Fasil",
+    "whatYouLearn": "Sa w ap aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "“Pratike kounye a” louvri yon sesyon pratike ki deja filtre pou pati sa a.",
+    "recommendedPathTitle": "Chemen rekòmande",
+    "recommended": {
+      "0": "Fè Pati 1 jiskaske oryantasyon, fòm yo, nòrm/vektè inite, ak dot product vin otomatik pou ou.",
+      "1": "Apre sa ale nan Pati 2 pou metrize endepandans/span/baz (sa yo ouvri pòt pou tout rès la).",
+      "2": "Retounen sou jeyometri dot product la chak fwa projèksyon/dekonpozisyon sanble “misterye”."
+    },
+    "routeHint": "Si chemen materyèl ou a pa /learn, jis chanje lyen learnHref yo.",
+    "parts": {
+      "part1": {
+        "badge": "Kòmanse la",
+        "title": "Vektè — Pati 1",
+        "subtitle": "Fondasyon, entwisyon jeyometrik, fòm NumPy, ak operasyon prensipal yo",
+        "bullets": {
+          "0": "Sa vektè vle di (aljèb vs jeyometri) ak notasyon ℝⁿ",
+          "1": "Fòm liy vs kolòn + transpoze (poukisa sa enpòtan)",
+          "2": "Reprezantasyon NumPy: (n,), (1,n), (n,1) + entwisyon sou shape",
+          "3": "Ajoute/soustrè, miltipliye pa skalè (pyèj lis vs array)",
+          "4": "Nòrm (grandè) + vektè inite",
+          "5": "Dot product: kalkile + entèprete siy/ang",
+          "6": "Hadamard vs dot vs outer product (sa ou jwenn)",
+          "7": "Lide projèksyon (prepare pou dekonpozisyon)"
+        }
+      },
+      "part2": {
+        "badge": "Apre sa",
+        "title": "Vektè — Pati 2",
+        "subtitle": "Konbinezon lineyè → endepandans → span/sou-espas → baz",
+        "bullets": {
+          "0": "Ansanm vektè: fini / enfini / vid",
+          "1": "Konbinezon lineyè ak pwa (pa konpozan)",
+          "2": "Endepandan vs depandan (enkli règ vektè zewo a)",
+          "3": "Span (liy vs tout ℝ²) + entwisyon dimansyon",
+          "4": "Tès sou-espas: vektè zewo + règ fèmti yo",
+          "5": "Tcheke baz (nan ℝ²: det ≠ 0)",
+          "6": "Kowòdone nan yon baz (rezoud pou c₁, c₂)",
+          "7": "Koneksyon ak projèksyon + dekonpozisyon òtogonal"
+        }
+      }
+    }
+  }
+}

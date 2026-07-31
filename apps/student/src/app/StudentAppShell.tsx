@@ -1,45 +1,43 @@
-import type { AppSessionResponse } from "@zoeskoul/auth-client";
+import {
+  normalizeStudentPathname,
+  isNextOwnedPath,
+} from "../compat/app-route-ownership";
+
+import type {
+  AppSessionResponse,
+} from "@zoeskoul/auth-client";
 import {
   useEffect,
   useState,
 } from "react";
 
-import { CourseOverviewView } from "../courses/CourseOverviewView";
-import { ModuleOverviewView } from "../courses/ModuleOverviewView";
-import { MyLearningView } from "../learning/MyLearningView";
-import { StudentLessonHost } from "../lessons/StudentLessonHost";
+import HeaderSlick from "@/components/HeaderSlick";
+import { ExactMyLearningView } from "../exact-old-ui/ExactMyLearningView";
+import { ExactCatalogsView } from "../exact-old-ui/ExactCatalogsView";
+import { ExactCatalogDetailView } from "../exact-old-ui/ExactCatalogDetailView";
+import { ExactSubjectModulesView } from "../exact-old-ui/ExactSubjectModulesView";
+import { ExactModuleIntroView } from "../exact-old-ui/ExactModuleIntroView";
+import { ExactReviewModuleView } from "../exact-old-ui/ExactReviewModuleView";
 import {
-  activeStudentRouteId,
-  navigateStudentApp,
-  resolveStudentLocation,
-  studentRoutes,
+  ExactDailyPracticeView,
+  ExactModulePracticeView,
+} from "../exact-old-ui/ExactPracticeViews";
+import {
+  resolveStudentShellLocation,
 } from "./studentRoutes";
+
+import {
+  shouldRenderGlobalStudentHeader,
+} from "./studentLayout";
+
+import {
+  StudentNotFoundView,
+} from "./StudentNotFoundView";
 
 type AuthenticatedSession = Extract<
   AppSessionResponse,
   { authenticated: true }
 >;
-
-const routeHeadings = {
-  learning: {
-    eyebrow: "My Learning",
-    title: "Your learning",
-    description:
-      "Continue courses, open assigned learning, and return to tutoring.",
-  },
-  assignments: {
-    eyebrow: "Assignments",
-    title: "Assigned learning",
-    description:
-      "Courses shared by a teacher, tutor, or learning group.",
-  },
-  tutoring: {
-    eyebrow: "Tutoring",
-    title: "Tutoring sessions",
-    description:
-      "Join active sessions and reopen work shared by your tutor.",
-  },
-} as const;
 
 export function StudentAppShell(props: {
   apiOrigin: string;
@@ -47,155 +45,191 @@ export function StudentAppShell(props: {
   session: AuthenticatedSession;
 }) {
   const [pathname, setPathname] = useState(
-    () => window.location.pathname,
+    () =>
+      normalizeStudentPathname(
+        window.location.pathname,
+      ),
   );
 
   useEffect(() => {
-    const handlePopState = () => {
-      setPathname(window.location.pathname);
+    const update = () => {
+      const nextPathname =
+        normalizeStudentPathname(
+          window.location.pathname,
+        );
+
+      if (
+        nextPathname !==
+        window.location.pathname
+      ) {
+        window.history.replaceState(
+          {},
+          "",
+          nextPathname,
+        );
+      }
+
+      setPathname(nextPathname);
     };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    window.addEventListener("popstate", update);
+    window.addEventListener(
+      "zoeskoul:vite-navigation",
+      update,
+    );
+
+    return () => {
+      window.removeEventListener("popstate", update);
+      window.removeEventListener(
+        "zoeskoul:vite-navigation",
+        update,
+      );
+    };
   }, []);
 
+
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      window.history.replaceState({}, "", "/learning");
-      setPathname("/learning");
+    const normalized =
+      normalizeStudentPathname(
+        window.location.pathname,
+      );
+
+    if (
+      normalized !==
+      window.location.pathname
+    ) {
+      window.history.replaceState(
+        {},
+        "",
+        normalized,
+      );
+      setPathname(normalized);
     }
   }, []);
 
-  const location = resolveStudentLocation(pathname);
-  const activeRouteId = activeStudentRouteId(location);
-  const heading =
-    location.kind === "course"
-      ? {
-          eyebrow: "Course",
-          title: "Course overview",
-          description:
-            "Review modules and choose where to continue.",
-        }
-      : location.kind === "module"
-        ? {
-            eyebrow: "Module",
-            title: "Module outline",
-            description:
-              "Review sections and topics before opening the interactive lesson.",
-          }
-        : location.kind === "lesson"
-          ? null
-          : routeHeadings[location.route.id];
+  const location =
+    resolveStudentShellLocation(pathname);
 
-  const displayName =
-    props.session.user.name ??
-    props.session.user.email ??
-    "Learner";
+  useEffect(() => {
+    if (
+      location.kind !== "website" ||
+      !isNextOwnedPath(pathname)
+    ) {
+      return;
+    }
 
-  const content =
-    location.kind === "course" ? (
-      <CourseOverviewView
+    const target = new URL(
+      location.path +
+        window.location.search +
+        window.location.hash,
+      props.websiteOrigin,
+    );
+
+    window.location.replace(
+      target.toString(),
+    );
+  }, [
+    location,
+    props.websiteOrigin,
+  ]);
+
+  if (location.kind === "website") {
+    return (
+      <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+        <main className="ui-container py-8">
+          <section className="ui-page-surface p-6">
+            <div className="ui-section-kicker">
+              ZoeSkoul
+            </div>
+            <h1 className="mt-1 ui-title-md">
+              Opening the website
+            </h1>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  if (location.kind === "lesson") {
+    return (
+      <ExactReviewModuleView
         apiOrigin={props.apiOrigin}
-        websiteOrigin={props.websiteOrigin}
-        subjectSlug={location.subjectSlug}
-      />
-    ) : location.kind === "module" ? (
-      <ModuleOverviewView
-        apiOrigin={props.apiOrigin}
-        websiteOrigin={props.websiteOrigin}
+        locale={location.locale}
         subjectSlug={location.subjectSlug}
         moduleSlug={location.moduleSlug}
       />
-    ) : location.kind === "lesson" ? (
-      <StudentLessonHost
+    );
+  }
+
+  const content =
+    location.kind === "not-found" ? (
+      <StudentNotFoundView
+        locale={location.locale}
+        path={location.path}
+      />
+    ) : location.kind === "daily-practice" ? (
+      <ExactDailyPracticeView
+        locale={location.locale}
+      />
+    ) : location.kind === "module-practice" ? (
+      <ExactModulePracticeView
+        subjectSlug={
+          location.subjectSlug
+        }
+        moduleSlug={
+          location.moduleSlug
+        }
+      />
+    ) : location.kind === "catalogs" ? (
+      <ExactCatalogsView
         apiOrigin={props.apiOrigin}
-        websiteOrigin={props.websiteOrigin}
+      />
+    ) : location.kind === "catalog-detail" ? (
+      <ExactCatalogDetailView
+        apiOrigin={props.apiOrigin}
+        catalogSlug={location.catalogSlug}
+      />
+    ) : location.kind === "assignments" ? (
+      <ExactMyLearningView
+        apiOrigin={props.apiOrigin}
+        mode="assignments"
+      />
+    ) : location.kind === "tutoring" ? (
+      <ExactMyLearningView
+        apiOrigin={props.apiOrigin}
+        mode="tutoring"
+      />
+    ) : location.kind === "course" ? (
+      <ExactSubjectModulesView
+        apiOrigin={props.apiOrigin}
+        locale={location.locale}
+        subjectSlug={location.subjectSlug}
+        canUnlockAll={
+          props.session.capabilities
+            .canUnlockAll
+        }
+      />
+    ) : location.kind === "module" ? (
+      <ExactModuleIntroView
+        apiOrigin={props.apiOrigin}
+        locale={location.locale}
         subjectSlug={location.subjectSlug}
         moduleSlug={location.moduleSlug}
       />
     ) : (
-      <MyLearningView
+      <ExactMyLearningView
         apiOrigin={props.apiOrigin}
-        websiteOrigin={props.websiteOrigin}
-        routeId={location.route.id}
       />
     );
 
-  if (location.kind === "lesson") {
-    return content;
-  }
-
-  const visibleHeading = heading ?? routeHeadings.learning;
-
   return (
-    <div className="student-layout">
-      <aside className="student-sidebar">
-        <a
-          className="student-brand"
-          href="/learning"
-          onClick={(event) => navigateStudentApp(event, "/learning")}
-        >
-          <span className="student-brand-mark">Z</span>
-          <span>
-            <strong>ZoeSkoul</strong>
-            <small>Student</small>
-          </span>
-        </a>
-
-        <nav className="student-navigation" aria-label="Student navigation">
-          {studentRoutes.map((item) => {
-            const active = item.id === activeRouteId;
-
-            return (
-              <a
-                key={item.id}
-                className={active ? "is-active" : undefined}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                onClick={(event) => navigateStudentApp(event, item.href)}
-              >
-                <strong>{item.label}</strong>
-                <small>{item.description}</small>
-              </a>
-            );
-          })}
-        </nav>
-
-        <div className="student-account-card">
-          {props.session.user.image ? (
-            <img
-              src={props.session.user.image}
-              alt=""
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <span className="student-account-avatar" aria-hidden="true">
-              {displayName.slice(0, 1).toUpperCase()}
-            </span>
-          )}
-
-          <span>
-            <strong>{displayName}</strong>
-            <small>
-              {props.session.user.roles.join(", ") || "student"}
-            </small>
-          </span>
-        </div>
-      </aside>
-
-      <main className="student-main">
-        <header className="student-topbar student-real-topbar">
-          <div>
-            <p>{visibleHeading.eyebrow}</p>
-            <h1>{visibleHeading.title}</h1>
-            <span className="student-page-description">
-              {visibleHeading.description}
-            </span>
-          </div>
-        </header>
-
-        {content}
-      </main>
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+      {shouldRenderGlobalStudentHeader(
+        location,
+      ) ? (
+        <HeaderSlick brand="ZoeSkoul" />
+      ) : null}
+      {content}
     </div>
   );
 }

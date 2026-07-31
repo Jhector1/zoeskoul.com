@@ -1,3 +1,5 @@
+import "./student-embedded-try-it-file-create.css";
+
 import {
   ControlledCodeEditor,
 } from "@zoeskoul/editor-surface";

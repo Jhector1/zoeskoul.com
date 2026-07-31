@@ -1,0 +1,148 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "constant-and-rectangular-loops": {
+          "label": "Fixed and Rectangular Nested Loops",
+          "summary": "Compare Foo1’s fixed strip with Foo2’s growing square.",
+          "cards": {
+            "foo1-foo2-walkthrough": {
+              "title": "Foo1 and Foo2: Fixed Width versus an n × n Rectangle"
+            },
+            "rectangle-animation": {
+              "title": "Fixed Strip versus Growing Rectangle"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "count_foo1_foo2": {
+              "title": "Derive Exact Counts for Foo1 and Foo2"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "count_foo1_foo2": {
+                "title": "Derive Exact Counts for Foo1 and Foo2",
+                "prompt": "Complete the four helpers in `analysis.c`. Count tuple-print calls separately from all `printf` calls. Use formulas rather than reproducing the printing loops.",
+                "hint": "Foo1 adds one newline to each group of three tuple prints. Foo2 adds one newline to each row of n tuple prints.",
+                "help": {
+                  "concept": "The exact tuple counts are `3n` and `n²`; total printf counts are `4n` and `n²+n`.",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 6;\n    printf(\"foo1 tuples=%lld all=%lld theta=n\\n\", foo1_tuple_prints(n), foo1_all_printf_calls(n));\n    printf(\"foo2 tuples=%lld all=%lld theta=n^2\\n\", foo2_tuple_prints(n), foo2_all_printf_calls(n));\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 6;\n    printf(\"foo1 tuples=%lld all=%lld theta=n\\n\", foo1_tuple_prints(n), foo1_all_printf_calls(n));\n    printf(\"foo2 tuples=%lld all=%lld theta=n^2\\n\", foo2_tuple_prints(n), foo2_all_printf_calls(n));\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 6;\n    printf(\"foo1 tuples=%lld all=%lld theta=n\\n\", foo1_tuple_prints(n), foo1_all_printf_calls(n));\n    printf(\"foo2 tuples=%lld all=%lld theta=n^2\\n\", foo2_tuple_prints(n), foo2_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo1_tuple_prints(long long n);\nlong long foo1_all_printf_calls(long long n);\nlong long foo2_tuple_prints(long long n);\nlong long foo2_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo1_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo1_all_printf_calls(long long n) { (void)n; return 0; }\nlong long foo2_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo2_all_printf_calls(long long n) { (void)n; return 0; }\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 6;\n    printf(\"foo1 tuples=%lld all=%lld theta=n\\n\", foo1_tuple_prints(n), foo1_all_printf_calls(n));\n    printf(\"foo2 tuples=%lld all=%lld theta=n^2\\n\", foo2_tuple_prints(n), foo2_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo1_tuple_prints(long long n);\nlong long foo1_all_printf_calls(long long n);\nlong long foo2_tuple_prints(long long n);\nlong long foo2_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo1_tuple_prints(long long n) { return 3 * n; }\nlong long foo1_all_printf_calls(long long n) { return 4 * n; }\nlong long foo2_tuple_prints(long long n) { return n * n; }\nlong long foo2_all_printf_calls(long long n) { return n * n + n; }\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Foo1 has exactly three tuple prints per row."
+                  },
+                  {
+                    "message": "Foo2 forms an n by n rectangle."
+                  },
+                  {
+                    "message": "Include one newline call for each Foo2 row."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "foo1-reason": {
+              "title": "Why Foo1 is linear",
+              "prompt": "Why is Foo1 Θ(n) even though it contains two loops?",
+              "hint": "Ask whether the inner bound grows with n.",
+              "help": {
+                "concept": "A fixed inner bound contributes a constant factor, so 3n is Θ(n).",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Nested loops are always linear",
+                "b": "The inner loop runs a fixed 3 times",
+                "c": "printf is constant-time only outside loops",
+                "d": "The outer loop runs once"
+              }
+            },
+            "foo2-all": {
+              "title": "Count every printf",
+              "prompt": "How many total printf calls does Foo2 make, including newlines?",
+              "hint": "There is one newline after each row.",
+              "help": {
+                "concept": "The n² tuple prints plus n newline prints give n²+n.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "n²",
+                "b": "2n",
+                "c": "n²+n",
+                "d": "n³"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "constant-and-rectangular-loops": {
+          "foo1-foo2-walkthrough": {
+            "title": "Foo1 and Foo2: Fixed Width versus an n × n Rectangle",
+            "bodyMarkdown": "### Foo1: the inner loop has constant width\n\n```c\nvoid Foo1(int n) {\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < 3; j++) {\n            printf(\"(%d,%d) \", i, j);\n        }\n        printf(\"\\n\");\n    }\n}\n```\n\n**Step 1 — Trace the ranges.** `i` takes `n` values. For every `i`, `j` is exactly `0, 1, 2`.\n\n**Step 2 — Count tuple prints.** There are `3` per row and `n` rows, so `P(n) = 3n`.\n\n**Step 3 — Include newlines when requested.** One newline per row adds `n`, giving `4n` total `printf` calls.\n\n**Step 4 — Classify.** `Foo1` is `Θ(n)`.\n\n### Foo2: both dimensions depend on n\n\n```c\nvoid Foo2(int n) {\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < n; j++) {\n            printf(\"(%d,%d) \", i, j);\n        }\n        printf(\"\\n\");\n    }\n}\n```\n\n`Foo2` forms an `n × n` rectangle. The tuple print runs `n²` times; adding `n` newlines gives `n² + n` total `printf` calls. The tight bound is `Θ(n²)`.\n\nThe important distinction is not “one loop versus two loops.” It is whether each loop’s iteration count grows with `n`."
+          },
+          "rectangle-animation": {
+            "title": "Fixed Strip versus Growing Rectangle",
+            "context": "Watch the bound of the inner loop. A constant width contributes only a constant factor; a width of n creates a second growing dimension.",
+            "steps": [
+              {
+                "title": "Foo1: one row has fixed width",
+                "body": "For any i, j visits 0, 1, 2. The row width is always 3."
+              },
+              {
+                "title": "Foo1: repeat the strip n times",
+                "body": "n identical rows, each with 3 tuple prints, gives 3n."
+              },
+              {
+                "title": "Foo2: one row grows with n",
+                "body": "For every i, j visits 0 through n−1, so each row contains n tuple prints."
+              },
+              {
+                "title": "Foo2: n rows by n columns",
+                "body": "Independent dimensions multiply: n rows times n tuple prints per row."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

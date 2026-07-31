@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "comments_intro": {
+          "label": "Kòmantè : nòt pou moun (Python pa pran yo an kont)",
+          "summary": "Sèvi ak kòmantè pou esplike entansyon, make etap yo, epi dezaktive kòd tanporèman pandan w ap debug (tankou nòt plizyè liy).",
+          "cards": {
+            "sketch": { "title": "Kòmantè nan Python (#)" },
+            "quiz": { "title": "Ti tès rapid : kòmantè" }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "syntax": {
+        "comments": {
+          "title": "Kòmantè : nòt pou moun (Python pa pran yo an kont)",
+          "bodyMarkdown": "Lè w ap ekri kòd, ou ap ekri pou **de odyans** :\n\n1) Òdinatè a (Python)\n2) Ou menm nan lavni (ak lòt moun)\n\nYon **kòmantè** se yon nòt pou moun ke Python inyore nèt.\n\nPanse kòmantè tankou ti papye sou yon resèt :\nyo ede w sonje *poukisa* ou fè yon bagay, pa sèlman *kisa*.\n\n---\n\n## De fason pou ekri kòmantè nan Python\n\nNan Python, w ap sèvi sitou ak :\n\n1) **Kòmantè yon sèl liy** ak `#`\n2) **Nòt plizyè liy** (plizyè liy ki kòmanse ak `#`, oswa pafwa triple quotes)\n\n---\n\n## Kòmantè yon sèl liy : `#`\n\nNenpòt sa ki apre `#` sou yon liy, Python inyore li.\n\n~~~python\n# Sa a se yon kòmantè.\nprint(\"Hello\")  # Sa a tou se kòmantè\n~~~\n\n---\n\n## Kòmantè plizyè liy (nòt plizyè liy)\n\nPou nòt plizyè liy, ou gen de opsyon komen :\n\n### Opsyon A : plizyè liy `#` (rekòmande)\n\n~~~python\n# Etap 1 : mande itilizatè a antre done\n# Etap 2 : konvèti an nonb\n# Etap 3 : fè kalkil la\n# Etap 4 : enprime rezilta a\n~~~\n\n### Opsyon B : triple quotes (`\"\"\" ... \"\"\"` oswa `''' ... '''`)\n\nSa yo kreye yon **string plizyè liy**. Si ou pa mete li nan yon varyab, Python ap inyore li anjeneral lè l ap kouri, se poutèt sa kèk moun itilize l tankou kòmantè blòk.\n\n~~~python\n\"\"\"\nNòt plizyè liy:\n- Sa a se yon string literal\n- Gen moun ki sèvi avè l kòm \"kòmantè blòk\"\n\"\"\"\n~~~\n\n> **Konsèy :** Itilize triple quotes sitou pou **docstrings** (dokimantasyon pou fonksyon/klas). Pou kòmantè nòmal, pito liy `#`.\n\n---\n\n## Poukisa kòmantè enpòtan (Modil 0)\n\nSèvi ak kòmantè pou :\n- esplike *poukisa* yon liy la\n- make etap yo nan yon ti pwogram (mande → konvèti → kalkile → montre)\n- dezaktive yon liy tanporèman pandan w ap debug\n\n---\n\n## Eseye li (editè sou bò dwat)\n\nKouri sa a :\n\n~~~python\n# Etap 1 : mete valè nan varyab\nprice = 4.99\nqty = 3\n\n# Etap 2 : kalkile\ntotal = price * qty\n\n# Etap 3 : montre rezilta\nprint(\"total =\", total)\n~~~\n\nKounye a **mete kòmantè** sou liy ki kalkile `total` la epi kouri ankò :\n\n~~~python\nprice = 4.99\nqty = 3\n\n# total = price * qty\n\nprint(\"total =\", total)\n~~~\n\nOu dwe jwenn yon erè — se nòmal.\nSa montre kòmantè yo vrèman “retire” kòd la nan egzekisyon.\n\n---\n\n## Nòt\n\n✅ Ekri kòmantè pou esplike **entansyon** (poukisa a).\n❌ Pa ekri kòmantè ki jis repete kòd la.\n\nYon kòmantè itil :\n~~~python\n# Konvèti antre a (tèks) an nonb pou n ka fè matematik\nage = int(input(\"Age: \"))\n~~~\n\nPa itil (repete kòd la) :\n~~~python\n# Mete age egal ak antre a\nage = int(input(\"Age: \"))\n~~~\n\n---\n\nApre sa : n ap sèvi ak kòmantè pou make etap yo pandan n ap aprann **varyab** ak **tip done**."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m0_comments_symbol": {
+      "title": "Siy kòmantè (#)",
+      "prompt": "Ki siy ki kòmanse yon kòmantè yon sèl liy nan Python?",
+      "options": {
+        "a": "`//`",
+        "b": "`#`",
+        "c": "`/* ... */`"
+      },
+      "hint": "Python sèvi ak `#` pou kòmantè yon sèl liy."
+    },
+    "m0_comments_ignored_by_python": {
+      "title": "Python inyore kòmantè",
+      "prompt": "Kòmantè yo sèvi sitou pou:",
+      "options": {
+        "a": "Moun ki ap li kòd la",
+        "b": "Fè Python kouri pi vit",
+        "c": "Chanje rezilta a otomatikman"
+      },
+      "hint": "Python inyore kòmantè; yo ede moun konprann kòd la."
+    },
+    "m0_comments_best_reason": {
+      "title": "Pi bon rezon pou fè kòmantè",
+      "prompt": "Ki pi bon rezon pou ekri yon kòmantè?",
+      "options": {
+        "a": "Pou repete egzakteman sa kòd la deja di",
+        "b": "Pou esplike entansyon oswa yon etap ki difisil",
+        "c": "Pou fè fichye a pi long"
+      },
+      "hint": "Bon kòmantè esplike entansyon (poukisa a), pa bagay evidan (kisa a)."
+    },
+    "m0_comments_multiline_true": {
+      "title": "Kòmantè plizyè liy",
+      "prompt": "Ki fason ki rekòmande pou ekri nòt plizyè liy nan Python?",
+      "options": {
+        "a": "Sèvi ak `/* ... */`",
+        "b": "Sèvi ak plizyè liy ki kòmanse ak `#`",
+        "c": "Sèvi ak `//` sou chak liy"
+      },
+      "hint": "Python pa sèvi ak `/* */` ni `//`. Pou nòt plizyè liy, sèvi ak plizyè liy `#`."
+    },
+    "m0_comments_docstring_vs_comment": {
+      "title": "Docstring vs kòmantè",
+      "prompt": "Ki deklarasyon ki vre sou docstrings (triple quotes) ak kòmantè?",
+      "options": {
+        "a": "Docstring yo inyore menm jan ak kòmantè `#` yo",
+        "b": "Docstring yo mache sèlman anwo fichye a, okenn lòt kote",
+        "c": "Docstring yo se string pou dokimantasyon; `#` se vrè siy kòmantè a",
+        "d": "Python pa sipòte docstrings"
+      },
+      "hint": "Docstring yo se string pou dokimantasyon (eg. dokimante fonksyon/klas). `#` se sentaks kòmantè a."
+    },
+    "m0_comments_inline_comment": {
+      "title": "Kòmantè sou menm liy lan",
+      "prompt": "Ki liy ki sèvi ak kòmantè sou menm liy lan kòrèkteman nan Python?",
+      "options": {
+        "a": "`total = price * qty  # kalkile total la`",
+        "b": "`total = price * qty  // kalkile total la`",
+        "c": "`total = price * qty  /* kalkile total la */`",
+        "d": "`total = price * qty  -- kalkile total la`"
+      },
+      "hint": "Kòmantè sou menm liy lan sèvi ak `#` apre kòd la: `value = ...  # eksplikasyon`."
+    },
+    "m0_comments_multiline_valid_ways": {
+      "title": "Fason ki valab pou ekri nòt plizyè liy",
+      "prompt": "Ki fason ki valab pou ekri nòt/kòmantè plizyè liy nan Python? (Chwazi tout sa ki bon.)",
+      "options": {
+        "a": "Plizyè liy ki kòmanse ak `#`",
+        "b": "Yon string ak triple quotes pou sèvi kòm nòt",
+        "c": "Blòk `/* ... */`",
+        "d": "`//` nan kòmansman chak liy"
+      },
+      "hint": "Vrè kòmantè Python se liy `#`. Triple quotes ka sèvi kòm docstrings/nòt, men `/* */` ak `//` pa Python."
+    },
+    "m0_comments_which_lines_are_comments": {
+      "title": "Jwenn liy kòmantè yo",
+      "prompt": "Gade liy sa yo. Ki liy ki kòmantè? (Chwazi tout sa ki bon.)\n\n1) `# Hello`\n2) `print(\"Hi\")`\n3) `x = 3  # set x`\n4) `#x = 10`\n",
+      "options": {
+        "a": "Liy 1",
+        "b": "Liy 2",
+        "c": "Liy 3",
+        "d": "Liy 4"
+      },
+      "hint": "Yon liy kòmantè kòmanse ak `#`. Kòd ka genyen kòmantè tou apre li sou menm liy lan."
+    },
+    "m0_comments_disable_error_line": {
+      "title": "Ranje l: fè kòmantè sou yon liy",
+      "prompt": "Pwogram nan kraze paske gen yon liy ki pa bon.\n\nTravay ou:\n- Mete kòmantè sou liy ki fè erè a\n- Kite lòt liy yo rete\n- Rezilta a dwe:\n  - `Start`\n  - `End`\n",
+      "hint": "Mete `#` nan kòmansman liy ki bay pwoblèm nan (oswa efase liy lan)."
+    },
+    "m0_comments_disable_wrong_math_line": {
+      "title": "Dezaktive liy move matematik la",
+      "prompt": "Pwogram nan kalkile total la byen, men gen yon liy ki vin gate li.\n\nTravay ou:\n- Mete kòmantè sou SÈL liy ki pa bon an\n- Pwogram nan dwe enprime `12`\n",
+      "hint": "Liy `total = total + 100` la se erè a—mete `#` devan li."
+    }
+  }
+}
