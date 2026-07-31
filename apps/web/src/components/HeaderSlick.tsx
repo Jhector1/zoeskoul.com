@@ -24,6 +24,13 @@ import NavButton from "@/components/ui/NavButton";
 import {
   buildWebLogoutUrl,
 } from "@/lib/auth/logout";
+import {
+  normalizeFontSizePx,
+  type AppFontSizePx,
+} from "@zoeskoul/preferences";
+import {
+  useAppPreferences,
+} from "@zoeskoul/preferences/react";
 
 type NavItem = { href: string; label: string };
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
@@ -52,28 +59,10 @@ function hardLogout(locale: string) {
   );
 }
 
-const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";
-const FONT_SIZE_DEFAULT = 16;
-const FONT_SIZE_OPTIONS = [14,16, 20, 24] as const;
 const START_SESSION_HREF = "/sandbox";
 
 function clampFontPx(x: number) {
-  if (x <= 14) return 14;
-  if (x <= 16) return 16;
-  if (x <= 20) return 20;
-  return 24;
-}
-
-function readStoredFontSize() {
-  if (typeof window === "undefined") return FONT_SIZE_DEFAULT;
-
-  try {
-    const raw = window.localStorage.getItem(FONT_SIZE_STORAGE_KEY);
-    const parsed = raw ? Number(raw) : NaN;
-    return Number.isFinite(parsed) ? clampFontPx(parsed) : FONT_SIZE_DEFAULT;
-  } catch {
-    return FONT_SIZE_DEFAULT;
-  }
+  return normalizeFontSizePx(x);
 }
 
 function applyBaseFontSize(px: number) {
@@ -91,7 +80,7 @@ function FontSizePicker(props: {
 }) {
   const { value, onChange, labels } = props;
 
-  const items: Array<{ px: (typeof FONT_SIZE_OPTIONS)[number]; label: string }> = [
+  const items: Array<{ px: AppFontSizePx; label: string }> = [
     { px: 14, label: labels.small },
       { px: 16, label: labels.normal },
     { px: 20, label: labels.large },
@@ -134,28 +123,12 @@ function SettingsMenu() {
   const t = useTranslations("Header");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
-
-  const [fontPx, setFontPx] = useState<number>(() => readStoredFontSize());
+  const { preferences, updatePreferences } = useAppPreferences();
+  const fontPx = preferences.fontSizePx;
 
   React.useLayoutEffect(() => {
     applyBaseFontSize(fontPx);
   }, [fontPx]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(FONT_SIZE_STORAGE_KEY, String(fontPx));
-    } catch {}
-  }, [fontPx]);
-
-  useEffect(() => {
-    function onStorage(e: StorageEvent) {
-      if (e.key !== FONT_SIZE_STORAGE_KEY) return;
-      setFontPx(readStoredFontSize());
-    }
-
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
 
   useEffect(() => {
     function onDown(e: MouseEvent) {
@@ -237,7 +210,11 @@ function SettingsMenu() {
                     <div className="mt-3">
                       <FontSizePicker
                           value={fontPx}
-                          onChange={(px) => setFontPx(clampFontPx(px))}
+                          onChange={(px) => {
+                            void updatePreferences({
+                              fontSizePx: clampFontPx(px),
+                            }).catch(() => undefined);
+                          }}
                           labels={{
                             small: t("fontSmall"),
                             normal: t("fontNormal"),

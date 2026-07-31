@@ -4,6 +4,12 @@ import * as React from "react";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import { ThemeProvider } from "next-themes";
+import { useTheme } from "next-themes";
+import type { AppPreferences } from "@zoeskoul/preferences";
+import {
+    AppPreferencesProvider,
+    useAppPreferences,
+} from "@zoeskoul/preferences/react";
 import { GlobalNavigationProgress } from "@/components/navigation/GlobalNavigationProgress";
 
 function isBenignMonacoCanceledError(reason: unknown) {
@@ -49,27 +55,51 @@ function MonacoCanceledErrorGuard() {
     return null;
 }
 
+function ThemePreferenceSync() {
+    const { preferences } = useAppPreferences();
+    const { theme, setTheme } = useTheme();
+
+    React.useEffect(() => {
+        if (theme !== preferences.theme) {
+            setTheme(preferences.theme);
+        }
+    }, [preferences.theme, setTheme, theme]);
+
+    return null;
+}
+
 export default function Providers({
                                       children,
                                       session,
+                                      apiOrigin,
+                                      initialPreferences,
                                   }: {
     children: React.ReactNode;
     session?: Session | null;
+    apiOrigin: string;
+    initialPreferences: AppPreferences;
 }) {
     return (
         <SessionProvider session={session}>
-            <ThemeProvider
-                attribute="class"
-                value={{ dark: "dark", light: "light" }}
-                defaultTheme="system"
-                enableSystem
-                enableColorScheme={false}
-                disableTransitionOnChange
+            <AppPreferencesProvider
+                apiOrigin={apiOrigin}
+                initialPreferences={initialPreferences}
             >
-                <MonacoCanceledErrorGuard />
-                <GlobalNavigationProgress />
-                {children}
-            </ThemeProvider>
+                <ThemeProvider
+                    attribute="class"
+                    value={{ dark: "dark", light: "light" }}
+                    defaultTheme={initialPreferences.theme}
+                    storageKey="zoeskoul-theme"
+                    enableSystem
+                    enableColorScheme={false}
+                    disableTransitionOnChange
+                >
+                    <ThemePreferenceSync />
+                    <MonacoCanceledErrorGuard />
+                    <GlobalNavigationProgress />
+                    {children}
+                </ThemeProvider>
+            </AppPreferencesProvider>
         </SessionProvider>
     );
 }

@@ -78,8 +78,11 @@ export default function LocaleSwitcher({
       minVisibleMs: 500,
     });
 
+    const hash =
+        typeof window === "undefined" ? "" : window.location.hash;
+
     startTransition(() => {
-      router.replace(href, { locale: nextLocale });
+      router.replace(`${href}${hash}`, { locale: nextLocale });
     });
   };
 

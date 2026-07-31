@@ -4,7 +4,7 @@ import {
   getProductionAppOrigin,
 } from "@zoeskoul/app-config";
 
-const ALLOWED_METHODS = "GET, POST, PUT, DELETE, OPTIONS";
+const ALLOWED_METHODS = "GET, POST, PATCH, PUT, DELETE, OPTIONS";
 const ALLOWED_HEADERS = "Accept, Content-Type";
 
 function requestOrigin(request: Request): string {
@@ -48,6 +48,11 @@ export function isAppOriginAllowed(request: Request): boolean {
   const origin = request.headers.get("Origin");
   if (!origin) return true;
   return allowedOrigins(request).has(origin);
+}
+
+export function isAppMutationOriginAllowed(request: Request): boolean {
+  return Boolean(request.headers.get("Origin")) &&
+    isAppOriginAllowed(request);
 }
 
 export function applyAppCorsHeaders(

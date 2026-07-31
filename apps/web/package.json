@@ -76,6 +76,7 @@
     "@zoeskoul/permissions": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
+    "@zoeskoul/preferences": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
     "@zoeskoul/workspace-contracts": "workspace:*",
     "better-sqlite3": "^12.8.0",

@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --max-warnings=0 vite.config.ts src/main.tsx src/App.tsx src/app src/compat src/exact-old-ui src/platform src/legacy-web/components/HeaderSlick.tsx src/legacy-web/components/UserMenuSlick.tsx src/legacy-web/components/LocaleSwitcher.tsx src/legacy-web/components/ThemeToggle.tsx src/legacy-web/features/practice/ui/subject-picker 'src/legacy-web/routes/(public)/[locale]/(generalZone)/subjects/[subjectSlug]/modules/SubjectModulesClient.tsx' 'src/legacy-web/routes/(public)/[locale]/(generalZone)/subjects/[subjectSlug]/modules/[moduleSlug]/ModuleIntroClient.tsx' 'src/legacy-web/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient.tsx' 'src/legacy-web/routes/(public)/[locale]/(learningZone)/practice/daily/daily-five-practice-client.tsx' 'src/legacy-web/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/practice/practice-client.tsx'",
-    "test": "vitest run src/lessons/studentEmbeddedTryItData.test.ts src/lessons/studentProgressPersistence.test.ts src/compat/settings-menu-runtime.test.tsx src/app/studentSubjectFirstRoutes.test.ts src/compat/navigation-refresh.test.ts src/compat/LegacyApiBridge.test.ts src/compat/learnerFacingExerciseCopy.test.ts src/compat/practice-kind-helper.test.tsx src/compat/icu-message.test.ts src/app/studentOwnedRoutes.test.ts src/app/studentLocaleRoot.test.ts src/app/studentRouteOwnership.test.ts src/app/studentShellLocation.test.ts src/compat/next-intl-array-path.test.ts src/compat/practice-non-code-tools.test.ts src/compat/student-css-parity.test.ts src/app/studentLayout.test.ts src/app/studentPlatformRouteOwnership.test.ts src/app/StudentAccessGate.test.tsx src/app/StudentAppShell.test.ts src/app/studentLogout.test.ts",
+    "test": "vitest run src/lessons/studentEmbeddedTryItData.test.ts src/lessons/studentProgressPersistence.test.ts src/compat/settings-menu-runtime.test.tsx src/compat/preferences-runtime.test.ts src/app/studentSubjectFirstRoutes.test.ts src/compat/navigation-refresh.test.ts src/compat/LegacyApiBridge.test.ts src/compat/learnerFacingExerciseCopy.test.ts src/compat/practice-kind-helper.test.tsx src/compat/icu-message.test.ts src/app/studentOwnedRoutes.test.ts src/app/studentLocaleRoot.test.ts src/app/studentRouteOwnership.test.ts src/app/studentShellLocation.test.ts src/compat/next-intl-array-path.test.ts src/compat/practice-non-code-tools.test.ts src/compat/student-css-parity.test.ts src/app/studentLayout.test.ts src/app/studentPlatformRouteOwnership.test.ts src/app/StudentAccessGate.test.tsx src/app/StudentAppShell.test.ts src/app/studentLogout.test.ts",
     "transplant:inventory": "wc -l src/legacy-web/TRANSPLANT_FILES.txt"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
     "@zoeskoul/permissions": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
+    "@zoeskoul/preferences": "workspace:*",
     "@zoeskoul/workspace-contracts": "workspace:*"
   },
   "devDependencies": {

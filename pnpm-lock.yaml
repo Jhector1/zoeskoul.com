@@ -190,6 +190,9 @@ importers:
       '@zoeskoul/practice-contracts':
         specifier: workspace:*
         version: link:../../packages/practice-contracts
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../../packages/preferences
       '@zoeskoul/workspace-contracts':
         specifier: workspace:*
         version: link:../../packages/workspace-contracts
@@ -269,6 +272,9 @@ importers:
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../../packages/preferences
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -369,6 +375,9 @@ importers:
       '@zoeskoul/practice-contracts':
         specifier: workspace:*
         version: link:../../packages/practice-contracts
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../../packages/preferences
       '@zoeskoul/pty-auth':
         specifier: workspace:*
         version: link:../../packages/pty-auth
@@ -536,7 +545,14 @@ importers:
         specifier: ^5
         version: 5.9.3
 
-  packages/api-client: {}
+  packages/api-client:
+    devDependencies:
+      eslint:
+        specifier: ^9.39.4
+        version: 9.39.4(jiti@2.6.1)
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
   packages/api-contracts:
     dependencies:
@@ -839,6 +855,22 @@ importers:
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../code-contracts
+
+  packages/preferences:
+    dependencies:
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.3
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      eslint:
+        specifier: ^9.39.4
+        version: 9.39.4(jiti@2.6.1)
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
   packages/progress-contracts: {}
 

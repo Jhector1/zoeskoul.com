@@ -4,6 +4,9 @@ import "@zoeskoul/editor-surface/styles.css";
 import {
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";
+import {
+  AppPreferencesProvider,
+} from "@zoeskoul/preferences/react";
 
 import { StudentAccessGate } from "./app/StudentAccessGate";
 import { StudentAppShell } from "./app/StudentAppShell";
@@ -23,23 +26,25 @@ export function App() {
     getLocalAppOrigin("website");
 
   return (
-    <StudentThemeProvider>
-      <StudentAccessGate
-        apiOrigin={apiOrigin}
-        websiteOrigin={websiteOrigin}
-      >
-        {(session) => (
-          <LegacyProviders session={session}>
-            <LegacyApiBridge apiOrigin={apiOrigin}>
-              <StudentAppShell
-                apiOrigin={apiOrigin}
-                websiteOrigin={websiteOrigin}
-                session={session}
-              />
-            </LegacyApiBridge>
-          </LegacyProviders>
-        )}
-      </StudentAccessGate>
-    </StudentThemeProvider>
+    <AppPreferencesProvider apiOrigin={apiOrigin}>
+      <StudentThemeProvider>
+        <StudentAccessGate
+          apiOrigin={apiOrigin}
+          websiteOrigin={websiteOrigin}
+        >
+          {(session) => (
+            <LegacyProviders session={session}>
+              <LegacyApiBridge apiOrigin={apiOrigin}>
+                <StudentAppShell
+                  apiOrigin={apiOrigin}
+                  websiteOrigin={websiteOrigin}
+                  session={session}
+                />
+              </LegacyApiBridge>
+            </LegacyProviders>
+          )}
+        </StudentAccessGate>
+      </StudentThemeProvider>
+    </AppPreferencesProvider>
   );
 }

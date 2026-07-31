@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
+import { useAppPreferences } from "@zoeskoul/preferences/react";
 import { cn } from "@/lib/cn";
 
 export function ThemeToggle({
@@ -12,6 +13,7 @@ export function ThemeToggle({
     className?: string;
 }) {
     const { theme, setTheme } = useTheme();
+    const { updatePreferences } = useAppPreferences();
     const [mounted, setMounted] = React.useState(false);
 
     React.useEffect(() => setMounted(true), []);
@@ -22,7 +24,11 @@ export function ThemeToggle({
     return (
         <button
             type="button"
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={() => {
+                const nextTheme = isDark ? "light" : "dark";
+                setTheme(nextTheme);
+                void updatePreferences({ theme: nextTheme }).catch(() => undefined);
+            }}
             className={cn(
                 "ui-btn-ide-border gap-1.5",
                 compact ? "min-w-[72px]" : "h-9 px-3 text-xs",

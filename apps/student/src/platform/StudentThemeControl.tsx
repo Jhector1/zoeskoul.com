@@ -10,6 +10,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import {
+  useAppPreferences,
+} from "@zoeskoul/preferences/react";
 
 const choices = [
   {
@@ -34,6 +37,7 @@ export function StudentThemeControl() {
     theme,
     setTheme,
   } = useTheme();
+  const { updatePreferences } = useAppPreferences();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -70,7 +74,12 @@ export function StudentThemeControl() {
                 ? "inline-flex h-7 items-center justify-center gap-1.5 rounded-md bg-neutral-900 px-2 text-[11px] font-semibold text-white dark:bg-white dark:text-neutral-900"
                 : "inline-flex h-7 items-center justify-center gap-1.5 rounded-md px-2 text-[11px] font-medium text-neutral-600 hover:bg-neutral-100 dark:text-white/65 dark:hover:bg-white/[0.08]"
             }
-            onClick={() => setTheme(choice.value)}
+            onClick={() => {
+              setTheme(choice.value);
+              void updatePreferences({
+                theme: choice.value,
+              }).catch(() => undefined);
+            }}
           >
             <Icon className="h-3.5 w-3.5" aria-hidden="true" />
             {choice.label}

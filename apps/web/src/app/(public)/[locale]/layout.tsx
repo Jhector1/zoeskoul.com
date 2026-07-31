@@ -13,6 +13,13 @@ import { SfxProvider } from "@/lib/sfx/SfxProvider";
 import { inter, playfair, greatVibes } from "@/app/fonts";
 import { getSiteUrl } from "@/lib/seo/site";
 import MarketingConsentPrompt from "@/components/marketing/MarketingConsentPrompt";
+import { cookies } from "next/headers";
+import {
+    APP_PREFERENCES_COOKIE_NAME,
+    DEFAULT_APP_PREFERENCES,
+    normalizeLocale,
+    parsePreferencesCookieValue,
+} from "@zoeskoul/preferences";
 
 type LayoutProps = Readonly<{
     children: React.ReactNode;
@@ -72,6 +79,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
 
     const session = await auth();
     const messages = await getMessages();
+    const cookieStore = await cookies();
+    const initialPreferences =
+        parsePreferencesCookieValue(
+            cookieStore.get(APP_PREFERENCES_COOKIE_NAME)?.value,
+        ) ?? {
+            ...DEFAULT_APP_PREFERENCES,
+            locale: normalizeLocale(locale),
+        };
 
     return (
         <html
@@ -81,7 +96,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         >
         <body className="min-h-dvh w-full min-w-0 overflow-x-hidden bg-[var(--app-bg)] text-neutral-900 dark:text-white">
         <div className="min-h-dvh w-full min-w-0 overflow-x-hidden bg-[radial-gradient(1200px_700px_at_20%_0%,var(--app-bg-ink)_0%,transparent_60%)]">
-            <Providers session={session}>
+            <Providers
+                session={session}
+                apiOrigin={getSiteUrl().origin}
+                initialPreferences={initialPreferences}
+            >
                 <NextIntlClientProvider messages={messages}>
                     <SfxProvider>
                         {children}

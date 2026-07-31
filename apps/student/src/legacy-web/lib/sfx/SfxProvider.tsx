@@ -5,6 +5,9 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { onSfx } from "./bus";
 import { play, unlockAndPreload } from "./engine";
 import { readSfxSettings, writeSfxSettings, clamp } from "./settings";
+import {
+    useOptionalAppPreferences,
+} from "@zoeskoul/preferences/react";
 
 type SfxCtx = {
     enabled: boolean;
@@ -16,13 +19,16 @@ type SfxCtx = {
 const Ctx = createContext<SfxCtx | null>(null);
 
 export function SfxProvider({ children }: { children: React.ReactNode }) {
-    const [enabled, setEnabled] = useState(true);
+    const sharedPreferences = useOptionalAppPreferences();
+    const [localEnabled, setLocalEnabled] = useState(true);
     const [volume, setVolume] = useState(0.7);
+    const enabled =
+        sharedPreferences?.preferences.soundEnabled ?? localEnabled;
 
     // load persisted settings once
     useEffect(() => {
         const s = readSfxSettings();
-        setEnabled(s.enabled);
+        setLocalEnabled(s.enabled);
         setVolume(s.volume);
     }, []);
 
@@ -60,10 +66,15 @@ export function SfxProvider({ children }: { children: React.ReactNode }) {
         () => ({
             enabled,
             volume,
-            setEnabled,
+            setEnabled: (next: boolean) => {
+                setLocalEnabled(next);
+                void sharedPreferences
+                    ?.updatePreferences({ soundEnabled: next })
+                    .catch(() => undefined);
+            },
             setVolume: (v: number) => setVolume(clamp(v)),
         }),
-        [enabled, volume]
+        [enabled, sharedPreferences, volume]
     );
 
     return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
