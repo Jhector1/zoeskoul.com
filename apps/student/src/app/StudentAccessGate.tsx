@@ -1,5 +1,6 @@
 import {
   buildAuthenticateUrl,
+  type AppCapability,
   type AppSessionResponse,
 } from "@zoeskoul/auth-client";
 import { useAppSession } from "@zoeskoul/auth-client/react";
@@ -13,6 +14,9 @@ type AuthenticatedSession = Extract<
   { authenticated: true }
 >;
 
+const STUDENT_ACCESS_CAPABILITY: AppCapability =
+  "student:access";
+
 export function StudentAccessGate(props: {
   apiOrigin: string;
   websiteOrigin: string;
@@ -24,8 +28,7 @@ export function StudentAccessGate(props: {
 
   useEffect(() => {
     if (
-      state.status !== "ready" ||
-      state.session.authenticated
+      state.status !== "unauthenticated"
     ) {
       return;
     }
@@ -60,7 +63,7 @@ export function StudentAccessGate(props: {
         <section className="student-state-card">
           <p className="student-state-eyebrow">Session unavailable</p>
           <h1>We could not open your learning space</h1>
-          <p>{state.error}</p>
+          <p>{state.error.message}</p>
           <button
             className="student-primary-button"
             type="button"
@@ -73,7 +76,7 @@ export function StudentAccessGate(props: {
     );
   }
 
-  if (!state.session.authenticated) {
+  if (state.status === "unauthenticated") {
     return (
       <main className="student-state-page" aria-busy="true">
         <section className="student-state-card">
@@ -86,7 +89,17 @@ export function StudentAccessGate(props: {
     );
   }
 
-  if (!state.session.capabilities.accessStudentApp) {
+  if (state.status !== "authenticated") {
+    return null;
+  }
+
+  const session = state.session;
+
+  if (
+    !session.capabilities.includes(
+      STUDENT_ACCESS_CAPABILITY,
+    )
+  ) {
     return (
       <main className="student-state-page">
         <section className="student-state-card">
@@ -107,5 +120,5 @@ export function StudentAccessGate(props: {
     );
   }
 
-  return props.children(state.session);
+  return props.children(session);
 }

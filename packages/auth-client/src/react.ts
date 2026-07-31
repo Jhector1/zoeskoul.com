@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import {
+  AuthClientError,
   createAuthClient,
   type AppSessionResponse,
 } from "./index.js";
@@ -16,14 +17,33 @@ export type AppSessionLoadState =
       error: null;
     }
   | {
-      status: "ready";
-      session: AppSessionResponse;
+      status: "authenticated";
+      session: Extract<
+        AppSessionResponse,
+        { authenticated: true }
+      >;
+      error: null;
+    }
+  | {
+      status: "unauthenticated";
+      session: Extract<
+        AppSessionResponse,
+        { authenticated: false }
+      >;
       error: null;
     }
   | {
       status: "error";
       session: null;
-      error: string;
+      error: {
+        message: string;
+        kind:
+          | "http"
+          | "network"
+          | "invalid_json"
+          | "invalid_payload";
+        status?: number;
+      };
     };
 
 export function useAppSession(args: {
@@ -54,8 +74,17 @@ export function useAppSession(args: {
       .then((session) => {
         if (controller.signal.aborted) return;
 
+        if (session.authenticated) {
+          setState({
+            status: "authenticated",
+            session,
+            error: null,
+          });
+          return;
+        }
+
         setState({
-          status: "ready",
+          status: "unauthenticated",
           session,
           error: null,
         });
@@ -67,9 +96,19 @@ export function useAppSession(args: {
           status: "error",
           session: null,
           error:
-            error instanceof Error
-              ? error.message
-              : "The session request failed.",
+            error instanceof AuthClientError
+              ? {
+                  message: error.message,
+                  kind: error.kind,
+                  status: error.status,
+                }
+              : {
+                  message:
+                    error instanceof Error
+                      ? error.message
+                      : "The session request failed.",
+                  kind: "network",
+                },
         });
       });
 

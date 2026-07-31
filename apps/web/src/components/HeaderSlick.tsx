@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import UserMenuSlick from "./UserMenuSlick";
 
@@ -21,6 +21,9 @@ import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavi
 import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
 import NavButton from "@/components/ui/NavButton";
+import {
+  buildWebLogoutUrl,
+} from "@/lib/auth/logout";
 
 type NavItem = { href: string; label: string };
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
@@ -32,7 +35,7 @@ type HeaderSlotCtx = {
   user?: Session["user"];
 };
 
-async function hardLogout(locale: string) {
+function hardLogout(locale: string) {
   startGlobalNavigationPending({
     label: "Logging out…",
     description: "Closing your session securely.",
@@ -40,11 +43,13 @@ async function hardLogout(locale: string) {
     minVisibleMs: 700,
   });
 
-  try {
-    await signOut({ redirect: false });
-  } finally {
-    window.location.href = `/api/auth/keycloak-logout?postLogoutRedirect=${encodeURIComponent(`/${locale}`)}`;
-  }
+  window.location.assign(
+    buildWebLogoutUrl({
+      websiteOrigin:
+        window.location.origin,
+      locale,
+    }),
+  );
 }
 
 const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";

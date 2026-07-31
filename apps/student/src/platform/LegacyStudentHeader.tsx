@@ -20,6 +20,9 @@ import {
   navigateStudentApp,
 } from "../app/studentRoutes";
 import {
+  buildStudentLogoutUrl,
+} from "../app/studentLogout";
+import {
   StudentThemeControl,
 } from "./StudentThemeControl";
 
@@ -128,16 +131,12 @@ function UserMenu(props: {
 
   function signOut() {
     const locale = localeFromPath(window.location.pathname);
-    const redirect = new URL(`/${locale}`, props.websiteOrigin);
-    const signOutUrl = new URL(
-      "/api/auth/keycloak-logout",
-      props.websiteOrigin,
+    window.location.assign(
+      buildStudentLogoutUrl({
+        websiteOrigin: props.websiteOrigin,
+        locale,
+      }),
     );
-    signOutUrl.searchParams.set(
-      "postLogoutRedirect",
-      redirect.toString(),
-    );
-    window.location.assign(signOutUrl);
   }
 
   return (

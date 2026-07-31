@@ -1,24 +1,38 @@
 import {
+  getLocalAppOrigin,
+  getProductionAppOrigin,
   isTrustedBrowserAppOrigin,
+  normalizeSupportedLocale,
 } from "@zoeskoul/app-config";
 
 export function resolveAuthRedirect(args: {
   url: string;
   baseUrl: string;
   includeLocalApps: boolean;
+  fallbackPath?: string;
 }): string {
+  const baseOrigin = new URL(args.baseUrl).origin;
+  const fallbackUrl = new URL(
+    args.fallbackPath ?? "/en",
+    baseOrigin,
+  ).toString();
+
   if (args.url.startsWith("/") && !args.url.startsWith("//")) {
-    return `${args.baseUrl}${args.url}`;
+    return new URL(args.url, baseOrigin).toString();
   }
 
   try {
     const parsed = new URL(args.url);
 
     if (
-      parsed.origin === args.baseUrl ||
-      isTrustedBrowserAppOrigin(parsed.origin, {
-        includeLocal: args.includeLocalApps,
-      })
+      !parsed.username &&
+      !parsed.password &&
+      (
+        parsed.origin === baseOrigin ||
+        isTrustedBrowserAppOrigin(parsed.origin, {
+          includeLocal: args.includeLocalApps,
+        })
+      )
     ) {
       return parsed.toString();
     }
@@ -26,5 +40,27 @@ export function resolveAuthRedirect(args: {
     // Invalid and untrusted callback values fall through to the website.
   }
 
-  return `${args.baseUrl}/en`;
+  return fallbackUrl;
+}
+
+export function resolveRequestedAuthCallback(args: {
+  rawCallbackUrl: string | null | undefined;
+  locale: string;
+  includeLocalApps: boolean;
+}): string {
+  const locale =
+    normalizeSupportedLocale(args.locale);
+  const baseUrl = args.includeLocalApps
+    ? getLocalAppOrigin("website")
+    : getProductionAppOrigin("website");
+
+  return resolveAuthRedirect({
+    url: String(
+      args.rawCallbackUrl ?? "",
+    ).trim(),
+    baseUrl,
+    includeLocalApps:
+      args.includeLocalApps,
+    fallbackPath: `/${locale}`,
+  });
 }

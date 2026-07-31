@@ -25,16 +25,16 @@ export async function GET(request: Request) {
     access.authenticated && access.user
       ? {
           authenticated: true,
-          user: {
-            ...access.user,
-            roles: access.capabilities.appRoles,
-          },
-          capabilities: access.capabilities,
+          user: access.user,
+          roles: access.capabilities.appRoles,
+          capabilities:
+            access.capabilities.capabilities,
         }
       : {
           authenticated: false,
           user: null,
-          capabilities: access.capabilities,
+          roles: [],
+          capabilities: [],
         };
 
   return appCorsJson(request, body);

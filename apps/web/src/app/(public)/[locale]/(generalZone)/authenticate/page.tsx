@@ -1,15 +1,18 @@
 "use client";
 
 import React, {useMemo, useState} from "react";
-import {signIn} from "next-auth/react";
 import {useSearchParams} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import {cn} from "@/lib/cn";
-import {sanitizeCallbackUrl} from "@/lib/auth/callback-url";
+import {resolveRequestedAuthCallback} from "@/lib/auth/resolveAuthRedirect";
+import {
+    type AuthProviderId,
+    signInWithProvider,
+} from "@/lib/auth/signInWithProvider";
 
 type AuthProvider = {
-    id: string;
+    id: AuthProviderId;
     labelKey: string;
     noteKey?: string;
     icon: React.FC<{ className?: string }>;
@@ -47,7 +50,6 @@ export default function AuthenticatePage() {
     const locale = useLocale();
     const sp = useSearchParams();
 
-    const fallback = `/${locale}`;
     const rawCallbackUrl = sp.get("callbackUrl");
     const rawError = sp.get("error");
     const accessReason = sp.get("reason");
@@ -55,11 +57,12 @@ export default function AuthenticatePage() {
 
     const callbackUrl = useMemo(
         () =>
-            sanitizeCallbackUrl(rawCallbackUrl, {
+            resolveRequestedAuthCallback({
+                rawCallbackUrl,
                 locale,
-                fallback,
+                includeLocalApps: process.env.NODE_ENV !== "production",
             }),
-        [rawCallbackUrl, locale, fallback],
+        [rawCallbackUrl, locale],
     );
 
     const errorText = useMemo(
@@ -105,12 +108,12 @@ export default function AuthenticatePage() {
 
     const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
 
-    async function onProvider(providerId: string) {
+    async function onProvider(providerId: AuthProviderId) {
         if (loadingProvider) return;
         setLoadingProvider(providerId);
 
         try {
-            await signIn(providerId, {callbackUrl});
+            await signInWithProvider(providerId, callbackUrl);
         } catch {
             setLoadingProvider(null);
         }

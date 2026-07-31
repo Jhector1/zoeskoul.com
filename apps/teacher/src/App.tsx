@@ -1,10 +1,13 @@
 import { useAppSession } from "@zoeskoul/auth-client/react";
+import type { AppCapability } from "@zoeskoul/auth-client";
 import {
   getLocalAppOrigin,
   zoeSkoulApps,
 } from "@zoeskoul/app-config";
 
 const app = zoeSkoulApps.teacher;
+const TEACHER_ACCESS_CAPABILITY: AppCapability =
+  "teacher:access";
 
 export function App() {
   const apiOrigin =
@@ -13,7 +16,8 @@ export function App() {
 
   const sessionState = useAppSession({ apiOrigin });
   const session =
-    sessionState.status === "ready"
+    sessionState.status === "authenticated" ||
+    sessionState.status === "unauthenticated"
       ? sessionState.session
       : null;
 
@@ -21,10 +25,12 @@ export function App() {
     sessionState.status === "loading"
       ? "Checking the central ZoeSkoul session…"
       : sessionState.status === "error"
-        ? `Session check failed: ${sessionState.error}`
+        ? `Session check failed: ${sessionState.error.message}`
         : !session?.authenticated
           ? "Signed out"
-          : session.capabilities.accessTeacherApp
+          : session.capabilities.includes(
+                TEACHER_ACCESS_CAPABILITY,
+              )
             ? "Authenticated teaching application session ready"
             : "Signed in, but this account cannot access the teacher app";
 
@@ -34,8 +40,8 @@ export function App() {
       : "—";
 
   const roles =
-    session?.authenticated && session.user
-      ? session.user.roles.join(", ") || "none"
+    session?.authenticated
+      ? session.roles.join(", ") || "none"
       : "—";
 
   return (

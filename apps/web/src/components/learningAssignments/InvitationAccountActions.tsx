@@ -1,14 +1,30 @@
 "use client";
 
-import { signOut } from "next-auth/react";
+import {
+  buildWebLogoutUrl,
+} from "@/lib/auth/logout";
 
 export default function InvitationAccountActions({
   callbackUrl,
 }: {
   callbackUrl: string;
 }) {
-  async function switchAccount() {
-    await signOut({ callbackUrl });
+  function switchAccount() {
+    const locale =
+      window.location.pathname
+        .split("/")
+        .filter(Boolean)[0] ??
+      "en";
+
+    window.location.assign(
+      buildWebLogoutUrl({
+        websiteOrigin:
+          window.location.origin,
+        locale,
+        postLogoutRedirect:
+          callbackUrl,
+      }),
+    );
   }
 
   return (

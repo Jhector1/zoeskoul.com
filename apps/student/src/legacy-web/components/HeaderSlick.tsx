@@ -1,9 +1,15 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
+import {
+  getLocalAppOrigin,
+} from "@zoeskoul/app-config";
 import UserMenuSlick from "./UserMenuSlick";
+import {
+  buildStudentLogoutUrl,
+} from "../../app/studentLogout";
 
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -31,7 +37,10 @@ type HeaderSlotCtx = {
   user?: Session["user"];
 };
 
-async function hardLogout(locale: string) {
+function hardLogout(
+  locale: string,
+  websiteOrigin: string,
+) {
   startGlobalNavigationPending({
     label: "Logging out…",
     description: "Closing your session securely.",
@@ -39,11 +48,12 @@ async function hardLogout(locale: string) {
     minVisibleMs: 700,
   });
 
-  try {
-    await signOut({ redirect: false });
-  } finally {
-    window.location.href = `/api/auth/keycloak-logout?postLogoutRedirect=${encodeURIComponent(`/${locale}`)}`;
-  }
+  window.location.assign(
+    buildStudentLogoutUrl({
+      websiteOrigin,
+      locale,
+    }),
+  );
 }
 
 const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";
@@ -282,6 +292,9 @@ export default function HeaderSlick({
                                       isUser = true,
                                       isSetting = true,
                                       isBillingStatus = true,
+                                      websiteOrigin =
+                                        import.meta.env.VITE_WEBSITE_ORIGIN ??
+                                        getLocalAppOrigin("website"),
                                       slot,
                                       SlotComponent,
                                     }: {
@@ -291,6 +304,7 @@ export default function HeaderSlick({
   isNav?: boolean;
   isUser?: boolean;
   isSetting?: boolean;
+  websiteOrigin?: string;
   slot?: React.ReactNode;
   SlotComponent?: React.ComponentType<HeaderSlotCtx>;
 }) {
@@ -471,7 +485,10 @@ export default function HeaderSlick({
                             email={user?.email}
                             image={user?.image}
                             profileHref="/profile"
-                            onSignOut={() => hardLogout(locale)}
+                            onSignOut={() => hardLogout(
+                              locale,
+                              websiteOrigin,
+                            )}
                         />
                     ) : (
                         <NavButton
@@ -573,7 +590,10 @@ export default function HeaderSlick({
                                 </Link>
                                 <button
                                     type="button"
-                                    onClick={() => hardLogout(locale)}
+                                    onClick={() => hardLogout(
+                                      locale,
+                                      websiteOrigin,
+                                    )}
                                     className={mobileItem(false)}
                                 >
                                   {t("logout")}

@@ -33,6 +33,9 @@ import {
 import {
   StudentNotFoundView,
 } from "./StudentNotFoundView";
+import {
+  resolveLegacyStudentAccess,
+} from "./studentSessionCompatibility";
 
 type AuthenticatedSession = Extract<
   AppSessionResponse,
@@ -109,6 +112,10 @@ export function StudentAppShell(props: {
 
   const location =
     resolveStudentShellLocation(pathname);
+  const legacyAccess =
+    resolveLegacyStudentAccess(
+      props.session.roles,
+    );
 
   useEffect(() => {
     if (
@@ -205,8 +212,7 @@ export function StudentAppShell(props: {
         locale={location.locale}
         subjectSlug={location.subjectSlug}
         canUnlockAll={
-          props.session.capabilities
-            .canUnlockAll
+          legacyAccess.canUnlockAll
         }
       />
     ) : location.kind === "module" ? (
@@ -227,7 +233,12 @@ export function StudentAppShell(props: {
       {shouldRenderGlobalStudentHeader(
         location,
       ) ? (
-        <HeaderSlick brand="ZoeSkoul" />
+        <HeaderSlick
+          brand="ZoeSkoul"
+          websiteOrigin={
+            props.websiteOrigin
+          }
+        />
       ) : null}
       {content}
     </div>
