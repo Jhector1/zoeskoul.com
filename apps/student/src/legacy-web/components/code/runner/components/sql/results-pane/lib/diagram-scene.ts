@@ -158,4 +158,3 @@ type DragTarget = (HTMLElement | SVGElement) & {
     releasePointerCapture?: (pointerId: number) => void;
     hasPointerCapture?: (pointerId: number) => boolean;
 };
-

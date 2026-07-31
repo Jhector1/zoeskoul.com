@@ -946,7 +946,7 @@ export default function QuizBlock({
         practiceBank.practice,
         passScore,
         excusedById,
-    ]);  
+    ]);
     useEffect(() => {
         if (
             !shouldAutoCompleteReviewCard({
@@ -1450,7 +1450,7 @@ export default function QuizBlock({
     strictSequential,
     unlimitedAttempts,
     autoAdvance,
-  ]);  
+  ]);
 
   const emitState = useCallback(
       (s: SavedQuizState) => onStateChange?.(s),

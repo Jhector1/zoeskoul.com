@@ -1120,7 +1120,7 @@ export default function QuizBlock({
         excusedById,
         initState?.practiceMeta,
         initState?.practiceItemPatch,
-    ]);  
+    ]);
     const allQuestionsFlowDone =
         questions.length > 0 && questions.every((question) => isFlowDone(question));
     const hasFinalizedZeroCreditQuestion = questions.some((question) => {

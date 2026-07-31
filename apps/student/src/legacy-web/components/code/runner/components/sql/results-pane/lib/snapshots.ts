@@ -143,4 +143,3 @@ export function buildDefaultTableSnapshots(schema: SchemaModel): SqlTableSnapsho
 
     return out;
 }
-

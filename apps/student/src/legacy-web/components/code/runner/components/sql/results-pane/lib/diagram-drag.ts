@@ -120,4 +120,3 @@ type PanZoomCanvasProps = {
 
 const MIN_SCALE = 0.35;
 const MAX_SCALE = 2.5;
-

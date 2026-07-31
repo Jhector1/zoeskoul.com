@@ -186,5 +186,3 @@ export function actorKeyOf(actor: Actor): string {
   if (actor.guestId) return `g:${sha(actor.guestId)}`;
   return "g:missing";
 }
-
-

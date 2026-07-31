@@ -40,4 +40,3 @@ export function orthogonalPath(
     const my = (start.y + end.y) / 2;
     return `M ${start.x} ${start.y} L ${start.x} ${my} L ${end.x} ${my} L ${end.x} ${end.y}`;
 }
-
