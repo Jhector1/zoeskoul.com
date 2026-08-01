@@ -36,6 +36,7 @@ import {
 } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
     extractRuntimeSnapshotFromWorkspace,
+    rememberWorkspaceForSubmit,
     selectWorkspaceForSubmit,
     type WorkspaceSubmitCache,
 } from "@/components/tools/panes/workspaceSnapshot";
@@ -2400,10 +2401,29 @@ export default function CodeToolPane(props: {
 
         const pending = pendingWorkspaceRef.current;
         const forceUserEdit = pendingWorkspaceForceUserEditRef.current;
+
+        /**
+         * Keep the submit bridge cache aligned with the workspace being flushed.
+         *
+         * Without this replacement, the first Check stores attempt A in
+         * lastFlushedWorkspaceForSubmitRef. A later edit B can be debounced into
+         * the runtime and clear pendingWorkspaceRef, while the cache still points
+         * at A. The next Check then validates A even though Monaco shows B.
+         */
+        lastFlushedWorkspaceForSubmitRef.current = rememberWorkspaceForSubmit({
+            contextKey: workspaceContextKey,
+            workspace: pending,
+        });
+
         pendingWorkspaceRef.current = undefined;
         pendingWorkspaceForceUserEditRef.current = false;
         emitWorkspaceUpstreamAndCommit(pending, forceUserEdit);
-    }, [boundId, emitWorkspaceUpstreamAndCommit, syncCodeInputSnapshot]);
+    }, [
+        boundId,
+        emitWorkspaceUpstreamAndCommit,
+        syncCodeInputSnapshot,
+        workspaceContextKey,
+    ]);
 
     useEffect(() => {
         if (!boundId) return;
@@ -2572,10 +2592,10 @@ export default function CodeToolPane(props: {
             workspace &&
             forceWorkspaceHasContent(workspace)
         ) {
-            lastFlushedWorkspaceForSubmitRef.current = {
+            lastFlushedWorkspaceForSubmitRef.current = rememberWorkspaceForSubmit({
                 contextKey: workspaceContextKey,
                 workspace,
-            };
+            });
             pendingWorkspaceRef.current = undefined;
             pendingWorkspaceForceUserEditRef.current = false;
             emitWorkspaceUpstreamAndCommit(workspace, true);
@@ -2684,10 +2704,10 @@ export default function CodeToolPane(props: {
         });
 
         if (workspaceForSubmit && forceWorkspaceHasContent(workspaceForSubmit)) {
-            lastFlushedWorkspaceForSubmitRef.current = {
+            lastFlushedWorkspaceForSubmitRef.current = rememberWorkspaceForSubmit({
                 contextKey: workspaceContextKey,
                 workspace: workspaceForSubmit,
-            };
+            });
         }
 
         flushPendingWorkspace();

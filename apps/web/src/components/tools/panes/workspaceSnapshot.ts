@@ -28,6 +28,24 @@ export type WorkspaceSubmitCache = {
 };
 
 /**
+ * Record the newest Monaco workspace that has been flushed out of the local
+ * typing buffer.
+ *
+ * The submit bridge keeps this cache because React may publish the same
+ * workspace one render later. Every flush must replace the previous cache;
+ * otherwise a later Check can reuse the workspace from the previous attempt.
+ */
+export function rememberWorkspaceForSubmit(args: {
+    contextKey: string;
+    workspace: WorkspaceStateV2 | null;
+}): WorkspaceSubmitCache {
+    return {
+        contextKey: args.contextKey,
+        workspace: args.workspace,
+    };
+}
+
+/**
  * Select the workspace that Check/submit must use.
  *
  * Monaco edits are kept local-first while the learner types. Flushing clears

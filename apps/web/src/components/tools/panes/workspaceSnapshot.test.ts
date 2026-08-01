@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
     extractRuntimeSnapshotFromWorkspace,
+    rememberWorkspaceForSubmit,
     selectWorkspaceForSubmit,
 } from "@/components/tools/panes/workspaceSnapshot";
 
@@ -90,6 +91,36 @@ describe("selectWorkspaceForSubmit", () => {
                 currentWorkspace: staleWorkspace,
             }),
         ).toBe(newerWorkspace);
+    });
+
+
+    it("replaces the previous attempt after a corrected edit is flushed by autosave", () => {
+        const firstAttempt = staleWorkspace;
+        const correctedWorkspace = liveWorkspace;
+
+        let cache = rememberWorkspaceForSubmit({
+            contextKey: "python-topic:exercise-1",
+            workspace: firstAttempt,
+        });
+
+        expect(cache.workspace).toBe(firstAttempt);
+
+        // This models the normal idle/autosave flush after the learner corrects
+        // the editor. pendingWorkspaceRef is cleared immediately after this step.
+        cache = rememberWorkspaceForSubmit({
+            contextKey: "python-topic:exercise-1",
+            workspace: correctedWorkspace,
+        });
+
+        expect(
+            selectWorkspaceForSubmit({
+                contextKey: "python-topic:exercise-1",
+                pendingWorkspace: undefined,
+                lastFlushed: cache,
+                // React is allowed to still be one render behind here.
+                currentWorkspace: firstAttempt,
+            }),
+        ).toBe(correctedWorkspace);
     });
 
     it("does not reuse a flushed workspace after the exercise context changes", () => {
