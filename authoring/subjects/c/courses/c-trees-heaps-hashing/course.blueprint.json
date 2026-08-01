@@ -1,0 +1,116 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-trees-heaps-hashing",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "title": "C Data Structures II: Trees, Heaps, and Hashing",
+  "subtitle": "Search by order, process by priority, and look up by key.",
+  "level": "intermediate",
+  "moduleCount": 7,
+  "description": "A cumulative C course on binary trees, traversals, binary search trees, deletion and balance, binary heaps, priority queues, and hash tables.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners following the cumulative C data-structures and algorithms pathway."
+  ],
+  "prerequisites": [
+    "C Data Structures I or equivalent.",
+    "Comfort with recursion, pointers, dynamic memory, stacks, and queues."
+  ],
+  "goals": [
+    "Implement recursive and iterative tree algorithms.",
+    "Trace BST insertion and deletion.",
+    "Build heaps and priority queues.",
+    "Design collision-safe hash tables.",
+    "Maintain synchronized indexes without duplicate ownership."
+  ],
+  "teachingStyle": {
+    "tone": "Visual, precise, book-like, cumulative, and implementation-focused.",
+    "pseudocodeBeforeC": true,
+    "manualAnimations": true,
+    "quizWeight": 0.2,
+    "pseudocodeWeight": 0.2,
+    "projectWeight": 0.2,
+    "codeInputWeight": 0.4
+  },
+  "constraints": {
+    "moduleCount": 7,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<moduleSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>",
+    "requireModuleProject": true,
+    "finalCapstoneSingleTopic": true
+  },
+  "seedModules": [
+    "c-trees-heaps-hashing-module-1-binary-trees",
+    "c-trees-heaps-hashing-module-2-traversals",
+    "c-trees-heaps-hashing-module-3-bsts",
+    "c-trees-heaps-hashing-module-4-bst-deletion-balance",
+    "c-trees-heaps-hashing-module-5-heaps",
+    "c-trees-heaps-hashing-module-6-hashing",
+    "c-trees-heaps-hashing-module-7-capstone"
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "runtimePolicy": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file",
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false,
+    "pseudocodeRuntime": "deterministic_ir"
+  }
+}

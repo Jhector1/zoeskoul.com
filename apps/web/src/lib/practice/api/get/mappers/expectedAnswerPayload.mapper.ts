@@ -1,7 +1,7 @@
 import { PracticeKind } from "@zoeskoul/db";
 
 export function buildExpectedAnswerPayload(kind: PracticeKind, expectedCanon: any) {
-    if (kind === PracticeKind.code_input) return null;
+    if (kind === PracticeKind.code_input || kind === PracticeKind.pseudocode_input) return null;
 
     if (kind === PracticeKind.single_choice) {
         const optionId =

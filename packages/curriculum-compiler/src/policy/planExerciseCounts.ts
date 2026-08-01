@@ -14,6 +14,7 @@ const KIND_KEYS: ExerciseKindKey[] = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "pseudocode_input",
     "code_input",
 ];
 
@@ -42,6 +43,7 @@ export function planExerciseCounts(args: {
         multi_choice: 0,
         drag_reorder: 0,
         fill_blank_choice: 0,
+        pseudocode_input: 0,
         code_input: 0,
     };
 
@@ -70,12 +72,21 @@ export function planExerciseCounts(args: {
         return typeof max !== "number" || counts[kind] < max;
     });
 
-    const rawCounts = eligibleKinds.map((kind) => ({
-        kind,
-        raw: mix[kind] * remaining,
-        base: Math.floor(mix[kind] * remaining),
-        remainder: mix[kind] * remaining - Math.floor(mix[kind] * remaining),
-    }));
+    const rawCounts = eligibleKinds.map((kind) => {
+        const rawWeight = mix[kind];
+        const weight =
+            typeof rawWeight === "number" && Number.isFinite(rawWeight)
+                ? Math.max(0, rawWeight)
+                : 0;
+        const raw = weight * remaining;
+
+        return {
+            kind,
+            raw,
+            base: Math.floor(raw),
+            remainder: raw - Math.floor(raw),
+        };
+    });
 
     for (const item of rawCounts) {
         const max = constraints[item.kind]?.max;
@@ -126,7 +137,7 @@ function dominantFromCounts(
     return KIND_KEYS.slice().sort((a, b) => {
         const countDiff = counts[b] - counts[a];
         if (countDiff !== 0) return countDiff;
-        return mix[b] - mix[a];
+        return (mix[b] ?? 0) - (mix[a] ?? 0);
     })[0] ?? "fill_blank_choice";
 }
 

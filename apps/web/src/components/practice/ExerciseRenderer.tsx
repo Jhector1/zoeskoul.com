@@ -11,6 +11,7 @@ import VectorDragTargetExerciseUI from "./kinds/VectorDragTargetExerciseUI";
 import VectorDragDotExerciseUI from "./kinds/VectorDragDotExerciseUI";
 import CodeInputExerciseUI from "./kinds/CodeInputExerciseUI";
 import TextInputExerciseUI from "./kinds/TextInputExerciseUI";
+import PseudocodeInputExerciseUI from "./kinds/PseudocodeInputExerciseUI";
 import DragReorderExerciseUI from "./kinds/DragReorderExerciseUI";
 import VoiceInputExerciseUI from "./kinds/VoiceInputExerciseUI";
 
@@ -2177,6 +2178,19 @@ export default function ExerciseRenderer({
     const codeFeedback = resultAny?.feedback ?? null;
     const codeExplanation =
         typeof resultAny?.explanation === "string" ? resultAny.explanation : null;
+
+    if (ex.kind === "pseudocode_input") {
+        return (
+            <PseudocodeInputExerciseUI
+                exercise={ex}
+                value={current.pseudocode ?? ""}
+                onChange={(pseudocode) => updateCurrent({ pseudocode, ...resetCheckPatch() })}
+                disabled={lockInputs}
+                checked={checked}
+                ok={ok}
+            />
+        );
+    }
 
     if (ex.kind === "code_input") {
         const useTools = codeRunnerMode === "tools" && !!codeTools && !!codeInputId;

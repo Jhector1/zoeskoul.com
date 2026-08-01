@@ -13,6 +13,7 @@ const KIND_ORDER: ExerciseKindKey[] = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "pseudocode_input",
     "code_input",
 ];
 
@@ -113,6 +114,54 @@ function makeFallbackFillBlank(seed: TopicSeed, index: number): DraftExercise {
     };
 }
 
+
+function makeFallbackPseudocode(seed: TopicSeed, index: number): DraftExercise {
+    const title = seed.title || seed.topicId || "this algorithm";
+    return {
+        id: `${safeSlug(seed.topicId)}-pseudocode-${index}`,
+        kind: "pseudocode_input",
+        title: "Write the algorithm steps",
+        prompt: `Write clear pseudocode that applies the main procedure from ${title}.`,
+        mode: "write",
+        dialect: "zoeskoul-v1",
+        starterPseudocode: "PROCEDURE SOLVE(input)\n    ",
+        solutionPseudocode: "PROCEDURE SOLVE(input)\n    RETURN input",
+        validation: {
+            strategy: "required_structure",
+            rules: [
+                {
+                    id: "has-procedure",
+                    kind: "structure",
+                    structure: "procedure",
+                    min: 1,
+                    message: "Define the procedure before writing its steps.",
+                },
+                {
+                    id: "has-return",
+                    kind: "structure",
+                    structure: "return",
+                    min: 1,
+                    message: "Return or report the algorithm result.",
+                },
+            ],
+            ignoreFormatting: true,
+            allowEquivalentNames: true,
+        },
+        editor: {
+            showLineNumbers: true,
+            allowIndentation: true,
+            showKeywordReference: true,
+            minRows: 10,
+        },
+        hint: "State the procedure, its decisions or repetition, and how it terminates.",
+        help: {
+            concept: `This task checks the algorithm structure for ${title}.`,
+            hint_1: "Write the input, control flow, and state changes before worrying about C syntax.",
+            hint_2: "Trace one small input and confirm that the procedure reaches a result.",
+        },
+    };
+}
+
 function makeGenericFallbackExercise(args: {
     seed: TopicSeed;
     kind: ExerciseKindKey;
@@ -127,6 +176,8 @@ function makeGenericFallbackExercise(args: {
             return makeFallbackDragReorder(args.seed, args.index);
         case "fill_blank_choice":
             return makeFallbackFillBlank(args.seed, args.index);
+        case "pseudocode_input":
+            return makeFallbackPseudocode(args.seed, args.index);
         case "code_input":
             return null;
     }

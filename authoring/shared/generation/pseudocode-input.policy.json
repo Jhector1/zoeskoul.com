@@ -1,0 +1,142 @@
+{
+  "policyId": "zoeskoul-pseudocode-v1",
+  "inputKind": "pseudocode_input",
+  "purpose": "Assess algorithm structure and behavior without requiring language-specific syntax.",
+  "modes": [
+    "complete",
+    "fill_blanks",
+    "reorder",
+    "trace",
+    "write"
+  ],
+  "dialect": {
+    "id": "zoeskoul-v1",
+    "keywords": [
+      "PROCEDURE",
+      "IF",
+      "ELSE",
+      "WHILE",
+      "FOR",
+      "FOR EACH",
+      "RETURN",
+      "CREATE",
+      "SET",
+      "SWAP",
+      "INSERT",
+      "REMOVE",
+      "ENQUEUE",
+      "DEQUEUE",
+      "PUSH",
+      "POP",
+      "VISIT"
+    ],
+    "operators": [
+      "←",
+      "=",
+      "<",
+      ">",
+      "≤",
+      "≥",
+      "≠",
+      "AND",
+      "OR",
+      "NOT",
+      "NULL"
+    ],
+    "acceptedAliases": {
+      "<-": "←",
+      ":=": "←",
+      "nil": "NULL",
+      "null": "NULL",
+      "true": "TRUE",
+      "false": "FALSE"
+    }
+  },
+  "authoringSchema": {
+    "required": [
+      "inputKind",
+      "mode",
+      "dialect",
+      "validation"
+    ],
+    "fields": {
+      "starter": "optional pseudocode text",
+      "solution": "official reference only; never exact-match graded",
+      "editor": [
+        "showLineNumbers",
+        "allowIndentation",
+        "showKeywordHighlighting",
+        "showStructureGuide"
+      ],
+      "validation.strategy": [
+        "ordered_steps",
+        "required_structure",
+        "semantic_rules",
+        "trace_output",
+        "hybrid"
+      ],
+      "validation.rules": "semantic rule objects with stable ids",
+      "validation.scenarios": "deterministic inputs and expected paths, states, outputs, or invariants",
+      "roles": "optional role aliases for traversal pointer, parent pointer, key, indices, accumulator, queue, stack, or result"
+    }
+  },
+  "normalization": [
+    "Ignore capitalization, harmless whitespace, optional colons, and equivalent arrow syntax.",
+    "Normalize NULL, null, and nil.",
+    "Accept equivalent learner variable names by inferred or authored roles.",
+    "Normalize member access forms such as node.key, node->key, and key OF node when unambiguous.",
+    "Do not normalize away branch direction, loop termination, state-update order, or data-structure operations."
+  ],
+  "validationPipeline": [
+    "normalize_submission",
+    "parse_supported_statements",
+    "build_pseudocode_ir",
+    "infer_variable_roles",
+    "check_required_structure",
+    "execute_deterministic_scenarios",
+    "check_outputs_paths_states_and_invariants",
+    "return_rule_level_feedback"
+  ],
+  "irNodes": [
+    "procedure",
+    "if",
+    "while",
+    "for",
+    "assignment",
+    "return",
+    "call",
+    "create",
+    "swap",
+    "insert",
+    "remove",
+    "queue_operation",
+    "stack_operation",
+    "visit"
+  ],
+  "feedbackContract": {
+    "status": [
+      "correct",
+      "incorrect",
+      "unparsed"
+    ],
+    "fields": [
+      "passedRules",
+      "failedRules",
+      "traceFailure",
+      "unrecognizedLines"
+    ],
+    "requirements": [
+      "Never return only incorrect.",
+      "Name the first invariant or behavior that failed.",
+      "Show expected and actual trace state when a scenario fails.",
+      "After repeated failures, AI may explain the deterministic result without changing pass/fail."
+    ]
+  },
+  "safetyAndReliability": [
+    "AI is never the primary pass/fail validator.",
+    "Do not execute arbitrary learner code.",
+    "Bound loops and recursion in the pseudocode interpreter.",
+    "Reject unsupported free-form prose with a specific formatting hint.",
+    "Keep official solution hidden until reveal policy permits it."
+  ]
+}

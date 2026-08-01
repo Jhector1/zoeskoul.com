@@ -5,34 +5,60 @@
   "accessPolicy": "paid",
   "visibility": "private",
   "courseOrder": [
-    "c-data-structures",
-    "c-runtime-analysis-asymptotics"
+    "c-programming-foundations",
+    "c-runtime-analysis-asymptotics",
+    "c-data-structures-linear",
+    "c-trees-heaps-hashing",
+    "algorithms-in-c"
   ],
   "publishTarget": {
-    "liveSubjectSlug": "c-data-structures",
-    "courseSlug": "c-data-structures",
+    "liveSubjectSlug": "c",
+    "courseSlug": "c-programming-foundations",
     "channel": "draft"
   },
   "versioning": {
-    "family": "c-data-structures",
-    "version": 1,
+    "family": "c-data-structures-algorithms",
+    "version": 2,
     "status": "draft",
     "defaultForNewEnrollments": false,
-    "supersedes": null,
+    "supersedes": "c-data-structures-v1",
     "supersededBy": null
   },
   "courses": [
     {
-      "courseSlug": "c-data-structures",
-      "title": "C Data Structures and Algorithm Analysis",
+      "courseSlug": "c-programming-foundations",
+      "title": "C Programming Foundations",
       "order": 1,
-      "path": "courses/c-data-structures/course.spec.json"
+      "path": "courses/c-programming-foundations/course.spec.json",
+      "status": "draft"
     },
     {
       "courseSlug": "c-runtime-analysis-asymptotics",
       "title": "Runtime Analysis and Asymptotics in C",
       "order": 2,
-      "path": "courses/c-runtime-analysis-asymptotics/course.spec.json"
+      "path": "courses/c-runtime-analysis-asymptotics/course.spec.json",
+      "status": "draft"
+    },
+    {
+      "courseSlug": "c-data-structures-linear",
+      "title": "C Data Structures I: Linear Structures",
+      "order": 3,
+      "path": "courses/c-data-structures-linear/course.spec.json",
+      "status": "draft"
+    },
+    {
+      "courseSlug": "c-trees-heaps-hashing",
+      "title": "C Data Structures II: Trees, Heaps, and Hashing",
+      "order": 4,
+      "path": "courses/c-trees-heaps-hashing/course.spec.json",
+      "status": "draft"
+    },
+    {
+      "courseSlug": "algorithms-in-c",
+      "title": "Algorithms in C",
+      "order": 5,
+      "path": "courses/algorithms-in-c/course.spec.json",
+      "status": "draft"
     }
   ]
 }

@@ -1,0 +1,2349 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "c-programming-foundations",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "courseNumber": 1,
+  "title": "C Programming Foundations",
+  "subtitle": "Build the C memory model needed for real data structures.",
+  "description": "A cumulative introduction to C execution, control flow, functions, arrays, pointers, structs, dynamic memory, multi-file design, and deterministic testing.",
+  "level": "beginner",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 9,
+  "moduleRange": {
+    "start": 1,
+    "end": 9,
+    "label": "C Programming Foundations"
+  },
+  "prerequisites": [
+    "No prior C programming required.",
+    "Basic comfort using a browser-based editor."
+  ],
+  "intendedFor": "Learners following the cumulative C data-structures and algorithms pathway.",
+  "learningGoals": [
+    "Trace C execution and memory state.",
+    "Write safe multi-file C11 programs.",
+    "Use pointers, structs, and dynamic memory with explicit ownership.",
+    "Build and test a cumulative record-management project."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Follow modules in order. Each standard module extends the same cumulative workspace and ends with a module project. The final module is one cumulative capstone topic.",
+    "summary": "A cumulative introduction to C execution, control flow, functions, arrays, pointers, structs, dynamic memory, multi-file design, and deterministic testing.",
+    "cumulativeProject": "Campus Operations Foundation",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "How C Programs Execute",
+        "coreSkill": "Understand the shape of a C program and the path from source text to a running executable.",
+        "outputFocus": "Create the initial campus-ops program and a deterministic diagnostic harness."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Decisions and Loops",
+        "coreSkill": "Trace control flow before writing branches and loops that terminate correctly.",
+        "outputFocus": "Extend campus-ops with a menu loop and command dispatcher."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Functions and Program Decomposition",
+        "coreSkill": "Break a program into testable functions while understanding parameters, scope, and call-stack behavior.",
+        "outputFocus": "Refactor campus-ops around reusable service functions."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Arrays and Strings",
+        "coreSkill": "Use contiguous storage safely for records, text, searching, insertion, and removal.",
+        "outputFocus": "Add a fixed-capacity service registry."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Pointers and Memory Addresses",
+        "coreSkill": "Use pointers to observe and update memory without losing ownership or dereferencing invalid addresses.",
+        "outputFocus": "Add pointer-based update helpers and trace tests."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Structs and Self-Referential Types",
+        "coreSkill": "Model records and nodes with structs while making representation invariants explicit.",
+        "outputFocus": "Add request records and linked history node types."
+      },
+      {
+        "moduleNumber": 7,
+        "title": "Dynamic Memory and Ownership",
+        "coreSkill": "Allocate, resize, transfer, and release heap memory with explicit ownership rules.",
+        "outputFocus": "Convert the service registry into a dynamic store."
+      },
+      {
+        "moduleNumber": 8,
+        "title": "Multi-File C Programs and Testing",
+        "coreSkill": "Separate public interfaces, private implementation, builds, and deterministic tests.",
+        "outputFocus": "Prepare the reusable foundation library used by later courses."
+      },
+      {
+        "moduleNumber": 9,
+        "title": "C Foundations Capstone",
+        "coreSkill": "Combine control flow, functions, arrays, pointers, structs, dynamic memory, and multi-file organization.",
+        "outputFocus": "Build a dynamic multi-file student record manager with safe strings, validated commands, search, update, deletion, tests, and complete cleanup."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "c-programming-foundations-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 9
+    },
+    "releases": [
+      {
+        "name": "c-programming-foundations-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 9
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.08,
+        "multi_choice": 0.05,
+        "drag_reorder": 0.07,
+        "fill_blank_choice": 0.08,
+        "pseudocode_input": 0.22,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "technicalTopicPseudocodeInputMin": 1,
+        "topicExerciseMin": 5
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 7,
+      "capstoneRequired": true,
+      "cumulativeWorkspaceRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": true,
+      "finalCapstoneSingleTopic": true
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug c-programming-foundations, profileId c, and the shared C multi-file workspace policy.",
+    "Teach the idea in language-neutral pseudocode before showing the complete C implementation.",
+    "Use pseudocode_input for algorithm completion, reorder, trace, or full-write activities; never validate raw prose by exact string matching.",
+    "Validate pseudocode through normalized structure rules and deterministic trace scenarios. AI may explain failures but is not the primary pass/fail checker.",
+    "Every pointer-heavy, recursive, tree, heap, sorting, or graph operation begins with a manual algorithm_animation using stable layouts and one state change per frame.",
+    "Place a predict-next-step interaction before important animation transitions.",
+    "Every C code_input uses fixedLanguage c, recipeType fixed_tests, entryFilePath main.c, and complete starterFiles and solutionFiles.",
+    "Keep learner TODOs in named implementation .c files and preserve supplied headers and deterministic main.c harnesses.",
+    "Compile all authored .c files as C11 and free official-solution allocations before exit.",
+    "Complexity is graded with counts, choices, traces, or structured pseudocode\u2014not exact Big-O prose.",
+    "Every standard module ends with one progressive module project; the final module contains exactly one cumulative capstone topic."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "assessmentAndDelivery": {
+    "recommendedRhythm": "Two or three traced lessons plus one hands-on implementation session each week.",
+    "deliverables": [
+      "pseudocode traces",
+      "animation predictions",
+      "multi-file C exercises",
+      "module projects",
+      "cumulative capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul pseudocode editor",
+      "algorithm animation",
+      "browser C editor",
+      "Run button",
+      "output panel"
+    ],
+    "closingNote": "Learners complete C Programming Foundations with an executable cumulative project and an analysis record."
+  },
+  "allowedConcepts": [
+    "C11",
+    "control flow",
+    "functions",
+    "arrays",
+    "strings",
+    "pointers",
+    "structs",
+    "malloc",
+    "realloc",
+    "free",
+    "multi-file programs",
+    "deterministic tests"
+  ],
+  "disallowedConcepts": [
+    "linked lists as a finished abstraction",
+    "binary search trees",
+    "heaps",
+    "graphs",
+    "dynamic programming"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "c-programming-foundations-module-1-program-execution",
+      "order": 1,
+      "prefix": "c_programming_foundations_module_1_program_execution",
+      "title": "How C Programs Execute",
+      "purpose": "Understand the shape of a C program and the path from source text to a running executable.",
+      "description": "Understand the shape of a C program and the path from source text to a running executable.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain c program structure using the governing invariant or execution rule.",
+        "Explain preprocessing, compilation, and linking using the governing invariant or execution rule.",
+        "Explain types, values, and expressions using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace c program structure",
+        "Trace preprocessing, compilation, and linking",
+        "Trace types, values, and expressions"
+      ],
+      "quizFocus": [
+        "c program structure",
+        "preprocessing, compilation, and linking",
+        "types, values, and expressions",
+        "input, output, and first errors"
+      ],
+      "moduleProject": "Create the initial campus-ops program and a deterministic diagnostic harness.",
+      "workspaceIncrement": [
+        "main.c",
+        "diagnostics.h",
+        "diagnostics.c",
+        "tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Create the initial campus-ops program and a deterministic diagnostic harness.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-1-program-execution-concepts",
+          "title": "How C Programs Execute",
+          "description": "Understand the shape of a C program and the path from source text to a running executable.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-program-structure",
+              "title": "C Program Structure",
+              "summary": "Read headers, declarations, main, blocks, statements, and expressions as one executable program.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain c program structure using the governing invariant or execution rule.",
+                "Trace a representative c program structure example by hand.",
+                "Apply c program structure in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "predict_next_step",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ]
+              },
+              "topicNumber": "1.1"
+            },
+            {
+              "topicId": "c-compilation-and-linking",
+              "title": "Preprocessing, Compilation, and Linking",
+              "summary": "Trace source files through preprocessing, object generation, and linking.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain preprocessing, compilation, and linking using the governing invariant or execution rule.",
+                "Trace a representative preprocessing, compilation, and linking example by hand.",
+                "Apply preprocessing, compilation, and linking in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.2"
+            },
+            {
+              "topicId": "c-types-values-and-expressions",
+              "title": "Types, Values, and Expressions",
+              "summary": "Work with integer, character, floating-point, and boolean-style values while respecting conversion and overflow.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain types, values, and expressions using the governing invariant or execution rule.",
+                "Trace a representative types, values, and expressions example by hand.",
+                "Apply types, values, and expressions in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.3"
+            },
+            {
+              "topicId": "c-input-output-and-errors",
+              "title": "Input, Output, and First Errors",
+              "summary": "Use formatted input and output, then interpret compiler warnings and incorrect runtime output.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain input, output, and first errors using the governing invariant or execution rule.",
+                "Trace a representative input, output, and first errors example by hand.",
+                "Apply input, output, and first errors in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-1-program-execution-project",
+          "title": "Module Project",
+          "description": "Create the initial campus-ops program and a deterministic diagnostic harness.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-1-diagnostic-console",
+              "title": "Module 1 Project: Diagnostic Console",
+              "summary": "Build the first version of a console program that reads values, computes a result, and reports invalid input clearly.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Compile a warning-free multi-file C11 program.",
+                "Read input and produce deterministic output.",
+                "Explain each stage from source to executable."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "1.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "c-programming-foundations-module-2-control-flow",
+      "order": 2,
+      "prefix": "c_programming_foundations_module_2_control_flow",
+      "title": "Decisions and Loops",
+      "purpose": "Trace control flow before writing branches and loops that terminate correctly.",
+      "description": "Trace control flow before writing branches and loops that terminate correctly.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain boolean conditions and if statements using the governing invariant or execution rule.",
+        "Explain nested decisions and switch using the governing invariant or execution rule.",
+        "Explain for, while, and do-while loops using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace boolean conditions and if statements",
+        "Trace nested decisions and switch",
+        "Trace for, while, and do-while loops"
+      ],
+      "quizFocus": [
+        "boolean conditions and if statements",
+        "nested decisions and switch",
+        "for, while, and do-while loops",
+        "loop tracing, break, and continue"
+      ],
+      "moduleProject": "Extend campus-ops with a menu loop and command dispatcher.",
+      "workspaceIncrement": [
+        "menu.h",
+        "menu.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Extend campus-ops with a menu loop and command dispatcher.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-2-control-flow-concepts",
+          "title": "Decisions and Loops",
+          "description": "Trace control flow before writing branches and loops that terminate correctly.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-boolean-conditions-and-if",
+              "title": "Boolean Conditions and If Statements",
+              "summary": "Use zero/nonzero truth, comparisons, and mutually exclusive branches.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain boolean conditions and if statements using the governing invariant or execution rule.",
+                "Trace a representative boolean conditions and if statements example by hand.",
+                "Apply boolean conditions and if statements in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.1"
+            },
+            {
+              "topicId": "c-nested-decisions-and-switch",
+              "title": "Nested Decisions and Switch",
+              "summary": "Choose between nested branches and switch-based dispatch without accidental fallthrough.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain nested decisions and switch using the governing invariant or execution rule.",
+                "Trace a representative nested decisions and switch example by hand.",
+                "Apply nested decisions and switch in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.2"
+            },
+            {
+              "topicId": "c-for-while-and-do-while",
+              "title": "For, While, and Do-While Loops",
+              "summary": "Select a loop form based on initialization, continuation, update, and guaranteed first execution.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain for, while, and do-while loops using the governing invariant or execution rule.",
+                "Trace a representative for, while, and do-while loops example by hand.",
+                "Apply for, while, and do-while loops in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.3"
+            },
+            {
+              "topicId": "c-loop-tracing-and-control",
+              "title": "Loop Tracing, Break, and Continue",
+              "summary": "Trace condition checks and updates while using early loop control deliberately.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain loop tracing, break, and continue using the governing invariant or execution rule.",
+                "Trace a representative loop tracing, break, and continue example by hand.",
+                "Apply loop tracing, break, and continue in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-2-control-flow-project",
+          "title": "Module Project",
+          "description": "Extend campus-ops with a menu loop and command dispatcher.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-2-menu-controller",
+              "title": "Module 2 Project: Menu Controller",
+              "summary": "Add a repeated command menu with validated choices and a clean exit path.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Implement a terminating command loop.",
+                "Handle invalid choices without corrupting state.",
+                "Trace condition checks and loop iterations."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "2.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "c-programming-foundations-module-3-functions",
+      "order": 3,
+      "prefix": "c_programming_foundations_module_3_functions",
+      "title": "Functions and Program Decomposition",
+      "purpose": "Break a program into testable functions while understanding parameters, scope, and call-stack behavior.",
+      "description": "Break a program into testable functions while understanding parameters, scope, and call-stack behavior.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain function contracts, parameters, and returns using the governing invariant or execution rule.",
+        "Explain scope and the call stack using the governing invariant or execution rule.",
+        "Explain arrays and output parameters using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace function contracts, parameters, and returns",
+        "Trace scope and the call stack",
+        "Trace arrays and output parameters"
+      ],
+      "quizFocus": [
+        "function contracts, parameters, and returns",
+        "scope and the call stack",
+        "arrays and output parameters",
+        "designing small testable functions"
+      ],
+      "moduleProject": "Refactor campus-ops around reusable service functions.",
+      "workspaceIncrement": [
+        "services.h",
+        "services.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Refactor campus-ops around reusable service functions.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-3-functions-concepts",
+          "title": "Functions and Program Decomposition",
+          "description": "Break a program into testable functions while understanding parameters, scope, and call-stack behavior.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-function-contracts",
+              "title": "Function Contracts, Parameters, and Returns",
+              "summary": "Define what a function receives, guarantees, and returns.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain function contracts, parameters, and returns using the governing invariant or execution rule.",
+                "Trace a representative function contracts, parameters, and returns example by hand.",
+                "Apply function contracts, parameters, and returns in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.1"
+            },
+            {
+              "topicId": "c-scope-and-call-stack",
+              "title": "Scope and the Call Stack",
+              "summary": "Visualize local variables, nested calls, and return values in stack frames.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain scope and the call stack using the governing invariant or execution rule.",
+                "Trace a representative scope and the call stack example by hand.",
+                "Apply scope and the call stack in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.2"
+            },
+            {
+              "topicId": "c-arrays-and-output-parameters",
+              "title": "Arrays and Output Parameters",
+              "summary": "Pass array data and update caller-owned results through pointer parameters.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain arrays and output parameters using the governing invariant or execution rule.",
+                "Trace a representative arrays and output parameters example by hand.",
+                "Apply arrays and output parameters in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.3"
+            },
+            {
+              "topicId": "c-small-testable-functions",
+              "title": "Designing Small Testable Functions",
+              "summary": "Separate validation, transformation, and reporting into focused functions.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain designing small testable functions using the governing invariant or execution rule.",
+                "Trace a representative designing small testable functions example by hand.",
+                "Apply designing small testable functions in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-3-functions-project",
+          "title": "Module Project",
+          "description": "Refactor campus-ops around reusable service functions.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-3-service-functions",
+              "title": "Module 3 Project: Service Functions",
+              "summary": "Refactor the menu program into small functions with headers and deterministic tests.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Write clear function contracts.",
+                "Use output parameters safely.",
+                "Keep each function responsible for one task."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "3.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "c-programming-foundations-module-4-arrays-strings",
+      "order": 4,
+      "prefix": "c_programming_foundations_module_4_arrays_strings",
+      "title": "Arrays and Strings",
+      "purpose": "Use contiguous storage safely for records, text, searching, insertion, and removal.",
+      "description": "Use contiguous storage safely for records, text, searching, insertion, and removal.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain array layout and traversal using the governing invariant or execution rule.",
+        "Explain search, insert, and remove in arrays using the governing invariant or execution rule.",
+        "Explain two-dimensional arrays and row-major storage using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace array layout and traversal",
+        "Trace search, insert, and remove in arrays",
+        "Trace two-dimensional arrays and row-major storage"
+      ],
+      "quizFocus": [
+        "array layout and traversal",
+        "search, insert, and remove in arrays",
+        "two-dimensional arrays and row-major storage",
+        "strings, terminators, and buffer safety"
+      ],
+      "moduleProject": "Add a fixed-capacity service registry.",
+      "workspaceIncrement": [
+        "service_registry.h",
+        "service_registry.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add a fixed-capacity service registry.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-4-arrays-strings-concepts",
+          "title": "Arrays and Strings",
+          "description": "Use contiguous storage safely for records, text, searching, insertion, and removal.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-array-layout-and-traversal",
+              "title": "Array Layout and Traversal",
+              "summary": "Connect indices to contiguous addresses and traverse within bounds.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain array layout and traversal using the governing invariant or execution rule.",
+                "Trace a representative array layout and traversal example by hand.",
+                "Apply array layout and traversal in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.1"
+            },
+            {
+              "topicId": "c-array-search-insert-remove",
+              "title": "Search, Insert, and Remove in Arrays",
+              "summary": "Trace comparisons and shifts while preserving logical size.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain search, insert, and remove in arrays using the governing invariant or execution rule.",
+                "Trace a representative search, insert, and remove in arrays example by hand.",
+                "Apply search, insert, and remove in arrays in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.2"
+            },
+            {
+              "topicId": "c-two-dimensional-arrays",
+              "title": "Two-Dimensional Arrays and Row-Major Storage",
+              "summary": "Map rows and columns to contiguous memory.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain two-dimensional arrays and row-major storage using the governing invariant or execution rule.",
+                "Trace a representative two-dimensional arrays and row-major storage example by hand.",
+                "Apply two-dimensional arrays and row-major storage in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.3"
+            },
+            {
+              "topicId": "c-strings-and-buffer-safety",
+              "title": "Strings, Terminators, and Buffer Safety",
+              "summary": "Manipulate character arrays while preserving capacity and the null terminator.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain strings, terminators, and buffer safety using the governing invariant or execution rule.",
+                "Trace a representative strings, terminators, and buffer safety example by hand.",
+                "Apply strings, terminators, and buffer safety in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-4-arrays-strings-project",
+          "title": "Module Project",
+          "description": "Add a fixed-capacity service registry.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-4-service-registry",
+              "title": "Module 4 Project: Service Registry",
+              "summary": "Store service names and numeric codes in a fixed-capacity registry with search, insertion, and deletion.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Maintain size and capacity invariants.",
+                "Shift records safely.",
+                "Reject overlong or duplicate service names."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "4.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "c-programming-foundations-module-5-pointers",
+      "order": 5,
+      "prefix": "c_programming_foundations_module_5_pointers",
+      "title": "Pointers and Memory Addresses",
+      "purpose": "Use pointers to observe and update memory without losing ownership or dereferencing invalid addresses.",
+      "description": "Use pointers to observe and update memory without losing ownership or dereferencing invalid addresses.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain addresses, pointers, and dereferencing using the governing invariant or execution rule.",
+        "Explain null, dangling, and uninitialized pointers using the governing invariant or execution rule.",
+        "Explain pointer arithmetic and arrays using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace addresses, pointers, and dereferencing",
+        "Trace null, dangling, and uninitialized pointers",
+        "Trace pointer arithmetic and arrays"
+      ],
+      "quizFocus": [
+        "addresses, pointers, and dereferencing",
+        "null, dangling, and uninitialized pointers",
+        "pointer arithmetic and arrays",
+        "pointer-to-pointer updates"
+      ],
+      "moduleProject": "Add pointer-based update helpers and trace tests.",
+      "workspaceIncrement": [
+        "pointer_lab.h",
+        "pointer_lab.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add pointer-based update helpers and trace tests.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-5-pointers-concepts",
+          "title": "Pointers and Memory Addresses",
+          "description": "Use pointers to observe and update memory without losing ownership or dereferencing invalid addresses.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-addresses-pointers-dereference",
+              "title": "Addresses, Pointers, and Dereferencing",
+              "summary": "Connect an object, its address, a pointer value, and dereferenced data.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain addresses, pointers, and dereferencing using the governing invariant or execution rule.",
+                "Trace a representative addresses, pointers, and dereferencing example by hand.",
+                "Apply addresses, pointers, and dereferencing in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.1"
+            },
+            {
+              "topicId": "c-null-dangling-uninitialized-pointers",
+              "title": "Null, Dangling, and Uninitialized Pointers",
+              "summary": "Recognize invalid pointer states before dereferencing.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain null, dangling, and uninitialized pointers using the governing invariant or execution rule.",
+                "Trace a representative null, dangling, and uninitialized pointers example by hand.",
+                "Apply null, dangling, and uninitialized pointers in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.2"
+            },
+            {
+              "topicId": "c-pointer-arithmetic-and-arrays",
+              "title": "Pointer Arithmetic and Arrays",
+              "summary": "Relate A[i] to *(A + i) while respecting element size and bounds.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain pointer arithmetic and arrays using the governing invariant or execution rule.",
+                "Trace a representative pointer arithmetic and arrays example by hand.",
+                "Apply pointer arithmetic and arrays in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.3"
+            },
+            {
+              "topicId": "c-pointer-to-pointer",
+              "title": "Pointer-to-Pointer Updates",
+              "summary": "Update caller-owned pointers and prepare for dynamic structures.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain pointer-to-pointer updates using the governing invariant or execution rule.",
+                "Trace a representative pointer-to-pointer updates example by hand.",
+                "Apply pointer-to-pointer updates in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-5-pointers-project",
+          "title": "Module Project",
+          "description": "Add pointer-based update helpers and trace tests.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-5-pointer-lab",
+              "title": "Module 5 Project: Pointer State Lab",
+              "summary": "Implement pointer-based updates and produce a trace showing every address and value transition.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Update caller-owned state through pointers.",
+                "Avoid invalid dereferences.",
+                "Explain pointer ownership and lifetime."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "5.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "c-programming-foundations-module-6-structs",
+      "order": 6,
+      "prefix": "c_programming_foundations_module_6_structs",
+      "title": "Structs and Self-Referential Types",
+      "purpose": "Model records and nodes with structs while making representation invariants explicit.",
+      "description": "Model records and nodes with structs while making representation invariants explicit.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain struct design and initialization using the governing invariant or execution rule.",
+        "Explain struct pointers, nesting, and typedef using the governing invariant or execution rule.",
+        "Explain self-referential structs using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace struct design and initialization",
+        "Trace struct pointers, nesting, and typedef",
+        "Trace self-referential structs"
+      ],
+      "quizFocus": [
+        "struct design and initialization",
+        "struct pointers, nesting, and typedef",
+        "self-referential structs",
+        "node representation invariants"
+      ],
+      "moduleProject": "Add request records and linked history node types.",
+      "workspaceIncrement": [
+        "request.h",
+        "request.c",
+        "history_node.h",
+        "history_node.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add request records and linked history node types.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-6-structs-concepts",
+          "title": "Structs and Self-Referential Types",
+          "description": "Model records and nodes with structs while making representation invariants explicit.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-struct-design-and-initialization",
+              "title": "Struct Design and Initialization",
+              "summary": "Group related fields, initialize every field, and pass records safely.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain struct design and initialization using the governing invariant or execution rule.",
+                "Trace a representative struct design and initialization example by hand.",
+                "Apply struct design and initialization in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.1"
+            },
+            {
+              "topicId": "c-struct-pointers-nesting-typedef",
+              "title": "Struct Pointers, Nesting, and Typedef",
+              "summary": "Use dot and arrow notation and organize larger models from smaller structs.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain struct pointers, nesting, and typedef using the governing invariant or execution rule.",
+                "Trace a representative struct pointers, nesting, and typedef example by hand.",
+                "Apply struct pointers, nesting, and typedef in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.2"
+            },
+            {
+              "topicId": "c-self-referential-structs",
+              "title": "Self-Referential Structs",
+              "summary": "Define nodes that point to other nodes without embedding an infinite object.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain self-referential structs using the governing invariant or execution rule.",
+                "Trace a representative self-referential structs example by hand.",
+                "Apply self-referential structs in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.3"
+            },
+            {
+              "topicId": "c-node-representation-invariants",
+              "title": "Node Representation Invariants",
+              "summary": "State which fields and links must be valid before and after an operation.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain node representation invariants using the governing invariant or execution rule.",
+                "Trace a representative node representation invariants example by hand.",
+                "Apply node representation invariants in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-6-structs-project",
+          "title": "Module Project",
+          "description": "Add request records and linked history node types.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-6-request-node-model",
+              "title": "Module 6 Project: Request Node Model",
+              "summary": "Introduce a request struct and a self-referential history node with constructor tests.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Initialize every field and pointer.",
+                "Distinguish record ownership from link ownership.",
+                "Check node invariants in tests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "6.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "c-programming-foundations-module-7-dynamic-memory",
+      "order": 7,
+      "prefix": "c_programming_foundations_module_7_dynamic_memory",
+      "title": "Dynamic Memory and Ownership",
+      "purpose": "Allocate, resize, transfer, and release heap memory with explicit ownership rules.",
+      "description": "Allocate, resize, transfer, and release heap memory with explicit ownership rules.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain stack memory, heap memory, and malloc using the governing invariant or execution rule.",
+        "Explain allocation failure and calloc using the governing invariant or execution rule.",
+        "Explain realloc, size, and capacity using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace stack memory, heap memory, and malloc",
+        "Trace allocation failure and calloc",
+        "Trace realloc, size, and capacity"
+      ],
+      "quizFocus": [
+        "stack memory, heap memory, and malloc",
+        "allocation failure and calloc",
+        "realloc, size, and capacity",
+        "free, ownership, leaks, and double free"
+      ],
+      "moduleProject": "Convert the service registry into a dynamic store.",
+      "workspaceIncrement": [
+        "dynamic_store.h",
+        "dynamic_store.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Convert the service registry into a dynamic store.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-7-dynamic-memory-concepts",
+          "title": "Dynamic Memory and Ownership",
+          "description": "Allocate, resize, transfer, and release heap memory with explicit ownership rules.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-stack-vs-heap-and-malloc",
+              "title": "Stack Memory, Heap Memory, and Malloc",
+              "summary": "Compare automatic lifetime with dynamically allocated lifetime.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain stack memory, heap memory, and malloc using the governing invariant or execution rule.",
+                "Trace a representative stack memory, heap memory, and malloc example by hand.",
+                "Apply stack memory, heap memory, and malloc in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.1"
+            },
+            {
+              "topicId": "c-allocation-failure-and-calloc",
+              "title": "Allocation Failure and Calloc",
+              "summary": "Check allocation results and choose initialized allocation when appropriate.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain allocation failure and calloc using the governing invariant or execution rule.",
+                "Trace a representative allocation failure and calloc example by hand.",
+                "Apply allocation failure and calloc in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.2"
+            },
+            {
+              "topicId": "c-realloc-size-and-capacity",
+              "title": "Realloc, Size, and Capacity",
+              "summary": "Resize a buffer without losing the original allocation on failure.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain realloc, size, and capacity using the governing invariant or execution rule.",
+                "Trace a representative realloc, size, and capacity example by hand.",
+                "Apply realloc, size, and capacity in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.3"
+            },
+            {
+              "topicId": "c-free-ownership-and-leaks",
+              "title": "Free, Ownership, Leaks, and Double Free",
+              "summary": "Define one owner and release each allocation exactly once.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain free, ownership, leaks, and double free using the governing invariant or execution rule.",
+                "Trace a representative free, ownership, leaks, and double free example by hand.",
+                "Apply free, ownership, leaks, and double free in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-7-dynamic-memory-project",
+          "title": "Module Project",
+          "description": "Convert the service registry into a dynamic store.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-7-dynamic-service-store",
+              "title": "Module 7 Project: Dynamic Service Store",
+              "summary": "Replace the fixed service registry with dynamically resized storage and complete cleanup.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Grow capacity safely.",
+                "Preserve data across reallocations.",
+                "Free all owned allocations exactly once."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "7.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "c-programming-foundations-module-8-multifile-testing",
+      "order": 8,
+      "prefix": "c_programming_foundations_module_8_multifile_testing",
+      "title": "Multi-File C Programs and Testing",
+      "purpose": "Separate public interfaces, private implementation, builds, and deterministic tests.",
+      "description": "Separate public interfaces, private implementation, builds, and deterministic tests.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain headers and include guards using the governing invariant or execution rule.",
+        "Explain source files and private helpers using the governing invariant or execution rule.",
+        "Explain compiling and linking multiple files using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace headers and include guards",
+        "Trace source files and private helpers",
+        "Trace compiling and linking multiple files"
+      ],
+      "quizFocus": [
+        "headers and include guards",
+        "source files and private helpers",
+        "compiling and linking multiple files",
+        "deterministic tests and project layout"
+      ],
+      "moduleProject": "Prepare the reusable foundation library used by later courses.",
+      "workspaceIncrement": [
+        "Makefile.reference.txt",
+        "foundation_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Prepare the reusable foundation library used by later courses.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-8-multifile-testing-concepts",
+          "title": "Multi-File C Programs and Testing",
+          "description": "Separate public interfaces, private implementation, builds, and deterministic tests.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-headers-and-include-guards",
+              "title": "Headers and Include Guards",
+              "summary": "Publish types and declarations once without duplicate-definition problems.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain headers and include guards using the governing invariant or execution rule.",
+                "Trace a representative headers and include guards example by hand.",
+                "Apply headers and include guards in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.1"
+            },
+            {
+              "topicId": "c-source-files-and-private-helpers",
+              "title": "Source Files and Private Helpers",
+              "summary": "Keep implementation details internal while exposing a stable interface.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain source files and private helpers using the governing invariant or execution rule.",
+                "Trace a representative source files and private helpers example by hand.",
+                "Apply source files and private helpers in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.2"
+            },
+            {
+              "topicId": "c-compiling-and-linking-multiple-files",
+              "title": "Compiling and Linking Multiple Files",
+              "summary": "Understand how translation units become one executable.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain compiling and linking multiple files using the governing invariant or execution rule.",
+                "Trace a representative compiling and linking multiple files example by hand.",
+                "Apply compiling and linking multiple files in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.3"
+            },
+            {
+              "topicId": "c-deterministic-tests-and-project-layout",
+              "title": "Deterministic Tests and Project Layout",
+              "summary": "Test observable behavior and organize models, structures, algorithms, and tests.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain deterministic tests and project layout using the governing invariant or execution rule.",
+                "Trace a representative deterministic tests and project layout example by hand.",
+                "Apply deterministic tests and project layout in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "8.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-programming-foundations-section-8-multifile-testing-project",
+          "title": "Module Project",
+          "description": "Prepare the reusable foundation library used by later courses.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-module-8-foundation-release",
+              "title": "Module 8 Project: Foundation Release",
+              "summary": "Consolidate campus-ops into a clean multi-file library with a complete deterministic test suite.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Expose stable headers.",
+                "Keep helpers private.",
+                "Compile all C files and pass tests without warnings."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "8.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 9,
+      "moduleSlug": "c-programming-foundations-module-9-capstone",
+      "order": 9,
+      "prefix": "c_programming_foundations_module_9_capstone",
+      "title": "C Foundations Capstone",
+      "purpose": "Combine control flow, functions, arrays, pointers, structs, dynamic memory, and multi-file organization.",
+      "description": "Combine control flow, functions, arrays, pointers, structs, dynamic memory, and multi-file organization.",
+      "role": "capstone",
+      "learningObjectives": [
+        "Design the program before coding with structured pseudocode.",
+        "Implement the complete multi-file C11 workspace.",
+        "Pass ordinary, edge, invalid-input, and memory-ownership scenarios."
+      ],
+      "guidedExercises": [],
+      "quizFocus": [],
+      "moduleProject": "Student Record Manager Capstone",
+      "workspaceIncrement": [
+        "main.c",
+        "student.h",
+        "student.c",
+        "storage.h",
+        "storage.c",
+        "menu.h",
+        "menu.c",
+        "tests.c"
+      ],
+      "recommendedPacing": "Complete the capstone in progressive steps; every step must preserve all earlier behavior.",
+      "typicalOutcome": "Build a dynamic multi-file student record manager with safe strings, validated commands, search, update, deletion, tests, and complete cleanup.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-programming-foundations-section-9-capstone",
+          "title": "C Foundations Capstone",
+          "description": "Combine control flow, functions, arrays, pointers, structs, dynamic memory, and multi-file organization.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "c-foundations-student-record-manager",
+              "title": "Student Record Manager Capstone",
+              "summary": "Build a dynamic multi-file student record manager with safe strings, validated commands, search, update, deletion, tests, and complete cleanup.",
+              "minutes": 180,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "capstone",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Design the program before coding with structured pseudocode.",
+                "Implement the complete multi-file C11 workspace.",
+                "Pass ordinary, edge, invalid-input, and memory-ownership scenarios."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ],
+                "capstone": true
+              },
+              "topicNumber": "9.1",
+              "projectBrief": {
+                "scenario": "A campus records team needs a reliable multi-file student record manager.",
+                "role": "Junior C systems developer",
+                "workspace": "A cumulative C11 workspace with student, storage, menu, and test modules.",
+                "deliverable": "A tested student record manager with safe input, dynamic storage, search, update, deletion, and complete cleanup.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Design the program before coding with structured pseudocode.",
+                  "Implement the complete multi-file C11 workspace.",
+                  "Pass ordinary, edge, invalid-input, and memory-ownership scenarios."
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sectionCount": 1,
+      "topicCount": 1
+    }
+  ]
+}

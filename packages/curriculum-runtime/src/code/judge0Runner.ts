@@ -231,7 +231,12 @@ function pickJavaMainClass(entryPath: string, files: FileEntry[]) {
     return pkg ? `${pkg}.${cls}` : cls;
 }
 
-function scriptsFor(language: string, entry: string, files: FileEntry[]) {
+function scriptsFor(
+    language: string,
+    entry: string,
+    files: FileEntry[],
+    cCompilerMode: "learner" | "strict" | "sanitized" = "learner",
+) {
     const normalized = String(language ?? "").toLowerCase();
     const mainClass = normalized === "java" ? pickJavaMainClass(entry, files) : "";
 
@@ -256,6 +261,10 @@ set -euo pipefail
 java -cp build "${mainClass}"
 `;
             case "c":
+                return `#!/usr/bin/env bash
+set -euo pipefail
+${cCompilerMode === "sanitized" ? 'export ASAN_OPTIONS="detect_leaks=1:halt_on_error=1:abort_on_error=1"\nexport UBSAN_OPTIONS="halt_on_error=1:print_stacktrace=1"\n' : ""}./build/app
+`;
             case "cpp":
                 return `#!/usr/bin/env bash
 set -euo pipefail
@@ -275,13 +284,20 @@ mkdir -p build
 FILES=$(find . -name "*.java" -not -path "./build/*")
 javac -d build $FILES
 `;
-            case "c":
+            case "c": {
+                const flags = cCompilerMode === "sanitized"
+                    ? "-O1 -g -std=c11 -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer"
+                    : cCompilerMode === "strict"
+                        ? "-O2 -std=c11 -Wall -Wextra -Wpedantic -Werror"
+                        : "-O2 -std=c11 -Wall -Wextra -Wpedantic";
                 return `#!/usr/bin/env bash
 set -euo pipefail
 mkdir -p build
-FILES=$(find . -name "*.c" -not -path "./build/*")
-gcc -O2 -std=c11 -I. -o build/app $FILES
+mapfile -d '' FILES < <(find . -name "*.c" -not -path "./build/*" -print0)
+((\${#FILES[@]} > 0))
+gcc ${flags} -I. -o build/app "\${FILES[@]}"
 `;
+            }
             case "cpp":
                 return `#!/usr/bin/env bash
 set -euo pipefail
@@ -300,7 +316,21 @@ g++ -O2 -std=c++17 -I. -o build/app $FILES
     return { compile, run };
 }
 
-async function zipProject(language: string, entry: string, files: FileEntry[]) {
+export function buildProjectScriptsForTest(args: {
+    language: string;
+    entry: string;
+    files?: Array<{ path: string; content: string }>;
+    cCompilerMode?: "learner" | "strict" | "sanitized";
+}) {
+    return scriptsFor(args.language, args.entry, args.files ?? [], args.cCompilerMode);
+}
+
+async function zipProject(
+    language: string,
+    entry: string,
+    files: FileEntry[],
+    cCompilerMode: "learner" | "strict" | "sanitized" = "learner",
+) {
     const safeEntry = assertSafeRelPath(entry);
     const zip = new JSZip();
 
@@ -324,7 +354,7 @@ async function zipProject(language: string, entry: string, files: FileEntry[]) {
         }
     }
 
-    const { compile, run } = scriptsFor(language, safeEntry, normalizedFiles);
+    const { compile, run } = scriptsFor(language, safeEntry, normalizedFiles, cCompilerMode);
 
     if (compile) {
         zip.file("compile", compile);
@@ -350,7 +380,11 @@ function makeProjectFiles(args: {
     const merged = new Map<string, FileEntry>();
 
     for (const file of files) {
-        merged.set(file.path, file);
+        const safePath = assertSafeRelPath(file.path);
+        if (merged.has(safePath)) {
+            throw new Error(`Duplicate project file path: ${safePath}`);
+        }
+        merged.set(safePath, { ...file, path: safePath });
     }
 
     // Important:
@@ -385,7 +419,7 @@ async function buildJudge0SubmissionBody(args: {
     // This makes package golden and web grading use the same Python executable
     // used by the bound Tools workspace, avoiding Python 3.7 vs 3.8+ drift.
     const useProjectMode =
-        language === "python" || Boolean(args.entry) || files.length > 0;
+        language === "python" || language === "c" || Boolean(args.entry) || files.length > 0;
 
     if (useProjectMode) {
         const project = makeProjectFiles({
@@ -395,10 +429,14 @@ async function buildJudge0SubmissionBody(args: {
             files: args.files,
         });
 
+        const cCompilerMode = args.limits?.cCompilerMode === "strict" || args.limits?.cCompilerMode === "sanitized"
+            ? args.limits.cCompilerMode
+            : "learner";
         const additional_files = await zipProject(
             language,
             project.entry,
             project.files,
+            cCompilerMode,
         );
 
         return {

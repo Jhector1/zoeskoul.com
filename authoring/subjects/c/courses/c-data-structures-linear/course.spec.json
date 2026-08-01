@@ -1,0 +1,2105 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "c-data-structures-linear",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "courseNumber": 3,
+  "title": "C Data Structures I: Linear Structures",
+  "subtitle": "Build the representation, animate the invariant, and preserve every link.",
+  "description": "A cumulative C course on abstract data types, dynamic arrays, linked lists, stacks, queues, deques, ownership, and operation tradeoffs.",
+  "level": "intermediate",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 8,
+  "moduleRange": {
+    "start": 1,
+    "end": 8,
+    "label": "C Data Structures I: Linear Structures"
+  },
+  "prerequisites": [
+    "C Programming Foundations or equivalent.",
+    "Runtime Analysis and Asymptotics recommended."
+  ],
+  "intendedFor": "Learners following the cumulative C data-structures and algorithms pathway.",
+  "learningGoals": [
+    "Implement linear structures from first principles.",
+    "Trace array shifts, pointer links, and circular indices.",
+    "Preserve invariants and memory ownership.",
+    "Compare operation costs by representation."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Follow modules in order. Each standard module extends the same cumulative workspace and ends with a module project. The final module is one cumulative capstone topic.",
+    "summary": "A cumulative C course on abstract data types, dynamic arrays, linked lists, stacks, queues, deques, ownership, and operation tradeoffs.",
+    "cumulativeProject": "Campus Service Desk",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Data-Structure Foundations",
+        "coreSkill": "Separate an abstract data type from its concrete representation and invariant.",
+        "outputFocus": "Initialize the campus-service-desk structure library."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Dynamic Arrays",
+        "coreSkill": "Implement indexed storage that grows while preserving logical size and amortized efficiency.",
+        "outputFocus": "Add the vector used to store service definitions."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Singly Linked Lists",
+        "coreSkill": "Implement link changes deliberately while preserving the head and every reachable node.",
+        "outputFocus": "Add linked request history."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Doubly Linked and Circular Lists",
+        "coreSkill": "Use additional links and sentinels to simplify bidirectional and circular operations.",
+        "outputFocus": "Upgrade history to a doubly linked timeline."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Stacks",
+        "coreSkill": "Implement last-in-first-out behavior and apply it to parsing and execution order.",
+        "outputFocus": "Add stack-based undo."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Queues",
+        "coreSkill": "Implement first-in-first-out behavior without repeated array shifting.",
+        "outputFocus": "Add the regular request queue."
+      },
+      {
+        "moduleNumber": 7,
+        "title": "Deques",
+        "coreSkill": "Insert and remove efficiently at both ends and apply the structure to windows and priority overrides.",
+        "outputFocus": "Add urgent request handling."
+      },
+      {
+        "moduleNumber": 8,
+        "title": "Linear Structures Capstone",
+        "coreSkill": "Combine dynamic arrays, lists, stacks, queues, and deques in one consistent service-desk engine.",
+        "outputFocus": "Build a tested service desk using a vector for services, list for history, queue for regular work, deque for urgent work, and stack for undo."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "c-data-structures-linear-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 8
+    },
+    "releases": [
+      {
+        "name": "c-data-structures-linear-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 8
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.08,
+        "multi_choice": 0.05,
+        "drag_reorder": 0.07,
+        "fill_blank_choice": 0.08,
+        "pseudocode_input": 0.22,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "technicalTopicPseudocodeInputMin": 1,
+        "topicExerciseMin": 5
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 6,
+      "capstoneRequired": true,
+      "cumulativeWorkspaceRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": true,
+      "finalCapstoneSingleTopic": true
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug c-data-structures-linear, profileId c, and the shared C multi-file workspace policy.",
+    "Teach the idea in language-neutral pseudocode before showing the complete C implementation.",
+    "Use pseudocode_input for algorithm completion, reorder, trace, or full-write activities; never validate raw prose by exact string matching.",
+    "Validate pseudocode through normalized structure rules and deterministic trace scenarios. AI may explain failures but is not the primary pass/fail checker.",
+    "Every pointer-heavy, recursive, tree, heap, sorting, or graph operation begins with a manual algorithm_animation using stable layouts and one state change per frame.",
+    "Place a predict-next-step interaction before important animation transitions.",
+    "Every C code_input uses fixedLanguage c, recipeType fixed_tests, entryFilePath main.c, and complete starterFiles and solutionFiles.",
+    "Keep learner TODOs in named implementation .c files and preserve supplied headers and deterministic main.c harnesses.",
+    "Compile all authored .c files as C11 and free official-solution allocations before exit.",
+    "Complexity is graded with counts, choices, traces, or structured pseudocode\u2014not exact Big-O prose.",
+    "Every standard module ends with one progressive module project; the final module contains exactly one cumulative capstone topic."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "lessonSequence": [
+      "concept_and_invariant",
+      "pseudocode_input",
+      "worked_trace",
+      "algorithm_animation",
+      "predict_next_step",
+      "guided_code_input",
+      "independent_code_input",
+      "complexity_check",
+      "edge_cases",
+      "recap"
+    ],
+    "animationRules": [
+      "Disable autoplay by default.",
+      "Use previous, next, play or pause, replay, and a visible step counter.",
+      "Keep layouts stable; animate links, active cells, call frames, or edges rather than moving the whole structure.",
+      "Synchronize heap tree and array states, recursion and call stack states, and graph state with queue or stack state.",
+      "Prefer five to ten meaningful frames and one state transition per frame."
+    ],
+    "pseudocodeRules": [
+      "Use dialect zoeskoul-v1 and inputKind pseudocode_input.",
+      "Accept equivalent variable names and harmless syntax variants after normalization.",
+      "Require explicit termination, state updates, and invariant-preserving branches.",
+      "Use structure plus scenario execution for pass/fail.",
+      "Keep the learner pseudocode visible beside the following C translation exercise."
+    ],
+    "workspaceRules": [
+      "Reuse the same course workspace across module projects.",
+      "Do not ask learners to create boilerplate files or remember compiler commands.",
+      "Each new module adds focused .h/.c files while preserving prior passing tests.",
+      "Project steps are progressive and may not reset earlier work."
+    ]
+  },
+  "assessmentAndDelivery": {
+    "recommendedRhythm": "Two or three traced lessons plus one hands-on implementation session each week.",
+    "deliverables": [
+      "pseudocode traces",
+      "animation predictions",
+      "multi-file C exercises",
+      "module projects",
+      "cumulative capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul pseudocode editor",
+      "algorithm animation",
+      "browser C editor",
+      "Run button",
+      "output panel"
+    ],
+    "closingNote": "Learners complete C Data Structures I: Linear Structures with an executable cumulative project and an analysis record."
+  },
+  "allowedConcepts": [
+    "abstract data type",
+    "representation invariant",
+    "dynamic array",
+    "linked list",
+    "doubly linked list",
+    "circular list",
+    "stack",
+    "queue",
+    "deque",
+    "amortized analysis",
+    "memory ownership"
+  ],
+  "disallowedConcepts": [
+    "binary search trees",
+    "heaps",
+    "hash tables",
+    "graphs",
+    "dynamic programming"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "c-data-structures-linear-module-1-foundations",
+      "order": 1,
+      "prefix": "c_data_structures_linear_module_1_foundations",
+      "title": "Data-Structure Foundations",
+      "purpose": "Separate an abstract data type from its concrete representation and invariant.",
+      "description": "Separate an abstract data type from its concrete representation and invariant.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain abstract data types versus implementations using the governing invariant or execution rule.",
+        "Explain representation invariants using the governing invariant or execution rule.",
+        "Explain contiguous versus linked storage using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace abstract data types versus implementations",
+        "Trace representation invariants",
+        "Trace contiguous versus linked storage"
+      ],
+      "quizFocus": [
+        "abstract data types versus implementations",
+        "representation invariants",
+        "contiguous versus linked storage",
+        "ownership and operation tradeoffs"
+      ],
+      "moduleProject": "Initialize the campus-service-desk structure library.",
+      "workspaceIncrement": [
+        "structures/common.h",
+        "structures/common.c",
+        "tests/invariants.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Initialize the campus-service-desk structure library.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-1-foundations-concepts",
+          "title": "Data-Structure Foundations",
+          "description": "Separate an abstract data type from its concrete representation and invariant.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "adt-vs-implementation",
+              "title": "Abstract Data Types versus Implementations",
+              "summary": "Distinguish required behavior from array- or pointer-based storage choices.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain abstract data types versus implementations using the governing invariant or execution rule.",
+                "Trace a representative abstract data types versus implementations example by hand.",
+                "Apply abstract data types versus implementations in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.1"
+            },
+            {
+              "topicId": "representation-invariants",
+              "title": "Representation Invariants",
+              "summary": "State conditions that must remain true before and after every operation.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain representation invariants using the governing invariant or execution rule.",
+                "Trace a representative representation invariants example by hand.",
+                "Apply representation invariants in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.2"
+            },
+            {
+              "topicId": "contiguous-vs-linked-storage",
+              "title": "Contiguous versus Linked Storage",
+              "summary": "Compare locality, resizing, pointer overhead, and update costs.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain contiguous versus linked storage using the governing invariant or execution rule.",
+                "Trace a representative contiguous versus linked storage example by hand.",
+                "Apply contiguous versus linked storage in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.3"
+            },
+            {
+              "topicId": "ownership-and-operation-tradeoffs",
+              "title": "Ownership and Operation Tradeoffs",
+              "summary": "Tie access, search, insertion, deletion, and cleanup cost to representation.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain ownership and operation tradeoffs using the governing invariant or execution rule.",
+                "Trace a representative ownership and operation tradeoffs example by hand.",
+                "Apply ownership and operation tradeoffs in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "1.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-1-foundations-project",
+          "title": "Module Project",
+          "description": "Initialize the campus-service-desk structure library.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-1-structure-contracts",
+              "title": "Module 1 Project: Structure Contracts",
+              "summary": "Define public interfaces, invariants, and ownership rules for the structures built in this course.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Separate ADT behavior from representation.",
+                "Write invariant checkers.",
+                "Document ownership and destruction responsibilities."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "1.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "c-data-structures-linear-module-2-dynamic-arrays",
+      "order": 2,
+      "prefix": "c_data_structures_linear_module_2_dynamic_arrays",
+      "title": "Dynamic Arrays",
+      "purpose": "Implement indexed storage that grows while preserving logical size and amortized efficiency.",
+      "description": "Implement indexed storage that grows while preserving logical size and amortized efficiency.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain size, capacity, and initialization using the governing invariant or execution rule.",
+        "Explain indexed access and append using the governing invariant or execution rule.",
+        "Explain resizing and amortized append using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace size, capacity, and initialization",
+        "Trace indexed access and append",
+        "Trace resizing and amortized append"
+      ],
+      "quizFocus": [
+        "size, capacity, and initialization",
+        "indexed access and append",
+        "resizing and amortized append",
+        "insert, remove, and search"
+      ],
+      "moduleProject": "Add the vector used to store service definitions.",
+      "workspaceIncrement": [
+        "structures/vector.h",
+        "structures/vector.c",
+        "tests/vector_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add the vector used to store service definitions.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-2-dynamic-arrays-concepts",
+          "title": "Dynamic Arrays",
+          "description": "Implement indexed storage that grows while preserving logical size and amortized efficiency.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "dynamic-array-size-capacity",
+              "title": "Size, Capacity, and Initialization",
+              "summary": "Represent occupied elements separately from allocated slots.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain size, capacity, and initialization using the governing invariant or execution rule.",
+                "Trace a representative size, capacity, and initialization example by hand.",
+                "Apply size, capacity, and initialization in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.1"
+            },
+            {
+              "topicId": "dynamic-array-access-append",
+              "title": "Indexed Access and Append",
+              "summary": "Use direct addressing and append without resizing when capacity remains.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain indexed access and append using the governing invariant or execution rule.",
+                "Trace a representative indexed access and append example by hand.",
+                "Apply indexed access and append in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.2"
+            },
+            {
+              "topicId": "dynamic-array-resize-amortized",
+              "title": "Resizing and Amortized Append",
+              "summary": "Grow capacity geometrically and explain amortized constant-time append.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain resizing and amortized append using the governing invariant or execution rule.",
+                "Trace a representative resizing and amortized append example by hand.",
+                "Apply resizing and amortized append in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.3"
+            },
+            {
+              "topicId": "dynamic-array-insert-remove-search",
+              "title": "Insert, Remove, and Search",
+              "summary": "Shift values safely and update size exactly once.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain insert, remove, and search using the governing invariant or execution rule.",
+                "Trace a representative insert, remove, and search example by hand.",
+                "Apply insert, remove, and search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "2.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-2-dynamic-arrays-project",
+          "title": "Module Project",
+          "description": "Add the vector used to store service definitions.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-2-vector-project",
+              "title": "Module 2 Project: Dynamic Vector",
+              "summary": "Implement vector_init, push, insert, remove, get, find, and free with invariant tests.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve size and capacity invariants.",
+                "Handle allocation failure without losing data.",
+                "Pass empty, boundary, resize, and removal tests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "2.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "c-data-structures-linear-module-3-singly-linked-lists",
+      "order": 3,
+      "prefix": "c_data_structures_linear_module_3_singly_linked_lists",
+      "title": "Singly Linked Lists",
+      "purpose": "Implement link changes deliberately while preserving the head and every reachable node.",
+      "description": "Implement link changes deliberately while preserving the head and every reachable node.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain nodes, empty lists, and traversal using the governing invariant or execution rule.",
+        "Explain insert at the head and tail using the governing invariant or execution rule.",
+        "Explain insert after and search using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace nodes, empty lists, and traversal",
+        "Trace insert at the head and tail",
+        "Trace insert after and search"
+      ],
+      "quizFocus": [
+        "nodes, empty lists, and traversal",
+        "insert at the head and tail",
+        "insert after and search",
+        "delete, reverse, and free"
+      ],
+      "moduleProject": "Add linked request history.",
+      "workspaceIncrement": [
+        "structures/list.h",
+        "structures/list.c",
+        "tests/list_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add linked request history.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-3-singly-linked-lists-concepts",
+          "title": "Singly Linked Lists",
+          "description": "Implement link changes deliberately while preserving the head and every reachable node.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "singly-list-node-empty-traversal",
+              "title": "Nodes, Empty Lists, and Traversal",
+              "summary": "Represent the head and move a temporary cursor without losing the list.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain nodes, empty lists, and traversal using the governing invariant or execution rule.",
+                "Trace a representative nodes, empty lists, and traversal example by hand.",
+                "Apply nodes, empty lists, and traversal in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.1"
+            },
+            {
+              "topicId": "singly-list-head-tail-insert",
+              "title": "Insert at the Head and Tail",
+              "summary": "Compare constant-time head insertion with traversal or a tail pointer.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain insert at the head and tail using the governing invariant or execution rule.",
+                "Trace a representative insert at the head and tail example by hand.",
+                "Apply insert at the head and tail in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.2"
+            },
+            {
+              "topicId": "singly-list-insert-after-search",
+              "title": "Insert After and Search",
+              "summary": "Preserve the old successor before changing a link.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain insert after and search using the governing invariant or execution rule.",
+                "Trace a representative insert after and search example by hand.",
+                "Apply insert after and search in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "fill_blanks",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.3"
+            },
+            {
+              "topicId": "singly-list-delete-reverse-free",
+              "title": "Delete, Reverse, and Free",
+              "summary": "Track previous, current, and next so no node becomes lost or leaked.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain delete, reverse, and free using the governing invariant or execution rule.",
+                "Trace a representative delete, reverse, and free example by hand.",
+                "Apply delete, reverse, and free in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "3.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-3-singly-linked-lists-project",
+          "title": "Module Project",
+          "description": "Add linked request history.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-3-history-list",
+              "title": "Module 3 Project: Request History List",
+              "summary": "Implement a linked request history with insertion, search, deletion, reversal, and complete destruction.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Animate every link change.",
+                "Handle empty and one-node lists.",
+                "Free every node exactly once."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "3.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "c-data-structures-linear-module-4-advanced-lists",
+      "order": 4,
+      "prefix": "c_data_structures_linear_module_4_advanced_lists",
+      "title": "Doubly Linked and Circular Lists",
+      "purpose": "Use additional links and sentinels to simplify bidirectional and circular operations.",
+      "description": "Use additional links and sentinels to simplify bidirectional and circular operations.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain doubly linked lists using the governing invariant or execution rule.",
+        "Explain circular linked lists using the governing invariant or execution rule.",
+        "Explain sentinel nodes using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace doubly linked lists",
+        "Trace circular linked lists",
+        "Trace sentinel nodes"
+      ],
+      "quizFocus": [
+        "doubly linked lists",
+        "circular linked lists",
+        "sentinel nodes",
+        "cycle detection with slow and fast pointers"
+      ],
+      "moduleProject": "Upgrade history to a doubly linked timeline.",
+      "workspaceIncrement": [
+        "structures/timeline.h",
+        "structures/timeline.c",
+        "tests/timeline_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Upgrade history to a doubly linked timeline.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-4-advanced-lists-concepts",
+          "title": "Doubly Linked and Circular Lists",
+          "description": "Use additional links and sentinels to simplify bidirectional and circular operations.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "doubly-linked-list",
+              "title": "Doubly Linked Lists",
+              "summary": "Maintain symmetric previous and next relationships during insertion and deletion.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain doubly linked lists using the governing invariant or execution rule.",
+                "Trace a representative doubly linked lists example by hand.",
+                "Apply doubly linked lists in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.1"
+            },
+            {
+              "topicId": "circular-linked-lists",
+              "title": "Circular Linked Lists",
+              "summary": "Represent wraparound without using NULL as the end marker.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain circular linked lists using the governing invariant or execution rule.",
+                "Trace a representative circular linked lists example by hand.",
+                "Apply circular linked lists in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.2"
+            },
+            {
+              "topicId": "sentinel-nodes",
+              "title": "Sentinel Nodes",
+              "summary": "Use permanent boundary nodes to reduce edge-case branches.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain sentinel nodes using the governing invariant or execution rule.",
+                "Trace a representative sentinel nodes example by hand.",
+                "Apply sentinel nodes in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "reorder",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.3"
+            },
+            {
+              "topicId": "linked-list-cycle-detection",
+              "title": "Cycle Detection with Slow and Fast Pointers",
+              "summary": "Detect unintended cycles without extra storage.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain cycle detection with slow and fast pointers using the governing invariant or execution rule.",
+                "Trace a representative cycle detection with slow and fast pointers example by hand.",
+                "Apply cycle detection with slow and fast pointers in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "4.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-4-advanced-lists-project",
+          "title": "Module Project",
+          "description": "Upgrade history to a doubly linked timeline.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-4-activity-timeline",
+              "title": "Module 4 Project: Activity Timeline",
+              "summary": "Upgrade history to a sentinel-based doubly linked timeline with safe forward and backward traversal.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Update all four affected links.",
+                "Preserve sentinel invariants.",
+                "Detect corrupted cycles in tests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "4.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "c-data-structures-linear-module-5-stacks",
+      "order": 5,
+      "prefix": "c_data_structures_linear_module_5_stacks",
+      "title": "Stacks",
+      "purpose": "Implement last-in-first-out behavior and apply it to parsing and execution order.",
+      "description": "Implement last-in-first-out behavior and apply it to parsing and execution order.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain stack adt and array implementation using the governing invariant or execution rule.",
+        "Explain linked stack using the governing invariant or execution rule.",
+        "Explain balanced delimiters and postfix evaluation using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace stack adt and array implementation",
+        "Trace linked stack",
+        "Trace balanced delimiters and postfix evaluation"
+      ],
+      "quizFocus": [
+        "stack adt and array implementation",
+        "linked stack",
+        "balanced delimiters and postfix evaluation",
+        "call-stack connections and applications"
+      ],
+      "moduleProject": "Add stack-based undo.",
+      "workspaceIncrement": [
+        "structures/stack.h",
+        "structures/stack.c",
+        "models/action.h",
+        "models/action.c",
+        "tests/stack_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add stack-based undo.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-5-stacks-concepts",
+          "title": "Stacks",
+          "description": "Implement last-in-first-out behavior and apply it to parsing and execution order.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "stack-adt-array-implementation",
+              "title": "Stack ADT and Array Implementation",
+              "summary": "Maintain top, capacity, overflow, and underflow rules.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain stack adt and array implementation using the governing invariant or execution rule.",
+                "Trace a representative stack adt and array implementation example by hand.",
+                "Apply stack adt and array implementation in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.1"
+            },
+            {
+              "topicId": "linked-stack",
+              "title": "Linked Stack",
+              "summary": "Use head insertion and removal for constant-time push and pop.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain linked stack using the governing invariant or execution rule.",
+                "Trace a representative linked stack example by hand.",
+                "Apply linked stack in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.2"
+            },
+            {
+              "topicId": "stack-delimiters-postfix",
+              "title": "Balanced Delimiters and Postfix Evaluation",
+              "summary": "Use a stack to defer unmatched symbols and intermediate operands.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain balanced delimiters and postfix evaluation using the governing invariant or execution rule.",
+                "Trace a representative balanced delimiters and postfix evaluation example by hand.",
+                "Apply balanced delimiters and postfix evaluation in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.3"
+            },
+            {
+              "topicId": "stack-call-stack-applications",
+              "title": "Call-Stack Connections and Applications",
+              "summary": "Relate custom stack operations to recursive execution and undo behavior.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain call-stack connections and applications using the governing invariant or execution rule.",
+                "Trace a representative call-stack connections and applications example by hand.",
+                "Apply call-stack connections and applications in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "5.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-5-stacks-project",
+          "title": "Module Project",
+          "description": "Add stack-based undo.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-5-undo-stack",
+              "title": "Module 5 Project: Undo Stack",
+              "summary": "Add an undo history that can reverse the most recent service-desk mutation.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Push complete reversible actions.",
+                "Pop safely from empty and nonempty stacks.",
+                "Restore state without leaking action data."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "5.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "c-data-structures-linear-module-6-queues",
+      "order": 6,
+      "prefix": "c_data_structures_linear_module_6_queues",
+      "title": "Queues",
+      "purpose": "Implement first-in-first-out behavior without repeated array shifting.",
+      "description": "Implement first-in-first-out behavior without repeated array shifting.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain queue adt and the simple-array problem using the governing invariant or execution rule.",
+        "Explain circular array queue using the governing invariant or execution rule.",
+        "Explain linked queue using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace queue adt and the simple-array problem",
+        "Trace circular array queue",
+        "Trace linked queue"
+      ],
+      "quizFocus": [
+        "queue adt and the simple-array problem",
+        "circular array queue",
+        "linked queue",
+        "queue using two stacks"
+      ],
+      "moduleProject": "Add the regular request queue.",
+      "workspaceIncrement": [
+        "structures/queue.h",
+        "structures/queue.c",
+        "tests/queue_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add the regular request queue.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-6-queues-concepts",
+          "title": "Queues",
+          "description": "Implement first-in-first-out behavior without repeated array shifting.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "queue-adt-and-array-problem",
+              "title": "Queue ADT and the Simple-Array Problem",
+              "summary": "Explain why shifting after each dequeue is avoidable.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain queue adt and the simple-array problem using the governing invariant or execution rule.",
+                "Trace a representative queue adt and the simple-array problem example by hand.",
+                "Apply queue adt and the simple-array problem in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.1"
+            },
+            {
+              "topicId": "circular-array-queue",
+              "title": "Circular Array Queue",
+              "summary": "Maintain front, rear, size, and capacity with modular arithmetic.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain circular array queue using the governing invariant or execution rule.",
+                "Trace a representative circular array queue example by hand.",
+                "Apply circular array queue in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.2"
+            },
+            {
+              "topicId": "linked-queue",
+              "title": "Linked Queue",
+              "summary": "Use head and tail pointers for constant-time enqueue and dequeue.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain linked queue using the governing invariant or execution rule.",
+                "Trace a representative linked queue example by hand.",
+                "Apply linked queue in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.3"
+            },
+            {
+              "topicId": "queue-using-two-stacks",
+              "title": "Queue Using Two Stacks",
+              "summary": "Transfer elements only when needed and derive amortized cost.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain queue using two stacks using the governing invariant or execution rule.",
+                "Trace a representative queue using two stacks example by hand.",
+                "Apply queue using two stacks in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "6.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-6-queues-project",
+          "title": "Module Project",
+          "description": "Add the regular request queue.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-6-request-queue",
+              "title": "Module 6 Project: Waiting Request Queue",
+              "summary": "Implement regular request processing with a circular queue and linked-queue comparison tests.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Preserve FIFO order.",
+                "Handle wraparound visibly.",
+                "Compare array and linked ownership rules."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "6.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "c-data-structures-linear-module-7-deques",
+      "order": 7,
+      "prefix": "c_data_structures_linear_module_7_deques",
+      "title": "Deques",
+      "purpose": "Insert and remove efficiently at both ends and apply the structure to windows and priority overrides.",
+      "description": "Insert and remove efficiently at both ends and apply the structure to windows and priority overrides.",
+      "role": "standard",
+      "learningObjectives": [
+        "Explain deque operations and invariants using the governing invariant or execution rule.",
+        "Explain circular array deque using the governing invariant or execution rule.",
+        "Explain linked deque using the governing invariant or execution rule."
+      ],
+      "guidedExercises": [
+        "Trace deque operations and invariants",
+        "Trace circular array deque",
+        "Trace linked deque"
+      ],
+      "quizFocus": [
+        "deque operations and invariants",
+        "circular array deque",
+        "linked deque",
+        "sliding windows and palindrome checks"
+      ],
+      "moduleProject": "Add urgent request handling.",
+      "workspaceIncrement": [
+        "structures/deque.h",
+        "structures/deque.c",
+        "tests/deque_tests.c"
+      ],
+      "recommendedPacing": "Complete the traced lessons first, then finish the cumulative module project without restarting the workspace.",
+      "typicalOutcome": "Add urgent request handling.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-7-deques-concepts",
+          "title": "Deques",
+          "description": "Insert and remove efficiently at both ends and apply the structure to windows and priority overrides.",
+          "role": "instruction",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "deque-operations",
+              "title": "Deque Operations and Invariants",
+              "summary": "Define push-front, push-back, pop-front, and pop-back precisely.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain deque operations and invariants using the governing invariant or execution rule.",
+                "Trace a representative deque operations and invariants example by hand.",
+                "Apply deque operations and invariants in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.1"
+            },
+            {
+              "topicId": "circular-array-deque",
+              "title": "Circular Array Deque",
+              "summary": "Extend modular indexing to both directions.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain circular array deque using the governing invariant or execution rule.",
+                "Trace a representative circular array deque example by hand.",
+                "Apply circular array deque in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "trace",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.2"
+            },
+            {
+              "topicId": "linked-deque",
+              "title": "Linked Deque",
+              "summary": "Use a doubly linked representation for constant-time end operations.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain linked deque using the governing invariant or execution rule.",
+                "Trace a representative linked deque example by hand.",
+                "Apply linked deque in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "complete",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.3"
+            },
+            {
+              "topicId": "deque-sliding-window-palindrome",
+              "title": "Sliding Windows and Palindrome Checks",
+              "summary": "Apply a deque when both ends matter.",
+              "minutes": 30,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c"
+              ],
+              "learningGoals": [
+                "Explain sliding windows and palindrome checks using the governing invariant or execution rule.",
+                "Trace a representative sliding windows and palindrome checks example by hand.",
+                "Apply sliding windows and palindrome checks in a focused C exercise and justify its cost."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "activitySequence": [
+                  "concept_sketch",
+                  "pseudocode_input",
+                  "algorithm_animation",
+                  "guided_code_input",
+                  "independent_code_input",
+                  "complexity_check"
+                ],
+                "pseudocode": {
+                  "required": true,
+                  "inputKind": "pseudocode_input",
+                  "mode": "write",
+                  "dialect": "zoeskoul-v1",
+                  "validationStrategy": "hybrid"
+                }
+              },
+              "topicNumber": "7.4"
+            }
+          ]
+        },
+        {
+          "sectionNumber": "2",
+          "sectionSlug": "c-data-structures-linear-section-7-deques-project",
+          "title": "Module Project",
+          "description": "Add urgent request handling.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "ds1-module-7-urgent-deque",
+              "title": "Module 7 Project: Urgent Request Deque",
+              "summary": "Add urgent requests at either end while preserving regular queue behavior.",
+              "minutes": 75,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "module-project",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Implement all four deque operations.",
+                "Handle wraparound and empty transitions.",
+                "Choose a representation based on constraints."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ]
+              },
+              "topicNumber": "7.5"
+            }
+          ]
+        }
+      ],
+      "sectionCount": 2,
+      "topicCount": 5
+    },
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "c-data-structures-linear-module-8-capstone",
+      "order": 8,
+      "prefix": "c_data_structures_linear_module_8_capstone",
+      "title": "Linear Structures Capstone",
+      "purpose": "Combine dynamic arrays, lists, stacks, queues, and deques in one consistent service-desk engine.",
+      "description": "Combine dynamic arrays, lists, stacks, queues, and deques in one consistent service-desk engine.",
+      "role": "capstone",
+      "learningObjectives": [
+        "Keep all structure invariants synchronized.",
+        "Implement progressive multi-file C steps.",
+        "Pass edge, ordering, ownership, and cumulative regression tests."
+      ],
+      "guidedExercises": [],
+      "quizFocus": [],
+      "moduleProject": "Campus Service Desk Capstone",
+      "workspaceIncrement": [
+        "main.c",
+        "models/request.h",
+        "models/request.c",
+        "structures/vector.c",
+        "structures/list.c",
+        "structures/stack.c",
+        "structures/queue.c",
+        "structures/deque.c",
+        "tests/capstone_tests.c"
+      ],
+      "recommendedPacing": "Complete the capstone in progressive steps; every step must preserve all earlier behavior.",
+      "typicalOutcome": "Build a tested service desk using a vector for services, list for history, queue for regular work, deque for urgent work, and stack for undo.",
+      "runtimePolicy": {
+        "language": "c",
+        "backend": "judge0",
+        "mode": "multi_file",
+        "pseudocodeRuntime": "deterministic_ir"
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-linear-section-8-capstone",
+          "title": "Linear Structures Capstone",
+          "description": "Combine dynamic arrays, lists, stacks, queues, and deques in one consistent service-desk engine.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
+          "topics": [
+            {
+              "topicId": "campus-service-desk-capstone",
+              "title": "Campus Service Desk Capstone",
+              "summary": "Build a tested service desk using a vector for services, list for history, queue for regular work, deque for urgent work, and stack for undo.",
+              "minutes": 180,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "capstone",
+                "cumulative-project"
+              ],
+              "learningGoals": [
+                "Keep all structure invariants synchronized.",
+                "Implement progressive multi-file C steps.",
+                "Pass edge, ordering, ownership, and cumulative regression tests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "projectFlow": "progressive",
+                "activitySequence": [
+                  "project_synopsis",
+                  "design_pseudocode_input",
+                  "progressive_code_inputs",
+                  "behavioral_tests",
+                  "reflection"
+                ],
+                "capstone": true
+              },
+              "topicNumber": "8.1",
+              "projectBrief": {
+                "scenario": "A campus service desk needs reliable storage, history, queues, urgent handling, and undo.",
+                "role": "Data structures developer",
+                "workspace": "One cumulative C workspace containing vector, list, stack, queue, deque, model, and test modules.",
+                "deliverable": "A tested service-desk engine that preserves every linear-structure invariant and releases all owned memory.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep all structure invariants synchronized.",
+                  "Implement progressive multi-file C steps.",
+                  "Pass edge, ordering, ownership, and cumulative regression tests."
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sectionCount": 1,
+      "topicCount": 1
+    }
+  ]
+}

@@ -32,7 +32,9 @@
     "finalCapstoneSectionContainsOneTopic": true,
     "finalCapstoneStepCountComesFromAuthoring": true,
     "projectTopicsUseOneSynopsisSketch": true,
-    "projectStepsMustBeChained": true
+    "projectStepsMustBeChained": true,
+    "pseudocodeInputsUseDeterministicValidation": true,
+    "pseudocodeWriteNeedsStructureAndScenarios": true
   },
   "projectRequirements": {
     "reuseTryItInProjects": true,
@@ -62,6 +64,14 @@
     "distinguishProjectSteps": true,
     "distinguishQuizExercises": true,
     "distinguishCodeInputExercises": true,
-    "doNotTreatKindsAsInterchangeable": true
+    "doNotTreatKindsAsInterchangeable": true,
+    "distinguishPseudocodeInputExercises": true,
+    "pseudocodeInputIsNotCodeInputOrFreeText": true
+  },
+  "pseudocodeDefaults": {
+    "inputKind": "pseudocode_input",
+    "dialect": "zoeskoul-v1",
+    "validationStrategy": "hybrid",
+    "aiPassFailAllowed": false
   }
 }

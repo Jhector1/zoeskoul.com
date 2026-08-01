@@ -8,6 +8,7 @@ import { gradeMatrixInput } from "./matrixInput";
 import { gradeVectorDragTarget } from "./vectorDragTarget";
 import { gradeVectorDragDot } from "./vectorDragDot";
 import { gradeCodeInput } from "./codeInput";
+import { gradePseudocodeInput } from "./pseudocodeInput";
 import { gradeTextInput } from "./textInput";
 import { gradeDragReorder } from "./dragReorder";
 import { gradeVoiceInput } from "./voiceInput";
@@ -48,6 +49,9 @@ export async function gradeInstance(args: {
 
     case "code_input":
       return gradeCodeInput(args as any);
+
+    case "pseudocode_input":
+      return gradePseudocodeInput(args as any);
 
     case "text_input":
       return gradeTextInput(args as any);

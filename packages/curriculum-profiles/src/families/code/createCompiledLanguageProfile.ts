@@ -43,7 +43,9 @@ function normalizeStarterFiles(
 
     for (const file of files) {
         const path = normalizePath(file.path, "Invalid compiled-language workspace path");
-        if (seen.has(path)) continue;
+        if (seen.has(path)) {
+            throw new Error(`Duplicate compiled-language workspace path: ${path}`);
+        }
         seen.add(path);
         normalized.push({
             ...file,
@@ -58,18 +60,27 @@ function normalizeStarterFiles(
 
 function normalizeFixtureFiles(files: ManifestFileFixture[] | undefined) {
     if (!Array.isArray(files)) return [];
+    const seen = new Set<string>();
     return files
         .filter((file) => normalizeText(file.path))
-        .map((file) => ({
-            ...file,
-            path: normalizePath(file.path, "Invalid compiled-language fixture path"),
-            content: String(file.content ?? ""),
-        }));
+        .map((file) => {
+            const path = normalizePath(file.path, "Invalid compiled-language fixture path");
+            if (seen.has(path)) {
+                throw new Error(`Duplicate compiled-language fixture path: ${path}`);
+            }
+            seen.add(path);
+            return {
+                ...file,
+                path,
+                content: String(file.content ?? ""),
+            };
+        });
 }
 
 function requireTests(
     tests: ProgrammingCodeInputTestDraft[] | undefined,
     exerciseId: string,
+    minimumFixedTests: number,
 ) {
     const normalized = Array.isArray(tests)
         ? tests
@@ -84,9 +95,23 @@ function requireTests(
             .filter((test) => test.stdout.length > 0)
         : [];
 
-    if (normalized.length < 1) {
+    if (normalized.length < minimumFixedTests) {
         throw new Error(
-            `Compiled-language code_input exercise "${exerciseId}" needs at least one fixed test.`,
+            `Compiled-language code_input exercise "${exerciseId}" needs at least ${minimumFixedTests} fixed tests.`,
+        );
+    }
+
+    const signatures = normalized.map((test) =>
+        JSON.stringify({
+            stdin: test.stdin ?? "",
+            stdout: test.stdout,
+            match: test.match,
+            files: test.files ?? [],
+        }),
+    );
+    if (new Set(signatures).size !== signatures.length) {
+        throw new Error(
+            `Compiled-language code_input exercise "${exerciseId}" contains duplicate fixed tests.`,
         );
     }
 
@@ -117,9 +142,11 @@ export function createCompiledLanguageProfile(args: {
     defaultEntryFileName: string;
     defaultStarterCode: string;
     authoringRules?: string[];
+    minimumFixedTests?: number;
 }): CourseProfile {
+    const minimumFixedTests = Math.max(1, Math.trunc(args.minimumFixedTests ?? 1));
     const codeInput: CodeInputProfileCapability = {
-        minimumFixedTests: 1,
+        minimumFixedTests,
         defaultStarter() {
             return args.defaultStarterCode;
         },
@@ -247,7 +274,7 @@ export function createCompiledLanguageProfile(args: {
                 showExpectedExample: true,
                 recipe: {
                     type: "fixed_tests",
-                    tests: requireTests(buildArgs.exercise.tests, buildArgs.exercise.id),
+                    tests: requireTests(buildArgs.exercise.tests, buildArgs.exercise.id, minimumFixedTests),
                     solutionCode: solutionCodeTag,
                     solutionFiles,
                     ...(sourceChecks?.length ? { sourceChecks } : {}),
@@ -267,6 +294,7 @@ export function createCompiledLanguageProfile(args: {
             "multi_choice",
             "drag_reorder",
             "fill_blank_choice",
+            "pseudocode_input",
             "code_input",
         ],
         allowedRecipeTypes: ["fixed_tests"],

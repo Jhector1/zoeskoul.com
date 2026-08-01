@@ -36,6 +36,12 @@ export function pickAnswerForAI(current: QItem, exercise: Exercise) {
       return { kind: "matrix_input", values, raw };
     }
 
+    case "pseudocode_input":
+      return {
+        kind: "pseudocode_input",
+        value: current.pseudocode ?? "",
+      };
+
     case "code_input":
       return {
         kind: "code_input",

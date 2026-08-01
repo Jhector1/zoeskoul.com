@@ -756,6 +756,24 @@ export default function RevealAnswerCard({
             };
         }
 
+        if (kind === "pseudocode_input") {
+            const value = String(revealT.value ?? revealT.solution ?? "").trimEnd();
+            return {
+                title: "Pseudocode solution",
+                copyText: value,
+                fillLabel: "Fill in pseudocode editor",
+                fillPatch: value ? ({ pseudocode: value } as Partial<QItem>) : null,
+                node: (
+                    <div className="ui-surface-muted overflow-hidden">
+                        <div className="border-b px-3 py-2 ui-border ui-meta-strong">ZoeSkoul pseudocode</div>
+                        <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-6 ui-text">
+                            <code>{value || "(no solution provided)"}</code>
+                        </pre>
+                    </div>
+                ),
+            };
+        }
+
         if (kind === "matrix_input") {
             const values = Array.isArray(revealT.values) ? (revealT.values as number[][]) : [];
             const rows = values.length;

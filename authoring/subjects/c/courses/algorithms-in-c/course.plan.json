@@ -1,0 +1,86 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "algorithms-in-c",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "title": "Algorithms in C",
+  "description": "A cumulative algorithms course covering correctness, searching, sorting, divide and conquer, graph traversal, greedy design, shortest paths, backtracking, and dynamic programming in C.",
+  "moduleOrder": [
+    "algorithms-in-c-module-1-design-foundations",
+    "algorithms-in-c-module-2-searching",
+    "algorithms-in-c-module-3-elementary-sorting",
+    "algorithms-in-c-module-4-divide-conquer-sorting",
+    "algorithms-in-c-module-5-heap-selection",
+    "algorithms-in-c-module-6-graphs",
+    "algorithms-in-c-module-7-greedy",
+    "algorithms-in-c-module-8-shortest-paths",
+    "algorithms-in-c-module-9-backtracking-dp",
+    "algorithms-in-c-module-10-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "algorithms-in-c-module-1-design-foundations",
+      "moduleNumber": 1,
+      "title": "Algorithm Design Foundations",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-2-searching",
+      "moduleNumber": 2,
+      "title": "Searching Algorithms",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-3-elementary-sorting",
+      "moduleNumber": 3,
+      "title": "Elementary Sorting",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-4-divide-conquer-sorting",
+      "moduleNumber": 4,
+      "title": "Divide-and-Conquer Sorting",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-5-heap-selection",
+      "moduleNumber": 5,
+      "title": "Heap Sort and Selection",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-6-graphs",
+      "moduleNumber": 6,
+      "title": "Graph Representation and Traversal",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-7-greedy",
+      "moduleNumber": 7,
+      "title": "Greedy Algorithms",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-8-shortest-paths",
+      "moduleNumber": 8,
+      "title": "Shortest Paths",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-9-backtracking-dp",
+      "moduleNumber": 9,
+      "title": "Backtracking and Dynamic Programming",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "algorithms-in-c-module-10-capstone",
+      "moduleNumber": 10,
+      "title": "Algorithms in C Capstone",
+      "role": "capstone"
+    }
+  ]
+}

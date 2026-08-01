@@ -280,6 +280,12 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
         return { kind: "matrix_input", values };
     }
 
+    if (ex.kind === "pseudocode_input") {
+        const value = String(item.pseudocode ?? "").trimEnd();
+        if (!value.trim()) return undefined;
+        return { kind: "pseudocode_input", value };
+    }
+
     if (ex.kind === "code_input") {
         const language = String(
             (item as any).codeLang ?? (ex as any).language ?? "python",
@@ -412,6 +418,7 @@ export function initItemFromExercise(
         stdin: "",
 
         text: "",
+        pseudocode: "",
         reorderIds: [],
         reorder: undefined,
 
@@ -425,6 +432,13 @@ export function initItemFromExercise(
         return {
             ...base,
             text: resolveMaybeTagged((ex as any).starterText ?? "", resolveText),
+        };
+    }
+
+    if (ex.kind === "pseudocode_input") {
+        return {
+            ...base,
+            pseudocode: resolveMaybeTagged((ex as any).starterPseudocode ?? "", resolveText),
         };
     }
 

@@ -1,0 +1,79 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-programming-foundations",
+  "catalogSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
+  "title": "C Programming Foundations",
+  "description": "A cumulative introduction to C execution, control flow, functions, arrays, pointers, structs, dynamic memory, multi-file design, and deterministic testing.",
+  "moduleOrder": [
+    "c-programming-foundations-module-1-program-execution",
+    "c-programming-foundations-module-2-control-flow",
+    "c-programming-foundations-module-3-functions",
+    "c-programming-foundations-module-4-arrays-strings",
+    "c-programming-foundations-module-5-pointers",
+    "c-programming-foundations-module-6-structs",
+    "c-programming-foundations-module-7-dynamic-memory",
+    "c-programming-foundations-module-8-multifile-testing",
+    "c-programming-foundations-module-9-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "c-programming-foundations-module-1-program-execution",
+      "moduleNumber": 1,
+      "title": "How C Programs Execute",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-2-control-flow",
+      "moduleNumber": 2,
+      "title": "Decisions and Loops",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-3-functions",
+      "moduleNumber": 3,
+      "title": "Functions and Program Decomposition",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-4-arrays-strings",
+      "moduleNumber": 4,
+      "title": "Arrays and Strings",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-5-pointers",
+      "moduleNumber": 5,
+      "title": "Pointers and Memory Addresses",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-6-structs",
+      "moduleNumber": 6,
+      "title": "Structs and Self-Referential Types",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-7-dynamic-memory",
+      "moduleNumber": 7,
+      "title": "Dynamic Memory and Ownership",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-8-multifile-testing",
+      "moduleNumber": 8,
+      "title": "Multi-File C Programs and Testing",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-programming-foundations-module-9-capstone",
+      "moduleNumber": 9,
+      "title": "C Foundations Capstone",
+      "role": "capstone"
+    }
+  ]
+}

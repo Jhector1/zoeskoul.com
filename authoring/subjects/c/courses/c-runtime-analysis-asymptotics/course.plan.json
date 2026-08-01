@@ -2,38 +2,57 @@
   "subjectSlug": "c",
   "courseSlug": "c-runtime-analysis-asymptotics",
   "catalogSlug": "c",
-  "trackSlug": "c",
+  "trackSlug": "c-data-structures-algorithms",
   "profileId": "c",
   "workspaceProfileId": "browser-code-runner",
   "workspacePolicyId": "c-multifile-workspace",
+  "pseudocodePolicyId": "zoeskoul-pseudocode-v1",
   "title": "Runtime Analysis and Asymptotics in C",
-  "description": "Trace C loops and recursive calls, derive exact runtime functions, compare growth with limits, and prove O, Ω, and Θ bounds.",
+  "description": "A cumulative runtime-analysis course covering exact frequency counts, loop sums, asymptotic notation, formal proofs, recurrences, space, and amortized analysis.",
   "moduleOrder": [
     "c-runtime-analysis-asymptotics-module-1-frequency-counting",
     "c-runtime-analysis-asymptotics-module-2-limit-method",
     "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
-    "c-runtime-analysis-asymptotics-module-4-capstone"
+    "c-runtime-analysis-asymptotics-module-4-recurrences",
+    "c-runtime-analysis-asymptotics-module-5-applied-analysis",
+    "c-runtime-analysis-asymptotics-module-6-capstone"
   ],
   "modules": [
     {
       "moduleSlug": "c-runtime-analysis-asymptotics-module-1-frequency-counting",
       "moduleNumber": 1,
-      "title": "Frequency Counting in C"
+      "title": "Frequency Counting in C",
+      "role": "standard"
     },
     {
       "moduleSlug": "c-runtime-analysis-asymptotics-module-2-limit-method",
       "moduleNumber": 2,
-      "title": "Asymptotics with Limits"
+      "title": "Asymptotics with Limits",
+      "role": "standard"
     },
     {
       "moduleSlug": "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
       "moduleNumber": 3,
-      "title": "Proofs from the Definitions"
+      "title": "Proofs from the Definitions",
+      "role": "standard"
     },
     {
-      "moduleSlug": "c-runtime-analysis-asymptotics-module-4-capstone",
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-4-recurrences",
       "moduleNumber": 4,
-      "title": "Runtime Analysis Capstone"
+      "title": "Recurrence Relations",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-5-applied-analysis",
+      "moduleNumber": 5,
+      "title": "Applied Cost Analysis",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-6-capstone",
+      "moduleNumber": 6,
+      "title": "Runtime Analysis Capstone",
+      "role": "capstone"
     }
   ]
 }

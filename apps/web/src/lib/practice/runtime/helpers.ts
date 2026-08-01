@@ -101,6 +101,10 @@ export function isEmptyPracticeAnswer(
         return !(tokens.length > 0 && order.length === tokens.length);
     }
 
+    if (ex.kind === "pseudocode_input") {
+        return !String((item as any).pseudocode ?? "").trim();
+    }
+
     if (ex.kind === "code_input") {
         const { code } = extractCodeLike(item as any);
         const terminalEvidence = (item as any).terminalEvidence;
@@ -153,6 +157,10 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
 
         case "matrix_input":
             if (Array.isArray(payload.raw)) (item as any).mat = payload.raw;
+            break;
+
+        case "pseudocode_input":
+            (item as any).pseudocode = String(payload.value ?? payload.solution ?? "");
             break;
 
         case "code_input": {

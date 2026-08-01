@@ -98,17 +98,32 @@
       "subjectSlug": "c",
       "path": "subjects/c",
       "courseOrder": [
-        "c-data-structures",
-        "c-runtime-analysis-asymptotics"
+        "c-programming-foundations",
+        "c-runtime-analysis-asymptotics",
+        "c-data-structures-linear",
+        "c-trees-heaps-hashing",
+        "algorithms-in-c"
       ],
       "courses": [
         {
-          "courseSlug": "c-data-structures",
-          "path": "subjects/c/courses/c-data-structures/course.spec.json"
+          "courseSlug": "c-programming-foundations",
+          "path": "subjects/c/courses/c-programming-foundations/course.spec.json"
         },
         {
           "courseSlug": "c-runtime-analysis-asymptotics",
           "path": "subjects/c/courses/c-runtime-analysis-asymptotics/course.spec.json"
+        },
+        {
+          "courseSlug": "c-data-structures-linear",
+          "path": "subjects/c/courses/c-data-structures-linear/course.spec.json"
+        },
+        {
+          "courseSlug": "c-trees-heaps-hashing",
+          "path": "subjects/c/courses/c-trees-heaps-hashing/course.spec.json"
+        },
+        {
+          "courseSlug": "algorithms-in-c",
+          "path": "subjects/c/courses/algorithms-in-c/course.spec.json"
         }
       ]
     }

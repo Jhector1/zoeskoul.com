@@ -10,6 +10,7 @@ export type ExerciseKind =
     | "vector_drag_dot"
     | "matrix_input"
     | "code_input"
+    | "pseudocode_input"
     | "text_input"
     | "drag_reorder"
     | "voice_input"
