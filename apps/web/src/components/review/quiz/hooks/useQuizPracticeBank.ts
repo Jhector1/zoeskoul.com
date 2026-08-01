@@ -592,6 +592,32 @@ function normalizeLiveWorkspaceSubmitSnapshot(
   };
 }
 
+export function orderPracticeWorkspaceSubmitCandidateKeys(args: {
+  stableKey: string;
+  wantedIds: Iterable<string>;
+  boundExerciseKey?: string | null;
+  activeExerciseKey?: string | null;
+}) {
+  /**
+   * Exact visible-question identities must win over route-global active/bound
+   * keys. During navigation or rebinding those global keys can briefly describe
+   * the previous exercise, and the first matching bridge getter would otherwise
+   * submit that stale workspace.
+   */
+  return Array.from(
+      new Set(
+          [
+            args.stableKey,
+            ...Array.from(args.wantedIds),
+            args.boundExerciseKey,
+            args.activeExerciseKey,
+          ]
+              .map((value) => String(value ?? "").trim())
+              .filter(Boolean),
+      ),
+  );
+}
+
 export function getLiveWorkspaceForPracticeSubmit(candidateKeys: string[]) {
   const win = getReviewSubmitBridgeHost();
   if (!win) return null;
@@ -723,12 +749,14 @@ function getRuntimePracticePatchForQuestion(
 
   const activeExerciseKey = String(runtime.activeExerciseKey ?? "").trim();
   const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
-  const liveWorkspaceSnapshot = getLiveWorkspaceForPracticeSubmit([
-    boundExerciseKey,
-    activeExerciseKey,
-    stableKey,
-    ...Array.from(wantedIds),
-  ]);
+  const liveWorkspaceSnapshot = getLiveWorkspaceForPracticeSubmit(
+      orderPracticeWorkspaceSubmitCandidateKeys({
+        stableKey,
+        wantedIds,
+        boundExerciseKey,
+        activeExerciseKey,
+      }),
+  );
 
   const candidates = Object.entries(exercises)
       .map(([key, value]: any) => {

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import { syncSubscriptionsForUser } from "@/lib/billing/stripeService";
+import { syncSubscriptionsSafely } from "@/lib/billing/syncSubscriptionsSafely";
 import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 
 export async function requireEntitledUser() {
@@ -27,7 +28,11 @@ export async function requireEntitledUser() {
   }
 
   // ✅ makes Stripe truth “instant” if webhook is delayed
-  await syncSubscriptionsForUser(userId).catch(() => {});
+  await syncSubscriptionsSafely({
+    userId,
+    source: "billing/require-entitled",
+    sync: syncSubscriptionsForUser,
+  });
 
   const ent = await getEntitlementForUser(userId);
   if (!ent.ok) {

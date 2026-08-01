@@ -4,6 +4,7 @@ import {
     getPracticeQuestionIdentity,
     getPracticeStateIdentity,
     getLiveWorkspaceForPracticeSubmit,
+    orderPracticeWorkspaceSubmitCandidateKeys,
     mergeSavedPatchIntoPracticeItem,
     sanitizeSavedPracticePatch,
     stablePracticeItemJsonForNoopCompare,
@@ -47,6 +48,48 @@ describe("useQuizPracticeBank practice identity guards", () => {
             ownerKey: stableKey,
             code: "SELECT 1;",
             language: "sql",
+        });
+
+        delete win.__zoeGetWorkspaceBeforeSubmit;
+        delete win.__zoeGetAnyWorkspaceBeforeSubmit;
+    });
+
+
+    it("prefers the visible question workspace over a stale active binding", () => {
+        const win = getReviewSubmitBridgeHost();
+        if (!win) throw new Error("Expected a browser window for this test.");
+
+        const currentKey = stableKey;
+        const staleBoundKey = "previous-topic:previous-exercise";
+
+        win.__zoeGetWorkspaceBeforeSubmit = {
+            [staleBoundKey]: () => ({
+                ownerKey: staleBoundKey,
+                workspace: { version: 2, nodes: [] },
+                code: "age = 21",
+                stdin: "",
+                language: "python",
+            }),
+            [currentKey]: () => ({
+                ownerKey: currentKey,
+                workspace: { version: 2, nodes: [] },
+                code: "age = 12\nprint(age)",
+                stdin: "",
+                language: "python",
+            }),
+        };
+
+        const orderedKeys = orderPracticeWorkspaceSubmitCandidateKeys({
+            stableKey: currentKey,
+            wantedIds: [currentKey, exerciseId],
+            boundExerciseKey: staleBoundKey,
+            activeExerciseKey: staleBoundKey,
+        });
+
+        expect(orderedKeys[0]).toBe(currentKey);
+        expect(getLiveWorkspaceForPracticeSubmit(orderedKeys)).toMatchObject({
+            ownerKey: currentKey,
+            code: "age = 12\nprint(age)",
         });
 
         delete win.__zoeGetWorkspaceBeforeSubmit;

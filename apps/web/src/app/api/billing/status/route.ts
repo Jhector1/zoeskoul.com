@@ -8,6 +8,7 @@ import {
   syncSubscriptionsForUser,
 } from "@/lib/billing/stripeService";
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
+import { syncSubscriptionsSafely } from "@/lib/billing/syncSubscriptionsSafely";
 
 import { getLocaleFromCookie } from "@/serverUtils";
 import { toIntlLocale } from "@/i18n/money";
@@ -62,7 +63,11 @@ export async function GET() {
 
   if (!billingExempt) {
     // Stripe-first freshness for accounts whose access depends on payment.
-    await syncSubscriptionsForUser(userId).catch(() => {});
+    await syncSubscriptionsSafely({
+      userId,
+      source: "billing/status",
+      sync: syncSubscriptionsForUser,
+    });
   }
 
   const ent = await getEntitlementForUser(userId);
