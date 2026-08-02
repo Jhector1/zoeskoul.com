@@ -1,3 +1,4 @@
+import { isReviewRouteTransitionReady } from "../navigation/reviewRouteTransition";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
 import {useRouter} from "@/i18n/navigation";
@@ -494,40 +495,43 @@ export function useReviewModuleController({
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
 
     const [isRouteTransitioning, setIsRouteTransitioning] = useState(false);
-    const routeTransitionTimerRef = useRef<number | null>(null);
+    const routeTransitionHrefRef = useRef<string | null>(null);
+    const routeTransitionFrameRef = useRef<number | null>(null);
+    const routeTransitionRevisionRef = useRef(0);
 
-    const beginRouteTransition = useCallback(() => {
-        if (typeof window !== "undefined" && routeTransitionTimerRef.current !== null) {
-            window.clearTimeout(routeTransitionTimerRef.current);
-            routeTransitionTimerRef.current = null;
+    const clearRouteTransitionFrame = useCallback(() => {
+        if (
+            typeof window !== "undefined" &&
+            routeTransitionFrameRef.current !== null
+        ) {
+            window.cancelAnimationFrame(routeTransitionFrameRef.current);
         }
-
-        setIsRouteTransitioning(true);
+        routeTransitionFrameRef.current = null;
     }, []);
 
-    const finishRouteTransition = useCallback(() => {
-        if (typeof window === "undefined") {
-            setIsRouteTransitioning(false);
-            return;
-        }
+    const beginRouteTransition = useCallback(
+        (href: string | null = null) => {
+            clearRouteTransitionFrame();
+            routeTransitionRevisionRef.current += 1;
+            routeTransitionHrefRef.current = href;
+            setIsRouteTransitioning(true);
+        },
+        [clearRouteTransitionFrame],
+    );
 
-        if (routeTransitionTimerRef.current !== null) {
-            window.clearTimeout(routeTransitionTimerRef.current);
-        }
-
-        routeTransitionTimerRef.current = window.setTimeout(() => {
-            setIsRouteTransitioning(false);
-            routeTransitionTimerRef.current = null;
-        }, 180);
-    }, []);
+    const cancelRouteTransition = useCallback(() => {
+        clearRouteTransitionFrame();
+        routeTransitionRevisionRef.current += 1;
+        routeTransitionHrefRef.current = null;
+        setIsRouteTransitioning(false);
+    }, [clearRouteTransitionFrame]);
 
     useEffect(() => {
         return () => {
-            if (typeof window !== "undefined" && routeTransitionTimerRef.current !== null) {
-                window.clearTimeout(routeTransitionTimerRef.current);
-            }
+            clearRouteTransitionFrame();
+            routeTransitionHrefRef.current = null;
         };
-    }, []);
+    }, [clearRouteTransitionFrame]);
 
     const taggedMessages = useTaggedT();
     const resolveReviewMessageRef = useRef(taggedMessages.resolve);
@@ -1094,12 +1098,17 @@ export function useReviewModuleController({
 
             const href = buildRoutePathForCurrentSurface(target);
 
-            beginRouteTransition();
-            routeTargetRef.current = target;
-            setRouteTarget(target);
+            /**
+             * Freeze the current visible route while its latest workspace and
+             * progress state settle. Publish the destination only afterward.
+             */
+            beginRouteTransition(href);
 
             try {
                 await flushAll();
+
+                routeTargetRef.current = target;
+                setRouteTarget(target);
 
                 if (typeof window !== "undefined") {
                     const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
@@ -1115,14 +1124,15 @@ export function useReviewModuleController({
                         window.history.pushState(nextHistoryState, "", href);
                     }
                 }
-            } finally {
-                finishRouteTransition();
+            } catch (error) {
+                cancelRouteTransition();
+                throw error;
             }
         },
         [
             beginRouteTransition,
             buildRoutePathForCurrentSurface,
-            finishRouteTransition,
+            cancelRouteTransition,
             firstUnlockedRouteTarget,
             flushAll,
             moduleSlug,
@@ -2079,14 +2089,11 @@ export function useReviewModuleController({
                 sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
             });
 
-            await flushAll();
-
             await navigateToResolvedTarget(nextTarget, "push", {
                 bypassProgressiveLock: true,
             });
         },
         [
-            flushAll,
             mod,
             moduleSlug,
             navigateToResolvedTarget,
@@ -2496,7 +2503,7 @@ export function useReviewModuleController({
         })
             ? routeEditorEntry
             : null;
-    const boardEnabled = true;
+    const boardEnabled = isTutoringSession;
     const boardScopeKey = `card:${viewTid}:${activeCard?.id ?? routeTarget?.targetSlug ?? "general"}`;
     const tutoringBoardRequestKey = useMemo(
         () =>
@@ -2573,6 +2580,105 @@ export function useReviewModuleController({
         !boundExerciseMatchesActiveCard,
     );
 
+    useEffect(() => {
+        if (!isRouteTransitioning) return;
+
+        const pendingHref = routeTransitionHrefRef.current;
+        if (!pendingHref || !routeTarget) return;
+
+        const currentHref = buildRoutePathForCurrentSurface(routeTarget);
+        const browserHref =
+            typeof window === "undefined"
+                ? null
+                : `${window.location.pathname}${window.location.search}`;
+
+        if (
+            !isReviewRouteTransitionReady({
+                pendingHref,
+                currentHref,
+                browserHref,
+                progressHydrated,
+                showSkeleton,
+                saveStatus,
+                hasExpectedExerciseSurface,
+                pendingExerciseBinding,
+                toolHydrated: tool.toolHydrated,
+            })
+        ) {
+            return;
+        }
+
+        const transitionRevision = routeTransitionRevisionRef.current;
+        clearRouteTransitionFrame();
+
+        const completeIfStillCurrent = () => {
+            if (
+                transitionRevision !==
+                routeTransitionRevisionRef.current
+            ) {
+                return;
+            }
+
+            if (routeTransitionHrefRef.current !== pendingHref) {
+                return;
+            }
+
+            const latestTarget = routeTargetRef.current;
+            if (!latestTarget) return;
+
+            const latestHref =
+                buildRoutePathForCurrentSurface(latestTarget);
+            const latestBrowserHref =
+                typeof window === "undefined"
+                    ? null
+                    : `${window.location.pathname}${window.location.search}`;
+
+            if (
+                latestHref !== pendingHref ||
+                (
+                    latestBrowserHref !== null &&
+                    latestBrowserHref !== pendingHref
+                )
+            ) {
+                return;
+            }
+
+            routeTransitionHrefRef.current = null;
+            routeTransitionFrameRef.current = null;
+            setIsRouteTransitioning(false);
+        };
+
+        if (typeof window === "undefined") {
+            completeIfStillCurrent();
+            return;
+        }
+
+        /**
+         * Two stable frames let route, workspace, and panel layout commit
+         * before the transition mask is removed.
+         */
+        routeTransitionFrameRef.current =
+            window.requestAnimationFrame(() => {
+                routeTransitionFrameRef.current =
+                    window.requestAnimationFrame(
+                        completeIfStillCurrent,
+                    );
+            });
+
+        return clearRouteTransitionFrame;
+    }, [
+        buildRoutePathForCurrentSurface,
+        clearRouteTransitionFrame,
+        hasExpectedExerciseSurface,
+        isRouteTransitioning,
+        pendingExerciseBinding,
+        progressHydrated,
+        routeTarget,
+        saveStatus,
+        showSkeleton,
+        tool.toolHydrated,
+    ]);
+
     const rightRailExerciseKey = routeCanUseBoundExercise
         ? activeExerciseTarget?.exerciseStateKey ??
           activeCardRegistryExerciseEntry?.exerciseStateKey ??
@@ -2601,7 +2707,7 @@ export function useReviewModuleController({
         layout: {
             ariaBusy: showSkeleton || isRouteTransitioning || isModuleContinuePending,
             reduceMotion,
-            showMask,
+            showMask: showMask || isRouteTransitioning,
             showSkeleton,
             isNavigating: isRouteTransitioning || isModuleContinuePending,
             navigationLabel: saveStatus === "saving" ? "Saving progress..." : "Loading...",
@@ -2820,10 +2926,11 @@ export function useReviewModuleController({
                 boardDocumentRequestKey: tutoringBoardRequestKey,
                 boardDocumentRefreshMs: isTutoringSession ? 5000 : undefined,
                 notesEnabled: false,
-                // Course lessons use a compact Code/Board switcher rather than the
-                // larger review-practice Tools/Run/More header.
+                // Only tutoring workspaces expose the compact Run/Board switcher.
+                // Standard lessons keep the file/editor/output surface without
+                // the secondary tools header.
                 showHeader: false,
-                showToolTabs: true,
+                showToolTabs: isTutoringSession,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
                 toolSqlDialect: rightRailSqlProps.toolSqlDialect,
