@@ -5,6 +5,10 @@ import {
   normalizeSupportedLocale,
 } from "@zoeskoul/app-config";
 
+import {
+  isConfiguredBrowserOrigin,
+} from "@/lib/http/configuredBrowserOrigins";
+
 export function resolveAuthRedirect(args: {
   url: string;
   baseUrl: string;
@@ -31,7 +35,8 @@ export function resolveAuthRedirect(args: {
         parsed.origin === baseOrigin ||
         isTrustedBrowserAppOrigin(parsed.origin, {
           includeLocal: args.includeLocalApps,
-        })
+        }) ||
+        isConfiguredBrowserOrigin(parsed.origin)
       )
     ) {
       return parsed.toString();

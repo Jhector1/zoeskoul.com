@@ -4,6 +4,10 @@ import {
   getProductionAppOrigin,
 } from "@zoeskoul/app-config";
 
+import {
+  getConfiguredBrowserOrigins,
+} from "@/lib/http/configuredBrowserOrigins";
+
 const ALLOWED_METHODS = "GET, POST, PATCH, PUT, DELETE, OPTIONS";
 const ALLOWED_HEADERS = "Accept, Content-Type";
 
@@ -21,6 +25,10 @@ function allowedOrigins(request: Request): Set<string> {
     requestOrigin(request),
     ...browserAppIds.map(getProductionAppOrigin),
   ]);
+
+  for (const origin of getConfiguredBrowserOrigins()) {
+    origins.add(origin);
+  }
 
   if (isLocalApiRequest(request)) {
     for (const appId of browserAppIds) {
