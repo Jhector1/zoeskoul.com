@@ -1,3 +1,9 @@
+/* Shared ZoeSkoul root type scale.
+   Applications set only --app-font-size through @zoeskoul/preferences. */
+html {
+    font-size: var(--app-font-size, 16px);
+}
+
 /* =========================================================
    ZoeSkoul UI system — cleaner refactor
    Goals:

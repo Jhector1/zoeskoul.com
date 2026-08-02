@@ -60,7 +60,7 @@ function persistCompatibility(preferences: AppPreferences): void {
     "--app-font-size",
     `${preferences.fontSizePx}px`,
   );
-  document.documentElement.style.fontSize = `${preferences.fontSizePx}px`;
+
   document.cookie =
     `NEXT_LOCALE=${preferences.locale}; Path=/; Max-Age=31536000; SameSite=Lax`;
 }

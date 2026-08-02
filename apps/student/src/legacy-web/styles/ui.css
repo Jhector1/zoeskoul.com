@@ -1,5 +1,5 @@
 /* modular UI tokens */
-@import "./ui/colors.css";
+@import "../../../../../packages/ui-styles/colors.css";
 @import "./ui/palette.css";
 
 @import "./ui/layout.css";
@@ -17,10 +17,9 @@
 @import "./ui/codeRunner.css";
 @import "./ui/reviewModuleSkeleton.css";
 @import "./ui/tooltip.css";
-@import "./ui/ui-v2.css";
+@import "../../../../../packages/ui-styles/ui-v2.css";
 
 @layer base {
-    html { font-size: var(--app-font-size, 16px); }
 
     :root {
         --app-bg: #ffffff;
