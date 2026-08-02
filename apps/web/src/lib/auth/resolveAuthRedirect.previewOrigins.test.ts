@@ -17,7 +17,7 @@ afterEach(() => {
 describe("configured preview auth redirects", () => {
   it("preserves the exact Student preview deep link", () => {
     vi.stubEnv(
-      "NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS",
+      "NEXT_PUBLIC_STUDENT_APP_ORIGIN",
       "https://student-preview.zoeskoul.com",
     );
 
@@ -38,7 +38,7 @@ describe("configured preview auth redirects", () => {
 
   it("rejects a lookalike callback origin", () => {
     vi.stubEnv(
-      "NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS",
+      "NEXT_PUBLIC_STUDENT_APP_ORIGIN",
       "https://student-preview.zoeskoul.com",
     );
 

@@ -35,12 +35,101 @@ export const browserAppIds = [
 
 export type ZoeSkoulBrowserAppId = (typeof browserAppIds)[number];
 
+export type ZoeSkoulDeploymentEnvironment =
+  | "development"
+  | "test"
+  | "preview"
+  | "production";
+
 export function getLocalAppOrigin(appId: ZoeSkoulAppId): string {
   return `http://localhost:${zoeSkoulApps[appId].localPort}`;
 }
 
 export function getProductionAppOrigin(appId: ZoeSkoulAppId): string {
   return zoeSkoulApps[appId].productionOrigin;
+}
+
+export function normalizeConfiguredAppOrigin(
+  value: string | null | undefined,
+): string | null {
+  const candidate = value?.trim();
+
+  if (!candidate) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(candidate);
+
+    if (
+      (parsed.protocol !== "http:" && parsed.protocol !== "https:") ||
+      parsed.username ||
+      parsed.password ||
+      parsed.pathname !== "/" ||
+      parsed.search ||
+      parsed.hash
+    ) {
+      return null;
+    }
+
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
+function isLocalBrowserOrigin(
+  value: string | null | undefined,
+): boolean {
+  const origin = normalizeConfiguredAppOrigin(value);
+
+  if (!origin) {
+    return false;
+  }
+
+  const hostname = new URL(origin).hostname;
+
+  return hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname === "[::1]";
+}
+
+/**
+ * Resolves a browser application's deployment origin without allowing a
+ * preview build to silently escape to a canonical production application.
+ * A null result deliberately means that preview deployment configuration is
+ * missing or invalid and the caller must fail closed on its current origin.
+ */
+export function resolveAppOrigin(args: {
+  appId: ZoeSkoulAppId;
+  configuredOrigin?: string | null;
+  currentOrigin?: string | null;
+  deploymentEnvironment: ZoeSkoulDeploymentEnvironment;
+}): string | null {
+  const configuredOrigin = normalizeConfiguredAppOrigin(
+    args.configuredOrigin,
+  );
+
+  if (configuredOrigin) {
+    return configuredOrigin;
+  }
+
+  if (isLocalBrowserOrigin(args.currentOrigin)) {
+    return getLocalAppOrigin(args.appId);
+  }
+
+  if (
+    args.deploymentEnvironment === "development" ||
+    args.deploymentEnvironment === "test"
+  ) {
+    return getLocalAppOrigin(args.appId);
+  }
+
+  if (args.deploymentEnvironment === "production") {
+    return getProductionAppOrigin(args.appId);
+  }
+
+  return null;
 }
 
 export function getTrustedBrowserAppOrigins(args?: {
@@ -372,14 +461,19 @@ export function buildLocalizedAppUrl(args: {
   pathname: string;
   locale?: string;
 }) {
-  const origin =
-    args.origin.replace(/\/+$/, "");
+  const origin = normalizeConfiguredAppOrigin(
+    args.origin,
+  );
 
-  return (
-    origin +
+  if (!origin) {
+    throw new TypeError("A valid application origin is required.");
+  }
+
+  return new URL(
     localizedRoutePath({
       pathname: args.pathname,
       locale: args.locale,
-    })
-  );
+    }),
+    origin,
+  ).toString();
 }

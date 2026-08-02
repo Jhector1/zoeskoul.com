@@ -1,12 +1,19 @@
 import {
+  afterEach,
   describe,
   expect,
   it,
+  vi,
 } from "vitest";
 
 import {
+  getConfiguredBrowserOrigins,
   parseConfiguredBrowserOrigins,
 } from "./configuredBrowserOrigins";
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
 
 describe("configured browser origins", () => {
   it("normalizes and deduplicates exact secure origins", () => {
@@ -43,5 +50,16 @@ describe("configured browser origins", () => {
         ),
       ),
     ).toEqual([]);
+  });
+
+  it("trusts the configured Student preview origin without another variable", () => {
+    vi.stubEnv(
+      "NEXT_PUBLIC_STUDENT_APP_ORIGIN",
+      "https://student-preview.example/",
+    );
+
+    expect(Array.from(getConfiguredBrowserOrigins())).toContain(
+      "https://student-preview.example",
+    );
   });
 });
