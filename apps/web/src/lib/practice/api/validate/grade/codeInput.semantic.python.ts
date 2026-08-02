@@ -14,6 +14,12 @@ import {
     buildPythonSemanticHarness,
     parseSemanticHarnessResult,
 } from "@zoeskoul/practice-checks";
+import {
+    isRunnerInfrastructureFailure,
+} from "@zoeskoul/curriculum-runtime";
+import {
+    createRunnerUnavailableGradeResult,
+} from "./infrastructureFailure";
 
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
@@ -277,23 +283,37 @@ async function runSemanticHarness(args: {
     showDebug: boolean;
 }): Promise<GradeResult | null> {
     const currentFiles = filesWithCurrentEntry(args);
-    const run = await runCode({
-        language: "python",
-        ...(args.entry && currentFiles?.length
-            ? {
-                  entry: args.entry,
-                  files: replaceEntryFileContent({
+    let run: Awaited<ReturnType<typeof runCode>>;
+
+    try {
+        run = await runCode({
+            language: "python",
+            ...(args.entry && currentFiles?.length
+                ? {
                       entry: args.entry,
-                      files: currentFiles,
-                      content: args.harness,
+                      files: replaceEntryFileContent({
+                          entry: args.entry,
+                          files: currentFiles,
+                          content: args.harness,
+                      }),
+                  }
+                : {
+                      code: args.harness,
                   }),
-              }
-            : {
-                  code: args.harness,
-              }),
-        stdin: "",
-        limits: DEFAULT_LIMITS,
-    } as any);
+            stdin: "",
+            limits: DEFAULT_LIMITS,
+        } as any);
+    } catch (error) {
+        if (isRunnerInfrastructureFailure(error)) {
+            return createRunnerUnavailableGradeResult(error);
+        }
+
+        throw error;
+    }
+
+    if (!run?.ok && isRunnerInfrastructureFailure(run)) {
+        return createRunnerUnavailableGradeResult(run);
+    }
 
     if (!run?.ok) {
         return {

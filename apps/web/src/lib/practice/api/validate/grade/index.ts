@@ -15,11 +15,15 @@ import { gradeVoiceInput } from "./voiceInput";
 import { gradeSentenceBuild } from "@/lib/practice/api/validate/grade/sentenceBuild";
 import { gradeFillBlankChoice } from "@/lib/practice/api/validate/grade/fillBlankChoice";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
+import type {
+  GradeInfrastructureFailure,
+} from "./infrastructureFailure";
 
 export type GradeResult = {
   ok: boolean;
   explanation: string;
   feedback?: CodeFeedback | null;
+  infrastructureFailure?: GradeInfrastructureFailure;
 };
 
 export async function gradeInstance(args: {

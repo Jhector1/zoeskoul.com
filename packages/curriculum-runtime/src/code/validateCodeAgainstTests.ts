@@ -1,6 +1,7 @@
 import { runLocalCode } from "./localRunner.js";
 import {
     getCodeRunner,
+    isRunnerInfrastructureFailure,
     normalizeRunCodeFiles,
     type RunCodeFile,
     type RunCodeFiles,
@@ -99,12 +100,9 @@ export async function validateCodeAgainstTests(args: {
         if (!run.ok) {
             return {
                 ok: false,
-                reason:
-                    run.error?.includes(
-                        "No local compiler-side runner is implemented",
-                    ) || run.error?.includes("Missing Judge0")
-                        ? "runner_unavailable"
-                        : "execution_failed",
+                reason: isRunnerInfrastructureFailure(run)
+                    ? "runner_unavailable"
+                    : "execution_failed",
                 testIndex: index,
                 message:
                     run.error ??

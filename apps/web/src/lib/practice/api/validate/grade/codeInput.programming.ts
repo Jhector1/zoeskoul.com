@@ -14,6 +14,9 @@ import {
     validateCodeAgainstTests,
 } from "@zoeskoul/curriculum-runtime";
 import { applyTerminalWorkspaceHintsToPathSets } from "@/lib/practice/terminalWorkspaceHints";
+import {
+    createRunnerUnavailableGradeResult,
+} from "./infrastructureFailure";
 
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
@@ -1267,22 +1270,9 @@ export async function gradeProgrammingCodeInput(args: {
     const sharedRunner = createJudge0CodeRunnerFromEnv();
 
     if (!sharedRunner) {
-        const feedback = classifyProgrammingRunFailure(
-            language,
-            {
-                ok: false,
-                status: "Error",
-                error: "Missing JUDGE0_URL env var.",
-            } as any,
-            "check",
-            code,
+        return createRunnerUnavailableGradeResult(
+            "Missing JUDGE0_URL env var.",
         );
-
-        return {
-            ok: false,
-            explanation: feedback.message,
-            feedback: showDebug ? feedback : { ...feedback, raw: null },
-        };
     }
 
     const run = await validateCodeAgainstTests({
@@ -1299,6 +1289,10 @@ export async function gradeProgrammingCodeInput(args: {
         maxTests: 12,
         runner: sharedRunner,
     });
+
+    if (!run.ok && run.reason === "runner_unavailable") {
+        return createRunnerUnavailableGradeResult(run.message);
+    }
 
     if (run.ok) {
         if (!semanticFirst) {
