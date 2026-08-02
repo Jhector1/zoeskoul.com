@@ -139,3 +139,15 @@ export {
   type LessonNavigationTopic,
   type LessonPosition,
 } from "./lessonNavigation";
+
+export {
+  hasCheckableReviewPracticeInput,
+  type ReviewPracticeSubmitInputState,
+} from "./reviewPracticeSubmitAvailability";
+
+export {
+  resolveReviewPracticeQuestionCompleted,
+  type ReviewPracticeCompletionScope,
+  shouldBlockReviewPracticeQuestionAction,
+  type ReviewPracticeQuestionActionState,
+} from "./reviewPracticeCompletionScope";

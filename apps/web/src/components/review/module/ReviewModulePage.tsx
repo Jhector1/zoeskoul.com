@@ -20,6 +20,9 @@ import CelebrationLayer from "./components/celebration/CelebrationLayer";
 
 import ReviewResetDialog from "./components/overlays/ReviewResetDialog";
 import ReviewModuleNavBar from "@/components/review/ReviewModuleNavBar";
+import {
+    ReviewDestinationTransitionProvider,
+} from "./navigation/ReviewDestinationTransitionContext";
 
 export default function ReviewModulePage(props: ReviewModulePageProps) {
     const vm = useReviewModuleController(props);
@@ -70,16 +73,20 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
     );
 
     return (
-        <ReviewToolsProvider
-            enabled={vm.toolsProvider.enabled}
-            mode="manual"
-            resetKey={vm.toolsProvider.resetKey}
-            externalBoundId={vm.toolsProvider.externalBoundId}
-            ensureVisible={vm.toolsProvider.ensureVisible}
-            onBindToToolsPanel={vm.toolsProvider.onBindToToolsPanel}
-            onUnbindFromToolsPanel={vm.toolsProvider.onUnbindFromToolsPanel}
+        <ReviewDestinationTransitionProvider
+            value={vm.destinationTransition}
         >
-            {page}
-        </ReviewToolsProvider>
+            <ReviewToolsProvider
+                enabled={vm.toolsProvider.enabled}
+                mode="manual"
+                resetKey={vm.toolsProvider.resetKey}
+                externalBoundId={vm.toolsProvider.externalBoundId}
+                ensureVisible={vm.toolsProvider.ensureVisible}
+                onBindToToolsPanel={vm.toolsProvider.onBindToToolsPanel}
+                onUnbindFromToolsPanel={vm.toolsProvider.onUnbindFromToolsPanel}
+            >
+                {page}
+            </ReviewToolsProvider>
+        </ReviewDestinationTransitionProvider>
     );
 }

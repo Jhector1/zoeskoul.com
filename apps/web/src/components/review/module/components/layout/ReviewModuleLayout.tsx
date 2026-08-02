@@ -115,6 +115,7 @@ export default function ReviewModuleLayout({
 
                 <ReviewSkeletonSwap
                     showSkeleton={showSkeleton}
+                    holdContent={isNavigating}
                     reduceMotion={reduceMotion}
                     leftCollapsed={leftCollapsed}
                     rightCollapsed={rightCollapsed}

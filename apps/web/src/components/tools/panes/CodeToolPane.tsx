@@ -48,6 +48,9 @@ import {
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 import { compactTerminalIdentityKey } from "@/components/code/runner/terminalIdentity";
+import {
+    useOptionalReviewDestinationTransition,
+} from "@/components/review/module/navigation/ReviewDestinationTransitionContext";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -1375,6 +1378,8 @@ export default function CodeToolPane(props: {
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 }) {
     const t = useTranslations("ide.tools.pane");
+    const destinationTransition =
+        useOptionalReviewDestinationTransition();
     const {
         toolScopeKey,
         editorOwnerKey,
@@ -2091,6 +2096,43 @@ export default function CodeToolPane(props: {
         !runtimeWorkspaceError &&
         !canRenderEditor &&
         shouldWaitForWorkspace;
+    const coordinatedEditorLoading = Boolean(
+        destinationTransition?.showEditorLoading,
+    );
+    const destinationEditorReady = Boolean(
+        destinationTransition?.destinationPublished &&
+        canRenderEditor &&
+        ideReady &&
+        toolHydrated &&
+        !pendingExerciseBinding &&
+        resolvedEditorOwnerKey ===
+            destinationTransition.expectedExerciseOwnerKey &&
+        runtimeResetRevision ===
+            destinationTransition.expectedGeneration,
+    );
+
+    useEffect(() => {
+        const destinationIdentity =
+            destinationTransition?.destinationIdentity;
+        if (
+            !destinationIdentity ||
+            !destinationTransition.destinationPublished
+        ) {
+            return;
+        }
+
+        destinationTransition.reportEditorReady({
+            destinationIdentity,
+            ownerKey: resolvedEditorOwnerKey,
+            generation: runtimeResetRevision,
+            ready: destinationEditorReady,
+        });
+    }, [
+        destinationEditorReady,
+        destinationTransition,
+        resolvedEditorOwnerKey,
+        runtimeResetRevision,
+    ]);
 
     const showWorkspaceError =
         runtimeWorkspaceError &&
@@ -3149,7 +3191,7 @@ export default function CodeToolPane(props: {
                         loginHref="/authenticate"
                         billingHref="/billing"
                         draftStorageMode={draftStorageMode}
-                        readOnly={readOnly}
+                        readOnly={readOnly || coordinatedEditorLoading}
                         servicePreset={ideShell.servicePreset}
                         forceDesktopLayout={paneIdeMode.forceDesktopLayout}
                         services={{
@@ -3194,6 +3236,19 @@ export default function CodeToolPane(props: {
                         sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                         onTerminalEvidenceChange={handleTerminalEvidenceChange}
                     />
+                ) : null}
+
+                {coordinatedEditorLoading ? (
+                    <div
+                        className="absolute inset-0 z-30 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm"
+                        data-testid="review-editor-transition-loading"
+                        aria-live="polite"
+                    >
+                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
+                            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
+                            {t("loadingEditor")}
+                        </div>
+                    </div>
                 ) : null}
 
                 {pendingExerciseBinding && !canRenderEditor ? (

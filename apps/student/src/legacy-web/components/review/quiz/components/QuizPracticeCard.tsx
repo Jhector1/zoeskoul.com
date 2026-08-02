@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  hasCheckableReviewPracticeInput,
+} from "@zoeskoul/learning-runtime";
 import { preserveLearnerFacingExerciseCopy } from "../../../../../compat/learnerFacingExerciseCopy";
 
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
@@ -1563,6 +1566,13 @@ export default function QuizPracticeCard(props: {
     return !isEmptyPracticeAnswer(ex, answerItemForReadiness, padRef?.current);
   }, [ex, answerItemForReadiness, padRef, runtimeExerciseCode]);
 
+  const hasSubmitInput = hasCheckableReviewPracticeInput({
+    hasRenderedInput: hasInput,
+    toolsActive: Boolean(toolsActive),
+    toolsAvailable: Boolean(toolsAny),
+    isCodeExercise: ex?.kind === "code_input",
+  });
+
   const isCodeExerciseWithInput = ex?.kind === "code_input" && hasInput;
   const compactLearnerUi = learnerUiFlags.compactLearnerUi;
 
@@ -1831,7 +1841,7 @@ export default function QuizPracticeCard(props: {
       excused ||
       (ps?.busy ?? false) ||
       isFinalized ||
-      !hasInput;
+      !hasSubmitInput;
 
   const disableHelpAction =
       readOnly ||

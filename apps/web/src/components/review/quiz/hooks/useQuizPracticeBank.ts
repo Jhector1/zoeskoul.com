@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  shouldBlockReviewPracticeQuestionAction,
+} from "@zoeskoul/learning-runtime";
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo} from "react";
 import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
 import type { VectorPadState } from "@/components/vectorpad/types";
@@ -36,6 +39,10 @@ import { buildReviewPracticeRevealCompletionPatch } from "@/components/review/qu
 import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
+type ReviewPracticeQuestionActionOptions = {
+  isQuestionCompleted: boolean;
+};
+
 export type PracticeState = PracticeItemState & {
   exerciseKey?: string;
   topicId?: string;
@@ -2101,8 +2108,17 @@ export function useQuizPracticeBank(args: {
   );
 
   const submitPractice = useCallback(
-      async (q: Extract<ReviewQuestion, { kind: "practice" }>) => {
-        if (isCompleted || locked) return;
+      async (q: Extract<ReviewQuestion, { kind: "practice" }>, actionOptions?: ReviewPracticeQuestionActionOptions) => {
+        if (
+          shouldBlockReviewPracticeQuestionAction({
+            locked,
+            questionCompleted: Boolean(
+              actionOptions?.isQuestionCompleted,
+            ),
+          })
+        ) {
+          return;
+        }
 
         const key = getStablePracticeQuestionKey(q);
         let ps = practice[key] ?? practice[q.id];
@@ -2301,9 +2317,17 @@ export function useQuizPracticeBank(args: {
   const openPracticeHelp = useCallback(
       async (
           q: Extract<ReviewQuestion, { kind: "practice" }>,
-          explicitStepKey?: string,
-      ) => {
-        if (isCompleted || locked) return;
+          explicitStepKey?: string, actionOptions?: ReviewPracticeQuestionActionOptions) => {
+        if (
+          shouldBlockReviewPracticeQuestionAction({
+            locked,
+            questionCompleted: Boolean(
+              actionOptions?.isQuestionCompleted,
+            ),
+          })
+        ) {
+          return;
+        }
 
         const key = getStablePracticeQuestionKey(q);
         const ps = visiblePractice[key] ?? visiblePractice[q.id];

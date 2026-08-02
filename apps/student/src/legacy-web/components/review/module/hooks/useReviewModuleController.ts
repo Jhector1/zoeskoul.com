@@ -1,4 +1,8 @@
-import { isReviewRouteTransitionReady } from "../navigation/reviewRouteTransition";
+import {
+    isReviewRouteTransitionReady,
+    resolveReviewDestinationTransitionPresentation,
+    resolveReviewTransitionLabel,
+} from "../navigation/reviewRouteTransition";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
 import {useRouter} from "@/i18n/navigation";
@@ -496,8 +500,17 @@ export function useReviewModuleController({
 
     const [isRouteTransitioning, setIsRouteTransitioning] = useState(false);
     const routeTransitionHrefRef = useRef<string | null>(null);
+    const routeTransitionRevealedHrefRef = useRef<string | null>(null);
     const routeTransitionFrameRef = useRef<number | null>(null);
     const routeTransitionRevisionRef = useRef(0);
+    const [routeTransitionExerciseReady, setRouteTransitionExerciseReady] =
+        useState<{ identity: string; ownerKey: string | null } | null>(null);
+    const [routeTransitionEditorReady, setRouteTransitionEditorReady] =
+        useState<{
+            identity: string;
+            ownerKey: string | null;
+            generation: number;
+        } | null>(null);
 
     const clearRouteTransitionFrame = useCallback(() => {
         if (
@@ -509,12 +522,42 @@ export function useReviewModuleController({
         routeTransitionFrameRef.current = null;
     }, []);
 
+    /**
+     * Start at most one visible transition for a destination.
+     *
+     * Tool registration can publish the same route several times while Monaco
+     * and the exercise registry reconcile. Those same-href publications may
+     * update route ownership, but they must never reopen the page mask after
+     * that destination has already been revealed.
+     */
     const beginRouteTransition = useCallback(
         (href: string | null = null) => {
+            if (!href) return false;
+
+            const browserHref =
+                typeof window === "undefined"
+                    ? null
+                    : `${window.location.pathname}${window.location.search}`;
+
+            if (routeTransitionHrefRef.current === href) {
+                return false;
+            }
+
+            if (
+                routeTransitionRevealedHrefRef.current === href &&
+                browserHref === href
+            ) {
+                return false;
+            }
+
             clearRouteTransitionFrame();
             routeTransitionRevisionRef.current += 1;
             routeTransitionHrefRef.current = href;
+            routeTransitionRevealedHrefRef.current = null;
+            setRouteTransitionExerciseReady(null);
+            setRouteTransitionEditorReady(null);
             setIsRouteTransitioning(true);
+            return true;
         },
         [clearRouteTransitionFrame],
     );
@@ -523,13 +566,67 @@ export function useReviewModuleController({
         clearRouteTransitionFrame();
         routeTransitionRevisionRef.current += 1;
         routeTransitionHrefRef.current = null;
+        setRouteTransitionExerciseReady(null);
+        setRouteTransitionEditorReady(null);
         setIsRouteTransitioning(false);
     }, [clearRouteTransitionFrame]);
+
+    const reportTransitionExerciseReady = useCallback(
+        (args: {
+            destinationIdentity: string;
+            ownerKey: string | null;
+            ready: boolean;
+        }) => {
+            if (routeTransitionHrefRef.current !== args.destinationIdentity) return;
+            setRouteTransitionExerciseReady((current) => {
+                if (!args.ready) return current === null ? current : null;
+                if (
+                    current?.identity === args.destinationIdentity &&
+                    current.ownerKey === args.ownerKey
+                ) {
+                    return current;
+                }
+                return {
+                    identity: args.destinationIdentity,
+                    ownerKey: args.ownerKey,
+                };
+            });
+        },
+        [],
+    );
+
+    const reportTransitionEditorReady = useCallback(
+        (args: {
+            destinationIdentity: string;
+            ownerKey: string | null;
+            generation: number;
+            ready: boolean;
+        }) => {
+            if (routeTransitionHrefRef.current !== args.destinationIdentity) return;
+            setRouteTransitionEditorReady((current) => {
+                if (!args.ready) return current === null ? current : null;
+                if (
+                    current?.identity === args.destinationIdentity &&
+                    current.ownerKey === args.ownerKey &&
+                    current.generation === args.generation
+                ) {
+                    return current;
+                }
+                return {
+                    identity: args.destinationIdentity,
+                    ownerKey: args.ownerKey,
+                    generation: args.generation,
+                };
+            });
+        },
+        [],
+    );
 
     useEffect(() => {
         return () => {
             clearRouteTransitionFrame();
             routeTransitionHrefRef.current = null;
+            routeTransitionRevealedHrefRef.current = null;
         };
     }, [clearRouteTransitionFrame]);
 
@@ -1102,7 +1199,8 @@ export function useReviewModuleController({
              * Freeze the current visible route while its latest workspace and
              * progress state settle. Publish the destination only afterward.
              */
-            beginRouteTransition(href);
+            const transitionStarted =
+                beginRouteTransition(href);
 
             try {
                 await flushAll();
@@ -1125,7 +1223,9 @@ export function useReviewModuleController({
                     }
                 }
             } catch (error) {
-                cancelRouteTransition();
+                if (transitionStarted) {
+                    cancelRouteTransition();
+                }
                 throw error;
             }
         },
@@ -1201,7 +1301,6 @@ export function useReviewModuleController({
     });
 
     const reduceMotion = useReduceMotion();
-    const [showMask, setShowMask] = useState(false);
 
     const maxUnlockedCardIndex = useMemo(
         () =>
@@ -1247,18 +1346,6 @@ export function useReviewModuleController({
         viewCards,
         viewTid,
     ]);
-
-    useEffect(() => {
-        if (reduceMotion) return;
-        if (showSkeleton) {
-            setShowMask(false);
-            return;
-        }
-
-        setShowMask(true);
-        const t = window.setTimeout(() => setShowMask(false), 420);
-        return () => window.clearTimeout(t);
-    }, [showSkeleton, reduceMotion]);
 
     const topicMotionKey = useMemo(() => {
         const viewProg: any = (progress as any)?.topics?.[viewTid] ?? {};
@@ -2579,6 +2666,56 @@ export function useReviewModuleController({
         !runtimeBindingMatchesExpectedExercise &&
         !boundExerciseMatchesActiveCard,
     );
+    const pendingTransitionHref = routeTransitionHrefRef.current;
+    const currentTransitionHref = routeTarget
+        ? buildRoutePathForCurrentSurface(routeTarget)
+        : null;
+    const browserTransitionHref =
+        typeof window === "undefined"
+            ? null
+            : `${window.location.pathname}${window.location.search}`;
+    const destinationPublished = Boolean(
+        pendingTransitionHref &&
+        currentTransitionHref === pendingTransitionHref &&
+        (
+            browserTransitionHref === null ||
+            browserTransitionHref === pendingTransitionHref
+        ),
+    );
+    const transitionExerciseReady = Boolean(
+        !hasExpectedExerciseSurface ||
+        (
+            routeTransitionExerciseReady?.identity === pendingTransitionHref &&
+            destinationPublished
+        ),
+    );
+    const transitionEditorReady = Boolean(
+        !hasExpectedExerciseSurface ||
+        (
+            routeTransitionEditorReady?.identity === pendingTransitionHref &&
+            routeTransitionEditorReady?.ownerKey === expectedExerciseBindingKey &&
+            routeTransitionEditorReady?.generation === store.resetRevision &&
+            destinationPublished
+        ),
+    );
+    const destinationReady = isReviewRouteTransitionReady({
+        pendingHref: pendingTransitionHref,
+        currentHref: currentTransitionHref,
+        browserHref: browserTransitionHref,
+        progressHydrated,
+        hasExpectedExerciseSurface,
+        pendingExerciseBinding,
+        toolHydrated: tool.toolHydrated,
+        exerciseReady: transitionExerciseReady,
+        editorReady: transitionEditorReady,
+    });
+    const destinationTransitionPresentation =
+        resolveReviewDestinationTransitionPresentation({
+            isTransitioning: isRouteTransitioning,
+            destinationIdentity: pendingTransitionHref,
+            destinationPublished,
+            destinationReady,
+        });
 
     useEffect(() => {
         if (!isRouteTransitioning) return;
@@ -2598,11 +2735,11 @@ export function useReviewModuleController({
                 currentHref,
                 browserHref,
                 progressHydrated,
-                showSkeleton,
-                saveStatus,
                 hasExpectedExerciseSurface,
                 pendingExerciseBinding,
                 toolHydrated: tool.toolHydrated,
+                exerciseReady: transitionExerciseReady,
+                editorReady: transitionEditorReady,
             })
         ) {
             return;
@@ -2643,6 +2780,8 @@ export function useReviewModuleController({
                 return;
             }
 
+            routeTransitionRevealedHrefRef.current =
+                pendingHref;
             routeTransitionHrefRef.current = null;
             routeTransitionFrameRef.current = null;
             setIsRouteTransitioning(false);
@@ -2673,9 +2812,9 @@ export function useReviewModuleController({
         isRouteTransitioning,
         pendingExerciseBinding,
         progressHydrated,
+        transitionEditorReady,
+        transitionExerciseReady,
         routeTarget,
-        saveStatus,
-        showSkeleton,
         tool.toolHydrated,
     ]);
 
@@ -2704,13 +2843,25 @@ export function useReviewModuleController({
     return {
         toolsProvider,
 
+        destinationTransition: {
+            ...destinationTransitionPresentation,
+            expectedExerciseOwnerKey: expectedExerciseBindingKey,
+            expectedGeneration: store.resetRevision,
+            reportExerciseReady: reportTransitionExerciseReady,
+            reportEditorReady: reportTransitionEditorReady,
+        },
+
         layout: {
             ariaBusy: showSkeleton || isRouteTransitioning || isModuleContinuePending,
             reduceMotion,
-            showMask: showMask || isRouteTransitioning,
+            showMask: false,
             showSkeleton,
             isNavigating: isRouteTransitioning || isModuleContinuePending,
-            navigationLabel: saveStatus === "saving" ? "Saving progress..." : "Loading...",
+            navigationLabel: resolveReviewTransitionLabel({
+                isRouteTransitioning,
+                isModuleContinuePending,
+                saveStatus,
+            }),
             leftCollapsed: panels.leftCollapsedEff,
             rightCollapsed: panels.rightCollapsedEff,
             leftW: panels.leftW,

@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  resolveReviewPracticeQuestionCompleted,
+} from "@zoeskoul/learning-runtime";
 import React, {
   useEffect,
   useLayoutEffect,
@@ -29,6 +32,7 @@ import {
 
 import QuizPracticeCard from "./quiz/components/QuizPracticeCard";
 import QuizLocalCard from "./quiz/components/QuizLocalCard";
+import ReviewExerciseTransitionBoundary from "./quiz/components/ReviewExerciseTransitionBoundary";
 import QuizFooter from "./quiz/components/QuizFooter";
 import { emitSfx } from "@/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
@@ -2000,6 +2004,25 @@ export default function QuizBlock({
   function renderQuestionItem(q: ReviewQuestion, idx: number) {
     const unlocked = isUnlocked(idx);
     const stablePracticeKey = getStablePracticeQuestionKey(q);
+    const practiceState =
+      q.kind === "practice"
+        ? practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]
+        : undefined;
+    const transitionQuestionReady =
+      q.kind !== "practice" ||
+      Boolean(
+        practiceState &&
+        !practiceState.loading &&
+        !practiceState.error &&
+        practiceState.exercise &&
+        practiceState.item &&
+        (
+          readOnly ||
+          String(
+            (practiceState.item as { key?: unknown })?.key ?? "",
+          ).trim()
+        ),
+      );
 
     /**
      * Important:
@@ -2048,12 +2071,17 @@ export default function QuizBlock({
             ref={setQuestionEl(q.id)}
             data-qid={q.id}
         >
+          <ReviewExerciseTransitionBoundary
+              active={idx === activeIndex}
+              ready={transitionQuestionReady}
+              ownerKey={q.kind === "practice" ? stablePracticeKey : q.id}
+          >
           {q.kind === "practice" ? (
               <QuizPracticeCard
                   q={q}
                   ownerCardId={quizCardId ?? quizId}
                   projectStepManifest={projectStepManifest}
-                  ps={practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]}
+                  ps={practiceState}
                   toolScopedId={stablePracticeKey}
                   toolsActive={canAutoBindToolsForExercise}
                   subjectRuntimeDefaults={practiceRuntimeDefaults.subjectRuntimeDefaults}
@@ -2062,7 +2090,10 @@ export default function QuizBlock({
                   sectionRuntimeDefaults={practiceRuntimeDefaults.sectionRuntimeDefaults}
                   topicRuntimeDefaults={practiceRuntimeDefaults.topicRuntimeDefaults}
                   unlocked={unlocked}
-                  isCompleted={isCompleted}
+                  isCompleted={resolveReviewPracticeQuestionCompleted({
+                      parentCompleted: isCompleted,
+                      questionFlowDone: isFlowDone(q),
+                  })}
                   locked={locked}
                   readOnly={readOnly}
                   unlimitedAttempts={unlimitedAttempts}
@@ -2134,16 +2165,30 @@ export default function QuizBlock({
                     if (readOnly) return;
                     practiceBank.updatePracticeItem(stablePracticeKey, patch);
                   }}
-                  onSubmit={() => {
+                  onSubmit={async () => {
                     if (readOnly) return;
                     lastActionQidRef.current = q.id;
                     scheduleScroll(q.id, "end");
-                    void practiceBank.submitPractice(q);
+                    await practiceBank.submitPractice(q, {
+                      isQuestionCompleted: resolveReviewPracticeQuestionCompleted({
+                        parentCompleted: isCompleted,
+                        questionFlowDone: isFlowDone(q),
+                      }),
+                    });
                   }}
-                  onHelp={(stepKey) => {
+                  onHelp={async (stepKey) => {
                     if (readOnly) return;
                     scheduleScroll(q.id, "end");
-                    void practiceBank.openPracticeHelp(q, stepKey);
+                    await practiceBank.openPracticeHelp(
+                      q,
+                      stepKey,
+                      {
+                        isQuestionCompleted: resolveReviewPracticeQuestionCompleted({
+                        parentCompleted: isCompleted,
+                        questionFlowDone: isFlowDone(q),
+                      }),
+                      },
+                    );
                   }}
               />
           ) : (
@@ -2175,6 +2220,7 @@ export default function QuizBlock({
                   }}
               />
           )}
+          </ReviewExerciseTransitionBoundary>
 
           {showNext && !compactModeActive ? (
               <div className="mt-2 flex justify-end">

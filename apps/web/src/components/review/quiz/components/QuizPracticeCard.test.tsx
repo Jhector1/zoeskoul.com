@@ -1538,3 +1538,127 @@ describe("applyPracticeWorkspaceHydration", () => {
     });
 
 });
+
+describe("QuizPracticeCard Tools submission availability", () => {
+    function submitButtonOpeningTag(html: string) {
+        const testId =
+            'data-testid="review-practice-submit-button"';
+        const testIdIndex = html.indexOf(testId);
+        expect(testIdIndex).toBeGreaterThanOrEqual(0);
+
+        const buttonStart = html.lastIndexOf(
+            "<button",
+            testIdIndex,
+        );
+        const buttonEnd = html.indexOf(
+            ">",
+            testIdIndex,
+        );
+
+        expect(buttonStart).toBeGreaterThanOrEqual(0);
+        expect(buttonEnd).toBeGreaterThan(buttonStart);
+
+        return html.slice(buttonStart, buttonEnd + 1);
+    }
+
+    it("does not trap a visible Tools code exercise behind stale hasInput", () => {
+        const exercise = makeCodeInputExercise({
+            id: "tools-stale-input-check",
+            title: "Check current editor",
+            prompt: "Write code in the Tools editor.",
+            starterCode: "",
+        } as any);
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-tools-stale-input-check",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python-v2",
+                        module: "python-v2-1",
+                        section: "variables",
+                        topic: "naming",
+                    },
+                } as any}
+                ownerCardId="card-tools-stale-input-check"
+                ps={makePracticeState({
+                    item: makeQItem({
+                        code: "",
+                        exercise,
+                    }),
+                    exercise,
+                })}
+                toolsActive
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        const button = submitButtonOpeningTag(html);
+
+        expect(button).not.toContain("disabled");
+        expect(html).toContain("Check this answer");
+        expect(html).toContain("Attempts: 0");
+    });
+
+    it("keeps an embedded blank code exercise disabled", () => {
+        const exercise = makeCodeInputExercise({
+            id: "embedded-blank-check",
+            title: "Embedded blank",
+            prompt: "Write code.",
+            starterCode: "",
+        } as any);
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-embedded-blank-check",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python-v2",
+                        module: "python-v2-1",
+                        section: "variables",
+                        topic: "naming",
+                    },
+                } as any}
+                ownerCardId="card-embedded-blank-check"
+                ps={makePracticeState({
+                    item: makeQItem({
+                        code: "",
+                        exercise,
+                    }),
+                    exercise,
+                })}
+                toolsActive={false}
+                codeSurfaceOverride="embedded"
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        const button = submitButtonOpeningTag(html);
+
+        expect(button).toContain("disabled");
+    });
+});
