@@ -9,19 +9,20 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
     "catalog": {
       "slug": "c",
       "order": 50,
-      "title": "C Programming",
-      "description": "A systems-programming path for implementing data structures, tracing pointer-based state, and analyzing efficient algorithms in C.",
+      "title": "C Programming, Data Structures, and Algorithms",
+      "description": "A cumulative C pathway from memory and pointers to data structures, runtime analysis, sorting, graphs, greedy algorithms, backtracking, and dynamic programming.",
       "imagePublicId": null,
-      "imageAlt": "C programming and data structures catalog cover",
-      "defaultSubjectSlug": "c-data-structures",
+      "imageAlt": "C programming, data structures, and algorithms catalog cover",
+      "defaultSubjectSlug": "c-runtime-analysis-asymptotics",
       "status": "active",
       "subjectSlugs": [
-        "c-data-structures",
-        "c-runtime-analysis-asymptotics"
+        "c-runtime-analysis-asymptotics",
+        "c-data-structures"
       ],
       "meta": {
         "family": "programming",
-        "featured": true
+        "featured": true,
+        "pathway": "c-data-structures-algorithms"
       }
     }
   },

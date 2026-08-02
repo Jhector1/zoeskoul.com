@@ -3,13 +3,13 @@
     "slug": "c",
     "order": 50,
     "title": "C Programming, Data Structures, and Algorithms",
-    "defaultSubjectSlug": "c",
+    "defaultSubjectSlug": "c-runtime-analysis-asymptotics",
     "description": "A cumulative C pathway from memory and pointers to data structures, runtime analysis, sorting, graphs, greedy algorithms, backtracking, and dynamic programming.",
     "imageAlt": "C programming, data structures, and algorithms catalog cover",
     "status": "active",
     "subjectSlugs": [
-      "c",
-      "c-data-structures-v1"
+      "c-runtime-analysis-asymptotics",
+      "c-data-structures"
     ],
     "meta": {
       "family": "programming",
@@ -18,10 +18,10 @@
     }
   },
   "subjectSlugs": [
-    "c",
-    "c-data-structures-v1"
+    "c-runtime-analysis-asymptotics",
+    "c-data-structures"
   ],
-  "defaultSubjectSlug": "c",
+  "defaultSubjectSlug": "c-runtime-analysis-asymptotics",
   "legacySubjectSlugs": [
     "c-data-structures-v1"
   ]
