@@ -1,6 +1,7 @@
 import {
   getAvailableVisibleCatalogsForActor,
 } from "@/lib/subjects/server/catalogVisibility";
+import { withResolvedCatalogImage } from "@/lib/subjects/catalogImagePresentation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -43,7 +44,7 @@ export async function GET(request: Request) {
       await getAvailableVisibleCatalogsForActor();
 
     return Response.json(
-      { catalogs },
+      { catalogs: catalogs.map(withResolvedCatalogImage) },
       { headers: corsHeaders(request) },
     );
   } catch (error) {

@@ -4,7 +4,6 @@ import {
 } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { ROUTES } from "@/utils";
 import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
 import type { SubjectCard } from "@/features/practice/ui/subject-picker/subjectCardTypes";
@@ -14,6 +13,7 @@ type Catalog = {
   title: string;
   description: string;
   imagePublicId: string | null;
+  imageUrl: string | null;
   imageAlt: string | null;
   defaultSubjectSlug: string | null;
   actorAccess: {
@@ -190,23 +190,9 @@ export function ExactCatalogsView(props: {
                 <article className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
                   <div className="flex min-w-0 gap-4">
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 dark:border-white/10 dark:bg-white/[0.06]">
-                      {catalog.imagePublicId ? (
+                      {catalog.imageUrl ? (
                         <Image
-                          src={
-                            cloudinaryImageUrl(
-                              catalog.imagePublicId,
-                              {
-                                w: 240,
-                                h: 240,
-                                crop: "fill",
-                                gravity: "auto",
-                                quality: "auto",
-                                format: "auto",
-                                dpr: "auto",
-                              },
-                            ) ??
-                            "/subjects/_default.png"
-                          }
+                          src={catalog.imageUrl}
                           alt={
                             catalog.imageAlt ??
                             catalog.title
