@@ -74,7 +74,6 @@ function applyBaseFontSize(px: number) {
 
   const next = clampFontPx(px);
   document.documentElement.style.setProperty("--app-font-size", `${next}px`);
-  document.documentElement.style.fontSize = `${next}px`;
 }
 
 function FontSizePicker(props: {

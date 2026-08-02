@@ -55,6 +55,7 @@ import {
     removePracticeEntryIntent,
 } from "@/lib/practice/entry";
 import { ONBOARDING_TRIAL_TARGET_COUNT } from "@/lib/practice/experience/defaults";
+import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
 
 type Choice = {
     label: string;
@@ -1502,7 +1503,10 @@ function SubjectGrid({
                 return (
                     <Link
                         key={subject.slug}
-                        href={`/${encodeURIComponent(locale)}/subjects/${subject.slug}/modules`}
+                        href={buildStudentAppHref({
+                            pathname: `/subjects/${subject.slug}/modules`,
+                            locale,
+                        })}
                         onClick={() => {
                             // The same endpoint enrolls a new learner and refreshes
                             // lastSeenAt for a current course. keepalive lets the
@@ -2339,7 +2343,10 @@ export default function HomePageAvatarOnboardingClient({
                                                     )}
 
                                                     <NavButton
-                                                        href={`/${encodeURIComponent(locale)}/catalogs`}
+                                                        href={buildStudentAppHref({
+                                                            pathname: "/catalogs",
+                                                            locale,
+                                                        })}
                                                         prefetch
                                                         className={cn(buttonClass("secondary"), "h-9 sm:w-auto")}
                                                     >
@@ -2458,7 +2465,10 @@ export default function HomePageAvatarOnboardingClient({
                                             </div>
 
                                             <Link
-                                                href={`/${encodeURIComponent(locale)}/catalogs`}
+                                                href={buildStudentAppHref({
+                                                            pathname: "/catalogs",
+                                                            locale,
+                                                        })}
                                                 className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)] transition-opacity hover:opacity-70"
                                             >
                                                 {t("recommended.viewAll")}

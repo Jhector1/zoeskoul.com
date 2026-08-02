@@ -31,8 +31,13 @@ import {
 import {
   useAppPreferences,
 } from "@zoeskoul/preferences/react";
+import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
 
-type NavItem = { href: string; label: string };
+type NavItem = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
 type HeaderSlotCtx = {
   locale: string;
@@ -41,6 +46,30 @@ type HeaderSlotCtx = {
   status: SessionStatus;
   user?: Session["user"];
 };
+
+function HeaderDestinationLink(props: {
+  href: string;
+  external?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  if (props.external) {
+    return (
+      <a href={props.href} className={props.className}>
+        {props.children}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={props.href as never}
+      className={props.className}
+    >
+      {props.children}
+    </Link>
+  );
+}
 
 function hardLogout(locale: string) {
   startGlobalNavigationPending({
@@ -70,7 +99,6 @@ function applyBaseFontSize(px: number) {
 
   const next = clampFontPx(px);
   document.documentElement.style.setProperty("--app-font-size", `${next}px`);
-  document.documentElement.style.fontSize = `${next}px`;
 }
 
 function FontSizePicker(props: {
@@ -289,15 +317,50 @@ export default function HeaderSlick({
 
   const slotNode = SlotComponent ? <SlotComponent {...slotCtx} /> : slot ?? null;
 
+  const studentHomeHref = buildStudentAppHref({
+    pathname: "/",
+    locale,
+  });
+
   const NAV: NavItem[] = useMemo(
       () => [
-        { href: ROUTES.home, label: t("home") },
-        { href: ROUTES.catalogs, label: t("catalogs") },
-        { href: ROUTES.myLearning, label: t("myLearning") },
-        { href: ROUTES.pricing, label: t("billing") },
-        { href: START_SESSION_HREF, label: t("startSession") },
+        {
+          href: isAuthed
+            ? studentHomeHref
+            : ROUTES.home,
+          label: t("home"),
+          external: isAuthed,
+        },
+        {
+          href: isAuthed
+            ? buildStudentAppHref({
+                pathname: ROUTES.catalogs,
+                locale,
+              })
+            : ROUTES.catalogs,
+          label: t("catalogs"),
+          external: isAuthed,
+        },
+        {
+          href: isAuthed
+            ? buildStudentAppHref({
+                pathname: ROUTES.myLearning,
+                locale,
+              })
+            : ROUTES.myLearning,
+          label: t("myLearning"),
+          external: isAuthed,
+        },
+        {
+          href: ROUTES.pricing,
+          label: t("billing"),
+        },
+        {
+          href: START_SESSION_HREF,
+          label: t("startSession"),
+        },
       ],
-      [t],
+      [isAuthed, locale, studentHomeHref, t],
   );
 
   const [open, setOpen] = useState(false);
@@ -340,7 +403,11 @@ export default function HeaderSlick({
           <div className="mx-auto px-4 md:px-6">
             <div className="flex h-16 min-w-0 items-center gap-2 sm:gap-3 lg:gap-4">
               <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-                <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+                <HeaderDestinationLink
+                  href={isAuthed ? studentHomeHref : ROUTES.home}
+                  external={isAuthed}
+                  className="group flex min-w-0 items-center gap-2.5"
+                >
                   <div className="ui-icon-box h-9 w-9 rounded-lg">
                   <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
                     L
@@ -363,7 +430,7 @@ export default function HeaderSlick({
                       {t("tagline")}
                     </div>
                   </div>
-                </Link>
+                </HeaderDestinationLink>
 
                 {headlineBadge && isBillingStatus ? (
                     <div className="hidden md:block">
@@ -405,12 +472,18 @@ export default function HeaderSlick({
                     <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
                       {NAV.map((n) => {
                         const isActive =
-                            n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href);
+                            !n.external &&
+                            (n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href));
 
                         return (
-                            <Link key={n.href} href={n.href} className={navLinkClass(Boolean(isActive))}>
+                            <HeaderDestinationLink
+                              key={n.href}
+                              href={n.href}
+                              external={n.external}
+                              className={navLinkClass(Boolean(isActive))}
+                            >
                               {n.label}
-                            </Link>
+                            </HeaderDestinationLink>
                         );
                       })}
                     </div>
@@ -504,14 +577,20 @@ export default function HeaderSlick({
                       {isNav
                           ? NAV.map((n) => {
                             const isActive =
-                                n.href === "/"
+                                !n.external &&
+                                (n.href === "/"
                                     ? pathname === "/"
-                                    : pathname?.startsWith(n.href);
+                                    : pathname?.startsWith(n.href));
 
                             return (
-                                <Link key={n.href} href={n.href} className={mobileItem(Boolean(isActive))}>
+                                <HeaderDestinationLink
+                                  key={n.href}
+                                  href={n.href}
+                                  external={n.external}
+                                  className={mobileItem(Boolean(isActive))}
+                                >
                                   {n.label}
-                                </Link>
+                                </HeaderDestinationLink>
                             );
                           })
                           : null}

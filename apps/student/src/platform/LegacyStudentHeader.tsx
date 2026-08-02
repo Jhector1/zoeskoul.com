@@ -72,7 +72,6 @@ function applyFontSize(value: number) {
     "--app-font-size",
     `${size}px`,
   );
-  document.documentElement.style.fontSize = `${size}px`;
 }
 
 function isInternalStudentHref(href: string): boolean {
