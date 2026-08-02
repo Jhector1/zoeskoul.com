@@ -6,6 +6,7 @@ import { getToken } from "next-auth/jwt";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { isCatalogLearningPath } from "@/lib/routing/protectedLearningPath";
+import { handleAppApiCorsBoundary } from "@/lib/http/appApiCorsBoundary";
 
 const handleI18n = createMiddleware(routing);
 
@@ -107,6 +108,11 @@ function redirectToAuthenticate(args: {
 export default async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
+  const apiCorsResponse = handleAppApiCorsBoundary(req);
+  if (apiCorsResponse) {
+    return apiCorsResponse;
+  }
+
   // 1) Collapse accidental double locale prefixes like /en/en/...
   const normalizedPath = collapseDuplicateLocalePath(pathname);
   if (normalizedPath) {
@@ -181,5 +187,8 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|favicon.ico|.*\\..*).*)"],
+  matcher: [
+    "/api/:path*",
+    "/((?!api|_next|favicon.ico|.*\\..*).*)",
+  ],
 };
