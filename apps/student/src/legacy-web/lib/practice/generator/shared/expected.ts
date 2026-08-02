@@ -1,5 +1,6 @@
 // src/lib/practice/generator/expected.ts
 import type { Exercise, ExerciseKind, Vec3 } from "../../types";
+import type { PseudocodeExpected } from "@zoeskoul/practice-checks";
 import { PracticePurpose } from "@zoeskoul/db";
 
 // Expected payloads (grading only)
@@ -33,6 +34,8 @@ export type ExpectedByKind = {
     targetDot: number;
     tolerance: number;
   };
+
+  pseudocode_input: PseudocodeExpected;
 
   code_input: {
     kind: "code_input";
