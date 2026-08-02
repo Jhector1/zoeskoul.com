@@ -1102,6 +1102,81 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 });
 
+
+describe("QuizPracticeCard runner outage visibility", () => {
+    it("shows a runner outage on a loaded project step without consuming the exercise", () => {
+        const exercise = makeCodeInputExercise({
+            id: "runner-outage-ex",
+            title: "Runner outage exercise",
+            prompt: "Write one line.",
+        });
+        const message =
+            "The code runner is temporarily unavailable. Try again in a moment.";
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-runner-outage-project-step",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                        exerciseKey: "runner-outage-ex",
+                    },
+                } as Parameters<typeof QuizPracticeCard>[0]["q"]}
+                ownerCardId="project-card"
+                projectStepManifest={{
+                    id: "runner-outage-ex",
+                    exerciseKey: "runner-outage-ex",
+                    title: "Runner outage exercise",
+                    prompt: "Write one line.",
+                }}
+                ps={{
+                    ...makePracticeState({
+                        item: makeQItem({
+                            code: "print('hi')",
+                            exercise,
+                        }),
+                        exercise,
+                        attempts: 0,
+                        ok: false,
+                    }),
+                    error: message,
+                }}
+                toolsActive={false}
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={
+                    ({ current: null } as unknown) as Parameters<
+                        typeof QuizPracticeCard
+                    >[0]["padRef"]
+                }
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain(
+            'data-testid="review-practice-inline-error"',
+        );
+        expect(html).toContain('role="alert"');
+        expect(html).toContain(message);
+        expect(html).toContain(
+            'data-testid="review-practice-submit-button"',
+        );
+        expect(html).toContain("Attempts: 0");
+    });
+});
+
 describe("applyPracticeWorkspaceHydration", () => {
     beforeEach(() => {
         resetRuntimeStore();

@@ -1872,7 +1872,9 @@ export default function QuizPracticeCard(props: {
   );
   const isRefreshing = Boolean(ps?.loading && hasExercise && !hasProjectStepFallback);
   const hasBlockingError = Boolean(ps?.error && !hasExercise && !hasProjectStepFallback);
-  const hasInlineError = Boolean(ps?.error && hasExercise && !hasProjectStepFallback);
+  const hasInlineError = Boolean(
+      ps?.error && (hasExercise || hasProjectStepFallback),
+  );
 
   useEffect(() => {
     setLoadTimedOut(false);
@@ -2068,7 +2070,12 @@ export default function QuizPracticeCard(props: {
               ) : null}
 
               {hasInlineError ? (
-                  <div className="mb-2 ui-quiz-note-danger">
+                  <div
+                      className="mb-2 ui-quiz-note-danger"
+                      role="alert"
+                      aria-live="assertive"
+                      data-testid="review-practice-inline-error"
+                  >
                     <div>{ps?.error}</div>
 
                     <div className="mt-2 flex flex-wrap gap-2">
