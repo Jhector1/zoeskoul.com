@@ -39,6 +39,15 @@ describe("app API CORS", () => {
     expect(isAppOriginAllowed(req)).toBe(true);
   });
 
+  it("allows the canonical website origin behind an HTTPS reverse proxy", () => {
+    const req = request(
+      "http://zoeskoul-web:3000/api/billing/portal",
+      "https://zoeskoul.com",
+    );
+
+    expect(isAppOriginAllowed(req)).toBe(true);
+  });
+
   it("does not allow localhost against the production API", () => {
     const req = request(
       "https://zoeskoul.com/api/app-session",
