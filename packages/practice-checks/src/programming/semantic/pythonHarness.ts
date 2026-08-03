@@ -164,7 +164,7 @@ def _coerce_dict_to_instance(value, class_name):
     if not isinstance(value, dict):
         return value
 
-    resolved_class_name = class_name or _infer_class_name_from_dict(value)
+    resolved_class_name = _infer_class_name_from_dict(value) or class_name
     if not resolved_class_name:
         return value
 
@@ -256,6 +256,15 @@ def _decode_value(value, kind, class_name=None):
 
     return value
 
+def _decode_expected_value(value, kind):
+    if kind == "dict_entries":
+        return _decode_dict_entries(value)
+
+    if kind == "list_of_dict_entries":
+        return _decode_list_of_dict_entries(value)
+
+    return value
+
 
 def _looks_like_key_value_entries(value):
     return (
@@ -340,7 +349,9 @@ def _unwrap_singleton_primitive_expected(value):
     return value
 
 def _semantic_equal(actual, expected):
-    expected = _unwrap_singleton_primitive_expected(expected)
+    if not isinstance(actual, (list, tuple)):
+        expected = _unwrap_singleton_primitive_expected(expected)
+
     normalized_actual = _normalize_actual_for_expected(actual, expected)
     return normalized_actual == expected
 
@@ -419,7 +430,7 @@ for check in _CHECKS:
                 check.get("argKinds") or [],
                 inferred_class_name,
             )
-            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+            expected = _decode_expected_value(check.get("expected"), check.get("expectedKind"))
 
             fn = _get_function(function_name)
 
@@ -474,7 +485,7 @@ for check in _CHECKS:
                 check.get("methodArgKinds") or [],
                 class_name,
             )
-            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+            expected = _decode_expected_value(check.get("expected"), check.get("expectedKind"))
             instance = _make_instance(class_name, constructor_args)
 
             if not hasattr(instance, method_name):
@@ -526,7 +537,7 @@ for check in _CHECKS:
                 check.get("methodArgKinds") or [],
                 class_name,
             )
-            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+            expected = _decode_expected_value(check.get("expected"), check.get("expectedKind"))
 
             if not hasattr(instance, method_name):
                 _fail(check.get("message") or f"Add a method named {method_name}.")
@@ -572,7 +583,7 @@ for check in _CHECKS:
 
                 _call_with_captured_stdout(call_method, call_args)
 
-            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+            expected = _decode_expected_value(check.get("expected"), check.get("expectedKind"))
 
             if not hasattr(instance, attribute_name):
                 _fail(check.get("message") or f"Instances should have a {attribute_name!r} attribute.")

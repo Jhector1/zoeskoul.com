@@ -1,0 +1,106 @@
+{
+  "SketchesVectorPart1": {
+    "common": {
+      "grid": "Grid",
+      "snap": "Snap",
+      "autoStep": "Auto step",
+      "angle": "Angle",
+      "projection": "Projection",
+      "components": "Components",
+      "reset": "Reset",
+      "zoom": "Zoom",
+      "gridStep": "Grid step",
+      "on": "ON",
+      "off": "off"
+    },
+
+    "dot": {
+      "title": "Dot product",
+      "sign": {
+        "zero": "≈ 0 (orthogonal)",
+        "pos": "> 0",
+        "neg": "< 0"
+      },
+      "overlayLine": "a·b = {dot}   |   θ = {theta}°",
+      "hud": {
+        "header": "**Dot product**",
+        "dot": "Dot:",
+        "sign": "**Sign:** {sign}",
+        "angle": "Angle:",
+        "scalarProj": "Scalar projection (“shadow length” on $\\vec b$):",
+        "projection": "Projection:"
+      }
+    },
+
+    "hadamardOuter": {
+      "title": "**Other vector multiplications**",
+      "hadamard": "### Hadamard (element-wise)",
+      "hadamardRule1": "- Only valid when lengths match.",
+      "hadamardHere": "- Here: **{status}**",
+      "defined": "defined ✅",
+      "undefined": "undefined ❌ (length mismatch)",
+      "outer": "### Outer product",
+      "outerRule1": "- Always produces a **matrix** of size $\\text{len}(a)\\times\\text{len}(b)$.",
+      "outerRule2": "- Useful for building rank-1 matrices and for understanding $\\text{col}\\cdot\\text{row}$.",
+      "cta": "Try editing values below and watch how outputs change.",
+      "labels": {
+        "a": "a",
+        "b": "b",
+        "hadamard": "Hadamard a ⊙ b",
+        "outer": "Outer a bᵀ",
+        "lengthMismatch": "Lengths must match."
+      }
+    },
+
+    "numpyShapes": {
+      "title": "**NumPy shapes + orientation**",
+      "intro": "Choose how each vector is stored. Watch how the *shape* changes what the operation means.",
+      "aRep": "- \\(a\\) representation: **{rep}** → shape **{shape}**",
+      "bRep": "- \\(b\\) representation: **{rep}** → shape **{shape}**",
+      "broadcast": "**Broadcasting demo (addition)**  \nWhen shapes differ, NumPy may “stretch” one side and produce a **matrix**.",
+      "dotOuter": "**Dot/outer intuition**",
+      "note": "> This is why orientation can cause “weird” results: the code is doing valid array math, but not always the *vector* operation you intended.",
+      "dotLine": {
+        "rowCol": "row · col → scalar (1×1)",
+        "colRow": "col · row → matrix (outer product)",
+        "other": "1D/1D often behaves like a dot (scalar), but shape details depend on how you store arrays."
+      },
+      "ui": {
+        "aStorage": "a storage",
+        "bStorage": "b storage",
+        "aShown": "a (shown as 2D)",
+        "bShown": "b (shown as 2D)",
+        "sum": "a + b (broadcasted result)"
+      }
+    },
+
+    "projection": {
+      "title": "**Projection + decomposition (VectorPad)**",
+      "drag": "Drag **blue** ($\\vec t$) and **pink** ($\\vec r$).",
+      "dotNorm": "**Dot + norm**",
+      "scalar": "**Scalar (projection coefficient)**",
+      "parallel": "**Parallel component**",
+      "perp": "**Perpendicular component**",
+      "check": "**Check**",
+      "footer": "> Yellow is $\\vec t_{\\parallel \\vec r}$. Purple is $\\vec t_{\\perp \\vec r}$.",
+      "alphaUndef": "\\\\text{undefined (}\\\\vec r=\\\\vec 0\\\\text{)}",
+      "checkOk": "\\\\approx 0\\ \\text{(perpendicular ✅)}",
+      "checkBad": "= {val}\\ \\text{(not } \\perp\\text{)}",
+      "overlay": {
+        "perpLabel": "t⊥r",
+        "alphaUndef": "α=undef",
+        "alpha": "α={val}"
+      }
+    },
+
+    "vectorBasics": {
+      "title": "**Vector basics**",
+      "drag": "Drag the tip of $\\vec v$ (blue).",
+      "unit": "- Unit vector:",
+      "note": "**Note:** {note}",
+      "noteZero": "Zero vector: unit vector is undefined.",
+      "noteNonZero": "Unit vector keeps the same direction.",
+      "overlay": "green dashed = unit vector"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@layer components {
+  /* =========================
+   * Surfaces
+   * ========================= */
+  .ui-card {
+    @apply  border border-neutral-200 bg-white shadow-sm;
+  }
+
+  .dark .ui-card {
+    @apply border-white/10 bg-white/[0.03];
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .ui-soft {
+    @apply rounded-xl border border-neutral-200 bg-neutral-50;
+  }
+
+  .dark .ui-soft {
+    @apply border-white/10 bg-neutral-900/40;
+  }
+
+  /* Home pills */
+  .ui-home-pill {
+    @apply inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-700;
+  }
+
+  .dark .ui-home-pill {
+    @apply border-white/10 bg-white/5 text-white/80;
+  }
+}

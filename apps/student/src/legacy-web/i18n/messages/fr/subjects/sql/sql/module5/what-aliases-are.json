@@ -1,0 +1,108 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "label": "Ce que sont les alias",
+          "summary": "Ce que sont les alias dans les colonnes calculées et les expressions SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction aux alias en SQL"
+            },
+            "sketch1": {
+              "title": "Pourquoi utiliser des alias ?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Créer une colonne calculée avec un alias",
+              "prompt": "Écrivez une requête SQL pour sélectionner le `customer_name` et la valeur totale de chaque commande (quantité multipliée par unit_price) depuis la table `orders`. Nommez la colonne calculée `order_value` à l'aide d'un alias.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT customer_name, \n       quantity * unit_price AS order_value\nFROM orders;"
+            },
+            "q2": {
+              "title": "Alias pour une colonne simple",
+              "prompt": "Écrivez une requête SQL pour sélectionner la colonne `region` de la table `orders`, mais affichez-la sous le nom `area` dans le résultat à l'aide d'un alias.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT region AS area\nFROM orders;"
+            },
+            "q3": {
+              "title": "But des alias de colonne",
+              "prompt": "Pourquoi utiliseriez-vous un alias de colonne dans une requête SQL ?",
+              "hint": "Pensez à la façon dont les résultats apparaissent à quelqu'un qui les lit.",
+              "help": {
+                "concept": "Les alias de colonne rendent les ensembles de résultats plus lisibles et compréhensibles en donnant aux colonnes des noms significatifs.",
+                "hint_1": "Les alias aident à clarifier ce que représente une colonne.",
+                "hint_2": "Ils sont particulièrement utiles pour les colonnes calculées ou lorsque les noms par défaut ne sont pas clairs."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q4": {
+              "title": "Utilisations valides des alias",
+              "prompt": "Lesquelles des utilisations suivantes des alias de colonne en SQL sont valides ? Sélectionnez toutes les réponses qui conviennent.",
+              "hint": "Pensez aux colonnes calculées et aux colonnes régulières.",
+              "help": {
+                "concept": "Les alias peuvent être utilisés à la fois pour les colonnes calculées et pour renommer des colonnes existantes afin de clarifier le résultat.",
+                "hint_1": "Vous pouvez utiliser des alias pour des expressions et pour des colonnes régulières.",
+                "hint_2": "Si vous souhaitez renommer une colonne ou une expression dans votre résultat SELECT, vous pouvez utiliser un alias."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q5": {
+              "title": "Syntaxe pour un alias de colonne",
+              "prompt": "Complétez l'espace vide pour attribuer correctement un alias à une colonne calculée en SQL.",
+              "hint": "Concentrez-vous sur le concept SQL manquant plutôt que sur le mot exact manquant.",
+              "help": {
+                "concept": "L'espace vide doit être complété par le terme SQL qui correspond à l'action que la requête cherche à effectuer.",
+                "hint_1": "Réfléchissez à ce que la partie manquante est censée faire dans la requête.",
+                "hint_2": "Choisissez le terme SQL qui complète le mieux le sens de la requête."
+              },
+              "template": "SELECT quantity * unit_price ___ total_price FROM orders;",
+              "choices": [
+                "AS",
+                "WITH",
+                "INTO",
+                "ON"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "sk1": {
+            "title": "Introduction aux alias en SQL",
+            "bodyMarkdown": "En SQL, un **alias** est un nom temporaire donné à une colonne ou une table pour la durée d'une requête. Les alias rendent vos résultats plus lisibles et vos requêtes plus faciles à écrire, surtout lorsque vous utilisez des colonnes calculées ou des expressions. Vous créez un alias avec le mot-clé `AS`.\n\nPar exemple, si vous souhaitez afficher la valeur totale de chaque commande dans la table `orders`, vous pouvez multiplier `quantity` par `unit_price` et donner au résultat un nom explicite :\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIci, `line_total` est un alias pour la colonne calculée."
+          },
+          "sk2": {
+            "title": "Pourquoi utiliser des alias ?",
+            "bodyMarkdown": "Les alias aident à rendre les résultats de vos requêtes SQL plus compréhensibles. Sans alias, les colonnes calculées ou les expressions apparaîtraient avec des noms génériques ou déroutants. Par exemple, `quantity * unit_price` s'afficherait comme une colonne portant exactement ce nom, ce qui n'est pas très convivial.\n\nEn utilisant un alias, vous pouvez renommer cette colonne avec un nom significatif, comme `line_total` ou `total_price`, rendant ainsi vos rapports plus clairs pour toute personne qui les lit."
+          }
+        }
+      }
+    }
+  }
+}

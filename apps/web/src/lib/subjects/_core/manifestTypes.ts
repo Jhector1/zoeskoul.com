@@ -168,6 +168,7 @@ export type AppManifestExercise =
     | ManifestMultiChoice
     | ManifestDragReorder
     | ManifestFillBlankChoice
+    | ManifestPseudocodeInput
     | AppManifestCodeInput;
 
 /**

@@ -1,0 +1,27 @@
+{
+  "PracticeReviewList": {
+    "questionLabel": "Kesyon {n}",
+    "attemptsLabel": "Tantativ:",
+    "hiddenCorrect": "Repons kòrèk la kache pou kous sa a.",
+    "status": {
+      "revealed": "Montre",
+      "correct": "✓ Kòrèk",
+      "incorrect": "✕ Pa kòrèk",
+      "unchecked": "Pa verifye"
+    },
+    "mini": {
+      "correct": "✓ Kòrèk",
+      "incorrect": "✕ Pa kòrèk",
+      "unchecked": "Poko verifye"
+    },
+    "details": {
+      "summary": "Montre sa yo te atann / eksplikasyon",
+      "expected": "Sa yo te atann",
+      "explanation": "Eksplikasyon"
+    },
+    "empty": {
+      "incorrect": "Pa gen kesyon ki pa kòrèk.",
+      "all": "Pa gen kesyon ankò."
+    }
+  }
+}

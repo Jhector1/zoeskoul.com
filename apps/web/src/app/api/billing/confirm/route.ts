@@ -1,7 +1,7 @@
 // src/app/api/billing/confirm/route.ts
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import type Stripe from "stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: "Missing sessionId" }, { status: 400 });
   }
 
-  const cs = await stripe.checkout.sessions.retrieve(sessionId);
+  const cs = await getStripe().checkout.sessions.retrieve(sessionId);
 
   if (cs.mode !== "subscription") {
     return NextResponse.json({ ok: false, message: "Not a subscription Checkout Session." }, { status: 400 });
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: "Checkout session has no subscription yet." }, { status: 409 });
   }
 
-  const sub = await stripe.subscriptions.retrieve(subId);
+  const sub = await getStripe().subscriptions.retrieve(subId);
 
   const saved = await upsertFromStripeSubscription(sub as Stripe.Subscription, userId);
   if (!saved) {

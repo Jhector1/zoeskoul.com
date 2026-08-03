@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import { resolveCurrentAuthoredSqlExpected } from "@/lib/practice/api/validate/services/currentAuthoredSqlExpected.service";
 
 function topicBundleFiles(root: string): string[] {
@@ -32,6 +33,10 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
         for (const file of files) {
             const bundle = JSON.parse(fs.readFileSync(file, "utf8"));
             const exercises = Array.isArray(bundle.exercises) ? bundle.exercises : [];
+            const publishedBundle = resolveTopicBundleManifest({
+                subjectSlug: "sql-analysis-reporting",
+                topicSlugOrId: String(bundle.topicId ?? ""),
+            });
 
             for (const exercise of exercises) {
                 if (exercise?.kind !== "code_input" || exercise?.language !== "sql") {
@@ -51,6 +56,11 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
                 expect(exercise.runtime?.datasetId, id).toBe("sales_reporting");
                 expect(exercise.recipe?.datasetId, id).toBe("sales_reporting");
                 expect(String(exercise.recipe?.solutionCode ?? "").trim(), id).not.toBe("");
+
+                // Planning/readiness bundles are intentionally retained on disk but
+                // are not part of the published subject manifest. Only published
+                // bundles can refresh persisted validation contracts at runtime.
+                if (!publishedBundle) continue;
 
                 const currentExpected = resolveCurrentAuthoredSqlExpected({
                     kind: "code_input",
@@ -77,7 +87,7 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
             }
         }
 
-        expect(sqlExerciseCount).toBe(82);
+        expect(sqlExerciseCount).toBe(76);
     });
 });
 

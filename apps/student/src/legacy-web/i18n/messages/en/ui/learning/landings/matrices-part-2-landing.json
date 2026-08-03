@@ -1,0 +1,35 @@
+{
+  "MatricesPart2Landing": {
+    "pageTitle": "Matrices — Part 2",
+    "pageIntro": "Build intuition for norms, rank, numerical tolerance, and stability. Learn why tiny noise can change answers and how to compare matrices safely in practice.",
+    "quickStartEasy": "Quick start (Easy)",
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "Tip: start with small matrices, then increase size once the pattern feels automatic.",
+    "parts": {
+      "part2": {
+        "badge": "NUMERICAL INTUITION",
+        "title": "Matrices: norms, rank, tolerance, and stability",
+        "subtitle": "Measure size, detect structure, and handle floating-point reality with ε",
+        "bullets": {
+          "0": "Compute the Frobenius norm from entries and interpret what it measures",
+          "1": "Understand the 2-norm (spectral norm) as the maximum stretch factor",
+          "2": "Compare norms and know when each is useful (fast vs geometric meaning)",
+          "3": "Compute rank from pivots / RREF and connect rank to independence",
+          "4": "Use an ε tolerance to define an effective rank (rankε) for noisy data",
+          "5": "See how small perturbations can flip rank and why ‘nearly dependent’ matters",
+          "6": "Recognize near-singular / ill-conditioned matrices and sensitivity of solutions",
+          "7": "Practice robust workflows: tolerances, rounding, and safe equality checks"
+        }
+      }
+    },
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Start with Frobenius norm drills until you can compute quickly.",
+      "1": "Move to rank and pivots, then compare rank vs rankε under noise.",
+      "2": "Finish with stability/conditioning intuition using near-singular examples."
+    },
+    "routeHint": "Routes: /practice/review/matrices_part2 (read) • /practice?section=module-3-matrices (practice)"
+  }
+}

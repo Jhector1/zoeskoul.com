@@ -1,6 +1,6 @@
 // src/app/api/stripe/webhook/route.ts
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import type Stripe from "stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
 
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(rawBody, sig, secret);
+    event = getStripe().webhooks.constructEvent(rawBody, sig, secret);
   } catch (err: any) {
     return NextResponse.json(
         { message: `Webhook error: ${err?.message ?? "Invalid signature"}` },
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
         if (!subId) break;
 
-        const sub = await stripe.subscriptions.retrieve(subId);
+        const sub = await getStripe().subscriptions.retrieve(subId);
 
         const hintedUserId =
             (cs.metadata?.userId as string | undefined) ??
@@ -94,7 +94,7 @@ export async function POST(req: Request) {
         const subId = extractSubscriptionIdFromInvoice(inv);
         if (!subId) break;
 
-        const sub = await stripe.subscriptions.retrieve(subId);
+        const sub = await getStripe().subscriptions.retrieve(subId);
         const hintedUserId = (sub.metadata?.userId as string | undefined) ?? null;
 
         await upsertFromStripeSubscription(sub, hintedUserId);

@@ -1,0 +1,414 @@
+{
+  "practice": {
+    "codeInput": {
+      "inputLabel": "> input",
+      "outputLabel": "output",
+      "exampleTitle": "Example",
+      "expectedExampleMeta": "Expected example",
+      "expectedResultTitle": "Expected result",
+      "resultPreviewMeta": "Result preview",
+      "nullValue": "NULL",
+      "checkAnswerTryAgain": "Check the answer and try again.",
+      "notCorrectYet": "Not correct yet"
+    },
+    "exerciseRenderer": {
+      "checkAnswerTryAgain": "Check the answer and try again.",
+      "notCorrectYet": "Not correct yet"
+    }
+  },
+  "Practice": {
+    "dailyStart": {
+      "title": "Choose today’s subject",
+      "subtitle": "Choose one subject. We’ll build a balanced set of up to {count} exercises from what is available and lock it for today.",
+      "exerciseCount": "{count} eligible exercises",
+      "moduleCount": "{count} modules",
+      "start": "Start this subject →",
+      "starting": "Starting…",
+      "empty": "No eligible practice options are available at this level.",
+      "subscriberTitle": "Build your practice session",
+      "subscriberSubtitle": "Choose a catalog, course, module, section, and topic. Your plan includes unlimited configurable practice.",
+      "freeTitle": "Choose today’s practice path",
+      "freeSubtitle": "Choose a free path for up to {count} questions today. Paid modules stay visible so you can unlock them when you are ready.",
+      "unlimitedBadge": "Unlimited practice",
+      "dailyBadge": "{count} questions today",
+      "steps": {
+        "catalog": "Catalog",
+        "course": "Course",
+        "module": "Module",
+        "section": "Section",
+        "topic": "Topic"
+      },
+      "chooseCatalog": "Choose a catalog",
+      "chooseCourse": "Choose a course",
+      "chooseModule": "Choose a module",
+      "chooseSection": "Choose a section",
+      "chooseTopic": "Choose a topic",
+      "catalogHelp": "Start with the learning area you want to practice.",
+      "courseHelp": "Choose the course that contains the skill you want to strengthen.",
+      "moduleHelp": "Free modules can start today. Paid modules show an unlock option.",
+      "sectionHelp": "Narrow practice to the part of the module that matters now.",
+      "topicHelp": "Choose the topic you want the session to focus on.",
+      "paidModule": "Subscription module",
+      "notAvailable": "Practice is not available here yet",
+      "unlock": "Unlock module",
+      "openingBilling": "Opening billing…",
+      "back": "Back",
+      "startUnlimited": "Start practice",
+      "startDaily": "Start today’s practice",
+      "selectToContinue": "Select an option to continue.",
+      "locked": "Locked",
+      "subscriberKicker": "Practice builder",
+      "freeKicker": "Daily practice",
+      "next": "Next",
+      "yourPractice": "Your practice",
+      "yourPracticeHelp": "Resume any unfinished topic.",
+      "currentPractice": "Current",
+      "inProgress": "In progress",
+      "continuePractice": "Continue practice",
+      "continuing": "Continuing…",
+      "practiceProgress": "{completed} of {total} completed"
+    },
+    "ai": {
+      "explainConcept": "Explain concept",
+      "explaining": "Explaining…",
+      "helperLine": "Explains the idea + approach — no final answer."
+    },
+    "aiTutor": {
+      "offer": "Two attempts did not pass. I can compare your work with the exercise and explain the mismatch without giving away the answer.",
+      "accept": "Help me",
+      "continue": "Continue chat",
+      "notNow": "Not now",
+      "avatarLabel": "Tutor",
+      "title": "AI tutor",
+      "subtitle": "Compares your attempt with the exercise and explains the mismatch",
+      "thinking": "Looking at your attempts…",
+      "placeholder": "Ask what the feedback means…",
+      "guardrail": "Ask about the feedback or concept. The tutor will guide you without giving the final answer.",
+      "send": "Send message",
+      "drag": "Drag AI tutor",
+      "minimize": "Minimize tutor",
+      "close": "Close chat",
+      "open": "Open AI tutor",
+      "available": "AI tutor available",
+      "error": "The tutor could not respond right now. Your exercise is still safe.",
+      "repeatError": "The tutor did not produce a new explanation. Ask about the specific checker message or the part of your attempt that is confusing."
+    },
+    "review": {
+      "emptyAll": "No questions yet.",
+      "emptyIncorrect": "No incorrect questions.",
+      "status": {
+        "revealed": "Revealed",
+        "correct": "✓ Correct",
+        "incorrect": "✕ Not correct",
+        "notChecked": "Not checked"
+      },
+      "card": {
+        "question": "Question {n}",
+        "attempts": "Attempts:",
+        "notCheckedYet": "Not checked yet",
+        "hiddenNote": "Correct answer is hidden for this run.",
+        "showDetails": "Show expected / explanation"
+      }
+    },
+    "title": "Practice Generator",
+    "subtitle": "Refresh keeps progress • ←/→ navigate • Enter submits",
+    "progress": {
+      "attempts": "Attempts",
+      "label": "Progress",
+      "correct": "Correct",
+      "question": "Q"
+    },
+    "filters": {
+      "sessionLocked": "Session mode • filters locked",
+      "topic": "Topic",
+      "difficulty": "Difficulty",
+      "assignmentLocked": "Assignment mode • filters locked"
+    },
+    "buttons": {
+      "prev": "Prev",
+      "next": "Next",
+      "submit": "Submit",
+      "reveal": "Reveal answer",
+      "retry": "Retry",
+      "auto": "Auto",
+      "hint": "Need a hint?"
+    },
+    "status": {
+      "clickNextToStart": "Click Next to start.",
+      "revealDisabled": "Reveal is disabled for this run.",
+      "loading": "Loading…",
+      "loadingDots": "Loading...",
+      "dash": "—"
+    },
+    "confirm": {
+      "progressLine": "Current progress: {answered}/{sessionSize} answered.",
+      "title": "Restart session?",
+      "subtitle": "Changing topic or difficulty will reset your current run.",
+      "loseProgress": "You’ll lose progress:",
+      "keep": "Keep current session",
+      "restart": "Yes, restart",
+      "esc": "Press Esc to close."
+    },
+    "result": {
+      "attemptsLeft": "Attempts left: {count}",
+      "title": "Result",
+      "submitToValidate": "Submit your answer to get validation.",
+      "errorTitle": "⚠️ Error",
+      "revealed": "👁️ Revealed (answer shown)",
+      "correct": "✅ Correct",
+      "incorrect": "❌ Not quite",
+      "revealedPractice": "Scoring is complete. You can still fill, edit, reset, and run the solution before continuing."
+    },
+    "loadError": {
+      "title": "Couldn’t load a question"
+    },
+    "questionPanel": {
+      "footerTip": "← / → moves between loaded questions • Next loads a new question at the end • Enter submits"
+    },
+    "answer": {
+      "yourAnswer": "Your answer",
+      "placeholder": "e.g. 3.5",
+      "details": "Details"
+    },
+    "vectorPad": {
+      "title": "Vector Pad",
+      "gridBadge": "Grid: 1 sq = {step} units{mode}",
+      "gridModeAuto": " • Auto",
+      "gridModeLocked": " • Locked",
+      "gridSelectOption": "1 sq = {step}"
+    },
+    "exercises": {
+      "vectorDragTarget": {
+        "instructions": "Drag a (blue) to match target a* = ({x}, {y}) within tolerance {tolerance}."
+      },
+      "vectorDragDot": {
+        "instructions": "Drag a so that a · b ≈ {targetDot} (tolerance {tolerance}).",
+        "bFixed": "b is fixed: ({x}, {y})",
+        "cards": {
+          "aCurrent": "a (current)",
+          "dotCurrent": "a · b (current)"
+        }
+      }
+    },
+    "summary": {
+      "return": "Return",
+      "title": "Session complete",
+      "subtitle": "You finished {answered}/{sessionSize} exercises",
+      "scoreLine": "{correct} correct • {missed} missed • {pct}%",
+      "reviewTitle": "Review & next steps",
+      "reviewSubtitle": "Refresh won’t lose progress • You can also go back to questions.",
+      "toggleMissedHide": "Hide missed",
+      "toggleMissedShow": "Show missed",
+      "backToQuestions": "Back to questions",
+      "missedHidden": "Missed list hidden.",
+      "urlTip": "Tip: changing topic/difficulty updates the URL params.",
+      "assignmentReturn": "Return to review"
+    },
+    "summaryCards": {
+      "score": "Score",
+      "niceWork": "Nice work. Review missed ones (below) to lock it in.",
+      "perfectRunTitle": "Perfect run ✅",
+      "perfectRunSubtitle": "You didn’t miss any questions in this session.",
+      "missedLabel": "Missed ({count})",
+      "yourAnswer": "Your answer",
+      "expected": "Expected",
+      "explanation": "Explanation"
+    },
+    "expectedSummary": {
+      "expected": "Expected",
+      "you": "You",
+      "delta": "Δ",
+      "chosen": "Chosen",
+      "correct": "Correct",
+      "missing": "Missing:",
+      "extra": "Extra:",
+      "targetAStar": "Target a*",
+      "tolerance": "Tolerance",
+      "targetDot": "Target a·b",
+      "yourDot": "Your a·b",
+      "aMag": "|a|",
+      "min": "min",
+      "generic": "Expected data available."
+    },
+    "errors": {
+      "incompleteAnswer": "Answer is incomplete or invalid.",
+      "failedToSubmit": "Failed to submit",
+      "failedToLoad": "Failed to load question"
+    },
+    "mobile": {
+      "leaderboard": "Leaderboard",
+      "controls": "Controls",
+      "controlsTitle": "Progress and controls",
+      "leaderboardTitle": "Practice leaderboard",
+      "close": "Close",
+      "submitting": "Submitting…",
+      "statusReady": "Ready to submit",
+      "statusCorrect": "Correct — continue",
+      "statusTryAgain": "Not quite — try again",
+      "statusRevealed": "Answer revealed",
+      "statusError": "Action needs attention",
+      "help": "Help",
+      "helpTitle": "Help and reveal",
+      "helpUnavailable": "Help is not available until the exercise loads.",
+      "helpIntroTitle": "Need help?",
+      "helpIntro": "Use the fallback hint only when the AI tutor cannot respond. Reveal unlocks after three unsuccessful attempts.",
+      "attemptsRemaining": "{count} attempts left",
+      "hintsUsed": "Hints used: {used}/{total}",
+      "showHint": "Show a hint",
+      "openingHelp": "Opening…",
+      "noMoreHints": "You have opened every available hint.",
+      "revealTitle": "Reveal the answer",
+      "revealWarning": "This finalizes the exercise, fills the solution, and awards no XP. You choose when to continue.",
+      "revealAnswer": "Reveal answer",
+      "revealConfirmTitle": "Reveal the answer?",
+      "revealConfirmBody": "The exercise will be finalized, and the solution will be filled into the answer or editor. You will earn no XP and will continue only when you press Next.",
+      "cancel": "Cancel",
+      "answerRevealedTitle": "Answer revealed",
+      "answerRevealedBody": "The solution has been filled in. Review it, then press Next when you are ready.",
+      "continue": "Continue",
+      "backToExercise": "Back to exercise"
+    },
+    "workspace": {
+      "assignment": {
+        "title": "Assignment",
+        "kicker": "Module assignment",
+        "returnToReview": "Return to review",
+        "returnTitle": "Leave the assignment and return to review",
+        "returnLoading": "Returning…",
+        "completeTitle": "Assignment complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed.",
+        "summaryTitle": "Assignment complete 🎉",
+        "summarySubtitle": "{completed} of {total} questions completed.",
+        "summaryNote": "{correct} correct • {revealed} revealed."
+      },
+      "onboardingTrial": {
+        "returnLabel": "Exit trial",
+        "returnTitle": "Leave the onboarding trial",
+        "returnLoading": "Leaving…",
+        "completeTitle": "Trial complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed."
+      },
+      "scopeTitle": "Practice scope",
+      "subscriber": "Subscriber",
+      "locked": "Locked",
+      "fixed": "Fixed",
+      "subject": "Subject",
+      "module": "Module",
+      "chooseSubject": "Choose a subject",
+      "chooseModule": "Choose a module",
+      "loadingSubjects": "Loading practice subjects…",
+      "subjectsUnavailable": "Practice subjects are temporarily unavailable.",
+      "subscriberLockedReason": "Subscribe to choose any subject, topic, and difficulty.",
+      "fixedScopeReason": "This practice run has a fixed subject and module.",
+      "dailyFallback": "Daily practice",
+      "challengeLabel": "Challenge",
+      "exerciseTab": "Exercise",
+      "codeTab": "Code",
+      "openWorkspace": "Open code workspace",
+      "badges": {
+        "assignment": "Assignment • teacher controlled",
+        "challenge": "Public challenge • exact exercise",
+        "trial": "Onboarding trial • starter questions",
+        "daily": "Daily Practice • ranked free practice",
+        "standard": "Subscriber practice • configurable",
+        "practice": "Practice"
+      },
+      "titles": {
+        "assignment": "Assignment",
+        "challenge": "Challenge",
+        "trial": "Trial practice",
+        "daily": "Daily Practice",
+        "standard": "Practice workspace",
+        "practice": "Practice workspace"
+      },
+      "subtitles": {
+        "assignment": "Complete the selected questions and submit your work.",
+        "challenge": "Solve the shared exercise and compare your result.",
+        "trial": "Try a focused starter exercise.",
+        "daily": "Complete today’s ranked practice set.",
+        "standard": "Choose a subject and topic, then practice in the full workspace.",
+        "practice": "Choose a topic and practice in the full workspace."
+      },
+      "navigator": {
+        "dailyEyebrow": "Daily practice",
+        "dailyTitle": "Today’s {count} exercises",
+        "dailySubtitle": "A fixed ranked set selected for today.",
+        "challengeEyebrow": "Challenge",
+        "challengeDefaultTitle": "Shared coding challenge",
+        "challengeSubtitle": "Solve the exact exercise shared with you.",
+        "subscriberEyebrow": "Subscriber practice",
+        "freeEyebrow": "Practice",
+        "chooseTitle": "Choose what to practice",
+        "subscriberSubtitle": "Select a subject, module, topic, and difficulty.",
+        "freeSubtitle": "Subscribe to choose any subject, module, topic, and difficulty.",
+        "defaultEyebrow": "Practice",
+        "defaultTitle": "Practice workspace",
+        "defaultSubtitle": "Work through the current exercise set.",
+        "progress": "Progress",
+        "correct": "Correct",
+        "fixedReason": "This exercise set is fixed for this experience.",
+        "dailySubjectReason": "Today’s subject is fixed after the daily set starts.",
+        "dailyMixReason": "The system balances today’s exercises across eligible modules in this subject. Exact module, topic, and difficulty controls belong to Unlimited Practice.",
+        "subscribeReason": "Subscribe to choose a different subject or module.",
+        "queue": "Exercise queue",
+        "fallbackBadge": "Practice",
+        "exerciseFallback": "Exercise {number}",
+        "statusCorrect": "Correct",
+        "statusCompleted": "Completed",
+        "statusInProgress": "In progress",
+        "statusRevealed": "Revealed",
+        "statusCurrent": "Current",
+        "statusNotStarted": "Not started",
+        "sidebarTabsAria": "Practice controls and leaderboard",
+        "controlsTab": "Practice",
+        "leaderboardTab": "Leaderboard",
+        "resetExercise": "Reset this exercise",
+        "resetExerciseDescription": "Restore the starter workspace without refunding attempts already used."
+      },
+      "stage": {
+        "completeTitle": "Practice complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed.",
+        "challengeDefaultTitle": "Coding challenge",
+        "challengeDefaultSubtitle": "Use the workspace, then check your answer when you are ready.",
+        "dailyDefaultTitle": "Daily practice",
+        "dailyDefaultSubtitle": "Complete today’s ranked practice exercises.",
+        "practiceDefaultTitle": "Practice",
+        "practiceDefaultSubtitle": "Choose a topic from the practice navigator and solve the exercise.",
+        "questionProgress": "Question {current} of {total}",
+        "tabsAria": "Exercise and code workspace",
+        "loadingTitle": "Preparing your exercise…",
+        "errorTitle": "Unable to load this exercise",
+        "loadingBody": "The practice workspace will appear here when it is ready.",
+        "retry": "Retry"
+      },
+      "header": {
+        "restartTitle": "Restart practice",
+        "restartDescription": "Clear this practice run and load a fresh set.",
+        "navigatorDrawerTitle": "Choose practice",
+        "resizeNavigator": "Drag to resize practice navigator"
+      }
+    },
+    "completion": {
+      "kicker": "Practice complete",
+      "title": "Session complete 🎉",
+      "score": "{correct} of {total} correct.",
+      "defaultNote": "Your progress has been saved.",
+      "defaultPrimary": "Continue",
+      "leaderboard": "View leaderboard",
+      "reviewResults": "Review results",
+      "daily": {
+        "kicker": "Daily practice complete",
+        "title": "You finished today’s practice 🎉",
+        "freeNote": "Your ranked practice is complete. Subscribe to unlock unlimited topic practice now.",
+        "subscriberNote": "Your ranked practice is complete. Unlimited topic practice is ready whenever you are.",
+        "freePrimary": "Subscribe for unlimited practice",
+        "subscriberPrimary": "Practice more",
+        "nextLabel": "Next ranked daily practice",
+        "countdown": "{hours}:{minutes}:{seconds}",
+        "ready": "Ready now",
+        "utcNote": "Daily practice resets at midnight UTC.",
+        "revealedNote": "{count} revealed answer(s) counted as completed, not correct, and earned no ranked-answer points."
+      }
+    }
+  }
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  hasCheckableReviewPracticeInput,
+} from "@zoeskoul/learning-runtime";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { ReviewQuestion } from "@/lib/subjects/types";
@@ -1550,6 +1553,13 @@ export default function QuizPracticeCard(props: {
     return !isEmptyPracticeAnswer(ex, answerItemForReadiness, padRef?.current);
   }, [ex, answerItemForReadiness, padRef, runtimeExerciseCode]);
 
+  const hasSubmitInput = hasCheckableReviewPracticeInput({
+    hasRenderedInput: hasInput,
+    toolsActive: Boolean(toolsActive),
+    toolsAvailable: Boolean(toolsAny),
+    isCodeExercise: ex?.kind === "code_input",
+  });
+
   const isCodeExerciseWithInput = ex?.kind === "code_input" && hasInput;
   const compactLearnerUi = learnerUiFlags.compactLearnerUi;
 
@@ -1818,7 +1828,7 @@ export default function QuizPracticeCard(props: {
       excused ||
       (ps?.busy ?? false) ||
       isFinalized ||
-      !hasInput;
+      !hasSubmitInput;
 
   const disableHelpAction =
       readOnly ||
@@ -1859,7 +1869,9 @@ export default function QuizPracticeCard(props: {
   );
   const isRefreshing = Boolean(ps?.loading && hasExercise && !hasProjectStepFallback);
   const hasBlockingError = Boolean(ps?.error && !hasExercise && !hasProjectStepFallback);
-  const hasInlineError = Boolean(ps?.error && hasExercise && !hasProjectStepFallback);
+  const hasInlineError = Boolean(
+      ps?.error && (hasExercise || hasProjectStepFallback),
+  );
 
   useEffect(() => {
     setLoadTimedOut(false);
@@ -2055,7 +2067,12 @@ export default function QuizPracticeCard(props: {
               ) : null}
 
               {hasInlineError ? (
-                  <div className="mb-2 ui-quiz-note-danger">
+                  <div
+                      className="mb-2 ui-quiz-note-danger"
+                      role="alert"
+                      aria-live="assertive"
+                      data-testid="review-practice-inline-error"
+                  >
                     <div>{ps?.error}</div>
 
                     <div className="mt-2 flex flex-wrap gap-2">

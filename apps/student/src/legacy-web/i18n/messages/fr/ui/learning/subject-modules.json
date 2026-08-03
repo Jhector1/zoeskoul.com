@@ -1,0 +1,40 @@
+{
+  "subjectModulesUi": {
+    "kickerSubject": "Sujet",
+    "unlockEnabled": "DÉVERROUILLAGE ACTIVÉ",
+    "overallProgress": "Progression globale",
+    "syncing": "Synchronisation…",
+    "topicsRatio": "{done}/{total} thèmes",
+    "modulesRatio": "• {done}/{total} modules",
+    "changeSubject": "← Changer de sujet",
+    "kickerModule": "Module",
+    "pillCompleted": "✓ Terminé",
+    "pillLocked": "🔒 Verrouillé",
+    "pillPremium": "💎 Premium",
+    "pillInProgress": "↻ En cours",
+    "pillNotStarted": "• Pas commencé",
+    "weeksLabel": "Semaines",
+    "sectionsLabel": "Sections",
+    "topicsLabel": "Thèmes",
+    "noTopics": "Aucun thème",
+    "topicsComplete": "{done}/{total} thèmes terminés",
+    "completedShort": "Terminé",
+    "cta": {
+      "signInToUnlock": "Se connecter pour déverrouiller →",
+      "unlock": "Déverrouiller →",
+      "review": "Revoir le module →",
+      "continue": "Continuer →",
+      "start": "Commencer →"
+    },
+    "empty": {
+      "title": "Aucun module pour l’instant",
+      "desc": "Ajoutez au moins un module pour ce sujet afin d’activer la navigation."
+    },
+    "errors": {
+      "missingSubjectTitle": "Sujet manquant",
+      "missingSubjectDesc": "Le paramètre subjectSlug est manquant.",
+      "notFoundTitle": "Sujet introuvable",
+      "notFoundDesc": "Aucun sujet avec le slug « {slug} »."
+    }
+  }
+}

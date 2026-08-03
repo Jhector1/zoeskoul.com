@@ -1,0 +1,396 @@
+{
+  "Practice": {
+    "dailyStart": {
+      "title": "Choisissez la matière du jour",
+      "subtitle": "Choisissez une matière. Nous créerons une série équilibrée allant jusqu’à {count} exercices parmi ceux disponibles et la verrouillerons pour aujourd’hui.",
+      "exerciseCount": "{count} exercices admissibles",
+      "moduleCount": "{count} modules",
+      "start": "Commencer cette matière →",
+      "starting": "Démarrage…",
+      "empty": "Aucune option de pratique admissible n’est disponible à ce niveau.",
+      "subscriberTitle": "Créez votre séance de pratique",
+      "subscriberSubtitle": "Choisissez un catalogue, un cours, un module, une section et un sujet. Votre forfait comprend une pratique configurable illimitée.",
+      "freeTitle": "Choisissez le parcours de pratique du jour",
+      "freeSubtitle": "Choisissez un parcours gratuit pour un maximum de {count} questions aujourd’hui. Les modules payants restent visibles pour pouvoir les débloquer.",
+      "unlimitedBadge": "Pratique illimitée",
+      "dailyBadge": "{count} questions aujourd’hui",
+      "steps": {
+        "catalog": "Catalogue",
+        "course": "Cours",
+        "module": "Module",
+        "section": "Section",
+        "topic": "Sujet"
+      },
+      "chooseCatalog": "Choisissez un catalogue",
+      "chooseCourse": "Choisissez un cours",
+      "chooseModule": "Choisissez un module",
+      "chooseSection": "Choisissez une section",
+      "chooseTopic": "Choisissez un sujet",
+      "catalogHelp": "Commencez par le domaine que vous souhaitez pratiquer.",
+      "courseHelp": "Choisissez le cours qui contient la compétence à renforcer.",
+      "moduleHelp": "Les modules gratuits peuvent commencer aujourd’hui. Les modules payants proposent une option de déblocage.",
+      "sectionHelp": "Limitez la pratique à la partie du module qui compte maintenant.",
+      "topicHelp": "Choisissez le sujet sur lequel la séance doit se concentrer.",
+      "paidModule": "Module avec abonnement",
+      "notAvailable": "La pratique n’est pas encore disponible ici",
+      "unlock": "Débloquer le module",
+      "openingBilling": "Ouverture de la facturation…",
+      "back": "Retour",
+      "startUnlimited": "Commencer la pratique",
+      "startDaily": "Commencer la pratique du jour",
+      "selectToContinue": "Sélectionnez une option pour continuer.",
+      "locked": "Verrouillé",
+      "subscriberKicker": "Créateur de pratique",
+      "freeKicker": "Pratique quotidienne",
+      "next": "Suivant",
+      "yourPractice": "Vos exercices",
+      "yourPracticeHelp": "Reprenez un sujet non terminé.",
+      "currentPractice": "En cours",
+      "inProgress": "À continuer",
+      "continuePractice": "Continuer",
+      "continuing": "Reprise…",
+      "practiceProgress": "{completed} sur {total} terminés"
+    },
+    "ai": {
+      "explainConcept": "Expliquer le concept",
+      "explaining": "Explication…",
+      "helperLine": "Explique l’idée + la méthode — sans donner la réponse finale."
+    },
+    "aiTutor": {
+      "offer": "Deux tentatives n’ont pas été validées. Je peux comparer votre travail à l’exercice et expliquer l’écart sans donner la réponse.",
+      "accept": "Aidez-moi",
+      "continue": "Continuer la discussion",
+      "notNow": "Pas maintenant",
+      "avatarLabel": "Tuteur",
+      "title": "Tuteur IA",
+      "subtitle": "Compare votre tentative à l’exercice et explique l’écart",
+      "thinking": "J’examine vos tentatives…",
+      "placeholder": "Demandez ce que signifie le retour…",
+      "guardrail": "Posez une question sur le retour ou le concept. Le tuteur vous guidera sans donner la réponse finale.",
+      "send": "Envoyer le message",
+      "drag": "Déplacer le tuteur IA",
+      "minimize": "Réduire le tuteur",
+      "close": "Fermer la discussion",
+      "open": "Ouvrir le tuteur IA",
+      "available": "Tuteur IA disponible",
+      "error": "Le tuteur ne peut pas répondre pour le moment. Votre exercice reste enregistré.",
+      "repeatError": "Le tuteur n’a pas produit de nouvelle explication. Posez une question sur le message précis du vérificateur ou sur la partie de votre tentative qui vous pose problème."
+    },
+    "review": {
+      "emptyAll": "Aucune question pour le moment.",
+      "emptyIncorrect": "Aucune question incorrecte.",
+      "status": {
+        "revealed": "Révélé",
+        "correct": "✓ Correct",
+        "incorrect": "✕ Incorrect",
+        "notChecked": "Non vérifié"
+      },
+      "card": {
+        "question": "Question {n}",
+        "attempts": "Tentatives :",
+        "notCheckedYet": "Pas encore vérifié",
+        "hiddenNote": "La bonne réponse est masquée pour cette session.",
+        "showDetails": "Afficher l’attendu / l’explication"
+      }
+    },
+    "title": "Practice Generator",
+    "subtitle": "Refresh keeps progress • ←/→ navigate • Enter submits",
+    "progress": {
+      "attempts": "Tentatives",
+      "label": "Progress",
+      "correct": "Correct",
+      "question": "Q"
+    },
+    "filters": {
+      "sessionLocked": "Mode session • filtres verrouillés",
+      "topic": "Topic",
+      "difficulty": "Difficulty",
+      "assignmentLocked": "Assignment mode • filters locked"
+    },
+    "buttons": {
+      "prev": "Prev",
+      "next": "Next",
+      "submit": "Submit",
+      "reveal": "Reveal",
+      "retry": "Retry",
+      "auto": "Auto"
+    },
+    "status": {
+      "clickNextToStart": "Cliquez sur Suivant pour commencer.",
+      "revealDisabled": "La révélation de la réponse est désactivée pour cette session.",
+      "attemptsLeft": "Tentatives restantes : {count}",
+      "loading": "Loading…",
+      "loadingDots": "Loading...",
+      "dash": "—"
+    },
+    "confirm": {
+      "progressLine": "Progression actuelle : {answered}/{sessionSize} répondu(s).",
+      "title": "Restart session?",
+      "subtitle": "Changing topic or difficulty will reset your current run.",
+      "loseProgress": "You’ll lose progress:",
+      "keep": "Keep current session",
+      "restart": "Yes, restart",
+      "esc": "Press Esc to close."
+    },
+    "result": {
+      "title": "Result",
+      "submitToValidate": "Submit your answer to get validation.",
+      "errorTitle": "⚠️ Error",
+      "revealed": "👁️ Revealed (answer shown)",
+      "correct": "✅ Correct",
+      "incorrect": "❌ Not quite",
+      "revealedPractice": "La notation est terminée. Vous pouvez encore remplir, modifier, réinitialiser et exécuter la solution avant de continuer."
+    },
+    "loadError": {
+      "title": "Couldn’t load a question"
+    },
+    "questionPanel": {
+      "footerTip": "← / → moves between loaded questions • Next loads a new question at the end • Enter submits"
+    },
+    "answer": {
+      "yourAnswer": "Your answer",
+      "placeholder": "e.g. 3.5",
+      "details": "Details"
+    },
+    "vectorPad": {
+      "title": "Vector Pad",
+      "gridBadge": "Grid: 1 sq = {step} units{mode}",
+      "gridModeAuto": " • Auto",
+      "gridModeLocked": " • Locked",
+      "gridSelectOption": "1 sq = {step}"
+    },
+    "exercises": {
+      "vectorDragTarget": {
+        "instructions": "Drag a (blue) to match target a* = ({x}, {y}) within tolerance {tolerance}."
+      },
+      "vectorDragDot": {
+        "instructions": "Drag a so that a · b ≈ {targetDot} (tolerance {tolerance}).",
+        "bFixed": "b is fixed: ({x}, {y})",
+        "cards": {
+          "aCurrent": "a (current)",
+          "dotCurrent": "a · b (current)"
+        }
+      }
+    },
+    "summary": {
+      "return": "Retour",
+      "title": "Session complete",
+      "subtitle": "You finished {answered}/{sessionSize} exercises",
+      "scoreLine": "{correct} correct • {missed} missed • {pct}%",
+      "reviewTitle": "Review & next steps",
+      "reviewSubtitle": "Refresh won’t lose progress • You can also go back to questions.",
+      "toggleMissedHide": "Hide missed",
+      "toggleMissedShow": "Show missed",
+      "backToQuestions": "Back to questions",
+      "missedHidden": "Missed list hidden.",
+      "urlTip": "Tip: changing topic/difficulty updates the URL params.",
+      "assignmentReturn": "Retour à la révision"
+    },
+    "summaryCards": {
+      "score": "Score",
+      "niceWork": "Nice work. Review missed ones (below) to lock it in.",
+      "perfectRunTitle": "Perfect run ✅",
+      "perfectRunSubtitle": "You didn’t miss any questions in this session.",
+      "missedLabel": "Missed ({count})",
+      "yourAnswer": "Your answer",
+      "expected": "Expected",
+      "explanation": "Explanation"
+    },
+    "expectedSummary": {
+      "expected": "Expected",
+      "you": "You",
+      "delta": "Δ",
+      "chosen": "Chosen",
+      "correct": "Correct",
+      "missing": "Missing:",
+      "extra": "Extra:",
+      "targetAStar": "Target a*",
+      "tolerance": "Tolerance",
+      "targetDot": "Target a·b",
+      "yourDot": "Your a·b",
+      "aMag": "|a|",
+      "min": "min",
+      "generic": "Expected data available."
+    },
+    "errors": {
+      "incompleteAnswer": "Answer is incomplete or invalid.",
+      "failedToSubmit": "Failed to submit",
+      "failedToLoad": "Failed to load question"
+    },
+    "mobile": {
+      "leaderboard": "Classement",
+      "controls": "Commandes",
+      "controlsTitle": "Progression et commandes",
+      "leaderboardTitle": "Classement de pratique",
+      "close": "Fermer",
+      "submitting": "Envoi…",
+      "statusReady": "Prêt à envoyer",
+      "statusCorrect": "Correct — continuer",
+      "statusTryAgain": "Pas encore — réessayer",
+      "statusRevealed": "Réponse révélée",
+      "statusError": "Une action demande votre attention",
+      "help": "Aide",
+      "helpTitle": "Indices et réponse",
+      "helpUnavailable": "L’aide sera disponible une fois l’exercice chargé.",
+      "helpIntroTitle": "Besoin d’aide ?",
+      "helpIntro": "Ouvrez les indices un par un. Révéler la réponse termine l’exercice et ne rapporte aucun XP.",
+      "attemptsRemaining": "{count} essais restants",
+      "hintsUsed": "Indices utilisés : {used}/{total}",
+      "showHint": "Afficher un indice",
+      "openingHelp": "Ouverture…",
+      "noMoreHints": "Vous avez ouvert tous les indices disponibles.",
+      "revealTitle": "Révéler la réponse",
+      "revealWarning": "Cela termine l’exercice et ne rapporte aucun XP.",
+      "revealAnswer": "Révéler la réponse",
+      "revealConfirmTitle": "Révéler la réponse ?",
+      "revealConfirmBody": "L’exercice sera marqué comme révélé. Vous ne gagnerez aucun XP.",
+      "cancel": "Annuler",
+      "answerRevealedTitle": "Réponse révélée",
+      "answerRevealedBody": "Examinez la solution, puis continuez lorsque vous êtes prêt.",
+      "continue": "Continuer",
+      "backToExercise": "Retour à l’exercice"
+    },
+    "workspace": {
+      "assignment": {
+        "title": "Devoir",
+        "kicker": "Devoir du module",
+        "returnToReview": "Retourner à la révision",
+        "returnTitle": "Quitter le devoir et retourner à la révision",
+        "returnLoading": "Retour…",
+        "completeTitle": "Devoir terminé",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés.",
+        "summaryTitle": "Devoir terminé 🎉",
+        "summarySubtitle": "{completed} questions terminées sur {total}.",
+        "summaryNote": "{correct} bonnes réponses • {revealed} réponses révélées."
+      },
+      "onboardingTrial": {
+        "returnLabel": "Quitter l’essai",
+        "returnTitle": "Quitter l’essai d’intégration",
+        "returnLoading": "Sortie…",
+        "completeTitle": "Essai terminé",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés."
+      },
+      "scopeTitle": "Portée de la pratique",
+      "subscriber": "Abonné",
+      "locked": "Verrouillé",
+      "fixed": "Fixe",
+      "subject": "Matière",
+      "module": "Module",
+      "chooseSubject": "Choisir une matière",
+      "chooseModule": "Choisir un module",
+      "loadingSubjects": "Chargement des matières…",
+      "subjectsUnavailable": "Les matières sont temporairement indisponibles.",
+      "subscriberLockedReason": "Abonnez-vous pour choisir une matière, un sujet et une difficulté.",
+      "fixedScopeReason": "Cette session utilise une matière et un module fixes.",
+      "dailyFallback": "Pratique quotidienne",
+      "challengeLabel": "Défi",
+      "exerciseTab": "Exercice",
+      "codeTab": "Code",
+      "openWorkspace": "Ouvrir l’espace de code",
+      "badges": {
+        "assignment": "Devoir • contrôlé par l’enseignant",
+        "challenge": "Défi public • exercice précis",
+        "trial": "Essai d’intégration • questions de départ",
+        "daily": "Pratique quotidienne • classement équitable",
+        "standard": "Pratique abonné • configurable",
+        "practice": "Pratique"
+      },
+      "titles": {
+        "assignment": "Devoir",
+        "challenge": "Défi",
+        "trial": "Pratique d’essai",
+        "daily": "Pratique quotidienne",
+        "standard": "Espace de pratique",
+        "practice": "Espace de pratique"
+      },
+      "subtitles": {
+        "assignment": "Répondez aux questions sélectionnées et remettez votre travail.",
+        "challenge": "Résolvez l’exercice partagé et comparez votre résultat.",
+        "trial": "Essayez un exercice de départ ciblé.",
+        "daily": "Terminez la série classée du jour.",
+        "standard": "Choisissez une matière et un sujet, puis pratiquez dans l’espace complet.",
+        "practice": "Choisissez un sujet et pratiquez dans l’espace complet."
+      },
+      "navigator": {
+        "dailyEyebrow": "Pratique quotidienne",
+        "dailyTitle": "Les {count} exercices du jour",
+        "dailySubtitle": "Une série classée fixe sélectionnée pour aujourd’hui.",
+        "challengeEyebrow": "Défi",
+        "challengeDefaultTitle": "Défi de programmation partagé",
+        "challengeSubtitle": "Résolvez exactement l’exercice qui vous a été partagé.",
+        "subscriberEyebrow": "Pratique abonné",
+        "freeEyebrow": "Pratique",
+        "chooseTitle": "Choisir quoi pratiquer",
+        "subscriberSubtitle": "Choisissez une matière, un module, un sujet et une difficulté.",
+        "freeSubtitle": "Abonnez-vous pour choisir une matière, un module, un sujet et une difficulté.",
+        "defaultEyebrow": "Pratique",
+        "defaultTitle": "Espace de pratique",
+        "defaultSubtitle": "Progressez dans la série d’exercices actuelle.",
+        "progress": "Progression",
+        "correct": "Correct",
+        "fixedReason": "Cette série d’exercices est fixe pour cette expérience.",
+        "dailySubjectReason": "La matière du jour est verrouillée après le démarrage de la série.",
+        "dailyMixReason": "Le système répartit les exercices du jour entre les modules admissibles de cette matière. Le choix précis du module, du sujet et de la difficulté appartient à la pratique illimitée.",
+        "subscribeReason": "Abonnez-vous pour choisir une autre matière ou un autre module.",
+        "queue": "File d’exercices",
+        "fallbackBadge": "Pratique",
+        "exerciseFallback": "Exercice {number}",
+        "statusCorrect": "Correct",
+        "statusCompleted": "Terminé",
+        "statusInProgress": "En cours",
+        "statusRevealed": "Réponse révélée",
+        "statusCurrent": "En cours",
+        "statusNotStarted": "Non commencé",
+        "sidebarTabsAria": "Contrôles de pratique et classement",
+        "controlsTab": "Pratique",
+        "leaderboardTab": "Classement",
+        "resetExercise": "Réinitialiser cet exercice",
+        "resetExerciseDescription": "Restaure l’espace de départ sans rendre les tentatives déjà utilisées."
+      },
+      "stage": {
+        "completeTitle": "Pratique terminée",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés.",
+        "challengeDefaultTitle": "Défi de programmation",
+        "challengeDefaultSubtitle": "Utilisez l’espace de travail, puis vérifiez votre réponse lorsque vous êtes prêt.",
+        "dailyDefaultTitle": "Pratique quotidienne",
+        "dailyDefaultSubtitle": "Terminez les exercices classés du jour.",
+        "practiceDefaultTitle": "Pratique",
+        "practiceDefaultSubtitle": "Choisissez un sujet dans le navigateur, puis résolvez l’exercice.",
+        "questionProgress": "Question {current} sur {total}",
+        "tabsAria": "Exercice et espace de code",
+        "loadingTitle": "Préparation de votre exercice…",
+        "errorTitle": "Impossible de charger cet exercice",
+        "loadingBody": "L’espace de pratique apparaîtra ici lorsqu’il sera prêt.",
+        "retry": "Réessayer"
+      },
+      "header": {
+        "restartTitle": "Recommencer la pratique",
+        "restartDescription": "Effacer cette session et charger une nouvelle série.",
+        "navigatorDrawerTitle": "Choisir la pratique",
+        "resizeNavigator": "Faire glisser pour redimensionner le navigateur de pratique"
+      }
+    },
+    "completion": {
+      "kicker": "Pratique terminée",
+      "title": "Session terminée 🎉",
+      "score": "{correct} sur {total} bonnes réponses.",
+      "defaultNote": "Votre progression a été enregistrée.",
+      "defaultPrimary": "Continuer",
+      "leaderboard": "Voir le classement",
+      "reviewResults": "Revoir les résultats",
+      "daily": {
+        "kicker": "Pratique quotidienne terminée",
+        "title": "Vous avez terminé la pratique du jour 🎉",
+        "freeNote": "Votre pratique classée est terminée. Abonnez-vous pour débloquer une pratique illimitée par sujet.",
+        "subscriberNote": "Votre pratique classée est terminée. La pratique illimitée par sujet reste disponible.",
+        "freePrimary": "S’abonner pour une pratique illimitée",
+        "subscriberPrimary": "Continuer à pratiquer",
+        "nextLabel": "Prochaine pratique quotidienne classée",
+        "countdown": "{hours}:{minutes}:{seconds}",
+        "ready": "Disponible maintenant",
+        "utcNote": "La pratique quotidienne se réinitialise à minuit UTC.",
+        "revealedNote": "{count} réponse(s) révélée(s) comptent comme terminées, mais pas comme correctes et ne rapportent aucun point classé de réponse."
+      }
+    }
+  }
+}

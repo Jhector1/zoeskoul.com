@@ -1,0 +1,51 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vecteurs",
+    "pageIntro": "Parcours en deux parties : la Partie 1 pose les bases ; la Partie 2 construit le cœur de l’algèbre linéaire (combinaisons → indépendance → engendré/sous-espace → base).",
+    "quickStartPart1Easy": "Démarrage rapide • Partie 1 • Facile",
+    "jumpPart2Easy": "Aller • Partie 2 • Facile",
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner",
+    "practiceNowHint": "“S’entraîner” ouvre une session d’exercices pré-filtrée pour cette partie.",
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Fais la Partie 1 jusqu’à ce que l’orientation, les formes, la norme/vecteurs unitaires et le produit scalaire soient automatiques.",
+      "1": "Passe à la Partie 2 pour maîtriser indépendance/engendré/base (ça débloque tout le reste).",
+      "2": "Reviens à la géométrie du produit scalaire quand la projection/décomposition semble “mystérieuse”."
+    },
+    "routeHint": "Si ton chemin de cours n’est pas /learn, remplace simplement les liens learnHref.",
+    "parts": {
+      "part1": {
+        "badge": "Commence ici",
+        "title": "Vecteurs — Partie 1",
+        "subtitle": "Bases, intuition géométrique, formes NumPy et opérations clés",
+        "bullets": {
+          "0": "Sens d’un vecteur (algèbre vs géométrie) et notation ℝⁿ",
+          "1": "Ligne vs colonne + transposée (pourquoi c’est important)",
+          "2": "Représentations NumPy : (n,), (1,n), (n,1) + intuition des shapes",
+          "3": "Addition/soustraction, multiplication scalaire (piège listes vs arrays)",
+          "4": "Norme (magnitude) + vecteurs unitaires",
+          "5": "Produit scalaire : calcul + interprétation signe/angle",
+          "6": "Hadamard vs scalaire vs produit externe (ce que tu obtiens)",
+          "7": "Idée de projection (prépare les décompositions)"
+        }
+      },
+      "part2": {
+        "badge": "Ensuite",
+        "title": "Vecteurs — Partie 2",
+        "subtitle": "Combinaisons linéaires → indépendance → engendré/sous-espace → base",
+        "bullets": {
+          "0": "Ensembles de vecteurs : fini / infini / vide",
+          "1": "Combinaisons linéaires pondérées (composante par composante)",
+          "2": "Indépendants vs dépendants (y compris la règle du vecteur nul)",
+          "3": "Engendré (droite vs tout ℝ²) + intuition de dimension",
+          "4": "Tests de sous-espace : vecteur nul + fermetures",
+          "5": "Vérifier une base (ℝ² : det ≠ 0)",
+          "6": "Coordonnées dans une base (résoudre c₁, c₂)",
+          "7": "Lien avec projection + décomposition orthogonale"
+        }
+      }
+    }
+  }
+}

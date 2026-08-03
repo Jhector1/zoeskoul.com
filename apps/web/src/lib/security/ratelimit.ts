@@ -4,6 +4,8 @@ import "server-only";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
+import { inMemoryRateLimit } from "./inMemoryRateLimit";
+
 type LimitResult =
     | { ok: true; limit: number; remaining: number; resetMs: number }
     | { ok: false; limit: number; remaining: number; resetMs: number };
@@ -16,6 +18,7 @@ function mustGet(name: string) {
 
 // Singleton (module-level) clients
 const ratelimitCache = new Map<string, Ratelimit>();
+const warnedDevelopmentFallbacks = new Set<string>();
 
 type RateLimitConfig = {
     bucket: string;
@@ -65,6 +68,36 @@ function getRatelimit(config: RateLimitConfig = DEFAULT_CONFIG): Ratelimit {
     return limiter;
 }
 
+function developmentFallbackWarning(
+    config: RateLimitConfig,
+    error: unknown,
+): void {
+    const warningKey = [
+        config.bucket,
+        config.limit,
+        config.window,
+    ].join(":");
+
+    if (warnedDevelopmentFallbacks.has(warningKey)) {
+        return;
+    }
+
+    warnedDevelopmentFallbacks.add(warningKey);
+
+    console.warn(
+        "[ratelimit] remote limiter unavailable; using process-local development fallback",
+        {
+            bucket: config.bucket,
+            limit: config.limit,
+            window: config.window,
+            error:
+                error instanceof Error
+                    ? error.message
+                    : String(error),
+        },
+    );
+}
+
 export async function rateLimit(
     key: string,
     config?: Partial<RateLimitConfig>,
@@ -76,13 +109,27 @@ export async function rateLimit(
         limit: config?.limit ?? DEFAULT_CONFIG.limit,
         window: config?.window ?? DEFAULT_CONFIG.window,
     };
-    const rl = getRatelimit(mergedConfig);
-    const out = await rl.limit(key);
 
-    return {
-        ok: out.success,
-        limit: out.limit,
-        remaining: out.remaining,
-        resetMs: out.reset, // epoch ms when window resets
-    };
+    try {
+        const rl = getRatelimit(mergedConfig);
+        const out = await rl.limit(key);
+
+        return {
+            ok: out.success,
+            limit: out.limit,
+            remaining: out.remaining,
+            resetMs: out.reset, // epoch ms when window resets
+        };
+    } catch (error) {
+        if (process.env.NODE_ENV === "production") {
+            throw error;
+        }
+
+        developmentFallbackWarning(mergedConfig, error);
+
+        return inMemoryRateLimit(
+            key,
+            mergedConfig,
+        );
+    }
 }

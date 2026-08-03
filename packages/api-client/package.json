@@ -1,0 +1,20 @@
+{
+  "name": "@zoeskoul/api-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "test": "vitest run --root ../.. packages/api-client/src",
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.4",
+    "vitest": "^4.1.5"
+  }
+}

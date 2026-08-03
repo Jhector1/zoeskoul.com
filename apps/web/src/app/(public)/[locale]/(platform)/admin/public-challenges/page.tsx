@@ -42,8 +42,8 @@ export default async function PublicChallengesPage({
             You cannot create public challenge links with this account.
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-700">
-            Add this account as an admin, publisher, or author, or include its
-            email in <code>CHALLENGE_PUBLISHER_EMAILS</code>.
+            Ask an administrator to grant this account an authorized database
+            role. Email addresses and environment variables do not grant access.
           </p>
           {access.email ? (
             <p className="mt-3 text-sm text-neutral-600">

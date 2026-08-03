@@ -284,6 +284,44 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         showDebug: Boolean(session?.assignment?.showDebug),
     });
 
+    if (graded.infrastructureFailure) {
+        const failure = graded.infrastructureFailure;
+
+        console.error("Practice grading infrastructure unavailable", {
+            requestId,
+            instanceId: instance.id,
+            sessionId: session?.id ?? null,
+            code: failure.code,
+            detail: failure.detail,
+        });
+
+        const response = jsonApiResponse({
+            requestId,
+            message: failure.message,
+            status: failure.status,
+            extra: {
+                ok: null,
+                code: failure.code,
+                explanation: null,
+                feedback: null,
+                finalized: false,
+                duplicate: false,
+                attempts: null,
+                sessionComplete: false,
+            },
+        });
+
+        response.headers.set(
+            "Retry-After",
+            String(failure.retryAfterSeconds),
+        );
+
+        return attachGuestCookie(
+            response,
+            setGuestId ?? undefined,
+        );
+    }
+
     const finalizeOnExhaust =
         mode === "assignment" ||
         mode === "public_challenge" ||

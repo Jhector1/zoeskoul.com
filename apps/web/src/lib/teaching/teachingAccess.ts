@@ -1,9 +1,8 @@
 import "server-only";
 
 import { cache } from "react";
-import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { resolveTeachingRoleAccess } from "./teachingRoleAccess";
+
+import { getCurrentUserAccess } from "@/lib/access/currentUserAccess";
 
 export type TeachingUser = {
   id: string;
@@ -17,54 +16,31 @@ export type TeachingPageAccess = {
   teachingUser: TeachingUser | null;
 };
 
-function configuredAdminEmails() {
-  return (process.env.ADMIN_EMAILS ?? "").split(",");
-}
-
-async function resolveTeachingUserForIdentity(args: {
-  userId?: string;
-  email?: string | null;
-}): Promise<TeachingUser | null> {
-  const email = args.email?.trim().toLowerCase() ?? null;
-  if (!args.userId && !email) return null;
-
-  const user = await prisma.user.findFirst({
-    where: args.userId ? { id: args.userId } : { email },
-    select: { id: true, email: true, roles: true },
-  });
-  if (!user) return null;
-
-  const access = resolveTeachingRoleAccess({
-    roles: user.roles ?? [],
-    email: user.email,
-    configuredAdminEmails: configuredAdminEmails(),
-  });
-  if (!access.allowed) return null;
-
-  return {
-    id: user.id,
-    email: user.email,
-    roles: access.roles,
-    isAdmin: access.isAdmin,
-  };
-}
-
 /**
  * One request-scoped lookup shared by the teaching layout and its pages.
- * It distinguishes a signed-out visitor from an authenticated learner so the
- * page guard can choose the correct redirect without duplicating auth logic.
+ * Database roles are authoritative; email and environment configuration never
+ * grant teaching or administrator privileges.
  */
 export const getTeachingPageAccess = cache(async (): Promise<TeachingPageAccess> => {
-  const session = await auth();
-  const userId = (session?.user as any)?.id as string | undefined;
-  const email = session?.user?.email ?? null;
-  const authenticated = Boolean(userId || email);
+  const access = await getCurrentUserAccess();
 
-  if (!authenticated) return { authenticated: false, teachingUser: null };
+  if (!access.authenticated || !access.user) {
+    return { authenticated: false, teachingUser: null };
+  }
+
+  const canAccessTeaching =
+    access.capabilities.isAdmin || access.capabilities.isTeacher;
 
   return {
     authenticated: true,
-    teachingUser: await resolveTeachingUserForIdentity({ userId, email }),
+    teachingUser: canAccessTeaching
+      ? {
+          id: access.user.id,
+          email: access.user.email,
+          roles: access.capabilities.roles,
+          isAdmin: access.capabilities.isAdmin,
+        }
+      : null,
   };
 });
 

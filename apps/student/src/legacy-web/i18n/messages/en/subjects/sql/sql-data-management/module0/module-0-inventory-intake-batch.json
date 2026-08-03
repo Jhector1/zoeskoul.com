@@ -1,0 +1,193 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-0-safe-inserts": {
+        "module-0-inventory-intake-batch": {
+          "label": "Module 0 Project: New Inventory Intake",
+          "summary": "Add a five-item approved inventory batch through five cumulative INSERT steps.",
+          "cards": {
+            "sketch0": {
+              "title": "New Inventory Intake Project"
+            },
+            "project": {
+              "title": "New Inventory Intake Project"
+            }
+          },
+          "projectSteps": {
+            "ci_module_0_step1": {
+              "title": "Add the First Approved Item"
+            },
+            "ci_module_0_step2": {
+              "title": "Record an Item with No Notes"
+            },
+            "ci_module_0_step3": {
+              "title": "Use the Approved Defaults"
+            },
+            "ci_module_0_step4": {
+              "title": "Add Two Items as One Batch"
+            },
+            "ci_module_0_step5": {
+              "title": "Finish the Intake Handoff"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "ci_module_0_step1": {
+                "title": "Add the First Approved Item",
+                "prompt": "The fulfillment team has approved the first item for its new packing station. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 101`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 101`."
+                },
+                "starterCode": "-- Apply the approved data change for \"Add the First Approved Item\" below.\n",
+                "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Apply the approved data change for \"Add the First Approved Item\" below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Add the First Approved Item\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;"
+                  }
+                }
+              },
+              "ci_module_0_step2": {
+                "title": "Record an Item with No Notes",
+                "prompt": "A second approved item has no notes on the intake sheet. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 102`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 102`."
+                },
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Continue the next requirement for Record an Item with No Notes below.\n",
+                "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Continue the next requirement for Record an Item with No Notes below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Record an Item with No Notes\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;"
+                  }
+                }
+              },
+              "ci_module_0_step3": {
+                "title": "Use the Approved Defaults",
+                "prompt": "The Shipping Pouch should receive the database's approved defaults instead of hard-coded values. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, is_test, notes)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 103`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 103`."
+                },
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Continue the next requirement for Use the Approved Defaults below.\n",
+                "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Continue the next requirement for Use the Approved Defaults below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Use the Approved Defaults\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;"
+                  }
+                }
+              },
+              "ci_module_0_step4": {
+                "title": "Add Two Items as One Batch",
+                "prompt": "Two small packing supplies were approved together and should be recorded as one batch. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, is_test, notes)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id IN (104, 105)`. Sort the final result by `id`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id IN (104, 105)`, ordered by `id`."
+                },
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Continue the next requirement for Add Two Items as One Batch below.\n",
+                "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Continue the next requirement for Add Two Items as One Batch below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Add Two Items as One Batch\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;"
+                  }
+                }
+              },
+              "ci_module_0_step5": {
+                "title": "Finish the Intake Handoff",
+                "prompt": "The intake script is ready for an operations handoff. In `query.sql`, return every column from `inventory_items`. Sort the final result by `id`. Keep the completed work in `operations.sql` unchanged.",
+                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items`, ordered by `id`."
+                },
+                "starterCode": "-- Return the verification result required for \"Finish the Intake Handoff\" below.\n",
+                "solutionCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Finish the Intake Handoff\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-0-safe-inserts": {
+        "module-0-inventory-intake-batch": {
+          "sketch-module-0-intro": {
+            "title": "New Inventory Intake Project",
+            "bodyMarkdown": "A small makers-market fulfillment team is opening a new packing station. You are the junior data operations analyst responsible for turning an approved five-item intake sheet into a safe, reviewable database change.\n\nThe project begins with one item and grows into a complete intake batch. You will practice explicit column lists, SQL `NULL`, table defaults, and one multi-row insert while preserving every record that already exists.\n\nYour deliverable is a two-file intake workspace:\n\n- `operations.sql` contains the cumulative `INSERT` statements for IDs 101 through 105.\n- `query.sql` returns the newly added rows and finishes with the full inventory ordered by `id`.\n\nEach step carries the previous approved work forward, so the final workspace reads as one coherent operational script rather than a collection of unrelated answers."
+          }
+        }
+      }
+    }
+  }
+}

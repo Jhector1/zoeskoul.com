@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "having-after-grouping": {
+          "label": "HAVING After Grouping",
+          "summary": "Keep only completed groups whose aggregate results meet a meaningful threshold.",
+          "cards": {
+            "sketch0": {
+              "title": "Filter the Completed Summary Rows"
+            },
+            "sketch1": {
+              "title": "Use a Calibrated Monetary Threshold"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "HAVING Timing",
+              "prompt": "What does HAVING filter?",
+              "hint": "HAVING can evaluate COUNT, SUM, and other aggregate results.",
+              "help": {
+                "concept": "Groups must exist before HAVING can test them.",
+                "hint_1": "WHERE handles source rows.",
+                "hint_2": "Choose the group-filter stage."
+              },
+              "options": {
+                "a": "Individual source rows before grouping",
+                "b": "Completed groups after aggregation",
+                "c": "Stored table columns permanently",
+                "d": "Only displayed headings"
+              }
+            },
+            "single-choice-2": {
+              "title": "Correct Aggregate Threshold",
+              "prompt": "Which clause correctly keeps groups with at least four rows?",
+              "hint": "The condition depends on a group count.",
+              "help": {
+                "concept": "Aggregate conditions belong in HAVING.",
+                "hint_1": "WHERE cannot use a group result that has not been calculated.",
+                "hint_2": "Choose HAVING."
+              },
+              "options": {
+                "a": "WHERE COUNT(*) >= 4",
+                "b": "HAVING COUNT(*) >= 4",
+                "c": "ORDER BY COUNT(*) >= 4",
+                "d": "GROUP BY COUNT(*) >= 4"
+              }
+            },
+            "multi-choice-1": {
+              "title": "WHERE and HAVING Pairings",
+              "prompt": "Which clauses are placed correctly for row or group filtering? Select all that apply.",
+              "hint": "Separate row attributes from aggregate outcomes.",
+              "help": {
+                "concept": "Status can be tested on one row.",
+                "hint_1": "SUM and AVG require group calculation.",
+                "hint_2": "COUNT cannot be evaluated in WHERE."
+              },
+              "options": {
+                "a": "WHERE order_status = Completed",
+                "b": "HAVING SUM(quantity * unit_price) > 550",
+                "c": "WHERE COUNT(*) >= 4",
+                "d": "HAVING AVG(customer_rating) < 4.3"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Good Threshold Design",
+              "prompt": "Which practices improve a HAVING exercise? Select all that apply.",
+              "hint": "A useful threshold should produce interpretable results and match the metric.",
+              "help": {
+                "concept": "Unexpected emptiness can make correct SQL look broken.",
+                "hint_1": "The report question should explain why the threshold matters.",
+                "hint_2": "Choose calibrated, meaningful practices."
+              },
+              "options": {
+                "a": "Check the threshold against seeded data.",
+                "b": "Make the business question explicit.",
+                "c": "Prefer an empty result even when emptiness is not the lesson.",
+                "d": "Use units that match the aggregate metric."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Logical Group Filtering",
+              "prompt": "Arrange the logical stages that lead to HAVING filtering.",
+              "hint": "HAVING cannot run until aggregate values exist.",
+              "help": {
+                "concept": "Row filtering precedes grouping.",
+                "hint_1": "Aggregates describe each group.",
+                "hint_2": "The final stage keeps qualifying groups."
+              },
+              "tokens": {
+                "t1": "Filter source rows with WHERE",
+                "t2": "Form groups",
+                "t3": "Calculate aggregate values",
+                "t4": "Filter groups with HAVING"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Group Filter",
+              "prompt": "Fill the clause that keeps categories with four or more completed orders.",
+              "hint": "The condition tests an aggregate count.",
+              "help": {
+                "concept": "Use the group-filtering clause after GROUP BY.",
+                "hint_1": "WHERE would act too early.",
+                "hint_2": "Choose HAVING."
+              },
+              "template": "[blank1] COUNT(*) >= 4",
+              "choices": [
+                "HAVING",
+                "WHERE",
+                "ORDER BY",
+                "SELECT"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_having_after_grouping_sketch0": {
+              "title": "Keep Categories with Several Completed Orders",
+              "prompt": "Return `category` and completed-order count as `completed_orders`. Calculate and return `category, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `category`. After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`.",
+              "hint": "The status filter belongs in WHERE; the count threshold belongs in HAVING.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nHAVING COUNT(*) >= 4\nORDER BY completed_orders DESC, category ASC;"
+            },
+            "try_having_after_grouping_sketch1": {
+              "title": "Find High-Value Categories",
+              "prompt": "Return each `category` and gross sales rounded to two decimals as `gross_sales`. Calculate and return `category, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Produce one result row per `category`. After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`.",
+              "hint": "Repeat the aggregate expression in HAVING and use the alias for display sorting.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "having-after-grouping": {
+          "sketch0": {
+            "title": "Filter the Completed Summary Rows",
+            "bodyMarkdown": "### Group filters run after aggregate calculations\n\n`HAVING` tests completed groups. Use it when the condition depends on `COUNT`, `SUM`, `AVG`, or another group result. `WHERE` cannot test a group total because that total does not exist yet.\n\nThe `HAVING` clause in SQL is used to filter records that work on aggregated data. Unlike the `WHERE` clause, which filters rows before aggregation, `HAVING` filters groups after aggregation. This is particularly useful when you want to apply conditions to grouped data.\n\nFor example, consider a sales report where you want to find regions with total sales exceeding $500. You would first group the data by region and then use `HAVING` to filter those groups:\n\n```sql\nSELECT\n    region,\n    SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nHAVING total_sales > 500;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `SUM(quantity * unit_price) AS total_sales` — adds the row values across the current group and names the output `total_sales`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region` — creates one group for every unique `region` value or combination.\n- `HAVING total_sales > 500;` — keeps only completed groups that satisfy `total_sales > 500`.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `HAVING` removes groups that do not meet the aggregate condition.\n5. `SELECT` returns the finished metric under its alias.\n\nIn this query, `SUM(quantity * unit_price)` calculates the total sales for each region, and `HAVING total_sales > 500` ensures only regions with sales over $500 are included in the results."
+          },
+          "sketch1": {
+            "title": "Use a Calibrated Monetary Threshold",
+            "bodyMarkdown": "### Group filters run after aggregate calculations\n\n`HAVING` tests completed groups. Use it when the condition depends on `COUNT`, `SUM`, `AVG`, or another group result. `WHERE` cannot test a group total because that total does not exist yet.\n\nA HAVING rule should be meaningful for the current data and the decision being made.\n\n```sql\nSELECT\n    region,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY region\nHAVING SUM(quantity * unit_price) > 450;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `ROUND(SUM(quantity * unit_price), 2) AS gross_sales` — adds the row values across the current group and names the output `gross_sales`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region` — creates one group for every unique `region` value or combination.\n- `HAVING SUM(quantity * unit_price) > 450;` — keeps only completed groups that satisfy `SUM(quantity * unit_price) > 450`.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `HAVING` removes groups that do not meet the aggregate condition.\n5. `SELECT` returns the finished metric under its alias.\n\nThis keeps regional groups whose gross sales exceed $450. The threshold is applied to each completed aggregate, not to individual order values.\n\nCalibrating the threshold matters: an impossible rule produces an empty report even when the query is correct."
+          }
+        }
+      }
+    }
+  }
+}

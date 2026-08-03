@@ -1,0 +1,22 @@
+{
+  "cardUi": {
+    "kinds": {
+      "quiz": "quiz",
+      "project": "project",
+      "tryIt": "try it yourself task"
+    },
+    "gateBanner": "Complete the topic items above (readings, videos, sketches) to unlock this {kind}.",
+    "completed": "✓ Completed",
+    "loadingSaved": "Loading saved {kind} state…",
+    "actions": {
+      "read": "Mark as read",
+      "readDone": "✓ Read",
+      "done": "Mark as done",
+      "doneDone": "✓ Done",
+      "doneTitle": "Mark this lesson as done",
+      "readTitle": "Mark this lesson as read",
+      "watched": "Mark watched",
+      "watchedDone": "✓ Watched"
+    }
+  }
+}

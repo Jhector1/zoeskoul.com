@@ -1,3 +1,67 @@
+const RUNNER_INFRASTRUCTURE_ERROR_PATTERNS = [
+    /\bfetch failed\b/i,
+    /\bECONNREFUSED\b/i,
+    /\bECONNRESET\b/i,
+    /\bENOTFOUND\b/i,
+    /\bETIMEDOUT\b/i,
+    /\bsocket hang up\b/i,
+    /missing JUDGE0_URL/i,
+    /missing Judge0 base URL/i,
+    /Judge0 submission failed/i,
+    /Judge0 poll failed/i,
+    /non-JSON response/i,
+    /execution timed out while waiting for Judge0/i,
+    /runner fetch failed/i,
+    /service unavailable/i,
+    /bad gateway/i,
+    /gateway timeout/i,
+    /authentication not found/i,
+    /\bunauthorized\b/i,
+    /\bforbidden\b/i,
+    /\binvalid token\b/i,
+    /\binternal error\b/i,
+] as const;
+
+function runnerFailureText(value: unknown): string {
+    if (value instanceof Error) {
+        return value.message;
+    }
+
+    if (!value || typeof value !== "object") {
+        return String(value ?? "");
+    }
+
+    const record = value as Record<string, unknown>;
+    return [record.error, record.message, record.status]
+        .filter((entry): entry is string => typeof entry === "string")
+        .join("\n");
+}
+
+/**
+ * Distinguishes runner infrastructure/configuration failures from learner-code
+ * failures. stderr and compile_output are intentionally excluded so learner
+ * programs cannot turn their own failure text into an infrastructure result.
+ */
+export function isRunnerInfrastructureFailure(value: unknown): boolean {
+    if (value && typeof value === "object") {
+        const record = value as Record<string, unknown>;
+        const cause = record.cause;
+
+        if (
+            cause &&
+            cause !== value &&
+            isRunnerInfrastructureFailure(cause)
+        ) {
+            return true;
+        }
+    }
+
+    const text = runnerFailureText(value);
+    return RUNNER_INFRASTRUCTURE_ERROR_PATTERNS.some((pattern) =>
+        pattern.test(text),
+    );
+}
+
 export type RunCodeLimits = {
     timeoutMs?: number;
     /** C-only compile policy. Custom metadata is consumed before Judge0 submission. */

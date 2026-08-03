@@ -1,0 +1,51 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vectors",
+    "pageIntro": "Two-part track: Part 1 builds the fundamentals; Part 2 builds the linear algebra core (combinations → independence → span/subspace → basis).",
+    "quickStartPart1Easy": "Quick start • Part 1 • Easy",
+    "jumpPart2Easy": "Jump • Part 2 • Easy",
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "“Practice now” opens a pre-filtered practice session for this part.",
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Do Part 1 until orientation, shapes, norm/unit vectors, and dot product feel automatic.",
+      "1": "Move to Part 2 to master independence/span/basis (these unlock everything later).",
+      "2": "Revisit dot-product geometry whenever projection/decomposition feels “mystical.”"
+    },
+    "routeHint": "If your material route isn’t /learn, just swap the learnHref links.",
+    "parts": {
+      "part1": {
+        "badge": "Start here",
+        "title": "Vectors — Part 1",
+        "subtitle": "Foundations, geometry intuition, NumPy shapes, and core operations",
+        "bullets": {
+          "0": "Vector meaning (algebra vs geometry) and ℝⁿ notation",
+          "1": "Row vs column orientation + transpose (why it matters)",
+          "2": "NumPy representations: (n,), (1,n), (n,1) + shape intuition",
+          "3": "Add/subtract, scalar multiply (lists vs arrays gotcha)",
+          "4": "Magnitude (norm) + unit vectors",
+          "5": "Dot product: compute + interpret sign/angle",
+          "6": "Hadamard vs dot vs outer product (what you get)",
+          "7": "Projection idea (setup for decompositions)"
+        }
+      },
+      "part2": {
+        "badge": "Next",
+        "title": "Vectors — Part 2",
+        "subtitle": "Linear combinations → independence → span/subspace → basis",
+        "bullets": {
+          "0": "Finite vs infinite vs empty vector sets",
+          "1": "Linear weighted combinations (component-wise)",
+          "2": "Independent vs dependent (including zero-vector rule)",
+          "3": "Span (line vs all of ℝ²) and dimension intuition",
+          "4": "Subspace tests: 0 vector + closure rules",
+          "5": "Basis checks (ℝ² det ≠ 0 intuition)",
+          "6": "Coordinates in a basis (solve for c₁, c₂)",
+          "7": "Connect to projection + orthogonal decomposition"
+        }
+      }
+    }
+  }
+}

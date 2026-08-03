@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "one-to-many-and-many-to-many-results": {
+          "label": "One-to-Many and Many-to-Many Results",
+          "summary": "Predict why one parent row may appear several times after joining to related detail rows.",
+          "cards": {
+            "sketch0": {
+              "title": "Read Repeated Rows Correctly"
+            },
+            "sketch1": {
+              "title": "Recognize a Many-to-Many Result"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_one_to_many_and_many_to_many_results_sketch0": {
+              "title": "Try One Row per Course ID",
+              "prompt": "Return one row per course with the course id and its department name. Return `courses.id AS course_id, departments.name AS department_name` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
+              "hint": "The many side is `courses`, so one output row should represent one course.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`."
+              },
+              "starterCode": "SELECT \nFROM departments\nJOIN courses ON ;",
+              "solutionCode": "SELECT courses.id AS course_id,\n       departments.name AS department_name\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
+            },
+            "try_one_to_many_and_many_to_many_results_sketch1": {
+              "title": "Try One Row per Enrollment",
+              "prompt": "Return one row per enrollment with the enrollment id, student grade level, and course title. Return `enrollments.id AS enrollment_id, students.grade_level, courses.title AS course_title` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`.",
+              "hint": "Use the bridge row as the grain and include its id in the result.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`."
+              },
+              "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
+              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Understanding One-to-Many Relationships",
+              "prompt": "In a one-to-many relationship, how many records in the second table can be associated with a single record in the first table?",
+              "hint": "Ask what one output row represents.",
+              "help": {
+                "concept": "Relationship shape explains why a parent may repeat and what one joined result row represents.",
+                "hint_1": "Identify the detail or bridge row that can repeat for one parent.",
+                "hint_2": "State the result grain in plain language before deciding whether repeated rows are correct."
+              },
+              "options": {
+                "a": "One",
+                "b": "Many",
+                "c": "None",
+                "d": "Exactly two"
+              }
+            },
+            "single-choice-2": {
+              "title": "Identifying Bridge Tables",
+              "prompt": "Which table acts as a bridge between students and courses in a many-to-many relationship?",
+              "hint": "Ask what one output row represents.",
+              "help": {
+                "concept": "Relationship shape explains why a parent may repeat and what one joined result row represents.",
+                "hint_1": "Identify the detail or bridge row that can repeat for one parent.",
+                "hint_2": "State the result grain in plain language before deciding whether repeated rows are correct."
+              },
+              "options": {
+                "a": "students",
+                "b": "courses",
+                "c": "enrollments",
+                "d": "departments"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "SQL Join Syntax",
+              "prompt": "Complete the SQL statement to join `students` and `enrollments` on the student ID.",
+              "hint": "Use the correct SQL syntax for joining tables.",
+              "help": {
+                "concept": "The `ON` clause specifies the condition for joining tables.",
+                "hint_1": "The `ON` clause should match the primary key of one table to the foreign key of another.",
+                "hint_2": "Ensure the column names are correctly qualified with table names."
+              },
+              "template": "SELECT * FROM students JOIN enrollments ON students.id = [blank1];",
+              "choices": [
+                "enrollments.student_id",
+                "students.student_id",
+                "enrollments.id",
+                "students.id"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Name the Result Grain",
+              "prompt": "After joining departments to courses without grouping, what does one result row represent?",
+              "hint": "Read the selected detail table and identify which row can repeat for one department.",
+              "help": {
+                "concept": "Result grain describes what one output row represents; it is not determined by a relationship label alone.",
+                "hint_1": "A department can own several course rows.",
+                "hint_2": "The ungrouped joined result has one row for each matching course."
+              },
+              "template": "One result row represents [blank1] together with its department.",
+              "choices": [
+                "one course",
+                "one department total",
+                "one student",
+                "one database"
+              ]
+            },
+            "multi-choice-1": {
+              "title": "Characteristics of Many-to-Many Relationships",
+              "prompt": "Select all characteristics of a many-to-many relationship.",
+              "hint": "Consider how many-to-many relationships are structured.",
+              "help": {
+                "concept": "Many-to-many relationships involve a bridge table to connect two tables.",
+                "hint_1": "Think about the role of the bridge table.",
+                "hint_2": "Consider how each table can relate to multiple records in the other."
+              },
+              "options": {
+                "a": "Requires a bridge table",
+                "b": "Each record in one table can relate to multiple records in the other",
+                "c": "Directly connects two tables without intermediaries",
+                "d": "Involves only two tables"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Join Operations",
+              "prompt": "Arrange the steps to perform a join between `students` and `courses` using `enrollments`.",
+              "hint": "Think about the sequence of joining tables in a many-to-many relationship.",
+              "help": {
+                "concept": "Joining tables in a many-to-many relationship involves using a bridge table.",
+                "hint_1": "Start by joining the first table to the bridge table.",
+                "hint_2": "Then join the bridge table to the second table."
+              },
+              "tokens": {
+                "t1": "Join students to enrollments",
+                "t2": "Join enrollments to courses",
+                "t3": "Select columns from students and courses"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "one-to-many-and-many-to-many-results": {
+          "sketch0": {
+            "title": "One-to-many joins repeat the row from the one side",
+            "bodyMarkdown": "A **one-to-many relationship** means that one row in a parent table may be connected to several rows in another table, while each of those related rows points back to one parent. Departments and courses have this shape: one department can offer many courses, but each course belongs to one department.\n\n```sql\nSELECT departments.name AS department_name,\n       courses.title AS course_title\nFROM departments\nINNER JOIN courses\n  ON departments.id = courses.department_id;\n```\n\nThe query produces one row for each matched course. If Humanities offers two courses, the department name appears twice—once beside each course title. SQL has not duplicated a department by mistake. It has repeated the department value because the **result grain is one course with its department**.\n\nThis distinction matters whenever a joined result contains repeated labels. Before reaching for `DISTINCT`, ask what one row is supposed to represent. If each row represents a different course, the repeated department name is correct and useful.\n\nThe ERD's `1` and `many` markers help predict this pattern before the query runs. The side marked `many` usually determines how many detailed rows can appear when no grouping changes the grain."
+          },
+          "sketch1": {
+            "title": "The bridge row becomes the grain of a many-to-many result",
+            "bodyMarkdown": "A **many-to-many relationship** exists when rows on both sides may have several partners. Students can take many courses, and courses can include many students. The database represents that idea through `enrollments`, where each row stores one particular student-course link.\n\n```sql\nSELECT students.name AS student_name,\n       courses.title AS course_title\nFROM students\nINNER JOIN enrollments\n  ON students.id = enrollments.student_id\nINNER JOIN courses\n  ON enrollments.course_id = courses.id;\n```\n\nThe path begins at a student, crosses one enrollment row, and arrives at one course. Because the bridge records the relationship, one output row represents **one enrollment**, even though the selected columns come from `students` and `courses`.\n\nRepetition can now occur on both sides. Mia may appear beside several course titles, and Biology may appear beside several student names. Removing those repeated names would erase real relationships. The important question is whether the combination of values represents a distinct bridge row.\n\nThis idea prepares you for counts later in the course. Counting output rows measures enrollments. Counting distinct students or distinct courses measures a different entity and may require `COUNT(DISTINCT ...)`."
+          }
+        }
+      }
+    }
+  }
+}

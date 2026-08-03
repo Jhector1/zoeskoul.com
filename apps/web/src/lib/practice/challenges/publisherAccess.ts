@@ -2,23 +2,9 @@ import "server-only";
 
 import { NextResponse } from "next/server";
 
-import { auth } from "@/lib/auth";
-import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
+import { getCurrentUserAccess } from "@/lib/access/currentUserAccess";
 
 const ALLOWED_ROLES = new Set(["admin", "publisher", "author"]);
-
-function configuredPublisherEmails() {
-  return new Set(
-    [
-      process.env.ADMIN_EMAILS ?? "",
-      process.env.CHALLENGE_PUBLISHER_EMAILS ?? "",
-    ]
-      .join(",")
-      .split(",")
-      .map((value) => value.trim().toLowerCase())
-      .filter(Boolean),
-  );
-}
 
 export type ChallengePublisherAccess = {
   authenticated: boolean;
@@ -29,11 +15,9 @@ export type ChallengePublisherAccess = {
 };
 
 export async function resolveChallengePublisherAccess(): Promise<ChallengePublisherAccess> {
-  const session = await auth();
-  const userId = (session?.user as { id?: string | null } | undefined)?.id ?? null;
-  const email = session?.user?.email?.trim().toLowerCase() ?? null;
+  const access = await getCurrentUserAccess();
 
-  if (!userId && !email) {
+  if (!access.authenticated || !access.user) {
     return {
       authenticated: false,
       allowed: false,
@@ -43,21 +27,13 @@ export async function resolveChallengePublisherAccess(): Promise<ChallengePublis
     };
   }
 
-  const privileged = await resolvePrivilegedLearningAccess({ userId, email });
-  const roles = (privileged.roles ?? [])
-    .map((role) => role.trim().toLowerCase())
-    .filter(Boolean);
-  const roleAllowed = roles.some((role) => ALLOWED_ROLES.has(role));
-  const emailAllowed = Boolean(email && configuredPublisherEmails().has(email));
-  const localDevelopmentAllowed =
-    process.env.NODE_ENV !== "production" &&
-    process.env.CHALLENGE_LOCAL_DEV_ACCESS !== "0";
+  const roles = access.capabilities.roles;
 
   return {
     authenticated: true,
-    allowed: roleAllowed || emailAllowed || localDevelopmentAllowed,
-    userId,
-    email,
+    allowed: roles.some((role) => ALLOWED_ROLES.has(role)),
+    userId: access.user.id,
+    email: access.user.email,
     roles,
   };
 }

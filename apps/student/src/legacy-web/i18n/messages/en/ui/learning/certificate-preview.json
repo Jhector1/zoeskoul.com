@@ -1,0 +1,13 @@
+{
+  "certificatePreview": {
+    "lockedOverlay": "Finish the checklist to unlock",
+    "title": "CERTIFICATE",
+    "subtitle": "OF COMPLETION",
+    "presentedTo": "This certificate is proudly presented to",
+    "completionOf": "for the successful completion of",
+    "dateAwarded": "Date awarded",
+    "issuedBadge": "ISSUED",
+    "issuedOn": "Issued: {date}",
+    "certificateId": "Certificate ID: {id}"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "modules": {
+    "python": {
+      "python-0": {
+        "title": "Module 0 — Fondasyon",
+        "description": "Espas travay + baz pwogramasyon: modèl IPO, sentaks, ak kòmantè.",
+        "meta": {
+          "prereqs": [
+            "Okenn — ou ka kòmanse isit"
+          ],
+          "outcomes": [
+            "Konprann editè a, bouton Run, ak tèminal la",
+            "Eksplike Antre → Pwosesis → Sòti",
+            "Konprann kisa sentaks ye ak poukisa SyntaxError rive",
+            "Sèvi ak kòmantè # yo avèk entansyon pandan w ap aprann"
+          ],
+          "why": [
+            "Mete bon modèl panse a + konpetans pou travay nan anviwònman an",
+            "Evite konfizyon debutan anvan ou ekri pi gwo pwogram"
+          ]
+        }
+      },
+      "python-1": {
+        "title": "Module 1 — Blòk Debaz",
+        "description": "Varyab/kalite, operatè/ekspresyon, string, ak modèl ti pwogram.",
+        "meta": {
+          "prereqs": [
+            "Module 0 — Fondasyon"
+          ],
+          "outcomes": [
+            "Mete valè nan varyab epi esplike kalite (types)",
+            "Sèvi ak operatè + ekspresyon pou fè kalkil",
+            "Travay ak string (print, f-strings, endèks, metòd)",
+            "Bati ti pwogram ak Mande → Konvèti → Kalkile → Montre"
+          ],
+          "why": [
+            "Se blòk sa yo ki dèyè prèske tout pwogram debutan",
+            "Fè kondisyon/bouk yo santi yo natirèl nan pwochen modil la"
+          ]
+        }
+      },
+      "python-2": {
+        "title": "Module 2 — Kontwòl Koule + Koleksyon",
+        "description": "Kondisyon, bouk, lis, ak fonksyon — mare ansanm nan mini-pwojè ak istwa.",
+        "meta": {
+          "prereqs": [
+            "Module 1 — Blòk Debaz"
+          ],
+          "outcomes": [
+            "Sèvi ak if/elif/else ak konparezon ak lojik boolean",
+            "Ekri bouk while pou valide epi repete aksyon",
+            "Sèvi ak bouk for pou pase sou range ak lis",
+            "Kreye epi sèvi ak lis pou kenbe anpil valè",
+            "Ekri fonksyon ou ka re-itilize ak paramèt ak return"
+          ],
+          "why": [
+            "Se la pwogram yo kòmanse santi yo “vivan” (desizyon + repetisyon)",
+            "Lis + fonksyon bay estrikti pou yon ti aplikasyon"
+          ]
+        }
+      }
+    }
+  }
+}

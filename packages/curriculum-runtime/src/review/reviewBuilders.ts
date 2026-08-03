@@ -36,6 +36,8 @@ export function makeQuizCard(args: any) {
     id: `${args.topicId}_q${args.index}`,
     title: args.title,
     passScore: args.passScore ?? 0.75,
+    studentRuntimeExerciseKey:
+      args.studentRuntimeExerciseKey,
     spec: args.spec,
     tools: args.tools,
   };

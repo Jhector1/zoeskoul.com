@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-3-inequality-proofs": {
+        "inequality-definition-recipe-and-big-o": {
+          "label": "Big-O Proofs from the Definition",
+          "summary": "Prove two upper bounds and repair an invalid threshold.",
+          "cards": {
+            "big-o-proofs": {
+              "title": "Use the Inequality Definition to Prove Big-O"
+            },
+            "big-o-proof-animation": {
+              "title": "Choose Constants, Then Validate the Threshold"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "poly-big-o-constants": {
+              "title": "Valid polynomial constants",
+              "prompt": "Which pair proves 10n²=O(n³)?",
+              "hint": "Substitute the constants into 10n²≤cn³.",
+              "help": {
+                "concept": "With c=10, the inequality reduces to 1≤n.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "c=1,n₀=1",
+                "b": "c=10,n₀=1",
+                "c": "c=0,n₀=1",
+                "d": "c=1,n₀=0 only"
+              }
+            },
+            "exp-counterexample": {
+              "title": "Check n₀",
+              "prompt": "Why is c=1,n₀=2 invalid for n²≤2ⁿ?",
+              "hint": "Test the next few integers.",
+              "help": {
+                "concept": "At n=3, 9≤8 is false.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "n=2 fails",
+                "b": "n=3 fails",
+                "c": "n=4 fails",
+                "d": "c must be negative"
+              }
+            },
+            "big-o-nonunique": {
+              "title": "Constants are not unique",
+              "prompt": "What is required of Big-O constants?",
+              "hint": "The definition asks for existence, not optimality.",
+              "help": {
+                "concept": "Big-O proofs only need one valid positive c and one valid threshold n₀.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "They must be the smallest possible",
+                "b": "Any positive pair that makes the inequality hold eventually is enough",
+                "c": "c must equal 1",
+                "d": "n₀ must equal 0"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-3-inequality-proofs": {
+        "inequality-definition-recipe-and-big-o": {
+          "big-o-proofs": {
+            "title": "Use the Inequality Definition to Prove Big-O",
+            "bodyMarkdown": "### Definition\n\n`T(n) = O(g(n))` when there are positive constants `c` and `n₀` such that\n\n$$\n0\\le T(n)\\le c\\,g(n)\\quad\\text{for every }n\\ge n_0.\n$$\n\n### Proof recipe\n\n1. Write the required inequality.\n2. Choose a positive constant `c`.\n3. Solve for a threshold `n₀` that makes the inequality true.\n4. Check nearby values so the threshold is valid.\n5. State the constants and conclusion.\n\n### Proof 1: `10n² = O(n³)`\n\nChoose `c = 10`. Then `10n² ≤ 10n³` whenever `n ≥ 1`, so `c = 10` and `n₀ = 1` work. The handout also shows `c = 5`, `n₀ = 2`; constants are not unique.\n\n### Proof 2: `n² = O(2ⁿ)`\n\nTry `c = 1`. The inequality `n² ≤ 2ⁿ` is true at `n = 2`, false at `n = 3`, and true again at `n = 4`. Therefore `n₀ = 2` is invalid.\n\nChoose `n₀ = 4`. An induction argument shows the inequality remains true for every later integer, so `c = 1`, `n₀ = 4` is valid.\n\n**Source correction:** The handwritten solution selects `n₀ = 2`, but `9 ≤ 8` is false at `n = 3`."
+          },
+          "big-o-proof-animation": {
+            "title": "Choose Constants, Then Validate the Threshold",
+            "context": "The critical habit is checking that the inequality remains true beyond the proposed starting point.",
+            "steps": [
+              {
+                "title": "Write the inequality first",
+                "body": "Do not guess a Θ label. State exactly what Big-O requires."
+              },
+              {
+                "title": "Choose c and solve for n",
+                "body": "For 10n² ≤ 10n³, dividing by 10n² gives 1 ≤ n."
+              },
+              {
+                "title": "Test the proposed threshold",
+                "body": "A threshold must make the inequality true for every later n, not just at its first value."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

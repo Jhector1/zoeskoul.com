@@ -58,7 +58,9 @@ export function getMarketingProviderByName(
 }
 
 export function getConfiguredMarketingProvider(
-  env: MarketingProviderEnvironment = process.env,
+  env: MarketingProviderEnvironment = {
+    MARKETING_EMAIL_PROVIDER: process.env.MARKETING_EMAIL_PROVIDER,
+  },
 ): MarketingProviderAdapter | null {
   const name = parseMarketingProviderName(env.MARKETING_EMAIL_PROVIDER);
   return name ? getMarketingProviderByName(name) : null;

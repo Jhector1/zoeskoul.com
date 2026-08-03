@@ -1,0 +1,219 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "label": "Record the First Community Project Snapshot",
+          "summary": "Commit the staged two-file baseline and verify its history and clean state.",
+          "cards": {
+            "sketch0": {
+              "title": "The Proposal Carries Forward"
+            },
+            "sketch1": {
+              "title": "A Commit Records the Proposal"
+            },
+            "sketch2": {
+              "title": "Verify History and Current State Separately"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_working_tree_staging_and_history_sketch0": {
+              "title": "Record the First Community Snapshot",
+              "prompt": "The two project files are already staged. Record that proposal with the commit message `Start community project`. Do not restage or edit anything.",
+              "hint": "Commit the prepared staging area with the exact message.",
+              "help": {
+                "concept": "`git commit -m \"Start community project\"` records the current staging area as one local history entry. `-m` supplies the commit message directly. Only staged content enters the commit.",
+                "hint_1": "Use the message exactly as written.",
+                "hint_2": "After the command, the repository should contain one commit."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git commit -m \"Start community project\"",
+              "instructions": "The two project files are already staged. Record that proposal with the commit message `Start community project`. Do not restage or edit anything.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you record the staged two-file snapshot with the requested message?"
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch1": {
+              "title": "Read the First History Entry",
+              "prompt": "Read the concise history and confirm that the newest entry is `Start community project`.",
+              "hint": "Use the one-line history view.",
+              "help": {
+                "concept": "`git log --oneline` lists commits newest first, showing a short identifier and the commit message on one line. It reads history without changing it.",
+                "hint_1": "There should be exactly one history entry.",
+                "hint_2": "The short identifier can differ; the message is what matters here."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git log --oneline",
+              "instructions": "Read the concise history and confirm that the newest entry is `Start community project`.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you read the concise commit history?"
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch2": {
+              "title": "Confirm a Clean Working State",
+              "prompt": "Inspect compact status after the first commit. A clean repository produces no file entries.",
+              "hint": "Read short status and look for an empty result.",
+              "help": {
+                "concept": "`git status --short` prints one line per unfinished path. No output means the working tree and staging area match the current commit.",
+                "hint_1": "Do not create or edit a file.",
+                "hint_2": "The repository should remain at one commit."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git status --short",
+              "instructions": "Inspect compact status after the first commit. A clean repository produces no file entries.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you verify that no unfinished file entries remain?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Identify the Working Tree",
+              "prompt": "What is the working tree in Git?",
+              "hint": "Choose the layer that contains the project files you can open and edit right now.",
+              "help": {
+                "concept": "Follow one edit from the working tree to the staging area and into a named commit, checking each boundary along the way.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The project files and folders you can currently edit",
+                "b": "The proposed snapshot prepared for the next commit",
+                "c": "The sequence of recorded commits",
+                "d": "The list of patterns Git should ignore"
+              }
+            },
+            "single-choice-2": {
+              "title": "Purpose of the Staging Area",
+              "prompt": "What is the purpose of the staging area in Git?",
+              "hint": "Choose the layer where selected changes wait before they become a commit.",
+              "help": {
+                "concept": "Follow one edit from the working tree to the staging area and into a named commit, checking each boundary along the way.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To prepare selected changes for the next commit",
+                "b": "To store the complete commit history",
+                "c": "To display only unstaged line changes",
+                "d": "To initialize an ordinary folder"
+              }
+            },
+            "multi-choice-1": {
+              "title": "What a Commit Records",
+              "prompt": "Which facts about a commit are correct? Select all that apply.",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Follow one edit from the working tree to the staging area and into a named commit, checking each boundary along the way.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "It records the staged snapshot.",
+                "b": "It includes a message and author identity.",
+                "c": "It automatically includes every unstaged edit.",
+                "d": "It becomes part of repository history."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Git Workflow",
+              "prompt": "Arrange the steps of the Git workflow in the correct order.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Follow one edit from the working tree to the staging area and into a named commit, checking each boundary along the way.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Edit files in the working tree",
+                "t2": "Stage changes in the staging area",
+                "t3": "Commit changes to the commit history"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "working-tree-intro": {
+            "title": "Record the Prepared Snapshot",
+            "bodyMarkdown": "The same two files remain staged from the previous lesson. `git commit -m \"Start community project\"` records exactly that staged proposal as the first history entry. The commit command does not automatically include later unstaged edits."
+          },
+          "staging-area-intro": {
+            "title": "Read the History Entry",
+            "bodyMarkdown": "`git log --oneline` lists commits newest first, one entry per line. Each line contains a short identifier and the commit message. The identifier may differ between valid repositories; the message explains the purpose of the snapshot."
+          },
+          "commit-history-intro": {
+            "title": "Confirm the Current State",
+            "bodyMarkdown": "`git status --short` prints one line for each unfinished path. When it prints nothing, the working tree and staging area match the current commit. History inspection and current-state inspection answer different questions."
+          }
+        }
+      }
+    }
+  }
+}

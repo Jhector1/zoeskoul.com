@@ -1,0 +1,200 @@
+{
+  "homeOnboarding": {
+    "common": {
+      "notSet": "Non défini",
+      "featured": "À la une",
+      "guide": "Guide",
+      "mvp": ""
+    },
+    "labels": {
+      "language": {
+        "english": "English",
+        "french": "Français",
+        "haitian-creole": "Kreyòl"
+      },
+      "level": {
+        "beginner": "Débutant",
+        "intermediate": "Intermédiaire",
+        "advanced": "Avancé"
+      },
+      "studyTime": {
+        "1-2-hours": "1 à 2 heures",
+        "3-5-hours": "3 à 5 heures",
+        "6-plus-hours": "6+ heures"
+      },
+      "theme": {
+        "light": "Clair",
+        "dark": "Sombre"
+      }
+    },
+    "welcome": {
+      "fallbackGoals": "vos objectifs d’apprentissage",
+      "new": "Vous êtes prêt à commencer avec {interestText}. Lancez une courte leçon, relevez un défi, puis avancez à votre rythme.",
+      "returning": "Bon retour. Reprenez {interestText}, essayez le dernier défi ou découvrez quelque chose de nouveau."
+    },
+    "interestSummary": {
+      "empty": "Choisissez une matière et nous vous aiderons à trouver un point de départ clair.",
+      "focused": "Vous apprenez {interests}. Gardons cet élan."
+    },
+    "gate": {
+      "kicker": "Bienvenue",
+      "title": "Configurons votre espace {appName}.",
+      "description": "Répondez à quelques questions rapides pour personnaliser la langue, les matières, le niveau, le rythme et le thème. Vous pourrez tout modifier plus tard."
+    },
+    "hero": {
+      "kicker": "Votre espace d’apprentissage",
+      "title": "Apprenez en pratiquant, une étape claire à la fois.",
+      "descriptionFresh": "Choisissez ce que vous voulez apprendre, adoptez un rythme qui convient à votre semaine, puis lancez une leçon ou un défi quand vous êtes prêt.",
+      "chooseSubject": "Choisissez une matière à essayer",
+      "continueLearning": "Continuer",
+      "try3Questions": "Commencer 3 questions",
+      "startingTrial": "Démarrage de l’essai...",
+      "openGuide": "Configurer mon apprentissage",
+      "exploreSubjects": "Parcourir les matières",
+      "editPreferences": "Ajuster ma configuration",
+      "editAnswers": "Modifier mes réponses",
+      "currentTheme": "Thème : {theme}",
+      "continueLesson": "Continuer la leçon",
+      "startLearning": "Commencer à apprendre",
+      "exploreLessons": "Explorer les leçons",
+      "learningOpening": "Ouverture de votre leçon…"
+    },
+    "practiceCard": {
+      "guestKicker": "Pratique gratuite",
+      "dailyKicker": "Pratique quotidienne",
+      "guestTitle": "Commencez avec {count} questions gratuites.",
+      "dailyTitle": "Prenez un moment pour la pratique du jour.",
+      "guestDescription": "Découvrez rapidement ZoeSkoul avec une courte série guidée. Aucun compte n’est nécessaire.",
+      "dailyDescription": "Répondez à {count} questions ciblées et gardez votre élan d’apprentissage.",
+      "guestCta": "Commencer {count} questions gratuites",
+      "dailyCta": "Commencer la pratique",
+      "opening": "Ouverture de la pratique…",
+      "unlimitedKicker": "Pratique illimitée",
+      "unlimitedTitle": "Travaillez exactement ce dont vous avez besoin.",
+      "unlimitedDescription": "Choisissez un catalogue, un cours, un module, une section et un sujet, puis pratiquez autant que vous le souhaitez avec votre forfait.",
+      "unlimitedCta": "Choisir une pratique"
+    },
+    "steps": {
+      "preferredLanguage": {
+        "title": "Quelle langue {appName} doit-il utiliser pour votre expérience ?",
+        "description": "Cela définit votre langue par défaut pour l’accueil, la navigation et le contenu d’entraînement lorsque la traduction est disponible."
+      },
+      "learningInterests": {
+        "title": "Sur quoi voulez-vous vous concentrer en premier ?",
+        "description": "{appName} donnera la priorité aux bonnes matières, aux bons points de départ et aux suggestions d’exercices sur votre page d’accueil.",
+        "catalogPicker": {
+          "catalogLabel": "Choisissez un catalogue",
+          "catalogHelp": "Les cours ci-dessous se mettent à jour lorsque vous choisissez un autre catalogue.",
+          "coursesTitle": "Cours de {catalog}",
+          "oneCourse": "1 cours",
+          "manyCourses": "{count} cours",
+          "oneSelected": "1 sélectionné",
+          "manySelected": "{count} sélectionnés",
+          "showMore": "Afficher {count} de plus",
+          "showLess": "Afficher moins"
+        }
+      },
+      "level": {
+        "title": "Quel est votre niveau actuel ?",
+        "description": "Cela aide {appName} à décider s’il faut commencer par les bases, une pratique mixte ou du contenu plus avancé."
+      },
+      "studyTime": {
+        "title": "Combien de temps voulez-vous étudier chaque semaine ?",
+        "description": "Votre rythme hebdomadaire permet de garder les recommandations réalistes au lieu d’être trop chargées."
+      },
+      "discoverySource": {
+        "title": "Comment avez-vous découvert {appName} ?",
+        "description": "Cela nous aide à comprendre quels canaux attirent les bons apprenants et à améliorer l’onboarding avec le temps."
+      },
+      "themePreference": {
+        "title": "Quel thème souhaitez-vous utiliser ?",
+        "description": "Choisissez l’apparence la plus confortable pour lire, coder et pratiquer chaque jour."
+      },
+      "trialIntent": {
+        "title": "Voulez-vous essayer 3 questions maintenant ?",
+        "description": "Lancez un court essai maintenant, ou revenez-y plus tard depuis la page d’accueil."
+      },
+      "choices": {
+        "themeLightHint": "Clair et net pour étudier en journée.",
+        "themeDarkHint": "Plus doux pour les yeux en faible luminosité et lors des longues sessions.",
+        "trialNowLabel": "Oui, je veux essayer maintenant",
+        "trialNowHint": "Nous lancerons un court essai de 3 questions après la configuration.",
+        "trialLaterLabel": "Plus tard",
+        "trialLaterHint": "Vous pourrez commencer depuis la page d’accueil quand vous serez prêt.",
+        "search": "Recherche",
+        "friend": "Ami ou collègue",
+        "social": "Réseaux sociaux",
+        "school-work": "École ou travail",
+        "other": "Autre"
+      }
+    },
+    "panel": {
+      "title": "Personnalisez votre espace",
+      "description": "Répondez à quelques questions rapides. Vous pourrez tout modifier plus tard.",
+      "skip": "Ignorer",
+      "step": "Étape {current} sur {total}",
+      "back": "Retour",
+      "continue": "Continuer",
+      "finish": "Terminer la configuration"
+    },
+    "guideCard": {
+      "personalized": "Prêt quand vous l’êtes",
+      "ready": "Trouvons votre point de départ",
+      "start": "Commencer",
+      "updatePreferences": "Ajuster la configuration"
+    },
+    "highlights": {
+      "kicker": "Pensé pour vous",
+      "title": "Un parcours d’apprentissage adapté à vos objectifs.",
+      "description": "Votre langue, votre niveau d’expérience et votre rythme hebdomadaire aident ZoeSkoul à vous proposer la bonne prochaine étape.",
+      "cards": {
+        "language": {
+          "title": "Langue",
+          "text": "Apprenez dans la langue qui vous semble la plus naturelle."
+        },
+        "level": {
+          "title": "Niveau",
+          "text": "Commencez au bon niveau sans revoir inutilement ce que vous maîtrisez déjà."
+        },
+        "pace": {
+          "title": "Rythme hebdomadaire",
+          "text": "Choisissez un rythme hebdomadaire que vous pouvez vraiment tenir."
+        }
+      }
+    },
+    "recommended": {
+      "kicker": "Choisissez la suite",
+      "title": "Commencez par quelque chose que vous avez envie de construire.",
+      "titleWithCurrent": "Continuez à apprendre ou choisissez la suite.",
+      "viewAll": "Voir toutes les matières",
+      "current": "En cours",
+      "recommendation": "Recommandé",
+      "continueSubject": "Continuer le cours",
+      "exploreSubject": "Explorer la matière"
+    },
+    "floatingAssistant": {
+      "title": "Vous voulez modifier votre configuration ?",
+      "subtitle": "Langue, niveau, rythme et plus"
+    },
+    "trial": {
+      "chooseSubjectError": "Choisissez d’abord une matière.",
+      "startError": "Impossible de démarrer l’essai pour le moment.",
+      "overlayTitle": "Préparation de votre première session de pratique.",
+      "overlayDescription": "Cela ne prendra qu’un instant."
+    },
+    "entry": {
+      "kicker": "Bienvenue",
+      "title": "Bienvenue sur {appName}",
+      "description": "Aidons-nous à vous diriger au bon endroit. Êtes-vous nouveau ici ou avez-vous déjà un compte ?",
+      "avatarText": "Bonjour, je suis votre guide. Êtes-vous nouveau ici ou avez-vous déjà un compte ?",
+      "newUser": "Je suis nouveau ici",
+      "returningUser": "J’ai déjà un compte",
+      "helper": "Les nouveaux utilisateurs commencent par l’onboarding. Les utilisateurs existants vont à la connexion."
+    },
+    "latestChallenge": {
+      "eyebrow": "Dernier défi quotidien",
+      "noAccount": "Aucun compte requis",
+      "cta": "Ouvrir le défi"
+    }
+  }
+}

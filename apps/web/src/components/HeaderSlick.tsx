@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import UserMenuSlick from "./UserMenuSlick";
 
@@ -21,8 +21,23 @@ import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavi
 import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
 import NavButton from "@/components/ui/NavButton";
+import {
+  buildWebLogoutUrl,
+} from "@/lib/auth/logout";
+import {
+  normalizeFontSizePx,
+  type AppFontSizePx,
+} from "@zoeskoul/preferences";
+import {
+  useAppPreferences,
+} from "@zoeskoul/preferences/react";
+import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
 
-type NavItem = { href: string; label: string };
+type NavItem = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
 type HeaderSlotCtx = {
   locale: string;
@@ -32,7 +47,31 @@ type HeaderSlotCtx = {
   user?: Session["user"];
 };
 
-async function hardLogout(locale: string) {
+function HeaderDestinationLink(props: {
+  href: string;
+  external?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  if (props.external) {
+    return (
+      <a href={props.href} className={props.className}>
+        {props.children}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={props.href as never}
+      className={props.className}
+    >
+      {props.children}
+    </Link>
+  );
+}
+
+function hardLogout(locale: string) {
   startGlobalNavigationPending({
     label: "Logging out…",
     description: "Closing your session securely.",
@@ -40,35 +79,19 @@ async function hardLogout(locale: string) {
     minVisibleMs: 700,
   });
 
-  try {
-    await signOut({ redirect: false });
-  } finally {
-    window.location.href = `/api/auth/keycloak-logout?postLogoutRedirect=${encodeURIComponent(`/${locale}`)}`;
-  }
+  window.location.assign(
+    buildWebLogoutUrl({
+      websiteOrigin:
+        window.location.origin,
+      locale,
+    }),
+  );
 }
 
-const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";
-const FONT_SIZE_DEFAULT = 16;
-const FONT_SIZE_OPTIONS = [14,16, 20, 24] as const;
 const START_SESSION_HREF = "/sandbox";
 
 function clampFontPx(x: number) {
-  if (x <= 14) return 14;
-  if (x <= 16) return 16;
-  if (x <= 20) return 20;
-  return 24;
-}
-
-function readStoredFontSize() {
-  if (typeof window === "undefined") return FONT_SIZE_DEFAULT;
-
-  try {
-    const raw = window.localStorage.getItem(FONT_SIZE_STORAGE_KEY);
-    const parsed = raw ? Number(raw) : NaN;
-    return Number.isFinite(parsed) ? clampFontPx(parsed) : FONT_SIZE_DEFAULT;
-  } catch {
-    return FONT_SIZE_DEFAULT;
-  }
+  return normalizeFontSizePx(x);
 }
 
 function applyBaseFontSize(px: number) {
@@ -76,7 +99,6 @@ function applyBaseFontSize(px: number) {
 
   const next = clampFontPx(px);
   document.documentElement.style.setProperty("--app-font-size", `${next}px`);
-  document.documentElement.style.fontSize = `${next}px`;
 }
 
 function FontSizePicker(props: {
@@ -86,7 +108,7 @@ function FontSizePicker(props: {
 }) {
   const { value, onChange, labels } = props;
 
-  const items: Array<{ px: (typeof FONT_SIZE_OPTIONS)[number]; label: string }> = [
+  const items: Array<{ px: AppFontSizePx; label: string }> = [
     { px: 14, label: labels.small },
       { px: 16, label: labels.normal },
     { px: 20, label: labels.large },
@@ -129,28 +151,12 @@ function SettingsMenu() {
   const t = useTranslations("Header");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
-
-  const [fontPx, setFontPx] = useState<number>(() => readStoredFontSize());
+  const { preferences, updatePreferences } = useAppPreferences();
+  const fontPx = preferences.fontSizePx;
 
   React.useLayoutEffect(() => {
     applyBaseFontSize(fontPx);
   }, [fontPx]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(FONT_SIZE_STORAGE_KEY, String(fontPx));
-    } catch {}
-  }, [fontPx]);
-
-  useEffect(() => {
-    function onStorage(e: StorageEvent) {
-      if (e.key !== FONT_SIZE_STORAGE_KEY) return;
-      setFontPx(readStoredFontSize());
-    }
-
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
 
   useEffect(() => {
     function onDown(e: MouseEvent) {
@@ -232,7 +238,11 @@ function SettingsMenu() {
                     <div className="mt-3">
                       <FontSizePicker
                           value={fontPx}
-                          onChange={(px) => setFontPx(clampFontPx(px))}
+                          onChange={(px) => {
+                            void updatePreferences({
+                              fontSizePx: clampFontPx(px),
+                            }).catch(() => undefined);
+                          }}
                           labels={{
                             small: t("fontSmall"),
                             normal: t("fontNormal"),
@@ -307,15 +317,50 @@ export default function HeaderSlick({
 
   const slotNode = SlotComponent ? <SlotComponent {...slotCtx} /> : slot ?? null;
 
+  const studentHomeHref = buildStudentAppHref({
+    pathname: "/",
+    locale,
+  });
+
   const NAV: NavItem[] = useMemo(
       () => [
-        { href: ROUTES.home, label: t("home") },
-        { href: ROUTES.catalogs, label: t("catalogs") },
-        { href: ROUTES.myLearning, label: t("myLearning") },
-        { href: ROUTES.pricing, label: t("billing") },
-        { href: START_SESSION_HREF, label: t("startSession") },
+        {
+          href: isAuthed
+            ? studentHomeHref
+            : ROUTES.home,
+          label: t("home"),
+          external: isAuthed,
+        },
+        {
+          href: isAuthed
+            ? buildStudentAppHref({
+                pathname: ROUTES.catalogs,
+                locale,
+              })
+            : ROUTES.catalogs,
+          label: t("catalogs"),
+          external: isAuthed,
+        },
+        {
+          href: isAuthed
+            ? buildStudentAppHref({
+                pathname: ROUTES.myLearning,
+                locale,
+              })
+            : ROUTES.myLearning,
+          label: t("myLearning"),
+          external: isAuthed,
+        },
+        {
+          href: ROUTES.pricing,
+          label: t("billing"),
+        },
+        {
+          href: START_SESSION_HREF,
+          label: t("startSession"),
+        },
       ],
-      [t],
+      [isAuthed, locale, studentHomeHref, t],
   );
 
   const [open, setOpen] = useState(false);
@@ -358,7 +403,11 @@ export default function HeaderSlick({
           <div className="mx-auto px-4 md:px-6">
             <div className="flex h-16 min-w-0 items-center gap-2 sm:gap-3 lg:gap-4">
               <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-                <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+                <HeaderDestinationLink
+                  href={isAuthed ? studentHomeHref : ROUTES.home}
+                  external={isAuthed}
+                  className="group flex min-w-0 items-center gap-2.5"
+                >
                   <div className="ui-icon-box h-9 w-9 rounded-lg">
                   <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
                     L
@@ -381,7 +430,7 @@ export default function HeaderSlick({
                       {t("tagline")}
                     </div>
                   </div>
-                </Link>
+                </HeaderDestinationLink>
 
                 {headlineBadge && isBillingStatus ? (
                     <div className="hidden md:block">
@@ -423,12 +472,18 @@ export default function HeaderSlick({
                     <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
                       {NAV.map((n) => {
                         const isActive =
-                            n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href);
+                            !n.external &&
+                            (n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href));
 
                         return (
-                            <Link key={n.href} href={n.href} className={navLinkClass(Boolean(isActive))}>
+                            <HeaderDestinationLink
+                              key={n.href}
+                              href={n.href}
+                              external={n.external}
+                              className={navLinkClass(Boolean(isActive))}
+                            >
                               {n.label}
-                            </Link>
+                            </HeaderDestinationLink>
                         );
                       })}
                     </div>
@@ -522,14 +577,20 @@ export default function HeaderSlick({
                       {isNav
                           ? NAV.map((n) => {
                             const isActive =
-                                n.href === "/"
+                                !n.external &&
+                                (n.href === "/"
                                     ? pathname === "/"
-                                    : pathname?.startsWith(n.href);
+                                    : pathname?.startsWith(n.href));
 
                             return (
-                                <Link key={n.href} href={n.href} className={mobileItem(Boolean(isActive))}>
+                                <HeaderDestinationLink
+                                  key={n.href}
+                                  href={n.href}
+                                  external={n.external}
+                                  className={mobileItem(Boolean(isActive))}
+                                >
                                   {n.label}
-                                </Link>
+                                </HeaderDestinationLink>
                             );
                           })
                           : null}

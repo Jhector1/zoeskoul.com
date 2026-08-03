@@ -1,0 +1,229 @@
+.learning-dashboard {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.learning-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.7fr);
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 1.4rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(241, 238, 255, 0.95));
+  box-shadow: 0 1.25rem 3rem rgba(55, 65, 92, 0.08);
+}
+
+.learning-summary h2 {
+  margin: 0.45rem 0 0.7rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.learning-summary p {
+  max-width: 46rem;
+  margin: 0;
+  color: #647087;
+  line-height: 1.7;
+}
+
+.learning-summary-kicker,
+.learning-section-heading span,
+.learning-card-kicker {
+  color: #6f56ff;
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.learning-summary-counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-self: stretch;
+}
+
+.learning-summary-counts div {
+  display: grid;
+  place-content: center;
+  gap: 0.3rem;
+  min-height: 7.5rem;
+  border: 1px solid rgba(111, 86, 255, 0.12);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.76);
+  text-align: center;
+}
+
+.learning-summary-counts strong {
+  font-size: 1.8rem;
+}
+
+.learning-summary-counts span {
+  color: #788299;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.learning-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.learning-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.learning-section-heading h2 {
+  margin: 0.35rem 0 0;
+  font-size: 1.35rem;
+}
+
+.learning-section-heading > strong {
+  display: grid;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #ede9ff;
+  color: #4a36d1;
+}
+
+.learning-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.learning-card {
+  display: flex;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0.75rem 2rem rgba(55, 65, 92, 0.05);
+}
+
+.learning-card-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.95rem;
+  background: #ede9ff;
+  color: #4a36d1;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.learning-card-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.learning-card-copy h3 {
+  margin: 0.35rem 0 0.55rem;
+  font-size: 1.05rem;
+}
+
+.learning-card-copy > p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #687389;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.learning-card-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.learning-status {
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
+  background: #f2f4f8;
+  color: #69748a;
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-transform: capitalize;
+}
+
+.learning-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  margin-top: 0.75rem;
+  color: #7a8498;
+  font-size: 0.76rem;
+}
+
+.learning-card-action {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: #4a36d1;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.learning-card-action:hover {
+  text-decoration: underline;
+}
+
+.learning-empty,
+.learning-error,
+.learning-loading {
+  padding: 1.5rem;
+  border: 1px dashed rgba(23, 32, 51, 0.16);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.learning-empty p,
+.learning-error p,
+.learning-loading p {
+  margin-bottom: 0;
+  color: #748096;
+  line-height: 1.6;
+}
+
+.learning-loading {
+  display: grid;
+  justify-items: center;
+  min-height: 15rem;
+  place-content: center;
+  text-align: center;
+}
+
+@media (max-width: 1050px) {
+  .learning-summary,
+  .learning-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .learning-summary-counts {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-summary-counts div {
+    min-height: 5rem;
+  }
+
+  .learning-card {
+    flex-direction: column;
+  }
+}

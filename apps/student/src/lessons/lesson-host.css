@@ -1,0 +1,445 @@
+.lesson-review-state-page,
+.lesson-host-state {
+  display: grid;
+  min-height: 100dvh;
+  place-content: center;
+  justify-items: center;
+  padding: 2rem;
+  background:
+    radial-gradient(
+      1200px 700px at 20% 0%,
+      #eafff5 0%,
+      #ffffff 55%,
+      #f6f7ff 100%
+    );
+  color: rgb(17 24 39);
+  text-align: center;
+}
+
+.lesson-host-state {
+  min-height: 12rem;
+  background: transparent;
+}
+
+.lesson-review-state-page p,
+.lesson-host-state p {
+  max-width: 34rem;
+  margin: 0.55rem 0 0;
+  color: rgb(75 85 99 / 0.88);
+  line-height: 1.6;
+}
+
+.student-review-topic-content {
+  display: grid;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+}
+
+.lesson-content-card {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid rgb(226 232 240 / 0.84);
+  border-radius: 0;
+  background: rgb(248 250 252 / 0.96);
+  color: rgb(17 24 39);
+  box-shadow: none;
+}
+
+.lesson-card-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgb(226 232 240 / 0.7);
+}
+
+.lesson-card-title h4 {
+  margin: 0;
+  color: rgb(17 24 39 / 0.96);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.lesson-card-title span {
+  color: rgb(21 128 61);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.lesson-card-status-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lesson-reading-content {
+  min-width: 0;
+  color: rgb(55 65 81 / 0.94);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.lesson-reading-content > :first-child {
+  margin-top: 0;
+}
+
+.lesson-reading-content > :last-child {
+  margin-bottom: 0;
+}
+
+.lesson-video-frame {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgb(226 232 240 / 0.84);
+  border-radius: 0.65rem;
+  background: #111827;
+}
+
+.lesson-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.lesson-runtime-handoff {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: 1px solid rgb(226 232 240 / 0.84);
+  border-radius: 0.55rem;
+  background: rgb(255 255 255 / 0.86);
+}
+
+.lesson-runtime-handoff > div {
+  display: grid;
+  min-width: 0;
+  gap: 0.22rem;
+}
+
+.lesson-runtime-handoff strong {
+  color: rgb(17 24 39 / 0.96);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.lesson-runtime-handoff span {
+  color: rgb(75 85 99 / 0.84);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.lesson-card-actions,
+.student-simple-quiz-actions,
+.student-embedded-try-it-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.lesson-card-actions {
+  justify-content: flex-end;
+  margin-top: 0.85rem;
+}
+
+.lesson-card-actions button,
+.lesson-runtime-handoff button,
+.student-simple-quiz-actions button,
+.student-embedded-try-it-actions button {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.75rem;
+  border: 1px solid rgb(226 232 240 / 0.86);
+  border-radius: 0.45rem;
+  background: rgb(255 255 255 / 0.94);
+  color: rgb(75 85 99 / 0.96);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 650;
+}
+
+.lesson-card-actions button:hover:not(:disabled),
+.lesson-runtime-handoff button:hover:not(:disabled),
+.student-simple-quiz-actions button:hover:not(:disabled),
+.student-embedded-try-it-actions button:hover:not(:disabled) {
+  border-color: rgb(203 213 225 / 0.9);
+  background: rgb(241 245 249 / 0.96);
+  color: rgb(17 24 39);
+}
+
+.lesson-runtime-handoff button.is-primary,
+.student-simple-quiz-actions button[type="submit"],
+.student-embedded-try-it-actions button[type="submit"] {
+  border-color: rgb(16 185 129 / 0.3);
+  background: rgb(16 185 129 / 0.96);
+  color: white;
+}
+
+.lesson-runtime-handoff button.is-primary:hover:not(:disabled),
+.student-simple-quiz-actions button[type="submit"]:hover:not(:disabled),
+.student-embedded-try-it-actions button[type="submit"]:hover:not(:disabled) {
+  background: rgb(5 150 105);
+  color: white;
+}
+
+.lesson-card-actions button:disabled,
+.lesson-runtime-handoff button:disabled,
+.student-simple-quiz-actions button:disabled,
+.student-embedded-try-it-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.lesson-card-actions button.is-complete {
+  border-color: rgb(16 185 129 / 0.22);
+  background: rgb(16 185 129 / 0.08);
+  color: rgb(5 122 85);
+}
+
+.lesson-progress-warning,
+.lesson-topic-complete {
+  padding: 0.8rem 0.9rem;
+  border-radius: 0.55rem;
+  font-size: 0.78rem;
+}
+
+.lesson-progress-warning {
+  border: 1px solid rgb(245 158 11 / 0.24);
+  background: rgb(245 158 11 / 0.1);
+  color: rgb(146 64 14);
+}
+
+.lesson-topic-complete {
+  border: 1px solid rgb(16 185 129 / 0.2);
+  background: rgb(16 185 129 / 0.08);
+  color: rgb(5 122 85);
+}
+
+.lesson-topic-complete p {
+  margin: 0.25rem 0 0;
+  color: inherit;
+  font-size: 0.75rem;
+}
+
+.student-simple-quiz,
+.student-embedded-try-it {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.student-simple-quiz.is-loading,
+.student-embedded-try-it.is-loading {
+  min-height: 12rem;
+  place-content: center;
+  justify-items: center;
+}
+
+.student-simple-quiz-heading,
+.student-embedded-try-it-heading {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.student-simple-quiz-heading > span,
+.student-embedded-try-it-heading > span {
+  color: rgb(75 85 99 / 0.82);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.student-simple-quiz-heading h5,
+.student-simple-quiz-heading p,
+.student-embedded-try-it-heading h5,
+.student-embedded-try-it-heading p {
+  margin: 0;
+}
+
+.student-simple-quiz-heading h5,
+.student-embedded-try-it-heading h5 {
+  color: rgb(17 24 39 / 0.96);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.student-simple-quiz-heading p,
+.student-embedded-try-it-heading p {
+  color: rgb(75 85 99 / 0.88);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.student-simple-quiz fieldset {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.student-simple-quiz legend,
+.student-simple-quiz-number > span {
+  margin-bottom: 0.45rem;
+  color: rgb(17 24 39 / 0.9);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.student-simple-quiz-options {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.student-simple-quiz-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgb(226 232 240 / 0.86);
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.88);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.student-simple-quiz-options label:has(input:checked) {
+  border-color: rgb(16 185 129 / 0.38);
+  background: rgb(16 185 129 / 0.07);
+}
+
+.student-simple-quiz-options input {
+  margin-top: 0.18rem;
+}
+
+.student-simple-quiz-number {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.student-simple-quiz-number input {
+  width: min(100%, 18rem);
+  padding: 0.68rem 0.75rem;
+  border: 1px solid rgb(203 213 225 / 0.9);
+  border-radius: 0.48rem;
+  background: white;
+  font: inherit;
+}
+
+.student-simple-quiz-feedback {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.72rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.student-simple-quiz-feedback p {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+.student-simple-quiz-feedback.is-correct {
+  border: 1px solid rgb(16 185 129 / 0.24);
+  background: rgb(16 185 129 / 0.08);
+  color: rgb(5 122 85);
+}
+
+.student-simple-quiz-feedback.is-incorrect {
+  border: 1px solid rgb(245 158 11 / 0.28);
+  background: rgb(245 158 11 / 0.1);
+  color: rgb(146 64 14);
+}
+
+.student-simple-quiz-feedback.is-error,
+.student-simple-quiz.is-error,
+.student-embedded-try-it.is-error {
+  border: 1px solid rgb(244 63 94 / 0.2);
+  background: rgb(244 63 94 / 0.08);
+  color: rgb(159 18 57);
+}
+
+.student-simple-quiz.is-error,
+.student-embedded-try-it.is-error {
+  padding: 0.85rem;
+  border-radius: 0.55rem;
+}
+
+.student-embedded-try-it {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(226 232 240 / 0.72);
+}
+
+.student-embedded-try-it-filebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: -0.35rem;
+  padding: 0.58rem 0.72rem;
+  border: 1px solid rgb(226 232 240 / 0.84);
+  border-bottom: 0;
+  border-radius: 0.55rem 0.55rem 0 0;
+  background: rgb(241 245 249 / 0.92);
+  color: rgb(75 85 99 / 0.82);
+  font-size: 0.7rem;
+}
+
+.student-embedded-try-it-filebar strong {
+  color: rgb(17 24 39 / 0.94);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+}
+
+.student-embedded-try-it .zoe-controlled-code-editor {
+  border-color: rgb(226 232 240 / 0.84);
+  border-radius: 0 0 0.55rem 0.55rem;
+}
+
+.student-embedded-try-it-next {
+  margin: 0;
+  color: rgb(5 122 85);
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+@media (max-width: 640px) {
+  .lesson-runtime-handoff {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lesson-runtime-handoff button,
+  .student-simple-quiz-actions button,
+  .student-embedded-try-it-actions button {
+    flex: 1 1 auto;
+  }
+
+  .student-embedded-try-it-filebar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}

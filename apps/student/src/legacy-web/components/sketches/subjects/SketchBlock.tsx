@@ -1,0 +1,295 @@
+"use client";
+
+import React, { useCallback, useMemo, useState } from "react";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
+
+import type { SavedSketchState } from "./types";
+import type { SketchEntry } from "./registryTypes";
+import type { SketchSpec } from "./specTypes";
+
+import { getSketchEntry } from "./registry";
+import { defaultStateForSpec } from "./defaults";
+import { migrateSketchState } from "./migrate";
+import { useDebouncedEmit } from "@/components/sketches/_shared/useDebouncedEmit";
+import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_shared/sketchUi";
+import { SketchShell } from "@/components/sketches/_shared/shells";
+import SketchRenderer from "./SketchRenderer";
+import { useTaggedT } from "@/i18n/tagged";
+import {
+    isCompactLearnerUiActive,
+    shouldShowExpandedLearnerTitles,
+} from "@/lib/config/learnerUiFlags";
+import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";
+
+function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {
+    if (!patch) return base;
+    return { ...(base as any), ...(patch as any) } as SketchSpec;
+}
+
+export default function SketchBlock(props: {
+    cardId: string;
+    stateKey?: string;
+    title?: string;
+    sketchId: string;
+    height?: number;
+    propsPatch?: Record<string, unknown>;
+    initialState?: SavedSketchState | null;
+    onStateChange?: (s: SavedSketchState) => void;
+    done?: boolean;
+    onMarkDone?: () => void;
+    prereqsMet?: boolean;
+    locked?: boolean;
+    markDoneDisabled?: boolean;
+    markDoneDisabledReason?: string;
+    markDoneLabel?: string;
+    markDoneDoneLabel?: string;
+    markDoneTitle?: string;
+}) {
+    const tt = useTaggedT();               // for tagged keys like "@:sketches...."
+    const ui = useTaggedT("sketchBlockUi"); // for UI strings
+
+    const {
+        cardId,
+        stateKey,
+        title,
+        sketchId,
+        height,
+        propsPatch,
+        initialState,
+        onStateChange,
+        done = false,
+        onMarkDone,
+        prereqsMet = true,
+        locked = false,
+        markDoneDisabled = false,
+        markDoneDisabledReason,
+        markDoneLabel,
+        markDoneDoneLabel,
+        markDoneTitle,
+    } = props;
+
+    const sketchStateKey = stateKey ?? cardId;
+    const initialStateKey = useMemo(
+        () => JSON.stringify(initialState ?? null),
+        [initialState],
+    );
+
+    const entry: SketchEntry | null = useMemo(() => {
+        const registered = getSketchEntry(sketchId);
+        if (registered) return registered;
+
+        const patch = propsPatch as Record<string, unknown> | undefined;
+        if (patch && typeof patch.archetype === "string") {
+            return {
+                kind: "archetype",
+                spec: {
+                    specVersion: typeof patch.specVersion === "number" ? patch.specVersion : 1,
+                    ...patch,
+                } as any,
+            } satisfies SketchEntry;
+        }
+
+        return null;
+    }, [sketchId, propsPatch]);
+    const [confirmReset, setConfirmReset] = useState(false);
+
+    const resolved = useMemo(() => {
+        if (!entry) return null;
+
+        if (entry.kind === "custom") {
+            const s0 = initialState ?? entry.defaultState ?? null;
+            return { entry, spec: null as any, state: s0 };
+        }
+
+        const spec = mergeSpec(entry.spec, propsPatch);
+        const base0 = initialState ?? entry.defaultState ?? defaultStateForSpec(spec);
+        const migrated = migrateSketchState(spec, base0);
+        return { entry, spec, state: migrated };
+    }, [entry, initialState, propsPatch]);
+
+    const [state, setState] = useState<SavedSketchState | null>(() => resolved?.state ?? null);
+
+    React.useEffect(() => {
+        setState(resolved?.state ?? null);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sketchStateKey, sketchId, initialStateKey]);
+
+    const emit = useCallback((s: SavedSketchState) => onStateChange?.(s), [onStateChange]);
+    useDebouncedEmit(state, (s) => s && emit(s), { enabled: Boolean(onStateChange), delayMs: 350 });
+
+    const readOnly = locked || !prereqsMet;
+    const compactFooterControls = isCompactLearnerUiActive();
+    const showExpandedTitles = shouldShowExpandedLearnerTitles();
+
+    if (!entry) {
+        return (
+            <div className="ui-soft p-3 text-xs font-extrabold text-neutral-700 dark:text-white/70">
+                {ui.t("unknownSketch", { id: sketchId }, `Unknown sketchId: ${sketchId}`)}
+                {/*<span className="ml-2 font-mono">{sketchId}</span>*/}
+            </div>
+        );
+    }
+
+    const footerStatus = markDoneDisabled && markDoneDisabledReason ? (
+        <div className="ui-sketch-muted font-extrabold">{markDoneDisabledReason}</div>
+    ) : !prereqsMet ? (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("finishPrereqs")}</div>
+    ) : locked ? (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("locked")}</div>
+    ) : compactFooterControls ? null : (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("autosave")}</div>
+    );
+
+    const footerControls = !compactFooterControls || onMarkDone ? (
+        <div className="flex items-center gap-2">
+            {!compactFooterControls ? (
+                <button type="button" className={SKETCH_BTN} onClick={() => setConfirmReset(true)} disabled={readOnly}>
+                    {ui.t("reset")}
+                </button>
+            ) : null}
+
+            {onMarkDone ? (
+                <button
+                    type="button"
+                    className={cn(SKETCH_BTN_PRIMARY, done && "opacity-70")}
+                    onClick={onMarkDone}
+                    disabled={!prereqsMet || markDoneDisabled}
+                    data-flow-focus="1"
+                    title={markDoneDisabled ? markDoneDisabledReason : (markDoneTitle ?? ui.t("markReadTitle"))}
+                >
+                    {done
+                        ? (markDoneDoneLabel ?? ui.t("markedRead"))
+                        : (markDoneLabel ?? ui.t("markRead"))}
+                </button>
+            ) : null}
+        </div>
+    ) : null;
+
+    const footer = footerStatus || footerControls ? (
+        <div
+            className={cn(
+                "flex flex-wrap items-center gap-2",
+                footerStatus ? "justify-between" : "justify-end",
+            )}
+        >
+            {footerStatus}
+            {footerControls}
+        </div>
+    ) : null;
+
+    // CUSTOM
+    if (entry.kind === "custom") {
+        const Comp = entry.Component;
+
+        const shellTitle = showExpandedTitles
+            ? tt.resolve(title ?? null)
+            : null;
+
+        return (
+            <>
+                <SketchShell
+                    title={shellTitle || undefined}
+                    height={height}
+                    left={
+                        <Comp
+                            value={state}
+                            onChange={(next) => {
+                                setState(next);
+                                onStateChange?.(next);
+                            }}
+                            readOnly={readOnly}
+                            height={height}
+                            title={shellTitle || undefined}
+                        />
+                    }
+                    footer={footer}
+                />
+
+                <ConfirmDialog
+                    open={confirmReset}
+                    onOpenChange={setConfirmReset}
+                    danger
+                    title={ui.t("resetDialog.title")}
+                    confirmLabel={ui.t("resetDialog.confirm")}
+                    description={
+                        <div className="grid gap-2">
+                            <div>{ui.t("resetDialog.line1")}</div>
+                            <div className="ui-sketch-muted font-extrabold">{ui.t("resetDialog.line2")}</div>
+                        </div>
+                    }
+                    onConfirm={() => {
+                        const fresh = initialState ?? entry.defaultState ?? null;
+                        if (fresh) {
+                            setState(fresh);
+                            onStateChange?.(fresh);
+                        } else {
+                            setState({ version: 1, updatedAt: new Date().toISOString(), data: {} });
+                        }
+                    }}
+                />
+            </>
+        );
+    }
+
+    // ARCHETYPE
+    const spec: SketchSpec = resolved?.spec;
+    const s: SavedSketchState = state ?? defaultStateForSpec(spec);
+
+    const resolvedCardTitle = showExpandedTitles
+        ? tt.resolve(title ?? null)
+        : null;
+    const resolvedContentTitle = showExpandedTitles
+        ? tt.resolve(spec.title ?? null)
+        : null;
+    const shellTitle = getDistinctSketchShellTitle(
+        resolvedCardTitle,
+        resolvedContentTitle,
+    );
+    const subtitle = tt.resolve(spec.subtitle ?? null);
+    const rightMarkdown = tt.resolve(spec.hudMarkdown ?? null);
+
+    return (
+        <>
+            <SketchShell
+                title={shellTitle || undefined}
+                subtitle={subtitle || undefined}
+
+                tone={spec.tone}
+                height={height}
+                rightMarkdown={rightMarkdown || undefined}
+                left={
+                    <SketchRenderer
+                        spec={spec}
+                        showTitle={showExpandedTitles}
+                        value={s}
+                        onChange={(next) => {
+                            setState(next);
+                            onStateChange?.(next);
+                        }}
+                        readOnly={readOnly}
+                    />
+                }
+                footer={footer}
+            />
+
+            <ConfirmDialog
+                open={confirmReset}
+                onOpenChange={setConfirmReset}
+                danger
+                title={ui.t("resetDialog.title")}
+                confirmLabel={ui.t("resetDialog.confirm")}
+                description={
+                    <div className="grid gap-2">
+                        <div>{ui.t("resetDialog.line1")}</div>
+                        <div className="ui-sketch-muted font-extrabold">{ui.t("resetDialog.line2")}</div>
+                    </div>
+                }
+                onConfirm={() => {
+                    const fresh = defaultStateForSpec(spec);
+                    setState(fresh);
+                    onStateChange?.(fresh);
+                }}
+            />
+        </>
+    );
+}

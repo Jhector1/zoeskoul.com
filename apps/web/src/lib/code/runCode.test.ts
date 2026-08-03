@@ -109,7 +109,11 @@ describe("submitRun", () => {
 
         expect(getSingleFileLanguageIdMock).not.toHaveBeenCalled();
         expect(zipProjectMock).toHaveBeenCalledWith("bash", "main.sh", [
-            { path: "main.sh", content: 'echo "Hello from Bash!"\n' },
+            {
+                kind: "file",
+                path: "main.sh",
+                content: 'echo "Hello from Bash!"\n',
+            },
         ]);
         expect(createJudge0SubmissionMock).toHaveBeenCalledWith(
             "http://judge0.test/submissions?base64_encoded=true",

@@ -5,13 +5,17 @@ import {
     getActor,
 } from "@/lib/practice/actor";
 import {
-    bodyJsonResponse,
-    bodyJsonWithGuestCookie,
-    enforceSameOriginPost,
+    bodyJsonResponse as baseBodyJsonResponse,
+    bodyJsonWithGuestCookie as baseBodyJsonWithGuestCookie,
     exceedsContentLength,
     getClientIp,
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
+import {
+    appCorsPreflight,
+    applyAppCorsHeaders,
+    isAppOriginAllowed,
+} from "@/lib/http/appCors";
 import { pickLocale } from "@/lib/review/api/shared/schemas";
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import {
@@ -31,6 +35,33 @@ import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
 import { rateLimit } from "@/lib/security/ratelimit";
 
+function progressJsonResponse(
+    request: Request,
+    data: unknown,
+    status = 200,
+): Response {
+    return applyAppCorsHeaders(
+        request,
+        baseBodyJsonResponse(data, status),
+    );
+}
+
+function progressJsonWithGuestCookie(
+    request: Request,
+    data: unknown,
+    status: number,
+    setGuestId?: string,
+): Response {
+    return applyAppCorsHeaders(
+        request,
+        baseBodyJsonWithGuestCookie(
+            data,
+            status,
+            setGuestId,
+        ),
+    );
+}
+
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -47,6 +78,14 @@ async function resolveReviewProgressScope(args: {
 }
 
 export async function GET(req: Request) {
+    if (!isAppOriginAllowed(req)) {
+        return progressJsonResponse(
+            req,
+            { message: "Forbidden." },
+            403,
+        );
+    }
+
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
     const moduleSlug = (
@@ -57,7 +96,7 @@ export async function GET(req: Request) {
     const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
-        return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);
+        return progressJsonResponse(req, { message: "Missing subjectSlug/moduleId." }, 400);
     }
 
     const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
@@ -66,7 +105,7 @@ export async function GET(req: Request) {
     });
 
     if (!resolved.ok) {
-        return bodyJsonWithGuestCookie(
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -91,7 +130,7 @@ export async function GET(req: Request) {
 
     const state = (row?.state ?? null) as ReviewProgressState | null;
 
-    return bodyJsonWithGuestCookie(
+    return progressJsonWithGuestCookie(req,
         {
             progress: state,
         },
@@ -105,12 +144,16 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
-    if (!enforceSameOriginPost(req)) {
-        return bodyJsonResponse({ message: "Forbidden." }, 403);
+    if (!isAppOriginAllowed(req)) {
+        return progressJsonResponse(
+            req,
+            { message: "Forbidden." },
+            403,
+        );
     }
 
     if (exceedsContentLength(req, REVIEW_PROGRESS_LIMITS.maxPayloadBytes)) {
-        return bodyJsonResponse(
+        return progressJsonResponse(req,
             {
                 message: `Payload exceeds the ${REVIEW_PROGRESS_LIMITS.maxPayloadBytes} byte limit.`,
             },
@@ -120,12 +163,12 @@ export async function PUT(req: Request) {
 
     const body = await readJsonSafe(req);
     if (!body) {
-        return bodyJsonResponse({ message: "Invalid JSON body." }, 400);
+        return progressJsonResponse(req, { message: "Invalid JSON body." }, 400);
     }
 
     const parsed = ReviewProgressWriteSchema.safeParse(body);
     if (!parsed.success) {
-        return bodyJsonResponse(
+        return progressJsonResponse(req,
             {
                 message: "Invalid body.",
                 issues: parsed.error.issues,
@@ -145,7 +188,7 @@ export async function PUT(req: Request) {
     });
 
     if (!resolved.ok) {
-        return bodyJsonWithGuestCookie(
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -166,7 +209,7 @@ export async function PUT(req: Request) {
         });
 
         if (!rl.ok) {
-            const res = bodyJsonWithGuestCookie(
+            const res = progressJsonWithGuestCookie(req,
                 {
                     message: "Too many requests.",
                 },
@@ -178,7 +221,7 @@ export async function PUT(req: Request) {
             return res;
         }
     } catch {
-        return bodyJsonWithGuestCookie(
+        return progressJsonWithGuestCookie(req,
             {
                 message: "Service unavailable.",
             },
@@ -219,7 +262,7 @@ export async function PUT(req: Request) {
             existingBytes: reviewProgressStateBytes(previousState),
         });
 
-        return bodyJsonWithGuestCookie(
+        return progressJsonWithGuestCookie(req,
             {
                 ok: false,
                 ignored: true,
@@ -268,7 +311,7 @@ export async function PUT(req: Request) {
             });
 
             if (updated.count !== 1) {
-                return bodyJsonWithGuestCookie(
+                return progressJsonWithGuestCookie(req,
                     {
                         ok: false,
                         ignored: true,
@@ -292,7 +335,7 @@ export async function PUT(req: Request) {
         if (
             String((error as { code?: unknown } | null)?.code ?? "") === "P2002"
         ) {
-            return bodyJsonWithGuestCookie(
+            return progressJsonWithGuestCookie(req,
                 {
                     ok: false,
                     ignored: true,
@@ -325,7 +368,7 @@ export async function PUT(req: Request) {
         });
     }
 
-    return bodyJsonWithGuestCookie(
+    return progressJsonWithGuestCookie(req,
         {
             ok: true,
             saved,
@@ -338,8 +381,12 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-    if (!enforceSameOriginPost(req)) {
-        return bodyJsonResponse({ message: "Forbidden." }, 403);
+    if (!isAppOriginAllowed(req)) {
+        return progressJsonResponse(
+            req,
+            { message: "Forbidden." },
+            403,
+        );
     }
 
     const { searchParams } = new URL(req.url);
@@ -352,7 +399,7 @@ export async function DELETE(req: Request) {
     const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
-        return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);
+        return progressJsonResponse(req, { message: "Missing subjectSlug/moduleId." }, 400);
     }
 
     const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
@@ -361,7 +408,7 @@ export async function DELETE(req: Request) {
     });
 
     if (!resolved.ok) {
-        return bodyJsonWithGuestCookie(
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -394,11 +441,15 @@ export async function DELETE(req: Request) {
         }),
     ]);
 
-    return bodyJsonWithGuestCookie(
+    return progressJsonWithGuestCookie(req,
         {
             ok: true,
         },
         200,
         setGuestId,
     );
+}
+
+export function OPTIONS(req: Request) {
+    return appCorsPreflight(req);
 }

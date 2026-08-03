@@ -1,22 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
-const ADMINS = new Set(
-  (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map(s => s.trim().toLowerCase())
-    .filter(Boolean)
-);
+import { getCurrentUserAccess } from "@/lib/access/currentUserAccess";
 
-export async function requireAdmin(req: Request) {
-  const session = await auth();
-  const email = session?.user?.email?.toLowerCase();
+export async function requireAdmin(_request?: Request) {
+  const access = await getCurrentUserAccess();
 
-  if (!email) {
+  if (!access.authenticated) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  if (!ADMINS.has(email)) {
+
+  if (!access.capabilities.isAdmin) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
+
   return null;
 }

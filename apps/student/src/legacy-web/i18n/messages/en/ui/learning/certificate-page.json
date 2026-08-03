@@ -1,0 +1,56 @@
+{
+  "certificatePage": {
+    "title": "Certificate",
+    "courseCertificate": "Course Certificate",
+    "loading": "Loading…",
+    "back": "Back",
+    "loadFailed": "Unable to load certificate status.",
+    "downloadFailed": "Unable to download certificate.",
+    "downloadPreparing": "Preparing…",
+    "downloadPdf": "Download PDF",
+    "status": {
+      "unlocked": "Unlocked",
+      "inProgress": "In progress",
+      "issued": "Issued",
+      "locked": "Locked",
+      "complete": "Complete"
+    },
+    "hero": {
+      "congratulations": "Congratulations",
+      "almostThere": "Almost there",
+      "eligible": "You completed <subject>{subjectName}</subject>. Your certificate is ready.",
+      "locked": "Finish all modules{assignmentSuffix} to unlock the certificate for <subject>{subjectName}</subject>.",
+      "assignmentSuffix": " and required assignments"
+    },
+    "certificateId": "Certificate ID:",
+    "previewTitle": "Certificate Preview",
+    "checklistTitle": "Checklist",
+    "modulesCount": "{count} modules",
+    "checklistDetails": "Topics: {topics} • Assignment: {assignment}",
+    "checklistValue": {
+      "done": "done",
+      "notDone": "not done"
+    },
+    "nextStepsTitle": "Next steps",
+    "nextSteps": {
+      "course": {
+        "title": "Start the next course",
+        "body": "Keep momentum and continue learning with your next subject."
+      },
+      "practice": {
+        "title": "Practice regularly",
+        "body": "A short daily practice routine will help the material stick."
+      },
+      "project": {
+        "title": "Build a small project",
+        "body": "Use what you learned in something real and finish it."
+      }
+    },
+    "fallbacks": {
+      "course": "Course",
+      "learner": "Learner",
+      "guestLearner": "Guest Learner",
+      "emptyDate": "—"
+    }
+  }
+}

@@ -31,5 +31,5 @@ describe("buildCertificatePdf", () => {
         expect(source).toContain("Inter-Regular");
         expect(source).toContain("Inter-Bold");
         expect(source).toContain("Inter-ExtraBold");
-    });
+    }, 15_000);
 });

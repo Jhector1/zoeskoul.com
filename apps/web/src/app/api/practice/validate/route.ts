@@ -1,3 +1,4 @@
+import { isAppMutationOriginAllowed } from "@/lib/http/appCors";
 import { prisma } from "@/lib/prisma";
 import { rateLimit } from "@/lib/security/ratelimit";
 
@@ -5,7 +6,6 @@ import { BodySchema } from "@/lib/practice/api/validate/schemas";
 import { buildPracticeValidateContext } from "@/lib/practice/api/validate/context";
 import { handlePracticeValidate } from "@/lib/practice/api/validate/handler";
 import {
-  enforceSameOriginPost,
   getClientIp,
   jsonApiResponse,
   readJsonSafe,
@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   const requestId = crypto.randomUUID();
 
-  if (!enforceSameOriginPost(req)) {
+  if (!isAppMutationOriginAllowed(req)) {
     return jsonApiResponse({
       requestId,
       message: "Forbidden.",

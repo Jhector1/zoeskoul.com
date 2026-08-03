@@ -1,0 +1,106 @@
+@layer components {
+  /* =========================
+   * Sketch tokens (review sketches)
+   * ========================= */
+  .ui-sketch-grid {
+    @apply grid gap-3;
+  }
+
+  .ui-sketch-panel {
+    @apply rounded-2xl border border-neutral-200 bg-white shadow-sm p-4;
+  }
+
+  .dark .ui-sketch-panel {
+    @apply border-white/10 bg-white/[0.03];
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .ui-sketch-label {
+    @apply text-xs font-extrabold text-neutral-600;
+  }
+
+  .dark .ui-sketch-label {
+    @apply text-white/60;
+  }
+
+  .ui-sketch-chip {
+    @apply rounded-xl border px-3 py-1 text-xs font-extrabold transition;
+  }
+
+  .ui-sketch-chip--idle {
+    @apply border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50;
+  }
+
+  .dark .ui-sketch-chip--idle {
+    @apply border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/[0.10];
+  }
+
+  .ui-sketch-chip--active-sky {
+    @apply border-sky-300/60 bg-sky-50 text-sky-950;
+  }
+
+  .dark .ui-sketch-chip--active-sky {
+    @apply border-sky-300/30 bg-sky-300/10 text-white/90;
+  }
+
+  .ui-sketch-chip--active-rose {
+    @apply border-rose-300/60 bg-rose-50 text-rose-950;
+  }
+
+  .dark .ui-sketch-chip--active-rose {
+    @apply border-rose-300/30 bg-rose-300/10 text-white/90;
+  }
+
+  .ui-sketch-chip--active-emerald {
+    @apply border-emerald-600/25 bg-emerald-500/10 text-emerald-950;
+  }
+
+  .dark .ui-sketch-chip--active-emerald {
+    @apply border-emerald-300/30 bg-emerald-300/10 text-white/90;
+  }
+
+  .ui-sketch-input {
+    @apply mt-1 w-full rounded-xl border px-3 py-2 text-xs font-extrabold outline-none transition border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-300;
+  }
+
+  .dark .ui-sketch-input {
+    @apply border-white/10 bg-white/[0.06] text-white/90 placeholder:text-white/35 focus:border-white/20;
+  }
+
+  .ui-sketch-codeblock {
+    @apply rounded-2xl border p-3 border-neutral-200 bg-neutral-50;
+  }
+
+  .dark .ui-sketch-codeblock {
+    @apply border-white/10 bg-black/30;
+  }
+
+  .ui-sketch-code {
+    @apply mt-2 whitespace-pre-wrap text-xs text-neutral-800;
+  }
+
+  .dark .ui-sketch-code {
+    @apply text-white/85;
+  }
+
+  .ui-sketch-muted {
+    @apply text-xs text-neutral-500;
+  }
+
+  .dark .ui-sketch-muted {
+    @apply text-white/50;
+  }
+
+  /* MathMarkdown default */
+  .ui-math {
+    @apply text-sm text-neutral-700;
+  }
+
+  .dark .ui-math {
+    @apply text-white/80;
+  }
+
+  .dark .ui-math .katex {
+    @apply text-white/90;
+  }
+}

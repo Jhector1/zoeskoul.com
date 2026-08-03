@@ -53,6 +53,7 @@ describe("practice purpose policy", () => {
 
   it("uses each exact authored purpose in a subscriber queue", () => {
     const session = {
+      id: "subscriber-session",
       mode: "standard",
       meta: {
         kind: "subscriber_practice",

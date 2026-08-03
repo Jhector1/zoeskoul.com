@@ -1,0 +1,11 @@
+.student-real-topbar {
+  margin-bottom: 1.5rem;
+}
+
+.student-page-description {
+  display: block;
+  max-width: 42rem;
+  margin-top: 0.55rem;
+  color: #718096;
+  line-height: 1.55;
+}

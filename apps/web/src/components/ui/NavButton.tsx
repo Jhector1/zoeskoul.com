@@ -7,8 +7,14 @@ import { routing } from "@/i18n/routing";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import {
+    isAbsoluteHttpHref,
+    resolveNavButtonNavigationKind,
+} from "./navButtonNavigation";
 
-type NavHref = Parameters<ReturnType<typeof useRouter>["push"]>[0];
+type RouterHref =
+    Parameters<ReturnType<typeof useRouter>["push"]>[0];
+type NavHref = RouterHref | string;
 
 type NavButtonProps = {
     /**
@@ -40,6 +46,7 @@ type NavButtonProps = {
 
 function normalizeHref(href: NavHref): NavHref {
     if (typeof href !== "string") return href;
+    if (isAbsoluteHttpHref(href)) return href;
 
     let path = href.startsWith("/") ? href : `/${href}`;
     const localeSet = new Set(routing.locales);
@@ -86,6 +93,8 @@ export default function NavButton({
         () => (href === undefined ? null : normalizeHref(href)),
         [href],
     );
+    const navigationKind =
+        resolveNavButtonNavigationKind(normalizedHref);
 
     const currentUrl = useMemo(() => {
         const qs = searchParams?.toString();
@@ -97,10 +106,21 @@ export default function NavButton({
     }, [currentUrl]);
 
     useEffect(() => {
-        if (prefetch && !hardReload && normalizedHref !== null) {
-            router.prefetch(normalizedHref);
+        if (
+            prefetch &&
+            !hardReload &&
+            normalizedHref !== null &&
+            navigationKind !== "external"
+        ) {
+            router.prefetch(normalizedHref as RouterHref);
         }
-    }, [normalizedHref, prefetch, hardReload, router]);
+    }, [
+        normalizedHref,
+        navigationKind,
+        prefetch,
+        hardReload,
+        router,
+    ]);
 
     const loading = clicked || isPending;
     const isDisabled = disabled || loading || (!onClick && normalizedHref === null);
@@ -151,9 +171,34 @@ export default function NavButton({
                      * Used by review module Previous/Next slideshow controls.
                      * There is no href, so do not call router.push.
                      */
-                    if (normalizedHref === null) {
+                    if (navigationKind === "none") {
                         await clickResult;
                         setClicked(false);
+                        return;
+                    }
+
+                    if (
+                        navigationKind === "external" &&
+                        typeof normalizedHref === "string"
+                    ) {
+                        startGlobalNavigationPending({
+                            label:
+                                typeof loadingText === "string"
+                                    ? loadingText
+                                    : "Loading…",
+                            source: "nav-button-external",
+                            minVisibleMs: 350,
+                        });
+
+                        /**
+                         * Cross-app navigation must leave the current Next.js
+                         * router. Let the spinner paint, then ask the browser
+                         * to load the absolute destination.
+                         */
+                        window.setTimeout(() => {
+                            window.location.assign(normalizedHref);
+                        }, 80);
+
                         return;
                     }
 
@@ -170,7 +215,7 @@ export default function NavButton({
                     });
 
                     startTransition(() => {
-                        router.push(normalizedHref);
+                        router.push(normalizedHref as RouterHref);
                     });
                 } catch (error) {
                     setClicked(false);

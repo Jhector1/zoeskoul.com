@@ -2,10 +2,13 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@zoeskoul-code-input-expected", () => ({
   buildFixedTestsExpected: vi.fn((recipe: any) => ({
-    kind: "programming",
-    language: "python",
+    kind: "code_input",
+    strategy: "programming",
+    language: recipe?.language ?? "python",
+    checkMode: "stdout",
     recipeType: "fixed_tests",
     tests: recipe?.tests ?? [],
+    semanticChecks: [],
   })),
   buildSemanticExpected: vi.fn((recipe: any) => ({
     kind: "code_input",

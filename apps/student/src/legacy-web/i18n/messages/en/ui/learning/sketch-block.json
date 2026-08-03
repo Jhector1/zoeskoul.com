@@ -1,0 +1,17 @@
+{
+  "sketchBlockUi": {
+    "finishPrereqs": "Finish “Mark as read” items in this topic first.",
+    "locked": "Locked.",
+    "autosave": "Progress saves automatically.",
+    "reset": "Reset",
+    "markRead": "Mark as read",
+    "markedRead": "✓ Marked as read",
+    "markReadTitle": "Mark this learning card as read",
+    "resetDialog": {
+      "title": "Reset this sketch?",
+      "confirm": "Reset",
+      "line1": "This will clear your inputs for this card.",
+      "line2": "This can’t be undone."
+    }
+  }
+}

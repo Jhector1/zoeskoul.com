@@ -1,0 +1,35 @@
+{
+  "MatricesPart1Landing": {
+    "pageTitle": "Matris — Pati 1",
+    "pageIntro": "Aprann kisa yon matris ye, kijan pou li fòm li, kijan pou w fè endèks/koupe li tankou nan NumPy, epi bati entuisyon pou miltiplikasyon, transpoze, ak simetri.",
+    "quickStartEasy": "Kòmanse vit (Fasil)",
+    "whatYouLearn": "Sa w ap aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "Konsèy: chwazi yon nivo difikilte epi repete jiskaske li vin otomatik.",
+    "parts": {
+      "part1": {
+        "badge": "BAZ",
+        "title": "Matris: sans, fòm, ak operasyon debaz",
+        "subtitle": "Soti nan tablo done rive nan transfòmasyon: endèks, matris espesyal, miltiplikasyon, transpoze, simetri",
+        "bullets": {
+          "0": "Li fòm matris la (liy × kolòn) epi konte kantite eleman total",
+          "1": "Wè matris la tankou yon tablo done oswa vektè-kolòn yo mete youn sou lòt",
+          "2": "Konvèti endèks nan matematik pou vin endèks NumPy (kòmanse a 0)",
+          "3": "Devine fòm yon slice ak règ Python (entèval ki pa enkli fen an)",
+          "4": "Idantifye matris idantite, dyagonal, ak triyangilè",
+          "5": "Konprann diferans ant miltiplikasyon eleman-pa-eleman ak miltiplikasyon matris (* vs @), epi shift A + λI",
+          "6": "Jwenn fòm AB, verifye si miltiplikasyon an posib, epi kalkile yon eleman ak dot product",
+          "7": "Sèvi ak règ transpoze (LIVE EVIL), fòm transpoze yo, epi rekonèt matris simetrik"
+        }
+      }
+    },
+    "recommendedPathTitle": "Chimen rekòmande",
+    "recommended": {
+      "0": "Kòmanse ak fòm + endèks jiskaske ou reponn vit.",
+      "1": "Ale sou fòm/validite miltiplikasyon, apre sa kalkile eleman yo.",
+      "2": "Fini ak modèl transpoze + simetri."
+    },
+    "routeHint": "Chemen: /practice/review/matrices_part1 (li) • /practice?section=module-2-matrices (pratike)"
+  }
+}

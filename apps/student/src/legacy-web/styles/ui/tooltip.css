@@ -1,0 +1,30 @@
+@layer components {
+    /* =========================
+     * Portal Tooltip (theme-aware)
+     * ========================= */
+    .ui-tooltip {
+
+        @apply pointer-events-none fixed z-[9999];
+        @apply rounded-2xl border px-2 py-1;
+        @apply text-[11px] font-extrabold shadow-lg;
+        @apply border-neutral-200 bg-white text-neutral-800;
+    }
+
+    .dark .ui-tooltip {
+        @apply border-white/10 bg-black/80 text-white/90;
+    }
+
+    .ui-tooltip-arrow {
+        @apply absolute left-1/2 h-2 w-2 -translate-x-1/2 rotate-45;
+        @apply border border-neutral-200 bg-white;
+    }
+
+    .dark .ui-tooltip-arrow {
+        @apply border-white/10 bg-black/80;
+    }
+
+    .ui-tooltip--below-lg {
+        @apply lg:hidden; /* ✅ tooltip shows only when <lg */
+    }
+
+}

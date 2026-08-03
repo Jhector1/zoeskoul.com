@@ -14,10 +14,10 @@ export function resolveModuleFromTopicSlug(args: {
         if (byPrefix) return byPrefix.slug;
     }
 
-    for (const module of manifest.modules) {
-        for (const section of module.sections) {
+    for (const subjectModule of manifest.modules) {
+        for (const section of subjectModule.sections) {
             if (section.topics.includes(base)) {
-                return module.slug;
+                return subjectModule.slug;
             }
         }
     }

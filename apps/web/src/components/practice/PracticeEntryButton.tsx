@@ -1,8 +1,10 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useLocale } from "next-intl";
 
 import EntryActionButton from "@/components/navigation/EntryActionButton";
+import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
 import { buildPracticeEntryHref } from "@/lib/practice/entry";
 
 type PracticeEntryButtonProps = {
@@ -30,10 +32,18 @@ export default function PracticeEntryButton({
   onGuestClick,
   prefetch = true,
 }: PracticeEntryButtonProps) {
-  const href =
+  const locale = useLocale();
+  const localHref =
     !isAuthenticated && onGuestClick
       ? undefined
       : buildPracticeEntryHref(isAuthenticated);
+  const href =
+    isAuthenticated && localHref
+      ? buildStudentAppHref({
+          pathname: localHref,
+          locale,
+        })
+      : localHref;
 
   return (
     <EntryActionButton

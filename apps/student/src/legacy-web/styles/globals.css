@@ -1,0 +1,102 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+@import "./ui.css";
+
+/* Tailwind custom variants must come after all CSS imports. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes review-nav-progress {
+    0% {
+        transform: translateX(-120%);
+        opacity: 0.45;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(340%);
+        opacity: 0.45;
+    }
+}
+
+/* Keep xterm text selection readable in both light and dark themes. */
+.xterm .xterm-selection div {
+    background-color: rgba(37, 99, 235, 0.24) !important;
+}
+
+.dark .xterm .xterm-selection div,
+[data-theme="dark"] .xterm .xterm-selection div {
+    background-color: rgba(147, 197, 253, 0.28) !important;
+}
+
+
+
+@keyframes app-global-navigation-progress {
+    0% {
+        transform: translateX(-120%);
+        opacity: 0.48;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(340%);
+        opacity: 0.48;
+    }
+}
+
+.app-global-navigation-progress-bar {
+    animation: app-global-navigation-progress 1.15s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-global-navigation-progress-bar {
+        animation-duration: 2.4s;
+    }
+}
+
+
+@keyframes app-global-navigation-toast-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-0.75rem) scale(0.96);
+        filter: blur(6px);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(0.0625rem) scale(1.01);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.app-global-navigation-toast {
+    animation: app-global-navigation-toast-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: top center;
+}
+
+/*
+ * Mobile code focus mode.
+ *
+ * Virtual keyboards shrink the visual viewport without consistently resizing
+ * the layout viewport (especially on iOS). While Monaco owns keyboard focus,
+ * remove the review header and redundant Exercise/Code switcher so the editor
+ * keeps enough visible room to show the active line and caret. Both return as
+ * soon as the keyboard closes.
+ */
+@media (max-width: 767px) {
+    html[data-zoe-mobile-keyboard="open"] [data-mobile-workspace-header="true"],
+    html[data-zoe-mobile-keyboard="open"] [data-mobile-workspace-chrome="true"] {
+        display: none !important;
+    }
+}

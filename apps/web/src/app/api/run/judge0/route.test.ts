@@ -110,7 +110,7 @@ describe("POST /api/run/judge0", () => {
         });
     });
 
-    it("rejects cross-origin POST requests before parsing JSON", async () => {
+    it("rejects untrusted-origin POST requests before parsing JSON", async () => {
         const { POST } = await import("./route");
 
         const req = makeReq({
@@ -126,6 +126,59 @@ describe("POST /api/run/judge0", () => {
         expect(mocks.getActor).not.toHaveBeenCalled();
         expect(mocks.rateLimit).not.toHaveBeenCalled();
         expect(mocks.parseRunReq).not.toHaveBeenCalled();
+        expect(mocks.submitRun).not.toHaveBeenCalled();
+    });
+
+
+    it("accepts the trusted production Student app origin", async () => {
+        const { POST } = await import("./route");
+
+        const res = await POST(
+            makeReq({
+                origin: "https://student.zoeskoul.com",
+            }),
+        );
+
+        expect(res.status).toBe(200);
+        expect(mocks.submitRun).toHaveBeenCalledTimes(1);
+    });
+
+    it("accepts the exact configured Student preview origin", async () => {
+        vi.stubEnv(
+            "NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS",
+            "https://student-preview.zoeskoul.com",
+        );
+
+        const { POST } = await import("./route");
+
+        const res = await POST(
+            makeReq({
+                origin: "https://student-preview.zoeskoul.com",
+            }),
+        );
+
+        expect(res.status).toBe(200);
+        expect(mocks.submitRun).toHaveBeenCalledTimes(1);
+    });
+
+    it("rejects a configured-preview lookalike origin", async () => {
+        vi.stubEnv(
+            "NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS",
+            "https://student-preview.zoeskoul.com",
+        );
+
+        const { POST } = await import("./route");
+
+        const req = makeReq({
+            origin:
+                "https://student-preview.zoeskoul.com.evil.example",
+        });
+        const textSpy = vi.spyOn(req, "text");
+
+        const res = await POST(req);
+
+        expect(res.status).toBe(403);
+        expect(textSpy).not.toHaveBeenCalled();
         expect(mocks.submitRun).not.toHaveBeenCalled();
     });
 

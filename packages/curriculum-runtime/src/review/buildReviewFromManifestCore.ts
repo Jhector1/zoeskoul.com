@@ -131,6 +131,10 @@ export function buildReviewFromManifestCore(args: {
                     index,
                     title: tag(card.titleKey),
                     tools: card.tools,
+                    studentRuntimeExerciseKey:
+                        typeof card.studentRuntimeExerciseKey === "string"
+                            ? card.studentRuntimeExerciseKey.trim() || undefined
+                            : undefined,
                     spec: makeQuizSpec({
                         subject: manifest.subjectSlug,
                         module: manifest.moduleSlug,

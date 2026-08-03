@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { useLocale } from "next-intl";
 
 import EntryActionButton from "@/components/navigation/EntryActionButton";
+import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
 import {
   createStartLearningEntry,
   parseLearningEntry,
@@ -34,6 +36,7 @@ export default function LearningEntryButton({
   loadingText,
   prefetch = true,
 }: LearningEntryButtonProps) {
+  const locale = useLocale();
   const [entry, setEntry] = useState<LearningEntry | null>(null);
 
   useEffect(() => {
@@ -74,7 +77,14 @@ export default function LearningEntryButton({
 
   return (
     <EntryActionButton
-      href={resolvedEntry.href}
+      href={
+        isAuthenticated
+          ? buildStudentAppHref({
+              pathname: resolvedEntry.href,
+              locale,
+            })
+          : resolvedEntry.href
+      }
       label={label}
       className={className}
       disabled={disabled}

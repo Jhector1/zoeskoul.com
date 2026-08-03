@@ -1,0 +1,337 @@
+"use client";
+
+import { useCallback } from "react";
+import type { SqlDialect, WorkspaceLanguage } from "@/lib/practice/types";
+import type { RunResult } from "@/lib/code/types";
+import type { ExecutionBackend } from "@/components/code/runner/runtime";
+import { runViaApi } from "@/lib/code/runClient";
+import { exportProjectFiles } from "../../fsTree";
+import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
+import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
+import {InteractiveLanguage, StartSessionResult} from "@zoeskoul/code-contracts";
+import type { FileEntry } from "@zoeskoul/code-contracts";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
+import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
+
+type Args = {
+    nodes: any[];
+    activeFile: any | null;
+    entryFile: any | null;
+    activeFileId: string | null;
+    entryFileId: string | null;
+    sqlDialect: SqlDialect;
+    sqlDatasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    canUseMultiFile: boolean;
+    backend: ExecutionBackend;
+};
+
+type IdeRunArgs =
+    | {
+    language: "sql";
+    code?: string;
+    sqlDialect?: SqlDialect;
+    datasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    signal?: AbortSignal;
+}
+    | {
+    language: InteractiveLanguage;
+    code?: string;
+    stdin?: string;
+    captureWorkspace?: boolean;
+    signal?: AbortSignal;
+};
+
+type IdeRunResponse = RunResult | StartSessionResult;
+
+type ProjectFile = FileEntry;
+
+function patchNodesWithAuthoritativeCode(args: {
+    nodes: any[];
+    activeFileId: string | null;
+    code?: string;
+}) {
+    const { nodes, activeFileId, code } = args;
+
+    if (!activeFileId || typeof code !== "string") {
+        return nodes;
+    }
+
+    let changed = false;
+
+    const patchedNodes = nodes.map((node) => {
+        if (node.kind !== "file" || node.id !== activeFileId || node.binary) {
+            return node;
+        }
+
+        if (String(node.content ?? "") === code) {
+            return node;
+        }
+
+        changed = true;
+
+        return {
+            ...node,
+            content: code,
+        };
+    });
+
+    return changed ? patchedNodes : nodes;
+}
+
+type ProjectSqlReq = {
+    kind: "sql";
+    mode: "batch";
+    language: "sql";
+    dialect: SqlDialect;
+    code: string;
+    schemaSql?: string;
+    seedSql?: string;
+    datasetId?: string;
+    resultShape?: "table";
+};
+
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
+type ProjectCodeReq =
+    | {
+    kind: "code";
+    language: InteractiveLanguage;
+    code: string;
+    captureWorkspace?: boolean;
+}
+    | {
+    kind: "code";
+    language: InteractiveLanguage;
+    entry: string;
+    files: ProjectFile[];
+    captureWorkspace?: boolean;
+};
+
+export function buildProjectRunRequest(args: {
+    language: IdeRunArgs["language"];
+    nodes: any[];
+    activeFile: any | null;
+    entryFile: any | null;
+    activeFileId: string | null;
+    entryFileId: string | null;
+    sqlDialect: SqlDialect;
+    sqlDatasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    canUseMultiFile: boolean;
+    preferWorkspaceFiles?: boolean;
+    code?: string;
+}): ProjectSqlReq | ProjectCodeReq {
+    const {
+        language,
+        nodes,
+        activeFile,
+        entryFile,
+        activeFileId,
+        entryFileId,
+        sqlDialect,
+        sqlDatasetId,
+        sqlResultShape,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
+        canUseMultiFile,
+        preferWorkspaceFiles,
+        code,
+    } = args;
+
+    const patchedNodes = patchNodesWithAuthoritativeCode({
+        nodes,
+        activeFileId,
+        code,
+    });
+    const files = exportProjectFiles(patchedNodes);
+    const textFiles = files.filter((file) => !isBinaryWorkspaceEntry(file));
+
+    if (language === "sql") {
+        const schemaFile = textFiles.find((f) =>
+            f.path.toLowerCase().endsWith("schema.sql"),
+        );
+        const seedFile = textFiles.find((f) =>
+            f.path.toLowerCase().endsWith("seed.sql"),
+        );
+        const queryFile = textFiles.find((f) =>
+            f.path.toLowerCase().endsWith("query.sql"),
+        );
+
+        const activePath = String(
+            activeFile?.path ?? activeFile?.name ?? ""
+        ).toLowerCase();
+
+        const activeIsSchema = activePath.endsWith("schema.sql");
+        const activeIsSeed = activePath.endsWith("seed.sql");
+
+        const activeQuery =
+            !activeIsSchema && !activeIsSeed
+                ? (code ?? (activeFile?.binary ? "" : activeFile?.content) ?? "")
+                : (queryFile?.content ?? code ?? "");
+
+        return {
+            kind: "sql",
+            mode: "batch",
+            language: "sql",
+            dialect: sqlDialect,
+            code: activeQuery,
+            schemaSql: firstNonBlank(
+                canUseMultiFile ? schemaFile?.content : undefined,
+                sqlSchemaSql,
+                sqlSetupSql,
+            ),
+            seedSql: firstNonBlank(
+                canUseMultiFile ? seedFile?.content : undefined,
+                sqlSeedSql,
+            ),
+            datasetId: firstNonBlank(sqlDatasetId),
+            resultShape: sqlResultShape,
+        };
+    }
+    const shouldUseWorkspaceFiles =
+        canUseMultiFile && (files.length > 1 || preferWorkspaceFiles === true);
+
+    if (!shouldUseWorkspaceFiles) {
+        return {
+            kind: "code",
+            language,
+            code:
+                code ??
+                (activeFile?.binary ? undefined : activeFile?.content) ??
+                (entryFile?.binary ? undefined : entryFile?.content) ??
+                "",
+        };
+    }
+
+    const workspaceSubmission = serializeWorkspaceForCodeRun({
+        version: 2,
+        language: language as WorkspaceLanguage,
+        nodes: patchedNodes,
+        openTabs: [],
+        activeFileId: (activeFileId ?? "") as string,
+        entryFileId: (entryFileId ?? activeFileId ?? "") as string,
+        stdin: "",
+        expanded: [],
+        leftPct: 26,
+    });
+
+    if (!workspaceSubmission) {
+        return {
+            kind: "code",
+            language,
+            code:
+                code ??
+                (activeFile?.binary ? undefined : activeFile?.content) ??
+                (entryFile?.binary ? undefined : entryFile?.content) ??
+                "",
+        };
+    }
+
+    return {
+        kind: "code",
+        language,
+        entry: workspaceSubmission.entry,
+        files: workspaceSubmission.files,
+    };
+}
+
+export function useIdeRunner({
+                                 nodes,
+                                 activeFile,
+                                 entryFile,
+                                 activeFileId,
+                                 entryFileId,
+                                 sqlDialect,
+                                 sqlDatasetId,
+                                 sqlResultShape,
+                                 sqlSchemaSql,
+                                 sqlSeedSql,
+                                 sqlSetupSql,
+                                 canUseMultiFile,
+                                 backend,
+                             }: Args) {
+    const onRunProject = useCallback(
+        async (args: IdeRunArgs): Promise<IdeRunResponse> => {
+            const req = buildProjectRunRequest({
+                language: args.language,
+                nodes,
+                activeFile,
+                entryFile,
+                activeFileId,
+                entryFileId,
+                sqlDialect:
+                    args.language === "sql" ? (args.sqlDialect ?? sqlDialect) : sqlDialect,
+                sqlDatasetId:
+                    args.language === "sql" ? (args.datasetId ?? sqlDatasetId) : undefined,
+                sqlResultShape:
+                    args.language === "sql" ? (args.sqlResultShape ?? sqlResultShape) : undefined,
+                sqlSchemaSql:
+                    args.language === "sql" ? (args.sqlSchemaSql ?? sqlSchemaSql) : undefined,
+                sqlSeedSql:
+                    args.language === "sql" ? (args.sqlSeedSql ?? sqlSeedSql) : undefined,
+                sqlSetupSql:
+                    args.language === "sql" ? (args.sqlSetupSql ?? sqlSetupSql) : undefined,
+                canUseMultiFile,
+                preferWorkspaceFiles: backend === "pty",
+                code: args.code,
+            });
+
+            if (args.language === "sql") {
+                return runBatchClient(req as ProjectSqlReq, args.signal);
+            }
+
+            if (backend === "pty") {
+                return startInteractiveProjectRun(
+                    {
+                        ...req,
+                        mode: "interactive",
+                    } as any,
+                    args.signal,
+                );
+            }
+
+            return runViaApi(
+                {
+                    ...req,
+                    stdin: args.stdin ?? "",
+                    captureWorkspace: args.captureWorkspace === true,
+                } as any,
+                args.signal,
+            ) as Promise<RunResult>;
+        },
+        [
+            nodes,
+            activeFile,
+            entryFile,
+            activeFileId,
+            entryFileId,
+            sqlDialect,
+            sqlDatasetId,
+            sqlResultShape,
+            sqlSchemaSql,
+            sqlSeedSql,
+            sqlSetupSql,
+            canUseMultiFile,
+            backend,
+        ],
+    );
+
+    return { onRunProject };
+}

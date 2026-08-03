@@ -1,0 +1,396 @@
+{
+  "Practice": {
+    "dailyStart": {
+      "title": "Chwazi matyè jodi a",
+      "subtitle": "Chwazi yon matyè. N ap kreye yon seri ekilibre ki gen jiska {count} egzèsis nan sa ki disponib yo epi n ap fikse li pou jodi a.",
+      "exerciseCount": "{count} egzèsis ki kalifye",
+      "moduleCount": "{count} modil",
+      "start": "Kòmanse matyè sa a →",
+      "starting": "Ap kòmanse…",
+      "empty": "Pa gen opsyon pratik ki kalifye nan nivo sa a.",
+      "subscriberTitle": "Kreye sesyon pratik ou",
+      "subscriberSubtitle": "Chwazi yon katalòg, yon kou, yon modil, yon seksyon ak yon sijè. Plan ou gen pratik san limit ou ka konfigire.",
+      "freeTitle": "Chwazi chemen pratik jodi a",
+      "freeSubtitle": "Chwazi yon chemen gratis pou jiska {count} kesyon jodi a. Modil peye yo rete vizib pou ou ka debloke yo lè ou pare.",
+      "unlimitedBadge": "Pratik san limit",
+      "dailyBadge": "{count} kesyon jodi a",
+      "steps": {
+        "catalog": "Katalòg",
+        "course": "Kou",
+        "module": "Modil",
+        "section": "Seksyon",
+        "topic": "Sijè"
+      },
+      "chooseCatalog": "Chwazi yon katalòg",
+      "chooseCourse": "Chwazi yon kou",
+      "chooseModule": "Chwazi yon modil",
+      "chooseSection": "Chwazi yon seksyon",
+      "chooseTopic": "Chwazi yon sijè",
+      "catalogHelp": "Kòmanse ak domèn aprantisaj ou vle pratike a.",
+      "courseHelp": "Chwazi kou ki gen konpetans ou vle ranfòse a.",
+      "moduleHelp": "Modil gratis yo ka kòmanse jodi a. Modil peye yo montre yon opsyon pou debloke.",
+      "sectionHelp": "Limite pratik la nan pati modil ki enpòtan kounye a.",
+      "topicHelp": "Chwazi sijè sesyon an dwe konsantre sou li.",
+      "paidModule": "Modil abònman",
+      "notAvailable": "Pratik poko disponib isit la",
+      "unlock": "Debloke modil la",
+      "openingBilling": "Ap ouvri bòdwo…",
+      "back": "Retounen",
+      "startUnlimited": "Kòmanse pratik",
+      "startDaily": "Kòmanse pratik jodi a",
+      "selectToContinue": "Chwazi yon opsyon pou kontinye.",
+      "locked": "Bloke",
+      "subscriberKicker": "Konstwi pratik",
+      "freeKicker": "Pratik chak jou",
+      "next": "Pwochen",
+      "yourPractice": "Pratik ou yo",
+      "yourPracticeHelp": "Kontinye nenpòt sijè ou poko fini.",
+      "currentPractice": "Kounye a",
+      "inProgress": "An pwogrè",
+      "continuePractice": "Kontinye pratike",
+      "continuing": "Ap kontinye…",
+      "practiceProgress": "{completed} sou {total} fini"
+    },
+    "ai": {
+      "explainConcept": "Eksplike konsèp",
+      "explaining": "Ap eksplike…",
+      "helperLine": "Li eksplike lide a + metòd la — li pa bay repons final la."
+    },
+    "aiTutor": {
+      "offer": "De tantativ pa pase. Mwen ka konpare travay ou ak egzèsis la epi esplike diferans lan san mwen pa bay repons lan.",
+      "accept": "Ede mwen",
+      "continue": "Kontinye pale",
+      "notNow": "Pa kounye a",
+      "avatarLabel": "Titè",
+      "title": "Titè AI",
+      "subtitle": "Li konpare tantativ ou ak egzèsis la epi li esplike diferans lan",
+      "thinking": "M ap gade tantativ ou yo…",
+      "placeholder": "Mande sa mesaj la vle di…",
+      "guardrail": "Mande sou mesaj la oswa konsèp la. Titè a ap gide w san li pa bay repons final la.",
+      "send": "Voye mesaj",
+      "drag": "Deplase titè AI a",
+      "minimize": "Minimize titè a",
+      "close": "Fèmen konvèsasyon an",
+      "open": "Louvri titè IA a",
+      "available": "Titè IA a disponib",
+      "error": "Titè a pa ka reponn kounye a. Egzèsis ou a toujou an sekirite.",
+      "repeatError": "Titè a pa t bay yon nouvo eksplikasyon. Mande sou mesaj verifikatè a oswa sou pati nan tantativ ou ki pa klè pou ou."
+    },
+    "review": {
+      "emptyAll": "Pa gen kesyon ankò.",
+      "emptyIncorrect": "Pa gen kesyon ki pa kòrèk.",
+      "status": {
+        "revealed": "Montre",
+        "correct": "✓ Kòrèk",
+        "incorrect": "✕ Pa kòrèk",
+        "notChecked": "Pa verifye"
+      },
+      "card": {
+        "question": "Kesyon {n}",
+        "attempts": "Tantativ:",
+        "notCheckedYet": "Poko verifye",
+        "hiddenNote": "Repons kòrèk la kache pou kous sa a.",
+        "showDetails": "Montre sa yo te atann / eksplikasyon"
+      }
+    },
+    "title": "Jeneratè Pratik",
+    "subtitle": "Refresh kenbe pwogrè • ←/→ pou navige • Antre pou soumèt",
+    "progress": {
+      "attempts": "Tantativ",
+      "label": "Pwogrè",
+      "correct": "Kòrèk",
+      "question": "K"
+    },
+    "filters": {
+      "sessionLocked": "Mòd sesyon • filtè yo bloke",
+      "topic": "Sijè",
+      "difficulty": "Nivo",
+      "assignmentLocked": "Mòd devwa • filtè yo bloke"
+    },
+    "buttons": {
+      "prev": "Anvan",
+      "next": "Apre",
+      "submit": "Soumèt",
+      "reveal": "Montre repons",
+      "retry": "Re-eseye",
+      "auto": "Oto"
+    },
+    "status": {
+      "clickNextToStart": "Peze Next pou kòmanse.",
+      "revealDisabled": "Montre repons dezaktive pou kous sa a.",
+      "loading": "Ap chaje…",
+      "loadingDots": "Ap chaje...",
+      "dash": "—"
+    },
+    "confirm": {
+      "progressLine": "Pwogrè kounye a: {answered}/{sessionSize} reponn.",
+      "title": "Rekòmanse sesyon an?",
+      "subtitle": "Chanje sijè oswa nivo ap rekòmanse sesyon w ap fè a.",
+      "loseProgress": "Ou pral pèdi pwogrè w:",
+      "keep": "Kenbe sesyon aktyèl la",
+      "restart": "Wi, rekòmanse",
+      "esc": "Peze Esc pou fèmen."
+    },
+    "result": {
+      "attemptsLeft": "Tantativ ki rete: {count}",
+      "title": "Rezilta",
+      "submitToValidate": "Soumèt repons ou pou w jwenn koreksyon an.",
+      "errorTitle": "⚠️ Erè",
+      "revealed": "👁️ Montre (repons lan parèt)",
+      "correct": "✅ Kòrèk",
+      "incorrect": "❌ Pa fin sa",
+      "revealedPractice": "Nòt la fini. Ou ka toujou ranpli, modifye, rekòmanse, epi kouri solisyon an anvan ou kontinye."
+    },
+    "loadError": {
+      "title": "Nou pa t ka chaje yon kesyon"
+    },
+    "questionPanel": {
+      "footerTip": "← / → pou deplase • Next chaje yon nouvo kesyon nan fen lis la • Antre pou soumèt"
+    },
+    "answer": {
+      "yourAnswer": "Repons ou",
+      "placeholder": "eg. 3.5",
+      "details": "Detay"
+    },
+    "vectorPad": {
+      "title": "Vector Pad",
+      "gridBadge": "Griy: 1 kare = {step} inite{mode}",
+      "gridModeAuto": " • Oto",
+      "gridModeLocked": " • Fikse",
+      "gridSelectOption": "1 kare = {step}"
+    },
+    "exercises": {
+      "vectorDragTarget": {
+        "instructions": "Trennen a (ble) pou l matche ak sib a* = ({x}, {y}) nan tolerans {tolerance}."
+      },
+      "vectorDragDot": {
+        "instructions": "Trennen a pou a · b ≈ {targetDot} (tolerans {tolerance}).",
+        "bFixed": "b fikse: ({x}, {y})",
+        "cards": {
+          "aCurrent": "a (kounye a)",
+          "dotCurrent": "a · b (kounye a)"
+        }
+      }
+    },
+    "summary": {
+      "return": "Retounen",
+      "title": "Sesyon fini",
+      "subtitle": "Ou fini {answered}/{sessionSize} egzèsis",
+      "scoreLine": "{correct} kòrèk • {missed} rate • {pct}%",
+      "reviewTitle": "Revizyon & pwochen etap",
+      "reviewSubtitle": "Refresh pa efase pwogrè • Ou ka retounen sou kesyon yo tou.",
+      "toggleMissedHide": "Kache sa w rate yo",
+      "toggleMissedShow": "Montre sa w rate yo",
+      "backToQuestions": "Tounen sou kesyon yo",
+      "missedHidden": "Lis sa w rate yo kache.",
+      "urlTip": "Ti konsèy: chanje sijè/nivo mete ajou paramèt URL la.",
+      "assignmentReturn": "Retounen nan revizyon"
+    },
+    "summaryCards": {
+      "score": "Nòt",
+      "niceWork": "Bon travay. Revize kesyon ou rate yo (anba) pou w fikse sa w aprann.",
+      "perfectRunTitle": "San fot ✅",
+      "perfectRunSubtitle": "Ou pa rate okenn kesyon nan sesyon sa a.",
+      "missedLabel": "Rate ({count})",
+      "yourAnswer": "Repons ou",
+      "expected": "Sa yo te atann",
+      "explanation": "Eksplikasyon"
+    },
+    "expectedSummary": {
+      "expected": "Atann",
+      "you": "Ou",
+      "delta": "Δ",
+      "chosen": "Ou chwazi",
+      "correct": "Kòrèk",
+      "missing": "Manke:",
+      "extra": "Anplis:",
+      "targetAStar": "Sib a*",
+      "tolerance": "Tolerans",
+      "targetDot": "Sib a·b",
+      "yourDot": "a·b pa ou",
+      "aMag": "|a|",
+      "min": "min",
+      "generic": "Gen done atann disponib."
+    },
+    "errors": {
+      "incompleteAnswer": "Repons lan pa konplè oswa li pa valab.",
+      "failedToSubmit": "Nou pa t ka soumèt",
+      "failedToLoad": "Nou pa t ka chaje kesyon an"
+    },
+    "mobile": {
+      "leaderboard": "Klasman",
+      "controls": "Kontwòl",
+      "controlsTitle": "Pwogrè ak kontwòl",
+      "leaderboardTitle": "Klasman pratik",
+      "close": "Fèmen",
+      "submitting": "Ap soumèt…",
+      "statusReady": "Pare pou soumèt",
+      "statusCorrect": "Kòrèk — kontinye",
+      "statusTryAgain": "Poko sa — eseye ankò",
+      "statusRevealed": "Repons lan montre",
+      "statusError": "Yon aksyon bezwen atansyon",
+      "help": "Èd",
+      "helpTitle": "Endis ak repons",
+      "helpUnavailable": "Èd la ap disponib lè egzèsis la fin chaje.",
+      "helpIntroTitle": "Bezwen èd?",
+      "helpIntro": "Louvri endis yo youn apre lòt. Montre repons lan ap fini egzèsis la epi li pap bay XP.",
+      "attemptsRemaining": "{count} tantativ rete",
+      "hintsUsed": "Endis itilize: {used}/{total}",
+      "showHint": "Montre yon endis",
+      "openingHelp": "Ap louvri…",
+      "noMoreHints": "Ou louvri tout endis ki disponib yo.",
+      "revealTitle": "Montre repons lan",
+      "revealWarning": "Sa ap fini egzèsis la epi li pap bay XP.",
+      "revealAnswer": "Montre repons lan",
+      "revealConfirmTitle": "Montre repons lan?",
+      "revealConfirmBody": "Egzèsis la ap make kòm repons montre. Ou pap resevwa XP pou li.",
+      "cancel": "Anile",
+      "answerRevealedTitle": "Repons lan montre",
+      "answerRevealedBody": "Revize solisyon an, apre sa kontinye lè ou pare.",
+      "continue": "Kontinye",
+      "backToExercise": "Tounen nan egzèsis la"
+    },
+    "workspace": {
+      "assignment": {
+        "title": "Devwa",
+        "kicker": "Devwa modil la",
+        "returnToReview": "Retounen nan revizyon",
+        "returnTitle": "Kite devwa a epi retounen nan revizyon",
+        "returnLoading": "Ap retounen…",
+        "completeTitle": "Devwa fini",
+        "completeSubtitle": "{correct} repons kòrèk sou {answered} egzèsis ki fini.",
+        "summaryTitle": "Devwa fini 🎉",
+        "summarySubtitle": "{completed} sou {total} kesyon fini.",
+        "summaryNote": "{correct} kòrèk • {revealed} repons revele."
+      },
+      "onboardingTrial": {
+        "returnLabel": "Kite esè a",
+        "returnTitle": "Kite esè onboarding lan",
+        "returnLoading": "Ap soti…",
+        "completeTitle": "Esè fini",
+        "completeSubtitle": "{correct} repons kòrèk sou {answered} egzèsis ki fini."
+      },
+      "scopeTitle": "Zòn pratik",
+      "subscriber": "Abòne",
+      "locked": "Bloke",
+      "fixed": "Fiks",
+      "subject": "Sijè",
+      "module": "Modil",
+      "chooseSubject": "Chwazi yon sijè",
+      "chooseModule": "Chwazi yon modil",
+      "loadingSubjects": "Ap chaje sijè pratik yo…",
+      "subjectsUnavailable": "Sijè pratik yo pa disponib pou kounye a.",
+      "subscriberLockedReason": "Abòne pou chwazi nenpòt sijè, tèm, ak nivo difikilte.",
+      "fixedScopeReason": "Sesyon pratik sa a gen yon sijè ak yon modil fiks.",
+      "dailyFallback": "Pratik chak jou",
+      "challengeLabel": "Defi",
+      "exerciseTab": "Egzèsis",
+      "codeTab": "Kòd",
+      "openWorkspace": "Louvri espas kòd la",
+      "badges": {
+        "assignment": "Devwa • pwofesè kontwole",
+        "challenge": "Defi piblik • egzèsis presi",
+        "trial": "Pratik esè • kestyon pou kòmanse",
+        "daily": "Pratik chak jou • klasman ekitab",
+        "standard": "Pratik abòne • reglabl",
+        "practice": "Pratik"
+      },
+      "titles": {
+        "assignment": "Devwa",
+        "challenge": "Defi",
+        "trial": "Pratik esè",
+        "daily": "Pratik chak jou",
+        "standard": "Espas pratik",
+        "practice": "Espas pratik"
+      },
+      "subtitles": {
+        "assignment": "Fè kestyon yo chwazi yo epi soumèt travay ou.",
+        "challenge": "Rezoud egzèsis pataje a epi konpare rezilta ou.",
+        "trial": "Eseye yon egzèsis debaz ki byen vize.",
+        "daily": "Fini seri pratik klase pou jodi a.",
+        "standard": "Chwazi yon sijè ak yon tèm, epi pratike nan espas konplè a.",
+        "practice": "Chwazi yon tèm epi pratike nan espas konplè a."
+      },
+      "navigator": {
+        "dailyEyebrow": "Pratik chak jou",
+        "dailyTitle": "{count} egzèsis jodi a",
+        "dailySubtitle": "Yon seri klase fiks yo chwazi pou jodi a.",
+        "challengeEyebrow": "Defi",
+        "challengeDefaultTitle": "Defi kòd yo pataje",
+        "challengeSubtitle": "Rezoud menm egzèsis yo te pataje avè w la.",
+        "subscriberEyebrow": "Pratik abòne",
+        "freeEyebrow": "Pratik",
+        "chooseTitle": "Chwazi sa pou pratike",
+        "subscriberSubtitle": "Chwazi yon sijè, modil, tèm, ak nivo difikilte.",
+        "freeSubtitle": "Abòne pou chwazi yon sijè, modil, tèm, ak nivo difikilte.",
+        "defaultEyebrow": "Pratik",
+        "defaultTitle": "Espas pratik",
+        "defaultSubtitle": "Travay sou seri egzèsis aktyèl la.",
+        "progress": "Pwogrè",
+        "correct": "Kòrèk",
+        "fixedReason": "Seri egzèsis sa a fiks pou eksperyans sa a.",
+        "dailySubjectReason": "Matyè jodi a rete fikse apre seri chak jou a kòmanse.",
+        "dailyMixReason": "Sistèm nan balanse egzèsis jodi a atravè modil ki kalifye nan matyè sa a. Chwa presi modil, sijè, ak difikilte se pou Pratik San Limit.",
+        "subscribeReason": "Abòne pou chwazi yon lòt sijè oswa modil.",
+        "queue": "Lis egzèsis",
+        "fallbackBadge": "Pratik",
+        "exerciseFallback": "Egzèsis {number}",
+        "statusCorrect": "Kòrèk",
+        "statusCompleted": "Fini",
+        "statusInProgress": "An pwogrè",
+        "statusRevealed": "Repons devwale",
+        "statusCurrent": "Aktyèl",
+        "statusNotStarted": "Poko kòmanse",
+        "sidebarTabsAria": "Kontwòl pratik ak klasman",
+        "controlsTab": "Pratik",
+        "leaderboardTab": "Klasman",
+        "resetExercise": "Reyajiste egzèsis sa a",
+        "resetExerciseDescription": "Retabli espas travay depa a san remèt tantativ ou deja itilize yo."
+      },
+      "stage": {
+        "completeTitle": "Pratik fini",
+        "completeSubtitle": "{correct} repons kòrèk sou {answered} egzèsis fini.",
+        "challengeDefaultTitle": "Defi kòd",
+        "challengeDefaultSubtitle": "Sèvi ak espas travay la, epi verifye repons ou lè ou pare.",
+        "dailyDefaultTitle": "Pratik chak jou",
+        "dailyDefaultSubtitle": "Fini egzèsis klase pou jodi a.",
+        "practiceDefaultTitle": "Pratik",
+        "practiceDefaultSubtitle": "Chwazi yon tèm nan navigatè pratik la epi rezoud egzèsis la.",
+        "questionProgress": "Kesyon {current} sou {total}",
+        "tabsAria": "Egzèsis ak espas kòd",
+        "loadingTitle": "N ap prepare egzèsis ou…",
+        "errorTitle": "Nou pa ka chaje egzèsis sa a",
+        "loadingBody": "Espas pratik la ap parèt isit la lè li pare.",
+        "retry": "Eseye ankò"
+      },
+      "header": {
+        "restartTitle": "Rekòmanse pratik",
+        "restartDescription": "Efase sesyon sa a epi chaje yon nouvo seri.",
+        "navigatorDrawerTitle": "Chwazi pratik",
+        "resizeNavigator": "Trennen pou chanje lajè navigatè pratik la"
+      }
+    },
+    "completion": {
+      "kicker": "Pratik fini",
+      "title": "Sesyon an fini 🎉",
+      "score": "{correct} sou {total} repons kòrèk.",
+      "defaultNote": "Pwogrè ou anrejistre.",
+      "defaultPrimary": "Kontinye",
+      "leaderboard": "Gade klasman an",
+      "reviewResults": "Revize rezilta yo",
+      "daily": {
+        "kicker": "Pratik chak jou fini",
+        "title": "Ou fini pratik jodi a 🎉",
+        "freeNote": "Pratik klase ou fini. Abòne pou debloke pratik san limit pa sijè.",
+        "subscriberNote": "Pratik klase ou fini. Pratik san limit pa sijè toujou disponib.",
+        "freePrimary": "Abòne pou pratik san limit",
+        "subscriberPrimary": "Pratike plis",
+        "nextLabel": "Pwochen pratik chak jou klase",
+        "countdown": "{hours}:{minutes}:{seconds}",
+        "ready": "Disponib kounye a",
+        "utcNote": "Pratik chak jou rekòmanse a minwi UTC.",
+        "revealedNote": "{count} repons ou devwale konte kòm fini, men yo pa kòrèk epi yo pa bay pwen klase pou repons."
+      }
+    }
+  }
+}

@@ -4,10 +4,10 @@ import { parseRunReq } from "@/lib/code/api/parseRunReq";
 import {checkIdeCapability} from "@/lib/access/ideCapabilityServer";
 import { actorKeyOf, ensureGuestId, getActor } from "@/lib/practice/actor";
 import {
-  enforceSameOriginPost,
   exceedsContentLength,
   getClientIp,
 } from "@/lib/practice/api/shared/http";
+import { isAppMutationOriginAllowed } from "@/lib/http/appCors";
 import { prisma } from "@/lib/prisma";
 import { rateLimit } from "@/lib/security/ratelimit";
 import type { RunReq } from "@/lib/code/types";
@@ -27,7 +27,7 @@ function jsonNoStore(body: unknown, status: number) {
 
 export async function POST(req: Request) {
   try {
-    if (!enforceSameOriginPost(req)) {
+    if (!isAppMutationOriginAllowed(req)) {
       return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
     }
 

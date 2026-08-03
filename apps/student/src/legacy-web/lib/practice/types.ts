@@ -1,0 +1,315 @@
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
+import { PracticeKind } from "@zoeskoul/db";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { FileEntry } from "@/lib/code/types";
+import type {
+    CodeExpectedExample,
+    Difficulty,
+    ExerciseHelpSpec,
+    ExerciseKind,
+    SqlDialect,
+    SqlRuntimeSpec,
+    Vec3,
+} from "@zoeskoul/practice-contracts";
+import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
+import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
+
+// src/lib/practice/types.ts
+
+/**
+ * DB-facing slug (unlimited).
+ * Canonical topic id for UI + URL + DB.
+ */
+export type TopicSlug = string;
+
+/**
+ * @deprecated Use TopicSlug. Kept for backward compatibility.
+ */
+export type Topic = TopicSlug;
+
+/**
+ * Generator engine keys (ONLY engines you implement).
+ */
+export type GenKey =
+    | GeneratedSubjectGenKey
+    | (string & {});
+
+
+export type CodeInputSurface = "auto" | "embedded" | "workspace";
+
+export type CodeInputUiSpec = {
+    /**
+     * Chooses the learner-facing code surface.
+     *
+     * - "workspace"/"auto" use ToolsPanel/FullIDE.
+     * - "embedded" is only for very small inline checks. Runtime still forces
+     *   ToolsPanel when files, SQL, terminal, or multi-file workspace is used.
+     */
+    codeSurface?: CodeInputSurface;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embedded?: boolean;
+    /** @deprecated Prefer codeSurface. */
+    embeddedCodeInput?: boolean;
+    [key: string]: unknown;
+};
+
+export type ExerciseBase = {
+    id: string;
+    topic: TopicSlug;
+    difficulty: Difficulty;
+    title: string;
+    prompt: string;
+    help?: ExerciseHelpSpec;
+    hint?: string;
+    tools?: ToolPresentationPolicy;
+};
+
+export type SingleChoiceExercise = ExerciseBase & {
+    kind: "single_choice";
+    options: { id: string; text: string }[];
+};
+
+export type MatrixInputExercise = ExerciseBase & {
+    kind: "matrix_input";
+    rows: number;
+    cols: number;
+    tolerance: number;
+    step?: number;
+    integerOnly?: boolean;
+};
+
+export type MultiChoiceExercise = ExerciseBase & {
+    kind: "multi_choice";
+    options: { id: string; text: string }[];
+};
+
+export type NumericExercise = ExerciseBase & {
+    kind: "numeric";
+    tolerance?: number;
+    correctValue?: number;
+};
+
+export type VectorDragTargetExercise = ExerciseBase & {
+    kind: "vector_drag_target";
+    initialA: Vec3;
+    initialB?: Vec3;
+    targetA: Vec3;
+    lockB: boolean;
+    targetB?: Vec3;
+    tolerance: number;
+};
+
+export type VectorDragDotExercise = ExerciseBase & {
+    kind: "vector_drag_dot";
+    initialA: Vec3;
+    b: Vec3;
+    targetDot: number;
+    tolerance: number;
+};
+
+export type CodeInputExercise = ExerciseBase & {
+    kind: "code_input";
+    language?: WorkspaceLanguage;
+    /**
+     * Optional authoring hint for the display surface. Omit or use "auto" to
+     * default to ToolsPanel/FullIDE. Use "embedded" only for tiny inline checks.
+     */
+    codeSurface?: CodeInputSurface;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embedded?: boolean;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embeddedCodeInput?: boolean;
+    ui?: CodeInputUiSpec;
+    starterCode?: string;
+    starterStdin?: string;
+    stdinHint?: string;
+    editorHeight?: number;
+    allowLanguageSwitch?: boolean;
+    examples?: Array<{ stdin?: string; stdout: string }>;
+    fixedSqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
+    expectedExample?: CodeExpectedExample | null;
+    ideConfig?: LearningIdeConfig | null;
+};
+
+export type TextInputExercise = ExerciseBase & {
+    kind: "text_input";
+    placeholder?: string;
+    ui?: "short" | "long";
+};
+
+export type DragToken = { id: string; text: string };
+
+export type DragReorderExercise = ExerciseBase & {
+    kind: "drag_reorder";
+    tokens: DragToken[];
+};
+
+export type VoiceInputExercise = ExerciseBase & {
+    kind: "voice_input";
+    targetText: string;
+    locale?: string;
+    maxSeconds?: number;
+};
+
+export type WordBankArrangeExercise = ExerciseBase & {
+    kind: "word_bank_arrange";
+    targetText: string;
+    locale?: string;
+    wordBank?: string[];
+    distractors?: string[];
+    ttsText?: string;
+};
+
+export type ListenBuildExercise = ExerciseBase & {
+    kind: "listen_build";
+    targetText: string;
+    locale?: string;
+    wordBank?: string[];
+    distractors?: string[];
+};
+
+export type FillBlankChoiceExercise = ExerciseBase & {
+    kind: "fill_blank_choice";
+    template: string;
+    choices: string[];
+    correct?: string;
+    locale?: string;
+};
+
+export type TextInputSubmitAnswer = {
+    kind: "text_input";
+    value: string;
+};
+
+export type DragReorderSubmitAnswer = {
+    kind: "drag_reorder";
+    tokenIds?: string[];
+    order?: string[];
+};
+
+export type VoiceInputSubmitAnswer = {
+    kind: "voice_input";
+    transcript: string;
+    audioUrl?: string;
+    audioId?: string;
+};
+
+export type WordBankArrangeSubmitAnswer = {
+    kind: "word_bank_arrange";
+    value: string;
+};
+
+export type ListenBuildSubmitAnswer = {
+    kind: "listen_build";
+    value: string;
+};
+
+export type FillBlankChoiceSubmitAnswer = {
+    kind: "fill_blank_choice";
+    value: string;
+};
+
+export type TerminalEvidence = {
+    commands: string[];
+    outputText: string;
+    cwd?: string;
+};
+
+export type Exercise =
+    | SingleChoiceExercise
+    | MultiChoiceExercise
+    | NumericExercise
+    | VectorDragTargetExercise
+    | VectorDragDotExercise
+    | MatrixInputExercise
+    | CodeInputExercise
+    | TextInputExercise
+    | DragReorderExercise
+    | VoiceInputExercise
+    | WordBankArrangeExercise
+    | ListenBuildExercise
+    | FillBlankChoiceExercise;
+
+export type SubmitAnswer =
+    | { kind: "single_choice"; optionId: string }
+    | { kind: "multi_choice"; optionIds: string[] }
+    | { kind: "numeric"; value: number }
+    | { kind: "vector_drag_target"; a: Vec3; b: Vec3 }
+    | { kind: "vector_drag_dot"; a: Vec3 }
+    | { kind: "matrix_input"; values: number[][] }
+    | {
+    kind: "code_input";
+    language?: WorkspaceLanguage;
+    code: string;
+    stdin?: string;
+    terminalEvidence?: TerminalEvidence;
+    entry?: string;
+    files?: Array<
+        | FileEntry
+        | {
+            kind: "directory";
+            path: string;
+        }
+    >;
+}
+    | TextInputSubmitAnswer
+    | DragReorderSubmitAnswer
+    | VoiceInputSubmitAnswer
+    | WordBankArrangeSubmitAnswer
+    | ListenBuildSubmitAnswer
+    | FillBlankChoiceSubmitAnswer;
+
+export type ValidateGamificationPayload = {
+    xpGained: number;
+    rankedXpGained: number;
+    leveledUp: boolean;
+    streakExtended: boolean;
+    awarded: Array<{
+        sourceType: string;
+        xpDelta: number;
+        rankedXpDelta: number;
+        reason: string;
+    }>;
+    summary: {
+        totalXp: number;
+        rankedXp: number;
+        level: number;
+        currentStreak: number;
+        longestStreak: number;
+        xpIntoLevel: number;
+        xpForNextLevel: number | null;
+        levelProgressPct: number;
+    };
+};
+
+export type ValidateResponse = {
+    ok: boolean;
+    expected: any;
+    explanation?: string | null;
+    feedback?: string | null;
+    finalized?: boolean;
+    attempts?: {
+        used: number;
+        max: number | null;
+        left: number | null;
+    };
+    sessionComplete?: boolean;
+    summary?: unknown;
+    returnUrl?: string | null;
+    requestId?: string;
+    gamification?: ValidateGamificationPayload | null;
+};
+
+export type PoolKind = PracticeKind;
+
+export type {
+    CodeExpectedExample,
+    Difficulty,
+    ExerciseHelpSpec,
+    ExerciseKind,
+    SqlDialect,
+    SqlRuntimeSpec,
+    Vec3,
+    WorkspaceLanguage,
+};
