@@ -10,6 +10,8 @@
         "dist/**"
       ],
       "env": [
+        "VITE_API_ORIGIN",
+        "VITE_WEBSITE_ORIGIN",
         "LEARNOIR_STRIPE_SECRET_KEY",
         "NEXTAUTH_URL",
         "APP_ORIGIN",
