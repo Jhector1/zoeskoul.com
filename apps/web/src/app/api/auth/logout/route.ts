@@ -2,6 +2,9 @@ import {
   signOut,
 } from "@/lib/auth";
 import {
+  getProductionAppOrigin,
+} from "@zoeskoul/app-config";
+import {
   buildKeycloakEndSessionUrl,
   readKeycloakIdToken,
   resolveLogoutProvider,
@@ -17,13 +20,17 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
+  const websiteOrigin =
+    process.env.NODE_ENV === "production"
+      ? getProductionAppOrigin("website")
+      : req.nextUrl.origin;
   const postLogoutRedirect =
     resolveLogoutRedirect({
       rawRedirect:
         req.nextUrl.searchParams.get(
           "postLogoutRedirect",
         ),
-      baseUrl: req.nextUrl.origin,
+      baseUrl: websiteOrigin,
       locale:
         req.nextUrl.searchParams.get("locale"),
       includeLocalApps:
