@@ -10,6 +10,40 @@ export type ReviewRouteTransitionReadiness = {
     editorReady: boolean;
 };
 
+export function isLatestReviewNavigationGeneration(args: {
+    navigationGeneration: number;
+    latestNavigationGeneration: number;
+    transitionNavigationGeneration?: number;
+}) {
+    return (
+        args.navigationGeneration === args.latestNavigationGeneration &&
+        (
+            args.transitionNavigationGeneration === undefined ||
+            args.navigationGeneration === args.transitionNavigationGeneration
+        )
+    );
+}
+
+export function publishReviewNavigationImmediately<TSnapshot>(args: {
+    navigationGeneration: number;
+    latestNavigationGeneration: number;
+    snapshot: TSnapshot;
+    enqueueSnapshot: (snapshot: TSnapshot) => void;
+    publish: () => void;
+}) {
+    args.enqueueSnapshot(args.snapshot);
+
+    if (!isLatestReviewNavigationGeneration({
+        navigationGeneration: args.navigationGeneration,
+        latestNavigationGeneration: args.latestNavigationGeneration,
+    })) {
+        return false;
+    }
+
+    args.publish();
+    return true;
+}
+
 export function isReviewRouteTransitionReady(
     state: ReviewRouteTransitionReadiness,
 ) {

@@ -53,6 +53,7 @@ export default function ReviewExerciseTransitionBoundary({
 }) {
   const transition = useOptionalReviewDestinationTransition();
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const lastPromptMarkOwnerRef = useRef<string | null>(null);
   const [settledHeight, setSettledHeight] = useState(420);
   const showSkeleton = Boolean(
     active &&
@@ -73,6 +74,24 @@ export default function ReviewExerciseTransitionBoundary({
     observer.observe(element);
     return () => observer.disconnect();
   }, [showSkeleton]);
+
+  useEffect(() => {
+    if (!active || showSkeleton) return;
+
+    const markOwner = ownerKey ?? "local";
+    if (lastPromptMarkOwnerRef.current === markOwner) return;
+    lastPromptMarkOwnerRef.current = markOwner;
+
+    if (typeof performance === "undefined" || typeof performance.mark !== "function") {
+      return;
+    }
+
+    performance.mark("exercise_prompt_rendered", {
+      detail: {
+        ownerKey: markOwner,
+      },
+    });
+  }, [active, ownerKey, showSkeleton]);
 
   useEffect(() => {
     const destinationIdentity = transition?.destinationIdentity;
