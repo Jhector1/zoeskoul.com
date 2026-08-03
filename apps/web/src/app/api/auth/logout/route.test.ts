@@ -37,9 +37,10 @@ vi.mock("@/lib/prisma", () => ({
 function makeLogoutRequest(
   query =
     "?postLogoutRedirect=http%3A%2F%2Flocalhost%3A3000%2Fen&locale=en",
+  requestOrigin = "http://localhost:3000",
 ) {
   return new NextRequest(
-    `http://localhost:3000/api/auth/logout${query}`,
+    `${requestOrigin}/api/auth/logout${query}`,
     {
       headers: {
         Referer:
@@ -112,6 +113,104 @@ describe("GET /api/auth/logout", () => {
     expect(
       response.headers.get("location"),
     ).not.toContain("must-not-leak");
+  });
+
+  it("preserves the local Website origin during development", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+
+    const { GET } =
+      await loadLogoutRoute();
+    const response = await GET(
+      makeLogoutRequest(),
+    );
+
+    expect(mocks.signOut).toHaveBeenCalledWith({
+      redirect: false,
+      redirectTo:
+        "http://localhost:3000/en",
+    });
+    expect(response.headers.get("location")).toBe(
+      "http://localhost:3000/en",
+    );
+  });
+
+  it("uses the canonical Website origin behind the production reverse proxy", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+
+    const { GET } =
+      await loadLogoutRoute();
+    const response = await GET(
+      makeLogoutRequest(
+        "?postLogoutRedirect=https%3A%2F%2Fzoeskoul.com%2Fen&locale=en",
+        "https://localhost:3000",
+      ),
+    );
+
+    expect(mocks.signOut).toHaveBeenCalledWith({
+      redirect: false,
+      redirectTo:
+        "https://zoeskoul.com/en",
+    });
+    expect(response.headers.get("location")).toBe(
+      "https://zoeskoul.com/en",
+    );
+  });
+
+  it.each([
+    "https%3A%2F%2Fevil.example",
+    "http%3A%2F%2Flocalhost%3A3000%2Ffr",
+  ])(
+    "falls back to the canonical Website for production redirect %s",
+    async (redirect) => {
+      vi.stubEnv("NODE_ENV", "production");
+
+      const { GET } =
+        await loadLogoutRoute();
+      const response = await GET(
+        makeLogoutRequest(
+          `?postLogoutRedirect=${redirect}&locale=fr`,
+          "https://localhost:3000",
+        ),
+      );
+
+      expect(mocks.signOut).toHaveBeenCalledWith({
+        redirect: false,
+        redirectTo:
+          "https://zoeskoul.com/fr",
+      });
+      expect(response.headers.get("location")).toBe(
+        "https://zoeskoul.com/fr",
+      );
+    },
+  );
+
+  it("uses the canonical Website for the production Keycloak redirect", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    mocks.getToken.mockResolvedValue({
+      provider: "keycloak",
+      kc_id_token: "server-token",
+    });
+
+    const { GET } =
+      await loadLogoutRoute();
+    const response = await GET(
+      makeLogoutRequest(
+        "?postLogoutRedirect=https%3A%2F%2Fzoeskoul.com%2Fen&locale=en",
+        "https://localhost:3000",
+      ),
+    );
+    const location = new URL(
+      response.headers.get("location")!,
+    );
+
+    expect(mocks.signOut).toHaveBeenCalledWith({
+      redirect: false,
+      redirectTo:
+        "https://zoeskoul.com/en",
+    });
+    expect(location.searchParams.get(
+      "post_logout_redirect_uri",
+    )).toBe("https://zoeskoul.com/en");
   });
 
   it("ignores browser-supplied provider tokens", async () => {
