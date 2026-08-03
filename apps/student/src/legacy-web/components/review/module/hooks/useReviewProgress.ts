@@ -73,6 +73,38 @@ type ReviewSaveStatus =
 
 type ReviewProgressSetter = Dispatch<SetStateAction<ReviewProgressState>>;
 
+type ReviewProgressPayload = ReturnType<typeof buildReviewProgressPayload>;
+
+export type ReviewNavigationProgressSnapshot = Readonly<{
+    moduleIdentity: string;
+    cardIdentity: string | null;
+    exerciseIdentity: string | null;
+    progressRevision: number;
+    navigationGeneration: number;
+    payload: Readonly<ReviewProgressPayload>;
+}>;
+
+export function createReviewNavigationProgressSnapshot(args: {
+    subjectSlug: string;
+    moduleSlug: string;
+    cardIdentity: string | null;
+    exerciseIdentity: string | null;
+    progressRevision: number;
+    navigationGeneration: number;
+    payload: ReviewProgressPayload;
+}): ReviewNavigationProgressSnapshot {
+    const detachedPayload = JSON.parse(stableJson(args.payload)) as ReviewProgressPayload;
+
+    return Object.freeze({
+        moduleIdentity: `${args.subjectSlug}:${args.moduleSlug}`,
+        cardIdentity: args.cardIdentity,
+        exerciseIdentity: args.exerciseIdentity,
+        progressRevision: args.progressRevision,
+        navigationGeneration: args.navigationGeneration,
+        payload: detachedPayload,
+    });
+}
+
 export function useReviewProgress(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -112,6 +144,7 @@ export function useReviewProgress(args: {
     const remoteSyncInFlightRef = useRef(false);
     const saveInFlightRef = useRef(false);
     const pendingSavePayloadRef = useRef<any | null>(null);
+    const navigationSaveQueueRef = useRef<ReviewNavigationProgressSnapshot[]>([]);
     const pendingSaveTimerRef = useRef<number | null>(null);
     const runtimeSaveTimerRef = useRef<number | null>(null);
     const lastSavedMeaningfulBodyRef = useRef<string>("");
@@ -240,6 +273,7 @@ export function useReviewProgress(args: {
             pendingSaveTimerRef.current = null;
         }
         pendingSavePayloadRef.current = null;
+        navigationSaveQueueRef.current = [];
         if (runtimeSaveTimerRef.current != null) {
             window.clearTimeout(runtimeSaveTimerRef.current);
             runtimeSaveTimerRef.current = null;
@@ -351,11 +385,18 @@ export function useReviewProgress(args: {
                 ),
             }) as typeof payload;
 
-            progressRef.current = canonicalState;
+            const hasNewerQueuedState =
+                navigationSaveQueueRef.current.length > 0 ||
+                pendingSavePayloadRef.current !== null ||
+                getSaveRevision(progressRef.current) > getSaveRevision(canonicalState);
+
+            if (!hasNewerQueuedState) {
+                progressRef.current = canonicalState;
+            }
             lastCommittedRef.current = stableJson(canonicalPayload);
             lastSavedMeaningfulBodyRef.current = meaningfulBodyForPayload(canonicalPayload);
-            localDirtyRef.current = false;
-            setSaveStatus("saved");
+            localDirtyRef.current = hasNewerQueuedState;
+            setSaveStatus(hasNewerQueuedState ? "saving" : "saved");
             setLastSaveError(null);
 
             const gamification = gamificationEnabled ? data?.gamification ?? null : null;
@@ -379,19 +420,28 @@ export function useReviewProgress(args: {
         if (!hydrationCompleteRef.current) return;
         if (saveInFlightRef.current) return;
 
-        const nextPayload = pendingSavePayloadRef.current;
+        const navigationSnapshot = navigationSaveQueueRef.current.shift() ?? null;
+        const nextPayload = navigationSnapshot?.payload ?? pendingSavePayloadRef.current;
         if (!nextPayload) return;
 
         const meaningfulBody = meaningfulBodyForPayload(nextPayload);
         if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
-            pendingSavePayloadRef.current = null;
-            localDirtyRef.current = false;
-            setSaveStatus("saved");
+            if (!navigationSnapshot) pendingSavePayloadRef.current = null;
+            const hasMoreQueuedState = Boolean(
+                navigationSaveQueueRef.current.length || pendingSavePayloadRef.current,
+            );
+            localDirtyRef.current = hasMoreQueuedState;
+            setSaveStatus(hasMoreQueuedState ? "saving" : "saved");
             setLastSaveError(null);
+            if (hasMoreQueuedState) {
+                queueMicrotask(() => {
+                    void drainSaveQueueRef.current();
+                });
+            }
             return;
         }
 
-        pendingSavePayloadRef.current = null;
+        if (!navigationSnapshot) pendingSavePayloadRef.current = null;
         saveInFlightRef.current = true;
         setLastSaveError(null);
 
@@ -405,11 +455,18 @@ export function useReviewProgress(args: {
             setSaveStatus(status === 409 ? "conflict" : "error");
             setLastSaveError(error?.message ?? String(error));
             localDirtyRef.current = true;
-            // Preserve the newest known payload. Do not overwrite it with older snapshots.
-            pendingSavePayloadRef.current = pendingSavePayloadRef.current ?? nextPayload;
+            if (navigationSnapshot) {
+                navigationSaveQueueRef.current.unshift(navigationSnapshot);
+            } else {
+                // Preserve the newest known payload. Do not overwrite it with older snapshots.
+                pendingSavePayloadRef.current = pendingSavePayloadRef.current ?? nextPayload;
+            }
         } finally {
             saveInFlightRef.current = false;
-            if (!failed && pendingSavePayloadRef.current) {
+            if (
+                !failed &&
+                (navigationSaveQueueRef.current.length > 0 || pendingSavePayloadRef.current)
+            ) {
                 void drainSaveQueueRef.current();
             }
         }
@@ -418,6 +475,64 @@ export function useReviewProgress(args: {
     useEffect(() => {
         drainSaveQueueRef.current = drainSaveQueue;
     }, [drainSaveQueue]);
+
+    const captureNavigationProgressSnapshot = useCallback(
+        (identity: {
+            cardIdentity: string | null;
+            exerciseIdentity: string | null;
+            navigationGeneration: number;
+        }): ReviewNavigationProgressSnapshot | null => {
+            if (!subjectSlug || !moduleSlug) return null;
+            if (!hydrationCompleteRef.current || readOnly) return null;
+
+            if (pendingSaveTimerRef.current != null) {
+                window.clearTimeout(pendingSaveTimerRef.current);
+                pendingSaveTimerRef.current = null;
+            }
+            if (runtimeSaveTimerRef.current != null) {
+                window.clearTimeout(runtimeSaveTimerRef.current);
+                runtimeSaveTimerRef.current = null;
+            }
+
+            const stateWithRuntime = mergeRuntimeIntoProgress(
+                progressRef.current,
+                useReviewRuntimeStore.getState(),
+            );
+            const stateToSave = makeSaveState(stateWithRuntime);
+            const nextPayload = buildPayloadFromState(stateToSave);
+
+            progressRef.current = stateToSave;
+            pendingSavePayloadRef.current = null;
+            localDirtyRef.current = true;
+
+            return createReviewNavigationProgressSnapshot({
+                subjectSlug,
+                moduleSlug,
+                cardIdentity: identity.cardIdentity,
+                exerciseIdentity: identity.exerciseIdentity,
+                progressRevision: getSaveRevision(stateToSave),
+                navigationGeneration: identity.navigationGeneration,
+                payload: nextPayload,
+            });
+        },
+        [subjectSlug, moduleSlug, readOnly, buildPayloadFromState],
+    );
+
+    const enqueueNavigationProgressSnapshot = useCallback(
+        (snapshot: ReviewNavigationProgressSnapshot | null) => {
+            if (!snapshot || readOnly) return;
+            if (snapshot.moduleIdentity !== `${subjectSlug}:${moduleSlug}`) return;
+
+            navigationSaveQueueRef.current.push(snapshot);
+            localDirtyRef.current = true;
+            setSaveStatus("saving");
+
+            queueMicrotask(() => {
+                void drainSaveQueueRef.current();
+            });
+        },
+        [moduleSlug, readOnly, subjectSlug],
+    );
 
     const queueProgressSave = useCallback(
         (nextState: ReviewProgressState, options?: { immediate?: boolean; reason?: string }) => {
@@ -511,7 +626,11 @@ export function useReviewProgress(args: {
         while (Date.now() - startedAt < timeoutMs) {
             await drainSaveQueueRef.current();
 
-            if (!saveInFlightRef.current && !pendingSavePayloadRef.current) {
+            if (
+                !saveInFlightRef.current &&
+                navigationSaveQueueRef.current.length === 0 &&
+                !pendingSavePayloadRef.current
+            ) {
                 return;
             }
 
@@ -1521,6 +1640,8 @@ export function useReviewProgress(args: {
 
         flushNow: putProgressNow,
         flush,
+        captureNavigationProgressSnapshot,
+        enqueueNavigationProgressSnapshot,
         saveStatus,
         lastSaveError,
     };

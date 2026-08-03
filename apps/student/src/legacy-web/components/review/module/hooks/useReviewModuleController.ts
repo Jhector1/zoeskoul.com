@@ -1,5 +1,7 @@
 import {
+    isLatestReviewNavigationGeneration,
     isReviewRouteTransitionReady,
+    publishReviewNavigationImmediately,
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
 } from "../navigation/reviewRouteTransition";
@@ -448,6 +450,8 @@ export function useReviewModuleController({
         setViewTopicId,
         flushNow: flushNowUnsafe,
         flush: flushUnsafe,
+        captureNavigationProgressSnapshot: captureNavigationProgressSnapshotUnsafe,
+        enqueueNavigationProgressSnapshot: enqueueNavigationProgressSnapshotUnsafe,
         saveStatus,
         lastSaveError,
     } = useReviewProgress({
@@ -480,6 +484,20 @@ export function useReviewModuleController({
         if (!workspaceCapabilities.canMutateProgress) return;
         await flushUnsafe();
     }, [flushUnsafe, workspaceCapabilities.canMutateProgress]);
+    const captureNavigationProgressSnapshot = useCallback(
+        (...args: Parameters<typeof captureNavigationProgressSnapshotUnsafe>) => {
+            if (!workspaceCapabilities.canMutateProgress) return null;
+            return captureNavigationProgressSnapshotUnsafe(...args);
+        },
+        [captureNavigationProgressSnapshotUnsafe, workspaceCapabilities.canMutateProgress],
+    );
+    const enqueueNavigationProgressSnapshot = useCallback(
+        (...args: Parameters<typeof enqueueNavigationProgressSnapshotUnsafe>) => {
+            if (!workspaceCapabilities.canMutateProgress) return;
+            enqueueNavigationProgressSnapshotUnsafe(...args);
+        },
+        [enqueueNavigationProgressSnapshotUnsafe, workspaceCapabilities.canMutateProgress],
+    );
 
     const reviewWorkspacePersistencePolicy = useMemo(
         () =>
@@ -503,6 +521,10 @@ export function useReviewModuleController({
     const routeTransitionRevealedHrefRef = useRef<string | null>(null);
     const routeTransitionFrameRef = useRef<number | null>(null);
     const routeTransitionRevisionRef = useRef(0);
+    const navigationGenerationRef = useRef(0);
+    const routeTransitionNavigationGenerationRef = useRef(0);
+    const [routeTransitionNavigationGeneration, setRouteTransitionNavigationGeneration] =
+        useState(0);
     const [routeTransitionExerciseReady, setRouteTransitionExerciseReady] =
         useState<{ identity: string; ownerKey: string | null } | null>(null);
     const [routeTransitionEditorReady, setRouteTransitionEditorReady] =
@@ -531,7 +553,7 @@ export function useReviewModuleController({
      * that destination has already been revealed.
      */
     const beginRouteTransition = useCallback(
-        (href: string | null = null) => {
+        (href: string | null = null, navigationGeneration = navigationGenerationRef.current) => {
             if (!href) return false;
 
             const browserHref =
@@ -540,6 +562,8 @@ export function useReviewModuleController({
                     : `${window.location.pathname}${window.location.search}`;
 
             if (routeTransitionHrefRef.current === href) {
+                routeTransitionNavigationGenerationRef.current = navigationGeneration;
+                setRouteTransitionNavigationGeneration(navigationGeneration);
                 return false;
             }
 
@@ -552,6 +576,8 @@ export function useReviewModuleController({
 
             clearRouteTransitionFrame();
             routeTransitionRevisionRef.current += 1;
+            routeTransitionNavigationGenerationRef.current = navigationGeneration;
+            setRouteTransitionNavigationGeneration(navigationGeneration);
             routeTransitionHrefRef.current = href;
             routeTransitionRevealedHrefRef.current = null;
             setRouteTransitionExerciseReady(null);
@@ -575,8 +601,14 @@ export function useReviewModuleController({
         (args: {
             destinationIdentity: string;
             ownerKey: string | null;
+            navigationGeneration: number;
             ready: boolean;
         }) => {
+            if (!isLatestReviewNavigationGeneration({
+                navigationGeneration: args.navigationGeneration,
+                latestNavigationGeneration: navigationGenerationRef.current,
+                transitionNavigationGeneration: routeTransitionNavigationGenerationRef.current,
+            })) return;
             if (routeTransitionHrefRef.current !== args.destinationIdentity) return;
             setRouteTransitionExerciseReady((current) => {
                 if (!args.ready) return current === null ? current : null;
@@ -600,8 +632,14 @@ export function useReviewModuleController({
             destinationIdentity: string;
             ownerKey: string | null;
             generation: number;
+            navigationGeneration: number;
             ready: boolean;
         }) => {
+            if (!isLatestReviewNavigationGeneration({
+                navigationGeneration: args.navigationGeneration,
+                latestNavigationGeneration: navigationGenerationRef.current,
+                transitionNavigationGeneration: routeTransitionNavigationGenerationRef.current,
+            })) return;
             if (routeTransitionHrefRef.current !== args.destinationIdentity) return;
             setRouteTransitionEditorReady((current) => {
                 if (!args.ready) return current === null ? current : null;
@@ -1194,36 +1232,74 @@ export function useReviewModuleController({
             }
 
             const href = buildRoutePathForCurrentSurface(target);
+            const navigationGeneration = ++navigationGenerationRef.current;
+            const leavingTarget = routeTargetRef.current;
+            const leavingExerciseIdentity =
+                leavingTarget?.kind === "exercise"
+                    ? leavingTarget.exerciseStateKey ?? leavingTarget.exerciseId
+                    : store.tool.boundExerciseKey ?? null;
+
+            if (typeof performance !== "undefined" && typeof performance.mark === "function") {
+                performance.mark("exercise_navigation_click", {
+                    detail: {
+                        moduleIdentity: `${subjectSlug}:${moduleSlug}`,
+                        cardIdentity: leavingTarget?.cardId ?? null,
+                        exerciseIdentity: leavingExerciseIdentity,
+                        destinationCardIdentity: target.cardId,
+                        destinationExerciseIdentity:
+                            target.kind === "exercise"
+                                ? target.exerciseStateKey ?? target.exerciseId
+                                : null,
+                        navigationGeneration,
+                    },
+                });
+            }
 
             /**
-             * Freeze the current visible route while its latest workspace and
-             * progress state settle. Publish the destination only afterward.
+             * The runtime flush bridge is synchronous. Capture and detach the
+             * exercise being left before publishing the destination; the save
+             * queue can persist it without reading mutable destination state.
              */
-            const transitionStarted =
-                beginRouteTransition(href);
+            store.flushToolSnapshot();
+            const progressSnapshot = captureNavigationProgressSnapshot({
+                cardIdentity: leavingTarget?.cardId ?? null,
+                exerciseIdentity: leavingExerciseIdentity,
+                navigationGeneration,
+            });
+
+            const transitionStarted = beginRouteTransition(href, navigationGeneration);
 
             try {
-                await flushAll();
+                publishReviewNavigationImmediately({
+                    navigationGeneration,
+                    latestNavigationGeneration: navigationGenerationRef.current,
+                    snapshot: progressSnapshot,
+                    enqueueSnapshot: enqueueNavigationProgressSnapshot,
+                    publish: () => {
+                        routeTargetRef.current = target;
+                        setRouteTarget(target);
 
-                routeTargetRef.current = target;
-                setRouteTarget(target);
+                        if (typeof window !== "undefined") {
+                            const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
+                                href,
+                                targetKey: nextTargetKey,
+                                subjectSlug,
+                                moduleSlug,
+                            });
 
-                if (typeof window !== "undefined") {
-                    const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
-                        href,
-                        targetKey: nextTargetKey,
-                        subjectSlug,
-                        moduleSlug,
-                    });
-
-                    if (mode === "replace") {
-                        window.history.replaceState(nextHistoryState, "", href);
-                    } else {
-                        window.history.pushState(nextHistoryState, "", href);
-                    }
-                }
+                            if (mode === "replace") {
+                                window.history.replaceState(nextHistoryState, "", href);
+                            } else {
+                                window.history.pushState(nextHistoryState, "", href);
+                            }
+                        }
+                    },
+                });
             } catch (error) {
-                if (transitionStarted) {
+                if (
+                    transitionStarted &&
+                    navigationGeneration === navigationGenerationRef.current
+                ) {
                     cancelRouteTransition();
                 }
                 throw error;
@@ -1233,13 +1309,15 @@ export function useReviewModuleController({
             beginRouteTransition,
             buildRoutePathForCurrentSurface,
             cancelRouteTransition,
+            captureNavigationProgressSnapshot,
+            enqueueNavigationProgressSnapshot,
             firstUnlockedRouteTarget,
-            flushAll,
             moduleSlug,
             progressHydrated,
             progressiveUnlock.unlockedTargetKeys,
             showProgressiveLockMessage,
             subjectSlug,
+            store,
             targetRegistry,
             navigationUnlockAll,
         ],
@@ -2507,8 +2585,6 @@ export function useReviewModuleController({
     const handleCompactSinglePrev = useCallback(async () => {
         if (!compactSinglePrevEnabled) return;
 
-        await persistBeforeUnifiedNavigation();
-
         const latestQuizNavigation = compactQuizNavigationRef.current;
         if (latestQuizNavigation?.cardId === activeCard?.id && latestQuizNavigation.canGoPrev) {
             latestQuizNavigation.onPrev();
@@ -2523,6 +2599,7 @@ export function useReviewModuleController({
         if (navigateToTopicEdgeCard(topicFlow.prevTopic?.id, "last")) return;
 
         if (nav?.prevModuleId) {
+            await persistBeforeUnifiedNavigation();
             goModule(nav.prevModuleId);
         }
     }, [
@@ -2541,8 +2618,6 @@ export function useReviewModuleController({
     const handleCompactSingleNext = useCallback(async () => {
         if (!compactSingleNextEnabled) return;
 
-        await persistBeforeUnifiedNavigation();
-
         const latestQuizNavigation = compactQuizNavigationRef.current;
         if (latestQuizNavigation?.cardId === activeCard?.id && latestQuizNavigation.canGoNext) {
             latestQuizNavigation.onNext();
@@ -2555,11 +2630,13 @@ export function useReviewModuleController({
         }
 
         if (viewIsComplete && outroContinueEnabled) {
+            await persistBeforeUnifiedNavigation();
             handleOutroContinue();
             return;
         }
 
         if (showFinalCertificateCta && canOpenCertificate) {
+            await persistBeforeUnifiedNavigation();
             handleOpenCertificate();
         }
     }, [
@@ -2746,12 +2823,24 @@ export function useReviewModuleController({
         }
 
         const transitionRevision = routeTransitionRevisionRef.current;
+        const transitionNavigationGeneration =
+            routeTransitionNavigationGenerationRef.current;
         clearRouteTransitionFrame();
 
         const completeIfStillCurrent = () => {
             if (
                 transitionRevision !==
                 routeTransitionRevisionRef.current
+            ) {
+                return;
+            }
+
+            if (
+                !isLatestReviewNavigationGeneration({
+                    navigationGeneration: transitionNavigationGeneration,
+                    latestNavigationGeneration: navigationGenerationRef.current,
+                    transitionNavigationGeneration: routeTransitionNavigationGenerationRef.current,
+                })
             ) {
                 return;
             }
@@ -2847,8 +2936,23 @@ export function useReviewModuleController({
             ...destinationTransitionPresentation,
             expectedExerciseOwnerKey: expectedExerciseBindingKey,
             expectedGeneration: store.resetRevision,
-            reportExerciseReady: reportTransitionExerciseReady,
-            reportEditorReady: reportTransitionEditorReady,
+            reportExerciseReady: (args: {
+                destinationIdentity: string;
+                ownerKey: string | null;
+                ready: boolean;
+            }) => reportTransitionExerciseReady({
+                ...args,
+                navigationGeneration: routeTransitionNavigationGeneration,
+            }),
+            reportEditorReady: (args: {
+                destinationIdentity: string;
+                ownerKey: string | null;
+                generation: number;
+                ready: boolean;
+            }) => reportTransitionEditorReady({
+                ...args,
+                navigationGeneration: routeTransitionNavigationGeneration,
+            }),
         },
 
         layout: {

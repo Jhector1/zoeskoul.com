@@ -5,11 +5,68 @@ import {
 } from "vitest";
 
 import {
+    isLatestReviewNavigationGeneration,
     isReviewRouteTransitionReady,
+    publishReviewNavigationImmediately,
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
     shouldStartReviewRouteTransition,
 } from "./reviewRouteTransition";
+
+describe("review navigation publication", () => {
+    it("publishes the destination prompt before a never-resolving progress PUT", () => {
+        const neverResolvingSave = new Promise<void>(() => undefined);
+        const queued: string[] = [];
+        const published: string[] = [];
+
+        const didPublish = publishReviewNavigationImmediately({
+            navigationGeneration: 4,
+            latestNavigationGeneration: 4,
+            snapshot: "exercise:left",
+            enqueueSnapshot: (snapshot) => {
+                queued.push(snapshot);
+                void neverResolvingSave;
+            },
+            publish: () => published.push("exercise:next"),
+        });
+
+        expect(didPublish).toBe(true);
+        expect(queued).toEqual(["exercise:left"]);
+        expect(published).toEqual(["exercise:next"]);
+    });
+
+    it("rejects an older rapid-navigation generation", () => {
+        const published: string[] = [];
+
+        expect(
+            publishReviewNavigationImmediately({
+                navigationGeneration: 8,
+                latestNavigationGeneration: 9,
+                snapshot: "exercise:first-left",
+                enqueueSnapshot: () => undefined,
+                publish: () => published.push("exercise:stale"),
+            }),
+        ).toBe(false);
+        expect(
+            publishReviewNavigationImmediately({
+                navigationGeneration: 9,
+                latestNavigationGeneration: 9,
+                snapshot: "exercise:second-left",
+                enqueueSnapshot: () => undefined,
+                publish: () => published.push("exercise:latest"),
+            }),
+        ).toBe(true);
+
+        expect(published).toEqual(["exercise:latest"]);
+        expect(
+            isLatestReviewNavigationGeneration({
+                navigationGeneration: 8,
+                latestNavigationGeneration: 9,
+                transitionNavigationGeneration: 8,
+            }),
+        ).toBe(false);
+    });
+});
 
 function readiness(
     overrides: Partial<
