@@ -23,6 +23,12 @@ function isLocalApiRequest(request: Request): boolean {
 function allowedOrigins(request: Request): Set<string> {
   const origins = new Set<string>([
     requestOrigin(request),
+
+    // Behind a reverse proxy, request.url may use the internal HTTP origin
+    // while the browser correctly sends Origin: https://zoeskoul.com.
+    // Trust the canonical Website origin explicitly.
+    getProductionAppOrigin("website"),
+
     ...browserAppIds.map(getProductionAppOrigin),
   ]);
 
