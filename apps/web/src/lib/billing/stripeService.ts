@@ -1,7 +1,7 @@
 // src/lib/billing/stripeService.ts
 import "server-only";
 import {prisma} from "@/lib/prisma";
-import {stripe} from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import type Stripe from "stripe";
 import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 import { formatMoneyMinor } from "@/i18n/money";
@@ -106,8 +106,8 @@ export async function getPricePresentation(intlLocale = "en-US", desiredCurrency
 
     try {
         const [pM, pY] = await Promise.all([
-            stripe.prices.retrieve(monthlyPriceId,{ expand: ["currency_options"] }),
-            stripe.prices.retrieve(yearlyPriceId,{ expand: ["currency_options"] }),
+            getStripe().prices.retrieve(monthlyPriceId,{ expand: ["currency_options"] }),
+            getStripe().prices.retrieve(yearlyPriceId,{ expand: ["currency_options"] }),
         ]);
 
         // If caller didn’t specify currency, start from the Price base currency
@@ -163,7 +163,7 @@ export async function ensureStripeCustomer(userId: string) {
     // If we have an id, verify it exists in Stripe (and isn’t deleted)
     if (u.stripeCustomerId) {
         try {
-            const got = await stripe.customers.retrieve(u.stripeCustomerId);
+            const got = await getStripe().customers.retrieve(u.stripeCustomerId);
 
             // Stripe can return a DeletedCustomer object
             if ((got as any)?.deleted) {
@@ -189,7 +189,7 @@ export async function ensureStripeCustomer(userId: string) {
     }
 
     // Create a new Stripe customer + persist
-    const customer = await stripe.customers.create({
+    const customer = await getStripe().customers.create({
         email: u.email ?? undefined,
         metadata: {userId},
     });
@@ -242,7 +242,7 @@ export async function createCheckoutSession(args: {
     const stripeLocale = stripeCheckoutLocaleFromAppLocale(args.appLocale ?? (hasLocale ? localeSeg : null));
 
     const checkout = await withValidCustomer(args.userId, (customerId) =>
-        stripe.checkout.sessions.create({
+        getStripe().checkout.sessions.create({
             mode: "subscription",
             customer: customerId,
             line_items: [{ price: args.priceId, quantity: 1 }],
@@ -272,7 +272,7 @@ export async function createBillingPortalSession(userId: string) {
     const {appUrl} = billingConfig();
 
     const portal = await withValidCustomer(userId, (customerId) =>
-        stripe.billingPortal.sessions.create({
+        getStripe().billingPortal.sessions.create({
             customer: customerId,
             return_url: `${appUrl}/billing`,
         }),
@@ -383,7 +383,7 @@ export async function syncSubscriptionsForUser(userId: string) {
 
     // ✅ if stale/missing, clear and stop (prevents 500s in /status)
     try {
-        const got = await stripe.customers.retrieve(customerId);
+        const got = await getStripe().customers.retrieve(customerId);
         if ((got as any)?.deleted) {
             await prisma.user.update({
                 where: {id: userId},
@@ -404,7 +404,7 @@ export async function syncSubscriptionsForUser(userId: string) {
         throw e;
     }
 
-    const list = await stripe.subscriptions.list({
+    const list = await getStripe().subscriptions.list({
         customer: customerId,
         status: "all",
         limit: 10,
@@ -454,7 +454,7 @@ export async function getOrCreateStripeCustomerId(userId: string) {
 
     if (u.stripeCustomerId) {
         try {
-            const got = await stripe.customers.retrieve(u.stripeCustomerId);
+            const got = await getStripe().customers.retrieve(u.stripeCustomerId);
             if ((got as any)?.deleted) throw Object.assign(new Error("deleted"), {code: "resource_missing"});
             return u.stripeCustomerId;
         } catch (e: any) {
@@ -466,7 +466,7 @@ export async function getOrCreateStripeCustomerId(userId: string) {
         }
     }
 
-    const created = await stripe.customers.create({
+    const created = await getStripe().customers.create({
         email: u.email ?? undefined,
         metadata: {userId},
     });
