@@ -17,16 +17,34 @@ set +a
 : "${DOMAIN:?required}"
 : "${RUNNER_PRIVATE_URL:?required}"
 
-echo "Pulling web stack images..."
-docker compose pull
+echo "Pulling production images..."
+docker compose pull web postgres redis
 
-echo "Starting/recreating web stack..."
-docker compose up -d --remove-orphans
+echo "Starting database and Redis..."
+docker compose up \
+  -d \
+  --wait \
+  --wait-timeout 180 \
+  postgres \
+  redis
+
+echo "Running database migrations..."
+./migrate.sh
+
+echo "Starting/replacing ZoeSkoul Web..."
+docker compose up \
+  -d \
+  --wait \
+  --wait-timeout 180 \
+  web
 
 echo "Current services:"
 docker compose ps
 
+echo "Running smoke tests..."
+./smoke-test.sh
+
 echo "Pruning unused images..."
 docker image prune -f >/dev/null || true
 
-echo "Done. Run ./smoke-test.sh next."
+echo "ZoeSkoul Web deployment completed successfully."
