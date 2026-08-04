@@ -317,6 +317,8 @@ export function defaultExt(lang: WorkspaceLanguage) {
             return ".java";
         case "javascript":
             return ".js";
+        case "r":
+            return ".R";
         case "c":
             return ".c";
         case "cpp":

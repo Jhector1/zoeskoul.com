@@ -16,6 +16,7 @@ export function normalizeWorkspaceLanguage(
         case "sql":
         case "java":
         case "javascript":
+        case "r":
         case "c":
         case "cpp":
         case "bash":

@@ -100,6 +100,35 @@ describe("submitRun", () => {
         );
     });
 
+    it("routes R project runs through Judge0 multi-file mode", async () => {
+        await submitRun({
+            language: "r",
+            entry: "main.R",
+            files: [
+                { path: "helpers.R", content: "double_value <- function(x) x * 2\n" },
+                { path: "main.R", content: 'source("helpers.R")\ncat(double_value(21), "\\n")\n' },
+            ],
+        });
+
+        expect(getSingleFileLanguageIdMock).not.toHaveBeenCalled();
+        expect(zipProjectMock).toHaveBeenCalledWith(
+            "r",
+            "main.R",
+            expect.arrayContaining([
+                expect.objectContaining({ path: "main.R" }),
+                expect.objectContaining({ path: "helpers.R" }),
+            ]),
+        );
+        expect(createJudge0SubmissionMock).toHaveBeenCalledWith(
+            "http://judge0.test/submissions?base64_encoded=true",
+            expect.objectContaining({
+                language_id: 89,
+                additional_files: "zip-b64",
+                enable_network: false,
+            }),
+        );
+    });
+
     it("routes bash project runs through project mode without asking for a single-file Judge0 lang id", async () => {
         await submitRun({
             language: "bash",

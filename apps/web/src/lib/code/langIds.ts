@@ -12,7 +12,7 @@ function envInt(name: string) {
     return Number.isFinite(n) ? n : null;
 }
 
-const FALLBACK_LANG_IDS: Record<Judge0Language, number> = {
+const FALLBACK_LANG_IDS: Partial<Record<Judge0Language, number>> = {
     python: 71,
     java: 62,
     javascript: 63,
@@ -24,14 +24,25 @@ export function getSingleFileLanguageId(lang: Judge0Language) {
     const py = envInt("JUDGE0_LANG_PYTHON");
     const ja = envInt("JUDGE0_LANG_JAVA");
     const js = envInt("JUDGE0_LANG_JAVASCRIPT");
+    const r = envInt("JUDGE0_LANG_R");
     const c = envInt("JUDGE0_LANG_C");
     const cpp = envInt("JUDGE0_LANG_CPP");
 
     if (lang === "python" && py) return py;
     if (lang === "java" && ja) return ja;
     if (lang === "javascript" && js) return js;
+    if (lang === "r" && r) return r;
     if (lang === "c" && c) return c;
     if (lang === "cpp" && cpp) return cpp;
 
-    return FALLBACK_LANG_IDS[lang];
+    const fallback = FALLBACK_LANG_IDS[lang];
+    if (fallback) return fallback;
+
+    if (lang === "r") {
+        throw new Error(
+            "R is not configured for Judge0. Set JUDGE0_LANG_R to the verified R language ID.",
+        );
+    }
+
+    throw new Error(`Unsupported Judge0 language: ${lang}`);
 }

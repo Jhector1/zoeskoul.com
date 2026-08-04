@@ -23,6 +23,14 @@ describe("workspace file capabilities", () => {
     );
     expect(resolveWorkspaceEditorLanguage("styles/theme.scss")).toBe("scss");
     expect(resolveWorkspaceEditorLanguage("Dockerfile")).toBe("dockerfile");
+    expect(resolveWorkspaceEditorLanguage("main.R")).toBe("r");
+    expect(resolveWorkspaceEditorLanguage("main.r")).toBe("r");
+    expect(resolveWorkspaceFileCapability("analysis/main.R")).toMatchObject({
+      storage: "text",
+      viewer: "editor",
+      editable: true,
+      editorLanguage: "r",
+    });
   });
 
   it("routes major binary formats to dedicated viewers or safe details", () => {
@@ -53,7 +61,7 @@ describe("workspace file capabilities", () => {
     expect(isSafeWorkspaceRelativePath("C:\\tmp\\photo.png")).toBe(false);
     expect(resolveWorkspaceFileCapability("../photo.png")).toBeNull();
     expect(() => assertWorkspaceRelativePath("../photo.png")).toThrow(
-      /unsafe workspace path/i,
+      /unsafe path/i,
     );
   });
 

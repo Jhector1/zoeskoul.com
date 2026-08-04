@@ -23,6 +23,11 @@ describe("controlled editor model identity", () => {
     ).toBe("cpp");
     expect(
       normalizeControlledEditorLanguage(
+        "R",
+      ),
+    ).toBe("r");
+    expect(
+      normalizeControlledEditorLanguage(
         "unknown",
       ),
     ).toBe("plaintext");
@@ -39,6 +44,16 @@ describe("controlled editor model identity", () => {
     ).toBe(
       "inmemory://zoeskoul-controlled-editor/" +
         "python/module/topic/try-1/main.py",
+    );
+
+    expect(
+      buildControlledEditorModelPath({
+        modelKey: "r/module/topic/try-1",
+        language: "r",
+      }),
+    ).toBe(
+      "inmemory://zoeskoul-controlled-editor/" +
+        "r/module/topic/try-1/main.R",
     );
 
     expect(

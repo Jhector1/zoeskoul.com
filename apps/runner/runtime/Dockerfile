@@ -36,6 +36,7 @@ RUN apt-get update \
     nodejs \
     openjdk-21-jdk-headless \
     python3 \
+    r-base \
     tini \
  && apt-get purge -y --auto-remove curl gpg \
  && rm -rf /var/lib/apt/lists/*
@@ -52,7 +53,9 @@ WORKDIR /workspace
 
 COPY --chown=1000:1000 apps/runner/pty-runner.py /opt/runner/pty-runner.py
 
-RUN chmod 0555 /opt/runner/pty-runner.py
+RUN chmod 0555 /opt/runner/pty-runner.py \
+ && Rscript --version \
+ && test "$(Rscript --vanilla -e 'cat(mean(c(2, 4, 6)))')" = "4"
 
 USER 1000:1000
 

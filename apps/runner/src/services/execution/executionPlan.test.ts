@@ -43,3 +43,25 @@ describe("getExecutionPlan", () => {
         ).toThrow(/Unsafe cwd/);
     });
 });
+
+
+describe("R execution plan", () => {
+    it("runs an authored R entry with Rscript --vanilla", () => {
+        const plan = getExecutionPlan("r", "main.R", [
+            { kind: "file", path: "main.R", content: 'cat(mean(c(2, 4, 6)), "\\n")\n' },
+        ]);
+
+        expect(plan.compileCmd).toBeUndefined();
+        expect(plan.runCmd).toEqual(["Rscript", "--vanilla", "main.R"]);
+    });
+
+    it("supports nested R entry paths and rejects a missing entry", () => {
+        const plan = getExecutionPlan("r", "src/main.R", [
+            { kind: "file", path: "src/main.R", content: 'source("../helpers.R")\n' },
+            { kind: "file", path: "helpers.R", content: "double_value <- function(x) x * 2\n" },
+        ]);
+
+        expect(plan.runCmd).toEqual(["Rscript", "--vanilla", "src/main.R"]);
+        expect(() => getExecutionPlan("r")).toThrow(/Missing R entry file/);
+    });
+});

@@ -9,6 +9,7 @@ export const WORKSPACE_LANGUAGES = [
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
     "sql",
@@ -22,6 +23,7 @@ export const RUNNER_LANGUAGES = [
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
     "sql",
@@ -33,6 +35,7 @@ export const RUNNER_CODE_LANGUAGES = [
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
 ] as const;
@@ -43,6 +46,7 @@ export const INTERACTIVE_LANGUAGES = [
     "python",
     "javascript",
     "java",
+    "r",
     "c",
     "cpp",
 ] as const;

@@ -11,6 +11,7 @@ export const IDE_LANGUAGES = [
   "python",
   "java",
   "javascript",
+  "r",
   "c",
   "cpp",
   "sql",

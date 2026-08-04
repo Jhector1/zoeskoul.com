@@ -130,6 +130,8 @@ function syntheticEntryFor(language: string) {
       return "main.py";
     case "javascript":
       return "main.js";
+    case "r":
+      return "main.R";
     case "java":
       return "Main.java";
     case "c":

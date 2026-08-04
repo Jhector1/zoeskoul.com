@@ -2,6 +2,7 @@ export const PROGRAMMING_LANGUAGES = [
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
     "bash",

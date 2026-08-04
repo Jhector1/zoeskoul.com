@@ -16,6 +16,8 @@ function resolveCommand(language: string):
             return { command: "python3", args: ["-c"] };
         case "javascript":
             return { command: "node", args: ["-e"] };
+        case "r":
+            return { command: "Rscript", args: ["--vanilla", "-e"] };
         default:
             return null;
     }

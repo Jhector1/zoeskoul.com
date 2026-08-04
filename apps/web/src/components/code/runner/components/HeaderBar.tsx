@@ -13,7 +13,14 @@ import {
     FiCode,
     FiSquare,
 } from "react-icons/fi";
-import { SiPython, SiJavascript, SiC, SiCplusplus, SiHtml5 } from "react-icons/si";
+import {
+    SiPython,
+    SiJavascript,
+    SiR,
+    SiC,
+    SiCplusplus,
+    SiHtml5,
+} from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
@@ -26,6 +33,7 @@ const LANG_META: Record<
     python: { label: "Python", Icon: SiPython },
     java: { label: "Java", Icon: FaJava },
     javascript: { label: "JavaScript", Icon: SiJavascript },
+    r: { label: "R", Icon: SiR },
     web: { label: "Web", Icon: SiHtml5 },
     c: { label: "C", Icon: SiC },
     cpp: { label: "C++", Icon: SiCplusplus },

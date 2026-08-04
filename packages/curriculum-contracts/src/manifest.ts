@@ -23,6 +23,7 @@ export type WorkspaceLanguage =
   | "python"
   | "java"
   | "javascript"
+  | "r"
   | "c"
   | "cpp"
   | "bash"

@@ -36,6 +36,8 @@ function languageLabel(language: string, t: ReturnType<typeof useTranslations>) 
             return t("language.c");
         case "python":
             return t("language.python");
+        case "r":
+            return "R";
         case "java":
             return t("language.java");
         case "sql":
