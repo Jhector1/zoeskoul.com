@@ -20,6 +20,7 @@ const CODE_LANGS = new Set<InteractiveLanguage>([
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
 ]);

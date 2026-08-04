@@ -246,6 +246,7 @@ const GENERIC_TOOL_SAMPLE_LANGUAGES: WorkspaceLanguage[] = [
     "sql",
     "java",
     "javascript",
+    "r",
     "typescript",
     "c",
     "cpp",

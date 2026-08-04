@@ -27,6 +27,8 @@ export function normalizeControlledEditorLanguage(
     case "javascript":
     case "js":
       return "javascript";
+    case "r":
+      return "r";
     case "typescript":
     case "ts":
       return "typescript";
@@ -68,6 +70,8 @@ function extensionForLanguage(
       return "py";
     case "javascript":
       return "js";
+    case "r":
+      return "R";
     case "typescript":
       return "ts";
     case "java":

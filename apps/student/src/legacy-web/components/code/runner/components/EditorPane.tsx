@@ -30,6 +30,8 @@ function normalizeEditorLanguage(lang: string) {
         case "javascript":
         case "js":
             return "javascript";
+        case "r":
+            return "r";
         case "typescript":
         case "ts":
             return "typescript";
@@ -68,6 +70,8 @@ function extForLang(lang: string) {
         case "javascript":
         case "js":
             return "js";
+        case "r":
+            return "R";
         case "typescript":
         case "ts":
             return "ts";

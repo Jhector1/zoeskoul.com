@@ -61,6 +61,23 @@ describe("Judge0 project zip workspace capture", () => {
         expect(run).toContain('node "$ENTRY"');
     });
 
+    it("supports R project runs with an authored entry and no compile script", async () => {
+        const encoded = await zipProject("r", "main.R", [
+            { path: "helpers.R", content: "double_value <- function(x) x * 2\n" },
+            { path: "main.R", content: 'source("helpers.R")\ncat(double_value(21), "\\n")\n' },
+        ]);
+
+        const project = await unzipProject(encoded);
+        const run = await project.read("run");
+
+        expect(project.names).toContain("main.R");
+        expect(project.names).toContain("helpers.R");
+        expect(project.names).not.toContain("compile");
+        expect(project.names).not.toContain("compile.sh");
+        expect(run).toContain('ENTRY="main.R"');
+        expect(run).toContain('Rscript --vanilla "$ENTRY"');
+    });
+
     it("supports bash project runs", async () => {
         const encoded = await zipProject("bash", "main.sh", [
             {

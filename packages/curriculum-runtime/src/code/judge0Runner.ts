@@ -144,18 +144,20 @@ function normalizeLimits(input?: RunCodeLimits) {
     };
 }
 
-function getSingleFileLanguageId(language: string) {
+export function resolveJudge0LanguageId(language: string) {
     const normalized = String(language ?? "").toLowerCase();
 
     const python = envInt("JUDGE0_LANG_PYTHON");
     const java = envInt("JUDGE0_LANG_JAVA");
     const javascript = envInt("JUDGE0_LANG_JAVASCRIPT");
+    const r = envInt("JUDGE0_LANG_R");
     const c = envInt("JUDGE0_LANG_C");
     const cpp = envInt("JUDGE0_LANG_CPP");
 
     if (normalized === "python" && python) return python;
     if (normalized === "java" && java) return java;
     if (normalized === "javascript" && javascript) return javascript;
+    if (normalized === "r" && r) return r;
     if (normalized === "c" && c) return c;
     if (normalized === "cpp" && cpp) return cpp;
 
@@ -205,6 +207,8 @@ function syntheticEntryFor(language: string) {
             return "__zoeskoul_main__.py";
         case "javascript":
             return "__zoeskoul_main__.js";
+        case "r":
+            return "__zoeskoul_main__.R";
         case "java":
             return "Main.java";
         case "c":
@@ -254,6 +258,12 @@ python3 "$ENTRY"
 set -euo pipefail
 ENTRY="${entry}"
 node "$ENTRY"
+`;
+            case "r":
+                return `#!/usr/bin/env bash
+set -euo pipefail
+ENTRY="${entry}"
+Rscript --vanilla "$ENTRY"
 `;
             case "java":
                 return `#!/usr/bin/env bash
@@ -307,6 +317,7 @@ g++ -O2 -std=c++17 -I. -o build/app $FILES
 `;
             case "python":
             case "javascript":
+            case "r":
                 return null;
             default:
                 throw new Error(`Unsupported project language: ${language}`);
@@ -447,9 +458,14 @@ async function buildJudge0SubmissionBody(args: {
         };
     }
 
-    const language_id = getSingleFileLanguageId(language);
+    const language_id = resolveJudge0LanguageId(language);
 
     if (!language_id) {
+        if (language === "r") {
+            throw new Error(
+                "R is not configured for Judge0. Set JUDGE0_LANG_R to the verified R language ID.",
+            );
+        }
         throw new Error(`Unsupported language for Judge0: ${args.language}`);
     }
 

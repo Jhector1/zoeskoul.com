@@ -114,6 +114,12 @@ export function getExecutionPlan(
                 runCmd: ["node", entry],
             };
 
+        case "r":
+            if (!entry) throw new Error("Missing R entry file.");
+            return {
+                runCmd: ["Rscript", "--vanilla", entry],
+            };
+
         case "bash":
             if (shell) {
                 /**

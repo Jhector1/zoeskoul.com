@@ -11,3 +11,27 @@ describe("getSingleFileLanguageId", () => {
         expect(getSingleFileLanguageId("cpp")).toBe(54);
     });
 });
+
+
+describe("R Judge0 language id", () => {
+    it("uses the verified JUDGE0_LANG_R override", () => {
+        const previous = process.env.JUDGE0_LANG_R;
+        process.env.JUDGE0_LANG_R = "99";
+        try {
+            expect(getSingleFileLanguageId("r")).toBe(99);
+        } finally {
+            if (previous == null) delete process.env.JUDGE0_LANG_R;
+            else process.env.JUDGE0_LANG_R = previous;
+        }
+    });
+
+    it("fails explicitly instead of guessing an R language id", () => {
+        const previous = process.env.JUDGE0_LANG_R;
+        delete process.env.JUDGE0_LANG_R;
+        try {
+            expect(() => getSingleFileLanguageId("r")).toThrow(/JUDGE0_LANG_R/);
+        } finally {
+            if (previous != null) process.env.JUDGE0_LANG_R = previous;
+        }
+    });
+});

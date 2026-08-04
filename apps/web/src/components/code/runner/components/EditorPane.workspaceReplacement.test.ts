@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
+    buildModelPath,
     buildWorkspaceModelReplacements,
     canApplyMountedWorkspaceReplacement,
     replaceMountedWorkspaceModels,
@@ -37,6 +38,17 @@ const workspace: WorkspaceStateV2 = {
     expanded: [],
     leftPct: 26,
 };
+
+describe("R Monaco model paths", () => {
+    it("uses a deterministic uppercase .R model extension", () => {
+        expect(buildModelPath({
+            instanceKey: "runner-r",
+            exerciseStateKey: "review:r-mean",
+            modelKey: "main",
+            lang: "r",
+        })).toBe("inmemory://zoeskoul-runner/review-r-mean/main.R");
+    });
+});
 
 describe("mounted Monaco workspace replacement", () => {
     it("does not consume a reveal replacement before Monaco is mounted", () => {

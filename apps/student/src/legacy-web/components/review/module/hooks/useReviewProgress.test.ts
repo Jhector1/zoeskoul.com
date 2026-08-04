@@ -98,11 +98,13 @@ describe("review navigation progress snapshots", () => {
             snapshot: "exercise:left",
             enqueueSnapshot: () => {
                 backgroundTasks.push(
-                    put().catch(async (error) => {
-                        if (error.status !== 409) throw error;
-                        await get();
-                        await put();
-                    }),
+                    put().catch(
+                        async (error: Error & { status?: number }) => {
+                            if (error.status !== 409) throw error;
+                            await get();
+                            await put();
+                        },
+                    ),
                 );
             },
             publish: () => {

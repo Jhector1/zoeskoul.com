@@ -5,6 +5,22 @@ vi.mock("server-only", () => ({}));
 import { parseRunReq } from "@/lib/code/api/parseRunReq";
 
 describe("parseRunReq", () => {
+    it("accepts single-file and multi-file R run requests", () => {
+        expect(parseRunReq({ language: "r", code: 'cat(mean(c(2, 4, 6)), "\\n")' })).toMatchObject({
+            kind: "code",
+            language: "r",
+        });
+
+        expect(parseRunReq({
+            language: "r",
+            entry: "main.R",
+            files: [
+                { path: "main.R", content: 'source("helpers.R")\n' },
+                { path: "helpers.R", content: "double_value <- function(x) x * 2\n" },
+            ],
+        })).toMatchObject({ kind: "code", language: "r", entry: "main.R" });
+    });
+
     it("accepts a bounded multi-file run request", () => {
         const parsed = parseRunReq({
             language: "python",

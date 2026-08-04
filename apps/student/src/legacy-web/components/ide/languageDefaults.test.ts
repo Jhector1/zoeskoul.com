@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+    defaultExt,
     defaultMainCode,
     defaultMainFile,
 } from "./languageDefaults";
@@ -20,5 +21,16 @@ describe("languageDefaults typescript", () => {
     it("uses main.ts and a TypeScript starter", () => {
         expect(defaultMainFile("typescript")).toBe("main.ts");
         expect(defaultMainCode("typescript")).toContain("const message: string");
+    });
+});
+
+
+describe("languageDefaults R", () => {
+    it("uses main.R, the .R extension, and a valid base R starter", () => {
+        expect(defaultExt("r")).toBe(".R");
+        expect(defaultMainFile("r")).toBe("main.R");
+        expect(defaultMainCode("r")).toBe(
+            "values <- c(2, 4, 6)\nprint(mean(values))\n",
+        );
     });
 });

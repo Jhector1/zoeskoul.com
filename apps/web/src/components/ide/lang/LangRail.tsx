@@ -4,6 +4,7 @@ import React from "react";
 import {
     SiPython,
     SiJavascript,
+    SiR,
     SiC,
     SiCplusplus,
     SiHtml5,
@@ -27,6 +28,7 @@ export const LANGS: LangItem[] = [
     { id: "python", label: "Python", desc: "Best for quick practice", Icon: SiPython },
     { id: "java", label: "Java", desc: "OOP + interviews", Icon: FaJava },
     { id: "javascript", label: "JavaScript", desc: "Web scripting", Icon: SiJavascript },
+    { id: "r", label: "R", desc: "Statistics + data science", Icon: SiR },
     { id: "web", label: "Web", desc: "HTML + CSS + JS", Icon: SiHtml5 },
     { id: "c", label: "C", desc: "Low-level fundamentals", Icon: SiC },
     { id: "cpp", label: "C++", desc: "Performance + STL", Icon: SiCplusplus },

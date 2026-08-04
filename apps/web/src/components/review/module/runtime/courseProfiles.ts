@@ -18,6 +18,7 @@ export type CourseProfileId =
   | "sql"
   | "java"
   | "javascript"
+  | "r"
   | "typescript"
   | "cpp"
   | "c"
@@ -72,6 +73,7 @@ const PROFILE_LANGUAGE_BY_ID: Record<
   sql: { id: "sql", language: "sql" },
   java: { id: "java", language: "java" },
   javascript: { id: "javascript", language: "javascript" },
+  r: { id: "r", language: "r" },
   typescript: { id: "typescript", language: "typescript" },
   c: { id: "c", language: "c" },
   cpp: { id: "cpp", language: "cpp" },
@@ -296,6 +298,8 @@ export function resolveCourseFileSeed(args: {
       return resolveFileSeed(args.target, defaultMainFile("python" as WorkspaceLanguage));
     case "java":
       return resolveFileSeed(args.target, defaultMainFile("java" as WorkspaceLanguage));
+    case "r":
+      return resolveFileSeed(args.target, defaultMainFile("r" as WorkspaceLanguage));
     case "c":
       return resolveCFileSeed(args.target);
     case "sql":

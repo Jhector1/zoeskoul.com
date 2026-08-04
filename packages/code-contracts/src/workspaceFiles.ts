@@ -138,6 +138,7 @@ export const WORKSPACE_EDITOR_LANGUAGE_BY_EXTENSION: Readonly<Record<string, str
   ".json": "json", ".jsonc": "json", ".webmanifest": "json", ".map": "json",
   ".md": "markdown", ".mdx": "markdown", ".xml": "xml", ".svg": "xml",
   ".yaml": "yaml", ".yml": "yaml", ".py": "python", ".pyi": "python",
+  ".r": "r",
   ".java": "java", ".c": "cpp", ".cc": "cpp", ".cpp": "cpp",
   ".cxx": "cpp", ".h": "cpp", ".hh": "cpp", ".hpp": "cpp",
   ".hxx": "cpp", ".cs": "csharp", ".go": "go", ".rs": "rust",

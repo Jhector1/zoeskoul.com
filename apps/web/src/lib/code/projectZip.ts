@@ -219,6 +219,10 @@ python3 "$ENTRY"
                 return `ENTRY="${entry}"
 node "$ENTRY"
 `;
+            case "r":
+                return `ENTRY="${entry}"
+Rscript --vanilla "$ENTRY"
+`;
             case "java":
                 return `java -cp build "${mainClass}"
 `;
@@ -261,6 +265,7 @@ g++ -O2 -std=c++17 -I. -o build/app $FILES
 `;
             case "python":
             case "javascript":
+            case "r":
             case "bash":
                 return null;
             default:

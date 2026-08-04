@@ -465,6 +465,8 @@ function defaultLanguageForSubject(subjectSlug: string) {
       return "java";
     case "javascript":
       return "javascript";
+    case "r":
+      return "r";
     case "c":
       return "c";
     case "cpp":

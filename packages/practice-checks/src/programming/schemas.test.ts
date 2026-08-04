@@ -38,6 +38,17 @@ describe("ProgrammingExpectedSchema", () => {
             },
         ]);
     });
+    it("accepts R stdout expectations", () => {
+        const parsed = ProgrammingExpectedSchema.parse({
+            kind: "code_input",
+            language: "r",
+            tests: [{ stdin: "", stdout: "4\n", match: "exact" }],
+        });
+
+        expect(parsed.language).toBe("r");
+        expect(parsed.checkMode).toBe("stdout");
+    });
+
     it("parses semantic expected", () => {
         const parsed = ProgrammingExpectedSchema.parse({
             kind: "code_input",

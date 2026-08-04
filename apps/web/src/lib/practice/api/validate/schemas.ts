@@ -29,6 +29,7 @@ export const ProgrammingLanguageSchema = z.enum([
     "python",
     "java",
     "javascript",
+    "r",
     "c",
     "cpp",
     "bash",
@@ -111,7 +112,7 @@ const CodeInputAnswerSchema = z
     .object({
         kind: z.literal("code_input"),
         language: z
-            .enum(["python", "java", "javascript", "c", "cpp", "bash", "sql"])
+            .enum(["python", "java", "javascript", "r", "c", "cpp", "bash", "sql"])
             .optional(),
         code: z.string().optional(),
         source: z.string().optional(),
