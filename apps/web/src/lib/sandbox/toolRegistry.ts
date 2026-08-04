@@ -6,6 +6,7 @@ export type ProgrammingCodeToolSlug =
     | "python"
     | "java"
     | "javascript"
+    | "r"
     | "web"
     | "c"
     | "cpp"
@@ -28,11 +29,12 @@ export type SandboxToolEntry =
         | "online-python-compiler"
         | "online-java-compiler"
         | "online-javascript-editor"
+        | "online-r-compiler"
         | "online-web-editor"
         | "online-c-compiler"
         | "online-cpp-compiler"
         | "online-sql-editor";
-    lessonPath: string;
+    lessonPath?: string;
 }
     | {
     kind: "programming";
@@ -56,6 +58,7 @@ export const PROGRAMMING_TOOL_ORDER: ProgrammingCodeToolSlug[] = [
     "python",
     "java",
     "javascript",
+    "r",
     "web",
     "c",
     "cpp",
@@ -116,6 +119,15 @@ export function resolveSandboxToolEntry(
                     lessonPath: "/subjects/javascript/modules",
                 };
 
+            case "r":
+                return {
+                    kind: "programming",
+                    category: "programming",
+                    toolSlug: "r",
+                    title: "Online R Compiler",
+                    initialLanguage: "r",
+                    seoKey: "online-r-compiler",
+                };
             case "web":
                 return {
                     kind: "programming",

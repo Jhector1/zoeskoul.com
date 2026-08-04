@@ -23,6 +23,7 @@ import {
     IconTrash,
 } from "./icons";
 import {IdeWorkspacePolicy} from "@/components/ide/workspaceHook/workspace.policy";
+import type { EditorSplitPlacement } from "@/components/code/runner/types";
 
 function setInlineValuePreserveCaret(
     setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>,
@@ -195,6 +196,7 @@ type TreeProps = {
     setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
 
     openFile: (id: NodeId) => void;
+    openFileInSplit?: (id: NodeId, placement: EditorSplitPlacement) => void;
     toggleFolder: (id: NodeId) => void;
 
     startNewFile: (parentId: NodeId | null) => void;
@@ -230,6 +232,7 @@ type TreeProps = {
 
 function Tree(props: TreeProps) {
     const t = useTranslations("ide.explorer.tree");
+    const layoutT = useTranslations("ide.editorLayout");
     const {
         parentId,
         depth,
@@ -244,6 +247,7 @@ function Tree(props: TreeProps) {
         inlineEdit,
         setInlineEdit,
         openFile,
+        openFileInSplit,
         toggleFolder,
         startNewFile,
         startNewFolder,
@@ -331,6 +335,20 @@ function Tree(props: TreeProps) {
                     });
 
                 const baseFileActions: MenuAction[] = [
+                    ...(openFileInSplit && !isTouchLike
+                        ? [
+                              {
+                                  label: layoutT("openToLeft"),
+                                  onClick: () => openFileInSplit(n.id, "left"),
+                                  icon: <IconFile className="h-4 w-4" />,
+                              },
+                              {
+                                  label: layoutT("openToRight"),
+                                  onClick: () => openFileInSplit(n.id, "right"),
+                                  icon: <IconFile className="h-4 w-4" />,
+                              },
+                          ]
+                        : []),
                     ...(!isSql && allowSetEntry
                         ? [
                             {
@@ -460,6 +478,7 @@ function Tree(props: TreeProps) {
                                         inlineEdit={inlineEdit}
                                         setInlineEdit={setInlineEdit}
                                         openFile={openFile}
+                                        openFileInSplit={openFileInSplit}
                                         toggleFolder={toggleFolder}
                                         startNewFile={startNewFile}
                                         startNewFolder={startNewFolder}
@@ -678,6 +697,7 @@ function Tree(props: TreeProps) {
                                     inlineEdit={inlineEdit}
                                     setInlineEdit={setInlineEdit}
                                     openFile={openFile}
+                                    openFileInSplit={openFileInSplit}
                                     toggleFolder={toggleFolder}
                                     startNewFile={startNewFile}
                                     startNewFolder={startNewFolder}
@@ -714,6 +734,7 @@ export default function ExplorerTree(props: {
     setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
 
     openFile: (id: NodeId) => void;
+    openFileInSplit?: (id: NodeId, placement: EditorSplitPlacement) => void;
     toggleFolder: (id: NodeId) => void;
 
     startNewFile: (parentId: NodeId | null) => void;
@@ -741,6 +762,7 @@ export default function ExplorerTree(props: {
         inlineEdit,
         setInlineEdit,
         openFile,
+        openFileInSplit,
         toggleFolder,
         startNewFile,
         startNewFolder,
@@ -1009,6 +1031,7 @@ export default function ExplorerTree(props: {
                     inlineEdit={inlineEdit}
                     setInlineEdit={setInlineEdit}
                     openFile={openFile}
+                    openFileInSplit={openFileInSplit}
                     toggleFolder={toggleFolder}
                     startNewFile={startNewFile}
                     startNewFolder={startNewFolder}

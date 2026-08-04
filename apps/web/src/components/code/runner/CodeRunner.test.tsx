@@ -49,6 +49,7 @@ vi.mock("@/components/code/runner/hooks/useSplitSizing", () => ({
         bottomTermH: 160,
         rightTotalH: 320,
         termW: 240,
+        isResizing: false,
         separatorProps: {},
         onPointerDownSplit: vi.fn(),
     }),

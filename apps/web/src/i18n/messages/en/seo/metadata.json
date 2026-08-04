@@ -56,12 +56,6 @@
         "twitterTitle": "Contact — {appName}",
         "twitterDescription": "Reach out to {appName}."
       },
-
-
-
-
-
-
       "online-web-editor": {
         "title": "Online HTML CSS JS Editor — {appName}",
         "description": "Write HTML, CSS, and JavaScript online with live preview in {appName}.",
@@ -70,96 +64,94 @@
         "twitterTitle": "Online HTML CSS JS Editor — {appName}",
         "twitterDescription": "Write HTML, CSS, and JavaScript online with live preview in {appName}."
       },
-
-
-        "legal-index": {
-          "title": "Legal — {appName}",
-          "description": "Read the legal policies, privacy information, terms, and platform rules for {appName}.",
-          "ogTitle": "Legal — {appName}",
-          "ogDescription": "Legal policies and platform rules for {appName}.",
-          "twitterTitle": "Legal — {appName}",
-          "twitterDescription": "Legal policies and platform rules for {appName}."
-        },
-        "terms": {
-          "title": "Terms of Service — {appName}",
-          "description": "Read the {appName} terms of service for using the platform, content, subscriptions, and learning tools.",
-          "ogTitle": "Terms of Service — {appName}",
-          "ogDescription": "Read the terms for using {appName}.",
-          "twitterTitle": "Terms of Service — {appName}",
-          "twitterDescription": "Read the terms for using {appName}."
-        },
-        "privacy": {
-          "title": "Privacy Policy — {appName}",
-          "description": "Read the {appName} privacy policy and learn how personal data is collected, used, and protected.",
-          "ogTitle": "Privacy Policy — {appName}",
-          "ogDescription": "Learn how {appName} handles user data.",
-          "twitterTitle": "Privacy Policy — {appName}",
-          "twitterDescription": "Learn how {appName} handles user data."
-        },
-        "cookies": {
-          "title": "Cookie Policy — {appName}",
-          "description": "Learn how {appName} uses cookies, local storage, and similar technologies.",
-          "ogTitle": "Cookie Policy — {appName}",
-          "ogDescription": "Learn how cookies and similar technologies are used on {appName}.",
-          "twitterTitle": "Cookie Policy — {appName}",
-          "twitterDescription": "Learn how cookies are used on {appName}."
-        },
-        "refund": {
-          "title": "Refund Policy — {appName}",
-          "description": "Review cancellation, renewal, and refund rules for paid plans and purchases on {appName}.",
-          "ogTitle": "Refund Policy — {appName}",
-          "ogDescription": "Read the refund and cancellation policy for {appName}.",
-          "twitterTitle": "Refund Policy — {appName}",
-          "twitterDescription": "Read the refund and cancellation policy for {appName}."
-        },
-        "acceptable-use": {
-          "title": "Acceptable Use Policy — {appName}",
-          "description": "Review the rules for lawful and safe use of {appName}, including account, content, and system usage.",
-          "ogTitle": "Acceptable Use Policy — {appName}",
-          "ogDescription": "Read the acceptable use rules for {appName}.",
-          "twitterTitle": "Acceptable Use Policy — {appName}",
-          "twitterDescription": "Read the acceptable use rules for {appName}."
-        },
-        "community": {
-          "title": "Community Guidelines — {appName}",
-          "description": "Learn the community expectations for respectful and constructive participation on {appName}.",
-          "ogTitle": "Community Guidelines — {appName}",
-          "ogDescription": "Community rules and expectations for {appName}.",
-          "twitterTitle": "Community Guidelines — {appName}",
-          "twitterDescription": "Community rules and expectations for {appName}."
-        },
-        "dmca": {
-          "title": "Copyright and DMCA Policy — {appName}",
-          "description": "Read the copyright and DMCA policy for submitting notices and responding to infringement claims on {appName}.",
-          "ogTitle": "Copyright and DMCA Policy — {appName}",
-          "ogDescription": "Copyright and DMCA policy for {appName}.",
-          "twitterTitle": "Copyright and DMCA Policy — {appName}",
-          "twitterDescription": "Copyright and DMCA policy for {appName}."
-        },
-        "ai-policy": {
-          "title": "AI Usage Policy — {appName}",
-          "description": "Learn how AI-powered features on {appName} may be used and what limitations apply.",
-          "ogTitle": "AI Usage Policy — {appName}",
-          "ogDescription": "Rules for using AI-powered features on {appName}.",
-          "twitterTitle": "AI Usage Policy — {appName}",
-          "twitterDescription": "Rules for using AI-powered features on {appName}."
-        },
-        "academic-integrity": {
-          "title": "Academic Integrity Policy — {appName}",
-          "description": "Review honesty expectations for assessments, assignments, and certifications on {appName}.",
-          "ogTitle": "Academic Integrity Policy — {appName}",
-          "ogDescription": "Integrity expectations for learners on {appName}.",
-          "twitterTitle": "Academic Integrity Policy — {appName}",
-          "twitterDescription": "Integrity expectations for learners on {appName}."
-        },
-        "data-rights": {
-          "title": "Data Rights Policy — {appName}",
-          "description": "Learn about privacy rights, access requests, deletion requests, and data rights on {appName}.",
-          "ogTitle": "Data Rights Policy — {appName}",
-          "ogDescription": "Privacy and data rights information for {appName}.",
-          "twitterTitle": "Data Rights Policy — {appName}",
-          "twitterDescription": "Privacy and data rights information for {appName}."
-        },
+      "legal-index": {
+        "title": "Legal — {appName}",
+        "description": "Read the legal policies, privacy information, terms, and platform rules for {appName}.",
+        "ogTitle": "Legal — {appName}",
+        "ogDescription": "Legal policies and platform rules for {appName}.",
+        "twitterTitle": "Legal — {appName}",
+        "twitterDescription": "Legal policies and platform rules for {appName}."
+      },
+      "terms": {
+        "title": "Terms of Service — {appName}",
+        "description": "Read the {appName} terms of service for using the platform, content, subscriptions, and learning tools.",
+        "ogTitle": "Terms of Service — {appName}",
+        "ogDescription": "Read the terms for using {appName}.",
+        "twitterTitle": "Terms of Service — {appName}",
+        "twitterDescription": "Read the terms for using {appName}."
+      },
+      "privacy": {
+        "title": "Privacy Policy — {appName}",
+        "description": "Read the {appName} privacy policy and learn how personal data is collected, used, and protected.",
+        "ogTitle": "Privacy Policy — {appName}",
+        "ogDescription": "Learn how {appName} handles user data.",
+        "twitterTitle": "Privacy Policy — {appName}",
+        "twitterDescription": "Learn how {appName} handles user data."
+      },
+      "cookies": {
+        "title": "Cookie Policy — {appName}",
+        "description": "Learn how {appName} uses cookies, local storage, and similar technologies.",
+        "ogTitle": "Cookie Policy — {appName}",
+        "ogDescription": "Learn how cookies and similar technologies are used on {appName}.",
+        "twitterTitle": "Cookie Policy — {appName}",
+        "twitterDescription": "Learn how cookies are used on {appName}."
+      },
+      "refund": {
+        "title": "Refund Policy — {appName}",
+        "description": "Review cancellation, renewal, and refund rules for paid plans and purchases on {appName}.",
+        "ogTitle": "Refund Policy — {appName}",
+        "ogDescription": "Read the refund and cancellation policy for {appName}.",
+        "twitterTitle": "Refund Policy — {appName}",
+        "twitterDescription": "Read the refund and cancellation policy for {appName}."
+      },
+      "acceptable-use": {
+        "title": "Acceptable Use Policy — {appName}",
+        "description": "Review the rules for lawful and safe use of {appName}, including account, content, and system usage.",
+        "ogTitle": "Acceptable Use Policy — {appName}",
+        "ogDescription": "Read the acceptable use rules for {appName}.",
+        "twitterTitle": "Acceptable Use Policy — {appName}",
+        "twitterDescription": "Read the acceptable use rules for {appName}."
+      },
+      "community": {
+        "title": "Community Guidelines — {appName}",
+        "description": "Learn the community expectations for respectful and constructive participation on {appName}.",
+        "ogTitle": "Community Guidelines — {appName}",
+        "ogDescription": "Community rules and expectations for {appName}.",
+        "twitterTitle": "Community Guidelines — {appName}",
+        "twitterDescription": "Community rules and expectations for {appName}."
+      },
+      "dmca": {
+        "title": "Copyright and DMCA Policy — {appName}",
+        "description": "Read the copyright and DMCA policy for submitting notices and responding to infringement claims on {appName}.",
+        "ogTitle": "Copyright and DMCA Policy — {appName}",
+        "ogDescription": "Copyright and DMCA policy for {appName}.",
+        "twitterTitle": "Copyright and DMCA Policy — {appName}",
+        "twitterDescription": "Copyright and DMCA policy for {appName}."
+      },
+      "ai-policy": {
+        "title": "AI Usage Policy — {appName}",
+        "description": "Learn how AI-powered features on {appName} may be used and what limitations apply.",
+        "ogTitle": "AI Usage Policy — {appName}",
+        "ogDescription": "Rules for using AI-powered features on {appName}.",
+        "twitterTitle": "AI Usage Policy — {appName}",
+        "twitterDescription": "Rules for using AI-powered features on {appName}."
+      },
+      "academic-integrity": {
+        "title": "Academic Integrity Policy — {appName}",
+        "description": "Review honesty expectations for assessments, assignments, and certifications on {appName}.",
+        "ogTitle": "Academic Integrity Policy — {appName}",
+        "ogDescription": "Integrity expectations for learners on {appName}.",
+        "twitterTitle": "Academic Integrity Policy — {appName}",
+        "twitterDescription": "Integrity expectations for learners on {appName}."
+      },
+      "data-rights": {
+        "title": "Data Rights Policy — {appName}",
+        "description": "Learn about privacy rights, access requests, deletion requests, and data rights on {appName}.",
+        "ogTitle": "Data Rights Policy — {appName}",
+        "ogDescription": "Privacy and data rights information for {appName}.",
+        "twitterTitle": "Data Rights Policy — {appName}",
+        "twitterDescription": "Privacy and data rights information for {appName}."
+      },
       "online-python-compiler": {
         "title": "Online Python Compiler — {appName}",
         "description": "Write, run, and test Python code online with {appName}.",
@@ -183,6 +175,14 @@
         "ogDescription": "Write and run JavaScript online with the {appName} code editor.",
         "twitterTitle": "Online JavaScript Editor — {appName}",
         "twitterDescription": "Write and run JavaScript online with the {appName} code editor."
+      },
+      "online-r-compiler": {
+        "title": "Online R Compiler — {appName}",
+        "description": "Write, run, and test R code online with {appName}.",
+        "ogTitle": "Online R Compiler — {appName}",
+        "ogDescription": "Write, run, and test R code online with {appName}.",
+        "twitterTitle": "Online R Compiler — {appName}",
+        "twitterDescription": "Write, run, and test R code online with {appName}."
       },
       "online-c-compiler": {
         "title": "Online C Compiler — {appName}",

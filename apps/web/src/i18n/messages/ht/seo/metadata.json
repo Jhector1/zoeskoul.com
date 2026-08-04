@@ -166,6 +166,14 @@
         "twitterTitle": "Editè JavaScript sou entènèt — {appName}",
         "twitterDescription": "Ekri epi kouri JavaScript sou entènèt ak editè kòd {appName}."
       },
+      "online-r-compiler": {
+        "title": "Konpilatè R sou entènèt — {appName}",
+        "description": "Ekri, kouri, epi teste kòd R sou entènèt ak {appName}.",
+        "ogTitle": "Konpilatè R sou entènèt — {appName}",
+        "ogDescription": "Ekri, kouri, epi teste kòd R sou entènèt ak {appName}.",
+        "twitterTitle": "Konpilatè R sou entènèt — {appName}",
+        "twitterDescription": "Ekri, kouri, epi teste kòd R sou entènèt ak {appName}."
+      },
       "online-c-compiler": {
         "title": "Konpilatè C sou entènèt — {appName}",
         "description": "Ekri, konpile, epi kouri kòd C sou entènèt ak {appName}.",

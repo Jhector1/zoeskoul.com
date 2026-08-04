@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { FileNode, FSNode, NodeId } from "../types";
 import { cn } from "../utils";
 import { pathOf } from "../fsTree";
+import NodeMenu, { type MenuAction } from "./NodeMenu";
+import type { EditorSplitPlacement } from "@/components/code/runner/types";
 
 export default function TabsBar(props: {
     nodes: FSNode[];
@@ -12,10 +14,25 @@ export default function TabsBar(props: {
     activeFileId: NodeId | null;
     setActiveFileId: (id: NodeId) => void;
     closeTab: (id: NodeId) => void;
+    openFileInSplit?: (id: NodeId, placement: EditorSplitPlacement) => void;
 }) {
     const t = useTranslations("ide.explorer.tabs");
-    const { nodes, tabFiles, activeFileId, setActiveFileId, closeTab } = props;
+    const layoutT = useTranslations("ide.editorLayout");
+    const {
+        nodes,
+        tabFiles,
+        activeFileId,
+        setActiveFileId,
+        closeTab,
+        openFileInSplit,
+    } = props;
     const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+    const [contextMenu, setContextMenu] = useState<{
+        open: boolean;
+        x: number;
+        y: number;
+        actions: MenuAction[];
+    }>({ open: false, x: 0, y: 0, actions: [] });
 
     const moveFocus = (fromIndex: number, dir: -1 | 1) => {
         if (!tabFiles.length) return;
@@ -36,6 +53,7 @@ export default function TabsBar(props: {
     }, [activeFileId, tabFiles]);
 
     return (
+        <>
         <div
             role="tablist"
             aria-label={t("openFiles")}
@@ -49,9 +67,33 @@ export default function TabsBar(props: {
                     const filePath = pathOf(nodes, f.id);
                     const tabLabel = filePath.includes("/") ? filePath : f.name;
 
+                    const splitActions: MenuAction[] = openFileInSplit
+                        ? [
+                              {
+                                  label: layoutT("openToLeft"),
+                                  onClick: () => openFileInSplit(f.id, "left"),
+                              },
+                              {
+                                  label: layoutT("openToRight"),
+                                  onClick: () => openFileInSplit(f.id, "right"),
+                              },
+                          ]
+                        : [];
+
                     return (
                         <div
                             key={f.id}
+                            onContextMenu={(event) => {
+                                if (!splitActions.length) return;
+                                event.preventDefault();
+                                event.stopPropagation();
+                                setContextMenu({
+                                    open: true,
+                                    x: event.clientX,
+                                    y: event.clientY,
+                                    actions: splitActions,
+                                });
+                            }}
                             className={cn(
                                 "flex shrink-0 items-center gap-1 rounded-md border",
                                 "max-w-[180px] sm:max-w-[220px]",
@@ -121,5 +163,19 @@ export default function TabsBar(props: {
                 })}
             </div>
         </div>
+        <NodeMenu
+            trigger="none"
+            open={contextMenu.open}
+            onOpenChange={(open) =>
+                setContextMenu((current) => ({ ...current, open }))
+            }
+            anchorPoint={
+                contextMenu.open
+                    ? { x: contextMenu.x, y: contextMenu.y }
+                    : null
+            }
+            actions={contextMenu.actions}
+        />
+        </>
     );
 }

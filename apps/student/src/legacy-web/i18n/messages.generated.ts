@@ -337,6 +337,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/ui/home/landing-page.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/home/onboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/code-runner.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/full-ide.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/projects.json").then((m) => (m?.default ?? {}) as AnyObj),
@@ -366,6 +367,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/ui/platform/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/platform/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/platform/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "es": [
@@ -387,6 +389,8 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/es/subjects/sql/sql/module5/writing-readable-output.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/subjects/sql/sql/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/platform/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "fr": [
@@ -455,6 +459,8 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/fr/ui/platform/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/platform/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/platform/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "ht": [
@@ -550,6 +556,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/ht/ui/chrome/user-menu.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/home/landing-page.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/home/onboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/ide/full-ide.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/ide/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/learning/content-card.json").then((m) => (m?.default ?? {}) as AnyObj),
@@ -571,6 +578,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/ht/ui/platform/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/platform/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/platform/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 };
 

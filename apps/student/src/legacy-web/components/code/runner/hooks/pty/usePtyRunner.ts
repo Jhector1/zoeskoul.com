@@ -13,7 +13,6 @@ import { resolveRuntime } from "../controller/useResolvedRuntime";
 import {
     RunEvent,
     RunSessionState,
-    type InteractiveLanguage,
 } from "@zoeskoul/code-contracts";
 import { exportWorkspaceEntries, pathOf } from "@/components/ide/fsTree";
 import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
@@ -22,6 +21,10 @@ import {
     sortWorkspaceSyncEntries,
     workspaceSyncEntriesEqual,
 } from "@/lib/projects/workspaceSyncEntries";
+import {
+    isPtyRunnerLanguage,
+    unsupportedPtyRunnerLanguageMessage,
+} from "./language";
 
 type StartedInteractiveSession = {
     ok?: true;
@@ -40,7 +43,7 @@ type SnapshotWorkspaceResponse =
     error: string;
 };
 
-function isFinalSessionState(state: string) {
+export function isFinalPtySessionState(state: string) {
     return (
         state === "completed" ||
         state === "failed" ||
@@ -60,17 +63,6 @@ function isStartedInteractiveSession(
         typeof v.sessionId === "string" &&
         typeof v.state === "string" &&
         typeof v.wsUrl === "string"
-    );
-}
-
-function isInteractiveLanguage(lang: string): lang is InteractiveLanguage {
-    return (
-        lang === "python" ||
-        lang === "java" ||
-        lang === "javascript" ||
-        lang === "c" ||
-        lang === "cpp" ||
-        lang === "bash"
     );
 }
 
@@ -274,7 +266,7 @@ function handleSessionEvent(args: {
             return;
         }
 
-        if (isFinalSessionState(ev.state)) {
+        if (isFinalPtySessionState(ev.state)) {
             setBusy(false);
             setInputEnabled(false);
             setRunState("idle");
@@ -344,6 +336,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const runBaselineEntriesRef = React.useRef<WorkspaceSyncEntry[]>([]);
     const snapshottedSessionIdsRef = React.useRef<Set<string>>(new Set());
     const snapshotInFlightSessionIdsRef = React.useRef<Set<string>>(new Set());
+    const startRequestInFlightRef = React.useRef(false);
     const getCurrentWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
         if (typeof args.getWorkspaceFiles === "function") {
             return sortEntries(args.getWorkspaceFiles());
@@ -458,7 +451,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     );
 
     const startRun = React.useCallback(async () => {
-        if (disabled || !allowRun || busy) return;
+        if (disabled || !allowRun || busy || startRequestInFlightRef.current) return;
         const currentEntries = getCurrentWorkspaceEntries();
         const runCode =
             readRunCodeFromWorkspaceEntries({
@@ -468,10 +461,10 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             args.getLatestCode?.() ??
             code;
 
-        if (!isInteractiveLanguage(lang)) {
+        if (!isPtyRunnerLanguage(lang)) {
             pushChunk(
                 "err",
-                "PTY runner does not support SQL. Use the SQL runner instead.\r\n",
+                unsupportedPtyRunnerLanguageMessage(lang),
             );
             setBusy(false);
             setRunState("idle");
@@ -495,6 +488,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         setBusy(true);
         setRunState("starting");
         setLastRunLanguage(lang);
+        startRequestInFlightRef.current = true;
 
         try {
             if (onRun) {
@@ -539,6 +533,8 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             setBusy(false);
             setRunState("idle");
             setInputEnabled(false);
+        } finally {
+            startRequestInFlightRef.current = false;
         }
     }, [
         disabled,
@@ -570,6 +566,20 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     }, [session, pushChunk]);
 
     React.useEffect(() => {
+        if (!isFinalPtySessionState(session.state)) return;
+
+        // The backend session state is authoritative. Event delivery and React
+        // event-buffer reconciliation are intentionally separate, so a final
+        // status can reach useRunSession even when the corresponding buffered
+        // exit/status event is not consumed by this hook. Never leave Run in
+        // the Stop state after the backend has already finalized the process.
+        setBusy(false);
+        setInputEnabled(false);
+        setRunState("idle");
+        void applySnapshotForSession(session.sessionId);
+    }, [session.state, session.sessionId, applySnapshotForSession]);
+
+    React.useEffect(() => {
         if (!session.events.length) return;
 
         const newEvents = session.events.filter(
@@ -589,7 +599,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 setRunState,
             });
 
-            if (ev.type === "status" && isFinalSessionState(ev.state)) {
+            if (ev.type === "status" && isFinalPtySessionState(ev.state)) {
                 void applySnapshotForSession(session.sessionId);
             }
 

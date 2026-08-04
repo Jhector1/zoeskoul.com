@@ -12,6 +12,7 @@ import {
 } from "@/components/code/runner/runtime";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
 import type { FileNode, WorkspaceStateV2 } from "@/components/ide/types";
+import type { EditorSplitPlacement } from "@/components/code/runner/types";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
 import { isBinaryFileNode } from "@/lib/ide/workspaceFileContent";
@@ -27,6 +28,13 @@ type Props = {
     tabFiles: FileNode[];
     activeFileId: string | null;
     activeFile: FileNode | null;
+    splitFile?: FileNode | null;
+    splitPlacement?: EditorSplitPlacement | null;
+    onOpenFileInSplit?: (
+        id: string,
+        placement: EditorSplitPlacement,
+    ) => void;
+    onCloseSplit?: () => void;
     runnerHeight: number | "auto";
     title: string;
     isSql: boolean;
@@ -42,7 +50,10 @@ type Props = {
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
         files: WorkspaceSyncEntry[],
-        meta: { dirtyUiPaths: Set<string> },
+        meta: {
+            dirtyUiPaths: Set<string>;
+            baselinePaths?: Set<string>;
+        },
     ) => void | Promise<void>;
     onTerminalEvidenceChange?: (evidence: import("@/lib/practice/types").TerminalEvidence) => void;
     onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;
@@ -83,6 +94,10 @@ export default function IdeEditorPane({
     tabFiles,
     activeFileId,
     activeFile,
+    splitFile = null,
+    splitPlacement = null,
+    onOpenFileInSplit,
+    onCloseSplit,
     runnerHeight,
     title,
     isSql,
@@ -219,6 +234,7 @@ export default function IdeEditorPane({
                         activeFileId={activeFileId}
                         setActiveFileId={setActiveFileId}
                         closeTab={closeTab}
+                        openFileInSplit={onOpenFileInSplit}
                     />
                 </div>
             ) : null}
@@ -268,6 +284,33 @@ export default function IdeEditorPane({
                                       }
                                     : null
                             }
+                            splitEditor={
+                                splitFile && splitPlacement
+                                    ? {
+                                          placement: splitPlacement,
+                                          fileId: splitFile.id,
+                                          fileName: splitFile.name,
+                                          editorLanguage: resolveWorkspaceEditorLanguage(
+                                              splitFile.name,
+                                              String(language),
+                                          ),
+                                          code: isBinaryFileNode(splitFile)
+                                              ? ""
+                                              : splitFile.content ?? "",
+                                          binary: isBinaryFileNode(splitFile)
+                                              ? splitFile.binary
+                                              : null,
+                                          onChangeCode: (nextCode: string) => {
+                                              if (readOnly || isBinaryFileNode(splitFile)) {
+                                                  return;
+                                              }
+                                              onChangeFileCode(splitFile.id, nextCode);
+                                          },
+                                          readOnly,
+                                      }
+                                    : null
+                            }
+                            onCloseSplitEditor={onCloseSplit}
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlDatasetId={sqlDatasetId}

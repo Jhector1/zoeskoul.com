@@ -19,6 +19,7 @@ export type SeoRouteKey =
     | "online-python-compiler"
     | "online-java-compiler"
     | "online-javascript-editor"
+    | "online-r-compiler"
     | "online-c-compiler"
     | "online-cpp-compiler"
     | "online-sql-editor"

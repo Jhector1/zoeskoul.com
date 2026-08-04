@@ -166,6 +166,14 @@
         "twitterTitle": "Éditeur JavaScript en ligne — {appName}",
         "twitterDescription": "Écrivez et exécutez du JavaScript en ligne avec l’éditeur de code {appName}."
       },
+      "online-r-compiler": {
+        "title": "Compilateur R en ligne — {appName}",
+        "description": "Écrivez, exécutez et testez du code R en ligne avec {appName}.",
+        "ogTitle": "Compilateur R en ligne — {appName}",
+        "ogDescription": "Écrivez, exécutez et testez du code R en ligne avec {appName}.",
+        "twitterTitle": "Compilateur R en ligne — {appName}",
+        "twitterDescription": "Écrivez, exécutez et testez du code R en ligne avec {appName}."
+      },
       "online-c-compiler": {
         "title": "Compilateur C en ligne — {appName}",
         "description": "Écrivez, compilez et exécutez du code C en ligne avec {appName}.",

@@ -17,6 +17,7 @@ import {
     resolveWorkspaceFileCapability,
     workspaceBase64DecodedByteLength,
 } from "@zoeskoul/code-contracts";
+import { PdfViewer } from "@zoeskoul/pdf-viewer";
 
 import type { BinaryFileContent } from "@/components/ide/types";
 
@@ -95,6 +96,7 @@ export default function BinaryFileViewer({
     className,
 }: BinaryFileViewerProps) {
     const t = useTranslations("ide.editor.binary");
+    const pdfT = useTranslations("ide.pdfViewer");
     const capability = resolveWorkspaceFileCapability(fileName);
     const viewer = capability?.storage === "binary" ? capability.viewer : "details";
     const { url, error } = useBinaryObjectUrl(binary);
@@ -141,16 +143,24 @@ export default function BinaryFileViewer({
 
         if (viewer === "pdf") {
             return (
-                <object
-                    aria-label={t("pdfTitle", { fileName })}
-                    data={url}
-                    type="application/pdf"
-                    className="h-full w-full bg-white"
-                >
-                    <div className="flex h-full items-center justify-center p-8 text-center text-sm text-neutral-600 dark:text-white/60">
-                        {t("pdfUnsupported")}
-                    </div>
-                </object>
+                <PdfViewer
+                    url={url}
+                    fileName={fileName}
+                    ariaLabel={t("pdfTitle", { fileName })}
+                    labels={{
+                        toolbar: pdfT("toolbar"),
+                        loading: pdfT("loading"),
+                        loadError: pdfT("loadError"),
+                        pageError: pdfT("pageError"),
+                        previousPage: pdfT("previousPage"),
+                        nextPage: pdfT("nextPage"),
+                        zoomOut: pdfT("zoomOut"),
+                        zoomIn: pdfT("zoomIn"),
+                        fitWidth: pdfT("fitWidth"),
+                        page: pdfT("page"),
+                    }}
+                    className="h-full w-full"
+                />
             );
         }
 

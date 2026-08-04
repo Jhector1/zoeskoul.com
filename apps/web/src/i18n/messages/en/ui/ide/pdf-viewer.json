@@ -1,0 +1,16 @@
+{
+  "ide": {
+    "pdfViewer": {
+      "toolbar": "PDF controls",
+      "loading": "Rendering PDF…",
+      "loadError": "This PDF could not be rendered safely. Download it to open it locally.",
+      "pageError": "This page could not be rendered.",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "zoomOut": "Zoom out",
+      "zoomIn": "Zoom in",
+      "fitWidth": "Fit",
+      "page": "Page"
+    }
+  }
+}

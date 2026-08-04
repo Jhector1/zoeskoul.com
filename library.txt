@@ -272,3 +272,16 @@ cd /Users/admin/Documents/NextJSProject/zoeskoul.com && \
 for course in python-v2 python-data-functions applied-python-projects; do
  RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python  "$course"
 done
+
+
+
+cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+pnpm dlx dotenv-cli \
+  -e /Users/admin/Documents/NextJSProject/zoeskoul.com/apps/web/.env.development.local \
+  -- pnpm --filter @zoeskoul/web dev
+
+
+  cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+  pnpm --filter @zoeskoul/student dev

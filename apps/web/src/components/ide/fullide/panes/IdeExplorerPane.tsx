@@ -16,6 +16,7 @@ import { cn } from "@/lib/cn";
 import { PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
+import type { EditorSplitPlacement } from "@/components/code/runner/types";
 import { resolveWorkspaceFileCapability } from "@zoeskoul/code-contracts";
 
 type Props = {
@@ -46,6 +47,7 @@ type Props = {
         setInlineEdit: (value: any) => void;
         setToast: React.Dispatch<React.SetStateAction<Toast>>;
         openFile: (id: string) => void;
+        openFileInSplit: (id: string, placement: EditorSplitPlacement) => void;
         toggleFolder: (id: string) => void;
         startNewFile: CreateNodeHandler;
         startNewFolder: CreateNodeHandler;
@@ -588,6 +590,7 @@ export default function IdeExplorerPane({
                     policy={policy}
                     setInlineEdit={actions.setInlineEdit}
                     openFile={actions.openFile}
+                    openFileInSplit={actions.openFileInSplit}
                     toggleFolder={actions.toggleFolder}
                     startNewFile={actions.startNewFile}
                     startNewFolder={actions.startNewFolder}

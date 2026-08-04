@@ -1,0 +1,16 @@
+{
+  "ide": {
+    "pdfViewer": {
+      "toolbar": "Controles de PDF",
+      "loading": "Renderizando PDF…",
+      "loadError": "Este PDF no se pudo mostrar de forma segura. Descárgalo para abrirlo localmente.",
+      "pageError": "No se pudo mostrar esta página.",
+      "previousPage": "Página anterior",
+      "nextPage": "Página siguiente",
+      "zoomOut": "Alejar",
+      "zoomIn": "Acercar",
+      "fitWidth": "Ajustar",
+      "page": "Página"
+    }
+  }
+}

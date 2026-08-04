@@ -411,6 +411,45 @@ describe("mergeTerminalSnapshotIntoWorkspace", () => {
         expect(unchanged).toBe(next);
     });
 
+    it("does not let an older terminal snapshot delete a newly generated PDF", () => {
+        const base = workspaceWithSyntheticSrc([
+            { id: "file:main", name: "main.R", content: "print(mean(c(2, 4, 6)))" },
+        ]);
+        const mainEntry = {
+            kind: "file" as const,
+            path: "src/main.R",
+            content: "print(mean(c(2, 4, 6)))",
+        };
+        const pdfEntry = {
+            kind: "file" as const,
+            path: "src/Rplots.pdf",
+            encoding: "base64" as const,
+            data: "JVBERg==",
+            mimeType: "application/pdf",
+            sizeBytes: 4,
+        };
+        const withPdf = mergeTerminalSnapshotIntoWorkspace({
+            prior: base,
+            snapshotFiles: [mainEntry, pdfEntry],
+        });
+
+        const preserved = mergeTerminalSnapshotIntoWorkspace({
+            prior: withPdf,
+            snapshotFiles: [mainEntry],
+            terminalBaselinePaths: ["src", "src/main.R"],
+        });
+
+        expect(allPaths(preserved)).toContain("src/Rplots.pdf");
+
+        const deletedByAwareTerminal = mergeTerminalSnapshotIntoWorkspace({
+            prior: withPdf,
+            snapshotFiles: [mainEntry],
+            terminalBaselinePaths: ["src", "src/main.R", "src/Rplots.pdf"],
+        });
+
+        expect(allPaths(deletedByAwareTerminal)).not.toContain("src/Rplots.pdf");
+    });
+
     it("rejects malformed binary snapshots instead of silently converting them", () => {
         const prior = workspaceWithSyntheticSrc([
             { id: "file:main", name: "main.py", content: "print('ok')" },

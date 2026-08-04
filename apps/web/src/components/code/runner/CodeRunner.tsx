@@ -49,6 +49,15 @@ import type {
     ToolSurface,
 } from "@zoeskoul/curriculum-contracts";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
+import {
+    EDITOR_SPLIT_DEFAULT_RATIO,
+    EDITOR_SPLIT_KEYBOARD_STEP,
+    EDITOR_SPLIT_MAX_RATIO,
+    EDITOR_SPLIT_MIN_RATIO,
+    clampEditorSplitRatio,
+    resolveEditorSplitOrder,
+    resolveEditorSplitRatioFromClientX,
+} from "@/components/ide/fullide/editorSplit";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
     buildWorkspaceTerminalHostKey,
@@ -225,7 +234,13 @@ const WorkspaceTerminalRuntimeBridge = React.memo(
                     ? () => getWorkspaceFilesRef.current?.() ?? []
                     : undefined,
                 onTerminalSnapshotFiles: controllerConfig.onTerminalSnapshotFiles
-                    ? (files: WorkspaceSyncEntry[], meta: { dirtyUiPaths: Set<string> }) =>
+                    ? (
+                          files: WorkspaceSyncEntry[],
+                          meta: {
+                              dirtyUiPaths: Set<string>;
+                              baselinePaths?: Set<string>;
+                          },
+                      ) =>
                           onTerminalSnapshotFilesRef.current?.(files, meta)
                     : undefined,
             }),
@@ -625,6 +640,7 @@ export async function restartWorkspaceTerminalSession(args: {
 
 function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const t = useTranslations("ide.codeRunner");
+    const layoutT = useTranslations("ide.editorLayout");
     const {
         frame = "card" as CodeRunnerFrame,
         className,
@@ -671,6 +687,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspace,
         workspaceReplacementRevision,
         activeBinaryFile,
+        splitEditor,
+        onCloseSplitEditor,
         onBeforeRun,
         isAuthenticated,
         editorLanguage,
@@ -703,6 +721,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const { resolvedTheme } = useTheme();
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
     const runnerRootRef = useRef<HTMLDivElement | null>(null);
+    const editorSplitHostRef = useRef<HTMLDivElement | null>(null);
+    const editorSplitDragCleanupRef = useRef<(() => void) | null>(null);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const initialMobilePaneLanguage: WorkspaceLanguage =
         fixedLanguage ??
@@ -716,6 +736,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             sqlPaneOptions,
             runnerPaneOptions,
         }),
+    );
+    const [outputPanelCollapsed, setOutputPanelCollapsed] = useState(false);
+    const [editorSplitRatio, setEditorSplitRatio] = useState(
+        EDITOR_SPLIT_DEFAULT_RATIO,
     );
     const appliedSqlMobilePaneDefaultKeyRef = useRef<string | null>(null);
     const appliedRunnerPaneDefaultKeyRef = useRef<string | null>(null);
@@ -735,6 +759,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             setEditorTheme(resolvedTheme === "dark" ? "vs-dark" : "vs");
         }
     }, [resolvedTheme, showEditorThemeToggle]);
+
+    useEffect(() => {
+        setEditorSplitRatio(EDITOR_SPLIT_DEFAULT_RATIO);
+    }, [splitEditor?.fileId, splitEditor?.placement]);
+
+    useEffect(() => {
+        return () => {
+            editorSplitDragCleanupRef.current?.();
+        };
+    }, []);
 
     useEffect(() => {
         const node = runnerRootRef.current;
@@ -1361,6 +1395,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const setDock = (d: TerminalDock) => {
         if (fixedTerminalDock) return;
+        setOutputPanelCollapsed(false);
         if (isNarrowScreen) {
             setUDock("bottom");
             return;
@@ -1713,6 +1748,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
     } as any);
+
+    useEffect(() => {
+        if (term.runState !== "idle") {
+            setOutputPanelCollapsed(false);
+        }
+    }, [term.runState]);
 
     const workspaceTerm = useMemo(
         () =>
@@ -2324,6 +2365,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             : rootStyle;
 
     const outputLabel = isWeb ? t("previewTab") : lang === "sql" ? t("resultsTab") : t("outputTab");
+    const canCollapseBottomPanel =
+        !isNarrowScreen &&
+        showEditor &&
+        showTerminal &&
+        !terminalOnlyMode &&
+        effectiveDock === "bottom";
     const mobileTabAttention = !isWeb && (term.runState !== "idle" || !!term.lastResult);
     const measuredSurfaceHeight = split.mainH || numericHeight;
     const keyboardChromeHeight =
@@ -2365,6 +2412,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const selectWorkspaceTerminalTab = useCallback(
         (terminalId: string) => {
             setTerminalTabMessage(null);
+            setOutputPanelCollapsed(false);
             setOutputTab("terminal");
 
             if (terminalId !== activeTerminalId) {
@@ -2566,6 +2614,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     const openWorkspaceTerminalPane = useCallback(async () => {
+        setOutputPanelCollapsed(false);
         setOutputTab("terminal");
 
         if (isNarrowScreen && showEditor && showTerminal) {
@@ -2731,7 +2780,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             {!terminalOnlyMode ? (
                                 <button
                                     type="button"
-                                    onClick={() => setOutputTab("output")}
+                                    onClick={() => {
+                                        setOutputPanelCollapsed(false);
+                                        setOutputTab("output");
+                                    }}
                                     className={cx(
                                         MOBILE_TAB_BASE,
                                         outputTab === "output"
@@ -2859,6 +2911,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     ? `${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions}`
                                     : "—/—"}
                             </span>
+
+                            {canCollapseBottomPanel ? (
+                                <button
+                                    type="button"
+                                    onClick={() => setOutputPanelCollapsed(true)}
+                                    aria-label={layoutT("collapseBottomPanel")}
+                                    title={layoutT("collapseBottomPanel")}
+                                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-neutral-300 text-sm font-bold text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-white/15 dark:text-white/80 dark:hover:bg-white/[0.06]"
+                                >
+                                    ↓
+                                </button>
+                            ) : null}
                         </div>
 
                         {terminalTabMessage ? (
@@ -2866,6 +2930,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 {terminalTabMessage}
                             </div>
                         ) : null}
+                    </div>
+                ) : canCollapseBottomPanel ? (
+                    <div className={cx("flex h-11 items-center justify-between px-3", PANEL_TABS)}>
+                        <span className="text-[11px] font-medium text-neutral-600 dark:text-white/65">
+                            {outputLabel}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={() => setOutputPanelCollapsed(true)}
+                            aria-label={layoutT("collapseBottomPanel")}
+                            title={layoutT("collapseBottomPanel")}
+                            className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-300 text-sm font-bold text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-white/15 dark:text-white/80 dark:hover:bg-white/[0.06]"
+                        >
+                            ↓
+                        </button>
                     </div>
                 ) : null}
 
@@ -2876,61 +2955,294 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         );
     };
 
-    const renderEditorPane = (editorHeight: number) => (
-        <div
-            data-testid={editorTestId}
-            className={PANEL_EDITOR}
-            style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
-        >
-            {activeBinaryFile ? (
-                <BinaryFileViewer
-                    fileName={activeBinaryFile.name}
-                    binary={activeBinaryFile.binary}
-                />
-            ) : (
-                <>
-                    {process.env.NODE_ENV !== "production" ? (
-                        <textarea
-                            data-testid="code-editor-e2e-input"
-                            aria-label="E2E code editor input"
-                            value={code}
-                            readOnly={readOnly}
-                            onChange={(e) => {
-                                if (!readOnly) setCode(e.target.value);
-                            }}
-                            style={{
-                                position: "absolute",
-                                width: 1,
-                                height: 1,
-                                opacity: 0,
-                                pointerEvents: "auto",
-                            }}
-                        />
+    const updateEditorSplitRatioFromClientX = useCallback(
+        (clientX: number) => {
+            const host = editorSplitHostRef.current;
+            if (!host) return;
+
+            const rect = host.getBoundingClientRect();
+            setEditorSplitRatio(
+                resolveEditorSplitRatioFromClientX({
+                    clientX,
+                    left: rect.left,
+                    width: rect.width,
+                }),
+            );
+        },
+        [],
+    );
+
+    const handleEditorSplitPointerDown = useCallback(
+        (event: React.PointerEvent<HTMLDivElement>) => {
+            if (event.button !== 0) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            editorSplitDragCleanupRef.current?.();
+
+            const divider = event.currentTarget;
+            const pointerId = event.pointerId;
+            const previousUserSelect = document.body.style.userSelect;
+            const previousCursor = document.body.style.cursor;
+
+            document.body.style.userSelect = "none";
+            document.body.style.cursor = "col-resize";
+
+            try {
+                divider.setPointerCapture(pointerId);
+            } catch {}
+
+            const onMove = (moveEvent: PointerEvent) => {
+                updateEditorSplitRatioFromClientX(moveEvent.clientX);
+            };
+
+            const cleanup = () => {
+                window.removeEventListener("pointermove", onMove, true);
+                window.removeEventListener("pointerup", cleanup, true);
+                window.removeEventListener("pointercancel", cleanup, true);
+                divider.removeEventListener("lostpointercapture", cleanup);
+                document.body.style.userSelect = previousUserSelect;
+                document.body.style.cursor = previousCursor;
+
+                try {
+                    if (divider.hasPointerCapture(pointerId)) {
+                        divider.releasePointerCapture(pointerId);
+                    }
+                } catch {}
+
+                if (editorSplitDragCleanupRef.current === cleanup) {
+                    editorSplitDragCleanupRef.current = null;
+                }
+            };
+
+            window.addEventListener("pointermove", onMove, true);
+            window.addEventListener("pointerup", cleanup, true);
+            window.addEventListener("pointercancel", cleanup, true);
+            divider.addEventListener("lostpointercapture", cleanup);
+            editorSplitDragCleanupRef.current = cleanup;
+        },
+        [updateEditorSplitRatioFromClientX],
+    );
+
+    const handleEditorSplitKeyDown = useCallback(
+        (event: React.KeyboardEvent<HTMLDivElement>) => {
+            let nextRatio: number | null = null;
+
+            if (event.key === "ArrowLeft") {
+                nextRatio = editorSplitRatio - EDITOR_SPLIT_KEYBOARD_STEP;
+            } else if (event.key === "ArrowRight") {
+                nextRatio = editorSplitRatio + EDITOR_SPLIT_KEYBOARD_STEP;
+            } else if (event.key === "Home") {
+                nextRatio = EDITOR_SPLIT_MIN_RATIO;
+            } else if (event.key === "End") {
+                nextRatio = EDITOR_SPLIT_MAX_RATIO;
+            }
+
+            if (nextRatio == null) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            setEditorSplitRatio(clampEditorSplitRatio(nextRatio));
+        },
+        [editorSplitRatio],
+    );
+
+    const renderEditorSurface = (args: {
+        fileName: string;
+        editorLanguage: string;
+        code: string;
+        binary?: import("@/components/ide/types").BinaryFileContent | null;
+        onChangeCode: (code: string) => void;
+        modelKey: string;
+        editorHeight: number;
+        primary: boolean;
+        readOnly: boolean;
+        showGroupHeader: boolean;
+        closeable: boolean;
+    }) => (
+        <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
+            {args.showGroupHeader ? (
+                <div className="flex h-8 shrink-0 items-center gap-2 border-b border-neutral-200 bg-neutral-50/80 px-2.5 text-[11px] font-medium text-neutral-600 dark:border-white/10 dark:bg-black/20 dark:text-white/65">
+                    <span className="min-w-0 flex-1 truncate" title={args.fileName}>
+                        {args.fileName}
+                    </span>
+                    {args.closeable ? (
+                        <button
+                            type="button"
+                            onClick={onCloseSplitEditor}
+                            aria-label={layoutT("closeSplit")}
+                            title={layoutT("closeSplit")}
+                            className="grid h-5 w-5 shrink-0 place-items-center rounded text-sm text-neutral-400 transition-colors hover:bg-black/5 hover:text-neutral-700 dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/75"
+                        >
+                            ×
+                        </button>
                     ) : null}
-                    <EditorPane
-                        frame={frame}
-                        lang={effectiveEditorLanguage}
-                        mobileEditMode="auto"
-                        code={code}
-                        onChange={setCode}
-                        theme={editorTheme}
-                        height={editorHeight}
-                        disabled={disabled || term.busy}
-                        readOnly={readOnly}
-                        modelKey={effectiveEditorModelKey}
-                        exerciseStateKey={effectiveExerciseStateKey}
-                        workspace={workspace}
-                        workspaceReplacementRevision={
-                            workspaceReplacementRevision
-                        }
-                        onMount={(ed) => {
-                            monacoEditorRef.current = ed;
-                            requestLayout();
-                        }}
-                    />
-                </>
-            )}
+                </div>
+            ) : null}
+
+            <div className="relative min-h-0 min-w-0 flex-1 overflow-hidden">
+                {args.binary ? (
+                    <BinaryFileViewer fileName={args.fileName} binary={args.binary} />
+                ) : (
+                    <>
+                        {args.primary && process.env.NODE_ENV !== "production" ? (
+                            <textarea
+                                data-testid="code-editor-e2e-input"
+                                aria-label="E2E code editor input"
+                                value={args.code}
+                                readOnly={args.readOnly}
+                                onChange={(e) => {
+                                    if (!args.readOnly) args.onChangeCode(e.target.value);
+                                }}
+                                style={{
+                                    position: "absolute",
+                                    width: 1,
+                                    height: 1,
+                                    opacity: 0,
+                                    pointerEvents: "auto",
+                                }}
+                            />
+                        ) : null}
+                        <EditorPane
+                            frame={frame}
+                            lang={args.editorLanguage}
+                            mobileEditMode="auto"
+                            code={args.code}
+                            onChange={args.onChangeCode}
+                            theme={editorTheme}
+                            height={Math.max(
+                                80,
+                                args.editorHeight - (args.showGroupHeader ? 32 : 0),
+                            )}
+                            disabled={disabled || term.busy}
+                            readOnly={args.readOnly}
+                            modelKey={args.modelKey}
+                            exerciseStateKey={effectiveExerciseStateKey}
+                            workspace={workspace}
+                            workspaceReplacementRevision={workspaceReplacementRevision}
+                            onMount={
+                                args.primary
+                                    ? (ed) => {
+                                          monacoEditorRef.current = ed;
+                                          requestLayout();
+                                      }
+                                    : undefined
+                            }
+                        />
+                    </>
+                )}
+            </div>
         </div>
+    );
+
+    const renderEditorPane = (editorHeight: number) => {
+        const primaryEditor = renderEditorSurface({
+            fileName: title,
+            editorLanguage: effectiveEditorLanguage,
+            code,
+            binary: activeBinaryFile?.binary ?? null,
+            onChangeCode: setCode,
+            modelKey: effectiveEditorModelKey,
+            editorHeight,
+            primary: true,
+            readOnly,
+            showGroupHeader: Boolean(splitEditor && !isNarrowScreen),
+            closeable: false,
+        });
+
+        if (!splitEditor || isNarrowScreen) {
+            return (
+                <div
+                    data-testid={editorTestId}
+                    className={PANEL_EDITOR}
+                    style={{
+                        touchAction: isNarrowScreen ? "pan-y" : "auto",
+                        height: "100%",
+                    }}
+                >
+                    {primaryEditor}
+                </div>
+            );
+        }
+
+        const secondaryEditor = renderEditorSurface({
+            fileName: splitEditor.fileName,
+            editorLanguage: splitEditor.editorLanguage,
+            code: splitEditor.code,
+            binary: splitEditor.binary ?? null,
+            onChangeCode: splitEditor.onChangeCode,
+            modelKey: `${effectiveExerciseStateKey}:${splitEditor.fileId}`,
+            editorHeight,
+            primary: false,
+            readOnly: readOnly || splitEditor.readOnly === true,
+            showGroupHeader: true,
+            closeable: true,
+        });
+        const [leftEditor, rightEditor] = resolveEditorSplitOrder({
+            primary: primaryEditor,
+            secondary: secondaryEditor,
+            placement: splitEditor.placement,
+        });
+
+        return (
+            <div
+                ref={editorSplitHostRef}
+                data-testid={editorTestId}
+                className={`${PANEL_EDITOR} grid h-full min-h-0 min-w-0`}
+                style={{
+                    touchAction: "auto",
+                    height: "100%",
+                    gridTemplateColumns: `${editorSplitRatio}fr 6px ${
+                        1 - editorSplitRatio
+                    }fr`,
+                }}
+            >
+                <div className="min-h-0 min-w-0 overflow-hidden">
+                    {leftEditor}
+                </div>
+                <div
+                    role="separator"
+                    tabIndex={0}
+                    aria-orientation="vertical"
+                    aria-label={layoutT("splitDivider")}
+                    aria-valuemin={Math.round(EDITOR_SPLIT_MIN_RATIO * 100)}
+                    aria-valuemax={Math.round(EDITOR_SPLIT_MAX_RATIO * 100)}
+                    aria-valuenow={Math.round(editorSplitRatio * 100)}
+                    onPointerDown={handleEditorSplitPointerDown}
+                    onKeyDown={handleEditorSplitKeyDown}
+                    className={[
+                        "group relative z-20 h-full w-[6px] cursor-col-resize touch-none outline-none",
+                        "before:absolute before:inset-y-0 before:-inset-x-1 before:content-['']",
+                        "bg-neutral-200 transition-colors hover:bg-sky-400 focus-visible:bg-sky-500",
+                        "dark:bg-white/10 dark:hover:bg-sky-500 dark:focus-visible:bg-sky-400",
+                    ].join(" ")}
+                    title="Drag or use arrow keys to resize editor groups"
+                >
+                    <span
+                        aria-hidden="true"
+                        className="absolute left-1/2 top-1/2 h-8 w-px -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-400/70 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 dark:bg-white/50"
+                    />
+                </div>
+                <div className="min-h-0 min-w-0 overflow-hidden">
+                    {rightEditor}
+                </div>
+            </div>
+        );
+    };
+
+    const renderCollapsedOutputPanel = () => (
+        <button
+            type="button"
+            onClick={() => setOutputPanelCollapsed(false)}
+            aria-label={layoutT("expandBottomPanel")}
+            title={layoutT("expandBottomPanel")}
+            className="flex h-9 w-full shrink-0 items-center justify-between border-t border-neutral-200 bg-white/88 px-3 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-black/25 dark:text-white/65 dark:hover:bg-white/[0.04]"
+        >
+            <span>{outputTab === "terminal" ? t("terminalTab") : outputLabel}</span>
+            <span aria-hidden="true" className="text-sm font-bold">
+                ↑
+            </span>
+        </button>
     );
 
     const renderCollapsedIdleOutputFooter = () => (
@@ -2941,6 +3253,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     return (
         <div ref={runnerRootRef} className={outerCls} data-testid={testId} style={rootStyle}>
+            {split.isResizing ? (
+                <div
+                    aria-hidden="true"
+                    data-testid="runner-split-drag-shield"
+                    className="pointer-events-auto fixed inset-0 z-[2147483647] touch-none"
+                    style={{
+                        cursor: effectiveDock === "bottom" ? "row-resize" : "col-resize",
+                    }}
+                />
+            ) : null}
             {workspaceTerminalEnabled &&
             resolvedTerminalHostKey &&
             hydratedTerminalHostKey === resolvedTerminalHostKey
@@ -3158,6 +3480,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                             : renderOutputPane(mobileBodyHeight)}
                                 </div>
                             </div>
+                        ) : outputPanelCollapsed && effectiveDock === "bottom" ? (
+                            <div className="flex h-full min-h-0 flex-col">
+                                <div className={cx("min-h-0 flex-1", PANEL_EDITOR)}>
+                                    {renderEditorPane(Math.max(80, surfaceBodyHeight - 36))}
+                                </div>
+                                {renderCollapsedOutputPanel()}
+                            </div>
                         ) : shouldCollapseIdleOutput ? (
                             <div className="flex h-full min-h-0 flex-col">
                                 <div className={cx("min-h-0 flex-1", PANEL_EDITOR)}>
@@ -3186,7 +3515,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                         term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
-                                        "h-[6px]",
+                                        "relative z-20 h-[6px] shrink-0 touch-none",
                                         SPLIT_BAR_IDLE,
                                         term.runState !== "idle" && !isWeb
                                             ? "cursor-not-allowed opacity-60"
@@ -3222,7 +3551,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                         term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
-                                        "w-[6px]",
+                                        "relative z-20 w-[6px] shrink-0 touch-none",
                                         SPLIT_BAR_IDLE,
                                         term.runState !== "idle" && !isWeb
                                             ? "cursor-not-allowed opacity-60"

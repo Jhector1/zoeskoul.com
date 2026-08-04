@@ -1,0 +1,12 @@
+{
+  "ide": {
+    "editorLayout": {
+      "openToLeft": "Open to the Left",
+      "openToRight": "Open to the Right",
+      "closeSplit": "Close split editor",
+      "splitDivider": "Split editor divider",
+      "collapseBottomPanel": "Collapse bottom panel",
+      "expandBottomPanel": "Expand bottom panel"
+    }
+  }
+}

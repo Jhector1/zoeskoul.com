@@ -1640,11 +1640,12 @@ export function useWorkspaceTerminalController(
         if (snapshotInFlightRef.current) return await snapshotInFlightRef.current;
 
         const run = (async (): Promise<boolean> => {
+            const terminalBaselineEntries = lastPushedEntriesRef.current;
             const snapshot = await snapshotFiles();
             const currentUiEntries = getWorkspaceEntries();
             const dirtyUiPaths = diffDirtyUiPaths(
                 currentUiEntries,
-                lastPushedEntriesRef.current,
+                terminalBaselineEntries,
             );
 
             const nextBaseline = mergeWorkspaceSnapshotBaseline(
@@ -1658,6 +1659,9 @@ export function useWorkspaceTerminalController(
             try {
                 await args.onTerminalSnapshotFiles?.(snapshot, {
                     dirtyUiPaths,
+                    baselinePaths: new Set(
+                        terminalBaselineEntries.map((entry) => entry.path),
+                    ),
                 });
             } finally {
                 lastPushedEntriesRef.current = nextBaseline;

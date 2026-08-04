@@ -1,0 +1,12 @@
+{
+  "ide": {
+    "editorLayout": {
+      "openToLeft": "Louvri sou bò gòch",
+      "openToRight": "Louvri sou bò dwat",
+      "closeSplit": "Fèmen editè ki separe a",
+      "splitDivider": "Separatè editè a",
+      "collapseBottomPanel": "Rantre panèl anba a",
+      "expandBottomPanel": "Louvri panèl anba a"
+    }
+  }
+}

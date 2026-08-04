@@ -109,7 +109,10 @@ export type SharedRunnerArgs = {
     getWorkspaceFiles?: () => WorkspaceSyncEntry[];
     onTerminalSnapshotFiles?: (
         files: WorkspaceSyncEntry[],
-        meta: { dirtyUiPaths: Set<string> },
+        meta: {
+            dirtyUiPaths: Set<string>;
+            baselinePaths?: Set<string>;
+        },
     ) => void | Promise<void>;
 };
 
@@ -145,7 +148,10 @@ export type WorkspaceTerminalConfig = {
     getWorkspaceFiles?: () => WorkspaceSyncEntry[];
     onTerminalSnapshotFiles?: (
         files: WorkspaceSyncEntry[],
-        meta: { dirtyUiPaths: Set<string> },
+        meta: {
+            dirtyUiPaths: Set<string>;
+            baselinePaths?: Set<string>;
+        },
     ) => void | Promise<void>;
 };
 

@@ -74,6 +74,7 @@
     "@zoeskoul/learning-runtime": "workspace:*",
     "@zoeskoul/lesson-renderer": "workspace:*",
     "@zoeskoul/permissions": "workspace:*",
+    "@zoeskoul/pdf-viewer": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",

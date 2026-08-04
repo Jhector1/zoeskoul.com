@@ -565,7 +565,7 @@ export async function startDockerSession(
   ownerKey: string,
 ): Promise<StartSessionResult> {
   if (req.kind !== "shell" || !req.clientOwnerKey) {
-    consumeStartToken(ownerKey);
+    consumeStartToken(ownerKey, req.kind === "shell" ? "shell" : "code");
     return await startDockerSessionUncoordinated(req, ownerKey);
   }
 
@@ -600,7 +600,7 @@ export async function startDockerSession(
       };
     }
 
-    consumeStartToken(ownerKey);
+    consumeStartToken(ownerKey, "shell");
     const started = await startDockerSessionUncoordinated(req, ownerKey);
     if (started.ok) {
       return { ...started, reused: false };

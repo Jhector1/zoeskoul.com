@@ -1,0 +1,16 @@
+{
+  "ide": {
+    "pdfViewer": {
+      "toolbar": "Kontwòl PDF",
+      "loading": "N ap rann PDF la…",
+      "loadError": "Nou pa t kapab rann PDF sa a an sekirite. Telechaje li pou ouvri li sou aparèy ou.",
+      "pageError": "Nou pa t kapab rann paj sa a.",
+      "previousPage": "Paj anvan",
+      "nextPage": "Paj apre",
+      "zoomOut": "Retire zoum",
+      "zoomIn": "Mete zoum",
+      "fitWidth": "Ajiste",
+      "page": "Paj"
+    }
+  }
+}

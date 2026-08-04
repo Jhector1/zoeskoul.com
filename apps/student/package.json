@@ -20,6 +20,7 @@
     "@zoeskoul/learning-runtime": "workspace:*",
     "@zoeskoul/lesson-renderer": "workspace:*",
     "@zoeskoul/lesson-shell": "workspace:*",
+    "@zoeskoul/pdf-viewer": "workspace:*",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "lucide-react": "^0.563.0",

@@ -30,6 +30,7 @@ import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminal
 import {FullIDEServices, resolveFullIDEServices} from "./services";
 import { resolveLearnerWorkspacePresentation } from "./workspacePresentation";
 import { resolveExternalWorkspaceApplyKey } from "./externalWorkspaceControl";
+import type { EditorSplitPlacement } from "@/components/code/runner/types";
 import {
     resolveFullIdeWorkspaceChangeOrigin,
     type PendingUserWorkspaceMutation,
@@ -224,9 +225,25 @@ function FullIDEInner({
     const activeFile = learnerWorkspace.activeFile ?? null;
     const entryFile = learnerWorkspace.entryFile ?? undefined;
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
+    const [editorSplit, setEditorSplit] = useState<{
+        fileId: string;
+        placement: EditorSplitPlacement;
+    } | null>(null);
+    const splitFile = editorSplit
+        ? visibleWorkspaceNodes.find(
+              (node): node is import("@/components/ide/types").FileNode =>
+                  node.kind === "file" && node.id === editorSplit.fileId,
+          ) ?? null
+        : null;
     const [workspaceFileSelectionVersion, setWorkspaceFileSelectionVersion] =
         useState(0);
     const currentWorkspaceRef = useRef(currentWorkspace);
+
+    useEffect(() => {
+        if (editorSplit && !splitFile) {
+            setEditorSplit(null);
+        }
+    }, [editorSplit, splitFile]);
 
     useEffect(() => {
         if (activeFileId && activeFileId !== workspaceActiveFileId) {
@@ -444,7 +461,10 @@ function FullIDEInner({
     const applyTerminalSnapshotFiles = useCallback(
         async (
             files: WorkspaceSyncEntry[],
-            meta: { dirtyUiPaths: Set<string> },
+            meta: {
+                dirtyUiPaths: Set<string>;
+                baselinePaths?: Set<string>;
+            },
         ) => {
             if (readOnly) return;
             const prior = currentWorkspaceRef.current;
@@ -454,6 +474,7 @@ function FullIDEInner({
                 prior,
                 snapshotFiles: files,
                 dirtyUiPaths: meta.dirtyUiPaths,
+                terminalBaselinePaths: meta.baselinePaths,
             });
 
             if (nextWorkspace === prior) {
@@ -480,6 +501,26 @@ function FullIDEInner({
         },
         [actions],
     );
+    const handleOpenWorkspaceFileInSplit = useCallback(
+        (id: string, placement: EditorSplitPlacement) => {
+            const file = visibleWorkspaceNodes.find(
+                (node) => node.kind === "file" && node.id === id,
+            );
+
+            if (!file) return;
+
+            if (!viewport.isDesktop || !activeFile) {
+                handleOpenWorkspaceFile(id);
+                return;
+            }
+
+            setEditorSplit({ fileId: id, placement });
+        },
+        [activeFile, handleOpenWorkspaceFile, viewport.isDesktop, visibleWorkspaceNodes],
+    );
+    const handleCloseEditorSplit = useCallback(() => {
+        setEditorSplit(null);
+    }, []);
     const handleSelectWorkspaceTab = useCallback(
         (id: string | null) => {
             if (!id) return;
@@ -540,6 +581,7 @@ function FullIDEInner({
                 setInlineEdit: readOnly ? noOp : actions.setInlineEdit,
                 setToast: actions.setToast,
                 openFile: handleOpenWorkspaceFile,
+                openFileInSplit: handleOpenWorkspaceFileInSplit,
                 toggleFolder: actions.toggleFolder,
                 startNewFile: readOnly ? noOp : actions.startNewFile,
                 startNewFolder: readOnly ? noOp : actions.startNewFolder,
@@ -580,6 +622,10 @@ function FullIDEInner({
             tabFiles={visibleTabFiles}
             activeFileId={activeFileId}
             activeFile={activeFile}
+            splitFile={splitFile}
+            splitPlacement={editorSplit?.placement ?? null}
+            onOpenFileInSplit={handleOpenWorkspaceFileInSplit}
+            onCloseSplit={handleCloseEditorSplit}
             runnerHeight={runnerHeight}
             title={runnerTitle}
             isSql={isSql}

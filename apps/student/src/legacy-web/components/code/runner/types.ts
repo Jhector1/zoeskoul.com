@@ -11,6 +11,18 @@ import type { SqlPaneOptions } from "@/components/code/runner/components/sql/res
 import type { ToolRunnerPanePolicy } from "@zoeskoul/curriculum-contracts";
 
 export type TerminalDock = "bottom" | "right";
+export type EditorSplitPlacement = "left" | "right";
+
+export type SplitEditorPane = {
+    placement: EditorSplitPlacement;
+    fileId: string;
+    fileName: string;
+    editorLanguage: string;
+    code: string;
+    binary?: BinaryFileContent | null;
+    onChangeCode: (code: string) => void;
+    readOnly?: boolean;
+};
 
 export type TermLine =
     | { type: "sys"; text: string; runId?: number }
@@ -107,6 +119,9 @@ export type CommonProps = {
         name: string;
         binary: BinaryFileContent;
     } | null;
+    /** Optional second editor group opened from a file or tab context menu. */
+    splitEditor?: SplitEditorPane | null;
+    onCloseSplitEditor?: () => void;
     /**
      * Increments whenever the learner explicitly selects a workspace file.
      * The file id alone cannot represent a second click on the active file.

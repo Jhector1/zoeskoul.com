@@ -1,0 +1,12 @@
+{
+  "ide": {
+    "editorLayout": {
+      "openToLeft": "Ouvrir à gauche",
+      "openToRight": "Ouvrir à droite",
+      "closeSplit": "Fermer l’éditeur fractionné",
+      "splitDivider": "Séparateur de l’éditeur",
+      "collapseBottomPanel": "Réduire le panneau inférieur",
+      "expandBottomPanel": "Développer le panneau inférieur"
+    }
+  }
+}

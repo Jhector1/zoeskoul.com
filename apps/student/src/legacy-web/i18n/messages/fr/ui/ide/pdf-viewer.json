@@ -1,0 +1,16 @@
+{
+  "ide": {
+    "pdfViewer": {
+      "toolbar": "Commandes PDF",
+      "loading": "Affichage du PDF…",
+      "loadError": "Ce PDF n’a pas pu être affiché en toute sécurité. Téléchargez-le pour l’ouvrir localement.",
+      "pageError": "Cette page n’a pas pu être affichée.",
+      "previousPage": "Page précédente",
+      "nextPage": "Page suivante",
+      "zoomOut": "Réduire le zoom",
+      "zoomIn": "Agrandir le zoom",
+      "fitWidth": "Ajuster",
+      "page": "Page"
+    }
+  }
+}

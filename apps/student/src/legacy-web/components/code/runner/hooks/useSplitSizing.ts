@@ -18,6 +18,25 @@ function sameSize(a: Size, b: Size) {
     return a.w === b.w && a.h === b.h;
 }
 
+function createImmediateSplitDragShield(cursor: "row-resize" | "col-resize") {
+    if (typeof document === "undefined") return null;
+
+    const shield = document.createElement("div");
+    shield.setAttribute("aria-hidden", "true");
+    shield.dataset.runnerSplitDragShield = "imperative";
+    Object.assign(shield.style, {
+        position: "fixed",
+        inset: "0",
+        zIndex: "2147483647",
+        cursor,
+        touchAction: "none",
+        userSelect: "none",
+        background: "transparent",
+    });
+    document.body.appendChild(shield);
+    return shield;
+}
+
 export function useSplitSizing(args: {
     height: number;
 
@@ -163,6 +182,14 @@ export function useSplitSizing(args: {
 
     const userResizedRef = React.useRef(false);
     const restoreFocusRef = React.useRef<HTMLElement | null>(null);
+    const [isResizing, setIsResizing] = React.useState(false);
+    const dragCleanupRef = React.useRef<(() => void) | null>(null);
+
+    React.useEffect(() => {
+        return () => {
+            dragCleanupRef.current?.();
+        };
+    }, []);
 
     const scheduleLayout = React.useCallback(() => {
         if (layoutRafRef.current != null) return;
@@ -278,6 +305,12 @@ export function useSplitSizing(args: {
             if (disabled) return;
             e.preventDefault();
 
+            const divider = e.currentTarget;
+            const pointerId = e.pointerId;
+            try {
+                divider.setPointerCapture(pointerId);
+            } catch {}
+
             userResizedRef.current = true;
 
             const active = document.activeElement as HTMLElement | null;
@@ -300,12 +333,31 @@ export function useSplitSizing(args: {
                 startSize: dock === "bottom" ? effectiveTermH : effectiveTermW,
                 dock,
             };
+            setIsResizing(true);
+
+            // Embedded PDF viewers use a browser/native surface that can swallow
+            // pointer movement as soon as the cursor crosses into the preview.
+            // Install the drag shield synchronously, before React has time to
+            // render the declarative shield, so every file type uses the same
+            // continuous split-resize interaction.
+            const dragShield = createImmediateSplitDragShield(
+                dock === "bottom" ? "row-resize" : "col-resize",
+            );
 
             const prevSelect = document.body.style.userSelect;
             const prevCursor = document.body.style.cursor;
+            const pdfEmbeds = [...mainRef.current?.querySelectorAll<HTMLElement>(
+                'object[type="application/pdf"], embed[type="application/pdf"]',
+            ) ?? []].map((element) => ({
+                element,
+                pointerEvents: element.style.pointerEvents,
+            }));
 
             document.body.style.userSelect = "none";
             document.body.style.cursor = dock === "bottom" ? "row-resize" : "col-resize";
+            for (const { element } of pdfEmbeds) {
+                element.style.pointerEvents = "none";
+            }
 
             const onMove = (ev: PointerEvent) => {
                 const d = splitDragRef.current;
@@ -322,10 +374,22 @@ export function useSplitSizing(args: {
 
             const onUp = () => {
                 splitDragRef.current = null;
+                dragCleanupRef.current = null;
                 window.removeEventListener("pointermove", onMove);
                 window.removeEventListener("pointerup", onUp);
+                window.removeEventListener("pointercancel", onUp);
+                try {
+                    if (divider.hasPointerCapture(pointerId)) {
+                        divider.releasePointerCapture(pointerId);
+                    }
+                } catch {}
+                dragShield?.remove();
                 document.body.style.userSelect = prevSelect;
                 document.body.style.cursor = prevCursor;
+                for (const { element, pointerEvents } of pdfEmbeds) {
+                    element.style.pointerEvents = pointerEvents;
+                }
+                if (mountedRef.current) setIsResizing(false);
 
                 const toRestore = restoreFocusRef.current;
                 restoreFocusRef.current = null;
@@ -343,8 +407,10 @@ export function useSplitSizing(args: {
 
             window.addEventListener("pointermove", onMove);
             window.addEventListener("pointerup", onUp);
+            window.addEventListener("pointercancel", onUp);
+            dragCleanupRef.current = onUp;
         },
-        [disabled, dock, effectiveTermH, effectiveTermW, resizeBottomTo, resizeRightTo],
+        [disabled, dock, effectiveTermH, effectiveTermW, mainRef, resizeBottomTo, resizeRightTo],
     );
 
     const onKeyDownSplit = React.useCallback(
@@ -432,6 +498,8 @@ export function useSplitSizing(args: {
 
         bottomMaxTerm,
         rightMaxTerm,
+
+        isResizing,
 
         onPointerDownSplit,
         separatorProps,

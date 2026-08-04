@@ -211,16 +211,19 @@ export default function ProgrammingIdeSandbox({
     const handleLanguageChange = (next: WorkspaceLanguage) => {
         if (next === lang && surfaceMode === "code") return;
 
-        clearReadyTimer();
-        setIdeReady(false);
-        setLang(next);
-
         const href = routeLanguageMap?.[next];
         if (href) {
-            router.push(href);
+            // Keep the current IDE visible until the prefetched sibling route
+            // is ready. Optimistically changing local language/ready state here
+            // creates one transition cover, then Next's route loading boundary
+            // creates a second full-page flash.
+            router.push(href, { scroll: false });
             return;
         }
 
+        clearReadyTimer();
+        setIdeReady(false);
+        setLang(next);
         setSurfaceMode("code");
     };
 
@@ -416,6 +419,7 @@ export default function ProgrammingIdeSandbox({
                         {surfaceMode === "code" ? (
                             <>
                                 <FullIDE
+                                    key={`${toolSlug}:${initialLanguage}`}
                                     className={cn(
                                         "h-full transition-opacity duration-200",
                                         ideReady ? "opacity-100" : "opacity-0",

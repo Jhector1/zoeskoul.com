@@ -43,7 +43,15 @@ const envSchema = z.object({
   RUNNER_MAX_CONCURRENT_PER_ACTOR: z.coerce.number().int().positive().optional(),
   MAX_ACTIVE_SESSIONS_PER_USER: intEnv(4),
   RUNNER_MAX_CONCURRENT_GLOBAL: intEnv(40),
-  RUNNER_STARTS_PER_MINUTE_PER_ACTOR: intEnv(60),
+  // Legacy shared limit. Keep it as the shell fallback so existing deployments
+  // retain their terminal-abuse policy while code runs get their own budget.
+  RUNNER_STARTS_PER_MINUTE_PER_ACTOR: intEnv(12),
+  RUNNER_CODE_STARTS_PER_MINUTE_PER_ACTOR: intEnv(30),
+  RUNNER_SHELL_STARTS_PER_MINUTE_PER_ACTOR: z.coerce
+    .number()
+    .int()
+    .positive()
+    .optional(),
 
   RUNNER_CHILD_NETWORK: z.string().min(1).default("none"),
   RUNNER_DISABLE_NETWORK: boolFlag(true),
@@ -95,7 +103,11 @@ export const env = {
     parsed.RUNNER_MAX_CONCURRENT_PER_ACTOR ??
     parsed.MAX_ACTIVE_SESSIONS_PER_USER,
   maxConcurrentGlobal: parsed.RUNNER_MAX_CONCURRENT_GLOBAL,
-  startsPerMinutePerActor: parsed.RUNNER_STARTS_PER_MINUTE_PER_ACTOR,
+  codeStartsPerMinutePerActor:
+    parsed.RUNNER_CODE_STARTS_PER_MINUTE_PER_ACTOR,
+  shellStartsPerMinutePerActor:
+    parsed.RUNNER_SHELL_STARTS_PER_MINUTE_PER_ACTOR ??
+    parsed.RUNNER_STARTS_PER_MINUTE_PER_ACTOR,
 
   childNetwork: parsed.RUNNER_DISABLE_NETWORK
     ? "none"

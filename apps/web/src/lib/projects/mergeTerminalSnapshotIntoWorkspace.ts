@@ -29,6 +29,7 @@ type MergeArgs = {
     prior: WorkspaceStateV2;
     snapshotFiles: SnapshotEntry[];
     dirtyUiPaths?: Iterable<string>;
+    terminalBaselinePaths?: Iterable<string>;
 };
 
 function now() {
@@ -334,6 +335,19 @@ export function mergeTerminalSnapshotIntoWorkspace(
 
     const priorFiles = priorFilePathMap(prior, syntheticRootName);
     const priorFolders = priorFolderPathMap(prior, syntheticRootId, syntheticRootName);
+    if (args.terminalBaselinePaths) {
+        const terminalBaselinePaths = new Set(
+            [...args.terminalBaselinePaths]
+                .map((path) => normalizeRelPath(path, syntheticRootName))
+                .filter(Boolean),
+        );
+
+        for (const rel of [...priorFiles.keys(), ...priorFolders.keys()]) {
+            if (!terminalBaselinePaths.has(rel)) {
+                dirtyUiPaths.add(rel);
+            }
+        }
+    }
     const desiredEntries = buildDesiredEntries({
         snapshotFiles,
         priorFiles,
