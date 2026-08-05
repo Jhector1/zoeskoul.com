@@ -341,9 +341,12 @@ export function resolveStudentLocation(
   }
 
   if (
-    parts[0] === "subjects" ||
-    parts[0] === "learning" ||
-    parts[0] === "my-learning"
+    (
+      parts[0] === "subjects" ||
+      parts[0] === "learning" ||
+      parts[0] === "my-learning"
+    ) &&
+    !parts[1]
   ) {
     return {
       kind: "my-learning",

@@ -57,11 +57,12 @@ function StateSurface(props: {
 
 export function ExactMyLearningView(props: {
   apiOrigin: string;
+  locale: string;
   mode?: "all" | "assignments" | "tutoring";
 }) {
   const state = useMyLearning({
     apiOrigin: props.apiOrigin,
-    locale: "en",
+    locale: props.locale,
   });
 
   if (state.status === "loading") {

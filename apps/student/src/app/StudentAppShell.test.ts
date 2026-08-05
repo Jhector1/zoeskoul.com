@@ -53,4 +53,25 @@ describe("StudentAppShell session compatibility", () => {
       "props.session.authenticated",
     );
   });
+
+  it("passes the resolved route locale to every My Learning view", () => {
+    const source = readFileSync(
+      new URL(
+        "./StudentAppShell.tsx",
+        import.meta.url,
+      ),
+      "utf8",
+    );
+
+    const myLearningCalls = source.match(
+      /<ExactMyLearningView[\s\S]*?\/>/g,
+    ) ?? [];
+
+    expect(myLearningCalls).toHaveLength(3);
+    for (const call of myLearningCalls) {
+      expect(call).toContain(
+        "locale={location.locale}",
+      );
+    }
+  });
 });
