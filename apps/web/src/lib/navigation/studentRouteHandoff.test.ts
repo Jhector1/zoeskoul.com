@@ -77,13 +77,53 @@ describe("Student route handoff", () => {
     ).toBeNull();
   });
 
+  it("activates Daily Practice in production and preserves the query", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://zoeskoul.com/fr/practice/daily?source=home",
+        environment: "production",
+      }),
+    ).toBe(
+      "https://student.zoeskoul.com/fr/practice/daily?source=home",
+    );
+  });
+
+  it("uses the configured Student origin for a Daily Practice preview", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/en/practice/daily?source=preview",
+        environment: "preview",
+        configuredOrigin:
+          "https://student-preview.example",
+      }),
+    ).toBe(
+      "https://student-preview.example/en/practice/daily?source=preview",
+    );
+  });
+
+  it("fails closed for Daily Practice preview without a Student origin", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/en/practice/daily",
+        environment: "preview",
+        configuredOrigin: null,
+      }),
+    ).toBeNull();
+  });
+
   it.each([
     "https://zoeskoul.com/en/subjects",
     "https://zoeskoul.com/en/catalogs",
-    "https://zoeskoul.com/en/practice/daily",
+    "https://zoeskoul.com/en/practice",
+    "https://zoeskoul.com/en/practice/daily/extra",
+    "https://zoeskoul.com/en/practice/trial",
+    "https://zoeskoul.com/en/subjects/python/modules/module-1/practice",
     "https://zoeskoul.com/en/sandbox/programming/python",
   ])(
-    "does not activate the Phase 1 route %s",
+    "does not activate the sibling route %s",
     (currentUrl) => {
       expect(
         resolveStudentRouteHandoff({

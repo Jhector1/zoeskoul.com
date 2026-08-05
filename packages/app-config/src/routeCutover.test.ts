@@ -99,8 +99,37 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     ).toBe("unknown");
   });
 
-  it("starts with an empty production Student handoff allowlist", () => {
-    expect(studentRouteCutoverAllowlist).toEqual([]);
+  it("activates only the exact Daily Practice route", () => {
+    expect(studentRouteCutoverAllowlist).toEqual([
+      "/practice/daily",
+    ]);
+
+    for (const pathname of [
+      "/en/practice/daily",
+      "/fr/practice/daily?source=home",
+      "/ht/practice/daily#today",
+    ]) {
+      expect(
+        isStudentRouteCutoverReady({
+          pathname,
+        }),
+      ).toBe(true);
+    }
+  });
+
+  it.each([
+    "/en/practice",
+    "/en/practice/daily/extra",
+    "/en/practice/trial",
+    "/en/subjects/python/modules/module-1/practice",
+    "/en/catalogs",
+    "/en/sandbox/programming/python",
+  ])("does not broaden the Daily Practice cutover to %s", (pathname) => {
+    expect(
+      isStudentRouteCutoverReady({
+        pathname,
+      }),
+    ).toBe(false);
   });
 
   it("keeps unknown routes unknown", () => {

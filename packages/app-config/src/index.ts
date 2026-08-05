@@ -535,11 +535,13 @@ export function resolveDesiredAppRouteOwner(args: {
 }
 
 /**
- * Locale-stripped route prefixes that Web may actively hand off to Student.
- * Phase 1 intentionally starts empty. A route must be implemented, tested,
- * browser-validated, and production-qualified before adding its prefix here.
+ * Exact locale-stripped routes that Web may actively hand off to Student.
+ * Each route must be implemented, tested, browser-validated, and
+ * production-qualified before it is added here.
  */
-export const studentRouteCutoverAllowlist: readonly string[] = [];
+export const studentRouteCutoverAllowlist: readonly string[] = [
+  "/practice/daily",
+];
 
 export function isStudentRouteCutoverReady(args: {
   pathname: string;
@@ -555,10 +557,8 @@ export function isStudentRouteCutoverReady(args: {
   const { segments } = stripRouteLocale(args.pathname);
   const normalizedPath = `/${segments.join("/")}`;
 
-  return studentRouteCutoverAllowlist.some(
-    (prefix) =>
-      normalizedPath === prefix ||
-      normalizedPath.startsWith(`${prefix}/`),
+  return studentRouteCutoverAllowlist.includes(
+    normalizedPath,
   );
 }
 
