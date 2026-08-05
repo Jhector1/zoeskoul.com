@@ -543,6 +543,7 @@ export const studentRouteCutoverAllowlist: readonly string[] = [
   "/practice/daily",
   "/catalogs",
   "/catalogs/:catalogSlug",
+  "/subjects",
 ];
 
 function matchesStudentRouteCutoverPattern(args: {

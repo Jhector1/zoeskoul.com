@@ -160,8 +160,47 @@ describe("Student route handoff", () => {
     ).toBeNull();
   });
 
+  it("activates the exact Subjects entry in production and preserves the query", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://zoeskoul.com/fr/subjects?source=header",
+        environment: "production",
+      }),
+    ).toBe(
+      "https://student.zoeskoul.com/fr/subjects?source=header",
+    );
+  });
+
+  it("uses the configured Student preview origin for the Subjects entry", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/ht/subjects?source=preview",
+        environment: "preview",
+        configuredOrigin:
+          "https://student-preview.example",
+      }),
+    ).toBe(
+      "https://student-preview.example/ht/subjects?source=preview",
+    );
+  });
+
+  it("fails closed for a Subjects preview without a Student origin", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/en/subjects",
+        environment: "preview",
+        configuredOrigin: null,
+      }),
+    ).toBeNull();
+  });
+
   it.each([
-    "https://zoeskoul.com/en/subjects",
+    "https://zoeskoul.com/en/subjects/python",
+    "https://zoeskoul.com/en/subjects/python/modules",
+    "https://zoeskoul.com/en/subjects/python/progress",
     "https://zoeskoul.com/en/practice",
     "https://zoeskoul.com/en/practice/daily/extra",
     "https://zoeskoul.com/en/practice/trial",
