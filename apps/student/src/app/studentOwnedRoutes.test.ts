@@ -26,6 +26,21 @@ describe(
     );
 
     it(
+      "does not treat Daily Practice descendants as the cutover route",
+      () => {
+        expect(
+          resolveStudentLocation(
+            "/en/practice/daily/extra",
+          ),
+        ).toEqual({
+          kind: "not-found",
+          locale: "en",
+          path: "/en/practice/daily/extra",
+        });
+      },
+    );
+
+    it(
       "keeps assignments and tutoring lists in Vite",
       () => {
         expect(
