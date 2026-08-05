@@ -198,8 +198,56 @@ describe("Student route handoff", () => {
   });
 
   it.each([
+    [
+      "https://zoeskoul.com/en/assignments?source=header",
+      "https://student.zoeskoul.com/en/assignments?source=header",
+    ],
+    [
+      "https://zoeskoul.com/fr/tutoring-sessions?source=my-learning",
+      "https://student.zoeskoul.com/fr/tutoring-sessions?source=my-learning",
+    ],
+    [
+      "https://zoeskoul.com/ht/subjects/python/modules",
+      "https://student.zoeskoul.com/ht/subjects/python/modules",
+    ],
+    [
+      "https://zoeskoul.com/en/subjects/python/modules/module-1",
+      "https://student.zoeskoul.com/en/subjects/python/modules/module-1",
+    ],
+    [
+      "https://zoeskoul.com/fr/subjects/python/modules/module-1/practice?mode=assignment",
+      "https://student.zoeskoul.com/fr/subjects/python/modules/module-1/practice?mode=assignment",
+    ],
+    [
+      "https://zoeskoul.com/en/subjects/python/modules/module-1/learn",
+      "https://student.zoeskoul.com/en/subjects/python/modules/module-1/learn",
+    ],
+    [
+      "https://zoeskoul.com/ht/subjects/python/modules/module-1/learn/section/topic/exercise/first?attempt=2#answer",
+      "https://student.zoeskoul.com/ht/subjects/python/modules/module-1/learn/section/topic/exercise/first?attempt=2#answer",
+    ],
+    [
+      "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn",
+      "https://student.zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn",
+    ],
+    [
+      "https://zoeskoul.com/fr/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first",
+      "https://student.zoeskoul.com/fr/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first",
+    ],
+  ])(
+    "activates the remaining implemented Student flow from %s",
+    (currentUrl, expectedUrl) => {
+      expect(
+        resolveStudentRouteHandoff({
+          currentUrl,
+          environment: "production",
+        }),
+      ).toBe(expectedUrl);
+    },
+  );
+
+  it.each([
     "https://zoeskoul.com/en/subjects/python",
-    "https://zoeskoul.com/en/subjects/python/modules",
     "https://zoeskoul.com/en/subjects/python/progress",
     "https://zoeskoul.com/en/practice",
     "https://zoeskoul.com/en/practice/daily/extra",
@@ -208,7 +256,15 @@ describe("Student route handoff", () => {
     "https://zoeskoul.com/en/catalogs/core/extra",
     "https://zoeskoul.com/en/catalogs/core/subjects",
     "https://zoeskoul.com/en/catalogs/%2F",
-    "https://zoeskoul.com/en/subjects/python/modules/module-1/practice",
+    "https://zoeskoul.com/en/assignments/assignment-1",
+    "https://zoeskoul.com/en/tutoring-sessions/session-1",
+    "https://zoeskoul.com/en/subjects/python/assignments",
+    "https://zoeskoul.com/en/subjects/python/modules/module-1/practice/extra",
+    "https://zoeskoul.com/en/subjects/python/modules/module-1/learn/section",
+    "https://zoeskoul.com/en/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
+    "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1",
+    "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn/section",
+    "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
     "https://zoeskoul.com/en/sandbox/programming/python",
   ])(
     "does not activate the sibling route %s",

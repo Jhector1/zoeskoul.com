@@ -25,7 +25,7 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/subjects/python-v2/certificate",
     "/en/subjects/python-v2/progress",
     "/en/tutoring-sessions/session-1",
-    "/en/catalog/core/subjects/python-v2/modules/python-v2-1/learn",
+    "/en/subjects/python-v2/assignments",
   ])(
     "declares %s as Student-owned without activating it",
     (pathname) => {
@@ -104,6 +104,15 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
       "/catalogs",
       "/catalogs/:catalogSlug",
       "/subjects",
+      "/assignments",
+      "/tutoring-sessions",
+      "/subjects/:subjectSlug/modules",
+      "/subjects/:subjectSlug/modules/:moduleSlug",
+      "/subjects/:subjectSlug/modules/:moduleSlug/practice",
+      "/subjects/:subjectSlug/modules/:moduleSlug/learn",
+      "/subjects/:subjectSlug/modules/:moduleSlug/learn/:sectionSlug/:topicId/:targetKind/:targetSlug",
+      "/catalog/:catalogSlug/subjects/:subjectSlug/modules/:moduleSlug/learn",
+      "/catalog/:catalogSlug/subjects/:subjectSlug/modules/:moduleSlug/learn/:sectionSlug/:topicId/:targetKind/:targetSlug",
     ]);
   });
 
@@ -118,6 +127,15 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/subjects",
     "/fr/subjects?source=header",
     "/ht/subjects#learning",
+    "/en/assignments",
+    "/fr/tutoring-sessions?source=my-learning",
+    "/ht/subjects/python/modules",
+    "/en/subjects/python/modules/module-1",
+    "/fr/subjects/python/modules/module-1/practice?mode=assignment",
+    "/en/subjects/python/modules/module-1/learn",
+    "/ht/subjects/python/modules/module-1/learn/section/topic/exercise/first?attempt=2",
+    "/en/catalog/core/subjects/python/modules/module-1/learn",
+    "/fr/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first#answer",
   ])("activates the validated Student route %s", (pathname) => {
     expect(
       isStudentRouteCutoverReady({
@@ -130,13 +148,20 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/practice",
     "/en/practice/daily/extra",
     "/en/practice/trial",
-    "/en/subjects/python/modules/module-1/practice",
+    "/en/assignments/assignment-1",
+    "/en/tutoring-sessions/session-1",
+    "/en/subjects/python/assignments",
+    "/en/subjects/python/modules/module-1/practice/extra",
+    "/en/subjects/python/modules/module-1/learn/section",
+    "/en/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
     "/en/catalog",
     "/en/catalogs/core/extra",
     "/en/catalogs/core/subjects",
     "/en/catalogs/%2F",
+    "/en/catalog/core/subjects/python/modules/module-1",
+    "/en/catalog/core/subjects/python/modules/module-1/learn/section",
+    "/en/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
     "/en/subjects/python",
-    "/en/subjects/python/modules",
     "/en/subjects/python/progress",
     "/en/sandbox/programming/python",
   ])("does not broaden the active cutovers to %s", (pathname) => {
