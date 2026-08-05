@@ -170,7 +170,11 @@ cd ~/Documents/zoeskoul.com/zoeskoul-infra/infra
 ENABLE_JUDGE0=1 ./scripts/compose.sh build runner
 ENABLE_JUDGE0=1 ./scripts/compose.sh up -d --force-recreate runner
 
+zoeskoul-runner
+ssh deploy@85.239.233.177
 
+zile-digital
+ssh deploy@45.137.194.202
 
 cd /opt/zoeskoul/zoe-infra/hosts/runner
 docker compose down
@@ -212,7 +216,6 @@ pnpm curr:course -- check sql sql-data-management --resume \
   TRANSLATION_MODEL=deepseek-v4-flash \
   pnpm curr:course -- check git git-foundations --resume < /dev/null
 
-ssh deploy@5.78.227.155
 
 
 

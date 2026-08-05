@@ -75,6 +75,7 @@ export type FullIDEProps = {
     showTopLanguageButtons?: boolean;
     lessonHref?: string;
     lessonLabel?: string;
+    showSettingsMenu?: boolean;
     access: Pick<
         IdeCapabilities,
         "hasUser" | "canUseMultiFile" | "canSaveCloud" | "canCreateProjects"

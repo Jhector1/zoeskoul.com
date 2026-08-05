@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import UserMenuSlick from "./UserMenuSlick";
@@ -147,10 +148,21 @@ function FontSizePicker(props: {
   );
 }
 
-function SettingsMenu() {
+export function SettingsMenu({
+  showSound = true,
+}: {
+  showSound?: boolean;
+}) {
   const t = useTranslations("Header");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const [menuPosition, setMenuPosition] = useState({
+    top: 68,
+    right: 12,
+    desktop: false,
+  });
   const { preferences, updatePreferences } = useAppPreferences();
   const fontPx = preferences.fontSizePx;
 
@@ -158,12 +170,39 @@ function SettingsMenu() {
     applyBaseFontSize(fontPx);
   }, [fontPx]);
 
+  React.useLayoutEffect(() => {
+    if (!open) return;
+
+    const updateMenuPosition = () => {
+      const rect = buttonRef.current?.getBoundingClientRect();
+      if (!rect) return;
+
+      const desktop = window.matchMedia("(min-width: 768px)").matches;
+      setMenuPosition({
+        top: Math.max(12, rect.bottom + 8),
+        right: Math.max(12, window.innerWidth - rect.right),
+        desktop,
+      });
+    };
+
+    updateMenuPosition();
+    window.addEventListener("resize", updateMenuPosition);
+    window.addEventListener("scroll", updateMenuPosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updateMenuPosition);
+      window.removeEventListener("scroll", updateMenuPosition, true);
+    };
+  }, [open]);
+
   useEffect(() => {
     function onDown(e: MouseEvent) {
       const target = e.target as HTMLElement | null;
       if (target?.closest?.('[data-modal-root="true"]')) return;
-      if (!wrapRef.current) return;
-      if (!wrapRef.current.contains(target as Node)) setOpen(false);
+      if (!target) return;
+      if (wrapRef.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      setOpen(false);
     }
 
     function onKey(e: KeyboardEvent) {
@@ -179,9 +218,110 @@ function SettingsMenu() {
     };
   }, []);
 
+  const menu = open && typeof document !== "undefined"
+    ? createPortal(
+        <>
+          <div
+              className="fixed inset-0 z-[9998] bg-black/20 md:hidden"
+              onClick={() => setOpen(false)}
+              aria-hidden="true"
+          />
+
+          <div
+              ref={panelRef}
+              role="menu"
+              className={cn(
+                  "fixed z-[9999] overflow-y-auto rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-white/10 dark:bg-neutral-950",
+                  menuPosition.desktop
+                      ? "w-[24rem]"
+                      : "left-3 right-3",
+              )}
+              style={{
+                top: menuPosition.top,
+                right: menuPosition.desktop ? menuPosition.right : undefined,
+                maxHeight: `calc(100dvh - ${menuPosition.top + 12}px)`,
+              }}
+          >
+            <div className="border-b border-neutral-200 px-4 py-3 dark:border-white/10">
+              <div className="text-sm font-semibold text-neutral-900 dark:text-white">
+                {t("settings")}
+              </div>
+              <div className="mt-0.5 text-xs text-neutral-600 dark:text-white/60">
+                {t("settingsSubtitle")}
+              </div>
+            </div>
+
+            <div className="grid gap-3 p-3">
+              <div className="ui-surface-muted p-3">
+                <div className="ui-kicker">{t("theme")}</div>
+                <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div className="text-xs text-neutral-600 dark:text-white/60">
+                    {t("themeHint")}
+                  </div>
+                  <div className="shrink-0">
+                    <ThemeToggle compact />
+                  </div>
+                </div>
+              </div>
+
+              <div className="ui-surface-muted p-3">
+                <div className="ui-kicker">{t("fontSize")}</div>
+                <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
+                  {t("fontSizeHint")}
+                </div>
+                <div className="mt-3">
+                  <FontSizePicker
+                      value={fontPx}
+                      onChange={(px) => {
+                        void updatePreferences({
+                          fontSizePx: clampFontPx(px),
+                        }).catch(() => undefined);
+                      }}
+                      labels={{
+                        small: t("fontSmall"),
+                        normal: t("fontNormal"),
+                        large: t("fontLarge"),
+                        extraLarge:t("fontExtraLarge")
+                      }}
+                  />
+                </div>
+              </div>
+
+              <div className="ui-surface-muted p-3">
+                <div className="ui-kicker">{t("language")}</div>
+                <div className="mt-3">
+                  <LocaleSwitcher compact className="w-full min-w-0" />
+                </div>
+              </div>
+
+              {showSound ? (
+                <div className="ui-surface-muted p-3">
+                  <div className="ui-kicker">{t("sound")}</div>
+                  <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                    <div className="text-xs text-neutral-600 dark:text-white/60">
+                      {t("soundHint")}
+                    </div>
+                    <div className="shrink-0">
+                      <SoundToggle />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              <button type="button" onClick={() => setOpen(false)} className="ui-btn-secondary w-full">
+                {t("close")}
+              </button>
+            </div>
+          </div>
+        </>,
+        document.body,
+      )
+    : null;
+
   return (
       <div ref={wrapRef} className="relative">
         <button
+            ref={buttonRef}
             type="button"
             className="ui-btn-ide-ghost !w-8 !px-0"
             aria-haspopup="menu"
@@ -192,93 +332,7 @@ function SettingsMenu() {
           <Settings className="h-4 w-4" />
         </button>
 
-        {open ? (
-            <>
-              <div
-                  className="fixed inset-0 z-[69] bg-black/20 md:hidden"
-                  onClick={() => setOpen(false)}
-                  aria-hidden="true"
-              />
-
-              <div
-                  role="menu"
-                  className={cn(
-                      "fixed left-3 right-3 top-[4.25rem] z-[70]",
-                      "max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-white/10 dark:bg-neutral-950",
-                      "md:absolute md:left-auto md:right-0 md:top-full md:mt-2 md:w-[24rem]",
-                  )}
-              >
-                <div className="border-b border-neutral-200 px-4 py-3 dark:border-white/10">
-                  <div className="text-sm font-semibold text-neutral-900 dark:text-white">
-                    {t("settings")}
-                  </div>
-                  <div className="mt-0.5 text-xs text-neutral-600 dark:text-white/60">
-                    {t("settingsSubtitle")}
-                  </div>
-                </div>
-
-                <div className="grid gap-3 p-3">
-                  <div className="ui-surface-muted p-3">
-                    <div className="ui-kicker">{t("theme")}</div>
-                    <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="text-xs text-neutral-600 dark:text-white/60">
-                        {t("themeHint")}
-                      </div>
-                      <div className="shrink-0">
-                        <ThemeToggle compact />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="ui-surface-muted p-3">
-                    <div className="ui-kicker">{t("fontSize")}</div>
-                    <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
-                      {t("fontSizeHint")}
-                    </div>
-                    <div className="mt-3">
-                      <FontSizePicker
-                          value={fontPx}
-                          onChange={(px) => {
-                            void updatePreferences({
-                              fontSizePx: clampFontPx(px),
-                            }).catch(() => undefined);
-                          }}
-                          labels={{
-                            small: t("fontSmall"),
-                            normal: t("fontNormal"),
-                            large: t("fontLarge"),
-                            extraLarge:t("fontExtraLarge")
-                          }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="ui-surface-muted p-3">
-                    <div className="ui-kicker">{t("language")}</div>
-                    <div className="mt-3">
-                      <LocaleSwitcher compact className="w-full min-w-0" />
-                    </div>
-                  </div>
-
-                  <div className="ui-surface-muted p-3">
-                    <div className="ui-kicker">{t("sound")}</div>
-                    <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="text-xs text-neutral-600 dark:text-white/60">
-                        {t("soundHint")}
-                      </div>
-                      <div className="shrink-0">
-                        <SoundToggle />
-                      </div>
-                    </div>
-                  </div>
-
-                  <button type="button" onClick={() => setOpen(false)} className="ui-btn-secondary w-full">
-                    {t("close")}
-                  </button>
-                </div>
-              </div>
-            </>
-        ) : null}
+        {menu}
       </div>
   );
 }

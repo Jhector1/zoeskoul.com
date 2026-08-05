@@ -435,6 +435,7 @@ export default function ProgrammingIdeSandbox({
                                     showTopLanguageButtons={false}
                                     lessonHref={lessonHref}
                                     lessonLabel={lessonLabel}
+                                    showSettingsMenu
                                     access={access}
                                     loginHref={authHref as any}
                                     billingHref="/billing"

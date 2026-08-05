@@ -1,5 +1,6 @@
 "use client";
 
+import { SettingsMenu } from "@/components/HeaderSlick";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -95,6 +96,7 @@ export default function IdeHeader({
                                       showSaveControls,
                                       showSaveAs,
                                       showLessonLink,
+                                      showSettingsMenu = false,
                                       language,
                                       sqlDialect,
                                       onChangeSqlDialect,
@@ -127,6 +129,7 @@ export default function IdeHeader({
     showSaveControls: boolean;
     showSaveAs: boolean;
     showLessonLink: boolean;
+    showSettingsMenu?: boolean;
     language: WorkspaceLanguage;
     sqlDialect: SqlDialect;
     onChangeSqlDialect: (dialect: SqlDialect) => void;
@@ -289,6 +292,10 @@ export default function IdeHeader({
                         >
                             {saveButtonLabel}
                         </button>
+                    ) : null}
+
+                    {showSettingsMenu ? (
+                        <SettingsMenu showSound={false} />
                     ) : null}
 
                     {showLessonLink && lessonHref ? (

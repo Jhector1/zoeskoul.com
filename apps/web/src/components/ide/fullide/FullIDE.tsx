@@ -49,6 +49,7 @@ type FullIDEInnerProps = {
     fullHeight: boolean;
     lessonHref?: string;
     lessonLabel: string;
+    showSettingsMenu?: FullIDEProps["showSettingsMenu"];
     access: FullIDEProps["access"];
     loginHref: string;
     billingHref: string;
@@ -153,6 +154,7 @@ function FullIDEInner({
                           fullHeight,
                           lessonHref,
                           lessonLabel,
+                          showSettingsMenu,
                           access,
                           loginHref,
                           billingHref,
@@ -724,6 +726,7 @@ function FullIDEInner({
                     showSaveControls={services.projects.showSaveControls}
                     showSaveAs={!readOnly && services.projects.showSaveAs}
                     showLessonLink={services.chrome.showLessonLink}
+                    showSettingsMenu={Boolean(showSettingsMenu)}
                     language={language}
                     sqlDialect={sqlDialect}
                     onChangeSqlDialect={setSqlDialect}
@@ -899,6 +902,7 @@ export default function FullIDE(props: FullIDEProps) {
         showTopLanguageButtons = true,
         lessonHref,
         lessonLabel = "Lesson",
+        showSettingsMenu = false,
         access,
         loginHref,
         billingHref = "/billing",
@@ -1292,6 +1296,7 @@ export default function FullIDE(props: FullIDEProps) {
                 fullHeight={fullHeight}
                 lessonHref={lessonHref}
                 lessonLabel={lessonLabel}
+                showSettingsMenu={showSettingsMenu}
                 access={access}
                 loginHref={normalizedLoginHref}
                 billingHref={billingHref}
