@@ -15,7 +15,6 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
   it.each([
     "/en/achievements",
     "/en/assignments/assignment-1",
-    "/en/catalogs",
     "/en/certificates",
     "/en/leaderboard",
     "/en/practice/trial",
@@ -99,22 +98,28 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     ).toBe("unknown");
   });
 
-  it("activates only the exact Daily Practice route", () => {
+  it("activates only the validated Student route patterns", () => {
     expect(studentRouteCutoverAllowlist).toEqual([
       "/practice/daily",
+      "/catalogs",
+      "/catalogs/:catalogSlug",
     ]);
+  });
 
-    for (const pathname of [
-      "/en/practice/daily",
-      "/fr/practice/daily?source=home",
-      "/ht/practice/daily#today",
-    ]) {
-      expect(
-        isStudentRouteCutoverReady({
-          pathname,
-        }),
-      ).toBe(true);
-    }
+  it.each([
+    "/en/practice/daily",
+    "/fr/practice/daily?source=home",
+    "/ht/practice/daily#today",
+    "/en/catalogs",
+    "/fr/catalogs?source=header",
+    "/ht/catalogs/core",
+    "/en/catalogs/data-analysis?source=home",
+  ])("activates the validated Student route %s", (pathname) => {
+    expect(
+      isStudentRouteCutoverReady({
+        pathname,
+      }),
+    ).toBe(true);
   });
 
   it.each([
@@ -122,9 +127,13 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/practice/daily/extra",
     "/en/practice/trial",
     "/en/subjects/python/modules/module-1/practice",
-    "/en/catalogs",
+    "/en/catalog",
+    "/en/catalogs/core/extra",
+    "/en/catalogs/core/subjects",
+    "/en/catalogs/%2F",
+    "/en/subjects",
     "/en/sandbox/programming/python",
-  ])("does not broaden the Daily Practice cutover to %s", (pathname) => {
+  ])("does not broaden the active cutovers to %s", (pathname) => {
     expect(
       isStudentRouteCutoverReady({
         pathname,

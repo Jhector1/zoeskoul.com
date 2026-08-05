@@ -535,13 +535,40 @@ export function resolveDesiredAppRouteOwner(args: {
 }
 
 /**
- * Exact locale-stripped routes that Web may actively hand off to Student.
+ * Locale-stripped route patterns that Web may actively hand off to Student.
  * Each route must be implemented, tested, browser-validated, and
  * production-qualified before it is added here.
  */
 export const studentRouteCutoverAllowlist: readonly string[] = [
   "/practice/daily",
+  "/catalogs",
+  "/catalogs/:catalogSlug",
 ];
+
+function matchesStudentRouteCutoverPattern(args: {
+  pattern: string;
+  segments: string[];
+}): boolean {
+  const patternSegments = routePathSegments(args.pattern);
+
+  if (patternSegments.length !== args.segments.length) {
+    return false;
+  }
+
+  return patternSegments.every((patternSegment, index) => {
+    const segment = args.segments[index];
+
+    if (!segment) {
+      return false;
+    }
+
+    if (patternSegment.startsWith(":")) {
+      return !segment.includes("/");
+    }
+
+    return patternSegment === segment;
+  });
+}
 
 export function isStudentRouteCutoverReady(args: {
   pathname: string;
@@ -555,10 +582,12 @@ export function isStudentRouteCutoverReady(args: {
   }
 
   const { segments } = stripRouteLocale(args.pathname);
-  const normalizedPath = `/${segments.join("/")}`;
 
-  return studentRouteCutoverAllowlist.includes(
-    normalizedPath,
+  return studentRouteCutoverAllowlist.some((pattern) =>
+    matchesStudentRouteCutoverPattern({
+      pattern,
+      segments,
+    }),
   );
 }
 
