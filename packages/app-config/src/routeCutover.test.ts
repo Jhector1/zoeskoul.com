@@ -103,6 +103,7 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
       "/practice/daily",
       "/catalogs",
       "/catalogs/:catalogSlug",
+      "/subjects",
     ]);
   });
 
@@ -114,6 +115,9 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/fr/catalogs?source=header",
     "/ht/catalogs/core",
     "/en/catalogs/data-analysis?source=home",
+    "/en/subjects",
+    "/fr/subjects?source=header",
+    "/ht/subjects#learning",
   ])("activates the validated Student route %s", (pathname) => {
     expect(
       isStudentRouteCutoverReady({
@@ -131,7 +135,9 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/catalogs/core/extra",
     "/en/catalogs/core/subjects",
     "/en/catalogs/%2F",
-    "/en/subjects",
+    "/en/subjects/python",
+    "/en/subjects/python/modules",
+    "/en/subjects/python/progress",
     "/en/sandbox/programming/python",
   ])("does not broaden the active cutovers to %s", (pathname) => {
     expect(

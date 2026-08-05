@@ -95,6 +95,36 @@ describe(
     );
 
     it(
+      "keeps the localized My Learning entry exact",
+      () => {
+        expect(
+          resolveStudentLocation(
+            "/fr/subjects",
+          ),
+        ).toEqual({
+          kind: "my-learning",
+          locale: "fr",
+        });
+
+        for (const path of [
+          "/en/subjects/python",
+          "/en/learning/extra",
+          "/en/my-learning/extra",
+        ]) {
+          expect(
+            resolveStudentLocation(
+              path,
+            ),
+          ).toEqual({
+            kind: "not-found",
+            locale: "en",
+            path,
+          });
+        }
+      },
+    );
+
+    it(
       "keeps assignments and tutoring lists in Vite",
       () => {
         expect(

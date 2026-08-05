@@ -200,11 +200,13 @@ export function StudentAppShell(props: {
     ) : location.kind === "assignments" ? (
       <ExactMyLearningView
         apiOrigin={props.apiOrigin}
+        locale={location.locale}
         mode="assignments"
       />
     ) : location.kind === "tutoring" ? (
       <ExactMyLearningView
         apiOrigin={props.apiOrigin}
+        locale={location.locale}
         mode="tutoring"
       />
     ) : location.kind === "course" ? (
@@ -226,6 +228,7 @@ export function StudentAppShell(props: {
     ) : (
       <ExactMyLearningView
         apiOrigin={props.apiOrigin}
+        locale={location.locale}
       />
     );
 
