@@ -60,8 +60,16 @@ export function useParams<T extends Record<string, string>>() {
   const result: Record<string, string> = { locale };
 
   const catalogsIndex = segments.indexOf("catalogs");
-  if (catalogsIndex >= 0 && segments[catalogsIndex + 1]) {
-    result.catalogSlug = segments[catalogsIndex + 1];
+  const catalogIndex = segments.indexOf("catalog");
+  const catalogSlugIndex =
+    catalogIndex >= 0
+      ? catalogIndex + 1
+      : catalogsIndex >= 0
+        ? catalogsIndex + 1
+        : -1;
+
+  if (catalogSlugIndex >= 0 && segments[catalogSlugIndex]) {
+    result.catalogSlug = segments[catalogSlugIndex];
   }
 
   const subjectsIndex = segments.indexOf("subjects");

@@ -544,6 +544,15 @@ export const studentRouteCutoverAllowlist: readonly string[] = [
   "/catalogs",
   "/catalogs/:catalogSlug",
   "/subjects",
+  "/assignments",
+  "/tutoring-sessions",
+  "/subjects/:subjectSlug/modules",
+  "/subjects/:subjectSlug/modules/:moduleSlug",
+  "/subjects/:subjectSlug/modules/:moduleSlug/practice",
+  "/subjects/:subjectSlug/modules/:moduleSlug/learn",
+  "/subjects/:subjectSlug/modules/:moduleSlug/learn/:sectionSlug/:topicId/:targetKind/:targetSlug",
+  "/catalog/:catalogSlug/subjects/:subjectSlug/modules/:moduleSlug/learn",
+  "/catalog/:catalogSlug/subjects/:subjectSlug/modules/:moduleSlug/learn/:sectionSlug/:topicId/:targetKind/:targetSlug",
 ];
 
 function matchesStudentRouteCutoverPattern(args: {

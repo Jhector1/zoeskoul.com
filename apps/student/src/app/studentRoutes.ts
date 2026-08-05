@@ -109,6 +109,17 @@ export function resolveStudentLocation(
     };
   }
 
+  const isExactLessonTarget = (
+    startIndex: number,
+  ) =>
+    Boolean(
+      parts[startIndex] &&
+      parts[startIndex + 1] &&
+      parts[startIndex + 2] &&
+      parts[startIndex + 3] &&
+      !parts[startIndex + 4],
+    );
+
   if (
     parts[0] === "practice" &&
     parts[1] === "daily" &&
@@ -143,7 +154,8 @@ export function resolveStudentLocation(
   }
 
   if (
-    parts[0] === "assignments"
+    parts[0] === "assignments" &&
+    !parts[1]
   ) {
     return {
       kind: "assignments",
@@ -170,7 +182,8 @@ export function resolveStudentLocation(
 
   if (
     subjectRoot &&
-    parts[2] === "assignments"
+    parts[2] === "assignments" &&
+    !parts[3]
   ) {
     return {
       kind: "assignments",
@@ -182,7 +195,8 @@ export function resolveStudentLocation(
     subjectRoot &&
     parts[2] === "modules" &&
     parts[3] &&
-    parts[4] === "practice"
+    parts[4] === "practice" &&
+    !parts[5]
   ) {
     return {
       kind: "module-practice",
@@ -196,7 +210,11 @@ export function resolveStudentLocation(
     subjectRoot &&
     parts[2] === "modules" &&
     parts[3] &&
-    parts[4] === "learn"
+    parts[4] === "learn" &&
+    (
+      !parts[5] ||
+      isExactLessonTarget(5)
+    )
   ) {
     return {
       kind: "lesson",
@@ -209,7 +227,8 @@ export function resolveStudentLocation(
   if (
     subjectRoot &&
     parts[2] === "modules" &&
-    parts[3]
+    parts[3] &&
+    !parts[4]
   ) {
     return {
       kind: "module",
@@ -221,7 +240,8 @@ export function resolveStudentLocation(
 
   if (
     subjectRoot &&
-    parts[2] === "modules"
+    parts[2] === "modules" &&
+    !parts[3]
   ) {
     return {
       kind: "course",
@@ -230,12 +250,35 @@ export function resolveStudentLocation(
     };
   }
 
+  // Catalog-prefixed review URLs keep the same Student review player.
+  if (
+    parts[0] === "catalog" &&
+    parts[1] &&
+    parts[2] === "subjects" &&
+    parts[3] &&
+    parts[4] === "modules" &&
+    parts[5] &&
+    parts[6] === "learn" &&
+    (
+      !parts[7] ||
+      isExactLessonTarget(7)
+    )
+  ) {
+    return {
+      kind: "lesson",
+      locale,
+      subjectSlug: parts[3],
+      moduleSlug: parts[5],
+    };
+  }
+
   // Original subject-first learning routes.
   if (
     parts[0] &&
     parts[1] === "modules" &&
     parts[2] &&
-    parts[3] === "practice"
+    parts[3] === "practice" &&
+    !parts[4]
   ) {
     return {
       kind: "module-practice",
@@ -249,7 +292,11 @@ export function resolveStudentLocation(
     parts[0] &&
     parts[1] === "modules" &&
     parts[2] &&
-    parts[3] === "learn"
+    parts[3] === "learn" &&
+    (
+      !parts[4] ||
+      isExactLessonTarget(4)
+    )
   ) {
     return {
       kind: "lesson",
@@ -262,7 +309,8 @@ export function resolveStudentLocation(
   if (
     parts[0] &&
     parts[1] === "modules" &&
-    parts[2]
+    parts[2] &&
+    !parts[3]
   ) {
     return {
       kind: "module",
@@ -290,7 +338,8 @@ export function resolveStudentLocation(
     parts[1] &&
     parts[2] === "modules" &&
     parts[3] &&
-    parts[4] === "practice"
+    parts[4] === "practice" &&
+    !parts[5]
   ) {
     return {
       kind: "module-practice",
@@ -305,7 +354,11 @@ export function resolveStudentLocation(
     parts[1] &&
     parts[2] === "modules" &&
     parts[3] &&
-    parts[4] === "learn"
+    parts[4] === "learn" &&
+    (
+      !parts[5] ||
+      isExactLessonTarget(5)
+    )
   ) {
     return {
       kind: "lesson",
@@ -319,7 +372,8 @@ export function resolveStudentLocation(
     parts[0] === "courses" &&
     parts[1] &&
     parts[2] === "modules" &&
-    parts[3]
+    parts[3] &&
+    !parts[4]
   ) {
     return {
       kind: "module",
@@ -331,7 +385,8 @@ export function resolveStudentLocation(
 
   if (
     parts[0] === "courses" &&
-    parts[1]
+    parts[1] &&
+    !parts[2]
   ) {
     return {
       kind: "course",
