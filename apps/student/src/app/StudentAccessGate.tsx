@@ -9,18 +9,14 @@ import {
   type ReactNode,
 } from "react";
 
-type AuthenticatedSession = Extract<
-  AppSessionResponse,
-  { authenticated: true }
->;
-
 const STUDENT_ACCESS_CAPABILITY: AppCapability =
   "student:access";
 
 export function StudentAccessGate(props: {
   apiOrigin: string;
   websiteOrigin: string;
-  children: (session: AuthenticatedSession) => ReactNode;
+  allowUnauthenticated?: boolean;
+  children: (session: AppSessionResponse) => ReactNode;
 }) {
   const state = useAppSession({
     apiOrigin: props.apiOrigin,
@@ -28,7 +24,8 @@ export function StudentAccessGate(props: {
 
   useEffect(() => {
     if (
-      state.status !== "unauthenticated"
+      state.status !== "unauthenticated" ||
+      props.allowUnauthenticated
     ) {
       return;
     }
@@ -40,6 +37,7 @@ export function StudentAccessGate(props: {
 
     window.location.replace(signInUrl);
   }, [
+    props.allowUnauthenticated,
     props.websiteOrigin,
     state,
   ]);
@@ -77,6 +75,10 @@ export function StudentAccessGate(props: {
   }
 
   if (state.status === "unauthenticated") {
+    if (props.allowUnauthenticated) {
+      return props.children(state.session);
+    }
+
     return (
       <main className="student-state-page" aria-busy="true">
         <section className="student-state-card">
@@ -94,6 +96,10 @@ export function StudentAccessGate(props: {
   }
 
   const session = state.session;
+
+  if (props.allowUnauthenticated) {
+    return props.children(session);
+  }
 
   if (
     !session.capabilities.includes(

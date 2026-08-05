@@ -49,5 +49,8 @@ describe("StudentAppShell session compatibility", () => {
     expect(source).toContain(
       "legacyAccess.canUnlockAll",
     );
+    expect(source).toContain(
+      "props.session.authenticated",
+    );
   });
 });

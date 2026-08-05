@@ -122,7 +122,8 @@ export function resolveStudentLocation(
 
   if (
     parts[0] === "catalogs" &&
-    parts[1]
+    parts[1] &&
+    !parts[2]
   ) {
     return {
       kind: "catalog-detail",
@@ -131,7 +132,10 @@ export function resolveStudentLocation(
     };
   }
 
-  if (parts[0] === "catalogs") {
+  if (
+    parts[0] === "catalogs" &&
+    !parts[1]
+  ) {
     return {
       kind: "catalogs",
       locale,
@@ -453,5 +457,17 @@ export function navigateStudentApp(
     new Event(
       "zoeskoul:vite-navigation",
     ),
+  );
+}
+
+export function isPublicStudentPath(
+  rawPathname: string,
+): boolean {
+  const location =
+    resolveStudentLocation(rawPathname);
+
+  return (
+    location.kind === "catalogs" ||
+    location.kind === "catalog-detail"
   );
 }
