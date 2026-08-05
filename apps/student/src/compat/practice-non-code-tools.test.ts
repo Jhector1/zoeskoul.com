@@ -6,6 +6,7 @@ import {
 
 import {
   isStandalonePracticeCodeExercise,
+  isStandalonePracticeToolBindingPending,
   shouldShowStandalonePracticeCodeTool,
 } from "../legacy-web/components/practice/tools/useStandalonePracticeTools";
 
@@ -49,6 +50,70 @@ describe(
             exerciseKind: null,
           }),
         ).toBe(true);
+      },
+    );
+
+    it(
+      "does not block a resolved practice editor while formal binding is absent",
+      () => {
+        expect(
+          isStandalonePracticeToolBindingPending({
+            codeToolEnabled: true,
+            busy: false,
+            hasExercise: true,
+            hasCurrent: true,
+            boundId: null,
+            exerciseStateKey: "practice:python:exercise-1",
+          }),
+        ).toBe(false);
+      },
+    );
+
+    it(
+      "keeps waiting while the active exercise contract is unresolved",
+      () => {
+        expect(
+          isStandalonePracticeToolBindingPending({
+            codeToolEnabled: true,
+            busy: true,
+            hasExercise: false,
+            hasCurrent: false,
+            boundId: null,
+            exerciseStateKey: "practice:python:exercise-1",
+          }),
+        ).toBe(true);
+      },
+    );
+
+    it(
+      "keeps waiting for a stale previous-exercise binding to be replaced",
+      () => {
+        expect(
+          isStandalonePracticeToolBindingPending({
+            codeToolEnabled: true,
+            busy: false,
+            hasExercise: true,
+            hasCurrent: true,
+            boundId: "practice:python:exercise-0",
+            exerciseStateKey: "practice:python:exercise-1",
+          }),
+        ).toBe(true);
+      },
+    );
+
+    it(
+      "clears the pending state when Tools is bound to the current exercise",
+      () => {
+        expect(
+          isStandalonePracticeToolBindingPending({
+            codeToolEnabled: true,
+            busy: false,
+            hasExercise: true,
+            hasCurrent: true,
+            boundId: "practice:python:exercise-1",
+            exerciseStateKey: "practice:python:exercise-1",
+          }),
+        ).toBe(false);
       },
     );
   },
