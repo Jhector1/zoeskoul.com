@@ -5,6 +5,7 @@ import {
 } from "vitest";
 
 import {
+  isPublicStudentPath,
   resolveStudentLocation,
 } from "./studentRoutes";
 
@@ -37,6 +38,59 @@ describe(
           locale: "en",
           path: "/en/practice/daily/extra",
         });
+      },
+    );
+
+    it(
+      "keeps only exact catalog list and detail routes public",
+      () => {
+        expect(
+          resolveStudentLocation(
+            "/en/catalogs",
+          ),
+        ).toEqual({
+          kind: "catalogs",
+          locale: "en",
+        });
+        expect(
+          resolveStudentLocation(
+            "/fr/catalogs/core",
+          ),
+        ).toEqual({
+          kind: "catalog-detail",
+          locale: "fr",
+          catalogSlug: "core",
+        });
+        expect(
+          resolveStudentLocation(
+            "/en/catalogs/core/extra",
+          ),
+        ).toEqual({
+          kind: "not-found",
+          locale: "en",
+          path: "/en/catalogs/core/extra",
+        });
+
+        expect(
+          isPublicStudentPath(
+            "/en/catalogs",
+          ),
+        ).toBe(true);
+        expect(
+          isPublicStudentPath(
+            "/en/catalogs/core",
+          ),
+        ).toBe(true);
+        expect(
+          isPublicStudentPath(
+            "/en/catalogs/core/extra",
+          ),
+        ).toBe(false);
+        expect(
+          isPublicStudentPath(
+            "/en/practice/daily",
+          ),
+        ).toBe(false);
       },
     );
 

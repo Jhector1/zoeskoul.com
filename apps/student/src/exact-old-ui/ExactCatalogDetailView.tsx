@@ -2,6 +2,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import {
+  buildAuthenticateUrl,
+} from "@zoeskoul/auth-client";
 import { Link } from "@/i18n/navigation";
 import { ROUTES } from "@/utils";
 import SubjectCardGrid from "@/features/practice/ui/subject-picker/SubjectCardGrid";
@@ -21,6 +24,9 @@ type Catalog = {
 
 function CatalogGrid(props: {
   initialSubjects: SubjectCard[];
+  authenticated: boolean;
+  websiteOrigin: string;
+  locale: string;
 }) {
   const {
     subjects,
@@ -28,13 +34,28 @@ function CatalogGrid(props: {
     pickSubject,
   } = useSubjectCardController({
     initialSubjects: props.initialSubjects,
-    allowEnrollment: true,
+    allowEnrollment: props.authenticated,
   });
+
+  const onPick = (subject: SubjectCard) => {
+    if (props.authenticated) {
+      void pickSubject(subject);
+      return;
+    }
+
+    window.location.assign(
+      buildAuthenticateUrl({
+        websiteOrigin: props.websiteOrigin,
+        callbackUrl: window.location.href,
+        locale: props.locale,
+      }),
+    );
+  };
 
   return (
     <SubjectCardGrid
       subjects={subjects}
-      onPick={pickSubject}
+      onPick={onPick}
       enrollingSlug={enrollingSlug}
     />
   );
@@ -42,6 +63,9 @@ function CatalogGrid(props: {
 
 export function ExactCatalogDetailView(props: {
   apiOrigin: string;
+  websiteOrigin: string;
+  locale: string;
+  authenticated: boolean;
   catalogSlug: string;
 }) {
   const [catalog, setCatalog] =
@@ -165,7 +189,12 @@ export function ExactCatalogDetailView(props: {
             </div>
           </section>
 
-          <CatalogGrid initialSubjects={subjects} />
+          <CatalogGrid
+            initialSubjects={subjects}
+            authenticated={props.authenticated}
+            websiteOrigin={props.websiteOrigin}
+            locale={props.locale}
+          />
         </div>
       </div>
     </div>

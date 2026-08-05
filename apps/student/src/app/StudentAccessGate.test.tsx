@@ -65,6 +65,101 @@ describe("StudentAccessGate", () => {
     ]);
   });
 
+  it("allows an anonymous session through only for a public route", () => {
+    const session = {
+      authenticated: false,
+      user: null,
+      roles: [],
+      capabilities: [],
+    } as const;
+    const child = vi.fn(
+      () => <div>public catalog</div>,
+    );
+
+    mocks.useAppSession.mockReturnValue({
+      status: "unauthenticated",
+      session,
+      error: null,
+    });
+
+    const markup = renderToStaticMarkup(
+      <StudentAccessGate
+        apiOrigin="https://zoeskoul.com"
+        websiteOrigin="https://zoeskoul.com"
+        allowUnauthenticated
+      >
+        {child}
+      </StudentAccessGate>,
+    );
+
+    expect(child).toHaveBeenCalledWith(session);
+    expect(markup).toContain("public catalog");
+  });
+
+  it("keeps anonymous protected routes behind sign in", () => {
+    const child = vi.fn(
+      () => <div>never rendered</div>,
+    );
+
+    mocks.useAppSession.mockReturnValue({
+      status: "unauthenticated",
+      session: {
+        authenticated: false,
+        user: null,
+        roles: [],
+        capabilities: [],
+      },
+      error: null,
+    });
+
+    const markup = renderToStaticMarkup(
+      <StudentAccessGate
+        apiOrigin="https://zoeskoul.com"
+        websiteOrigin="https://zoeskoul.com"
+      >
+        {child}
+      </StudentAccessGate>,
+    );
+
+    expect(child).not.toHaveBeenCalled();
+    expect(markup).toContain("Sign-in required");
+  });
+
+  it("allows authenticated non-student accounts to browse public routes", () => {
+    const child = vi.fn(
+      () => <div>teacher catalog</div>,
+    );
+
+    mocks.useAppSession.mockReturnValue({
+      status: "authenticated",
+      session: {
+        authenticated: true,
+        user: {
+          id: "teacher-1",
+          name: "Teacher",
+          email: "teacher@example.com",
+          image: null,
+        },
+        roles: ["teacher"],
+        capabilities: ["teacher:access"],
+      },
+      error: null,
+    });
+
+    const markup = renderToStaticMarkup(
+      <StudentAccessGate
+        apiOrigin="https://zoeskoul.com"
+        websiteOrigin="https://zoeskoul.com"
+        allowUnauthenticated
+      >
+        {child}
+      </StudentAccessGate>,
+    );
+
+    expect(child).toHaveBeenCalledTimes(1);
+    expect(markup).toContain("teacher catalog");
+  });
+
   it("denies a session missing student capability with unchanged copy", () => {
     mocks.useAppSession.mockReturnValue({
       status: "authenticated",
@@ -98,13 +193,13 @@ describe("StudentAccessGate", () => {
       "Access is controlled by the roles stored for your account in the ZoeSkoul database.",
     );
     expect(markup).toContain(
-      "<main class=\"student-state-page\"><section class=\"student-state-card\">",
+      '<main class="student-state-page"><section class="student-state-card">',
     );
     expect(markup).toContain(
-      "<p class=\"student-state-eyebrow\">Access unavailable</p>",
+      '<p class="student-state-eyebrow">Access unavailable</p>',
     );
     expect(markup).toContain(
-      "<a class=\"student-primary-button\" href=\"https://zoeskoul.com\">Return to ZoeSkoul</a>",
+      '<a class="student-primary-button" href="https://zoeskoul.com">Return to ZoeSkoul</a>',
     );
   });
 });

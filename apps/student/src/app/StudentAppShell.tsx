@@ -37,15 +37,10 @@ import {
   resolveLegacyStudentAccess,
 } from "./studentSessionCompatibility";
 
-type AuthenticatedSession = Extract<
-  AppSessionResponse,
-  { authenticated: true }
->;
-
 export function StudentAppShell(props: {
   apiOrigin: string;
   websiteOrigin: string;
-  session: AuthenticatedSession;
+  session: AppSessionResponse;
 }) {
   const [pathname, setPathname] = useState(
     () =>
@@ -114,7 +109,9 @@ export function StudentAppShell(props: {
     resolveStudentShellLocation(pathname);
   const legacyAccess =
     resolveLegacyStudentAccess(
-      props.session.roles,
+      props.session.authenticated
+        ? props.session.roles
+        : [],
     );
 
   useEffect(() => {
@@ -195,6 +192,9 @@ export function StudentAppShell(props: {
     ) : location.kind === "catalog-detail" ? (
       <ExactCatalogDetailView
         apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        locale={location.locale}
+        authenticated={props.session.authenticated}
         catalogSlug={location.catalogSlug}
       />
     ) : location.kind === "assignments" ? (

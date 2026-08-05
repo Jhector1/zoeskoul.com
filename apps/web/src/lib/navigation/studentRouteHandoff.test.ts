@@ -115,11 +115,60 @@ describe("Student route handoff", () => {
   });
 
   it.each([
+    [
+      "https://zoeskoul.com/en/catalogs?source=header",
+      "https://student.zoeskoul.com/en/catalogs?source=header",
+    ],
+    [
+      "https://zoeskoul.com/fr/catalogs/core?source=home",
+      "https://student.zoeskoul.com/fr/catalogs/core?source=home",
+    ],
+  ])(
+    "activates the public catalog handoff from %s",
+    (currentUrl, expectedUrl) => {
+      expect(
+        resolveStudentRouteHandoff({
+          currentUrl,
+          environment: "production",
+        }),
+      ).toBe(expectedUrl);
+    },
+  );
+
+  it("uses the configured Student preview origin for catalogs", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/ht/catalogs/core?source=preview",
+        environment: "preview",
+        configuredOrigin:
+          "https://student-preview.example",
+      }),
+    ).toBe(
+      "https://student-preview.example/ht/catalogs/core?source=preview",
+    );
+  });
+
+  it("fails closed for a catalog preview without a Student origin", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://web-preview.example/en/catalogs",
+        environment: "preview",
+        configuredOrigin: null,
+      }),
+    ).toBeNull();
+  });
+
+  it.each([
     "https://zoeskoul.com/en/subjects",
-    "https://zoeskoul.com/en/catalogs",
     "https://zoeskoul.com/en/practice",
     "https://zoeskoul.com/en/practice/daily/extra",
     "https://zoeskoul.com/en/practice/trial",
+    "https://zoeskoul.com/en/catalog",
+    "https://zoeskoul.com/en/catalogs/core/extra",
+    "https://zoeskoul.com/en/catalogs/core/subjects",
+    "https://zoeskoul.com/en/catalogs/%2F",
     "https://zoeskoul.com/en/subjects/python/modules/module-1/practice",
     "https://zoeskoul.com/en/sandbox/programming/python",
   ])(

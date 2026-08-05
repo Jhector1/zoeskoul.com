@@ -19,15 +19,10 @@ import {
   useLocationSnapshot,
 } from "./navigation-runtime";
 
-type AuthenticatedSession = Extract<
-  AppSessionResponse,
-  { authenticated: true }
->;
-
 type Messages = Record<string, unknown>;
 
 export function LegacyProviders(props: {
-  session: AuthenticatedSession;
+  session: AppSessionResponse;
   children: ReactNode;
 }) {
   useLocationSnapshot();
@@ -77,13 +72,15 @@ export function LegacyProviders(props: {
     );
   }
 
-  const session = {
-    user: {
-      ...props.session.user,
-      id: props.session.user.id,
-      roles: props.session.roles,
-    },
-  };
+  const session = props.session.authenticated
+    ? {
+        user: {
+          ...props.session.user,
+          id: props.session.user.id,
+          roles: props.session.roles,
+        },
+      }
+    : null;
 
   return (
     <SessionProvider session={session}>
