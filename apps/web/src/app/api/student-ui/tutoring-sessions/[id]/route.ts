@@ -10,13 +10,13 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
-  context: { params: Promise<{ sessionId: string }> },
+  context: { params: Promise<{ id: string }> },
 ) {
   if (!isAppOriginAllowed(request)) {
     return appCorsJson(request, { error: "Forbidden" }, { status: 403 });
   }
 
-  const { sessionId } = await context.params;
+  const { id: sessionId } = await context.params;
   const moduleSlug = new URL(request.url).searchParams.get("moduleSlug");
   const data = await loadTutoringSessionPage({ sessionId, moduleSlug });
 
@@ -39,7 +39,10 @@ export async function GET(
   if (data.status !== "ready") {
     return appCorsJson(
       request,
-      { status: data.status, message: "This tutoring session has no published learning workspace." },
+      {
+        status: data.status,
+        message: "This tutoring session has no published learning workspace.",
+      },
       { status: 404 },
     );
   }
