@@ -3,7 +3,6 @@ import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
 } from "@zoeskoul/curriculum-profiles";
-import {RetryableTopicValidationError} from "../validate/RetryableTopicValidationError.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";

@@ -11,11 +11,20 @@ import { resolveStudentRouteHandoff } from "@/lib/navigation/studentRouteHandoff
 
 const handleI18n = createMiddleware(routing);
 
+type RoutingLocale = (typeof routing.locales)[number];
+
+function isRoutingLocale(value: string | undefined): value is RoutingLocale {
+  return (
+    typeof value === "string" &&
+    routing.locales.some((locale) => locale === value)
+  );
+}
+
 function stripLocale(pathname: string) {
   const parts = pathname.split("/");
   const maybeLocale = parts[1];
 
-  if (routing.locales.includes(maybeLocale as any)) {
+  if (isRoutingLocale(maybeLocale)) {
     const rest = "/" + parts.slice(2).join("/");
     return {
       locale: maybeLocale,
@@ -31,7 +40,7 @@ function stripLocale(pathname: string) {
 
 function hasLocalePrefix(pathname: string) {
   const maybeLocale = pathname.split("/")[1];
-  return routing.locales.includes(maybeLocale as any);
+  return isRoutingLocale(maybeLocale);
 }
 
 function collapseDuplicateLocalePath(pathname: string) {
@@ -42,7 +51,7 @@ function collapseDuplicateLocalePath(pathname: string) {
   if (
       first &&
       second &&
-      routing.locales.includes(first as any) &&
+      isRoutingLocale(first) &&
       first === second
   ) {
     const rest = parts.slice(3).join("/");
@@ -126,7 +135,7 @@ export default async function middleware(req: NextRequest) {
   if (!hasLocalePrefix(pathname)) {
     const saved = req.cookies.get(LOCALE_COOKIE)?.value;
 
-    if (saved && routing.locales.includes(saved as any)) {
+    if (isRoutingLocale(saved)) {
       const url = req.nextUrl.clone();
       url.pathname = `/${saved}${pathname === "/" ? "" : pathname}`;
       return NextResponse.redirect(url);
@@ -179,14 +188,15 @@ export default async function middleware(req: NextRequest) {
   const cookieName =
       POSSIBLE_SESSION_COOKIES.find((name) => req.cookies.get(name)) ?? undefined;
 
-  const opts: any = { req, secret };
+  const tokenOptions: Parameters<typeof getToken>[0] = {
+    req,
+    secret,
+    ...(cookieName
+      ? { cookieName, salt: cookieName }
+      : {}),
+  };
 
-  if (cookieName) {
-    opts.cookieName = cookieName;
-    opts.salt = cookieName;
-  }
-
-  const token = await getToken(opts);
+  const token = await getToken(tokenOptions);
 
   if (!token) {
     return redirectToAuthenticate({
