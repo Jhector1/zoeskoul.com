@@ -76,10 +76,12 @@ export function isStandalonePracticeToolBindingPending(args: {
     return true;
   }
 
-  return Boolean(
-    args.boundId &&
-      args.boundId !== args.exerciseStateKey,
-  );
+  /**
+   * Formal Tools binding is advisory once the current exercise contract is
+   * resolved. A stale previous-exercise boundId must not keep the deterministic
+   * current workspace behind the loading mask forever.
+   */
+  return false;
 }
 
 export function useStandalonePracticeTools(args: {
@@ -229,8 +231,7 @@ export function useStandalonePracticeTools(args: {
       onCollapse,
       onUnbind: unbind,
       boundId: codeToolEnabled
-        ? tool.boundId ??
-          exerciseStateKey
+        ? exerciseStateKey
         : null,
       pendingExerciseBinding,
       editorOwnerKey:

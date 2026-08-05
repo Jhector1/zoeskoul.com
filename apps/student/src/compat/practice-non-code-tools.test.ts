@@ -86,7 +86,7 @@ describe(
     );
 
     it(
-      "keeps waiting for a stale previous-exercise binding to be replaced",
+      "does not block a resolved editor on a stale previous-exercise binding",
       () => {
         expect(
           isStandalonePracticeToolBindingPending({
@@ -97,7 +97,7 @@ describe(
             boundId: "practice:python:exercise-0",
             exerciseStateKey: "practice:python:exercise-1",
           }),
-        ).toBe(true);
+        ).toBe(false);
       },
     );
 
