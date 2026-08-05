@@ -204,5 +204,113 @@ describe(
       },
     );
 
+    it(
+      "keeps the implemented canonical course flow exact",
+      () => {
+        expect(
+          resolveStudentLocation(
+            "/fr/subjects/python/modules",
+          ),
+        ).toEqual({
+          kind: "course",
+          locale: "fr",
+          subjectSlug: "python",
+        });
+
+        expect(
+          resolveStudentLocation(
+            "/fr/subjects/python/modules/module-1",
+          ),
+        ).toEqual({
+          kind: "module",
+          locale: "fr",
+          subjectSlug: "python",
+          moduleSlug: "module-1",
+        });
+
+        expect(
+          resolveStudentLocation(
+            "/fr/subjects/python/modules/module-1/practice",
+          ),
+        ).toEqual({
+          kind: "module-practice",
+          locale: "fr",
+          subjectSlug: "python",
+          moduleSlug: "module-1",
+        });
+
+        for (const path of [
+          "/fr/subjects/python/modules/module-1/learn",
+          "/fr/subjects/python/modules/module-1/learn/section/topic/exercise/first",
+        ]) {
+          expect(
+            resolveStudentLocation(path),
+          ).toEqual({
+            kind: "lesson",
+            locale: "fr",
+            subjectSlug: "python",
+            moduleSlug: "module-1",
+          });
+        }
+      },
+    );
+
+    it(
+      "rejects partial and trailing canonical course paths",
+      () => {
+        for (const path of [
+          "/en/assignments/extra",
+          "/en/tutoring-sessions/session-1",
+          "/en/subjects/python/assignments/extra",
+          "/en/subjects/python/modules/extra/trailing",
+          "/en/subjects/python/modules/module-1/practice/extra",
+          "/en/subjects/python/modules/module-1/learn/section",
+          "/en/subjects/python/modules/module-1/learn/section/topic/exercise",
+          "/en/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
+        ]) {
+          expect(
+            resolveStudentLocation(path),
+          ).toEqual({
+            kind: "not-found",
+            locale: "en",
+            path,
+          });
+        }
+      },
+    );
+
+    it(
+      "opens exact catalog-prefixed lesson routes in the review player",
+      () => {
+        for (const path of [
+          "/en/catalog/core/subjects/python/modules/module-1/learn",
+          "/en/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first",
+        ]) {
+          expect(
+            resolveStudentLocation(path),
+          ).toEqual({
+            kind: "lesson",
+            locale: "en",
+            subjectSlug: "python",
+            moduleSlug: "module-1",
+          });
+        }
+
+        for (const path of [
+          "/en/catalog/core/subjects/python/modules/module-1",
+          "/en/catalog/core/subjects/python/modules/module-1/learn/section",
+          "/en/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
+        ]) {
+          expect(
+            resolveStudentLocation(path),
+          ).toEqual({
+            kind: "not-found",
+            locale: "en",
+            path,
+          });
+        }
+      },
+    );
+
   },
 );
