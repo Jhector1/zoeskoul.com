@@ -16,6 +16,7 @@ describe(
       "lesson",
       "daily-practice",
       "module-practice",
+      "tutoring-session",
     ])(
       "uses only the internal workspace header for %s",
       (kind) => {
@@ -43,6 +44,11 @@ describe(
       "catalog",
       "assignments",
       "tutoring",
+      "achievements",
+      "leaderboard",
+      "progress",
+      "certificate",
+      "subject-assignments",
       "course",
       "module",
     ])(

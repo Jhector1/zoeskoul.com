@@ -27,8 +27,38 @@ export type StudentLocation =
       locale: string;
     }
   | {
+      kind: "subject-assignments";
+      locale: string;
+      subjectSlug: string;
+    }
+  | {
+      kind: "achievements";
+      locale: string;
+    }
+  | {
+      kind: "leaderboard";
+      locale: string;
+    }
+  | {
+      kind: "progress";
+      locale: string;
+      subjectSlug: string;
+    }
+  | {
+      kind: "certificate";
+      locale: string;
+      subjectSlug: string;
+    }
+  | {
       kind: "tutoring";
       locale: string;
+    }
+  | {
+      kind: "tutoring-session";
+      locale: string;
+      sessionId: string;
+      subjectSlug?: string;
+      moduleSlug?: string;
     }
   | {
       kind: "daily-practice";
@@ -154,6 +184,26 @@ export function resolveStudentLocation(
   }
 
   if (
+    parts[0] === "achievements" &&
+    !parts[1]
+  ) {
+    return {
+      kind: "achievements",
+      locale,
+    };
+  }
+
+  if (
+    parts[0] === "leaderboard" &&
+    !parts[1]
+  ) {
+    return {
+      kind: "leaderboard",
+      locale,
+    };
+  }
+
+  if (
     parts[0] === "assignments" &&
     !parts[1]
   ) {
@@ -176,6 +226,40 @@ export function resolveStudentLocation(
     };
   }
 
+  if (
+    parts[0] === "tutoring-sessions" &&
+    parts[1] &&
+    !parts[2]
+  ) {
+    return {
+      kind: "tutoring-session",
+      locale,
+      sessionId: parts[1],
+    };
+  }
+
+  if (
+    parts[0] === "tutoring-sessions" &&
+    parts[1] &&
+    parts[2] === "subjects" &&
+    parts[3] &&
+    parts[4] === "modules" &&
+    parts[5] &&
+    parts[6] === "learn" &&
+    (
+      !parts[7] ||
+      isExactLessonTarget(7)
+    )
+  ) {
+    return {
+      kind: "tutoring-session",
+      locale,
+      sessionId: parts[1],
+      subjectSlug: parts[3],
+      moduleSlug: parts[5],
+    };
+  }
+
   const subjectRoot =
     parts[0] === "subjects" &&
     Boolean(parts[1]);
@@ -186,8 +270,33 @@ export function resolveStudentLocation(
     !parts[3]
   ) {
     return {
-      kind: "assignments",
+      kind: "subject-assignments",
       locale,
+      subjectSlug: parts[1],
+    };
+  }
+
+  if (
+    subjectRoot &&
+    parts[2] === "progress" &&
+    !parts[3]
+  ) {
+    return {
+      kind: "progress",
+      locale,
+      subjectSlug: parts[1],
+    };
+  }
+
+  if (
+    subjectRoot &&
+    parts[2] === "certificate" &&
+    !parts[3]
+  ) {
+    return {
+      kind: "certificate",
+      locale,
+      subjectSlug: parts[1],
     };
   }
 
@@ -526,6 +635,8 @@ export function isPublicStudentPath(
 
   return (
     location.kind === "catalogs" ||
-    location.kind === "catalog-detail"
+    location.kind === "catalog-detail" ||
+    location.kind === "achievements" ||
+    location.kind === "leaderboard"
   );
 }

@@ -46,7 +46,8 @@
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
-    "@zoeskoul/workspace-contracts": "workspace:*"
+    "@zoeskoul/workspace-contracts": "workspace:*",
+    "recharts": "^3.6.0"
   },
   "devDependencies": {
     "@types/react": "^19",

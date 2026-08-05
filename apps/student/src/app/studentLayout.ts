@@ -23,6 +23,7 @@ export function resolveStudentLayout(
     case "lesson":
     case "daily-practice":
     case "module-practice":
+    case "tutoring-session":
       return "workspace";
 
     default:
