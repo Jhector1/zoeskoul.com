@@ -7,6 +7,7 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { isCatalogLearningPath } from "@/lib/routing/protectedLearningPath";
 import { handleAppApiCorsBoundary } from "@/lib/http/appApiCorsBoundary";
+import { resolveStudentRouteHandoff } from "@/lib/navigation/studentRouteHandoff";
 
 const handleI18n = createMiddleware(routing);
 
@@ -132,7 +133,20 @@ export default async function middleware(req: NextRequest) {
     }
   }
 
-  // 3) Let next-intl do locale detection / redirects / rewrites
+  // 3) Cross-app handoff is controlled by an explicit, currently empty,
+  // production-qualified allowlist in @zoeskoul/app-config. Unlocalized
+  // requests still pass through next-intl first so locale detection remains
+  // unchanged.
+  if (hasLocalePrefix(pathname)) {
+    const studentHandoff = resolveStudentRouteHandoff({
+      currentUrl: req.nextUrl.toString(),
+    });
+    if (studentHandoff) {
+      return NextResponse.redirect(studentHandoff, 307);
+    }
+  }
+
+  // 4) Let next-intl do locale detection / redirects / rewrites
   const res = handleI18n(req);
 
   const { pathname: localizedPathname } = req.nextUrl;
