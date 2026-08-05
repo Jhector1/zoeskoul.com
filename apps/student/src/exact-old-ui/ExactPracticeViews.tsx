@@ -10,6 +10,9 @@ import PracticeClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[
 import {
   resolveLegacyApiUrl,
 } from "../compat/LegacyApiBridge";
+import {
+  loadDailyPracticePayload,
+} from "./dailyPracticeBootstrap";
 
 type DailyProps =
   ComponentProps<
@@ -88,32 +91,11 @@ export function ExactDailyPracticeView(
           props.apiOrigin,
       });
 
-    void fetch(
+    void loadDailyPracticePayload({
       requestUrl,
-      {
-        credentials: "include",
-        cache: "no-store",
-        signal: controller.signal,
-      },
-    )
-      .then(async (response) => {
-        const payload =
-          await response
-            .json()
-            .catch(() => null);
-
-        if (
-          !response.ok ||
-          !payload
-        ) {
-          throw new Error(
-            String(
-              payload?.error ??
-              "Daily Practice could not be loaded.",
-            ),
-          );
-        }
-
+      signal: controller.signal,
+    })
+      .then((payload) => {
         setState({
           status: "ready",
           data: payload as DailyProps,
