@@ -176,6 +176,7 @@ export function StudentAppShell(props: {
       />
     ) : location.kind === "daily-practice" ? (
       <ExactDailyPracticeView
+        apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     ) : location.kind === "module-practice" ? (

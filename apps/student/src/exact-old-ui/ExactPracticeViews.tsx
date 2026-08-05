@@ -7,6 +7,9 @@ import {
 
 import DailyFivePracticeClient from "@/routes/(public)/[locale]/(learningZone)/practice/daily/daily-five-practice-client";
 import PracticeClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/practice/practice-client";
+import {
+  resolveLegacyApiUrl,
+} from "../compat/LegacyApiBridge";
 
 type DailyProps =
   ComponentProps<
@@ -53,6 +56,7 @@ function PracticeState(props: {
 
 export function ExactDailyPracticeView(
   props: {
+    apiOrigin: string;
     locale: string;
   },
 ) {
@@ -74,8 +78,18 @@ export function ExactDailyPracticeView(
       props.locale,
     );
 
+    const requestUrl =
+      resolveLegacyApiUrl({
+        rawUrl:
+          `/api/student-ui/practice/daily?${query.toString()}`,
+        browserUrl:
+          window.location.href,
+        apiOrigin:
+          props.apiOrigin,
+      });
+
     void fetch(
-      `/api/student-ui/practice/daily?${query.toString()}`,
+      requestUrl,
       {
         credentials: "include",
         cache: "no-store",
@@ -125,7 +139,10 @@ export function ExactDailyPracticeView(
     return () => {
       controller.abort();
     };
-  }, [props.locale]);
+  }, [
+    props.apiOrigin,
+    props.locale,
+  ]);
 
   if (state.status === "loading") {
     return (

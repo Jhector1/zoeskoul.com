@@ -58,6 +58,27 @@ describe("LegacyApiBridge URL routing", () => {
     );
   });
 
+  it.each([
+    "/api/student-ui/practice/daily?locale=fr&source=home",
+    "/api/practice/daily/start",
+    "/api/practice/session/start",
+  ])(
+    "rewrites the Daily Practice request %s to Web in production",
+    (rawUrl) => {
+      expect(
+        resolveLegacyApiUrl({
+          rawUrl,
+          browserUrl:
+            "https://student.zoeskoul.com/fr/practice/daily",
+          apiOrigin:
+            "https://zoeskoul.com",
+        }),
+      ).toBe(
+        `https://zoeskoul.com${rawUrl}`,
+      );
+    },
+  );
+
   it("does not rewrite non-API URLs", () => {
     expect(
       resolveLegacyApiUrl({

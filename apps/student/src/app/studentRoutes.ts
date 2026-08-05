@@ -111,7 +111,8 @@ export function resolveStudentLocation(
 
   if (
     parts[0] === "practice" &&
-    parts[1] === "daily"
+    parts[1] === "daily" &&
+    !parts[2]
   ) {
     return {
       kind: "daily-practice",
