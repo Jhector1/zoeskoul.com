@@ -10,7 +10,7 @@ import {
     walkFiles,
     writeTextFile,
     projectRoot,
-} from "./_shared/generator-common";
+} from "./generatorCommon.js";
 
 const subjectsRoot = path.join(projectRoot, "src", "lib", "subjects");
 const authoringCatalogsRoot = path.resolve(

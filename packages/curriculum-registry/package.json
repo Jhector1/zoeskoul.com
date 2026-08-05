@@ -12,8 +12,17 @@
     }
   },
   "scripts": {
+    "prebuild": "pnpm --filter @zoeskoul/curriculum-core build",
     "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "generate": "pnpm generate:web",
+    "generate:web": "pnpm build && node dist/generate/generateI18nManifest.js --app-root apps/web && node dist/generate/generateTopicManifests.js --app-root apps/web && node dist/generate/generateSubjectManifests.js --app-root apps/web && node dist/generate/generateCatalogManifests.js --app-root apps/web",
+    "generate:i18n:web": "pnpm build && node dist/generate/generateI18nManifest.js --app-root apps/web",
+    "generate:topics:web": "pnpm build && node dist/generate/generateTopicManifests.js --app-root apps/web",
+    "generate:subjects:web": "pnpm build && node dist/generate/generateSubjectManifests.js --app-root apps/web",
+    "generate:catalogs:web": "pnpm build && node dist/generate/generateCatalogManifests.js --app-root apps/web",
+    "check": "pnpm check:web",
+    "check:web": "pnpm build && node dist/generate/checkGeneratedArtifacts.js --app-root apps/web"
   },
   "dependencies": {
     "@zoeskoul/curriculum-core": "workspace:*"

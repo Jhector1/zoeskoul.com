@@ -7,14 +7,24 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { isCatalogLearningPath } from "@/lib/routing/protectedLearningPath";
 import { handleAppApiCorsBoundary } from "@/lib/http/appApiCorsBoundary";
+import { resolveStudentRouteHandoff } from "@/lib/navigation/studentRouteHandoff";
 
 const handleI18n = createMiddleware(routing);
+
+type RoutingLocale = (typeof routing.locales)[number];
+
+function isRoutingLocale(value: string | undefined): value is RoutingLocale {
+  return (
+    typeof value === "string" &&
+    routing.locales.some((locale) => locale === value)
+  );
+}
 
 function stripLocale(pathname: string) {
   const parts = pathname.split("/");
   const maybeLocale = parts[1];
 
-  if (routing.locales.includes(maybeLocale as any)) {
+  if (isRoutingLocale(maybeLocale)) {
     const rest = "/" + parts.slice(2).join("/");
     return {
       locale: maybeLocale,
@@ -30,7 +40,7 @@ function stripLocale(pathname: string) {
 
 function hasLocalePrefix(pathname: string) {
   const maybeLocale = pathname.split("/")[1];
-  return routing.locales.includes(maybeLocale as any);
+  return isRoutingLocale(maybeLocale);
 }
 
 function collapseDuplicateLocalePath(pathname: string) {
@@ -41,7 +51,7 @@ function collapseDuplicateLocalePath(pathname: string) {
   if (
       first &&
       second &&
-      routing.locales.includes(first as any) &&
+      isRoutingLocale(first) &&
       first === second
   ) {
     const rest = parts.slice(3).join("/");
@@ -125,14 +135,27 @@ export default async function middleware(req: NextRequest) {
   if (!hasLocalePrefix(pathname)) {
     const saved = req.cookies.get(LOCALE_COOKIE)?.value;
 
-    if (saved && routing.locales.includes(saved as any)) {
+    if (isRoutingLocale(saved)) {
       const url = req.nextUrl.clone();
       url.pathname = `/${saved}${pathname === "/" ? "" : pathname}`;
       return NextResponse.redirect(url);
     }
   }
 
-  // 3) Let next-intl do locale detection / redirects / rewrites
+  // 3) Cross-app handoff is controlled by an explicit, currently empty,
+  // production-qualified allowlist in @zoeskoul/app-config. Unlocalized
+  // requests still pass through next-intl first so locale detection remains
+  // unchanged.
+  if (hasLocalePrefix(pathname)) {
+    const studentHandoff = resolveStudentRouteHandoff({
+      currentUrl: req.nextUrl.toString(),
+    });
+    if (studentHandoff) {
+      return NextResponse.redirect(studentHandoff, 307);
+    }
+  }
+
+  // 4) Let next-intl do locale detection / redirects / rewrites
   const res = handleI18n(req);
 
   const { pathname: localizedPathname } = req.nextUrl;
@@ -165,14 +188,15 @@ export default async function middleware(req: NextRequest) {
   const cookieName =
       POSSIBLE_SESSION_COOKIES.find((name) => req.cookies.get(name)) ?? undefined;
 
-  const opts: any = { req, secret };
+  const tokenOptions: Parameters<typeof getToken>[0] = {
+    req,
+    secret,
+    ...(cookieName
+      ? { cookieName, salt: cookieName }
+      : {}),
+  };
 
-  if (cookieName) {
-    opts.cookieName = cookieName;
-    opts.salt = cookieName;
-  }
-
-  const token = await getToken(opts);
+  const token = await getToken(tokenOptions);
 
   if (!token) {
     return redirectToAuthenticate({

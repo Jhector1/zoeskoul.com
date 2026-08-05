@@ -1,8 +1,17 @@
-// scripts/_shared/generator-common.ts
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-export const projectRoot = process.cwd();
+const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+export const repositoryRoot = path.resolve(moduleDir, "..", "..", "..", "..");
+
+function readAppRoot(argv = process.argv.slice(2)): string {
+    const idx = argv.indexOf("--app-root");
+    const configured = idx === -1 ? null : argv[idx + 1] ?? null;
+    return configured?.trim() || "apps/web";
+}
+
+export const projectRoot = path.resolve(repositoryRoot, readAppRoot());
 
 export async function exists(p: string): Promise<boolean> {
     try {

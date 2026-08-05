@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "pnpm --filter @zoeskoul/progress-contracts build",
     "dev": "next dev --port 3001",
+    "prebuild": "pnpm --filter @zoeskoul/progress-contracts build",
     "build": "next build",
     "start": "next start --port 3001",
+    "pretypecheck": "pnpm --filter @zoeskoul/progress-contracts build",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -13,7 +16,6 @@
     "@prisma/client": "^7.4.0",
     "@zoeskoul/progress-contracts": "workspace:*",
     "@zoeskoul/db": "workspace:*",
-
     "next": "16.1.1",
     "pg": "^8.20.0",
     "react": "19.2.3",

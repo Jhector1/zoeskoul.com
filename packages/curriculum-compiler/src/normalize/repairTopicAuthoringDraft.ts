@@ -3,7 +3,6 @@ import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
 } from "@zoeskoul/curriculum-profiles";
-import {RetryableTopicValidationError} from "../validate/RetryableTopicValidationError.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -886,6 +885,10 @@ export function repairTopicAuthoringDraft(
                     solutionCode,
                     datasetId: normalizeText(exercise.datasetId) || undefined,
                     recipeType: exercise.recipeType,
+                    // `base` is created before discriminant narrowing, so its
+                    // spread retains the combined pseudocode/code-input `mode`
+                    // type. Re-assert the narrowed code-input execution mode.
+                    mode: exercise.mode,
                     hint: sanitized.hint || fallback.hint,
                     help: {
                         concept: sanitized.help.concept || fallback.help.concept,

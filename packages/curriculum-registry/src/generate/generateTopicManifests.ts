@@ -14,7 +14,7 @@ import {
     readFlag,
     writeTextFile,
     relFromProject,
-} from "./_shared/generator-common";
+} from "./generatorCommon.js";
 
 const subjectsRoot = path.join(projectRoot, "src", "lib", "subjects");
 

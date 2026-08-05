@@ -3,31 +3,22 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-const projectRoot = process.cwd();
+import {
+    exists,
+    getDirectories,
+    projectRoot,
+} from "./generatorCommon.js";
+
 const messagesRoot = path.join(projectRoot, "src", "i18n", "messages");
 const outputFile = path.join(projectRoot, "src", "i18n", "messages.generated.ts");
 const defaultLocale = "en";
 
-async function exists(p) {
-    try {
-        await fs.access(p);
-        return true;
-    } catch {
-        return false;
-    }
-}
-
-async function getDirectories(dir) {
+async function walkJsonFiles(
+    dir: string,
+    baseDir = dir,
+): Promise<string[]> {
     const entries = await fs.readdir(dir, { withFileTypes: true });
-    return entries
-        .filter((e) => e.isDirectory())
-        .map((e) => e.name)
-        .sort((a, b) => a.localeCompare(b));
-}
-
-async function walkJsonFiles(dir, baseDir = dir) {
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    const out = [];
+    const out: string[] = [];
 
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
@@ -37,17 +28,24 @@ async function walkJsonFiles(dir, baseDir = dir) {
             continue;
         }
 
-        if (!entry.isFile()) continue;
-        if (!entry.name.endsWith(".json")) continue;
+        if (!entry.isFile() || !entry.name.endsWith(".json")) {
+            continue;
+        }
 
-        const rel = path.relative(baseDir, fullPath).split(path.sep).join("/");
-        out.push(rel);
+        const relativePath = path
+            .relative(baseDir, fullPath)
+            .split(path.sep)
+            .join("/");
+        out.push(relativePath);
     }
 
     return out;
 }
 
-function makeLoaderBlock(locale, files) {
+function makeLoaderBlock(
+    locale: string,
+    files: string[],
+): string {
     if (files.length === 0) {
         return `  ${JSON.stringify(locale)}: [],`;
     }
@@ -60,7 +58,7 @@ function makeLoaderBlock(locale, files) {
     return `  ${JSON.stringify(locale)}: [\n${lines.join("\n")}\n  ],`;
 }
 
-async function main() {
+async function main(): Promise<void> {
     if (!(await exists(messagesRoot))) {
         throw new Error(`Messages directory not found: ${messagesRoot}`);
     }
@@ -72,10 +70,12 @@ async function main() {
     }
 
     if (!locales.includes(defaultLocale)) {
-        throw new Error(`Default locale "${defaultLocale}" not found under ${messagesRoot}`);
+        throw new Error(
+            `Default locale "${defaultLocale}" not found under ${messagesRoot}`,
+        );
     }
 
-    const localeToFiles = {};
+    const localeToFiles: Record<string, string[]> = {};
 
     for (const locale of locales) {
         const localeDir = path.join(messagesRoot, locale);
@@ -84,7 +84,7 @@ async function main() {
     }
 
     const loaderBlocks = locales
-        .map((locale) => makeLoaderBlock(locale, localeToFiles[locale]))
+        .map((locale) => makeLoaderBlock(locale, localeToFiles[locale] ?? []))
         .join("\n\n");
 
     const fileContents = `/* eslint-disable */
@@ -129,11 +129,11 @@ export const AVAILABLE_MESSAGE_LOCALES = ${JSON.stringify(locales)} as const;
     await fs.writeFile(outputFile, fileContents, "utf8");
 
     console.log(
-        `Generated src/i18n/messages.generated.ts for locales: ${locales.join(", ")}`
+        `Generated src/i18n/messages.generated.ts for locales: ${locales.join(", ")}`,
     );
 }
 
-main().catch((error) => {
+main().catch((error: unknown) => {
     console.error(error);
     process.exit(1);
 });

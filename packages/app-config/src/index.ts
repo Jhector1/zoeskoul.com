@@ -254,6 +254,23 @@ const adminOwnedRoots =
     "users",
   ]);
 
+// Desired ownership describes the final application boundary. It is kept
+// separate from the legacy/current resolver so route declarations cannot
+// accidentally activate a production cross-app redirect before the target
+// application implements and validates the route.
+const desiredWebsiteOwnedRoots = new Set(
+  [...websiteOwnedRoots].filter((root) => root !== "sandbox"),
+);
+desiredWebsiteOwnedRoots.add("c");
+desiredWebsiteOwnedRoots.add("invitations");
+
+const desiredStudentOwnedRoots = new Set([
+  ...studentOwnedRoots,
+  "leaderboard",
+  "projects",
+  "sandbox",
+]);
+
 function safelyDecode(
   value: string,
 ) {
@@ -346,6 +363,20 @@ function isOriginalSubjectFirstLearningRoute(
   );
 }
 
+function isCatalogPrefixedLearningRoute(
+  segments: string[],
+) {
+  return Boolean(
+    segments[0] === "catalog" &&
+    segments[1] &&
+    segments[2] === "subjects" &&
+    segments[3] &&
+    segments[4] === "modules" &&
+    segments[5] &&
+    segments[6] === "learn",
+  );
+}
+
 export function resolveAppRouteOwner(args: {
   pathname: string;
   currentApp?: KnownAppRouteOwner;
@@ -421,6 +452,114 @@ export function resolveAppRouteOwner(args: {
   }
 
   return "unknown";
+}
+
+/**
+ * Returns the application that should own a route after the multi-app
+ * separation is complete. This does not imply that the route is ready for
+ * production cutover.
+ */
+export function resolveDesiredAppRouteOwner(args: {
+  pathname: string;
+  currentApp?: KnownAppRouteOwner;
+}): AppRouteOwner {
+  const { segments } =
+    stripRouteLocale(args.pathname);
+
+  if (segments.length === 0) {
+    return args.currentApp ?? "website";
+  }
+
+  const root = segments[0] ?? "";
+
+  if (desiredWebsiteOwnedRoots.has(root)) {
+    return "website";
+  }
+
+  if (
+    args.currentApp === "student" &&
+    (
+      desiredStudentOwnedRoots.has(root) ||
+      isOriginalSubjectFirstLearningRoute(segments) ||
+      isCatalogPrefixedLearningRoute(segments)
+    )
+  ) {
+    return "student";
+  }
+
+  if (
+    args.currentApp === "teacher" &&
+    (
+      teacherOwnedRoots.has(root) ||
+      root === "dashboard" ||
+      root === "assignments" ||
+      root === "courses" ||
+      root === "tutoring-sessions"
+    )
+  ) {
+    return "teacher";
+  }
+
+  if (
+    args.currentApp === "admin" &&
+    (
+      adminOwnedRoots.has(root) ||
+      root === "dashboard" ||
+      root === "catalogs" ||
+      root === "subjects" ||
+      root === "courses" ||
+      root === "assignments" ||
+      root === "tutoring"
+    )
+  ) {
+    return "admin";
+  }
+
+  if (
+    desiredStudentOwnedRoots.has(root) ||
+    isOriginalSubjectFirstLearningRoute(segments) ||
+    isCatalogPrefixedLearningRoute(segments)
+  ) {
+    return "student";
+  }
+
+  if (teacherOwnedRoots.has(root)) {
+    return "teacher";
+  }
+
+  if (adminOwnedRoots.has(root)) {
+    return "admin";
+  }
+
+  return "unknown";
+}
+
+/**
+ * Locale-stripped route prefixes that Web may actively hand off to Student.
+ * Phase 1 intentionally starts empty. A route must be implemented, tested,
+ * browser-validated, and production-qualified before adding its prefix here.
+ */
+export const studentRouteCutoverAllowlist: readonly string[] = [];
+
+export function isStudentRouteCutoverReady(args: {
+  pathname: string;
+}): boolean {
+  if (
+    resolveDesiredAppRouteOwner({
+      pathname: args.pathname,
+    }) !== "student"
+  ) {
+    return false;
+  }
+
+  const { segments } = stripRouteLocale(args.pathname);
+  const normalizedPath = `/${segments.join("/")}`;
+
+  return studentRouteCutoverAllowlist.some(
+    (prefix) =>
+      normalizedPath === prefix ||
+      normalizedPath.startsWith(`${prefix}/`),
+  );
 }
 
 export function localizedRoutePath(args: {
