@@ -309,8 +309,8 @@ export function ExactAchievementsView() {
             });
             const jj = await rr.json().catch(() => null);
             if (rr.ok) setData(jj);
-        } catch (e: any) {
-            alert(e?.message ?? t("downloadFailed"));
+        } catch (error: unknown) {
+            alert(error instanceof Error ? error.message : t("downloadFailed"));
         } finally {
             setDownloadingSlug(null);
         }

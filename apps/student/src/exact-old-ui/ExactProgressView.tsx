@@ -2,7 +2,7 @@
 "use client";
 
 import { difficultyOptions, topicOptions } from "@/components/vectorpad/types";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -49,8 +49,8 @@ type ProgressResponse = {
     kind: string;
     title: string;
     prompt: string;
-    userAnswer: any;
-    expected: any;
+    userAnswer: unknown;
+    expected: unknown;
     explanation?: string;
   }>;
   meta: { range: string; topic: string; difficulty: string };
@@ -66,7 +66,7 @@ function fmtDate(iso: string) {
   return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 }
 
-async function readJsonSafe(res: Response) {
+async function readJsonSafe(res: Response): Promise<unknown> {
   const text = await res.text();
   if (!text) throw new Error(`Empty response body (status ${res.status})`);
   try {
@@ -74,6 +74,15 @@ async function readJsonSafe(res: Response) {
   } catch {
     throw new Error(`Non-JSON response (status ${res.status}): ${text.slice(0, 180)}`);
   }
+}
+
+function responseMessage(value: unknown): string | null {
+  if (typeof value !== "object" || value === null || !("message" in value)) {
+    return null;
+  }
+
+  const message = (value as { message?: unknown }).message;
+  return typeof message === "string" ? message : null;
 }
 
 const TOPIC_OPTIONS = topicOptions;
@@ -96,7 +105,7 @@ export function ExactProgressView() {
   const [data, setData] = useState<ProgressResponse | null>(null);
   const [err, setErr] = useState<string>("");
 
-  async function load() {
+  const load = useCallback(async () => {
     setBusy(true);
     setErr("");
     try {
@@ -106,21 +115,22 @@ export function ExactProgressView() {
         difficulty,
       });
       const r = await fetch(`/api/student-ui/progress?${q.toString()}`, { cache: "no-store" });
-      const j = (await readJsonSafe(r)) as ProgressResponse;
-      if (!r.ok) throw new Error((j as any)?.message || `Request failed (${r.status})`);
-      setData(j);
-    } catch (e: any) {
-      setErr(e?.message || "Failed to load progress.");
+      const payload = await readJsonSafe(r);
+      if (!r.ok) {
+        throw new Error(responseMessage(payload) ?? `Request failed (${r.status})`);
+      }
+      setData(payload as ProgressResponse);
+    } catch (error: unknown) {
+      setErr(error instanceof Error ? error.message : "Failed to load progress.");
       setData(null);
     } finally {
       setBusy(false);
     }
-  }
+  }, [difficulty, range, topic]);
 
   useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range, topic, difficulty]);
+    void load();
+  }, [load]);
 
   const palette = useMemo(() => ["#7aa2ff", "#ff6bd6", "#53f7b6", "#ffdf6b", "#b59bff"], []);
 
@@ -158,7 +168,7 @@ const topicLabelById = useMemo(() => {
             <select
               className="rounded-2xl border border-white/10 bg-black/25 px-3 py-2 text-sm font-extrabold text-white/90 outline-none"
               value={topic}
-              onChange={(e) => setTopic(e.target.value as any)}
+              onChange={(e) => setTopic(e.target.value as Topic | "all")}
             >
               {TOPIC_OPTIONS.map((x) => (
                 <option key={x.id} value={x.id}>
@@ -170,7 +180,7 @@ const topicLabelById = useMemo(() => {
             <select
               className="rounded-2xl border border-white/10 bg-black/25 px-3 py-2 text-sm font-extrabold text-white/90 outline-none"
               value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value as any)}
+              onChange={(e) => setDifficulty(e.target.value as Difficulty | "all")}
             >
               {DIFF_OPTIONS.map((x) => (
                 <option key={x.id} value={x.id}>
@@ -230,7 +240,7 @@ sub={data ? `Best topic: ${topicLabelById.get(data.totals.bestTopic) ?? data.tot
                       color: "rgba(255,255,255,0.9)",
                       fontWeight: 700,
                     }}
-                    formatter={(v: any, name: any) => (name === "accuracy" ? pct(Number(v)) : v)}
+                    formatter={(value, name) => (name === "accuracy" ? pct(Number(value)) : value)}
                   />
                   <Line type="monotone" dataKey="accuracy" strokeWidth={3} dot={false} />
                 </LineChart>
@@ -394,50 +404,6 @@ sub={data ? `Best topic: ${topicLabelById.get(data.totals.bestTopic) ?? data.tot
         </div>
       </div>
     </div>
-  );
-}
-
-
-
-
-function prettyJson(v: any) {
-  if (v === undefined) return "—";
-  if (typeof v === "string") return v; // keep strings readable
-  try {
-    return JSON.stringify(v, null, 2);
-  } catch {
-    return String(v);
-  }
-}
-
-// function JsonBlock({ value }: { value: any }) {
-//   const text = prettyJson(value);
-//   return (
-//     <pre
-//       className={cn(
-//         "mt-1 rounded-lg border border-white/10 bg-black/30 p-2",
-//         "font-mono text-[11px] leading-relaxed text-white/85",
-//         "whitespace-pre-wrap break-words", // ✅ wraps nicely
-//         "max-h-40 overflow-auto" // ✅ prevents huge cards
-//       )}
-//     >
-//       {text}
-//     </pre>
-//   );
-// }
-
-
-function JsonBlock({ value, label = "View JSON" }: { value: any; label?: string }) {
-  const text = prettyJson(value);
-  return (
-    <details className="mt-1">
-      <summary className="cursor-pointer select-none text-[11px] font-extrabold text-white/70 hover:text-white/85">
-        {label}
-      </summary>
-      <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-white/10 bg-black/30 p-2 font-mono text-[11px] leading-relaxed text-white/85">
-        {text}
-      </pre>
-    </details>
   );
 }
 

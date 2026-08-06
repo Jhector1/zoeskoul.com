@@ -195,8 +195,8 @@ export function ExactCertificateView() {
             );
             const dd = await rr.json().catch(() => null);
             if (rr.ok) setStatus(dd);
-        } catch (e: any) {
-            alert(e?.message ?? t("downloadFailed"));
+        } catch (error: unknown) {
+            alert(error instanceof Error ? error.message : t("downloadFailed"));
         } finally {
             setDownloading(false);
         }

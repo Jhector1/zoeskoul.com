@@ -34,11 +34,33 @@ type Assignment = {
   moduleSlug?: string | null;
 };
 
+type AssignmentsResponse = {
+  assignments?: Assignment[];
+  code?: string;
+  message?: string;
+};
+
+type AssignmentStartResponse = {
+  code?: string;
+  message?: string;
+  subjectSlug?: string | null;
+  moduleSlug?: string | null;
+  sessionId?: string | number | null;
+};
+
+async function readJsonSafe<T>(response: Response): Promise<T | null> {
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
 function topicSlug(t: AssignmentTopic): string {
   return typeof t === "string" ? t : String(t.slug ?? "");
 }
 
-const badge = (txt: string) =>
+const badge = (_txt: string) =>
   "rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-extrabold text-white/70";
 
 function billingUrl(nextPath: string) {
@@ -57,20 +79,20 @@ export function ExactSubjectAssignmentsView() {
       try {
         const r = await fetch("/api/student-ui/assignments", { cache: "no-store" });
 
+        const data = await readJsonSafe<AssignmentsResponse>(r);
+
         // ✅ handle paywall
         if (!r.ok) {
-          let data: any = null;
-          try {
-            data = await r.json();
-          } catch {}
           if (r.status === 402 || data?.code === "NOT_ENTITLED") {
             router.replace(billingUrl("/assignments"));
             return;
           }
+
+          setItems([]);
+          return;
         }
 
-        const data = await r.json();
-        setItems(data.assignments ?? []);
+        setItems(data?.assignments ?? []);
       } finally {
         setBusy(false);
       }
@@ -80,10 +102,8 @@ export function ExactSubjectAssignmentsView() {
   const start = async (a: Assignment) => {
     const r = await fetch(`/api/student-ui/assignments/${a.id}/start`, { method: "POST" });
 
-    let data: any = null;
-    try {
-      data = await r.json();
-    } catch {
+    const data = await readJsonSafe<AssignmentStartResponse>(r);
+    if (!data) {
       alert("Unexpected response. Please try again.");
       return;
     }
