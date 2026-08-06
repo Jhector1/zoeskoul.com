@@ -53,10 +53,10 @@ export default async function BillingPage({
                                               searchParams,
                                           }: {
     params: Promise<{ locale: string }>;
-    searchParams?: SearchParams | Promise<SearchParams>;
+    searchParams?: Promise<SearchParams>;
 }) {
     const { locale } = await params;
-    const sp = await Promise.resolve(searchParams ?? {});
+    const sp = (await searchParams) ?? {};
 
     const next = pickString(sp, "next");
     const callbackUrl = safeInternalPath(next ?? pickString(sp, "callbackUrl") ?? "/");
