@@ -18,6 +18,7 @@
     "@zoeskoul/editor-surface": "workspace:*",
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
+    "@zoeskoul/learner-ui": "workspace:*",
     "@zoeskoul/lesson-renderer": "workspace:*",
     "@zoeskoul/lesson-shell": "workspace:*",
     "@zoeskoul/pdf-viewer": "workspace:*",
