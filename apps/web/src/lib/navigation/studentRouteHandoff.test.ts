@@ -207,6 +207,38 @@ describe("Student route handoff", () => {
       "https://student.zoeskoul.com/fr/tutoring-sessions?source=my-learning",
     ],
     [
+      "https://zoeskoul.com/en/achievements?source=header",
+      "https://student.zoeskoul.com/en/achievements?source=header",
+    ],
+    [
+      "https://zoeskoul.com/fr/leaderboard?period=all_time",
+      "https://student.zoeskoul.com/fr/leaderboard?period=all_time",
+    ],
+    [
+      "https://zoeskoul.com/ht/subjects/python/progress",
+      "https://student.zoeskoul.com/ht/subjects/python/progress",
+    ],
+    [
+      "https://zoeskoul.com/en/subjects/python/certificate",
+      "https://student.zoeskoul.com/en/subjects/python/certificate",
+    ],
+    [
+      "https://zoeskoul.com/fr/subjects/python/assignments",
+      "https://student.zoeskoul.com/fr/subjects/python/assignments",
+    ],
+    [
+      "https://zoeskoul.com/en/tutoring-sessions/session-1?workspace=mine",
+      "https://student.zoeskoul.com/en/tutoring-sessions/session-1?workspace=mine",
+    ],
+    [
+      "https://zoeskoul.com/fr/tutoring-sessions/session-1/subjects/python/modules/module-1/learn?workspace=reference",
+      "https://student.zoeskoul.com/fr/tutoring-sessions/session-1/subjects/python/modules/module-1/learn?workspace=reference",
+    ],
+    [
+      "https://zoeskoul.com/ht/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section/topic/exercise/first#answer",
+      "https://student.zoeskoul.com/ht/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section/topic/exercise/first#answer",
+    ],
+    [
       "https://zoeskoul.com/ht/subjects/python/modules",
       "https://student.zoeskoul.com/ht/subjects/python/modules",
     ],
@@ -248,7 +280,6 @@ describe("Student route handoff", () => {
 
   it.each([
     "https://zoeskoul.com/en/subjects/python",
-    "https://zoeskoul.com/en/subjects/python/progress",
     "https://zoeskoul.com/en/practice",
     "https://zoeskoul.com/en/practice/daily/extra",
     "https://zoeskoul.com/en/practice/trial",
@@ -257,14 +288,20 @@ describe("Student route handoff", () => {
     "https://zoeskoul.com/en/catalogs/core/subjects",
     "https://zoeskoul.com/en/catalogs/%2F",
     "https://zoeskoul.com/en/assignments/assignment-1",
-    "https://zoeskoul.com/en/tutoring-sessions/session-1",
-    "https://zoeskoul.com/en/subjects/python/assignments",
     "https://zoeskoul.com/en/subjects/python/modules/module-1/practice/extra",
     "https://zoeskoul.com/en/subjects/python/modules/module-1/learn/section",
     "https://zoeskoul.com/en/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
     "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1",
     "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn/section",
     "https://zoeskoul.com/en/catalog/core/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
+    "https://zoeskoul.com/en/achievements/extra",
+    "https://zoeskoul.com/en/leaderboard/extra",
+    "https://zoeskoul.com/en/subjects/python/progress/extra",
+    "https://zoeskoul.com/en/subjects/python/certificate/extra",
+    "https://zoeskoul.com/en/subjects/python/assignments/extra",
+    "https://zoeskoul.com/en/tutoring-sessions/session-1/extra",
+    "https://zoeskoul.com/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section",
+    "https://zoeskoul.com/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
     "https://zoeskoul.com/en/sandbox/programming/python",
   ])(
     "does not activate the sibling route %s",
