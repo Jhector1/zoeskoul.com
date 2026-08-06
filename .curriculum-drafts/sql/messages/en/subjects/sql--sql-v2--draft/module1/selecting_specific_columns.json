@@ -151,14 +151,14 @@
             },
             "try-selecting_specific_columns-sketch0": {
               "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Return `name, category, price` from `products` in that column order.",
+              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
               "hint": "Use the all-columns wildcard after SELECT.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `name, category, price` from `products` in that column order."
+                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
+                "hint_1": "Use the all-columns wildcard after SELECT.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show product names, categories, and prices\nSELECT \nFROM products;"
+              "starterCode": "-- Return every column from products\nSELECT\nFROM products;"
             },
             "try-selecting_specific_columns-sketch2": {
               "title": "Build a Focused Product View",

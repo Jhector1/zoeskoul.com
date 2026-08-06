@@ -149,14 +149,14 @@
             },
             "try-what_select_does-sketch0": {
               "title": "Choose a Two-Column Result",
-              "prompt": "Build a compact stock reference that places each product's `id` beside its `stock` value. Return `name, category` from `products` in that column order.",
+              "prompt": "Build a compact stock reference that places each product's `id` beside its `stock` value. Return those two columns from `products`, in that order.",
               "hint": "List `id` and `stock` after SELECT, then name `products` after FROM.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `name, category` from `products` in that column order."
+                "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
+                "hint_1": "List `id` and `stock` after SELECT, then name `products` after FROM.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show product names and categories\nSELECT \nFROM products;"
+              "starterCode": "-- Return only id and stock from products\nSELECT\nFROM products;"
             },
             "try-what_select_does-sketch2": {
               "title": "Read Two Fields from the Product Table",

@@ -61,7 +61,7 @@
               },
               "options": {
                 "a": "WHERE 'category' = Art",
-                "b": "WHERE 'Art' = category ="
+                "b": "WHERE category = 'Art'"
               }
             },
             "mc_where_numeric_matches": {
@@ -241,7 +241,7 @@
               },
               "options": {
                 "a": "WHERE 'category' = Art",
-                "b": "WHERE 'Art' = category ="
+                "b": "WHERE category = 'Art'"
               }
             },
             "mc_where_numeric_matches": {

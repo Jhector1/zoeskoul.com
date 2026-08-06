@@ -140,7 +140,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
@@ -264,11 +264,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products;",
+        "solutionCode": "SELECT *\nFROM products;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT name, category, price\nFROM products;",
+            "content": "SELECT *\nFROM products;",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -292,7 +292,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT name, category, price\nFROM products;",
+          "content": "SELECT *\nFROM products;",
           "language": "sql",
           "isEntry": true,
           "entry": true
