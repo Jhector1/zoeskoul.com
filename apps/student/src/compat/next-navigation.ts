@@ -72,6 +72,14 @@ export function useParams<T extends Record<string, string>>() {
     result.catalogSlug = segments[catalogSlugIndex];
   }
 
+  const tutoringSessionsIndex = segments.indexOf("tutoring-sessions");
+  if (
+    tutoringSessionsIndex >= 0 &&
+    segments[tutoringSessionsIndex + 1]
+  ) {
+    result.sessionId = segments[tutoringSessionsIndex + 1];
+  }
+
   const subjectsIndex = segments.indexOf("subjects");
   const modulesIndex = segments.indexOf("modules");
 

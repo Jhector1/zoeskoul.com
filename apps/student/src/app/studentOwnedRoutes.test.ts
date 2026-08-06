@@ -88,6 +88,16 @@ describe(
         ).toBe(false);
         expect(
           isPublicStudentPath(
+            "/en/achievements",
+          ),
+        ).toBe(true);
+        expect(
+          isPublicStudentPath(
+            "/en/leaderboard",
+          ),
+        ).toBe(true);
+        expect(
+          isPublicStudentPath(
             "/en/practice/daily",
           ),
         ).toBe(false);
@@ -194,13 +204,75 @@ describe(
       },
     );
     it(
-      "keeps deep tutoring routes on the student origin",
+      "resolves the final learner parity routes exactly",
       () => {
         expect(
           resolveStudentLocation(
+            "/en/achievements",
+          ),
+        ).toEqual({
+          kind: "achievements",
+          locale: "en",
+        });
+        expect(
+          resolveStudentLocation(
+            "/fr/leaderboard",
+          ),
+        ).toEqual({
+          kind: "leaderboard",
+          locale: "fr",
+        });
+        expect(
+          resolveStudentLocation(
+            "/en/subjects/python/progress",
+          ),
+        ).toEqual({
+          kind: "progress",
+          locale: "en",
+          subjectSlug: "python",
+        });
+        expect(
+          resolveStudentLocation(
+            "/en/subjects/python/certificate",
+          ),
+        ).toEqual({
+          kind: "certificate",
+          locale: "en",
+          subjectSlug: "python",
+        });
+        expect(
+          resolveStudentLocation(
+            "/en/subjects/python/assignments",
+          ),
+        ).toEqual({
+          kind: "subject-assignments",
+          locale: "en",
+          subjectSlug: "python",
+        });
+        expect(
+          resolveStudentLocation(
             "/en/tutoring-sessions/session-1",
-          ).kind,
-        ).not.toBe("website");
+          ),
+        ).toEqual({
+          kind: "tutoring-session",
+          locale: "en",
+          sessionId: "session-1",
+        });
+
+        for (const path of [
+          "/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn",
+          "/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section/topic/exercise/first",
+        ]) {
+          expect(
+            resolveStudentLocation(path),
+          ).toEqual({
+            kind: "tutoring-session",
+            locale: "en",
+            sessionId: "session-1",
+            subjectSlug: "python",
+            moduleSlug: "module-1",
+          });
+        }
       },
     );
 
@@ -260,8 +332,14 @@ describe(
       () => {
         for (const path of [
           "/en/assignments/extra",
-          "/en/tutoring-sessions/session-1",
           "/en/subjects/python/assignments/extra",
+          "/en/achievements/extra",
+          "/en/leaderboard/extra",
+          "/en/subjects/python/progress/extra",
+          "/en/subjects/python/certificate/extra",
+          "/en/tutoring-sessions/session-1/extra",
+          "/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section",
+          "/en/tutoring-sessions/session-1/subjects/python/modules/module-1/learn/section/topic/exercise/first/extra",
           "/en/subjects/python/modules/extra/trailing",
           "/en/subjects/python/modules/module-1/practice/extra",
           "/en/subjects/python/modules/module-1/learn/section",

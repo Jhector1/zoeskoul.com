@@ -15,6 +15,12 @@ import HeaderSlick from "@/components/HeaderSlick";
 import { ExactMyLearningView } from "../exact-old-ui/ExactMyLearningView";
 import { ExactCatalogsView } from "../exact-old-ui/ExactCatalogsView";
 import { ExactCatalogDetailView } from "../exact-old-ui/ExactCatalogDetailView";
+import { ExactAchievementsView } from "../exact-old-ui/ExactAchievementsView";
+import { ExactLeaderboardView } from "../exact-old-ui/ExactLeaderboardView";
+import { ExactProgressView } from "../exact-old-ui/ExactProgressView";
+import { ExactCertificateView } from "../exact-old-ui/ExactCertificateView";
+import { ExactSubjectAssignmentsView } from "../exact-old-ui/ExactSubjectAssignmentsView";
+import { ExactTutoringSessionView } from "../exact-old-ui/ExactTutoringSessionView";
 import { ExactSubjectModulesView } from "../exact-old-ui/ExactSubjectModulesView";
 import { ExactModuleIntroView } from "../exact-old-ui/ExactModuleIntroView";
 import { ExactReviewModuleView } from "../exact-old-ui/ExactReviewModuleView";
@@ -154,6 +160,18 @@ export function StudentAppShell(props: {
     );
   }
 
+  if (location.kind === "tutoring-session") {
+    return (
+      <ExactTutoringSessionView
+        websiteOrigin={props.websiteOrigin}
+        locale={location.locale}
+        sessionId={location.sessionId}
+        subjectSlug={location.subjectSlug}
+        moduleSlug={location.moduleSlug}
+      />
+    );
+  }
+
   if (location.kind === "lesson") {
     return (
       <ExactReviewModuleView
@@ -197,6 +215,16 @@ export function StudentAppShell(props: {
         authenticated={props.session.authenticated}
         catalogSlug={location.catalogSlug}
       />
+    ) : location.kind === "achievements" ? (
+      <ExactAchievementsView />
+    ) : location.kind === "leaderboard" ? (
+      <ExactLeaderboardView />
+    ) : location.kind === "progress" ? (
+      <ExactProgressView />
+    ) : location.kind === "certificate" ? (
+      <ExactCertificateView />
+    ) : location.kind === "subject-assignments" ? (
+      <ExactSubjectAssignmentsView />
     ) : location.kind === "assignments" ? (
       <ExactMyLearningView
         apiOrigin={props.apiOrigin}

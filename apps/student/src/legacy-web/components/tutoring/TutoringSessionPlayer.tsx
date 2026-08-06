@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
+import ReviewModulePageClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import type { ReviewModule } from "@/lib/subjects/types";
 import {
@@ -121,7 +121,7 @@ export default function TutoringSessionPlayer({
     const refreshMeta = async () => {
       try {
         const response = await fetch(
-          `/api/tutoring-sessions/${encodeURIComponent(session.id)}/workspace/meta`,
+          `/api/student-ui/tutoring-sessions/${encodeURIComponent(session.id)}/workspace/meta`,
           { cache: "no-store", signal: controller.signal },
         );
         if (!response.ok) return;
@@ -201,7 +201,7 @@ export default function TutoringSessionPlayer({
     setNotice(null);
     try {
       const response = await fetch(
-        `/api/tutoring-sessions/${encodeURIComponent(session.id)}/workspace/apply-updates`,
+        `/api/student-ui/tutoring-sessions/${encodeURIComponent(session.id)}/workspace/apply-updates`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -231,7 +231,7 @@ export default function TutoringSessionPlayer({
     setNotice(null);
     try {
       const response = await fetch(
-        `/api/admin/tutoring-sessions/${encodeURIComponent(session.id)}/publish`,
+        `/api/student-ui/tutoring-sessions/${encodeURIComponent(session.id)}/publish`,
         { method: "POST" },
       );
       const json = await response.json().catch(() => ({}));

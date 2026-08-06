@@ -50,6 +50,40 @@ export function shouldShowStandalonePracticeCodeTool(
   );
 }
 
+export function isStandalonePracticeToolBindingPending(args: {
+  codeToolEnabled: boolean;
+  busy: boolean;
+  hasExercise: boolean;
+  hasCurrent: boolean;
+  boundId: string | null;
+  exerciseStateKey: string;
+}) {
+  if (!args.codeToolEnabled) {
+    return false;
+  }
+
+  /**
+   * While the practice item itself is unresolved, keep the coordinated Tools
+   * loading state. Once the exercise and item are available, however, the
+   * editor can hydrate deterministically from exerciseStateKey even before the
+   * optional formal bind callback finishes. Treating a null boundId as pending
+   * made practice-only code exercises display "Loading exercise..." forever.
+   */
+  if (
+    args.busy &&
+    (!args.hasExercise || !args.hasCurrent)
+  ) {
+    return true;
+  }
+
+  /**
+   * Formal Tools binding is advisory once the current exercise contract is
+   * resolved. A stale previous-exercise boundId must not keep the deterministic
+   * current workspace behind the loading mask forever.
+   */
+  return false;
+}
+
 export function useStandalonePracticeTools(args: {
   props: PracticeShellProps;
   rightCollapsed: boolean;
@@ -58,7 +92,10 @@ export function useStandalonePracticeTools(args: {
   onEnsureVisible: () => void;
 }) {
   const { props, rightCollapsed, rightW, onCollapse, onEnsureVisible } = args;
-  const [toolProgress, setToolProgress] = useState<any>({ topics: {} });
+  const [toolProgress, setToolProgress] = useState<{
+    topics: Record<string, unknown>;
+    [key: string]: unknown;
+  }>({ topics: {} });
   const runtimeResetRevision = useReviewRuntimeStore((state) => state.resetRevision);
 
   const exerciseId = useMemo(
@@ -76,7 +113,7 @@ export function useStandalonePracticeTools(args: {
       firstText(
         props.exercise?.topic,
         props.topic,
-        (props.current as any)?.topic,
+        props.current?.exercise.topic,
         "all",
       ) ?? "all",
     [props.current, props.exercise?.topic, props.topic],
@@ -121,8 +158,18 @@ export function useStandalonePracticeTools(args: {
     setProgress: setToolProgress,
     viewTid: topicId,
     scopeKey: exerciseStateKey,
-    defaultLang: (props.current?.codeLang ?? (props.exercise as any)?.language ?? "python") as any,
-    defaultCode: props.current?.code ?? (props.exercise as any)?.starterCode ?? "",
+    defaultLang:
+      props.current?.codeLang ??
+      (props.exercise?.kind === "code_input"
+        ? props.exercise.language
+        : undefined) ??
+      "python",
+    defaultCode:
+      props.current?.code ??
+      (props.exercise?.kind === "code_input"
+        ? props.exercise.starterCode
+        : undefined) ??
+      "",
     defaultStdin: props.current?.codeStdin ?? props.current?.stdin ?? "",
     rightCollapsed,
     rightW,
@@ -135,7 +182,9 @@ export function useStandalonePracticeTools(args: {
 
   const bind = useCallback(
     async (binding: { id: string } & RegisterExerciseToolArgs) => {
-      await tool.bindCodeInput(binding as any);
+      await tool.bindCodeInput(
+        binding as Parameters<typeof tool.bindCodeInput>[0],
+      );
       return true;
     },
     [tool.bindCodeInput],
@@ -167,18 +216,24 @@ export function useStandalonePracticeTools(args: {
         props.current?.exercise?.kind,
     });
 
+  const pendingExerciseBinding =
+    isStandalonePracticeToolBindingPending({
+      codeToolEnabled,
+      busy: props.busy,
+      hasExercise: Boolean(props.exercise),
+      hasCurrent: Boolean(props.current),
+      boundId: tool.boundId,
+      exerciseStateKey,
+    });
+
   const panelProps = useMemo<ComponentProps<typeof ToolsPanel>>(
     () => ({
       onCollapse,
       onUnbind: unbind,
       boundId: codeToolEnabled
-        ? tool.boundId ??
-          exerciseStateKey
+        ? exerciseStateKey
         : null,
-      pendingExerciseBinding:
-        codeToolEnabled &&
-        tool.boundId !==
-          exerciseStateKey,
+      pendingExerciseBinding,
       editorOwnerKey:
         codeToolEnabled
           ? exerciseStateKey
@@ -217,6 +272,7 @@ export function useStandalonePracticeTools(args: {
       codeToolEnabled,
       exerciseStateKey,
       onCollapse,
+      pendingExerciseBinding,
       props.experienceMode,
       props.locale,
       props.moduleSlug,
