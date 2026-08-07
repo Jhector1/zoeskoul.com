@@ -5,7 +5,7 @@ import {
   useState,
 } from "react";
 
-import SubjectModulesClient from "@/routes/(public)/[locale]/(generalZone)/subjects/[subjectSlug]/modules/SubjectModulesClient";
+import SubjectModulesClient from "@student/features/courses/SubjectModulesClient";
 
 type ModuleOverview = {
   subject: {

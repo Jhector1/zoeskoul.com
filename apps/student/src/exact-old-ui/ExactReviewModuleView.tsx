@@ -6,7 +6,7 @@ import {
 import type {
   ReviewModule,
 } from "@/lib/subjects/types";
-import ReviewModulePageClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
+import ReviewModulePageClient from "@student/features/learning/ReviewModulePageClient";
 
 type PageData =
   | {

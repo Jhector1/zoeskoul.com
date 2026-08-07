@@ -24,6 +24,9 @@
       "node"
     ],
     "paths": {
+      "@student/*": [
+        "./src/*"
+      ],
       "@/*": [
         "./src/legacy-web/*"
       ],
