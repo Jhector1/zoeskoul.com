@@ -45,6 +45,7 @@ function deps(
   return {
     retrieveSubscription: vi.fn(async () => subscription("active")),
     upsertSubscription: vi.fn(async () => ({ subscriptionId: "sub_1" })),
+    releaseBillingCheckoutReservation: vi.fn(async () => true),
     cancelDeletedCustomer: vi.fn(async () => ({ users: 1, subscriptions: 1 })),
     ...overrides,
   };
@@ -217,5 +218,62 @@ describe("Stripe current-state reconciliation", () => {
         deps(),
       ),
     ).resolves.toEqual({ kind: "ignored", reason: "missing_subscription" });
+  });
+});
+
+
+describe("expired subscription Checkout reconciliation", () => {
+  const checkoutAttemptId = "4c37ca16-f26d-4f90-8b12-76b1f387f670";
+
+  it("releases the durable billing reservation from trusted Checkout metadata", async () => {
+    const releaseBillingCheckoutReservation = vi.fn(async () => true);
+
+    await expect(
+      reconcileStripeBillingEvent(
+        event("checkout.session.expired", {
+          id: "cs_test_expired",
+          mode: "subscription",
+          customer: "cus_1",
+          metadata: {
+            userId: "user_1",
+            checkoutAttemptId,
+          },
+        }),
+        deps({ releaseBillingCheckoutReservation }),
+      ),
+    ).resolves.toEqual({
+      kind: "processed",
+      action: "checkout_released",
+    });
+
+    expect(releaseBillingCheckoutReservation).toHaveBeenCalledWith(
+      "user_1",
+      checkoutAttemptId,
+    );
+  });
+
+  it("does not release a reservation from malformed expiration metadata", async () => {
+    const releaseBillingCheckoutReservation = vi.fn(async () => true);
+
+    await expect(
+      reconcileStripeBillingEvent(
+        event("checkout.session.expired", {
+          id: "cs_test_expired",
+          mode: "subscription",
+          customer: "cus_1",
+          metadata: {
+            userId: "user_1",
+            useTrial: "true",
+            checkoutAttemptId: "bad",
+          },
+        }),
+        deps({ releaseBillingCheckoutReservation }),
+      ),
+    ).resolves.toEqual({
+      kind: "ignored",
+      reason: "missing_checkout_reservation_reference",
+    });
+
+    expect(releaseBillingCheckoutReservation).not.toHaveBeenCalled();
   });
 });

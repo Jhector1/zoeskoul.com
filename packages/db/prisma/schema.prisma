@@ -415,6 +415,8 @@ model User {
   image                             String?
   stripeCustomerId                  String?                    @unique
   trialUsedAt                       DateTime?
+  billingCheckoutAttemptId            String?
+  billingCheckoutReservedAt           DateTime?
   createdAt                         DateTime                   @default(now())
   updatedAt                         DateTime                   @updatedAt
   roles                             UserRole[]                 @default([student])

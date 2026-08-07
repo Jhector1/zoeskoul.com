@@ -5,6 +5,8 @@ import type Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
+import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
+import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
 
 export const RELEVANT_STRIPE_BILLING_EVENT_TYPES = [
   "checkout.session.completed",
@@ -42,7 +44,13 @@ export type StripeBillingEventReferences = {
 };
 
 export type StripeWebhookReconciliationResult =
-  | { kind: "processed"; action: "subscription_reconciled" | "customer_deleted" }
+  | {
+      kind: "processed";
+      action:
+        | "subscription_reconciled"
+        | "customer_deleted"
+        | "checkout_released";
+    }
   | { kind: "ignored"; reason: string };
 
 export type StripeWebhookReconciliationDeps = {
@@ -51,6 +59,10 @@ export type StripeWebhookReconciliationDeps = {
     subscription: Stripe.Subscription,
     hintedUserId?: string | null,
   ): Promise<unknown | null>;
+  releaseBillingCheckoutReservation(
+    userId: string,
+    checkoutAttemptId: string,
+  ): Promise<boolean>;
   cancelDeletedCustomer(customerId: string): Promise<{
     users: number;
     subscriptions: number;
@@ -208,6 +220,7 @@ const defaultDeps: StripeWebhookReconciliationDeps = {
   retrieveSubscription: async (subscriptionId) =>
     getStripe().subscriptions.retrieve(subscriptionId),
   upsertSubscription: upsertFromStripeSubscription,
+  releaseBillingCheckoutReservation,
   cancelDeletedCustomer: defaultCancelDeletedCustomer,
 };
 
@@ -263,6 +276,34 @@ export async function reconcileStripeBillingEvent(
     return canceled.users > 0 || canceled.subscriptions > 0
       ? { kind: "processed", action: "customer_deleted" }
       : { kind: "ignored", reason: "unmapped_customer" };
+  }
+
+  if (
+    event.type === "checkout.session.expired" &&
+    object?.mode === "subscription"
+  ) {
+    const metadata = asRecord(object.metadata);
+    const userId = metadataUserId(object);
+    const checkoutAttemptId = metadata?.checkoutAttemptId;
+
+    if (!userId || !isCheckoutAttemptId(checkoutAttemptId)) {
+      return {
+        kind: "ignored",
+        reason: "missing_checkout_reservation_reference",
+      };
+    }
+
+    const released = await deps.releaseBillingCheckoutReservation(
+      userId,
+      checkoutAttemptId,
+    );
+
+    return released
+      ? { kind: "processed", action: "checkout_released" }
+      : {
+          kind: "ignored",
+          reason: "checkout_reservation_missing",
+        };
   }
 
   if (isCheckoutEvent(event.type)) {
