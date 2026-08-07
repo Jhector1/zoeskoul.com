@@ -50,12 +50,12 @@ describe("HeaderChrome ownership boundary", () => {
       "../../../apps/web/src/components/HeaderSlick.tsx",
     );
     const student = readSource(
-      "../../../apps/student/src/legacy-web/components/HeaderSlick.tsx",
+      "../../../apps/student/src/components/chrome/StudentHeaderSlick.tsx",
     );
 
     for (const source of [web, student]) {
-      expect(source).toContain(
-        'import { HeaderChrome } from "@zoeskoul/learner-ui";',
+      expect(source).toMatch(
+        /import\s+\{[^}]*\bHeaderChrome\b[^}]*\}\s+from\s+"@zoeskoul\/learner-ui";/,
       );
       expect(source).toContain("<HeaderChrome");
       expect(source).not.toContain(

@@ -766,12 +766,18 @@ importers:
 
   packages/learner-ui:
     dependencies:
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../preferences
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
       lucide-react:
         specifier: ^0.563.0
         version: 0.563.0(react@19.2.3)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.5.0

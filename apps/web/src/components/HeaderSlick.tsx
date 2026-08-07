@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { HeaderChrome } from "@zoeskoul/learner-ui";
+import { HeaderChrome, ThemeToggle } from "@zoeskoul/learner-ui";
 import { createPortal } from "react-dom";
 import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
@@ -10,7 +10,6 @@ import UserMenuSlick from "./UserMenuSlick";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
-import { ThemeToggle } from "./ThemeToggle";
 import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";

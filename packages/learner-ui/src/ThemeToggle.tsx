@@ -3,7 +3,12 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { useAppPreferences } from "@zoeskoul/preferences/react";
-import { cn } from "@/lib/cn";
+import clsx, { type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
 
 export function ThemeToggle({
                                 compact = false,
