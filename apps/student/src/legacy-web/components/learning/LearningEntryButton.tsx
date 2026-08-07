@@ -68,9 +68,9 @@ export default function LearningEntryButton({
   const resolvedEntry = entry ?? createStartLearningEntry();
   const label = !isAuthenticated
     ? guestLabel
-    : entry?.kind === "start"
-      ? startLabel
-      : continueLabel;
+    : resolvedEntry.kind === "continue"
+      ? continueLabel
+      : startLabel;
 
   return (
     <EntryActionButton
