@@ -5,6 +5,11 @@ import { getStripe } from "@/lib/stripe";
 import type Stripe from "stripe";
 import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 import { formatMoneyMinor } from "@/i18n/money";
+import {
+  buildStripeCheckoutIdempotencyKey,
+  isCheckoutAttemptId,
+} from "@/lib/billing/checkoutAttempt";
+import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
 
 function priceUnitAmountMinor(p: Stripe.Price): number | null {
     if (typeof p.unit_amount === "number") return p.unit_amount;
@@ -211,6 +216,7 @@ function stripeCheckoutLocaleFromAppLocale(appLocale?: string | null): Stripe.Ch
     return "auto"; // ht not supported; Stripe will choose best match
 }
 
+
 export async function createCheckoutSession(args: {
     userId: string;
     priceId: string;
@@ -218,58 +224,119 @@ export async function createCheckoutSession(args: {
     callbackUrl: string;
     currency?: "usd" | "htg";
     appLocale?: string | null;
+    checkoutAttemptId: string;
+    checkoutExpiresAt?: Date;
 }) {
     const { appUrl, trialDays } = billingConfig();
 
     const cb = safeInternalPathOrNull(args.callbackUrl) ?? "/billing";
 
     const localeSeg = cb.split("/").filter(Boolean)[0];
-    const hasLocale = localeSeg && localeSeg.length === 2;
+    const hasLocale = Boolean(localeSeg && localeSeg.length === 2);
 
-    const successPath = hasLocale ? `/${localeSeg}/billing/success` : `/billing/success`;
-    const billingPath = hasLocale ? `/${localeSeg}/billing` : `/billing`;
+    const successPath = hasLocale
+        ? `/${localeSeg}/billing/success`
+        : "/billing/success";
+    const billingPath = hasLocale
+        ? `/${localeSeg}/billing`
+        : "/billing";
+
+    const attemptQuery =
+        `&checkout_attempt_id=${encodeURIComponent(args.checkoutAttemptId)}`;
 
     const success_url =
         `${appUrl}${successPath}` +
         `?session_id={CHECKOUT_SESSION_ID}` +
-        `&next=${encodeURIComponent(cb)}`;
+        `&next=${encodeURIComponent(cb)}` +
+        attemptQuery;
 
     const cancel_url =
         `${appUrl}${billingPath}` +
         `?next=${encodeURIComponent(cb)}` +
-        `&canceled=1`;
+        `&canceled=1` +
+        attemptQuery;
 
-    const stripeLocale = stripeCheckoutLocaleFromAppLocale(args.appLocale ?? (hasLocale ? localeSeg : null));
-
-    const checkout = await withValidCustomer(args.userId, (customerId) =>
-        getStripe().checkout.sessions.create({
-            mode: "subscription",
-            customer: customerId,
-            line_items: [{ price: args.priceId, quantity: 1 }],
-            allow_promotion_codes: true,
-
-            // ✅ Checkout language/formatting
-            locale: stripeLocale, // supported list is limited; "auto" works broadly :contentReference[oaicite:5]{index=5}
-
-            // ✅ Force currency to match what you showed in your UI
-            // Requires your Price to have currency_options[htg] configured.
-            ...(args.currency ? { currency: args.currency } : {}),
-
-            subscription_data: {
-                ...(args.useTrial ? { trial_period_days: trialDays } : {}),
-                metadata: { userId: args.userId, priceId: args.priceId, currency: args.currency ?? "" },
-            },
-
-            client_reference_id: args.userId,
-            success_url,
-            cancel_url,
-        })
+    const stripeLocale = stripeCheckoutLocaleFromAppLocale(
+        args.appLocale ?? (hasLocale ? localeSeg : null),
     );
 
-    return { url: checkout.url };
+    const checkout = await withValidCustomer(args.userId, async (customerId) => {
+        const stripe = getStripe();
+
+        // Recover a Session that Stripe may already have created when the
+        // previous response was lost or indeterminate. This lookup is safe to
+        // repeat and keeps retries on the original logical Checkout attempt.
+        const recent = await stripe.checkout.sessions.list({
+            customer: customerId,
+            limit: 10,
+        });
+        const recovered = recent.data.find(
+            (session) =>
+                session.mode === "subscription" &&
+                session.metadata?.checkoutAttemptId === args.checkoutAttemptId &&
+                (session.status === "open" || session.status === "complete"),
+        );
+
+        if (recovered) {
+            return {
+                id: recovered.id,
+                url:
+                    recovered.url ??
+                    success_url.replace(
+                        "{CHECKOUT_SESSION_ID}",
+                        recovered.id,
+                    ),
+            };
+        }
+
+        return stripe.checkout.sessions.create(
+            {
+                mode: "subscription",
+                customer: customerId,
+                line_items: [{ price: args.priceId, quantity: 1 }],
+                allow_promotion_codes: true,
+                locale: stripeLocale,
+                ...(args.currency ? { currency: args.currency } : {}),
+                ...(args.checkoutExpiresAt
+                    ? {
+                        expires_at: Math.floor(
+                            args.checkoutExpiresAt.getTime() / 1000,
+                        ),
+                    }
+                    : {}),
+                metadata: {
+                    userId: args.userId,
+                    checkoutAttemptId: args.checkoutAttemptId,
+                    useTrial: args.useTrial ? "true" : "false",
+                },
+                subscription_data: {
+                    ...(args.useTrial
+                        ? { trial_period_days: trialDays }
+                        : {}),
+                    metadata: {
+                        userId: args.userId,
+                        priceId: args.priceId,
+                        currency: args.currency ?? "",
+                        checkoutAttemptId: args.checkoutAttemptId,
+                    },
+                },
+                client_reference_id: args.userId,
+                success_url,
+                cancel_url,
+            },
+            {
+                idempotencyKey: buildStripeCheckoutIdempotencyKey(
+                    args.checkoutAttemptId,
+                ),
+            },
+        );
+    });
+
+    return { id: checkout.id, url: checkout.url };
 }
+
 export async function createBillingPortalSession(userId: string) {
-    const {appUrl} = billingConfig();
+    const { appUrl } = billingConfig();
 
     const portal = await withValidCustomer(userId, (customerId) =>
         getStripe().billingPortal.sessions.create({
@@ -278,7 +345,7 @@ export async function createBillingPortalSession(userId: string) {
         }),
     );
 
-    return {url: portal.url};
+    return { url: portal.url };
 }
 
 export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hintedUserId?: string | null) {
@@ -330,8 +397,19 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
         },
     });
 
+    const checkoutAttemptId = sub.metadata?.checkoutAttemptId;
+    if (isCheckoutAttemptId(checkoutAttemptId)) {
+        await releaseBillingCheckoutReservation(
+            user.id,
+            checkoutAttemptId,
+        );
+    }
+
     if (!user.trialUsedAt && sub.status === "trialing") {
-        await prisma.user.update({where: {id: user.id}, data: {trialUsedAt: new Date()}});
+        await prisma.user.update({
+            where: {id: user.id},
+            data: {trialUsedAt: new Date()},
+        });
     }
 
     return {userId: user.id, status: sub.status, priceId, currentPeriodEnd, trialEnd, subscriptionId: sub.id};

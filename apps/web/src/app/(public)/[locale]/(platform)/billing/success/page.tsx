@@ -4,6 +4,11 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
+import {
+  clearBrowserCheckoutAttempt,
+  isCheckoutAttemptId,
+} from "@/lib/billing/checkoutAttempt";
+
 import Badge, { type BadgeTone } from "@/components/billing/Badge";
 import {
   BillingCard,
@@ -90,6 +95,7 @@ export default function BillingSuccessPageClient() {
 
   const sessionId = sp.get("session_id");
   const nextParam = sp.get("next");
+  const checkoutAttemptId = sp.get("checkout_attempt_id");
 
   const [busy, setBusy] = useState(true);
   const [data, setData] = useState<ConfirmResp | null>(null);
@@ -156,6 +162,9 @@ export default function BillingSuccessPageClient() {
           setData({ ok: false, message: (j as any)?.message ?? t("errors.confirmFailed") });
         } else {
           setData(j);
+          if (j.ok && isCheckoutAttemptId(checkoutAttemptId)) {
+            clearBrowserCheckoutAttempt(checkoutAttemptId);
+          }
         }
       } catch (e: any) {
         if (!alive) return;
@@ -169,7 +178,7 @@ export default function BillingSuccessPageClient() {
     return () => {
       alive = false;
     };
-  }, [sessionId, t]);
+  }, [sessionId, checkoutAttemptId, t]);
 
   useEffect(() => {
     if (busy) return;
