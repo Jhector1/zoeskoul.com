@@ -206,7 +206,7 @@ async function defaultCancelDeletedCustomer(customerId: string) {
       where: { stripeCustomerId: customerId },
       data: {
         status: "canceled",
-        currentPeriodEnd: new Date(0),
+        currentPeriodEnd: null,
         trialEnd: null,
         cancelAtPeriodEnd: false,
       },
