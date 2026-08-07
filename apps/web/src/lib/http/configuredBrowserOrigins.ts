@@ -51,6 +51,7 @@ export function parseConfiguredBrowserOrigins(
 export function getConfiguredBrowserOrigins(): Set<string> {
   return parseConfiguredBrowserOrigins(
     [
+      process.env.STUDENT_APP_ORIGIN,
       process.env.NEXT_PUBLIC_STUDENT_APP_ORIGIN,
       process.env
         .NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS,
