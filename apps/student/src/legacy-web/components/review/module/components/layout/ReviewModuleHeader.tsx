@@ -3,7 +3,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
-import HeaderSlick from "@/components/HeaderSlick";
+import StudentHeaderSlick from "@student/components/chrome/StudentHeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
 import NavButton from "@/components/ui/NavButton";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
@@ -274,7 +274,7 @@ export default function ReviewModuleHeader({
 
     return (
         <>
-        <HeaderSlick
+        <StudentHeaderSlick
             slot={
                 <div className="flex w-full items-center justify-between gap-3">
                     <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">

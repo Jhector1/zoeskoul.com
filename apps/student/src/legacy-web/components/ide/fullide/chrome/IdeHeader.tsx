@@ -1,6 +1,6 @@
 "use client";
 
-import { SettingsMenu } from "@/components/HeaderSlick";
+import { SettingsMenu } from "@student/components/chrome/StudentHeaderSlick";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
