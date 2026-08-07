@@ -35,10 +35,10 @@
       },
       "versioning": {
         "family": "sql",
-        "version": 2,
+        "version": 1,
         "status": "active",
         "defaultForNewEnrollments": true,
-        "supersedes": "sql",
+        "supersedes": null,
         "supersededBy": null
       }
     }

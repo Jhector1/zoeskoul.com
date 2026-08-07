@@ -240,7 +240,7 @@
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "AND"
+        "value": "("
       }
     },
     {
