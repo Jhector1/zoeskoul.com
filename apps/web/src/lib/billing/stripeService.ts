@@ -434,7 +434,7 @@ async function expireLocalSubscriptionsMissingFromStripe(
         where: staleWhere,
         data: {
             status: "canceled",
-            currentPeriodEnd: new Date(0),
+            currentPeriodEnd: null,
             trialEnd: null,
             cancelAtPeriodEnd: false,
         },

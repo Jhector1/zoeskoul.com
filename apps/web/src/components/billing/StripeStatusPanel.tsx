@@ -3,6 +3,7 @@
 import React, { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
+import { shouldShowRenewalDate } from "@/lib/billing/period";
 
 export type StripeSubscriptionStatus =
     | "trialing"
@@ -92,10 +93,21 @@ export function StripeStatusPanel(props: {
       });
     }
 
-    if (props.currentPeriodEnd) {
+    if (
+      shouldShowRenewalDate({
+        status: s,
+        currentPeriodEnd: props.currentPeriodEnd,
+        cancelAtPeriodEnd: props.cancelAtPeriodEnd,
+      })
+    ) {
       out.push({
         k: "renews",
-        text: t("renews", { when: formatWhen(props.currentPeriodEnd, locale) }),
+        text: t("renews", {
+          when: formatWhen(
+            props.currentPeriodEnd,
+            locale,
+          ),
+        }),
       });
     }
 

@@ -12,6 +12,7 @@ import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import { getLocaleFromCookie } from "@/serverUtils";
 import { toIntlLocale } from "@/i18n/money";
 import {resolveBillingCurrency} from "@/lib/billing/currency";
+import { futureBillingPeriodIsoOrNull } from "@/lib/billing/period";
 import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
 
 export const runtime = "nodejs";
@@ -88,7 +89,7 @@ export async function GET() {
     trialEligible: !billingExempt && !u?.trialUsedAt,
 
     trialEndsAt: ent.trialEnd ? ent.trialEnd.toISOString() : null,
-    currentPeriodEnd: ent.currentPeriodEnd ? ent.currentPeriodEnd.toISOString() : null,
+    currentPeriodEnd: futureBillingPeriodIsoOrNull(ent.currentPeriodEnd),
     cancelAtPeriodEnd: Boolean(ent.cancelAtPeriodEnd),
 
     appLocale,
