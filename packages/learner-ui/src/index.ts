@@ -11,3 +11,6 @@ export {
 } from "./HeaderChrome";
 
 export { ThemeToggle } from "./ThemeToggle";
+
+export { UserMenuChrome } from "./UserMenuChrome";
+export type { UserMenuChromeProps, UserMenuLinkRenderProps } from "./UserMenuChrome";
