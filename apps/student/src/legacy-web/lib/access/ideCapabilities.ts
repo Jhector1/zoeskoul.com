@@ -1,5 +1,10 @@
 import { FeatureKey } from "@zoeskoul/db";
-import type { AccessSnapshot } from "./accessSnapshot";
+export type IdeAccessSnapshot = {
+  hasUser: boolean;
+  isSubscribed: boolean;
+  featureAccess: ReadonlySet<FeatureKey>;
+};
+
 
 export type IdeCapability =
     | "multi_file"
@@ -25,11 +30,11 @@ export type IdeCapabilities = {
     maxProjects: number | null;
 };
 
-function hasFeature(snapshot: AccessSnapshot, key: FeatureKey) {
+function hasFeature(snapshot: IdeAccessSnapshot, key: FeatureKey) {
     return snapshot.featureAccess.has(key);
 }
 
-export function resolveIdeCapabilities(snapshot: AccessSnapshot): IdeCapabilities {
+export function resolveIdeCapabilities(snapshot: IdeAccessSnapshot): IdeCapabilities {
     const isSubscribed = snapshot.isSubscribed;
 
     const canUseMultiFile =
