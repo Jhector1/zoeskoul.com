@@ -1,45 +1,38 @@
-// src/app/api/stripe/webhook/route.ts
 import { NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
 import type Stripe from "stripe";
-import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
+
+import {
+  claimStripeEvent,
+  markStripeEventFailed,
+  markStripeEventIgnored,
+  markStripeEventProcessed,
+  stripeEventErrorText,
+} from "@/lib/billing/stripeEventLedger";
+import {
+  extractStripeBillingEventReferences,
+  isRelevantStripeBillingEventType,
+  reconcileStripeBillingEvent,
+} from "@/lib/billing/stripeWebhookReconciliation";
+import { getStripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-function extractSubscriptionIdFromInvoice(inv: Stripe.Invoice): string | null {
-  // Stripe types can lag behind API surface across versions.
-  // Use a safe "any" view for fields that may not be present in typings.
-  const x = inv as any;
-
-  // ✅ Newer invoices: invoice.parent.subscription_details.subscription :contentReference[oaicite:1]{index=1}
-  const pSub = x?.parent?.subscription_details?.subscription;
-  if (typeof pSub === "string") return pSub;
-  if (pSub && typeof pSub === "object" && typeof pSub.id === "string") return pSub.id;
-
-  // Fallback: sometimes the subscription is reachable via line parent details :contentReference[oaicite:2]{index=2}
-  const lines: any[] = x?.lines?.data ?? [];
-  for (const line of lines) {
-    const s1 = line?.parent?.subscription_item_details?.subscription;
-    if (typeof s1 === "string") return s1;
-    if (s1 && typeof s1 === "object" && typeof s1.id === "string") return s1.id;
-
-    const s2 = line?.parent?.invoice_item_details?.subscription;
-    if (typeof s2 === "string") return s2;
-    if (s2 && typeof s2 === "object" && typeof s2.id === "string") return s2.id;
-  }
-
-  return null;
+function errorMessage(error: unknown, fallback: string): string {
+  return error instanceof Error && error.message ? error.message : fallback;
 }
 
 export async function POST(req: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!secret) {
-    return NextResponse.json({ message: "Missing STRIPE_WEBHOOK_SECRET" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Missing STRIPE_WEBHOOK_SECRET" },
+      { status: 500 },
+    );
   }
 
-  const sig = req.headers.get("stripe-signature");
-  if (!sig) {
+  const signature = req.headers.get("stripe-signature");
+  if (!signature) {
     return NextResponse.json({ message: "Missing signature" }, { status: 400 });
   }
 
@@ -47,67 +40,93 @@ export async function POST(req: Request) {
 
   let event: Stripe.Event;
   try {
-    event = getStripe().webhooks.constructEvent(rawBody, sig, secret);
-  } catch (err: any) {
+    event = getStripe().webhooks.constructEvent(rawBody, signature, secret);
+  } catch (error: unknown) {
     return NextResponse.json(
-        { message: `Webhook error: ${err?.message ?? "Invalid signature"}` },
-        { status: 400 },
+      { message: `Webhook error: ${errorMessage(error, "Invalid signature")}` },
+      { status: 400 },
     );
   }
 
-  try {
-    switch (event.type) {
-      case "checkout.session.completed": {
-        const cs = event.data.object as Stripe.Checkout.Session;
-        if (cs.mode !== "subscription") break;
-
-        const subId =
-            typeof cs.subscription === "string" ? cs.subscription : cs.subscription?.id ?? null;
-
-        if (!subId) break;
-
-        const sub = await getStripe().subscriptions.retrieve(subId);
-
-        const hintedUserId =
-            (cs.metadata?.userId as string | undefined) ??
-            (sub.metadata?.userId as string | undefined) ??
-            null;
-
-        await upsertFromStripeSubscription(sub, hintedUserId);
-        break;
-      }
-
-      case "customer.subscription.created":
-      case "customer.subscription.updated":
-      case "customer.subscription.deleted": {
-        const sub = event.data.object as Stripe.Subscription;
-        const hintedUserId = (sub.metadata?.userId as string | undefined) ?? null;
-        await upsertFromStripeSubscription(sub, hintedUserId);
-        break;
-      }
-
-      case "invoice.paid":
-      case "invoice.payment_failed": {
-        const inv = event.data.object as Stripe.Invoice;
-
-        // ✅ NEW: extract via invoice.parent / lines (no inv.subscription)
-        const subId = extractSubscriptionIdFromInvoice(inv);
-        if (!subId) break;
-
-        const sub = await getStripe().subscriptions.retrieve(subId);
-        const hintedUserId = (sub.metadata?.userId as string | undefined) ?? null;
-
-        await upsertFromStripeSubscription(sub, hintedUserId);
-        break;
-      }
-
-      default:
-        break;
-    }
-  } catch (e: any) {
-    // Returning 500 tells Stripe to retry
-    return NextResponse.json({ message: e?.message ?? "Webhook handler failed" }, { status: 500 });
+  if (!isRelevantStripeBillingEventType(event.type)) {
+    return NextResponse.json({ received: true, outcome: "unrelated" });
   }
 
-  return NextResponse.json({ received: true });
+  const references = extractStripeBillingEventReferences(event);
+  let claimAttemptCount: number | null = null;
+
+  try {
+    const claim = await claimStripeEvent({
+      id: event.id,
+      type: event.type,
+      livemode: event.livemode,
+      created: event.created,
+      ...references,
+    });
+
+    if (claim.kind === "duplicate") {
+      return NextResponse.json({
+        received: true,
+        duplicate: true,
+        outcome: claim.status,
+      });
+    }
+
+    if (claim.kind === "in_progress") {
+      return NextResponse.json(
+        { received: false, outcome: "processing" },
+        { status: 409 },
+      );
+    }
+
+    claimAttemptCount = claim.attemptCount;
+    const result = await reconcileStripeBillingEvent(event);
+
+    if (result.kind === "ignored") {
+      const marked = await markStripeEventIgnored(
+        event.id,
+        claim.attemptCount,
+        result.reason,
+      );
+      if (!marked) {
+        throw new Error("Stripe event could not be marked ignored");
+      }
+      return NextResponse.json({ received: true, outcome: "ignored" });
+    }
+
+    const marked = await markStripeEventProcessed(
+      event.id,
+      claim.attemptCount,
+    );
+    if (!marked) {
+      throw new Error("Stripe event could not be marked processed");
+    }
+
+    return NextResponse.json({ received: true, outcome: "processed" });
+  } catch (error: unknown) {
+    if (claimAttemptCount !== null) {
+      try {
+        await markStripeEventFailed(
+          event.id,
+          claimAttemptCount,
+          error,
+        );
+      } catch (markError: unknown) {
+        console.error(
+          "[stripe-webhook] failed to record event failure",
+          stripeEventErrorText(markError),
+        );
+      }
+    }
+
+    console.error(
+      "[stripe-webhook] event processing failed",
+      stripeEventErrorText(error),
+    );
+
+    return NextResponse.json(
+      { message: "Webhook handler failed", outcome: "failed" },
+      { status: 500 },
+    );
+  }
 }
