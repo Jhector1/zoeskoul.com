@@ -4,7 +4,7 @@
  * Browser boundary for the Next/Auth server module.
  *
  * Student UI obtains its authenticated session through StudentAccessGate and
- * next-auth/react compatibility context. Server Auth.js handlers must remain
+ * native Student session context. Server Auth.js handlers must remain
  * in apps/web.
  */
 export const handlers: any = {};

@@ -2,8 +2,10 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useSession } from "next-auth/react";
-import type { Session } from "next-auth";
+import {
+  useStudentSession,
+  type StudentSession,
+} from "../../app/studentSession";
 import {
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";
@@ -42,7 +44,7 @@ type HeaderSlotCtx = {
   pathname: string;
   isAuthed: boolean;
   status: SessionStatus;
-  user?: Session["user"];
+  user?: StudentSession["user"];
 };
 
 function hardLogout(
@@ -338,7 +340,7 @@ export default function HeaderSlick({
   const t = useTranslations("Header");
   const locale = useLocale();
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  const { data: session, status } = useStudentSession();
 
   const user = session?.user;
   const isAuthed = !!user;

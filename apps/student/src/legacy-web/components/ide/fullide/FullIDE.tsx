@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useStudentSession } from "../../../../app/studentSession";
 
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { useProjectDirtyState } from "@/components/code/projects/hooks/useProjectDirtyState";
@@ -937,7 +937,7 @@ export default function FullIDE(props: FullIDEProps) {
     } = props;
 
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session } = useStudentSession();
 
     const splitRef = useRef<HTMLDivElement | null>(null);
     const rootRef = useRef<HTMLDivElement | null>(null);

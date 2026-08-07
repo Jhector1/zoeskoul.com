@@ -11,8 +11,8 @@ import {
   IntlBridgeProvider,
 } from "./next-intl";
 import {
-  SessionProvider,
-} from "./next-auth-react";
+  StudentSessionProvider,
+} from "../app/studentSession";
 import { SfxProvider } from "../legacy-web/lib/sfx/SfxProvider";
 import {
   currentLocale,
@@ -83,7 +83,7 @@ export function LegacyProviders(props: {
     : null;
 
   return (
-    <SessionProvider session={session}>
+    <StudentSessionProvider session={session}>
       <IntlBridgeProvider
         locale={locale}
         messages={state.messages}
@@ -92,6 +92,6 @@ export function LegacyProviders(props: {
           {props.children}
         </SfxProvider>
       </IntlBridgeProvider>
-    </SessionProvider>
+    </StudentSessionProvider>
   );
 }
