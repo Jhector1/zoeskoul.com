@@ -1,6 +1,6 @@
 import { useModuleOverview } from "@zoeskoul/learning-client/react";
 
-import ModuleIntroClient from "@/routes/(public)/[locale]/(generalZone)/subjects/[subjectSlug]/modules/[moduleSlug]/ModuleIntroClient";
+import ModuleIntroClient from "@student/features/courses/ModuleIntroClient";
 
 function StateSurface(props: {
   title: string;

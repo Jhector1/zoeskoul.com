@@ -15,6 +15,10 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: [
       {
+        find: /^@student\/(.*)$/,
+        replacement: `${here}src/$1`,
+      },
+      {
         find: /^@\/components\/practice\/kinds\/KindHelper$/,
         replacement: source(
           "./src/compat/practice-kind-helper.tsx",

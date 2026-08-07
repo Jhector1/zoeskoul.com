@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import ReviewModulePageClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
+import ReviewModulePageClient from "@student/features/learning/ReviewModulePageClient";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import type { ReviewModule } from "@/lib/subjects/types";
 import {

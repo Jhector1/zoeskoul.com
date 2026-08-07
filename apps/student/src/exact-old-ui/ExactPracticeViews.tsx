@@ -5,8 +5,8 @@ import {
   type ComponentProps,
 } from "react";
 
-import DailyFivePracticeClient from "@/routes/(public)/[locale]/(learningZone)/practice/daily/daily-five-practice-client";
-import PracticeClient from "@/routes/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/practice/practice-client";
+import DailyFivePracticeClient from "@student/features/practice/DailyFivePracticeClient";
+import PracticeClient from "@student/features/practice/client/PracticeClient";
 import {
   resolveLegacyApiUrl,
 } from "../compat/LegacyApiBridge";
