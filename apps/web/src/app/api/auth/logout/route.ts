@@ -1,9 +1,7 @@
 import {
   signOut,
 } from "@/lib/auth";
-import {
-  getProductionAppOrigin,
-} from "@zoeskoul/app-config";
+import { resolveLogoutWebsiteOrigin } from "./logoutWebsiteOrigin";
 import {
   buildKeycloakEndSessionUrl,
   readKeycloakIdToken,
@@ -21,9 +19,11 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   const websiteOrigin =
-    process.env.NODE_ENV === "production"
-      ? getProductionAppOrigin("website")
-      : req.nextUrl.origin;
+    resolveLogoutWebsiteOrigin({
+      requestOrigin: req.nextUrl.origin,
+      nodeEnv: process.env.NODE_ENV,
+      vercelEnv: process.env.VERCEL_ENV,
+    });
   const postLogoutRedirect =
     resolveLogoutRedirect({
       rawRedirect:

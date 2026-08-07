@@ -35,7 +35,8 @@
       "OAuthAccountNotLinked": "Ce compte est déjà lié à une autre méthode de connexion. Utilisez la méthode initialement liée.",
       "CredentialsSignin": "Identifiants invalides. Veuillez réessayer.",
       "SessionRequired": "Veuillez vous connecter pour continuer.",
-      "Default": "Une erreur s’est produite. Veuillez réessayer."
+      "Default": "Une erreur s’est produite. Veuillez réessayer.",
+      "Configuration": "La connexion est temporairement indisponible. Veuillez réessayer dans un instant ou contacter l’assistance."
     },
     "context": {
       "courseInvite": {
