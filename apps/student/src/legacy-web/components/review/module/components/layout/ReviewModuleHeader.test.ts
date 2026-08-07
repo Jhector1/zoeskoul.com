@@ -44,7 +44,7 @@ vi.mock("next-intl", () => ({
     },
 }));
 
-vi.mock("@/components/HeaderSlick", () => ({
+vi.mock("@student/components/chrome/StudentHeaderSlick", () => ({
     default: ({ slot }: { slot: React.ReactNode }) =>
         React.createElement("div", { "data-testid": "header-slick" }, slot),
 }));

@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 
-import HeaderSlick from "@/components/HeaderSlick";
+import StudentHeaderSlick from "@student/components/chrome/StudentHeaderSlick";
 import { ExactMyLearningView } from "../exact-old-ui/ExactMyLearningView";
 import { ExactCatalogsView } from "../exact-old-ui/ExactCatalogsView";
 import { ExactCatalogDetailView } from "../exact-old-ui/ExactCatalogDetailView";
@@ -265,7 +265,7 @@ export function StudentAppShell(props: {
       {shouldRenderGlobalStudentHeader(
         location,
       ) ? (
-        <HeaderSlick
+        <StudentHeaderSlick
           brand="ZoeSkoul"
           websiteOrigin={
             props.websiteOrigin

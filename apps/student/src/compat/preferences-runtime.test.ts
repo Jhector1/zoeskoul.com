@@ -25,7 +25,7 @@ describe("Student shared preference compatibility", () => {
   it("routes existing controls through shared persistence adapters", () => {
     const files = [
       "../App.tsx",
-      "../legacy-web/components/HeaderSlick.tsx",
+      "../components/chrome/StudentHeaderSlick.tsx",
       "../legacy-web/components/LocaleSwitcher.tsx",
       "../legacy-web/components/ThemeToggle.tsx",
       "../legacy-web/lib/sfx/SfxProvider.tsx",

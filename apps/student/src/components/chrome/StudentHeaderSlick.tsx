@@ -10,7 +10,7 @@ import {
 import {
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";
-import UserMenuSlick from "./UserMenuSlick";
+import UserMenuSlick from "@/components/UserMenuSlick";
 import {
   buildStudentLogoutUrl,
 } from "../../app/studentLogout";
@@ -24,8 +24,8 @@ import {
 
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import LocaleSwitcher from "./LocaleSwitcher";
-import { ThemeToggle } from "./ThemeToggle";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
@@ -315,7 +315,7 @@ export function SettingsMenu({
   );
 }
 
-export default function HeaderSlick({
+export default function StudentHeaderSlick({
                                       brand = "Learnoir",
                                       badge = "BETA",
                                       isNav = true,
@@ -637,7 +637,7 @@ export default function HeaderSlick({
 
 export function LearnHeaderSlick() {
   return (
-      <HeaderSlick
+      <StudentHeaderSlick
           isBillingStatus={false}
           brand={process.env.NEXT_PUBLIC_APP_NAME}
           badge=""
