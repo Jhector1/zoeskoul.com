@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { HeaderChrome } from "@zoeskoul/learner-ui";
 import { createPortal } from "react-dom";
 import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
@@ -446,276 +447,255 @@ export default function HeaderSlick({
               : "text-neutral-700 hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]",
       );
 
-  return (
-      <header className="sticky top-0 z-50">
-        <div
-            className={cn(
-                "border-b border-neutral-200/80 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-neutral-950/85",
-                elevated && "shadow-sm",
-            )}
+  const brandGroup = (
+      <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
+        <HeaderDestinationLink
+          href={isAuthed ? studentHomeHref : ROUTES.home}
+          external={isAuthed}
+          className="group flex min-w-0 items-center gap-2.5"
         >
-          <div className="mx-auto px-4 md:px-6">
-            <div className="flex h-16 min-w-0 items-center gap-2 sm:gap-3 lg:gap-4">
-              <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-                <HeaderDestinationLink
-                  href={isAuthed ? studentHomeHref : ROUTES.home}
-                  external={isAuthed}
-                  className="group flex min-w-0 items-center gap-2.5"
-                >
-                  <div className="ui-icon-box h-9 w-9 rounded-lg">
-                  <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
-                    L
-                  </span>
-                  </div>
+          <div className="ui-icon-box h-9 w-9 rounded-lg">
+          <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
+            L
+          </span>
+          </div>
 
-                  <div className="min-w-0 leading-tight">
-                    <div className="flex min-w-0 items-center gap-2">
-                    <span
-                        className="min-w-0 truncate text-sm font-semibold tracking-tight text-neutral-900 dark:text-white/90"
-                        title={brand}
-                    >
-                      {brand}
-                    </span>
+          <div className="min-w-0 leading-tight">
+            <div className="flex min-w-0 items-center gap-2">
+            <span
+                className="min-w-0 truncate text-sm font-semibold tracking-tight text-neutral-900 dark:text-white/90"
+                title={brand}
+            >
+              {brand}
+            </span>
 
-                      <span className="hidden ui-pill-neutral sm:inline-flex">{badge}</span>
-                    </div>
+              <span className="hidden ui-pill-neutral sm:inline-flex">{badge}</span>
+            </div>
 
-                    <div className="hidden truncate text-[11px] text-neutral-500 dark:text-white/55 sm:block">
-                      {t("tagline")}
-                    </div>
-                  </div>
-                </HeaderDestinationLink>
+            <div className="hidden truncate text-[11px] text-neutral-500 dark:text-white/55 sm:block">
+              {t("tagline")}
+            </div>
+          </div>
+        </HeaderDestinationLink>
 
-                {headlineBadge && isBillingStatus ? (
-                    <div className="hidden md:block">
-                      {headlineBadge.href ? (
-                          <Link
-                              href={headlineBadge.href}
-                              aria-label={headlineBadge.text}
-                              className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/35"
-                          >
-                            <Badge tone={headlineBadge.tone} className="cursor-pointer whitespace-nowrap">
-                              {headlineBadge.text}
-                            </Badge>
-                          </Link>
-                      ) : (
-                          <Badge tone={headlineBadge.tone}>{headlineBadge.text}</Badge>
-                      )}
-                    </div>
-                ) : null}
-              </div>
-
-              {slotNode ? (
-                  <div className="hidden min-w-0 flex-1 justify-center xl:flex">
-                    <div className="max-w-full min-w-0 overflow-x-auto px-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                      {slotNode}
-                    </div>
-                  </div>
+        {headlineBadge && isBillingStatus ? (
+            <div className="hidden md:block">
+              {headlineBadge.href ? (
+                  <Link
+                      href={headlineBadge.href}
+                      aria-label={headlineBadge.text}
+                      className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/35"
+                  >
+                    <Badge tone={headlineBadge.tone} className="cursor-pointer whitespace-nowrap">
+                      {headlineBadge.text}
+                    </Badge>
+                  </Link>
               ) : (
-                  <div className="hidden flex-1 xl:block" />
+                  <Badge tone={headlineBadge.tone}>{headlineBadge.text}</Badge>
               )}
+            </div>
+        ) : null}
+      </div>
+  );
 
-              <div
-                  data-ai-tutor-header-slot="true"
-                  className="shrink-0"
-                  aria-live="polite"
+  const topRowActions = (
+      <>
+        <nav className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
+          {isNav ? (
+              <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
+                {NAV.map((n) => {
+                  const isActive =
+                      !n.external &&
+                      (n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href));
+
+                  return (
+                      <HeaderDestinationLink
+                        key={n.href}
+                        href={n.href}
+                        external={n.external}
+                        className={navLinkClass(Boolean(isActive))}
+                      >
+                        {n.label}
+                      </HeaderDestinationLink>
+                  );
+                })}
+              </div>
+          ) : null}
+
+          {isNav ? (
+              <LearningEntryButton
+                  isAuthenticated={isAuthed}
+                  continueLabel={t("continueLesson")}
+                  startLabel={t("startLearning")}
+                  guestLabel={t("exploreLessons")}
+                  loadingText={t("learningOpening")}
+                  disabled={status === "loading"}
+                  icon={<BookOpen className="h-4 w-4 shrink-0" />}
+                  className="ui-btn-primary h-8 whitespace-nowrap"
               />
+          ) : null}
 
-              <nav className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
-                {isNav ? (
-                    <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
-                      {NAV.map((n) => {
+          {isNav ? (
+              <PracticeEntryButton
+                  isAuthenticated={isAuthed}
+                  authenticatedLabel={t("practice")}
+                  guestLabel={t("practice")}
+                  loadingText={t("practiceOpening")}
+                  disabled={status === "loading"}
+                  icon={<Dumbbell className="h-4 w-4 shrink-0" />}
+                  className="ui-btn-info-secondary h-8 whitespace-nowrap"
+              />
+          ) : null}
+
+
+          {isSetting ? <SettingsMenu /> : null}
+
+          {isUser && status !== "loading"
+              ? isAuthed ? (
+                  <UserMenuSlick
+                      name={user?.name ?? "User"}
+                      email={user?.email}
+                      image={user?.image}
+                      profileHref="/profile"
+                      onSignOut={() => hardLogout(locale)}
+                  />
+              ) : (
+                  <NavButton
+                      href={authHref}
+                      className="ui-btn-secondary"
+                      loadingText={t("signInOpening")}
+                      prefetch
+                  >
+                    {t("signIn")}
+                  </NavButton>
+              )
+              : null}
+        </nav>
+
+        <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
+          {isSetting ? <SettingsMenu /> : null}
+
+          {(isNav || isUser) ? (
+              <button
+                  className="ui-btn-secondary"
+                  onClick={() => setOpen((v) => !v)}
+                  aria-expanded={open}
+                  aria-label={t("toggleMenu")}
+              >
+                {open ? t("close") : t("menu")}
+              </button>
+          ) : null}
+        </div>
+      </>
+  );
+
+  const mobileMenu = (
+      <>
+        {(isNav || isUser) ? (
+            <div
+                className={cn(
+                    "overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden",
+                    open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0",
+                )}
+            >
+              <div className="pb-4">
+                <div className="mt-2 grid gap-2">
+                  {isNav
+                      ? NAV.map((n) => {
                         const isActive =
                             !n.external &&
-                            (n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href));
+                            (n.href === "/"
+                                ? pathname === "/"
+                                : pathname?.startsWith(n.href));
 
                         return (
                             <HeaderDestinationLink
                               key={n.href}
                               href={n.href}
                               external={n.external}
-                              className={navLinkClass(Boolean(isActive))}
+                              className={mobileItem(Boolean(isActive))}
                             >
                               {n.label}
                             </HeaderDestinationLink>
                         );
-                      })}
-                    </div>
-                ) : null}
+                      })
+                      : null}
 
-                {isNav ? (
-                    <LearningEntryButton
-                        isAuthenticated={isAuthed}
-                        continueLabel={t("continueLesson")}
-                        startLabel={t("startLearning")}
-                        guestLabel={t("exploreLessons")}
-                        loadingText={t("learningOpening")}
-                        disabled={status === "loading"}
-                        icon={<BookOpen className="h-4 w-4 shrink-0" />}
-                        className="ui-btn-primary h-8 whitespace-nowrap"
-                    />
-                ) : null}
+                  {isNav ? (
+                      <LearningEntryButton
+                          isAuthenticated={isAuthed}
+                          continueLabel={t("continueLesson")}
+                          startLabel={t("startLearning")}
+                          guestLabel={t("exploreLessons")}
+                          loadingText={t("learningOpening")}
+                          disabled={status === "loading"}
+                          icon={<BookOpen className="h-4 w-4 shrink-0" />}
+                          className="ui-btn-primary min-h-10 w-full justify-center"
+                      />
+                  ) : null}
 
-                {isNav ? (
-                    <PracticeEntryButton
-                        isAuthenticated={isAuthed}
-                        authenticatedLabel={t("practice")}
-                        guestLabel={t("practice")}
-                        loadingText={t("practiceOpening")}
-                        disabled={status === "loading"}
-                        icon={<Dumbbell className="h-4 w-4 shrink-0" />}
-                        className="ui-btn-info-secondary h-8 whitespace-nowrap"
-                    />
-                ) : null}
+                  {isNav ? (
+                      <PracticeEntryButton
+                          isAuthenticated={isAuthed}
+                          authenticatedLabel={t("practice")}
+                          guestLabel={t("practice")}
+                          loadingText={t("practiceOpening")}
+                          disabled={status === "loading"}
+                          icon={<Dumbbell className="h-4 w-4 shrink-0" />}
+                          className="ui-btn-info-secondary min-h-10 w-full justify-center"
+                      />
+                  ) : null}
 
 
-                {isSetting ? <SettingsMenu /> : null}
+                  {isUser && status !== "loading"
+                      ? isAuthed ? (
+                          <>
+                            <Link
+                                href="/profile"
+                                className={mobileItem(Boolean(pathname?.startsWith("/profile")))}
+                            >
+                              {t("profile")}
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={() => hardLogout(locale)}
+                                className={mobileItem(false)}
+                            >
+                              {t("logout")}
+                            </button>
+                          </>
+                      ) : (
+                          <NavButton
+                              href={authHref}
+                              className={mobileItem(false)}
+                              loadingText={t("signInOpening")}
+                              prefetch
+                          >
+                            {t("signIn")}
+                          </NavButton>
+                      )
+                      : null}
 
-                {isUser && status !== "loading"
-                    ? isAuthed ? (
-                        <UserMenuSlick
-                            name={user?.name ?? "User"}
-                            email={user?.email}
-                            image={user?.image}
-                            profileHref="/profile"
-                            onSignOut={() => hardLogout(locale)}
-                        />
-                    ) : (
-                        <NavButton
-                            href={authHref}
-                            className="ui-btn-secondary"
-                            loadingText={t("signInOpening")}
-                            prefetch
-                        >
-                          {t("signIn")}
-                        </NavButton>
-                    )
-                    : null}
-              </nav>
-
-              <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
-                {isSetting ? <SettingsMenu /> : null}
-
-                {(isNav || isUser) ? (
-                    <button
-                        className="ui-btn-secondary"
-                        onClick={() => setOpen((v) => !v)}
-                        aria-expanded={open}
-                        aria-label={t("toggleMenu")}
-                    >
-                      {open ? t("close") : t("menu")}
-                    </button>
-                ) : null}
+                  {(isNav || isUser) ? (
+                      <div className="mt-3 text-[11px] text-neutral-500 dark:text-white/55">
+                        {t("tip")}
+                      </div>
+                  ) : null}
+                </div>
               </div>
             </div>
+        ) : null}
+      </>
+  );
 
-            {slotNode ? (
-                <div className="xl:hidden -mt-1 pb-2">
-                  <div className="ui-surface-muted px-2 py-2">
-                    <div className="flex items-center gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                      {slotNode}
-                    </div>
-                  </div>
-                </div>
-            ) : null}
-
-            {(isNav || isUser) ? (
-                <div
-                    className={cn(
-                        "overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden",
-                        open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0",
-                    )}
-                >
-                  <div className="pb-4">
-                    <div className="mt-2 grid gap-2">
-                      {isNav
-                          ? NAV.map((n) => {
-                            const isActive =
-                                !n.external &&
-                                (n.href === "/"
-                                    ? pathname === "/"
-                                    : pathname?.startsWith(n.href));
-
-                            return (
-                                <HeaderDestinationLink
-                                  key={n.href}
-                                  href={n.href}
-                                  external={n.external}
-                                  className={mobileItem(Boolean(isActive))}
-                                >
-                                  {n.label}
-                                </HeaderDestinationLink>
-                            );
-                          })
-                          : null}
-
-                      {isNav ? (
-                          <LearningEntryButton
-                              isAuthenticated={isAuthed}
-                              continueLabel={t("continueLesson")}
-                              startLabel={t("startLearning")}
-                              guestLabel={t("exploreLessons")}
-                              loadingText={t("learningOpening")}
-                              disabled={status === "loading"}
-                              icon={<BookOpen className="h-4 w-4 shrink-0" />}
-                              className="ui-btn-primary min-h-10 w-full justify-center"
-                          />
-                      ) : null}
-
-                      {isNav ? (
-                          <PracticeEntryButton
-                              isAuthenticated={isAuthed}
-                              authenticatedLabel={t("practice")}
-                              guestLabel={t("practice")}
-                              loadingText={t("practiceOpening")}
-                              disabled={status === "loading"}
-                              icon={<Dumbbell className="h-4 w-4 shrink-0" />}
-                              className="ui-btn-info-secondary min-h-10 w-full justify-center"
-                          />
-                      ) : null}
-
-
-                      {isUser && status !== "loading"
-                          ? isAuthed ? (
-                              <>
-                                <Link
-                                    href="/profile"
-                                    className={mobileItem(Boolean(pathname?.startsWith("/profile")))}
-                                >
-                                  {t("profile")}
-                                </Link>
-                                <button
-                                    type="button"
-                                    onClick={() => hardLogout(locale)}
-                                    className={mobileItem(false)}
-                                >
-                                  {t("logout")}
-                                </button>
-                              </>
-                          ) : (
-                              <NavButton
-                                  href={authHref}
-                                  className={mobileItem(false)}
-                                  loadingText={t("signInOpening")}
-                                  prefetch
-                              >
-                                {t("signIn")}
-                              </NavButton>
-                          )
-                          : null}
-
-                      {(isNav || isUser) ? (
-                          <div className="mt-3 text-[11px] text-neutral-500 dark:text-white/55">
-                            {t("tip")}
-                          </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-            ) : null}
-          </div>
-        </div>
-      </header>
+  return (
+      <HeaderChrome
+          elevated={elevated}
+          brandGroup={brandGroup}
+          centerSlot={slotNode}
+          topRowActions={topRowActions}
+          mobileMenu={mobileMenu}
+      />
   );
 }
 
