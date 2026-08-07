@@ -13,7 +13,7 @@ type Props = {
   onSignOut: () => void;
 };
 
-export default function UserMenuSlick({
+export default function StudentUserMenuSlick({
   name,
   email,
   image,

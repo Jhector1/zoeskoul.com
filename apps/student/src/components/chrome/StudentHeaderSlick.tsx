@@ -10,7 +10,7 @@ import {
 import {
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";
-import UserMenuSlick from "@/components/UserMenuSlick";
+import StudentUserMenuSlick from "@student/components/chrome/StudentUserMenuSlick";
 import {
   buildStudentLogoutUrl,
 } from "../../app/studentLogout";
@@ -487,7 +487,7 @@ export default function StudentHeaderSlick({
 
           {isUser && status !== "loading"
               ? isAuthed ? (
-                  <UserMenuSlick
+                  <StudentUserMenuSlick
                       name={user?.name ?? "User"}
                       email={user?.email}
                       image={user?.image}

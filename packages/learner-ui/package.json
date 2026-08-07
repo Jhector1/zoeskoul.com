@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run --root ../.. packages/learner-ui/src/achievements.test.ts packages/learner-ui/src/HeaderChrome.test.ts packages/learner-ui/src/ThemeToggle.test.ts"
+    "test": "vitest run --root ../.. packages/learner-ui/src/achievements.test.ts packages/learner-ui/src/HeaderChrome.test.ts packages/learner-ui/src/ThemeToggle.test.ts packages/learner-ui/src/UserMenuChrome.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
