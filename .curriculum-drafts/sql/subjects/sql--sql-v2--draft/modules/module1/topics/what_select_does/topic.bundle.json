@@ -258,11 +258,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category\nFROM products;",
+        "solutionCode": "SELECT id, stock\nFROM products;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT name, category\nFROM products;",
+            "content": "SELECT id, stock\nFROM products;",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -286,7 +286,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT name, category\nFROM products;",
+          "content": "SELECT id, stock\nFROM products;",
           "language": "sql",
           "isEntry": true,
           "entry": true

@@ -166,14 +166,14 @@
             },
             "try-query_structure_basics-sketch2": {
               "title": "Complete a Two-Column Query",
-              "prompt": "Write a complete query that returns `category` and `stock` from `products`. Return `id, price, created_at` from `products` in that column order.",
+              "prompt": "Write a complete query that returns `category` and `stock` from `products`. Keep SELECT first and FROM second.",
               "hint": "The table name comes after FROM.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, price, created_at` from `products` in that column order."
+                "concept": "Write a complete query that returns `category` and `stock` from `products`. Keep SELECT first and FROM second.",
+                "hint_1": "The table name comes after FROM.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show product ids, prices, and creation dates\nSELECT \nFROM products;"
+              "starterCode": "-- Complete the query structure\nSELECT category, stock\nFROM ;"
             }
           },
           "tryIt": {

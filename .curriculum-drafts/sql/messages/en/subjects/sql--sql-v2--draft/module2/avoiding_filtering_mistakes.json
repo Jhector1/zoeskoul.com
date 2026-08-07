@@ -44,7 +44,7 @@
               },
               "options": {
                 "a": "category = Art",
-                "b": "Art = category ="
+                "b": "category = 'Art'"
               }
             },
             "mc_and_vs_or": {
@@ -235,7 +235,7 @@
               },
               "options": {
                 "a": "category = Art",
-                "b": "Art = category ="
+                "b": "category = 'Art'"
               }
             },
             "mc_and_vs_or": {

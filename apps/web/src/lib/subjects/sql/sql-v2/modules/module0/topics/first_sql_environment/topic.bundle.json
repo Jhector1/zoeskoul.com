@@ -428,7 +428,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Hello SQL' AS message;",
+            "content": "SELECT 'Ready to query' AS status;",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -527,7 +527,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT name, age, city\nFROM students;",
+            "content": "SELECT name, city\nFROM students;",
             "language": "sql",
             "isEntry": true,
             "entry": true
