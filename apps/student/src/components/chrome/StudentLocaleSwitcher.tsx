@@ -6,11 +6,11 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { LocaleSwitcherChrome } from "@zoeskoul/learner-ui";
-import ConfirmResetModal from "./practice/ConfirmResetModal";
+import ConfirmResetModal from "@/components/practice/ConfirmResetModal";
 import { persistLocale } from "@/lib/locale/persistLocale";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 
-export default function LocaleSwitcher({
+export default function StudentLocaleSwitcher({
   compact = false,
   className,
 }: {

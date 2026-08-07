@@ -24,7 +24,7 @@ import {
 
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
+import StudentLocaleSwitcher from "@student/components/chrome/StudentLocaleSwitcher";
 import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
@@ -267,7 +267,7 @@ export function SettingsMenu({
               <div className="ui-surface-muted p-3">
                 <div className="ui-kicker">{t("language")}</div>
                 <div className="mt-3">
-                  <LocaleSwitcher compact className="w-full min-w-0" />
+                  <StudentLocaleSwitcher compact className="w-full min-w-0" />
                 </div>
               </div>
 

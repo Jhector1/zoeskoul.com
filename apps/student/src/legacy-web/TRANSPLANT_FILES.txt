@@ -1,5 +1,4 @@
 apps/student/src/legacy-web/README.md
-apps/student/src/legacy-web/components/LocaleSwitcher.tsx
 apps/student/src/legacy-web/components/Module0VectorSimulatorP5Hybrid.tsx
 apps/student/src/legacy-web/components/admin/AdminAttemptsChart.tsx
 apps/student/src/legacy-web/components/admin/assignments/AssignmentEditor.tsx
