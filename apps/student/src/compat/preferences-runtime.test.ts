@@ -27,7 +27,7 @@ describe("Student shared preference compatibility", () => {
       "../App.tsx",
       "../components/chrome/StudentHeaderSlick.tsx",
       "../legacy-web/components/LocaleSwitcher.tsx",
-      "../legacy-web/components/ThemeToggle.tsx",
+      "../../../../packages/learner-ui/src/ThemeToggle.tsx",
       "../legacy-web/lib/sfx/SfxProvider.tsx",
     ];
     const source = files.map((file) =>

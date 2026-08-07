@@ -9,3 +9,5 @@ export {
   HeaderChrome,
   type HeaderChromeProps,
 } from "./HeaderChrome";
+
+export { ThemeToggle } from "./ThemeToggle";
