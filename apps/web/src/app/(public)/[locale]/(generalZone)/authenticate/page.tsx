@@ -35,14 +35,23 @@ const PROVIDERS: AuthProvider[] = [
     },
 ];
 
+const KNOWN_AUTH_ERROR_CODES = new Set([
+    "OAuthSignin",
+    "OAuthCallback",
+    "OAuthAccountNotLinked",
+    "CredentialsSignin",
+    "SessionRequired",
+    "Configuration",
+]);
+
 function friendlyAuthError(code: string | null, t: (key: string) => string) {
     if (!code) return null;
 
-    try {
-        return t(`errors.${code}`);
-    } catch {
-        return t("errors.Default");
-    }
+    const safeCode = KNOWN_AUTH_ERROR_CODES.has(code)
+        ? code
+        : "Default";
+
+    return t(`errors.${safeCode}`);
 }
 
 export default function AuthenticatePage() {

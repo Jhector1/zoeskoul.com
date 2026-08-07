@@ -338,3 +338,28 @@
     align-self: flex-start;
   }
 }
+
+/*
+ * StudentAccessGate bootstrap/error cards own both light and dark states here.
+ * Keep this override in the same file as the base white card so the bootstrap
+ * surface does not depend on cross-file stylesheet ordering.
+ */
+html.dark .student-state-page {
+  background: #0a0a0a;
+  color: #f5f5f5;
+}
+
+html.dark .student-state-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(23, 23, 23, 0.96);
+  color: #f5f5f5;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.35);
+}
+
+html.dark .student-state-card p {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+html.dark .student-state-eyebrow {
+  color: #9b8cff;
+}

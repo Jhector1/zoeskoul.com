@@ -35,7 +35,8 @@
       "OAuthAccountNotLinked": "That account is already linked to a different sign-in method. Use the originally linked method.",
       "CredentialsSignin": "Invalid credentials. Please try again.",
       "SessionRequired": "Please sign in to continue.",
-      "Default": "Something went wrong. Please try again."
+      "Default": "Something went wrong. Please try again.",
+      "Configuration": "Sign-in is temporarily unavailable. Please try again in a moment or contact support."
     },
     "context": {
       "courseInvite": {

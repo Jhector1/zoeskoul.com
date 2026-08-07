@@ -35,7 +35,8 @@
       "OAuthAccountNotLinked": "Kont sa a deja lye ak yon lòt fason pou konekte. Sèvi ak metòd ki te lye a okòmansman.",
       "CredentialsSignin": "Enfòmasyon yo pa bon. Tanpri eseye ankò.",
       "SessionRequired": "Tanpri konekte pou kontinye.",
-      "Default": "Gen yon bagay ki pa mache. Tanpri eseye ankò."
+      "Default": "Gen yon bagay ki pa mache. Tanpri eseye ankò.",
+      "Configuration": "Koneksyon an pa disponib pou kounye a. Tanpri eseye ankò nan yon ti moman oswa kontakte sipò."
     },
     "context": {
       "courseInvite": {
