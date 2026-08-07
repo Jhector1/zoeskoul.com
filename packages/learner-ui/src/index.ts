@@ -14,3 +14,6 @@ export { ThemeToggle } from "./ThemeToggle";
 
 export { UserMenuChrome } from "./UserMenuChrome";
 export type { UserMenuChromeProps, UserMenuLinkRenderProps } from "./UserMenuChrome";
+
+export { LocaleSwitcherChrome } from "./LocaleSwitcherChrome";
+export type { LocaleSwitcherChromeProps } from "./LocaleSwitcherChrome";
