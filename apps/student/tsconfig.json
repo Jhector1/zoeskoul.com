@@ -36,12 +36,6 @@
       "next/link": [
         "./src/compat/next-link.tsx"
       ],
-      "next-auth/react": [
-        "./src/compat/next-auth-react.tsx"
-      ],
-      "next-auth": [
-        "./src/compat/next-auth.ts"
-      ],
       "next-intl": [
         "./src/compat/next-intl.tsx"
       ],
@@ -65,15 +59,6 @@
       ],
       "next-intl/server": [
         "./src/compat/next-intl-server.ts"
-      ],
-      "next-auth/providers/google": [
-        "./src/compat/next-auth-provider-google.ts"
-      ],
-      "next-auth/providers/keycloak": [
-        "./src/compat/next-auth-provider-keycloak.ts"
-      ],
-      "@auth/prisma-adapter": [
-        "./src/compat/auth-prisma-adapter.ts"
       ],
       "server-only": [
         "./src/compat/server-only.ts"
