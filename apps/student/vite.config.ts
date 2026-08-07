@@ -81,24 +81,6 @@ export default defineConfig(({ mode }) => ({
         ),
       },
       {
-        find: "next-auth/providers/google",
-        replacement: source(
-          "./src/compat/next-auth-provider-google.ts",
-        ),
-      },
-      {
-        find: "next-auth/providers/keycloak",
-        replacement: source(
-          "./src/compat/next-auth-provider-keycloak.ts",
-        ),
-      },
-      {
-        find: "@auth/prisma-adapter",
-        replacement: source(
-          "./src/compat/auth-prisma-adapter.ts",
-        ),
-      },
-      {
         find: "server-only",
         replacement: source(
           "./src/compat/server-only.ts",
@@ -124,18 +106,6 @@ export default defineConfig(({ mode }) => ({
         find: "next/link",
         replacement: source(
           "./src/compat/next-link.tsx",
-        ),
-      },
-      {
-        find: "next-auth/react",
-        replacement: source(
-          "./src/compat/next-auth-react.tsx",
-        ),
-      },
-      {
-        find: "next-auth",
-        replacement: source(
-          "./src/compat/next-auth.ts",
         ),
       },
       {
