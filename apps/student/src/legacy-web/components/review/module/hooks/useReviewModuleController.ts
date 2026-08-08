@@ -12,7 +12,7 @@ import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
 import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
 
-import {ROUTES} from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 import {useReviewProgress} from "@/components/review/module/hooks/useReviewProgress";
 import {useAssignmentStatus} from "@/components/review/module/hooks/useAssignmentStatus";

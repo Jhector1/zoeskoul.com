@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { HeaderChrome, ThemeToggle } from "@zoeskoul/learner-ui";
+import {
+  HeaderChrome,
+  ThemeToggle,
+} from "@zoeskoul/learner-ui";
 import { createPortal } from "react-dom";
 import {
   useStudentSession,
   type StudentSession,
-} from "../../app/studentSession";
+  } from "../../app/studentSession";
 import {
+  ROUTES,
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";
 import StudentUserMenuSlick from "@student/components/chrome/StudentUserMenuSlick";
@@ -29,7 +33,6 @@ import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
-import { ROUTES } from "@/utils";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import {useAuthHref} from "@student/hooks/useAuthHref";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";

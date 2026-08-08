@@ -3,7 +3,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import NavButton from "@/components/ui/NavButton";
 
 type Props = {

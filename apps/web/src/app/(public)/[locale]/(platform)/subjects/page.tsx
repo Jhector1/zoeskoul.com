@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import SubjectPicker from "@/features/practice/ui/subject-picker/SubjectPicker";
 import { getEnrolledVisibleSubjectCardsForActor } from "@/lib/subjects/server/catalogVisibility";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import AssignedCourseCard from "@/components/learningAssignments/AssignedCourseCard";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
 import {

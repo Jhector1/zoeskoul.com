@@ -6,7 +6,7 @@ import {
   buildAuthenticateUrl,
 } from "@zoeskoul/auth-client";
 import { Link } from "@/i18n/navigation";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import SubjectCardGrid from "@student/features/practice/ui/subject-picker/SubjectCardGrid";
 import {
   useSubjectCardController,

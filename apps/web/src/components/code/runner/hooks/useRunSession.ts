@@ -7,7 +7,7 @@ import type {
     RunSessionState,
 } from "@zoeskoul/code-contracts";
 import { TERMINAL_SOCKET_STALE_MS, type TerminalConnectionState } from "../runtime";
-import {toWebSocketUrl} from "@/utils";
+import { toWebSocketUrl } from "@zoeskoul/api-client";
 
 type StartBrowserSessionResult =
     | {

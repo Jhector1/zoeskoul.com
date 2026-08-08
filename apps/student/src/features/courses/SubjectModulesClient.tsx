@@ -7,7 +7,7 @@ import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import NavButton from "@/components/ui/NavButton";
 import { getCourseModuleEntryPolicy } from "@/components/review/module/runtime/courseProgressionPolicy";

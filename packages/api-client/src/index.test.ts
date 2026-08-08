@@ -40,3 +40,74 @@ describe("createApiClient", () => {
     );
   });
 });
+
+describe("toWebSocketUrl", () => {
+  it("uses secure websocket transport from an HTTPS page", async () => {
+    const { toWebSocketUrl } = await import("./index");
+
+    vi.stubGlobal("window", {
+      location: {
+        href: "https://student.zoeskoul.com/en/subjects",
+        protocol: "https:",
+      },
+    });
+
+    expect(
+      toWebSocketUrl("http://runner.example/socket"),
+    ).toBe("wss://runner.example/socket");
+
+    expect(
+      toWebSocketUrl("ws://runner.example/socket"),
+    ).toBe("wss://runner.example/socket");
+
+    expect(
+      toWebSocketUrl("https://runner.example/socket"),
+    ).toBe("wss://runner.example/socket");
+
+    expect(
+      toWebSocketUrl("wss://runner.example/socket"),
+    ).toBe("wss://runner.example/socket");
+
+    vi.unstubAllGlobals();
+  });
+
+  it("uses ws transport from an HTTP page", async () => {
+    const { toWebSocketUrl } = await import("./index");
+
+    vi.stubGlobal("window", {
+      location: {
+        href: "http://localhost:3002/en/subjects",
+        protocol: "http:",
+      },
+    });
+
+    expect(
+      toWebSocketUrl("https://runner.example/socket"),
+    ).toBe("ws://runner.example/socket");
+
+    expect(
+      toWebSocketUrl("wss://runner.example/socket"),
+    ).toBe("ws://runner.example/socket");
+
+    vi.unstubAllGlobals();
+  });
+
+  it("resolves relative websocket URLs against the browser URL", async () => {
+    const { toWebSocketUrl } = await import("./index");
+
+    vi.stubGlobal("window", {
+      location: {
+        href: "https://student.zoeskoul.com/en/subjects",
+        protocol: "https:",
+      },
+    });
+
+    expect(
+      toWebSocketUrl("/api/run/socket"),
+    ).toBe(
+      "wss://student.zoeskoul.com/api/run/socket",
+    );
+
+    vi.unstubAllGlobals();
+  });
+});

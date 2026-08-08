@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import type { SubjectCard } from "./subjectCardTypes";
 import { recordSubjectVisit } from "@/lib/subjects/client/recordSubjectVisit";
 

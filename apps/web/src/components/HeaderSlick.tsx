@@ -14,7 +14,7 @@ import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import { useSearchParams } from "next/navigation";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import {useAuthHref} from "@/hooks/useAuthHref";

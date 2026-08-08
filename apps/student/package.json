@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@zoeskoul/app-config": "workspace:*",
+    "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/editor-surface": "workspace:*",
     "@zoeskoul/learning-client": "workspace:*",

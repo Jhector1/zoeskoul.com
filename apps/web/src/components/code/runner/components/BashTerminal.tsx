@@ -7,7 +7,7 @@ import type {
     RunEvent,
     RunSessionState,
 } from "@zoeskoul/code-contracts";
-import {toWebSocketUrl} from "@/utils";
+import { toWebSocketUrl } from "@zoeskoul/api-client";
 
 type BashTerminalStartResult =
     | {

@@ -160,3 +160,40 @@ describe(
     });
   },
 );
+
+describe("shared route constructors", () => {
+  it("keeps canonical cross-app route paths stable", async () => {
+    const { ROUTES } = await import("@zoeskoul/app-config");
+
+    expect(ROUTES.home).toBe("/");
+    expect(ROUTES.myLearning).toBe("/subjects");
+    expect(ROUTES.catalogs).toBe("/catalogs");
+    expect(ROUTES.catalogDetail("python")).toBe("/catalogs/python");
+
+    expect(ROUTES.subjectModules("python")).toBe(
+      "/subjects/python/modules",
+    );
+
+    expect(ROUTES.moduleIntro("python", "basics")).toBe(
+      "/subjects/python/modules/basics",
+    );
+
+    expect(ROUTES.learningPath("python", "basics")).toBe(
+      "/subjects/python/modules/basics/learn",
+    );
+
+    expect(ROUTES.practicePath("python", "basics")).toBe(
+      "/subjects/python/modules/basics/practice",
+    );
+
+    expect(ROUTES.dailyPractice).toBe("/practice/daily");
+    expect(ROUTES.signIn).toBe("/auth/signin");
+    expect(ROUTES.pricing).toBe("/billing");
+
+    expect(ROUTES.teachingCourseAssignments).toBe(
+      "/admin/course-assignments",
+    );
+
+    expect(ROUTES.adminDashboard).toBe("/admin");
+  });
+});

@@ -1,4 +1,4 @@
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 export type ProfileWorkspaceRole = "student" | "teacher" | "admin";
 

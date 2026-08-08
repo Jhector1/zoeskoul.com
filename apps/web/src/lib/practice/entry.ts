@@ -1,4 +1,4 @@
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 export const PRACTICE_ENTRY_QUERY_KEY = "practice";
 export const PRACTICE_ENTRY_QUERY_VALUE = "start";
