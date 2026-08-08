@@ -77,7 +77,7 @@ import {
 
 import {buildReviewTargetRegistry} from "../runtime/reviewTargetRegistry";
 import {resolveFlowNavigationConfig} from "@/components/review/navigation/FlowNavigator";
-import {useTaggedT} from "@/i18n/tagged";
+import {useTaggedT} from "@student/i18n/tagged";
 import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
     getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic

@@ -26,7 +26,7 @@ vi.mock(
   }),
 );
 
-vi.mock("@/i18n/tagged", () => ({
+vi.mock("@student/i18n/tagged", () => ({
   useTaggedT: () => ({
     resolve: (
       value: string,

@@ -45,7 +45,7 @@ import {
 } from "./quiz/runtimeDefaults";
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import { withTutoringContentRequestHeaders } from "@/lib/tutoring/clientContentRequestContext";

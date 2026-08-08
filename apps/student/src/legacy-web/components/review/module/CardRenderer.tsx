@@ -15,8 +15,8 @@ import type { ReviewAssessmentCompletionReason } from "@/components/review/quiz/
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { shouldShowExpandedLearnerTitles } from "@/lib/config/learnerUiFlags";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";

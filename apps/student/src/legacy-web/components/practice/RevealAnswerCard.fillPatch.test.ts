@@ -11,7 +11,7 @@ import RevealAnswerCard, {
 } from "./RevealAnswerCard";
 import { resolveRevealAnswerForResult } from "./shell/ResultPanel";
 
-vi.mock("@/i18n/tagged", () => ({
+vi.mock("@student/i18n/tagged", () => ({
     isTaggedKey: (value: unknown) =>
         typeof value === "string" && value.startsWith("@:"),
     stripTag: (value: string) => value.slice(2),

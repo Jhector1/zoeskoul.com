@@ -5,7 +5,7 @@ import type { ReviewQuestion } from "@/lib/subjects/types";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { normalizeMath } from "@/lib/markdown/normalizeMath";
 import { cn } from "@/lib/cn";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 
 export default function QuizLocalCard(props: {
     q: Exclude<ReviewQuestion, { kind: "practice" }>;

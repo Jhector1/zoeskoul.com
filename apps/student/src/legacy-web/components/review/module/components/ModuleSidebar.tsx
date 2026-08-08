@@ -8,7 +8,7 @@ import type {
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import RingButton from "@/components/review/module/RingButton";
-import {useTaggedT} from "@/i18n/tagged";
+import {useTaggedT} from "@student/i18n/tagged";
 import { cn } from "@/lib/cn";
 
 export type SidebarTopicItemVm = {

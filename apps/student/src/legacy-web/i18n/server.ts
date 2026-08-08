@@ -42,8 +42,8 @@ export async function getServerI18n(namespace?: string) {
 
 import "server-only";
 
-import type { Values } from "@/i18n/tagged";
-import { resolveDeepTagged, type DeepResolved } from "@/i18n/resolveDeepTagged";
+import type { Values } from "@zoeskoul/i18n-core";
+import { resolveDeepTagged, type DeepResolved } from "@zoeskoul/i18n-core";
 
 export async function resolveTaggedOnServer<T>(
     input: T,

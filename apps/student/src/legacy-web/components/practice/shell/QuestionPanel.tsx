@@ -4,8 +4,8 @@ import React, { useMemo } from "react";
 import ExerciseRenderer from "../ExerciseRenderer";
 import type { PracticeShellProps } from "../PracticeShell";
 import type { Exercise } from "@/lib/practice/types";
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 
 export default function QuestionPanel(props: PracticeShellProps) {
     const {

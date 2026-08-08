@@ -14,7 +14,7 @@ import { useDebouncedEmit } from "@/components/sketches/_shared/useDebouncedEmit
 import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_shared/sketchUi";
 import { SketchShell } from "@/components/sketches/_shared/shells";
 import SketchRenderer from "./SketchRenderer";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import {
     isCompactLearnerUiActive,
     shouldShowExpandedLearnerTitles,

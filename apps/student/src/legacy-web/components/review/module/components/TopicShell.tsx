@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 
 export default function TopicShell(props: {
     title?: string;

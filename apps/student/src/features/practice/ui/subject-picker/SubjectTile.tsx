@@ -6,7 +6,7 @@ import type { SubjectCard } from "./subjectCardTypes";
 import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { cn } from "@/lib/cn";
 import Pill from "./Pill";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
 
 export default function SubjectTile({

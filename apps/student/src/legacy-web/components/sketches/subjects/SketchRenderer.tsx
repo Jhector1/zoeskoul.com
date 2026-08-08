@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useMessages } from "next-intl";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import type { SavedSketchState } from "./types";
 import type { SketchSpec } from "./specTypes";
 

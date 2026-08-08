@@ -50,7 +50,7 @@ vi.mock("@/components/sketches/subjects/SketchBlock", () => ({
     },
 }));
 
-vi.mock("@/i18n/tagged", () => ({
+vi.mock("@student/i18n/tagged", () => ({
     useTaggedT: () => ({
         t: (_key: string, _vars: Record<string, unknown>, fallback: string) => fallback,
         resolve: (value: string | null | undefined, _vars: Record<string, unknown>, fallback: string) =>

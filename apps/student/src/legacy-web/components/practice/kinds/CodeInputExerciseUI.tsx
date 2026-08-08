@@ -18,7 +18,7 @@ import { runViaApi } from "@/lib/code/runClient";
 import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import {
     resolveSqlRunnerConfig,

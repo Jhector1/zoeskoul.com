@@ -1,7 +1,7 @@
 import "server-only";
 
-import type { Values } from "@/i18n/tagged";
-import { resolveDeepTagged, type DeepResolved } from "@/i18n/resolveDeepTagged";
+import type { Values } from "@zoeskoul/i18n-core";
+import { resolveDeepTagged, type DeepResolved } from "@zoeskoul/i18n-core";
 import { getServerI18n } from "@/i18n/server";
 
 export async function resolveTaggedOnServer<T>(
