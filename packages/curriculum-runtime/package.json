@@ -61,7 +61,6 @@
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
-    "@zoeskoul/curriculum-profiles": "workspace:*",
     "@zoeskoul/i18n-core": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
