@@ -2,7 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import CatalogSubjectGridClient from "./CatalogSubjectGridClient";
 
-import {ROUTES} from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 import {getAvailableVisibleCatalogForActor} from "@/lib/subjects/server/catalogVisibility";
 
 export const runtime = "nodejs";

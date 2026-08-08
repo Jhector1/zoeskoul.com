@@ -114,3 +114,14 @@ export function createApiClient(options: ApiClientOptions) {
 }
 
 export type ApiClient = ReturnType<typeof createApiClient>;
+
+export function toWebSocketUrl(input: string) {
+    const url = new URL(input, window.location.href);
+
+    if (url.protocol === "http:" || url.protocol === "ws:") {
+        url.protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    } else if (url.protocol === "https:" || url.protocol === "wss:") {
+        url.protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    }
+    return url.toString();
+}

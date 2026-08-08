@@ -14,7 +14,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 type FooterLink = {
     href: string;

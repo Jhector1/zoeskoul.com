@@ -9,7 +9,7 @@ import SubjectPicker from "@student/features/practice/ui/subject-picker/SubjectP
 import type { SubjectCard } from "@student/features/practice/ui/subject-picker/subjectCardTypes";
 import AssignedCourseCard from "@/components/learningAssignments/AssignedCourseCard";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 function courseCard(
   course: LearningCourseSummary,

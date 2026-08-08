@@ -34,7 +34,7 @@ export default async function HomePage({
 // import { Link } from "@/i18n/navigation";
 // import { getTranslations } from "next-intl/server";
 // import { cn } from "@/lib/cn";
-// import { ROUTES } from "@/utils";
+// import { ROUTES } from "@zoeskoul/app-config";
 // import {AppLocale} from "@/lib/seo/types";
 // import {getRouteSeo, getSharedSeo} from "@/lib/seo/getSeo";
 // import {buildMetadata} from "@/lib/seo/buildMetadata";

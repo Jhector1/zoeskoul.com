@@ -155,6 +155,47 @@ export function isTrustedBrowserAppOrigin(
 
 // Shared cross-application route ownership and locale-aware URL policy.
 // Keep this in the root entrypoint while app-config exports TypeScript source.
+export const ROUTES = {
+  home: "/",
+  myLearning: "/subjects",
+  catalog: "/subjects",
+  catalogs: "/catalogs",
+  catalogDetail: (catalogSlug: string) => `/catalogs/${catalogSlug}`,
+
+  subjectModules: (subjectSlug: string) =>
+    `/subjects/${subjectSlug}/modules`,
+
+  moduleIntro: (subjectSlug: string, moduleSlug: string) =>
+    `/subjects/${subjectSlug}/modules/${moduleSlug}`,
+
+  learningPath: (subjectSlug: string, moduleSlug: string) =>
+    `/subjects/${subjectSlug}/modules/${moduleSlug}/learn`,
+
+  practicePath: (subjectSlug: string, moduleSlug: string) =>
+    `/subjects/${subjectSlug}/modules/${moduleSlug}/practice`,
+
+  review: "/review",
+  dailyPractice: "/practice/daily",
+  signIn: "/auth/signin",
+  pricing: "/billing",
+  contact: "/contact",
+  privacy: "/privacy",
+  authenticate: "/authenticate",
+  terms: "/terms",
+  sandbox: "/sandbox",
+  achievements: "/achievements",
+  assignments: "/assignments",
+  tutoringSessions: "/tutoring-sessions",
+
+  teachingCourseAssignments: "/admin/course-assignments",
+  teachingLearningGroups: "/admin/learning-groups",
+  teachingTutoringSessions: "/admin/tutoring-sessions",
+
+  adminDashboard: "/admin",
+  adminAssignments: "/admin/assignments",
+  adminPublicChallenges: "/admin/public-challenges",
+} as const;
+
 export const supportedLocales = [
   "en",
   "es",

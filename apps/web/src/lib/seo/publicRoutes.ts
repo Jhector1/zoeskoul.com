@@ -1,4 +1,4 @@
-import { ROUTES } from "@/utils";
+import { ROUTES } from "@zoeskoul/app-config";
 
 export const PUBLIC_INDEXABLE_ROUTES = [
     ROUTES.home,
