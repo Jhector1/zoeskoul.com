@@ -491,12 +491,6 @@ apps/student/src/legacy-web/components/vectorpad/defaultState.ts
 apps/student/src/legacy-web/components/vectorpad/types.ts
 apps/student/src/legacy-web/components/vectorpad/useRafForceUpdate.ts
 apps/student/src/legacy-web/components/vectorpad/useZHeldRef.ts
-apps/student/src/legacy-web/features/practice/ui/subject-picker/Pill.tsx
-apps/student/src/legacy-web/features/practice/ui/subject-picker/SubjectCardGrid.tsx
-apps/student/src/legacy-web/features/practice/ui/subject-picker/SubjectPicker.tsx
-apps/student/src/legacy-web/features/practice/ui/subject-picker/SubjectTile.tsx
-apps/student/src/legacy-web/features/practice/ui/subject-picker/subjectCardTypes.ts
-apps/student/src/legacy-web/features/practice/ui/subject-picker/useSubjectCardController.ts
 apps/student/src/legacy-web/hooks/useAuthHref.ts
 apps/student/src/legacy-web/i18n/loadPracticeTopicI18n.test.ts
 apps/student/src/legacy-web/i18n/loadPracticeTopicI18n.ts

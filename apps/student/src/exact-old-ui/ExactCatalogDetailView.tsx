@@ -7,13 +7,13 @@ import {
 } from "@zoeskoul/auth-client";
 import { Link } from "@/i18n/navigation";
 import { ROUTES } from "@/utils";
-import SubjectCardGrid from "@/features/practice/ui/subject-picker/SubjectCardGrid";
+import SubjectCardGrid from "@student/features/practice/ui/subject-picker/SubjectCardGrid";
 import {
   useSubjectCardController,
-} from "@/features/practice/ui/subject-picker/useSubjectCardController";
+} from "@student/features/practice/ui/subject-picker/useSubjectCardController";
 import type {
   SubjectCard,
-} from "@/features/practice/ui/subject-picker/subjectCardTypes";
+} from "@student/features/practice/ui/subject-picker/subjectCardTypes";
 
 type Catalog = {
   slug: string;

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { ROUTES } from "@/utils";
 import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
-import type { SubjectCard } from "@/features/practice/ui/subject-picker/subjectCardTypes";
+import type { SubjectCard } from "@student/features/practice/ui/subject-picker/subjectCardTypes";
 
 type Catalog = {
   slug: string;
