@@ -1,0 +1,15 @@
+{
+  "name": "@zoeskoul/i18n-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "test": "vitest run --root ../.. packages/i18n-core/src",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

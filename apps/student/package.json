@@ -17,6 +17,7 @@
     "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/editor-surface": "workspace:*",
+    "@zoeskoul/i18n-core": "workspace:*",
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
     "@zoeskoul/learner-ui": "workspace:*",

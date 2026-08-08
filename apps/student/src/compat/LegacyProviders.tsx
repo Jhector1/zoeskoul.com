@@ -5,8 +5,8 @@ import {
   type ReactNode,
 } from "react";
 import {
-  loadLocaleMessages,
-} from "../legacy-web/i18n/messages.generated";
+  loadStudentLocaleMessages,
+} from "@student/i18n/messages";
 import {
   IntlBridgeProvider,
 } from "./next-intl";
@@ -35,7 +35,7 @@ export function LegacyProviders(props: {
   useEffect(() => {
     let cancelled = false;
 
-    void loadLocaleMessages(locale)
+    void loadStudentLocaleMessages(locale)
       .then((messages) => {
         if (!cancelled) {
           setState({ locale, messages });
