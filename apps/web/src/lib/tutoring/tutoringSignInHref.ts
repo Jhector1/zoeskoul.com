@@ -1,4 +1,4 @@
-import { buildAuthenticateAccessHref } from "@/lib/access/accessGate";
+import { buildAuthenticateAccessHref } from "@zoeskoul/permissions/accessGate";
 
 function segment(value: string) {
   return encodeURIComponent(value);

@@ -2,7 +2,7 @@
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { useTaggedT } from "@student/i18n/tagged";
-import { normalizeMath } from "@/lib/markdown/normalizeMath";
+import { normalizeMath } from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
 import React from "react";
 
 type LearnerFacingExercise = {

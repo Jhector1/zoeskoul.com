@@ -4,7 +4,7 @@ import {
     buildReviewExerciseRouteTarget,
     removeReviewRoutePrefix,
     resolveReviewRouteTarget,
-} from "./reviewRoute";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRoute";
 
 describe("resolveReviewRouteTarget", () => {
     const mod = {

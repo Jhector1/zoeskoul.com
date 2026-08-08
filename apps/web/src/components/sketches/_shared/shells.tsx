@@ -4,7 +4,7 @@ import React from "react";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { cn, SKETCH_PANEL } from "./sketchUi";
 import { toneCls } from "./tones";
-import type { SketchTone } from "../subjects/types";
+import type { SketchTone } from "@zoeskoul/learner-ui/sketches/subjects/types";
 
 export function SketchShell({
                               title,

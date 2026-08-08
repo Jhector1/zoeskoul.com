@@ -6,7 +6,7 @@ import SubjectCardGrid from "./SubjectCardGrid";
 import Pill from "./Pill";
 import type { SubjectCard } from "./subjectCardTypes";
 import { useSubjectCardController } from "./useSubjectCardController";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useTaggedT } from "@student/i18n/tagged";
 
 export type { SubjectCard } from "./subjectCardTypes";

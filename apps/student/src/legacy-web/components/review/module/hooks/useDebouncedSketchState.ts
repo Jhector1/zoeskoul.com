@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 
 export function useDebouncedSketchState(args: {
     delayMs?: number;

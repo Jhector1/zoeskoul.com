@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { FlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
-import type { ReviewWorkspaceCapabilities } from "./workspaceCapabilities";
+import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 
 export type ReviewModulePageProps = {
     mod: ReviewModule;

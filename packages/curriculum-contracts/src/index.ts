@@ -22,6 +22,7 @@ export * from "./workspace-path.js";
 export * from "./terminal-expectations.js";
 export * from "./git-expectations.js";
 export * from "./tool-presentation.js";
+export * from "./subjects/types.js";
 
 export {
     countBracketBlanks,

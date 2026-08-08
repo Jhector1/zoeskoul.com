@@ -46,8 +46,8 @@ describe("ThemeToggle shared ownership", () => {
     expect(web).toContain(
       'import { HeaderChrome, ThemeToggle } from "@zoeskoul/learner-ui";',
     );
-    expect(student).toContain(
-      'import { HeaderChrome, ThemeToggle } from "@zoeskoul/learner-ui";',
+    expect(student).toMatch(
+      /import\s*\{[\s\S]*HeaderChrome,[\s\S]*ThemeToggle,[\s\S]*\}\s*from "@zoeskoul\/learner-ui";/,
     );
 
     expect(web).not.toContain('from "./ThemeToggle"');

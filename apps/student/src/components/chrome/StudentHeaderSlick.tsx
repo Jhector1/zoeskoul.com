@@ -30,7 +30,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@student/i18n/navigation";
 import StudentLocaleSwitcher from "@student/components/chrome/StudentLocaleSwitcher";
 import { BookOpen, Dumbbell, Settings } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import SoundToggle from "@/lib/sfx/SoundToggle";

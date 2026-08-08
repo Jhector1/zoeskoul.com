@@ -1,4 +1,18 @@
 import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
+import {
+  normalizeWorkspaceBase64,
+  resolveWorkspaceFileCapability,
+  workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
+
+export function defaultMainFile(lang: WorkspaceLanguage): string {
+  const names: Record<string, string> = {
+    python: "main.py", java: "Main.java", javascript: "main.js",
+    r: "main.R", typescript: "main.ts", c: "main.c", cpp: "main.cpp",
+    bash: "main.sh", sql: "query.sql", web: "index.html",
+  };
+  return names[lang] ?? "main.txt";
+}
 
 export const REVIEW_WORKSPACE_VIEWS = [
   "master",
@@ -88,6 +102,24 @@ export type BinaryFileContent = {
   sizeBytes: number;
   checksum?: string;
 };
+
+export function normalizeBinaryFileContent(
+  raw: unknown,
+  fileName: string,
+): BinaryFileContent | undefined {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const record = raw as Record<string, unknown>;
+  if (record.encoding !== "base64") return undefined;
+  const data = normalizeWorkspaceBase64(record.data);
+  const sizeBytes = workspaceBase64DecodedByteLength(record.data);
+  const capability = resolveWorkspaceFileCapability(fileName);
+  if (data == null || sizeBytes == null || capability?.storage !== "binary") return undefined;
+  if (typeof record.sizeBytes === "number" && record.sizeBytes !== sizeBytes) return undefined;
+  const checksum = typeof record.checksum === "string" && /^sha256:[a-f0-9]{64}$/i.test(record.checksum.trim())
+    ? record.checksum.trim().toLowerCase()
+    : undefined;
+  return { encoding: "base64", data, mimeType: capability.mimeType, sizeBytes, ...(checksum ? { checksum } : {}) };
+}
 
 export type FileNode = {
   id: NodeId;

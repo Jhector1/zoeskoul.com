@@ -4,12 +4,12 @@ import {
     STUDENTS_INITIAL_TABLE_SNAPSHOTS,
     STUDENTS_SQL_SCHEMA,
     STUDENTS_SQL_SEED,
-} from "../data/studentsSqlFallback";
+} from "@zoeskoul/learning-runtime/review/module/data/studentsSqlFallback";
 
 import {
     resolveRightRailSqlProps,
     type SqlInitialTableSnapshots,
-} from "./resolveRightRailSqlProps";
+} from "@zoeskoul/learning-runtime/review/module/runtime/resolveRightRailSqlProps";
 
 function tableSnapshot(
     name: string,

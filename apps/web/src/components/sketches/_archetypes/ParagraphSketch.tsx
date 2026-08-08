@@ -2,7 +2,7 @@
 
 import React from "react";
 import RichMarkdownContent from "@/components/sketches/shared/RichMarkdownContent";
-import {ParagraphSpec} from "@/components/sketches/subjects/specTypes";
+import {ParagraphSpec} from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 
 export function ParagraphSketch({

@@ -6,7 +6,7 @@ import { DIFFICULTIES, rngFromActor } from "@/lib/practice/catalog";
 import { getExerciseWithExpected } from "@/lib/practice/generator";
 import { buildExerciseFromManifest } from "@/lib/practice/generator/engines/json/buildExerciseFromManifest";
 import { loadPracticeTopicI18n } from "@/i18n/loadPracticeTopicI18n";
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 import type { ManifestExercise } from "@/lib/subjects/_core/manifestTypes";

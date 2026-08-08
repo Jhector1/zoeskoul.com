@@ -5,37 +5,37 @@ import {
 } from "@zoeskoul/learning-runtime";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import type { ReviewQuestion } from "@/lib/subjects/types";
+import type { ReviewQuestion } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
 import { resolveCodeSurface } from "@/components/practice/workspaceExercise";
 import {
   shouldSkipEmbeddedEnsureExercise,
 } from "@/components/practice/ExerciseRenderer";
-import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
-import { reviewSaveDebug } from "@/components/review/module/runtime/reviewSaveDebug";
+import { exerciseDebug, summarizeExercisePatch } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";
+import { reviewSaveDebug } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
-import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { shouldOfferAiTutor } from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
 import {
   isAiTutorFallbackRequired,
   resolveAiTutorExerciseKey,
-} from "@/components/ai-tutor/tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
-import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
   normalizeWorkspaceLanguage,
   stateLanguageMatches,
-} from "@/components/review/module/runtime/workspaceCodeSource";
-import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
-import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
-import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
+} from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
+import { resolveExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
+import { normalizeTopicProgressKey } from "@zoeskoul/learning-runtime/review/progressTopicKeys";
+import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
 
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
@@ -46,8 +46,8 @@ import {
   getFallbackPracticeHintStepKey,
 } from "@/lib/practice/help/steps";
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
-import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
-import { createManifestWorkspaceDefinition } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
+import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
+import { createManifestWorkspaceDefinition } from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
 import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
 import { defaultMainFile } from "@/components/ide/languageDefaults";
 import {
@@ -55,14 +55,14 @@ import {
   firstUsableStarterFilesValue,
   pickEntryFileFromStarterFilesValue,
   starterFileContentForPath,
-} from "@/components/review/module/runtime/starterContent";
+} from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
   resolveReviewFinalizedPracticeAction,
   type ReviewFinalizedPracticeAction,
-} from "@/components/review/quiz/reviewQuizCompletion";
-import { isReviewFinalizedActionConsumed } from "@/components/review/quiz/projectPracticeCompletion";
+} from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
+import { isReviewFinalizedActionConsumed } from "@zoeskoul/learning-runtime/review/quiz/projectPracticeCompletion";
 
 function uniqueTruthyStrings(values: Array<unknown>) {
   return Array.from(

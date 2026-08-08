@@ -7,7 +7,7 @@ import type { PracticeRunMetaApi } from "@/lib/practice/apiTypes";
 import type { Difficulty } from "@/lib/practice/types";
 import type { TopicValue } from "@/lib/practice/uiTypes";
 
-import { difficultyOptions } from "@/components/vectorpad/types";
+import { difficultyOptions } from "@zoeskoul/learner-ui/vectorpad/types";
 import { useTopicOptions } from "./topicOptions";
 import { readReturnUrlFromSearchParams } from "./storage";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";

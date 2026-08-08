@@ -13,7 +13,7 @@ import {
   getResolvedSubjectModulesFromManifest,
 } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { notFound } from "next/navigation";
-import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
+import { normalizeTopicProgressKey } from "@zoeskoul/learning-runtime/review/progressTopicKeys";
 import { getManifestSubjectPublicationStatus } from "@/lib/subjects/server/subjectPublication";
 import { checkSubjectAudienceAccess } from "@/lib/access/subjectAudienceAccess";
 

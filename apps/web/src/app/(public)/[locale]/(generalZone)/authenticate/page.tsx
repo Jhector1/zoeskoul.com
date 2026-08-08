@@ -4,7 +4,7 @@ import React, {useMemo, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
-import {cn} from "@/lib/cn";
+import {cn} from "@zoeskoul/learner-ui/lib/cn";
 import {resolveRequestedAuthCallback} from "@/lib/auth/resolveAuthRedirect";
 import {
     type AuthProviderId,

@@ -3,12 +3,12 @@
 import React from "react";
 import type { PracticeShellProps } from "../PracticeShell";
 import { resolvePracticeMobilePrimaryAction } from "./mobileActionState";
-import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { shouldOfferAiTutor } from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
 import {
   isAiTutorFallbackRequired,
   resolveAiTutorExerciseKey,
-} from "@/components/ai-tutor/tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,

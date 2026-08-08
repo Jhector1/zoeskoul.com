@@ -13,7 +13,7 @@ import {
     ShieldCheck,
     Sparkles,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { ROUTES } from "@zoeskoul/app-config";
 
 type FooterLink = {

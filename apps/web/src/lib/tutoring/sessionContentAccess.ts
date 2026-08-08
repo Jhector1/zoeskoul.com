@@ -6,7 +6,7 @@ import { bodyJsonResponse } from "@/lib/practice/api/shared/http";
 import { getTutoringRequestAccess } from "./sessionRequestAccess";
 import { parseTutoringSnapshot } from "./sessionSnapshot";
 import { resolveTutoringSnapshotContentScope } from "./sessionContentAccessCore";
-import { TUTORING_SESSION_HEADER } from "./contentRequestProtocol";
+import { TUTORING_SESSION_HEADER } from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 
 export type TutoringContentAccessResult =
   | { kind: "none" }

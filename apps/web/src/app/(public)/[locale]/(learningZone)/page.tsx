@@ -33,7 +33,7 @@ export default async function HomePage({
 // import Image from "next/image";
 // import { Link } from "@/i18n/navigation";
 // import { getTranslations } from "next-intl/server";
-// import { cn } from "@/lib/cn";
+// import { cn } from "@zoeskoul/learner-ui/lib/cn";
 // import { ROUTES } from "@zoeskoul/app-config";
 // import {AppLocale} from "@/lib/seo/types";
 // import {getRouteSeo, getSharedSeo} from "@/lib/seo/getSeo";

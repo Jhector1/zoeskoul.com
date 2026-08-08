@@ -1,7 +1,7 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { defaultMainCode } from "@/components/ide/languageDefaults";
-import { resolveCourseLanguage } from "@/components/review/module/runtime/courseProfiles";
+import { resolveCourseLanguage } from "@zoeskoul/learning-runtime/review/module/runtime/courseProfiles";
 
 export type ToolDefaults = {
     defaultLang: WorkspaceLanguage;

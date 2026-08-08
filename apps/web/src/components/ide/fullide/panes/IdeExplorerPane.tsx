@@ -12,7 +12,7 @@ import type {
 } from "@/components/ide/workspaceHook/workspace.policy";
 import type { Toast } from "@/components/ide/types";
 import { IconChevronRight, IconFile, IconFolder } from "../icons";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
 import type { FullIDEServices } from "@/components/ide/fullide/services";

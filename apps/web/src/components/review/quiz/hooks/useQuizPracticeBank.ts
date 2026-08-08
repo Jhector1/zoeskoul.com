@@ -4,9 +4,9 @@ import {
   shouldBlockReviewPracticeQuestionAction,
 } from "@zoeskoul/learning-runtime";
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo} from "react";
-import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import { defaultVectorPadState } from "@/components/vectorpad/defaultState";
+import type { ReviewQuestion, ReviewQuizSpec } from "@zoeskoul/curriculum-contracts/subjects/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import { defaultVectorPadState } from "@zoeskoul/learner-ui/vectorpad/defaultState";
 import type { SavedQuizState } from "@/lib/review/progressTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
 import type { PracticeItemState } from "@/lib/practice/runtime";
@@ -27,16 +27,16 @@ import {
   getNextPracticeHelpStepKey,
   isRevealStepKey,
 } from "@/lib/practice/help/steps";
-import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
-import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
-import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { emitGamificationUpdate } from "@zoeskoul/learning-client/legacy-compatible/gamification/browserEvents";
+import { reviewDebug, summarizePracticePatch } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
+import { exerciseDebug, summarizeExercisePatch } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import {
   normalizeWorkspaceLanguage,
   stateLanguageMatches,
-} from "@/components/review/module/runtime/workspaceCodeSource";
-import { buildReviewPracticeRevealCompletionPatch } from "@/components/review/quiz/reviewPracticeRevealCompletion";
-import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
+} from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
+import { buildReviewPracticeRevealCompletionPatch } from "@zoeskoul/learning-runtime/review/quiz/reviewPracticeRevealCompletion";
+import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 type ReviewPracticeQuestionActionOptions = {

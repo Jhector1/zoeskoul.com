@@ -1,6 +1,6 @@
 import { buildReviewFromManifestCore } from "@zoeskoul/curriculum-runtime/review";
 import { normalizeToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
-import { makeTopicDef } from "@/lib/subjects/_core/topicMeta";
+import { makeTopicDef } from "@zoeskoul/curriculum-runtime/compat/topicMeta";
 import type { TopicBundleManifest } from "@/lib/subjects/_core/manifestTypes";
 import type {
   Difficulty,
@@ -11,7 +11,7 @@ import type {
   ReviewProjectStep,
   ReviewTopicShape,
   SeedPolicy,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { PracticeKind } from "@zoeskoul/db";
 import { loadDraftModuleTopics, subjectWithoutDraftWrapper, type DraftRef, type LoadedDraftTopic } from "./fs";
 

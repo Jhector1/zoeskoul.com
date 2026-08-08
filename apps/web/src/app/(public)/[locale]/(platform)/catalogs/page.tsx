@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
+import { cloudinaryImageUrl } from "@zoeskoul/learner-ui/lib/cloudinary/url";
 import { ROUTES } from "@zoeskoul/app-config";
 import { getAvailableVisibleCatalogsForActor } from "@/lib/subjects/server/catalogVisibility";
-import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
+import { resolveCatalogCourseStatusPresentation } from "@zoeskoul/curriculum-contracts/subjects/catalogCourseStatus";
 
 export const runtime = "nodejs";
 

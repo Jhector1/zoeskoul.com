@@ -3,7 +3,7 @@ import type {
   PracticeRuntimeSurface,
 } from "@/lib/practice/experience/routePolicy";
 import { resolvePracticeSurfaceMode } from "@/lib/practice/experience/routePolicy";
-import type { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import type { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 /**
  * Resolve the client presentation mode before the session status request has

@@ -5,7 +5,7 @@ import {
     clampLearningProgressIndex,
     resolveLearningActivityLabel,
     shouldUseNestedLearningProgress,
-} from "./learningProgress";
+} from "@zoeskoul/learning-runtime/review/module/learningProgress";
 
 describe("learning progress", () => {
     it("clamps the active index to the available steps", () => {

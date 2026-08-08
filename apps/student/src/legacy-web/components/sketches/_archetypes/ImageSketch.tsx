@@ -2,8 +2,8 @@
 "use client";
 
 import * as React from "react";
-import type { SavedSketchState } from "../subjects/types";
-import type { ImageSketchSpec } from "../subjects/specTypes";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
+import type { ImageSketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 // import ImageSketch from "@/components/sketches/ImageSketchComponent";
 import ImageSketchComponent from "@/components/sketches/components/ImageSketchComponent";

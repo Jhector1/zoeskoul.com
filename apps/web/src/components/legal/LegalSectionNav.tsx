@@ -10,7 +10,7 @@ import {
     type RefObject,
 } from "react";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 type SectionItem = {
     id: string;

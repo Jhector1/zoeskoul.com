@@ -1,4 +1,4 @@
-import type { TutoringWorkspaceView } from "./contentRequestProtocol";
+import type { TutoringWorkspaceView } from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 
 export const TUTORING_MASTER_OWNER_KEY = "shared";
 

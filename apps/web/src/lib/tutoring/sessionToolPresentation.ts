@@ -3,7 +3,7 @@ import type {
   ReviewCard,
   ReviewModule,
   ReviewTopicShape,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 
 type UnknownRecord = Record<string, unknown>;
 

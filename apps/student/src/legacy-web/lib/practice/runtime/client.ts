@@ -1,7 +1,7 @@
 import type { MutableRefObject } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import type { QItem, PracticeHelpEntry } from "@/lib/practice/uiTypes";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import {
     fetchPracticeExercise,
     fetchPracticeHelp,
@@ -25,11 +25,11 @@ import {
 import {
     normalizeWorkspaceLanguage,
     stateLanguageMatches,
-} from "@/components/review/module/runtime/workspaceCodeSource";
+} from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 import {
     deriveEntryCode,
     resolveExerciseWorkspace,
-} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 
 const PRACTICE_AUTHORED_CONTRACT_FIELDS = [
     "help",

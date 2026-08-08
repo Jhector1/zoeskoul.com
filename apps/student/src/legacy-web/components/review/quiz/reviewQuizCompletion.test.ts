@@ -7,7 +7,7 @@ import {
     resolveReviewFinalizedPracticeAction,
     shouldAutoCompleteReviewCard,
     shouldFinalizeReviewCardFromManualNext,
-} from "./reviewQuizCompletion";
+} from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
 
 
 describe("resolveReviewFinalizedNavigationAction", () => {

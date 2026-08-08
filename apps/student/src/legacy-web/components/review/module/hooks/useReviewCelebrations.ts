@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import type { ReviewModule } from "@/lib/subjects/types";
-import { moduleCompleteFromProgress } from "../selectors";
-import { isTopicComplete } from "../utils";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { moduleCompleteFromProgress } from "@zoeskoul/learning-runtime/review/module/selectors";
+import { isTopicComplete } from "@zoeskoul/learning-runtime/review/module/utils";
 
 const TOPIC_TOAST_MS = 4200;
 

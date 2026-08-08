@@ -4,12 +4,12 @@ import type {
     TopicSlug,
 } from "@/lib/practice/types";
 import type { MissedItem, QItem } from "@/lib/practice/uiTypes";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import {
     buildSubmitAnswerFromItem,
     initItemFromExercise,
 } from "@/lib/practice/uiHelpers";
-import { isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import type { SessionHistoryRow } from "./types";
 
 export function coerceMaxAttempts(v: unknown): number | null {

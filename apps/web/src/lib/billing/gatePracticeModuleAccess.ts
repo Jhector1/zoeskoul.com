@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
-import { buildBillingHref, safeInternalPath } from "@/lib/billing/moduleAccess";
+import { buildBillingHref, safeInternalPath } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";
 import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
 

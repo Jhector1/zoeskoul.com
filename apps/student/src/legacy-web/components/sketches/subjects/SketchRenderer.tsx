@@ -3,8 +3,8 @@
 import * as React from "react";
 import { useMessages } from "next-intl";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
-import type { SavedSketchState } from "./types";
-import type { SketchSpec } from "./specTypes";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
+import type { SketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 
 import { ParagraphSketch } from "@/components/sketches/_archetypes/ParagraphSketch";
 import ImageSketch from "@/components/sketches/_archetypes/ImageSketch";

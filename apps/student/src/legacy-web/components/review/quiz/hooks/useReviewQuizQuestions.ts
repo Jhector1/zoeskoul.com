@@ -1,7 +1,7 @@
 // src/components/review/quiz/hooks/useReviewQuizQuestions.ts
 import { useEffect, useMemo, useState } from "react";
-import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
-import { fetchReviewQuiz } from "@/lib/subjects/clientApi";
+import type { ReviewQuestion, ReviewQuizSpec } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { fetchReviewQuiz } from "@zoeskoul/learning-client/legacy-compatible/subjects/clientApi";
 
 
 type ProjectStepLike = {

@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import type { QItem } from "@/components/practice/practiceType";
 
 export function useVectorPadRef(current: QItem | null) {

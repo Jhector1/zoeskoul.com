@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
-import type { ReviewModule } from "@/lib/subjects/types";
-import { isTopicComplete } from "../utils";
-import { isModuleTopicUnlocked } from "../runtime/courseProgressionPolicy";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { isTopicComplete } from "@zoeskoul/learning-runtime/review/module/utils";
+import { isModuleTopicUnlocked } from "@zoeskoul/learning-runtime/review/module/runtime/courseProgressionPolicy";
 
 type Args = {
     topics: ReviewModule["topics"] | undefined;

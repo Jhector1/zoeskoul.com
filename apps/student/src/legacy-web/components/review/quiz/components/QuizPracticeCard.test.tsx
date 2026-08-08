@@ -7,7 +7,7 @@ import QuizPracticeCard, {
     flushReviewToolsBeforeSubmit,
     workspaceStableKey,
 } from "./QuizPracticeCard";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
@@ -15,7 +15,7 @@ import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
 import {
     getReviewSubmitBridgeHost,
     type ReviewSubmitBridgeHost,
-} from "@/lib/review/submitBridge";
+} from "@zoeskoul/learning-runtime/review/submitBridge";
 
 vi.mock("@/lib/config/learnerUiFlags", () => ({
     learnerUiFlags: {

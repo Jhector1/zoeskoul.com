@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { QItem } from "@/lib/practice/uiTypes";
-import { buildReviewPracticeRevealCompletionPatch } from "./reviewPracticeRevealCompletion";
+import { buildReviewPracticeRevealCompletionPatch } from "@zoeskoul/learning-runtime/review/quiz/reviewPracticeRevealCompletion";
 
 function item(patch: Partial<QItem> = {}): QItem {
   return {

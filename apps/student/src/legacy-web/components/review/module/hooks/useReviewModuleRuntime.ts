@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { toolsPolicyForSubject } from "@/lib/tools/policy";
+import { toolsPolicyForSubject } from "@zoeskoul/learner-ui/lib/tools/policy";
 import { resolveToolDefaults } from "@/components/tools/resolveToolDefaults";
-import { resolveCourseSqlRunnerConfig } from "@/components/review/module/runtime/courseProfiles";
-import type { ReviewModule } from "@/lib/subjects/types";
+import { resolveCourseSqlRunnerConfig } from "@zoeskoul/learning-runtime/review/module/runtime/courseProfiles";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import {
     learningIdeFromRuntimeDefaults,

@@ -18,12 +18,12 @@ import {
   cloneVec,
   initItemFromExercise,
 } from "@/lib/practice/uiHelpers";
-import { isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { usePracticeExcuseActions } from "@/lib/flow/usePracticeExcuseActions";
 import { getSessionStatus, type SessionStatus } from "./sessionStatus";
 import { SESSION_DEFAULT } from "./constants";
 import type { RunMeta, TopicValue } from "./usePracticeRunMeta";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import { getEffectiveSid } from "./storage";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
@@ -38,7 +38,7 @@ import {
   requestPracticeHelpItem,
   submitPracticeItem,
 } from "@/lib/practice/runtime";
-import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
 import {

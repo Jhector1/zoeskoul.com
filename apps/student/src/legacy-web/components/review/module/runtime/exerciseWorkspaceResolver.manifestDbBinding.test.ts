@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import {buildReviewTargetRegistry, ReviewTargetEntry} from "./reviewTargetRegistry";
+import {buildReviewTargetRegistry, ReviewTargetEntry} from "@zoeskoul/learning-runtime/review/module/runtime/reviewTargetRegistry";
 import {
   deriveEntryCode,
   resolveExerciseWorkspace,
-} from "./exerciseWorkspaceResolver";
-import { resolveDeterministicEditorSource } from "./deterministicEditorSource";
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
+import { resolveDeterministicEditorSource } from "@zoeskoul/learning-runtime/review/module/runtime/deterministicEditorSource";
 
 function fileContent(workspace: WorkspaceStateV2, fileName: string) {
   const node = workspace.nodes.find(

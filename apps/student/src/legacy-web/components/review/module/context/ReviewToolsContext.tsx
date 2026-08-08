@@ -25,13 +25,13 @@ import type {
   UnknownRecord,
   WorkspaceOrigin,
 } from "../runtime/reviewRuntimeTypes";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
 import {
     hasNonBlankText,
     normalizeCodeWorkspacePair,
     stateLanguageMatches, workspaceWithEntryCode,
-} from "@/components/review/module/runtime/workspaceCodeSource";
+} from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 
 type SqlTableSnapshot = {
   name: string;

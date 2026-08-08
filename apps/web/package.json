@@ -65,6 +65,7 @@
     "@upstash/redis": "^1.36.3",
     "@zoeskoul/api-contracts": "workspace:*",
     "@zoeskoul/app-config": "workspace:*",
+    "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",

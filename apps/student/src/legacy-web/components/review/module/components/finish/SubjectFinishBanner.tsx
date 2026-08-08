@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useSubjectFinishCopy } from "../../hooks/useSubjectFinishCopy";
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 

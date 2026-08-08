@@ -1,6 +1,6 @@
 import type { BillingStatus } from "@/lib/billing/types";
 import type { BadgeTone } from "./Badge";
-import { fmtShortDate } from "@/lib/billing/format";
+import { fmtShortDate } from "@zoeskoul/learner-ui/lib/billing/format";
 
 export type BillingHeadline = {
   tone: BadgeTone;

@@ -1,7 +1,7 @@
 // src/lib/practice/generator/engines/json/buildGeneratorTopicsFromManifest.ts
 import type { TopicBundle } from "@/lib/practice/generator/engines/utils";
 import { defineJsonGeneratorTopic } from "@/lib/practice/generator/engines/json/defineJsonGeneratorTopic";
-import { withTopicParentContext } from "@/lib/subjects/_core/withTopicParentContext";
+import { withTopicParentContext } from "@zoeskoul/curriculum-runtime/compat/withTopicParentContext";
 import type {
     SubjectManifest,
     TopicManifestRefMap,

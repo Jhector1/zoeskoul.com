@@ -5,7 +5,7 @@ import {
 
 import type {
   ReviewModule,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 import ReviewModulePageClient from "@student/features/learning/ReviewModulePageClient";
 
 type PageData =

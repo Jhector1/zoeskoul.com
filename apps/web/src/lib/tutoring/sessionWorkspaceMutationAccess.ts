@@ -1,6 +1,6 @@
 import "server-only";
 
-import { TUTORING_SESSION_HEADER } from "./contentRequestProtocol";
+import { TUTORING_SESSION_HEADER } from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 import { getTutoringRequestAccess } from "./sessionRequestAccess";
 import { canMutateTutoringWorkspace } from "./sessionWorkspaceAccessCore";
 import { resolveTutoringRequestWorkspace } from "./sessionWorkspaceRequest";

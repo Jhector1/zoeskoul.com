@@ -5,7 +5,7 @@ import type {
 } from "@zoeskoul/learning-contracts";
 
 import type { Actor } from "@/lib/practice/actor";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 import {
   buildStudentRuntimePracticeLaunch,

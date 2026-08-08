@@ -1,4 +1,4 @@
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 const HIDDEN_SOLUTION_KEYS = new Set([
   "solutionCode",

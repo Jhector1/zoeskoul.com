@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { resolveCompactAssignmentCtaVisibility } from "./assignmentCtaVisibility";
 
 const topics: ReviewModule["topics"] = [

@@ -10,7 +10,7 @@ const { cloudinaryImageUrlMock } = vi.hoisted(() => ({
   cloudinaryImageUrlMock: vi.fn(),
 }));
 
-vi.mock("@/lib/cloudinary/url", () => ({
+vi.mock("@zoeskoul/learner-ui/lib/cloudinary/url", () => ({
   cloudinaryImageUrl: cloudinaryImageUrlMock,
 }));
 

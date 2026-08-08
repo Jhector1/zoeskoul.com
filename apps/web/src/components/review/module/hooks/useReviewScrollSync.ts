@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
-import type { ReviewCard } from "@/lib/subjects/types";
-import { isCardDoneFromState, isQuizLikeCard } from "../progressKeys";
-import { prereqsMetForAnyQuizOrProject } from "../utils";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { isCardDoneFromState, isQuizLikeCard } from "@zoeskoul/learning-runtime/review/module/progressKeys";
+import { prereqsMetForAnyQuizOrProject } from "@zoeskoul/learning-runtime/review/module/utils";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 
 type Args = {

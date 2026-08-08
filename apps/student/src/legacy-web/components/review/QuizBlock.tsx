@@ -12,13 +12,13 @@ import React, {
   useRef,
 } from "react";
 import { flushSync } from "react-dom";
-import type {ReviewProjectSpec, ReviewProjectStep, ReviewQuestion, ReviewQuizSpec} from "@/lib/subjects/types";
+import type {ReviewProjectSpec, ReviewProjectStep, ReviewQuestion, ReviewQuizSpec} from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { SavedQuizState } from "@/lib/subjects/progressTypes";
 import type {
   ExerciseRuntimeState,
   UnknownRecord,
 } from "@/components/review/module/runtime/reviewRuntimeTypes";
-import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
+import { buildReviewQuizKey } from "@zoeskoul/curriculum-contracts/subjects/quizClient";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 import { useQuizLocalAnswers } from "./quiz/hooks/useQuizLocalAnswers";
@@ -36,19 +36,19 @@ import ReviewExerciseTransitionBoundary from "./quiz/components/ReviewExerciseTr
 import QuizFooter from "./quiz/components/QuizFooter";
 import { emitSfx } from "@/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
-import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
-import { deriveEntryCode, isWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { reviewDebug, summarizePracticePatch } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
+import { exerciseDebug, summarizeExercisePatch } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";
+import { deriveEntryCode, isWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import {
   resolveQuizPracticeRuntimeDefaults,
-} from "./quiz/runtimeDefaults";
+} from "@zoeskoul/learning-runtime/review/quiz/runtimeDefaults";
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@student/i18n/tagged";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
-import { withTutoringContentRequestHeaders } from "@/lib/tutoring/clientContentRequestContext";
+import { withTutoringContentRequestHeaders } from "@zoeskoul/learning-client/legacy-compatible/tutoring/clientContentRequestContext";
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
@@ -56,14 +56,14 @@ import {
   COMPACT_PRACTICE_NAV_LABEL,
   type CompactProgressStepStatus,
   type CompactQuizNavigationState,
-} from "@/components/review/module/compactFlowNavigation";
+} from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 import {
     computeReviewQuizCompletionSummary,
     resolveReviewCardAutoCompletionReason,
     resolveReviewFinalizedNavigationAction,
     shouldFinalizeReviewCardFromManualNext,
-} from "@/components/review/quiz/reviewQuizCompletion";
-import { resolveReviewQuizRestoreIndex } from "@/components/review/quiz/reviewQuizNavigation";
+} from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
+import { resolveReviewQuizRestoreIndex } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizNavigation";
 import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
@@ -75,7 +75,7 @@ import {
     getReviewPracticeItemCompletionState,
     resolveReviewPracticeCompletionStatus,
     type ReviewPracticeItemCompletionState,
-} from "@/components/review/quiz/projectPracticeCompletion";
+} from "@zoeskoul/learning-runtime/review/quiz/projectPracticeCompletion";
 
 type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
   UnknownRecord & {

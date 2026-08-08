@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";
+import { getDistinctSketchShellTitle } from "@zoeskoul/learner-ui/sketches/subjects/getDistinctSketchShellTitle";
 
 describe("getDistinctSketchShellTitle", () => {
     it("hides an outer title that repeats the sketch heading", () => {

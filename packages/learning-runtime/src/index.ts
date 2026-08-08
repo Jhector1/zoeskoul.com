@@ -27,6 +27,26 @@ export type ReviewRuntimeStateV2 = {
   exercises?: Record<string, any>;
 };
 
+export type {
+  CardRuntimeState,
+  CardStateKey,
+  EditorRuntimeState,
+  ExerciseRuntimeState,
+  ExerciseStateKey,
+  ResetExerciseToStarterArgs,
+  ResetExerciseToStarterResult,
+  ReviewRuntimeState,
+  ReviewRuntimeStore,
+  RuntimeFileEditEntry,
+  RuntimeFileEditOrigin,
+  RuntimeFileEditState,
+  RuntimeWorkspaceMutation,
+  RuntimeWorkspaceMutationType,
+  SketchState,
+  UnknownRecord,
+  WorkspaceOrigin,
+} from "./review/module/runtime/reviewRuntimeTypes";
+
 export type ReviewTopicProgress = {
   quizVersion?: number;
 

@@ -1,5 +1,5 @@
-import type { ReviewModule, ReviewCard } from "@/lib/subjects/types";
-import { isTopicComplete } from "./utils";
+import type { ReviewModule, ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { isTopicComplete } from "@zoeskoul/learning-runtime/review/module/utils";
 
 export function resolveCompactAssignmentCtaVisibility(args: {
     compactLearnerUi: boolean;

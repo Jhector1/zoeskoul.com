@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { StripeStatusPanel } from "@/components/billing/StripeStatusPanel";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 import BillingShell from "@/components/billing/BillingShell";
 import BillingHeader from "@/components/billing/BillingHeader";

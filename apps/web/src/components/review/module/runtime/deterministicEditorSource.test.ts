@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveDeterministicEditorSource } from "./deterministicEditorSource";
+import { resolveDeterministicEditorSource } from "@zoeskoul/learning-runtime/review/module/runtime/deterministicEditorSource";
 
 function makeEntry(overrides: Record<string, unknown> = {}) {
   return {

@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef } from "react";
 import type p5 from "p5";
-import type { Mode, Vec3 } from "@/lib/math/vec3";
+import type { Mode, Vec3 } from "@zoeskoul/learner-ui/lib/math/vec3";
 import {
   COLORS,
   angleBetween,
@@ -12,8 +12,8 @@ import {
   safeUnit,
   scalarProjOfAonB,
   mul,
-} from "@/lib/math/vec3";
-import type { VectorPadState } from "./types";
+} from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 
 type Handles = { a?: boolean; b?: boolean };
 type Visibility = { a?: boolean; b?: boolean };

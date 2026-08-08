@@ -48,7 +48,6 @@ describe("UserMenuChrome ownership boundary", () => {
     for (const source of [web, student]) {
       expect(source).toContain('from "next/image"');
       expect(source).toContain('from "next-intl"');
-      expect(source).toContain('from "@/i18n/navigation"');
       expect(source).toContain(
         'import { UserMenuChrome } from "@zoeskoul/learner-ui";',
       );
@@ -56,6 +55,8 @@ describe("UserMenuChrome ownership boundary", () => {
       expect(source).toContain("<UserMenuChrome");
       expect(source).toContain('alt={t("avatarAlt", { name })}');
     }
+    expect(web).toContain('from "@/i18n/navigation"');
+    expect(student).toContain('from "@student/i18n/navigation"');
   });
 
   it("moves Student adapter out of legacy ownership", () => {

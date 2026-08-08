@@ -3,7 +3,7 @@ import {
   buildAccessGateSearchParams,
   buildAuthenticateAccessHref,
   safeAccessPath,
-} from "./accessGate";
+} from "@zoeskoul/permissions/accessGate";
 
 describe("access gate continuation", () => {
   it("shares one safe continuation contract across account and billing gates", () => {

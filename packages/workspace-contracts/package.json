@@ -12,6 +12,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*"
   }
 }

@@ -1,7 +1,7 @@
 // src/app/progress/page.tsx
 "use client";
 
-import { difficultyOptions, topicOptions } from "@/components/vectorpad/types";
+import { difficultyOptions, topicOptions } from "@zoeskoul/learner-ui/vectorpad/types";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   LineChart,

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 export const GLOBAL_NAVIGATION_PENDING_EVENT = "zoeskoul:navigation-pending";
 export const GLOBAL_NAVIGATION_IDLE_EVENT = "zoeskoul:navigation-idle";

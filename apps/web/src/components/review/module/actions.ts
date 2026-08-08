@@ -1,4 +1,4 @@
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
     ReviewProgressState,
     ReviewTopicProgress,
@@ -8,7 +8,7 @@ import {
     isQuizLikeCard,
     markCardDoneInTopicState,
     normalizeTopicProgressForCards,
-} from "./progressKeys";
+} from "@zoeskoul/learning-runtime/review/module/progressKeys";
 
 type RuntimeStateRecord = {
     exercises?: Record<string, { cardId?: string }>;

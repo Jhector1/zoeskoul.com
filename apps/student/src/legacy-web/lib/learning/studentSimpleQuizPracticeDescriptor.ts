@@ -5,7 +5,7 @@ import type {
 import type {
   ReviewCard,
   ReviewModule,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 
 import {
   findStudentRuntimeTopic,

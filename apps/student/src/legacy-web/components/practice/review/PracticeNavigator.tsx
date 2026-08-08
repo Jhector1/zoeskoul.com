@@ -8,7 +8,7 @@ import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import PracticeScopeSelector from "@/components/practice/shell/PracticeScopeSelector";
 import PracticeLeaderboardRail from "@/components/practice/leaderboard/PracticeLeaderboardRail";
 import { shouldShowPracticeLeaderboard } from "@/components/practice/leaderboard/visibility";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { resolvePracticeQueueStatus } from "@/lib/practice/experience/queueStatus";
 import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import {

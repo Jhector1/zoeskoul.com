@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import TopicShell from "../../components/TopicShell";
 import ReviewTopicCards from "./ReviewTopicCards";
 import ReviewTopicCompletion from "./ReviewTopicCompletion";
 import ReviewLearningProgress from "./ReviewLearningProgress";
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
     ReviewProgressState,
     ReviewTopicProgress,
@@ -14,14 +14,14 @@ import type {
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
-import type { ReviewWorkspaceCapabilities } from "../../workspaceCapabilities";
-import { isCardDoneFromState } from "../../progressKeys";
+import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
+import { isCardDoneFromState } from "@zoeskoul/learning-runtime/review/module/progressKeys";
 import {
     resolveLearningActivityLabel,
     shouldUseNestedLearningProgress,
     type LearningProgressTrack,
-} from "../../learningProgress";
+} from "@zoeskoul/learning-runtime/review/module/learningProgress";
 
 type Props = {
     leftCollapsedEff: boolean;

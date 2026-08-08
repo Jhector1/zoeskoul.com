@@ -5,7 +5,7 @@ import {
     classifySqlResultMismatch,
     classifySqlRunFailure,
 } from "@/lib/code/feedback";
-import { getSqlDataset } from "@/lib/subjects/sql/sql/datasets";
+import { getSqlDataset } from "@zoeskoul/curriculum-runtime/subjects/sql/sql/datasets";
 import { validateSqlSubmission } from "@zoeskoul/curriculum-runtime/sql";
 import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 

@@ -7,7 +7,7 @@ import {
     isReviewFinalizedActionConsumed,
     isReviewPracticeStepComplete,
     resolveReviewPracticeCompletionStatus,
-} from "./projectPracticeCompletion";
+} from "@zoeskoul/learning-runtime/review/quiz/projectPracticeCompletion";
 
 describe("resolveReviewPracticeCompletionStatus", () => {
     it("uses saved project-step metadata when the step is not mounted", () => {

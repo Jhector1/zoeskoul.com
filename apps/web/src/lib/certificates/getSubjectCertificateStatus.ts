@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { hasReviewModule } from "@/lib/subjects/registry";
-import { CERT_REQUIRE_ASSIGNMENT } from "@/lib/certificates/policy";
+import { CERT_REQUIRE_ASSIGNMENT } from "@zoeskoul/learner-ui/lib/certificates/policy";
 import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 
 export type SubjectCertificateModuleStatus = {

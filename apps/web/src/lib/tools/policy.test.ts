@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { toolsPolicyForSubject } from "./policy";
+import { toolsPolicyForSubject } from "@zoeskoul/learner-ui/lib/tools/policy";
 
 describe("toolsPolicyForSubject", () => {
     it("enables the code workspace for the Git curriculum profile", () => {

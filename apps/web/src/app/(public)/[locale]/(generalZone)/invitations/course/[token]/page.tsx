@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { actorKeyOf } from "@/lib/practice/actor";
-import { buildAuthenticateAccessHref } from "@/lib/access/accessGate";
+import { buildAuthenticateAccessHref } from "@zoeskoul/permissions/accessGate";
 import {
   acceptLearningAssignmentInvite,
   findLearningAssignmentInviteByToken,

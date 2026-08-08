@@ -5,8 +5,8 @@ import MathMarkdown from "@/components/markdown/MathMarkdown";
 import type {
     AlgorithmAnimationNode,
     AlgorithmAnimationSpec,
-} from "@/components/sketches/subjects/specTypes";
-import type { SavedSketchState } from "@/components/sketches/subjects/types";
+} from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 
 function clampStep(value: unknown, stepCount: number) {
     const parsed = Number(value);

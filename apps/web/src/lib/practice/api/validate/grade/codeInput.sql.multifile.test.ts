@@ -9,7 +9,7 @@ vi.mock("@zoeskoul/curriculum-runtime/sql", () => ({
     validateSqlSubmission: validateSqlSubmissionMock,
 }));
 vi.mock("@/lib/code/runCode", () => ({ runCode: runCodeMock }));
-vi.mock("@/lib/subjects/sql/sql/datasets", () => ({
+vi.mock("@zoeskoul/curriculum-runtime/subjects/sql/sql/datasets", () => ({
     getSqlDataset: vi.fn(() => null),
 }));
 

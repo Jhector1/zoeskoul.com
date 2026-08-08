@@ -4,7 +4,7 @@ vi.mock("@zoeskoul-code-input-expected", () => ({
     buildFixedTestsExpected: () => ({}),
 }));
 
-import { defineCourseFromManifest } from "./defineCourseFromManifest";
+import { defineCourseFromManifest } from "@zoeskoul/curriculum-runtime/compat/defineCourseFromManifest";
 
 describe("defineCourseFromManifest", () => {
     it("copies subject profile metadata onto built modules", () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 /** precompute */
 const FILE_ROWS = [0, 1, 2, 3, 4, 5, 6] as const;

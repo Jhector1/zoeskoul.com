@@ -7,7 +7,7 @@ import type {
 } from "@zoeskoul/learning-contracts";
 
 import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import { prisma } from "@/lib/prisma";
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
@@ -15,7 +15,7 @@ import { buildPracticeGetContext } from "@/lib/practice/api/get/context";
 import { handlePracticeGet } from "@/lib/practice/api/get/handler";
 import { GetParamsSchema } from "@/lib/practice/api/get/schemas";
 import type { Actor } from "@/lib/practice/actor";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 import {
   resolveStudentEmbeddedTryItDescriptor,

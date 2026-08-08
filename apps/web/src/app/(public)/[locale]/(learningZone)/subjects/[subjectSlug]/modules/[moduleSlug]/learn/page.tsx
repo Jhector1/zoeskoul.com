@@ -4,7 +4,7 @@ import { loadReviewModulePageData } from "./loadReviewModulePageData";
 import {
     buildDefaultReviewRouteTarget,
     buildReviewRoutePath,
-} from "@/components/review/module/runtime/reviewRoute";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRoute";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

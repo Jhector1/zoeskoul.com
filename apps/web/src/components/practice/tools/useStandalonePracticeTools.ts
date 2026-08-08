@@ -6,8 +6,8 @@ import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import type { ExerciseToolsValue, RegisterExerciseToolArgs } from "@/components/tools/context/ExerciseToolsContext";
 import type ToolsPanel from "@/components/tools/ToolsPanel";
 import { useToolCodeRunnerState } from "@/components/review/module/hooks/useToolCodeRunnerState";
-import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 
 function firstText(...values: unknown[]) {

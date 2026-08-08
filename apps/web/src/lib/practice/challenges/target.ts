@@ -1,6 +1,6 @@
 import "server-only";
 
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 
 export type PublishedPracticePurpose = "quiz" | "project" | "try_it";

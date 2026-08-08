@@ -5,6 +5,17 @@ export type LearningCourseStatus =
   | "draft"
   | "legacy";
 
+export type ReviewContentVersion = {
+  kind: "review_content_patch";
+  subjectSlug: string;
+  moduleSlug: string;
+  contentReleaseId: string;
+  subjectContentHash: string;
+  moduleContentHash: string;
+  generatedAt: string | null;
+  courseTrackVersion: number | null;
+};
+
 export type LearningCourseSummary = {
   subjectId: string;
   slug: string;

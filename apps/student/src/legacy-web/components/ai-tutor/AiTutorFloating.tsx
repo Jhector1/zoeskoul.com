@@ -40,7 +40,7 @@ import {
   buildAiTutorFailureContext,
   buildAiTutorUserAnswer,
   shouldOfferAiTutor,
-} from "./tutorContext";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 import {
   markAiTutorAvailable,
   readAiTutorUnlocked,
@@ -48,7 +48,7 @@ import {
   resolveAiTutorExerciseKey,
   resolveAiTutorSurface,
   setAiTutorRuntimeStatus,
-} from "./tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 
 type TutorUiMessage = PracticeTutorMessage & {
   id: string;

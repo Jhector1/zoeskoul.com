@@ -1,7 +1,7 @@
 
 // src/components/review/sketches/registryTypes.ts
 import type React from "react";
-import type { SavedSketchState } from "./types";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 
 export type CustomSketchProps = {
     value: SavedSketchState | null;
@@ -28,8 +28,8 @@ export type SketchEntry =
 
 
 // import type React from "react";
-// import type { SketchSpec } from "./specTypes";
-// import type { SavedSketchState } from "./types";
+// import type { SketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
+// import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 //
 // export type SketchEntryArchetype = {
 //     kind: "archetype";

@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
-import { countAnswered } from "../utils";
+import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
+import { countAnswered } from "@zoeskoul/learning-runtime/review/module/utils";
 import { buildResetModuleProgress, buildResetTopicProgress } from "../actions";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 
 type PendingChange =

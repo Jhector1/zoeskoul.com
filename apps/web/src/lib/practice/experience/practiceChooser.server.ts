@@ -3,7 +3,7 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 import { listPublishedPracticeExerciseOptions } from "@/lib/practice/challenges/publishedCatalog";
-import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
 import { selectVisibleSubjectsForActor } from "@/lib/subjects/server/subjectVisibilityCore";
 import { loadPracticeAccessModelForActor } from "./dailyAccess";

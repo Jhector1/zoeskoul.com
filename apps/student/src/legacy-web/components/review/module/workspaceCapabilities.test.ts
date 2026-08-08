@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveTutoringReviewWorkspaceCapabilities } from "./workspaceCapabilities";
+import { resolveTutoringReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 
 describe("tutoring review workspace capabilities", () => {
   it("makes a tutor's learner view observational and ungated", () => {

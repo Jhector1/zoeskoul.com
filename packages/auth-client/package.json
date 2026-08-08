@@ -6,7 +6,9 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./react": "./src/react.ts"
+    "./react": "./src/react.ts",
+    "./auth-href": "./src/auth-href.ts",
+    "./callback-url": "./src/callback-url.ts"
   },
   "scripts": {
     "lint": "eslint src",

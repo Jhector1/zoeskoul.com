@@ -4,8 +4,8 @@ import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { usePathname } from "@student/i18n/navigation";
-import { buildLocalCallbackUrl } from "@/lib/auth/callback-url";
-import { buildAuthenticateHref } from "@/lib/auth/auth-href";
+import { buildLocalCallbackUrl } from "@zoeskoul/auth-client/callback-url";
+import { buildAuthenticateHref } from "@zoeskoul/auth-client/auth-href";
 
 export function useAuthHref() {
     const locale = useLocale();

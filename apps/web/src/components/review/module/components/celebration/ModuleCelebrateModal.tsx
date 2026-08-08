@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import type { CelebrateCopy } from "../../hooks/useReviewCelebrations";
 
 const MODULE_MODAL_BACKDROP_TRANSITION = {

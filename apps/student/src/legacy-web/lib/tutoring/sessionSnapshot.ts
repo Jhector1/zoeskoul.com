@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { ReviewModule, ReviewModuleSection, ReviewTopicShape } from "@/lib/subjects/types";
+import type { ReviewModule, ReviewModuleSection, ReviewTopicShape } from "@zoeskoul/curriculum-contracts/subjects/types";
 import {
   getResolvedReviewModule,
   getResolvedReviewModuleRows,

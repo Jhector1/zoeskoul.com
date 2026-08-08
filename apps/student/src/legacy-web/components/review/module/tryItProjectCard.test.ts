@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 import {
     getAssessmentDisplayKind,
     isTryItProjectCard,
-} from "./tryItProjectCard";
+} from "@zoeskoul/learning-runtime/review/module/tryItProjectCard";
 
 function projectCard(
     overrides: Partial<Extract<ReviewCard, { type: "project" }>> = {},

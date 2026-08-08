@@ -29,7 +29,7 @@ vi.mock("@student/i18n/tagged", () => ({
     }),
 }));
 
-vi.mock("@/components/review/module/runtime/reviewRuntimeStore", () => ({
+vi.mock("@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore", () => ({
     useReviewRuntimeStore: (selector: (state: { patchExercise: ReturnType<typeof vi.fn> }) => unknown) =>
         selector({ patchExercise: vi.fn() }),
 }));

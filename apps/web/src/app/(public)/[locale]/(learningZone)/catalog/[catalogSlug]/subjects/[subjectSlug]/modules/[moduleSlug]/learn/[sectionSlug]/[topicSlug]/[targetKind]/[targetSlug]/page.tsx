@@ -4,7 +4,7 @@ import {
     buildDefaultReviewRouteTarget,
     buildReviewRoutePath,
     resolveReviewRouteTarget,
-} from "@/components/review/module/runtime/reviewRoute";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRoute";
 import { notFound, redirect } from "next/navigation";
 
 export const runtime = "nodejs";

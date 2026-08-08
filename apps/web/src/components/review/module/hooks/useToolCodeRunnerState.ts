@@ -7,29 +7,29 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
-import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
-import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
+import { useDebouncedCommit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useDebouncedCommit";
+import { useFlushOnPageExit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useFlushOnPageExit";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { defaultMainCode } from "@/components/ide/languageDefaults";
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
-} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
+} from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import {
     getCardIdFromToolScopeKey,
     getCardStateKeyFromToolScopeKey,
-} from "../runtime/exerciseKeys";
-import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
-import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
-import { getTopicProgressState, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
+import { getTopicProgressState, normalizeTopicProgressKey } from "@zoeskoul/learning-runtime/review/progressTopicKeys";
 import {
     getStateLanguage,
     normalizeCodeWorkspacePair,
     stateLanguageMatches,
-} from "@/components/review/module/runtime/workspaceCodeSource";
-import { isI18nAliasString } from "../runtime/starterContent";
+} from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
+import { isI18nAliasString } from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
 import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 
 type BoundTarget = {

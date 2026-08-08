@@ -14,7 +14,7 @@ import type {
     ReviewProjectSpec,
     ReviewQuizSpec,
     ReviewTopicShape,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import {getReviewContentVersion} from "@/lib/review/contentVersion";
 

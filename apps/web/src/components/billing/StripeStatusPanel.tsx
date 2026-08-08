@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { shouldShowRenewalDate } from "@/lib/billing/period";
 
 export type StripeSubscriptionStatus =
