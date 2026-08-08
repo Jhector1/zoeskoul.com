@@ -31,7 +31,7 @@ import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { ROUTES } from "@/utils";
 import SoundToggle from "@/lib/sfx/SoundToggle";
-import {useAuthHref} from "@/hooks/useAuthHref";
+import {useAuthHref} from "@student/hooks/useAuthHref";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
