@@ -27,7 +27,7 @@ import {
 } from "@zoeskoul/preferences/react";
 
 import { useTranslations, useLocale } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@student/i18n/navigation";
 import StudentLocaleSwitcher from "@student/components/chrome/StudentLocaleSwitcher";
 import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";

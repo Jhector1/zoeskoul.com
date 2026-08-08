@@ -2,8 +2,8 @@
 
 import React, { useEffect, useMemo, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { usePathname, useRouter } from "@student/i18n/navigation";
+import { routing } from "@student/i18n/routing";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";

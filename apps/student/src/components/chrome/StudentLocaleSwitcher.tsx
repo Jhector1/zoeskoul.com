@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@student/i18n/navigation";
 import { useSearchParams } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { routing } from "@student/i18n/routing";
 import { LocaleSwitcherChrome } from "@zoeskoul/learner-ui";
 import ConfirmResetModal from "@/components/practice/ConfirmResetModal";
 import { persistLocale } from "@/lib/locale/persistLocale";

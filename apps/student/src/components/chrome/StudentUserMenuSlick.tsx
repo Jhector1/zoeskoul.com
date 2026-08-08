@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { UserMenuChrome } from "@zoeskoul/learner-ui";
-import { Link } from "@/i18n/navigation";
+import { Link } from "@student/i18n/navigation";
 
 type Props = {
   name: string;

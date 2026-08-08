@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "@student/i18n/navigation";
 import { ArrowLeft, Award, CheckCircle2, Download, Lock, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
 import CertificatePreviewCard from "./certificate/CertificatePreviewCard";

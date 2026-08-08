@@ -1032,12 +1032,10 @@ apps/student/src/legacy-web/i18n/messages/ht/ui/platform/billing.json
 apps/student/src/legacy-web/i18n/messages/ht/ui/platform/contact.json
 apps/student/src/legacy-web/i18n/messages/ht/ui/platform/legal.json
 apps/student/src/legacy-web/i18n/money.ts
-apps/student/src/legacy-web/i18n/navigation.ts
 apps/student/src/legacy-web/i18n/request.ts
 apps/student/src/legacy-web/i18n/resolveDeepTagged.ts
 apps/student/src/legacy-web/i18n/resolveTaggedOnServer.test.ts
 apps/student/src/legacy-web/i18n/resolveTaggedOnServer.ts
-apps/student/src/legacy-web/i18n/routing.ts
 apps/student/src/legacy-web/i18n/server.ts
 apps/student/src/legacy-web/i18n/tagged.ts
 apps/student/src/legacy-web/lib/ide/learningIdeConfig.test.ts
