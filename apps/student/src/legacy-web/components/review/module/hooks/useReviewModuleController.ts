@@ -7,7 +7,7 @@ import {
 } from "../navigation/reviewRouteTransition";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
-import {useRouter} from "@/i18n/navigation";
+import {useRouter} from "@student/i18n/navigation";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
 import type {ReviewProgressState} from "@/lib/subjects/progressTypes";

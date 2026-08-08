@@ -3,7 +3,7 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
+import { Link } from "@student/i18n/navigation";
 import { ROUTES } from "@zoeskoul/app-config";
 import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
 import type { SubjectCard } from "@student/features/practice/ui/subject-picker/subjectCardTypes";

@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import { Link } from "@student/i18n/navigation";
 import TutoringInvitationActions from "./TutoringInvitationActions";
 
 function invitationLabel(state: string) {

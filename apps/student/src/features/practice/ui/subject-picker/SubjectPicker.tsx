@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import { Link } from "@student/i18n/navigation";
 import SubjectCardGrid from "./SubjectCardGrid";
 import Pill from "./Pill";
 import type { SubjectCard } from "./subjectCardTypes";

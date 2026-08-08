@@ -5,7 +5,7 @@ import {
 import { useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "@student/i18n/navigation";
 
 const STUDENT_ACHIEVEMENTS_ENDPOINT = "/api/student-ui/achievements";
 

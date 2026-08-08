@@ -1,1 +1,1 @@
-export { Link as default } from "../legacy-web/i18n/navigation";
+export { Link as default } from "@student/i18n/navigation";

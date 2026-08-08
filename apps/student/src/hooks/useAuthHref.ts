@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname } from "@student/i18n/navigation";
 import { buildLocalCallbackUrl } from "@/lib/auth/callback-url";
 import { buildAuthenticateHref } from "@/lib/auth/auth-href";
 
