@@ -39,8 +39,8 @@ import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exe
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import type { Exercise } from "@/lib/practice/types";
 import {
   canRevealPracticeAnswer,

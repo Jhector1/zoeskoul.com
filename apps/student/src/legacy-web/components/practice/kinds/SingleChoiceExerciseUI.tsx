@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import {
     normalizePresentableOptions,
 } from "@/lib/practice/presentationOrder";

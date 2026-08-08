@@ -31,7 +31,7 @@ import {
   fetchPracticeTutor,
   type PracticeTutorMessage,
 } from "@/lib/practice/clientApi";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import {
   AiTutorAvatar,
   useAiTutorTypewriter,

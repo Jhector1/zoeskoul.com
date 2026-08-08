@@ -15,7 +15,7 @@ import {
 
 import NavButton from "@/components/ui/NavButton";
 import SubscriberPracticeRail from "@/components/practice/SubscriberPracticeRail";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import { cn } from "@/lib/cn";
 import {

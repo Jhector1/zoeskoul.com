@@ -25,8 +25,8 @@ import { SESSION_DEFAULT } from "./constants";
 import type { RunMeta, TopicValue } from "./usePracticeRunMeta";
 import type { VectorPadState } from "@/components/vectorpad/types";
 import { getEffectiveSid } from "./storage";
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { emitSfx } from "@/lib/sfx/bus";
 import {
   buildLocalMissed,

@@ -9,8 +9,8 @@ import MathMarkdown from "@/components/markdown/MathMarkdown";
 import MatrixInputPanel from "./MatrixInputPanel";
 import { defaultMainFile } from "@/components/ide/languageDefaults";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 
 async function copyToClipboard(text: string) {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeShellProps } from "../PracticeShell";

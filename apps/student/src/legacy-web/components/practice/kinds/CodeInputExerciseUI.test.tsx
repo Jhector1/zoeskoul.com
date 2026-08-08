@@ -23,7 +23,7 @@ vi.mock("@/components/practice/kinds/KindHelper", () => ({
     ExercisePrompt: () => <div data-testid="mock-exercise-prompt" />,
 }));
 
-vi.mock("@/i18n/tagged", () => ({
+vi.mock("@student/i18n/tagged", () => ({
     useTaggedT: () => ({
         t: (_key: string, _params?: unknown, fallback?: string) => fallback ?? "",
     }),

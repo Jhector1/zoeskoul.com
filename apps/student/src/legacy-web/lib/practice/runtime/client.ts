@@ -15,7 +15,7 @@ import {
     cloneVec,
     initItemFromExercise,
 } from "@/lib/practice/uiHelpers";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { coerceMaxAttempts } from "./helpers";
 import type { PracticeRuntimeTextResolvers } from "./types";
 import {

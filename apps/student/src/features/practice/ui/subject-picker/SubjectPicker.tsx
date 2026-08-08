@@ -7,7 +7,7 @@ import Pill from "./Pill";
 import type { SubjectCard } from "./subjectCardTypes";
 import { useSubjectCardController } from "./useSubjectCardController";
 import { cn } from "@/lib/cn";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 
 export type { SubjectCard } from "./subjectCardTypes";
 

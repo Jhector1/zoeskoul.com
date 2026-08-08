@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import PracticeScopeSelector from "@/components/practice/shell/PracticeScopeSelector";

@@ -372,6 +372,9 @@ importers:
       '@zoeskoul/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@zoeskoul/i18n-core':
+        specifier: workspace:*
+        version: link:../../packages/i18n-core
       '@zoeskoul/learner-ui':
         specifier: workspace:*
         version: link:../../packages/learner-ui

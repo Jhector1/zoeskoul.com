@@ -5,7 +5,7 @@ import MathMarkdown from "@/components/markdown/MathMarkdown";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeHelpState, QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "@/components/practice/RevealAnswerCard";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import {
     PRACTICE_HELP_STEP_DEF_MAP,

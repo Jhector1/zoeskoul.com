@@ -2,7 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/cn";
-import { useTaggedT } from "@/i18n/tagged";
+import { useTaggedT } from "@student/i18n/tagged";
 
 export default function QuizFooter(props: {
   checkedCount: number;

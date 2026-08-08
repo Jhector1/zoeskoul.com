@@ -46,7 +46,7 @@ const mocked = vi.hoisted(() => ({
     } as Record<string, string>,
 }));
 
-vi.mock("@/i18n/tagged", () => ({
+vi.mock("@student/i18n/tagged", () => ({
     useTaggedT: () => ({
         t: (_key: string, _params?: unknown, fallback?: string) => fallback ?? "",
         raw: (key: string, fallback?: string) => mocked.rawMessages[key] ?? fallback ?? "",

@@ -12,8 +12,8 @@ import MultiChoiceExerciseUI from "./kinds/MultiChoiceExerciseUI";
 import CodeInputExerciseUI from "./kinds/CodeInputExerciseUI";
 import { buildCorrectItemFromExpected } from "@/lib/practice/runtime";
 import { useTranslations } from "next-intl";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
-import { useTaggedT } from "@/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
+import { useTaggedT } from "@student/i18n/tagged";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 
 function normalizeMath(md: string) {

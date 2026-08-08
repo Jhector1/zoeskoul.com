@@ -20,8 +20,8 @@ import {
 } from "@/lib/practice/runtime";
 import { cloneVec } from "@/lib/practice/uiHelpers";
 import { emitSfx } from "@/lib/sfx/bus";
-import { useTaggedT } from "@/i18n/tagged";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@student/i18n/tagged";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import {
   DEFAULT_PRACTICE_HELP_POLICY,
   getNextPracticeHelpStepKey,

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import type { BillingStatus } from "@/lib/billing/types";
-import { formatMoneyMinor, toIntlLocale } from "@/i18n/money";
+import { formatMoneyMinor, toIntlLocale } from "@zoeskoul/i18n-core";
 import { deriveBillingHeadline } from "@/components/billing/deriveBillingHeadline";
 
 function hasRawPricing(s: BillingStatus | null) {
