@@ -3,7 +3,7 @@
 
 import React from "react";
 import PracticeShell from "@/components/practice/PracticeShell";
-import { usePracticeController } from "@/features/practice/client/usePracticeController";
+import { usePracticeController } from "@student/features/practice/client/usePracticeController";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { useTranslations } from "next-intl";
 

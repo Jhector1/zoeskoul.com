@@ -16,7 +16,7 @@ import {
 import { usePracticeEngine } from "./usePracticeEngine";
 import { useVectorPadRef } from "./useVectorPadRef";
 import { SESSION_DEFAULT } from "./constants";
-import {lastSessionKey} from "@/features/practice/client/storage";
+import {lastSessionKey} from "@student/features/practice/client/storage";
 import {coercePurposeMode, coercePurposePolicy} from "@/lib/subjects/quizClient";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { getPracticeRuntimeSurfacePolicy, type PracticeRuntimeSurface } from "@/lib/practice/experience/routePolicy";
