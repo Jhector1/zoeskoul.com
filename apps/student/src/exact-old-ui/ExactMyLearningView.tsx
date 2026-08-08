@@ -5,8 +5,8 @@ import type {
 } from "@zoeskoul/learning-client";
 import { useMyLearning } from "@zoeskoul/learning-client/react";
 
-import SubjectPicker from "@/features/practice/ui/subject-picker/SubjectPicker";
-import type { SubjectCard } from "@/features/practice/ui/subject-picker/subjectCardTypes";
+import SubjectPicker from "@student/features/practice/ui/subject-picker/SubjectPicker";
+import type { SubjectCard } from "@student/features/practice/ui/subject-picker/subjectCardTypes";
 import AssignedCourseCard from "@/components/learningAssignments/AssignedCourseCard";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
 import { ROUTES } from "@/utils";
