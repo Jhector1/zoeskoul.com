@@ -6,7 +6,7 @@ import {
     shouldDefaultCollapseToolsRailForCompactQuiz,
     toolPresentationPolicyFromManifest,
     toolPresentationPolicyFromTopic,
-} from "./toolsRailVisibility";
+} from "@zoeskoul/learning-runtime/review/module/toolsRailVisibility";
 
 const readingSketch = {
     type: "sketch" as const,

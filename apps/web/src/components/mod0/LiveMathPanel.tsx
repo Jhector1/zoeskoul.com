@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import type { Mode } from "@/lib/math/vec3";
-import type { Vec3 } from "@/lib/math/vec3";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import { angleBetween, clamp, dot, fmt, fmt2, mag, projOfAonB, radToDeg, scalarProjOfAonB, sub } from "@/lib/math/vec3";
+import type { Mode } from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { Vec3 } from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import { angleBetween, clamp, dot, fmt, fmt2, mag, projOfAonB, radToDeg, scalarProjOfAonB, sub } from "@zoeskoul/learner-ui/lib/math/vec3";
 import { KV } from "./ui";
 
 export default React.memo(function LiveMathPanel({

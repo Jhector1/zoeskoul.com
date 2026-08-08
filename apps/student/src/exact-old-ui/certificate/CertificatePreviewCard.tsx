@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/cn";
-import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@/lib/certificates/policy";
-import { CERTIFICATE_COLORS, CERTIFICATE_DESIGN_WIDTH } from "@/lib/certificates/design";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@zoeskoul/learner-ui/lib/certificates/policy";
+import { CERTIFICATE_COLORS, CERTIFICATE_DESIGN_WIDTH } from "@zoeskoul/learner-ui/lib/certificates/design";
 
 type CertificatePreviewCardProps = {
     eligible: boolean;

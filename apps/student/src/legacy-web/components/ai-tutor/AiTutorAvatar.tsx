@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 type AvatarSize = "xxs" | "xs" | "sm" | "md" | "lg";
 type AvatarTone = "accent" | "info";

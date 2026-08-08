@@ -9,6 +9,24 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./topic-meta": {
+      "types": "./dist/topicMeta.d.ts",
+      "browser": "./dist/topicMeta.js",
+      "import": "./dist/topicMeta.js",
+      "default": "./dist/topicMeta.js"
+    },
+    "./with-topic-parent-context": {
+      "types": "./dist/withTopicParentContext.d.ts",
+      "browser": "./dist/withTopicParentContext.js",
+      "import": "./dist/withTopicParentContext.js",
+      "default": "./dist/withTopicParentContext.js"
+    },
+    "./sql-datasets": {
+      "types": "./dist/sql/datasets/index.d.ts",
+      "browser": "./dist/sql/datasets/index.js",
+      "import": "./dist/sql/datasets/index.js",
+      "default": "./dist/sql/datasets/index.js"
     }
   },
   "scripts": {
@@ -17,7 +35,6 @@
     "test": "vitest run --root ../.. packages/curriculum-core/src"
   },
   "dependencies": {
-
     "@zoeskoul/curriculum-contracts": "workspace:*"
   }
 }

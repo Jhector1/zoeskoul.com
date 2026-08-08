@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getTeachingUser } from "@/lib/teaching/teachingAccess";
 import { redactReviewModuleSolutions } from "@/lib/learningAssignments/redactReviewModuleSolutions";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { getTutoringSessionAccess } from "./sessionAccess";
 import { TUTORING_DOCUMENT_LIMITS } from "./sessionDocumentPolicy";

@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import type { Exercise, Difficulty } from "@/lib/practice/types";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 
 import type { MissedItem, QItem, TopicValue } from "./practiceType";
 import { buildSubmitAnswerFromItem } from "@/lib/practice/uiHelpers";
@@ -12,7 +12,7 @@ import PracticeView from "./shell/PracticeView";
 import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
 import EmbeddedPracticeReviewWorkspace from "./review/EmbeddedPracticeReviewWorkspace";
 import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
-import { isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
 import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";

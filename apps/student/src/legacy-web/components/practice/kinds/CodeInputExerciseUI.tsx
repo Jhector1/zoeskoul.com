@@ -23,19 +23,19 @@ import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
-} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
+} from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 import { formatSqlDisplayValue } from "@zoeskoul/practice-checks";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
-import { reviewDebug, summarizeWorkspace } from "@/components/review/module/runtime/reviewDebug";
-import { exerciseDebug, summarizeExerciseWorkspace } from "@/components/review/module/runtime/exerciseDebug";
-import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
+import { resolveExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
+import { reviewDebug, summarizeWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
+import { exerciseDebug, summarizeExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 
 export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive" | "always";
 

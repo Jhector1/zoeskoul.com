@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import type { Mode } from "@/lib/math/vec3";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { Mode } from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import LiveMathPanel from "./LiveMathPanel";
 import { Toggle, killEvent, StatusBox } from "./ui";
 import {QuestionType} from "@/components/mod0/hooks/usePracticeEngine";

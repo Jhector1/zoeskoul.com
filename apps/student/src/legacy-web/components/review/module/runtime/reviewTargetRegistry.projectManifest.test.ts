@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildReviewTargetRegistry } from "./reviewTargetRegistry";
+import { buildReviewTargetRegistry } from "@zoeskoul/learning-runtime/review/module/runtime/reviewTargetRegistry";
 
 describe("buildReviewTargetRegistry project manifest binding", () => {
   it("builds a manifest-bound project exercise entry for an authored step", () => {

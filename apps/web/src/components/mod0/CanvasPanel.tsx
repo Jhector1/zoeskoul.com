@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import VectorPad from "@/components/vectorpad/VectorPad";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import type { Mode, Vec3 } from "@/lib/math/vec3";
-import { COLORS } from "@/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import type { Mode, Vec3 } from "@zoeskoul/learner-ui/lib/math/vec3";
+import { COLORS } from "@zoeskoul/learner-ui/lib/math/vec3";
 
 export default React.memo(function CanvasPanel({
                                                    mode,

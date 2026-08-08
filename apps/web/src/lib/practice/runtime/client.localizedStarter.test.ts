@@ -3,7 +3,7 @@ import {
     fetchResolvedPracticeItem,
     normalizeCurrentPracticeItem,
 } from "@/lib/practice/runtime/client";
-import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 
 vi.mock("@/lib/practice/clientApi", async () => {
     return {

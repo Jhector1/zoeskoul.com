@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { buildDraftPreviewReviewModule } from "@/lib/dev/curriculumDrafts/preview";
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 export const runtime = "nodejs";
 

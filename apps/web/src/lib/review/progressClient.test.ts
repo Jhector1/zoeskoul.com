@@ -5,7 +5,7 @@ import {
   fetchReviewProgressGET,
   ReviewProgressClientError,
   saveReviewProgressPUT,
-} from "./progressClient";
+} from "@zoeskoul/learning-client/legacy-compatible/review/progressClient";
 
 describe("fetchReviewProgressGET", () => {
   afterEach(() => {

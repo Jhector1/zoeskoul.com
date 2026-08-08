@@ -21,7 +21,7 @@ import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import {
     normalizeProgressTopics,
     normalizeTopicProgressKey,
-} from "@/lib/review/progressTopicKeys";
+} from "@zoeskoul/learning-runtime/review/progressTopicKeys";
 import {
     getReviewProgressSaveRevision,
     mergeReviewProgressForSave,

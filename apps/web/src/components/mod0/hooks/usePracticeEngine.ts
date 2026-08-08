@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import type { Mode } from "@/lib/math/vec3";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import { angleBetween, dot, projOfAonB, radToDeg, scalarProjOfAonB, mag } from "@/lib/math/vec3";
+import type { Mode } from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import { angleBetween, dot, projOfAonB, radToDeg, scalarProjOfAonB, mag } from "@zoeskoul/learner-ui/lib/math/vec3";
 
 export type QuestionType = "dot" | "angle" | "scalarProj" | "projX" | "projY" | "projZ";
 export type StatusKind = "idle" | "good" | "bad";

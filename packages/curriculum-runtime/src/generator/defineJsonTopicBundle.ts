@@ -13,7 +13,7 @@ function normalizeRuntimePurpose(value: unknown, kind?: unknown, fallback?: "qui
   return fallback ?? "quiz";
 }
 
-function defineJsonGeneratorTopic(manifest: any, profileId: string) {
+export function defineJsonGeneratorTopic(manifest: any, profileId = manifest.profileId ?? manifest.subjectSlug ?? "generic") {
   const pool = manifest.exercises.map((exercise: any) => ({
     key: exercise.id,
     w: exercise.weight ?? 1,

@@ -2,9 +2,9 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import VectorPad from "@/components/vectorpad/VectorPad";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import type { Mode, Vec3 } from "@/lib/math/vec3";
-import { mag, safeUnit, mul, cross, areCollinear2D } from "@/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import type { Mode, Vec3 } from "@zoeskoul/learner-ui/lib/math/vec3";
+import { mag, safeUnit, mul, cross, areCollinear2D } from "@zoeskoul/learner-ui/lib/math/vec3";
 import { useZHeldRef } from "@/components/vectorpad/useZHeldRef";
 import { useRafForceUpdate } from "@/components/vectorpad/useRafForceUpdate";
 import { useTranslations } from "next-intl";

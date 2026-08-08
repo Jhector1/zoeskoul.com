@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getStateLanguage, stateLanguageMatches } from "./workspaceCodeSource";
+import { getStateLanguage, stateLanguageMatches } from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 
 describe("workspaceCodeSource language detection", () => {
     it("does not classify empty SQL metadata as SQL", () => {

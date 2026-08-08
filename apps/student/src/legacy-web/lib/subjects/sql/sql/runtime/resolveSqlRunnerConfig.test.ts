@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveSqlRunnerConfig } from "./resolveSqlRunnerConfig";
+import { resolveSqlRunnerConfig } from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 
 describe("resolveSqlRunnerConfig", () => {
     it("inherits dataset snapshots from module runtime defaults", () => {

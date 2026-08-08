@@ -5,7 +5,7 @@ import crypto from "node:crypto";
 import {
   buildCloudinaryImageUrl,
   type CloudinaryImageOpts,
-} from "./url";
+} from "@zoeskoul/learner-ui/lib/cloudinary/url";
 import { profileAvatarFileError } from "@/lib/profile/profileAvatar";
 
 const MAX_CHALLENGE_OG_IMAGE_BYTES = 4 * 1024 * 1024;

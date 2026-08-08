@@ -2,8 +2,8 @@ import type {
     ReviewModule,
     ReviewModuleSection,
     ReviewTopicShape,
-} from "@/lib/subjects/types";
-import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
+import { SUBJECT_ARTIFACTS } from "@student/subjects";
 import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 

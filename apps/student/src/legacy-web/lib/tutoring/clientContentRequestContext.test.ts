@@ -2,12 +2,12 @@ import { describe, expect, it } from "vitest";
 import {
   getTutoringClientContentRequestContext,
   withTutoringContentRequestHeaders,
-} from "./clientContentRequestContext";
+} from "@zoeskoul/learning-client/legacy-compatible/tutoring/clientContentRequestContext";
 import {
   TUTORING_LEARNER_ID_HEADER,
   TUTORING_SESSION_HEADER,
   TUTORING_WORKSPACE_VIEW_HEADER,
-} from "./contentRequestProtocol";
+} from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 
 describe("tutoring client content request context", () => {
   it("reads session and selected learner workspace from a tutoring lesson route", () => {

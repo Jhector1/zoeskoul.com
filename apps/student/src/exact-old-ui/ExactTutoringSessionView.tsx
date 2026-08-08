@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import TutoringSessionPlayer from "@/components/tutoring/TutoringSessionPlayer";
 import type { TutoringWorkspaceParticipant } from "@/components/tutoring/TutoringWorkspaceBar";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 type TutoringPayload = {
   status: "ready";

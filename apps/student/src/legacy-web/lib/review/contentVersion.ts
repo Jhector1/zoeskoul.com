@@ -1,7 +1,7 @@
 import "server-only";
 
 import crypto from "node:crypto";
-import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+import { SUBJECT_ARTIFACTS } from "@student/subjects";
 import {
     getRawReviewModule,
     getRawReviewModuleRows,

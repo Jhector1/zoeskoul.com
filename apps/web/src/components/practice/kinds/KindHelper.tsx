@@ -1,7 +1,7 @@
 "use client";
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import { normalizeMath } from "@/lib/markdown/normalizeMath";
+import { normalizeMath } from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
 import React from "react";
 import type { Exercise } from "@/lib/practice/types";
 import { useTaggedT } from "@/i18n/tagged";

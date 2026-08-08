@@ -6,7 +6,7 @@ import {
 
 import {
   buildReviewFromManifest,
-} from "./buildReviewFromManifest";
+} from "@zoeskoul/curriculum-runtime/compat/buildReviewFromManifest";
 
 describe(
   "buildReviewFromManifest student runtime quiz selector",

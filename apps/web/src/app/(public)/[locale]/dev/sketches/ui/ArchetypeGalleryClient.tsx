@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import type { SavedSketchState } from "@/components/sketches/subjects/types";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 import SketchRenderer from "@/components/sketches/subjects/SketchRenderer";
 import { SketchShell } from "@/components/sketches/_shared/shells";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 type Item = { id: string; archetype: string; title: string };
 

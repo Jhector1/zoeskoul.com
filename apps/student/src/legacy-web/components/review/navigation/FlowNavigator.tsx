@@ -2,7 +2,7 @@
 
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import NavButton from "@/components/ui/NavButton";
 
 export type FlowNavMode = "scroll" | "slideshow";

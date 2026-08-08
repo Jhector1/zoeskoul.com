@@ -2,7 +2,7 @@
 
 import React from "react";
 import ReviewSkeletonSwap from "../overlays/ReviewSkeletonSwap";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 type Props = {
     ariaBusy: boolean;

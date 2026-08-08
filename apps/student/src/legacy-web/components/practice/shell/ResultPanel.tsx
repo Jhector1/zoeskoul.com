@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import type { Exercise } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "../RevealAnswerCard";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import { isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 
 export function resolveRevealAnswerForResult(current: QItem | null | undefined) {
     const activeHelpEntry =

@@ -26,6 +26,8 @@ export type ToolSqlPanePolicy = {
     compactDefaultTab?: SqlPaneTab;
 };
 
+export type SqlPaneOptions = ToolSqlPanePolicy;
+
 /**
  * Presentation-only policy for the learner Tools workspace.
  *

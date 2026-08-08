@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
+import { resolveTopicStageRuntimeDefaults } from "@zoeskoul/learning-runtime/review/module/runtime/topicStageRuntimeDefaults";
 
 describe("resolveTopicStageRuntimeDefaults", () => {
     it("includes module runtime defaults on the topic stage", () => {

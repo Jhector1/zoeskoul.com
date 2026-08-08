@@ -8,7 +8,7 @@ import {
   WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS,
   WORKSPACE_RUNTIME_SAVE_COALESCE_MS,
   WORKSPACE_TEXT_SAVE_DEBOUNCE_MS,
-} from "./workspacePersistenceContract";
+} from "@zoeskoul/learning-runtime/review/workspacePersistenceContract";
 
 describe("workspace persistence contract", () => {
   it("isolates tutor, learner, assignment, and submission ownership fields", () => {

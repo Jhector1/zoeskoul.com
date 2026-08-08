@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
     getPracticeTopicRuntimeDefaults,
     resolveQuizPracticeRuntimeDefaults,
-} from "./runtimeDefaults";
+} from "@zoeskoul/learning-runtime/review/quiz/runtimeDefaults";
 
 describe("getPracticeTopicRuntimeDefaults", () => {
     it("returns quiz spec runtime defaults for practice questions", () => {

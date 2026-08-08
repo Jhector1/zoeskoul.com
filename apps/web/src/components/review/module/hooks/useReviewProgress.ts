@@ -7,7 +7,7 @@ import {
     fetchReviewProgressGET,
     buildReviewProgressPayload,
     saveReviewProgressPUT,
-} from "@/lib/review/progressClient";
+} from "@zoeskoul/learning-client/legacy-compatible/review/progressClient";
 import {
     getReviewProgressClientSaveRevision as getSaveRevision,
     isReviewUserSavedState as isUserSavedState,
@@ -28,8 +28,8 @@ import {
     looksLikeBetterReviewExerciseRestoreCandidate as looksLikeBetterExerciseRestoreCandidate,
     savedReviewExerciseLooksLikeLearnerEditorWork as savedExerciseLooksLikeLearnerEditorWork,
 } from "@zoeskoul/learning-runtime";
-import { stableJson } from "@/lib/client/persistence/stableJson";
-import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
+import { stableJson } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/stableJson";
+import { useFlushOnPageExit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useFlushOnPageExit";
 import {
     buildCanonicalWorkspaceIdentity,
     nextWorkspaceSaveRevision,
@@ -38,18 +38,18 @@ import {
     savedStarterHashMatchesRuntimeStarter,
     WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS,
     WORKSPACE_RUNTIME_SAVE_COALESCE_MS,
-} from "@/lib/review/workspacePersistenceContract";
-import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
-import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
-import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
+} from "@zoeskoul/learning-runtime/review/workspacePersistenceContract";
+import { emitGamificationUpdate } from "@zoeskoul/learning-client/legacy-compatible/gamification/browserEvents";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 import {
     getCardIdFromToolScopeKey,
     getCardStateKeyFromToolScopeKey,
     getCardToolScopeKey,
     getExerciseStateKey,
-} from "../runtime/exerciseKeys";
-import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { stateLanguageMatches } from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 import {
     canPollReviewRemoteProgress,
     shouldApplyRemoteReviewWorkspace,

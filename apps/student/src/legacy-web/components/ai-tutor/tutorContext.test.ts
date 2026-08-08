@@ -4,7 +4,7 @@ import type { QItem } from "@/lib/practice/uiTypes";
 import {
   buildAiTutorFailureContext,
   shouldOfferAiTutor,
-} from "./tutorContext";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 
 function item(patch: Partial<QItem> = {}): QItem {
   return {

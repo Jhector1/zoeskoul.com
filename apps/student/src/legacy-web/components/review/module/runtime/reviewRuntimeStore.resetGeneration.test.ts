@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { useReviewRuntimeStore } from "./reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 
 function makeWorkspace(files: Array<{ path: string; content: string }>): WorkspaceStateV2 {
   const now = Date.now();

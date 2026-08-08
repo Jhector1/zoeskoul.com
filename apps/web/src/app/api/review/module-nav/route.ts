@@ -12,7 +12,7 @@ import { getLocaleFromCookie } from "@/serverUtils";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { SUBJECTS } from "@/lib/subjects";
-import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 
 function cleanSegment(value: string | null | undefined, fallback = "") {
     const normalized = String(value ?? "").trim();

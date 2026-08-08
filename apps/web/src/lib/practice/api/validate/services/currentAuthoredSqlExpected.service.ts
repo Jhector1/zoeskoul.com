@@ -1,4 +1,4 @@
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import { makeSqlExpected } from "@/lib/practice/generator/engines/sql/sqlExpected";
 import type { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";

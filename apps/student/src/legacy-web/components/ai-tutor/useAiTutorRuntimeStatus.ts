@@ -5,7 +5,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import {
   getAiTutorRuntimeStatus,
   subscribeAiTutorRuntimeStatus,
-} from "./tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 
 export function useAiTutorRuntimeStatus(
   exerciseKey: string | null | undefined,

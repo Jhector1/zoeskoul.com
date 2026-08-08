@@ -1,8 +1,8 @@
-import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
 import {
   tutoringContentRequestDedupeKey,
   withTutoringContentRequestHeaders,
-} from "@/lib/tutoring/clientContentRequestContext";
+} from "@zoeskoul/learning-client/legacy-compatible/tutoring/clientContentRequestContext";
 import type {
   PracticeGetResponse,
   PracticeStatusResponse,

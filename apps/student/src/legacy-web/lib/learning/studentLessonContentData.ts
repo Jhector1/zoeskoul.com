@@ -8,7 +8,7 @@ import type {
   ReviewCard,
   ReviewModule,
   ReviewTopic,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 
 function nullableString(
   value: unknown,

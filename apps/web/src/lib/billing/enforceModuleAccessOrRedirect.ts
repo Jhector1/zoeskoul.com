@@ -3,10 +3,10 @@ import "server-only";
 import { redirect } from "next/navigation";
 import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
-import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";
 import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
-import { buildAuthenticateAccessHref } from "@/lib/access/accessGate";
+import { buildAuthenticateAccessHref } from "@zoeskoul/permissions/accessGate";
 
 export async function enforceModuleAccessOrRedirect(args: {
     prisma: PrismaClient;

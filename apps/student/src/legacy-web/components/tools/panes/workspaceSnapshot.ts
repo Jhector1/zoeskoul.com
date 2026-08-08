@@ -1,5 +1,5 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 
 export function extractRuntimeSnapshotFromWorkspace(
     workspace: WorkspaceStateV2 | null,

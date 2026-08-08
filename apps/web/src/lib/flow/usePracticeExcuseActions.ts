@@ -4,7 +4,7 @@
 import { useCallback } from "react";
 import type { MutableRefObject } from "react";
 import type { QItem } from "@/components/practice/practiceType";
-import { excusePracticeItem, isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { excusePracticeItem, isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { getEffectiveSid } from "@/features/practice/client/storage";
 
 export function usePracticeExcuseActions(args: {

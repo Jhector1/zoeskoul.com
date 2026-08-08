@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { clamp } from "../utils";
+import { clamp } from "@zoeskoul/learning-runtime/review/module/utils";
 
 export function useResizablePanels(args?: {
     leftDefault?: number;

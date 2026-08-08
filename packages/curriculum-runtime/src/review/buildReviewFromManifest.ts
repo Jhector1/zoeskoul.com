@@ -1,4 +1,4 @@
-import { makeTopicDef } from "@zoeskoul/curriculum-core";
+import { makeTopicDef } from "@zoeskoul/curriculum-core/topic-meta";
 import { tag } from "../i18n/resolveManifestMessages.js";
 import { buildReviewFromManifestCore } from "./buildReviewFromManifestCore.js";
 

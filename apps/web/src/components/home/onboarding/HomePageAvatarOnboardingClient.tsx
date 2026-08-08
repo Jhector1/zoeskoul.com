@@ -24,7 +24,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import NavButton from "@/components/ui/NavButton";
 import { useRouter, usePathname } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import {
     buildTrialHref,
     saveOnboarding,
@@ -47,7 +47,7 @@ import {
     buildHomeSubjectShelf,
     type HomeSubjectShelfItem,
 } from "@/lib/home/buildHomeSubjectShelf";
-import { recordSubjectVisit } from "@/lib/subjects/client/recordSubjectVisit";
+import { recordSubjectVisit } from "@zoeskoul/learning-client/legacy-compatible/subjects/client/recordSubjectVisit";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
 import {
     buildPracticeEntryHref,

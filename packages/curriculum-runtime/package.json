@@ -25,6 +25,30 @@
     "./review": {
       "types": "./dist/review/index.d.ts",
       "default": "./dist/review/index.js"
+    },
+    "./compat/*": {
+      "types": "./dist/compat/*.d.ts",
+      "default": "./dist/compat/*.js"
+    },
+    "./curriculum/*": {
+      "types": "./dist/curriculum/*.d.ts",
+      "default": "./dist/curriculum/*.js"
+    },
+    "./curriculum/resolveManifestExercise": {
+      "types": "./dist/curriculum/resolveManifestExercise.d.ts",
+      "default": "./dist/curriculum/resolveManifestExercise.js"
+    },
+    "./subjects/sql/sql/runtime/resolveSqlRunnerConfig": {
+      "types": "./dist/subjects/sql/sql/runtime/resolveSqlRunnerConfig.d.ts",
+      "default": "./dist/subjects/sql/sql/runtime/resolveSqlRunnerConfig.js"
+    },
+    "./subjects/sql/sql/datasets": {
+      "types": "./dist/subjects/sql/sql/datasets/index.d.ts",
+      "default": "./dist/subjects/sql/sql/datasets/index.js"
+    },
+    "./subjects/*": {
+      "types": "./dist/subjects/*.d.ts",
+      "default": "./dist/subjects/*.js"
     }
   },
   "scripts": {
@@ -37,6 +61,8 @@
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
+    "@zoeskoul/i18n-core": "workspace:*",
+    "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "jszip": "^3.10.1"
   }

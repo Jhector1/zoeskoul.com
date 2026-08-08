@@ -1,4 +1,4 @@
-import type { SketchTone } from "../subjects/types";
+import type { SketchTone } from "@zoeskoul/learner-ui/sketches/subjects/types";
 
 export function toneCls(tone: SketchTone | undefined) {
     const t = tone ?? "neutral";

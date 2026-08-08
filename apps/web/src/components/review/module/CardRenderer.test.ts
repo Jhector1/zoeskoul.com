@@ -2,13 +2,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
-import { buildQuizBlockRuntimeDefaultsProps } from "./runtime/cardRuntimeDefaults";
+import { buildQuizBlockRuntimeDefaultsProps } from "@zoeskoul/learning-runtime/review/module/runtime/cardRuntimeDefaults";
 import {
     DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
-} from "./workspaceCapabilities";
+} from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import CardRenderer from "./CardRenderer";
 
 
@@ -60,7 +60,7 @@ vi.mock("@/i18n/tagged", () => ({
     stripTag: (value: string) => value.replace(/^@:/, ""),
 }));
 
-vi.mock("@/components/review/module/runtime/reviewRuntimeStore", () => ({
+vi.mock("@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore", () => ({
     useReviewRuntimeStore: (selector: (state: { ensureCard: typeof mocked.ensureCard }) => unknown) =>
         selector({ ensureCard: mocked.ensureCard }),
 }));

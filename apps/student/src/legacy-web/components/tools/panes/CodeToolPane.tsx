@@ -22,11 +22,11 @@ import {
     mergeLearningIdeConfigs,
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
-import {languagesCompatible} from "@/components/review/module/utils";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
+import {languagesCompatible} from "@zoeskoul/learning-runtime/review/module/utils";
 import {defaultMainFile} from "@/components/ide/languageDefaults";
-import { normalizeCodeWorkspacePair } from "@/components/review/module/runtime/workspaceCodeSource";
+import { normalizeCodeWorkspacePair } from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 import {
     clearReviewWorkspaceDraft,
     isWorkspaceState,
@@ -46,7 +46,7 @@ import {
     type ReviewWorkspaceRuntimeCommitMode,
 } from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
+import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
 import { compactTerminalIdentityKey } from "@/components/code/runner/terminalIdentity";
 import {
     useOptionalReviewDestinationTransition,

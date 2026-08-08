@@ -1,4 +1,4 @@
-import { WORKSPACE_TEXT_SAVE_DEBOUNCE_MS } from "@/lib/review/workspacePersistenceContract";
+import { WORKSPACE_TEXT_SAVE_DEBOUNCE_MS } from "@zoeskoul/learning-runtime/review/workspacePersistenceContract";
 
 export type ReviewWorkspaceRuntimeCommitMode =
   | "deferred"

@@ -9,7 +9,7 @@ import {
   resolveAiTutorSurface,
   setAiTutorRuntimeStatus,
   subscribeAiTutorRuntimeStatus,
-} from "./tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 
 function memoryStorage() {
   const values = new Map<string, string>();

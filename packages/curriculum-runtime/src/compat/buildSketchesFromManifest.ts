@@ -1,0 +1,134 @@
+import type { TopicBundleManifest } from "@zoeskoul/curriculum-contracts";
+import type { SketchEntry } from "@zoeskoul/curriculum-contracts/subjects/types";
+
+const optimizer = (imagePublicId: string) => {
+    const cloudName = (globalThis as { process?: { env?: Record<string, string | undefined> } })
+        .process?.env?.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME?.trim();
+    if (!cloudName || !imagePublicId.trim()) return "";
+    const encodedId = encodeURIComponent(imagePublicId).replace(/%2F/g, "/");
+    return `https://res.cloudinary.com/${encodeURIComponent(cloudName)}/image/upload/f_auto,q_auto,c_fill,w_1200,dpr_auto,g_auto/${encodedId}`;
+};
+function buildImageEntry(img: { id: string; publicId: string; alt?: string; width?: number; height?: number }) {
+    const src = optimizer(img.publicId).trim();
+
+    if (!src) {
+        return null;
+    }
+
+    return [
+        img.id,
+        {
+            src,
+            alt: img.alt ?? "",
+            ...(img.width != null ? { width: img.width } : {}),
+            ...(img.height != null ? { height: img.height } : {}),
+        },
+    ] as const;
+}
+export function buildSketchesFromManifest(
+    manifest: TopicBundleManifest,
+): Record<string, SketchEntry> {
+    const entries: Array<[string, SketchEntry]> = manifest.sketches.map((sketch) => {
+        const sketchId =
+            `${manifest.subjectSlug}.${manifest.moduleSlug}.${manifest.topicId}.${sketch.id}`;
+
+        const runtime = sketch.runtime ?? manifest.runtimeDefaults ?? null;
+
+        if (sketch.archetype === "algorithm_animation") {
+            const entry: SketchEntry = {
+                kind: "archetype",
+                spec: {
+                    archetype: "algorithm_animation",
+                    specVersion: 1,
+                    title: `@:${sketch.titleKey}`,
+                    ...(sketch.contextKey
+                        ? { contextMarkdown: `@:${sketch.contextKey}` }
+                        : {}),
+                    steps: sketch.steps.map((step) => ({
+                        id: step.id,
+                        title: `@:${step.titleKey}`,
+                        ...(step.bodyKey ? { bodyMarkdown: `@:${step.bodyKey}` } : {}),
+                        ...(step.formula ? { formula: step.formula } : {}),
+                        ...(step.code ? { code: step.code } : {}),
+                        nodes: step.nodes.map((node) => ({ ...node })),
+                        ...(step.edges?.length
+                            ? { edges: step.edges.map((edge) => ({ ...edge })) }
+                            : {}),
+                    })),
+                    ...(sketch.intervalMs != null ? { intervalMs: sketch.intervalMs } : {}),
+                    ...(sketch.autoPlay != null ? { autoPlay: sketch.autoPlay } : {}),
+                    ...(sketch.showControls != null ? { showControls: sketch.showControls } : {}),
+                    ...(sketch.showStepCounter != null
+                        ? { showStepCounter: sketch.showStepCounter }
+                        : {}),
+                    ...(sketch.canvasHeight != null ? { canvasHeight: sketch.canvasHeight } : {}),
+                    ...(runtime ? { runtime } : {}),
+                },
+            };
+
+            return [sketchId, entry];
+        }
+
+        if (sketch.archetype === "image") {
+            const entry: SketchEntry = {
+                kind: "archetype",
+                spec: {
+                    archetype: "image",
+                    specVersion: 1,
+                    title: `@:${sketch.titleKey}`,
+                    src: sketch.src ?? (sketch.publicId ? optimizer(sketch.publicId) : ""),
+                    ...(sketch.altKey ? { alt: `@:${sketch.altKey}` } : {}),
+                    ...(sketch.captionKey ? { caption: `@:${sketch.captionKey}` } : {}),
+                    ...(sketch.aspectRatio != null ? { aspectRatio: sketch.aspectRatio } : {}),
+                    ...(sketch.markers?.length
+                        ? {
+                            markers: sketch.markers.map((m) => ({
+                                id: m.id,
+                                x: m.x,
+                                y: m.y,
+                                label: `@:${m.labelKey}`,
+                            })),
+                        }
+                        : {}),
+                    ...(sketch.initialZoom != null ? { initialZoom: sketch.initialZoom } : {}),
+                    ...(sketch.minZoom != null ? { minZoom: sketch.minZoom } : {}),
+                    ...(sketch.maxZoom != null ? { maxZoom: sketch.maxZoom } : {}),
+                    ...(sketch.zoomStep != null ? { zoomStep: sketch.zoomStep } : {}),
+                    ...(sketch.allowPan != null ? { allowPan: sketch.allowPan } : {}),
+                    ...(sketch.allowWheelZoom != null ? { allowWheelZoom: sketch.allowWheelZoom } : {}),
+                    ...(sketch.allowDoubleClickReset != null
+                        ? { allowDoubleClickReset: sketch.allowDoubleClickReset }
+                        : {}),
+                    ...(sketch.showControls != null ? { showControls: sketch.showControls } : {}),
+                    ...(runtime ? { runtime } : {}),
+                },
+            };
+
+            return [sketchId, entry];
+        }
+
+        const entry: SketchEntry = {
+            kind: "archetype",
+            spec: {
+                archetype: "paragraph",
+                specVersion: 2,
+                title: `@:${sketch.titleKey}`,
+                bodyMarkdown: `@:${sketch.bodyKey}`,
+                ...(runtime ? { runtime } : {}),
+                ...(sketch.images?.length
+                    ? {
+                        images: Object.fromEntries(
+                            sketch.images
+                                .map(buildImageEntry)
+                                .filter((entry): entry is NonNullable<typeof entry> => entry !== null),
+                        ),
+                    }
+                    : {}),
+            },
+        };
+
+        return [sketchId, entry];
+    });
+
+    return Object.fromEntries(entries);
+}

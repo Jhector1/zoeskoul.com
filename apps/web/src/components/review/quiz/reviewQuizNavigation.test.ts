@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveReviewQuizRestoreIndex } from "./reviewQuizNavigation";
+import { resolveReviewQuizRestoreIndex } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizNavigation";
 
 describe("resolveReviewQuizRestoreIndex", () => {
     it("starts a completed multi-question quiz at question one for review navigation", () => {

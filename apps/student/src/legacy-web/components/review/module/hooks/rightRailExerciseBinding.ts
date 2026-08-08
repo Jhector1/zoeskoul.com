@@ -1,4 +1,4 @@
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 export function cardHasAuthoredExerciseSurface(card: ReviewCard | null | undefined) {
     if (!card) return false;

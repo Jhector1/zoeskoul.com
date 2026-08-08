@@ -3,11 +3,11 @@
 import React, { useMemo } from "react";
 import Image from "next/image";
 import type { SubjectCard } from "./subjectCardTypes";
-import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
-import { cn } from "@/lib/cn";
+import { cloudinaryImageUrl } from "@zoeskoul/learner-ui/lib/cloudinary/url";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Pill from "./Pill";
 import { useTaggedT } from "@/i18n/tagged";
-import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
+import { resolveCatalogCourseStatusPresentation } from "@zoeskoul/curriculum-contracts/subjects/catalogCourseStatus";
 
 export default function SubjectTile({
                                       s,

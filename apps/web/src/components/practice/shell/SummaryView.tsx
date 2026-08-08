@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import DailyResetCountdown from "@/components/practice/completion/DailyResetCountdown";
 import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
 import type { PracticeShellProps } from "../PracticeShell";

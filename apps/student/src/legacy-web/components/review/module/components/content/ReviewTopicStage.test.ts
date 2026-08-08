@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
     DEFAULT_REVIEW_WORKSPACE_CAPABILITIES,
-} from "../../workspaceCapabilities";
+} from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import ReviewTopicStage from "./ReviewTopicStage";
 
 vi.mock("@/lib/config/learnerUiFlags", () => ({

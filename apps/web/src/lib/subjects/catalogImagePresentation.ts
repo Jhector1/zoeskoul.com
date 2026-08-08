@@ -1,6 +1,6 @@
 import {
   cloudinaryImageUrl,
-} from "@/lib/cloudinary/url";
+} from "@zoeskoul/learner-ui/lib/cloudinary/url";
 
 export type CatalogImageSource = {
   imagePublicId: string | null;

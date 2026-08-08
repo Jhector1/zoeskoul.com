@@ -1,6 +1,6 @@
 import "server-only";
 
-import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+import { SUBJECT_ARTIFACTS } from "@student/subjects";
 import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
 import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import {
@@ -14,7 +14,7 @@ import type {
     ReviewProjectSpec,
     ReviewQuizSpec,
     ReviewTopicShape,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import {getReviewContentVersion} from "@/lib/review/contentVersion";
 

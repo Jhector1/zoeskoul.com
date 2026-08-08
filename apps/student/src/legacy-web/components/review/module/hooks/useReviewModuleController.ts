@@ -34,21 +34,21 @@ import {useReviewReset} from "./useReviewReset";
 import {useReviewScrollSync} from "./useReviewScrollSync";
 import {useReviewPanels} from "./useReviewPanels";
 
-import {prereqsMetForAnyQuizOrProject, isTopicComplete} from "../utils";
+import {prereqsMetForAnyQuizOrProject, isTopicComplete} from "@zoeskoul/learning-runtime/review/module/utils";
 import {
     canAutoMarkReadingCardDone,
     getEmbeddedTryIt,
     hasRequiredEmbeddedTryIt,
     isCardDoneFromState,
     isQuizLikeCard,
-} from "../progressKeys";
+} from "@zoeskoul/learning-runtime/review/module/progressKeys";
 import {
     getModuleProgress,
     getSidebarTopicItems,
     getViewCards,
     getViewTopic,
     moduleCompleteFromProgress,
-} from "../selectors";
+} from "@zoeskoul/learning-runtime/review/module/selectors";
 import {
     buildQuizResetProgress,
     buildMarkCardDoneProgress,
@@ -61,9 +61,9 @@ import {
 
 
 import type {ReviewModulePageProps, HeaderGamificationVm} from "../types";
-import {useReviewRuntimeStore} from "../runtime/reviewRuntimeStore";
-import {getCardStateKey, getCardToolScopeKey} from "../runtime/exerciseKeys";
-import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
+import {useReviewRuntimeStore} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import {getCardStateKey, getCardToolScopeKey} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
 import {
     buildReviewCardRouteTarget,
     buildReviewExerciseRouteTarget,
@@ -73,21 +73,21 @@ import {
     removeReviewRoutePrefix,
     resolveReviewRouteTarget,
     type ReviewResolvedRouteTarget,
-} from "../runtime/reviewRoute";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRoute";
 
-import {buildReviewTargetRegistry} from "../runtime/reviewTargetRegistry";
+import {buildReviewTargetRegistry} from "@zoeskoul/learning-runtime/review/module/runtime/reviewTargetRegistry";
 import {resolveFlowNavigationConfig} from "@/components/review/navigation/FlowNavigator";
 import {useTaggedT} from "@student/i18n/tagged";
 import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
     getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
-} from "@/components/review/module/runtime/progressiveUnlock";
+} from "@zoeskoul/learning-runtime/review/module/runtime/progressiveUnlock";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
-import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
+import {resolveRightRailSqlProps} from "@zoeskoul/learning-runtime/review/module/runtime/resolveRightRailSqlProps";
+import { resolveTopicStageRuntimeDefaults } from "@zoeskoul/learning-runtime/review/module/runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
-import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
@@ -103,17 +103,17 @@ import {
     COMPACT_PRACTICE_NAV_LABEL,
     isAtFinalModuleNavigationStep,
     type CompactQuizNavigationState,
-} from "../compactFlowNavigation";
+} from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 import { shouldShowFinalCertificateCta } from "../certificateNavigation";
 import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRail,
     toolPresentationPolicyFromManifest,
     toolPresentationPolicyFromTopic,
-} from "../toolsRailVisibility";
+} from "@zoeskoul/learning-runtime/review/module/toolsRailVisibility";
 import {
     resolveReviewWorkspaceCapabilities,
-} from "../workspaceCapabilities";
+} from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 
 function normalizeCompactNavKind(value: unknown) {
     return String(value ?? "")

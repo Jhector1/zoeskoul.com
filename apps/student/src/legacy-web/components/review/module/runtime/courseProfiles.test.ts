@@ -6,7 +6,7 @@ import {
     resolveCourseFileSeed,
     resolveCourseSqlRunnerConfig,
     resolveRuntimeDefaultDataset,
-} from "./courseProfiles";
+} from "@zoeskoul/learning-runtime/review/module/runtime/courseProfiles";
 
 describe("getCourseProfile", () => {
     it("resolves sql-v2 as SQL from profileId metadata", () => {

@@ -4,7 +4,7 @@ import {
   getCardStateKey,
   getCardStateKeyFromToolScopeKey,
   getCardToolScopeKey,
-} from "./exerciseKeys";
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 
 describe("card tool scope keys", () => {
   const cardKey = getCardStateKey({

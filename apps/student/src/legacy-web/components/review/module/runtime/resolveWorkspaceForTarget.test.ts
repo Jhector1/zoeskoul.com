@@ -5,7 +5,7 @@ import {
   createManifestWorkspaceDefinition,
   resolveWorkspaceForExerciseTarget,
   resolveWorkspaceForTarget,
-} from "./resolveWorkspaceForTarget";
+} from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
 
 function filePaths(workspace: WorkspaceStateV2 | null) {
   if (!workspace) return [];

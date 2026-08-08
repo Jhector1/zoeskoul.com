@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import {
   TUTORING_LEARNER_ID_HEADER,
   TUTORING_WORKSPACE_VIEW_HEADER,
-} from "./contentRequestProtocol";
+} from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 import {
   getTutoringWorkspaceMeta,
   isTutoringParticipant,

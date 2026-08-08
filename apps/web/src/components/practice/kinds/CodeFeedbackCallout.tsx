@@ -3,7 +3,7 @@
 import React from "react";
 import { useTaggedT } from "@/i18n/tagged";
 import type { CodeFeedback, CodeFeedbackTone } from "@/lib/code/feedback/types";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Badge from "@/components/billing/Badge";
 
 function resolveFeedbackTone(args: {

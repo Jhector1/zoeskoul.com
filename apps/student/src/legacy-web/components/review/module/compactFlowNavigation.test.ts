@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   COMPACT_PRACTICE_NAV_LABEL,
   isAtFinalModuleNavigationStep,
-} from "./compactFlowNavigation";
+} from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 
 describe("isAtFinalModuleNavigationStep", () => {
   it("keeps module navigation hidden while a nested project or quiz step remains", () => {

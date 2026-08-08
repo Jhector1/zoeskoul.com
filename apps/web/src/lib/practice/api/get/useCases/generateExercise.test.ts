@@ -29,7 +29,7 @@ vi.mock("@/i18n/loadPracticeTopicI18n", () => ({
     loadPracticeTopicI18n: loadPracticeTopicI18nMock,
 }));
 
-vi.mock("@/lib/curriculum/resolveManifestExercise", () => ({
+vi.mock("@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise", () => ({
     resolveManifestExercise: resolveManifestExerciseMock,
 }));
 

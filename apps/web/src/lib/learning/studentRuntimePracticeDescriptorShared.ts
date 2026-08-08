@@ -1,7 +1,7 @@
 import type {
   ReviewModule,
   ReviewTopic,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 
 export type JsonRecord = Record<string, unknown>;
 

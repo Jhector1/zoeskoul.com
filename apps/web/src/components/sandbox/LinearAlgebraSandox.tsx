@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import SpanBasisModule from "@/components/modules/SpanBasisModule";
 import Module0VectorSimulatorP5Hybrid from "@/components/Module0VectorSimulatorP5Hybrid";
-import type { Mode } from "@/lib/math/vec3";
+import type { Mode } from "@zoeskoul/learner-ui/lib/math/vec3";
 import { useTranslations } from "next-intl";
 
 type Tool = "span" | "module0";

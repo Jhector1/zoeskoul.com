@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import type { ReviewCard, ReviewEmbeddedTryIt } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewEmbeddedTryIt } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
     ReviewTopicProgress,
     SavedQuizState,
@@ -10,25 +10,25 @@ import type {
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import QuizBlock from "@/components/review/QuizBlock";
-import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
-import type { ReviewAssessmentCompletionReason } from "@/components/review/quiz/reviewQuizCompletion";
+import { buildReviewQuizKey } from "@zoeskoul/curriculum-contracts/subjects/quizClient";
+import type { ReviewAssessmentCompletionReason } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
-import type { SavedSketchState } from "@/components/sketches/subjects/types";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { shouldShowExpandedLearnerTitles } from "@/lib/config/learnerUiFlags";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { getCardToolScopeKey } from "@/components/review/module/runtime/exerciseKeys";
-import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { getCardToolScopeKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { buildQuizBlockRuntimeDefaultsProps } from "@zoeskoul/learning-runtime/review/module/runtime/cardRuntimeDefaults";
 import type { QuizResetTarget } from "@/components/review/module/actions";
-import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
-import type { ReviewWorkspaceCapabilities } from "@/components/review/module/workspaceCapabilities";
+import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import {
     getAssessmentDisplayKind,
     type AssessmentDisplayKind,
-} from "@/components/review/module/tryItProjectCard";
+} from "@zoeskoul/learning-runtime/review/module/tryItProjectCard";
 type ReviewCardSpecRecord = Record<string, unknown> | null | undefined;
 
 function GateBanner({ text }: { text: string }) {

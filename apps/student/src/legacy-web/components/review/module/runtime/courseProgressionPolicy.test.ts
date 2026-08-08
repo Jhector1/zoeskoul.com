@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
     getCourseModuleEntryPolicy,
     isModuleTopicUnlocked,
-} from "./courseProgressionPolicy";
+} from "@zoeskoul/learning-runtime/review/module/runtime/courseProgressionPolicy";
 
 describe("course progression policy", () => {
     it("keeps every accessible module entry open regardless of course progress", () => {

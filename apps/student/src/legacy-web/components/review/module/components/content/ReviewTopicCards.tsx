@@ -3,7 +3,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
   ReviewProgressState,
   ReviewTopicProgress,
@@ -12,17 +12,17 @@ import type {
 
 import CardRenderer from "@/components/review/module/CardRenderer";
 import FlowNavigator from "@/components/review/navigation/FlowNavigator";
-import { useReviewRuntimeStore } from "../../runtime/reviewRuntimeStore";
-import { mergeRuntimeIntoProgress } from "../../runtime/runtimeProgressBridge";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
-import { reviewDebug } from "../../runtime/reviewDebug";
+import { reviewDebug } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
 
 import {
   canAutoMarkReadingCardDone,
   hasRequiredEmbeddedTryIt,
   isCardDoneFromState,
   isQuizLikeCard,
-} from "../../progressKeys";
+} from "@zoeskoul/learning-runtime/review/module/progressKeys";
 import {
   buildEmbeddedTryItPassProgress,
   buildMarkCardDoneProgress,
@@ -32,11 +32,11 @@ import {
   type QuizResetTarget,
 } from "../../actions";
 
-import { getCardStateKey } from "../../runtime/exerciseKeys";
+import { getCardStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
-import type { ReviewWorkspaceCapabilities } from "../../workspaceCapabilities";
+import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 
 const TOPIC_PANE_ANIM = {
   initial: { opacity: 0, y: 10 },

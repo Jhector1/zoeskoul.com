@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import SubjectTile from "./SubjectTile";
 import type { SubjectCard } from "./subjectCardTypes";
 

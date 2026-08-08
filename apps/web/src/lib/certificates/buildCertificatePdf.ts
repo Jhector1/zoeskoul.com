@@ -4,8 +4,8 @@ import {
     CERTIFICATE_DESIGN_WIDTH,
     CERTIFICATE_LAYOUT,
     CERTIFICATE_TYPE,
-} from "@/lib/certificates/design";
-import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@/lib/certificates/policy";
+} from "@zoeskoul/learner-ui/lib/certificates/design";
+import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@zoeskoul/learner-ui/lib/certificates/policy";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 

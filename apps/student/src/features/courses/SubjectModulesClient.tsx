@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@zoeskoul/app-config";
-import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import NavButton from "@/components/ui/NavButton";
-import { getCourseModuleEntryPolicy } from "@/components/review/module/runtime/courseProgressionPolicy";
+import { getCourseModuleEntryPolicy } from "@zoeskoul/learning-runtime/review/module/runtime/courseProgressionPolicy";
 
 type ModuleRow = {
     id: string;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { rebaseTutoringModuleToolPresentation } from "./sessionToolPresentation";
 
 function moduleFixture(args: {

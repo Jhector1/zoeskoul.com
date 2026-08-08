@@ -6,10 +6,10 @@ import type {
     ReviewModule,
     ReviewModuleSection,
     ReviewTopicShape,
-} from "@/lib/subjects/types";
+} from "@zoeskoul/curriculum-contracts/subjects/types";
 import RingButton from "@/components/review/module/RingButton";
 import {useTaggedT} from "@student/i18n/tagged";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 export type SidebarTopicItemVm = {
     id: string;

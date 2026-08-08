@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 
 describe("resolveManifestExercise", () => {
   it("returns the exact authored exercise from the topic bundle", () => {

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
     ReviewProgressState,
     ReviewTopicProgress,
@@ -19,18 +19,18 @@ import {
 import {
     getModuleProgress, getSidebarTopicItems,
     moduleCompleteFromProgress,
-} from "./selectors";
+} from "@zoeskoul/learning-runtime/review/module/selectors";
 
 import {
     countAnswered,
     isTopicComplete,
     prereqsMetForAnyQuizOrProject,
-} from "./utils";
+} from "@zoeskoul/learning-runtime/review/module/utils";
 import {
     canAutoMarkReadingCardDone,
     hasRequiredEmbeddedTryIt,
     isCardDoneFromState,
-} from "./progressKeys";
+} from "@zoeskoul/learning-runtime/review/module/progressKeys";
 
 import ReviewTopicCompletion from "./components/content/ReviewTopicCompletion";
 

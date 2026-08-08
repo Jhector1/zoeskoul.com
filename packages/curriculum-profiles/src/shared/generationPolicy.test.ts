@@ -23,6 +23,7 @@ describe("shared generation policy", () => {
                     "multi_choice",
                     "drag_reorder",
                     "fill_blank_choice",
+                    "pseudocode_input",
                 ],
             },
             projects: {

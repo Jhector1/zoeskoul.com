@@ -6,12 +6,12 @@ import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeShellProps } from "../PracticeShell";
 import ResultPanel from "./ResultPanel";
-import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { shouldOfferAiTutor } from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
 import {
     isAiTutorFallbackRequired,
     resolveAiTutorExerciseKey,
-} from "@/components/ai-tutor/tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 import {
     canRevealPracticeAnswer,
     DEFAULT_PRACTICE_HELP_POLICY,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveCatalogCourseStatusPresentation } from "./catalogCourseStatus";
+import { resolveCatalogCourseStatusPresentation } from "@zoeskoul/curriculum-contracts/subjects/catalogCourseStatus";
 
 describe("resolveCatalogCourseStatusPresentation", () => {
     it("treats an unversioned active course as available", () => {

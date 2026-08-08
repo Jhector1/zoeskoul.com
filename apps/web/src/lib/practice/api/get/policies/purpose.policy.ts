@@ -1,8 +1,8 @@
-import type { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import type { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
 import {
     coercePurposeMode,
     coercePurposePolicy,
-} from "@/lib/subjects/quizClient";
+} from "@zoeskoul/curriculum-contracts/subjects/quizClient";
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 import { readSubscriberPracticeMeta } from "@/lib/practice/experience/subscriberPractice";
 

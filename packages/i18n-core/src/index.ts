@@ -82,6 +82,10 @@ export {
   type Values,
 } from "./tagged";
 
+export function tag(key: string): string {
+  return `@:${key}`;
+}
+
 export {
   resolveDeepTagged,
   type DeepResolved,

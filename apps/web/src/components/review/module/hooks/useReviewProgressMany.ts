@@ -1,7 +1,7 @@
 import {
   completedTopicKeysFromProgress,
   fetchReviewProgressGET,
-} from "@/lib/review/progressClient";
+} from "@zoeskoul/learning-client/legacy-compatible/review/progressClient";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type ModuleProgressLite = {

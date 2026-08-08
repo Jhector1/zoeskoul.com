@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import type { Mode, Vec3 } from "@/lib/math/vec3";
-import { clamp, mag } from "@/lib/math/vec3";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import type { Mode, Vec3 } from "@zoeskoul/learner-ui/lib/math/vec3";
+import { clamp, mag } from "@zoeskoul/learner-ui/lib/math/vec3";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import { useTranslations } from "next-intl";
 import { useZHeldRef } from "@/components/vectorpad/useZHeldRef";
 

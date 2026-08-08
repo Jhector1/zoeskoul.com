@@ -1,6 +1,6 @@
 import type { SketchEntry } from "./registryTypes";
 import { ARCHETYPE_GALLERY_SKETCHES } from "@/components/sketches/gallery/registry";
-import { SUBJECT_SKETCHES } from "@/lib/subjects";
+import { SUBJECT_SKETCHES } from "@student/subjects";
 
 const ALL: Record<string, SketchEntry> = {
     ...SUBJECT_SKETCHES,

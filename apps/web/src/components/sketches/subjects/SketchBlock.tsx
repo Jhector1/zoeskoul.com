@@ -3,13 +3,13 @@
 import React, { useCallback, useMemo, useState } from "react";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-import type { SavedSketchState } from "./types";
+import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
 import type { SketchEntry } from "./registryTypes";
-import type { SketchSpec } from "./specTypes";
+import type { SketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 
 import { getSketchEntry } from "./registry";
-import { defaultStateForSpec } from "./defaults";
-import { migrateSketchState } from "./migrate";
+import { defaultStateForSpec } from "@zoeskoul/learner-ui/sketches/subjects/defaults";
+import { migrateSketchState } from "@zoeskoul/learner-ui/sketches/subjects/migrate";
 import { useDebouncedEmit } from "@/components/sketches/_shared/useDebouncedEmit";
 import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_shared/sketchUi";
 import { SketchShell } from "@/components/sketches/_shared/shells";
@@ -19,7 +19,7 @@ import {
     isCompactLearnerUiActive,
     shouldShowExpandedLearnerTitles,
 } from "@/lib/config/learnerUiFlags";
-import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";
+import { getDistinctSketchShellTitle } from "@zoeskoul/learner-ui/sketches/subjects/getDistinctSketchShellTitle";
 
 function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {
     if (!patch) return base;

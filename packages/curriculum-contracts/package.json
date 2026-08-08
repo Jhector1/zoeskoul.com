@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./subjects/*": {
+      "types": "./dist/subjects/*.d.ts",
+      "default": "./dist/subjects/*.js"
     }
   },
   "scripts": {
@@ -17,6 +21,8 @@
     "test": "vitest run --root ../.. packages/curriculum-contracts/src"
   },
   "dependencies": {
+    "@zoeskoul/learning-contracts": "workspace:*",
+    "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*"
   }
 }

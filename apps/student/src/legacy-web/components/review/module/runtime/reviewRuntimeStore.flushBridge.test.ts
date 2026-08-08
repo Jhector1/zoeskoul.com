@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { useReviewRuntimeStore } from "./reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 
 describe("reviewRuntimeStore tool snapshot flush bridge", () => {
   afterEach(() => {

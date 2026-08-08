@@ -12,12 +12,12 @@ import type { QItem } from "@/lib/practice/uiTypes";
 import PracticeHelpPanel from "../PracticeHelpPanel";
 import type { TFn } from "../PracticeShell";
 import { resolveMobilePracticeHelpState } from "./mobileHelpState";
-import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { shouldOfferAiTutor } from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
 import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
 import {
   isAiTutorFallbackRequired,
   resolveAiTutorExerciseKey,
-} from "@/components/ai-tutor/tutorAvailability";
+} from "@zoeskoul/learner-ui/ai-tutor/tutorAvailability";
 
 export default function PracticeMobileHelpPanel({
   t,

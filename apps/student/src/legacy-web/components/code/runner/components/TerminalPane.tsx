@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { RunResult } from "@/lib/code/types";
 import type { RunnerState, TermLine } from "../types";
 import { cleanTermText } from "../utils/text";
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 const lineCls = (t: TermLine["type"]) => {
     switch (t) {

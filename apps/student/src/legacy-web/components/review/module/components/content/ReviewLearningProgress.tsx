@@ -2,12 +2,12 @@
 
 import React from "react";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import {
     buildLearningProgressSteps,
     type LearningProgressStatus,
     type LearningProgressTrack,
-} from "../../learningProgress";
+} from "@zoeskoul/learning-runtime/review/module/learningProgress";
 
 function statusLabel(status: LearningProgressStatus, current: boolean): string {
     if (current) return status === "revealed" ? "current, revealed" : "current";

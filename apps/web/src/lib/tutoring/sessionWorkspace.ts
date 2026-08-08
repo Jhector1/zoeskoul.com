@@ -7,7 +7,7 @@ import {
   tutoringReferenceOwnerKey,
 } from "./sessionWorkspaceAccessCore";
 
-export type { TutoringWorkspaceView } from "./contentRequestProtocol";
+export type { TutoringWorkspaceView } from "@zoeskoul/learning-contracts/tutoring/contentRequestProtocol";
 export {
   canMutateTutoringWorkspace,
   readRequestedTutoringWorkspaceView,

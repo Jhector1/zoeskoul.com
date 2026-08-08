@@ -11,7 +11,7 @@ import {
     pickDirectReviewRuntimeWorkspace,
     shouldUseLocalReviewDraft,
 } from "@/components/tools/panes/CodeToolPane";
-import { deriveEntryCode } from "./exerciseWorkspaceResolver";
+import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 
 function makeWorkspace(
     content: string,

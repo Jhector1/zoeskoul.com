@@ -5,7 +5,7 @@ import type { GamificationSummary } from "@/lib/gamification/types";
 import {
     emitGamificationUpdate,
     subscribeGamificationUpdate,
-} from "@/lib/gamification/browserEvents";
+} from "@zoeskoul/learning-client/legacy-compatible/gamification/browserEvents";
 
 type GamificationSummaryResponse = {
     summary?: GamificationSummary | null;

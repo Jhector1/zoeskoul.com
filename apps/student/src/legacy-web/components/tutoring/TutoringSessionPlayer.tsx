@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ReviewModulePageClient from "@student/features/learning/ReviewModulePageClient";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import type { ReviewModule } from "@/lib/subjects/types";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import {
   resolveTutoringReviewWorkspaceCapabilities,
-} from "@/components/review/module/workspaceCapabilities";
+} from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import TutoringWorkspaceBar, {
   getTutoringWorkspaceViewLabel,
   type TutoringWorkspaceParticipant as Participant,

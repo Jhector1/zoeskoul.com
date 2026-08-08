@@ -137,6 +137,50 @@ export type ManifestIdeServiceConfig = {
   terminalBootstrap?: ManifestTerminalBootstrap;
 };
 
+export type LearningIdeServicePreset = ManifestIdeServicePreset;
+export type LearningIdeRunnerBackend = ManifestIdeRunnerBackend;
+export type LearningIdeLayoutMode = ManifestIdeLayoutMode;
+export type LearningIdeServiceRequirements = ManifestIdeServiceRequirements;
+export type LearningIdeFileActions = {
+  enabled?: boolean;
+  createFile?: boolean;
+  createFolder?: boolean;
+  rename?: boolean;
+  delete?: boolean;
+  dragDrop?: boolean;
+};
+export type LearningIdeConfig = ManifestIdeServiceConfig & {
+  terminalSessionScope?: import("./practice.js").TerminalSessionScope | "module";
+  terminalCwd?: string;
+  showOpenTerminalButton?: boolean;
+  showRestartTerminalButton?: boolean;
+  fileActions?: LearningIdeFileActions;
+  sqlPane?: import("./tool-presentation.js").ToolSqlPanePolicy;
+};
+
+export function mergeLearningIdeConfigs(
+  ...configs: Array<LearningIdeConfig | null | undefined>
+): LearningIdeConfig | null {
+  let merged: LearningIdeConfig | null = null;
+  for (const config of configs) {
+    if (!config) continue;
+    const previous = merged as LearningIdeConfig | null;
+    const manifest = mergeManifestIdeServiceConfigs(previous, config);
+    merged = {
+      ...(merged ?? {}),
+      ...config,
+      ...(manifest ?? {}),
+      ...(config.fileActions
+        ? { fileActions: { ...(previous?.fileActions ?? {}), ...config.fileActions } }
+        : {}),
+      ...(config.sqlPane
+        ? { sqlPane: { ...(previous?.sqlPane ?? {}), ...config.sqlPane } }
+        : {}),
+    };
+  }
+  return merged;
+}
+
 export function mergeManifestTerminalBootstraps(
   ...bootstraps: Array<ManifestTerminalBootstrap | null | undefined>
 ): ManifestTerminalBootstrap | undefined {

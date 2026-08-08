@@ -5,7 +5,11 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./ai-tutor/*": "./src/ai-tutor/*.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./sketches/*": "./src/sketches/*.ts",
+    "./vectorpad/*": "./src/vectorpad/*.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
@@ -16,6 +20,9 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.563.0",
     "tailwind-merge": "^3.4.0",
+    "@zoeskoul/curriculum-contracts": "workspace:*",
+    "@zoeskoul/permissions": "workspace:*",
+    "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
     "next-themes": "^0.4.6"
   },

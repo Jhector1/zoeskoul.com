@@ -3,8 +3,8 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import type { WorkspaceLanguage, Exercise } from "@/lib/practice/types";
-import type { VectorPadState } from "@/components/vectorpad/types";
-import { defaultVectorPadState } from "@/components/vectorpad/defaultState";
+import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
+import { defaultVectorPadState } from "@zoeskoul/learner-ui/vectorpad/defaultState";
 import ExerciseRenderer from "./ExerciseRenderer";
 import type { QItem } from "./practiceType";
 import SingleChoiceExerciseUI from "./kinds/SingleChoiceExerciseUI";

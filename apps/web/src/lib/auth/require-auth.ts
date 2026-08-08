@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { buildAuthenticateHref } from "@/lib/auth/auth-href";
-import { buildLocalCallbackUrl } from "@/lib/auth/callback-url";
+import { buildAuthenticateHref } from "@zoeskoul/auth-client/auth-href";
+import { buildLocalCallbackUrl } from "@zoeskoul/auth-client/callback-url";
 
 export function redirectToSignIn(args: {
     locale: string;

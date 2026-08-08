@@ -24,8 +24,8 @@ import { useGamificationSummary } from "@/components/review/module/hooks/useGami
 import { useStandalonePracticeTools } from "@/components/practice/tools/useStandalonePracticeTools";
 import { ExerciseToolsProvider } from "@/components/tools/context/ExerciseToolsContext";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
-import { cn } from "@/lib/cn";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 
 function firstText(...values: unknown[]) {
   for (const value of values) {

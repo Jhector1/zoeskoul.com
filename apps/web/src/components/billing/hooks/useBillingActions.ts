@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { buildAccessGateSearchParams } from "@/lib/access/accessGate";
+import { buildAccessGateSearchParams } from "@zoeskoul/permissions/accessGate";
 import {
   clearBrowserCheckoutAttempt,
   getOrCreateBrowserCheckoutAttempt,

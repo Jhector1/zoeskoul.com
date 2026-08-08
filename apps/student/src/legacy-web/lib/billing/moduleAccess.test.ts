@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildBillingHref, safeInternalPath } from "./moduleAccess";
+import { buildBillingHref, safeInternalPath } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 
 describe("buildBillingHref", () => {
     it("includes next, back, reason, subject, and module for unlock redirects", () => {

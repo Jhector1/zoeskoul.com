@@ -1,4 +1,4 @@
-import type { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import type { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 export type PracticePurposeRequestParams = {
   preferPurpose?: PurposeMode;

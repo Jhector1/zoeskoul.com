@@ -1,4 +1,4 @@
-import { withTopicParentContext } from "@zoeskoul/curriculum-core";
+import { withTopicParentContext } from "@zoeskoul/curriculum-core/with-topic-parent-context";
 import { tag } from "../i18n/resolveManifestMessages.js";
 import { defineJsonTopicBundle } from "../generator/defineJsonTopicBundle.js";
 

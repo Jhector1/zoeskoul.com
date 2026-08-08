@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import { resolveCurrentAuthoredSqlExpected } from "@/lib/practice/api/validate/services/currentAuthoredSqlExpected.service";
 

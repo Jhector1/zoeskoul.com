@@ -3,7 +3,7 @@ import type { QItem } from "@/lib/practice/uiTypes";
 import {
   resolveReviewFinalizedNavigationAction,
   type ReviewFinalizedPracticeAction,
-} from "@/components/review/quiz/reviewQuizCompletion";
+} from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
 
 const STANDALONE_AUTO_ADVANCE_MODES = new Set<PracticeExperienceMode>([
   "practice",
