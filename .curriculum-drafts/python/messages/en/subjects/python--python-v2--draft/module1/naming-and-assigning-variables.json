@@ -4,7 +4,7 @@
       "python-v2-1": {
         "naming-and-assigning-variables": {
           "label": "Naming and Assigning Variables",
-          "summary": "Use clear variable names, assign values with =, and update variables by reassignment.",
+          "summary": "Create variables with clear names, store values with `=`, and update stored values by assigning to the same name again.",
           "cards": {
             "sketch0": {
               "title": "What a variable does"
@@ -85,13 +85,13 @@
               }
             },
             "q5": {
-              "title": "Build a simple assignment program",
-              "prompt": "Put the lines in the correct order to store a name and print it.",
-              "hint": "Assign the value before trying to print the variable.",
+              "title": "Assign before using a variable",
+              "prompt": "Put the two lines in the order that stores the name first and then prints the stored value.",
+              "hint": "A variable must receive a value before this program can print it.",
               "help": {
-                "concept": "A variable must be assigned before it is used in `print`.",
-                "hint_1": "The line with the string value should come before the line that displays the variable.",
-                "hint_2": "Start with the assignment, then use `print(...)`."
+                "concept": "Python executes from top to bottom, so the assignment must happen before `print(name)` uses the variable.",
+                "hint_1": "Find the line that creates `name`.",
+                "hint_2": "Place `print(name)` after the assignment."
               },
               "tokens": {
                 "t1": "print(name)",
@@ -99,28 +99,29 @@
               }
             },
             "q6": {
-              "title": "Order a reassignment example",
-              "prompt": "Arrange the lines so the program prints `1` and then `2`.",
-              "hint": "The first print must happen before the variable is updated.",
+              "title": "Trace reassignment in order",
+              "prompt": "Arrange the four lines so the program prints `1` first and `2` second.",
+              "hint": "Print the first stored value before replacing it, then print the new value.",
               "help": {
-                "concept": "To show both the old and new values, print once before reassignment and once after reassignment.",
-                "hint_1": "The update to `count` should happen between the two print lines.",
-                "hint_2": "Start by storing `1`, then print, then change the value, then print again."
+                "concept": "To observe both values, use the variable once before reassignment and once after reassignment.",
+                "hint_1": "Start with `count = 1`, then print it.",
+                "hint_2": "Only after the first print should `count = 2` run."
               },
               "tokens": {
-                "t1": "print(count)",
-                "t2": "count = 2",
-                "t3": "count = 1"
+                "t1": "count = 1",
+                "t2": "print(count)",
+                "t3": "count = 2",
+                "t4": "print(count)"
               }
             },
             "q7": {
-              "title": "Complete the variable name",
-              "prompt": "Choose the best word to complete the assignment.",
-              "hint": "Pick the name that matches the value `16`.",
+              "title": "Choose a clear variable name",
+              "prompt": "Choose the best value for the blank so the assignment clearly stores a person's age.\n\n```python\n___ = 14\n```",
+              "hint": "Choose a valid name that describes what the value `14` means.",
               "help": {
-                "concept": "A clear variable name should describe the meaning of the value being stored.",
-                "hint_1": "Choose a name that describes what the value represents, not merely its data type.",
-                "hint_2": "Choose the option that would make the line easy to read for another person."
+                "concept": "A descriptive variable name communicates the meaning of its value.",
+                "hint_1": "`print` is used for output, not as the intended name here.",
+                "hint_2": "The name should describe a person's age."
               },
               "template": "[blank1] = 16",
               "choices": [
@@ -131,13 +132,13 @@
               ]
             },
             "q8": {
-              "title": "Complete the reassignment",
-              "prompt": "Fill the blank so the variable is updated to a new number.",
-              "hint": "The blank should be the new value on the right side of `=`.",
+              "title": "Complete a reassignment",
+              "prompt": "Choose the value that updates `score` from `5` to `7`.\n\n```python\nscore = 5\nscore = ___\n```",
+              "hint": "The right side of `=` is the new value that will be stored.",
               "help": {
-                "concept": "Reassignment changes a variable by giving it a new value with `=`.",
-                "hint_1": "The variable name is already provided, so only the replacement value is missing.",
-                "hint_2": "Choose the number that would become the new stored value after the line runs."
+                "concept": "Reassignment uses the same variable name on the left and a new value on the right.",
+                "hint_1": "The target value is the number `7`.",
+                "hint_2": "Do not quote the number."
               },
               "template": "score = [blank1]",
               "choices": [
@@ -148,59 +149,72 @@
               ]
             },
             "q9": {
-              "title": "Store and print one value",
-              "prompt": "In `main.py`, write code that stores the number `12` in a variable named `age` and prints the value.\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Assign `12` to `age`, then print the variable.",
+              "title": "Assign a number, then use the variable",
+              "prompt": "Store the number `12` in a variable named `age`, then print `age`.\n\nDo not print `12` directly—the output should come from the variable.",
+              "hint": "Assign `12` to `age` first, then pass `age` to `print()`.",
               "help": {
-                "concept": "A basic assignment uses `name = value`, and `print(name)` displays the stored value.",
-                "hint_1": "You need one assignment line and one print line.",
-                "hint_2": "The variable name must be `age`, and the printed result should come from the variable."
+                "concept": "The point is to store a value under a name and then use that name to retrieve the value.",
+                "hint_1": "Your first line should assign to `age`.",
+                "hint_2": "Your second line should print the variable, not the literal `12`."
               },
-              "starterCode": "# Store 12 in a variable named age\n# Then print the variable"
+              "starterCode": "# Store 12 in age\n# Print the variable\n",
+              "solutionCode": "age = 12\nprint(age)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 12 to age, then print the variable age rather than printing 12 directly."
+                }
+              }
             },
             "q10": {
-              "title": "Store text in a clear variable",
-              "prompt": "In `main.py`, write code that stores the text `\"Maya\"` in a variable named `student_name` and prints it.\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Read the task \"Store text in a clear variable\" and identify the required result.",
+              "title": "Use a descriptive name for text",
+              "prompt": "Store the string `\"Maya\"` in a variable named `student_name`, then print `student_name`.",
+              "hint": "Use the exact descriptive name `student_name` for the assignment and print.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Store text in a clear variable\".",
-                "hint_1": "Build the requested behavior without printing extra labels or lines.",
-                "hint_2": "Run once with the supplied input and check punctuation, spacing, and order."
+                "concept": "A descriptive variable name should communicate what the stored value represents.",
+                "hint_1": "Assign the quoted text `\"Maya\"` to `student_name`.",
+                "hint_2": "Print `student_name`, not the literal text directly."
               },
-              "starterCode": "# Store the name in student_name\n# Print the variable"
+              "starterCode": "# Store \"Maya\" in student_name\n# Print the variable\n",
+              "solutionCode": "student_name = \"Maya\"\nprint(student_name)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign Maya to student_name, then print the variable student_name."
+                }
+              }
             },
             "q11": {
-              "title": "Update a variable",
-              "prompt": "Write Python code that:\n1. stores `3` in a variable named `level`\n2. changes `level` to `4`\n3. prints `level`\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Use the same variable name twice, then print after the update.",
+              "title": "Replace a stored value",
+              "prompt": "Create `level` with the value `3`, reassign the same variable to `4`, then print `level`.\n\nOnly the final value should be printed.",
+              "hint": "Use two assignments to `level`, followed by one print call.",
               "help": {
-                "concept": "Reassignment means giving a new value to an existing variable name.",
-                "hint_1": "The first value is only temporary because the second assignment replaces it.",
-                "hint_2": "Print after the second assignment so the output shows the updated value."
+                "concept": "Reassignment replaces the value associated with the same variable name.",
+                "hint_1": "First write `level = 3`, then `level = 4`.",
+                "hint_2": "Print `level` after the second assignment."
               },
-              "starterCode": "# Create level\n# Update level\n# Print level"
-            },
-            "q12": {
-              "title": "Read input into a variable",
-              "prompt": "In `main.py`, write code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Identify the concept being tested, then compare every option with that concept.",
-              "help": {
-                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
-                "hint_1": "Check names, punctuation, and execution order rather than relying on wording that merely sounds familiar.",
-                "hint_2": "Work through the expression or control flow before selecting the option that matches Python’s behavior."
-              },
-              "starterCode": "# Read one line into city\n# Print city"
+              "starterCode": "# Create level\n# Reassign level\n# Print the final value\n",
+              "solutionCode": "level = 3\nlevel = 4\nprint(level)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 3 to level, reassign 4 to the same variable, then print level."
+                }
+              }
             },
             "q13": {
-              "title": "Print before and after reassignment",
-              "prompt": "Create a focused solution that stores `\"red\"` in a variable named `color`, prints it, changes `color` to `\"green\"`, and prints it again.\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Look for the choice that satisfies both the syntax and behavior described.",
+              "title": "Observe a value before and after reassignment",
+              "prompt": "Write a program that:\n\n1. stores the string `\"red\"` in a variable named `color`\n2. prints `color`\n3. changes `color` to `\"green\"`\n4. prints `color` again\n\nThe output should show `red` first and `green` second.",
+              "hint": "Print the variable once before and once after the second assignment.",
               "help": {
-                "concept": "Your solution must satisfy the complete input-and-output contract.",
-                "hint_1": "Evaluate each option against the exact condition, value, or output described in the question.",
-                "hint_2": "Trace the code or rule in the prompt, then reject choices that conflict with Python syntax or runtime behavior."
+                "concept": "Printing before and after reassignment lets you observe the old stored value and then the new one.",
+                "hint_1": "The first assignment should be `color = \"red\"`.",
+                "hint_2": "Reassign `color` to `\"green\"` between the two print calls."
               },
-              "starterCode": "# Store the first color\n# Print it\n# Change the color\n# Print it again"
+              "starterCode": "# Store \"red\" in color\n# Print color\n# Change color to \"green\"\n# Print color again\n",
+              "solutionCode": "color = \"red\"\nprint(color)\ncolor = \"green\"\nprint(color)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign red to color, print it, reassign green to the same variable, and print it again."
+                }
+              }
             }
           }
         }
@@ -212,16 +226,16 @@
       "python-v2-1": {
         "naming-and-assigning-variables": {
           "sk1": {
-            "title": "What a variable does",
-            "bodyMarkdown": "A variable is a name that stores a value so your program can use it later. In Python, you create a variable with `=`.\n\n```python\nscore = 10\nprint(score)\n```\n\nThis prints `10` in the output panel.\n\nTrace the example: - `score` is the variable name.\n- `=` assigns the value on the right to the name on the left.\n- `print(score)` shows the stored value.\n\nWorked example:\n\n```python\ncity = \"Lagos\"\nprint(city)\n```\n\nHere, the variable `city` stores the text `\"Lagos\"`."
+            "title": "Store a value with a variable",
+            "bodyMarkdown": "A variable gives a value a name so the program can use that value later.\n\n```python\nscore = 10\nprint(score)\n```\n\nRead the assignment from right to left:\n\n- `10` is the value.\n- `=` assigns that value.\n- `score` is the name that receives it.\n- `print(score)` uses the stored value, so the output is `10`.\n\nThe assignment itself does **not** print anything.\n\nAnother example:\n\n```python\ncity = \"Lagos\"\nprint(city)\n```\n\nNow `city` refers to the string `\"Lagos\"`. Using the name later lets Python retrieve the value that was assigned to it.\n"
           },
           "sk2": {
-            "title": "Choose clear variable names",
-            "bodyMarkdown": "Good variable names help you understand code quickly. A clear name tells you what the value means.\n\n```python\nage = 14\nfavorite_color = \"blue\"\n```\n\nThese names are clearer than short names like `a` or `x`.\n\nA few beginner-friendly rules:\n- Use letters, numbers, and underscores.\n- Start with a letter or underscore, not a number.\n- Use names that describe the value.\n- Spaces are not allowed in variable names.\n\nWorked example:\n\n```python\nstudent_name = \"Mina\"\nprint(student_name)\n```\n\n`student_name` is easier to understand than just `s`.\n\nRead the flow carefully: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
+            "title": "Choose names that explain the value",
+            "bodyMarkdown": "Variable names should help a reader understand what a value represents.\n\n```python\nage = 14\nfavorite_color = \"blue\"\nstudent_name = \"Mina\"\n```\n\nThese names communicate more than vague names such as `x`, `n`, or `thing`.\n\nFor the names used in this lesson:\n\n- letters, numbers, and underscores are allowed;\n- a name cannot start with a number;\n- spaces are not allowed;\n- descriptive `snake_case` names such as `student_name` are easy to read.\n\nFor example:\n\n```python\nstudent_name = \"Mina\"\nprint(student_name)\n```\n\nThe value is still `\"Mina\"`, but the name tells us what that text means.\n"
           },
           "sk3": {
-            "title": "Reassignment updates a variable",
-            "bodyMarkdown": "A variable can change. When you assign a new value to the same name, the old value is replaced.\n\n```python\nlevel = 1\nprint(level)\nlevel = 2\nprint(level)\n```\n\nRead the flow carefully: - `level = 1` stores `1`.\n- `print(level)` shows `1`.\n- `level = 2` updates the same variable.\n- `print(level)` now shows `2`.\n\nWorked example:\n\n```python\nname = \"Ava\"\nprint(name)\nname = \"Noah\"\nprint(name)\n```\n\nThe second assignment changes the stored value from `\"Ava\"` to `\"Noah\"`."
+            "title": "Reassign a variable to replace its value",
+            "bodyMarkdown": "Assigning to the same variable again replaces the value currently stored under that name.\n\n```python\nlevel = 1\nprint(level)\n\nlevel = 2\nprint(level)\n```\n\nThe first `print(level)` outputs `1`. After `level = 2`, the same name refers to the new value, so the second print outputs `2`.\n\nThe variable does not keep both values at once.\n\n```python\nname = \"Ava\"\nname = \"Noah\"\nprint(name)\n```\n\nThis prints `Noah` because the second assignment is the most recent value stored in `name`.\n"
           }
         }
       }

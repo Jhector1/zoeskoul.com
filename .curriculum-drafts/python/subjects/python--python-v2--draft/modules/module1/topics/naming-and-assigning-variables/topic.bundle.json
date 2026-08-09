@@ -205,14 +205,16 @@
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t3",
           "t1",
-          "t2"
+          "t2",
+          "t3",
+          "t4"
         ]
       }
     },
@@ -247,50 +249,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "12\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "age = 12\nprint(age)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "age = 12\nprint(age)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "age = 12\nprint(age)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -312,19 +276,57 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "age = 12\nprint(age)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*age\\s*=\\s*12\\s*\\n\\s*print\\(\\s*age\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*age\\s*=\\s*12\\s*\\n\\s*print\\(\\s*age\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q9.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -335,55 +337,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Maya\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "student_name = \"Maya\"\nprint(student_name)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "student_name = \"Maya\"\nprint(student_name)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bstudent_name\\b",
-            "message": "Use the variable name `student_name` in your solution."
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "student_name = \"Maya\"\nprint(student_name)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -405,24 +364,57 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "student_name = \"Maya\"\nprint(student_name)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*student_name\\s*=\\s*[\\\"']Maya[\\\"']\\s*\\n\\s*print\\(\\s*student_name\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bstudent_name\\b",
-          "message": "Use the variable name `student_name` in your solution."
+          "pattern": "(?s)^\\s*student_name\\s*=\\s*[\\\"']Maya[\\\"']\\s*\\n\\s*print\\(\\s*student_name\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q10.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -433,50 +425,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "4\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "level = 3\nlevel = 4\nprint(level)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "level = 3\nlevel = 4\nprint(level)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "level = 3\nlevel = 4\nprint(level)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -498,19 +452,145 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "level = 3\nlevel = 4\nprint(level)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*level\\s*=\\s*3\\s*\\n\\s*level\\s*=\\s*4\\s*\\n\\s*print\\(\\s*level\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*level\\s*=\\s*3\\s*\\n\\s*level\\s*=\\s*4\\s*\\n\\s*print\\(\\s*level\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q11.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*color\\s*=\\s*[\\\"']red[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*\\n\\s*color\\s*=\\s*[\\\"']green[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*color\\s*=\\s*[\\\"']red[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*\\n\\s*color\\s*=\\s*[\\\"']green[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q13.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

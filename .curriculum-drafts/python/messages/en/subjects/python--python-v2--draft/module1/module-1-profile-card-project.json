@@ -4,7 +4,7 @@
       "python-v2-1": {
         "module-1-profile-card-project": {
           "label": "Module Project: Build a Profile Card",
-          "summary": "A tutor wants one profile card program that grows from a simple stored value into a clean interactive card. Each step keeps the working code and upgrades it.",
+          "summary": "Build one profile-card program cumulatively: start with stored values, make it interactive, clean typed text, then convert an age and calculate next year's value. Every step begins with the exact previous solution.",
           "cards": {
             "sketch0": {
               "title": "Your first profile-card client"
@@ -15,79 +15,121 @@
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Build the first profile card"
+              "title": "Step 1: Build the stored-value card"
             },
             "mp_2": {
-              "title": "Make the card read input"
+              "title": "Step 2: Make the card interactive"
             },
             "mp_3": {
-              "title": "Clean the typed name"
+              "title": "Step 3: Clean typed text"
             },
             "mp_4": {
-              "title": "Finish the full profile card"
+              "title": "Step 4: Add age conversion and calculation"
             }
           },
           "quiz": {
             "mp-1-store-profile-values": {
-              "title": "Build the first profile card",
-              "prompt": "Turn the preview into the first real card. Store `\"Maya\"` in `student_name`, store `7` in `level`, then print exactly:\nProfile for Maya\nLevel: 7",
-              "hint": "Store the values first, then print the two card lines.",
+              "title": "Build the stored-value profile card",
+              "prompt": "Upgrade the preview into a two-line profile card. Replace the preview program by storing `\"Maya\"` in `student_name` and `7` in `level`. Use f-strings to print exactly:\n\n```text\nProfile for Maya\nLevel: 7\n```",
+              "hint": "Replace the preview with the two assignments, then interpolate both variables in labeled f-strings.",
               "help": {
-                "concept": "This step starts the actual project structure. The card now has labeled output instead of a single preview value.",
-                "hint_1": "Use `student_name` for the name variable and `level` for the number.",
-                "hint_2": "The first line starts with `Profile for`."
+                "concept": "This step combines variables with basic f-string interpolation.",
+                "hint_1": "Use `student_name` and `level` as the variable names.",
+                "hint_2": "Print two lines: the profile label first and the level label second."
               },
-              "starterCode": "name = \"Ava\"\nprint(name)\n\n# Replace the preview with a first profile card.\n# Store Maya in student_name and 7 in level.\n# Then print the two profile lines.\n"
+              "starterCode": "name = \"Ava\"\nprint(name)\n",
+              "solutionCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store Maya in student_name and 7 in level, then use both variables in the two f-string output lines."
+                }
+              }
             },
             "mp-2-read-and-label-input": {
-              "title": "Make the card read input",
-              "prompt": "Keep the same card layout, but make it more useful. Replace the stored name with `input()`, keep `level = 7`, read the city with a second `input()`, and print exactly:\nProfile for <name>\nLevel: 7\nCity: <city>",
-              "hint": "Use `input()` for the typed name and city, then keep printing the card in the same order.",
+              "title": "Make the profile card interactive",
+              "prompt": "Keep the working card structure. Replace the stored name with the first `input()`, keep `level = 7`, read a city with a second `input()`, and add the city line. Print exactly:\n\n```text\nProfile for <name>\nLevel: 7\nCity: <city>\n```",
+              "hint": "Change only what the new requirement needs: name becomes input, city is added as input, and the existing level line stays.",
               "help": {
-                "concept": "The project still feels like the same card, but now the learner can type values instead of relying only on stored text.",
-                "hint_1": "The name comes from the first input and the city comes from the second input.",
-                "hint_2": "Keep the level line in the middle."
+                "concept": "The same formatted card now uses runtime text values supplied by the learner.",
+                "hint_1": "The input order is name, then city.",
+                "hint_2": "Preserve the two existing output lines and add `City:` as the third line."
               },
-              "starterCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n\n# Keep the profile card idea.\n# Replace the stored name with input().\n# Read the city with input() too, then add the city line.\n"
+              "starterCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
+              "solutionCode": "student_name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the name and city with two input() calls."
+                },
+                "1": {
+                  "message": "Keep the profile, level, and city output in that order."
+                }
+              }
             },
             "mp-3-clean-typed-name": {
-              "title": "Clean the typed name",
-              "prompt": "Keep the same three-line card. This time, clean the typed name with `.strip()` and `.title()` before printing it.",
-              "hint": "Store the typed name first, then clean it before you print the card.",
+              "title": "Clean the typed profile text",
+              "prompt": "Keep the same three-line card and the same input order. Clean outside whitespace from both the typed name and typed city with `.strip()` before printing them.",
+              "hint": "Apply `.strip()` to the string returned by each text input.",
               "help": {
-                "concept": "This is an upgrade to the same program, not a reset. The card layout stays the same while the name handling gets better.",
-                "hint_1": "Use one variable for the raw name and another for the cleaned result if that helps.",
-                "hint_2": "Only the name needs cleaning in this step."
+                "concept": "This step improves the same interactive card using the string-cleanup method already learned.",
+                "hint_1": "The name can be read as `input().strip()`.",
+                "hint_2": "Do the same for the city; keep `level = 7` unchanged."
               },
-              "starterCode": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the card layout.\n# Clean the typed name with .strip() and .title() before printing it.\n"
+              "starterCode": "student_name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+              "solutionCode": "student_name = input().strip()\nlevel = 7\ncity = input().strip()\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use .strip() on both typed text values."
+                },
+                "1": {
+                  "message": "Keep the existing three-line card structure."
+                }
+              }
             },
             "mp-4-build-full-profile-card": {
-              "title": "Finish the full profile card",
-              "prompt": "Keep the cleaned-name card you already built. Now replace the level with a typed age, convert it to an integer, and print the finished card as:\nProfile for <clean name>\nAge next year: <age + 1>\nCity: <city>",
-              "hint": "Keep the cleaned name logic, switch the middle value to `int(input())`, and print the updated middle line.",
+              "title": "Finish the interactive profile card",
+              "prompt": "Keep the cleaned name and city. Replace `level = 7` with a typed age from the second input line, convert it with `int()`, and change the middle output line to next year's age.\n\nThe input order is name, age, city. Print exactly:\n\n```text\nProfile for <clean name>\nAge next year: <age + 1>\nCity: <clean city>\n```",
+              "hint": "Preserve the cleaned text logic, convert only the age, and use `age + 1` inside the middle f-string.",
               "help": {
-                "concept": "The final step keeps most of the card structure the same, but makes the program more realistic by reading an age and calculating next year.",
-                "hint_1": "The input order is name, age, city.",
-                "hint_2": "The middle line should use `age + 1`, not the raw age."
+                "concept": "The final step combines input, string cleanup, integer conversion, arithmetic, variables, and f-string output in one cumulative program.",
+                "hint_1": "The second input must become an integer before you add 1.",
+                "hint_2": "Do not remove the `.strip()` calls already working for the name and city."
               },
-              "starterCode": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the cleaned name.\n# Replace level with a typed age.\n# Print Age next year instead of Level.\n"
+              "starterCode": "student_name = input().strip()\nlevel = 7\ncity = input().strip()\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+              "solutionCode": "student_name = input().strip()\nage = int(input())\ncity = input().strip()\nprint(f\"Profile for {student_name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep .strip() on both text inputs."
+                },
+                "1": {
+                  "message": "Convert the age with int() before calculating age + 1."
+                },
+                "2": {
+                  "message": "Use f-strings to print the three labeled profile lines."
+                }
+              }
             },
             "try-module-1-profile-card-project-sketch0": {
-              "title": "Preview the profile card",
-              "prompt": "Store `\"Ava\"` in a variable named `name` and print it.",
-              "hint": "Assign first, then print the variable.",
+              "title": "Preview a stored profile value",
+              "prompt": "Store `\"Ava\"` in a variable named `name`, then print `name`.",
+              "hint": "Assign the value first, then print the variable.",
               "help": {
-                "concept": "This quick preview gives the project one clean stored value before the full profile card grows around it.",
+                "concept": "The preview establishes the first working program that the project will grow from.",
                 "hint_1": "Use the variable name `name`.",
-                "hint_2": "Print the variable, not the text directly."
+                "hint_2": "Print `name`, not a second hard-coded copy of `Ava`."
               },
-              "starterCode": "# Store Ava in name.\n# Then print name.\n"
+              "starterCode": "# Store Ava in name, then print the variable.\n",
+              "solutionCode": "name = \"Ava\"\nprint(name)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign `\"Ava\"` to name and print the value through the variable."
+                }
+              }
             }
           },
           "tryIt": {
             "try_module_1_profile_card_project_sketch0": {
-              "title": "Try it yourself",
-              "prompt": "Store `\"Ava\"` in a variable named `name` and print it."
+              "title": "Preview a stored profile value",
+              "prompt": "Store `\"Ava\"` in `name`, then print the value stored in `name`."
             },
             "allowReveal": true
           }
@@ -100,8 +142,8 @@
       "python-v2-1": {
         "module-1-profile-card-project": {
           "sketch-1": {
-            "title": "Your first profile-card client",
-            "bodyMarkdown": "A tutor is meeting several new students and wants one tiny profile card generator instead of rewriting the same information by hand every time.\n\nThis module project should feel like one connected build. You start with a very small card, then keep improving the same program until it reads input, cleans the name, and prints a polished final version."
+            "title": "Grow one program instead of restarting",
+            "bodyMarkdown": "This project combines the Module 1 skills in one program.\n\nYou will keep improving the same profile card:\n\n1. store profile values and format them with f-strings;\n2. replace stored text with `input()`;\n3. clean typed text with `.strip()`;\n4. convert a typed age with `int()` and calculate next year's age.\n\nThe important project rule is **cumulative continuity**: when one step works, the next step starts from that exact working code. You will modify the existing program instead of starting over.\n"
           }
         }
       }

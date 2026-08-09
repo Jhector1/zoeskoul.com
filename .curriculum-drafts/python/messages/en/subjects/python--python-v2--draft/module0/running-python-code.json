@@ -4,16 +4,16 @@
       "python-v2-0": {
         "running-python-code": {
           "label": "Running Python Code",
-          "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
+          "summary": "Use the editor–Run–output cycle, follow top-to-bottom execution, and improve a program by editing and running it again.",
           "cards": {
             "sketch0": {
-              "title": "How code runs in ZoeSkoul"
+              "title": "From code editor to output"
             },
             "sketch1": {
-              "title": "Using print with text"
+              "title": "Python runs the current program top to bottom"
             },
             "sketch2": {
-              "title": "Comments and simple syntax mistakes"
+              "title": "Edit, run again, and compare"
             },
             "quiz": {
               "title": "Quiz"
@@ -21,185 +21,218 @@
           },
           "quiz": {
             "sc_runner_parts": {
-              "title": "Main parts of the runner",
-              "prompt": "Which answer correctly describes how you run Python code in this lesson?",
-              "hint": "Think about the editor, the Run button, and where printed text appears.",
+              "title": "Follow the run cycle",
+              "prompt": "Which sequence describes the normal way to test Python code in ZoeSkoul?",
+              "hint": "Code is written before it can be executed and observed.",
               "help": {
-                "concept": "This question checks whether you know the basic browser workflow: write code in the code editor, click Run, and read results in the output panel.",
-                "hint_1": "Look for the option that mentions typing code first, then running it, then reading printed output.",
-                "hint_2": "The correct answer includes all three parts: code editor, Run button, and output panel."
+                "concept": "The basic cycle is: edit the program, run the current code, then inspect what the run produced.",
+                "hint_1": "The output panel shows results; it is not where source code is written.",
+                "hint_2": "Choose editor → Run → output."
               },
               "options": {
-                "a": "Type code in the code editor, click Run, and read the result in the output panel.",
-                "b": "Write code in a document and wait for it to run automatically.",
-                "c": "Type code into the output panel and click Run there.",
-                "d": "Click Run before writing code so Python can create the program for you."
+                "a": "Write or edit code → click Run → inspect the output",
+                "b": "Inspect the output → click Run → write the program",
+                "c": "Type the program into the output panel → click Run",
+                "d": "Click Run and let Python invent the program automatically"
               }
             },
-            "sc_print_purpose": {
-              "title": "What print does",
-              "prompt": "What does `print(\"Hello\")` do when you click Run?",
-              "hint": "Focus on what appears after Python executes the line.",
+            "sc_source_vs_output": {
+              "title": "Know where to make a change",
+              "prompt": "You ran a program and want to change its second line. Where should you make that change?",
+              "hint": "The output panel shows results from a run.",
               "help": {
-                "concept": "This question checks the role of `print(...)`: it displays a value in the output panel.",
-                "hint_1": "The line does not create a comment or ask for input; it sends text outward.",
-                "hint_2": "Think about the exact word inside the quotes and where that word is shown after running."
+                "concept": "Source code is edited in the code editor. The output panel shows the result produced when the program runs.",
+                "hint_1": "Do not edit the displayed output and expect the program to change.",
+                "hint_2": "Change the source code in the editor, then run it again."
               },
               "options": {
-                "a": "It shows the text Hello in the output panel.",
-                "b": "It turns Hello into a comment.",
-                "c": "It removes the word Hello from the program.",
-                "d": "It asks the learner to type Hello."
+                "a": "In the code editor",
+                "b": "Inside the previous output",
+                "c": "In the lesson title",
+                "d": "By changing the Run button"
               }
             },
-            "mc_valid_print_lines": {
-              "title": "Valid print statements",
-              "prompt": "Choose all lines that are valid Python print statements.",
-              "hint": "Check for the print name, parentheses, and properly closed quotes.",
+            "mc_run_cycle_facts": {
+              "title": "Understand edit and rerun",
+              "prompt": "Which statements about the edit–Run–output cycle are true? Choose all correct answers.",
+              "hint": "Think about when code changes take effect in the displayed result.",
               "help": {
-                "concept": "A valid beginner `print(...)` statement needs correct spelling, matching parentheses, and complete string quotes when printing text.",
-                "hint_1": "Any option with a missing quote or missing parenthesis is not valid syntax.",
-                "hint_2": "Look for lines where `print` is followed by parentheses and the text string starts and ends with quotes."
+                "concept": "Editing changes the source program. Running executes the current program and produces a new result that you can compare with the previous one.",
+                "hint_1": "A code edit is not the same action as executing the code.",
+                "hint_2": "Running again after an edit is how you observe the changed behavior."
               },
               "options": {
-                "a": "print(\"Hi\")",
-                "b": "print(5)",
-                "c": "print \"Hi\""
-              }
-            },
-            "mc_comments_behavior": {
-              "title": "What comments do",
-              "prompt": "Choose all correct statements about comments in beginner Python code.",
-              "hint": "Think about lines that start with `#`.",
-              "help": {
-                "concept": "Comments are notes for humans. Python ignores them during execution, so they do not produce output by themselves.",
-                "hint_1": "A comment can explain code, but it is not executed like a `print(...)` statement.",
-                "hint_2": "Select the statements that match `#` lines being ignored by Python and useful for explanation."
-              },
-              "options": {
-                "a": "A comment starts with `#`.",
-                "b": "Python ignores a comment when the code runs.",
-                "c": "A comment always appears in the output panel.",
-                "d": "A comment is required on every line of code."
+                "a": "Run executes the current code in the editor.",
+                "b": "Editing source code automatically rewrites the previous output without another run.",
+                "c": "After editing, running again lets you observe the new result.",
+                "d": "The output panel is the main place to type Python source code."
               }
             },
             "dr_run_steps": {
-              "title": "Order the run process",
-              "prompt": "Put these actions in the correct order for checking a Python program in ZoeSkoul.",
-              "hint": "Start with writing code and end with reading the result.",
+              "title": "Order one test cycle",
+              "prompt": "Arrange the actions for one useful code-testing cycle.",
+              "hint": "Make a change before executing it.",
               "help": {
-                "concept": "This question checks the normal workflow for using the browser runner: write code, run it, then inspect the output.",
-                "hint_1": "You cannot inspect output before the program has been run.",
-                "hint_2": "The correct sequence begins in the code editor, then uses Run, then finishes in the output panel."
+                "concept": "A useful cycle is edit → run → inspect. You use what you observe to decide whether another edit is needed.",
+                "hint_1": "Execution comes after the code change.",
+                "hint_2": "Inspection comes after the run produces a result."
               },
               "tokens": {
-                "t1": "Type Python code in the code editor",
+                "t1": "Edit the program",
                 "t2": "Click Run",
-                "t3": "Read the output panel"
+                "t3": "Inspect the new output"
               }
             },
             "dr_program_flow": {
-              "title": "Top-to-bottom execution",
-              "prompt": "Arrange the printed lines in the order Python produces them for this code: `print(\"One\")` then `print(\"Two\")`.",
-              "hint": "Arrange the pieces in the order Python uses them.",
+              "title": "Follow top-to-bottom execution",
+              "prompt": "This program contains three output statements in this order: `First`, `Second`, `Third`. Arrange the resulting output.",
+              "hint": "For these simple statements, Python executes from the first line downward.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "Python normally executes simple statements from top to bottom, so their visible results appear in the same sequence.",
+                "hint_1": "Start with the result produced by the first code line.",
+                "hint_2": "Keep the same order as the source statements."
               },
               "tokens": {
-                "t1": "One",
-                "t2": "Two"
+                "t1": "First",
+                "t2": "Second",
+                "t3": "Third"
               }
             },
-            "fb_comment_symbol": {
-              "title": "Comment marker",
-              "prompt": "Complete the Python comment line with the correct symbol.",
-              "hint": "Look at the blank, then choose the word or symbol that makes the idea correct.",
+            "fb_after_edit_output": {
+              "title": "Predict the next run",
+              "prompt": "A program previously printed `Draft`. You change its only line to `print(\"Ready\")` and click Run again. What should the new output contain?",
+              "hint": "The new run uses the current code.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "When you run after an edit, Python executes the edited program, so the new output reflects the new source code.",
+                "hint_1": "Ignore what the previous run displayed.",
+                "hint_2": "Use the text in the edited statement."
               },
-              "template": "[blank1] this line is a comment",
+              "template": "The new run displays [blank1].",
               "choices": [
-                "#",
-                "print",
-                "\"",
-                "="
+                "Ready",
+                "Draft",
+                "Run",
+                "print"
               ]
             },
-            "fb_print_output_word": {
-              "title": "Predict simple output",
-              "prompt": "Fill in the missing output for this code.",
-              "hint": "Look at the exact text inside the quotes.",
+            "ci_run_first_edit": {
+              "title": "Make a change and run it",
+              "prompt": "The starter program prints `Draft`. Change the program so the next run prints exactly:\n\n`Ready`",
+              "hint": "Edit the string in the existing output statement.",
               "help": {
-                "concept": "When `print(...)` contains a string, Python displays that exact string in the output panel.",
-                "hint_1": "The output matches the word between the quotation marks.",
-                "hint_2": "Do not add extra punctuation or code words; use the printed text itself."
+                "concept": "The editor contains the source program. After changing the source, run the program again to see the new result.",
+                "hint_1": "Keep the existing statement shape.",
+                "hint_2": "Replace only the displayed word."
               },
-              "template": "Code: `print(\"Start\")` → Output: [blank1]",
-              "choices": [
-                "Start",
-                "print",
-                "\"Start\"",
-                "Run"
-              ]
+              "starterCode": "print(\"Draft\")\n",
+              "solutionCode": "print(\"Ready\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep one print call and make it display exactly Ready."
+                }
+              }
             },
-            "ci_print_greeting": {
-              "title": "Print a greeting",
-              "prompt": "Create a focused solution that prints exactly `Hello, ZoeSkoul!` on one line.",
-              "hint": "Use one `print(...)` statement with the exact text.",
+            "ci_top_to_bottom_order": {
+              "title": "Put output statements in execution order",
+              "prompt": "Reorder the starter program so its output is exactly:\n\n`First`\n`Second`\n`Third`",
+              "hint": "The first source line runs before the lines below it.",
               "help": {
-                "concept": "This exercise practices the simplest run cycle: write one valid `print(...)` statement and check the exact output.",
-                "hint_1": "Put the message inside quotes so Python treats it as text.",
-                "hint_2": "Your program should produce one line of output with the greeting and punctuation exactly as shown."
+                "concept": "For this straight-line program, Python executes each statement from top to bottom.",
+                "hint_1": "Move the line that prints `First` to the top.",
+                "hint_2": "The source order should match the required output order."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "print(\"Third\")\nprint(\"First\")\nprint(\"Second\")\n",
+              "solutionCode": "print(\"First\")\nprint(\"Second\")\nprint(\"Third\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Place the three print calls in First, Second, Third order."
+                }
+              }
             },
-            "ci_two_lines": {
-              "title": "Print two lines in order",
-              "prompt": "In `main.py`, write code that prints `First` on one line and `Second` on the next line.",
-              "hint": "Use two separate `print(...)` statements.",
+            "ci_edit_rerun_preserve": {
+              "title": "Change one result and preserve the rest",
+              "prompt": "The starter program already prints two lines. Change only what is necessary so the next run prints exactly:\n\n`Status`\n`Version 2`",
+              "hint": "The first line is already correct.",
               "help": {
-                "concept": "This exercise checks top-to-bottom execution: each `print(...)` runs in order and creates its own output line.",
-                "hint_1": "The first line of code should produce the first line of output.",
-                "hint_2": "Write one print for `First` and another print below it for `Second`."
+                "concept": "A focused edit changes the part that needs improvement while preserving code that already produces the correct result.",
+                "hint_1": "Leave the `Status` line unchanged.",
+                "hint_2": "Edit the text in the second statement, then run again."
               },
-              "starterCode": "# Print two lines below"
+              "starterCode": "print(\"Status\")\nprint(\"Version 1\")\n",
+              "solutionCode": "print(\"Status\")\nprint(\"Version 2\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve Status on the first line and change only the second result to Version 2."
+                }
+              }
             },
-            "ci_comment_and_output": {
-              "title": "Use a comment and print",
-              "prompt": "Write Python code with a comment on the first line and a `print(...)` statement on the second line that prints `Ready`.",
-              "hint": "Read the coding task and identify what the program should print.",
+            "ci_practice_insert_middle_line": {
+              "title": "Insert a missing middle output",
+              "prompt": "Add one line between the existing statements so the program prints:\n\n`Start`\n`Middle`\n`End`",
+              "hint": "Insert the new statement between the two existing statements.",
               "help": {
-                "concept": "The exercise evaluates what the finished program does with the supplied values.",
-                "hint_1": "Use the named file and expected behavior as a checklist; test one focused change before adding another.",
-                "hint_2": "Trace the code or rule in the prompt, then reject choices that conflict with Python syntax or runtime behavior."
+                "concept": "In straight-line code, the position of a statement determines when its output appears.",
+                "hint_1": "Do not remove the correct first or last line.",
+                "hint_2": "Add the statement that produces `Middle` between them."
               },
-              "starterCode": "# Add a comment here\n# Then write a print statement below"
+              "starterCode": "print(\"Start\")\nprint(\"End\")\n",
+              "solutionCode": "print(\"Start\")\nprint(\"Middle\")\nprint(\"End\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Insert Middle between the existing Start and End output statements."
+                }
+              }
             },
-            "ci_fix_quotes": {
-              "title": "Print quoted text correctly",
-              "prompt": "Create a focused solution that prints exactly `Learning Python`.",
-              "hint": "Read the task \"Print quoted text correctly\" and identify the required result.",
+            "ci_practice_reorder_output": {
+              "title": "Reorder a four-line program",
+              "prompt": "Reorder the existing statements so the program prints exactly:\n\n`North`\n`East`\n`South`\n`West`",
+              "hint": "Match source order to required output order.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print quoted text correctly\".",
-                "hint_1": "Use the named values and operations to generate the requested result.",
-                "hint_2": "Run the code and compare each printed line with the expected result."
+                "concept": "With simple sequential statements, output order follows the top-to-bottom order of the code.",
+                "hint_1": "You do not need new statements.",
+                "hint_2": "Move each existing line into the same order as the target output."
               },
-              "starterCode": "print("
+              "starterCode": "print(\"South\")\nprint(\"North\")\nprint(\"West\")\nprint(\"East\")\n",
+              "solutionCode": "print(\"North\")\nprint(\"East\")\nprint(\"South\")\nprint(\"West\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Reorder the four existing print calls to North, East, South, West."
+                }
+              }
             },
-            "ci_print_expression": {
-              "title": "Print an expression result",
-              "prompt": "In `main.py`, write code that prints the result of `3 + 4`.",
-              "hint": "You can place a math expression directly inside `print(...)`.",
+            "ci_practice_change_middle": {
+              "title": "Edit only the middle line",
+              "prompt": "Change only the middle output so the program prints:\n\n`Red`\n`Gold`\n`Green`",
+              "hint": "The first and third statements are already correct.",
               "help": {
-                "concept": "Python can evaluate a simple expression first and then print the resulting value.",
-                "hint_1": "Do not put the expression in quotes if you want Python to calculate it.",
-                "hint_2": "Use `print(...)` around the addition so the output panel shows the computed number."
+                "concept": "A targeted edit preserves correct behavior while changing only the part required by the new goal.",
+                "hint_1": "Do not rewrite the whole program.",
+                "hint_2": "Change `Blue` to `Gold` in the middle statement."
               },
-              "starterCode": "# Print the result of an addition"
+              "starterCode": "print(\"Red\")\nprint(\"Blue\")\nprint(\"Green\")\n",
+              "solutionCode": "print(\"Red\")\nprint(\"Gold\")\nprint(\"Green\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve Red and Green and change only the middle result to Gold."
+                }
+              }
+            },
+            "ci_practice_extend_program": {
+              "title": "Extend a working program",
+              "prompt": "The first two lines are already correct. Add two more statements so the complete output is:\n\n`Step 1`\n`Step 2`\n`Step 3`\n`Step 4`",
+              "hint": "Keep the working lines and continue below them.",
+              "help": {
+                "concept": "You can extend a straight-line program by adding new statements after the existing ones.",
+                "hint_1": "Do not change `Step 1` or `Step 2`.",
+                "hint_2": "Append statements for `Step 3` and `Step 4` in that order."
+              },
+              "starterCode": "print(\"Step 1\")\nprint(\"Step 2\")\n",
+              "solutionCode": "print(\"Step 1\")\nprint(\"Step 2\")\nprint(\"Step 3\")\nprint(\"Step 4\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the first two steps and extend the program through Step 4 in order."
+                }
+              }
             }
           }
         }
@@ -211,16 +244,16 @@
       "python-v2-0": {
         "running-python-code": {
           "sketch_run_cycle": {
-            "title": "How code runs in ZoeSkoul",
-            "bodyMarkdown": "In this course, you write Python code in the **code editor**, click **Run**, and read the result in the **output panel**.\n\nA Python program is a list of instructions. Python reads them from top to bottom. When it reaches a `print(...)` statement, it sends text or values to the output panel.\n\nExample:\n\n```python\nprint(\"Hello\")\nprint(\"Python\")\n```\n\nTrace the example: - The first line prints `Hello`\n- The second line prints `Python`\n- The output panel shows the lines in the same order\n\nSo the output is:\n\n```text\nHello\nPython\n```"
+            "title": "From code editor to output",
+            "bodyMarkdown": "When you work on a Python exercise in ZoeSkoul, three parts have different jobs:\n\n1. **Code editor** — where you write or change the program\n2. **Run** — executes the current program\n3. **Output panel** — shows what that run produced\n\nThink of the workflow as:\n\n```text\nedit code → Run → inspect result\n```\n\nSuppose the editor contains:\n\n```python\nprint(\"Draft\")\n```\n\nAfter you run it, the output shows:\n\n```text\nDraft\n```\n\nNow change the source code to:\n\n```python\nprint(\"Ready\")\n```\n\nThe program has changed in the editor. Run it again to observe the result of the new version.\n\nThe important distinction is:\n\n- **source code** is what you control\n- **output** is evidence of what the last run did\n\nYou will use this edit–Run–inspect cycle throughout the course.\n"
           },
           "sketch_print_and_strings": {
-            "title": "Using print with text",
-            "bodyMarkdown": "The `print(...)` statement displays something in the output panel. Text in Python is usually written inside quotes.\n\nExample:\n\n```python\nprint(\"I am learning Python\")\n```\n\nHere is what each part does:\n- `print` tells Python to display something\n- `(` and `)` wrap the value to display\n- `\"I am learning Python\"` is a string value\n\nYou can also print numbers:\n\n```python\nprint(7)\nprint(3 + 2)\n```\n\nThis prints the value of each expression.\n\nRead the flow carefully: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
+            "title": "Python runs the current program top to bottom",
+            "bodyMarkdown": "A simple Python program can contain several statements.\n\nFor straight-line code like this:\n\n```python\nprint(\"First\")\nprint(\"Second\")\nprint(\"Third\")\n```\n\nPython reaches the first statement, then the second, then the third.\n\nThe output is therefore:\n\n```text\nFirst\nSecond\nThird\n```\n\nThe order of the source lines matters.\n\nIf you move the last statement to the top:\n\n```python\nprint(\"Third\")\nprint(\"First\")\nprint(\"Second\")\n```\n\nthe output order changes too.\n\nFor now, use this rule for simple programs:\n\n**top source line → next source line → next source line**\n\nLater, conditionals, loops, and functions will make execution paths more interesting. This lesson establishes the basic starting model.\n"
           },
           "sketch_comments_and_errors": {
-            "title": "Comments and simple syntax mistakes",
-            "bodyMarkdown": "A comment starts with `#`. Python ignores comments when the code runs.\n\nExample:\n\n```python\n# This line is a comment\nprint(\"Ready\")\n```\n\nOnly `Ready` appears in the output panel.\n\nBeginners also see syntax mistakes sometimes. A syntax mistake means Python cannot understand the code as written.\n\nFor example, this is incorrect because the closing quote is missing:\n\n```python\nprint(\"Hello)\n```\n\nThis version is correct:\n\n```python\nprint(\"Hello\")\n```\n\nRead the flow carefully: - The opening quote starts the string\n- The closing quote ends the string\n- The closing parenthesis finishes the `print(...)` statement"
+            "title": "Edit, run again, and compare",
+            "bodyMarkdown": "Programming is iterative: you rarely write a program once and never touch it again.\n\nA useful loop is:\n\n```text\nrun → observe → edit → run again → compare\n```\n\nSuppose the program is:\n\n```python\nprint(\"Status\")\nprint(\"Version 1\")\n```\n\nand the new requirement is:\n\n```text\nStatus\nVersion 2\n```\n\nThe first line already does the right thing. A focused edit changes only the second line:\n\n```python\nprint(\"Status\")\nprint(\"Version 2\")\n```\n\nThen run the program again and compare the new output with the requirement.\n\nThis habit matters:\n\n- preserve code that already works\n- change the smallest relevant part\n- run again\n- use the result as feedback\n\nThat same loop scales from tiny exercises to larger projects.\n"
           }
         }
       }
