@@ -2,12 +2,15 @@ import {
     isLatestReviewNavigationGeneration,
     isReviewRouteTransitionReady,
     publishReviewNavigationImmediately,
+    publishReviewToolBindIfCurrent,
+    reviewToolBindMatchesCurrentCard,
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
 } from "../navigation/reviewRouteTransition";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
 import {useRouter} from "@student/i18n/navigation";
+import {publishNavigation} from "@student/compat/navigation-runtime";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
 import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
@@ -182,6 +185,22 @@ function sameReviewResolvedRouteTarget(
             right.kind !== "exercise" ||
             left.exerciseStateKey === right.exerciseStateKey)
     );
+}
+
+function reviewRouteTargetIdentity(
+    target: ReviewResolvedRouteTarget | null | undefined,
+) {
+    if (!target) return null;
+
+    return [
+        target.kind,
+        target.sectionSlug,
+        target.topicId,
+        target.cardId,
+        target.targetKind,
+        target.targetSlug,
+        target.kind === "exercise" ? target.exerciseStateKey : "",
+    ].join("::");
 }
 
 function buildReviewRouteHistoryState(
@@ -853,12 +872,20 @@ export function useReviewModuleController({
         });
 
         if (currentPath !== normalizedPath) {
-            window.history.replaceState(nextHistoryState, "", normalizedPath);
+            publishNavigation(normalizedPath, {
+                replace: true,
+                state: nextHistoryState,
+                scroll: false,
+            });
             return;
         }
 
         if (readReviewRouteHistoryTargetKey() !== targetKey) {
-            window.history.replaceState(nextHistoryState, "", normalizedPath);
+            publishNavigation(normalizedPath, {
+                replace: true,
+                state: nextHistoryState,
+                scroll: false,
+            });
         }
     }, [
         buildRoutePathForCurrentSurface,
@@ -934,16 +961,16 @@ export function useReviewModuleController({
                     firstUnlockedRouteTarget,
                 );
 
-                window.history.replaceState(
-                    buildReviewRouteHistoryState(window.history.state, {
+                publishNavigation(fallbackHref, {
+                    replace: true,
+                    state: buildReviewRouteHistoryState(window.history.state, {
                         href: fallbackHref,
                         targetKey: fallbackTargetKey,
                         subjectSlug,
                         moduleSlug,
                     }),
-                    "",
-                    fallbackHref,
-                );
+                    scroll: false,
+                });
                 showProgressiveLockMessage();
             }
 
@@ -1288,9 +1315,16 @@ export function useReviewModuleController({
                             });
 
                             if (mode === "replace") {
-                                window.history.replaceState(nextHistoryState, "", href);
+                                publishNavigation(href, {
+                                    replace: true,
+                                    state: nextHistoryState,
+                                    scroll: false,
+                                });
                             } else {
-                                window.history.pushState(nextHistoryState, "", href);
+                                publishNavigation(href, {
+                                    state: nextHistoryState,
+                                    scroll: false,
+                                });
                             }
                         }
                     },
@@ -1339,7 +1373,11 @@ export function useReviewModuleController({
                 moduleSlug,
             });
 
-            window.history.replaceState(nextHistoryState, "", href);
+            publishNavigation(href, {
+                replace: true,
+                state: nextHistoryState,
+                scroll: false,
+            });
         };
 
         window.addEventListener("pagehide", syncVisibleRouteToAddressBar);
@@ -2276,6 +2314,19 @@ export function useReviewModuleController({
             const activeRouteTarget = routeTargetRef.current;
             const inputId = typeof args.id === "string" ? args.id.trim() : "";
 
+            if (!reviewToolBindMatchesCurrentCard({
+                bindOwnerCardId: ownerCardId,
+                routeCardId: activeRouteTarget?.cardId,
+                activeCardId: activeCard?.id,
+            })) {
+                return false;
+            }
+
+            const acceptedBindOwner = {
+                navigationGeneration: navigationGenerationRef.current,
+                routeIdentity: reviewRouteTargetIdentity(activeRouteTarget),
+            };
+
             const activeRouteOwnsThisExercise =
                 activeRouteTarget?.kind === "exercise" &&
                 activeRouteTarget.cardId === ownerCardId &&
@@ -2301,7 +2352,7 @@ export function useReviewModuleController({
                 exerciseId: routeExerciseId,
                 subjectSlug,
                 moduleSlug,
-                sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
+                sectionSlug: activeRouteTarget?.sectionSlug ?? sectionSlug,
             });
 
             /**
@@ -2315,15 +2366,6 @@ export function useReviewModuleController({
              * Only let tool binds influence routing when they belong to the card
              * and exercise that currently own the route target.
              */
-            if (
-                activeRouteTarget?.cardId &&
-                ownerCardId &&
-                activeRouteTarget.cardId !== ownerCardId &&
-                activeCard?.id !== ownerCardId
-            ) {
-                return false;
-            }
-
             const currentExerciseStateKey =
                 activeRouteTarget?.kind === "exercise"
                     ? activeRouteTarget.exerciseStateKey
@@ -2341,15 +2383,21 @@ export function useReviewModuleController({
                 return false;
             }
 
-            await tool.bindCodeInput(args as any);
-
-            if (!routeAlreadyActive) {
-                void navigateToResolvedTarget(nextTarget, "push", {
-                    bypassProgressiveLock: true,
-                });
-            }
-
-            return true;
+            return publishReviewToolBindIfCurrent({
+                acceptedOwner: acceptedBindOwner,
+                getCurrentOwner: () => ({
+                    navigationGeneration: navigationGenerationRef.current,
+                    routeIdentity: reviewRouteTargetIdentity(routeTargetRef.current),
+                }),
+                bind: () => tool.bindCodeInput(args as any),
+                publish: () => {
+                    if (!routeAlreadyActive) {
+                        void navigateToResolvedTarget(nextTarget, "push", {
+                            bypassProgressiveLock: true,
+                        });
+                    }
+                },
+            });
         },
         [
             tool.bindCodeInput,

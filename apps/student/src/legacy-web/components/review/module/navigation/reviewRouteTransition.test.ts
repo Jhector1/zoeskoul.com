@@ -8,12 +8,38 @@ import {
     isLatestReviewNavigationGeneration,
     isReviewRouteTransitionReady,
     publishReviewNavigationImmediately,
+    publishReviewToolBindIfCurrent,
+    reviewToolBindMatchesCurrentCard,
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
     shouldStartReviewRouteTransition,
 } from "./reviewRouteTransition";
 
 describe("review navigation publication", () => {
+    it("accepts an embedded exercise bind owned by the mounted card when the route has no card target", () => {
+        expect(reviewToolBindMatchesCurrentCard({
+            bindOwnerCardId: "sketch1",
+            routeCardId: null,
+            activeCardId: "sketch1",
+        })).toBe(true);
+    });
+
+    it("rejects a stale bind owned by neither the route nor the mounted card", () => {
+        expect(reviewToolBindMatchesCurrentCard({
+            bindOwnerCardId: "sketch0",
+            routeCardId: "sketch1",
+            activeCardId: "sketch1",
+        })).toBe(false);
+    });
+
+    it("keeps the resolved route authoritative while the mounted card is lagging", () => {
+        expect(reviewToolBindMatchesCurrentCard({
+            bindOwnerCardId: "sketch0",
+            routeCardId: "sketch1",
+            activeCardId: "sketch0",
+        })).toBe(false);
+    });
+
     it("publishes the destination prompt before a never-resolving progress PUT", () => {
         const neverResolvingSave = new Promise<void>(() => undefined);
         const queued: string[] = [];
@@ -33,6 +59,103 @@ describe("review navigation publication", () => {
         expect(didPublish).toBe(true);
         expect(queued).toEqual(["exercise:left"]);
         expect(published).toEqual(["exercise:next"]);
+    });
+
+    it("keeps B published when an A tool bind finishes late", async () => {
+        let releaseBind!: () => void;
+        const heldBind = new Promise<void>((resolve) => {
+            releaseBind = resolve;
+        });
+        let owner = { navigationGeneration: 0, routeIdentity: "A" };
+        let href = "/review/A";
+
+        const staleBind = publishReviewToolBindIfCurrent({
+            acceptedOwner: owner,
+            getCurrentOwner: () => owner,
+            bind: () => heldBind,
+            publish: () => {
+                owner = { navigationGeneration: 1, routeIdentity: "A/exercise" };
+                href = "/review/A/exercise";
+            },
+        });
+
+        owner = { navigationGeneration: 1, routeIdentity: "B" };
+        href = "/review/B";
+        expect(href).toBe("/review/B");
+
+        releaseBind();
+        await expect(staleBind).resolves.toBe(false);
+        expect(owner).toEqual({ navigationGeneration: 1, routeIdentity: "B" });
+        expect(href).toBe("/review/B");
+    });
+
+    it("keeps C published when stale A and B binds resolve after rapid navigation", async () => {
+        const releases: Array<() => void> = [];
+        const heldBind = () => new Promise<void>((resolve) => releases.push(resolve));
+        let owner = { navigationGeneration: 0, routeIdentity: "A" };
+        let href = "/review/A";
+        const startBind = (routeIdentity: string) =>
+            publishReviewToolBindIfCurrent({
+                acceptedOwner: { ...owner, routeIdentity },
+                getCurrentOwner: () => owner,
+                bind: heldBind,
+                publish: () => {
+                    href = `/review/${routeIdentity}/exercise`;
+                },
+            });
+
+        const bindA = startBind("A");
+        owner = { navigationGeneration: 1, routeIdentity: "B" };
+        href = "/review/B";
+        const bindB = startBind("B");
+        owner = { navigationGeneration: 2, routeIdentity: "C" };
+        href = "/review/C";
+
+        releases.forEach((release) => release());
+        await expect(Promise.all([bindA, bindB])).resolves.toEqual([false, false]);
+        expect(href).toBe("/review/C");
+    });
+
+    it("allows Previous as the latest explicit navigation", () => {
+        let href = "/review/B";
+        const didPublish = publishReviewNavigationImmediately({
+            navigationGeneration: 2,
+            latestNavigationGeneration: 2,
+            snapshot: "B",
+            enqueueSnapshot: () => undefined,
+            publish: () => {
+                href = "/review/A";
+            },
+        });
+
+        expect(didPublish).toBe(true);
+        expect(href).toBe("/review/A");
+    });
+
+    it("does not let a late progress save alter the published destination", async () => {
+        let finishSave!: () => void;
+        const heldSave = new Promise<void>((resolve) => {
+            finishSave = resolve;
+        });
+        let queuedSave = Promise.resolve();
+        let href = "/review/A";
+
+        publishReviewNavigationImmediately({
+            navigationGeneration: 1,
+            latestNavigationGeneration: 1,
+            snapshot: "A-progress",
+            enqueueSnapshot: () => {
+                queuedSave = heldSave;
+            },
+            publish: () => {
+                href = "/review/B";
+            },
+        });
+
+        expect(href).toBe("/review/B");
+        finishSave();
+        await queuedSave;
+        expect(href).toBe("/review/B");
     });
 
     it("rejects an older rapid-navigation generation", () => {
