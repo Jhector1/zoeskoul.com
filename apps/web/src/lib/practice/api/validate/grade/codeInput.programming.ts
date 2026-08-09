@@ -872,14 +872,34 @@ function checkSourceContains(source: string, pattern: unknown, normalizeWhitespa
     return commentFree.includes(needle);
 }
 
+function compileSourceRegex(pattern: string): RegExp | null {
+    let source = pattern;
+    const flags = new Set<string>(["m"]);
+
+    // Curriculum source checks are authored with Python-style leading inline
+    // flags such as (?s), (?m), or (?im). JavaScript RegExp does not accept
+    // that syntax when flags are also passed separately, so translate the
+    // supported flags into the RegExp constructor before compiling.
+    const inlineFlags = /^\(\?([ims]+)\)/.exec(source);
+    if (inlineFlags) {
+        source = source.slice(inlineFlags[0].length);
+        for (const flag of inlineFlags[1]) {
+            flags.add(flag);
+        }
+    }
+
+    try {
+        return new RegExp(source, Array.from(flags).join(""));
+    } catch {
+        return null;
+    }
+}
+
 function checkSourceRegex(source: string, pattern: unknown): boolean {
     if (typeof pattern !== "string" || !pattern) return false;
 
-    try {
-        return new RegExp(pattern, "m").test(stripPythonComments(source));
-    } catch {
-        return false;
-    }
+    const regex = compileSourceRegex(pattern);
+    return regex ? regex.test(stripPythonComments(source)) : false;
 }
 
 function checkOrderedPatterns(args: {
@@ -910,14 +930,12 @@ function checkOrderedPatterns(args: {
             continue;
         }
 
-        try {
-            const regex = new RegExp(item, "m");
-            const match = regex.exec(sourceText.slice(cursor));
-            if (!match) return false;
-            cursor += (match.index ?? 0) + match[0].length;
-        } catch {
-            return false;
-        }
+        const regex = compileSourceRegex(item);
+        if (!regex) return false;
+
+        const match = regex.exec(sourceText.slice(cursor));
+        if (!match) return false;
+        cursor += (match.index ?? 0) + match[0].length;
     }
 
     return true;
