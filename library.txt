@@ -282,7 +282,7 @@ cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
 
 pnpm dlx dotenv-cli \
   -e /Users/admin/Documents/NextJSProject/zoeskoul.com/apps/web/.env.development.local \
-  -- pnpm --filter @zoeskoul/web dev
+  -- pnpm --filter @zoeskoul/web build
 
 
   cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
