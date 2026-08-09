@@ -197,9 +197,7 @@
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4",
-          "t5"
+          "t3"
         ]
       }
     },
@@ -221,9 +219,7 @@
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4",
-          "t5"
+          "t3"
         ]
       }
     },
@@ -259,26 +255,26 @@
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "\n",
-            "stdout": "empty\n",
+            "stdout": "False\n",
             "match": "exact"
           },
           {
             "stdin": "hello\n",
-            "stdout": "not empty\n",
+            "stdout": "True\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "text = input()\nif text:\n    print(\"not empty\")\nelse:\n    print(\"empty\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\nif text:\n    print(\"not empty\")\nelse:\n    print(\"empty\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -287,37 +283,15 @@
         "sourceChecks": [
           {
             "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
             "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bnot\\b",
-            "message": "Use not to reverse the condition in this exercise."
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\btext\\b",
-            "message": "Use the variable name `text` in your solution."
+            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*text\\s*\\)\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.1.message"
           }
         ]
       },
@@ -334,7 +308,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\nif text:\n    print(\"not empty\")\nelse:\n    print(\"empty\")",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -356,7 +330,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\nif text:\n    print(\"not empty\")\nelse:\n    print(\"empty\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -366,37 +340,15 @@
       "sourceChecks": [
         {
           "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
           "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bnot\\b",
-          "message": "Use not to reverse the condition in this exercise."
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\btext\\b",
-          "message": "Use the variable name `text` in your solution."
+          "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*text\\s*\\)\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.1.message"
         }
       ]
     },
@@ -408,31 +360,31 @@
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "0\n",
-            "stdout": "falsy number\n",
+            "stdout": "False\n",
             "match": "exact"
           },
           {
             "stdin": "8\n",
-            "stdout": "truthy number\n",
+            "stdout": "True\n",
             "match": "exact"
           },
           {
             "stdin": "-2\n",
-            "stdout": "truthy number\n",
+            "stdout": "True\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "number = int(input())\nif number:\n    print(\"truthy number\")\nelse:\n    print(\"falsy number\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "number = int(input())\nif number:\n    print(\"truthy number\")\nelse:\n    print(\"falsy number\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -441,38 +393,15 @@
         "sourceChecks": [
           {
             "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
             "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bnumber\\b",
-            "message": "Use the variable name `number` in your solution."
+            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*number\\s*\\)\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.1.message"
           }
         ]
       },
@@ -489,7 +418,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "number = int(input())\nif number:\n    print(\"truthy number\")\nelse:\n    print(\"falsy number\")",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -511,7 +440,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "number = int(input())\nif number:\n    print(\"truthy number\")\nelse:\n    print(\"falsy number\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -521,38 +450,15 @@
       "sourceChecks": [
         {
           "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
           "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bnumber\\b",
-          "message": "Use the variable name `number` in your solution."
+          "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*number\\s*\\)\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.1.message"
         }
       ]
     },
@@ -564,26 +470,15 @@
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "None\n",
-            "stdout": "missing\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "apple\n",
-            "stdout": "present\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "value = input()\nif value == \"None\":\n    print(\"missing\")\nelse:\n    print(\"present\")",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "value = input()\nif value == \"None\":\n    print(\"missing\")\nelse:\n    print(\"present\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -591,33 +486,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bvalue\\b",
-            "message": "Use the variable name `value` in your solution."
+            "pattern": "(?s)^\\s*value\\s*=\\s*None\\s*\\n\\s*print\\s*\\(\\s*bool\\s*\\(\\s*value\\s*\\)\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
           }
         ]
       },
@@ -634,7 +512,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "value = input()\nif value == \"None\":\n    print(\"missing\")\nelse:\n    print(\"present\")",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -656,7 +534,111 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "value = input()\nif value == \"None\":\n    print(\"missing\")\nelse:\n    print(\"present\")",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*value\\s*=\\s*None\\s*\\n\\s*print\\s*\\(\\s*bool\\s*\\(\\s*value\\s*\\)\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-points-message",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-4\n",
+            "stdout": "True\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*points\\s*\\)\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -666,32 +648,125 @@
       "sourceChecks": [
         {
           "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
+          "pattern": "int(",
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bvalue\\b",
-          "message": "Use the variable name `value` in your solution."
+          "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*points\\s*\\)\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "code-two-inputs-both-present",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\nworld\n",
+            "stdout": "True\nTrue\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\nworld\n",
+            "stdout": "False\nTrue\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "hello\n\n",
+            "stdout": "True\nFalse\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?s)print\\s*\\(\\s*bool\\s*\\(\\s*first\\s*\\)\\s*\\).*print\\s*\\(\\s*bool\\s*\\(\\s*second\\s*\\)\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)print\\s*\\(\\s*bool\\s*\\(\\s*first\\s*\\)\\s*\\).*print\\s*\\(\\s*bool\\s*\\(\\s*second\\s*\\)\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.1.message"
         }
       ]
     }

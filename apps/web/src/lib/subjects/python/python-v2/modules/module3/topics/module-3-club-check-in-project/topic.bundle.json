@@ -141,11 +141,20 @@
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
-        "language": "python",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "3\n2\n1\nOpen\n",
+            "stdin": "Ava\nMia\nZoe\n",
+            "stdout": "Checked in: Ava\nChecked in: Mia\nChecked in: Zoe\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\nNoah\nIris\n",
+            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "VIP-Ava\nMia\nKai\n",
+            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: Kai\n",
             "match": "exact"
           }
         ],
@@ -161,10 +170,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "range(3, 0, -1)",
+            "type": "source_regex",
+            "pattern": "(?s)for\\s+_\\s+in\\s+range\\s*\\(\\s*3\\s*\\)\\s*:.*name\\s*=\\s*input\\s*\\(\\s*\\).*Checked in:",
             "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.sourceChecks.0.message",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -179,10 +188,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "range(3, 0, -1)",
+          "type": "source_regex",
+          "pattern": "(?s)for\\s+_\\s+in\\s+range\\s*\\(\\s*3\\s*\\)\\s*:.*name\\s*=\\s*input\\s*\\(\\s*\\).*Checked in:",
           "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.sourceChecks.0.message",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -230,16 +239,20 @@
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
-        "language": "python",
         "tests": [
           {
             "stdin": "Ava\nMia\nZoe\n",
-            "stdout": "Checked in: Ava\nChecked in: Mia\nChecked in: Zoe\n",
+            "stdout": "Checked in: Ava\nChecked in: Mia\nChecked in: Zoe\nTotal check-ins: 3\n",
             "match": "exact"
           },
           {
-            "stdin": "Leo\nNoah\nIris\n",
-            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\n",
+            "stdin": "VIP-Ava\nMia\nKai\n",
+            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: Kai\nTotal check-ins: 3\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "A\nB\nC\n",
+            "stdout": "Checked in: A\nChecked in: B\nChecked in: C\nTotal check-ins: 3\n",
             "match": "exact"
           }
         ],
@@ -255,10 +268,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "range(3)",
+            "type": "source_regex",
+            "pattern": "(?s)total\\s*=\\s*0.*for\\s+_\\s+in\\s+range\\s*\\(\\s*3\\s*\\)\\s*:.*(?:total\\s*\\+=\\s*1|total\\s*=\\s*total\\s*\\+\\s*1).*Total check-ins:",
             "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.sourceChecks.0.message",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -273,10 +286,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "range(3)",
+          "type": "source_regex",
+          "pattern": "(?s)total\\s*=\\s*0.*for\\s+_\\s+in\\s+range\\s*\\(\\s*3\\s*\\)\\s*:.*(?:total\\s*\\+=\\s*1|total\\s*=\\s*total\\s*\\+\\s*1).*Total check-ins:",
           "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.sourceChecks.0.message",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -324,16 +337,20 @@
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
-        "language": "python",
         "tests": [
           {
             "stdin": "VIP-Ava\nMia\nVIP-Zoe\n",
-            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: VIP-Zoe\nVIP check-ins: 2\n",
+            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: VIP-Zoe\nTotal check-ins: 3\nVIP check-ins: 2\n",
             "match": "exact"
           },
           {
             "stdin": "Leo\nNoah\nIris\n",
-            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\nVIP check-ins: 0\n",
+            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\nTotal check-ins: 3\nVIP check-ins: 0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "VIP-A\nVIP-B\nVIP-C\n",
+            "stdout": "Checked in: VIP-A\nChecked in: VIP-B\nChecked in: VIP-C\nTotal check-ins: 3\nVIP check-ins: 3\n",
             "match": "exact"
           }
         ],
@@ -349,10 +366,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "vip_count += 1",
+            "type": "source_regex",
+            "pattern": "(?s)vip_count\\s*=\\s*0.*startswith\\s*\\(\\s*[\"\\']VIP-[\"\\']\\s*\\).*(?:vip_count\\s*\\+=\\s*1|vip_count\\s*=\\s*vip_count\\s*\\+\\s*1).*VIP check-ins:",
             "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.sourceChecks.0.message",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -367,10 +384,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "vip_count += 1",
+          "type": "source_regex",
+          "pattern": "(?s)vip_count\\s*=\\s*0.*startswith\\s*\\(\\s*[\"\\']VIP-[\"\\']\\s*\\).*(?:vip_count\\s*\\+=\\s*1|vip_count\\s*=\\s*vip_count\\s*\\+\\s*1).*VIP check-ins:",
           "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.sourceChecks.0.message",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -418,16 +435,20 @@
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
-        "language": "python",
         "tests": [
           {
-            "stdin": "Ava\nMia\ndone\n",
-            "stdout": "Checked in: Ava\nChecked in: Mia\nTotal check-ins: 2\n",
+            "stdin": "Ava\nVIP-Mia\ndone\n",
+            "stdout": "Checked in: Ava\nChecked in: VIP-Mia\nTotal check-ins: 2\nVIP check-ins: 1\n",
             "match": "exact"
           },
           {
             "stdin": "done\n",
-            "stdout": "Total check-ins: 0\n",
+            "stdout": "Total check-ins: 0\nVIP check-ins: 0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "VIP-A\nVIP-B\nKai\ndone\n",
+            "stdout": "Checked in: VIP-A\nChecked in: VIP-B\nChecked in: Kai\nTotal check-ins: 3\nVIP check-ins: 2\n",
             "match": "exact"
           }
         ],
@@ -444,14 +465,9 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bwhile\\s+True\\s*:",
-            "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "break",
-            "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.1.message",
-            "normalizeWhitespace": true
+            "pattern": "(?s)while\\s+True\\s*:.*name\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+name\\s*==\\s*[\"\\']done[\"\\']\\s*:.*break.*Total check-ins:.*VIP check-ins:",
+            "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -467,14 +483,9 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bwhile\\s+True\\s*:",
-          "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message"
-        },
-        {
-          "type": "source_contains",
-          "pattern": "break",
-          "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.1.message",
-          "normalizeWhitespace": true
+          "pattern": "(?s)while\\s+True\\s*:.*name\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+name\\s*==\\s*[\"\\']done[\"\\']\\s*:.*break.*Total check-ins:.*VIP check-ins:",
+          "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -522,7 +533,6 @@
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
-        "language": "python",
         "tests": [
           {
             "stdin": "VIP-Ava\n\nMia\nVIP-Zoe\ndone\n",
@@ -532,6 +542,11 @@
           {
             "stdin": "\ndone\n",
             "stdout": "Total check-ins: 0\nVIP check-ins: 0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\nVIP-A\n\nKai\ndone\n",
+            "stdout": "Checked in: VIP-A\nChecked in: Kai\nTotal check-ins: 2\nVIP check-ins: 1\n",
             "match": "exact"
           }
         ],
@@ -547,16 +562,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "continue",
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+name\\s*==\\s*[\"\\']done[\"\\']\\s*:.*break.*if\\s+name\\s*==\\s*[\"\\']{2}\\s*:.*continue.*(?:total\\s*\\+=\\s*1|total\\s*=\\s*total\\s*\\+\\s*1).*VIP check-ins:",
             "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "break",
-            "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.1.message",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -571,16 +580,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "continue",
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+name\\s*==\\s*[\"\\']done[\"\\']\\s*:.*break.*if\\s+name\\s*==\\s*[\"\\']{2}\\s*:.*continue.*(?:total\\s*\\+=\\s*1|total\\s*=\\s*total\\s*\\+\\s*1).*VIP check-ins:",
           "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.0.message",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "break",
-          "message": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.1.message",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": false
         }
       ]
     }

@@ -4,7 +4,7 @@
       "python-v2-1": {
         "input-and-type-conversion": {
           "label": "Input and Type Conversion",
-          "summary": "Use input(), int(), float(), and str() to read user-entered values and turn them into the types your program needs.",
+          "summary": "Read user input as text, convert numeric text with `int()` or `float()`, and use `str()` when a number must become part of a text message.",
           "cards": {
             "sketch0": {
               "title": "What input() gives you"
@@ -21,13 +21,13 @@
           },
           "quiz": {
             "sc_input_type": {
-              "title": "What type comes from input()?",
+              "title": "Recognize the type returned by input()",
               "prompt": "If a user types `25` into `input()`, what type does Python return before any conversion?",
-              "hint": "Translate the question into a Python rule before selecting an answer.",
+              "hint": "`input()` does not inspect the characters and guess a numeric type.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
-                "hint_1": "Evaluate each option against the exact condition, value, or output described in the question.",
-                "hint_2": "Check names, punctuation, and execution order rather than relying on wording that merely sounds familiar."
+                "concept": "`input()` returns a string before any explicit conversion.",
+                "hint_1": "The characters may look like digits while still being text.",
+                "hint_2": "A later `int()` or `float()` call is what creates a numeric value."
               },
               "options": {
                 "a": "int",
@@ -39,11 +39,11 @@
             "sc_best_conversion_decimal": {
               "title": "Choose the right conversion",
               "prompt": "A program asks for a temperature like `21.5`. Which conversion should you use on the result of `input()`?",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "hint": "A value such as `21.5` needs a numeric type that can keep the decimal part.",
               "help": {
-                "concept": "Connect the prompt to the Python rule introduced in this lesson, then trace how that rule affects the program state.",
-                "hint_1": "Work through the expression or control flow before selecting the option that matches Python’s behavior.",
-                "hint_2": "Evaluate each option against the exact condition, value, or output described in the question."
+                "concept": "`float()` converts numeric text that may contain a decimal point.",
+                "hint_1": "`int()` is for whole-number conversion.",
+                "hint_2": "Choose the conversion that preserves `.5`."
               },
               "options": {
                 "a": "bool()",
@@ -55,11 +55,11 @@
             "mc_valid_number_conversions": {
               "title": "Conversions that make numbers",
               "prompt": "Which lines can correctly turn user input into a number? Choose all that apply.",
-              "hint": "Look for conversions that produce numeric values from the text returned by input().",
+              "hint": "Select only the lines whose final stored value is numeric.",
               "help": {
-                "concept": "Since `input()` returns a string, numeric programs often wrap it with `int()` or `float()` to create numbers.",
-                "hint_1": "Two common built-in conversions are used for whole numbers and decimal numbers.",
-                "hint_2": "Pick the lines that call `input()` and then wrap that result in a numeric conversion, not the one that keeps it as text."
+                "concept": "`int(input(...))` creates an integer and `float(input(...))` creates a floating-point number.",
+                "hint_1": "`str(...)` produces text, not a number.",
+                "hint_2": "`print(...)` displays a value; it is not a numeric conversion."
               },
               "options": {
                 "a": "age = int(input(\"Age: \"))",
@@ -71,11 +71,11 @@
             "mc_true_statements_conversion": {
               "title": "True statements about conversion",
               "prompt": "Which statements are true? Choose all that apply.",
-              "hint": "Think about what input() returns and when str() is useful.",
+              "hint": "Check the direction of each conversion: text to number or value to text.",
               "help": {
-                "concept": "This question checks three linked ideas: `input()` returns strings, `int()` converts text digits to integers, and `str()` helps combine numbers with text.",
-                "hint_1": "One true statement is about `input()`, and another is about joining a number into a message.",
-                "hint_2": "Reject any statement claiming that `input()` automatically gives an integer or that `str()` is only for user input."
+                "concept": "Conversion is explicit: `input()` returns text, `int()` can create an integer, and `str()` can create text.",
+                "hint_1": "Typing digits does not make `input()` return an integer automatically.",
+                "hint_2": "`str()` is useful when a number must participate in string concatenation."
               },
               "options": {
                 "a": "input() returns a string",
@@ -87,11 +87,11 @@
             "dr_steps_add_one": {
               "title": "Order the steps for adding 1 to user input",
               "prompt": "Put these steps in the correct order to read an age and print the age plus 1.",
-              "hint": "The program must read text first, then convert, then do math, then print.",
+              "hint": "Read first, convert second, calculate third, then display the result.",
               "help": {
-                "concept": "A beginner input program usually follows a sequence: get text from `input()`, convert it, use the converted value, then display the result.",
-                "hint_1": "You cannot safely add `1` before converting the typed text into a number.",
-                "hint_2": "Start with reading the value, then make it numeric, then calculate, then show the result."
+                "concept": "Each step prepares the value for the next operation.",
+                "hint_1": "Arithmetic needs the converted number, not the original input string.",
+                "hint_2": "Printing belongs after the calculation."
               },
               "tokens": {
                 "t1": "Read the value with input()",
@@ -103,11 +103,11 @@
             "dr_build_message_number": {
               "title": "Order the steps for a text message with a number",
               "prompt": "Arrange the steps to create and print the message `You have 5 stars` using a number variable.",
-              "hint": "The number must exist before it can be converted into text and joined into a message.",
+              "hint": "The numeric value must become text before it can join the surrounding text pieces.",
               "help": {
-                "concept": "When combining numbers and strings with `+`, create the number first, convert it with `str()`, then build the full message and print it.",
-                "hint_1": "The conversion with `str()` happens before the final string is complete.",
-                "hint_2": "Start by storing the numeric value, then turn it into text, then join the pieces, then print."
+                "concept": "`str()` bridges a numeric value into a string-building expression.",
+                "hint_1": "Store the number before converting it.",
+                "hint_2": "Join the text only after the number has a string form."
               },
               "tokens": {
                 "t1": "Store 5 in a variable",
@@ -118,12 +118,12 @@
             },
             "fb_int_conversion": {
               "title": "Fill the conversion built-in tool",
-              "prompt": "Complete the code so the input becomes a whole number.",
-              "hint": "Look at the blank, then choose the word or symbol that makes the idea correct.",
+              "prompt": "Choose the built-in function for the blank so the typed value becomes a whole number.\n\n```python\nage = ___(input())\n```",
+              "hint": "The target type is an integer.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "`int()` converts compatible numeric text into a whole number.",
+                "hint_1": "The result of `input()` begins as text.",
+                "hint_2": "Choose the conversion that produces an integer."
               },
               "template": "age = [blank1](input(\"Age: \"))",
               "choices": [
@@ -135,12 +135,12 @@
             },
             "fb_str_message": {
               "title": "Fill the missing conversion",
-              "prompt": "Complete the code so the number can be joined with text.",
-              "hint": "Look at the blank, then choose the word or symbol that makes the idea correct.",
+              "prompt": "Choose the built-in function for the blank so the number can join the surrounding text.\n\n```python\ncount = 5\nmessage = \"You have \" + ___(count) + \" stars\"\n```",
+              "hint": "The concatenation needs every piece to be text.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "`str()` converts the number into text for string concatenation.",
+                "hint_1": "`count` begins as an integer.",
+                "hint_2": "Convert it in the number-to-text direction."
               },
               "template": "message = \"Score: \" + [blank1](score)",
               "choices": [
@@ -151,59 +151,107 @@
               ]
             },
             "code_echo_name": {
-              "title": "Read and print a name",
-              "prompt": "Build a small Python program that reads one line of input as a name and prints `Hello, NAME!` using the entered name.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "title": "Read and echo text",
+              "prompt": "Read one line of input into a variable named `name`, then print `name` unchanged.\n\nThe output should be exactly whatever text the user entered.",
+              "hint": "Store the result of `input()` in `name`, then print the variable.",
               "help": {
-                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
-                "hint_1": "Use the named file and expected behavior as a checklist; test one focused change before adding another.",
-                "hint_2": "Evaluate each option against the exact condition, value, or output described in the question."
+                "concept": "`input()` already returns text, so a name does not need numeric conversion.",
+                "hint_1": "Use one `input()` call.",
+                "hint_2": "Print `name` rather than hard-coding an example name."
               },
-              "starterCode": "# Read a name and print a greeting\n# TODO: use input() and print()"
+              "starterCode": "# Read one line into name\n# Print name unchanged\n",
+              "solutionCode": "name = input()\nprint(name)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the value with input() instead of hard-coding it."
+                },
+                "1": {
+                  "message": "Store the input in the variable name and print that variable."
+                }
+              }
             },
             "code_add_two_ages": {
               "title": "Add two whole numbers from input",
-              "prompt": "Complete the program so it reads two whole numbers, one per line, converts them with `int()`, and prints their sum.",
-              "hint": "Read the task \"Add two whole numbers from input\" and identify the required result.",
+              "prompt": "Read two whole numbers, one per input line. Convert both values with `int()`, then print their sum.",
+              "hint": "Each input begins as text, so convert both before adding them.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add two whole numbers from input\".",
-                "hint_1": "Use the named values and operations to generate the requested result.",
-                "hint_2": "Run once with the supplied input and check punctuation, spacing, and order."
+                "concept": "Arithmetic should use the integer values produced by `int()`, not the original input strings.",
+                "hint_1": "Call `input()` twice because there are two input lines.",
+                "hint_2": "Convert both values before using `+` for numeric addition."
               },
-              "starterCode": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print"
+              "starterCode": "# Read two whole numbers\n# Convert both with int()\n# Print their sum\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nprint(first + second)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read two values with input()."
+                },
+                "1": {
+                  "message": "Convert the numeric text with int() before adding."
+                }
+              }
             },
             "code_double_price": {
-              "title": "Double a decimal number",
-              "prompt": "Build a small Python program that reads one decimal number, converts it with `float()`, and prints the value multiplied by 2.",
-              "hint": "Read the task \"Double a decimal number\" and identify the required result.",
+              "title": "Double a decimal input",
+              "prompt": "Read one decimal number, convert it with `float()`, and print the value multiplied by `2`.",
+              "hint": "Use `float()` because the input may contain a decimal point.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Double a decimal number\".",
-                "hint_1": "Complete the starter so the output follows the prompt exactly.",
-                "hint_2": "Run the code and compare each printed line with the expected result."
+                "concept": "`float()` converts decimal numeric text into a value that can participate in arithmetic.",
+                "hint_1": "Read the value with `input()`.",
+                "hint_2": "Multiply the converted number, not the original string."
               },
-              "starterCode": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print"
+              "starterCode": "# Read a decimal value\n# Convert with float()\n# Print double the number\n",
+              "solutionCode": "value = float(input())\nprint(value * 2)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the value with input()."
+                },
+                "1": {
+                  "message": "Convert the decimal input with float() before multiplying."
+                }
+              }
             },
             "code_age_next_year": {
-              "title": "Print next year's age",
-              "prompt": "Create a focused solution that reads a person's age as a whole number and prints `Next year: X` where `X` is the age plus 1.",
-              "hint": "Convert the typed age to an integer before adding 1.",
+              "title": "Build a next-year age message",
+              "prompt": "Read one whole-number age and print `Next year: X`, where `X` is the entered age plus `1`.\n\nUse `int()` for the numeric work and `str()` when you place the result inside the text message.",
+              "hint": "Convert first, add 1 as arithmetic, then convert the result to text for the message.",
               "help": {
-                "concept": "This combines input, integer conversion, arithmetic, and readable output in one short program.",
-                "hint_1": "Store the converted age in a variable, then calculate one more than that value.",
-                "hint_2": "Build the printed message so the label text comes first, followed by the updated number."
+                "concept": "This practice combines both conversion directions: text to integer for arithmetic, then number to string for output construction.",
+                "hint_1": "Store `int(input())` in an age variable.",
+                "hint_2": "Join `str(age + 1)` after the label `Next year: `."
               },
-              "starterCode": "# Read an age and print next year's age\n# TODO: complete the program"
+              "starterCode": "# Read a whole-number age\n# Print: Next year: X\n",
+              "solutionCode": "age = int(input())\nprint(\"Next year: \" + str(age + 1))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the age with input() and convert it with int()."
+                },
+                "1": {
+                  "message": "Use str() to place the calculated next-year age into the message."
+                }
+              }
             },
             "code_profile_line": {
-              "title": "Build a simple profile line",
-              "prompt": "In `main.py`, write code that reads a name on the first line and an age on the second line. Convert the age to an integer, then print `NAME is AGE years old`.",
-              "hint": "Read the task \"Build a simple profile line\" and identify the required result.",
+              "title": "Put a number inside a text message",
+              "prompt": "The starter already reads a name and a whole-number age. Finish the program so it prints exactly:\n\n`NAME is AGE years old`\n\nUse `str(age)` when you join the numeric age with the surrounding text.",
+              "hint": "Convert `age` back to text only where the output string needs it.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Build a simple profile line\".",
-                "hint_1": "Implement the smallest program that produces the required behavior.",
-                "hint_2": "Execute the starter after your edit and inspect both values and line order."
+                "concept": "`age` should stay numeric after `int()`, then `str(age)` can provide a text version for concatenation.",
+                "hint_1": "Keep the two input lines already provided.",
+                "hint_2": "Build the final string from `name`, literal text, and `str(age)`."
               },
-              "starterCode": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence"
+              "starterCode": "name = input()\nage = int(input())\n# Build and print: NAME is AGE years old\n",
+              "solutionCode": "name = input()\nage = int(input())\nprint(name + \" is \" + str(age) + \" years old\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the name and age from input rather than hard-coding them."
+                },
+                "1": {
+                  "message": "Keep the age numeric with int() after reading it."
+                },
+                "2": {
+                  "message": "Use str(age) when joining the age into the text message."
+                }
+              }
             }
           }
         }
@@ -215,16 +263,16 @@
       "python-v2-1": {
         "input-and-type-conversion": {
           "sketch_input_returns_text": {
-            "title": "What input() gives you",
-            "bodyMarkdown": "When you use `input()`, Python waits for the user to type something and press Enter. The important beginner idea is this: **`input()` gives you a string**.\n\nThat means even if the user types `42`, Python first treats it as text, not as a number.\n\n```python\nname = input(\"Enter your name: \")\nprint(name)\n```\n\nTrace the example: - `input(\"Enter your name: \")` shows a prompt.\n- The user types something.\n- That typed value is stored in `name` as text.\n- `print(name)` shows it in the output panel.\n\nWorked example:\n- If the user types `Maya`, then `name` becomes `\"Maya\"`.\n- The program prints `Maya`.\n\nWhy this matters: if you want to do math with user input, you usually need to convert it first."
+            "title": "input() always gives you text",
+            "bodyMarkdown": "`input()` pauses the program and reads what the user types. The value it returns is always a string.\n\n```python\nname = input()\nprint(name)\n```\n\nIf the user types:\n\n```text\nMaya\n```\n\nthen `name` stores the string `\"Maya\"`.\n\nThe same rule applies when the characters look numeric. If the user types `42`, `input()` still returns the string `\"42\"`.\n\nThat distinction matters because text and numbers behave differently. Reading input is the first step; converting it is a separate step when your program needs numeric behavior.\n"
           },
           "sketch_convert_numbers": {
-            "title": "Turning input into numbers with int() and float()",
-            "bodyMarkdown": "Because `input()` returns text, you must convert numeric input before doing arithmetic.\n\nUse `int()` for whole numbers and `float()` for decimal numbers.\n\n```python\nage_text = input(\"Enter your age: \")\nage = int(age_text)\nprint(age + 1)\n```\n\nRead the flow carefully: - `age_text = input(...)` reads what the user typed as a string.\n- `age = int(age_text)` converts that string to an integer.\n- `print(age + 1)` adds `1` as math, not as text.\n\nWorked example:\n- User types `12`\n- `age_text` is `\"12\"`\n- `age` is `12`\n- Output is `13`\n\nFor decimal values, use `float()`:\n\n```python\nprice = float(input(\"Enter a price: \"))\nprint(price)\n```\n\nIf the user types `3.5`, then `price` becomes the number `3.5`."
+            "title": "Convert numeric input before doing math",
+            "bodyMarkdown": "Because `input()` returns text, numeric input must be converted before you use it as a number.\n\nUse `int()` for whole numbers:\n\n```python\nage_text = input()\nage = int(age_text)\nprint(age + 1)\n```\n\nIf the user types `12`:\n\n- `age_text` is the string `\"12\"`;\n- `int(age_text)` produces the integer `12`;\n- `age + 1` produces `13`.\n\nYou can also convert directly:\n\n```python\nage = int(input())\n```\n\nUse `float()` when decimal values are allowed:\n\n```python\nprice = float(input())\nprint(price * 2)\n```\n\nIf the user types `3.5`, `price` becomes the number `3.5`.\n"
           },
           "sketch_str_and_output": {
-            "title": "Using str() to build readable output",
-            "bodyMarkdown": "Sometimes you have a number and want to combine it with text. Use `str()` to turn the number into a string.\n\n```python\ncount = 7\nmessage = \"You have \" + str(count) + \" points\"\nprint(message)\n```\n\nTrace the example: - `count` stores a number.\n- `str(count)` changes that number into text.\n- The strings join together into one message.\n- `print(message)` sends the final text to the output panel.\n\nWorked example:\n- `count` is `7`\n- `str(count)` becomes `\"7\"`\n- Output is `You have 7 points`\n\nWithout `str()`, Python cannot join a string and an integer with `+`."
+            "title": "Convert a number to text when building a message",
+            "bodyMarkdown": "Sometimes your program has a number but needs to place that number inside a larger string.\n\n```python\ncount = 7\nmessage = \"You have \" + str(count) + \" points\"\nprint(message)\n```\n\n`str(count)` converts the integer `7` into the string `\"7\"`, so all three pieces can be joined as text.\n\nWithout that conversion, this expression mixes incompatible values:\n\n```python\n\"You have \" + count\n```\n\nFor this lesson, remember the direction of each conversion:\n\n- `int(\"12\")` → number `12`\n- `float(\"3.5\")` → number `3.5`\n- `str(12)` → text `\"12\"`\n\nChoose the conversion based on what the next operation needs.\n"
           }
         }
       }

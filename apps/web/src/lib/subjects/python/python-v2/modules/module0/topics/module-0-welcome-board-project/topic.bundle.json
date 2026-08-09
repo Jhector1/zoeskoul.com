@@ -24,19 +24,7 @@
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-module-0-welcome-board-project-sketch0",
-        "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.title",
-        "promptKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.prompt",
-        "exerciseKey": "try-module-0-welcome-board-project-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "project",
@@ -51,7 +39,7 @@
           {
             "id": "mp_1",
             "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_1.title",
-            "exerciseKey": "mp-1-print-event-title",
+            "exerciseKey": "mp-1-set-event-title",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -60,7 +48,7 @@
           {
             "id": "mp_2",
             "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_2.title",
-            "exerciseKey": "mp-2-print-agenda-lines",
+            "exerciseKey": "mp-2-add-useful-comment",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -69,7 +57,7 @@
           {
             "id": "mp_3",
             "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_3.title",
-            "exerciseKey": "mp-3-show-seat-count",
+            "exerciseKey": "mp-3-add-event-time",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -78,7 +66,25 @@
           {
             "id": "mp_4",
             "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_4.title",
-            "exerciseKey": "mp-4-build-full-welcome-board",
+            "exerciseKey": "mp-4-add-seat-literal",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_5",
+            "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_5.title",
+            "exerciseKey": "mp-5-calculate-helper-count",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_6",
+            "titleKey": "topics.python-v2.python-v2-0.module-0-welcome-board-project.projectSteps.mp_6.title",
+            "exerciseKey": "mp-6-add-final-message",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -98,18 +104,18 @@
   ],
   "exercises": [
     {
-      "id": "try-module-0-welcome-board-project-sketch0",
+      "id": "mp-1-set-event-title",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0",
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +124,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -131,28 +137,22 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Welcome to Python Club\")\n",
+            "content": "print(\"Code Club Open House\")",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Welcome to Python Club\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Welcome to Python Club\")\n",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Welcome to Python Club\")\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -160,17 +160,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the welcome line.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Welcome to Python Club\")\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -178,26 +184,26 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the welcome line.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "mp-1-print-event-title",
+      "id": "mp-2-add-useful-comment",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title",
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -206,11 +212,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -219,28 +225,22 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\n",
+            "content": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Code Club Open House\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Code Club Open House\")\n",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -248,17 +248,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) for the title line.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -266,26 +272,26 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) for the title line.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "mp-2-print-agenda-lines",
+      "id": "mp-3-add-event-time",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines",
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -294,11 +300,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -307,28 +313,22 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n",
+            "content": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Code Club Open House\nDoors open at 4 PM\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -336,17 +336,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) for each board line.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -354,26 +360,26 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) for each board line.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "mp-3-show-seat-count",
+      "id": "mp-4-add-seat-literal",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count",
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -382,11 +388,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -395,28 +401,22 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n",
+            "content": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Code Club Open House\nDoors open at 4 PM\nHelpers ready: 6\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -424,23 +424,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the updated board.",
-            "normalizeWhitespace": true
-          },
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
           {
-            "type": "source_contains",
-            "pattern": "2 * 3",
-            "message": "Calculate the helper count with 2 * 3.",
-            "normalizeWhitespace": true
+            "type": "printed_line_count",
+            "min": 4
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -448,32 +448,26 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the updated board.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "2 * 3",
-          "message": "Calculate the helper count with 2 * 3.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "mp-4-build-full-welcome-board",
+      "id": "mp-5-calculate-helper-count",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board",
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -482,11 +476,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -495,28 +489,22 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\nprint(\"Bring your questions!\")\n",
+            "content": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Code Club Open House\nDoors open at 4 PM\nHelpers ready: 6\nBring your questions!\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\nprint(\"Bring your questions!\")\n",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\nprint(\"Bring your questions!\")\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -524,23 +512,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) for each board line.",
-            "normalizeWhitespace": true
-          },
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
           {
-            "type": "source_contains",
-            "pattern": "2 * 3",
-            "message": "Keep the helper count calculated with 2 * 3.",
-            "normalizeWhitespace": true
+            "type": "printed_line_count",
+            "min": 6
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\nprint(\"Bring your questions!\")\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -548,16 +536,98 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) for each board line.",
-          "normalizeWhitespace": true
-        },
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "mp-6-add-final-message",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
+      "starterFiles": [
         {
-          "type": "source_contains",
-          "pattern": "2 * 3",
-          "message": "Keep the helper count calculated with 2 * 3.",
-          "normalizeWhitespace": true
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)\nprint(\"Bring your questions!\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Bring your questions![\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 7
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Bring your questions![\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

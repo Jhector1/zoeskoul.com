@@ -18,9 +18,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-running-python-code-sketch0",
-        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.title",
-        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.prompt",
-        "exerciseKey": "ci_print_greeting",
+        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.title",
+        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.prompt",
+        "exerciseKey": "ci_run_first_edit",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -37,9 +37,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-running-python-code-sketch1",
-        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.title",
-        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.prompt",
-        "exerciseKey": "ci_two_lines",
+        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.title",
+        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.prompt",
+        "exerciseKey": "ci_top_to_bottom_order",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -56,9 +56,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-running-python-code-sketch2",
-        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.title",
-        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.prompt",
-        "exerciseKey": "ci_comment_and_output",
+        "titleKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.title",
+        "promptKey": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.prompt",
+        "exerciseKey": "ci_edit_rerun_preserve",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -122,11 +122,11 @@
       }
     },
     {
-      "id": "sc_print_purpose",
+      "id": "sc_source_vs_output",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.sc_print_purpose",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.sc_source_vs_output",
       "optionIds": [
         "a",
         "b",
@@ -139,30 +139,11 @@
       }
     },
     {
-      "id": "mc_valid_print_lines",
+      "id": "mc_run_cycle_facts",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.mc_valid_print_lines",
-      "optionIds": [
-        "a",
-        "b",
-        "c"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "mc_comments_behavior",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.mc_comments_behavior",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.mc_run_cycle_facts",
       "optionIds": [
         "a",
         "b",
@@ -173,7 +154,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "c"
         ]
       }
     },
@@ -205,63 +186,47 @@
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.dr_program_flow",
       "tokenIds": [
         "t1",
-        "t2"
+        "t2",
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2"
+          "t2",
+          "t3"
         ]
       }
     },
     {
-      "id": "fb_comment_symbol",
+      "id": "fb_after_edit_output",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.fb_comment_symbol",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.fb_after_edit_output",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "#"
+        "value": "Ready"
       }
     },
     {
-      "id": "fb_print_output_word",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.fb_print_output_word",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Start"
-      }
-    },
-    {
-      "id": "ci_print_greeting",
+      "id": "ci_run_first_edit",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Hello, ZoeSkoul!\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"Hello, ZoeSkoul!\")",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Hello, ZoeSkoul!\")",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -269,10 +234,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?m)^\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
           }
         ]
       },
@@ -280,7 +251,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -289,7 +260,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Hello, ZoeSkoul!\")",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -298,11 +269,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -311,7 +282,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Hello, ZoeSkoul!\")",
+            "content": "print(\"Ready\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -320,36 +291,30 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?m)^\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "ci_two_lines",
+      "id": "ci_top_to_bottom_order",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "First\nSecond\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(\"First\")\nprint(\"Second\")",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"First\")\nprint(\"Second\")",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -357,10 +322,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']First[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Second[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Third[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 3
           }
         ]
       },
@@ -368,7 +339,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -377,7 +348,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(\"First\")\nprint(\"Second\")",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -386,11 +357,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -399,7 +370,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(\"First\")\nprint(\"Second\")",
+            "content": "print(\"First\")\nprint(\"Second\")\nprint(\"Third\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -408,36 +379,30 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']First[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Second[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Third[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "ci_comment_and_output",
+      "id": "ci_edit_rerun_preserve",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Ready\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "# This is a comment\nprint(\"Ready\")",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "# This is a comment\nprint(\"Ready\")",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -445,10 +410,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Status[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Version 2[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
           }
         ]
       },
@@ -456,7 +427,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -465,7 +436,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "# This is a comment\nprint(\"Ready\")",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -474,11 +445,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -487,7 +458,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "# This is a comment\nprint(\"Ready\")",
+            "content": "print(\"Status\")\nprint(\"Version 2\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -496,10 +467,362 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Status[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Version 2[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci_practice_insert_middle_line",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Start[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Middle[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']End[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 3
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Start\")\nprint(\"Middle\")\nprint(\"End\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Start[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Middle[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']End[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci_practice_reorder_output",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']North[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']East[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']South[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']West[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 4
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"North\")\nprint(\"East\")\nprint(\"South\")\nprint(\"West\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']North[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']East[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']South[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']West[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci_practice_change_middle",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Red[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Gold[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Green[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 3
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Red\")\nprint(\"Gold\")\nprint(\"Green\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Red[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Gold[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Green[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci_practice_extend_program",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Step 1[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 2[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 3[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 4[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 4
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Step 1\")\nprint(\"Step 2\")\nprint(\"Step 3\")\nprint(\"Step 4\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Step 1[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 2[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 3[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 4[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }
