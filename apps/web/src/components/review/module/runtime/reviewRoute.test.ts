@@ -89,6 +89,66 @@ describe("resolveReviewRouteTarget", () => {
         ],
     } as any;
 
+    it("resolves an embedded try-it exercise to its owning lesson card", () => {
+        const topic = {
+            id: "running-python-code",
+            label: "Running Python Code",
+            cards: [{
+                type: "sketch",
+                id: "sketch1",
+                sketchId: "sketch_print_and_strings",
+                tryIt: {
+                    id: "try-top-to-bottom",
+                    exerciseKey: "ci_top_to_bottom_order",
+                },
+            }],
+        };
+        const embeddedModule = {
+            id: "python-v2-0",
+            title: "Getting Started with Python",
+            topics: [topic],
+            sections: [{
+                id: "setup-and-first-programs",
+                slug: "python-v2-python-v2-0-setup-and-first-programs",
+                title: "Setup and First Programs",
+                order: 1,
+                topics: [topic],
+            }],
+        } as any;
+
+        const resolved = resolveReviewRouteTarget({
+            mod: embeddedModule,
+            subjectSlug: "python-v2",
+            moduleSlug: "python-v2-0",
+            route: {
+                sectionSlug: "python-v2-python-v2-0-setup-and-first-programs",
+                topicSlug: "running-python-code",
+                targetKind: "exercise",
+                targetSlug: "ci-top-to-bottom-order",
+            },
+        });
+
+        expect(resolved).toMatchObject({
+            kind: "exercise",
+            cardId: "sketch1",
+            exerciseId: "ci_top_to_bottom_order",
+            targetSlug: "ci-top-to-bottom-order",
+        });
+
+        expect(buildReviewExerciseRouteTarget({
+            mod: embeddedModule,
+            topicId: "running-python-code",
+            cardId: "sketch1",
+            exerciseId: "ci-top-to-bottom-order",
+            subjectSlug: "python-v2",
+            moduleSlug: "python-v2-0",
+        })).toMatchObject({
+            cardId: "sketch1",
+            exerciseId: "ci_top_to_bottom_order",
+            targetSlug: "ci-top-to-bottom-order",
+        });
+    });
+
     it("returns null for an explicit broken exercise route instead of falling back", () => {
         const resolved = resolveReviewRouteTarget({
             mod,

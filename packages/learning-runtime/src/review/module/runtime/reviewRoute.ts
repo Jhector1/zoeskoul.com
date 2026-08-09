@@ -203,6 +203,41 @@ function getProjectExerciseEntries(
     }).filter((entry) => entry.exerciseId);
 }
 
+function getEmbeddedTryItExerciseEntries(card: ReviewCard) {
+    if (card.type !== "text" && card.type !== "sketch") return [];
+
+    const tryIt = card.tryIt;
+    if (!tryIt) return [];
+
+    const entries: Array<{ exerciseId: string; routeSlug: string }> = [];
+    const seen = new Set<string>();
+    const add = (exerciseIdValue: unknown, routeIdValue?: unknown) => {
+        const exerciseId =
+            typeof exerciseIdValue === "string" ? exerciseIdValue.trim() : "";
+        if (!exerciseId || seen.has(exerciseId)) return;
+
+        seen.add(exerciseId);
+        entries.push({
+            exerciseId,
+            routeSlug: cleanSegment(
+                typeof routeIdValue === "string" && routeIdValue.trim()
+                    ? routeIdValue
+                    : exerciseId,
+                "exercise",
+            ),
+        });
+    };
+
+    add(tryIt.exerciseKey);
+
+    const steps = Array.isArray(tryIt.spec?.steps) ? tryIt.spec.steps : [];
+    for (const step of steps) {
+        add(step?.exerciseKey, step?.id);
+    }
+
+    return entries;
+}
+
 export function buildDefaultReviewRouteTarget(mod: ReviewModule): ReviewResolvedRouteTarget | null {
     const topicMap = getTopicLookup(mod);
 
@@ -282,6 +317,34 @@ export function resolveReviewRouteTarget(args: {
             typeof lookup.topic.meta === "object" &&
             "rawManifest" in lookup.topic.meta,
         );
+
+        for (const card of cards) {
+            for (const entry of getEmbeddedTryItExerciseEntries(card)) {
+                if (entry.routeSlug !== targetSlug) continue;
+
+                return {
+                    kind: "exercise" as const,
+                    sectionSlug,
+                    topicId,
+                    topicSlug: getTopicRouteSlug(topicId),
+                    cardId: card.id,
+                    cardType: card.type,
+                    targetKind: "exercise" as const,
+                    targetSlug,
+                    exerciseId: entry.exerciseId,
+                    exerciseStateKey: getExerciseStateKey(
+                        {
+                            subjectSlug,
+                            moduleSlug,
+                            sectionSlug,
+                            topicId,
+                            cardId: card.id,
+                        },
+                        entry.exerciseId,
+                    ),
+                };
+            }
+        }
 
         for (const card of cards) {
             if (card.type !== "project") continue;
@@ -499,6 +562,13 @@ export function buildReviewExerciseRouteTarget(args: {
     const rawExerciseId = typeof args.exerciseId === "string" ? args.exerciseId.trim() : "";
     const exerciseToken = lastIdSegment(rawExerciseId);
     const projectCard = card?.type === "project" ? card : null;
+    const matchedEmbeddedTryIt = card
+        ? getEmbeddedTryItExerciseEntries(card).find((entry) =>
+            entry.exerciseId === rawExerciseId ||
+            entry.exerciseId === exerciseToken ||
+            entry.routeSlug === cleanSegment(exerciseToken, "exercise"),
+        ) ?? null
+        : null;
     const matchedStep = projectCard
         ? getProjectExerciseEntries(projectCard, topicManifest, {
             strictManifestExerciseMatch: hasExplicitRawManifest,
@@ -515,7 +585,11 @@ export function buildReviewExerciseRouteTarget(args: {
     const matchedLegacyAlias = matchedStep?.routeAliases?.some(
         (alias) => cleanSegment(alias, "exercise") === cleanSegment(exerciseToken, "exercise"),
     ) ?? false;
-    const canonicalExerciseId = matchedStep?.exerciseId ?? exerciseToken ?? rawExerciseId;
+    const canonicalExerciseId =
+        matchedStep?.exerciseId ??
+        matchedEmbeddedTryIt?.exerciseId ??
+        exerciseToken ??
+        rawExerciseId;
     const routeExerciseId =
         matchedStep && matchedLegacyAlias
             ? exerciseToken || rawExerciseId
@@ -523,6 +597,8 @@ export function buildReviewExerciseRouteTarget(args: {
     const routeSlug =
         matchedStep && !matchedLegacyAlias
             ? matchedStep.routeSlug
+            : matchedEmbeddedTryIt
+                ? matchedEmbeddedTryIt.routeSlug
             : cleanSegment(exerciseToken || rawExerciseId, "exercise");
 
     return {

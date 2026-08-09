@@ -44,6 +44,46 @@ export function publishReviewNavigationImmediately<TSnapshot>(args: {
     return true;
 }
 
+export type ReviewToolBindOwner = {
+    navigationGeneration: number;
+    routeIdentity: string | null;
+};
+
+export function reviewToolBindMatchesCurrentCard(args: {
+    bindOwnerCardId: string;
+    routeCardId: string | null | undefined;
+    activeCardId: string | null | undefined;
+}) {
+    if (!args.bindOwnerCardId) return false;
+
+    if (args.routeCardId) {
+        return args.routeCardId === args.bindOwnerCardId;
+    }
+
+    return args.activeCardId === args.bindOwnerCardId;
+}
+
+export async function publishReviewToolBindIfCurrent(args: {
+    acceptedOwner: ReviewToolBindOwner;
+    getCurrentOwner: () => ReviewToolBindOwner;
+    bind: () => Promise<void>;
+    publish: () => void;
+}) {
+    await args.bind();
+
+    const currentOwner = args.getCurrentOwner();
+    if (
+        currentOwner.navigationGeneration !==
+            args.acceptedOwner.navigationGeneration ||
+        currentOwner.routeIdentity !== args.acceptedOwner.routeIdentity
+    ) {
+        return false;
+    }
+
+    args.publish();
+    return true;
+}
+
 export function isReviewRouteTransitionReady(
     state: ReviewRouteTransitionReadiness,
 ) {

@@ -27,6 +27,29 @@ export function emitNavigation() {
   window.dispatchEvent(new Event(NAVIGATION_EVENT));
 }
 
+export function publishNavigation(
+  href: string,
+  options: {
+    replace?: boolean;
+    state?: unknown;
+    scroll?: boolean;
+  } = {},
+) {
+  const state = options.state ?? {};
+
+  if (options.replace) {
+    window.history.replaceState(state, "", href);
+  } else {
+    window.history.pushState(state, "", href);
+  }
+
+  emitNavigation();
+
+  if (options.scroll !== false) {
+    window.scrollTo({ top: 0, left: 0 });
+  }
+}
+
 export function navigate(
   href: string,
   options: {
@@ -50,17 +73,7 @@ export function navigate(
 
   const next = `${target.pathname}${target.search}${target.hash}`;
 
-  if (options.replace) {
-    window.history.replaceState({}, "", next);
-  } else {
-    window.history.pushState({}, "", next);
-  }
-
-  emitNavigation();
-
-  if (options.scroll !== false) {
-    window.scrollTo({ top: 0, left: 0 });
-  }
+  publishNavigation(next, options);
 }
 
 export function currentLocale() {
