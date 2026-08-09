@@ -248,50 +248,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "7\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "count = 7\nprint(count)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "count = 7\nprint(count)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "count = 7\nprint(count)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -313,19 +275,57 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "count = 7\nprint(count)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*count\\s*=\\s*7\\s*\\n\\s*print\\(\\s*count\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*count\\s*=\\s*7\\s*\\n\\s*print\\(\\s*count\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -336,55 +336,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Mila\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "name = \"Mila\"\nprint(name)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "name = \"Mila\"\nprint(name)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bname\\b",
-            "message": "Use the variable name `name` in your solution."
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "name = \"Mila\"\nprint(name)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -406,24 +363,57 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = \"Mila\"\nprint(name)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*name\\s*=\\s*[\\\"']Mila[\\\"']\\s*\\n\\s*print\\(\\s*name\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bname\\b",
-          "message": "Use the variable name `name` in your solution."
+          "pattern": "(?s)^\\s*name\\s*=\\s*[\\\"']Mila[\\\"']\\s*\\n\\s*print\\(\\s*name\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -434,55 +424,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "green\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "favorite_color = \"green\"\nprint(favorite_color)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "favorite_color = \"green\"\nprint(favorite_color)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfavorite_color\\b",
-            "message": "Use the variable name `favorite_color` in your solution."
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "favorite_color = \"green\"\nprint(favorite_color)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -504,24 +451,145 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "favorite_color = \"green\"\nprint(favorite_color)",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*favorite_color\\s*=\\s*[\\\"']green[\\\"']\\s*\\n\\s*print\\(\\s*favorite_color\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*favorite_color\\s*=\\s*[\\\"']green[\\\"']\\s*\\n\\s*print\\(\\s*favorite_color\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-accidental-string-number",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*age\\s*=\\s*12\\s*\\n\\s*print\\(\\s*age\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bfavorite_color\\b",
-          "message": "Use the variable name `favorite_color` in your solution."
+          "pattern": "(?s)^\\s*age\\s*=\\s*12\\s*\\n\\s*print\\(\\s*age\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

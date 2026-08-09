@@ -4,7 +4,7 @@
       "python-v2-3": {
         "for-loops-over-text": {
           "label": "For Loops Over Text",
-          "summary": "Loop through a string one character at a time.",
+          "summary": "Use a `for` loop to visit a string one character at a time, work with the current loop variable, and select or transform characters directly.",
           "cards": {
             "sketch0": {
               "title": "A string can be looped through character by character"
@@ -23,11 +23,11 @@
             "sc-1": {
               "title": "What does the loop visit?",
               "prompt": "In Python, what does `for ch in \"dog\":` loop over?",
-              "hint": "Think about what a string is made of.",
+              "hint": "A string supplies one character to the loop variable at a time.",
               "help": {
-                "concept": "A string is a sequence of characters, so a `for` loop over a string takes one character at a time in order.",
-                "hint_1": "The loop does not take the whole word at once.",
-                "hint_2": "For `\"dog\"`, the loop variable becomes `\"d\"`, then `\"o\"`, then `\"g\"`."
+                "concept": "Iterating directly over a string visits its characters from left to right.",
+                "hint_1": "For `\"dog\"`, the values are `\"d\"`, then `\"o\"`, then `\"g\"`.",
+                "hint_2": "The loop variable does not hold the entire string at once."
               },
               "options": {
                 "a": "Each character in the string",
@@ -39,11 +39,11 @@
             "sc-2": {
               "title": "What prints?",
               "prompt": "What is printed by this code?\n\n```python\nfor ch in \"hi\":\n    print(ch)\n```",
-              "hint": "Check what `print(ch)` does on each loop.",
+              "hint": "The loop runs once for `h` and once for `i`.",
               "help": {
-                "concept": "The loop runs once for each character, and `print` outputs the current character on its own line each time.",
-                "hint_1": "The first loop uses `h`, and the second loop uses `i`.",
-                "hint_2": "There are two lines of output, one for each character in order."
+                "concept": "`print(ch)` prints the current character during each repetition.",
+                "hint_1": "Each `print` call ends its own output line.",
+                "hint_2": "The characters keep their original order."
               },
               "options": {
                 "a": "hi",
@@ -54,12 +54,12 @@
             },
             "mc-1": {
               "title": "Valid loop variable names",
-              "prompt": "Choose all variable names that could correctly be used in this loop: `for ___ in \"sun\":`",
-              "hint": "Identify the concept being tested, then compare every option with that concept.",
+              "prompt": "Which names could validly replace the blank in `for ___ in \"sun\":`? Choose all that apply.",
+              "hint": "Use the normal Python rules for variable names.",
               "help": {
-                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
+                "concept": "A loop variable uses the same naming rules as any other Python variable.",
+                "hint_1": "A name cannot start with a digit.",
+                "hint_2": "A variable name cannot contain a space."
               },
               "options": {
                 "a": "ch",
@@ -69,61 +69,60 @@
               }
             },
             "mc-2": {
-              "title": "What can you do inside the loop?",
-              "prompt": "Choose all actions that make sense when looping over a string one character at a time.",
-              "hint": "Think about tasks done once for each character.",
+              "title": "Work with the current character",
+              "prompt": "Which actions can sensibly use the current character while looping over text? Choose all that apply.",
+              "hint": "The loop variable represents one character during each repetition.",
               "help": {
-                "concept": "A loop over text is useful for processing each character, such as printing, counting matches, or checking conditions.",
-                "hint_1": "If the loop variable holds one character, you can compare it to a letter.",
-                "hint_2": "You can also update a counter or print the current character during each loop."
+                "concept": "Inside the loop, you can print, compare, or transform the current character.",
+                "hint_1": "A character can be compared with another string value.",
+                "hint_2": "String methods such as `.upper()` can be called on the current character."
               },
               "options": {
-                "a": "Print each character",
-                "b": "Count how many times a letter appears",
-                "c": "Compare the current character to \"a\"",
-                "d": "Install a package before the loop runs"
+                "a": "Print the current character",
+                "b": "Check whether the current character equals `\"a\"`",
+                "c": "Print the uppercase version of the current character",
+                "d": "Treat the current character as the entire original string"
               }
             },
             "dr-1": {
               "title": "Build a simple text loop",
-              "prompt": "Put the code lines in the correct order to print each character in `cat`.",
-              "hint": "Arrange the pieces in the order Python uses them.",
+              "prompt": "Arrange the lines to make valid Python that prints each character in `\"cat\"`.",
+              "hint": "Assign the string first, then use an indented loop body.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The `for` header follows the string assignment, and the body is indented beneath the header.",
+                "hint_1": "Start with `word = \"cat\"`.",
+                "hint_2": "Keep `print(ch)` inside the loop."
               },
               "tokens": {
-                "t1": "for ch in word:",
-                "t2": "print(ch)",
-                "t3": "word = \"cat\""
+                "t1": "word = \"cat\"",
+                "t2": "for ch in word:",
+                "t3": "    print(ch)"
               }
             },
             "dr-2": {
-              "title": "Order the counting steps",
-              "prompt": "Arrange these lines to count how many `a` characters are in `banana`.",
-              "hint": "Arrange the pieces in the order Python uses them.",
+              "title": "Build a vowel-selection loop",
+              "prompt": "Arrange the lines to print only the vowels from `\"boat\"`.",
+              "hint": "The `if` belongs inside the loop, and its print belongs inside the `if`.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "Nested indentation shows that the condition is checked once for each character.",
+                "hint_1": "Loop through `text` before checking the current `ch`.",
+                "hint_2": "The print line needs one more indentation level than the `if` line."
               },
               "tokens": {
-                "t1": "if ch == \"a\":",
-                "t2": "count = count + 1",
-                "t3": "for ch in text:",
-                "t4": "count = 0",
-                "t5": "text = \"banana\""
+                "t1": "text = \"boat\"",
+                "t2": "for ch in text:",
+                "t3": "    if ch in \"aeiou\":",
+                "t4": "        print(ch)"
               }
             },
             "fb-1": {
               "title": "Complete the loop variable",
               "prompt": "Fill in the missing part so the loop prints each character in the string.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "hint": "The same variable name must appear in the loop header and `print` call.",
               "help": {
-                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
-                "hint_1": "Think about what the missing part needs to do in the statement.",
-                "hint_2": "Choose the term that best completes the meaning of the statement."
+                "concept": "The loop variable receives each character and can be used in the body.",
+                "hint_1": "The body already uses `ch`.",
+                "hint_2": "Choose `ch` for the blank."
               },
               "template": "for [blank1] in \"code\":\n    print(ch)",
               "choices": [
@@ -134,76 +133,106 @@
               ]
             },
             "fb-2": {
-              "title": "Complete the condition",
-              "prompt": "Fill in the missing value so the code counts `e` characters.",
-              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "title": "Complete a vowel condition",
+              "prompt": "Fill in the missing value so the condition is true for lowercase vowels.",
+              "hint": "Use one string that contains all five lowercase vowels.",
               "help": {
-                "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Think about what the missing part needs to do in the statement.",
-                "hint_2": "Choose the term that best completes the meaning of the statement."
+                "concept": "The `in` operator can test whether the current character appears inside a string of allowed characters.",
+                "hint_1": "The condition should accept `a`, `e`, `i`, `o`, and `u`.",
+                "hint_2": "Choose `\"aeiou\"`."
               },
-              "template": "if ch == [blank1]:\n    count = count + 1",
               "choices": [
+                "\"aeiou\"",
                 "\"a\"",
-                "\"e\"",
-                "e",
-                "count"
-              ]
+                "\"bcdfg\"",
+                "ch"
+              ],
+              "template": "if ch in [blank1]:\n    print(ch)"
             },
             "code-1": {
-              "title": "Print each character on its own line",
-              "prompt": "Use Python to reads one line of text from input and prints each character on its own line in the same order.",
-              "hint": "Read the task \"Print each character on its own line\" and identify the required result.",
+              "title": "Print each character",
+              "prompt": "Read one line of text and use a `for` loop to print each character on its own line in the same order.",
+              "hint": "Loop directly over `text`; no `range()` is needed.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print each character on its own line\".",
-                "hint_1": "Translate the output contract into the necessary Python statements.",
-                "hint_2": "Use the output panel to verify the exact behavior before submitting."
+                "concept": "Direct string iteration gives the loop variable one character at a time.",
+                "hint_1": "Use `for ch in text:`.",
+                "hint_2": "Print `ch` inside the loop."
               },
-              "starterCode": "text = input()\n\n# TODO: loop through text and print each character on its own line"
+              "starterCode": "text = input()\n# Print each character on its own line\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop directly over `text` with `for ch in text:` and print `ch`."
+                }
+              }
             },
             "code-2": {
-              "title": "Count the letter a",
-              "prompt": "Complete the program so it reads one line of text and prints how many times the character `a` appears.",
-              "hint": "Read the coding task and identify what the program should print.",
+              "title": "Print each character in uppercase",
+              "prompt": "Read one line of text. Loop over its characters and print the uppercase version of each character on its own line.",
+              "hint": "Call `.upper()` on the current loop variable.",
               "help": {
-                "concept": "The grader checks the resulting behavior, not merely the presence of a familiar line.",
-                "hint_1": "Use the Python statement or expression that matches the required output.",
-                "hint_2": "Run once with the supplied input and check punctuation, spacing, and order."
+                "concept": "The loop variable can be transformed independently during each repetition.",
+                "hint_1": "Use `for ch in text:`.",
+                "hint_2": "Print `ch.upper()`."
               },
-              "starterCode": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)"
+              "starterCode": "text = input()\n# Print each character in uppercase\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    print(ch.upper())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop over `text` and call `.upper()` on the current character."
+                }
+              }
             },
             "code-3": {
-              "title": "Print only vowels",
-              "prompt": "Use Python to reads one line of text and prints only the vowels (`a`, `e`, `i`, `o`, `u`) from that text, one per line, in order.",
-              "hint": "Read the task \"Print only vowels\" and identify the required result.",
+              "title": "Print only lowercase vowels",
+              "prompt": "Read one line of text and print only its lowercase vowels (`a`, `e`, `i`, `o`, `u`), one per line, in their original order.",
+              "hint": "Inside the loop, test whether `ch` is in `\"aeiou\"`.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print only vowels\".",
-                "hint_1": "Complete the starter so the output follows the prompt exactly.",
-                "hint_2": "Run once with the supplied input and check punctuation, spacing, and order."
+                "concept": "The loop visits every character; the condition selects which ones produce output.",
+                "hint_1": "Use `for ch in text:`.",
+                "hint_2": "Inside it, use `if ch in \"aeiou\":`."
               },
-              "starterCode": "text = input()\n\n# TODO: print only vowels, one per line"
+              "starterCode": "text = input()\n# Print only lowercase vowels\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    if ch in \"aeiou\":\n        print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop over `text` and use `if ch in \"aeiou\":` before printing."
+                }
+              }
             },
             "code-4": {
-              "title": "Count uppercase letters",
-              "prompt": "Use Python to reads one line of text and prints the number of uppercase letters. Count a character if it is equal to its uppercase version and is different from its lowercase version.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "title": "Print uppercase letters only",
+              "prompt": "Read one line of text and print only its uppercase alphabetic characters, one per line, in order.",
+              "hint": "An uppercase letter is equal to its uppercase form and different from its lowercase form.",
               "help": {
-                "concept": "This task verifies the program behavior described in the prompt.",
-                "hint_1": "Run the starter once, compare its behavior with the prompt, and make the smallest change that satisfies every requirement.",
-                "hint_2": "Trace the code or rule in the prompt, then reject choices that conflict with Python syntax or runtime behavior."
+                "concept": "You can classify the current character without keeping a running count.",
+                "hint_1": "Compare `ch` with both `ch.upper()` and `ch.lower()`.",
+                "hint_2": "Print `ch` only when both uppercase-letter checks are true."
               },
-              "starterCode": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)"
+              "starterCode": "text = input()\n# Print uppercase letters only\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop over `text` and classify each current character with `.upper()` and `.lower()` comparisons."
+                }
+              }
             },
             "code-5": {
-              "title": "Build text without spaces",
-              "prompt": "In `main.py`, write code that reads one line of text and prints the same text without spaces. Keep all other characters in the same order.",
-              "hint": "Use the code behavior described in the question to eliminate incompatible choices.",
+              "title": "Print non-space characters",
+              "prompt": "Read one line of text and print every character except a space, one per line, preserving the original order.",
+              "hint": "Print the character only when `ch != \" \"`.",
               "help": {
-                "concept": "The task is complete when the program consistently produces the requested result.",
-                "hint_1": "Read the starter from top to bottom, identify the missing responsibility, and verify the result after your edit.",
-                "hint_2": "Trace the code or rule in the prompt, then reject choices that conflict with Python syntax or runtime behavior."
+                "concept": "Filtering can print selected characters directly without building a result string.",
+                "hint_1": "Loop over every character in `text`.",
+                "hint_2": "Use `if ch != \" \":` before printing."
               },
-              "starterCode": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)"
+              "starterCode": "text = input()\n# Print every non-space character\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    if ch != \" \":\n        print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop over `text` and print `ch` only when it is not a space."
+                }
+              }
             }
           }
         }
@@ -215,16 +244,16 @@
       "python-v2-3": {
         "for-loops-over-text": {
           "sketch-1": {
-            "title": "A string can be looped through character by character",
-            "bodyMarkdown": "A `for` loop can visit each character in a string from left to right. This is useful when you want to inspect text, count letters, or build a new result.\n\n```python\nword = \"cat\"\nfor ch in word:\n    print(ch)\n```\n\nOutput:\n\n```python\nc\na\nt\n```\n\nTrace the example: - `word` stores the text `\"cat\"`.\n- `for ch in word:` means: take one character at a time from the string.\n- On the first loop, `ch` is `\"c\"`.\n- On the second loop, `ch` is `\"a\"`.\n- On the third loop, `ch` is `\"t\"`.\n- `print(ch)` shows the current character in the output panel.\n\nWorked example:\n\n```python\nname = \"Mia\"\nfor letter in name:\n    print(\"Letter:\", letter)\n```\n\nThis prints each letter on its own line with a label."
+            "title": "Visit each character from left to right",
+            "bodyMarkdown": "A string is a sequence of characters, so a `for` loop can visit those characters directly.\n\n```python\nword = \"cat\"\n\nfor ch in word:\n    print(ch)\n```\n\nThe output is:\n\n```text\nc\na\nt\n```\n\nPython does not need an index or `range()` here. The string itself supplies the loop values.\n\nThe loop runs once for each character, in order from left to right.\n"
           },
           "sketch-2": {
-            "title": "The loop variable changes each time",
-            "bodyMarkdown": "In a `for` loop over text, the loop variable holds the current character. You can name it anything helpful, such as `ch`, `letter`, or `char`.\n\n```python\ntext = \"hi!\"\nfor char in text:\n    print(char)\n```\n\nRead the flow carefully: - `text = \"hi!\"` stores a string.\n- `for char in text:` starts a loop over that string.\n- `print(char)` prints the current character each time the loop runs.\n\nThe variable `char` is not the whole string. It is just one character during each loop.\n\nWorked example:\n\n```python\ntext = \"go\"\nfor char in text:\n    print(char, \"is the current character\")\n```\n\nFirst `char` is `\"g\"`, then it becomes `\"o\"`."
+            "title": "Use the current character inside the loop",
+            "bodyMarkdown": "The loop variable holds one character at a time.\n\n```python\ntext = \"go\"\n\nfor ch in text:\n    print(ch.upper())\n```\n\nThe first repetition uses `\"g\"`, then the second uses `\"o\"`.\n\nOutput:\n\n```text\nG\nO\n```\n\nThe loop variable can be named `ch`, `letter`, `char`, or another valid variable name. What matters is that it represents the **current character** during that repetition.\n\nYou can use normal string operations on that character before printing it.\n"
           },
           "sketch-3": {
-            "title": "Use loops over text to count or filter",
-            "bodyMarkdown": "Looping over text becomes powerful when you do something with each character, such as counting vowels or printing only certain letters.\n\n```python\ntext = \"banana\"\ncount = 0\n\nfor ch in text:\n    if ch == \"a\":\n        count = count + 1\n\nprint(count)\n```\n\nTrace the example: - `count = 0` starts the counter at zero.\n- The loop checks each character in `\"banana\"`.\n- When the character is `\"a\"`, the counter increases by 1.\n- After the loop ends, `print(count)` shows the total.\n\nThe output is `3` because `banana` has three `a` characters.\n\nAnother example:\n\n```python\ntext = \"apple\"\nfor ch in text:\n    if ch != \"p\":\n        print(ch)\n```\n\nThis prints every character except `p`."
+            "title": "Select characters with a condition",
+            "bodyMarkdown": "You can combine a text loop with an `if` statement when only some characters should produce output.\n\n```python\ntext = \"banana\"\n\nfor ch in text:\n    if ch in \"aeiou\":\n        print(ch)\n```\n\nThe output is:\n\n```text\na\na\na\n```\n\nThe loop still visits every character. The condition decides whether the current character should be printed.\n\nThis is **selection**, not accumulation: the program handles each character directly instead of building a running count or result.\n\nCounting matches and building running results belong in the next lesson on accumulators and counters.\n"
           }
         }
       }

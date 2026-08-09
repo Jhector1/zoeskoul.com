@@ -104,12 +104,50 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0",
       "language": "python",
-      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Ava[\"\\']\\s*\\n\\s*print\\(\\s*name\\s*\\)\\s*$",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -131,57 +169,19 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = \"Ava\"\nprint(name)\n",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Ava\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "name = \"Ava\"\nprint(name)\n",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "name = \"Ava\"\nprint(name)\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Print the value stored in the variable.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "name = \"Ava\"\nprint(name)\n",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Print the value stored in the variable.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Ava[\"\\']\\s*\\n\\s*print\\(\\s*name\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -192,12 +192,50 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values",
       "language": "python",
-      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)student_name\\s*=\\s*[\"\\']Maya[\"\\'].*level\\s*=\\s*7.*print\\(\\s*f[\"\\']Profile for \\{student_name\\}[\"\\']\\s*\\).*print\\(\\s*f[\"\\']Level: \\{level\\}[\"\\']\\s*\\)",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -219,81 +257,19 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Profile for Maya\nLevel: 7\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "student_name",
-            "message": "Store the name in student_name.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "level",
-            "message": "Store the level in level.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Print the profile lines.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "student_name",
-          "message": "Store the name in student_name.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "level",
-          "message": "Store the level in level.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Print the profile lines.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)student_name\\s*=\\s*[\"\\']Maya[\"\\'].*level\\s*=\\s*7.*print\\(\\s*f[\"\\']Profile for \\{student_name\\}[\"\\']\\s*\\).*print\\(\\s*f[\"\\']Level: \\{level\\}[\"\\']\\s*\\)",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -304,12 +280,61 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input",
       "language": "python",
-      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\nAustin\n",
+            "stdout": "Profile for Maya\nLevel: 7\nCity: Austin\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\nDallas\n",
+            "stdout": "Profile for Leo\nLevel: 7\nCity: Dallas\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?s)Profile for.*Level:.*City:",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -331,74 +356,25 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Maya\nAustin\n",
-            "stdout": "Profile for Maya\nLevel: 7\nCity: Austin\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "Leo\nDallas\n",
-            "stdout": "Profile for Leo\nLevel: 7\nCity: Dallas\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Use input() for the typed values.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Print the labeled profile lines.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Use input() for the typed values.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.0.message"
         },
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Print the labeled profile lines.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)Profile for.*Level:.*City:",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.1.message"
         }
       ]
     },
@@ -409,12 +385,61 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name",
       "language": "python",
-      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  Maya  \n  Austin  \n",
+            "stdout": "Profile for Maya\nLevel: 7\nCity: Austin\n",
+            "match": "exact"
+          },
+          {
+            "stdin": " Leo \n Dallas \n",
+            "stdout": "Profile for Leo\nLevel: 7\nCity: Dallas\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*\\.strip\\s*\\(\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?s)Profile for.*Level:.*City:",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -436,86 +461,25 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  maya\nAustin\n",
-            "stdout": "Profile for Maya\nLevel: 7\nCity: Austin\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "  leo\nDallas\n",
-            "stdout": "Profile for Leo\nLevel: 7\nCity: Dallas\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "strip()",
-            "message": "Use .strip() to remove extra spaces.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "title()",
-            "message": "Use .title() to clean the name.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the typed values with input().",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "strip()",
-          "message": "Use .strip() to remove extra spaces.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*\\.strip\\s*\\(\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.0.message"
         },
         {
-          "type": "source_contains",
-          "pattern": "title()",
-          "message": "Use .title() to clean the name.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the typed values with input().",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)Profile for.*Level:.*City:",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.1.message"
         }
       ]
     },
@@ -526,12 +490,67 @@
       "weight": 1,
       "messageBase": "topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card",
       "language": "python",
-      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  Maya  \n12\n  Austin  \n",
+            "stdout": "Profile for Maya\nAge next year: 13\nCity: Austin\n",
+            "match": "exact"
+          },
+          {
+            "stdin": " Leo \n15\n Dallas \n",
+            "stdout": "Profile for Leo\nAge next year: 16\nCity: Dallas\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*\\.strip\\s*\\(\\s*\\)",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "age\\s*\\+\\s*1",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"\\']",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.2.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -553,108 +572,31 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "raw_name = input()\nage = int(input())\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  maya\n12\nAustin\n",
-            "stdout": "Profile for Maya\nAge next year: 13\nCity: Austin\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "  leo\n15\nDallas\n",
-            "stdout": "Profile for Leo\nAge next year: 16\nCity: Dallas\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "raw_name = input()\nage = int(input())\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "raw_name = input()\nage = int(input())\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the profile values with input().",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the age so you can add 1.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "strip()",
-            "message": "Clean the outside spaces from the name.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "title()",
-            "message": "Change the cleaned name to title case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"']",
-            "message": "Use an f-string to format the profile lines."
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "raw_name = input()\nage = int(input())\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the profile values with input().",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the age so you can add 1.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "strip()",
-          "message": "Clean the outside spaces from the name.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "title()",
-          "message": "Change the cleaned name to title case.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*\\.strip\\s*\\(\\s*\\)",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "f[\"']",
-          "message": "Use an f-string to format the profile lines."
+          "pattern": "age\\s*\\+\\s*1",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"\\']",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python--python-v2--draft.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.2.message"
         }
       ]
     }
