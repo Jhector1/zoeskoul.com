@@ -249,7 +249,7 @@
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -259,21 +259,26 @@
             "match": "exact"
           },
           {
-            "stdin": "8\n",
+            "stdin": "0\n",
             "stdout": "Child\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
+            "stdin": "12\n",
+            "stdout": "Child\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "13\n",
             "stdout": "Older\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -281,45 +286,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle case in this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bage\\b",
-            "message": "Use the variable name `age` in your solution."
+            "pattern": "(?s)if\\s+age\\s*<\\s*0\\s*:.*elif\\s+age\\s*<\\s*13\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -336,7 +306,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -358,7 +328,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -367,45 +337,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle case in this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bage\\b",
-          "message": "Use the variable name `age` in your solution."
+          "pattern": "(?s)if\\s+age\\s*<\\s*0\\s*:.*elif\\s+age\\s*<\\s*13\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -417,7 +352,7 @@
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -427,21 +362,26 @@
             "match": "exact"
           },
           {
-            "stdin": "75\n",
+            "stdin": "99\n",
             "stdout": "Pass\n",
             "match": "exact"
           },
           {
-            "stdin": "40\n",
+            "stdin": "60\n",
+            "stdout": "Pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "59\n",
             "stdout": "Fail\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -449,45 +389,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle case in this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bscore\\b",
-            "message": "Use the variable name `score` in your solution."
+            "pattern": "(?s)if\\s+score\\s*==\\s*100\\s*:.*elif\\s+score\\s*>=\\s*60\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -504,7 +409,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -526,7 +431,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -535,45 +440,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle case in this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bscore\\b",
-          "message": "Use the variable name `score` in your solution."
+          "pattern": "(?s)if\\s+score\\s*==\\s*100\\s*:.*elif\\s+score\\s*>=\\s*60\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -585,7 +455,7 @@
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -605,11 +475,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -617,39 +487,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle case in this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\btext\\b",
-            "message": "Use the variable name `text` in your solution."
+            "pattern": "(?s)if\\s+text\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+text\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -666,7 +507,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -688,7 +529,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -697,39 +538,211 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+text\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+text\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-invalid-code-first",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-1\n",
+            "stdout": "Invalid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "Start\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "4\n",
+            "stdout": "Continue\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+code\\s*<\\s*0\\s*:.*elif\\s+code\\s*==\\s*0\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
         {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
         {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle case in this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\btext\\b",
-          "message": "Use the variable name `text` in your solution."
+          "pattern": "(?s)if\\s+code\\s*<\\s*0\\s*:.*elif\\s+code\\s*==\\s*0\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-zero-before-small",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "Zero\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "Small\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n",
+            "stdout": "Small\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "11\n",
+            "stdout": "Large\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+n\\s*==\\s*0\\s*:.*elif\\s+n\\s*<=\\s*10\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+n\\s*==\\s*0\\s*:.*elif\\s+n\\s*<=\\s*10\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

@@ -255,21 +255,15 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "1\n2\n3\n4\n5\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "n = 1\nwhile n <= 5:\n    print(n)\n    n = n + 1",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 1\nwhile n <= 5:\n    print(n)\n    n = n + 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -277,16 +271,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
+            "type": "source_regex",
+            "pattern": "(?ms)^\\s*n\\s*=\\s*1\\s*$\\n^\\s*while\\s+n\\s*<=\\s*5\\s*:\\s*$\\n^    print\\s*\\(\\s*n\\s*\\)\\s*$\\n^    (?:n\\s*=\\s*n\\s*\\+\\s*1|n\\s*\\+=\\s*1)\\s*$",
+            "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
           {
-            "type": "source_contains",
-            "pattern": "while ",
-            "message": "Use a while loop for this exercise.",
-            "normalizeWhitespace": true
+            "type": "printed_line_count",
+            "min": 5
           }
         ]
       },
@@ -303,7 +297,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = 1\nwhile n <= 5:\n    print(n)\n    n = n + 1",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -325,7 +319,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 1\nwhile n <= 5:\n    print(n)\n    n = n + 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -334,16 +328,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "while ",
-          "message": "Use a while loop for this exercise.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?ms)^\\s*n\\s*=\\s*1\\s*$\\n^\\s*while\\s+n\\s*<=\\s*5\\s*:\\s*$\\n^    print\\s*\\(\\s*n\\s*\\)\\s*$\\n^    (?:n\\s*=\\s*n\\s*\\+\\s*1|n\\s*\\+=\\s*1)\\s*$",
+          "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -355,21 +343,31 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "3\n",
             "stdout": "0\n1\n2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = 0\nwhile n <= 2:\n    print(n)\n    n = n + 1",
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 0\nwhile n <= 2:\n    print(n)\n    n = n + 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -377,16 +375,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "while ",
-            "message": "Use a while loop for this exercise.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)limit\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*n\\s*=\\s*0.*while\\s+n\\s*<\\s*limit\\s*:.*print\\s*\\(\\s*n\\s*\\).*?(?:n\\s*=\\s*n\\s*\\+\\s*1|n\\s*\\+=\\s*1)",
+            "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -403,7 +395,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = 0\nwhile n <= 2:\n    print(n)\n    n = n + 1",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -425,7 +417,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 0\nwhile n <= 2:\n    print(n)\n    n = n + 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -434,16 +426,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "while ",
-          "message": "Use a while loop for this exercise.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)limit\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*n\\s*=\\s*0.*while\\s+n\\s*<\\s*limit\\s*:.*print\\s*\\(\\s*n\\s*\\).*?(?:n\\s*=\\s*n\\s*\\+\\s*1|n\\s*\\+=\\s*1)",
+          "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -455,21 +441,31 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "3\n",
             "stdout": "3\n2\n1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -477,16 +473,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "while ",
-            "message": "Use a while loop for this exercise.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*while\\s+n\\s*>=\\s*1\\s*:.*print\\s*\\(\\s*n\\s*\\).*?(?:n\\s*=\\s*n\\s*-\\s*1|n\\s*-=\\s*1)",
+            "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -503,7 +493,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -525,7 +515,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -534,16 +524,206 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
+          "type": "source_regex",
+          "pattern": "(?s)n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*while\\s+n\\s*>=\\s*1\\s*:.*print\\s*\\(\\s*n\\s*\\).*?(?:n\\s*=\\s*n\\s*-\\s*1|n\\s*-=\\s*1)",
+          "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_repeat_word_3_times",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Go\n3\n",
+            "stdout": "Go\nGo\nGo\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Hi\n1\n",
+            "stdout": "Hi\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "X\n0\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*times\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*count\\s*=\\s*0.*while\\s+count\\s*<\\s*times\\s*:.*print\\s*\\(\\s*word\\s*\\).*?(?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1)",
+            "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
         {
-          "type": "source_contains",
-          "pattern": "while ",
-          "message": "Use a while loop for this exercise.",
-          "normalizeWhitespace": true
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*times\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*count\\s*=\\s*0.*while\\s+count\\s*<\\s*times\\s*:.*print\\s*\\(\\s*word\\s*\\).*?(?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1)",
+          "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_sum_1_to_4",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\nstop\n",
+            "stdout": "hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "one\ntwo\nstop\n",
+            "stdout": "one\ntwo\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "stop\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*while\\s+word\\s*!=\\s*[\"\\']stop[\"\\']\\s*:.*print\\s*\\(\\s*word\\s*\\).*word\\s*=\\s*input\\s*\\(\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*while\\s+word\\s*!=\\s*[\"\\']stop[\"\\']\\s*:.*print\\s*\\(\\s*word\\s*\\).*word\\s*=\\s*input\\s*\\(\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

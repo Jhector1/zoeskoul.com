@@ -18,9 +18,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-operators-and-expressions-sketch0",
-        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.title",
-        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.prompt",
-        "exerciseKey": "ci-arithmetic-output",
+        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.title",
+        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.prompt",
+        "exerciseKey": "ci-use-four-operators",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -37,9 +37,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-operators-and-expressions-sketch1",
-        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.title",
-        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.prompt",
-        "exerciseKey": "ci-parentheses-output",
+        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.title",
+        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.prompt",
+        "exerciseKey": "ci-follow-precedence",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -56,9 +56,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-operators-and-expressions-sketch2",
-        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.title",
-        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.prompt",
-        "exerciseKey": "ci-comparison-output",
+        "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.title",
+        "promptKey": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.prompt",
+        "exerciseKey": "ci-change-grouping",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -105,11 +105,28 @@
   ],
   "exercises": [
     {
-      "id": "sc-expression-definition",
+      "id": "sc-division-operator",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-expression-definition",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-division-operator",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "sc-precedence-result",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-precedence-result",
       "optionIds": [
         "a",
         "b",
@@ -122,28 +139,11 @@
       }
     },
     {
-      "id": "sc-parentheses-effect",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-parentheses-effect",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "mc-comparison-results",
+      "id": "mc-operator-matches",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.mc-comparison-results",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.mc-operator-matches",
       "optionIds": [
         "a",
         "b",
@@ -154,37 +154,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "mc-boolean-operators",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.mc-boolean-operators",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr-arithmetic-order",
+      "id": "dr-precedence-steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-arithmetic-order",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-precedence-steps",
       "tokenIds": [
         "t1",
         "t2",
@@ -202,11 +181,11 @@
       }
     },
     {
-      "id": "dr-boolean-evaluation",
+      "id": "dr-grouped-steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-boolean-evaluation",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-grouped-steps",
       "tokenIds": [
         "t1",
         "t2",
@@ -224,23 +203,11 @@
       }
     },
     {
-      "id": "fb-equality-operator",
+      "id": "fb-target-operator",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.fb-equality-operator",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "+"
-      }
-    },
-    {
-      "id": "fb-boolean-or",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.fb-boolean-or",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.fb-target-operator",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -248,28 +215,22 @@
       }
     },
     {
-      "id": "ci-arithmetic-output",
+      "id": "ci-use-four-operators",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "17\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(7 + 5 * 2)",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(7 + 5 * 2)",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -277,10 +238,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 4
           }
         ]
       },
@@ -288,7 +255,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -297,7 +264,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(7 + 5 * 2)",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -306,11 +273,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -319,7 +286,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(7 + 5 * 2)",
+            "content": "print(12 + 3)\nprint(12 - 3)\nprint(12 * 3)\nprint(12 / 3)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -328,36 +295,30 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "ci-parentheses-output",
+      "id": "ci-follow-precedence",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "24\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print((7 + 5) * 2)",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print((7 + 5) * 2)",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -365,10 +326,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
           }
         ]
       },
@@ -376,7 +343,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -385,7 +352,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print((7 + 5) * 2)",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -394,11 +361,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -407,7 +374,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print((7 + 5) * 2)",
+            "content": "print(2 + 3 * 4)\nprint(18 - 8 / 2)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -416,36 +383,30 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
-      "id": "ci-comparison-output",
+      "id": "ci-change-grouping",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
-      "showExpectedExample": true,
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "5\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print(9 - 4)",
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(9 - 4)",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -453,10 +414,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\*\\s*4\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
           }
         ]
       },
@@ -464,7 +431,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -473,7 +440,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "print(9 - 4)",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -482,11 +449,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -495,7 +462,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "print(9 - 4)",
+            "content": "print((2 + 3) * 4)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -504,10 +471,274 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\*\\s*4\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-practice-choose-operator",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*8\\s*\\*\\s*4\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(8 * 4)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*8\\s*\\*\\s*4\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-practice-compare-grouping",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-practice-division-precedence",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*20\\s*-\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(20 - 12 / 3)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*20\\s*-\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

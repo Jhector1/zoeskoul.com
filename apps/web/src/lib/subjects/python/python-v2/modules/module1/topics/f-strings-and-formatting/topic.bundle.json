@@ -37,9 +37,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-f-strings-and-formatting-sketch1",
-        "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.title",
-        "promptKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.prompt",
-        "exerciseKey": "ci_format_price_two_decimals",
+        "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.title",
+        "promptKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.prompt",
+        "exerciseKey": "ci_input_name_city",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -56,9 +56,9 @@
       "height": 420,
       "tryIt": {
         "id": "try-f-strings-and-formatting-sketch2",
-        "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.title",
-        "promptKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.prompt",
-        "exerciseKey": "ci_input_greeting",
+        "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.title",
+        "promptKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.prompt",
+        "exerciseKey": "ci_format_price_two_decimals",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -128,11 +128,13 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.sc_decimal_places",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
@@ -247,60 +249,12 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Mila is 13 years old\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "name = \"Mila\"\nage = 13\nprint(f\"{name} is {age} years old\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "name = \"Mila\"\nage = 13\nprint(f\"{name} is {age} years old\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"']",
-            "message": "Use an f-string to build the formatted text."
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bname\\b",
-            "message": "Use the variable name `name` in your solution."
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "name = \"Mila\"\nage = 13\nprint(f\"{name} is {age} years old\")",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -322,29 +276,57 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = \"Mila\"\nage = 13\nprint(f\"{name} is {age} years old\")",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Mila[\"\\']\\s*\\n\\s*age\\s*=\\s*13\\s*\\n\\s*print\\(\\s*f[\"\\']\\{name\\} is \\{age\\} years old[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "f[\"']",
-          "message": "Use an f-string to build the formatted text."
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bname\\b",
-          "message": "Use the variable name `name` in your solution."
+          "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Mila[\"\\']\\s*\\n\\s*age\\s*=\\s*13\\s*\\n\\s*print\\(\\s*f[\"\\']\\{name\\} is \\{age\\} years old[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -355,60 +337,12 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Price: $4.50\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "price = 4.5\nprint(f\"Price: ${price:.2f}\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "price = 4.5\nprint(f\"Price: ${price:.2f}\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"']",
-            "message": "Use an f-string to build the formatted text."
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprice\\b",
-            "message": "Use the variable name `price` in your solution."
-          }
-        ]
-      },
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
           "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "price = 4.5\nprint(f\"Price: ${price:.2f}\")",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -430,41 +364,69 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "price = 4.5\nprint(f\"Price: ${price:.2f}\")",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*price\\s*=\\s*4\\.5\\s*\\n\\s*print\\(\\s*f[\"\\']Price: \\$\\{price:\\.2f\\}[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "f[\"']",
-          "message": "Use an f-string to build the formatted text."
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bprice\\b",
-          "message": "Use the variable name `price` in your solution."
+          "pattern": "(?s)^\\s*price\\s*=\\s*4\\.5\\s*\\n\\s*print\\(\\s*f[\"\\']Price: \\$\\{price:\\.2f\\}[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
     {
       "id": "ci_input_greeting",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -479,11 +441,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "name = input()\nprint(f\"Hello, {name}!\")",
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\nprint(f\"Hello, {name}!\")",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -492,25 +454,15 @@
         "sourceChecks": [
           {
             "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
             "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "f[\"']",
-            "message": "Use an f-string to build the formatted text."
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bname\\b",
-            "message": "Use the variable name `name` in your solution."
+            "pattern": "f[\"\\']Hello,\\s*\\{name\\}![\"\\']",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.1.message"
           }
         ]
       },
@@ -527,7 +479,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "name = input()\nprint(f\"Hello, {name}!\")",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -549,7 +501,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\nprint(f\"Hello, {name}!\")",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -559,25 +511,225 @@
       "sourceChecks": [
         {
           "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "pattern": "input(",
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.0.message"
         },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"\\']Hello,\\s*\\{name\\}![\"\\']",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "ci_input_name_city",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\nLima\n",
+            "stdout": "Maya lives in Lima\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Noah\nParis\n",
+            "stdout": "Noah lives in Paris\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"\\'][^\"\\']*\\{name\\}[^\"\\']*\\{city\\}[^\"\\']*[\"\\']",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
         {
           "type": "source_contains",
           "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "f[\"']",
-          "message": "Use an f-string to build the formatted text."
+          "pattern": "f[\"\\'][^\"\\']*\\{name\\}[^\"\\']*\\{city\\}[^\"\\']*[\"\\']",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "ci_average_one_decimal",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n4\n",
+            "stdout": "Average: 3.5\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n13\n",
+            "stdout": "Average: 11.5\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "normalizeWhitespace": true,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\{[^{}]+:\\.1f\\}",
+            "normalizeWhitespace": false,
+            "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.1.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "normalizeWhitespace": true,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bname\\b",
-          "message": "Use the variable name `name` in your solution."
+          "pattern": "\\{[^{}]+:\\.1f\\}",
+          "normalizeWhitespace": false,
+          "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.1.message"
         }
       ]
     }

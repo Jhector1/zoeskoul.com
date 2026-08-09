@@ -229,7 +229,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "if"
+        "value": "if score >= 80:"
       }
     },
     {
@@ -241,7 +241,7 @@
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "print(\"Go\")"
+        "value": "    print(\"Go\")"
       }
     },
     {
@@ -252,26 +252,26 @@
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "14\n",
-            "stdout": "big\n",
+            "stdout": "big\ndone\n",
             "match": "exact"
           },
           {
             "stdin": "10\n",
-            "stdout": "small\n",
+            "stdout": "done\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\n\nif n > 10:\n    print(\"big\")\nelse:\n    print(\"small\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n > 10:\n    print(\"big\")\nelse:\n    print(\"small\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -279,39 +279,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bn\\b",
-            "message": "Use the variable name `n` in your solution."
+            "pattern": "(?m)^if n > 10:\\s*$\\n^    print\\([\"\\']big[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -328,7 +299,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\nif n > 10:\n    print(\"big\")\nelse:\n    print(\"small\")",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -350,7 +321,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n > 10:\n    print(\"big\")\nelse:\n    print(\"small\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -359,39 +330,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bn\\b",
-          "message": "Use the variable name `n` in your solution."
+          "pattern": "(?m)^if n > 10:\\s*$\\n^    print\\([\"\\']big[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -403,26 +345,26 @@
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "7\n",
-            "stdout": "high\nchecked\n",
+            "stdout": "high\nchecked\ndone\n",
             "match": "exact"
           },
           {
             "stdin": "3\n",
-            "stdout": "low\n",
+            "stdout": "done\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\n\nif n >= 5:\n    print(\"high\")\n    print(\"checked\")\nelse:\n    print(\"low\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n >= 5:\n    print(\"high\")\n    print(\"checked\")\nelse:\n    print(\"low\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -430,39 +372,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bn\\b",
-            "message": "Use the variable name `n` in your solution."
+            "pattern": "(?m)^if n >= 5:\\s*$\\n^    print\\([\"\\']high[\"\\']\\)\\s*$\\n^    print\\([\"\\']checked[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -479,7 +392,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\nif n >= 5:\n    print(\"high\")\n    print(\"checked\")\nelse:\n    print(\"low\")",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -501,7 +414,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n >= 5:\n    print(\"high\")\n    print(\"checked\")\nelse:\n    print(\"low\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -510,39 +423,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
           "type": "source_regex",
-          "pattern": "\\bn\\b",
-          "message": "Use the variable name `n` in your solution."
+          "pattern": "(?m)^if n >= 5:\\s*$\\n^    print\\([\"\\']high[\"\\']\\)\\s*$\\n^    print\\([\"\\']checked[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -554,7 +438,7 @@
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -574,11 +458,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+        "solutionCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -586,45 +470,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle case in this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
             "type": "source_regex",
-            "pattern": "\\bn\\b",
-            "message": "Use the variable name `n` in your solution."
+            "pattern": "(?m)^if n > 0:\\s*$\\n^    print\\([\"\\']positive[\"\\']\\)\\s*$\\n^elif n < 0:\\s*$\\n^    print\\([\"\\']negative[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']zero[\"\\']\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
@@ -641,7 +490,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -663,7 +512,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -672,45 +521,201 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
+          "type": "source_regex",
+          "pattern": "(?m)^if n > 0:\\s*$\\n^    print\\([\"\\']positive[\"\\']\\)\\s*$\\n^elif n < 0:\\s*$\\n^    print\\([\"\\']negative[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']zero[\"\\']\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-nested-if-basic",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "20\n",
+            "stdout": "adult\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "15\n",
+            "stdout": "teen\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n",
+            "stdout": "child\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?m)^if age >= 13:\\s*$\\n^    if age >= 18:\\s*$\\n^        print\\([\"\\']adult[\"\\']\\)\\s*$\\n^    else:\\s*$\\n^        print\\([\"\\']teen[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']child[\"\\']\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
         {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
         {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle case in this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bn\\b",
-          "message": "Use the variable name `n` in your solution."
+          "pattern": "(?m)^if age >= 13:\\s*$\\n^    if age >= 18:\\s*$\\n^        print\\([\"\\']adult[\"\\']\\)\\s*$\\n^    else:\\s*$\\n^        print\\([\"\\']teen[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']child[\"\\']\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-special-case-first",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "80\n",
+            "stdout": "pass\nchecked\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "40\n",
+            "stdout": "retry\nchecked\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?m)^if score >= 60:\\s*$\\n^    print\\([\"\\']pass[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']retry[\"\\']\\)\\s*$\\n^print\\([\"\\']checked[\"\\']\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?m)^if score >= 60:\\s*$\\n^    print\\([\"\\']pass[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']retry[\"\\']\\)\\s*$\\n^print\\([\"\\']checked[\"\\']\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }

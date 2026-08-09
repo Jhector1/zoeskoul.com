@@ -4,10 +4,10 @@
       "python-v2-0": {
         "module-0-welcome-board-project": {
           "label": "Module Project: Build a Welcome Board",
-          "summary": "A club leader needs one welcome board that grows a little more polished with each step. Keep improving the same program until the full board is ready.",
+          "summary": "Build one Python welcome board in stages. Preserve working code while adding a useful comment, literals, an arithmetic expression, and a final welcome message.",
           "cards": {
             "sketch0": {
-              "title": "Your first client: a club leader with an empty welcome board"
+              "title": "Build one program, one improvement at a time"
             },
             "project": {
               "title": "Welcome Board Builder"
@@ -18,78 +18,124 @@
               "title": "Set the event title"
             },
             "mp_2": {
-              "title": "Add the time line"
+              "title": "Document the board"
             },
             "mp_3": {
-              "title": "Add the helper count"
+              "title": "Add the event time"
             },
             "mp_4": {
+              "title": "Add a numeric literal"
+            },
+            "mp_5": {
+              "title": "Calculate the helper count"
+            },
+            "mp_6": {
               "title": "Finish the welcome board"
             }
           },
           "quiz": {
-            "mp-1-print-event-title": {
+            "mp-1-set-event-title": {
               "title": "Set the event title",
-              "prompt": "Start the real welcome board. Replace the preview line with one line that prints exactly `Code Club Open House`.",
-              "hint": "You only need one print line in this step.",
+              "prompt": "Start the welcome board with one line that prints exactly:\n\n`Code Club Open House`",
+              "hint": "Use one `print()` call with the title as a string literal.",
               "help": {
-                "concept": "The project now shifts from the preview into the real board. Keep it simple and get the heading correct first.",
-                "hint_1": "Remove the preview text and print the event title instead.",
-                "hint_2": "Match the capitalization and spacing exactly."
+                "concept": "The project begins with one working line. Later stages will keep this line and extend the same program.",
+                "hint_1": "The event title is text, so write it as a quoted string.",
+                "hint_2": "This stage needs one output line only."
               },
-              "starterCode": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n"
+              "starterCode": "# Start the board with the event title.\n",
+              "solutionCode": "print(\"Code Club Open House\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Start with one print call for the exact event title."
+                }
+              }
             },
-            "mp-2-print-agenda-lines": {
-              "title": "Add the time line",
-              "prompt": "Keep the title line from the previous step. Under it, add one new line that prints exactly `Doors open at 4 PM`.",
-              "hint": "Leave the title in place and add one more print line below it.",
+            "mp-2-add-useful-comment": {
+              "title": "Document the board",
+              "prompt": "Keep the working title line. Add one useful Python comment on the line above it describing the purpose of the program.\n\nThe program output must still be exactly:\n\n`Code Club Open House`",
+              "hint": "A Python comment starts with `#` and should not become output.",
               "help": {
-                "concept": "This step extends the same program instead of starting over. Keep the working line you already have, then add the next detail.",
-                "hint_1": "The output now has two lines.",
-                "hint_2": "The title should still print first."
+                "concept": "Comments document code for readers without changing the program's normal output.",
+                "hint_1": "Put the comment above the existing `print()` call.",
+                "hint_2": "Do not add another printed line in this stage."
               },
-              "starterCode": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n"
+              "starterCode": "print(\"Code Club Open House\")",
+              "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Add one non-empty Python comment above the existing event-title print call."
+                }
+              }
             },
-            "mp-3-show-seat-count": {
-              "title": "Add the helper count",
-              "prompt": "Keep the two board lines you already have. Add a third line that prints exactly `Helpers ready: 6`, and calculate the `6` with `2 * 3` instead of typing it directly.",
-              "hint": "Add one more print line and let Python evaluate `2 * 3`.",
+            "mp-3-add-event-time": {
+              "title": "Add the event time",
+              "prompt": "Keep the comment and title. Add one new output line under the title that prints exactly:\n\n`Doors open at 4 PM`",
+              "hint": "Preserve the existing program and add one new `print()` call below the title.",
               "help": {
-                "concept": "Now the board mixes text with a small expression. That keeps the program readable while still letting Python do the number work.",
-                "hint_1": "Keep the first two lines exactly as they are.",
-                "hint_2": "The new line should print the label first and the calculated value second."
+                "concept": "A cumulative project grows by preserving correct code and adding one focused improvement.",
+                "hint_1": "The comment stays at the top.",
+                "hint_2": "The new time line should appear after the event title."
               },
-              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n"
+              "starterCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")",
+              "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve the comment and title, then add the event-time line below them."
+                }
+              }
             },
-            "mp-4-build-full-welcome-board": {
+            "mp-4-add-seat-literal": {
+              "title": "Add a numeric literal",
+              "prompt": "Keep the board so far. Add these two output lines at the bottom:\n\n`Seats available`\n`24`\n\nPrint `24` as a numeric literal, not as quoted text.",
+              "hint": "The label is a string, but the seat count should be the number `24` without quotes.",
+              "help": {
+                "concept": "A numeric literal is a number written directly in code. Quoting `24` would turn it into a string instead.",
+                "hint_1": "Use one print call for the label and one for the number.",
+                "hint_2": "The line for the count should contain `print(24)`, not `print(\"24\")`."
+              },
+              "starterCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")",
+              "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve the board and print the seat count as numeric literal 24 without quotes."
+                }
+              }
+            },
+            "mp-5-calculate-helper-count": {
+              "title": "Calculate the helper count",
+              "prompt": "Keep everything already working. Add these two output lines:\n\n`Helpers ready`\n`6`\n\nDo not type the final `6` directly. Make Python calculate it with the expression `2 * 3`.",
+              "hint": "Print the label first, then print the expression `2 * 3` on the next line.",
+              "help": {
+                "concept": "An arithmetic expression produces a value. Here the program should calculate the helper count rather than hard-code the result.",
+                "hint_1": "Keep `2 * 3` visible in the source code.",
+                "hint_2": "The expression should not be inside quotes."
+              },
+              "starterCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)",
+              "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve the board and calculate the helper count with the expression 2 * 3."
+                }
+              }
+            },
+            "mp-6-add-final-message": {
               "title": "Finish the welcome board",
-              "prompt": "Keep the board you have built so far. Add one last line under it that prints exactly `Bring your questions!`.",
-              "hint": "Do not rewrite the earlier lines. Just add the final line at the bottom.",
+              "prompt": "Keep the complete working board from the previous step. Add one final line at the bottom that prints exactly:\n\n`Bring your questions!`\n\nPreserve every earlier line and add only the new final message.",
+              "hint": "Start from the working program exactly as it is and add one quoted string in a new `print()` call at the bottom.",
               "help": {
-                "concept": "The last step is a small polish step, not a reset. Keep the working board and add the final message so the whole program feels finished.",
-                "hint_1": "The final output has four lines.",
-                "hint_2": "The new line belongs after the helper count."
+                "concept": "A cumulative project grows from the previous working solution. The final step should preserve all earlier behavior and add only the new requirement.",
+                "hint_1": "Do not rewrite or remove any of the earlier board lines.",
+                "hint_2": "The final value is text, so keep it inside matching quotes."
               },
-              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n"
-            },
-            "try-module-0-welcome-board-project-sketch0": {
-              "title": "Preview the welcome board",
-              "prompt": "Start the board with one friendly line: print exactly `Welcome to Python Club`.",
-              "hint": "Use one print statement.",
-              "help": {
-                "concept": "This quick preview shows the kind of clean output the project will build.",
-                "hint_1": "You only need one line of text for this preview.",
-                "hint_2": "Match the words exactly."
-              },
-              "starterCode": "# Print the first welcome line\n"
+              "starterCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)",
+              "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)\nprint(\"Bring your questions!\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve the complete Step 5 solution and add only the final quoted Bring your questions! print line."
+                }
+              }
             }
-          },
-          "tryIt": {
-            "try_module_0_welcome_board_project_sketch0": {
-              "title": "Try it yourself",
-              "prompt": "Start the board with one friendly line: print exactly `Welcome to Python Club`."
-            },
-            "allowReveal": true
           }
         }
       }
@@ -100,8 +146,8 @@
       "python-v2-0": {
         "module-0-welcome-board-project": {
           "sketch-1": {
-            "title": "Your first client: a club leader with an empty welcome board",
-            "bodyMarkdown": "A club leader is setting up the first Python meetup and wants one simple welcome board on the screen before students walk in. The board does not need fancy features yet. It just needs to grow cleanly, one useful line at a time.\n\nThis module project is meant to feel like one small build. Each step starts with the program from the previous step, then adds one clear improvement so the finished board grows naturally."
+            "title": "Build one program, one improvement at a time",
+            "bodyMarkdown": "A club leader needs a simple welcome board for the first Python meetup.\n\nThis project is one continuous program, not a collection of unrelated exercises. Each stage starts from working code and adds one new requirement.\n\nBy the end, your board will combine several Module 0 skills:\n\n- display text with `print()`\n- keep a useful comment for readers\n- use a numeric literal as a real number\n- calculate a value with an arithmetic expression\n- use an error message to make a targeted debugging fix\n- preserve earlier working behavior while the program grows\n\nTreat every completed stage as a version worth keeping. When the next requirement arrives, change only what needs to change.\n"
           }
         }
       }

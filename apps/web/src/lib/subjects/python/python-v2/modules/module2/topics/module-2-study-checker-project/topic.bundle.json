@@ -27,8 +27,8 @@
       "height": 420,
       "tryIt": {
         "id": "try-module-2-study-checker-project-sketch0",
-        "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.tryIt.try_module_2_study_checker_project_sketch0.title",
-        "promptKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.tryIt.try_module_2_study_checker_project_sketch0.prompt",
+        "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.title",
+        "promptKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.prompt",
         "exerciseKey": "try-module-2-study-checker-project-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -131,33 +131,21 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "50\n",
-            "stdout": "Ready\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "Keep going\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+        "solutionCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -165,29 +153,34 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the score before comparing it.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "70\n",
+            "stdout": "",
+            "match": "exact"
           },
           {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement for the choice.",
-            "normalizeWhitespace": true
+            "stdin": "-2\n",
+            "stdout": "",
+            "match": "exact"
           },
           {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the second result.",
-            "normalizeWhitespace": true
+            "stdin": "100\n",
+            "stdout": "",
+            "match": "exact"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -195,22 +188,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the score before comparing it.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement for the choice.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the second result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -248,33 +229,38 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "70\n",
-            "stdout": "Pass\n",
+            "stdout": "Passing\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "Try again\n",
+            "stdin": "69\n",
+            "stdout": "Needs practice\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "100\n",
+            "stdout": "Passing\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+        "solutionCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -282,29 +268,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input before comparing it.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement for the rule.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Use else for the second result.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+score\\s*>=\\s*70\\s*:.*print\\s*\\(\\s*[\"\\']Passing[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']Needs practice[\"\\']\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -312,22 +286,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input before comparing it.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement for the rule.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Use else for the second result.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+score\\s*>=\\s*70\\s*:.*print\\s*\\(\\s*[\"\\']Passing[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']Needs practice[\"\\']\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -365,38 +327,43 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "75\nyes\n",
-            "stdout": "Join\n",
+            "stdout": "Passing\n",
             "match": "exact"
           },
           {
             "stdin": "75\nno\n",
-            "stdout": "Wait\n",
+            "stdout": "Join club first\n",
             "match": "exact"
           },
           {
             "stdin": "60\nyes\n",
-            "stdout": "Wait\n",
+            "stdout": "Needs practice\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "60\nno\n",
+            "stdout": "Join club first\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+        "solutionCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -404,29 +371,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "and",
-            "message": "Use and so both rules must pass.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read both inputs with input().",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the score before comparing it.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)member\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -434,22 +389,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "and",
-          "message": "Use and so both rules must pass.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read both inputs with input().",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the score before comparing it.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)member\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -487,38 +430,43 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "75\nyes\nABC\n",
-            "stdout": "Join\n",
+            "stdout": "Passing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "75\nno\nABC\n",
+            "stdout": "Join club first\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "60\nyes\nABC\n",
+            "stdout": "Needs practice\n",
             "match": "exact"
           },
           {
             "stdin": "75\nyes\n\n",
             "stdout": "Missing code\n",
             "match": "exact"
-          },
-          {
-            "stdin": "60\nyes\nABC\n",
-            "stdout": "Wait\n",
-            "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+        "solutionCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -526,29 +474,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "\"\"",
-            "message": "Check for the empty string explicitly.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Add the missing-code case before the normal rule.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "and",
-            "message": "Keep the combined Join rule.",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)code\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -556,22 +492,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "\"\"",
-          "message": "Check for the empty string explicitly.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Add the missing-code case before the normal rule.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "and",
-          "message": "Keep the combined Join rule.",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)code\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     },
@@ -609,14 +533,14 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif member != \"yes\":\n    print(\"Join club first\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -626,17 +550,22 @@
             "match": "exact"
           },
           {
-            "stdin": "75\nyes\nABC\n",
+            "stdin": "90\nyes\nABC\n",
+            "stdout": "Excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "70\nyes\nABC\n",
             "stdout": "Passing\n",
             "match": "exact"
           },
           {
-            "stdin": "60\nyes\nABC\n",
+            "stdin": "69\nyes\nABC\n",
             "stdout": "Needs practice\n",
             "match": "exact"
           },
           {
-            "stdin": "75\nno\nABC\n",
+            "stdin": "95\nno\nABC\n",
             "stdout": "Join club first\n",
             "match": "exact"
           },
@@ -646,16 +575,16 @@
             "match": "exact"
           },
           {
-            "stdin": "75\nyes\n\n",
+            "stdin": "-2\nno\n\n",
             "stdout": "Missing code\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif member != \"yes\":\n    print(\"Join club first\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+        "solutionCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif member != \"yes\":\n    print(\"Join club first\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -663,41 +592,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if / elif / else chain for the rules.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle cases.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the score before comparing it.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the values with input().",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*<\\s*0\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.sourceChecks.0.message",
+            "normalizeWhitespace": false
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif member != \"yes\":\n    print(\"Join club first\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -705,34 +610,10 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if / elif / else chain for the rules.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle cases.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the score before comparing it.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the values with input().",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*<\\s*0\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.sourceChecks.0.message",
+          "normalizeWhitespace": false
         }
       ]
     }
