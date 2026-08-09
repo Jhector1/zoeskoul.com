@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import {
     CATALOG_MANIFESTS,
     SUBJECT_CATALOG_SLUGS,
-} from "@/lib/subjects/catalogs.generated";
+} from "@zoeskoul/curriculum-registry/runtime";
 import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
 
 import {

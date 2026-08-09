@@ -1,0 +1,281 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "label": "Useful String Methods",
+          "summary": "Use string methods to normalize text with `strip()` and `lower()`, replace selected text, and split or join text using separators.",
+          "cards": {
+            "sketch0": {
+              "title": "What string methods do"
+            },
+            "sketch1": {
+              "title": "Changing text with replace"
+            },
+            "sketch2": {
+              "title": "Breaking and joining text"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Choose the lowercase method",
+              "prompt": "Which string method changes all letters in a string to lowercase?",
+              "hint": "Choose the method whose job is changing letter case.",
+              "help": {
+                "concept": "`.lower()` returns a lowercase version of a string.",
+                "hint_1": "`.strip()` removes outside whitespace instead.",
+                "hint_2": "`.split()` and `.join()` work with text pieces and separators."
+              },
+              "options": {
+                "a": "strip()",
+                "b": "lower()",
+                "c": "split()",
+                "d": "join()"
+              }
+            },
+            "sc-2": {
+              "title": "Pick the method for outside spaces",
+              "prompt": "Which method removes spaces from the beginning and end of a string?",
+              "hint": "Choose the method that removes whitespace only from the outside edges.",
+              "help": {
+                "concept": "`.strip()` removes leading and trailing whitespace.",
+                "hint_1": "It does not remove spaces between words.",
+                "hint_2": "`.replace()` swaps selected text rather than trimming the edges."
+              },
+              "options": {
+                "a": "replace()",
+                "b": "lower()",
+                "c": "strip()",
+                "d": "split()"
+              }
+            },
+            "mc-1": {
+              "title": "Methods that return strings",
+              "prompt": "Choose all expressions that return a string.",
+              "hint": "Check whether each expression returns one string or a collection of pieces.",
+              "help": {
+                "concept": "`.lower()`, `.strip()`, and `.replace()` return strings, while `.split()` returns pieces in a list.",
+                "hint_1": "A case change still produces a string.",
+                "hint_2": "Splitting is different because it breaks one string into multiple elements."
+              },
+              "options": {
+                "a": "\"Hi\".lower()",
+                "b": "\"  hi  \".strip()",
+                "c": "\"a,b,c\".split(\",\")",
+                "d": "\"cat\".replace(\"c\", \"b\")"
+              }
+            },
+            "mc-2": {
+              "title": "Good uses of split and join",
+              "prompt": "Choose all true statements about `split()` and `join()`.",
+              "hint": "`split()` breaks text apart; `join()` combines text pieces.",
+              "help": {
+                "concept": "The separator belongs to the split or join operation and determines where text is broken or inserted.",
+                "hint_1": "`.split(\",\")` uses commas as boundaries.",
+                "hint_2": "`\" \".join(...)` inserts spaces between pieces."
+              },
+              "options": {
+                "a": "`\"a,b,c\".split(\",\")` breaks the text into parts",
+                "b": "`\" \".join([\"I\", \"code\"])` combines words with a space",
+                "c": "`split()` always makes text lowercase",
+                "d": "`join()` removes outside spaces from a string"
+              }
+            },
+            "dr-1": {
+              "title": "Order the cleanup steps",
+              "prompt": "Put these steps in order to clean a name, make it lowercase, and print it.",
+              "hint": "Store the text first, trim it second, lowercase the cleaned value third, then print.",
+              "help": {
+                "concept": "Each assignment uses the value produced by the previous string operation.",
+                "hint_1": "The variable must exist before a method can be called on it.",
+                "hint_2": "Printing belongs after the final transformed value is ready."
+              },
+              "tokens": {
+                "t1": "name = \"  ALICE  \"",
+                "t2": "clean = name.strip()",
+                "t3": "result = clean.lower()",
+                "t4": "print(result)"
+              }
+            },
+            "dr-2": {
+              "title": "Order split and join",
+              "prompt": "Arrange the code steps to turn \"red-blue-green\" into \"red, blue, green\".",
+              "hint": "Split on the old separator before joining with the new separator.",
+              "help": {
+                "concept": "Changing separators can be a two-step transformation: split into pieces, then join the same pieces with a different separator.",
+                "hint_1": "First create the original string.",
+                "hint_2": "The join step must happen after the split has produced pieces."
+              },
+              "tokens": {
+                "t1": "colors = \"red-blue-green\"",
+                "t2": "parts = colors.split(\"-\")",
+                "t3": "result = \", \".join(parts)",
+                "t4": "print(result)"
+              }
+            },
+            "fb-1": {
+              "title": "Fill the method name",
+              "prompt": "Choose the method name for the blank so outside spaces are removed.\n\n```python\nclean = text.___()\n```",
+              "hint": "This method trims the beginning and end of the string.",
+              "help": {
+                "concept": "`.strip()` removes leading and trailing whitespace.",
+                "hint_1": "Do not choose a method for changing case.",
+                "hint_2": "Do not choose a method that breaks text into pieces."
+              },
+              "template": "clean = text.[blank1]()",
+              "choices": [
+                "lower",
+                "strip",
+                "split",
+                "join"
+              ]
+            },
+            "fb-2": {
+              "title": "Fill the separator",
+              "prompt": "Choose the separator for the blank so the words are joined with one space.\n\n```python\nresult = ___.join(words)\n```",
+              "hint": "The string before `.join()` becomes the separator placed between pieces.",
+              "help": {
+                "concept": "`\" \".join(words)` inserts one space between each string in `words`.",
+                "hint_1": "A hyphen would produce hyphen-separated text.",
+                "hint_2": "Choose the literal containing exactly one space."
+              },
+              "template": "sentence = [blank1].join(words)",
+              "choices": [
+                "\"-\"",
+                "\" \"",
+                "\",\"",
+                "\"|\""
+              ]
+            },
+            "code-1": {
+              "title": "Normalize a line of text",
+              "prompt": "Read one line of input. Remove whitespace from its beginning and end, convert the cleaned text to lowercase, and print the result.",
+              "hint": "Apply `.strip()` before `.lower()`.",
+              "help": {
+                "concept": "String methods can be chained when each method returns another string.",
+                "hint_1": "Read the text with `input()`.",
+                "hint_2": "Use both `.strip()` and `.lower()` before printing."
+              },
+              "starterCode": "text = input()\n# Remove outside whitespace, lowercase the result, and print it\n",
+              "solutionCode": "text = input()\nprint(text.strip().lower())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the text with input()."
+                },
+                "1": {
+                  "message": "Use both .strip() and .lower() to normalize the text."
+                }
+              }
+            },
+            "code-2": {
+              "title": "Trim outside whitespace",
+              "prompt": "Read one line of input, remove whitespace from the beginning and end with `.strip()`, and print the cleaned text.",
+              "hint": "Do not change spaces inside the text; only trim the outer edges.",
+              "help": {
+                "concept": "`.strip()` removes leading and trailing whitespace while preserving interior characters.",
+                "hint_1": "Keep the result as a string.",
+                "hint_2": "Print the stripped value."
+              },
+              "starterCode": "text = input()\n# Strip outside whitespace and print\n",
+              "solutionCode": "text = input()\nprint(text.strip())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the text with input()."
+                },
+                "1": {
+                  "message": "Use .strip() before printing the cleaned text."
+                }
+              }
+            },
+            "code-3": {
+              "title": "Replace every matching word",
+              "prompt": "Read one line of input and replace every occurrence of `cat` with `dog`, then print the changed string.",
+              "hint": "Use `.replace(\"cat\", \"dog\")`.",
+              "help": {
+                "concept": "`.replace(old, new)` returns a new string with matching occurrences changed.",
+                "hint_1": "The text to find is `cat`.",
+                "hint_2": "The replacement text is `dog`."
+              },
+              "starterCode": "text = input()\n# Replace cat with dog and print the result\n",
+              "solutionCode": "text = input()\nprint(text.replace(\"cat\", \"dog\"))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the text with input()."
+                },
+                "1": {
+                  "message": "Use .replace(\"cat\", \"dog\") for the transformation."
+                }
+              }
+            },
+            "code-4": {
+              "title": "Chain cleanup methods",
+              "prompt": "Read one line of input, remove outside whitespace, convert the result to lowercase, replace every underscore `_` with a hyphen `-`, and print it.",
+              "hint": "Perform cleanup first, then replacement on the resulting string.",
+              "help": {
+                "concept": "A sequence of string methods can transform the result of the previous method.",
+                "hint_1": "Use `.strip()` and `.lower()` for normalization.",
+                "hint_2": "Then use `.replace(\"_\", \"-\")`."
+              },
+              "starterCode": "text = input()\n# Strip, lowercase, replace _ with -, then print\n",
+              "solutionCode": "text = input()\nprint(text.strip().lower().replace(\"_\", \"-\"))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the text with input()."
+                },
+                "1": {
+                  "message": "Use .strip(), .lower(), and .replace(\"_\", \"-\") in the transformation."
+                }
+              }
+            },
+            "code-5": {
+              "title": "Change a comma separator to a pipe separator",
+              "prompt": "Read one line such as ` apple,banana,cherry `. Remove outside whitespace, split the cleaned text at commas, join the pieces with ` | `, and print the final string.",
+              "hint": "Use `.strip()`, then `.split(\",\")`, then `\" | \".join(...)`.",
+              "help": {
+                "concept": "Splitting creates pieces from one separator; joining recombines those pieces with a new separator.",
+                "hint_1": "Store the cleaned string or split result in a variable if that makes the steps clearer.",
+                "hint_2": "The join separator must be exactly ` | ` including spaces."
+              },
+              "starterCode": "text = input()\n# Strip outside whitespace\n# Split at commas\n# Join the pieces with ' | ' and print\n",
+              "solutionCode": "text = input()\nparts = text.strip().split(\",\")\nprint(\" | \".join(parts))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the text with input()."
+                },
+                "1": {
+                  "message": "Use .strip() and .split(\",\") before joining the pieces."
+                },
+                "2": {
+                  "message": "Use \" | \".join(...) to combine the pieces with the new separator."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "sketch-1": {
+            "title": "Clean and normalize text with methods",
+            "bodyMarkdown": "A string method is an operation attached to a string value.\n\nTwo common cleanup methods are:\n\n- `.strip()` — removes whitespace from the beginning and end;\n- `.lower()` — returns a lowercase version of the text.\n\n```python\nname = \"  Ada Lovelace  \"\nclean_name = name.strip().lower()\nprint(clean_name)\n```\n\nOutput:\n\n```text\nada lovelace\n```\n\nMethods return new values. The original string is not changed automatically.\n\n```python\ntext = \"  HELLO  \"\nclean = text.strip()\nlowercase = clean.lower()\n```\n\nYou can call methods one at a time or chain them when each result is a string.\n"
+          },
+          "sketch-2": {
+            "title": "Replace selected text",
+            "bodyMarkdown": "Use `.replace(old, new)` when you want a new string with selected text swapped for different text.\n\n```python\nmessage = \"I like cats\"\nchanged = message.replace(\"cats\", \"dogs\")\nprint(changed)\n```\n\nOutput:\n\n```text\nI like dogs\n```\n\nThe original `message` still contains `\"I like cats\"` unless you assign the returned string back to that variable.\n\n`replace()` can affect every matching occurrence:\n\n```python\ntext = \"cat cat\"\nprint(text.replace(\"cat\", \"dog\"))\n```\n\nOutput:\n\n```text\ndog dog\n```\n\nThe two arguments matter:\n\n```text\nreplace(text_to_find, replacement_text)\n```\n"
+          },
+          "sketch-3": {
+            "title": "Split text apart and join pieces together",
+            "bodyMarkdown": "`.split(separator)` breaks one string into pieces. `.join(...)` combines string pieces using a separator.\n\n```python\ncolors = \"red-blue-green\"\nparts = colors.split(\"-\")\nresult = \", \".join(parts)\n\nprint(result)\n```\n\nOutput:\n\n```text\nred, blue, green\n```\n\nThe separators play opposite roles:\n\n- `split(\"-\")` removes each `-` boundary and creates pieces;\n- `\", \".join(parts)` places `, ` between those pieces.\n\nYou can combine cleanup with the same workflow:\n\n```python\nraw = \" apple,banana,cherry \"\nclean = raw.strip()\nparts = clean.split(\",\")\nresult = \" | \".join(parts)\n\nprint(result)\n```\n\nOutput:\n\n```text\napple | banana | cherry\n```\n\nUse `split()` when one string needs to become pieces, and `join()` when pieces need to become one string again.\n"
+          }
+        }
+      }
+    }
+  }
+}

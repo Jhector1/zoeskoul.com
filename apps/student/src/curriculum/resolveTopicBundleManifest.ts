@@ -1,5 +1,5 @@
 import type { SlimTopicManifest } from "@zoeskoul/curriculum-contracts";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import { setReviewTopicManifestResolver } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRoute";
 
 function normalizeTopicId(topicSlugOrId: string) {

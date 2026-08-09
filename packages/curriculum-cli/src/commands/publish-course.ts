@@ -1,6 +1,7 @@
 import {
     publishDraftToLive,
     resolveAuthoringCompileTarget,
+    rebuildRegistries,
 } from "@zoeskoul/curriculum-compiler";
 
 export function parsePublishCourseArgs(args: string[]) {
@@ -80,6 +81,8 @@ export async function runPublishCourse(
         liveSubjectSlug: liveTarget.liveSubjectSlug,
         courseSlug,
     });
+
+    await rebuildRegistries();
 
     console.log(
         `Published ${subjectSlug}/${courseSlug} to live subject ${liveTarget.liveSubjectSlug}`,

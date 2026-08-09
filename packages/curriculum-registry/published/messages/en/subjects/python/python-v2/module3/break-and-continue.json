@@ -1,0 +1,263 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "break-and-continue": {
+          "label": "Break and Continue",
+          "summary": "Use `break` to exit a loop immediately, use `continue` to skip the rest of only the current iteration, and choose between them based on whether later iterations should still run.",
+          "cards": {
+            "sketch0": {
+              "title": "Using break to stop a loop early"
+            },
+            "sketch1": {
+              "title": "Using continue to skip one loop turn"
+            },
+            "sketch2": {
+              "title": "Break vs continue"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-break-effect": {
+              "title": "What break does",
+              "prompt": "Inside a `while` loop, what does `break` do?",
+              "hint": "After `break`, there is no next iteration of that loop.",
+              "help": {
+                "concept": "`break` exits the nearest enclosing loop immediately.",
+                "hint_1": "It affects the entire loop, not only one statement.",
+                "hint_2": "Later iterations do not run."
+              },
+              "options": {
+                "a": "It stops the loop immediately",
+                "b": "It skips only the current print statement",
+                "c": "It restarts the loop from the beginning",
+                "d": "It changes False to True"
+              }
+            },
+            "sc-continue-effect": {
+              "title": "What continue does",
+              "prompt": "Inside a loop, what does `continue` do?",
+              "hint": "Only the remainder of the current turn is skipped.",
+              "help": {
+                "concept": "`continue` jumps to the next iteration without ending the loop.",
+                "hint_1": "Statements after `continue` in the same iteration do not run.",
+                "hint_2": "Later iterations can still run."
+              },
+              "options": {
+                "a": "It ends the program",
+                "b": "It exits the loop completely",
+                "c": "It skips the rest of the current iteration",
+                "d": "It repeats the same iteration forever"
+              }
+            },
+            "mc-break-uses": {
+              "title": "Good uses for break",
+              "prompt": "Which situations are good reasons to use `break` in a loop? Choose all correct answers.",
+              "hint": "Choose cases where there is no reason to process later iterations.",
+              "help": {
+                "concept": "`break` is appropriate when reaching a condition completes the loop's job early.",
+                "hint_1": "Finding a target can make further searching unnecessary.",
+                "hint_2": "Skipping one unwanted value is a `continue` use instead."
+              },
+              "options": {
+                "a": "Stop searching after you find the target value",
+                "b": "End a loop when the user enters a quit number",
+                "c": "Skip printing one unwanted value but keep looping",
+                "d": "Automatically increase a counter by 1"
+              }
+            },
+            "mc-continue-results": {
+              "title": "Effects of continue",
+              "prompt": "Which statements about `continue` are true? Choose all correct answers.",
+              "hint": "Later iterations still happen after a `continue`.",
+              "help": {
+                "concept": "`continue` skips only the remaining statements in the current iteration.",
+                "hint_1": "It can prevent one value from being printed.",
+                "hint_2": "It does not exit the loop."
+              },
+              "options": {
+                "a": "It can skip printing a specific value",
+                "b": "It can move control to the next iteration",
+                "c": "It always ends the loop immediately",
+                "d": "It can be used while later iterations still run"
+              }
+            },
+            "dr-break-flow": {
+              "title": "Order of events with break",
+              "prompt": "Arrange these events in the correct order for this loop idea: the loop checks a value, finds the stop value, runs `break`, and then the loop ends.",
+              "hint": "The matching value must be encountered before `break` can exit the loop.",
+              "help": {
+                "concept": "The loop reaches a value, detects the stop condition, executes `break`, and exits.",
+                "hint_1": "Detection happens before the `break` statement.",
+                "hint_2": "The loop ends immediately after `break` executes."
+              },
+              "tokens": {
+                "t1": "The loop checks the current value",
+                "t2": "The stop value is found",
+                "t3": "`break` runs",
+                "t4": "The loop ends"
+              }
+            },
+            "dr-continue-flow": {
+              "title": "Order of events with continue",
+              "prompt": "Arrange these steps for a loop iteration where `continue` is used to skip one value.",
+              "hint": "After `continue`, Python skips the remainder of that iteration and begins the next one.",
+              "help": {
+                "concept": "The sequence is encounter value → run `continue` → skip remaining body → start next iteration.",
+                "hint_1": "The current iteration is not restarted.",
+                "hint_2": "The whole loop does not end."
+              },
+              "tokens": {
+                "t1": "The loop reaches a special value",
+                "t2": "`continue` runs",
+                "t3": "The remaining statements in this iteration are skipped",
+                "t4": "The next iteration begins"
+              }
+            },
+            "fb-break-keyword": {
+              "title": "Fill the loop control word",
+              "prompt": "Choose the keyword that stops the loop immediately.",
+              "hint": "Choose the keyword that exits the loop completely.",
+              "help": {
+                "concept": "`break` leaves the nearest loop immediately.",
+                "hint_1": "`continue` would keep the loop running.",
+                "hint_2": "Choose `break`."
+              },
+              "template": "if count == 5:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "while",
+                "print"
+              ]
+            },
+            "fb-continue-keyword": {
+              "title": "Fill the skip keyword",
+              "prompt": "Choose the keyword that skips the rest of the current iteration.",
+              "hint": "Choose the keyword that jumps to the next iteration.",
+              "help": {
+                "concept": "`continue` skips the remaining statements in the current iteration.",
+                "hint_1": "`break` would end the loop.",
+                "hint_2": "Choose `continue`."
+              },
+              "template": "if number == 3:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "range",
+                "input"
+              ]
+            },
+            "code-break-stop-at-number": {
+              "title": "Stop when a sentinel appears",
+              "prompt": "Read integers one per line inside a `while True` loop. Print each number until `0` is read. When `0` appears, use `break` to stop and do not print the `0`.",
+              "hint": "Read first, test for 0, then print only if the loop did not break.",
+              "help": {
+                "concept": "A sentinel can end an otherwise open-ended loop as soon as it is read.",
+                "hint_1": "Place the `if number == 0:` check before `print(number)`.",
+                "hint_2": "Use `break` inside that condition."
+              },
+              "starterCode": "while True:\n    # Read one integer\n    # Stop on 0; otherwise print it\n    pass\n",
+              "solutionCode": "while True:\n    number = int(input())\n    if number == 0:\n        break\n    print(number)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read a number inside `while True`, test `number == 0`, and use `break` before printing."
+                }
+              }
+            },
+            "code-continue-skip-multiples": {
+              "title": "Skip matching values with continue",
+              "prompt": "Read an integer `stop`. Loop through `range(1, stop)`. Use `continue` to skip multiples of 3 and print every other value.",
+              "hint": "Test `number % 3 == 0` before the print.",
+              "help": {
+                "concept": "`continue` is useful when one class of values should be ignored while later iterations still run.",
+                "hint_1": "Use `for number in range(1, stop):`.",
+                "hint_2": "Inside the multiple-of-3 condition, run `continue`."
+              },
+              "starterCode": "stop = int(input())\n# Print 1 through stop-1, skipping multiples of 3\n",
+              "solutionCode": "stop = int(input())\nfor number in range(1, stop):\n    if number % 3 == 0:\n        continue\n    print(number)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `continue` inside the multiples-of-3 condition before `print(number)`."
+                }
+              }
+            },
+            "code-break-first-negative": {
+              "title": "Skip spaces and stop at a marker",
+              "prompt": "Read one line of text. Loop through its characters. Use `continue` to skip spaces. Use `break` to stop when `#` is reached. Print every other character before the first `#`, one per line.",
+              "hint": "Check for the space and `#` before printing the current character.",
+              "help": {
+                "concept": "`continue` ignores one iteration; `break` prevents all later iterations.",
+                "hint_1": "For a space, run `continue`.",
+                "hint_2": "For `#`, run `break`; otherwise print `ch`."
+              },
+              "starterCode": "text = input()\n# Skip spaces, stop at #, print other earlier characters\n",
+              "solutionCode": "text = input()\nfor ch in text:\n    if ch == \" \":\n        continue\n    if ch == \"#\":\n        break\n    print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use both `continue` for spaces and `break` for `#` before printing the current character."
+                }
+              }
+            },
+            "code-continue-skip-letter": {
+              "title": "Skip one character with continue",
+              "prompt": "Read one word. Loop through its characters and use `continue` to skip every lowercase `a`. Print all other characters, one per line.",
+              "hint": "When `ch == \"a\"`, continue before reaching the print.",
+              "help": {
+                "concept": "A skipped character should affect only its own iteration.",
+                "hint_1": "Loop directly over the input word.",
+                "hint_2": "Place `continue` inside `if ch == \"a\":`."
+              },
+              "starterCode": "word = input()\n# Skip lowercase a and print every other character\n",
+              "solutionCode": "word = input()\nfor ch in word:\n    if ch == \"a\":\n        continue\n    print(ch)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `continue` inside `if ch == \"a\":` before printing."
+                }
+              }
+            },
+            "code-break-guess-game": {
+              "title": "Stop after the correct guess",
+              "prompt": "Keep reading integer guesses inside a loop. For a wrong guess, print `try again`. When the guess is `7`, print `correct`, use `break`, and stop.",
+              "hint": "Check for 7 before printing the retry message.",
+              "help": {
+                "concept": "Once the target is found, `break` prevents any later guesses from being processed.",
+                "hint_1": "Inside the success condition, print `correct` then break.",
+                "hint_2": "Only wrong guesses should print `try again`."
+              },
+              "starterCode": "while True:\n    guess = int(input())\n    # Print correct and stop on 7; otherwise print try again\n",
+              "solutionCode": "while True:\n    guess = int(input())\n    if guess == 7:\n        print(\"correct\")\n        break\n    print(\"try again\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `break` in the `guess == 7` branch after printing `correct`."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "break-and-continue": {
+          "break-basics": {
+            "title": "Use break to leave the whole loop",
+            "bodyMarkdown": "`break` exits the nearest loop immediately.\n\n```python\nfor n in range(1, 6):\n    if n == 3:\n        break\n    print(n)\n```\n\nThe output is:\n\n```text\n1\n2\n```\n\nWhen `n` becomes `3`, Python runs `break`. The loop ends before `3` is printed, and values `4` and `5` are never processed.\n\nUse `break` when the loop's job is finished early—for example, after finding a target or reading a sentinel value.\n"
+          },
+          "continue-basics": {
+            "title": "Use continue to skip one iteration",
+            "bodyMarkdown": "`continue` skips the **rest of the current iteration** and then lets the loop continue with the next value.\n\n```python\nfor n in range(1, 6):\n    if n == 3:\n        continue\n    print(n)\n```\n\nThe output is:\n\n```text\n1\n2\n4\n5\n```\n\nOnly the iteration where `n == 3` is skipped. Later values still run.\n\nUse `continue` when one value should be ignored but the loop should keep processing what comes next.\n"
+          },
+          "break-vs-continue": {
+            "title": "Choose whether to stop or skip",
+            "bodyMarkdown": "The key question is: **Should later iterations still happen?**\n\n- `break` → no; exit the loop now.\n- `continue` → yes; skip this iteration and move to the next one.\n\nBoth can appear in the same loop:\n\n```python\ntext = \"a b#cd\"\n\nfor ch in text:\n    if ch == \" \":\n        continue\n    if ch == \"#\":\n        break\n    print(ch)\n```\n\nThe output is:\n\n```text\na\nb\n```\n\nWhat happens:\n\n1. `a` prints.\n2. The space triggers `continue`, so nothing prints for that iteration.\n3. `b` prints.\n4. `#` triggers `break`, so the loop ends.\n5. `c` and `d` are never visited.\n\nUse the effect you need—not whichever keyword happens to look familiar.\n"
+          }
+        }
+      }
+    }
+  }
+}

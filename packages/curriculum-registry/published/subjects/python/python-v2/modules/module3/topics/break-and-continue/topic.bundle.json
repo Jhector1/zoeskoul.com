@@ -1,0 +1,741 @@
+{
+  "topicId": "break-and-continue",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-python-v2-3-while-loops",
+  "prefix": "pyv2_3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.break-and-continue.label",
+    "summaryKey": "topics.python-v2.python-v2-3.break-and-continue.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.sketch0.title",
+      "sketchId": "break-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-break-and-continue-sketch0",
+        "titleKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.title",
+        "promptKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.prompt",
+        "exerciseKey": "code-break-stop-at-number",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.sketch1.title",
+      "sketchId": "continue-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-break-and-continue-sketch1",
+        "titleKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.title",
+        "promptKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.prompt",
+        "exerciseKey": "code-continue-skip-multiples",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.sketch2.title",
+      "sketchId": "break-vs-continue",
+      "height": 420,
+      "tryIt": {
+        "id": "try-break-and-continue-sketch2",
+        "titleKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.title",
+        "promptKey": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.prompt",
+        "exerciseKey": "code-break-first-negative",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "break-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.break-and-continue.break-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.break-and-continue.break-basics.bodyMarkdown"
+    },
+    {
+      "id": "continue-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.break-and-continue.continue-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.break-and-continue.continue-basics.bodyMarkdown"
+    },
+    {
+      "id": "break-vs-continue",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.break-and-continue.break-vs-continue.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.break-and-continue.break-vs-continue.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-break-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.sc-break-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-continue-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.sc-continue-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-break-uses",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.mc-break-uses",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-continue-results",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.mc-continue-results",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-break-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.dr-break-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-continue-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.dr-continue-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-break-keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.fb-break-keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "break"
+      }
+    },
+    {
+      "id": "fb-continue-keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.fb-continue-keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "continue"
+      }
+    },
+    {
+      "id": "code-break-stop-at-number",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "4\n7\n0\n",
+            "stdout": "4\n7\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n5\n0\n",
+            "stdout": "-2\n5\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)while\\s+True\\s*:.*number\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+number\\s*==\\s*0\\s*:.*break.*print\\s*\\(\\s*number\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)while\\s+True\\s*:.*number\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+number\\s*==\\s*0\\s*:.*break.*print\\s*\\(\\s*number\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-continue-skip-multiples",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "11\n",
+            "stdout": "1\n2\n4\n5\n7\n8\n10\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "1\n2\n4\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n",
+            "stdout": "1\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+number\\s+in\\s+range\\s*\\(\\s*1\\s*,\\s*stop\\s*\\)\\s*:.*if\\s+number\\s*%\\s*3\\s*==\\s*0\\s*:.*continue.*print\\s*\\(\\s*number\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+number\\s+in\\s+range\\s*\\(\\s*1\\s*,\\s*stop\\s*\\)\\s*:.*if\\s+number\\s*%\\s*3\\s*==\\s*0\\s*:.*continue.*print\\s*\\(\\s*number\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-break-first-negative",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "a b#cd\n",
+            "stdout": "a\nb\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "xy z\n",
+            "stdout": "x\ny\nz\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "#later\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*[\"\\'] [\"\\']\\s*:.*continue.*if\\s+ch\\s*==\\s*[\"\\']#[\"\\']\\s*:.*break.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*[\"\\'] [\"\\']\\s*:.*continue.*if\\s+ch\\s*==\\s*[\"\\']#[\"\\']\\s*:.*break.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-break-guess-game",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n5\n7\n",
+            "stdout": "try again\ntry again\ncorrect\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "7\n",
+            "stdout": "correct\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "8\n7\n",
+            "stdout": "try again\ncorrect\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)while\\s+True\\s*:.*guess\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+guess\\s*==\\s*7\\s*:.*print\\s*\\(\\s*[\"\\']correct[\"\\']\\s*\\).*break.*print\\s*\\(\\s*[\"\\']try again[\"\\']\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)while\\s+True\\s*:.*guess\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+guess\\s*==\\s*7\\s*:.*print\\s*\\(\\s*[\"\\']correct[\"\\']\\s*\\).*break.*print\\s*\\(\\s*[\"\\']try again[\"\\']\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-continue-skip-letter",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "banana\n",
+            "stdout": "b\nn\nn\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "cat\n",
+            "stdout": "c\nt\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "aaa\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+word\\s*:.*if\\s+ch\\s*==\\s*[\"\\']a[\"\\']\\s*:.*continue.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+word\\s*:.*if\\s+ch\\s*==\\s*[\"\\']a[\"\\']\\s*:.*continue.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

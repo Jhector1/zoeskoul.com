@@ -1,7 +1,12 @@
 import { getRequestConfig } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
-import { loadLocaleMessages } from "./messages.generated";
+import {
+  loadLocaleMessages as loadAppLocaleMessages,
+} from "./messages.generated";
+import {
+  loadCurriculumLocaleMessages,
+} from "@zoeskoul/curriculum-registry/runtime";
 
 type AnyObj = Record<string, any>;
 
@@ -21,6 +26,48 @@ function deepMerge<T extends AnyObj>(base: T, override: AnyObj): T {
     }
 
     return out as T;
+}
+
+
+type CurriculumMessageObject = Record<string, any>;
+
+function isCurriculumMessageObject(
+  value: unknown,
+): value is CurriculumMessageObject {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function mergeCurriculumMessages(
+  base: CurriculumMessageObject,
+  override: CurriculumMessageObject,
+): CurriculumMessageObject {
+  const out: CurriculumMessageObject = { ...base };
+
+  for (const [key, value] of Object.entries(override)) {
+    const current = out[key];
+
+    out[key] =
+      isCurriculumMessageObject(current) &&
+      isCurriculumMessageObject(value)
+        ? mergeCurriculumMessages(current, value)
+        : value;
+  }
+
+  return out;
+}
+
+async function loadLocaleMessages(
+  locale: string,
+): Promise<CurriculumMessageObject> {
+  const [appMessages, curriculumMessages] = await Promise.all([
+    loadAppLocaleMessages(locale),
+    loadCurriculumLocaleMessages(locale),
+  ]);
+
+  return mergeCurriculumMessages(
+    appMessages,
+    curriculumMessages,
+  );
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

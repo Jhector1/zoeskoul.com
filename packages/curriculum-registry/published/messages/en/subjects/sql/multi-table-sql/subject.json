@@ -1,0 +1,169 @@
+{
+  "subjects": {
+    "multi-table-sql": {
+      "title": "Multi-Table SQL & Joins",
+      "description": "Move beyond single-table reports by following keys across related tables. Build INNER JOIN and LEFT JOIN reports, travel through bridge tables, preserve unmatched rows, count relationships accurately, and complete a school participation capstone.",
+      "prerequisites": [
+        "SQL Analysis & Reporting, or equivalent experience building clear single-table detail reports and grouped summaries."
+      ]
+    }
+  },
+  "modules": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "title": "Join Foundations",
+        "description": "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
+        "outcomes": [
+          "Trace primary-key and foreign-key relationships in the ERD.",
+          "Use INNER JOIN and ON to connect matching rows.",
+          "Qualify columns when multiple tables contain similar names.",
+          "Use concise table aliases without hiding the relationship logic."
+        ],
+        "why": [
+          "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "multi-table-sql-module-1-relationship-paths": {
+        "title": "Following Relationship Paths",
+        "description": "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
+        "outcomes": [
+          "Distinguish one-to-many and many-to-many result behavior.",
+          "Use enrollments as a bridge between students and courses.",
+          "Extend a valid join path one relationship at a time.",
+          "Detect missing, reversed, or unrelated ON conditions."
+        ],
+        "why": [
+          "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "title": "Outer Joins and Accurate Counts",
+        "description": "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
+        "outcomes": [
+          "Use LEFT JOIN to preserve every row from the chosen starting table.",
+          "Explain how WHERE can accidentally remove unmatched LEFT JOIN rows.",
+          "Find entities with no related records using an anti-join pattern.",
+          "Use COUNT(right_id) and COUNT(DISTINCT ...) at the intended result grain."
+        ],
+        "why": [
+          "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "multi-table-sql-module-3-final-capstone": {
+        "title": "Final Capstone",
+        "description": "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
+        "outcomes": [
+          "Plan the full students-to-departments relationship path from a reporting brief.",
+          "Preserve every student while joining optional enrollment, course, and department rows.",
+          "Calculate enrollment, distinct-course, and distinct-department counts at one-row-per-student grain.",
+          "Add a clear participation label and deterministic counseling-priority ranking."
+        ],
+        "why": [
+          "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
+          "The final work demonstrates the complete course workflow."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "multi-table-sql-multi-table-sql-section-0-relationship-keys": {
+          "title": "Relationship Keys",
+          "description": "Use the schema and ERD to identify which columns can connect tables.",
+          "weeks": null,
+          "bullets": [
+            "Reading Keys and Relationships",
+            "INNER JOIN with ON"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-0-readable-joins": {
+          "title": "Readable Join Queries",
+          "description": "Keep joined queries unambiguous as more columns appear.",
+          "weeks": null,
+          "bullets": [
+            "Qualifying Columns Across Tables",
+            "Table Aliases for Join Queries"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-0-module-project": {
+          "title": "Module Project",
+          "description": "Build one dependable two-table roster without discarding earlier work.",
+          "weeks": null,
+          "bullets": [
+            "Module 0 Project: Student Enrollment Activity Roster"
+          ]
+        }
+      },
+      "multi-table-sql-module-1-relationship-paths": {
+        "multi-table-sql-multi-table-sql-section-1-relationship-shapes": {
+          "title": "Relationship Shapes",
+          "description": "Understand how relationship cardinality changes the result rows.",
+          "weeks": null,
+          "bullets": [
+            "One-to-Many and Many-to-Many Results",
+            "Joining Through a Bridge Table"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-1-longer-joins": {
+          "title": "Longer Join Paths",
+          "description": "Extend and debug longer relational queries.",
+          "weeks": null,
+          "bullets": [
+            "Extending a Join Path",
+            "Avoiding Cartesian and Wrong-Key Joins"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-1-module-project": {
+          "title": "Module Project",
+          "description": "Build one four-table directory by extending a correct relationship path.",
+          "weeks": null,
+          "bullets": [
+            "Module 1 Project: Course Enrollment Directory"
+          ]
+        }
+      },
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "multi-table-sql-multi-table-sql-section-2-preserving-rows": {
+          "title": "Preserving Unmatched Rows",
+          "description": "Use LEFT JOIN intentionally and keep its unmatched rows visible.",
+          "weeks": null,
+          "bullets": [
+            "LEFT JOIN Preserves Unmatched Rows",
+            "Filtering LEFT JOINs with ON and WHERE"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-2-missing-and-counts": {
+          "title": "Missing Relationships and Counts",
+          "description": "Turn unmatched rows into useful audits and reliable grouped metrics.",
+          "weeks": null,
+          "bullets": [
+            "Finding Missing Relationships",
+            "Counting Related Rows Without Inflation"
+          ]
+        },
+        "multi-table-sql-multi-table-sql-section-2-module-project": {
+          "title": "Module Project",
+          "description": "Build one all-department scorecard with trustworthy relationship counts.",
+          "weeks": null,
+          "bullets": [
+            "Module 2 Project: Department Participation Scorecard"
+          ]
+        }
+      },
+      "multi-table-sql-module-3-final-capstone": {
+        "multi-table-sql-multi-table-sql-section-3-final-capstone": {
+          "title": "Final Capstone",
+          "description": "Complete one focused multi-table report from brief to final validated query.",
+          "weeks": null,
+          "bullets": [
+            "Final Capstone: Student Program Participation Audit"
+          ]
+        }
+      }
+    }
+  }
+}

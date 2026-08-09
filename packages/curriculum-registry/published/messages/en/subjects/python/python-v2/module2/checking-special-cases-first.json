@@ -1,0 +1,261 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "label": "Checking Special Cases First",
+          "summary": "Put invalid, sentinel, or narrower cases before broader cases when that prevents them from being hidden or makes the remaining logic clearer.",
+          "cards": {
+            "sketch0": {
+              "title": "Why check special cases first?"
+            },
+            "sketch1": {
+              "title": "Put specific checks before broad checks"
+            },
+            "sketch2": {
+              "title": "Use `elif` to separate cases clearly"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-special-before-general": {
+              "title": "Choose the best ordering",
+              "prompt": "Why is it usually better to check a special case before a broad case in an `if` / `elif` chain?",
+              "hint": "A first matching branch prevents later branches in the same chain from running.",
+              "help": {
+                "concept": "When a broad condition also includes a special value, placing the broad condition first can hide the special branch.",
+                "hint_1": "Ask whether the special value satisfies both conditions.",
+                "hint_2": "If it does, the narrower condition should be checked first."
+              },
+              "options": {
+                "a": "Because Python runs every matching branch in order",
+                "b": "Because a broad condition placed first can prevent the special case from being reached",
+                "c": "Because `elif` only works with numbers",
+                "d": "Because special cases must always be written in `else`"
+              }
+            },
+            "sc-output-perfect-score": {
+              "title": "Predict the output",
+              "prompt": "What does this code print when `score = 100`?\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect\")\nelse:\n    print(\"Fail\")\n```",
+              "hint": "Evaluate `score >= 60` before looking at the later `elif`.",
+              "help": {
+                "concept": "An `if` / `elif` chain stops after its first true branch.",
+                "hint_1": "`100 >= 60` is already true.",
+                "hint_2": "The later exact-score branch is therefore skipped."
+              },
+              "options": {
+                "a": "Perfect",
+                "b": "Fail",
+                "c": "Pass",
+                "d": "It prints both Pass and Perfect"
+              }
+            },
+            "mc-good-special-case-order": {
+              "title": "Find the good examples",
+              "prompt": "Which snippets check a special case before a broader case? Choose all that apply.",
+              "hint": "Look for a narrow case that would otherwise be included by a later broader rule.",
+              "help": {
+                "concept": "Good ordering places a subset or sentinel case before the wider case that follows it.",
+                "hint_1": "`score == 100` is narrower than `score >= 60`.",
+                "hint_2": "`text == \"\"` can be separated before the complementary non-empty case."
+              },
+              "options": {
+                "a": "if score == 100: ... elif score >= 60: ...",
+                "b": "if age >= 0: ... elif age == 0: ...",
+                "c": "if text == \"\": ... elif text != \"\": ...",
+                "d": "if number > 0: ... elif number == 1: ..."
+              }
+            },
+            "mc-values-hit-first-branch": {
+              "title": "Which value takes the special branch?",
+              "prompt": "Consider this code:\n\n```python\nif n == 0:\n    print(\"zero\")\nelif n <= 10:\n    print(\"small\")\nelse:\n    print(\"big\")\n```\n\nWhich value reaches the first branch?",
+              "hint": "The first branch uses exact equality.",
+              "help": {
+                "concept": "Only a value equal to `0` satisfies `n == 0`.",
+                "hint_1": "Do not evaluate the broader `n <= 10` branch until the first branch has failed.",
+                "hint_2": "Choose the exact special value."
+              },
+              "options": {
+                "a": "-1",
+                "b": "0",
+                "c": "1",
+                "d": "10"
+              }
+            },
+            "dr-order-score-checks": {
+              "title": "Order the branches",
+              "prompt": "Arrange these conditions from best to worst order for a grading check where `100` should get a special message before normal passing scores.",
+              "hint": "Put the exact score before the pass range, then use the fallback.",
+              "help": {
+                "concept": "The exact `100` case is contained inside the broader `>= 60` range.",
+                "hint_1": "Check `score == 100` first.",
+                "hint_2": "The catch-all `else` remains last."
+              },
+              "tokens": {
+                "t1": "if score == 100",
+                "t2": "elif score >= 60",
+                "t3": "else"
+              }
+            },
+            "dr-order-input-validation": {
+              "title": "Order validation logic",
+              "prompt": "Arrange these checks in a clear order for an age classifier. Invalid ages should be handled before normal ages.",
+              "hint": "Reject impossible input before classifying valid input.",
+              "help": {
+                "concept": "Validation-first logic handles an invalid range before special valid values and general cases.",
+                "hint_1": "Negative ages should be removed from normal classification first.",
+                "hint_2": "After that, handle the exact edge value and then the remainder."
+              },
+              "tokens": {
+                "t1": "if age < 0",
+                "t2": "elif age == 0",
+                "t3": "else"
+              }
+            },
+            "fb-empty-string-check": {
+              "title": "Complete the special-case check",
+              "prompt": "Fill in the missing value so the code checks for an empty string first.",
+              "hint": "The sentinel contains zero characters.",
+              "help": {
+                "concept": "The empty string literal is written as `\"\"`.",
+                "hint_1": "`\" \"` contains a space, so it is not empty.",
+                "hint_2": "Choose two quotes with nothing between them."
+              },
+              "template": "if text == [blank1]:\n    print(\"Empty\")",
+              "choices": [
+                "\"\"",
+                "\" \"",
+                "None",
+                "0"
+              ]
+            },
+            "fb-elif-keyword": {
+              "title": "Choose the right keyword",
+              "prompt": "Fill in the missing keyword to check a second condition only if the first one was false.",
+              "hint": "The second condition belongs to the same conditional chain.",
+              "help": {
+                "concept": "`elif` checks another condition only when earlier branches in the chain were false.",
+                "hint_1": "It follows the first `if` branch.",
+                "hint_2": "Choose `elif`."
+              },
+              "template": "if score == 100:\n    print(\"Perfect\")\n[blank1] score >= 60:\n    print(\"Pass\")",
+              "choices": [
+                "else",
+                "elif",
+                "then",
+                "loop"
+              ]
+            },
+            "code-invalid-before-range": {
+              "title": "Reject an invalid age before classifying it",
+              "prompt": "Read one integer age. Print `Invalid` for negative ages, `Child` for ages 0 through 12, and `Older` for all remaining ages.",
+              "hint": "Check `age < 0` before the normal age range.",
+              "help": {
+                "concept": "Validation-first logic removes impossible input before normal classification.",
+                "hint_1": "Use `if age < 0:` first.",
+                "hint_2": "After that, `elif age < 13:` safely represents ages 0–12."
+              },
+              "starterCode": "age = int(input())\n# Print Invalid, Child, or Older\n",
+              "solutionCode": "age = int(input())\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Check `age < 0` before the normal age classification."
+                }
+              }
+            },
+            "code-perfect-before-pass": {
+              "title": "Protect the perfect-score special case",
+              "prompt": "Read one integer score. Print `Perfect` for exactly 100, `Pass` for other scores of 60 or more, and `Fail` otherwise.",
+              "hint": "The exact 100 check must appear before the broader passing range.",
+              "help": {
+                "concept": "`score == 100` is a narrower case inside the broader `score >= 60` range.",
+                "hint_1": "Put the equality check first.",
+                "hint_2": "Use `elif score >= 60:` second."
+              },
+              "starterCode": "score = int(input())\n# Print Perfect, Pass, or Fail\n",
+              "solutionCode": "score = int(input())\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Place `score == 100` before the broader `score >= 60` check."
+                }
+              }
+            },
+            "code-empty-yes-other": {
+              "title": "Separate empty input before normal text",
+              "prompt": "Read one line of text. Print `Empty` for `\"\"`, `Confirmed` for `\"yes\"`, and `Other` for every other string.",
+              "hint": "Handle the empty-string sentinel first.",
+              "help": {
+                "concept": "A sentinel value can be separated before ordinary cases even when the branches do not overlap.",
+                "hint_1": "Start with `if text == \"\":`.",
+                "hint_2": "Then check `elif text == \"yes\":`."
+              },
+              "starterCode": "text = input()\n# Print Empty, Confirmed, or Other\n",
+              "solutionCode": "text = input()\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Check the empty-string sentinel before the normal text branches."
+                }
+              }
+            },
+            "code-zero-before-small": {
+              "title": "Protect zero from a broader small-number rule",
+              "prompt": "Read one nonnegative integer `n`. Print `Zero` for exactly 0, `Small` for values 1 through 10, and `Large` for values above 10.",
+              "hint": "Zero also satisfies `n <= 10`, so its exact check must come first.",
+              "help": {
+                "concept": "The exact zero case is contained inside the broader `n <= 10` range.",
+                "hint_1": "Use `if n == 0:` first.",
+                "hint_2": "Then `elif n <= 10:` handles the remaining small values."
+              },
+              "starterCode": "n = int(input())\n# Input is nonnegative; print Zero, Small, or Large\n",
+              "solutionCode": "n = int(input())\nif n == 0:\n    print(\"Zero\")\nelif n <= 10:\n    print(\"Small\")\nelse:\n    print(\"Large\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Place `n == 0` before the broader `n <= 10` branch."
+                }
+              }
+            },
+            "code-invalid-code-first": {
+              "title": "Handle an invalid code before valid states",
+              "prompt": "Read one integer `code`. Print `Invalid` when it is negative, `Start` when it is exactly 0, and `Continue` otherwise.",
+              "hint": "Remove the invalid range before checking valid code states.",
+              "help": {
+                "concept": "This practice uses validation first, then an exact valid edge case, then a general fallback.",
+                "hint_1": "Start with `code < 0`.",
+                "hint_2": "Check `code == 0` only after invalid codes are excluded."
+              },
+              "starterCode": "code = int(input())\n# Print Invalid, Start, or Continue\n",
+              "solutionCode": "code = int(input())\nif code < 0:\n    print(\"Invalid\")\nelif code == 0:\n    print(\"Start\")\nelse:\n    print(\"Continue\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Check `code < 0` before `code == 0` and the fallback."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "special-cases-come-first": {
+            "title": "Handle invalid or exceptional input early",
+            "bodyMarkdown": "Some values should be separated before normal processing begins.\n\nFor example, a negative age is invalid:\n\n```python\nage = -3\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")\n```\n\nPython checks the invalid case first.\n\nThat gives the rest of the chain a simpler assumption: once execution reaches the second branch, the age is already known to be nonnegative.\n\nExamples:\n\n- `-3` → `Invalid`\n- `8` → `Child`\n- `20` → `Older`\n\nThis is a **validation-first** pattern. The invalid condition does not have to overlap every later condition; handling it early keeps bad input out of the normal cases.\n"
+          },
+          "broad-vs-specific": {
+            "title": "Put a narrower matching case before a broader one",
+            "bodyMarkdown": "Order becomes essential when one value can satisfy more than one condition.\n\nConsider a perfect score:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect\")\nelse:\n    print(\"Fail\")\n```\n\nThe output is:\n\n```text\nPass\n```\n\n`100` satisfies both `score >= 60` and `score == 100`, but Python stops at the first true branch.\n\nTo preserve the special result, put the narrower condition first:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")\n```\n\nNow:\n\n- `100` → `Perfect`\n- `75` → `Pass`\n- `40` → `Fail`\n\nWhen conditions overlap, ask which rule matches fewer values. That narrower rule usually belongs first.\n"
+          },
+          "using-elif-for-clear-branches": {
+            "title": "Separate sentinel values before normal text",
+            "bodyMarkdown": "A special value can also act as a **sentinel**: a value with a distinct meaning that should be handled separately.\n\nFor text input, the empty string can mean “nothing was entered”:\n\n```python\ntext = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")\n```\n\nThese cases do not overlap, so putting the empty string first is not required to prevent `\"yes\"` from being hidden.\n\nIt is still useful because it separates the sentinel case from normal text handling immediately:\n\n1. no text entered;\n2. one recognized value;\n3. every other text value.\n\nThat makes the intent of the chain easier to read and extend later.\n"
+          }
+        }
+      }
+    }
+  }
+}

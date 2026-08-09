@@ -1,7 +1,7 @@
 import "server-only";
 
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
-import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
+import { CATALOG_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
 import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import {
     getRawReviewModule,
@@ -298,7 +298,7 @@ export async function getResolvedCatalogMap(): Promise<ResolvedCatalogMap> {
     for (const catalog of catalogEntries) {
         const subjects = (
             await Promise.all(
-                catalog.subjectSlugs.map((subjectSlug) =>
+                catalog.subjectSlugs.map((subjectSlug: string) =>
                     resolveSubjectCatalogItem(subjectSlug),
                 ),
             )

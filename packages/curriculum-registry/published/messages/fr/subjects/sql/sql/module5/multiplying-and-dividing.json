@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "label": "Multiplication et division",
+          "summary": "Multiplication et division dans les colonnes calculées et les expressions SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Multiplier des colonnes en SQL"
+            },
+            "sketch1": {
+              "title": "Diviser des colonnes en SQL"
+            },
+            "sketch2": {
+              "title": "Utiliser des alias pour la lisibilité"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Calculer le total de ligne pour chaque commande",
+              "prompt": "Écrivez une requête SQL pour sélectionner les champs `id`, `quantity`, `unit_price` et une nouvelle colonne appelée `line_total` (qui est `quantity` multiplié par `unit_price`) de la table `orders`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "q2": {
+              "title": "Calculer le prix unitaire moyen par commande",
+              "prompt": "Écrivez une requête SQL pour sélectionner les champs `id`, `quantity`, `unit_price` et une nouvelle colonne appelée `avg_price` qui divise la valeur totale de la commande (`quantity * unit_price`) par la `quantity` pour chaque commande.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "q3": {
+              "title": "But de l'utilisation des alias dans les colonnes calculées",
+              "prompt": "Pourquoi devriez-vous utiliser le mot-clé `AS` pour donner un alias à une colonne calculée en SQL ?",
+              "hint": "Pensez à l'apparence du résultat et à la façon dont vous faites référence aux colonnes.",
+              "help": {
+                "concept": "Les alias rendent votre jeu de résultats plus lisible et vous permettent de faire référence aux colonnes calculées par un nom clair.",
+                "hint_1": "Sans alias, le nom de la colonne est l'expression complète.",
+                "hint_2": "Les alias améliorent la lisibilité et facilitent l'utilisation de la colonne dans d'autres requêtes."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q4": {
+              "title": "Identifier les utilisations valides de la multiplication et de la division en SQL",
+              "prompt": "Lesquelles des propositions suivantes sont des façons valides d'utiliser la multiplication et la division dans une instruction SELECT en SQL ? Cochez toutes les réponses valides.",
+              "hint": "Considérez à la fois les opérations colonne à colonne et colonne à constante.",
+              "help": {
+                "concept": "SQL permet les opérations arithmétiques entre colonnes, entre une colonne et une constante, ou entre constantes.",
+                "hint_1": "Vous pouvez multiplier ou diviser des colonnes, ou utiliser des constantes dans les expressions.",
+                "hint_2": "Cherchez les options qui utilisent une syntaxe SQL valide pour l'arithmétique dans SELECT."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q5": {
+              "title": "Choisir le bon opérateur pour la division",
+              "prompt": "Choisissez la meilleure valeur pour le premier blanc manquant dans l'énoncé.",
+              "hint": "Pensez au symbole utilisé pour la division en SQL.",
+              "help": {
+                "concept": "SQL utilise les symboles arithmétiques standards pour les opérations, y compris la division.",
+                "hint_1": "C'est le même symbole qu'en mathématiques de base pour la division.",
+                "hint_2": "Cherchez le symbole qui sépare le numérateur et le dénominateur."
+              },
+              "template": "La première valeur manquante est [blank1].",
+              "choices": [
+                "/",
+                "*",
+                "+",
+                "-"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "sk1": {
+            "title": "Multiplier des colonnes en SQL",
+            "bodyMarkdown": "En SQL, vous pouvez multiplier deux colonnes ensemble pour créer une nouvelle valeur calculée dans votre instruction SELECT. Par exemple, pour calculer la valeur totale de chaque commande dans la table `orders`, vous pouvez multiplier `quantity` par `unit_price` :\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nCette requête ajoute une nouvelle colonne appelée `line_total` qui affiche le résultat de la multiplication pour chaque ligne."
+          },
+          "sk2": {
+            "title": "Diviser des colonnes en SQL",
+            "bodyMarkdown": "La division peut aussi être utilisée dans les expressions SQL. Par exemple, si vous voulez connaître le prix moyen par article pour chaque commande, vous pouvez diviser la valeur totale par la quantité :\n\n```sql\nSELECT id, quantity, unit_price, (quantity * unit_price) / quantity AS avg_price\nFROM orders;\n```\n\nCela retournera le prix moyen par article pour chaque commande. Faites attention à ne pas diviser par zéro."
+          },
+          "sk3": {
+            "title": "Utiliser des alias pour la lisibilité",
+            "bodyMarkdown": "Lorsque vous utilisez l'arithmétique en SQL, il est utile d'utiliser le mot-clé `AS` pour donner à vos colonnes calculées des noms clairs (alias). Cela rend vos résultats plus faciles à lire et à comprendre. Par exemple :\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nIci, `total_amount` est un alias pour la valeur calculée."
+          }
+        }
+      }
+    }
+  }
+}

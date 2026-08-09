@@ -2,6 +2,7 @@ import {
     loadBlueprint,
     publishDraft,
     resolveSubjectPublishTarget,
+    rebuildRegistries,
 } from "@zoeskoul/curriculum-compiler";
 
 function looksLikeBlueprintPath(value: string) {
@@ -18,5 +19,5 @@ export async function runPublish(input: string) {
         subjectSlug: target.liveSubjectSlug,
     });
 
-    // await rebuildRegistries();
+    await rebuildRegistries();
 }

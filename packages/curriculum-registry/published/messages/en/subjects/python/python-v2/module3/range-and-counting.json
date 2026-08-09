@@ -1,0 +1,259 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "range-and-counting": {
+          "label": "Range and Counting Patterns",
+          "summary": "Use `range(stop)`, `range(start, stop)`, and `range(start, stop, step)` to generate controlled numeric sequences for `for` loops.",
+          "cards": {
+            "sketch0": {
+              "title": "Counting with range()"
+            },
+            "sketch1": {
+              "title": "Using start and stop values"
+            },
+            "sketch2": {
+              "title": "Skipping numbers with a step"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-range-five-values": {
+              "title": "What does range(5) produce?",
+              "prompt": "Which list matches the values from `range(5)` in a `for` loop?",
+              "hint": "`range(5)` starts at 0 and excludes 5.",
+              "help": {
+                "concept": "`range(stop)` produces integers from 0 through `stop - 1`.",
+                "hint_1": "The first value is 0.",
+                "hint_2": "The last value is 4 because the stop boundary 5 is excluded."
+              },
+              "options": {
+                "a": "0, 1, 2, 3, 4",
+                "b": "1, 2, 3, 4, 5",
+                "c": "0, 1, 2, 3, 4, 5",
+                "d": "5"
+              }
+            },
+            "sc-range-start-stop": {
+              "title": "Which loop prints 1 to 5?",
+              "prompt": "Choose the loop that prints the numbers `1` through `5`, each on its own line.",
+              "hint": "To include 5, choose a stop boundary just after it.",
+              "help": {
+                "concept": "`range(start, stop)` includes `start` but excludes `stop`.",
+                "hint_1": "The sequence must begin at 1.",
+                "hint_2": "A stop value of 6 leaves 5 as the last produced value."
+              },
+              "options": {
+                "a": "for n in range(1, 5): print(n)",
+                "b": "for n in range(1, 6): print(n)",
+                "c": "for n in range(0, 5): print(n)",
+                "d": "for n in range(5): print(n)"
+              }
+            },
+            "mc-true-about-range": {
+              "title": "Facts about range()",
+              "prompt": "Choose all true statements about Python `range()`.",
+              "hint": "Check the defaults and remember that the stop value is excluded.",
+              "help": {
+                "concept": "`range()` supports stop, start/stop, and start/stop/step forms.",
+                "hint_1": "`range(5)` uses a default start of 0 and step of 1.",
+                "hint_2": "A third argument changes the step size."
+              },
+              "options": {
+                "a": "`range(5)` starts at 0 by default.",
+                "b": "The stop value is included in the loop.",
+                "c": "`range(2, 8, 2)` can count by twos.",
+                "d": "`range()` can help control how many times a loop runs."
+              }
+            },
+            "mc-even-loop-options": {
+              "title": "Ranges that produce the same even sequence",
+              "prompt": "Which loops print exactly `0, 2, 4, 6, 8`, one value per line? Choose all correct answers.",
+              "hint": "Because the stop value is excluded, more than one nearby stop boundary can produce the same final value.",
+              "help": {
+                "concept": "A step of 2 produces the even pattern; the stop boundary determines whether another value is reached.",
+                "hint_1": "`range(0, 10, 2)` stops before 10.",
+                "hint_2": "`range(0, 9, 2)` also stops after producing 8 because the next value would be 10."
+              },
+              "options": {
+                "a": "for n in range(0, 10, 2): print(n)",
+                "b": "for n in range(0, 9, 2): print(n)",
+                "c": "for n in range(2, 10, 2): print(n)",
+                "d": "for n in range(0, 11, 2): print(n)"
+              }
+            },
+            "dr-build-basic-range-loop": {
+              "title": "Build a range(stop) loop",
+              "prompt": "Arrange the lines to make valid Python that prints `0` through `4`.",
+              "hint": "The print statement belongs inside the `for` block.",
+              "help": {
+                "concept": "A `for` header is followed by an indented loop body.",
+                "hint_1": "Use `for n in range(5):` first.",
+                "hint_2": "Keep `print(n)` indented beneath it."
+              },
+              "tokens": {
+                "t1": "for n in range(5):",
+                "t2": "    print(n)"
+              }
+            },
+            "dr-build-step-range": {
+              "title": "Build a stepped range loop",
+              "prompt": "Arrange the lines to make valid Python that prints even numbers below 10.",
+              "hint": "Use a step of 2 and indent the print statement.",
+              "help": {
+                "concept": "`range(0, 10, 2)` produces the values and the indented loop body prints each one.",
+                "hint_1": "The `for` header comes first.",
+                "hint_2": "The print line belongs inside the loop."
+              },
+              "tokens": {
+                "t1": "for n in range(0, 10, 2):",
+                "t2": "    print(n)"
+              }
+            },
+            "fb-stop-not-included": {
+              "title": "Complete the stop value idea",
+              "prompt": "Fill in the missing word to complete the rule about `range()`.",
+              "hint": "The stop value marks the boundary but is not produced.",
+              "help": {
+                "concept": "Python ranges exclude their stop value.",
+                "hint_1": "`range(1, 6)` ends with 5.",
+                "hint_2": "Choose `excluded`."
+              },
+              "template": "In `range(start, stop)`, the stop value is [blank1].",
+              "choices": [
+                "included",
+                "excluded",
+                "doubled",
+                "repeated"
+              ]
+            },
+            "fb-step-even-pattern": {
+              "title": "Complete the step value",
+              "prompt": "Fill in the missing value so the loop counts by twos.",
+              "hint": "The desired values differ by 2.",
+              "help": {
+                "concept": "The third argument is the amount added between produced values.",
+                "hint_1": "The sequence should go 0, 2, 4, ...",
+                "hint_2": "Choose a step of 2."
+              },
+              "template": "for n in range(0, 10, [blank1]):",
+              "choices": [
+                "1",
+                "2",
+                "5",
+                "10"
+              ]
+            },
+            "ci-print-zero-to-four": {
+              "title": "Use range(stop) with an input boundary",
+              "prompt": "Read an integer `stop`. Use `for n in range(stop)` to print every value produced by the range, one per line.",
+              "hint": "With one argument, `range(stop)` starts at 0 and excludes `stop`.",
+              "help": {
+                "concept": "The input becomes the exclusive stop boundary.",
+                "hint_1": "Use exactly one argument in `range(...)`.",
+                "hint_2": "Print the loop variable inside the `for` block."
+              },
+              "starterCode": "stop = int(input())\n# Print the values from range(stop)\n",
+              "solutionCode": "stop = int(input())\nfor n in range(stop):\n    print(n)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `for n in range(stop):` and print `n` inside the loop."
+                }
+              }
+            },
+            "ci-print-one-to-five": {
+              "title": "Use explicit start and stop values",
+              "prompt": "Read integers `start` and `stop`. Use `range(start, stop)` to print every generated value, one per line.",
+              "hint": "Both inputs belong inside `range(start, stop)`.",
+              "help": {
+                "concept": "Two arguments choose the inclusive start and exclusive stop boundaries.",
+                "hint_1": "Read `start` first and `stop` second.",
+                "hint_2": "Print only the loop variable."
+              },
+              "starterCode": "start = int(input())\nstop = int(input())\n# Print range(start, stop)\n",
+              "solutionCode": "start = int(input())\nstop = int(input())\nfor n in range(start, stop):\n    print(n)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `for n in range(start, stop):` with both input boundaries."
+                }
+              }
+            },
+            "ci-even-under-ten": {
+              "title": "Use a step to count by twos",
+              "prompt": "Read an integer `stop`. Use `range(0, stop, 2)` to print the nonnegative even values below `stop`.",
+              "hint": "Start at 0 and use a step of 2.",
+              "help": {
+                "concept": "The third range argument controls the jump between generated values.",
+                "hint_1": "The stop boundary is still excluded.",
+                "hint_2": "Use `for n in range(0, stop, 2):`."
+              },
+              "starterCode": "stop = int(input())\n# Print nonnegative even values below stop\n",
+              "solutionCode": "stop = int(input())\nfor n in range(0, stop, 2):\n    print(n)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `range(0, stop, 2)` so the loop advances by two."
+                }
+              }
+            },
+            "ci-countdown-three-to-one": {
+              "title": "Count backward with a negative step",
+              "prompt": "Read an integer `start`. Use `range(start, 0, -1)` to print a countdown from `start` through 1. If `start` is 0, print nothing.",
+              "hint": "A negative step moves the generated values downward.",
+              "help": {
+                "concept": "For a countdown through 1, use an exclusive stop of 0 and a step of -1.",
+                "hint_1": "The start value is included.",
+                "hint_2": "The stop value 0 is excluded."
+              },
+              "starterCode": "start = int(input())\n# Count down from start through 1\n",
+              "solutionCode": "start = int(input())\nfor n in range(start, 0, -1):\n    print(n)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `range(start, 0, -1)` for a countdown that ends at 1."
+                }
+              }
+            },
+            "ci-print-squares-one-to-four": {
+              "title": "Transform each value from a range",
+              "prompt": "Read an integer `n`. Use `range(1, n + 1)` to print the square of each integer from 1 through `n`. If `n` is 0, print nothing.",
+              "hint": "Use `n + 1` as the exclusive stop so the value `n` is included.",
+              "help": {
+                "concept": "A loop can transform each generated range value independently without accumulating a running total.",
+                "hint_1": "Loop with `range(1, n + 1)`.",
+                "hint_2": "Print `value * value` for each generated value."
+              },
+              "starterCode": "n = int(input())\n# Print the squares from 1 through n\n",
+              "solutionCode": "n = int(input())\nfor value in range(1, n + 1):\n    print(value * value)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `range(1, n + 1)` and print the square of each loop value."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "range-and-counting": {
+          "sk-range-basics": {
+            "title": "Start at 0 with range(stop)",
+            "bodyMarkdown": "A `for` loop can take its values from `range()`.\n\n```python\nfor n in range(5):\n    print(n)\n```\n\n`range(5)` produces:\n\n```text\n0\n1\n2\n3\n4\n```\n\nWith one argument, `range(stop)`:\n\n- starts at `0`;\n- increases by `1`;\n- stops **before** `stop`.\n\nSo `5` is the boundary, not a value produced by the range.\n\nA useful rule is:\n\n```text\nrange(stop) -> 0 through stop - 1\n```\n"
+          },
+          "sk-range-start-stop": {
+            "title": "Choose both start and stop",
+            "bodyMarkdown": "Use two arguments when the sequence should begin somewhere other than `0`.\n\n```python\nfor n in range(2, 6):\n    print(n)\n```\n\nThe output is:\n\n```text\n2\n3\n4\n5\n```\n\nWith `range(start, stop)`:\n\n- `start` is included;\n- `stop` is excluded;\n- the default step is still `1`.\n\nThat means `range(1, 6)` produces `1` through `5`, while `range(3, 3)` produces no values because the starting point has already reached the stopping boundary.\n"
+          },
+          "sk-range-step-patterns": {
+            "title": "Control the jump with a step",
+            "bodyMarkdown": "A third argument controls how much the value changes each time.\n\n```python\nfor n in range(0, 10, 2):\n    print(n)\n```\n\nThe output is:\n\n```text\n0\n2\n4\n6\n8\n```\n\nHere the range means:\n\n- start at `0`;\n- stop before `10`;\n- add `2` each time.\n\nA negative step counts downward:\n\n```python\nfor n in range(3, 0, -1):\n    print(n)\n```\n\nThis produces:\n\n```text\n3\n2\n1\n```\n\nThe stop value is excluded in either direction. With a negative step, choose a stop value just below the last value you want to produce.\n"
+          }
+        }
+      }
+    }
+  }
+}

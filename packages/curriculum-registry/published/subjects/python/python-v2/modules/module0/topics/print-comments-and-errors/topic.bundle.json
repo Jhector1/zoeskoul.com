@@ -1,0 +1,481 @@
+{
+  "topicId": "print-comments-and-errors",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-0",
+  "sectionSlug": "python-v2-python-v2-0-setup-and-first-programs",
+  "prefix": "pyv2_0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-0.print-comments-and-errors.label",
+    "summaryKey": "topics.python-v2.python-v2-0.print-comments-and-errors.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch0.title",
+      "sketchId": "sketch-print-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-comments-and-errors-sketch0",
+        "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.title",
+        "promptKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.prompt",
+        "exerciseKey": "ci-print-one-line",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch1.title",
+      "sketchId": "sketch-comments",
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-comments-and-errors-sketch1",
+        "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.title",
+        "promptKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.prompt",
+        "exerciseKey": "ci-comment-and-output",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch2.title",
+      "sketchId": "sketch-first-errors",
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-comments-and-errors-sketch2",
+        "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.title",
+        "promptKey": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.prompt",
+        "exerciseKey": "ci-fix-missing-paren",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-print-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-print-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-print-basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch-comments",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-comments.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-comments.bodyMarkdown"
+    },
+    {
+      "id": "sketch-first-errors",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-first-errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-first-errors.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-print-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.sc-print-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-comment-line",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.sc-comment-line",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-valid-print-lines",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.mc-valid-print-lines",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-comments-behavior",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.mc-comments-behavior",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-build-valid-print",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.dr-build-valid-print",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-close-print-call",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.fb-close-print-call",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ")"
+      }
+    },
+    {
+      "id": "ci-print-one-line",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Welcome to Python[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Welcome to Python\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Welcome to Python[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-comment-and-output",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*#[^\\n]+\\n\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "# Show that the program is ready\nprint(\"Ready\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*#[^\\n]+\\n\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-missing-paren",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Hello[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Hello\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Hello[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

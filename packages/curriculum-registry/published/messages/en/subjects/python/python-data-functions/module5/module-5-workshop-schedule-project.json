@@ -1,0 +1,105 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-workshop-schedule-project": {
+          "label": "Module 5 Workshop Schedule Project",
+          "summary": "A community learning center needs one schedule board built from fixed session records, an ordered list, and a fast room lookup.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a structure for each job"
+            },
+            "project": {
+              "title": "Workshop Schedule Builder"
+            }
+          },
+          "projectSteps": {
+            "exercise1": {
+              "title": "Create the fixed workshop schedule"
+            },
+            "exercise2": {
+              "title": "Build a room lookup"
+            },
+            "exercise3": {
+              "title": "Format the schedule board"
+            }
+          },
+          "quiz": {
+            "try-workshop-schedule-sketch0": {
+              "title": "Unpack one workshop record",
+              "prompt": "The starter defines `session = (\"Python Basics\", \"Room A\")`. Unpack it into `name` and `room`, then print `Python Basics — Room A`.",
+              "hint": "Use one unpacking assignment before the f-string.",
+              "help": {
+                "concept": "A tuple keeps the two fields together while unpacking gives each position a readable name.",
+                "hint_1": "The left side needs two names.",
+                "hint_2": "Use the supplied tuple instead of typing the output directly."
+              },
+              "starterCode": "session = (\"Python Basics\", \"Room A\")\n# Unpack the tuple and print: Python Basics — Room A\n",
+              "solutionCode": "session = (\"Python Basics\", \"Room A\")\nname, room = session\nprint(f\"{name} — {room}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Unpack session into name and room."
+                }
+              }
+            },
+            "exercise1": {
+              "title": "Create the fixed workshop schedule",
+              "prompt": "Start the workshop schedule project. In step 1 of 3, implement `create_schedule()` so it returns a list containing exactly these tuples in order: `(\"Python Basics\", \"Room A\")`, `(\"Data Lab\", \"Room B\")`, and `(\"Web Starter\", \"Room C\")`.",
+              "hint": "Return the exact three records before adding lookup behavior.",
+              "help": {
+                "concept": "A list can hold several fixed tuple records in a predictable order.",
+                "hint_1": "Keep every workshop record as a two-value tuple.",
+                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+              },
+              "starterCode": "def create_schedule():\n    # Return the three required (session, room) tuples in a list.\n    return []\n",
+              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n"
+            },
+            "exercise2": {
+              "title": "Build a room lookup",
+              "prompt": "Continue the workshop schedule project. In step 2 of 3, keep `create_schedule()` unchanged. Implement `build_room_lookup(schedule)` so it returns a dictionary mapping each workshop name to its room.",
+              "hint": "Unpack each tuple into a session name and room.",
+              "help": {
+                "concept": "A dictionary turns a repeated search by position into a direct lookup by name.",
+                "hint_1": "Use the tuple values as the dictionary key and value.",
+                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+              },
+              "starterCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    # Return a dictionary that maps every session name to its room.\n    pass\n",
+              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n"
+            },
+            "exercise3": {
+              "title": "Format the schedule board",
+              "prompt": "Continue the workshop schedule project. In step 3 of 3, keep the schedule and lookup helpers. Implement `format_schedule(schedule)` so it returns a list of strings in the same order, using the format `<session> — <room>` for every tuple.",
+              "hint": "Build a new list in the same order as the schedule.",
+              "help": {
+                "concept": "Formatting belongs in a separate helper so the stored records remain reusable.",
+                "hint_1": "Return strings; do not print them inside the helper.",
+                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+              },
+              "starterCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n\ndef format_schedule(schedule):\n    # Return one \"<session> — <room>\" string for every tuple.\n    pass\n",
+              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n\ndef format_schedule(schedule):\n    return [f\"{name} — {room}\" for name, room in schedule]\n"
+            }
+          },
+          "tryIt": {
+            "try_workshop_schedule_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "The starter defines `session = (\"Python Basics\", \"Room A\")`. Unpack it into `name` and `room`, then print `Python Basics — Room A`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-workshop-schedule-project": {
+          "sketch-1": {
+            "title": "Choose a structure for each job",
+            "bodyMarkdown": "A community learning center schedules several workshops. Each workshop has a fixed pair of fields: its name and room. The complete schedule needs to preserve order, while staff also need a quick lookup by workshop name.\n\nThis project uses a tuple for each fixed record, a list for the ordered schedule, and a dictionary for direct lookup. The final helper formats the same data for a public schedule board without changing how the records are stored."
+          }
+        }
+      }
+    }
+  }
+}

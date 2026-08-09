@@ -4,7 +4,7 @@ import type {
     ReviewTopicShape,
 } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@student/subjects";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {

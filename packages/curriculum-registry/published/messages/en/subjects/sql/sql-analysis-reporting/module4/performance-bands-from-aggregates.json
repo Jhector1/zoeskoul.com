@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "performance-bands-from-aggregates": {
+          "label": "Performance Bands from Aggregates",
+          "summary": "Use CASE on aggregate expressions to turn grouped metrics into concise management labels.",
+          "cards": {
+            "sketch0": {
+              "title": "Label a Group from Its Aggregate Result"
+            },
+            "sketch1": {
+              "title": "Band a Rate Built from Conditional Counts"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Aggregate CASE Input",
+              "prompt": "What can a group-level CASE condition compare?",
+              "hint": "The label is assigned after the group metric is calculated.",
+              "help": {
+                "concept": "CASE can test aggregate expressions in a grouped SELECT.",
+                "hint_1": "This turns a numeric KPI into a category.",
+                "hint_2": "Choose the group metric."
+              },
+              "options": {
+                "a": "Only raw text columns",
+                "b": "An aggregate expression such as SUM or AVG",
+                "c": "Only aliases from another table",
+                "d": "A mutation statement"
+              }
+            },
+            "single-choice-2": {
+              "title": "Threshold Order",
+              "prompt": "Why should `>= 400` appear before `>= 340`?",
+              "hint": "A value of 420 satisfies both conditions.",
+              "help": {
+                "concept": "The first true WHEN determines the label.",
+                "hint_1": "Higher thresholds must be tested before broader lower thresholds.",
+                "hint_2": "Choose the first-match reason."
+              },
+              "options": {
+                "a": "CASE returns the first matching branch.",
+                "b": "SQL requires descending numbers.",
+                "c": "ORDER BY cannot sort labels.",
+                "d": "The lower threshold is invalid."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Good Performance Bands",
+              "prompt": "Which properties make performance bands useful? Select all that apply.",
+              "hint": "A band should explain a real metric distribution rather than hide it.",
+              "help": {
+                "concept": "Meaningful labels and realistic thresholds support action.",
+                "hint_1": "Identical labels would not segment performance.",
+                "hint_2": "Choose the properties that create useful variation."
+              },
+              "options": {
+                "a": "Thresholds are tied to a displayed metric.",
+                "b": "The labels communicate a meaningful state.",
+                "c": "The thresholds are calibrated to the dataset.",
+                "d": "Every group is forced into the same label."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Completion Rate Components",
+              "prompt": "Which values are used in a completion-rate calculation? Select all that apply.",
+              "hint": "A rate compares the matching count with the full group count.",
+              "help": {
+                "concept": "The percentage scale comes from multiplying by 100.",
+                "hint_1": "Unit price is unrelated to order completion rate.",
+                "hint_2": "Choose the count-based components."
+              },
+              "options": {
+                "a": "Completed-order conditional count",
+                "b": "Total order count",
+                "c": "100.0 to express a percentage",
+                "d": "SUM(unit_price) as the denominator"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Assign an Aggregate Band",
+              "prompt": "Arrange the design steps.",
+              "hint": "A useful label starts with a trustworthy metric and calibrated boundaries.",
+              "help": {
+                "concept": "Thresholds should be informed by expected output.",
+                "hint_1": "CASE order follows threshold priority.",
+                "hint_2": "End with the fallback label."
+              },
+              "tokens": {
+                "t1": "Define the group metric",
+                "t2": "Inspect realistic metric values",
+                "t3": "Choose ordered thresholds",
+                "t4": "Write CASE labels from highest threshold to ELSE"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Percentage Scale",
+              "prompt": "Fill the multiplier that expresses the conditional-count ratio as a percentage.",
+              "hint": "Convert a ratio such as 0.75 into 75.0.",
+              "help": {
+                "concept": "A percentage is the ratio multiplied by one hundred.",
+                "hint_1": "The decimal form also helps avoid integer-only division behavior.",
+                "hint_2": "Choose 100.0."
+              },
+              "template": "[blank1] * completed_orders / total_orders",
+              "choices": [
+                "100.0",
+                "1",
+                "0.01",
+                "10"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_performance_bands_from_aggregates_sketch0": {
+              "title": "Band Regions by Completed Net Sales",
+              "prompt": "For completed orders, return `region`, completed net sales rounded to two decimals, and `performance_band`: `Strong` for at least 400, `Stable` for at least 340, otherwise `Watch`. Calculate and return `region, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS completed_net_sales, CASE WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 400 THEN 'Strong' WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 340 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`.",
+              "hint": "Repeat the same net-sales aggregate in the metric and CASE thresholds.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales,\n    CASE\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 400 THEN 'Strong'\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 340 THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY completed_net_sales DESC, region ASC;"
+            },
+            "try_performance_bands_from_aggregates_sketch1": {
+              "title": "Label Category Completion Rates",
+              "prompt": "Return one row per `category` with completion rate rounded to one decimal and `completion_band`: `Reliable` for at least 70, `Mixed` for at least 55, otherwise `At risk`. Calculate and return `category, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed' ELSE 'At risk' END AS completion_band` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`.",
+              "hint": "Build the rate from completed-order count divided by total order count.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "performance-bands-from-aggregates": {
+          "sketch0": {
+            "title": "Label a Group from Its Aggregate Result",
+            "bodyMarkdown": "### Convert a metric into a readable business band\n\nThe aggregate creates the group metric first. A `CASE` expression then evaluates that metric and assigns a label. The thresholds should be based on the actual data and should represent a meaningful business distinction.\n\nIn SQL, the `CASE` statement can be used within aggregate functions to create conditional logic. This is particularly useful when you want to assign labels or categories based on aggregate results. For example, you might want to label sales performance as 'High', 'Medium', or 'Low' based on total sales.\n\nA grouped metric can be translated into a management label with CASE. The aggregate expression is evaluated for each completed group.\n\n```sql\nSELECT\n    region,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    CASE\n        WHEN SUM(quantity * unit_price) >= 550 THEN 'High volume'\n        WHEN SUM(quantity * unit_price) >= 500 THEN 'Steady volume'\n        ELSE 'Developing volume'\n    END AS sales_band\nFROM sales_reporting\nGROUP BY region;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `ROUND(SUM(quantity * unit_price), 2) AS gross_sales,` — adds the row values across the current group and names the output `gross_sales`.\n- `CASE` — starts conditional logic. SQL checks the following `WHEN` branches from top to bottom.\n- `WHEN SUM(quantity * unit_price) >= 550 THEN 'High volume'` — tests `SUM(quantity * unit_price) >= 550` and returns `'High volume'` when true.\n- `WHEN SUM(quantity * unit_price) >= 500 THEN 'Steady volume'` — tests `SUM(quantity * unit_price) >= 500` and returns `'Steady volume'` when true.\n- `ELSE 'Developing volume'` — returns `'Developing volume'` when no earlier condition matches.\n- `END AS sales_band` — closes the `CASE` expression. The result is named `sales_band`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region;` — creates one group for every unique `region` value or combination.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `SELECT` returns the finished metric under its alias.\n\nThe highest threshold appears first because a value above 550 also satisfies the lower condition. The label summarizes the metric; it should not replace the numeric value that supports it."
+          },
+          "sketch1": {
+            "title": "Band a Rate Built from Conditional Counts",
+            "bodyMarkdown": "### Convert a metric into a readable business band\n\nThe aggregate creates the group metric first. A `CASE` expression then evaluates that metric and assigns a label. The thresholds should be based on the actual data and should represent a meaningful business distinction.\n\nThe `HAVING` clause is used to filter groups after aggregation, similar to how `WHERE` filters rows before aggregation. This is useful when you want to include only those groups that meet certain criteria.\n\nPerformance labels can also be based on a rate calculated from conditional counts.\n\n```sql\nSELECT\n    region,\n    ROUND( 100.0 * SUM( CASE\n        WHEN order_status = 'Completed' THEN 1\n        ELSE 0\n    END ) / COUNT(*), 1 ) AS completion_rate\nFROM sales_reporting\nGROUP BY region;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `ROUND( 100.0 * SUM( CASE` — adds the values produced by the conditional `CASE` expression.\n- `WHEN order_status = 'Completed' THEN 1` — tests `order_status = 'Completed'` and returns `1` when true.\n- `ELSE 0` — returns `0` when no earlier condition matches.\n- `END ) / COUNT(*), 1 ) AS completion_rate` — counts every row in the current scope and names the output `completion_rate`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region;` — creates one group for every unique `region` value or combination.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `SELECT` returns the finished metric under its alias.\n\nThe conditional SUM counts completed orders, COUNT gives all orders, and `100.0` converts the ratio into a percentage while preserving decimal division.\n\nOnce the rate is defined, CASE can assign bands that use the same calculation and business thresholds."
+          }
+        }
+      }
+    }
+  }
+}

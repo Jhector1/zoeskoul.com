@@ -1,0 +1,166 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "left-join-preserves-unmatched-rows": {
+          "label": "LEFT JOIN Preserves Unmatched Rows",
+          "summary": "Learn how LEFT JOIN can be used to preserve all rows from a starting table, even when there are no matching records in the joined table.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose Which Rows Must Survive"
+            },
+            "sketch1": {
+              "title": "Preserve the Starting Entity Across a Longer Path"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_left_join_preserves_unmatched_rows_sketch0": {
+              "title": "Try LEFT JOIN with Every Department",
+              "prompt": "List every department beside a related course id. Return `departments.name, courses.id` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
+              "hint": "Place the table that must be preserved on the left side of the join.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
+            },
+            "try_left_join_preserves_unmatched_rows_sketch1": {
+              "title": "Try Preserving Departments through a Longer Path",
+              "prompt": "List every department with the names of students enrolled in its courses. Return `departments.name AS department_name, students.name AS student_name` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Use a LEFT JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`.",
+              "hint": "Keep every join after `departments` as a LEFT JOIN so a missing row does not break the path.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
+            }
+          },
+          "practice": {
+            "multi-choice-1": {
+              "title": "Understanding LEFT JOIN",
+              "prompt": "Which of the following statements about LEFT JOIN is true?",
+              "hint": "Consider how LEFT JOIN handles unmatched rows.",
+              "help": {
+                "concept": "LEFT JOIN includes all rows from the left table and matched rows from the right table.",
+                "hint_1": "LEFT JOIN will include unmatched rows from the left table with NULLs for the right table columns.",
+                "hint_2": "LEFT JOIN is useful for preserving all rows from the left table."
+              },
+              "options": {
+                "a": "LEFT JOIN only includes rows with matches in both tables.",
+                "b": "LEFT JOIN includes all rows from the left table, even if there are no matches in the right table.",
+                "c": "LEFT JOIN excludes unmatched rows from the left table.",
+                "d": "LEFT JOIN is the same as INNER JOIN."
+              }
+            },
+            "multi-choice-2": {
+              "title": "LEFT JOIN vs INNER JOIN",
+              "prompt": "What is the main difference between LEFT JOIN and INNER JOIN?",
+              "hint": "Think about how unmatched rows are handled in each join type.",
+              "help": {
+                "concept": "LEFT JOIN includes unmatched rows from the left table, while INNER JOIN does not.",
+                "hint_1": "LEFT JOIN preserves all rows from the left table, even if there are no matches.",
+                "hint_2": "INNER JOIN only includes rows with matches in both tables."
+              },
+              "options": {
+                "a": "LEFT JOIN includes unmatched rows from the left table, INNER JOIN does not.",
+                "b": "INNER JOIN includes unmatched rows from the left table, LEFT JOIN does not.",
+                "c": "Both LEFT JOIN and INNER JOIN include unmatched rows from the left table.",
+                "d": "Neither LEFT JOIN nor INNER JOIN include unmatched rows from the left table."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a LEFT JOIN query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT clause",
+                "t2": "FROM clause",
+                "t3": "LEFT JOIN clause",
+                "t4": "ON condition"
+              }
+            },
+            "fill-blank-1": {
+              "title": "LEFT JOIN Syntax",
+              "prompt": "Complete the LEFT JOIN syntax: `SELECT * FROM students [blank1] enrollments ON students.id = enrollments.student_id;`",
+              "hint": "The missing keyword is used to join tables while preserving all rows from the left table.",
+              "help": {
+                "concept": "the blank is used to include all rows from the left table, even if there are no matches in the right table.",
+                "hint_1": "The keyword is used to join tables while keeping all rows from the left table.",
+                "hint_2": "The keyword is the blank."
+              },
+              "template": "SELECT * FROM students [blank1] enrollments ON students.id = enrollments.student_id;",
+              "choices": [
+                "LEFT JOIN",
+                "INNER JOIN",
+                "RIGHT JOIN",
+                "FULL JOIN"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "LEFT JOIN Result",
+              "prompt": "In a LEFT JOIN, unmatched rows from the left table will have [blank1] in the columns from the right table.",
+              "hint": "Consider what value is used when there is no match in the right table.",
+              "help": {
+                "concept": "LEFT JOIN results in the blank for unmatched rows from the left table in the right table's columns.",
+                "hint_1": "Unmatched rows from the left table will have the blank in the right table's columns.",
+                "hint_2": "The value is the blank."
+              },
+              "template": "In a LEFT JOIN, unmatched rows from the left table will have [blank1] in the columns from the right table.",
+              "choices": [
+                "NULL",
+                "0",
+                "empty string",
+                "default value"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of LEFT JOIN",
+              "prompt": "What is the primary purpose of using a LEFT JOIN in SQL?",
+              "hint": "Choose the table whose rows must all remain.",
+              "help": {
+                "concept": "LEFT JOIN preserves every row from the chosen left table and fills missing right-side values with NULL.",
+                "hint_1": "Identify which table the report says must remain complete.",
+                "hint_2": "Start from that table and check the unmatched row in the results after running the query."
+              },
+              "options": {
+                "a": "To include only matching rows from both tables.",
+                "b": "To include all rows from the left table, even if there are no matches in the right table.",
+                "c": "To exclude unmatched rows from the left table.",
+                "d": "To include all rows from the right table, even if there are no matches in the left table."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "left-join-preserves-unmatched-rows": {
+          "sketch0": {
+            "title": "LEFT JOIN preserves every row from its left table",
+            "bodyMarkdown": "A **LEFT JOIN** keeps every row from the table written on the left side of the join, whether or not a matching row exists on the right. When no match exists, SQL preserves the left row and fills the right-side columns with `NULL`.\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id;\n```\n\nThe query begins with `students`, so every student is promised a place in the result. Students with enrollments produce matched rows. A student with no enrollment still appears once, but `enrollments.course_id` is `NULL` because there is no related enrollment value to display.\n\nThis is the central difference from `INNER JOIN`. An inner join asks for existing pairs and removes unmatched rows. A left join begins with a reporting requirement: **keep all of these rows**, then attach related information where it exists.\n\nThe table order therefore carries meaning. If the report must include every department, put `departments` on the left. If it must include every student, put `students` on the left. Choose the preserved entity before writing the join."
+          },
+          "sketch1": {
+            "title": "Every later LEFT JOIN must continue the same promise",
+            "bodyMarkdown": "Preserving a starting table through several relationships requires a chain of `LEFT JOIN`s. If the path begins with students, each later join must allow the unmatched student row—with its growing set of `NULL` values—to continue.\n\n```sql\nSELECT students.name, courses.title\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\nLEFT JOIN courses\n  ON enrollments.course_id = courses.id;\n```\n\nFirst, every student survives the join to `enrollments`. For a student without an enrollment, `enrollments.course_id` becomes `NULL`. The second left join cannot find a course for that `NULL` id, so `courses.title` also becomes `NULL`; the original student row remains.\n\nIf the second join were changed to `INNER JOIN`, the unmatched student would disappear at that point. The query would quietly break the promise made by the first join.\n\nRead a longer outer-join path from the starting entity outward. At every step, ask whether the report still contains the row it was designed to preserve. The `NULL` values are not missing output to hide—they are accurate evidence that the relationship ends there."
+          }
+        }
+      }
+    }
+  }
+}

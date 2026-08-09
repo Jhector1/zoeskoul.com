@@ -1,0 +1,9 @@
+{
+  "phase": "1C",
+  "canonicalOwner": "@zoeskoul/curriculum-registry",
+  "seededFrom": "apps/web live curriculum JSON",
+  "gitHeadAtSeed": "93b45b3c9647d8b22dda5a631ffb4399e6a2d9b9",
+  "seededAtUtc": "2026-08-09T05:31:57.588267+00:00",
+  "subjectArtifactFiles": 300,
+  "messageFiles": 432
+}

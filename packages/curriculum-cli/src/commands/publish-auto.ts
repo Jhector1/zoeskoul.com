@@ -4,6 +4,7 @@ import {
     loadBlueprint,
     publishDraft,
     resolveSubjectPublishTarget,
+    rebuildRegistries,
 } from "@zoeskoul/curriculum-compiler";
 
 function looksLikeBlueprintPath(value: string) {
@@ -24,6 +25,8 @@ export async function runPublishAuto(input: string) {
     await publishDraft({
         subjectSlug: target.liveSubjectSlug,
     });
+
+    await rebuildRegistries();
 
     console.log(`Auto-published subject ${target.liveSubjectSlug}`);
 }

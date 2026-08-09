@@ -1,0 +1,166 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "qualifying-columns-across-tables": {
+          "label": "Qualifying Columns Across Tables",
+          "summary": "Use table-qualified column references so SQL and readers know which source each value comes from.",
+          "cards": {
+            "sketch0": {
+              "title": "Give Every Column an Address"
+            },
+            "sketch1": {
+              "title": "Separate Source Names from Output Names"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_qualifying_columns_across_tables_sketch0": {
+              "title": "Disambiguate Enrollment and Student Columns",
+              "prompt": "Return `enrollments.id AS enrollment_id, students.name AS student_name, enrollments.term` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`.",
+              "hint": "Start from `enrollments`, then follow `student_id` to `students.id`.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`."
+              },
+              "starterCode": "-- Return a readable enrollment-to-student result\n",
+              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.name AS student_name,\n       enrollments.term\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id\nORDER BY enrollments.id;\n"
+            },
+            "try_qualifying_columns_across_tables_sketch1": {
+              "title": "Disambiguate Course and Department Columns",
+              "prompt": "Return `courses.id AS course_id, courses.title AS course_title, departments.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`.",
+              "hint": "The relationship is `courses.department_id = departments.id`.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`."
+              },
+              "starterCode": "-- Return a readable course-to-department result\n",
+              "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of Qualifying Columns",
+              "prompt": "Why is it important to qualify column names in SQL queries involving multiple tables?",
+              "hint": "Think about how SQL distinguishes between columns with the same name in different tables.",
+              "help": {
+                "concept": "Qualifying columns helps SQL distinguish between columns with the same name in different tables.",
+                "hint_1": "Consider what happens if two tables have a column with the same name.",
+                "hint_2": "Qualifying columns prevents ambiguity in SQL queries."
+              },
+              "options": {
+                "a": "To prevent ambiguity when columns have the same name in different tables.",
+                "b": "To make the query run faster.",
+                "c": "To reduce the size of the database.",
+                "d": "To ensure the database schema is correct."
+              }
+            },
+            "single-choice-2": {
+              "title": "Using Table Aliases",
+              "prompt": "What is the main benefit of using table aliases in SQL queries?",
+              "hint": "Consider how aliases affect the readability and length of SQL queries.",
+              "help": {
+                "concept": "Table aliases provide shorthand references for table names, making queries more readable.",
+                "hint_1": "Aliases help shorten the query without losing clarity.",
+                "hint_2": "Using aliases can make complex queries easier to manage."
+              },
+              "options": {
+                "a": "They make queries shorter and easier to read.",
+                "b": "They increase the execution speed of queries.",
+                "c": "They allow for more tables to be joined.",
+                "d": "They ensure data integrity."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Identifying Qualified Columns",
+              "prompt": "Which of the following are examples of qualified column names? Select all that apply.",
+              "hint": "Qualified column names include the table name as a prefix.",
+              "help": {
+                "concept": "Qualified column names include the table name to avoid ambiguity.",
+                "hint_1": "Look for column names that are prefixed with a table name.",
+                "hint_2": "Qualified columns are written as `table.column`."
+              },
+              "options": {
+                "a": "students.id",
+                "b": "id",
+                "c": "enrollments.student_id",
+                "d": "student_id"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Benefits of Using Aliases",
+              "prompt": "What are the benefits of using table aliases in SQL queries? Select all that apply.",
+              "hint": "Think about how aliases affect query readability and management.",
+              "help": {
+                "concept": "Table aliases simplify queries by providing shorthand references for table names.",
+                "hint_1": "Aliases can make complex queries easier to read and write.",
+                "hint_2": "They help manage queries with multiple tables."
+              },
+              "options": {
+                "a": "Simplifies query writing",
+                "b": "Improves query readability",
+                "c": "Increases query execution speed",
+                "d": "Ensures data accuracy"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT clause",
+                "t2": "FROM clause",
+                "t3": "JOIN clause",
+                "t4": "ON condition",
+                "t5": "WHERE clause"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "SQL Aliases Syntax",
+              "prompt": "Fill in the blank: To create an alias for a table in SQL, use the keyword `[blank1]`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "To create an alias for a table in SQL, use the keyword `[blank1]`.",
+              "choices": [
+                "AS",
+                "IS",
+                "IN",
+                "ON"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "qualifying-columns-across-tables": {
+          "sketch0": {
+            "title": "A qualified column names its table and column",
+            "bodyMarkdown": "A **qualified column** is a column written with its table name: `table_name.column_name`. The table name acts like an address. It tells SQL—and the person reading the query—exactly where the value comes from.\n\nThis matters as soon as joined tables contain repeated column names. Both `students` and `enrollments`, for example, have an `id` column. Writing only `id` leaves the source unclear. The qualified forms have different meanings:\n\n```sql\nSELECT enrollments.id, students.name\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id;\n```\n\nHere, `enrollments.id` identifies an enrollment record. `students.id`, used in the `ON` condition, identifies a student. The dot does not change either value; it removes uncertainty about the value's source.\n\nRead the query line by line. The `SELECT` list asks for the enrollment identifier and the student's name. The `FROM` and `JOIN` lines bring the two tables together. The `ON` condition uses two more qualified columns to describe their relationship.\n\nQualifying every shared or potentially confusing column is more than a way to silence an “ambiguous column” error. It preserves the meaning of the query when another table is added or when a reader returns to the SQL later."
+          },
+          "sketch1": {
+            "title": "Qualification finds the value; an alias labels the result",
+            "bodyMarkdown": "Two pieces of SQL can appear beside the same column expression while solving different problems. **Qualification** identifies the source. An **output alias** gives the displayed column a clearer heading.\n\nConsider two different `id` values in the same result:\n\n```sql\nSELECT enrollments.id AS enrollment_id,\n       students.id AS student_id\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id;\n```\n\nIn `enrollments.id AS enrollment_id`, the part before `AS` tells SQL which value to read. The part after `AS` tells SQL what heading to show in the result table. The same pattern turns `students.id` into the heading `student_id`.\n\nThis distinction is easy to blur because both features make a query more readable. Ask two separate questions. **Where does this value come from?** Answer with `table.column`. **What should the reader call it in the report?** Answer with `AS heading`.\n\nOutput aliases do not rename columns in the database, and they do not affect the relationship between tables. They belong only to this query's result. Table aliases, introduced next, shorten the table names used inside the query; they are another tool with another job."
+          }
+        }
+      }
+    }
+  }
+}

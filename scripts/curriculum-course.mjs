@@ -856,10 +856,9 @@ function assertSubjectPublishSafe() {
 
   const liveManifestPath = path.join(
       root,
-      "apps",
-      "web",
-      "src",
-      "lib",
+      "packages",
+      "curriculum-registry",
+      "published",
       "subjects",
       configuredLiveSubjectSlug,
       "subject.manifest.json",
@@ -910,10 +909,9 @@ or pass --force-live-overwrite only if you intentionally want to overwrite the c
 
   const liveManifestPath = path.join(
       root,
-      "apps",
-      "web",
-      "src",
-      "lib",
+      "packages",
+      "curriculum-registry",
+      "published",
       "subjects",
       resolvedLiveSubjectSlug,
       "subject.manifest.json",

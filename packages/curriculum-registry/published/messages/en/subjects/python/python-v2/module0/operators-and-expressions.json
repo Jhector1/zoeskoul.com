@@ -1,0 +1,247 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "label": "Operators and Expressions",
+          "summary": "Use Python arithmetic operators, follow operator precedence, and use parentheses to control grouping.",
+          "cards": {
+            "sketch0": {
+              "title": "Arithmetic operators change numeric values"
+            },
+            "sketch1": {
+              "title": "Precedence decides which operation happens first"
+            },
+            "sketch2": {
+              "title": "Parentheses let you choose the grouping"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-division-operator": {
+              "title": "Choose the division operator",
+              "prompt": "Which Python operator divides one numeric value by another?",
+              "hint": "Python uses a keyboard symbol for division.",
+              "help": {
+                "concept": "Python uses `+` for addition, `-` for subtraction, `*` for multiplication, and `/` for division.",
+                "hint_1": "Do not choose the multiplication symbol.",
+                "hint_2": "Choose the slash used in an expression such as `8 / 2`."
+              },
+              "options": {
+                "a": "+",
+                "b": "-",
+                "c": "*",
+                "d": "/"
+              }
+            },
+            "sc-precedence-result": {
+              "title": "Apply operator precedence",
+              "prompt": "What value does Python produce for `2 + 3 * 4`?",
+              "hint": "Multiplication is evaluated before addition.",
+              "help": {
+                "concept": "In an expression without grouping parentheses, multiplication and division are evaluated before addition and subtraction.",
+                "hint_1": "Evaluate `3 * 4` before combining the result with `2`.",
+                "hint_2": "Do not start by evaluating `2 + 3`."
+              },
+              "options": {
+                "a": "14",
+                "b": "20",
+                "c": "24",
+                "d": "9"
+              }
+            },
+            "mc-operator-matches": {
+              "title": "Match operators to their jobs",
+              "prompt": "Which operator descriptions are correct? Choose all correct answers.",
+              "hint": "Match each symbol with the arithmetic operation it performs.",
+              "help": {
+                "concept": "The four basic arithmetic operators are `+` add, `-` subtract, `*` multiply, and `/` divide.",
+                "hint_1": "Check the meaning of each symbol independently.",
+                "hint_2": "Two distractors deliberately swap operator meanings."
+              },
+              "options": {
+                "a": "`+` adds numeric values",
+                "b": "`*` multiplies numeric values",
+                "c": "`/` subtracts numeric values",
+                "d": "`-` divides numeric values"
+              }
+            },
+            "dr-precedence-steps": {
+              "title": "Trace an ungrouped expression",
+              "prompt": "Arrange the evaluation steps for `18 - 8 / 2`.",
+              "hint": "Division happens before subtraction.",
+              "help": {
+                "concept": "Python evaluates division before subtraction when there are no parentheses changing the grouping.",
+                "hint_1": "Start with `8 / 2`.",
+                "hint_2": "Use that result in the remaining subtraction."
+              },
+              "tokens": {
+                "t1": "Evaluate `8 / 2`",
+                "t2": "Produce `4.0`",
+                "t3": "Evaluate `18 - 4.0`",
+                "t4": "Produce `14.0`"
+              }
+            },
+            "dr-grouped-steps": {
+              "title": "Trace a grouped expression",
+              "prompt": "Arrange the evaluation steps for `(5 + 2) * 3`.",
+              "hint": "The grouped addition is evaluated before the multiplication.",
+              "help": {
+                "concept": "Parentheses give the grouped expression priority over the surrounding arithmetic.",
+                "hint_1": "Start inside the parentheses.",
+                "hint_2": "After the group becomes one value, multiply by `3`."
+              },
+              "tokens": {
+                "t1": "Evaluate `5 + 2`",
+                "t2": "Produce `7`",
+                "t3": "Evaluate `7 * 3`",
+                "t4": "Produce `21`"
+              }
+            },
+            "fb-target-operator": {
+              "title": "Choose the operator for a target",
+              "prompt": "Choose the operator that makes this expression produce `18`.",
+              "hint": "Ask which operation turns 6 and 3 into 18.",
+              "help": {
+                "concept": "Choosing an operator means choosing the arithmetic relationship between the two values.",
+                "hint_1": "Addition would produce a much smaller result.",
+                "hint_2": "Use the operator for multiplication."
+              },
+              "template": "6 [blank1] 3",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "ci-use-four-operators": {
+              "title": "Use all four arithmetic operators",
+              "prompt": "Write four `print()` statements using the values `12` and `3`:\n1. add them\n2. subtract `3` from `12`\n3. multiply them\n4. divide `12` by `3`\n\nUse the arithmetic expressions themselves inside `print(...)`.",
+              "hint": "Use one of `+`, `-`, `*`, and `/` on each line.",
+              "help": {
+                "concept": "Each arithmetic operator creates a different numeric expression from the same two values.",
+                "hint_1": "Keep the four operations in the order requested.",
+                "hint_2": "Do not replace the expressions with their final numeric answers."
+              },
+              "starterCode": "# Add 12 and 3\n# Subtract 3 from 12\n# Multiply 12 and 3\n# Divide 12 by 3\n",
+              "solutionCode": "print(12 + 3)\nprint(12 - 3)\nprint(12 * 3)\nprint(12 / 3)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the four requested expressions in +, -, *, / order."
+                }
+              }
+            },
+            "ci-follow-precedence": {
+              "title": "Let precedence control the result",
+              "prompt": "Write two `print()` statements using these expressions exactly:\n- `2 + 3 * 4`\n- `18 - 8 / 2`\n\nDo not add grouping parentheses. Run the program and observe which operations Python evaluates first.",
+              "hint": "Place each complete expression inside its own `print()` call.",
+              "help": {
+                "concept": "Without grouping parentheses, multiplication and division have higher precedence than addition and subtraction.",
+                "hint_1": "Keep the expressions exactly as written.",
+                "hint_2": "The purpose is to observe precedence, not to type the final answers."
+              },
+              "starterCode": "# Print the two ungrouped expressions below.\n",
+              "solutionCode": "print(2 + 3 * 4)\nprint(18 - 8 / 2)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep both mixed expressions ungrouped so normal precedence applies."
+                }
+              }
+            },
+            "ci-change-grouping": {
+              "title": "Change the grouping with parentheses",
+              "prompt": "The starter code uses `2 + 3 * 4`. Add parentheses so Python adds `2 + 3` first and then multiplies by `4`. Keep the expression inside `print()`.",
+              "hint": "Group the addition that should happen first.",
+              "help": {
+                "concept": "Parentheses change grouping by forcing the enclosed expression to be evaluated before the surrounding multiplication.",
+                "hint_1": "Do not change the numbers or operators.",
+                "hint_2": "Place one pair of parentheses around the addition."
+              },
+              "starterCode": "print(2 + 3 * 4)\n",
+              "solutionCode": "print((2 + 3) * 4)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Group 2 + 3 before multiplying by 4."
+                }
+              }
+            },
+            "ci-practice-choose-operator": {
+              "title": "Change one operator to reach the target",
+              "prompt": "The starter code prints the value of `8 + 4`. Change only the arithmetic operator so the expression becomes `8` times `4`.",
+              "hint": "Keep the two numbers and the `print()` call.",
+              "help": {
+                "concept": "Changing one operator changes the relationship between the same two numeric values.",
+                "hint_1": "Do not replace the expression with `32`.",
+                "hint_2": "Use Python's multiplication operator."
+              },
+              "starterCode": "print(8 + 4)\n",
+              "solutionCode": "print(8 * 4)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep 8 and 4 and change only the operator to multiplication."
+                }
+              }
+            },
+            "ci-practice-compare-grouping": {
+              "title": "Compare grouped and ungrouped expressions",
+              "prompt": "Write two lines. First print `10 - 2 * 3`. Then print `(10 - 2) * 3`. Keep both expressions visible in the code so you can compare how grouping changes evaluation.",
+              "hint": "The second expression groups the subtraction.",
+              "help": {
+                "concept": "The same numbers and operators can produce different values when parentheses change which operation happens first.",
+                "hint_1": "The first line has no extra grouping around `10 - 2`.",
+                "hint_2": "The second line groups `10 - 2` before multiplying."
+              },
+              "starterCode": "# Print the ungrouped expression, then the grouped expression.\n",
+              "solutionCode": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print the ungrouped expression first and the grouped version second."
+                }
+              }
+            },
+            "ci-practice-division-precedence": {
+              "title": "Preserve precedence while editing",
+              "prompt": "Complete the starter so it prints the value of `20 - 12 / 3`. Keep the expression ungrouped so division happens before subtraction.",
+              "hint": "Use the expression itself rather than its final value.",
+              "help": {
+                "concept": "An ungrouped mixed expression relies on Python's normal operator precedence.",
+                "hint_1": "Do not put parentheses around `20 - 12`.",
+                "hint_2": "Keep `/` between `12` and `3`."
+              },
+              "starterCode": "print(20 - 12 # complete the expression\n",
+              "solutionCode": "print(20 - 12 / 3)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Complete the ungrouped expression 20 - 12 / 3."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "sk-what-is-an-expression": {
+            "title": "Arithmetic operators change numeric values",
+            "bodyMarkdown": "You already saw that an expression produces a value. Now focus on the **operators** inside numeric expressions.\n\nPython's four basic arithmetic operators are:\n\n| Operator | Meaning | Example | Value |\n|---|---|---|---:|\n| `+` | add | `12 + 3` | `15` |\n| `-` | subtract | `12 - 3` | `9` |\n| `*` | multiply | `12 * 3` | `36` |\n| `/` | divide | `12 / 3` | `4.0` |\n\nThe operator tells Python what relationship to apply between the numeric values.\n\nFor example:\n\n```python\nprint(12 + 3)\nprint(12 * 3)\n```\n\nThe first expression adds. The second multiplies. The values are the same, but changing the operator changes the result.\n\nOne detail to notice: `/` produces a floating-point result such as `4.0`.\n\nThe main idea is:\n\n**values + operator → new numeric value**\n"
+          },
+          "sk-comparison-and-boolean": {
+            "title": "Precedence decides which operation happens first",
+            "bodyMarkdown": "An expression can contain more than one operator. When it does, Python follows **operator precedence**.\n\nFor the basic arithmetic in this lesson:\n\n1. multiplication `*` and division `/` happen first\n2. addition `+` and subtraction `-` happen after them\n\nConsider:\n\n```python\n2 + 3 * 4\n```\n\nPython does **not** simply work left to right.\n\nStep by step:\n\n1. `3 * 4` produces `12`\n2. `2 + 12` produces `14`\n\nAnother example:\n\n```python\n18 - 8 / 2\n```\n\nStep by step:\n\n1. `8 / 2` produces `4.0`\n2. `18 - 4.0` produces `14.0`\n\nPrecedence lets Python interpret mixed arithmetic consistently even when no parentheses are present.\n"
+          },
+          "sk-parentheses-order": {
+            "title": "Parentheses let you choose the grouping",
+            "bodyMarkdown": "Parentheses let you deliberately change which part of an expression Python evaluates first.\n\nCompare:\n\n```python\n2 + 3 * 4\n(2 + 3) * 4\n```\n\nThe first expression uses normal precedence:\n\n1. `3 * 4` → `12`\n2. `2 + 12` → `14`\n\nThe second expression groups the addition:\n\n1. `2 + 3` → `5`\n2. `5 * 4` → `20`\n\nThe numbers and operators are the same. Only the **grouping** changed.\n\nParentheses are useful when:\n\n- you need a different evaluation order\n- you want the intended grouping to be obvious to a reader\n\nUse them to express the calculation you actually mean, not as decoration around every operation.\n"
+          }
+        }
+      }
+    }
+  }
+}

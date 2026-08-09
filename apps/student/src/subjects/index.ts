@@ -1,6 +1,6 @@
 import { buildArtifacts } from "@zoeskoul/curriculum-runtime/compat/buildArtifacts";
 import { defineCourseFromManifest } from "@zoeskoul/curriculum-runtime/compat/defineCourseFromManifest";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 
 export const COURSE_BUNDLES = Object.values(SUBJECT_GENERATOR_SOURCES).map((source) =>
     defineCourseFromManifest({

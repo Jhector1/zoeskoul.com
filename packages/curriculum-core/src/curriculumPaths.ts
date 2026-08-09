@@ -241,10 +241,9 @@ export function getDraftSubjectMessagesPath(locale: string, subjectSlug: string)
 
 export function getLiveSubjectRoot(subjectSlug: string) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "lib",
+        "packages",
+        "curriculum-registry",
+        "published",
         "subjects",
         getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
@@ -253,10 +252,9 @@ export function getLiveSubjectRoot(subjectSlug: string) {
 
 export function getLiveMessagesRoot(subjectSlug: string) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "i18n",
+        "packages",
+        "curriculum-registry",
+        "published",
         "messages",
         getCatalogSlugForSubjectSlug(subjectSlug),
     );
@@ -264,10 +262,9 @@ export function getLiveMessagesRoot(subjectSlug: string) {
 
 export function getLiveSubjectMessagesRoot(locale: string, subjectSlug: string) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "i18n",
+        "packages",
+        "curriculum-registry",
+        "published",
         "messages",
         locale,
         "subjects",
@@ -278,10 +275,9 @@ export function getLiveSubjectMessagesRoot(locale: string, subjectSlug: string) 
 
 export function getSubjectManifestPath(subjectSlug: string) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "lib",
+        "packages",
+        "curriculum-registry",
+        "published",
         "subjects",
         getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
@@ -295,10 +291,9 @@ export function getTopicBundlePath(
     topicId: string,
 ) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "lib",
+        "packages",
+        "curriculum-registry",
+        "published",
         "subjects",
         getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
@@ -317,10 +312,9 @@ export function getTopicMessagesPath(
     topicId: string,
 ) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "i18n",
+        "packages",
+        "curriculum-registry",
+        "published",
         "messages",
         locale,
         "subjects",
@@ -333,10 +327,9 @@ export function getTopicMessagesPath(
 
 export function getSubjectMessagesPath(locale: string, subjectSlug: string) {
     return fromRepoRoot(
-        "apps",
-        "web",
-        "src",
-        "i18n",
+        "packages",
+        "curriculum-registry",
+        "published",
         "messages",
         locale,
         "subjects",

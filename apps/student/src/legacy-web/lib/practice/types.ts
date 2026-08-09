@@ -12,7 +12,7 @@ import type {
     Vec3,
 } from "@zoeskoul/practice-contracts";
 import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
-import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
+import type { GeneratedSubjectGenKey } from "@zoeskoul/curriculum-registry/runtime";
 
 // src/lib/practice/types.ts
 

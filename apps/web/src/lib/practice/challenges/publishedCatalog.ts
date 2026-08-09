@@ -1,8 +1,8 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
-import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { CATALOG_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import { resolvePublishedPracticeTarget } from "./target";
 import {
   collectStandaloneTryItExerciseKeys,

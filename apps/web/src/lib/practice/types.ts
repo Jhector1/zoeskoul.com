@@ -13,7 +13,7 @@ import type {
 } from "@zoeskoul/practice-contracts";
 import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
 import type { PseudocodeMode } from "@zoeskoul/practice-checks";
-import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
+import type { GeneratedSubjectGenKey } from "@zoeskoul/curriculum-registry/runtime";
 
 // src/lib/practice/types.ts
 

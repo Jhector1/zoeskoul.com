@@ -2,7 +2,7 @@ import "server-only";
 
 import { auth } from "@/lib/auth";
 import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
-import { SUBJECT_CATALOG_SLUGS } from "@/lib/subjects/catalogs.generated";
+import { SUBJECT_CATALOG_SLUGS } from "@zoeskoul/curriculum-registry/runtime";
 import { hasReviewModule } from "@/lib/subjects/registry";
 import { getSubjectPublicationState } from "@/lib/subjects/server/subjectPublication";
 import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";

@@ -1,0 +1,754 @@
+{
+  "topicId": "if-elif-else",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-python-v2-2-conditional-basics",
+  "prefix": "pyv2_2",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.if-elif-else.label",
+    "summaryKey": "topics.python-v2.python-v2-2.if-elif-else.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch0.title",
+      "sketchId": "sketch_if_basic",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch0",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.prompt",
+        "exerciseKey": "code_positive_negative_zero",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch1.title",
+      "sketchId": "sketch_if_else",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch1",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.prompt",
+        "exerciseKey": "code_pass_fail",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch2.title",
+      "sketchId": "sketch_elif_chain",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch2",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.prompt",
+        "exerciseKey": "code_grade_checker",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_if_basic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.bodyMarkdown"
+    },
+    {
+      "id": "sketch_if_else",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.bodyMarkdown"
+    },
+    {
+      "id": "sketch_elif_chain",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.bodyMarkdown"
+    },
+    {
+      "id": "sketch_order_matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_if_runs_true",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_if_runs_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_elif_role",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_elif_role",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_valid_conditional_facts",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_valid_conditional_facts",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_truthy_values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_truthy_values",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_branch_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_branch_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr_specific_before_general",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_specific_before_general",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "fb_else_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_else_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "else"
+      }
+    },
+    {
+      "id": "fb_comparison_operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_comparison_operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ">="
+      }
+    },
+    {
+      "id": "code_positive_negative_zero",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7\n",
+            "stdout": "positive\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*\\n\\s*if\\s+n\\s*>\\s*0\\s*:\\s*\\n\\s+print\\s*\\(\\s*[\"\\']positive[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*\\n\\s*if\\s+n\\s*>\\s*0\\s*:\\s*\\n\\s+print\\s*\\(\\s*[\"\\']positive[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_pass_fail",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "60\n",
+            "stdout": "pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "59\n",
+            "stdout": "fail\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "100\n",
+            "stdout": "pass\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+score\\s*>=\\s*60\\s*:.*print\\s*\\(\\s*[\"\\']pass[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']fail[\"\\']\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+score\\s*>=\\s*60\\s*:.*print\\s*\\(\\s*[\"\\']pass[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']fail[\"\\']\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_grade_checker",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "90\n",
+            "stdout": "A\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "80\n",
+            "stdout": "B\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "70\n",
+            "stdout": "C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "69\n",
+            "stdout": "F\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*80\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*80\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_empty_or_text",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "text\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "empty\n",
+            "match": "exact"
+          },
+          {
+            "stdin": " \n",
+            "stdout": "text\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+text\\s*:.*print\\s*\\(\\s*[\"\\']text[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']empty[\"\\']\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+text\\s*:.*print\\s*\\(\\s*[\"\\']text[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']empty[\"\\']\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_even_odd",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "even\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "7\n",
+            "stdout": "odd\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "even\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+n\\s*%\\s*2\\s*==\\s*0\\s*:.*print\\s*\\(\\s*[\"\\']even[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']odd[\"\\']\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+n\\s*%\\s*2\\s*==\\s*0\\s*:.*print\\s*\\(\\s*[\"\\']even[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']odd[\"\\']\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}
