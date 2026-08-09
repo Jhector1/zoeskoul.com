@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "date-function-awareness": {
+          "label": "Sensibilisation aux fonctions de date",
+          "summary": "Apprenez à reconnaître et à utiliser les fonctions de date dans les expressions SQL, en particulier pour les colonnes calculées et les rapports.",
+          "cards": {
+            "sketch0": {
+              "title": "Quelles sont les fonctions de date en SQL ?"
+            },
+            "sketch1": {
+              "title": "Utiliser les fonctions de date dans les colonnes calculées"
+            },
+            "sketch2": {
+              "title": "Filtrer avec des fonctions de date"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Extraire l'année de order_date",
+              "prompt": "Écrivez une requête SQL pour sélectionner les colonnes `id`, `order_date` et une colonne calculée appelée `order_year` qui contient la partie année de `order_date` depuis la table `orders`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id, order_date\n-- Ajoutez la colonne calculée ici\nFROM orders;"
+            },
+            "q2": {
+              "title": "Filtrer les commandes par mois à l'aide d'une fonction de date",
+              "prompt": "Écrivez une requête SQL pour sélectionner toutes les colonnes de `orders` où la commande a été passée en janvier (mois = '01').",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT *\nFROM orders\n-- Ajoutez votre clause WHERE ici ;"
+            },
+            "q3": {
+              "title": "But des fonctions de date",
+              "prompt": "Laquelle des propositions suivantes décrit le mieux le but des fonctions de date en SQL ?",
+              "hint": "Pensez à ce que vous pouvez faire avec les dates en SQL.",
+              "help": {
+                "concept": "Les fonctions de date vous aident à manipuler et à extraire des informations à partir des colonnes de date.",
+                "hint_1": "Elles servent à obtenir des parties d'une date ou à effectuer des calculs avec des dates.",
+                "hint_2": "Elles ne servent pas à formater des nombres ou à joindre des tables."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q4": {
+              "title": "Reconnaître l'utilisation des fonctions de date",
+              "prompt": "Lesquelles des expressions SQL suivantes utilisent une fonction de date ? Sélectionnez toutes les réponses qui conviennent.",
+              "hint": "Cherchez des fonctions qui opèrent sur des valeurs de date.",
+              "help": {
+                "concept": "Les fonctions de date incluent des fonctions comme `strftime`, `date` et `datetime` qui travaillent avec des colonnes de date.",
+                "hint_1": "Vérifiez si la fonction sert à extraire ou manipuler des informations de date.",
+                "hint_2": "Toutes les fonctions présentées ne sont pas liées aux dates."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q5": {
+              "title": "Extraire le mois d'une date",
+              "prompt": "Quelle fonction utiliseriez-vous pour extraire le mois de la colonne `order_date` dans SQLite ?",
+              "hint": "Réfléchissez à la fonction qui permet d'extraire la partie mois d'une date.",
+              "help": {
+                "concept": "Pour extraire le mois d'une date dans SQLite, vous utilisez une fonction qui peut formater ou extraire des parties de date.",
+                "hint_1": "Cherchez une fonction qui prend une date et une chaîne de format.",
+                "hint_2": "La fonction commence par 'str' et est couramment utilisée pour formater les dates."
+              },
+              "template": "SELECT id, order_date, _____ AS order_month FROM orders;",
+              "choices": [
+                "strftime('%m', order_date)",
+                "sum(order_date)",
+                "date(order_date)",
+                "substr(order_date, 6, 2)"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "date-function-awareness": {
+          "sk1": {
+            "title": "Quelles sont les fonctions de date en SQL ?",
+            "bodyMarkdown": "Les fonctions de date en SQL vous permettent de manipuler et d'extraire des informations à partir de valeurs de date. Par exemple, vous pouvez extraire l'année, le mois ou le jour d'une date, ou calculer la différence entre deux dates. Dans SQLite, les fonctions de date courantes incluent `date()`, `strftime()` et `datetime()`. Elles sont utiles pour filtrer, regrouper ou créer de nouvelles colonnes à partir d'informations de date.\n\n**Exemple :**\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nCette requête extrait l'année de chaque `order_date` dans la table `orders`."
+          },
+          "sk2": {
+            "title": "Utiliser les fonctions de date dans les colonnes calculées",
+            "bodyMarkdown": "Vous pouvez utiliser les fonctions de date directement dans vos instructions SELECT pour créer des colonnes calculées. Par exemple, si vous voulez voir dans quel mois chaque commande a été passée, vous pouvez utiliser :\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nCela ajoutera une nouvelle colonne appelée `order_month` affichant la partie mois de la date de chaque commande."
+          },
+          "sk3": {
+            "title": "Filtrer avec des fonctions de date",
+            "bodyMarkdown": "Les fonctions de date sont également utiles pour filtrer les données. Par exemple, pour trouver toutes les commandes passées en janvier, vous pouvez utiliser :\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nCela filtre la table `orders` pour n'inclure que les lignes où le mois est janvier."
+          }
+        }
+      }
+    }
+  }
+}

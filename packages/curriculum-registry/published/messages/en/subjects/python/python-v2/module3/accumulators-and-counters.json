@@ -1,0 +1,263 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "accumulators-and-counters": {
+          "label": "Accumulators and Counters",
+          "summary": "Initialize state before a loop, update a counter or accumulator during the loop, and use the final stored result after all relevant items have been processed.",
+          "cards": {
+            "sketch0": {
+              "title": "What accumulators and counters do"
+            },
+            "sketch1": {
+              "title": "Counting only when a condition is true"
+            },
+            "sketch2": {
+              "title": "Building running totals and summaries"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "ex1": {
+              "title": "Identify the accumulator",
+              "prompt": "In this code, which variable is the accumulator?\n\n```python\nnumbers = [2, 4, 6]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)\n```",
+              "hint": "Look for the variable that keeps the running sum.",
+              "help": {
+                "concept": "An accumulator stores a result that is repeatedly updated across loop iterations.",
+                "hint_1": "`n` is only the current item.",
+                "hint_2": "`total` keeps the sum built so far."
+              },
+              "options": {
+                "a": "numbers",
+                "b": "n",
+                "c": "total",
+                "d": "print"
+              }
+            },
+            "ex2": {
+              "title": "Choose the best starting value",
+              "prompt": "You want to count how many letters in a word are vowels. What is the best starting value for the counter variable?",
+              "hint": "Before the loop runs, zero matches have been found.",
+              "help": {
+                "concept": "A counter starts at zero when it represents how many matches have occurred so far.",
+                "hint_1": "No characters have been checked before the loop starts.",
+                "hint_2": "Choose `0`."
+              },
+              "options": {
+                "a": "1",
+                "b": "0",
+                "c": "\"\"",
+                "d": "True"
+              }
+            },
+            "ex3": {
+              "title": "Pick the counter patterns",
+              "prompt": "Which code lines are valid ways to increase a counter by 1? Choose all correct answers.",
+              "hint": "The new counter value must be the old counter value plus one.",
+              "help": {
+                "concept": "`count = count + 1` and `count += 1` both increment the stored counter by one.",
+                "hint_1": "`count = 1` resets rather than increments.",
+                "hint_2": "Subtracting one moves in the opposite direction."
+              },
+              "options": {
+                "a": "count = count + 1",
+                "b": "count += 1",
+                "c": "count = 1",
+                "d": "count = count - 1"
+              }
+            },
+            "ex4": {
+              "title": "Recognize accumulator behavior",
+              "prompt": "Which statements correctly describe accumulators? Choose all that apply.",
+              "hint": "An accumulator preserves and updates a running result across iterations.",
+              "help": {
+                "concept": "Accumulators can store different kinds of running results as long as each update builds from the current stored value.",
+                "hint_1": "Numeric totals often start at `0`.",
+                "hint_2": "A text accumulator can start at `\"\"` and grow by concatenation."
+              },
+              "options": {
+                "a": "A numeric accumulator can start at `0`.",
+                "b": "An accumulator is usually updated inside the loop.",
+                "c": "An accumulator must be reset to its starting value every iteration.",
+                "d": "A string accumulator can build text step by step."
+              }
+            },
+            "ex5": {
+              "title": "Order the counting steps",
+              "prompt": "Arrange these steps to count how many vowels are in a word.",
+              "hint": "Initialize first; the increment belongs after the condition matches.",
+              "help": {
+                "concept": "Conditional counting follows initialize → iterate → test → increment.",
+                "hint_1": "The counter must exist before the loop begins.",
+                "hint_2": "Increase it only after the current item passes the test."
+              },
+              "tokens": {
+                "t1": "Set `vowel_count = 0`",
+                "t2": "Loop through each character in the word",
+                "t3": "Check whether the character is a vowel",
+                "t4": "Increase `vowel_count` by 1"
+              }
+            },
+            "ex6": {
+              "title": "Order the running total logic",
+              "prompt": "Arrange these code ideas in the correct order for summing numbers in a list.",
+              "hint": "Initialize before the loop and print only after all updates are complete.",
+              "help": {
+                "concept": "A running total follows initialize → iterate → update → use the final value.",
+                "hint_1": "The accumulator update belongs inside the loop.",
+                "hint_2": "The final print belongs after the loop."
+              },
+              "tokens": {
+                "t1": "Set `total = 0`",
+                "t2": "Loop through each number",
+                "t3": "Update `total` with the current number",
+                "t4": "Print `total`"
+              }
+            },
+            "ex7": {
+              "title": "Fill the counter start value",
+              "prompt": "Complete the code so the counter starts correctly.",
+              "hint": "Before any matches are counted, the stored count is zero.",
+              "help": {
+                "concept": "Counters represent how many matching events have occurred so far.",
+                "hint_1": "At the start, none have occurred.",
+                "hint_2": "Choose `0`."
+              },
+              "template": "count = [blank1]",
+              "choices": [
+                "0",
+                "1",
+                "\"\"",
+                "count"
+              ]
+            },
+            "ex8": {
+              "title": "Fill the accumulator variable",
+              "prompt": "Complete the line so it adds the current number to the running total.",
+              "hint": "The same variable appears on both sides because it stores the running sum.",
+              "help": {
+                "concept": "An accumulator update reads the old accumulated value and stores the new one back under the same name.",
+                "hint_1": "The right side already uses `total`.",
+                "hint_2": "The left side should also be `total`."
+              },
+              "template": "[blank1] = total + n",
+              "choices": [
+                "n",
+                "print",
+                "total",
+                "numbers"
+              ]
+            },
+            "ex9": {
+              "title": "Build a running numeric total",
+              "prompt": "Read one line of space-separated integers. Use a `for` loop and a numeric accumulator named `total` to add every value, then print the final total.",
+              "hint": "Start `total` at 0, convert each part to an integer, and add it into the running total.",
+              "help": {
+                "concept": "A numeric accumulator keeps the sum built from all values processed so far.",
+                "hint_1": "Use `total = 0` before the loop.",
+                "hint_2": "Inside the loop, update with `total = total + int(part)` or the equivalent `+=` form."
+              },
+              "starterCode": "parts = input().split()\ntotal = 0\n# Add every number into total\nprint(total)\n",
+              "solutionCode": "parts = input().split()\ntotal = 0\nfor part in parts:\n    total = total + int(part)\nprint(total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `total` before the loop and update it from its previous value inside the loop."
+                }
+              }
+            },
+            "ex10": {
+              "title": "Count matching characters",
+              "prompt": "Read one word. Count how many lowercase vowels (`a`, `e`, `i`, `o`, `u`) it contains and print the final count.",
+              "hint": "Start the counter at 0 and increase it only when the current character is a vowel.",
+              "help": {
+                "concept": "A conditional counter changes by one only when the current item matches the condition.",
+                "hint_1": "Loop through `word` one character at a time.",
+                "hint_2": "Inside `if ch in \"aeiou\":`, increase `vowel_count` by 1."
+              },
+              "starterCode": "word = input()\nvowel_count = 0\n# Count lowercase vowels\nprint(vowel_count)\n",
+              "solutionCode": "word = input()\nvowel_count = 0\nfor ch in word:\n    if ch in \"aeiou\":\n        vowel_count = vowel_count + 1\nprint(vowel_count)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `vowel_count` before the loop and increment it only inside the vowel condition."
+                }
+              }
+            },
+            "ex11": {
+              "title": "Accumulate only matching numbers",
+              "prompt": "Read one line of space-separated integers. Add only the even values to `even_total`, then print the final total.",
+              "hint": "Convert each part, test whether it is even, and update the accumulator only for matches.",
+              "help": {
+                "concept": "A conditional accumulator skips values that fail the condition and adds only matching values.",
+                "hint_1": "Use `n % 2 == 0` to recognize even numbers.",
+                "hint_2": "Update `even_total` only inside that `if` block."
+              },
+              "starterCode": "parts = input().split()\neven_total = 0\n# Add only even numbers into even_total\nprint(even_total)\n",
+              "solutionCode": "parts = input().split()\neven_total = 0\nfor part in parts:\n    n = int(part)\n    if n % 2 == 0:\n        even_total = even_total + n\nprint(even_total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `even_total` before the loop and update it only when the converted number is even."
+                }
+              }
+            },
+            "ex12": {
+              "title": "Count positive numbers",
+              "prompt": "Read one line of space-separated integers. Count how many values are greater than 0 and print the final count.",
+              "hint": "Start `count` at 0 and increment only when the converted number is positive.",
+              "help": {
+                "concept": "This is the numeric version of a conditional counter.",
+                "hint_1": "Convert each `part` with `int(part)`.",
+                "hint_2": "Increase `count` only when `n > 0`."
+              },
+              "starterCode": "parts = input().split()\ncount = 0\n# Count values greater than zero\nprint(count)\n",
+              "solutionCode": "parts = input().split()\ncount = 0\nfor part in parts:\n    n = int(part)\n    if n > 0:\n        count = count + 1\nprint(count)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `count` before the loop and increment it only when `n > 0`."
+                }
+              }
+            },
+            "ex13": {
+              "title": "Build a text accumulator",
+              "prompt": "Read one word. Build a string named `result` by adding each character followed by `-`, then print the completed result.",
+              "hint": "Start with an empty string and update `result` inside the loop.",
+              "help": {
+                "concept": "A string accumulator follows the same initialize-and-update pattern as a numeric accumulator.",
+                "hint_1": "Start with `result = \"\"`.",
+                "hint_2": "Inside the loop, use `result = result + ch + \"-\"`."
+              },
+              "starterCode": "word = input()\nresult = \"\"\n# Add each character and a dash to result\nprint(result)\n",
+              "solutionCode": "word = input()\nresult = \"\"\nfor ch in word:\n    result = result + ch + \"-\"\nprint(result)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `result` to an empty string before the loop and extend it from its previous value inside the loop."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "accumulators-and-counters": {
+          "sk1": {
+            "title": "Keep a running value across iterations",
+            "bodyMarkdown": "A loop can remember work from earlier repetitions by storing a value **before** the loop and updating it **inside** the loop.\n\nTwo common patterns are:\n\n- a **counter**: how many matching events have happened;\n- an **accumulator**: a running result such as a numeric total.\n\nExample accumulator:\n\n```python\nnumbers = [3, 5, 2]\ntotal = 0\n\nfor n in numbers:\n    total = total + n\n\nprint(total)\n```\n\nThe running values of `total` are:\n\n```text\n0 -> 3 -> 8 -> 10\n```\n\nThe important pattern is:\n\n1. initialize the stored result before the loop;\n2. read its current value inside the loop;\n3. combine that value with the current item;\n4. store the new result back in the same variable.\n\n`total += n` is a shorter way to write `total = total + n`.\n"
+          },
+          "sk2": {
+            "title": "Increase a counter only when something matches",
+            "bodyMarkdown": "A counter normally starts at `0` because nothing has matched yet.\n\n```python\nword = \"banana\"\nvowel_count = 0\n\nfor ch in word:\n    if ch in \"aeiou\":\n        vowel_count = vowel_count + 1\n\nprint(vowel_count)\n```\n\nThe loop visits every character, but the counter changes only when the condition is true.\n\nFor `\"banana\"`:\n\n```text\nb -> count stays 0\na -> count becomes 1\nn -> count stays 1\na -> count becomes 2\nn -> count stays 2\na -> count becomes 3\n```\n\nThe final output is `3`.\n\nThis is a **conditional counter**: initialize once, test each item, and increment only for matches.\n"
+          },
+          "sk3": {
+            "title": "Accumulate only the values you want",
+            "bodyMarkdown": "An accumulator can also update only when an item passes a condition.\n\n```python\nnumbers = [4, 7, 2, 9, 6]\neven_total = 0\n\nfor n in numbers:\n    if n % 2 == 0:\n        even_total = even_total + n\n\nprint(even_total)\n```\n\nOnly the even values are added:\n\n```text\nstart: 0\nadd 4 -> 4\nskip 7\nadd 2 -> 6\nskip 9\nadd 6 -> 12\n```\n\nThe final output is `12`.\n\nThe difference from a counter is the update:\n\n- counter: usually add `1`;\n- numeric accumulator: add the current value or another calculated amount.\n\nA running result can also be text, but the same rule still applies: initialize before the loop and update the stored result during the loop.\n"
+          }
+        }
+      }
+    }
+  }
+}

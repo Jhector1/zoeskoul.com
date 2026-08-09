@@ -1,0 +1,148 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "moving-loop-bounds": {
+          "label": "Moving Loop Bounds and Cubic Work",
+          "summary": "Analyze Foo4 and Foo4_5 with exact interval counts.",
+          "cards": {
+            "foo4-walkthrough": {
+              "title": "Foo4 and Foo4_5: Cubic Work with Moving Bounds"
+            },
+            "moving-bounds-animation": {
+              "title": "Rectangle Plus or Minus a Triangular Correction"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "count_foo4_variants": {
+              "title": "Count Foo4 and Foo4_5 Exactly"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "count_foo4_variants": {
+                "title": "Count Foo4 and Foo4_5 Exactly",
+                "prompt": "Complete all four helpers. Use the integer-interval length for Foo4 and subtract the triangular correction for Foo4_5.",
+                "hint": "For Foo4_5, sum n²−i over i=0 through n−1.",
+                "help": {
+                  "concept": "Foo4 is n(n²−n). Foo4_5 is n³−n(n−1)/2. Both are Θ(n³).",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 4;\n    printf(\"foo4 tuples=%lld all=%lld theta=n^3\\n\", foo4_tuple_prints(n), foo4_all_printf_calls(n));\n    printf(\"foo45 tuples=%lld all=%lld theta=n^3\\n\", foo45_tuple_prints(n), foo45_all_printf_calls(n));\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 4;\n    printf(\"foo4 tuples=%lld all=%lld theta=n^3\\n\", foo4_tuple_prints(n), foo4_all_printf_calls(n));\n    printf(\"foo45 tuples=%lld all=%lld theta=n^3\\n\", foo45_tuple_prints(n), foo45_all_printf_calls(n));\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 4;\n    printf(\"foo4 tuples=%lld all=%lld theta=n^3\\n\", foo4_tuple_prints(n), foo4_all_printf_calls(n));\n    printf(\"foo45 tuples=%lld all=%lld theta=n^3\\n\", foo45_tuple_prints(n), foo45_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo4_tuple_prints(long long n);\nlong long foo4_all_printf_calls(long long n);\nlong long foo45_tuple_prints(long long n);\nlong long foo45_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo4_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo4_all_printf_calls(long long n) { (void)n; return 0; }\nlong long foo45_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo45_all_printf_calls(long long n) { (void)n; return 0; }\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 4;\n    printf(\"foo4 tuples=%lld all=%lld theta=n^3\\n\", foo4_tuple_prints(n), foo4_all_printf_calls(n));\n    printf(\"foo45 tuples=%lld all=%lld theta=n^3\\n\", foo45_tuple_prints(n), foo45_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo4_tuple_prints(long long n);\nlong long foo4_all_printf_calls(long long n);\nlong long foo45_tuple_prints(long long n);\nlong long foo45_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo4_tuple_prints(long long n) { return n * (n * n - n); }\nlong long foo4_all_printf_calls(long long n) { return foo4_tuple_prints(n) + n; }\nlong long foo45_tuple_prints(long long n) { return n * n * n - n * (n - 1) / 2; }\nlong long foo45_all_printf_calls(long long n) { return foo45_tuple_prints(n) + n; }\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Count n rows of width n²−n for Foo4."
+                  },
+                  {
+                    "message": "Subtract the triangular lower-bound correction for Foo4_5."
+                  },
+                  {
+                    "message": "Include one newline for each outer-loop row."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "foo4-row": {
+              "title": "One Foo4 row",
+              "prompt": "How many tuple prints occur in one Foo4 row?",
+              "hint": "Count integers from n through n²−1.",
+              "help": {
+                "concept": "The interval length is n²−n.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "n",
+                "b": "n²",
+                "c": "n²−n",
+                "d": "n³−n²"
+              }
+            },
+            "foo45-row": {
+              "title": "One Foo4_5 row",
+              "prompt": "How many tuple prints occur in Foo4_5 row i?",
+              "hint": "The loop starts at i and stops before n².",
+              "help": {
+                "concept": "The interval i through n²−1 contains n²−i values.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "i",
+                "b": "n²−i",
+                "c": "n−i",
+                "d": "n²+i"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "moving-loop-bounds": {
+          "foo4-walkthrough": {
+            "title": "Foo4 and Foo4_5: Cubic Work with Moving Bounds",
+            "bodyMarkdown": "### Foo4: count one large row, then multiply by n\n\n```c\nfor (int i = 0; i < n; i++) {\n    for (int j = n; j < n * n; j++) {\n        printf(\"(%d,%d) \", i, j);\n    }\n    printf(\"\\n\");\n}\n```\n\nFor one row, `j` starts at `n` and ends at `n² - 1`, so the row length is `n² - n`. There are `n` identical rows:\n\n$$\nP(n)=n(n^2-n)=n^3-n^2.\n$$\n\nAdding `n` newlines gives `n³ - n² + n`. The tight bound is `Θ(n³)`.\n\n### Foo4_5: the starting point changes with i\n\n```c\nfor (int i = 0; i < n; i++) {\n    for (int j = i; j < n * n; j++) {\n        printf(\"(%d,%d) \", i, j);\n    }\n    printf(\"\\n\");\n}\n```\n\nRow `i` has `n² - i` tuple prints, so:\n\n$$\nP(n)=\\sum_{i=0}^{n-1}(n^2-i)=n^3-\\frac{n(n-1)}{2}.\n$$\n\nThe cubic term remains dominant, so `Foo4_5` is also `Θ(n³)`.\n\n**Source clarification:** In the handout’s Foo4 output, one pair accidentally changes the row index from `1` to `2`. Within a row, `i` remains fixed."
+          },
+          "moving-bounds-animation": {
+            "title": "Rectangle Plus or Minus a Triangular Correction",
+            "context": "A changing lower bound changes the exact formula, but not necessarily its highest-order term.",
+            "steps": [
+              {
+                "title": "Foo4: measure one row",
+                "body": "The integer interval n through n²−1 contains n²−n values."
+              },
+              {
+                "title": "Foo4: repeat n identical rows",
+                "body": "n rows times n²−n prints per row gives n³−n²."
+              },
+              {
+                "title": "Foo4_5: row i loses i points",
+                "body": "The lower bound moves from 0 to n−1, creating a triangular correction."
+              },
+              {
+                "title": "Subtract the triangular correction",
+                "body": "Start with n rows of n², then subtract 0+1+...+(n−1)."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

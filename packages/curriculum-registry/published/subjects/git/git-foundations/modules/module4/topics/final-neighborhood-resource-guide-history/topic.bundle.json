@@ -1,0 +1,1278 @@
+{
+  "topicId": "final-neighborhood-resource-guide-history",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-4-final-capstone",
+  "sectionSlug": "git-foundations-git-foundations-section-4-final-capstone",
+  "prefix": "git_foundations_module_4",
+  "minutes": 120,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.cards.sketch0.title",
+      "sketchId": "intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch0",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch0.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch1",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch1.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch2",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch2.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch3",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch3.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch4",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch4.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_final_neighborhood_resource_guide_history_sketch5",
+            "titleKey": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.projectSteps.try_final_neighborhood_resource_guide_history_sketch5.title",
+            "exerciseKey": "try-final-neighborhood-resource-guide-history-sketch5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.intro.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nhours.txt\nold-contacts.txt\nservices.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 10 AM - 4 PM' ] || fail \"The content of hours.txt is not correct yet.\"\n[ -f \"$repo/old-contacts.txt\" ] || fail \"The expected file old-contacts.txt is missing.\"\n[ \"$(cat \"$repo/old-contacts.txt\")\" = 'Old contact list\n\nRetired phone tree.' ] || fail \"The content of old-contacts.txt is not correct yet.\"\n[ -f \"$repo/services.txt\" ] || fail \"The expected file services.txt is missing.\"\n[ \"$(cat \"$repo/services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry' ] || fail \"The content of services.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nhours.txt\nold-contacts.txt\nservices.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide\nUpdate neighborhood services' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 10 AM - 4 PM' ] || fail \"The content of hours.txt is not correct yet.\"\n[ -f \"$repo/old-contacts.txt\" ] || fail \"The expected file old-contacts.txt is missing.\"\n[ \"$(cat \"$repo/old-contacts.txt\")\" = 'Old contact list\n\nRetired phone tree.' ] || fail \"The content of old-contacts.txt is not correct yet.\"\n[ -f \"$repo/services.txt\" ] || fail \"The expected file services.txt is missing.\"\n[ \"$(cat \"$repo/services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic' ] || fail \"The content of services.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 3 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nhours.txt\nold-contacts.txt\nservices.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide\nUpdate neighborhood services\nUpdate help desk hours' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 9 AM - 5 PM' ] || fail \"The content of hours.txt is not correct yet.\"\n[ -f \"$repo/old-contacts.txt\" ] || fail \"The expected file old-contacts.txt is missing.\"\n[ \"$(cat \"$repo/old-contacts.txt\")\" = 'Old contact list\n\nRetired phone tree.' ] || fail \"The content of old-contacts.txt is not correct yet.\"\n[ -f \"$repo/services.txt\" ] || fail \"The expected file services.txt is missing.\"\n[ \"$(cat \"$repo/services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic' ] || fail \"The content of services.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 10 AM - 4 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 10 AM - 4 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 3 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'R  services.txt -> community-services.txt\nD  old-contacts.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncommunity-services.txt\nhours.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide\nUpdate neighborhood services\nUpdate help desk hours' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/community-services.txt\" ] || fail \"The expected file community-services.txt is missing.\"\n[ \"$(cat \"$repo/community-services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic' ] || fail \"The content of community-services.txt is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 9 AM - 5 PM' ] || fail \"The content of hours.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/old-contacts.txt",
+            "content": "Old contact list\n\nRetired phone tree.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/old-contacts.txt",
+          "content": "Old contact list\n\nRetired phone tree.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/community-services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 3 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  .gitignore\nR  services.txt -> community-services.txt\nD  old-contacts.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '.gitignore\nREADME.md\ncommunity-services.txt\nhours.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide\nUpdate neighborhood services\nUpdate help desk hours' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/.gitignore\" ] || fail \"The expected file .gitignore is missing.\"\n[ \"$(cat \"$repo/.gitignore\")\" = generated/ ] || fail \"The content of .gitignore is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/community-services.txt\" ] || fail \"The expected file community-services.txt is missing.\"\n[ \"$(cat \"$repo/community-services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic' ] || fail \"The content of community-services.txt is not correct yet.\"\n[ -f \"$repo/generated/preview.txt\" ] || fail \"The expected file generated/preview.txt is missing.\"\n[ \"$(cat \"$repo/generated/preview.txt\")\" = 'Temporary neighborhood preview.' ] || fail \"The content of generated/preview.txt is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 9 AM - 5 PM' ] || fail \"The content of hours.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/community-services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/community-services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/community-services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5",
+      "language": "bash",
+      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+      "starterFiles": [
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "neighborhood-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/community-services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/generated/preview.txt",
+          "content": "Temporary neighborhood preview.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=neighborhood-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 4 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '.gitignore\nREADME.md\ncommunity-services.txt\nhours.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start neighborhood guide\nUpdate neighborhood services\nUpdate help desk hours\nPrepare neighborhood guide handoff' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/.gitignore\" ] || fail \"The expected file .gitignore is missing.\"\n[ \"$(cat \"$repo/.gitignore\")\" = generated/ ] || fail \"The content of .gitignore is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Guide\n\nLocal services and opening hours.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/community-services.txt\" ] || fail \"The expected file community-services.txt is missing.\"\n[ \"$(cat \"$repo/community-services.txt\")\" = 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic' ] || fail \"The content of community-services.txt is not correct yet.\"\n[ -f \"$repo/generated/preview.txt\" ] || fail \"The expected file generated/preview.txt is missing.\"\n[ \"$(cat \"$repo/generated/preview.txt\")\" = 'Temporary neighborhood preview.' ] || fail \"The content of generated/preview.txt is not correct yet.\"\n[ -f \"$repo/hours.txt\" ] || fail \"The expected file hours.txt is missing.\"\n[ \"$(cat \"$repo/hours.txt\")\" = 'Help desk hours: 9 AM - 5 PM' ] || fail \"The content of hours.txt is not correct yet.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "neighborhood-guide/README.md",
+        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+        "starterFiles": [
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "neighborhood-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/community-services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/generated/preview.txt",
+            "content": "Temporary neighborhood preview.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide/generated\nprintf %s 'Temporary neighborhood preview.\n' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "neighborhood-guide/README.md",
+            "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "neighborhood-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/community-services.txt",
+            "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/generated/preview.txt",
+            "content": "Temporary neighborhood preview.\n",
+            "language": "text"
+          },
+          {
+            "path": "neighborhood-guide/hours.txt",
+            "content": "Help desk hours: 9 AM - 5 PM\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/neighborhood-guide",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide/generated\nprintf %s 'Temporary neighborhood preview.\n' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "neighborhood-guide/README.md",
+          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "neighborhood-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/community-services.txt",
+          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/generated/preview.txt",
+          "content": "Temporary neighborhood preview.\n",
+          "language": "text"
+        },
+        {
+          "path": "neighborhood-guide/hours.txt",
+          "content": "Help desk hours: 9 AM - 5 PM\n",
+          "language": "text"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Create and configure a repository from an ordinary project folder",
+      "Edit, inspect, stage, and commit two focused content changes",
+      "Create and verify an ignore policy for generated previews",
+      "Unstage and restore an accidental edit before structural cleanup",
+      "Rename and remove tracked paths, then audit the four-commit handoff"
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {},
+      "python-v2-4": {
+        "mini-gradebook-capstone": {
+          "label": "Final Project: Build a Mini Gradebook",
+          "summary": "Build one mini gradebook cumulatively: create the report header, read and total scores, track the highest score, calculate the average, classify the result, count passing scores, and polish the final report.",
+          "cards": {
+            "sketch0": {
+              "title": "Plan the gradebook"
+            },
+            "project": {
+              "title": "Mini Gradebook Builder"
+            }
+          },
+          "projectSteps": {
+            "cp_1": {
+              "title": "Read the gradebook header"
+            },
+            "cp_2": {
+              "title": "Add the score total"
+            },
+            "cp_3": {
+              "title": "Track the highest score"
+            },
+            "cp_4": {
+              "title": "Calculate the average"
+            },
+            "cp_5": {
+              "title": "Choose the status line"
+            },
+            "cp_6": {
+              "title": "Build the final gradebook report"
+            }
+          },
+          "quiz": {
+            "capstone-mini-gradebook": {
+              "title": "Polish the final mini gradebook",
+              "prompt": "Start from the exact working project. Keep all calculations and status logic, but polish the output into the final report by removing the preview-only `Total:` line and printing only these lines in order:\n\n`Student: <name>`\n`Scores entered: <count>`\n`Highest score: <highest>`\n`Average: <average>`\n`Passing scores: <passing_count>`\n`Status: <status>`",
+              "hint": "Do not rewrite the calculations. Move the report output after the score processing and omit only the `Total:` line.",
+              "help": {
+                "concept": "The final capstone step is a refactor of presentation, not a restart: preserve working logic and shape the output contract.",
+                "hint_1": "Keep the score loop, total, highest, passing counter, average, and status thresholds.",
+                "hint_2": "The final runtime output must not contain a `Total:` line."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\npassing_count = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n    if score >= 70:\n        passing_count = passing_count + 1\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\nprint(f\"Passing scores: {passing_count}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\n\ntotal = 0\nhighest = 0\npassing_count = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n    if score >= 70:\n        passing_count = passing_count + 1\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\nprint(f\"Passing scores: {passing_count}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Preserve the cumulative calculations and print the final six-line report without the preview `Total:` line."
+                }
+              }
+            },
+            "try-mini-gradebook-capstone-sketch0": {
+              "title": "Build the gradebook header",
+              "prompt": "Read a student name and an integer score count. Remove surrounding spaces from the name with `.strip()`, then print `Student: <name>` and `Scores entered: <count>`. For this capstone, `count` is at least 1.",
+              "hint": "Read the name as text, clean it with `.strip()`, and convert the count with `int()`.",
+              "help": {
+                "concept": "The preview establishes the exact header that every later project step will preserve.",
+                "hint_1": "Use `student = input().strip()` and `count = int(input())`.",
+                "hint_2": "Print both labels with f-strings."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\n\n# Print the two-line report header.\n",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read and strip `student`, convert `count` with `int()`, and print both header lines with f-strings."
+                }
+              }
+            },
+            "cp-1-read-gradebook-header": {
+              "title": "Add the running score total",
+              "prompt": "Keep the exact working header. Now read exactly `count` integer scores (each 0–100) with `for i in range(count)`, accumulate them in `total`, and print `Total: <total>`.",
+              "hint": "Initialize `total = 0` before the loop and add each score inside it.",
+              "help": {
+                "concept": "This step adds repeated score input and a numeric accumulator without replacing the working header.",
+                "hint_1": "Use one `input()` per loop iteration.",
+                "hint_2": "After the loop, print the accumulated total."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `range(count)` and update `total` from its previous value inside the score loop."
+                }
+              }
+            },
+            "cp-2-add-score-total": {
+              "title": "Track the highest score",
+              "prompt": "Keep the header and total working. Add a variable named `highest` that remembers the largest score seen so far, then print `Highest score: <highest>`.",
+              "hint": "Scores are 0–100, so `highest = 0` is a valid starting value for this project.",
+              "help": {
+                "concept": "A running maximum changes only when the current score is larger than the best score stored so far.",
+                "hint_1": "Initialize `highest` before the loop.",
+                "hint_2": "Inside the loop, update it only under `if score > highest:`."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `highest` before the loop and update it only when `score > highest`."
+                }
+              }
+            },
+            "cp-3-track-highest-score": {
+              "title": "Calculate and format the average",
+              "prompt": "Keep the total and highest-score logic. After all scores are read, calculate `average = total / count` and print `Average: <average>` with exactly one digit after the decimal point.",
+              "hint": "The input contract guarantees `count >= 1`, so calculate the average after the loop.",
+              "help": {
+                "concept": "The average is derived once the accumulator and score count are complete.",
+                "hint_1": "Use `average = total / count`.",
+                "hint_2": "Format the line with `{average:.1f}`."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Calculate `average = total / count` after the loop and format it with `:.1f`."
+                }
+              }
+            },
+            "cp-4-calculate-average": {
+              "title": "Choose a gradebook status",
+              "prompt": "Keep the working summary. Add a status after the average: `excellent` for averages at least 90, `passing` for averages at least 70, and `needs practice` otherwise.",
+              "hint": "Check the narrower 90+ case before the broader 70+ case.",
+              "help": {
+                "concept": "An ordered `if` / `elif` / `else` chain turns the numeric average into one mutually exclusive status.",
+                "hint_1": "Use `if average >= 90:` first.",
+                "hint_2": "Then use `elif average >= 70:` and `else`."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use an ordered `if` / `elif` / `else` chain for the 90+, 70+, and remaining status cases."
+                }
+              }
+            },
+            "cp-5-choose-status": {
+              "title": "Count passing scores",
+              "prompt": "Keep the entire working gradebook. Add a conditional counter named `passing_count` that counts how many individual scores are at least 70. Print `Passing scores: <passing_count>` before the status line.",
+              "hint": "Initialize the counter before the score loop and increment it only for scores 70 or higher.",
+              "help": {
+                "concept": "This step combines the existing score loop with a conditional counter while preserving the total and maximum.",
+                "hint_1": "Start with `passing_count = 0`.",
+                "hint_2": "Inside the loop, increment it under `if score >= 70:`."
+              },
+              "starterCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")",
+              "solutionCode": "student = input().strip()\ncount = int(input())\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\npassing_count = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n    if score >= 70:\n        passing_count = passing_count + 1\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\nprint(f\"Passing scores: {passing_count}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Initialize `passing_count` before the loop and increment it only when `score >= 70`."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_mini_gradebook_capstone_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Read one student name and print the first report line as `Student: <name>`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {},
+      "python-v2-4": {
+        "mini-gradebook-capstone": {
+          "sketch_gradebook_plan": {
+            "title": "Plan one cumulative gradebook",
+            "bodyMarkdown": "Build one small gradebook program from a working base instead of restarting at every step.\n\nInput contract for this capstone:\n\n1. one student name;\n2. one integer `count`, where `count >= 1`;\n3. exactly `count` integer scores, each from `0` through `100`.\n\nThe project grows through distinct responsibilities:\n\n1. print the student and score-count header;\n2. read the scores and build a running total;\n3. track the highest score;\n4. calculate and format the average;\n5. choose a status from the average;\n6. count how many scores are passing (`70` or higher);\n7. polish the output into the final report.\n\nEvery stage starts from the **exact solution of the previous stage**. Preserve the working program and add only the new responsibility needed by the next step.\n\nThe final report combines skills from across the course: input conversion, string cleanup, f-strings, `for`/`range`, accumulators, conditional counters, comparisons, and `if` / `elif` / `else`.\n"
+          }
+        }
+      }
+    }
+  }
+}

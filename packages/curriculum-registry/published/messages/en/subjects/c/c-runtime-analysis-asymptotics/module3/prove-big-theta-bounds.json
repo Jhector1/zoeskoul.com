@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-3-inequality-proofs": {
+        "prove-big-theta-bounds": {
+          "label": "A Big-Θ Inequality Proof",
+          "summary": "Prove a cubic polynomial has tight cubic growth.",
+          "cards": {
+            "theta-proof": {
+              "title": "Prove a Two-Sided Big-Θ Bound"
+            },
+            "theta-proof-animation": {
+              "title": "Squeeze a Polynomial Between Two Cubics"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "verify_theta_bounds": {
+              "title": "Sanity-Check the Θ Constants in C"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "verify_theta_bounds": {
+                "title": "Sanity-Check the Θ Constants in C",
+                "prompt": "Complete `theta_bounds_hold`. Avoid floating point by multiplying the lower inequality by 2. The finite test supports the algebraic proof but does not replace it.",
+                "hint": "Check `n³ <= 2T(n)` for the lower bound and `T(n) <= 2n³` for the upper bound.",
+                "help": {
+                  "concept": "The chosen constants are c₁=1/2, c₂=2, and n₀=7.",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"bounds.h\"\nint main(void) {\n    int valid = 1;\n    for (long long n = 7; n <= 50; n++) {\n        if (!theta_bounds_hold(n)) valid = 0;\n    }\n    printf(\"n0=7\\nchecked_through=50\\nstatus=%s\\n\", valid ? \"valid\" : \"invalid\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"bounds.h\"\nint main(void) {\n    int valid = 1;\n    for (long long n = 7; n <= 50; n++) {\n        if (!theta_bounds_hold(n)) valid = 0;\n    }\n    printf(\"n0=7\\nchecked_through=50\\nstatus=%s\\n\", valid ? \"valid\" : \"invalid\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"bounds.h\"\nint main(void) {\n    int valid = 1;\n    for (long long n = 7; n <= 50; n++) {\n        if (!theta_bounds_hold(n)) valid = 0;\n    }\n    printf(\"n0=7\\nchecked_through=50\\nstatus=%s\\n\", valid ? \"valid\" : \"invalid\");\n    return 0;\n}\n"
+                  },
+                  "bounds_h": {
+                    "content": "#ifndef BOUNDS_H\n#define BOUNDS_H\nint theta_bounds_hold(long long n);\n#endif\n"
+                  },
+                  "bounds_c": {
+                    "content": "#include \"bounds.h\"\nint theta_bounds_hold(long long n) {\n    (void)n;\n    /* TODO: verify (1/2)n^3 <= T(n) <= 2n^3 without floating point. */\n    return 0;\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"bounds.h\"\nint main(void) {\n    int valid = 1;\n    for (long long n = 7; n <= 50; n++) {\n        if (!theta_bounds_hold(n)) valid = 0;\n    }\n    printf(\"n0=7\\nchecked_through=50\\nstatus=%s\\n\", valid ? \"valid\" : \"invalid\");\n    return 0;\n}\n"
+                  },
+                  "bounds_h": {
+                    "content": "#ifndef BOUNDS_H\n#define BOUNDS_H\nint theta_bounds_hold(long long n);\n#endif\n"
+                  },
+                  "bounds_c": {
+                    "content": "#include \"bounds.h\"\nint theta_bounds_hold(long long n) {\n    const long long cube = n * n * n;\n    const long long t = cube - 3 * n * n - n + 1;\n    const int lower_ok = cube <= 2 * t;\n    const int upper_ok = t <= 2 * cube;\n    return n >= 7 && t >= 0 && lower_ok && upper_ok;\n}\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Encode the lower bound without floating point."
+                  },
+                  {
+                    "message": "Encode the upper bound."
+                  },
+                  {
+                    "message": "Respect the proven threshold n₀=7."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "theta-needs-both": {
+              "title": "Two-sided requirement",
+              "prompt": "What must a Θ proof establish?",
+              "hint": "Θ is a tight bound.",
+              "help": {
+                "concept": "T must eventually stay between c₁g and c₂g.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Only an upper bound",
+                "b": "Only a lower bound",
+                "c": "Both lower and upper constant multiples after one threshold",
+                "d": "Exact equality for every n"
+              }
+            },
+            "theta-small-negative": {
+              "title": "Why a threshold?",
+              "prompt": "Why can the proof ignore small n where T(n) is negative?",
+              "hint": "Read the quantifier in the definition.",
+              "help": {
+                "concept": "A finite prefix does not affect eventual growth.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Negative values are rounded to zero",
+                "b": "Asymptotic definitions only require the inequality for n≥n₀",
+                "c": "Θ applies only to even n",
+                "d": "c₁ may be negative"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-3-inequality-proofs": {
+        "prove-big-theta-bounds": {
+          "theta-proof": {
+            "title": "Prove a Two-Sided Big-Θ Bound",
+            "bodyMarkdown": "Let\n\n$$\nT(n)=n^3-3n^2-n+1.\n$$\n\nTo prove `T(n) = Θ(n³)`, find positive `c₁`, `c₂`, and `n₀` such that\n\n$$\n0\\le c_1n^3\\le T(n)\\le c_2n^3\n$$\n\nfor every `n ≥ n₀`.\n\n### Upper bound\n\nChoose `c₂ = 2`. Dropping negative terms can only increase `T(n)`:\n\n$$\nT(n)\\le n^3+1\\le2n^3\\quad(n\\ge1).\n$$\n\n### Lower bound\n\nChoose `c₁ = 1/2` and `n₀ = 7`. For `n ≥ 7`:\n\n$$\n3n^2\\le\\frac{3}{7}n^3,\\qquad n\\le\\frac{1}{49}n^3.\n$$\n\nTherefore\n\n$$\nT(n)\\ge\\left(1-\\frac37-\\frac1{49}\\right)n^3=\\frac{27}{49}n^3>\\frac12n^3.\n$$\n\n### Combine the bounds\n\n$$\n0\\le\\frac12n^3\\le T(n)\\le2n^3\\quad(n\\ge7).\n$$\n\nThe threshold matters because `T(n)` is negative for some small inputs. Asymptotic definitions allow a finite prefix to be ignored."
+          },
+          "theta-proof-animation": {
+            "title": "Squeeze a Polynomial Between Two Cubics",
+            "context": "Big-Θ requires both an eventual lower bound and an eventual upper bound.",
+            "steps": [
+              {
+                "title": "Choose an easy upper constant",
+                "body": "Negative terms only reduce T, so T≤n³+1≤2n³ for n≥1."
+              },
+              {
+                "title": "Control the negative terms",
+                "body": "At n≥7, rewrite 3n² and n as small fractions of n³."
+              },
+              {
+                "title": "Squeeze T between two multiples",
+                "body": "One n₀ must make both sides true."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

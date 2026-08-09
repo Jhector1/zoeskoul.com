@@ -1,0 +1,271 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators to compare values and work directly with the `True` or `False` results they produce.",
+          "cards": {
+            "sketch0": {
+              "title": "What comparison operators do"
+            },
+            "sketch1": {
+              "title": "Using True and False in decisions"
+            },
+            "sketch2": {
+              "title": "Truthiness of numbers, strings, and None"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-compare-equal": {
+              "title": "Equal comparison",
+              "prompt": "Which expression checks whether `score` is equal to `10`?",
+              "hint": "Equality uses two equals signs.",
+              "help": {
+                "concept": "`==` compares values, while `=` assigns a value.",
+                "hint_1": "The expression should ask whether score already equals 10.",
+                "hint_2": "Look for `score == 10`."
+              },
+              "options": {
+                "a": "score = 10",
+                "b": "score == 10",
+                "c": "10 = score"
+              }
+            },
+            "sc-truthy-string": {
+              "title": "Identify a boolean comparison result",
+              "prompt": "What value does the expression `4 <= 4` produce?",
+              "hint": "The operator includes equality as well as less-than.",
+              "help": {
+                "concept": "`<=` is true when the left value is less than or equal to the right value.",
+                "hint_1": "Here the two numbers are equal.",
+                "hint_2": "Comparison expressions produce the boolean values `True` or `False`."
+              },
+              "options": {
+                "a": "4",
+                "b": "True",
+                "c": "False",
+                "d": "\"True\""
+              }
+            },
+            "mc-true-comparisons": {
+              "title": "Choose all true comparisons",
+              "prompt": "Which expressions evaluate to `True`? Choose all that apply.",
+              "hint": "Evaluate each relationship exactly as written.",
+              "help": {
+                "concept": "Each comparison independently produces `True` or `False`.",
+                "hint_1": "`6 >= 6` is true because equality is allowed.",
+                "hint_2": "`3 != 5` is true because the values differ."
+              },
+              "options": {
+                "a": "4 < 2",
+                "b": "6 >= 6",
+                "c": "3 != 5",
+                "d": "7 == 8"
+              }
+            },
+            "mc-falsey-values": {
+              "title": "Choose the false comparison results",
+              "prompt": "Which expressions evaluate to `False`? Choose all that apply.",
+              "hint": "Evaluate each comparison one at a time.",
+              "help": {
+                "concept": "A comparison is false when the relationship written by its operator does not hold.",
+                "hint_1": "Check equality and ordering separately.",
+                "hint_2": "Do not confuse the string `\"False\"` with the boolean value `False`."
+              },
+              "options": {
+                "a": "8 < 3",
+                "b": "5 == 5",
+                "c": "4 != 4",
+                "d": "9 >= 2"
+              }
+            },
+            "dr-check-age-order": {
+              "title": "Store a threshold comparison",
+              "prompt": "Arrange the lines so the program stores whether `age` is at least 18, then prints that boolean result.",
+              "hint": "Create the number first, evaluate the comparison second, print the boolean last.",
+              "help": {
+                "concept": "A comparison result can be stored in a variable before it is printed.",
+                "hint_1": "The `age` variable must exist before `age >= 18` can be evaluated.",
+                "hint_2": "Print `is_adult` only after it has been assigned."
+              },
+              "tokens": {
+                "t1": "age = 20",
+                "t2": "is_adult = age >= 18",
+                "t3": "print(is_adult)"
+              }
+            },
+            "dr-compare-then-print": {
+              "title": "Build a comparison output",
+              "prompt": "Arrange the lines to print the result of checking whether `5` is less than `9`.",
+              "hint": "Compute the boolean first, then print the variable that stores it.",
+              "help": {
+                "concept": "The expression `5 < 9` is evaluated before its boolean result can be printed.",
+                "hint_1": "Assign the comparison to `result` first.",
+                "hint_2": "Then pass `result` to `print(...)`."
+              },
+              "tokens": {
+                "t1": "result = 5 < 9",
+                "t2": "print(result)"
+              }
+            },
+            "fb-greater-equal": {
+              "title": "Complete the operator",
+              "prompt": "Choose the operator that makes `age_check` become `True` when `age` is 18 or more.\n\n```python\nage_check = age [blank1] 18\n```",
+              "hint": "The relationship must include both values above 18 and exactly 18.",
+              "help": {
+                "concept": "`>=` means greater than or equal to.",
+                "hint_1": "`>` would exclude age 18.",
+                "hint_2": "`==` would accept only age 18."
+              },
+              "template": "age_check = age [blank1] 18",
+              "choices": [
+                ">",
+                ">=",
+                "==",
+                "!="
+              ]
+            },
+            "fb-empty-string": {
+              "title": "Fill the not-equal operator",
+              "prompt": "Choose the operator that makes this expression check whether `name` is different from `\"Ava\"`.",
+              "hint": "Use the comparison operator that means not equal.",
+              "help": {
+                "concept": "`!=` compares two values and returns `True` when they are different.",
+                "hint_1": "Do not use assignment.",
+                "hint_2": "The operator is an exclamation mark followed by an equals sign."
+              },
+              "template": "name [blank1] \"Ava\"",
+              "choices": [
+                "==",
+                "!=",
+                "=",
+                ">="
+              ]
+            },
+            "ci-print-comparisons": {
+              "title": "Print two comparison results",
+              "prompt": "Print the result of `8 > 3` on the first line and the result of `8 == 10` on the second line.",
+              "hint": "Print the comparison expressions themselves.",
+              "help": {
+                "concept": "Python can print the `True` or `False` value produced directly by a comparison expression.",
+                "hint_1": "Use one print call for `8 > 3`.",
+                "hint_2": "Use another print call for `8 == 10`."
+              },
+              "starterCode": "# Print 8 > 3\n# Print 8 == 10\n",
+              "solutionCode": "print(8 > 3)\nprint(8 == 10)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print both comparison expressions directly, in the requested order."
+                }
+              }
+            },
+            "ci-age-check": {
+              "title": "Print an age-threshold comparison",
+              "prompt": "Read one integer age and print the boolean result of checking whether the age is 18 or more. Do not use `if`.",
+              "hint": "Convert the input, then print `age >= 18` directly.",
+              "help": {
+                "concept": "A comparison itself already produces the `True` or `False` result you need.",
+                "hint_1": "Use `int(input())` for the age.",
+                "hint_2": "Pass `age >= 18` directly to `print(...)`."
+              },
+              "starterCode": "age = int(input())\n# Print whether age is at least 18\n",
+              "solutionCode": "age = int(input())\nprint(age >= 18)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read and convert the age with int(input())."
+                },
+                "1": {
+                  "message": "Print the comparison age >= 18 directly without branching."
+                }
+              }
+            },
+            "ci-number-sign": {
+              "title": "Compare two input numbers for equality",
+              "prompt": "Read two integers. Print `first == second` on the first output line and `first != second` on the second output line. Do not use `if`.",
+              "hint": "The two requested comparison expressions are opposites.",
+              "help": {
+                "concept": "`==` checks equality and `!=` checks inequality; both return booleans.",
+                "hint_1": "Read both values with `int(input())`.",
+                "hint_2": "Print the equality comparison first and the inequality comparison second."
+              },
+              "starterCode": "first = int(input())\nsecond = int(input())\n# Print equality, then inequality\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nprint(first == second)\nprint(first != second)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read and convert both integer inputs."
+                },
+                "1": {
+                  "message": "Print both == and != comparisons in the requested order."
+                }
+              }
+            },
+            "ci-name-truthy": {
+              "title": "Compare a typed name with a target",
+              "prompt": "Read one line into `name` and print the boolean result of checking whether `name` is exactly equal to `\"Ava\"`.",
+              "hint": "Use `==` between the variable and the target string.",
+              "help": {
+                "concept": "Equality comparisons work with strings as well as numbers.",
+                "hint_1": "Read the text with `input()`.",
+                "hint_2": "Print `name == \"Ava\"`."
+              },
+              "starterCode": "name = input()\n# Print whether name equals Ava\n",
+              "solutionCode": "name = input()\nprint(name == \"Ava\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the name with input()."
+                },
+                "1": {
+                  "message": "Compare name with \"Ava\" using == and print the result."
+                }
+              }
+            },
+            "ci-max-of-two": {
+              "title": "Check whether the first number is at least as large",
+              "prompt": "Read two integers and print the boolean result of `first >= second`.",
+              "hint": "No branch is needed; print the comparison directly.",
+              "help": {
+                "concept": "`>=` can compare two runtime numeric values and return a boolean.",
+                "hint_1": "Read both values as integers.",
+                "hint_2": "Print `first >= second`."
+              },
+              "starterCode": "first = int(input())\nsecond = int(input())\n# Print whether first is at least second\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nprint(first >= second)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read both values with int(input())."
+                },
+                "1": {
+                  "message": "Use and print the comparison first >= second."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "comparisons-and-truth-values": {
+          "compare-operators": {
+            "title": "Compare values with Python operators",
+            "bodyMarkdown": "Comparison operators ask whether two values have a particular relationship.\n\nEvery comparison expression evaluates to exactly one boolean value: `True` or `False`.\n\nCommon comparison operators are:\n\n- `==` — equal to\n- `!=` — not equal to\n- `>` — greater than\n- `<` — less than\n- `>=` — greater than or equal to\n- `<=` — less than or equal to\n\n```python\nprint(5 > 3)\nprint(5 == 3)\nprint(7 != 7)\n```\n\nOutput:\n\n```text\nTrue\nFalse\nFalse\n```\n\n`=` and `==` have different jobs:\n\n```python\nscore = 10      # assignment\nscore == 10     # comparison\n```\n\nUse `=` to store a value. Use `==` to ask whether two values are equal.\n"
+          },
+          "truth-values-in-conditions": {
+            "title": "Store and print comparison results",
+            "bodyMarkdown": "A comparison is an expression, so its boolean result can be stored in a variable.\n\n```python\nage = 16\nold_enough = age >= 13\n\nprint(old_enough)\n```\n\nOutput:\n\n```text\nTrue\n```\n\nYou can read that flow in two steps:\n\n1. `age >= 13` is evaluated;\n2. the resulting boolean is stored in `old_enough`.\n\nThe variable does not store the comparison text. It stores the result: either `True` or `False`.\n\nAnother example:\n\n```python\nscore = 72\npassed = score >= 70\n\nprint(passed)\n```\n\nOutput:\n\n```text\nTrue\n```\n\nLater lessons will use these boolean results to control which blocks run. For now, focus on creating and inspecting the comparison result itself.\n"
+          },
+          "truthiness-basics": {
+            "title": "Compare input values without branching",
+            "bodyMarkdown": "Comparisons also work with values read from input.\n\nFor numeric comparisons, convert the input text first:\n\n```python\nage = int(input())\nprint(age >= 18)\n```\n\nIf the input is `20`, the output is:\n\n```text\nTrue\n```\n\nIf the input is `14`, the output is:\n\n```text\nFalse\n```\n\nYou can compare two input values too:\n\n```python\nfirst = int(input())\nsecond = int(input())\n\nprint(first == second)\nprint(first != second)\n```\n\nFor equal inputs, the first line is `True` and the second is `False`.\n\nThis lesson stops at producing boolean results. The next conditional lessons will decide what code to run based on those results.\n"
+          }
+        }
+      }
+    }
+  }
+}

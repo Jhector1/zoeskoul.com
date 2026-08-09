@@ -1,0 +1,262 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "label": "Indentation and Blocks",
+          "summary": "Use indentation to show which statements belong to a Python block, keep statements in the same block aligned, and dedent to leave a block.",
+          "cards": {
+            "sketch0": {
+              "title": "Why indentation matters"
+            },
+            "sketch1": {
+              "title": "Lines with the same indentation belong together"
+            },
+            "sketch2": {
+              "title": "Each branch has its own block"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-indent-purpose": {
+              "title": "What indentation does",
+              "prompt": "In Python, what does indentation mainly tell the program?",
+              "hint": "Indentation shows which statements belong under a block header.",
+              "help": {
+                "concept": "Python uses indentation to define block membership.",
+                "hint_1": "Indented lines can belong to an `if`, `elif`, or `else` body.",
+                "hint_2": "A dedented line has left that block."
+              },
+              "options": {
+                "a": "Which lines belong to the same block",
+                "b": "Which variables are strings",
+                "c": "How many times a line will run",
+                "d": "Whether print adds a new line"
+              }
+            },
+            "sc-outside-block": {
+              "title": "Line outside the block",
+              "prompt": "What is true about a line that is not indented under an `if` statement?",
+              "hint": "A line aligned with the `if` header is no longer inside its indented body.",
+              "help": {
+                "concept": "Dedenting to the surrounding level ends the block.",
+                "hint_1": "The outside line is not controlled by that `if` block.",
+                "hint_2": "It can still run when the `if` condition is false."
+              },
+              "options": {
+                "a": "It is always ignored",
+                "b": "It belongs to the `if` block",
+                "c": "It is outside the `if` block",
+                "d": "It turns the `if` into an `else`"
+              }
+            },
+            "mc-same-block": {
+              "title": "Choose all lines in the block",
+              "prompt": "Consider this code:\n\n```python\nif True:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n```\n\nWhich lines are inside the `if` block? Choose all correct answers.",
+              "hint": "Look for the two statements with the same indentation beneath the header.",
+              "help": {
+                "concept": "Statements at the same indentation level beneath a header belong to the same block.",
+                "hint_1": "`print(\"A\")` and `print(\"B\")` are both shifted right.",
+                "hint_2": "`print(\"C\")` is dedented back to the outer level."
+              },
+              "options": {
+                "a": "print(\"A\")",
+                "b": "print(\"B\")",
+                "c": "print(\"C\")",
+                "d": "if True:"
+              }
+            },
+            "mc-branch-blocks": {
+              "title": "Valid ideas about blocks",
+              "prompt": "Which statements about Python blocks are correct? Choose all correct answers.",
+              "hint": "Indentation affects execution structure, not just appearance.",
+              "help": {
+                "concept": "Each branch body is defined by indentation, and same-level statements can share a block.",
+                "hint_1": "`else` can have its own indented body.",
+                "hint_2": "Reject the statement claiming indentation is only visual."
+              },
+              "options": {
+                "a": "Lines with the same indentation under an `if` can belong to the same block",
+                "b": "An `else` branch can have its own indented block",
+                "c": "Indentation in Python is only for readability and does not affect execution",
+                "d": "A line outside the block must be indented more than the `if` line"
+              }
+            },
+            "dr-if-else-structure": {
+              "title": "Build a correctly indented if / else",
+              "prompt": "Arrange the lines to form valid Python that prints `yes` when `x > 0` and `no` otherwise.",
+              "hint": "The two output lines must stay indented beneath their branch headers.",
+              "help": {
+                "concept": "Branch bodies must be indented beneath `if` and `else`.",
+                "hint_1": "Place the indented `yes` line after the `if` header.",
+                "hint_2": "Place the indented `no` line after `else:`."
+              },
+              "tokens": {
+                "t1": "if x > 0:",
+                "t2": "    print(\"yes\")",
+                "t3": "else:",
+                "t4": "    print(\"no\")"
+              }
+            },
+            "dr-two-line-block": {
+              "title": "Keep two statements in one block",
+              "prompt": "Arrange the lines so both messages belong to the same `if` block.",
+              "hint": "Both output lines should have the same indentation beneath the header.",
+              "help": {
+                "concept": "Two statements aligned at the same indented level can belong to one block.",
+                "hint_1": "Put the `if` header first.",
+                "hint_2": "Keep both indented `print(...)` lines after it."
+              },
+              "tokens": {
+                "t1": "if score >= 50:",
+                "t2": "    print(\"pass\")",
+                "t3": "    print(\"good effort\")"
+              }
+            },
+            "fb-indent-after-if": {
+              "title": "Choose the block header",
+              "prompt": "Choose the line that correctly starts the block containing the indented print statement.",
+              "hint": "The block header needs the `if` keyword, a condition, and a colon.",
+              "help": {
+                "concept": "An indented body follows a block header ending in `:`.",
+                "hint_1": "The condition is `score >= 80`.",
+                "hint_2": "Choose the complete `if` header."
+              },
+              "template": "[blank1]\n    print(\"target reached\")",
+              "choices": [
+                "if score >= 80:",
+                "if score >= 80",
+                "score >= 80:",
+                "else score >= 80:"
+              ]
+            },
+            "fb-line-in-block": {
+              "title": "Choose the line inside the block",
+              "prompt": "Pick the line that correctly belongs inside the `if ready:` block.",
+              "hint": "A statement inside the block must be indented beneath the header.",
+              "help": {
+                "concept": "Indentation places a statement inside the preceding block.",
+                "hint_1": "Look for spaces before `print`.",
+                "hint_2": "The left-aligned version is outside the block."
+              },
+              "template": "if ready:\n[blank1]",
+              "choices": [
+                "print(\"Go\")",
+                "    print(\"Go\")",
+                "        print(\"Go\")",
+                ": print(\"Go\")"
+              ]
+            },
+            "code-basic-if-output": {
+              "title": "Indent the if body",
+              "prompt": "The condition is already written. Fix the indentation so `big` prints only when `n > 10`, while `done` always prints afterward.",
+              "hint": "Indent only `print(\"big\")`; keep `print(\"done\")` outside the block.",
+              "help": {
+                "concept": "One indentation level places `print(\"big\")` inside the `if`; dedenting places `done` outside it.",
+                "hint_1": "Do not indent the final line.",
+                "hint_2": "The completed program should have one statement inside the block and one after it."
+              },
+              "starterCode": "n = int(input())\nif n > 10:\nprint(\"big\")\nprint(\"done\")\n",
+              "solutionCode": "n = int(input())\nif n > 10:\n    print(\"big\")\nprint(\"done\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Indent `print(\"big\")` under the `if` and keep `print(\"done\")` dedented."
+                }
+              }
+            },
+            "code-two-lines-in-block": {
+              "title": "Keep two lines in the same block",
+              "prompt": "Fix the indentation so both `high` and `checked` print when `n >= 5`. The final `done` line must always print.",
+              "hint": "Give `high` and `checked` the same indentation; dedent `done`.",
+              "help": {
+                "concept": "Statements with matching indentation beneath the same header share one block.",
+                "hint_1": "Both conditional messages belong inside the `if`.",
+                "hint_2": "The final message belongs outside the block."
+              },
+              "starterCode": "n = int(input())\nif n >= 5:\n    print(\"high\")\nprint(\"checked\")\n    print(\"done\")\n",
+              "solutionCode": "n = int(input())\nif n >= 5:\n    print(\"high\")\n    print(\"checked\")\nprint(\"done\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep both conditional prints at the same indentation level and dedent the final print."
+                }
+              }
+            },
+            "code-elif-branches": {
+              "title": "Fix branch-body indentation",
+              "prompt": "The branch conditions are already correct. Fix only the indentation so each message belongs to its matching `if`, `elif`, or `else` branch.",
+              "hint": "Each branch body should be indented one level beneath its header.",
+              "help": {
+                "concept": "Each branch header owns the indented statement immediately beneath it.",
+                "hint_1": "Do not change the conditions.",
+                "hint_2": "Align all three branch-body print statements at the same indentation depth."
+              },
+              "starterCode": "n = int(input())\nif n > 0:\nprint(\"positive\")\nelif n < 0:\n        print(\"negative\")\nelse:\nprint(\"zero\")\n",
+              "solutionCode": "n = int(input())\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Indent each branch-body print exactly one level beneath its header."
+                }
+              }
+            },
+            "code-special-case-first": {
+              "title": "Dedent after an if / else block",
+              "prompt": "Fix the indentation so the program prints `pass` or `retry`, then always prints `checked` after the conditional finishes.",
+              "hint": "The `checked` line should align with the `if`, not with either branch body.",
+              "help": {
+                "concept": "Dedenting returns execution to the surrounding block after a conditional.",
+                "hint_1": "Keep `pass` and `retry` indented under their branches.",
+                "hint_2": "Move `checked` back to the outer indentation level."
+              },
+              "starterCode": "score = int(input())\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")\n    print(\"checked\")\n",
+              "solutionCode": "score = int(input())\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")\nprint(\"checked\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Dedent `print(\"checked\")` so it runs after either branch."
+                }
+              }
+            },
+            "code-nested-if-basic": {
+              "title": "Fix two indentation depths",
+              "prompt": "The nested conditions are already written. Fix the indentation so `adult` belongs to the inner `if`, `teen` belongs to the inner `else`, and `child` belongs to the outer `else`.",
+              "hint": "The nested branch body needs two indentation levels; the outer fallback needs one.",
+              "help": {
+                "concept": "Nested blocks add another indentation depth.",
+                "hint_1": "The inner `if` and inner `else` are themselves inside the outer `if` block.",
+                "hint_2": "The final outer `else` aligns with the first `if`."
+              },
+              "starterCode": "age = int(input())\nif age >= 13:\n    if age >= 18:\n    print(\"adult\")\n    else:\nprint(\"teen\")\nelse:\n        print(\"child\")\n",
+              "solutionCode": "age = int(input())\nif age >= 13:\n    if age >= 18:\n        print(\"adult\")\n    else:\n        print(\"teen\")\nelse:\n    print(\"child\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use two indentation levels inside the nested branch and one level inside the outer else."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "indentation-intro": {
+            "title": "Indentation defines block membership",
+            "bodyMarkdown": "In Python, indentation is part of the program's structure.\n\nA line indented under a block header belongs to that block:\n\n```python\nage = 16\n\nif age >= 18:\n    print(\"adult\")\n\nprint(\"done\")\n```\n\n`print(\"adult\")` is inside the `if` block because it is indented.\n\n`print(\"done\")` is outside the block because it has returned to the same indentation level as `if`.\n\nFor `age = 16`, the output is:\n\n```text\ndone\n```\n\nPython skips the indented block because the condition is false, but the outside line still runs.\n\nPython commonly uses four spaces for one indentation level. The important rule is to keep each block level consistent.\n"
+          },
+          "same-indent-same-block": {
+            "title": "Keep lines in the same block aligned",
+            "bodyMarkdown": "Several statements can belong to the same block.\n\nThey should use the same indentation level:\n\n```python\nscore = 85\n\nif score >= 80:\n    print(\"Great job\")\n    print(\"You passed the target\")\n\nprint(\"Check complete\")\n```\n\nThe two indented `print(...)` lines are in the same `if` block because they line up.\n\nThe final line is dedented, so it is outside the block.\n\nFor `score = 85`:\n\n```text\nGreat job\nYou passed the target\nCheck complete\n```\n\nFor `score = 60`:\n\n```text\nCheck complete\n```\n\nA common mistake is accidentally dedenting one line too early. That changes which statements are controlled by the condition.\n"
+          },
+          "if-elif-else-blocks": {
+            "title": "Align each branch body under its header",
+            "bodyMarkdown": "Each `if`, `elif`, or `else` branch has its own indented body.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n\nprint(\"done\")\n```\n\nNotice two indentation levels:\n\n- `if`, `elif`, `else`, and `print(\"done\")` are aligned at the outer level;\n- each branch's `print(...)` line is indented one level beneath its header.\n\nFor `number = 0`, the output is:\n\n```text\nzero\ndone\n```\n\nIf a branch header is followed by a statement that is not indented, Python cannot treat that statement as the branch body.\n\nWhen a block ends, dedent back to the surrounding level.\n"
+          }
+        }
+      }
+    }
+  }
+}

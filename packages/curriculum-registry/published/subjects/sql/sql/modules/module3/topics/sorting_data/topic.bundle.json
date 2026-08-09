@@ -1,0 +1,643 @@
+{
+  "topicId": "sorting_data",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 8,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.sorting_data.label",
+    "summaryKey": "topics.sql.sql_module_3.sorting_data.summary"
+  },
+  "cards": [
+    {
+      "id": "why_sorting_matters",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.why_sorting_matters.title",
+      "sketchId": "why_sorting_matters",
+      "height": 520
+    },
+    {
+      "id": "order_by",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.order_by.title",
+      "sketchId": "order_by",
+      "height": 520
+    },
+    {
+      "id": "ascending_order",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.ascending_order.title",
+      "sketchId": "ascending_order",
+      "height": 520
+    },
+    {
+      "id": "descending_order",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.descending_order.title",
+      "sketchId": "descending_order",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "sort_names_asc",
+            "titleKey": "topics.sql.sql_module_3.sorting_data.projectSteps.sort_names_asc.title",
+            "exerciseKey": "m3_s01_sort_names_asc",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "sort_price_asc",
+            "titleKey": "topics.sql.sql_module_3.sorting_data.projectSteps.sort_price_asc.title",
+            "exerciseKey": "m3_s01_sort_price_asc",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "sort_stock_desc",
+            "titleKey": "topics.sql.sql_module_3.sorting_data.projectSteps.sort_stock_desc.title",
+            "exerciseKey": "m3_s01_sort_stock_desc",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.sorting_data.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "why_sorting_matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.sorting_data.why_sorting_matters.title",
+      "bodyKey": "sketches.sql.sql_module_3.sorting_data.why_sorting_matters.bodyMarkdown"
+    },
+    {
+      "id": "order_by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.sorting_data.order_by.title",
+      "bodyKey": "sketches.sql.sql_module_3.sorting_data.order_by.bodyMarkdown"
+    },
+    {
+      "id": "ascending_order",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.sorting_data.ascending_order.title",
+      "bodyKey": "sketches.sql.sql_module_3.sorting_data.ascending_order.bodyMarkdown"
+    },
+    {
+      "id": "descending_order",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.sorting_data.descending_order.title",
+      "bodyKey": "sketches.sql.sql_module_3.sorting_data.descending_order.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m3_s01_sort_names_asc",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sort_names_asc",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM products ORDER BY name;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Acrylic Paint Set"
+                ],
+                [
+                  "Desk Lamp"
+                ],
+                [
+                  "Fountain Pen"
+                ],
+                [
+                  "Notebook"
+                ],
+                [
+                  "Office Chair"
+                ],
+                [
+                  "Sketchbook"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_sort_price_asc",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sort_price_asc",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price FROM products ORDER BY price;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "price"
+              ],
+              "rows": [
+                [
+                  "Notebook",
+                  6.75
+                ],
+                [
+                  "Sketchbook",
+                  12.99
+                ],
+                [
+                  "Fountain Pen",
+                  18
+                ],
+                [
+                  "Acrylic Paint Set",
+                  24.5
+                ],
+                [
+                  "Desk Lamp",
+                  39.99
+                ],
+                [
+                  "Office Chair",
+                  129
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_sort_stock_desc",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sort_stock_desc",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock FROM products ORDER BY stock DESC;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "stock"
+              ],
+              "rows": [
+                [
+                  "Notebook",
+                  50
+                ],
+                [
+                  "Sketchbook",
+                  25
+                ],
+                [
+                  "Fountain Pen",
+                  15
+                ],
+                [
+                  "Acrylic Paint Set",
+                  10
+                ],
+                [
+                  "Desk Lamp",
+                  8
+                ],
+                [
+                  "Office Chair",
+                  3
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_why_sorting",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_why_sorting",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s01_order_by_job",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_order_by_job",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s01_ascending_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_ascending_meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s01_descending_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_descending_meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s01_sorting_result_check",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sorting_result_check",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s01_order_by_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_order_by_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_ascending_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_ascending_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_descending_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_descending_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_sorting_benefits_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sorting_benefits_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_sorting_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_sorting_workflow_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_reorder_sorting_purpose",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_reorder_sorting_purpose",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_reorder_order_by_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_reorder_order_by_flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_reorder_ascending_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_reorder_ascending_logic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_reorder_descending_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_reorder_descending_logic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_reorder_sorting_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_reorder_sorting_workflow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m3_s01_fill_order_by_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_fill_order_by_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ORDER BY"
+      }
+    },
+    {
+      "id": "m3_s01_fill_ascending_text",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_fill_ascending_text",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "A to Z"
+      }
+    },
+    {
+      "id": "m3_s01_fill_descending_numbers",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_fill_descending_numbers",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "largest to smallest"
+      }
+    },
+    {
+      "id": "m3_s01_fill_sorting_goal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_fill_sorting_goal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "order"
+      }
+    },
+    {
+      "id": "m3_s01_fill_sorting_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s01_fill_sorting_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "requested order"
+      }
+    }
+  ]
+}

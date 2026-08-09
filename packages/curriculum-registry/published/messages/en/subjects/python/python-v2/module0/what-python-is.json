@@ -1,0 +1,151 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "what-python-is": {
+          "label": "What Python Is",
+          "summary": "Understand Python as a general-purpose programming language, see where it is used, and preview how the course builds practical skill.",
+          "cards": {
+            "course-introduction": {
+              "title": "Start here"
+            },
+            "sketch0": {
+              "title": "Python is a programming language"
+            },
+            "sketch1": {
+              "title": "General-purpose means many kinds of work"
+            },
+            "sketch2": {
+              "title": "From first programs to real projects"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-python-language": {
+              "title": "Identify what Python is",
+              "prompt": "Which statement best describes Python?",
+              "hint": "Python is something people use to write instructions for computers.",
+              "help": {
+                "concept": "Python is a programming language. People write Python code to describe instructions and computations that a computer can execute.",
+                "hint_1": "Do not confuse the language with a website, operating system, or physical device.",
+                "hint_2": "Choose the answer that identifies Python as a language for writing programs."
+              },
+              "options": {
+                "a": "A programming language used to write programs",
+                "b": "A program that only installs Python packages",
+                "c": "A data-analysis library used inside another language",
+                "d": "A markup format used only to describe webpage structure"
+              }
+            },
+            "sc-general-purpose-meaning": {
+              "title": "Understand general-purpose",
+              "prompt": "What does it mean when Python is called a general-purpose language?",
+              "hint": "The phrase describes the range of problems the language can be used to solve.",
+              "help": {
+                "concept": "A general-purpose language is designed for many kinds of software and problem-solving tasks rather than one narrow job.",
+                "hint_1": "Python is not limited to only data work or only websites.",
+                "hint_2": "Choose the answer about using one language across many kinds of projects."
+              },
+              "options": {
+                "a": "It can be used for many different kinds of programming work",
+                "b": "It is designed for exactly one type of application",
+                "c": "It can only display text",
+                "d": "It only works for school exercises"
+              }
+            },
+            "sc-automation-example": {
+              "title": "Recognize automation",
+              "prompt": "Which task is the best example of using Python for automation?",
+              "hint": "Automation is useful when the same kind of work has to be repeated.",
+              "help": {
+                "concept": "Automation uses code to perform routine or repeated steps that would otherwise require manual work.",
+                "hint_1": "Look for a repetitive computer-based task.",
+                "hint_2": "The automated task should be something software can perform repeatedly."
+              },
+              "options": {
+                "a": "Rename hundreds of files using a consistent rule",
+                "b": "Rename one file manually one time",
+                "c": "Open each of hundreds of files and rename them manually",
+                "d": "Write the renaming rule down without executing it"
+              }
+            },
+            "mc-common-uses": {
+              "title": "Recognize common Python fields",
+              "prompt": "Which are common areas where Python is used? Choose all correct answers.",
+              "hint": "Think about software, data, automation, and intelligent systems.",
+              "help": {
+                "concept": "Python is used in areas including automation, web development, data analysis, and AI or machine learning.",
+                "hint_1": "Choose areas where software can process information or perform computations.",
+                "hint_2": "A manual physical chore is not itself a programming field."
+              },
+              "options": {
+                "a": "Automation",
+                "b": "Web applications",
+                "c": "Data analysis and AI",
+                "d": "A document file format such as PDF"
+              }
+            },
+            "mc-beginner-friendly-reasons": {
+              "title": "Why Python is a common first language",
+              "prompt": "Which qualities can make Python approachable for beginners? Choose all correct answers.",
+              "hint": "Think about reading code and getting feedback from small programs.",
+              "help": {
+                "concept": "Python is often chosen as a first language because many basic programs are readable and learners can begin experimenting with short pieces of code.",
+                "hint_1": "Look for qualities that reduce the barrier to starting.",
+                "hint_2": "Needing complex setup for every tiny program would not be a beginner advantage."
+              },
+              "options": {
+                "a": "Many basic Python statements are relatively readable",
+                "b": "Learners can start experimenting with small programs",
+                "c": "Every tiny program requires many files and packages",
+                "d": "Beginners must learn advanced AI before writing basic code"
+              }
+            },
+            "dr-course-progression": {
+              "title": "See how the course builds",
+              "prompt": "Arrange these course stages from earliest foundation to later application.",
+              "hint": "Start with running small programs and end with combining skills in projects.",
+              "help": {
+                "concept": "The course builds in layers: first you run and read small programs, then work with values and text, then add decisions and repetition, and finally combine ideas in projects.",
+                "hint_1": "Foundational interaction with code comes before larger programming structures.",
+                "hint_2": "Projects belong at the end because they combine skills learned earlier."
+              },
+              "tokens": {
+                "t1": "Run and read small Python programs",
+                "t2": "Work with values and text",
+                "t3": "Add decisions and repetition",
+                "t4": "Combine skills in projects"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "what-python-is": {
+          "course-introduction": {
+            "title": "Welcome to Python for Beginners",
+            "bodyMarkdown": "This course assumes no previous programming experience.\n\nYou will learn by reading short explanations, studying examples, making small changes, running code, and building projects that combine earlier skills.\n\nThe course is organized so that each new idea has a clear job. You will begin with the basic environment and simple values, then move into text, decisions, loops, functions, collections, and larger programs.\n\nYou do not need to memorize everything at once. The goal is to build a mental model gradually and practice each skill before relying on it in a project.\n\nBy the end of the course, you should be able to read beginner Python confidently, write useful small programs, debug common mistakes, and understand how the major building blocks fit together.\n"
+          },
+          "sketch-1": {
+            "title": "Python is a programming language",
+            "bodyMarkdown": "Python is a **programming language**: a language people use to write instructions and computations that a computer can execute.\n\nA Python program is written as source code. The code can describe work such as:\n\n- calculating values\n- transforming text or data\n- making decisions\n- repeating actions\n- organizing larger tasks into reusable pieces\n\nPython is known for syntax that is often relatively readable, which is one reason it is widely used for teaching programming.\n\nThe important idea at this point is not a particular Python command. It is the relationship:\n\n```text\nPython source code → computer executes instructions → program produces behavior or results\n```\n\nLater lessons will teach the specific syntax used to express those instructions.\n"
+          },
+          "sketch-2": {
+            "title": "General-purpose means many kinds of work",
+            "bodyMarkdown": "Python is a **general-purpose** programming language. That means it is useful across many kinds of software work rather than being designed for one narrow task.\n\nCommon areas include:\n\n- **Automation** — handling repeated computer tasks\n- **Web applications** — powering server-side logic and online services\n- **Data analysis** — cleaning, calculating, summarizing, and exploring information\n- **AI and machine learning** — preparing data and working with models\n- **Scripting and tools** — building small utilities that solve practical problems\n\nFor example, an automation program might rename hundreds of files according to one rule. A data program might calculate statistics from a dataset. A web application might use Python to decide what information to return to a user.\n\nThe syntax can differ from project to project, but the language is the same. That flexibility is what **general-purpose** means.\n"
+          },
+          "sketch-3": {
+            "title": "From first programs to real projects",
+            "bodyMarkdown": "Learning a programming language is more than learning isolated commands. You build skill by combining ideas.\n\nThis course follows that progression:\n\n1. **Run and inspect code** so you understand the basic feedback loop.\n2. **Work with values and text** so programs can represent information.\n3. **Make decisions and repeat work** so behavior can respond to conditions and scale beyond one step.\n4. **Create functions and larger structures** so code becomes reusable and organized.\n5. **Build projects** that combine several skills around one goal.\n\nA later project should feel different from an early exercise because it asks you to decide how multiple concepts fit together.\n\nThat is the purpose of the course structure: each topic contributes a tool, and projects give you a reason to combine those tools.\n"
+          }
+        }
+      }
+    }
+  }
+}

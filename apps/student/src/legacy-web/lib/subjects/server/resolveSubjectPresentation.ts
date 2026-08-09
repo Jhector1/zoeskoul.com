@@ -1,7 +1,7 @@
 import "server-only";
 
 import { SUBJECT_ARTIFACTS } from "@student/subjects";
-import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
+import { CATALOG_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
 import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import {
     getRawReviewModule,

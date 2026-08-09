@@ -69,11 +69,10 @@ describe("curriculumPaths", () => {
         expect(getSubjectManifestPath("python-v2")).toBe(
             path.join(
                 getRepoRoot(),
-                "apps",
-                "web",
-                "src",
-                "lib",
-                "subjects",
+                "packages",
+        "curriculum-registry",
+        "published",
+        "subjects",
                 "python",
                 "python-v2",
                 "subject.manifest.json",
@@ -82,11 +81,10 @@ describe("curriculumPaths", () => {
         expect(getTopicBundlePath("linux-terminal-fundamentals", "module1", "where-am-i")).toBe(
             path.join(
                 getRepoRoot(),
-                "apps",
-                "web",
-                "src",
-                "lib",
-                "subjects",
+                "packages",
+        "curriculum-registry",
+        "published",
+        "subjects",
                 "linux",
                 "linux-terminal-fundamentals",
                 "modules",

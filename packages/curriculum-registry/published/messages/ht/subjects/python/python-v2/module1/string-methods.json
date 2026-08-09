@@ -1,0 +1,253 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "label": "Metòd String Itil",
+          "summary": "Sèvi ak metòd tankou lower, strip, replace, split, ak join.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa metòd string yo fè"
+            },
+            "sketch1": {
+              "title": "Chanje tèks ak replace"
+            },
+            "sketch2": {
+              "title": "Separe epi reyini tèks"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Seri Pratik Metòd String"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Mete yon liy tèks an miniskil"
+            },
+            "code_2": {
+              "title": "Retire espas deyò yo"
+            },
+            "code_3": {
+              "title": "Ranplase yon mo"
+            },
+            "code_4": {
+              "title": "Separe mo ki separe ak vigil"
+            },
+            "code_5": {
+              "title": "Netwaye epi fòmate etikèt yo"
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Chwazi metòd miniskil la",
+              "prompt": "Ki metòd string ki chanje tout lèt nan yon string an miniskil?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te montre repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "strip()",
+                "b": "lower()",
+                "c": "split()",
+                "d": "join()"
+              }
+            },
+            "sc-2": {
+              "title": "Chwazi metòd pou espas deyò yo",
+              "prompt": "Ki metòd ki retire espas nan kòmansman ak nan fen yon string?",
+              "hint": "Panse ak netwaye tèks tankou \"  hi  \".",
+              "help": {
+                "concept": "Gen kèk metòd string ki chanje majiskil/miniskil lèt yo, gen kèk ki separe tèks la, epi gen youn ki retire espas anplis sèlman sou bò deyò string la.",
+                "hint_1": "Metòd la pa retire espas nan mitan tèks la, sèlman nan kòmansman ak nan fen.",
+                "hint_2": "Imajine w ap netwaye \"  Ada  \" pou non an kenbe lèt li yo men li pèdi espas deyò yo."
+              },
+              "options": {
+                "a": "replace()",
+                "b": "lower()",
+                "c": "strip()",
+                "d": "split()"
+              }
+            },
+            "mc-1": {
+              "title": "Metòd ki retounen string",
+              "prompt": "Chwazi tout ekspresyon ki retounen yon string.",
+              "hint": "Panse ak ki operasyon ki pwodui yon sèl moso tèks, pa yon lis.",
+              "help": {
+                "concept": "Diferan metòd string retounen diferan kalite rezilta. `lower()`, `strip()`, ak `replace()` retounen string, tandiske `split()` retounen yon lis string.",
+                "hint_1": "Verifye si chak ekspresyon bay tèks ou ta ka enprime dirèkteman kòm yon sèl string.",
+                "hint_2": "Youn nan opsyon yo kreye plizyè moso nan yon lis. Lòt yo kenbe rezilta a kòm yon sèl string."
+              },
+              "options": {
+                "a": "\"Hi\".lower()",
+                "b": "\"  hi  \".strip()",
+                "c": "\"a,b,c\".split(\",\")",
+                "d": "\"cat\".replace(\"c\", \"b\")"
+              }
+            },
+            "mc-2": {
+              "title": "Bon itilizasyon split ak join",
+              "prompt": "Chwazi tout deklarasyon ki vre sou `split()` ak `join()`.",
+              "hint": "Youn separe yon string an moso, epi lòt la konbine moso yo an yon sèl string.",
+              "help": {
+                "concept": "`split()` separe yon string lè li sèvi ak yon delimitè, epi `join()` konbine yon iterable string lè li sèvi ak string ki vini anvan `.join(...)` kòm separatè a.",
+                "hint_1": "Mande tèt ou kisa k rive ak kantite moso yo: èske rezilta a vin anpil pati oswa yon sèl string konbine?",
+                "hint_2": "Ou ka sèvi ak yon vigil pou separe tèks tankou \"a,b,c\", epi ou ka sèvi ak yon espas pou reyini mo yo an yon fraz."
+              },
+              "options": {
+                "a": "`\"a,b,c\".split(\",\")` separe tèks la an pati",
+                "b": "`\" \".join([\"I\", \"code\"])` konbine mo yo ak yon espas",
+                "c": "`split()` toujou mete tèks an miniskil",
+                "d": "`join()` retire espas deyò yo nan yon string"
+              }
+            },
+            "dr-1": {
+              "title": "Mete etap netwayaj yo nan lòd",
+              "prompt": "Mete etap sa yo nan lòd pou netwaye yon non, mete li an miniskil, epi enprime li.",
+              "hint": "Kòmanse pa estoke tèks orijinal la, apre sa transfòme li, epi montre rezilta a.",
+              "help": {
+                "concept": "Yon ti pwogram Python anjeneral swiv yon sekans: kreye yon valè, transfòme li ak metòd, estoke rezilta a, epi enprime valè final la.",
+                "hint_1": "Ou pa ka enprime valè netwaye a anvan li fin kreye.",
+                "hint_2": "Etap miniskil la dwe fèt apre tèks orijinal la egziste epi anvan enpresyon final la."
+              },
+              "tokens": {
+                "t1": "name = \"  ALICE  \"",
+                "t2": "clean = name.strip()",
+                "t3": "result = clean.lower()",
+                "t4": "print(result)"
+              }
+            },
+            "dr-2": {
+              "title": "Mete split ak join nan lòd",
+              "prompt": "Ranje etap kòd yo pou chanje \"red-blue-green\" an \"red, blue, green\".",
+              "hint": "Premye estoke tèks orijinal la, apre sa separe li, epi reyini moso yo ak yon nouvo separatè.",
+              "help": {
+                "concept": "Pou chanje separatè yo, premye separe string orijinal la an pati ak ansyen separatè a, apre sa reyini pati sa yo ak nouvo separatè a.",
+                "hint_1": "Lis pati yo dwe egziste anvan ou ka reyini li.",
+                "hint_2": "Tiret la itilize nan etap split la, epi vigil-ak-espas la itilize nan etap join la."
+              },
+              "tokens": {
+                "t1": "colors = \"red-blue-green\"",
+                "t2": "parts = colors.split(\"-\")",
+                "t3": "result = \", \".join(parts)",
+                "t4": "print(result)"
+              }
+            },
+            "fb-1": {
+              "title": "Ranpli non metòd la",
+              "prompt": "Konplete kòd la pou li retire espas deyò yo nan `text`.",
+              "hint": "Sèvi ak metòd ki koupe kòmansman ak fen yon string.",
+              "help": {
+                "concept": "Lè tèks gen espas ou pa vle sou bò yo, Python sèvi ak yon metòd string espesifik pou retire sèlman espas deyò sa yo.",
+                "hint_1": "Metòd sa a souvan itilize anvan konpare oswa enprime antre itilizatè ki deja netwaye.",
+                "hint_2": "Se pa metòd pou miniskil la epi se pa metòd pou ranplase yon mo ak yon lòt."
+              },
+              "template": "clean = text.[blank1]()",
+              "choices": [
+                "lower",
+                "strip",
+                "split",
+                "join"
+              ]
+            },
+            "fb-2": {
+              "title": "Ranpli separatè a",
+              "prompt": "Konplete kòd la pou mo yo reyini ak yon sèl espas.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Espas vid la dwe ranpli ak tèm ki koresponn ak travay yo dekri a.",
+                "hint_1": "Panse ak sa pati ki manke a bezwen fè nan deklarasyon an.",
+                "hint_2": "Chwazi tèm ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "sentence = [blank1].join(words)",
+              "choices": [
+                "\"-\"",
+                "\" \"",
+                "\",\"",
+                "\"|\""
+              ]
+            },
+            "code-1": {
+              "title": "Mete yon liy tèks an miniskil",
+              "prompt": "Ekri kòd Python ki li yon liy antre, konvèti li an miniskil, epi enprime rezilta a.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n# Convert text to lowercase and print it"
+            },
+            "code-2": {
+              "title": "Retire espas deyò yo",
+              "prompt": "Ekri kòd Python ki li yon liy antre, retire espas nan kòmansman ak nan fen, epi enprime tèks netwaye a.",
+              "hint": "Li travay la \"Retire espas deyò yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Retire espas deyò yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "text = input()\n# Remove outside spaces and print the result"
+            },
+            "code-3": {
+              "title": "Ranplase yon mo",
+              "prompt": "Ekri kòd Python ki li yon liy antre epi enprime rezilta a apre li fin ranplase chak `cat` ak `dog`.",
+              "hint": "Li travay la \"Ranplase yon mo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Ranplase yon mo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "text = input()\n# Replace cat with dog and print the result"
+            },
+            "code-4": {
+              "title": "Separe mo ki separe ak vigil",
+              "prompt": "Ekri kòd Python ki li yon liy mo ki separe ak vigil, separe tèks la nan chak vigil, epi enprime chak mo sou pwòp liy pa li.",
+              "hint": "Li travay la \"Separe mo ki separe ak vigil\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Separe mo ki separe ak vigil\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line"
+            },
+            "code-5": {
+              "title": "Netwaye epi fòmate etikèt yo",
+              "prompt": "Ekri kòd Python ki li yon liy antre tankou ` apple,banana,cherry `, retire espas deyò yo, separe tèks la pa vigil, apre sa reyini pati yo ak ` | ` epi enprime rezilta a.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "sketch-1": {
+            "title": "Kisa metòd string yo fè",
+            "bodyMarkdown": "Yon **metòd string** se yon aksyon entegre ou ka itilize sou tèks. Metòd yo ede w netwaye tèks, chanje li, oswa separe li an pati.\n\nMen kèk metòd ki trè itil:\n\n- `lower()` → mete tèks an miniskil\n- `strip()` → retire espas anplis nan kòmansman ak nan fen\n- `replace()` → ranplase yon moso tèks ak yon lòt\n- `split()` → separe tèks an yon lis ki gen pi piti moso\n- `join()` → konbine moso tèks yo an yon sèl string\n\nMen yon egzanp rapid:\n\n```python\nname = \"  Ada Lovelace  \"\nclean_name = name.strip().lower()\nprint(clean_name)\n```\n\nSòti:\n\n```python\nada lovelace\n```\n\nAnn pase ladan l:\n\n1. `name` kòmanse ak espas anplis anvan ak apre mo yo.\n2. `strip()` retire espas deyò yo.\n3. `lower()` chanje tout lèt yo an miniskil.\n4. `print()` voye tèks final la nan panèl sòti a."
+          },
+          "sketch-2": {
+            "title": "Chanje tèks ak replace",
+            "bodyMarkdown": "Sèvi ak `replace(old, new)` lè ou vle ranplase yon pati nan yon string ak yon lòt bagay.\n\nEgzanp:\n\n```python\nmessage = \"I like cats\"\nnew_message = message.replace(\"cats\", \"dogs\")\nprint(new_message)\n```\n\nSòti:\n\n```python\nI like dogs\n```\n\nAnn pase ladan l:\n\n- `message` estoke tèks orijinal la.\n- `replace(\"cats\", \"dogs\")` chèche `cats` epi chanje li an `dogs`.\n- Rezilta a estoke nan `new_message`.\n- `print(new_message)` montre tèks ki chanje a.\n\nEnpòtan: `replace()` pa chanje string orijinal la poukont li. Li ba ou yon **nouvo** string."
+          },
+          "sketch-3": {
+            "title": "Separe epi reyini tèks",
+            "bodyMarkdown": "Pafwa ou bezwen separe tèks, epi pafwa ou bezwen mete moso yo ansanm ankò.\n\nSèvi ak `split()` pou separe yon string an pati.\n\n```python\ncolors = \"red,blue,green\"\nparts = colors.split(\",\")\nprint(parts)\n```\n\nSa kreye moso yo lè li sèvi ak vigil la kòm separatè.\n\nSèvi ak `join()` pou konbine moso yo an yon sèl string.\n\n```python\nwords = [\"Python\", \"is\", \"fun\"]\nsentence = \" \".join(words)\nprint(sentence)\n```\n\nSòti:\n\n```python\nPython is fun\n```\n\nAnn pase ladan l:\n\n- `words` kenbe plizyè moso tèks.\n- `\" \".join(words)` mete yon espas ant chak moso.\n- Rezilta a se yon sèl fraz konplè.\n\nYon egzanp travay nèt:\n\n```python\nraw = \" apple | banana | cherry \"\nclean = raw.strip()\nparts = clean.split(\" | \")\nresult = \", \".join(parts)\nprint(result)\n```\n\nSa retire espas deyò yo, separe tèks la an non fwi, epi apre sa reyini yo ak vigil."
+          }
+        }
+      }
+    }
+  }
+}

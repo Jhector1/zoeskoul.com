@@ -1,0 +1,2223 @@
+{
+  "topicId": "recursive-boolean-configurations",
+  "subjectSlug": "c-data-structures",
+  "moduleSlug": "c-data-structures-module-1-algorithm-design-lab",
+  "sectionSlug": "c-data-structures-algorithm-design-lab",
+  "prefix": "cds1",
+  "minutes": 50,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.label",
+    "summaryKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.summary"
+  },
+  "cards": [
+    {
+      "id": "introduction",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.introduction.title",
+      "sketchId": "introduction",
+      "height": 440
+    },
+    {
+      "id": "question-1-problem",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.question-1-problem.title",
+      "sketchId": "question-1-problem",
+      "height": 760
+    },
+    {
+      "id": "recursion-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.recursion-animation.title",
+      "sketchId": "recursion-animation",
+      "height": 900
+    },
+    {
+      "id": "recursion-project",
+      "kind": "project",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.recursion-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "recursion_runtime",
+            "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.projectSteps.recursion_runtime.title",
+            "exerciseKey": "recursion-runtime",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "analysis-quiz",
+      "kind": "quiz",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.label",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "introduction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.introduction.title",
+      "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.introduction.bodyMarkdown"
+    },
+    {
+      "id": "question-1-problem",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.question-1-problem.title",
+      "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.question-1-problem.bodyMarkdown"
+    },
+    {
+      "id": "recursion-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.title",
+      "contextKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.context",
+      "intervalMs": 2200,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 500,
+      "steps": [
+        {
+          "id": "recursion-animation-1",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.0.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.0.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "edges": [],
+          "code": "FooStats stats = foo(3);\n// bits = [_, _, _]\nfoo_rec(bits, 3, 0, &stats);"
+        },
+        {
+          "id": "recursion-animation-2",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.1.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.1.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "bits[0] = true;\nfoo_rec(bits, 3, 1, stats);\n\nbits[0] = false;\nfoo_rec(bits, 3, 1, stats);",
+          "formula": "$T(3)=2T(2)+c$"
+        },
+        {
+          "id": "recursion-animation-3",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.2.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.2.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "dimmed": true
+            },
+            {
+              "id": "tt",
+              "label": "i=2",
+              "x": 12.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tf",
+              "label": "i=2",
+              "x": 37.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TF_"
+            },
+            {
+              "id": "ft",
+              "label": "i=2",
+              "x": 62.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FT_"
+            },
+            {
+              "id": "ff",
+              "label": "i=2",
+              "x": 87.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FF_"
+            },
+            {
+              "id": "ttt",
+              "label": "i=3",
+              "x": 5,
+              "y": 74,
+              "width": 10,
+              "detail": "TTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ttf",
+              "label": "i=3",
+              "x": 18,
+              "y": 74,
+              "width": 10,
+              "detail": "TTF • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "tft",
+              "label": "i=3",
+              "x": 31,
+              "y": 74,
+              "width": 10,
+              "detail": "TFT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "tff",
+              "label": "i=3",
+              "x": 43,
+              "y": 74,
+              "width": 10,
+              "detail": "TFF • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "ftt",
+              "label": "i=3",
+              "x": 57,
+              "y": 74,
+              "width": 10,
+              "detail": "FTT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "ftf",
+              "label": "i=3",
+              "x": 69,
+              "y": 74,
+              "width": 10,
+              "detail": "FTF • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "fft",
+              "label": "i=3",
+              "x": 82,
+              "y": 74,
+              "width": 10,
+              "detail": "FFT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "fff",
+              "label": "i=3",
+              "x": 95,
+              "y": 74,
+              "width": 10,
+              "detail": "FFF • leaf",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false"
+            },
+            {
+              "from": "t",
+              "to": "tt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tf",
+              "label": "false"
+            },
+            {
+              "from": "f",
+              "to": "ft",
+              "label": "true"
+            },
+            {
+              "from": "f",
+              "to": "ff",
+              "label": "false"
+            },
+            {
+              "from": "tt",
+              "to": "ttt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttf",
+              "label": "false"
+            },
+            {
+              "from": "tf",
+              "to": "tft",
+              "label": "true"
+            },
+            {
+              "from": "tf",
+              "to": "tff",
+              "label": "false"
+            },
+            {
+              "from": "ft",
+              "to": "ftt",
+              "label": "true"
+            },
+            {
+              "from": "ft",
+              "to": "ftf",
+              "label": "false"
+            },
+            {
+              "from": "ff",
+              "to": "fft",
+              "label": "true"
+            },
+            {
+              "from": "ff",
+              "to": "fff",
+              "label": "false"
+            }
+          ],
+          "code": "bits[0] = true;  // T__\nbits[1] = true;  // TT_\nbits[2] = true;  // TTT\n// i == 3: leaves++ and return"
+        },
+        {
+          "id": "recursion-animation-4",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.3.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.3.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "dimmed": true
+            },
+            {
+              "id": "tt",
+              "label": "i=2",
+              "x": 12.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tf",
+              "label": "i=2",
+              "x": 37.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TF_",
+              "dimmed": true
+            },
+            {
+              "id": "ft",
+              "label": "i=2",
+              "x": 62.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FT_"
+            },
+            {
+              "id": "ff",
+              "label": "i=2",
+              "x": 87.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FF_"
+            },
+            {
+              "id": "ttt",
+              "label": "i=3",
+              "x": 5,
+              "y": 74,
+              "width": 10,
+              "detail": "TTT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "ttf",
+              "label": "i=3",
+              "x": 18,
+              "y": 74,
+              "width": 10,
+              "detail": "TTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tft",
+              "label": "i=3",
+              "x": 31,
+              "y": 74,
+              "width": 10,
+              "detail": "TFT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "tff",
+              "label": "i=3",
+              "x": 43,
+              "y": 74,
+              "width": 10,
+              "detail": "TFF • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "ftt",
+              "label": "i=3",
+              "x": 57,
+              "y": 74,
+              "width": 10,
+              "detail": "FTT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "ftf",
+              "label": "i=3",
+              "x": 69,
+              "y": 74,
+              "width": 10,
+              "detail": "FTF • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "fft",
+              "label": "i=3",
+              "x": 82,
+              "y": 74,
+              "width": 10,
+              "detail": "FFT • leaf",
+              "shape": "pill"
+            },
+            {
+              "id": "fff",
+              "label": "i=3",
+              "x": 95,
+              "y": 74,
+              "width": 10,
+              "detail": "FFF • leaf",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false"
+            },
+            {
+              "from": "t",
+              "to": "tt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tf",
+              "label": "false"
+            },
+            {
+              "from": "f",
+              "to": "ft",
+              "label": "true"
+            },
+            {
+              "from": "f",
+              "to": "ff",
+              "label": "false"
+            },
+            {
+              "from": "tt",
+              "to": "ttt",
+              "label": "true"
+            },
+            {
+              "from": "tt",
+              "to": "ttf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tft",
+              "label": "true"
+            },
+            {
+              "from": "tf",
+              "to": "tff",
+              "label": "false"
+            },
+            {
+              "from": "ft",
+              "to": "ftt",
+              "label": "true"
+            },
+            {
+              "from": "ft",
+              "to": "ftf",
+              "label": "false"
+            },
+            {
+              "from": "ff",
+              "to": "fft",
+              "label": "true"
+            },
+            {
+              "from": "ff",
+              "to": "fff",
+              "label": "false"
+            }
+          ],
+          "code": "// return to the frame whose i is 2\nbits[2] = false;\nfoo_rec(bits, 3, 3, stats);  // TTF"
+        },
+        {
+          "id": "recursion-animation-5",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.4.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.4.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "dimmed": true
+            },
+            {
+              "id": "tt",
+              "label": "i=2",
+              "x": 12.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tf",
+              "label": "i=2",
+              "x": 37.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TF_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ft",
+              "label": "i=2",
+              "x": 62.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FT_",
+              "dimmed": true
+            },
+            {
+              "id": "ff",
+              "label": "i=2",
+              "x": 87.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FF_",
+              "dimmed": true
+            },
+            {
+              "id": "ttt",
+              "label": "i=3",
+              "x": 5,
+              "y": 74,
+              "width": 10,
+              "detail": "TTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ttf",
+              "label": "i=3",
+              "x": 18,
+              "y": 74,
+              "width": 10,
+              "detail": "TTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tft",
+              "label": "i=3",
+              "x": 31,
+              "y": 74,
+              "width": 10,
+              "detail": "TFT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tff",
+              "label": "i=3",
+              "x": 43,
+              "y": 74,
+              "width": 10,
+              "detail": "TFF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftt",
+              "label": "i=3",
+              "x": 57,
+              "y": 74,
+              "width": 10,
+              "detail": "FTT • leaf",
+              "dimmed": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftf",
+              "label": "i=3",
+              "x": 69,
+              "y": 74,
+              "width": 10,
+              "detail": "FTF • leaf",
+              "dimmed": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fft",
+              "label": "i=3",
+              "x": 82,
+              "y": 74,
+              "width": 10,
+              "detail": "FFT • leaf",
+              "dimmed": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fff",
+              "label": "i=3",
+              "x": 95,
+              "y": 74,
+              "width": 10,
+              "detail": "FFF • leaf",
+              "dimmed": true,
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false"
+            },
+            {
+              "from": "t",
+              "to": "tt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "f",
+              "to": "ft",
+              "label": "true"
+            },
+            {
+              "from": "f",
+              "to": "ff",
+              "label": "false"
+            },
+            {
+              "from": "tt",
+              "to": "ttt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ft",
+              "to": "ftt",
+              "label": "true"
+            },
+            {
+              "from": "ft",
+              "to": "ftf",
+              "label": "false"
+            },
+            {
+              "from": "ff",
+              "to": "fft",
+              "label": "true"
+            },
+            {
+              "from": "ff",
+              "to": "fff",
+              "label": "false"
+            }
+          ],
+          "code": "// completed outputs under bits[0] == true\nTTT, TTF, TFT, TFF"
+        },
+        {
+          "id": "recursion-animation-6",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.5.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.5.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tt",
+              "label": "i=2",
+              "x": 12.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tf",
+              "label": "i=2",
+              "x": 37.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TF_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ft",
+              "label": "i=2",
+              "x": 62.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ff",
+              "label": "i=2",
+              "x": 87.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FF_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ttt",
+              "label": "i=3",
+              "x": 5,
+              "y": 74,
+              "width": 10,
+              "detail": "TTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ttf",
+              "label": "i=3",
+              "x": 18,
+              "y": 74,
+              "width": 10,
+              "detail": "TTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tft",
+              "label": "i=3",
+              "x": 31,
+              "y": 74,
+              "width": 10,
+              "detail": "TFT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tff",
+              "label": "i=3",
+              "x": 43,
+              "y": 74,
+              "width": 10,
+              "detail": "TFF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftt",
+              "label": "i=3",
+              "x": 57,
+              "y": 74,
+              "width": 10,
+              "detail": "FTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftf",
+              "label": "i=3",
+              "x": 69,
+              "y": 74,
+              "width": 10,
+              "detail": "FTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fft",
+              "label": "i=3",
+              "x": 82,
+              "y": 74,
+              "width": 10,
+              "detail": "FFT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fff",
+              "label": "i=3",
+              "x": 95,
+              "y": 74,
+              "width": 10,
+              "detail": "FFF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "f",
+              "to": "ft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "f",
+              "to": "ff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ft",
+              "to": "ftt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ft",
+              "to": "ftf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ff",
+              "to": "fft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ff",
+              "to": "fff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "TTT  TTF  TFT  TFF\nFTT  FTF  FFT  FFF",
+          "formula": "$2^3=8\\text{ completed arrays}$"
+        },
+        {
+          "id": "recursion-animation-7",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.6.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.6.body",
+          "nodes": [
+            {
+              "id": "l0",
+              "label": "level 0",
+              "x": 14,
+              "y": 14,
+              "width": 16,
+              "detail": "1 call",
+              "tone": "info",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "l1",
+              "label": "level 1",
+              "x": 36,
+              "y": 32,
+              "width": 16,
+              "detail": "2 calls",
+              "shape": "pill"
+            },
+            {
+              "id": "l2",
+              "label": "level 2",
+              "x": 58,
+              "y": 50,
+              "width": 16,
+              "detail": "4 calls",
+              "shape": "pill"
+            },
+            {
+              "id": "l3",
+              "label": "level 3",
+              "x": 80,
+              "y": 68,
+              "width": 16,
+              "detail": "8 base calls",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "total",
+              "label": "15 total calls",
+              "x": 50,
+              "y": 90,
+              "width": 28,
+              "detail": "1 + 2 + 4 + 8",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "l0",
+              "to": "l1",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2"
+            },
+            {
+              "from": "l2",
+              "to": "l3"
+            },
+            {
+              "from": "l3",
+              "to": "total",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "code": "level 0: 1 call\nlevel 1: 2 calls\nlevel 2: 4 calls\nlevel 3: 8 calls\ntotal: 15 calls",
+          "formula": "$1+2+4+8=2^{4}-1=15$"
+        },
+        {
+          "id": "recursion-animation-8",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.7.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.7.body",
+          "nodes": [
+            {
+              "id": "tn",
+              "label": "T(n)",
+              "x": 50,
+              "y": 10,
+              "width": 16,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "l1",
+              "label": "T(n-1)",
+              "x": 25,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "r1",
+              "label": "T(n-1)",
+              "x": 75,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "l2a",
+              "label": "T(n-2)",
+              "x": 10,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "l2b",
+              "label": "T(n-2)",
+              "x": 38,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2a",
+              "label": "T(n-2)",
+              "x": 62,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2b",
+              "label": "T(n-2)",
+              "x": 90,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "levels",
+              "label": "level j has 2ʲ calls",
+              "x": 50,
+              "y": 84,
+              "width": 34,
+              "tone": "good",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "tn",
+              "to": "l1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "tn",
+              "to": "r1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2a"
+            },
+            {
+              "from": "l1",
+              "to": "l2b"
+            },
+            {
+              "from": "r1",
+              "to": "r2a"
+            },
+            {
+              "from": "r1",
+              "to": "r2b"
+            },
+            {
+              "from": "l2b",
+              "to": "levels",
+              "dashed": true
+            },
+            {
+              "from": "r2a",
+              "to": "levels",
+              "dashed": true
+            }
+          ],
+          "code": "T(n) = 2T(n - 1) + c\nT(0) = d",
+          "formula": "$T(n)=2T(n-1)+c$"
+        },
+        {
+          "id": "recursion-animation-9",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.8.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.8.body",
+          "nodes": [
+            {
+              "id": "tn",
+              "label": "T(n)",
+              "x": 50,
+              "y": 10,
+              "width": 16,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "l1",
+              "label": "T(n-1)",
+              "x": 25,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "r1",
+              "label": "T(n-1)",
+              "x": 75,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "l2a",
+              "label": "T(n-2)",
+              "x": 10,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "l2b",
+              "label": "T(n-2)",
+              "x": 38,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2a",
+              "label": "T(n-2)",
+              "x": 62,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2b",
+              "label": "T(n-2)",
+              "x": 90,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "levels",
+              "label": "level j has 2ʲ calls",
+              "x": 50,
+              "y": 84,
+              "width": 34,
+              "tone": "good",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "tn",
+              "to": "l1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "tn",
+              "to": "r1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2a"
+            },
+            {
+              "from": "l1",
+              "to": "l2b"
+            },
+            {
+              "from": "r1",
+              "to": "r2a"
+            },
+            {
+              "from": "r1",
+              "to": "r2b"
+            },
+            {
+              "from": "l2b",
+              "to": "levels",
+              "dashed": true
+            },
+            {
+              "from": "r2a",
+              "to": "levels",
+              "dashed": true
+            }
+          ],
+          "code": "T(n) = 2[2T(n - 2) + c] + c\n     = 4T(n - 2) + 2c + c\n     = 4T(n - 2) + 3c",
+          "formula": "$T(n)=2^2T(n-2)+(2+1)c$"
+        },
+        {
+          "id": "recursion-animation-10",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.9.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.9.body",
+          "nodes": [
+            {
+              "id": "tn",
+              "label": "T(n)",
+              "x": 50,
+              "y": 10,
+              "width": 16,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "l1",
+              "label": "T(n-1)",
+              "x": 25,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "r1",
+              "label": "T(n-1)",
+              "x": 75,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "l2a",
+              "label": "T(n-2)",
+              "x": 10,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "l2b",
+              "label": "T(n-2)",
+              "x": 38,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2a",
+              "label": "T(n-2)",
+              "x": 62,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2b",
+              "label": "T(n-2)",
+              "x": 90,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "levels",
+              "label": "level j has 2ʲ calls",
+              "x": 50,
+              "y": 84,
+              "width": 34,
+              "tone": "good",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "tn",
+              "to": "l1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "tn",
+              "to": "r1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2a"
+            },
+            {
+              "from": "l1",
+              "to": "l2b"
+            },
+            {
+              "from": "r1",
+              "to": "r2a"
+            },
+            {
+              "from": "r1",
+              "to": "r2b"
+            },
+            {
+              "from": "l2b",
+              "to": "levels",
+              "dashed": true
+            },
+            {
+              "from": "r2a",
+              "to": "levels",
+              "dashed": true
+            }
+          ],
+          "code": "T(n) = 4[2T(n - 3) + c] + 3c\n     = 8T(n - 3) + 7c",
+          "formula": "$T(n)=2^3T(n-3)+(4+2+1)c$"
+        },
+        {
+          "id": "recursion-animation-11",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.10.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.10.body",
+          "nodes": [
+            {
+              "id": "tn",
+              "label": "T(n)",
+              "x": 50,
+              "y": 10,
+              "width": 16,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "l1",
+              "label": "T(n-1)",
+              "x": 25,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "r1",
+              "label": "T(n-1)",
+              "x": 75,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "l2a",
+              "label": "T(n-2)",
+              "x": 10,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "l2b",
+              "label": "T(n-2)",
+              "x": 38,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2a",
+              "label": "T(n-2)",
+              "x": 62,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2b",
+              "label": "T(n-2)",
+              "x": 90,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "levels",
+              "label": "level j has 2ʲ calls",
+              "x": 50,
+              "y": 84,
+              "width": 34,
+              "tone": "good",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "tn",
+              "to": "l1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "tn",
+              "to": "r1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2a"
+            },
+            {
+              "from": "l1",
+              "to": "l2b"
+            },
+            {
+              "from": "r1",
+              "to": "r2a"
+            },
+            {
+              "from": "r1",
+              "to": "r2b"
+            },
+            {
+              "from": "l2b",
+              "to": "levels",
+              "dashed": true
+            },
+            {
+              "from": "r2a",
+              "to": "levels",
+              "dashed": true
+            }
+          ],
+          "code": "T(n) = 2^k T(n - k)\n       + c(1 + 2 + 2^2 + ... + 2^(k-1))",
+          "formula": "$1+2+\\cdots+2^{k-1}=2^k-1$"
+        },
+        {
+          "id": "recursion-animation-12",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.11.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.11.body",
+          "nodes": [
+            {
+              "id": "tn",
+              "label": "T(n)",
+              "x": 50,
+              "y": 10,
+              "width": 16,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "l1",
+              "label": "T(n-1)",
+              "x": 25,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "r1",
+              "label": "T(n-1)",
+              "x": 75,
+              "y": 34,
+              "width": 18
+            },
+            {
+              "id": "l2a",
+              "label": "T(n-2)",
+              "x": 10,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "l2b",
+              "label": "T(n-2)",
+              "x": 38,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2a",
+              "label": "T(n-2)",
+              "x": 62,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "r2b",
+              "label": "T(n-2)",
+              "x": 90,
+              "y": 60,
+              "width": 16
+            },
+            {
+              "id": "levels",
+              "label": "level j has 2ʲ calls",
+              "x": 50,
+              "y": 84,
+              "width": 34,
+              "tone": "good",
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "tn",
+              "to": "l1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "tn",
+              "to": "r1",
+              "label": "branch",
+              "active": true
+            },
+            {
+              "from": "l1",
+              "to": "l2a"
+            },
+            {
+              "from": "l1",
+              "to": "l2b"
+            },
+            {
+              "from": "r1",
+              "to": "r2a"
+            },
+            {
+              "from": "r1",
+              "to": "r2b"
+            },
+            {
+              "from": "l2b",
+              "to": "levels",
+              "dashed": true
+            },
+            {
+              "from": "r2a",
+              "to": "levels",
+              "dashed": true
+            }
+          ],
+          "code": "T(n) = 2^n T(0) + c(2^n - 1)\n     = d2^n + c2^n - c\n     = (d + c)2^n - c",
+          "formula": "$T(n)=2^nT(0)+c(2^n-1)$"
+        },
+        {
+          "id": "recursion-animation-13",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.12.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.12.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "i=0",
+              "x": 50,
+              "y": 8,
+              "width": 13,
+              "detail": "___",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "i=1",
+              "x": 25,
+              "y": 28,
+              "width": 13,
+              "detail": "T__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "f",
+              "label": "i=1",
+              "x": 75,
+              "y": 28,
+              "width": 13,
+              "detail": "F__",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tt",
+              "label": "i=2",
+              "x": 12.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "tf",
+              "label": "i=2",
+              "x": 37.5,
+              "y": 49,
+              "width": 12,
+              "detail": "TF_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ft",
+              "label": "i=2",
+              "x": 62.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FT_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ff",
+              "label": "i=2",
+              "x": 87.5,
+              "y": 49,
+              "width": 12,
+              "detail": "FF_",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "ttt",
+              "label": "i=3",
+              "x": 5,
+              "y": 74,
+              "width": 10,
+              "detail": "TTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ttf",
+              "label": "i=3",
+              "x": 18,
+              "y": 74,
+              "width": 10,
+              "detail": "TTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tft",
+              "label": "i=3",
+              "x": 31,
+              "y": 74,
+              "width": 10,
+              "detail": "TFT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "tff",
+              "label": "i=3",
+              "x": 43,
+              "y": 74,
+              "width": 10,
+              "detail": "TFF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftt",
+              "label": "i=3",
+              "x": 57,
+              "y": 74,
+              "width": 10,
+              "detail": "FTT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "ftf",
+              "label": "i=3",
+              "x": 69,
+              "y": 74,
+              "width": 10,
+              "detail": "FTF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fft",
+              "label": "i=3",
+              "x": 82,
+              "y": 74,
+              "width": 10,
+              "detail": "FFT • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            },
+            {
+              "id": "fff",
+              "label": "i=3",
+              "x": 95,
+              "y": 74,
+              "width": 10,
+              "detail": "FFF • leaf",
+              "tone": "good",
+              "active": true,
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "t",
+              "to": "tf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "f",
+              "to": "ft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "f",
+              "to": "ff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tt",
+              "to": "ttf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "tf",
+              "to": "tff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ft",
+              "to": "ftt",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ft",
+              "to": "ftf",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ff",
+              "to": "fft",
+              "label": "true",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "ff",
+              "to": "fff",
+              "label": "false",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "time  = Θ(2^n)\nstack = Θ(n)",
+          "formula": "$\\boxed{T(n)=\\Theta(2^n)}$"
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "recursion-runtime",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime",
+      "language": "c",
+      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/recursion.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/recursion.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/recursion.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/recursion.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "n=0 leaves=1 calls=1\nn=1 leaves=2 calls=3\nn=3 leaves=8 calls=15\nn=4 leaves=16 calls=31\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "recurrence",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.quiz.recurrence",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "tight-bound",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.quiz.tight-bound",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    }
+  ]
+}

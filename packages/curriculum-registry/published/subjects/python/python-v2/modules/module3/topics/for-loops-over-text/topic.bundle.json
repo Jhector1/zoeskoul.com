@@ -1,0 +1,740 @@
+{
+  "topicId": "for-loops-over-text",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-python-v2-3-for-loops",
+  "prefix": "pyv2_3",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.for-loops-over-text.label",
+    "summaryKey": "topics.python-v2.python-v2-3.for-loops-over-text.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-for-loops-over-text-sketch0",
+        "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.title",
+        "promptKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.prompt",
+        "exerciseKey": "code-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-for-loops-over-text-sketch1",
+        "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.title",
+        "promptKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.prompt",
+        "exerciseKey": "code-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-for-loops-over-text-sketch2",
+        "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.title",
+        "promptKey": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.prompt",
+        "exerciseKey": "code-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-1.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-2.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-3.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.sc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.sc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.mc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.mc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.dr-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr-2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.dr-2",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fb-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ch"
+      }
+    },
+    {
+      "id": "fb-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fb-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"aeiou\""
+      }
+    },
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "cat\n",
+            "stdout": "c\na\nt\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Hi!\n",
+            "stdout": "H\ni\n!\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "go\n",
+            "stdout": "G\nO\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Hi!\n",
+            "stdout": "H\nI\n!\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\.upper\\s*\\(\\s*\\)\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\.upper\\s*\\(\\s*\\)\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "banana\n",
+            "stdout": "a\na\na\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "code\n",
+            "stdout": "o\ne\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "sky\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s+in\\s*[\"\\']aeiou[\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s+in\\s*[\"\\']aeiou[\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-4",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Hi USA!\n",
+            "stdout": "H\nU\nS\nA\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "abc\n",
+            "stdout": "",
+            "match": "exact"
+          },
+          {
+            "stdin": "A1bC\n",
+            "stdout": "A\nC\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*ch\\.upper\\s*\\(\\s*\\)\\s+and\\s+ch\\s*!=\\s*ch\\.lower\\s*\\(\\s*\\)\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*ch\\.upper\\s*\\(\\s*\\)\\s+and\\s+ch\\s*!=\\s*ch\\.lower\\s*\\(\\s*\\)\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code-5",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "a b\n",
+            "stdout": "a\nb\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "no spaces\n",
+            "stdout": "n\no\ns\np\na\nc\ne\ns\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "   \n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*!=\\s*[\"\\'] [\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*!=\\s*[\"\\'] [\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
+          "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

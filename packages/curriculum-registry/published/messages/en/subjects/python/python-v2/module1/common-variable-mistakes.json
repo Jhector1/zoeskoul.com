@@ -1,0 +1,243 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "common-variable-mistakes": {
+          "label": "Common Variable Mistakes",
+          "summary": "Recognize and repair common variable mistakes: using a name too early, quoting a variable name by accident, and changing its spelling.",
+          "cards": {
+            "sketch0": {
+              "title": "Using a variable before it exists"
+            },
+            "sketch1": {
+              "title": "Strings by accident"
+            },
+            "sketch2": {
+              "title": "Clear names and exact spelling"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc-undefined-name": {
+              "title": "Find the use-before-assignment mistake",
+              "prompt": "Which program tries to use `score` before `score` has been assigned a value?",
+              "hint": "Read each program from top to bottom and find the first use of `score`.",
+              "help": {
+                "concept": "A name must be assigned before a line tries to read its stored value.",
+                "hint_1": "An assignment such as `score = 5` creates the value for later use.",
+                "hint_2": "Look for a `print(score)` that appears before any assignment to `score`."
+              },
+              "options": {
+                "a": "score = 5\nprint(score)",
+                "b": "print(score)\nscore = 5",
+                "c": "score = 5\nscore = 6\nprint(score)"
+              }
+            },
+            "sc-quotes-vs-variable": {
+              "title": "Quotes change the meaning",
+              "prompt": "If `name = \"Ava\"`, what does `print(\"name\")` show?",
+              "hint": "Quotes make `\"name\"` literal text instead of a variable lookup.",
+              "help": {
+                "concept": "`name` asks Python for the stored value; `\"name\"` is the literal string containing those four letters.",
+                "hint_1": "The variable contains `Ava`, but the print call does not reference the variable.",
+                "hint_2": "Read exactly what appears between the quotes."
+              },
+              "options": {
+                "a": "Ava",
+                "b": "name",
+                "c": "an error",
+                "d": "nothing"
+              }
+            },
+            "mc-valid-variable-uses": {
+              "title": "Choose all valid variable uses",
+              "prompt": "Which code snippets use variables correctly? Choose all that apply.",
+              "hint": "For each snippet, check that the exact variable name is assigned before it is printed.",
+              "help": {
+                "concept": "Correct variable use requires both execution order and exact name matching.",
+                "hint_1": "Reject code that prints a name before assigning it.",
+                "hint_2": "Reject code whose printed name is spelled differently from the assigned name."
+              },
+              "options": {
+                "a": "city = \"Rome\"\nprint(city)",
+                "b": "print(city)\ncity = \"Rome\"",
+                "c": "user_name = \"Kai\"\nprint(user_name)",
+                "d": "user_name = \"Kai\"\nprint(username)"
+              }
+            },
+            "mc-confusing-name-mistakes": {
+              "title": "Spot the likely mistakes",
+              "prompt": "Which examples show common variable mistakes? Choose all that apply.",
+              "hint": "Look for quoted variable names and mismatched spellings.",
+              "help": {
+                "concept": "Two common mistakes are printing the name as literal text and referring to a different spelling than the one assigned.",
+                "hint_1": "`print(\"name\")` does not read the variable `name`.",
+                "hint_2": "`first_name` and `firstname` are different identifiers."
+              },
+              "options": {
+                "a": "name = \"Lia\"\nprint(\"name\")",
+                "b": "age = 12\nprint(age)",
+                "c": "first_name = \"Noah\"\nprint(firstname)",
+                "d": "color = \"blue\"\nprint(color)"
+              }
+            },
+            "dr-order-assignment-then-use": {
+              "title": "Repair the execution order",
+              "prompt": "Arrange the ideas so `score` is created before its value is printed.",
+              "hint": "Choose the name, assign its value, then use the variable.",
+              "help": {
+                "concept": "A variable must be established before later code can read it.",
+                "hint_1": "The assignment belongs before the print step.",
+                "hint_2": "The final step should use the stored value."
+              },
+              "tokens": {
+                "t1": "Choose the variable name `score`",
+                "t2": "Assign `10` to `score`",
+                "t3": "Print `score`"
+              }
+            },
+            "dr-fix-quoted-name-thinking": {
+              "title": "Explain the quoted-name mistake",
+              "prompt": "Arrange the ideas to explain what Python does with `print(\"name\")`.",
+              "hint": "Start with what quotes mean, then follow that meaning to the output.",
+              "help": {
+                "concept": "Quotes change a possible variable name into a string literal.",
+                "hint_1": "First identify the value created by the quotes.",
+                "hint_2": "Then connect that literal value to what `print()` displays."
+              },
+              "tokens": {
+                "t1": "Quotes make `\"name\"` a string literal",
+                "t2": "Python treats it as text, not a variable lookup",
+                "t3": "`print(\"name\")` shows the letters name"
+              }
+            },
+            "fb-variable-name": {
+              "title": "Use a variable name, not text",
+              "prompt": "Choose the correct item for the blank.\n\n```python\n___ = 10\n```",
+              "hint": "The left side of an assignment needs a variable name.",
+              "help": {
+                "concept": "A basic assignment stores the right-side value under a valid name on the left.",
+                "hint_1": "Do not put quotation marks around the variable name.",
+                "hint_2": "Choose the identifier that describes the stored value."
+              },
+              "template": "[blank1] = 10",
+              "choices": [
+                "age",
+                "print",
+                "\"age\"",
+                "10"
+              ]
+            },
+            "fb-print-variable-value": {
+              "title": "Print the stored value",
+              "prompt": "Choose the correct item for the blank so the stored value is printed.\n\n```python\nname = \"Ava\"\nprint(___)\n```",
+              "hint": "Use the variable itself, without quotes.",
+              "help": {
+                "concept": "A bare variable name retrieves its stored value; quoted text prints the literal characters.",
+                "hint_1": "The value is already stored in `name`.",
+                "hint_2": "Putting quotes around `name` would print the word instead of `Ava`."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "name",
+                "\"name\"",
+                "print",
+                "="
+              ]
+            },
+            "ci-fix-undefined-name": {
+              "title": "Fix a variable used too early",
+              "prompt": "The starter program tries to print `count` before `count` exists. Repair the program so it assigns `7` to `count` first and then prints `count`.",
+              "hint": "Move the assignment before the line that reads the variable.",
+              "help": {
+                "concept": "Python must execute the assignment before a later statement can read the variable.",
+                "hint_1": "The final program should have two lines.",
+                "hint_2": "The assignment belongs above `print(count)`."
+              },
+              "starterCode": "print(count)\ncount = 7\n",
+              "solutionCode": "count = 7\nprint(count)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 7 to count before print(count) uses the variable."
+                }
+              }
+            },
+            "ci-print-variable-not-text": {
+              "title": "Remove accidental quotes around a variable",
+              "prompt": "The starter stores `\"Mila\"` in `name`, but it prints the word `name` instead of the stored value. Fix only the print line so the output is `Mila`.",
+              "hint": "The assignment is correct. The mistake is the quotes inside `print()`.",
+              "help": {
+                "concept": "Quoted `\"name\"` is literal text; unquoted `name` retrieves the variable's value.",
+                "hint_1": "Keep `name = \"Mila\"` unchanged.",
+                "hint_2": "The print call should use the variable name without quotes."
+              },
+              "starterCode": "name = \"Mila\"\nprint(\"name\")\n",
+              "solutionCode": "name = \"Mila\"\nprint(name)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the assignment and print the variable name without quotes."
+                }
+              }
+            },
+            "ci-match-variable-spelling": {
+              "title": "Fix a misspelled variable use",
+              "prompt": "The starter creates `favorite_color` but tries to print a different spelling. Fix the print line so it uses the exact variable that was assigned.",
+              "hint": "Compare the spelling on the assignment line with the spelling inside `print()`.",
+              "help": {
+                "concept": "Python requires an exact identifier match when code refers to a variable.",
+                "hint_1": "Keep the assignment line unchanged.",
+                "hint_2": "Use `favorite_color` inside `print()` with the underscore included."
+              },
+              "starterCode": "favorite_color = \"green\"\nprint(favoriteColor)\n",
+              "solutionCode": "favorite_color = \"green\"\nprint(favorite_color)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use favorite_color with the exact same spelling in the assignment and print call."
+                }
+              }
+            },
+            "ci-fix-accidental-string-number": {
+              "title": "Turn number-looking text into a number",
+              "prompt": "The starter stores `\"12\"` in `age`, which makes the value a string. Fix the assignment so `age` stores the number `12` instead, then keep printing `age`.",
+              "hint": "The digits are correct; the quotes are what make the value text.",
+              "help": {
+                "concept": "Removing quotes changes the literal from the string `\"12\"` to the integer `12`.",
+                "hint_1": "Keep the variable name `age`.",
+                "hint_2": "The corrected assignment should use `12` without quotation marks."
+              },
+              "starterCode": "age = \"12\"\nprint(age)\n",
+              "solutionCode": "age = 12\nprint(age)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store 12 in age without quotes, then print the variable."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "common-variable-mistakes": {
+          "sketch-1": {
+            "title": "A variable must exist before you use it",
+            "bodyMarkdown": "Python executes statements from top to bottom. A variable must receive a value before a later line can use that name.\n\nThis works:\n\n```python\nscore = 10\nprint(score)\n```\n\nBut this does not:\n\n```python\nprint(score)\nscore = 10\n```\n\nOn the first line, Python is asked to look up `score`, but no value has been assigned to that name yet.\n\nA useful debugging question is:\n\n> **Where is this variable first assigned, and does that happen before the line that uses it?**\n\nIf the use comes first, move or add the assignment before that use.\n"
+          },
+          "sketch-2": {
+            "title": "A variable name is different from quoted text",
+            "bodyMarkdown": "Quotes tell Python to treat characters as literal text.\n\n```python\nname = \"Zoe\"\n\nprint(name)\nprint(\"name\")\n```\n\nThese two print calls mean different things:\n\n- `print(name)` looks up the value stored in `name`, so it prints `Zoe`.\n- `print(\"name\")` prints the literal text `name`.\n\nThe same distinction matters with numbers:\n\n```python\nage = 12\nage_text = \"12\"\n```\n\n`12` is a number. `\"12\"` is a string.\n\nWhen debugging, ask whether the code needs the **stored value** or the **literal characters inside the quotes**.\n"
+          },
+          "sketch-3": {
+            "title": "Variable spelling must match exactly",
+            "bodyMarkdown": "Python treats each variable spelling as a different name.\n\n```python\nuser_name = \"Mina\"\nprint(user_name)\n```\n\nThis works because the assignment and the use spell the name the same way.\n\n```python\nuser_name = \"Mina\"\nprint(username)\n```\n\nThis does not use the same variable. `user_name` and `username` are different names.\n\nCapitalization matters too:\n\n```python\nscore = 8\nprint(Score)\n```\n\n`score` and `Score` are different names.\n\nWhen a variable lookup fails, compare the name at the failing line with the name that was actually assigned. Check underscores, capitalization, and every character.\n"
+          }
+        }
+      }
+    }
+  }
+}

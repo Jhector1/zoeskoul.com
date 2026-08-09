@@ -1,0 +1,250 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "print-comments-and-errors": {
+          "label": "Print, Kòmantè, ak Premye Erè",
+          "summary": "Sèvi ak enstriksyon print ak kòmantè pandan w ap aprann kijan erè sentaks parèt.",
+          "cards": {
+            "sketch0": {
+              "title": "Enprime tèks nan panèl sòti a"
+            },
+            "sketch1": {
+              "title": "Kòmantè yo se nòt pou moun, pa pou sòti"
+            },
+            "sketch2": {
+              "title": "Kijan yon premye erè sentaks sanble"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Enprimè entwodiksyon pèsonèl"
+            }
+          },
+          "projectSteps": {
+            "ci_print_one_line": {
+              "title": "Enprime yon mesaj byenvini"
+            },
+            "ci_two_lines": {
+              "title": "Enprime de liy"
+            },
+            "ci_comment_and_output": {
+              "title": "Sèvi ak yon kòmantè ak print"
+            },
+            "ci_fix_missing_paren": {
+              "title": "Korije erè sentaks la"
+            },
+            "ci_personal_intro": {
+              "title": "Kreye yon ti entwodiksyon"
+            }
+          },
+          "quiz": {
+            "sc-print-purpose": {
+              "title": "Sa print fè",
+              "prompt": "Kisa `print(\"Hello\")` fè nan Python?",
+              "hint": "Reflechi sou sa ki parèt nan panèl sòti a apre ou klike Run.",
+              "help": {
+                "concept": "`print()` voye yon valè nan panèl sòti a pou ou ka wè sòti pwogram nan.",
+                "hint_1": "Liy sa a pa yon kòmantè epi li pa yon erè. Li egzekite epi li montre tèks.",
+                "hint_2": "Chèche chwa ki dekri afichaj `Hello` nan panèl sòti a."
+              },
+              "options": {
+                "a": "Li montre Hello nan panèl sòti a.",
+                "b": "Li fè Hello tounen yon kòmantè.",
+                "c": "Li kreye yon erè sentaks chak fwa.",
+                "d": "Li kache Hello nan pwogram nan."
+              }
+            },
+            "sc-comment-line": {
+              "title": "Rekonèt yon kòmantè",
+              "prompt": "Ki liy ki se yon kòmantè Python?",
+              "hint": "Yon kòmantè Python kòmanse ak yon senbòl espesyal.",
+              "help": {
+                "concept": "Nan Python, yon kòmantè kòmanse ak `#` epi yo inyore li lè kòd la ap egzekite.",
+                "hint_1": "Se yon sèl opsyon ki kòmanse ak makè kòmantè yo itilize nan Python.",
+                "hint_2": "Chwazi liy ki kòmanse ak `#`, pa yon apèl `print()`."
+              },
+              "options": {
+                "a": "print(\"Note\")",
+                "b": "# Nòt pou lektè a",
+                "c": "\"Note\"",
+                "d": "print(# Note)"
+              }
+            },
+            "mc-valid-print-lines": {
+              "title": "Enstriksyon print ki valab",
+              "prompt": "Chwazi tout liy ki se enstriksyon print Python ki valab.",
+              "hint": "Yon enstriksyon print ki valab isit la bezwen `print`, parantèz, ak guiyèm ki byen fèmen.",
+              "help": {
+                "concept": "Yon apèl Python `print()` debaz bezwen parantèz ki koresponn ak guiyèm ki koresponn ozalantou tèks la.",
+                "hint_1": "Tcheke chak opsyon pou de bagay: èske guiyèm yo fèmen, epi èske `)` fèmen an prezan?",
+                "hint_2": "De opsyon yo konplè ak ekilibre; lòt yo manke yon guiyèm oswa yon parantèz."
+              },
+              "options": {
+                "a": "print(\"Hi\")",
+                "b": "print(\"Bye\")"
+              }
+            },
+            "mc-comments-behavior": {
+              "title": "Kijan kòmantè yo konpòte yo",
+              "prompt": "Chwazi tout deklarasyon ki kòrèk sou kòmantè Python yo.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "Yo kòmanse ak `#`.",
+                "b": "Yo parèt nan panèl sòti a kòm sòti nòmal.",
+                "c": "Python inyore yo lè l ap egzekite pwogram nan.",
+                "d": "Yo dwe andedan `print()`."
+              }
+            },
+            "dr-run-simple-program": {
+              "title": "Mete liy pwogram yo nan lòd",
+              "prompt": "Ranje liy sa yo pou fè yon pwogram senp ki montre yon tit epi apre sa yon salitasyon.",
+              "hint": "Kòmantè a ka vini an premye, epi tit la ta dwe enprime anvan salitasyon an.",
+              "help": {
+                "concept": "Python egzekite depi anlè rive anba, kidonk lòd liy yo kontwole lòd sòti a.",
+                "hint_1": "Mete kòmantè a anvan kòd li dekri a.",
+                "hint_2": "Liy ki enprime `Title` la ta dwe vini anvan liy ki enprime `Hello` a."
+              },
+              "tokens": {
+                "t1": "# Kòmansman pwogram nan",
+                "t2": "print(\"Title\")",
+                "t3": "print(\"Hello\")"
+              }
+            },
+            "dr-build-valid-print": {
+              "title": "Konstwi yon apèl print ki kòrèk",
+              "prompt": "Mete token yo nan lòd pou fòme yon liy Python ki valab ki enprime Hi.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon enstriksyon ki valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "print",
+                "t2": "(",
+                "t3": "\"Hi\"",
+                "t4": ")"
+              }
+            },
+            "fb-comment-symbol": {
+              "title": "Ranpli makè kòmantè a",
+              "prompt": "Konplete liy la pou li vin yon kòmantè Python.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè a."
+              },
+              "template": "[blank1] liy sa a eksplike pwogram nan",
+              "choices": [
+                "#",
+                "print",
+                "\"",
+                ")"
+              ]
+            },
+            "fb-complete-print-text": {
+              "title": "Konplete tèks ki enprime a",
+              "prompt": "Chwazi valè ki konplete enstriksyon print sa a kòrèkteman.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè a."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "Hello",
+                "\"Hello\"",
+                "# Hello",
+                "(Hello)"
+              ]
+            },
+            "ci-print-one-line": {
+              "title": "Enprime yon mesaj byenvini",
+              "prompt": "Ekri kòd Python ki enprime egzakteman `Welcome to Python` sou yon sèl liy.",
+              "hint": "Sèvi ak yon sèl apèl `print()` ak tèks la andedan guiyèm.",
+              "help": {
+                "concept": "Pou montre tèks, sèvi ak `print()` ak yon string literal andedan guiyèm.",
+                "hint_1": "Sòti a ta dwe yon sèl liy sèlman, ak menm majiskil ak miniskil yo jan yo montre a.",
+                "hint_2": "Mete mesaj la andedan guiyèm epi pase li bay `print()`."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-two-lines": {
+              "title": "Enprime de liy",
+              "prompt": "Ekri kòd Python ki enprime `Name: Alex` sou premye liy la epi `City: Lima` sou dezyèm liy la.",
+              "hint": "Li travay la \"Enprime de liy\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Enprime de liy\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# Print the two required lines"
+            },
+            "ci-comment-and-output": {
+              "title": "Sèvi ak yon kòmantè ak print",
+              "prompt": "Ekri kòd Python ak yon kòmantè sou premye liy la ak yon enstriksyon `print()` sou dezyèm liy la ki enprime egzakteman `Ready`.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "# Add your comment here\n# Then write the print line below"
+            },
+            "ci-fix-missing-paren": {
+              "title": "Korije erè sentaks la",
+              "prompt": "Kòd depa a gen yon erè sentaks. Korije li pou pwogram nan enprime egzakteman `Hello`.",
+              "hint": "Tcheke si apèl `print()` la fèmen nèt.",
+              "help": {
+                "concept": "Yon parantèz ki manke nan yon apèl zouti entegre lakòz yon erè sentaks paske Python pa ka fini li enstriksyon an.",
+                "hint_1": "Tèks la deja kòrèk; estrikti ki bò kote li a pa konplè.",
+                "hint_2": "Asire liy `print(` la fini ak senbòl fèmen ki koresponn ak `(` ouvè a."
+              },
+              "starterCode": "print(\"Hello\""
+            },
+            "ci-personal-intro": {
+              "title": "Kreye yon ti entwodiksyon",
+              "prompt": "Ekri kòd Python ki enprime twa liy sa yo egzakteman:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "# Write your introduction program below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "print-comments-and-errors": {
+          "sketch-print-basics": {
+            "title": "Enprime tèks nan panèl sòti a",
+            "bodyMarkdown": "Python itilize `print()` pou montre sòti.\n\nLè ou ekri tèks, mete li andedan guiyèm pou Python konnen se yon string li ye.\n\n```python\nprint(\"Hello\")\nprint(\"Welcome to Python\")\n```\n\nSi ou klike Run, panèl sòti a montre:\n\n```text\nHello\nWelcome to Python\n```\n\nAnn pase ladan l:\n- `print(\"Hello\")` montre `Hello`\n- `print(\"Welcome to Python\")` montre `Welcome to Python`\n- Chak `print()` kòmanse yon nouvo liy nan panèl sòti a\n\nEgzanp rezoud:\n\n```python\nprint(\"My name is Ava\")\nprint(\"I like coding\")\n```\n\nSòti:\n\n```text\nMy name is Ava\nI like coding\n```"
+          },
+          "sketch-comments": {
+            "title": "Kòmantè yo se nòt pou moun, pa pou sòti",
+            "bodyMarkdown": "Yon kòmantè kòmanse ak `#`. Python inyore kòmantè yo lè pwogram nan ap egzekite.\n\n```python\n# This is a comment\nprint(\"Hi\")\n# This line explains the next message\nprint(\"Bye\")\n```\n\nSòti:\n\n```text\nHi\nBye\n```\n\nAnn pase ladan l etap pa etap:\n- `# This is a comment` Python inyore li\n- `print(\"Hi\")` egzekite epi montre `Hi`\n- `# This line explains the next message` inyore tou\n- `print(\"Bye\")` egzekite epi montre `Bye`\n\nKòmantè yo itil pou rapèl ak eksplikasyon.\n\nEgzanp rezoud:\n\n```python\n# Introduce the program\nprint(\"Student profile\")\n# Show a hobby\nprint(\"Hobby: drawing\")\n```"
+          },
+          "sketch-first-errors": {
+            "title": "Kijan yon premye erè sentaks sanble",
+            "bodyMarkdown": "Yon erè sentaks rive lè Python pa ka li kòd ou a paske estrikti a kraze.\n\nYon erè debutan fè souvan se bliye yon guiyèm oswa yon parantèz.\n\n```python\nprint(\"Hello\"\n```\n\nSa lakòz yon erè paske `)` fèmen an manke.\n\nYon lòt egzanp:\n\n```python\nprint(\"Hello)\n```\n\nSa lakòz yon erè paske string nan manke guiyèm fèmen li.\n\nVèsyon ki kòrèk la:\n\n```python\nprint(\"Hello\")\n```\n\nAnn pase ladan l:\n- `print(` kòmanse apèl print la\n- `\"Hello\"` se tèks pou montre a\n- `)` fèmen apèl print la"
+          }
+        }
+      }
+    }
+  }
+}

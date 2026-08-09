@@ -1,0 +1,333 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "label": "Validasyon ak netwayaj done antre",
+          "summary": "Netwaye valè tèks yo, detekte done ki manke, epi rejte ranje ki pa valab san pwogram ou pa kraze.",
+          "cards": {
+            "sketch0": {
+              "title": "Ki validasyon ak netwayaj yo fè"
+            },
+            "sketch1": {
+              "title": "Valè ki manke kont valè ki pa valab"
+            },
+            "sketch2": {
+              "title": "Mete règ netwayaj yo nan fonksyon yo"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Kreye èd pou netwaye antre ki dezòdone."
+            }
+          },
+          "projectSteps": {
+            "ci_clean_name": {
+              "title": "Ekri yon fonksyon pou netwaye non"
+            },
+            "ci_parse_age": {
+              "title": "Analize yon laj an sekirite"
+            },
+            "ci_clean_row": {
+              "title": "Valide epi netwaye yon ranje"
+            }
+          },
+          "quiz": {
+            "sc-valid-row": {
+              "title": "Ki ranje ki valab apre netwayaj la?",
+              "prompt": "Yon pwogram retire espas nan tou de chan yo, epi li mande yon non ki pa vid ak yon laj ki ka konvèti ak fonksyon `int()`. Ki ranje ki ta aksepte?",
+              "hint": "Chèche yon ranje kote ou ka retire espas epi tèks laj la toujou vin yon nimewo antye.",
+              "help": {
+                "concept": "Yon ranje valab sèlman si netwayaj ak `strip()` kite yon non reyèl ak yon chèn laj ke `int()` ka konvèti.",
+                "hint_1": "Tcheke chak opsyon apre ou fin retire espas vid ki devan ak ki dèyè nan tou de valè yo.",
+                "hint_2": "Rejte ranje ki gen yon non netwaye vid oswa yon laj ki tankou yon mo olye de chif."
+              },
+              "options": {
+                "a": "Ava, 12",
+                "b": "[   ,   ]",
+                "c": "Leo, dis",
+                "d": "Mia, 4.5"
+              }
+            },
+            "sc-except-flow": {
+              "title": "Ki sa except catch la kenbe isit la?",
+              "prompt": "Nan yon blòk `try`/`except ValueError`, ki kalite pwoblèm `except` la fèt pou jere pandan `int(age_text)`?",
+              "hint": "Panse sou sa k rive lè tèks pa ka tounen yon antye.",
+              "help": {
+                "concept": "`ValueError` Li leve lè yon fonksyon konvèsyon tankou `int()` resevwa yon valè ki nan bon tip jeneral la men ki gen yon kontni ki pa ka itilize.",
+                "hint_1": "`int()` Li mache pou chèn tankou `'7'`, men li pa mache pou chèn ki gen mo oswa tèks desimal nan kontèks debutan sa a.",
+                "hint_2": "Pwoblèm nan pa yon non varyab ki manke oswa yon erè sentaks nan editè kòd la; se move kontni antre pandan konvèsyon an."
+              },
+              "options": {
+                "a": "Yon valè tèks tankou 'diz' ki pa ka konvèti an nimerik antye.",
+                "b": "Yon deklarasyon `print()` ki manke",
+                "c": "Endèks yon lis ki twò gwo",
+                "d": "Yon chemen fichye toujou relativ"
+              }
+            },
+            "mc-clean-steps": {
+              "title": "Etap itil pou netwaye",
+              "prompt": "Chwazi tout etap ki ede netwaye yon ranje tèks anvan validasyon.",
+              "hint": "Panse sou operasyon ki retire bri fòma oswa ki estandadize valè tèks yo.",
+              "help": {
+                "concept": "Netwayaj la prepare tèks brit la pou validasyon lè li retire espas anplis oswa fè fòma a pi konsistan anvan tcheke règ yo fèt.",
+                "hint_1": "Metòd tankou `strip()` ak normalizasyon ka ede; aksyon ki sèlman montre done pa netwaye yo.",
+                "hint_2": "Chwazi opsyon ki chanje antre dezòdone an yon fòm ki pi konsistan anvan w tcheke si li valab."
+              },
+              "options": {
+                "a": "Itilize `strip()` pou retire espas anplis ki antoure yon valè.",
+                "b": "Konvèti yon non tankou 'aVA' nan yon stil majiskil ki konsistan tankou title case.",
+                "c": "Enprime ranje a san chanje l",
+                "d": "Kenbe tout espas yo egzakteman jan yo te ye pou validasyon an ka wè dezòd la."
+              }
+            },
+            "mc-reject-row": {
+              "title": "Ki ranje yo ta dwe rejte?",
+              "prompt": "Yon ranje ki netwaye valab sèlman lè non an pa vid epi nòt la se yon antye ki soti nan 0 rive 100. Chwazi tout ranje ki ta dwe rejte.",
+              "hint": "Tcheke chak ranje apre ou fin retire espas yo, epi teste tou de règ yo.",
+              "help": {
+                "concept": "Validasyon ka enplike plis pase yon règ: prezans, konvèsyon tip, ak entèval nimerik ki pèmèt.",
+                "hint_1": "Yon ranje echwe si non ki netwaye a vid, si nòt la pa ka tounen yon antye, oswa si antye a pa ant 0 ak 100.",
+                "hint_2": "Gade byen ranje ki gen sèlman espas pou non, nòt ki baze sou mo, ak nimewo ki depase maksimòm ki pèmèt la."
+              },
+              "options": {
+                "a": "Avwa, 90",
+                "b": "[   , '75']",
+                "c": "Leo, dis",
+                "d": "Mia, 105"
+              }
+            },
+            "dr-clean-order": {
+              "title": "Kòmande pwosesis netwayaj la",
+              "prompt": "Mete etap sa yo nan yon lòd ki fè sans pou netwaye ak valide yon valè tèks ki ta dwe tounen yon antye.",
+              "hint": "Fòmate byen anvan konvèsyon an, epi sèvi ak nimewo a sèlman apre konvèsyon an reyisi.",
+              "help": {
+                "concept": "Yon pwosesis netwayaj serye retire espas sipèfl li yo an premye, apre sa li eseye konvèti yo, epi li itilize valè konvèti a pou verifikasyon ki vin apre yo.",
+                "hint_1": "Si ou eseye `int()` anvan ou retire espas yo epi tcheke tèks brit la, kòd ou a vin pi difisil pou konprann.",
+                "hint_2": "Kòmanse ak tèks orijinal la, netwaye li, konvèti li, epi kontinye ak validasyon nimerik."
+              },
+              "tokens": {
+                "t1": "Li valè tèks la",
+                "t2": "Retire espas anplis yo avèk `strip()`",
+                "t3": "Konvèti tèks ki netwaye a ak `int()`",
+                "t4": "Sèvi ak antye a nan verifikasyon ki vin apre yo."
+              }
+            },
+            "dr-try-except-order": {
+              "title": "Kòmande koule try/except la",
+              "prompt": "Aranje pati sa yo pou montre koule nòmal la lè w ap konvèti tèks ki netwaye an yon antye san danje.",
+              "hint": "Konvèsyon riske a dwe andedan `try`, epi jesyon erè a vini apre li.",
+              "help": {
+                "concept": "`try` li genyen kòd ki ka echwe, tandiske `except` jere yon erè espesifik si echèk sa a rive.",
+                "hint_1": "Mete tantativ konvèsyon an apre ou fin antre `try`, epi mete aksyon ranplasman an andedan `except ValueError`.",
+                "hint_2": "Chemen ki reyisi a itilize nimewo konvèti a anvan chemen pou jere erè a parèt."
+              },
+              "tokens": {
+                "t1": "Kòmanse `try:`",
+                "t2": "Eseye `age = int(age_text)`",
+                "t3": "Sèvi ak `age` si konvèsyon an te mache.",
+                "t4": "Jere move antre nan `except ValueError:`"
+              }
+            },
+            "fb-strip-name": {
+              "title": "Ranpli metòd netwayaj la",
+              "prompt": "Konplete kòd la pou li retire espas anplis ki antoure non an.",
+              "hint": "Sèvi ak metòd string ki retire espas nan tou de bout yo.",
+              "help": {
+                "concept": "`the missing term()` retire espas vid nan kòmansman ak nan fen yon chèn, ki se yon premye etap netwayaj ki kouran.",
+                "hint_1": "Valè ki manke a se non yon metòd ki itilize tankou `name.[blank1]()` nan Python.",
+                "hint_2": "Se metòd ki vire `'  Ava  '` an `'Ava'` san chanje lèt yo nan mitan."
+              },
+              "template": "clean_name = name.[blank1]()",
+              "choices": [
+                "Separe",
+                "depi",
+                "Ajoute",
+                "ekri"
+              ]
+            },
+            "fb-empty-check": {
+              "title": "Ranpli konparezon ki manke a",
+              "prompt": "Konplete kondisyon an pou li detekte yon valè netwaye ki manke.",
+              "hint": "Li fraz la ki antoure espas vid la epi deside ki wòl mo ki manke a jwe.",
+              "help": {
+                "concept": "Espas vid la bezwen mo oswa senbòl Python egzak ki fè liy lan fè sa ki dekri nan mesaj la.",
+                "hint_1": "Gade kòd ki antoure espas vid la pou deside si ou bezwen yon mo kle, yon valè, yon metòd, oswa yon kle.",
+                "hint_2": "Chwazi opsyon ki fè tout liy lan valab an Python epi ki bay rezilta ke kòmand la mande."
+              },
+              "template": "si cleaned_name == [blank1]:",
+              "choices": [
+                "Zewo",
+                "Pa genyen",
+                "\"\"",
+                "Fo"
+              ]
+            },
+            "ci-clean-name": {
+              "title": "Ekri yon fonksyon pou netwaye non",
+              "prompt": "Ekri `clean_name(text)` pou li retounen yon vèsyon netwaye nan tèks non an.",
+              "hint": "Li tach la \"Ekri yon fonksyon pou netwaye non\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+              "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
+            },
+            "ci-parse-age": {
+              "title": "Analize yon laj an sekirite",
+              "prompt": "Ekri `parse_age(text)` pou li retounen yon `int` lè tèks la se yon laj valab, epi `None` lè tèks la pa ka itilize kòm yon laj.",
+              "hint": "Li tach la \"Analize yon laj an sekirite\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+              "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
+            },
+            "ci-clean-row": {
+              "title": "Valide epi netwaye yon ranje",
+              "prompt": "Ekri `clean_row(row)` pou ranje ki gen fòm tankou `[name_text, score_text]`. Retounen yon diksyonè netwaye lè tou de valè yo valab, oswa `None` lè ranje a dwe rejte.",
+              "hint": "Li tach la \"Valide ak netwaye yon ranje\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyon epi konpare rezilta a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+              "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
+            },
+            "try-validating-and-cleaning-input-checkpoint": {
+              "title": "Netwaye epi valide yon non",
+              "prompt": "Li yon non. Retire tout espas epi mete premye lèt chak mo an majiskil. Si non ki netwaye a vid, enprime `Missing`; sinon enprime non ki netwaye a.",
+              "hint": "Itilize `.strip()` anvan ou tcheke si valè a vid.",
+              "help": {
+                "concept": "Netwaye antre anvan w valide l ede pwogram yo jere tèks dezòdone.",
+                "hint_1": "Itilize `.strip()` anvan ou tcheke si valè a vid.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "name = input()\n\n# Clean and validate the name.\n",
+              "solutionCode": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Retire espas vid nan non an."
+                },
+                "1": {
+                  "message": "Mete premye lèt non ki netwaye a an majiskil."
+                }
+              }
+            },
+            "try-validating-and-cleaning-input-sketch0": {
+              "title": "Netwaye yon non",
+              "prompt": "Netwaye espas vid ak kapitalizasyon anvan w itilize done itilizatè a.",
+              "hint": "Retire espas sipèfl, konvèti an majiskil tit, epi enprime rezilta a.",
+              "help": {
+                "concept": "Retire espas sipèfl, konvèti an majiskil tit, epi enprime rezilta a.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+              "solutionCode": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak strip() pou retire espas anplis."
+                },
+                "1": {
+                  "message": "Sèvi ak title() pou nòmalize non an."
+                }
+              }
+            },
+            "try-validating-and-cleaning-input-sketch1": {
+              "title": "Valide yon nòt",
+              "prompt": "Tcheke entèval nimerik yo apre konvèsyon an.",
+              "hint": "Konvèti score_text an nimerik. Enprime 'valid' si li soti nan 0 rive 100.",
+              "help": {
+                "concept": "Konvèti score_text an nimerik. Enprime 'valid' si li soti nan 0 rive 100.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+              "solutionCode": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Konvèti score_text an yon antye."
+                },
+                "1": {
+                  "message": "Tcheke ke nòt la ant 0 ak 100."
+                }
+              }
+            },
+            "try-validating-and-cleaning-input-sketch2": {
+              "title": "Netwaye plizyè ranje",
+              "prompt": "Separe chak ranje, retire chak chan, epi fòmate rezilta ki netwaye a.",
+              "hint": "Enprime liy nòt ak non ki netwaye, tankou Ava:92.",
+              "help": {
+                "concept": "Enprime liy nòt ak non ki netwaye, tankou Ava:92.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+              "solutionCode": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon bouk sou ranje yo olye w tape toude liy ki netwaye yo."
+                },
+                "1": {
+                  "message": "Separe chak ranje an non ak nòt."
+                },
+                "2": {
+                  "message": "Retire espas vid nan chak pati."
+                },
+                "3": {
+                  "message": "Mete premye lèt chak non an majiskil."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_validating_and_cleaning_input_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Li yon non. Retire tout espas epi mete premye lèt chak mo an majiskil. Si non ki netwaye a vid, enprime \"`Missing`\"; sinon enprime non ki netwaye a."
+            },
+            "try_validating_and_cleaning_input_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Netwaye espas vid ak kapitalizasyon anvan w itilize done itilizatè a."
+            },
+            "try_validating_and_cleaning_input_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Tcheke entèval nimerik yo apre konvèsyon an."
+            },
+            "try_validating_and_cleaning_input_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Separe chak ranje, retire chak chan, epi fòmate rezilta ki netwaye a."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "clean-basics": {
+            "title": "Ki validasyon ak netwayaj yo fè",
+            "bodyMarkdown": "Validation checks whether data is acceptable. Cleaning fixes small problems so valid data becomes easier to use.\n\nFor example, imagine a row of text:\n\n```python\nname = \"  Ava  \"\nage_text = \" 12 \"\n```\n\nYou can clean it like this:\n\n```python\nname = name.strip()\nage_text = age_text.strip()\nage = int(age_text)\nprint(name)\nprint(age)\n```\n\nStep by step:\n\n- `strip()` removes extra spaces at the start and end.\n- `int(age_text)` converts the cleaned text into a number.\n- `print(name)` shows `Ava`.\n- `print(age)` shows `12`.\n\nValidation often happens after cleaning. If `age_text` were `\"twelve\"`, `int(age_text)` would fail, so that row should be rejected or handled with `try`/`except`.\n\nA simple rule is:\n\n1. Clean small formatting issues.\n2. Check for missing values.\n3. Reject values that still do not fit the rules."
+          },
+          "missing-invalid": {
+            "title": "Valè ki manke kont valè ki pa valab",
+            "bodyMarkdown": "Yon valè ki manke vle di li absan oswa li vid. Yon valè ki pa valab prezan, men li pa kòrèk pou règ ou bezwen an.\n\nEgzanp:\n\n```python\nrows = [\n    [\"Ava\", \"12\"],\n    [\"\", \"15\"],\n    [\"Leo\", \"ten\"]\n]\n```\n\nOu ka li ranje sa yo konsa:\n\n- `['Ava', '12']` → ka itilize apre konvèsyon\n- `['', '15']` → non ki manke\n- `['Leo', 'ten']` → laj ki pa valab\n\nMen yon ti tèsè:\n\n```python\nfor row in rows:\n    name = row[0].strip()\n    age_text = row[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(name, age)\n        except ValueError:\n            print(\"invalid age\")\n```\n\nLiy pa liy:\n\n- Bouk la tcheke yon liy alafwa.\n- `strip()` netwaye espas vid yo anvan li tcheke.\n- `if name == \"\"` detekte yon non ki vid.\n- `try` eseye fè konvèsyon nimewo a.\n- `except ValueError` jere tèks tankou `\"ten\"`."
+          },
+          "cleaning-functions": {
+            "title": "Mete règ netwayaj yo nan fonksyon yo",
+            "bodyMarkdown": "When the same cleaning logic is used many times, put it in a function. This makes your code easier to read and reuse.\n\nExample:\n\n```python\ndef clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()\n\nprint(clean_name(\"  aVA  \"))\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- The function receives some text.\n- `strip()` removes extra spaces.\n- `title()` changes the capitalization.\n- `return` sends the cleaned result back.\n\nYou can do the same for validation:\n\n```python\ndef is_missing(text):\n    return text.strip() == \"\"\n\nprint(is_missing(\"   \"))\nprint(is_missing(\"Mila\"))\n```\n\nThis prints:\n\n```python\nTrue\nFalse\n```\n\nFunctions are especially helpful when cleaning many rows from a file."
+          }
+        }
+      }
+    }
+  }
+}

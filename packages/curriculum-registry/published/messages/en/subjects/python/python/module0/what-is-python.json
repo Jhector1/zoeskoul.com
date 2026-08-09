@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "what-is-python": {
+          "label": "What is Python?",
+          "summary": "An introduction to Python and its uses.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Python"
+            },
+            "sketch1": {
+              "title": "Applications of Python"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Read and print a learning message"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Complete the Python print statement",
+              "prompt": "Fill in the blank to complete the print statement in Python.",
+              "hint": "What do you want to display?",
+              "help": {
+                "concept": "The `print()` tool in Python displays text in the console.",
+                "hint_1": "Think about what you want to show on the screen.",
+                "hint_2": "Remember to use quotes around your text."
+              },
+              "template": "print('___')",
+              "choices": [
+                "Hello, World!",
+                "Python is great!",
+                "My name is Zoe."
+              ]
+            },
+            "2": {
+              "title": "Identify a use of Python",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "What do data scientists do with data?",
+              "help": {
+                "concept": "Data scientists analyze data to extract insights and make decisions.",
+                "hint_1": "Consider what you do with data.",
+                "hint_2": "Think about the process of examining data."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "analyzing",
+                "printing",
+                "drawing"
+              ]
+            },
+            "3": {
+              "title": "What is Python primarily used for?",
+              "prompt": "Select the primary use of Python.",
+              "hint": "Think about the most common applications.",
+              "help": {
+                "concept": "Python is versatile and used in many fields, but it has a primary focus.",
+                "hint_1": "Consider programming and scripting.",
+                "hint_2": "What language is often recommended for beginners?"
+              },
+              "options": {
+                "a": "Game Development",
+                "b": "Web Development",
+                "c": "Data Analysis",
+                "d": "Mobile App Development"
+              }
+            },
+            "4": {
+              "title": "Select applications of Python",
+              "prompt": "Which of the following are applications of Python? Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Web Development",
+                "b": "Data Science",
+                "c": "Machine Learning",
+                "d": "Graphic Design"
+              }
+            },
+            "5": {
+              "title": "Read and print a learning message",
+              "prompt": "Read ONE input called `language`.\n\nPrint exactly:\nI am learning <language>.",
+              "hint": "Read the input into a variable, then use an f-string to print the sentence.",
+              "help": {
+                "concept": "This task checks whether you can read one input and include it in printed output.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
+              },
+              "starterCode": "language = input()\n# Print the learning message here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-0": {
+        "what-is-python": {
+          "1": {
+            "title": "Introduction to Python",
+            "bodyMarkdown": "Python is a high-level programming language that is widely used for various applications, including web development, data analysis, artificial intelligence, and more. Its simple syntax makes it an excellent choice for beginners. For example, a simple Python program to print 'Hello, World!' looks like this:\n\n```python\nprint('Hello, World!')\n```\n\nThis line of code tells Python to display the text 'Hello, World!' on the screen. \n\n**Your turn:** Try modifying the text inside the quotes to print your name!"
+          },
+          "2": {
+            "title": "Applications of Python",
+            "bodyMarkdown": "Python is used in many fields, including:\n\n- Web development\n- Data science\n- Machine learning\n- Automation\n\nAt the beginner level, you do not need extra packages or files to start. You can begin with small programs that print clear messages:\n\n```python\nprint('Python can help automate repeated work')\nprint('Python can help analyze data later')\n```\n\nThese lines ask Python to display two messages. Later courses can add files, packages, and larger projects. For now, focus on reading each line and predicting exactly what appears in the output."
+          }
+        }
+      }
+    }
+  }
+}

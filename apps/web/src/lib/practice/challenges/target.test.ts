@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 
 vi.mock("server-only", () => ({}));
 

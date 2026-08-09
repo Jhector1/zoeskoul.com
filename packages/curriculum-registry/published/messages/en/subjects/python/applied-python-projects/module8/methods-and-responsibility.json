@@ -1,0 +1,245 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "label": "Python Method Types",
+          "summary": "Choose an instance method, class method, or static method based on what the behavior needs.",
+          "cards": {
+            "sketch0": {
+              "title": "Instance method"
+            },
+            "sketch1": {
+              "title": "Class method"
+            },
+            "sketch2": {
+              "title": "Static method"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_methods_and_responsibility_sketch0": {
+              "title": "Add an instance method that changes one car",
+              "prompt": "In `models/car.py`, add the instance method `drive(self, miles)`. It should increase `self.miles` and return the new value. In `main.py`, create `Car(\"Honda\", \"Fit\", 10000)`, call `car.drive(40)`, and print the returned value.",
+              "hint": "A method goes inside the class at the same indentation level as `__init__`.",
+              "help": {
+                "concept": "An instance method receives `self`, so it can read or change the state of the object that receives the call.",
+                "hint_1": "Inside `drive`, use `self.miles += miles`.",
+                "hint_2": "Return `self.miles` after updating it."
+              },
+              "starterCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\n# Call drive(40) and print the returned miles.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\n# Call drive(40) and print the returned miles."
+                },
+                "models_car_py": {
+                  "content": "# TODO: Update models/car.py to complete this step: Add a drive method.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\nprint(car.drive(40))",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\nprint(car.drive(40))"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car constructor with make, model, and miles."
+                },
+                "1": {
+                  "message": "Car should store make, model, and miles attributes."
+                },
+                "2": {
+                  "message": "Add a drive method that increases the miles."
+                },
+                "3": {
+                  "message": "drive(40) should return 10040 for a car that starts at 10000 miles."
+                },
+                "4": {
+                  "message": "Print the returned miles value."
+                }
+              },
+              "expectedOutput": "10040"
+            },
+            "try_methods_and_responsibility_sketch1": {
+              "title": "Build a Car with a class method",
+              "prompt": "Add `@classmethod` and `from_kilometers(cls, make, model, kilometers)` to `Car`. Convert kilometers to miles with `round(kilometers * 0.621371)`, then return `cls(make, model, miles)`. In `main.py`, create a car with `Car.from_kilometers(\"Toyota\", \"Prius\", 100)` and print its summary.",
+              "hint": "A class method receives `cls` and can return a new object by calling `cls(...)`.",
+              "help": {
+                "concept": "A class method is a natural place for an alternative constructor. It receives the class as `cls`, converts the incoming data, and creates the object.",
+                "hint_1": "Place `@classmethod` directly above the method.",
+                "hint_2": "Return `cls(make, model, miles)` after calculating miles."
+              },
+              "starterCode": "from models.car import Car\n\n# Create a Car from 100 kilometers, then print its summary.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\n# Use Car.from_kilometers(\"Toyota\", \"Prius\", 100).\n# Print the returned car's summary.\n"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # TODO: add @classmethod and from_kilometers(...).\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car.from_kilometers(\"Toyota\", \"Prius\", 100)\nprint(car.summary())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car.from_kilometers(\"Toyota\", \"Prius\", 100)\nprint(car.summary())\n"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    @classmethod\n    def from_kilometers(cls, make, model, kilometers):\n        miles = round(kilometers * 0.621371)\n        return cls(make, model, miles)\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car constructor working."
+                },
+                "1": {
+                  "message": "from_kilometers should create a Car with converted miles."
+                },
+                "2": {
+                  "message": "Print the summary from the Car returned by the class method."
+                }
+              },
+              "expectedOutput": "Toyota Prius - 62 miles"
+            },
+            "try_methods_and_responsibility_sketch2": {
+              "title": "Add a static validation method",
+              "prompt": "Add `@staticmethod` and `is_valid_miles(miles)` to `Car`. It should return `True` when miles is greater than or equal to 0 and `False` otherwise. In `main.py`, call it once from the class with `120` and once from a Car object with `-5`, then print both results.",
+              "hint": "A static method uses neither `self` nor `cls`; it receives only the value it checks.",
+              "help": {
+                "concept": "A static method is useful for logic related to the class that does not need object state or the class itself.",
+                "hint_1": "Place `@staticmethod` above `def is_valid_miles(miles):`.",
+                "hint_2": "Return the Boolean expression `miles >= 0`."
+              },
+              "starterCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\n# Print the validation result from the class and from the object.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\n# Print Car.is_valid_miles(120).\n# Then print car.is_valid_miles(-5).\n"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # TODO: add @staticmethod and is_valid_miles(miles).\n"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\nprint(Car.is_valid_miles(120))\nprint(car.is_valid_miles(-5))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\nprint(Car.is_valid_miles(120))\nprint(car.is_valid_miles(-5))\n"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    @staticmethod\n    def is_valid_miles(miles):\n        return miles >= 0\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class constructible."
+                },
+                "1": {
+                  "message": "is_valid_miles should return True for a non-negative value."
+                },
+                "2": {
+                  "message": "is_valid_miles should return False for a negative value."
+                },
+                "3": {
+                  "message": "Print both validation results."
+                }
+              },
+              "expectedOutput": "True\nFalse"
+            }
+          },
+          "practice": {
+            "mc-methods-and-responsibility-class-jobs": {
+              "title": "Compare Python method types",
+              "prompt": "Which statements are correct? Choose all that apply.",
+              "hint": "Match `self`, `cls`, and neither with the job each method performs.",
+              "help": {
+                "concept": "Instance methods receive `self`; class methods receive `cls`; static methods receive neither automatically.",
+                "hint_1": "Alternative constructors commonly use class methods.",
+                "hint_2": "A utility that needs no object or class state can be static."
+              },
+              "options": {
+                "a": "An instance method can read or change one object through `self`.",
+                "b": "A class method can create an object through `cls(...)`.",
+                "c": "A static method is useful when the logic needs neither `self` nor `cls`.",
+                "d": "Every method must receive `self`."
+              }
+            },
+            "sc-methods-and-responsibility-main-role": {
+              "title": "Choose an alternative constructor",
+              "prompt": "Which method type best fits `from_kilometers(...)`, which converts input and returns a new Car?",
+              "hint": "The method needs the class so it can create an object.",
+              "help": {
+                "concept": "Class methods are commonly used as named alternative constructors.",
+                "hint_1": "It should receive `cls`.",
+                "hint_2": "It should return `cls(...)`."
+              },
+              "options": {
+                "a": "A class method",
+                "b": "A static method",
+                "c": "A property with no method",
+                "d": "A print statement in main.py"
+              }
+            },
+            "fb-methods-and-responsibility-call-name": {
+              "title": "Add the utility decorator",
+              "prompt": "Fill in the decorator for a method that uses neither `self` nor `cls`.",
+              "hint": "The method is attached to the class but behaves like a related utility function.",
+              "help": {
+                "concept": "`@staticmethod` prevents Python from binding an instance or class argument.",
+                "hint_1": "It begins with @.",
+                "hint_2": "The word describes a static method."
+              },
+              "template": "[blank1]\ndef is_valid_miles(miles):",
+              "choices": [
+                "@staticmethod",
+                "@classmethod",
+                "self",
+                "@property"
+              ]
+            },
+            "dr-methods-and-responsibility-flow": {
+              "title": "Choose a method by what it needs",
+              "prompt": "Put this decision process in order.",
+              "hint": "Start by asking what data the behavior needs.",
+              "help": {
+                "concept": "The needed context determines the method type.",
+                "hint_1": "Object state points to an instance method.",
+                "hint_2": "No object or class context points to a static method."
+              },
+              "tokens": {
+                "t1": "Ask whether the behavior needs one object's state",
+                "t2": "Use an instance method when it needs `self`",
+                "t3": "Use a class method when it needs `cls` or creates objects",
+                "t4": "Use a static method when it needs neither"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "sketch-0": {
+            "title": "Instance methods work with one object",
+            "bodyMarkdown": "An **instance method** receives `self`. Use it when behavior reads or changes one object.\n\n```python\nclass Counter:\n    def __init__(self, value=0):\n        self.value = value\n\n    def increment(self):\n        self.value += 1\n        return self.value\n```\n\n`counter.increment()` updates that counter object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
+          },
+          "sketch-1": {
+            "title": "Class methods work with the class",
+            "bodyMarkdown": "A **class method** receives `cls` instead of `self`. A common use is an alternative constructor.\n\n```python\nclass Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    @classmethod\n    def from_fahrenheit(cls, fahrenheit):\n        celsius = (fahrenheit - 32) * 5 / 9\n        return cls(celsius)\n```\n\n`Temperature.from_fahrenheit(68)` converts the input and returns a new Temperature object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
+          },
+          "sketch-2": {
+            "title": "Static methods are related utilities",
+            "bodyMarkdown": "A **static method** receives neither `self` nor `cls`. Use it for logic that belongs near the class but does not need object or class state.\n\n```python\nclass Temperature:\n    @staticmethod\n    def is_valid(celsius):\n        return celsius >= -273.15\n```\n\nYou can call it as `Temperature.is_valid(20)`. Keep a method as an instance method when it needs `self`, a class method when it needs `cls`, and a static method when it needs neither.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
+          }
+        }
+      }
+    }
+  }
+}

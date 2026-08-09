@@ -1,0 +1,334 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-8-real-world-project": {
+        "class-roster-cleaner": {
+          "label": "Pwojè final kou a: Netwayè lis klas la",
+          "summary": "Bati pwosesis netwayaj lis la kòm yon koule kontinyèl: enspekte ekspòtasyon an, netwaye ranje yo, modilize lojik la, rezime klas la, epi voye rapò final yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Kliyan final ou a: biwo lekòl la"
+            },
+            "project": {
+              "title": "Netwayè Lis Klas"
+            }
+          },
+          "projectSteps": {
+            "cp_1": {
+              "title": "Li fichye lis la"
+            },
+            "cp_2": {
+              "title": "Netwaye yon ranje nan lis la"
+            },
+            "cp_3": {
+              "title": "Sote ranje ki pa bon yo an sekirite"
+            },
+            "cp_4": {
+              "title": "Mete netwayaj nan yon modil èd."
+            },
+            "cp_5": {
+              "title": "Ajoute fonksyon rezime"
+            },
+            "cp_6": {
+              "title": "Ekri rapò final yo"
+            }
+          },
+          "quiz": {
+            "cp-1-read-roster-file": {
+              "title": "Li fichye lis la",
+              "prompt": "Biwo lekòl la voye ou yon fichye ki rele \"`data/roster.csv`\" epi li di, \"Anvan nou fè konfyans fichye sa a, èske ou ka montre nou egzakteman sa li genyen ladan l?\" Li fichye a epi enprime chak liy brit san okenn liy vid anplis, enkli liy antèt la.",
+              "hint": "Kòmanse pa enspekte ekspòtasyon brit la egzakteman jan li te rive.",
+              "help": {
+                "concept": "Yon pwojè netwayaj done ki fèt ak anpil atansyon kòmanse ak vizibilite: li fichye sous la anvan ou transfòme li.",
+                "hint_1": "Ouvri `data/roster.csv` ak yon blòk `with open(...)`.",
+                "hint_2": "Fè yon bouk sou fichye a epi enprime `line.strip()`."
+              },
+              "starterCode": "# Read data/roster.csv and print every raw line without extra blank lines.\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Li data/roster.csv olye pou w tape sa ki nan lis la."
+                }
+              },
+              "solutionCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+            },
+            "cp-2-clean-one-row": {
+              "title": "Netwaye yon ranje nan lis la",
+              "prompt": "Kòmanse ak apèsi lis ou deja bati a. Kenbe kontèks sa a, epi ajoute `clean_row(line)` pou yon ranje done vin tounen yon diksyonè ki gen `name` netwaye, `score` antye, ak `email` an lèt piti. Li premye ranje done a ankò epi enprime diksyonè netwaye a.",
+              "hint": "Enspekte an premye, apre sa re-itilize menm fòm fichye a pou teste asistan an sou yon ranje.",
+              "help": {
+                "concept": "Yon fwa yon ranje gen yon fòm ki fyab, tout pwojè a ka reitilize menm lojik netwayaj sa a pou chak ranje.",
+                "hint_1": "Separe ranje a an `name`, `score`, ak `email`.",
+                "hint_2": "Sèvi ak `.strip().title()` pou non, `int(...)` pou nòt, ak `.strip().lower()` pou imèl."
+              },
+              "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "solutionCode": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n"
+            },
+            "cp-3-skip-bad-roster-rows": {
+              "title": "Sote ranje ki pa bon yo an sekirite",
+              "prompt": "Kenbe asistan `clean_row(line)` k ap fonksyone nan dènye etap la. Kounye a, fè yon bouk sou ranje done yo, ranmase dosye ki valab e ki netwaye, epi sote ranje ki pa valab yo pou netwayè lis la rete itil.",
+              "hint": "Sèvi ak menm asistan an pou chak ranje olye pou w refè netwayaj la an liy.",
+              "help": {
+                "concept": "Fichye reyèl yo raman pafè. Yon zouti done itil pwoteje koule travay la lè li ranmase anrejistreman ki valab epi sote ranje li pa ka netwaye.",
+                "hint_1": "Kreye yon tablo `records = []`, epi fè yon bouk sou ranje yo apre antèt la.",
+                "hint_2": "Ajoute andedan `try` epi sote ranje ki pa valab nan `except ValueError`."
+              },
+              "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak try/except pou sote ranje move nan lis la."
+                },
+                "1": {
+                  "message": "Trape ValueError pou liy move nan lis la."
+                },
+                "2": {
+                  "message": "Itilize clean_row(line) andedan bouk la."
+                }
+              },
+              "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+            },
+            "cp-4-move-cleaning-to-module": {
+              "title": "Mete netwayaj nan yon modil èd.",
+              "prompt": "Kòmanse ak pwogram ki netwaye lis travay la nan `main.py`. Mete `clean_row(line)` nan `tools/cleaning.py`, enpòte li tounen nan `main.py`, epi kenbe rezilta dosye ki netwaye yo egzakteman menm jan.",
+              "hint": "Etap sa a se yon refactoring, pa yon reekriti: workflow la rete nan `main.py`, epi detay netwayaj yo deplase nan modil èd la.",
+              "help": {
+                "concept": "Lè yon pwojè grandi, modil èd yo kenbe fichye prensipal la konsantre sou workflow la olye de detay yo.",
+                "hint_1": "Kreye yon kont `tools/cleaning.py` epi deplase kont `clean_row(line)` la ladan l.",
+                "hint_2": "Nan `main.py`, ranplase fonksyon lokal la ak `from tools.cleaning import clean_row`."
+              },
+              "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_cleaning_py": {
+                  "content": "# Move clean_row(line) here and keep the same cleaned record shape.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_cleaning_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte clean_row nan tools.cleaning."
+                },
+                "1": {
+                  "message": "Sèvi ak clean_row(line) nan modil èd la."
+                }
+              },
+              "solutionCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+            },
+            "cp-5-add-summary-functions": {
+              "title": "Ajoute fonksyon rezime",
+              "prompt": "Kenbe netwayè ki baze sou helper nan etap anvan an. Kounye a, ajoute `tools/scoring.py` pou pwojè a ka enprime nòt mwayèn nan awondi a yon plas desimal ak kantite pas.",
+              "hint": "Ajoute kalkil nòt la nan edè yo, epi ranplase apèsi dosye brit la ak de liy rezime yo.",
+              "help": {
+                "concept": "Rapò yo anjeneral bezwen rezime, pa sèlman ranje ki netwaye. Fonksyon èd fè kalkil sa yo fasil pou teste ak re-itilize.",
+                "hint_1": "Ajoute `average_score(records)` ak `passing_count(records)` nan `tools/scoring.py`.",
+                "hint_2": "Enpòte toude helper yo nan `main.py`, epi enprime `Average: ...` ak `Passing: ...`."
+              },
+              "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_cleaning_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n"
+                },
+                "tools_scoring_py": {
+                  "content": "# Add average_score(records) and passing_count(records) here.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_cleaning_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n"
+                },
+                "tools_scoring_py": {
+                  "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte average_score ak passing_count soti nan tools.scoring."
+                },
+                "1": {
+                  "message": "Sèvi ak average_score(records) pou kalkile mwayèn nan."
+                },
+                "2": {
+                  "message": "Sèvi ak passing_count(records) pou kalkile kantite pasaj."
+                }
+              },
+              "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n"
+            },
+            "cp-6-write-final-reports": {
+              "title": "Ekri rapò final yo",
+              "prompt": "Kòmanse ak netwayè a ki deja enprime mwayèn nan ak kantite pase yo. Konplete transfè a lè w ajoute asistan rapò yo, ekri `output/clean_roster.csv` ak `output/summary.txt`, epi enprime liy kantite netwaye a ak rezime final la.",
+              "hint": "Tounen rezime travay la an livrabl: ekri tou de fichye yo, epi enprime kantite ki netwaye a ansanm ak liy rezime yo.",
+              "help": {
+                "concept": "Yon pwojè reyèl fini ak livrabl: fichye ki netwaye ak yon rezime yon lòt moun ka itilize.",
+                "hint_1": "Ajoute `write_clean_roster(records, path)` ak `write_summary(records, path)` nan `tools/reports.py`.",
+                "hint_2": "Rele asistan sa yo pou de chemen sòti yo, epi enprime kantite dosye ki netwaye yo ansanm ak mwayèn nan ak liy ki pase yo."
+              },
+              "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n",
+              "starterFiles": {
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_cleaning_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n"
+                },
+                "tools_scoring_py": {
+                  "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n"
+                },
+                "tools_reports_py": {
+                  "content": "# Add write_clean_roster(records, path) and write_summary(records, path) here.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n"
+                },
+                "data_roster_csv": {
+                  "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n"
+                },
+                "tools_cleaning_py": {
+                  "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n"
+                },
+                "tools_scoring_py": {
+                  "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n"
+                },
+                "tools_reports_py": {
+                  "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak write_clean_roster(...) pou kreye rapò lis pwòp la."
+                },
+                "1": {
+                  "message": "Sèvi ak write_summary(...) pou kreye rapò rezime a."
+                },
+                "2": {
+                  "message": "Ekri lis pwòp la pou output/clean_roster.csv."
+                },
+                "3": {
+                  "message": "Ekri rezime pou output/summary.txt."
+                }
+              },
+              "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n"
+            },
+            "try-class-roster-cleaner-sketch0": {
+              "title": "Netwaye premye anrejistreman lis la",
+              "prompt": "Ouvri `data/roster.csv`, sote ranje antèt la, netwaye premye dosye elèv la, epi enprime `Ava Smith <ava@example.com>`.",
+              "hint": "Sote antèt la, epi netwaye premye ranje done a anvan ou enprime li.",
+              "help": {
+                "concept": "Kat sa a itilize fòm fichye lis reyèl la ki soti nan capstone la olye de yon chèn ranje ki kode an di.",
+                "hint_1": "Ouvri `data/roster.csv`, itilize `next(file)` yon fwa pou sote antèt la, epi li premye ranje done a.",
+                "hint_2": "Separe liy lan, mete non an ak premye lèt majiskil, mete adrès imel la an lèt piti, epi enprime `Name <email>`."
+              },
+              "starterCode": "with open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Clean the first student record and print Ava Smith <ava@example.com>.\n",
+              "solutionCode": "with open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nname, score, email = first_row.split(\",\")\nprint(f\"{name.strip().title()} <{email.strip().lower()}>\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Li ranje a nan data/roster.csv."
+                },
+                "1": {
+                  "message": "Sote ranje tit la anvan ou li premye elèv la."
+                },
+                "2": {
+                  "message": "Separe ranje lis la an pati li yo."
+                },
+                "3": {
+                  "message": "Mete non etidyan an an tit."
+                },
+                "4": {
+                  "message": "Ekri adrès imel la an lèt piti."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_class_roster_cleaner_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `data/roster.csv`, sote ranje antèt la, netwaye premye dosye elèv la, epi enprime `Ava Smith <ava@example.com>`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-8-real-world-project": {
+        "class-roster-cleaner": {
+          "sketch-1": {
+            "title": "Kliyan final ou a: biwo lekòl la",
+            "bodyMarkdown": "Jou rapò a ap pwoche, e biwo lekòl la gen yon ekspòtasyon lis non ki pa pare pou itilize. Non yo gen espasaj ak kapitalizasyon ki pa konsistan, nòt yo gen move valè, e anplwaye yo bezwen fichye pwòp yo ka fè konfyans.\n\nNan pwojè final sa a, w ap konstwi zouti yo te mande a. Pwojè a devlope san pwoblèm soti nan yon lektè fichye brit pou vin tounen yon netwayè plizyè fichye ak modil èd, fonksyon rezime, ak fichye rapò final. Chak etap kòmanse apati solisyon kanonik anvan an pou travay la sanble yon sèl pwojè reyèl, pa yon pil egzèsis ki pa konekte."
+          }
+        }
+      }
+    }
+  }
+}

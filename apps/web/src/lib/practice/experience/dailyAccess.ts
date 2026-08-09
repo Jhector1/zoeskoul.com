@@ -5,7 +5,7 @@ import { getAccessSnapshot } from "@/lib/access/accessSnapshot";
 import type { Actor } from "@/lib/practice/actor";
 import { actorKeyOf } from "@/lib/practice/actor";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import {
   selectAccessibleDailyPracticeOptions,
   type DailyAccessModule,

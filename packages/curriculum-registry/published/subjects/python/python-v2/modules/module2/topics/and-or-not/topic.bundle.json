@@ -1,0 +1,758 @@
+{
+  "topicId": "and-or-not",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-python-v2-2-combining-conditions",
+  "prefix": "pyv2_2",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.and-or-not.label",
+    "summaryKey": "topics.python-v2.python-v2-2.and-or-not.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch0.title",
+      "sketchId": "sketch_and_basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-and-or-not-sketch0",
+        "titleKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.title",
+        "promptKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.prompt",
+        "exerciseKey": "code_ticket_check",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch1.title",
+      "sketchId": "sketch_or_not",
+      "height": 420,
+      "tryIt": {
+        "id": "try-and-or-not-sketch1",
+        "titleKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.title",
+        "promptKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.prompt",
+        "exerciseKey": "code_free_day",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch2.title",
+      "sketchId": "sketch_combining_clear_rules",
+      "height": 420,
+      "tryIt": {
+        "id": "try-and-or-not-sketch2",
+        "titleKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.title",
+        "promptKey": "topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.prompt",
+        "exerciseKey": "code_not_logged_in",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_and_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_and_basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_and_basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch_or_not",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_or_not.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_or_not.bodyMarkdown"
+    },
+    {
+      "id": "sketch_combining_clear_rules",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_combining_clear_rules.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_combining_clear_rules.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_and_true",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.sc_and_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc_not_flip",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.sc_not_flip",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_or_cases",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.mc_or_cases",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc_valid_age_and_name",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.mc_valid_age_and_name",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_and_condition",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.dr_build_and_condition",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr_if_elif_else_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.dr_if_elif_else_logic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7",
+          "t8"
+        ]
+      }
+    },
+    {
+      "id": "fb_not_condition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.fb_not_condition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "not"
+      }
+    },
+    {
+      "id": "fb_or_operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.fb_or_operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "or"
+      }
+    },
+    {
+      "id": "code_ticket_check",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "20\nyes\n",
+            "stdout": "allowed\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\nno\n",
+            "stdout": "denied\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "16\nyes\n",
+            "stdout": "denied\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "16\nno\n",
+            "stdout": "denied\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+age\\s*>=\\s*18\\s+and\\s+has_id\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+age\\s*>=\\s*18\\s+and\\s+has_id\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_free_day",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "yes\nyes\n",
+            "stdout": "rest\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "yes\nno\n",
+            "stdout": "rest\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "no\nyes\n",
+            "stdout": "rest\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "no\nno\n",
+            "stdout": "work\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+is_weekend\\s+or\\s+is_holiday\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+is_weekend\\s+or\\s+is_holiday\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_not_logged_in",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "no\n",
+            "stdout": "please sign in\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "yes\n",
+            "stdout": "welcome\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+not\\s+logged_in\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+not\\s+logged_in\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_range_check",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "10\n",
+            "stdout": "in range\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "in range\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "9\n",
+            "stdout": "out of range\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "21\n",
+            "stdout": "out of range\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+n\\s*>=\\s*10\\s+and\\s+n\\s*<=\\s*20\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+n\\s*>=\\s*10\\s+and\\s+n\\s*<=\\s*20\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "code_score_certificate",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "80\nno\n",
+            "stdout": "certificate\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "95\nyes\n",
+            "stdout": "no certificate\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "70\nno\n",
+            "stdout": "no certificate\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)if\\s+score\\s*>=\\s*80\\s+and\\s+not\\s+late\\s*:.*else\\s*:",
+            "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)if\\s+score\\s*>=\\s*80\\s+and\\s+not\\s+late\\s*:.*else\\s*:",
+          "message": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

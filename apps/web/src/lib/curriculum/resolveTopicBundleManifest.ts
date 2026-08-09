@@ -1,5 +1,5 @@
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
-import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 
 function normalizeTopicId(topicSlugOrId: string) {
   if (!topicSlugOrId.includes(".")) return topicSlugOrId;

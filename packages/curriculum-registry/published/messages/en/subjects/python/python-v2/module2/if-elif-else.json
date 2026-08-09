@@ -1,0 +1,269 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "if-elif-else": {
+          "label": "If, Elif, and Else",
+          "summary": "Use `if` for one conditional action, `if`/`else` for two paths, and `if`/`elif`/`else` when one of several branches should run.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a path with if"
+            },
+            "sketch1": {
+              "title": "Use else for the other case"
+            },
+            "sketch2": {
+              "title": "Check more than two cases with elif"
+            },
+            "sketch3": {
+              "title": "Check special cases first"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc_if_runs_true": {
+              "title": "When does an if block run?",
+              "prompt": "In Python, when does the indented code under `if condition:` run?",
+              "hint": "Python evaluates the condition before entering the indented block.",
+              "help": {
+                "concept": "An `if` block runs only when its condition evaluates to `True`.",
+                "hint_1": "A false condition causes Python to skip that block.",
+                "hint_2": "Choose the option that says the block runs for the true case."
+              },
+              "options": {
+                "a": "It always runs",
+                "b": "It runs only when the condition is True",
+                "c": "It runs only when the condition is False",
+                "d": "It runs only when there is an else block"
+              }
+            },
+            "sc_elif_role": {
+              "title": "What is elif for?",
+              "prompt": "What is the main purpose of `elif` in Python?",
+              "hint": "`elif` is checked only after earlier conditions in the same chain were false.",
+              "help": {
+                "concept": "`elif` adds another condition to the same conditional chain.",
+                "hint_1": "It belongs after an `if`.",
+                "hint_2": "It gives Python another condition to test before an optional `else`."
+              },
+              "options": {
+                "a": "To repeat the same block many times",
+                "b": "To check another condition if earlier ones were false",
+                "c": "To end a program immediately",
+                "d": "To print the value of a variable"
+              }
+            },
+            "mc_valid_conditional_facts": {
+              "title": "Facts about conditional chains",
+              "prompt": "Choose all true statements about `if` / `elif` / `else` chains in Python.",
+              "hint": "Think about one conditional chain, not separate independent `if` statements.",
+              "help": {
+                "concept": "A single `if`/`elif`/`else` chain is checked from top to bottom and runs only its first matching branch.",
+                "hint_1": "`else` is the fallback when no earlier condition matched.",
+                "hint_2": "Python does not continue through the same chain after a branch has been selected."
+              },
+              "options": {
+                "a": "Python checks the conditions from top to bottom",
+                "b": "More than one branch in the same chain can run for one input",
+                "c": "Python stops after the first true branch in the chain",
+                "d": "The else block runs when earlier conditions were false"
+              }
+            },
+            "mc_truthy_values": {
+              "title": "Facts about if and else",
+              "prompt": "Which statements about an `if` / `else` pair are true? Choose all that apply.",
+              "hint": "An `if` / `else` pair represents two alternative paths.",
+              "help": {
+                "concept": "The `if` block handles the true case; `else` handles the remaining case.",
+                "hint_1": "`else` has no condition of its own.",
+                "hint_2": "For one `if` / `else` pair, exactly one branch runs."
+              },
+              "options": {
+                "a": "`else` is written without a condition",
+                "b": "Both branches run for the same input",
+                "c": "Exactly one branch runs",
+                "d": "`else` can appear by itself without a preceding `if`"
+              }
+            },
+            "dr_branch_order": {
+              "title": "Build an if / else program",
+              "prompt": "Arrange the lines to print `pass` when `score` is at least 60 and `fail` otherwise.",
+              "hint": "Read the score first, then place the `if` block before its `else` block.",
+              "help": {
+                "concept": "A two-path conditional starts with `if` and uses `else` for the remaining case.",
+                "hint_1": "The `else:` line comes after the indented true-case output.",
+                "hint_2": "Each print line belongs under its branch."
+              },
+              "tokens": {
+                "t1": "score = int(input())",
+                "t2": "if score >= 60:",
+                "t3": "    print(\"pass\")",
+                "t4": "else:",
+                "t5": "    print(\"fail\")"
+              }
+            },
+            "dr_specific_before_general": {
+              "title": "Build a three-branch chain",
+              "prompt": "Arrange the branch lines to classify `n` as `positive`, `negative`, or `zero`.",
+              "hint": "Start with `if`, continue with `elif`, and finish with `else`.",
+              "help": {
+                "concept": "A three-way conditional can test two conditions and use `else` for the remaining value.",
+                "hint_1": "Check `n > 0` first.",
+                "hint_2": "After `n < 0`, zero is the only remaining case."
+              },
+              "tokens": {
+                "t1": "if n > 0:",
+                "t2": "    print(\"positive\")",
+                "t3": "elif n < 0:",
+                "t4": "    print(\"negative\")",
+                "t5": "else:",
+                "t6": "    print(\"zero\")"
+              }
+            },
+            "fb_else_keyword": {
+              "title": "Complete the fallback branch",
+              "prompt": "Choose the keyword that makes this code run when the `if` condition is false.",
+              "hint": "The fallback branch handles every case where the preceding `if` was false.",
+              "help": {
+                "concept": "`else` introduces the fallback branch and does not take a condition.",
+                "hint_1": "It follows an `if` or `elif` block.",
+                "hint_2": "Choose `else`."
+              },
+              "template": "[blank1]:\n    print(\"no\")",
+              "choices": [
+                "if",
+                "elif",
+                "else",
+                "print"
+              ]
+            },
+            "fb_comparison_operator": {
+              "title": "Pick the correct comparison",
+              "prompt": "Fill in the operator so the condition is true when `age` is 18 or more.",
+              "hint": "The threshold includes age 18 itself.",
+              "help": {
+                "concept": "`>=` means greater than or equal to.",
+                "hint_1": "`>` would exclude 18.",
+                "hint_2": "`==` would include only 18."
+              },
+              "template": "if age [blank1] 18:\n    print(\"adult\")",
+              "choices": [
+                ">",
+                "<",
+                ">=",
+                "=="
+              ]
+            },
+            "code_positive_negative_zero": {
+              "title": "Run one block when a number is positive",
+              "prompt": "Read one integer into `n`. If `n` is greater than 0, print `positive`. If the condition is false, print nothing. Use only `if` for the branch.",
+              "hint": "This exercise needs one condition and one indented output line.",
+              "help": {
+                "concept": "A basic `if` can run one block for the true case and do nothing for the false case.",
+                "hint_1": "Check `n > 0`.",
+                "hint_2": "Do not add `elif` or `else`."
+              },
+              "starterCode": "n = int(input())\n# Print positive only when n > 0\n",
+              "solutionCode": "n = int(input())\nif n > 0:\n    print(\"positive\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use one `if n > 0:` block and print `positive` inside it, without `elif` or `else`."
+                }
+              }
+            },
+            "code_pass_fail": {
+              "title": "Choose pass or fail",
+              "prompt": "Read one integer score. Print `pass` if it is 60 or higher; otherwise print `fail`.",
+              "hint": "Use `if` for the threshold and `else` for every lower score.",
+              "help": {
+                "concept": "An `if` / `else` pair selects exactly one of two outputs.",
+                "hint_1": "The condition is `score >= 60`.",
+                "hint_2": "Put `fail` in the `else` branch."
+              },
+              "starterCode": "score = int(input())\n# Print pass or fail\n",
+              "solutionCode": "score = int(input())\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `if score >= 60:` followed by an `else` branch."
+                }
+              }
+            },
+            "code_grade_checker": {
+              "title": "Choose among four grade outcomes",
+              "prompt": "Read one integer score. Print `A` for 90 or more, `B` for 80–89, `C` for 70–79, and `F` otherwise.",
+              "hint": "Use one `if`, two `elif` branches, then `else`.",
+              "help": {
+                "concept": "An `if` / `elif` / `else` chain selects the first matching branch.",
+                "hint_1": "Check the thresholds from 90 down to 70.",
+                "hint_2": "Use `else` for scores below 70."
+              },
+              "starterCode": "score = int(input())\n# Print A, B, C, or F\n",
+              "solutionCode": "score = int(input())\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use an `if` / `elif` / `elif` / `else` chain with thresholds 90, 80, and 70."
+                }
+              }
+            },
+            "code_empty_or_text": {
+              "title": "Use truthiness in an if / else branch",
+              "prompt": "Read one line of text. Print `text` if it is non-empty; otherwise print `empty`.",
+              "hint": "The string itself can be used as the condition.",
+              "help": {
+                "concept": "This practice combines earlier truthiness knowledge with a two-path conditional.",
+                "hint_1": "Use `if text:` for the non-empty case.",
+                "hint_2": "Use `else` for the empty string."
+              },
+              "starterCode": "text = input()\n# Print text or empty\n",
+              "solutionCode": "text = input()\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `if text:` with an `else` branch."
+                }
+              }
+            },
+            "code_even_odd": {
+              "title": "Choose even or odd",
+              "prompt": "Read one integer. Print `even` when it is divisible by 2; otherwise print `odd`.",
+              "hint": "A number is even when `n % 2 == 0`.",
+              "help": {
+                "concept": "The remainder comparison creates a two-path decision.",
+                "hint_1": "Use `if n % 2 == 0:`.",
+                "hint_2": "Put `odd` in the `else` branch."
+              },
+              "starterCode": "n = int(input())\n# Print even or odd\n",
+              "solutionCode": "n = int(input())\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `n % 2 == 0` in an `if` / `else` branch."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "if-elif-else": {
+          "sketch_if_basic": {
+            "title": "Run one block with if",
+            "bodyMarkdown": "An `if` statement runs its indented block only when its condition is `True`.\n\n```python\ntemperature = 30\n\nif temperature > 25:\n    print(\"warm\")\n```\n\nOutput:\n\n```text\nwarm\n```\n\nPython evaluates `temperature > 25` first. Because the comparison is `True`, the indented `print(...)` runs.\n\nIf the condition is `False`, Python skips the block:\n\n```python\ntemperature = 18\n\nif temperature > 25:\n    print(\"warm\")\n```\n\nThis program prints nothing.\n\nThe basic shape is:\n\n```python\nif condition:\n    # runs only when condition is True\n```\n\nThe colon starts the block, and the indented lines belong to that `if`.\n"
+          },
+          "sketch_if_else": {
+            "title": "Choose between two paths with else",
+            "bodyMarkdown": "Add `else` when exactly one of two paths should run.\n\n```python\nscore = 72\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nIf `score >= 60` is `True`, Python runs the `if` block and skips the `else` block.\n\nIf the condition is `False`, Python skips the `if` block and runs `else`.\n\nSo:\n\n- `72` prints `pass`;\n- `40` prints `fail`.\n\nAn `else` branch does not have its own condition. It handles every case not taken by the preceding `if`.\n"
+          },
+          "sketch_elif_chain": {
+            "title": "Choose among several paths with elif",
+            "bodyMarkdown": "Use `elif` when a program needs more than two possible branches.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nPython checks the chain from top to bottom:\n\n1. check the `if` condition;\n2. if it is false, check the `elif` condition;\n3. if neither condition matched, run `else`.\n\nOnly one branch in this chain runs.\n\nExamples:\n\n- `8` prints `positive`;\n- `-3` prints `negative`;\n- `0` prints `zero`.\n\nA later lesson will focus on how to order overlapping or special cases. Here, the goal is to build a correct multi-branch chain.\n"
+          }
+        }
+      }
+    }
+  }
+}

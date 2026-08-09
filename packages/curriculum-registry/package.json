@@ -9,19 +9,23 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
     }
   },
   "scripts": {
-    "prebuild": "pnpm --filter @zoeskoul/curriculum-core build",
+    "prebuild": "pnpm --filter @zoeskoul/curriculum-core build && node scripts/generate-published-runtime.mjs",
     "build": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "generate": "pnpm generate:web",
+    "generate": "pnpm build",
     "generate:web": "pnpm build && node dist/generate/generateI18nManifest.js --app-root apps/web && node dist/generate/generateTopicManifests.js --app-root apps/web && node dist/generate/generateSubjectManifests.js --app-root apps/web && node dist/generate/generateCatalogManifests.js --app-root apps/web",
     "generate:i18n:web": "pnpm build && node dist/generate/generateI18nManifest.js --app-root apps/web",
     "generate:topics:web": "pnpm build && node dist/generate/generateTopicManifests.js --app-root apps/web",
     "generate:subjects:web": "pnpm build && node dist/generate/generateSubjectManifests.js --app-root apps/web",
     "generate:catalogs:web": "pnpm build && node dist/generate/generateCatalogManifests.js --app-root apps/web",
-    "check": "pnpm check:web",
+    "check": "pnpm build && node scripts/check-published-runtime.mjs && node scripts/check-app-consumption-boundary.mjs",
     "check:web": "pnpm build && node dist/generate/checkGeneratedArtifacts.js --app-root apps/web"
   },
   "dependencies": {

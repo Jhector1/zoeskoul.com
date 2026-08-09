@@ -1,0 +1,251 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "label": "Tcheke ka espesyal yo an premye",
+          "summary": "Sèvi ak verifikasyon bonè ki klè pou fè lojik kondisyonèl la pi fasil pou li.",
+          "cards": {
+            "sketch0": {
+              "title": "Poukisa tcheke ka espesyal yo an premye?"
+            },
+            "sketch1": {
+              "title": "Mete verifikasyon espesifik yo anvan verifikasyon laj yo"
+            },
+            "sketch2": {
+              "title": "Sèvi ak `elif` pou separe ka yo klèman"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratike tcheke ka espesyal yo an premye"
+            }
+          },
+          "projectSteps": {
+            "code_invalid_before_range": {
+              "title": "Tcheke antre ki pa valab an premye"
+            },
+            "code_perfect_before_pass": {
+              "title": "Afiche yon mesaj espesyal pou 100"
+            },
+            "code_empty_yes_other": {
+              "title": "Trete tèks vid an premye"
+            },
+            "code_zero_before_small": {
+              "title": "Tcheke zewo anvan yon entèval ki pi laj"
+            },
+            "code_invalid_code_first": {
+              "title": "Valide yon kòd anvan ka nòmal yo"
+            }
+          },
+          "quiz": {
+            "sc-special-before-general": {
+              "title": "Chwazi pi bon lòd la",
+              "prompt": "Poukisa li anjeneral pi bon pou tcheke yon ka espesyal anvan yon ka laj nan yon chèn `if` / `elif`?",
+              "hint": "Python sèvi ak premye branch ki gen kondisyon li vre.",
+              "help": {
+                "concept": "Nan yon chèn `if` / `elif`, Python tcheke kondisyon yo depi anlè jouk anba epi li sispann nan premye ki vre a. Yon kondisyon laj ka kache yon ka ki pi espesifik si li parèt an premye.",
+                "hint_1": "Reflechi sou sa k rive lè yon valè matche ak yon kondisyon espesifik epi ak yon kondisyon ki pi laj tou.",
+                "hint_2": "Si kondisyon ki pi laj la vini an premye, Python ap pran branch sa a epi sote branch ka espesyal ki vini apre a."
+              },
+              "options": {
+                "a": "Paske Python egzekite chak branch ki matche yo nan lòd",
+                "b": "Paske yon kondisyon laj ki mete an premye ka anpeche yo rive nan ka espesyal la",
+                "c": "Paske `elif` mache sèlman ak nonb",
+                "d": "Paske ka espesyal yo dwe toujou ekri nan `else`"
+              }
+            },
+            "sc-output-perfect-score": {
+              "title": "Prevwa rezilta a",
+              "prompt": "Kisa kòd sa a afiche lè `score = 100`?\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect\")\nelse:\n    print(\"Fail\")\n```",
+              "hint": "Tcheke ki kondisyon ki vin vre an premye.",
+              "help": {
+                "concept": "Python evalye branch `if` ak `elif` yo nan lòd. Menm si yon kondisyon ki vini pita vre tou, li pap egzekite yon fwa yo jwenn yon branch ki vre pi bonè.",
+                "hint_1": "Mande tèt ou si `100 >= 60` vre anvan ou panse ak liy `elif` la.",
+                "hint_2": "Yon fwa premye branch la matche, Python afiche soti nan branch sa a epi li sote rès la."
+              },
+              "options": {
+                "a": "Perfect",
+                "b": "Fail",
+                "c": "Pass",
+                "d": "Li afiche toude Pass ak Perfect"
+              }
+            },
+            "mc-good-special-case-order": {
+              "title": "Jwenn bon egzanp yo",
+              "prompt": "Ki fragman kòd ki tcheke yon ka espesyal anvan yon ka ki pi laj? Chwazi tout sa ki aplikab.",
+              "hint": "Chèche yon kondisyon etwat ki plase anlè yon kondisyon ki pi laj.",
+              "help": {
+                "concept": "Yon ka espesyal se yon kondisyon ki pi etwat, tankou `score == 100`, tandiske yon ka laj kouvri plis valè, tankou `score >= 60`. Bon lòd la mete ka ki pi etwat la an premye.",
+                "hint_1": "Tcheke si premye kondisyon an se yon sou-ansanm yon kondisyon ki vini pita oswa si se kontrè a.",
+                "hint_2": "Yon bon repons trete ka limit egzak la anvan kondisyon ki ta enkli li tou."
+              },
+              "options": {
+                "a": "if score == 100: ... elif score >= 60: ...",
+                "b": "if age >= 0: ... elif age == 0: ...",
+                "c": "if text == \"\": ... elif text != \"\": ...",
+                "d": "if number > 0: ... elif number == 1: ..."
+              }
+            },
+            "mc-values-hit-first-branch": {
+              "title": "Ki valè ki pran premye branch la?",
+              "prompt": "Konsidere kòd sa a:\n\n```python\nif n == 0:\n    print(\"zero\")\nelif n <= 10:\n    print(\"small\")\nelse:\n    print(\"big\")\n```\n\nKi valè ki afiche `zero`? Chwazi tout sa ki aplikab.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa matche ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "-1",
+                "b": "0",
+                "c": "1",
+                "d": "10"
+              }
+            },
+            "dr-order-score-checks": {
+              "title": "Mete branch yo nan lòd",
+              "prompt": "Ranje kondisyon sa yo soti nan pi bon rive nan pi move lòd pou yon verifikasyon nòt kote `100` ta dwe resevwa yon mesaj espesyal anvan nòt nòmal ki pase yo.",
+              "hint": "Mete kondisyon ki pi espesifik la an premye.",
+              "help": {
+                "concept": "Lè yon kondisyon pi espesifik pase yon lòt, youn ki espesifik la ta dwe vini pi bonè pou li pa kache pa yon matche ki pi laj.",
+                "hint_1": "Yon verifikasyon egalite egzak pou `100` pi etwat pase yon verifikasyon entèval pou pase.",
+                "hint_2": "Branch ki pran tout rès yo dwe vini an dènye paske li trete tout sa ki pa t matche pi bonè."
+              },
+              "tokens": {
+                "t1": "if score == 100",
+                "t2": "elif score >= 60",
+                "t3": "else"
+              }
+            },
+            "dr-order-input-validation": {
+              "title": "Mete lojik validasyon an nan lòd",
+              "prompt": "Ranje verifikasyon sa yo nan yon lòd ki klè pou yon klasifikatè laj. Laj ki pa valab yo ta dwe trete anvan laj nòmal yo.",
+              "hint": "Kòmanse ak entèval valè ki enposib la.",
+              "help": {
+                "concept": "Validasyon souvan mache pi byen lè yo tcheke antre ki pa valab oswa eksepsyonèl yo an premye, apre sa ka valab espesyal yo, epi finalman ka jeneral la.",
+                "hint_1": "Yon laj negatif pa valab, kidonk li ta dwe tcheke anvan nenpòt kategori laj nòmal.",
+                "hint_2": "Apre antre ki pa valab la, mete ka limit egzak la anvan ka laj ki rete a."
+              },
+              "tokens": {
+                "t1": "if age < 0",
+                "t2": "elif age == 0",
+                "t3": "else"
+              }
+            },
+            "fb-empty-string-check": {
+              "title": "Konplete verifikasyon ka espesyal la",
+              "prompt": "Ranpli valè ki manke a pou kòd la tcheke yon chèn vid an premye.",
+              "hint": "Yon chèn vid pa gen okenn karaktè.",
+              "help": {
+                "concept": "Nan Python, yon chèn vid ekri ak de sitasyon epi pa gen anyen nan mitan yo. Se yon ka espesyal komen pou tcheke anvan lòt valè tèks yo.",
+                "hint_1": "Ou bezwen literal chèn ki gen zewo karaktè.",
+                "hint_2": "Chèche chwa ki se sèlman sitasyon ouvèti ak fèmti san anyen anndan."
+              },
+              "template": "if text == [blank1]:\n    print(\"Empty\")",
+              "choices": [
+                "\"\"",
+                "\" \"",
+                "None",
+                "0"
+              ]
+            },
+            "fb-elif-keyword": {
+              "title": "Chwazi bon mo kle a",
+              "prompt": "Ranpli mo kle ki manke a pou tcheke yon dezyèm kondisyon sèlman si premye a te fo.",
+              "hint": "Mo kle sa a konbine `else` ak `if`.",
+              "help": {
+                "concept": "Sèvi ak `the missing term` nan Python lè ou vle yon lòt kondisyon tcheke sèlman si kondisyon ki te vini pi bonè nan menm chèn nan te fo.",
+                "hint_1": "Se pa `if`, paske sa ta kòmanse yon blòk kondisyon separe.",
+                "hint_2": "Se mo kle yo itilize ant `if` ak `else` nan yon chèn ki gen plizyè branch."
+              },
+              "template": "if score == 100:\n    print(\"Perfect\")\n[blank1] score >= 60:\n    print(\"Pass\")",
+              "choices": [
+                "else",
+                "elif",
+                "then",
+                "loop"
+              ]
+            },
+            "code-invalid-before-range": {
+              "title": "Tcheke antre ki pa valab an premye",
+              "prompt": "Ekri kòd Python ki li yon laj antye nan antre a. Si laj la pi piti pase 0, afiche `Invalid`. Sinon, si laj la pi piti pase 13, afiche `Child`. Nan tout lòt ka yo, afiche `Older`.",
+              "hint": "Trete laj enposib la anvan gwoup laj nòmal yo.",
+              "help": {
+                "concept": "Lè yon antre pa valab oswa eksepsyonèl, tcheke li an premye fè rès lojik branchman an pi senp ak pi klè.",
+                "hint_1": "Li laj la ak `input()`, konvèti li an `int`, epi teste `age < 0` anvan lòt kondisyon yo.",
+                "hint_2": "Apre verifikasyon valè ki pa valab la, pwochen branch la ta dwe kouvri laj soti nan 0 rive 12, epi branch final la trete rès la."
+              },
+              "starterCode": "age = int(input())\n\n# TODO: print Invalid, Child, or Older"
+            },
+            "code-perfect-before-pass": {
+              "title": "Afiche yon mesaj espesyal pou 100",
+              "prompt": "Ekri kòd Python ki li yon nòt antye. Si nòt la egzakteman 100, afiche `Perfect`. Sinon, si nòt la omwen 60, afiche `Pass`. Nan tout lòt ka yo, afiche `Fail`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa matche ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail"
+            },
+            "code-empty-yes-other": {
+              "title": "Trete tèks vid an premye",
+              "prompt": "Ekri kòd Python ki li yon liy tèks. Si tèks la se yon chèn vid, afiche `Empty`. Sinon, si tèks la se `yes`, afiche `Confirmed`. Nan tout lòt ka yo, afiche `Other`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si pwogram nan pwodui rezilta yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa matche ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n\n# TODO: print Empty, Confirmed, or Other"
+            },
+            "code-zero-before-small": {
+              "title": "Tcheke zewo anvan yon entèval ki pi laj",
+              "prompt": "Ekri kòd Python ki li yon nonb antye `n`. Si `n` egzakteman 0, afiche `Zero`. Sinon, si `n` pi piti oswa egal a 10, afiche `Small`. Nan tout lòt ka yo, afiche `Large`.",
+              "hint": "Valè egzak 0 fè pati entèval ki pi laj `<= 10` la, kidonk lòd la enpòtan.",
+              "help": {
+                "concept": "Lè yon valè espesyal enkli andedan yon entèval ki pi laj, verifikasyon valè egzak la dwe vini an premye sinon verifikasyon entèval la ap kache li.",
+                "hint_1": "Li nonb la, epi konpare ak `== 0` anvan ou itilize `<= 10`.",
+                "hint_2": "Dezyèm branch la ta dwe pran valè tankou 1 ak 10, pandan branch final la trete nonb ki pi gran pase 10."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print Zero, Small, or Large"
+            },
+            "code-invalid-code-first": {
+              "title": "Valide yon kòd anvan ka nòmal yo",
+              "prompt": "Ekri kòd Python ki li yon kòd antye. Si kòd la pi piti pase 0, afiche `Invalid`. Sinon, si kòd la se 0, afiche `Start`. Nan tout lòt ka yo, afiche `Continue`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa matche ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "special-cases-come-first": {
+            "title": "Poukisa tcheke ka espesyal yo an premye?",
+            "bodyMarkdown": "Lè yon pwogram gen plizyè chemen posib, li souvan itil pou tcheke ka ki pa òdinè oswa ki enpòtan yo an premye. Sa fè lojik ou a pi fasil pou li paske eksepsyon yo trete bonè, epi ka ki pi òdinè a ka vini pita.\n\nPa egzanp, imajine yon verifikatè tikè:\n\n```python\nage = 0\n\nif age < 0:\n    print(\"Invalid age\")\nelif age == 0:\n    print(\"Newborn ticket\")\nelse:\n    print(\"Regular age group\")\n```\n\nSwiv li etap pa etap:\n- `if age < 0:` tcheke yon antre ki pa valab an premye.\n- `elif age == 0:` tcheke yon ka limit espesyal apre sa.\n- `else:` trete tout sa ki rete.\n\nLòd sa a itil paske valè ki pa valab oswa ki ra yo ka separe anvan chemen nòmal la.\n\nSi ou mete ka laj la twò bonè, verifikasyon ki vini pita yo ka pa janm egzekite."
+          },
+          "broad-vs-specific": {
+            "title": "Mete verifikasyon espesifik yo anvan verifikasyon laj yo",
+            "bodyMarkdown": "Yon erè komen se ekri yon kondisyon laj anvan yon kondisyon ki pi espesifik. Python sispann nan premye branch ki matche a, kidonk lòd la enpòtan.\n\nGade egzanp sa a:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect score\")\nelse:\n    print(\"Needs work\")\n```\n\nLa a, `score == 100` se yon ka espesyal, men li vini apre `score >= 60`. Piske `100` pi gran oswa egal a `60` tou, Python afiche `Pass` epi li pa janm rive nan `Perfect score`.\n\nYon vèsyon ki pi klè se:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"Perfect score\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Needs work\")\n```\n\nKounye a yo tcheke ka espesyal la an premye.\n\n**Egzanp rezoud:**\n- Si `score` se `100`, rezilta a se `Perfect score`.\n- Si `score` se `75`, rezilta a se `Pass`.\n- Si `score` se `40`, rezilta a se `Needs work`.\n\nSwiv li etap pa etap: li chak enstriksyon depi anlè jouk anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki rezilta kòd la sipoze montre."
+          },
+          "using-elif-for-clear-branches": {
+            "title": "Sèvi ak `elif` pou separe ka yo klèman",
+            "bodyMarkdown": "Lè se yon sèl branch ki ta dwe egzekite, `if` / `elif` / `else` se yon bon modèl. Li pèmèt ou bay lis ka yo nan yon lòd ki klè soti nan sa ki pi espesyal rive nan sa ki pi jeneral.\n\nEgzanp:\n\n```python\ntext = \"\"\n\nif text == \"\":\n    print(\"Empty string\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other text\")\n```\n\nSwiv li etap pa etap:\n- `text == \"\"` tcheke ka espesyal yon chèn vid.\n- `text == \"yes\"` tcheke yon valè espesifik ki gen sans.\n- `else` pran tout lòt chèn yo.\n\nSa pi fasil pou konprann pase melanje verifikasyon laj ak etwat yo nan move lòd la."
+          }
+        }
+      }
+    }
+  }
+}

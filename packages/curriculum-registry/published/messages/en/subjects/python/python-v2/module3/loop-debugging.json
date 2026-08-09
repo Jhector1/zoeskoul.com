@@ -1,0 +1,263 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "loop-debugging": {
+          "label": "Loop Debugging",
+          "summary": "Debug loops by tracing changing state, checking start/stop boundaries, and verifying that each update moves execution toward the intended stopping point.",
+          "cards": {
+            "sketch0": {
+              "title": "Trace the loop state one step at a time"
+            },
+            "sketch1": {
+              "title": "Spot off-by-one errors"
+            },
+            "sketch2": {
+              "title": "Avoid repeated work and infinite loops"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "loop-debug-sc-1": {
+              "title": "Choose the first line to inspect",
+              "prompt": "A loop should print `1, 2, 3`, but it prints `1, 3`. Which part should you inspect first?",
+              "hint": "The observed values are skipping from 1 directly to 3.",
+              "help": {
+                "concept": "When the loop state jumps incorrectly, inspect the line that updates that state.",
+                "hint_1": "The condition allowed the loop to run.",
+                "hint_2": "A jump from 1 to 3 suggests the update changes the value by too much."
+              },
+              "options": {
+                "a": "The line that updates the loop variable",
+                "b": "The spelling of `print`",
+                "c": "A comment above the loop",
+                "d": "The filename"
+              }
+            },
+            "loop-debug-sc-2": {
+              "title": "Find the off-by-one condition",
+              "prompt": "You want to print `1`, `2`, and `3` with a loop that starts at `count = 1`. Which condition should the `while` loop use?",
+              "hint": "The condition must still be true when `count` is exactly 3.",
+              "help": {
+                "concept": "Inclusive endpoints require a condition that allows the final intended value.",
+                "hint_1": "`count < 3` becomes false too early.",
+                "hint_2": "`count <= 3` still runs when `count` equals 3."
+              },
+              "options": {
+                "a": "`while count < 3:`",
+                "b": "`while count <= 3:`",
+                "c": "`while count == 3:`",
+                "d": "`while count != 1:`"
+              }
+            },
+            "loop-debug-mc-1": {
+              "title": "Signs of an infinite loop",
+              "prompt": "Choose all situations that can make a `while` loop run forever.",
+              "hint": "Look for state that cannot make the condition false.",
+              "help": {
+                "concept": "A loop can run forever when the controlling state never changes or moves away from its stopping boundary.",
+                "hint_1": "Printing does not by itself change loop state.",
+                "hint_2": "A condition that eventually becomes false is a sign of progress, not an infinite loop."
+              },
+              "options": {
+                "a": "The loop variable never changes inside the loop.",
+                "b": "The loop variable changes away from the stopping value.",
+                "c": "The loop prints a value each time.",
+                "d": "The loop condition eventually becomes false."
+              }
+            },
+            "loop-debug-mc-2": {
+              "title": "Useful debugging actions",
+              "prompt": "Choose all actions that help debug a `while` loop.",
+              "hint": "Choose actions that expose the changing state and the condition controlling repetition.",
+              "help": {
+                "concept": "Useful debugging makes loop state visible and checks whether updates and boundaries match the intended behavior.",
+                "hint_1": "Tracing or temporary output can reveal the first wrong iteration.",
+                "hint_2": "Ignoring the condition removes the most important evidence."
+              },
+              "options": {
+                "a": "Trace the loop variable value on each pass.",
+                "b": "Add a temporary `print()` to show the counter.",
+                "c": "Ignore the condition and only read the final output.",
+                "d": "Check whether the update is inside the loop body."
+              }
+            },
+            "loop-debug-dr-1": {
+              "title": "Order the loop steps",
+              "prompt": "Put these steps in the correct order for one full cycle of a typical `while` loop.",
+              "hint": "The condition is checked before the body and again after the state update.",
+              "help": {
+                "concept": "A typical `while` cycle is check → body → update → check again.",
+                "hint_1": "No body statement runs before the first condition check.",
+                "hint_2": "The update affects the next condition check."
+              },
+              "tokens": {
+                "t1": "Check the condition",
+                "t2": "Run the loop body",
+                "t3": "Update the loop variable",
+                "t4": "Check the condition again"
+              }
+            },
+            "loop-debug-dr-2": {
+              "title": "Trace the values",
+              "prompt": "Arrange the values of `count` in the order they are checked by this code: `count = 1` then `while count <= 3:` with `count = count + 1` inside the loop.",
+              "hint": "The loop checks 1, 2, and 3 while true, then checks 4 and stops.",
+              "help": {
+                "concept": "A trace includes the final value that makes the condition false, even though that value is not printed by the body.",
+                "hint_1": "Start with the initialized value 1.",
+                "hint_2": "After printing 3, the update produces 4 for the final failed check."
+              },
+              "tokens": {
+                "t1": "1",
+                "t2": "2",
+                "t3": "3",
+                "t4": "4"
+              }
+            },
+            "loop-debug-fb-1": {
+              "title": "Complete the stopping condition",
+              "prompt": "Fill in the missing value so the loop includes 3 as the last printed number.",
+              "hint": "The boundary should still allow the final intended value 3.",
+              "help": {
+                "concept": "The loop condition must remain true at the final value that should be processed.",
+                "hint_1": "The operator is already `<=`.",
+                "hint_2": "Choose the intended last printed value as the boundary."
+              },
+              "template": "while count <= [blank1]:",
+              "choices": [
+                "2",
+                "3",
+                "4",
+                "count"
+              ]
+            },
+            "loop-debug-fb-2": {
+              "title": "Complete the update",
+              "prompt": "Fill in the missing code so the counter moves forward by 1 each time.",
+              "hint": "The next value must be one greater than the current value.",
+              "help": {
+                "concept": "A progress update changes the state used by the loop condition.",
+                "hint_1": "`count` alone would leave the value unchanged.",
+                "hint_2": "Choose `count + 1`."
+              },
+              "template": "count = [blank1]",
+              "choices": [
+                "count",
+                "count + 1",
+                "1",
+                "count - 1"
+              ]
+            },
+            "loop-debug-code-1": {
+              "title": "Fix a state update that skips a value",
+              "prompt": "The starter should print `1`, `2`, and `3`, but its update jumps by two. Fix the loop so the state advances by exactly 1 each iteration.",
+              "hint": "The condition is fine; inspect how `count` changes after each print.",
+              "help": {
+                "concept": "Tracing `1 -> 3` reveals an update-step bug.",
+                "hint_1": "Keep the start value and boundary.",
+                "hint_2": "Change the update so the next value after 1 is 2."
+              },
+              "starterCode": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 2\n",
+              "solutionCode": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the loop boundary and fix the update so `count` increases by exactly 1."
+                }
+              }
+            },
+            "loop-debug-code-2": {
+              "title": "Fix an excluded range endpoint",
+              "prompt": "Read an integer `n`. The starter is meant to print every integer from 1 through `n`, but its `range()` stop value excludes `n`. Fix the boundary.",
+              "hint": "The `range()` stop value is excluded, so the stop must be one past `n`.",
+              "help": {
+                "concept": "A range boundary bug is fixed by choosing the first value that should not be produced.",
+                "hint_1": "Keep the start at 1.",
+                "hint_2": "Use `n + 1` as the exclusive stop."
+              },
+              "starterCode": "n = int(input())\nfor value in range(1, n):\n    print(value)\n",
+              "solutionCode": "n = int(input())\nfor value in range(1, n + 1):\n    print(value)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fix the exclusive range boundary by using `range(1, n + 1)`."
+                }
+              }
+            },
+            "loop-debug-code-3": {
+              "title": "Repair a loop that cannot make progress",
+              "prompt": "A buggy loop with `count = 1` and `while count <= 3:` would never stop if the body only printed `count`. Write the corrected loop so it prints `1`, `2`, and `3` and updates the controlling state each iteration.",
+              "hint": "The value used by the condition must change inside the loop.",
+              "help": {
+                "concept": "A `while` loop needs progress toward making its condition false.",
+                "hint_1": "Start from `count = 1`.",
+                "hint_2": "After printing, increase `count` by 1 inside the loop."
+              },
+              "starterCode": "count = 1\n# Write the corrected loop; do not create a non-terminating loop\n",
+              "solutionCode": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+              "sourceChecks": {
+                "0": {
+                  "message": "Update `count` inside the `while` body so the condition can eventually become false."
+                }
+              }
+            },
+            "loop-debug-code-4": {
+              "title": "Fix a repetition off-by-one error",
+              "prompt": "Read a word and an integer `times`. The program should print the word exactly `times` times. Fix the starter's counter initialization so the loop performs the correct number of repetitions.",
+              "hint": "Before any repetitions happen, the number completed should be zero.",
+              "help": {
+                "concept": "A wrong starting value can make an otherwise correct loop run one time too few.",
+                "hint_1": "The condition `count < times` is appropriate.",
+                "hint_2": "Initialize `count` to 0, not 1."
+              },
+              "starterCode": "word = input()\ntimes = int(input())\ncount = 1\nwhile count < times:\n    print(word)\n    count = count + 1\n",
+              "solutionCode": "word = input()\ntimes = int(input())\ncount = 0\nwhile count < times:\n    print(word)\n    count = count + 1",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fix the off-by-one bug by initializing the completed-repetition counter to `0`."
+                }
+              }
+            },
+            "loop-debug-code-5": {
+              "title": "Fix a countdown range boundary",
+              "prompt": "Read an integer `start`. The starter should print a countdown from `start` through `1`, but its range excludes `1`. Fix the stop boundary.",
+              "hint": "With a step of -1, the stop value is still excluded.",
+              "help": {
+                "concept": "To include 1 in a descending range, use the first lower value—0—as the exclusive stop.",
+                "hint_1": "Keep the negative step.",
+                "hint_2": "Change only the stop boundary from 1 to 0."
+              },
+              "starterCode": "start = int(input())\nfor n in range(start, 1, -1):\n    print(n)\n",
+              "solutionCode": "start = int(input())\nfor n in range(start, 0, -1):\n    print(n)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `range(start, 0, -1)` so the descending range includes 1."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "loop-debugging": {
+          "trace-while-state": {
+            "title": "Trace state before changing code",
+            "bodyMarkdown": "When a loop produces the wrong result, trace the values that control it before editing the code.\n\n```python\ncount = 1\n\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nA compact trace is:\n\n```text\ncheck count=1 -> print 1 -> update to 2\ncheck count=2 -> print 2 -> update to 3\ncheck count=3 -> print 3 -> update to 4\ncheck count=4 -> condition false -> stop\n```\n\nTracing helps answer three debugging questions:\n\n1. What value is checked?\n2. What value is printed or processed?\n3. How does the controlling state change before the next check?\n\nTemporary `print()` statements or a small trace table can reveal where the actual behavior first differs from the intended behavior.\n\nDo not change several lines at once. Find the first incorrect state transition, then fix the line responsible for it.\n"
+          },
+          "find-off-by-one": {
+            "title": "Check both ends of the loop boundary",
+            "bodyMarkdown": "An **off-by-one error** means a loop includes one value too many or misses one value it should include.\n\nFor a `while` loop:\n\n```python\ncount = 1\nwhile count < 3:\n    print(count)\n    count = count + 1\n```\n\nThis prints only:\n\n```text\n1\n2\n```\n\nIf `3` should be included, the condition needs `<= 3`.\n\nThe same idea appears with `range()`:\n\n```python\nfor n in range(1, 3):\n    print(n)\n```\n\nThis also prints only `1` and `2` because the `range()` stop value is excluded. To include `3`, use:\n\n```python\nrange(1, 4)\n```\n\nWhen debugging a boundary, explicitly test:\n\n- the first intended value;\n- the last intended value;\n- the first value that should **not** be processed.\n\nThose three checks catch many off-by-one mistakes.\n"
+          },
+          "avoid-stuck-loops": {
+            "title": "Check that the loop can make progress",
+            "bodyMarkdown": "A `while` loop can get stuck when the condition stays true and the controlling state does not move toward making it false.\n\nBuggy pattern:\n\n```python\ncount = 1\n\nwhile count <= 3:\n    print(count)\n```\n\nDo **not** run a loop like this just to see what happens. Inspect it first:\n\n- the condition depends on `count`;\n- `count` starts at `1`;\n- nothing inside the loop changes `count`;\n- therefore `count <= 3` stays true.\n\nThe corrected version updates the same state used by the condition:\n\n```python\ncount = 1\n\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nA second failure pattern is changing state in the wrong direction. If a loop should stop when a number becomes larger, subtracting from that number moves away from the stopping point.\n\nBefore running a suspicious `while` loop, ask:\n\n> Which value controls the condition, and how does one iteration move that value toward stopping?\n"
+          }
+        }
+      }
+    }
+  }
+}

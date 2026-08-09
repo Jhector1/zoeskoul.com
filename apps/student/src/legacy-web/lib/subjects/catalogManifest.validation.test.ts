@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { CATALOG_MANIFESTS, SUBJECT_CATALOG_SLUGS } from "@/lib/subjects/catalogs.generated";
-import { SUBJECT_MANIFESTS } from "@/lib/subjects/subjects.generated";
+import { CATALOG_MANIFESTS, SUBJECT_CATALOG_SLUGS } from "@zoeskoul/curriculum-registry/runtime";
+import { SUBJECT_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
 
 function invariant(condition: unknown, message: string): asserts condition {
     if (!condition) {

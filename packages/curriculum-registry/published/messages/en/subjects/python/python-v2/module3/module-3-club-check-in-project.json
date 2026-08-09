@@ -1,0 +1,140 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "module-3-club-check-in-project": {
+          "label": "Module Project: Club Check-In Tracker",
+          "summary": "Build one club check-in tracker cumulatively: process a known number of members, count accepted check-ins, count VIP names, switch to a sentinel-controlled loop, and finally skip blank entries safely.",
+          "cards": {
+            "sketch0": {
+              "title": "A loop-powered check-in desk"
+            },
+            "project": {
+              "title": "Club Check-In Builder"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Add the total check-in counter"
+            },
+            "mp_2": {
+              "title": "Count VIP members too"
+            },
+            "mp_3": {
+              "title": "Keep the desk open until done"
+            },
+            "mp_4": {
+              "title": "Finish the club check-in tracker"
+            }
+          },
+          "quiz": {
+            "try-module-3-club-check-in-sketch0": {
+              "title": "Check in three members",
+              "prompt": "Read exactly three member names with a `for` loop and `range(3)`. After each input, print `Checked in: <name>`.",
+              "hint": "Put `input()` and the check-in print inside one `for _ in range(3):` loop.",
+              "help": {
+                "concept": "A fixed-count `for` loop is a good starting point when the desk knows exactly how many entries to process.",
+                "hint_1": "Use `range(3)` so the loop runs exactly three times.",
+                "hint_2": "Read and print one name during each iteration."
+              },
+              "starterCode": "# Read exactly three member names and print one check-in line for each.\n",
+              "solutionCode": "for _ in range(3):\n    name = input()\n    print(f\"Checked in: {name}\")",
+              "sourceChecks": [
+                {
+                  "message": "Use one `for` loop with `range(3)` to read and print all three member names."
+                }
+              ]
+            },
+            "mp-1-check-in-three-members": {
+              "title": "Add the total check-in counter",
+              "prompt": "Keep the exact three-member check-in program. Add a counter named `total`, increase it once for each accepted input, and print `Total check-ins: <total>` after the loop.",
+              "hint": "Initialize `total = 0` before the loop and increment it once inside each iteration.",
+              "help": {
+                "concept": "A counter starts at zero and records how many times the repeated check-in action succeeds.",
+                "hint_1": "Keep the existing `range(3)` loop and check-in line.",
+                "hint_2": "Add `total += 1` inside the loop, then print the total after the loop."
+              },
+              "starterCode": "for _ in range(3):\n    name = input()\n    print(f\"Checked in: {name}\")",
+              "solutionCode": "total = 0\nfor _ in range(3):\n    name = input()\n    total += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")",
+              "sourceChecks": [
+                {
+                  "message": "Keep the fixed-count loop and add a total counter that increments once per member."
+                }
+              ]
+            },
+            "mp-2-count-vip-members": {
+              "title": "Count VIP members too",
+              "prompt": "Keep the total counter working. Add `vip_count`, increase it only when a name starts with `VIP-`, and print both final counts after the loop.",
+              "hint": "Initialize a second counter before the loop and update it under `if name.startswith(\"VIP-\"):`.",
+              "help": {
+                "concept": "One loop can maintain independent counters for all accepted entries and for entries matching a condition.",
+                "hint_1": "Do not remove the total counter from the previous step.",
+                "hint_2": "Increment `vip_count` only for names whose prefix is exactly `VIP-`."
+              },
+              "starterCode": "total = 0\nfor _ in range(3):\n    name = input()\n    total += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")",
+              "solutionCode": "total = 0\nvip_count = 0\nfor _ in range(3):\n    name = input()\n    total += 1\n    if name.startswith(\"VIP-\"):\n        vip_count += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")\nprint(f\"VIP check-ins: {vip_count}\")",
+              "sourceChecks": [
+                {
+                  "message": "Preserve the total counter and add a conditional VIP counter using `startswith(\"VIP-\")`."
+                }
+              ]
+            },
+            "mp-3-stop-on-done": {
+              "title": "Keep the desk open until done",
+              "prompt": "Start from the exact fixed-count tracker. Change only the repetition rule: use `while True` so the desk accepts any number of names, and stop when the input is exactly `done`. Preserve both counters and the check-in output.",
+              "hint": "Replace the `for` loop with `while True`, read one name, then check the `done` sentinel before counting it.",
+              "help": {
+                "concept": "A sentinel-controlled `while` loop is useful when the number of future entries is unknown.",
+                "hint_1": "Put `if name == \"done\":` immediately after the input.",
+                "hint_2": "Use `break` for the sentinel, then keep the total and VIP logic for normal names."
+              },
+              "starterCode": "total = 0\nvip_count = 0\nfor _ in range(3):\n    name = input()\n    total += 1\n    if name.startswith(\"VIP-\"):\n        vip_count += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")\nprint(f\"VIP check-ins: {vip_count}\")",
+              "solutionCode": "total = 0\nvip_count = 0\nwhile True:\n    name = input()\n    if name == \"done\":\n        break\n    total += 1\n    if name.startswith(\"VIP-\"):\n        vip_count += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")\nprint(f\"VIP check-ins: {vip_count}\")",
+              "sourceChecks": [
+                {
+                  "message": "Use `while True` with a `done` sentinel and `break`, while preserving both counters."
+                }
+              ]
+            },
+            "mp-4-finish-club-check-in": {
+              "title": "Finish the club check-in tracker",
+              "prompt": "Keep the sentinel tracker working. Add one final special case: if the input is empty, use `continue` so the blank entry is not printed or counted. `done` must still end the session. Print the total and VIP counts after the loop.",
+              "hint": "Check `done` first, then check the empty string and `continue`, then do the normal counting work.",
+              "help": {
+                "concept": "Special cases belong before normal loop work when they should stop or skip the current iteration.",
+                "hint_1": "The `done` sentinel should `break` before any counting happens.",
+                "hint_2": "The empty string should `continue` before total or VIP counters change."
+              },
+              "starterCode": "total = 0\nvip_count = 0\nwhile True:\n    name = input()\n    if name == \"done\":\n        break\n    total += 1\n    if name.startswith(\"VIP-\"):\n        vip_count += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")\nprint(f\"VIP check-ins: {vip_count}\")",
+              "solutionCode": "total = 0\nvip_count = 0\nwhile True:\n    name = input()\n    if name == \"done\":\n        break\n    if name == \"\":\n        continue\n    total += 1\n    if name.startswith(\"VIP-\"):\n        vip_count += 1\n    print(f\"Checked in: {name}\")\n\nprint(f\"Total check-ins: {total}\")\nprint(f\"VIP check-ins: {vip_count}\")",
+              "sourceChecks": [
+                {
+                  "message": "Handle `done` with `break` and blank input with `continue` before counting normal names."
+                }
+              ]
+            }
+          },
+          "tryIt": {
+            "try_module_3_club_check_in_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use a `for` loop with `range(3, 0, -1)` to print `3`, `2`, and `1` on separate lines. After the loop, print `Open`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "module-3-club-check-in-project": {
+          "sketch-1": {
+            "title": "Grow one loop-powered check-in tracker",
+            "bodyMarkdown": "A neighborhood club wants one small program to run its check-in desk.\n\nBuild the tracker as **one cumulative project** instead of restarting at every step:\n\n1. process exactly three member names with `for` and `range(3)`;\n2. add a running total without removing the working check-in behavior;\n3. add a second counter for names beginning with `VIP-`;\n4. replace the fixed-count loop with `while True` and stop only when the input is `done`;\n5. treat an empty input as a skipped entry with `continue`.\n\nEvery stage starts from the **exact solution of the previous stage**. When the loop structure changes, preserve the counters and output behavior that already work.\n\nThis project synthesizes the main Module 3 ideas: fixed-count loops, accumulators and counters, `while` loops, sentinel values, `break`, `continue`, and careful special-case ordering."
+          }
+        }
+      }
+    }
+  }
+}

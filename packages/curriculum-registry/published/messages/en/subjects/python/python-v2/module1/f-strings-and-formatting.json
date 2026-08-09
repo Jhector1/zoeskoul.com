@@ -1,0 +1,269 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "label": "F-Strings and Formatting",
+          "summary": "Use f-strings to insert variables into readable text and apply format specifiers such as `:.2f` when numeric output needs a specific appearance.",
+          "cards": {
+            "sketch0": {
+              "title": "What an f-string does"
+            },
+            "sketch1": {
+              "title": "Why formatting helps readability"
+            },
+            "sketch2": {
+              "title": "Formatting numbers inside f-strings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc_fstring_prefix": {
+              "title": "Choose the correct f-string start",
+              "prompt": "Which line starts an f-string correctly in Python?",
+              "hint": "A formatted string needs the `f` prefix immediately before the opening quote.",
+              "help": {
+                "concept": "The `f` prefix tells Python to evaluate expressions inside `{}`.",
+                "hint_1": "Without `f`, `{name}` remains literal text.",
+                "hint_2": "The prefix belongs directly before the quote."
+              },
+              "options": {
+                "a": "print(\"Hello {name}\")",
+                "b": "print(f\"Hello {name}\")",
+                "c": "print(f Hello {name})"
+              }
+            },
+            "sc_decimal_places": {
+              "title": "Identify two-decimal formatting",
+              "prompt": "Which f-string expression displays `price` with exactly 2 digits after the decimal point?",
+              "hint": "The format specifier belongs after a colon inside the braces.",
+              "help": {
+                "concept": "`{price:.2f}` formats `price` as fixed-point output with two decimal places.",
+                "hint_1": "The colon begins the format specification.",
+                "hint_2": "The `.2f` must remain inside the same braces as `price`."
+              },
+              "options": {
+                "a": "f\"{price:.2f}\"",
+                "b": "f\"{price.2f}\"",
+                "c": "f\"{price:2f}\"",
+                "d": "f\"{price}: .2f\""
+              }
+            },
+            "mc_fstring_benefits": {
+              "title": "Pick true statements about f-strings",
+              "prompt": "Which statements about f-strings are correct? Choose all that apply.",
+              "hint": "Check both the syntax f-strings use and the kinds of values they can insert.",
+              "help": {
+                "concept": "F-strings can insert many Python values or expressions inside `{}` and often make output easier to read.",
+                "hint_1": "Numbers can be inserted too; f-strings are not limited to text variables.",
+                "hint_2": "Curly braces identify the values or expressions to evaluate."
+              },
+              "options": {
+                "a": "They can place variable values directly inside a string.",
+                "b": "They use curly braces around values or expressions.",
+                "c": "They work only with text values, not numbers.",
+                "d": "They can make output easier to read."
+              }
+            },
+            "mc_output_formatting_examples": {
+              "title": "Find valid formatting examples",
+              "prompt": "Which lines are valid ways to produce readable formatted output in this topic? Choose all that apply.",
+              "hint": "Check whether each line is valid Python and whether the variable value would actually appear.",
+              "help": {
+                "concept": "An f-string can interpolate a variable directly; normal concatenation also works when both pieces are strings.",
+                "hint_1": "A normal string without `f` will not substitute `{name}`.",
+                "hint_2": "Curly braces are not standalone values that can be added with `+`."
+              },
+              "options": {
+                "a": "print(f\"Name: {name}\")",
+                "b": "print(\"Name: \" + name)",
+                "c": "print(\"Name: {name}\")",
+                "d": "print(f\"Name: \" + {name})"
+              }
+            },
+            "dr_build_simple_fstring": {
+              "title": "Order the parts of a simple f-string",
+              "prompt": "Arrange the tokens to make a valid line that prints a label and a variable value.",
+              "hint": "The f-string expression belongs inside the `print(...)` call.",
+              "help": {
+                "concept": "A valid print call needs the opening call, the complete f-string argument, and the closing parenthesis.",
+                "hint_1": "Start with `print(`.",
+                "hint_2": "The closing `)` comes after the f-string."
+              },
+              "tokens": {
+                "t1": "print(",
+                "t2": "f\"Name: {name}\"",
+                "t3": ")"
+              }
+            },
+            "dr_profile_output_order": {
+              "title": "Order steps for formatted output",
+              "prompt": "Put these steps in the best order for showing a formatted profile line with an f-string.",
+              "hint": "Assign both values before the f-string tries to use them.",
+              "help": {
+                "concept": "Variables referenced by an f-string must already have values when the print statement executes.",
+                "hint_1": "Create `name` and `age` first.",
+                "hint_2": "Print the formatted sentence last."
+              },
+              "tokens": {
+                "t1": "name = \"Lina\"",
+                "t2": "age = 12",
+                "t3": "print(f\"{name} is {age} years old\")"
+              }
+            },
+            "fb_missing_prefix": {
+              "title": "Fill the missing prefix",
+              "prompt": "Complete the line so Python treats it as an f-string.",
+              "hint": "The prefix is the single letter that enables interpolation inside `{}`.",
+              "help": {
+                "concept": "Prefixing the quoted string with `f` makes it an f-string.",
+                "hint_1": "The prefix goes immediately before the opening quote.",
+                "hint_2": "The other listed letters do not enable f-string interpolation."
+              },
+              "template": "print([blank1]\"Hello {name}\")",
+              "choices": [
+                "f",
+                "p",
+                "x",
+                "s"
+              ]
+            },
+            "fb_decimal_format": {
+              "title": "Fill the number format",
+              "prompt": "Choose the missing format specifier so `price` is displayed with exactly 2 decimal places.\n\n```python\nprint(f\"Price: ${price___}\")\n```",
+              "hint": "The correct specifier starts with a colon and ends with `.2f`.",
+              "help": {
+                "concept": "`:.2f` tells an f-string to display a number with two digits after the decimal point.",
+                "hint_1": "The colon separates the value from its formatting instruction.",
+                "hint_2": "Use `.2f`, not `:2` or `::2f`."
+              },
+              "template": "print(f\"Price: ${price[blank1]}\")",
+              "choices": [
+                ":.2f",
+                ".2f",
+                ":2",
+                "::2f"
+              ]
+            },
+            "ci_print_profile_line": {
+              "title": "Insert two variables with an f-string",
+              "prompt": "Store `\"Mila\"` in `name` and `13` in `age`, then use one f-string to print exactly:\n\n`Mila is 13 years old`",
+              "hint": "Put both variable names inside `{}` in the same f-string.",
+              "help": {
+                "concept": "An f-string can interpolate multiple values inside one readable sentence.",
+                "hint_1": "Assign `name` and `age` before the print call.",
+                "hint_2": "Use `{name}` and `{age}` inside the f-string."
+              },
+              "starterCode": "# Store \"Mila\" in name\n# Store 13 in age\n# Print the sentence with one f-string\n",
+              "solutionCode": "name = \"Mila\"\nage = 13\nprint(f\"{name} is {age} years old\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign Mila to name and 13 to age, then interpolate both variables in one f-string."
+                }
+              }
+            },
+            "ci_format_price_two_decimals": {
+              "title": "Format a price to two decimal places",
+              "prompt": "The starter stores `price = 4.5`. Use an f-string with `:.2f` to print exactly:\n\n`Price: $4.50`",
+              "hint": "Place `:.2f` after `price` inside the same braces.",
+              "help": {
+                "concept": "A format specifier follows the value after a colon inside `{}`.",
+                "hint_1": "Keep the existing numeric value as `4.5`.",
+                "hint_2": "The formatted field should be `{price:.2f}`."
+              },
+              "starterCode": "price = 4.5\n# Print the price with exactly two decimal places\n",
+              "solutionCode": "price = 4.5\nprint(f\"Price: ${price:.2f}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep price as 4.5 and use the f-string field {price:.2f} in the print line."
+                }
+              }
+            },
+            "ci_input_greeting": {
+              "title": "Build an input greeting with an f-string",
+              "prompt": "Read one name from input and print `Hello, NAME!` using an f-string.",
+              "hint": "Interpolate `name` between the comma-space and exclamation mark.",
+              "help": {
+                "concept": "Input supplies the value at runtime; the f-string places that value inside a fixed sentence.",
+                "hint_1": "Store `input()` in `name`.",
+                "hint_2": "Use an f-string shaped like `f\"Hello, {name}!\"`."
+              },
+              "starterCode": "name = input()\n# Print the greeting with an f-string\n",
+              "solutionCode": "name = input()\nprint(f\"Hello, {name}!\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the name with input()."
+                },
+                "1": {
+                  "message": "Use an f-string that interpolates name in the greeting."
+                }
+              }
+            },
+            "ci_input_name_city": {
+              "title": "Format two input values in one sentence",
+              "prompt": "Read a name from the first input line and a city from the second. Use an f-string to print exactly:\n\n`NAME lives in CITY`",
+              "hint": "Read both variables first, then interpolate both in one f-string.",
+              "help": {
+                "concept": "F-strings keep a multi-value sentence readable while inserting each value where it belongs.",
+                "hint_1": "Use two calls to `input()`.",
+                "hint_2": "Use `{name}` and `{city}` inside the final f-string."
+              },
+              "starterCode": "name = input()\ncity = input()\n# Print: NAME lives in CITY\n",
+              "solutionCode": "name = input()\ncity = input()\nprint(f\"{name} lives in {city}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read both the name and city from input."
+                },
+                "1": {
+                  "message": "Use one f-string containing both name and city."
+                }
+              }
+            },
+            "ci_average_one_decimal": {
+              "title": "Format a calculated average to one decimal place",
+              "prompt": "Read two whole numbers, calculate their average, and print it as `Average: X.X` using an f-string with exactly one digit after the decimal point.",
+              "hint": "Calculate `(first + second) / 2`, then format the result with `:.1f`.",
+              "help": {
+                "concept": "An f-string can format the result of a calculation, not only a directly assigned variable.",
+                "hint_1": "Convert both input values with `int()` before calculating.",
+                "hint_2": "Use `:.1f` for one digit after the decimal point."
+              },
+              "starterCode": "first = int(input())\nsecond = int(input())\n# Calculate the average\n# Print: Average: X.X\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\naverage = (first + second) / 2\nprint(f\"Average: {average:.1f}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read and convert both whole-number inputs with int()."
+                },
+                "1": {
+                  "message": "Use an f-string with :.1f when printing the average."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "fstrings_intro": {
+            "title": "Insert values directly with an f-string",
+            "bodyMarkdown": "An f-string lets you place variable values directly inside a string.\n\nStart the string with `f`, then put the value or expression inside curly braces:\n\n```python\nname = \"Maya\"\nscore = 9\n\nprint(f\"{name} scored {score} points\")\n```\n\nOutput:\n\n```text\nMaya scored 9 points\n```\n\nInside the f-string:\n\n- `{name}` is replaced by the value stored in `name`;\n- `{score}` is replaced by the value stored in `score`.\n\nWithout the `f` prefix, the braces are just ordinary characters:\n\n```python\nprint(\"{name}\")\n```\n\nThat prints `{name}`, not the value of the variable.\n"
+          },
+          "fstrings_vs_concat": {
+            "title": "Use f-strings for readable multi-value output",
+            "bodyMarkdown": "You can sometimes combine strings with `+`, but f-strings are often easier to read when one message contains several values.\n\n```python\nname = \"Ava\"\ncity = \"Lima\"\n\nprint(f\"{name} lives in {city}\")\n```\n\nCompare that with:\n\n```python\nprint(name + \" lives in \" + city)\n```\n\nBoth can work because every piece is text, but the f-string keeps the sentence structure visible in one place.\n\nThis becomes especially useful for profile lines, summaries, and labels:\n\n```python\nname = \"Lina\"\nage = 12\n\nprint(f\"Name: {name} | Age: {age}\")\n```\n\nThe braces mark exactly where each value belongs.\n"
+          },
+          "formatted_values": {
+            "title": "Control decimal places inside an f-string",
+            "bodyMarkdown": "F-strings can also control how a numeric value is displayed.\n\n```python\nprice = 3.5\nprint(f\"Price: ${price:.2f}\")\n```\n\nOutput:\n\n```text\nPrice: $3.50\n```\n\nThe format specifier is inside the braces:\n\n```text\n{price:.2f}\n```\n\nRead it as:\n\n- `price` — the value to display;\n- `:` — starts the format specification;\n- `.2f` — display a fixed-point number with 2 digits after the decimal point.\n\nAnother example:\n\n```python\nratio = 7 / 3\nprint(f\"Ratio: {ratio:.3f}\")\n```\n\nThis displays the result with 3 digits after the decimal point.\n\nFormatting changes how the number is displayed; it does not change the numeric value stored in the variable.\n"
+          }
+        }
+      }
+    }
+  }
+}

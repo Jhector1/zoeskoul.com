@@ -1,0 +1,284 @@
+{
+  "topicId": "big-o-omega-theta-by-limits",
+  "subjectSlug": "c-runtime-analysis-asymptotics",
+  "moduleSlug": "c-runtime-analysis-asymptotics-module-2-limit-method",
+  "sectionSlug": "c-runtime-analysis-asymptotics-limit-method",
+  "prefix": "cra2",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.label",
+    "summaryKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.summary"
+  },
+  "cards": [
+    {
+      "id": "limit-rule",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.cards.limit-rule.title",
+      "sketchId": "limit-rule",
+      "height": 620
+    },
+    {
+      "id": "limit-outcomes-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.cards.limit-outcomes-animation.title",
+      "sketchId": "limit-outcomes-animation",
+      "height": 820
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 3,
+        "min": 3,
+        "max": 3,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "limit-rule",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-rule.title",
+      "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-rule.bodyMarkdown"
+    },
+    {
+      "id": "limit-outcomes-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.title",
+      "contextKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "limit-outcomes-animation-1",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "f",
+              "label": "f(n)",
+              "x": 20,
+              "y": 70,
+              "shape": "pill",
+              "detail": "slower",
+              "tone": "warn",
+              "width": 18
+            },
+            {
+              "id": "g",
+              "label": "g(n)",
+              "x": 80,
+              "y": 25,
+              "shape": "pill",
+              "detail": "faster",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            },
+            {
+              "id": "r",
+              "label": "ratio → 0",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 22
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.0.body",
+          "formula": "$\\lim f/g=0 \\Rightarrow f=O(g)$",
+          "edges": [
+            {
+              "from": "f",
+              "to": "r"
+            },
+            {
+              "from": "g",
+              "to": "r"
+            }
+          ]
+        },
+        {
+          "id": "limit-outcomes-animation-2",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "f",
+              "label": "f(n)",
+              "x": 22,
+              "y": 42,
+              "shape": "pill",
+              "detail": "same rate",
+              "tone": "good",
+              "active": true,
+              "width": 20
+            },
+            {
+              "id": "g",
+              "label": "g(n)",
+              "x": 78,
+              "y": 42,
+              "shape": "pill",
+              "detail": "same rate",
+              "tone": "good",
+              "active": true,
+              "width": 20
+            },
+            {
+              "id": "r",
+              "label": "ratio → L",
+              "x": 50,
+              "y": 72,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 22
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.1.body",
+          "formula": "$0<L<\\infty \\Rightarrow f=\\Theta(g)$",
+          "edges": [
+            {
+              "from": "f",
+              "to": "r"
+            },
+            {
+              "from": "g",
+              "to": "r"
+            }
+          ]
+        },
+        {
+          "id": "limit-outcomes-animation-3",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "f",
+              "label": "f(n)",
+              "x": 20,
+              "y": 25,
+              "shape": "pill",
+              "detail": "faster",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            },
+            {
+              "id": "g",
+              "label": "g(n)",
+              "x": 80,
+              "y": 70,
+              "shape": "pill",
+              "detail": "slower",
+              "tone": "warn",
+              "width": 18
+            },
+            {
+              "id": "r",
+              "label": "ratio → ∞",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 22
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.limit-outcomes-animation.steps.2.body",
+          "formula": "$\\lim f/g=\\infty \\Rightarrow f=\\Omega(g)$",
+          "edges": [
+            {
+              "from": "f",
+              "to": "r"
+            },
+            {
+              "from": "g",
+              "to": "r"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "limit-zero",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.quiz.limit-zero",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "limit-constant",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.quiz.limit-constant",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "limit-infinity",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.big-o-omega-theta-by-limits.quiz.limit-infinity",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

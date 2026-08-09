@@ -1,0 +1,480 @@
+{
+  "topicId": "values-types-and-literals",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-0",
+  "sectionSlug": "python-v2-python-v2-0-values-and-expressions",
+  "prefix": "pyv2_0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-0.values-types-and-literals.label",
+    "summaryKey": "topics.python-v2.python-v2-0.values-types-and-literals.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch0.title",
+      "sketchId": "values-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-values-types-and-literals-sketch0",
+        "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.title",
+        "promptKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.prompt",
+        "exerciseKey": "ci-print-literals",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch1.title",
+      "sketchId": "literals-and-spelling",
+      "height": 420,
+      "tryIt": {
+        "id": "try-values-types-and-literals-sketch1",
+        "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.title",
+        "promptKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.prompt",
+        "exerciseKey": "ci-fix-string-quotes",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch2.title",
+      "sketchId": "expressions-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-values-types-and-literals-sketch2",
+        "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.title",
+        "promptKey": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.prompt",
+        "exerciseKey": "ci-print-expression",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "values-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.values-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.values-basics.bodyMarkdown"
+    },
+    {
+      "id": "literals-and-spelling",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.literals-and-spelling.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.literals-and-spelling.bodyMarkdown"
+    },
+    {
+      "id": "expressions-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.expressions-intro.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.expressions-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-string-literal",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.sc-string-literal",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-float-value",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.sc-float-value",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-number-literals",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.mc-number-literals",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-valid-literals",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.mc-valid-literals",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-expression-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.dr-expression-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-quoted-text",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.fb-quoted-text",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"hello\""
+      }
+    },
+    {
+      "id": "ci-print-literals",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Zoe[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*7\\s*\\)\\s*\\n\\s*print\\(\\s*2\\.5\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 3
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Zoe[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*7\\s*\\)\\s*\\n\\s*print\\(\\s*2\\.5\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-print-expression",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*1\\.5\\s*\\+\\s*2\\.5\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(2 + 3)\nprint(1.5 + 2.5)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*1\\.5\\s*\\+\\s*2\\.5\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-string-quotes",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']hello[\"\\']\\s*\\)\\s*$",
+            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.sourceChecks.0.message",
+            "normalizeWhitespace": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"hello\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']hello[\"\\']\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

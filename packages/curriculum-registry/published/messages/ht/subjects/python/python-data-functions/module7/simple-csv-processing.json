@@ -1,0 +1,355 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "simple-csv-processing": {
+          "label": "Pwosesis Senp CSV",
+          "summary": "Sèvi ak modil csv la pou li ranje ki separe pa virg, jwenn valè yo pa non kolòn, epi netwaye done senp pandan w ap trete ranje yo an sekirite.",
+          "cards": {
+            "sketch0": {
+              "title": "Li liy CSV kòm diksyonè"
+            },
+            "sketch1": {
+              "title": "Netwaye valè ki soti nan ranje CSV yo"
+            },
+            "sketch2": {
+              "title": "Sote ranje move an sekirite"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Mini-pwojè netwayaj CSV"
+            }
+          },
+          "projectSteps": {
+            "ci_print_clean_names": {
+              "title": "Enprime non ki netwaye yo soti nan yon fichye CSV."
+            },
+            "ci_sum_valid_scores": {
+              "title": "Sime valè valab yo nan CSV la."
+            },
+            "ci_write_summary_file": {
+              "title": "Ekri yon fichye rezime CSV"
+            }
+          },
+          "quiz": {
+            "sc-import-csv": {
+              "title": "Poukisa enpòte csv?",
+              "prompt": "Poukisa ou ekri `import csv` anvan ou itilize `csv.DictReader`?",
+              "hint": "Panse kote `DictReader` soti.",
+              "help": {
+                "concept": "`DictReader` Se yon pati nan modil estanda Python `csv` la, kidonk fòk ou enpòte modil la anvan ou ka itilize `csv.DictReader`.",
+                "hint_1": "Chèche opsyon ki di kòd la ap fè zouti CSV yo disponib nan yon modil.",
+                "hint_2": "San enpòtasyon an, Python pa konnen sa `csv` refere a."
+              },
+              "options": {
+                "a": "Li fè modil `csv` la disponib pou ou ka itilize `csv.DictReader`.",
+                "b": "Li netwaye espas otomatikman nan chak valè CSV.",
+                "c": "Li konvèti chak valè CSV an yon antye.",
+                "d": "Li kreye yon nouvo fichye CSV si youn pa egziste."
+              }
+            },
+            "sc-dictreader-row-type": {
+              "title": "Kisa DictReader pwodui?",
+              "prompt": "Lè w ap fè yon bouk atravè `csv.DictReader(file)`, ki sa chak `row` sanble plis?",
+              "hint": "Panse sou jwenn aksè a valè yo ak non kolòn tankou `row[\"name\"]`.",
+              "help": {
+                "concept": "`csv.DictReader` li itilize ranje antèt la kòm kle, konsa chak ranje konpòte l tankou yon diksyonè ki mape non kolòn yo ak valè tèks.",
+                "hint_1": "Si ou ka itilize non yon kolòn andedan kwochè, ranje a baze sou kle.",
+                "hint_2": "Etikèt antèt yo vin tounen kle tankou `name` ak `score`."
+              },
+              "options": {
+                "a": "Yon diksyonè ki map non kolòn yo ak valè yo",
+                "b": "Yon antye sèl nan ranje a",
+                "c": "Yon lis non fichye",
+                "d": "Yon fonksyon ki netwaye ranje a"
+              }
+            },
+            "mc-clean-score-steps": {
+              "title": "Netwaye yon valè nòt",
+              "prompt": "Yon ranje CSV gen `row[\"score\"] == \" 12 \"`. Ki etap ki prepare l kòrèkteman pou matematik? Chwazi tout sa ki aplike.",
+              "hint": "Ou bezwen yon nimewo, pa tèks ki gen espas ant lèt yo.",
+              "help": {
+                "concept": "Valè CSV yo li kòm chèn. Pou itilize yon chan nimerik nan kalkil, retire espas sipèflou si sa nesesè epi konvèti tèks ki netwaye a an yon antye.",
+                "hint_1": "Yon sèl etap kòrèk retire espas ki antoure yo, epi yon lòt konvèti tèks la an nimewo.",
+                "hint_2": "Metòd tankou `.strip()` netwaye tèks la, pandan ke `int(...)` chanje tip la."
+              },
+              "options": {
+                "a": "Sèvi ak `.strip()` sou tèks nòt la.",
+                "b": "Sèvi ak `int(...)` sou tèks nòt mizik ki netwaye a.",
+                "c": "Kite l kòm tèks epi ajoute 1 dirèkteman",
+                "d": "Sèvi ak `dict(row)` pou konvèti nòt la an yon nimewo."
+              }
+            },
+            "mc-good-csv-processing": {
+              "title": "Modèl itil pou trete CSV",
+              "prompt": "Ki fragman kòd sa yo ki bon modèl pou debutan nan pwosesis senp CSV? Chwazi tout sa ki aplike.",
+              "hint": "Chèche modèl ki itilize modil csv la epi ki bay non kolòn yo klèman.",
+              "help": {
+                "concept": "Bon pwosesis CSV pou debutan itilize`import csv`, `csv.DictReader`, ak aksè klè pa non antèt. Enprime `dict(row)` itil tou pou enspekte yon ranje an sekirite.",
+                "hint_1": "Youn nan opsyon kòrèk yo li ranje yo ak `csv.DictReader`, epi yon lòt enprime yon diksyonè ranje konplè pou enspeksyon.",
+                "hint_2": "Evite chwa ki pretann valè CSV yo vin nimewo otomatikman oswa ki pa enpòte modil la."
+              },
+              "options": {
+                "a": "`import csv` swiv pa `reader = csv.DictReader(file)`",
+                "b": "`print(dict(row))` anndan yon bouk pou enspekte chak ranje",
+                "c": "Itilize `row[\"score\"]` pou jwenn aksè a yon kolòn ki gen non",
+                "d": "Sipoze `row[\"score\"]` se deja yon antye san konvèsyon"
+              }
+            },
+            "dr-read-csv-order": {
+              "title": "Kòmande etap lekti CSV yo",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou li yon fichye CSV ak`DictReader`, epi enprime yon kolòn.",
+              "hint": "Kòmanse pa mete zouti CSV yo disponib, apre sa louvri fichye a, epi kreye lektè a.",
+              "help": {
+                "concept": "Yon script ki li CSV anjeneral swiv yon sekans: enpòte modil la, louvri fichye a, kreye yon `DictReader`, fè yon bouk sou ranje yo, epi jwenn valè yo pa non kolòn.",
+                "hint_1": "Boukl la fèt apre lektè a fin kreye.",
+                "hint_2": "Aksè a `row[\"name\"]` dwe fèt andedan bouk la, apre yon ranje egziste."
+              },
+              "tokens": {
+                "t1": "print(row[\"name\"])",
+                "t2": ": pou ranje nan lektè",
+                "t3": "reader = csv.DictReader(file)",
+                "t4": "avèk open(\"names.csv\") kòm dosye",
+                "t5": "import csv"
+              }
+            },
+            "dr-clean-row-order": {
+              "title": "Kòmande etap netwayaj ranje yo",
+              "prompt": "Mete aksyon sa yo nan lòd kote yo netwaye yon nòt epi itilize li nan matematik.",
+              "hint": "Jwenn tèks la an premye, netwaye li, konvèti li, epi kalkile.",
+              "help": {
+                "concept": "Lè w ap netwaye done nimerik nan yon fichye CSV, premye li valè tèks la, apre sa retire espas yo, konvèti l an nimerik`int`, epi sèlman apre sa sèvi avè l nan aritmetik.",
+                "hint_1": "Arithmetik ta dwe fèt apre konvèsyon an nan yon antye.",
+                "hint_2": "`.strip()` Li dwe vini anvan `int(...)`, paske li netwaye tèks ke `int` pral li."
+              },
+              "tokens": {
+                "t1": "Ajoute 1 nan nòt antye a.",
+                "t2": "Konvèti tèks ki netwaye a avèk `int(...)`",
+                "t3": "Li `row[\"score\"]`",
+                "t4": "Retire espas yo avèk `.strip()`"
+              }
+            },
+            "fb-dictreader-name": {
+              "title": "Chwazi zouti lektè CSV la",
+              "prompt": "Konplete kòd la pou ranje yo ka jwenn pa non kolòn.",
+              "hint": "Sèvi ak zouti CSV ki kreye ranje tankou yon diksyonè.",
+              "help": {
+                "concept": "`csv.the missing term` li ranje antèt la epi li bay chak ranje ki vin apre kòm yon objè ki sanble ak yon diksyonè, kote kle yo se non kolòn yo.",
+                "hint_1": "Valè ki manke a se non klas lektè a apre \"`csv.`\".",
+                "hint_2": "Se pa `reader` ni `split`; se èd CSV ki kòmanse ak `Dict`."
+              },
+              "template": "lektè = csv.[espas1](fichye)",
+              "choices": [
+                "Diktè Lektè",
+                "Lektè",
+                "Separe",
+                "Ekritè"
+              ]
+            },
+            "fb-strip-choice": {
+              "title": "Chwazi metòd netwayaj la",
+              "prompt": "Ranpli metòd ki manke a pou retire espas ki antoure yon valè CSV.",
+              "hint": "Metòd sa a pou chèn retire espas nan tou de bout yo.",
+              "help": {
+                "concept": "`.the missing term()` retire espas vid nan kòmansman ak nan fen yon chèn, sa ki itil anvan konvèti valè tèks CSV yo.",
+                "hint_1": "Metòd ki manke a rele sou yon chèn tankou `row[\"name\"]`.",
+                "hint_2": "Se metòd la ki transfòme `\" Ava \"` an `\"Ava\"`."
+              },
+              "template": "clean_name = row[\"name\"].[blank1]()",
+              "choices": [
+                "debarase",
+                "Ajoute",
+                "ekri",
+                "li"
+              ]
+            },
+            "ci-print-clean-names": {
+              "title": "Enprime non ki netwaye yo soti nan yon fichye CSV",
+              "prompt": "Li`students.csv`\nak`csv.DictReader`\n, netwaye chak non pandan w ap fè yon bouk sou liy yo, epi enprime non ki netwaye yo.\n\nSòti ou a dwe egzakteman:\n`Ava`\n\n`Ben`\n.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki deja ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+              "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Retire espas anvan chak non CSV anvan ou enprime li."
+                }
+              }
+            },
+            "ci-sum-valid-scores": {
+              "title": "Sime valè ki valab yo nan CSV la.",
+              "prompt": "Li `scores.csv`, netwaye chak 'score', eseye konvèti li an antye, epi ajoute sèlman nimewo ki valab yo nan `total`. Enprime `total` apre bouk la.\n\nSòti ou a dwe egzakteman:\n`16`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itiliztry/except pou valè nòt ki pa valab."
+                },
+                "1": {
+                  "message": "Konvèti tèks nòt la ak int()."
+                }
+              }
+            },
+            "ci-write-summary-file": {
+              "title": "Ekri yon fichye rezime CSV",
+              "prompt": "Bati yon rapò kout apati de`scores.csv`\n. Pandan w ap fè bouk la, mete ajou`valid_rows`\nak`total_score`\npou ranje ki gen nòt antye ki valab, apre sa ekri rezilta sa yo nan`summary.txt`\nepi enprime kontni fichye a.\n\nSòti w la dwe egzakteman:\n`valid_rows: 2`\n\n`total_score: 16`\n.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+              "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itiliztry/except pou valè nòt ki pa valab."
+                },
+                "1": {
+                  "message": "Ekri rezime a nan summary.txt."
+                }
+              }
+            },
+            "try-simple-csv-processing-checkpoint": {
+              "title": "Li premye ranje CSV la",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, li premye liy la, epi enprime non an sou yon liy ak nòt la sou liy ki vin apre a.",
+              "hint": "Enpòte `csv`, kreye `csv.DictReader(file)`, epi itilize premye ranje a.",
+              "help": {
+                "concept": "Kat sa a kòmanse leson an ak yon fichye CSV reyèl olye de yon ranje kòd fiks.",
+                "hint_1": "Itiliz`import csv` ak `with open(\"scores.csv\") as file:`.",
+                "hint_2": "Kreye `reader = csv.DictReader(file)`, jwenn premye ranje a, epi enprime `row[\"name\"]` ak `row[\"score\"]`."
+              },
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak csv.DictReader pou li scores.csv."
+                },
+                "1": {
+                  "message": "Ouvri scores.csv pou etap sa a."
+                }
+              }
+            },
+            "try-simple-csv-processing-sketch0": {
+              "title": "Netwaye yon ranje CSV nan yon fichye",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, li premye liy la, retire espas nan `name` ak `score`, epi enprime chak valè ki netwaye sou pwòp liy li.",
+              "hint": "Li premye ranje a nan `csv.DictReader`, epi itilize `.strip()` sou tou de valè yo.",
+              "help": {
+                "concept": "Kat sa a pratike netwaye valè tèks yo apre li fin li yo nan yon fichye CSV.",
+                "hint_1": "Itiliz`row[\"name\"].strip()` ak `row[\"score\"].strip()`.",
+                "hint_2": "Enprime non ki netwaye a an premye, epi nòt ki netwaye a."
+              },
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak csv.DictReader pou li ranje a."
+                },
+                "1": {
+                  "message": "Retire espas vid nan valè CSV yo."
+                }
+              }
+            },
+            "try-simple-csv-processing-sketch1": {
+              "title": "Fè yon bouk sou ranje CSV yo",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, fè yon bouk sou chak ranje, epi enprime chak youn kòm `name: score`.",
+              "hint": "Fè yon bouk sou lektè a epi konstwi yon sèl liy fòmate apati chak ranje.",
+              "help": {
+                "concept": "Kat sa a pratike pwosesis CSV ranje pa ranje ak kolòn ki gen non.",
+                "hint_1": "Itilize `for row in reader:` apre ou fin kreye `csv.DictReader(file)`.",
+                "hint_2": "Enprime `f\"{row[\"name\"]}: {row[\"score\"]}\"` pou chak ranje."
+              },
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak csv.DictReader pou li ranje yo."
+                },
+                "1": {
+                  "message": "Fè yon bouk sou liy CSV yo olye pou w kode sòti a dirèkteman."
+                }
+              }
+            },
+            "try-simple-csv-processing-sketch2": {
+              "title": "Ajoute nòt CSV yo",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, konvèti chak nòt an antye, ajoute nòt yo nan `total`, epi enprime `total`.",
+              "hint": "Fè yon bouk atravè lektè a, konvèti `row[\"score\"]` ak `int(...)`, epi ajoute li nan `total`.",
+              "help": {
+                "concept": "Kat sa a aplike tout modèl CSV la: li ranje yo, konvèti tèks nòt la, epi fè kalkil an sekirite.",
+                "hint_1": "Kòmanse ak `total = 0`, epi fè yon bouk atravè `csv.DictReader(file)`.",
+                "hint_2": "Itilize `int(row[\"score\"])` andedan bouk la anvan ou ajoute l nan `total`."
+              },
+              "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak csv.DictReader pou li ranje yo."
+                },
+                "1": {
+                  "message": "Fè yon bouk sou liy CSV yo olye pou w kode total la dirèkteman."
+                },
+                "2": {
+                  "message": "Konvèti tèks nòt la ak int()."
+                },
+                "3": {
+                  "message": "Ajoute chak nòt nimerik nan total la."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_simple_csv_processing_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, li premye liy la, epi enprime non an sou yon liy ak nòt la sou liy ki vin apre a."
+            },
+            "try_simple_csv_processing_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, li premye liy la, retire espas nan `name` ak `score`, epi enprime chak valè ki netwaye sou pwòp liy li."
+            },
+            "try_simple_csv_processing_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, fè yon bouk sou chak ranje, epi enprime chak youn kòm `name: score`."
+            },
+            "try_simple_csv_processing_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `scores.csv` ak `csv.DictReader`, konvèti chak nòt an antye, ajoute nòt yo nan `total`, epi enprime `total`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "simple-csv-processing": {
+          "csv-dictreader-basics": {
+            "title": "Li liy CSV kòm diksyonè",
+            "bodyMarkdown": "The `csv` module helps Python read comma-separated data without you splitting each line by hand. A very useful tool is `csv.DictReader`, which turns each row into a dictionary.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"], row[\"score\"])\n```\n\nIf `scores.csv` contains:\n\n```text\nname,score\nAva,9\nBen,7\n```\n\nthe output is:\n\n```text\nAva 9\nBen 7\n```\n\nStep by step:\n\n- `import csv` makes the standard library CSV tools available.\n- `open(\"scores.csv\")` opens the file for reading.\n- `csv.DictReader(file)` reads the header row first.\n- Each later row becomes a dictionary like `{\"name\": \"Ava\", \"score\": \"9\"}`.\n- `row[\"name\"]` gets the value from the `name` column.\n\nWorked example: if a row is `Cara,12`, then `row[\"name\"]` is `\"Cara\"` and `row[\"score\"]` is `\"12\"`."
+          },
+          "csv-cleaning-values": {
+            "title": "Netwaye valè ki soti nan ranje CSV yo",
+            "bodyMarkdown": "CSV data often has extra spaces or values stored as text. Cleaning means fixing those values before using them.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        score = int(row[\"score\"].strip())\n        print(name, score + 1)\n```\n\nSuppose the file contains:\n\n```text\nname,score\n Ava , 9\nBen, 7\n```\n\nLine by line:\n\n- `row[\"name\"]` gets the text from the `name` column.\n- `.strip()` removes spaces around the text.\n- `row[\"score\"]` is still text, not a number.\n- `int(...)` converts that cleaned text into an integer.\n- `print(name, score + 1)` prints the cleaned name and a changed numeric value.\n\nWorked example:\n\n- For the first row, `row[\"name\"]` is `\" Ava \"`, so `strip()` makes it `\"Ava\"`.\n- `row[\"score\"]` is `\" 9\"`, so after cleaning and converting it becomes `9`."
+          },
+          "csv-safe-processing": {
+            "title": "Sote ranje move an sekirite",
+            "bodyMarkdown": "Sometimes a CSV file has messy data. A score might be missing or contain text like `oops`. You can use `try` and `except` to skip rows that cannot be converted.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            name = row[\"name\"].strip()\n            score = int(row[\"score\"].strip())\n            print(name, score)\n        except ValueError:\n            print(\"skipping bad score\")\n```\n\nIf the file contains:\n\n```text\nname,score\nAva,9\nBen,oops\nCara,12\n```\n\nthen the program prints:\n\n```text\nAva 9\nskipping bad score\nCara 12\n```\n\nWhat happens here:\n\n- Python reads one row at a time.\n- `int(...)` works for `\"9\"` and `\"12\"`.\n- `int(\"oops\")` raises a `ValueError`.\n- The `except ValueError:` block handles that problem so the program keeps going."
+          }
+        }
+      }
+    }
+  }
+}

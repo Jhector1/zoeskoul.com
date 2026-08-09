@@ -1,0 +1,228 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "label": "Add and Inspect Exact Project Changes",
+          "summary": "Add one third file, then inspect two supplied text edits without staging them.",
+          "cards": {
+            "sketch0": {
+              "title": "Diff Shows Exact Text Changes"
+            },
+            "sketch2": {
+              "title": "Name the File When Focus Matters"
+            },
+            "sketch3": {
+              "title": "Inspect Before You Stage"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inspect_unstaged_changes_with_diff_sketch0": {
+              "title": "Create the Third Project File",
+              "prompt": "The community project continues with the two tracked files from Module 1: `README.md` and `schedule.txt`. The community organizers now need a contact list, but `contacts.txt` does not exist yet.\n\nCreate `community-project/contacts.txt`. Starting on line 1, enter exactly:\n\n```text\nCommunity contacts\n\nHelp desk: 555-0100\n```\nThen use the terminal to:\n\n1. Inspect the short status and confirm that Git shows `?? contacts.txt`.\n2. Stage only `contacts.txt`.\n3. Create a focused commit with the exact message `Add community contacts`.\n\nWhen you finish, the repository should contain three tracked files and two commits. Do not change `README.md` or `schedule.txt`.",
+              "hint": "Create and save the exact three-line file first. Then inspect it as untracked, stage only that file, and commit it with the supplied message.",
+              "help": {
+                "concept": "An untracked file is not part of history until it is staged and committed. `git status --short` identifies it with `??`; `git add contacts.txt` stages it; `git commit -m \"Add community contacts\"` records it as the repository’s third file.",
+                "hint_1": "Do not change `README.md` or `schedule.txt`.",
+                "hint_2": "The new commit should add only `contacts.txt`."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git status --short\ngit add contacts.txt\ngit commit -m \"Add community contacts\"",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "instructions": "`community-project/` should begin this lesson with only `README.md` and `schedule.txt`; `contacts.txt` should not exist yet. Create `community-project/contacts.txt`. Starting on line 1, enter exactly these three lines: `Community contacts`, a blank line, and `Help desk: 555-0100`. Save the file.\n\nThen use the terminal to inspect short status, stage only `contacts.txt`, and record it with the exact commit message `Add community contacts`.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the new file before staging it?"
+                  },
+                  "1": {
+                    "message": "Did you stage only `contacts.txt`?"
+                  },
+                  "2": {
+                    "message": "Did you record the contact list as its own commit?"
+                  }
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch2": {
+              "title": "Change and Inspect the Cleanup Time",
+              "prompt": "The cleanup coordinator moved Saturday’s start time earlier so volunteers can finish before an afternoon event. Open `community-project/schedule.txt` and find this line:\n\n`Saturday cleanup: 10:00 AM`\n\nReplace it with:\n\n`Saturday cleanup: 9:30 AM`\n\nSave the file. Then use the command you learned earlier to inspect only the unstaged changes in `schedule.txt`.\n\nDo not stage the file yet.\n",
+              "hint": "Make the exact one-line edit, then compare the working copy with the staged version.",
+              "help": {
+                "concept": "`git diff -- schedule.txt` shows unstaged line changes for that file. A removed line begins with `-` and an added line begins with `+`. The command is read-only.",
+                "hint_1": "Change only the cleanup time.",
+                "hint_2": "The diff should show one removed line and one added line."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git diff -- schedule.txt",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "instructions": "Open `community-project/schedule.txt`. Find `Saturday cleanup: 10:00 AM` and replace it with `Saturday cleanup: 9:30 AM`. Save the file. Then inspect only that unstaged change. Do not stage it yet.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the unstaged schedule change?"
+                  }
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch3": {
+              "title": "Change and Inspect the Help Desk Number",
+              "prompt": "The help desk has a new phone number, so the project contact list must be corrected. Open `community-project/contacts.txt` and find this line:\n\n`Help desk: 555-0100`\n\nReplace it with:\n\n`Help desk: 555-0130`. Then use the command you learned earlier to inspect only the unstaged changes in `contacts.txt`.\n\nLeave the changes in both `schedule.txt` and `contacts.txt` unstaged.\n",
+              "hint": "Make the exact contact edit and narrow the diff to that path.",
+              "help": {
+                "concept": "`git diff -- contacts.txt` limits the unstaged comparison to the contact file even though another file is also modified. Naming the path changes only the output, not repository state.",
+                "hint_1": "Do not stage either edit.",
+                "hint_2": "The schedule change must remain present for the next topic."
+              },
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+              "solutionCode": "git diff -- contacts.txt",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
+                }
+              },
+              "instructions": "Open `community-project/contacts.txt`. Find `Help desk: 555-0100` and replace it with `Help desk: 555-0130`. Save the file. Then inspect only the contact change. Leave both edits unstaged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect only the contact-number change?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Using git diff",
+              "prompt": "When should you use `git diff`?",
+              "hint": "Ordinary `git diff` is most useful while a working-tree edit is still unstaged.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "After the change has already been committed",
+                "b": "Before staging a working-tree change",
+                "c": "When you want to list earlier commit subjects",
+                "d": "When you want to create repository metadata"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Interpreting Diff Output",
+              "prompt": "Which symbol in `git diff` output indicates a line has been added?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "-",
+                "b": "+",
+                "c": "*",
+                "d": "/"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Symbol for Removed Lines",
+              "prompt": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "choices": [
+                "-",
+                "+",
+                "*",
+                "/"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Purpose of git diff",
+              "prompt": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "choices": [
+                "working tree",
+                "staging area",
+                "commit history",
+                "ignore file"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "sketch0": {
+            "title": "Add One File for Module 2",
+            "bodyMarkdown": "Congratulations on completing Module 1. You now know how to inspect a project, initialize a repository, configure a local commit identity, stage files, create a commit, and verify the result.\n\nIn Module 2, you will learn new commands and continue practicing the commands from Module 1 in a more realistic workflow."
+          },
+          "sketch2": {
+            "title": "Read an Exact Text Change",
+            "bodyMarkdown": "The command `git diff -- schedule.txt` compares the working copy of `schedule.txt` with the version currently in the staging area.\n\nIn the output:\n\n* Lines beginning with `-` were removed.\n* Lines beginning with `+` were added.\n\nThe command is read-only. It does not stage, discard, or modify any changes, so it is safe to use before deciding what to stage.\n"
+          },
+          "sketch3": {
+            "title": "Narrow a Diff to One File",
+            "bodyMarkdown": "Continue practicing with the helpful `git diff` command."
+          }
+        }
+      }
+    }
+  }
+}

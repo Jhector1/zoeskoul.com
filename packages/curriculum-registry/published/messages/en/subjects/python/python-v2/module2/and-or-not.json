@@ -1,0 +1,268 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "and-or-not": {
+          "label": "And, Or, and Not",
+          "summary": "Combine boolean conditions with `and`, `or`, and `not`, then use parentheses to make multi-part rules easier to read.",
+          "cards": {
+            "sketch0": {
+              "title": "Using and to require two things"
+            },
+            "sketch1": {
+              "title": "Using or and not"
+            },
+            "sketch2": {
+              "title": "Combining conditions in real if statements"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "sc_and_true": {
+              "title": "When does and become true?",
+              "prompt": "Which statement about `A and B` is correct?",
+              "hint": "`and` requires every joined requirement to be true.",
+              "help": {
+                "concept": "`A and B` is true only when both `A` and `B` are true.",
+                "hint_1": "If either side is false, the whole `and` expression is false.",
+                "hint_2": "Choose the option requiring both sides."
+              },
+              "options": {
+                "a": "It is true only when both A and B are true.",
+                "b": "It is true when either A or B is true.",
+                "c": "It is always the opposite of A.",
+                "d": "It is true whenever A is false."
+              }
+            },
+            "sc_not_flip": {
+              "title": "Reverse a boolean with not",
+              "prompt": "If `logged_in = False`, what does `not logged_in` evaluate to?",
+              "hint": "`not` reverses `True` and `False`.",
+              "help": {
+                "concept": "`not False` evaluates to `True`.",
+                "hint_1": "Start with the value stored in `logged_in`.",
+                "hint_2": "Reverse that boolean value."
+              },
+              "options": {
+                "a": "False",
+                "b": "0",
+                "c": "True",
+                "d": "None"
+              }
+            },
+            "mc_or_cases": {
+              "title": "Choose the true or expressions",
+              "prompt": "Which expressions evaluate to `True`? Choose all correct answers.",
+              "hint": "`or` is true when at least one side is true.",
+              "help": {
+                "concept": "`or` fails only when both sides are false.",
+                "hint_1": "Evaluate the left and right sides separately.",
+                "hint_2": "Then ask whether at least one side is true."
+              },
+              "options": {
+                "a": "True or False",
+                "b": "False or False",
+                "c": "3 > 5 or 10 > 2",
+                "d": "7 == 8 or 1 > 4"
+              }
+            },
+            "mc_valid_age_and_name": {
+              "title": "Conditions that require both rules",
+              "prompt": "A user is accepted only when `age` is at least 18 and `name` is not empty. Which conditions correctly enforce both requirements? Choose all that apply.",
+              "hint": "Both the age rule and the non-empty-name rule must be required.",
+              "help": {
+                "concept": "Equivalent expressions are valid only if they still require both parts of the rule.",
+                "hint_1": "`name != \"\"` checks for a non-empty string.",
+                "hint_2": "`not (age < 18)` is another way to express age 18 or older."
+              },
+              "options": {
+                "a": "age >= 18 and name != \"\"",
+                "b": "age >= 18 or name != \"\"",
+                "c": "not (age < 18) and name != \"\"",
+                "d": "age >= 18 and name == \"\""
+              }
+            },
+            "dr_build_and_condition": {
+              "title": "Build an and expression",
+              "prompt": "Put the tokens in order to check whether `score` is at least 50 and `passed` is true.",
+              "hint": "Complete the comparison first, then join the boolean variable with `and`.",
+              "help": {
+                "concept": "A combined condition can join a comparison and an existing boolean value.",
+                "hint_1": "Start with `score >= 50`.",
+                "hint_2": "Then append `and passed`."
+              },
+              "tokens": {
+                "t1": "score",
+                "t2": ">=",
+                "t3": "50",
+                "t4": "and",
+                "t5": "passed"
+              }
+            },
+            "dr_if_elif_else_logic": {
+              "title": "Build a grouped boolean rule",
+              "prompt": "Arrange the tokens to express: weekend or holiday, and not raining.",
+              "hint": "Group the two free-day alternatives before joining the rain requirement.",
+              "help": {
+                "concept": "Parentheses can make the intended grouping of `or`, `and`, and `not` explicit.",
+                "hint_1": "Build `(is_weekend or is_holiday)` first.",
+                "hint_2": "Then require `and not is_raining`."
+              },
+              "tokens": {
+                "t1": "(",
+                "t2": "is_weekend",
+                "t3": "or",
+                "t4": "is_holiday",
+                "t5": ")",
+                "t6": "and",
+                "t7": "not",
+                "t8": "is_raining"
+              }
+            },
+            "fb_not_condition": {
+              "title": "Complete a not check",
+              "prompt": "Choose the missing word to make the condition true when `ready` is false.",
+              "hint": "Use the operator that reverses the value of `ready`.",
+              "help": {
+                "concept": "`not ready` is true exactly when `ready` is false.",
+                "hint_1": "`and` and `or` combine values instead of reversing one.",
+                "hint_2": "Choose `not`."
+              },
+              "template": "if [blank1] ready:\n    print(\"Wait\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "elif"
+              ]
+            },
+            "fb_or_operator": {
+              "title": "Complete an either-or rule",
+              "prompt": "Choose the operator that makes the condition true when either comparison is true.",
+              "hint": "Either extreme temperature should make the condition true.",
+              "help": {
+                "concept": "`or` joins alternative conditions when either one is enough.",
+                "hint_1": "`temp < 0` and `temp > 30` cannot both be true at once.",
+                "hint_2": "Choose the operator that accepts either condition."
+              },
+              "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "="
+              ]
+            },
+            "code_ticket_check": {
+              "title": "Require age and ID",
+              "prompt": "Read an integer age and then `yes` or `no` for whether the person has an ID. Print `allowed` only when age is at least 18 and the ID answer is `yes`; otherwise print `denied`.",
+              "hint": "Join the age comparison and ID comparison with `and`.",
+              "help": {
+                "concept": "Both requirements must be true for the `allowed` branch.",
+                "hint_1": "Compare `has_id` with `\"yes\"`.",
+                "hint_2": "Use one combined condition with `and`."
+              },
+              "starterCode": "age = int(input())\nhas_id = input().strip()\n# Print allowed or denied\n",
+              "solutionCode": "age = int(input())\nhas_id = input().strip()\nif age >= 18 and has_id == \"yes\":\n    print(\"allowed\")\nelse:\n    print(\"denied\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `and` to require both `age >= 18` and `has_id == \"yes\"`."
+                }
+              }
+            },
+            "code_free_day": {
+              "title": "Accept either free-day condition",
+              "prompt": "Read `yes` or `no` for `is_weekend`, then `yes` or `no` for `is_holiday`. Print `rest` when either answer is `yes`; otherwise print `work`.",
+              "hint": "Convert both answers to booleans, then join them with `or`.",
+              "help": {
+                "concept": "`or` is true when at least one free-day condition is true.",
+                "hint_1": "Convert each input with `== \"yes\"`.",
+                "hint_2": "Use `if is_weekend or is_holiday:`."
+              },
+              "starterCode": "is_weekend = input().strip() == \"yes\"\nis_holiday = input().strip() == \"yes\"\n# Print rest or work\n",
+              "solutionCode": "is_weekend = input().strip() == \"yes\"\nis_holiday = input().strip() == \"yes\"\nif is_weekend or is_holiday:\n    print(\"rest\")\nelse:\n    print(\"work\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `or` between `is_weekend` and `is_holiday`."
+                }
+              }
+            },
+            "code_not_logged_in": {
+              "title": "Reverse a login condition",
+              "prompt": "Read `yes` or `no` for whether the user is logged in. If the user is not logged in, print `please sign in`; otherwise print `welcome`.",
+              "hint": "Convert the answer to a boolean, then use `not logged_in`.",
+              "help": {
+                "concept": "`not` reverses the boolean stored in `logged_in`.",
+                "hint_1": "Set `logged_in` from the comparison `input().strip() == \"yes\"`.",
+                "hint_2": "Use `if not logged_in:`."
+              },
+              "starterCode": "logged_in = input().strip() == \"yes\"\n# Print the correct message\n",
+              "solutionCode": "logged_in = input().strip() == \"yes\"\nif not logged_in:\n    print(\"please sign in\")\nelse:\n    print(\"welcome\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `not logged_in` for the sign-in branch."
+                }
+              }
+            },
+            "code_score_certificate": {
+              "title": "Combine and with not",
+              "prompt": "Read an integer score and then `yes` or `no` for whether the work is late. Print `certificate` when the score is at least 80 and the work is not late; otherwise print `no certificate`.",
+              "hint": "Require the score threshold and `not late` together.",
+              "help": {
+                "concept": "This practice combines a comparison with a reversed boolean value.",
+                "hint_1": "Convert the second input with `== \"yes\"` and store it in `late`.",
+                "hint_2": "Use `score >= 80 and not late`."
+              },
+              "starterCode": "score = int(input())\nlate = input().strip() == \"yes\"\n# Print certificate or no certificate\n",
+              "solutionCode": "score = int(input())\nlate = input().strip() == \"yes\"\nif score >= 80 and not late:\n    print(\"certificate\")\nelse:\n    print(\"no certificate\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `score >= 80 and not late` as the combined requirement."
+                }
+              }
+            },
+            "code_range_check": {
+              "title": "Require both range boundaries",
+              "prompt": "Read one integer `n`. Print `in range` when `n` is at least 10 and at most 20; otherwise print `out of range`.",
+              "hint": "Both boundary comparisons must be true.",
+              "help": {
+                "concept": "A bounded range check combines a lower limit and an upper limit with `and`.",
+                "hint_1": "The lower comparison is `n >= 10`.",
+                "hint_2": "The upper comparison is `n <= 20`."
+              },
+              "starterCode": "n = int(input())\n# Print in range or out of range\n",
+              "solutionCode": "n = int(input())\nif n >= 10 and n <= 20:\n    print(\"in range\")\nelse:\n    print(\"out of range\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Combine the lower and upper boundary comparisons with `and`."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "and-or-not": {
+          "sketch_and_basics": {
+            "title": "Use and when every requirement must pass",
+            "bodyMarkdown": "Use `and` when **both** sides of a rule must be true.\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"allowed\")\nelse:\n    print(\"denied\")\n```\n\nThe combined condition has two parts:\n\n```python\nage >= 18\nhas_id\n```\n\n`and` joins them.\n\nThe result is true only when both parts are true:\n\n- `True and True` → `True`\n- `True and False` → `False`\n- `False and True` → `False`\n- `False and False` → `False`\n\nFor an entry rule, being old enough is not sufficient by itself, and having an ID is not sufficient by itself. Both requirements must pass.\n"
+          },
+          "sketch_or_not": {
+            "title": "Use or for alternatives and not to reverse",
+            "bodyMarkdown": "Use `or` when at least one condition is enough.\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"rest\")\nelse:\n    print(\"work\")\n```\n\nBecause one side is true, the combined condition is true.\n\nFor two boolean values:\n\n- `False or False` → `False`\n- every other combination → `True`\n\nUse `not` to reverse one boolean value:\n\n```python\nlogged_in = False\n\nif not logged_in:\n    print(\"please sign in\")\n```\n\n`logged_in` is `False`, so `not logged_in` becomes `True`.\n\nUseful pairs to remember:\n\n```text\nnot True  -> False\nnot False -> True\n```\n"
+          },
+          "sketch_combining_clear_rules": {
+            "title": "Group a multi-part rule clearly",
+            "bodyMarkdown": "A real rule can combine more than one boolean operator.\n\nSuppose a learner may study outside only when it is a weekend or holiday **and** it is not raining:\n\n```python\nis_weekend = True\nis_holiday = False\nis_raining = False\n\nif (is_weekend or is_holiday) and not is_raining:\n    print(\"study outside\")\nelse:\n    print(\"study inside\")\n```\n\nRead the rule in pieces:\n\n1. `(is_weekend or is_holiday)` asks whether either free-day condition is true;\n2. `not is_raining` requires rain to be false;\n3. `and` requires both larger requirements to pass.\n\nParentheses make the intended grouping visible to the reader.\n\nA good habit is to translate the Python back into plain language:\n\n> weekend or holiday, and not raining\n\nIf the code no longer matches the rule you meant to write, simplify or regroup it before adding more conditions.\n"
+          }
+        }
+      }
+    }
+  }
+}

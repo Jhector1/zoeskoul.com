@@ -1,0 +1,369 @@
+{
+  "subject": {
+    "slug": "c-runtime-analysis-asymptotics",
+    "profileId": "c",
+    "catalogSlug": "c",
+    "genKey": "c_course",
+    "order": 2,
+    "accessPolicy": "paid",
+    "visibility": "private",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.c-runtime-analysis-asymptotics.title",
+    "descriptionKey": "subjects.c-runtime-analysis-asymptotics.description",
+    "serviceDefaults": {
+      "preset": "runner",
+      "runnerBackend": "judge0",
+      "layoutMode": "default",
+      "requires": {
+        "files": true,
+        "multiFile": true,
+        "terminal": false
+      },
+      "fileActions": {
+        "enabled": true,
+        "createFile": true,
+        "createFolder": true,
+        "rename": true,
+        "delete": true,
+        "dragDrop": true
+      }
+    },
+    "runtimeDefaults": {
+      "kind": "code",
+      "language": "c",
+      "supportsTerminal": false,
+      "supportsMultiFile": true,
+      "supportsFileSystem": true,
+      "supportsStdInStdOut": true,
+      "supportsPackageInstall": false
+    },
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": true,
+        "moreComingMessageKey": "subjects.c-runtime-analysis-asymptotics.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "c-runtime-analysis-asymptotics",
+        "version": 1,
+        "status": "active",
+        "defaultForNewEnrollments": true,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    },
+    "tools": {
+      "defaultVisible": true,
+      "allowOpen": true
+    }
+  },
+  "modules": [
+    {
+      "slug": "c-runtime-analysis-asymptotics-module-1-frequency-counting",
+      "prefix": "cra1",
+      "order": 1,
+      "titleKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.title",
+      "descriptionKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "c",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "preset": "runner",
+        "runnerBackend": "judge0",
+        "layoutMode": "default",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 250,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.outcomes.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.outcomes.1",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.why.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "c-runtime-analysis-asymptotics-frequency-counting",
+          "order": 1,
+          "titleKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.title",
+          "descriptionKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.weeks",
+            "bulletKeys": [
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.bullets.0",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.bullets.1",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.bullets.2",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.bullets.3",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.c-runtime-analysis-asymptotics-frequency-counting.bullets.4"
+            ]
+          },
+          "serviceDefaults": {
+            "preset": "runner",
+            "runnerBackend": "judge0",
+            "layoutMode": "default",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "frequency-count-method",
+            "constant-and-rectangular-loops",
+            "dependent-triangular-loops",
+            "moving-loop-bounds",
+            "sequential-loops-and-linear-recursion"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "c-runtime-analysis-asymptotics-module-2-limit-method",
+      "prefix": "cra2",
+      "order": 2,
+      "titleKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.title",
+      "descriptionKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "c",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "preset": "runner",
+        "runnerBackend": "judge0",
+        "layoutMode": "default",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 220,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.outcomes.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.outcomes.1",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.why.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "c-runtime-analysis-asymptotics-limit-method",
+          "order": 1,
+          "titleKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.title",
+          "descriptionKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.weeks",
+            "bulletKeys": [
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.bullets.0",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.bullets.1",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.bullets.2",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.c-runtime-analysis-asymptotics-limit-method.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "preset": "runner",
+            "runnerBackend": "judge0",
+            "layoutMode": "default",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "big-o-omega-theta-by-limits",
+            "polynomial-and-log-limit-comparisons",
+            "exponential-limits-and-growth-order",
+            "limit-method-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+      "prefix": "cra3",
+      "order": 3,
+      "titleKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.title",
+      "descriptionKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "c",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "preset": "runner",
+        "runnerBackend": "judge0",
+        "layoutMode": "default",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 210,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.outcomes.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.outcomes.1",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.why.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "c-runtime-analysis-asymptotics-inequality-proofs",
+          "order": 1,
+          "titleKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.title",
+          "descriptionKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.weeks",
+            "bulletKeys": [
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.bullets.0",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.bullets.1",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.bullets.2",
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.c-runtime-analysis-asymptotics-inequality-proofs.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "preset": "runner",
+            "runnerBackend": "judge0",
+            "layoutMode": "default",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "inequality-definition-recipe-and-big-o",
+            "prove-big-omega-bounds",
+            "prove-big-theta-bounds",
+            "theta-equivalence-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "c-runtime-analysis-asymptotics-module-4-capstone",
+      "prefix": "cra4",
+      "order": 4,
+      "titleKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.title",
+      "descriptionKey": "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "c",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "preset": "runner",
+        "runnerBackend": "judge0",
+        "layoutMode": "default",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 120,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.outcomes.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.outcomes.1",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.why.0",
+          "modules.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "c-runtime-analysis-asymptotics-capstone",
+          "order": 1,
+          "titleKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.c-runtime-analysis-asymptotics-capstone.title",
+          "descriptionKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.c-runtime-analysis-asymptotics-capstone.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.c-runtime-analysis-asymptotics-capstone.weeks",
+            "bulletKeys": [
+              "sections.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.c-runtime-analysis-asymptotics-capstone.bullets.0"
+            ]
+          },
+          "serviceDefaults": {
+            "preset": "runner",
+            "runnerBackend": "judge0",
+            "layoutMode": "default",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "runtime-analysis-capstone"
+          ]
+        }
+      ]
+    }
+  ]
+}

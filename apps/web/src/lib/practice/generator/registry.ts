@@ -5,7 +5,7 @@ import { resolveModuleFromTopicSlug } from "@/lib/practice/generator/engines/jso
 import {
     SUBJECT_GENERATOR_SOURCES_BY_GENKEY,
     type GeneratedSubjectGenKey,
-} from "@/lib/subjects/subjects.generated";
+} from "@zoeskoul/curriculum-registry/runtime";
 
 export type TopicGeneratorFactory = (ctx: TopicContext) => SubjectModuleGenerator;
 

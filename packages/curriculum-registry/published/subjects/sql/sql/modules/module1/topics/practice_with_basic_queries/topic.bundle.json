@@ -1,0 +1,671 @@
+{
+  "topicId": "practice_with_basic_queries",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_1",
+  "sectionSlug": "section_1_1",
+  "prefix": "sql1",
+  "minutes": 8,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_1.practice_with_basic_queries.label",
+    "summaryKey": "topics.sql.sql_module_1.practice_with_basic_queries.summary"
+  },
+  "cards": [
+    {
+      "id": "query_one_column",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.query_one_column.title",
+      "sketchId": "query_one_column",
+      "height": 520
+    },
+    {
+      "id": "query_multiple_columns",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.query_multiple_columns.title",
+      "sketchId": "query_multiple_columns",
+      "height": 520
+    },
+    {
+      "id": "query_full_tables",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.query_full_tables.title",
+      "sketchId": "query_full_tables",
+      "height": 520
+    },
+    {
+      "id": "predicting_result_output",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.predicting_result_output.title",
+      "sketchId": "predicting_result_output",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "query_one_column_name",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_one_column_name.title",
+            "exerciseKey": "m1_s04_query_one_column_name",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "query_two_columns_name_price",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_two_columns_name_price.title",
+            "exerciseKey": "m1_s04_query_two_columns_name_price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "query_full_products_table",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_full_products_table.title",
+            "exerciseKey": "m1_s04_query_full_products_table",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "query_one_column",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_one_column.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_one_column.bodyMarkdown"
+    },
+    {
+      "id": "query_multiple_columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_multiple_columns.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_multiple_columns.bodyMarkdown"
+    },
+    {
+      "id": "query_full_tables",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_full_tables.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_full_tables.bodyMarkdown"
+    },
+    {
+      "id": "predicting_result_output",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.predicting_result_output.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.predicting_result_output.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m1_s04_query_one_column_name",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_one_column_name",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Sketchbook"
+                ],
+                [
+                  "Acrylic Paint Set"
+                ],
+                [
+                  "Desk Lamp"
+                ],
+                [
+                  "Notebook"
+                ],
+                [
+                  "Fountain Pen"
+                ],
+                [
+                  "Office Chair"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_query_two_columns_name_price",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_two_columns_name_price",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "price"
+              ],
+              "rows": [
+                [
+                  "Sketchbook",
+                  12.99
+                ],
+                [
+                  "Acrylic Paint Set",
+                  24.5
+                ],
+                [
+                  "Desk Lamp",
+                  39.99
+                ],
+                [
+                  "Notebook",
+                  6.75
+                ],
+                [
+                  "Fountain Pen",
+                  18
+                ],
+                [
+                  "Office Chair",
+                  129
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_query_full_products_table",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_full_products_table",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "id",
+                "name",
+                "category",
+                "price",
+                "stock",
+                "created_at"
+              ],
+              "rows": [
+                [
+                  1,
+                  "Sketchbook",
+                  "Art",
+                  12.99,
+                  25,
+                  "2026-01-10"
+                ],
+                [
+                  2,
+                  "Acrylic Paint Set",
+                  "Art",
+                  24.5,
+                  10,
+                  "2026-02-02"
+                ],
+                [
+                  3,
+                  "Desk Lamp",
+                  "Home",
+                  39.99,
+                  8,
+                  "2025-12-20"
+                ],
+                [
+                  4,
+                  "Notebook",
+                  "Stationery",
+                  6.75,
+                  50,
+                  "2026-02-14"
+                ],
+                [
+                  5,
+                  "Fountain Pen",
+                  "Stationery",
+                  18,
+                  15,
+                  "2026-01-25"
+                ],
+                [
+                  6,
+                  "Office Chair",
+                  "Home",
+                  129,
+                  3,
+                  "2025-11-05"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_one_column_result_shape",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_one_column_result_shape",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_multiple_columns_result_shape",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_multiple_columns_result_shape",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_full_table_query_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_full_table_query_meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_predict_before_run",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_predict_before_run",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_compare_results_habit",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_compare_results_habit",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_basic_queries_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_basic_queries_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_prediction_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_prediction_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_result_output_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_result_output_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_query_types_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_types_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_basic_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_basic_workflow_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_one_column_focus",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_one_column_focus",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_multi_column_use",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_multi_column_use",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_full_table_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_full_table_workflow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_predict_shape",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_predict_shape",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_predict_run_compare",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_predict_run_compare",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "m1_s04_fill_one_column_shape",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_one_column_shape",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "one result column"
+      }
+    },
+    {
+      "id": "m1_s04_fill_full_table_symbol",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_full_table_symbol",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "*"
+      }
+    },
+    {
+      "id": "m1_s04_fill_related_columns_goal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_related_columns_goal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "compare"
+      }
+    },
+    {
+      "id": "m1_s04_fill_predict_headers",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_predict_headers",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "headers"
+      }
+    },
+    {
+      "id": "m1_s04_fill_full_table_overview",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_full_table_overview",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "overview"
+      }
+    }
+  ]
+}
