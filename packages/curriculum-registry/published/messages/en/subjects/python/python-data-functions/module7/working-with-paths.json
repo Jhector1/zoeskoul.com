@@ -4,324 +4,210 @@
       "python-7-files-exceptions-and-data-cleaning": {
         "working-with-paths": {
           "label": "Working With Paths",
-          "summary": "Understand relative paths and simple file organization.",
+          "summary": "Use relative paths for same-folder and nested files, build path strings from pieces, and use `pathlib.Path` to join path components before opening a file.",
           "cards": {
             "sketch0": {
-              "title": "Relative paths point to files from your current workspace"
+              "title": "Relative paths describe where a file is"
             },
             "sketch1": {
-              "title": "Folders help organize files clearly"
+              "title": "Build a path from folder and file-name pieces"
             },
             "sketch2": {
-              "title": "Use simple relative paths, not machine-specific ones"
+              "title": "Use pathlib.Path to build and open a path"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-relative-path-folder": {
-              "title": "Choose the relative path",
-              "prompt": "A file named `input.txt` is inside a folder named `data`. Which path correctly refers to that file in this lesson?",
-              "hint": "Use the folder name first, then the file name.",
+            "sc-same-vs-nested": {
+              "title": "Same folder or nested folder",
+              "prompt": "Your program is in the workspace root. Which relative path points to `notes.txt` inside the `data` folder?",
+              "hint": "Put the containing folder before the file name.",
               "help": {
-                "concept": "A relative path names folders in order from the current workspace location to the target file.",
-                "hint_1": "The file is not in the same folder as the code; it is inside `data`.",
-                "hint_2": "Look for the choice that joins the folder and file with a forward slash."
-              },
-              "options": {
-                "a": "input.txt/data",
-                "b": "data/input.txt",
-                "c": "/data/input.txt",
-                "d": "data-input.txt"
-              }
-            },
-            "sc-same-folder-path": {
-              "title": "Path for a nearby file",
-              "prompt": "Your code and a file named `notes.txt` are in the same folder. Which path should you use to open that file?",
-              "hint": "If the file is in the same folder, you do not need to name another folder.",
-              "help": {
-                "concept": "A file in the same folder can be opened with just its file name as a relative path.",
-                "hint_1": "No extra folder name is needed here.",
-                "hint_2": "Choose the shortest valid path that names only the file itself."
+                "concept": "A nested relative path names the folder first and then the file, separated by `/`.",
+                "hint_1": "`notes.txt` by itself would mean the file is beside `main.py`.",
+                "hint_2": "Choose the path that enters `data` before naming `notes.txt`."
               },
               "options": {
                 "a": "data/notes.txt",
-                "b": "notes.txt",
-                "c": "./data/notes.txt",
-                "d": "folder/notes.txt"
+                "b": "notes.txt/data",
+                "c": "/notes.txt",
+                "d": "data-notes.txt"
               }
             },
-            "mc-relative-path-benefits": {
-              "title": "Why use relative paths here?",
-              "prompt": "Choose all true statements about using relative paths in this lesson.",
-              "hint": "Think about paths that work inside the provided workspace and folders.",
+            "sc-path-from-pieces": {
+              "title": "Build a path string from variables",
+              "prompt": "If `folder = \"records\"` and `filename = \"scores.txt\"`, which expression builds the relative path `records/scores.txt` from those variables?",
+              "hint": "Join folder, slash, and file name in that order.",
               "help": {
-                "concept": "Relative paths are useful because they describe file locations within the project structure instead of depending on one specific machine setup.",
-                "hint_1": "Look for statements about project folders and portability inside the lesson workspace.",
-                "hint_2": "Select the choices that describe starting from the current workspace and avoiding machine-specific locations."
+                "concept": "A relative path string can be assembled from existing string variables instead of hard-coding the finished path.",
+                "hint_1": "The folder belongs before the slash.",
+                "hint_2": "Use both variables so the expression still works if either value changes."
               },
               "options": {
-                "a": "They can point to files in folders like `data/input.txt`.",
-                "b": "They depend on one specific computer's full location.",
-                "c": "They help organize files by folder.",
-                "d": "They always require a full machine-specific location."
+                "a": "folder + \"/\" + filename",
+                "b": "filename + \"/\" + folder",
+                "c": "\"records/scores.txt\"",
+                "d": "folder + filename"
               }
             },
-            "mc-open-path-examples": {
-              "title": "Valid relative path examples",
-              "prompt": "Choose all paths that are valid relative path examples for this lesson's workspace style.",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
+            "sc-pathlib-join": {
+              "title": "Join path parts with Path",
+              "prompt": "After `from pathlib import Path`, which expression builds a path from `folder` and `filename`?",
+              "hint": "`Path(...)` can be combined with another path part using `/`.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "`Path(folder) / filename` joins path components without manually inserting a slash string.",
+                "hint_1": "Wrap the first path component in `Path(...)`.",
+                "hint_2": "Use `/` between the `Path` object and the file-name variable."
               },
               "options": {
-                "a": "notes.txt",
-                "b": "data/input.txt",
-                "c": "folder -> input.txt",
-                "d": "name of the output panel"
+                "a": "Path(folder) / filename",
+                "b": "Path(folder + filename)",
+                "c": "folder.read(filename)",
+                "d": "Path / folder / filename()"
               }
             },
-            "dr-read-file-steps": {
-              "title": "Order the file-reading steps",
-              "prompt": "Put these steps in the correct order for reading a file with a relative path and showing its contents.",
-              "hint": "Open first, then read, then display.",
+            "sc-open-path-object": {
+              "title": "Use a Path object with open",
+              "prompt": "If `path` is a `Path` object pointing to a text file, which line opens that path for reading?",
+              "hint": "`open(...)` can receive the path object directly.",
               "help": {
-                "concept": "Reading a file follows a sequence: open the file, get its contents, then print the result.",
-                "hint_1": "You cannot read from the file before opening it.",
-                "hint_2": "After reading the text into a variable, the last step is to show it in the output panel."
+                "concept": "A `Path` object can be passed directly to `open`, just like a relative path string.",
+                "hint_1": "Do not convert it to a machine-specific absolute path.",
+                "hint_2": "Use the existing `path` variable as the first argument to `open`."
               },
-              "tokens": {
-                "t1": "Open `data/input.txt` in read mode",
-                "t2": "Store the contents in a variable",
-                "t3": "Print the variable"
+              "options": {
+                "a": "with open(path, \"r\") as file:",
+                "b": "with path(\"r\") as file:",
+                "c": "with open(\"path\", \"r\") as file:",
+                "d": "with file.open(\"r\") as path:"
               }
-            },
-            "dr-build-nested-path": {
-              "title": "Build the path in order",
-              "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
-              "hint": "Folder name comes before the slash and file name.",
-              "help": {
-                "concept": "A nested relative path is built as folder, slash, then file name.",
-                "hint_1": "Start with the folder that contains the file.",
-                "hint_2": "The slash separates the folder name from the file name."
-              },
-              "tokens": {
-                "t1": "data",
-                "t2": "/",
-                "t3": "report.txt"
-              }
-            },
-            "fb-folder-part": {
-              "title": "Complete the folder path",
-              "prompt": "Fill in the missing folder name.",
-              "hint": "Read the complete relative path and include the folder that appears before the filename.",
-              "help": {
-                "concept": "A relative path to a file inside a folder includes the folder name before the slash.",
-                "hint_1": "The missing part is the folder that contains `input.txt`.",
-                "hint_2": "Use the folder name shown throughout the lesson examples."
-              },
-              "template": "[blank1]/input.txt",
-              "choices": [
-                "data",
-                "input",
-                "files",
-                "read"
-              ]
-            },
-            "fb-same-folder-file": {
-              "title": "Complete the same-folder path",
-              "prompt": "Fill in the missing file name for a file in the same folder.",
-              "hint": "No folder name is needed here.",
-              "help": {
-                "concept": "When a file is in the same folder, the relative path is just the file name.",
-                "hint_1": "The blank should be the exact file name, not a folder.",
-                "hint_2": "Choose the option that is a plain file name ending with `.txt`."
-              },
-              "template": "[blank1]",
-              "choices": [
-                "data/notes.txt",
-                "notes.txt",
-                "/notes.txt",
-                "folder/notes.txt"
-              ]
-            },
-            "ci-read-nested-file": {
-              "title": "Read from a nested relative path",
-              "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
-              "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
-              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/input.txt to read the nested file."
-                }
-              }
-            },
-            "ci-copy-between-paths": {
-              "title": "Copy text to another relative path",
-              "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
-              "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
-              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Read from data/source.txt."
-                },
-                "1": {
-                  "message": "Write to data/copy.txt."
-                },
-                "2": {
-                  "message": "Use file.write() to create the copy."
-                }
-              }
-            },
-            "ci-count-lines-in-folder": {
-              "title": "Count lines from a file path",
-              "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
-              "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
-              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/items.txt to count its lines."
-                }
-              }
-            },
-            "try-working-with-paths-checkpoint": {
-              "title": "Use a relative path",
-              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters.",
-              "hint": "Use `Path(\"data\") / \"names.txt\"`.",
-              "help": {
-                "concept": "Build the relative path first, then use it to read the file.",
-                "hint_1": "Create the path with `Path(\"data\") / \"names.txt\"`.",
-                "hint_2": "Read that path and print the file text without extra characters."
-              },
-              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
-              "starterFiles": {
-                "data_names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
-                },
-                "data_names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Use Path(...) to build the path."
-                },
-                "1": {
-                  "message": "Build the path with Path('data') / 'names.txt'."
-                }
-              },
-              "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
             },
             "try-working-with-paths-sketch0": {
-              "title": "Build a relative path",
-              "prompt": "Build the relative path `data/scores.txt` from the `folder` and `filename` variables, then print the path.",
-              "hint": "Combine the folder name, a slash, and the file name.",
+              "title": "Build a relative path from input",
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`.",
+              "hint": "Use both variables instead of typing a completed path.",
               "help": {
-                "concept": "This card practices writing a relative path as text.",
-                "hint_1": "Use the `folder` variable first, then `/`, then `filename`.",
-                "hint_2": "Print the finished path string `data/scores.txt`."
+                "concept": "A path string can be assembled from folder and file-name pieces that are already stored in variables.",
+                "hint_1": "Keep `folder` first and `filename` last.",
+                "hint_2": "Put the slash string between the two variables."
               },
-              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
-              "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+              "starterCode": "folder = input().strip()\nfilename = input().strip()\n\n# Build the relative path from folder and filename, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "folder = input().strip()\nfilename = input().strip()\n\n# Build the relative path from folder and filename, then print it.\n"
+                }
+              },
+              "solutionCode": "folder = input().strip()\nfilename = input().strip()\npath = folder + \"/\" + filename\nprint(path)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "folder = input().strip()\nfilename = input().strip()\npath = folder + \"/\" + filename\nprint(path)\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Build the path from folder and filename instead of typing the final path."
+                  "message": "Build `path` from `folder + \"/\" + filename`."
+                },
+                "1": {
+                  "message": "Print the `path` variable after building it."
                 }
               }
             },
             "try-working-with-paths-sketch1": {
-              "title": "Use pathlib for a path",
-              "prompt": "Use `Path(\"data\") / \"scores.txt\"`, store it in a variable, and print the path.",
-              "hint": "Import `Path`, join the two pieces with `/`, and print the result.",
+              "title": "Join path pieces with pathlib.Path",
+              "prompt": "Read a folder name and file name from input. Use `Path(folder) / filename` to build the path, store it in `path`, and print `path`.",
+              "hint": "Use the imported `Path` class and the `/` operator between path components.",
               "help": {
-                "concept": "This card practices building a path object instead of a plain string.",
-                "hint_1": "Create a variable like `path = Path(\"data\") / \"scores.txt\"`.",
-                "hint_2": "Print the path variable after you build it."
+                "concept": "`Path(folder) / filename` joins path components while keeping the result as a path object.",
+                "hint_1": "Do not build the finished path by manually typing a slash string in this exercise.",
+                "hint_2": "Print the `path` object after joining the components."
               },
-              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
-              "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+              "starterCode": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\n\n# Build a Path from folder and filename, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\n\n# Build a Path from folder and filename, then print it.\n"
+                }
+              },
+              "solutionCode": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\npath = Path(folder) / filename\nprint(path)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\npath = Path(folder) / filename\nprint(path)\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use Path(...) to build the path."
+                  "message": "Import `Path` from `pathlib`."
                 },
                 "1": {
-                  "message": "Build the path with Path('data') / 'scores.txt'."
+                  "message": "Build the path with `Path(folder) / filename`."
+                },
+                "2": {
+                  "message": "Print the resulting `path` object."
                 }
               }
             },
             "try-working-with-paths-sketch2": {
-              "title": "Read from a folder path",
-              "prompt": "Open `data/message.txt`, read the text from that relative path, and print it.",
-              "hint": "Use the full relative path `data/message.txt` inside `open(...)`.",
+              "title": "Open a file through a Path object",
+              "prompt": "Read a file name from input. Build `path = Path(\"data\") / filename`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
+              "hint": "Build the path first, then pass the `path` variable directly to `open`.",
               "help": {
-                "concept": "This card practices using a folder path when the file is not next to `main.py`.",
-                "hint_1": "Open `data/message.txt` inside a `with open(...)` block.",
-                "hint_2": "Read the file text and print only that text."
+                "concept": "A `Path` object can represent the nested relative location and can be passed directly to `open(...)`.",
+                "hint_1": "Use `Path(\"data\") / filename` so the input selects the supplied file.",
+                "hint_2": "Inside the `with open(path, \"r\")` block, read and strip the text before printing it."
               },
-              "starterCode": "# Open data/message.txt and print its text.\n",
+              "starterCode": "from pathlib import Path\n\nfilename = input().strip()\n\n# Build a Path inside the data folder.\n# Open that path in read mode and print the stripped text.\n",
               "starterFiles": {
-                "data_message_txt": {
-                  "content": "Nested hello\n"
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfilename = input().strip()\n\n# Build a Path inside the data folder.\n# Open that path in read mode and print the stripped text.\n"
+                },
+                "data_welcome_txt": {
+                  "content": "Welcome to Python paths!\n"
+                },
+                "data_reminder_txt": {
+                  "content": "Remember to save your work.\n"
                 }
               },
+              "solutionCode": "from pathlib import Path\n\nfilename = input().strip()\npath = Path(\"data\") / filename\n\nwith open(path, \"r\") as file:\n    text = file.read().strip()\n\nprint(text)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+                  "content": "from pathlib import Path\n\nfilename = input().strip()\npath = Path(\"data\") / filename\n\nwith open(path, \"r\") as file:\n    text = file.read().strip()\n\nprint(text)\n"
                 },
-                "data_message_txt": {
-                  "content": "Nested hello\n"
+                "data_welcome_txt": {
+                  "content": "Welcome to Python paths!\n"
+                },
+                "data_reminder_txt": {
+                  "content": "Remember to save your work.\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open data/message.txt instead of typing Nested hello."
+                  "message": "Import `Path` from `pathlib`."
+                },
+                "1": {
+                  "message": "Build `path` with `Path(\"data\") / filename`."
+                },
+                "2": {
+                  "message": "Open the `path` variable in read mode."
+                },
+                "3": {
+                  "message": "Read and strip the selected file text before printing it."
                 }
-              },
-              "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+              }
             }
           },
           "tryIt": {
-            "try_working_with_paths_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters."
-            },
             "try_working_with_paths_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build the relative path `data/scores.txt` from the `folder` and `filename` variables, then print the path."
+              "prompt": "Build and print a relative path string from folder and file-name input."
             },
             "try_working_with_paths_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use `Path(\"data\") / \"scores.txt\"`, store it in a variable, and print the path."
+              "prompt": "Use `Path` to join folder and file-name variables."
             },
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Open `data/message.txt`, read the text from that relative path, and print it."
+              "prompt": "Build a `Path` to a supplied data file and open that path."
             },
             "allowReveal": true
           }
@@ -333,17 +219,17 @@
     "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "working-with-paths": {
-          "paths-relative-basics": {
-            "title": "Relative paths point to files from your current workspace",
-            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”"
+          "relative-paths": {
+            "title": "Relative paths describe where a file is",
+            "bodyMarkdown": "A **relative path** describes a file from the current workspace instead of from one specific computer.\n\nIf the workspace looks like this:\n\n```text\nmain.py\nnotes.txt\ndata/\n  scores.txt\n```\n\nthen these two paths mean different locations:\n\n- `notes.txt` means the file beside `main.py`.\n- `data/scores.txt` means `scores.txt` inside the `data` folder.\n\nYou can pass either relative path directly to `open(...)`:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    text = file.read()\n```\n\nRelative paths keep the program tied to the project layout rather than to a machine-specific full location."
           },
-          "paths-folders-and-organization": {
-            "title": "Folders help organize files clearly",
-            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nFollow the execution: - `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
+          "path-pieces": {
+            "title": "Build a path from folder and file-name pieces",
+            "bodyMarkdown": "Sometimes the folder or file name comes from a variable. You can build the relative path from those pieces.\n\n```python\nfolder = \"reports\"\nfilename = \"today.txt\"\npath = folder + \"/\" + filename\nprint(path)\n```\n\nThe output is:\n\n```text\nreports/today.txt\n```\n\nUsing the variables matters: if `folder` or `filename` changes, the finished path changes too. The goal is to represent the location from its parts instead of typing the completed path separately."
           },
-          "paths-safe-habits": {
-            "title": "Use simple relative paths, not machine-specific ones",
-            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written."
+          "pathlib-path": {
+            "title": "Use pathlib.Path to build and open a path",
+            "bodyMarkdown": "Python's standard library includes `Path`, a small object for working with path components.\n\n```python\nfrom pathlib import Path\n\nfolder = \"data\"\nfilename = \"message.txt\"\npath = Path(folder) / filename\nprint(path)\n```\n\n`Path(folder) / filename` joins the two pieces as a path. You can then give that `Path` object directly to `open(...)`:\n\n```python\nwith open(path, \"r\") as file:\n    message = file.read().strip()\n\nprint(message)\n```\n\nFor this topic, keep `Path` simple: use it to join relative path pieces and pass the result to `open`."
           }
         }
       }

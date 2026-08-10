@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "replace-by-index",
       "height": 420,
       "tryIt": {
         "id": "try-list-methods-and-mutation-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "append-item",
       "height": 420,
       "tryIt": {
         "id": "try-list-methods-and-mutation-sketch1",
@@ -61,13 +61,51 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "remove-value",
       "height": 420,
       "tryIt": {
         "id": "try-list-methods-and-mutation-sketch2",
         "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.title",
         "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.prompt",
         "exerciseKey": "try-list-methods-and-mutation-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch3.title",
+      "sketchId": "pop-by-position",
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch3",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch3.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch3.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch4",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch4.title",
+      "sketchId": "sort-in-place",
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch4",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch4.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch4.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch4",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -84,7 +122,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +132,43 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "replace-by-index",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-1.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.replace-by-index.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.replace-by-index.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "append-item",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-2.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.append-item.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.append-item.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "remove-value",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-3.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.remove-value.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.remove-value.bodyMarkdown"
+    },
+    {
+      "id": "pop-by-position",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.pop-by-position.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.pop-by-position.bodyMarkdown"
+    },
+    {
+      "id": "sort-in-place",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sort-in-place.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sort-in-place.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-1",
+      "id": "sc-index-assignment",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-index-assignment",
       "optionIds": [
         "a",
         "b",
@@ -131,28 +181,11 @@
       }
     },
     {
-      "id": "sc-2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "mc-1",
+      "id": "mc-mutates-original",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-mutates-original",
       "optionIds": [
         "a",
         "b",
@@ -169,11 +202,11 @@
       }
     },
     {
-      "id": "mc-2",
-      "kind": "multi_choice",
+      "id": "sc-remove-vs-pop",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-remove-vs-pop",
       "optionIds": [
         "a",
         "b",
@@ -181,78 +214,25 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "dr-1",
-      "kind": "drag_reorder",
+      "id": "sc-sort-return",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.dr-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-sort-return",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "dr-2",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.dr-2",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "fb-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.fb-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "10"
-      }
-    },
-    {
-      "id": "fb-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.fb-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "sort"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -297,7 +277,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -309,8 +289,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "[3, 1, 2, 10]\n",
+            "stdin": "21\n",
+            "stdout": "[12, 15, 21]\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "9\n",
+            "stdout": "[12, 15, 9]\n",
             "match": "exact"
           }
         ],
@@ -324,34 +309,19 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "numbers",
-            "expected": [
-              3,
-              1,
-              2,
-              10
-            ],
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
-            "type": "uses_method",
-            "method": "append",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
-            "target": "numbers"
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_method",
-          "method": "append",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
-          "target": "numbers"
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -397,7 +367,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -409,8 +379,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "['apple']\ncherry\n",
+            "stdin": "Zoe\n",
+            "stdout": "['Ava', 'Noah', 'Zoe']\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Mia\n",
+            "stdout": "['Ava', 'Noah', 'Mia']\n",
             "match": "exact"
           }
         ],
@@ -424,45 +399,19 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "fruits",
-            "expected": [
-              "apple"
-            ],
-            "expectedKind": "json"
-          },
-          {
-            "type": "variable_equals",
-            "name": "last_item",
-            "expected": "cherry",
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+            "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+          "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -508,7 +457,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -520,8 +469,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "['Ava', 'Mia', 'Zoe']\n",
+            "stdin": "Excel\n",
+            "stdout": "['Python', 'SQL', 'Git']\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "SQL\n",
+            "stdout": "['Python', 'Excel', 'Git']\n",
             "match": "exact"
           }
         ],
@@ -535,33 +489,206 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "names",
-            "expected": [
-              "Ava",
-              "Mia",
-              "Zoe"
-            ],
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
-            "type": "uses_method",
-            "method": "sort",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
-            "target": "names"
+            "type": "source_regex",
+            "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
+          "type": "source_regex",
+          "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch3",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "T-105\n['T-104', 'T-106', 'T-107']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch4",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "42\n17\n30\n",
+            "stdout": "[17, 30, 42]\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n9\n1\n",
+            "stdout": "[1, 5, 9]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "sort",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
+            "target": "times"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
+        },
+        {
           "type": "uses_method",
           "method": "sort",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
-          "target": "names"
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
+          "target": "times"
         }
       ]
     }

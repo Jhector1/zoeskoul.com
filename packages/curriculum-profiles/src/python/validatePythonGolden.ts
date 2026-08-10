@@ -41,6 +41,8 @@ function normalizeWorkspaceFiles(
 
 function collectFixturePaths(exercise: ManifestCodeInput): Set<string> {
     const files = [
+        exercise.starterFiles,
+        exercise.workspace?.starterFiles,
         exercise.workspace?.files,
         exercise.workspace?.initialFiles,
         exercise.workspace?.workspaceFiles,
@@ -353,8 +355,13 @@ export async function validatePythonGolden(args: {
         const workspaceProvidedPaths = collectWorkspaceProvidedPaths(exercise);
         const requiredWorkspaceFiles = collectRequiredWorkspaceFiles(exercise);
         const perTestFixturePaths = collectTestFixturePaths(exercise);
-        const missingPaths = referencedReadFiles(code).filter((filePath) => !fixturePaths.has(filePath));
         const writtenPaths = new Set(referencedWriteFiles(code));
+        const missingPaths = referencedReadFiles(code).filter(
+            (filePath) =>
+                !fixturePaths.has(filePath) &&
+                !workspaceProvidedPaths.has(filePath) &&
+                !writtenPaths.has(filePath),
+        );
         const invalidFixtures = [
             ...normalizeWorkspaceFiles(exercise.workspace?.files),
             ...normalizeWorkspaceFiles(exercise.workspace?.initialFiles),

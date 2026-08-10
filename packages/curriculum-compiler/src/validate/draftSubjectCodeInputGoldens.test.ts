@@ -465,8 +465,9 @@ const bannedTryPhrases = [
 
 const multiFileTryTopics = new Set([
     "using-imports-and-helper-files",
-    "module-6-name-badge-package",
 ]);
+// The Module 6 project preview is intentionally single-file.
+// Its first project step introduces the sibling helper module.
 
 function collectTryExerciseTexts(messages: JsonObject): Array<{ id: string; text: string }> {
     const subjectKey = Object.keys(messages.topics ?? {})[0];

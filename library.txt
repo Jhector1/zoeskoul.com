@@ -83,7 +83,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish c c-runtime-analysis-asymptotics  --live-subject c-runtime-analysis-asymptotics   --force
+pnpm curr:course -- publish python python-data-functions  --live-subject python-data-functions   --force
 
 
 
@@ -273,7 +273,7 @@ pnpm curr:translate -- linux linux-terminal-fundamentals \
 
 cd /Users/admin/Documents/NextJSProject/zoeskoul.com && \
 for course in python-v2; do
- RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python  "$course"
+ RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python  python-data-functions
 done
 
 

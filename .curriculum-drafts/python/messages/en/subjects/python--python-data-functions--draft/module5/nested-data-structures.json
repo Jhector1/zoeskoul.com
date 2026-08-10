@@ -4,291 +4,189 @@
       "python-5-lists-tuples-and-dictionaries": {
         "nested-data-structures": {
           "label": "Nested Data Structures",
-          "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+          "summary": "Work with lists of dictionaries, dictionaries inside dictionaries, and lists stored inside dictionaries by accessing, updating, and looping through one layer at a time.",
           "cards": {
             "sketch0": {
-              "title": "What nested data structures are"
+              "title": "Reading from a list of dictionaries"
             },
             "sketch1": {
-              "title": "Reading values from nested containers"
+              "title": "Reading and updating a nested dictionary"
             },
             "sketch2": {
-              "title": "Looping through a list of dictionaries"
+              "title": "Changing a list stored inside a dictionary"
+            },
+            "sketch3": {
+              "title": "Looping through a list of records"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-1": {
-              "title": "Choose the best structure",
-              "prompt": "You want to store several products, and each product has a name and a price. Which structure is the best fit?",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
+            "sc-best-structure": {
+              "title": "Choose a structure for repeated records",
+              "prompt": "You need to store several products, and every product has a `name` and a `price`. Which structure best represents that data?",
+              "hint": "You need one collection for the whole group and labeled fields for each individual product.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "A list of dictionaries is a common structure for several records that share the same labeled fields.",
+                "hint_1": "The outer list stores all products.",
+                "hint_2": "Each dictionary can store one product with keys such as `\"name\"` and `\"price\"`."
               },
               "options": {
-                "a": "A single string with all product names",
-                "b": "A list of dictionaries",
-                "c": "One number for each product",
-                "d": "A tuple with only one product"
+                "a": "A list of dictionaries",
+                "b": "One long string",
+                "c": "A single dictionary for every product combined",
+                "d": "One integer"
               }
             },
-            "sc-2": {
-              "title": "Read a nested value",
-              "prompt": "Given `item = {\"name\": \"Pen\", \"info\": {\"price\": 2, \"stock\": 9}}`, which expression gets the value `9`?",
-              "hint": "First access the inner dictionary stored at `\"info\"`.",
+            "sc-list-then-key": {
+              "title": "Read from a list of dictionaries",
+              "prompt": "Given `players = [{\"name\": \"Mia\", \"score\": 7}, {\"name\": \"Leo\", \"score\": 5}]`, which expression gets Leo's score?",
+              "hint": "Select the second dictionary first, then read its `\"score\"` key.",
               "help": {
-                "concept": "To read a nested dictionary value, access the outer key first, then the inner key.",
-                "hint_1": "`\"stock\"` is not at the top level of `item`; it is inside `item[\"info\"]`.",
-                "hint_2": "The correct expression uses two bracket lookups in order: outer key, then inner key."
+                "concept": "For a list of dictionaries, access happens in layers: list index first, dictionary key second.",
+                "hint_1": "Leo is the second list item, so use index `1`.",
+                "hint_2": "Then use `['score']` on that dictionary."
               },
               "options": {
-                "a": "item[\"stock\"]",
-                "b": "item[\"info\"][\"stock\"]",
-                "c": "item[\"name\"][\"stock\"]",
-                "d": "item[0][\"stock\"]"
+                "a": "players[1][\"score\"]",
+                "b": "players[\"score\"][1]",
+                "c": "players[1][1]",
+                "d": "players[\"Leo\"][\"score\"]"
               }
             },
-            "mc-1": {
-              "title": "Valid nested structures",
-              "prompt": "Which of these are examples of nested data structures in Python? Choose all that apply.",
-              "hint": "A structure is nested when one collection is stored inside another.",
+            "sc-dict-then-key": {
+              "title": "Read from a dictionary inside a dictionary",
+              "prompt": "Given `item = {\"name\": \"Pen\", \"info\": {\"price\": 2, \"stock\": 9}}`, which expression gets the stock value?",
+              "hint": "Open the outer `\"info\"` field before reading `\"stock\"` from the inner dictionary.",
               "help": {
-                "concept": "Nested data structures contain collections inside collections, such as a list inside a dictionary or dictionaries inside a list.",
-                "hint_1": "Check whether each option includes one container placed inside another container.",
-                "hint_2": "A plain number or plain string alone is not nested; combinations like list-of-dicts or dict-with-list are."
+                "concept": "A dictionary nested inside another dictionary is read with one key lookup per layer.",
+                "hint_1": "`item[\"info\"]` gives the inner dictionary.",
+                "hint_2": "Then add `[\"stock\"]`."
               },
               "options": {
-                "a": "[{\"name\": \"Ava\"}, {\"name\": \"Ben\"}]",
-                "b": "{\"scores\": [10, 20, 30]}",
-                "c": "42",
-                "d": "\"hello\""
+                "a": "item[\"info\"][\"stock\"]",
+                "b": "item[\"stock\"]",
+                "c": "item[0][\"stock\"]",
+                "d": "item[\"name\"][\"stock\"]"
               }
             },
-            "mc-2": {
-              "title": "Useful access patterns",
-              "prompt": "Suppose `players = [{\"name\": \"Mia\", \"points\": 7}, {\"name\": \"Leo\", \"points\": 5}]`. Which expressions are valid ways to read data from this structure? Choose all that apply.",
-              "hint": "Start by deciding whether you need a list index first or a dictionary key first.",
+            "sc-loop-record": {
+              "title": "Understand the loop variable",
+              "prompt": "If `students` is a list of dictionaries, what does `student` hold during `for student in students:`?",
+              "hint": "The loop visits one item from the outer list at a time.",
               "help": {
-                "concept": "For a list of dictionaries, you use a numeric index to choose one dictionary, then a string key to read a value from that dictionary.",
-                "hint_1": "`players` is a list first, so expressions that begin with a string key on `players` are not correct.",
-                "hint_2": "Look for expressions that use `[0]` or `[1]` before `['name']` or `['points']`."
+                "concept": "When a list contains dictionaries, the loop variable receives one whole dictionary record on each iteration.",
+                "hint_1": "`student` is not only a name or score.",
+                "hint_2": "Inside the loop you can read fields such as `student[\"name\"]`."
               },
               "options": {
-                "a": "players[0][\"name\"]",
-                "b": "players[1][\"points\"]",
-                "c": "players[\"name\"]",
-                "d": "players[0][0]"
-              }
-            },
-            "dr-1": {
-              "title": "Access a city name",
-              "prompt": "Put these tokens in order to build the expression that gets `\"Paris\"` from `trip = {\"destination\": {\"city\": \"Paris\"}}`.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "trip",
-                "t2": "[\"destination\"]",
-                "t3": "[\"city\"]"
-              }
-            },
-            "dr-2": {
-              "title": "Build a loop over records",
-              "prompt": "Arrange these lines to make a loop that prints each student's name from `students`, a list of dictionaries.",
-              "hint": "The loop header comes first, and the indented print line comes after it.",
-              "help": {
-                "concept": "To loop through a list of dictionaries, write a `for` loop that takes one dictionary at a time, then access a key from that dictionary inside the loop.",
-                "hint_1": "Use `student` as the loop variable for each dictionary in `students`.",
-                "hint_2": "After the loop header, the print line should use `student[\"name\"]`."
-              },
-              "tokens": {
-                "t1": "for student in students:",
-                "t2": "print(student[\"name\"])"
-              }
-            },
-            "fb-1": {
-              "title": "Fill the missing key",
-              "prompt": "Complete the expression so it reads the score from the first dictionary in the list.",
-              "hint": "The first part `records[0]` gives you one dictionary.",
-              "help": {
-                "concept": "After selecting one dictionary from a list, use the correct key name to read the needed value.",
-                "hint_1": "You already have the first record. Now choose the key that stores the numeric result.",
-                "hint_2": "Use the dictionary key that names the requested field, not a list index or an unrelated variable."
-              },
-              "template": "records[0][\"[blank1]\"]",
-              "choices": [
-                "score",
-                "records",
-                "0",
-                "name"
-              ]
-            },
-            "fb-2": {
-              "title": "Fill the missing outer key",
-              "prompt": "Complete the expression so it reads the list stored inside the dictionary `data = {\"items\": [1, 2, 3]}`.",
-              "hint": "You need the key that points to the inner list.",
-              "help": {
-                "concept": "When a dictionary stores a list, you use the dictionary key first to get that list.",
-                "hint_1": "The list `[1, 2, 3]` is stored under one named key in `data`.",
-                "hint_2": "Choose the key that matches the label attached to the list value."
-              },
-              "template": "data[\"[blank1]\"]",
-              "choices": [
-                "items",
-                "data",
-                "list",
-                "0"
-              ]
-            },
-            "code-1": {
-              "title": "Return all names",
-              "prompt": "Each item in `records` stores a person's data. Finish `get_names(records)` by adding every record's `\"name\"` value to the `names` list, then return `names`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
-              "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
-            },
-            "code-2": {
-              "title": "Count total stock",
-              "prompt": "Finish `total_stock(items)` so it loops through the item dictionaries, adds each `\"stock\"` value into `total`, and returns the final total.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
-              "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
-            },
-            "code-3": {
-              "title": "Find the highest score",
-              "prompt": "Finish `highest_score(players)` so it compares each later player's `\"score\"` with `best` and returns the highest score in the list.",
-              "hint": "Read the task \"Find the highest score\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
-              "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
-            },
-            "try-nested-data-structures-checkpoint": {
-              "title": "Read nested data",
-              "prompt": "Use a list of dictionaries. Print the second student’s name and score.",
-              "hint": "Use index `1`, then dictionary keys.",
-              "help": {
-                "concept": "Nested data combines containers, such as a list of dictionaries.",
-                "hint_1": "Use index `1`, then dictionary keys.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
-              "solutionCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use students[1] to reach Mia instead of typing Mia directly."
-                },
-                "1": {
-                  "message": "Use the name key from the student dictionary."
-                },
-                "2": {
-                  "message": "Use the score key from the student dictionary."
-                }
+                "a": "One student dictionary at a time",
+                "b": "Only the student's name",
+                "c": "Only the list index",
+                "d": "The entire students list every time"
               }
             },
             "try-nested-data-structures-sketch0": {
-              "title": "Read a nested value",
-              "prompt": "Use a list index first, then a dictionary key.",
-              "hint": "Print the first student's name.",
+              "title": "Build records and read the second score",
+              "prompt": "Two student names and scores arrive as input. Build `students` as a list containing two dictionaries. Each dictionary must use the keys `\"name\"` and `\"score\"`. Then print the second student's name and score on separate lines by accessing `students[1]` first.",
+              "hint": "Build the two dictionaries inside one list, then access the second record with index `1`.",
               "help": {
-                "concept": "Print the first student's name.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A list of dictionaries combines positional access for the outer list with key access for each record.",
+                "hint_1": "Create `students = [{\"name\": name1, \"score\": score1}, {\"name\": name2, \"score\": score2}]`.",
+                "hint_2": "Print `students[1][\"name\"]` and `students[1][\"score\"]`."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
-              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+              "starterCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\n# Build students as a list of two dictionaries.\n# Print the second student's name using students[1].\n# Print the second student's score using students[1].\n",
+              "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use students[0] to reach the first student instead of typing Ava directly."
+                  "message": "Build `students` from the two input name/score pairs instead of hard-coding the output."
                 },
                 "1": {
-                  "message": "Use the name key from the student dictionary."
+                  "message": "Use `students[1][\"name\"]` to read the second student's name."
+                },
+                "2": {
+                  "message": "Use `students[1][\"score\"]` to read the second student's score."
                 }
               }
             },
             "try-nested-data-structures-sketch1": {
-              "title": "Print names and scores",
-              "prompt": "Loop through a list of dictionaries.",
-              "hint": "Loop through students and print: name: score.",
+              "title": "Update stock inside a nested dictionary",
+              "prompt": "The dictionary `product` contains an inner dictionary under the key `\"details\"`. Read a new stock count from input, update only `product[\"details\"][\"stock\"]`, then print the updated stock value.",
+              "hint": "Use one key lookup to reach `details`, then another key lookup to reach `stock`.",
               "help": {
-                "concept": "Loop through students and print: name: score.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "Nested assignment follows the same path as nested reading, with the final lookup placed on the left side of `=`.",
+                "hint_1": "Do not replace the whole `details` dictionary.",
+                "hint_2": "Assign with `product[\"details\"][\"stock\"] = new_stock`."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
-              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+              "starterCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\n# Update only the nested stock value.\n# Print the updated stock value.\n",
+              "solutionCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\nproduct[\"details\"][\"stock\"] = new_stock\nprint(product[\"details\"][\"stock\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through students instead of typing each line directly."
-                },
-                "1": {
-                  "message": "Use the name key while building each line."
-                },
-                "2": {
-                  "message": "Use the score key while building each line."
+                  "message": "Update the nested field with `product[\"details\"][\"stock\"] = new_stock`."
                 }
               }
             },
             "try-nested-data-structures-sketch2": {
-              "title": "Add a nested value",
-              "prompt": "Add a new value to the list stored inside the dictionary, then print the updated record.",
-              "hint": "Add 'Mia' to the students list.",
+              "title": "Add an attendee to a nested list",
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list.",
+              "hint": "First access the list stored under `\"students\"`, then call `.append()` on that list.",
               "help": {
-                "concept": "Add 'Mia' to the students list.",
-                "hint_1": "Add 'Mia' to the students list, then print course.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "When a dictionary value is a list, you can access that list by key and use normal list methods on it.",
+                "hint_1": "The input name is stored in `new_student`.",
+                "hint_2": "Use `course[\"students\"].append(new_student)`, then print `course[\"students\"]`."
               },
-              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
-              "solutionCode": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+              "starterCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\n# Append new_student to the list stored under \"students\".\n# Print the updated students list.\n",
+              "solutionCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\ncourse[\"students\"].append(new_student)\nprint(course[\"students\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the students key in the course dictionary."
+                  "message": "Append the input value with `course[\"students\"].append(new_student)`."
+                }
+              }
+            },
+            "try-nested-data-structures-sketch3": {
+              "title": "Loop through dynamic student records",
+              "prompt": "Two student names and scores arrive as input. Build `students` as a list of two dictionaries using the keys `\"name\"` and `\"score\"`. Loop through `students` so `student` receives one dictionary at a time. Print each record exactly as `name: score`.",
+              "hint": "Build the records first, then use one loop over `students` and read both keys from the current `student`.",
+              "help": {
+                "concept": "A loop over a list of dictionaries processes one whole record per iteration.",
+                "hint_1": "Use `for student in students:`.",
+                "hint_2": "Inside the loop, print `f\"{student['name']}: {student['score']}\"`."
+              },
+              "starterCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\n# Build students as a list of two dictionaries.\n# Loop through students.\n# Print each student as: name: score\n",
+              "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `students` from the two input name/score pairs before looping."
                 },
                 "1": {
-                  "message": "Append Mia to course['students'] instead of replacing the whole course."
+                  "message": "Loop with `for student in students:` so one dictionary record is processed at a time."
                 },
                 "2": {
-                  "message": "Call course['students'].append('Mia')."
+                  "message": "Read the current student's `\"name\"` key inside the loop."
+                },
+                "3": {
+                  "message": "Read the current student's `\"score\"` key inside the loop."
                 }
               }
             }
           },
           "tryIt": {
-            "try_nested_data_structures_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Use a list of dictionaries. Print the second student’s name and score."
-            },
             "try_nested_data_structures_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use a list index first, then a dictionary key."
+              "prompt": "Build two student dictionaries inside a list, then read the second record by index and key."
             },
             "try_nested_data_structures_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Loop through a list of dictionaries."
+              "prompt": "Update a stock value stored inside a nested dictionary."
             },
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Add a new value to the list stored inside the dictionary, then print the updated record."
+              "prompt": "Append an input name to a list stored inside a dictionary."
+            },
+            "try_nested_data_structures_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "Build student records from input and loop through the list one dictionary at a time."
             },
             "allowReveal": true
           }
@@ -300,17 +198,21 @@
     "python--python-data-functions--draft": {
       "python-5-lists-tuples-and-dictionaries": {
         "nested-data-structures": {
-          "sketch-1": {
-            "title": "What nested data structures are",
-            "bodyMarkdown": "Nested data structures are collections inside other collections. In Python, a very common pattern is a **list of dictionaries**.\n\nThis is useful when you have many items that all share the same kinds of details.\n\n```python\nstudents = [\n    {\"name\": \"Ava\", \"score\": 92},\n    {\"name\": \"Ben\", \"score\": 85},\n    {\"name\": \"Cara\", \"score\": 97}\n]\n\nprint(students[0][\"name\"])\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- `students[0]` gets the first dictionary in the list.\n- `students[0][\"name\"]` gets the value stored under the key `\"name\"` in that dictionary.\n\nA list keeps the whole group together, and each dictionary stores details about one item."
+          "list-of-dicts": {
+            "title": "Reading from a list of dictionaries",
+            "bodyMarkdown": "A **nested data structure** stores one collection inside another. A common example is a list whose items are dictionaries.\n\n```python\nstudents = [\n    {\"name\": \"Ava\", \"score\": 92},\n    {\"name\": \"Mia\", \"score\": 85}\n]\n\nprint(students[1][\"score\"])\n```\n\nOutput:\n\n```text\n85\n```\n\nRead the expression one layer at a time:\n\n1. `students[1]` selects the second item from the outer list.\n2. That item is a dictionary.\n3. `[\"score\"]` reads the `\"score\"` value from that dictionary.\n\nWhen the outer container is a list, start with a numeric index. After you reach a dictionary, use its key."
           },
-          "sketch-2": {
-            "title": "Reading values from nested containers",
-            "bodyMarkdown": "When data is nested, you read it one layer at a time.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nThis prints `12`.\n\nFollow the execution: - `product[\"details\"]` gets the inner dictionary.\n- `product[\"details\"][\"stock\"]` gets the `stock` value from that inner dictionary.\n\nYou can think of it as opening one box, then opening the smaller box inside it.\n\nWorked example: if you changed `\"stock\"` to `\"price\"`, the output would be `4`."
+          "dict-in-dict": {
+            "title": "Reading and updating a nested dictionary",
+            "bodyMarkdown": "A dictionary value can itself be another dictionary.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nOutput:\n\n```text\n12\n```\n\nAgain, follow the layers:\n\n- `product[\"details\"]` gets the inner dictionary.\n- `[\"stock\"]` reads one value from that inner dictionary.\n\nYou can update the same nested field by using that path on the left side of `=`:\n\n```python\nproduct[\"details\"][\"stock\"] = 20\n```\n\nOnly the nested `\"stock\"` value changes; the rest of `product` stays in place."
           },
-          "sketch-3": {
-            "title": "Looping through a list of dictionaries",
-            "bodyMarkdown": "A loop is a great way to work with every dictionary in a list.\n\n```python\nbooks = [\n    {\"title\": \"Sky\", \"pages\": 120},\n    {\"title\": \"River\", \"pages\": 95}\n]\n\nfor book in books:\n    print(book[\"title\"])\n```\n\nThis prints:\n\n```python\nSky\nRiver\n```\n\nStep by step:\n\n- `for book in books:` takes one dictionary at a time from the list.\n- On the first loop, `book` is `{\"title\": \"Sky\", \"pages\": 120}`.\n- On the second loop, `book` is `{\"title\": \"River\", \"pages\": 95}`.\n- `book[\"title\"]` reads the title from each dictionary.\n\nThis pattern is useful for contact books, inventories, and score lists."
+          "dict-with-list": {
+            "title": "Changing a list stored inside a dictionary",
+            "bodyMarkdown": "A dictionary can also store a list as one of its values.\n\n```python\ncourse = {\n    \"title\": \"Python\",\n    \"students\": [\"Ava\", \"Mia\"]\n}\n\ncourse[\"students\"].append(\"Noah\")\nprint(course[\"students\"])\n```\n\nOutput:\n\n```text\n['Ava', 'Mia', 'Noah']\n```\n\nThe expression `course[\"students\"]` first retrieves the inner list. Because that value is a list, normal list methods such as `.append()` work on it.\n\nThe useful question is always: **What type of value did the first access give me?** That tells you what operation comes next."
+          },
+          "loop-records": {
+            "title": "Looping through a list of records",
+            "bodyMarkdown": "When a list contains many dictionaries with the same shape, loop through the outer list and process one dictionary at a time.\n\n```python\nbooks = [\n    {\"title\": \"Sky\", \"pages\": 120},\n    {\"title\": \"River\", \"pages\": 95}\n]\n\nfor book in books:\n    print(book[\"title\"], book[\"pages\"])\n```\n\nOutput:\n\n```text\nSky 120\nRiver 95\n```\n\nDuring each iteration, `book` is one whole dictionary record. That means you can use dictionary keys such as `book[\"title\"]` and `book[\"pages\"]` inside the loop.\n\nThis pattern is the foundation for processing collections of users, products, events, scores, and other records."
           }
         }
       }

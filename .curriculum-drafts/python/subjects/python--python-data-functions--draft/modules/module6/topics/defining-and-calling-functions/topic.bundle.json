@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "function-define-call",
       "height": 420,
       "tryIt": {
         "id": "try-defining-and-calling-functions-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "function-reuse",
       "height": 420,
       "tryIt": {
         "id": "try-defining-and-calling-functions-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "function-body",
       "height": 420,
       "tryIt": {
         "id": "try-defining-and-calling-functions-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "function-define-call",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-define-call.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-define-call.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "function-reuse",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-reuse.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-reuse.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "function-body",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-body.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.function-body.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-function-call",
+      "id": "sc-definition-vs-call",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-function-call",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-definition-vs-call",
       "optionIds": [
         "a",
         "b",
@@ -131,11 +131,11 @@
       }
     },
     {
-      "id": "sc-parameter-meaning",
+      "id": "sc-function-body-indent",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-parameter-meaning",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-function-body-indent",
       "optionIds": [
         "a",
         "b",
@@ -144,15 +144,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-valid-calls",
-      "kind": "multi_choice",
+      "id": "sc-call-count",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-valid-calls",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-call-count",
       "optionIds": [
         "a",
         "b",
@@ -160,19 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "d"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-return-uses",
-      "kind": "multi_choice",
+      "id": "sc-define-before-call",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-return-uses",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-define-before-call",
       "optionIds": [
         "a",
         "b",
@@ -180,75 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "dr-define-then-call",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-define-then-call",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "dr-call-with-argument",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-call-with-argument",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "fb-def-keyword",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-def-keyword",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "def"
-      }
-    },
-    {
-      "id": "fb-call-argument",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-call-argument",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "\"Ava\""
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -293,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -302,27 +232,15 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "greet",
-            "args": [
-              "Ava"
-            ],
-            "expected": "Hello, Ava"
-          },
-          {
-            "type": "function_returns",
-            "functionName": "greet",
-            "args": [
-              "Mia"
-            ],
-            "expected": "Hello, Mia"
+            "stdin": "",
+            "stdout": "Functions are reusable!\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -331,8 +249,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "try-defining-and-calling-functions-sketch1",
@@ -376,7 +328,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -385,27 +337,15 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "square",
-            "args": [
-              5
-            ],
-            "expected": 25
-          },
-          {
-            "type": "function_returns",
-            "functionName": "square",
-            "args": [
-              -4
-            ],
-            "expected": 16
+            "stdin": "",
+            "stdout": "Ding!\nDing!\nDing!\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -414,8 +354,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+ring_bell\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Ding![\\'\\\"]\\s*\\)\\s*\\n(?:[ \\t]*\\n)*ring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*$",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.sourceChecks.0.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+ring_bell\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Ding![\\'\\\"]\\s*\\)\\s*\\n(?:[ \\t]*\\n)*ring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*$",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-defining-and-calling-functions-sketch2",
@@ -459,7 +413,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -468,27 +422,15 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "shout",
-            "args": [
-              "go"
-            ],
-            "expected": "GO"
-          },
-          {
-            "type": "function_returns",
-            "functionName": "shout",
-            "args": [
-              "team"
-            ],
-            "expected": "TEAM"
+            "stdin": "",
+            "stdout": "red\nblue\ngreen\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -497,8 +439,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

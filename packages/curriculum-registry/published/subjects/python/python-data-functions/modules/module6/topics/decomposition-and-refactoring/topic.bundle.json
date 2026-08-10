@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "extract-repetition",
       "height": 420,
       "tryIt": {
         "id": "try-decomposition-and-refactoring-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "extract-responsibility",
       "height": 420,
       "tryIt": {
         "id": "try-decomposition-and-refactoring-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "reuse-helper",
       "height": 420,
       "tryIt": {
         "id": "try-decomposition-and-refactoring-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "extract-repetition",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-repetition.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-repetition.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "extract-responsibility",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-responsibility.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-responsibility.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "reuse-helper",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.reuse-helper.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.reuse-helper.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-1",
+      "id": "sc-refactor-goal",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-refactor-goal",
       "optionIds": [
         "a",
         "b",
@@ -127,15 +127,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "sc-2",
+      "id": "sc-extract-repetition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-extract-repetition",
       "optionIds": [
         "a",
         "b",
@@ -144,15 +144,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-1",
-      "kind": "multi_choice",
+      "id": "sc-one-responsibility",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-one-responsibility",
       "optionIds": [
         "a",
         "b",
@@ -160,20 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-2",
-      "kind": "multi_choice",
+      "id": "sc-helper-reuse",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-helper-reuse",
       "optionIds": [
         "a",
         "b",
@@ -181,80 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-2",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-2",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "fb-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "clean_name(name)"
-      }
-    },
-    {
-      "id": "fb-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "return"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -299,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -308,27 +232,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "clean_text",
-            "args": [
-              "  HELLO  "
-            ],
-            "expected": "hello"
+            "stdin": "  ava  \n  mia  \n",
+            "stdout": "Ava\nMia\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "clean_text",
-            "args": [
-              " MiXeD "
-            ],
-            "expected": "mixed"
+            "stdin": "  jean  \nzoE\n",
+            "stdout": "Jean\nZoe\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -337,8 +254,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+name\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+name\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "try-decomposition-and-refactoring-sketch1",
@@ -382,7 +333,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -391,27 +342,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "get_first_name",
-            "args": [
-              "Ava Smith"
-            ],
-            "expected": "Ava"
+            "stdin": "one two three\n",
+            "stdout": "Words: 3\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "get_first_name",
-            "args": [
-              "Mia Chen"
-            ],
-            "expected": "Mia"
+            "stdin": "python functions are useful\n",
+            "stdout": "Words: 4\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -420,8 +364,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+word_count\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+len\\s*\\(\\s*text\\.split\\s*\\(\\s*\\)\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+word_count\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+len\\s*\\(\\s*text\\.split\\s*\\(\\s*\\)\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-decomposition-and-refactoring-sketch2",
@@ -465,7 +433,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -477,8 +445,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "  ava  \n",
             "stdout": "Badge: Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mIA\n",
+            "stdout": "Badge: Mia\n",
             "match": "exact"
           }
         ],
@@ -494,37 +467,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_call",
-            "functionName": "clean",
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "function_returns",
-            "functionName": "badge",
-            "args": [
-              "  mia  "
-            ],
-            "expected": "Badge: Mia",
-            "expectedKind": "json"
           },
           {
-            "type": "function_returns",
-            "functionName": "badge",
-            "args": [
-              "zoe"
-            ],
-            "expected": "Badge: Zoe",
-            "expectedKind": "json"
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_call",
-          "functionName": "clean",
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
         }
       ]
     }

@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch1.title",
-      "sketchId": "loop-and-build",
+      "sketchId": "running-total",
       "height": 420,
       "tryIt": {
         "id": "try-looping-through-lists-sketch1",
@@ -61,13 +61,32 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch2.title",
-      "sketchId": "loop-variables",
+      "sketchId": "loop-and-build",
       "height": 420,
       "tryIt": {
         "id": "try-looping-through-lists-sketch2",
         "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch2.title",
         "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch2.prompt",
         "exerciseKey": "try-looping-through-lists-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch3.title",
+      "sketchId": "filter-with-condition",
+      "height": 420,
+      "tryIt": {
+        "id": "try-looping-through-lists-sketch3",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch3.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch3.prompt",
+        "exerciseKey": "try-looping-through-lists-sketch3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -84,7 +103,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -100,16 +119,22 @@
       "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-basics.bodyMarkdown"
     },
     {
+      "id": "running-total",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.running-total.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.running-total.bodyMarkdown"
+    },
+    {
       "id": "loop-and-build",
       "archetype": "paragraph",
       "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.title",
       "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.bodyMarkdown"
     },
     {
-      "id": "loop-variables",
+      "id": "filter-with-condition",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.filter-with-condition.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.filter-with-condition.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -138,19 +163,21 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-empty-list-start",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-loop-uses",
-      "kind": "multi_choice",
+      "id": "sc-running-total",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-loop-uses",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-running-total",
       "optionIds": [
         "a",
         "b",
@@ -158,20 +185,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-good-loop-names",
-      "kind": "multi_choice",
+      "id": "sc-filter-append",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-good-loop-names",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-filter-append",
       "optionIds": [
         "a",
         "b",
@@ -179,82 +202,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr-build-derived-list",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-build-derived-list",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-read-loop-header",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-read-loop-header",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5"
-        ]
-      }
-    },
-    {
-      "id": "fb-append-call",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-append-call",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "append"
-      }
-    },
-    {
-      "id": "fb-loop-keyword",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-loop-keyword",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "for"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -299,7 +248,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -311,8 +260,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "cat\ndog\nfox\n",
+            "stdin": "Kitchen\nStudio\nLab\n",
+            "stdout": "Room: Kitchen\nRoom: Studio\nRoom: Lab\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "A\nB\nC\n",
+            "stdout": "Room: A\nRoom: B\nRoom: C\n",
             "match": "exact"
           }
         ],
@@ -328,17 +282,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "animals",
+            "type": "source_regex",
+            "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_for_loop",
+            "iterable": "rooms",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "animals",
+          "type": "source_regex",
+          "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_for_loop",
+          "iterable": "rooms",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -384,7 +348,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -396,7 +360,12 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "5\n8\n3\n4\n",
+            "stdout": "20\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n1\n7\n2\n",
             "stdout": "20\n",
             "match": "exact"
           }
@@ -411,37 +380,39 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "total",
-            "expected": 20,
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "scores",
+            "type": "source_regex",
+            "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+            "type": "uses_for_loop",
+            "iterable": "minutes",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "scores",
+          "type": "source_regex",
+          "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+          "type": "uses_for_loop",
+          "iterable": "minutes",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -487,7 +458,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -499,8 +470,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "[2, 4, 6]\n",
+            "stdin": "1\n4\n9\n",
+            "stdout": "[6, 9, 14]\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n0\n-2\n",
+            "stdout": "[15, 5, 3]\n",
             "match": "exact"
           }
         ],
@@ -514,43 +490,161 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "doubled",
-            "expected": [
-              2,
-              4,
-              6
-            ],
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "numbers",
+            "type": "source_regex",
+            "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_for_loop",
+            "iterable": "readings",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
           },
           {
             "type": "uses_method",
             "method": "append",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
-            "target": "doubled"
+            "target": "adjusted",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "numbers",
+          "type": "source_regex",
+          "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_for_loop",
+          "iterable": "readings",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
         },
         {
           "type": "uses_method",
           "method": "append",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
-          "target": "doubled"
+          "target": "adjusted",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "try-looping-through-lists-sketch3",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "95\n72\n80\n61\n",
+            "stdout": "[95, 80]\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "79\n80\n100\n81\n",
+            "stdout": "[80, 100, 81]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_for_loop",
+            "iterable": "scores",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_for_loop",
+          "iterable": "scores",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
         }
       ]
     }

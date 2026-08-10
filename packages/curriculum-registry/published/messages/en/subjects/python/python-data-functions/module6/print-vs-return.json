@@ -4,254 +4,162 @@
       "python-6-functions-and-modularity": {
         "print-vs-return": {
           "label": "Print vs Return",
-          "summary": "Understand when to display output and when to return data from a function so other code can keep using the result.",
+          "summary": "Distinguish display-only functions from functions that return reusable data, understand why printing a print-only call shows `None`, and fix code that prints when the caller needs a value.",
           "cards": {
             "sketch0": {
-              "title": "Printing shows a value; returning gives it back"
+              "title": "Printing displays a value but returns None"
             },
             "sketch1": {
-              "title": "A worked comparison: same output, different usefulness"
+              "title": "Returned values can be stored and reused"
             },
             "sketch2": {
-              "title": "When should you print, and when should you return?"
+              "title": "Fix a function that prints when it should return"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "pvrs-sc-1": {
-              "title": "Which statement describes return?",
-              "prompt": "Which statement best describes what `return` does in a function?",
-              "hint": "Think about whether the value is only shown or sent back to the code that called the function.",
+            "sc-print-only-result": {
+              "title": "What does the caller receive?",
+              "prompt": "A function contains `print(\"Ready\")` but no `return`. What value does the function call give back to its caller?",
+              "hint": "Visible output and a returned value are separate things.",
               "help": {
-                "concept": "`return` gives a result back to the caller so it can be stored, reused, or combined with other values.",
-                "hint_1": "A returned value can be assigned to a variable like `result = my_function()`.",
-                "hint_2": "Look for the option about sending a value back from the function, not just displaying it."
+                "concept": "A function with no explicit `return` gives the caller `None`, even if the function prints something.",
+                "hint_1": "`print(\"Ready\")` displays text in the output panel.",
+                "hint_2": "Because there is no `return`, the call itself evaluates to `None`."
               },
               "options": {
-                "a": "It sends a value back from the function to the caller.",
-                "b": "It always prints a value in the output panel.",
-                "c": "It repeats the function from the beginning.",
-                "d": "It creates a new parameter automatically."
+                "a": "\"Ready\"",
+                "b": "None",
+                "c": "print",
+                "d": "The function name"
               }
             },
-            "pvrs-sc-2": {
-              "title": "Which function result can be reused?",
-              "prompt": "A function should calculate a number and let later code multiply that number by 10. Which approach is best?",
-              "hint": "The later code needs the function's result as a value, not just visible output.",
+            "sc-display-only-call": {
+              "title": "Call a display-only function",
+              "prompt": "`show_status(text)` prints its text and does not return a value. Which line displays `Ready` once without also displaying `None`?",
+              "hint": "If the function already prints, call it directly.",
               "help": {
-                "concept": "When later code must keep using a result, the function should return that result instead of only printing it.",
-                "hint_1": "If the function only prints, another expression cannot directly use that printed value in a calculation.",
-                "hint_2": "Choose the option where the function gives the number back so another line can store it and multiply it."
+                "concept": "Wrapping a display-only function call in another `print()` prints the function's implicit `None` result too.",
+                "hint_1": "`show_status(\"Ready\")` already causes the function body to print `Ready`.",
+                "hint_2": "Avoid `print(show_status(\"Ready\"))` when the function itself is responsible for display."
               },
               "options": {
-                "a": "Use `return` inside the function and store the result in a variable.",
-                "b": "Use `print()` inside the function and assume later code can multiply the printed text.",
-                "c": "Add more parameters until the function becomes reusable.",
-                "d": "Put the multiplication inside the function even if other code needs the original result."
+                "a": "show_status(\"Ready\")",
+                "b": "print(show_status(\"Ready\"))",
+                "c": "return show_status(\"Ready\")",
+                "d": "show_status = \"Ready\""
               }
             },
-            "pvrs-mc-1": {
-              "title": "Choose the true statements",
-              "prompt": "Which statements about `print()` and `return` are true? Choose all that apply.",
-              "hint": "Separate what the user sees in the output panel from what the rest of the program can keep using.",
+            "sc-reuse-returned-value": {
+              "title": "Reuse a function result",
+              "prompt": "`double(6)` returns `12`. Which code correctly stores that returned value and then uses it in another calculation?",
+              "hint": "Store the function call on the right side of an assignment.",
               "help": {
-                "concept": "`print()` is for display, while `return` is for producing a value that calling code can use.",
-                "hint_1": "A returned value can be assigned to a variable; printed output is just displayed.",
-                "hint_2": "Pick the options that describe display versus reusable results correctly."
+                "concept": "A returned value behaves like another value: it can be assigned to a variable and used later.",
+                "hint_1": "First save `double(6)` in a variable.",
+                "hint_2": "Then use that variable in the later expression."
               },
               "options": {
-                "a": "`print()` displays output for the user to see.",
-                "b": "`return` can send a value back to the code that called the function.",
-                "c": "A function can never use both `print()` and `return`.",
-                "d": "If a function only prints a value, that printed value is automatically stored in a variable."
+                "a": "result = double(6)\nprint(result + 1)",
+                "b": "print = double(6)\nresult + 1",
+                "c": "double = 6\nprint(double + 1)",
+                "d": "return double(6)\nprint(result)"
               }
             },
-            "pvrs-mc-2": {
-              "title": "Ways to use a returned value",
-              "prompt": "A function `make_label(name)` returns a string. Which lines use that returned value correctly? Choose all that apply.",
-              "hint": "Look for lines where the function call becomes part of another expression or is stored for later use.",
+            "sc-fix-print-return-bug": {
+              "title": "Fix a print-versus-return bug",
+              "prompt": "The caller does `label = make_label(\"Book\")` and then needs `label + \"!\"`. Inside `make_label`, which statement should produce the label text?",
+              "hint": "The caller needs to receive a string value, not just see it displayed.",
               "help": {
-                "concept": "A returned value behaves like any other value, so it can be stored, printed, or combined with other strings.",
-                "hint_1": "If the function returns text, valid uses include assignment and string concatenation.",
-                "hint_2": "Choose the lines where the function call is treated like a string value produced by the function."
+                "concept": "When later code must store or combine a function result, the function should return that result.",
+                "hint_1": "Printing the label would display it but leave `label` as `None`.",
+                "hint_2": "Return the string so the caller can concatenate `\"!\"`."
               },
               "options": {
-                "a": "`label = make_label(\"Mia\")`",
-                "b": "`print(make_label(\"Mia\"))`",
-                "c": "`message = make_label(\"Mia\") + \"!\"`",
-                "d": "`return = make_label(\"Mia\")`"
+                "a": "print(\"Item: \" + item)",
+                "b": "return \"Item: \" + item",
+                "c": "input(\"Item: \" + item)",
+                "d": "def \"Item: \" + item"
               }
-            },
-            "pvrs-dr-1": {
-              "title": "Order the return flow",
-              "prompt": "Put these steps in the correct order for code that returns a value and then prints it.",
-              "hint": "Start with the function call, then think about what the function sends back, then what gets displayed.",
-              "help": {
-                "concept": "When a function returns a value, the call runs first, the value comes back to the caller, it can be stored, and then it may be printed.",
-                "hint_1": "The function must run before a variable can receive its returned value.",
-                "hint_2": "The displayed output happens after the returned value has already come back and been used by the calling code."
-              },
-              "tokens": {
-                "t1": "Call the function.",
-                "t2": "The function computes a result.",
-                "t3": "The function returns the value.",
-                "t4": "The caller stores or uses that value.",
-                "t5": "`print()` can display it."
-              }
-            },
-            "pvrs-dr-2": {
-              "title": "Build a reusable pattern",
-              "prompt": "Arrange these code pieces into a sensible pattern for using a returned value.",
-              "hint": "First define the function, then call it, then store the result, then display or reuse it.",
-              "help": {
-                "concept": "A common pattern is define a function with `return`, call it, save the returned value, and then use that value later.",
-                "hint_1": "The function definition must come before the call that uses it.",
-                "hint_2": "After the call returns a value, that value should be assigned before a later `print()` uses the variable."
-              },
-              "tokens": {
-                "t1": "`def add_one(n):`",
-                "t2": "`    return n + 1`",
-                "t3": "`result = add_one(4)`",
-                "t4": "`print(result)`"
-              }
-            },
-            "pvrs-fb-1": {
-              "title": "Complete the keyword",
-              "prompt": "Choose the word that correctly completes the function so it sends a value back.",
-              "hint": "The missing word should give the result back to the caller.",
-              "help": {
-                "concept": "A function uses a dedicated statement to send a computed value back to its caller.",
-                "hint_1": "`print` shows output, but this blank needs the keyword that hands the value back.",
-                "hint_2": "Choose the Python keyword used before an expression like `n * 2` when a function should produce a reusable result."
-              },
-              "template": "def double(n):\n    [blank1] n * 2",
-              "choices": [
-                "print",
-                "return",
-                "input",
-                "def"
-              ]
-            },
-            "pvrs-fb-2": {
-              "title": "Complete the display line",
-              "prompt": "Choose the code that displays the returned value from `get_name()` in the output panel.",
-              "hint": "The function already returns the value, so the missing part should show that value.",
-              "help": {
-                "concept": "If a function returns a value and you want to display it, wrap the function call in `print()`.",
-                "hint_1": "The blank is not inside the function definition; it is the line that shows the returned result.",
-                "hint_2": "Choose the option that calls the function and sends its result to the output panel."
-              },
-              "template": "[blank1]",
-              "choices": [
-                "print(get_name())",
-                "return get_name()",
-                "def get_name()",
-                "get_name = print()"
-              ]
-            },
-            "pvrs-code-1": {
-              "title": "Return a doubled value",
-              "prompt": "Write `double_number(n)` so it returns double the input instead of printing it.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def double_number(n):\n    # return double the input\n    pass",
-              "solutionCode": "def double_number(n):\n    return n * 2"
-            },
-            "pvrs-code-2": {
-              "title": "Return a greeting string",
-              "prompt": "Write `make_greeting(name)` so it returns a greeting string like `Hello, Ava`.",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
-              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
-            },
-            "pvrs-code-3": {
-              "title": "Return a total instead of printing it",
-              "prompt": "Write `add_prices(price1, price2)` so it returns the total of the two prices instead of printing it.",
-              "hint": "Trace the code before choosing the option that matches its actual behavior.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
-              "solutionCode": "def add_prices(price1, price2):\n    return price1 + price2"
-            },
-            "try-print-vs-return-checkpoint": {
-              "title": "Return, then print",
-              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`.",
-              "hint": "The function should return the value; the call site should print it.",
-              "help": {
-                "concept": "Returning a value and printing a value are separate actions.",
-                "hint_1": "The function should return the value; the call site should print it.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def add(a, b):\n    # Return the sum.\n    pass\n\n# Print the result of add(3, 4).\n",
-              "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
             },
             "try-print-vs-return-sketch0": {
-              "title": "Return then print",
-              "prompt": "The function returns the value; the caller prints it.",
-              "hint": "Return 'Hi, ' + name instead of printing inside the function.",
+              "title": "Call a display-only function directly",
+              "prompt": "The starter defines `show_status(text)` as a display-only function: it prints the text and returns no value. The final line incorrectly wraps the call in `print(...)`, which would display an extra `None`. Change only the caller behavior so the status is displayed exactly once.",
+              "hint": "Because `show_status` already prints, call `show_status(status)` directly.",
               "help": {
-                "concept": "Return 'Hi, ' + name instead of printing inside the function.",
-                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A display-only function should usually be called directly rather than wrapped in another `print()`.",
+                "hint_1": "Keep `print(text)` inside `show_status`.",
+                "hint_2": "Replace `print(show_status(status))` with a standalone `show_status(status)` call."
               },
-              "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n",
-              "solutionCode": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n"
+              "starterCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nprint(show_status(status))\n",
+              "solutionCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nshow_status(status)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `show_status` as a display-only function that prints `text`."
+                },
+                "1": {
+                  "message": "Call `show_status(status)` directly instead of printing the call's `None` result."
+                }
+              }
             },
             "try-print-vs-return-sketch1": {
-              "title": "Use a returned number",
-              "prompt": "Returned values can be stored and used in more expressions.",
-              "hint": "Store double(6) in result, then print result + 1.",
+              "title": "Store and reuse a returned number",
+              "prompt": "The starter defines `double(number)` so it returns twice the number. Read the existing input into `number`, store `double(number)` in a variable named `result`, then print `result + 1`.",
+              "hint": "The returned number can be saved first and used in a later expression.",
               "help": {
-                "concept": "Store double(6) in result, then print result + 1.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A returned value can be assigned to a variable and then reused in additional calculations.",
+                "hint_1": "Write `result = double(number)`.",
+                "hint_2": "Then print `result + 1`."
               },
-              "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n",
-              "solutionCode": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n"
+              "starterCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\n# Store double(number) in result.\n# Then print result + 1.\n",
+              "solutionCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\nresult = double(number)\nprint(result + 1)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store the returned value with `result = double(number)`."
+                },
+                "1": {
+                  "message": "Use the stored result in the later expression `result + 1`."
+                }
+              }
             },
             "try-print-vs-return-sketch2": {
-              "title": "Avoid printing None",
-              "prompt": "Print the returned string, not the function object.",
-              "hint": "Print label('zoe').",
+              "title": "Fix a function that prints instead of returning",
+              "prompt": "The starter's `make_label(item)` prints the label, but the caller needs to store that label and add `!`. Fix `make_label` so it returns `\"Item: \" + item` instead of printing it. Keep the caller-side assignment and final print.",
+              "hint": "The caller needs a string value in `label`, so the function must return the string.",
               "help": {
-                "concept": "Print label('zoe').",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
+                "concept": "Printing inside the function is not enough when the caller must store and transform the result.",
+                "hint_1": "Replace the function body's `print(...)` with `return \"Item: \" + item`.",
+                "hint_2": "Leave `label = make_label(item)` and `print(label + \"!\")` outside the function."
               },
-              "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n",
-              "solutionCode": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n"
+              "starterCode": "def make_label(item):\n    print(\"Item: \" + item)\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
+              "solutionCode": "def make_label(item):\n    return \"Item: \" + item\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Return the label string from `make_label` instead of printing it inside the function."
+                },
+                "1": {
+                  "message": "Store the returned label with `label = make_label(item)`."
+                },
+                "2": {
+                  "message": "Use the stored label in `print(label + \"!\")`."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_print_vs_return_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`."
-            },
             "try_print_vs_return_sketch0": {
               "title": "Try it yourself",
-              "prompt": "The function returns the value; the caller prints it."
+              "prompt": "Call a display-only function directly so its implicit `None` result is not printed."
             },
             "try_print_vs_return_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Returned values can be stored and used in more expressions."
+              "prompt": "Store a returned number and reuse it in another expression."
             },
             "try_print_vs_return_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Print the returned string, not the function object."
+              "prompt": "Fix a function that prints when its caller needs a returned string."
             },
             "allowReveal": true
           }
@@ -263,17 +171,17 @@
     "python-data-functions": {
       "python-6-functions-and-modularity": {
         "print-vs-return": {
-          "print-vs-return-idea": {
-            "title": "Printing shows a value; returning gives it back",
-            "bodyMarkdown": "`print()` and `return` do different jobs.\n\n- `print()` sends text or values to the **output panel** so a person can see them.\n- `return` sends a value back from a function so the rest of your code can use it.\n\nHere is a simple example:\n\n```python\ndef double_number(n):\n    return n * 2\n\nresult = double_number(5)\nprint(result)\n```\n\nStep by step:\n\n1. `double_number(5)` runs the function.\n2. `return n * 2` sends back `10`.\n3. That returned value is stored in `result`.\n4. `print(result)` displays `10` in the output panel.\n\nThe important idea: the function itself **returns** the value, and then another line **prints** it.\n\nIf you only print inside a function, the value appears on screen, but other code may not be able to reuse it."
+          "print-returns-none": {
+            "title": "Printing displays a value but returns None",
+            "bodyMarkdown": "`print()` and `return` affect different parts of a program. `print()` displays something for a person to see. `return` gives a value back to the caller.\n\nConsider a function that only prints:\n\n```python\ndef show_score(score):\n    print(score)\n\nresult = show_score(8)\nprint(result)\n```\n\nThe output is:\n\n```text\n8\nNone\n```\n\nThe first line appears because `show_score` prints `8`. The second line is `None` because the function has no explicit `return`. In Python, such a function still gives the caller the special value `None`.\n\nIf a function's job is only to display something, call it directly:\n\n```python\nshow_score(8)\n```\n\nDo not wrap a display-only call in another `print()` unless you actually want to display its `None` result."
           },
-          "print-vs-return-compare": {
-            "title": "A worked comparison: same output, different usefulness",
-            "bodyMarkdown": "These two functions may look similar, but they behave differently.\n\n```python\ndef show_total(a, b):\n    print(a + b)\n\ndef get_total(a, b):\n    return a + b\n```\n\nNow compare how they are used:\n\n```python\nshow_total(2, 3)\nvalue = get_total(2, 3)\nprint(value)\n```\n\nWhat happens?\n\n- `show_total(2, 3)` prints `5` right away.\n- `get_total(2, 3)` does **not** display anything by itself.\n- Instead, it returns `5`, which gets stored in `value`.\n- Then `print(value)` displays `5`.\n\nWhy does this matter?\n\nWith `return`, you can keep working with the result:\n\n```python\ntotal = get_total(2, 3)\nprint(total * 10)\n```\n\nThis prints `50` because the returned value can be reused in another calculation."
+          "reuse-returned-value": {
+            "title": "Returned values can be stored and reused",
+            "bodyMarkdown": "When a function uses `return`, the caller receives a real value that can keep participating in the program.\n\n```python\ndef triple(number):\n    return number * 3\n\nresult = triple(4)\nprint(result)\nprint(result + 2)\n```\n\nHere `triple(4)` returns `12`. The assignment stores that value in `result`. The caller can display `12`, add `2`, put it in a list, compare it, or pass it to another function.\n\nThat is the key advantage of `return`: the function produces data rather than only showing output."
           },
-          "print-vs-return-when": {
-            "title": "When should you print, and when should you return?",
-            "bodyMarkdown": "A good beginner rule is:\n\n- Use **`print()`** when you want to **show** something to the user.\n- Use **`return`** when you want a function to **produce a result** for other code to use.\n\nExample:\n\n```python\ndef make_greeting(name):\n    return \"Hello, \" + name\n\ngreeting = make_greeting(\"Ava\")\nprint(greeting)\n```\n\nFollow the execution: - The function builds a greeting.\n- `return` sends that greeting back.\n- The returned text is stored in `greeting`.\n- `print(greeting)` shows it in the output panel.\n\nIf the function used `print(\"Hello, \" + name)` instead, you would see the text, but you could not easily combine it with other strings later.\n\nFor example, this works well with `return`:\n\n```python\nmessage = make_greeting(\"Ava\")\nprint(message + \"!\")\n```"
+          "fix-print-bug": {
+            "title": "Fix a function that prints when it should return",
+            "bodyMarkdown": "A common beginner bug is to print a value inside a function even though later code needs to reuse that value.\n\nThis version has a problem:\n\n```python\ndef build_name(first, last):\n    print(first + \" \" + last)\n\nname = build_name(\"Mia\", \"Chen\")\nprint(name + \"!\")\n```\n\n`build_name` displays `Mia Chen`, but it does not return that string. So `name` receives `None`, and `name + \"!\"` cannot work.\n\nThe reusable version returns the string:\n\n```python\ndef build_name(first, last):\n    return first + \" \" + last\n\nname = build_name(\"Mia\", \"Chen\")\nprint(name + \"!\")\n```\n\nNow the function produces data, and the caller decides how to display or transform it."
           }
         }
       }
