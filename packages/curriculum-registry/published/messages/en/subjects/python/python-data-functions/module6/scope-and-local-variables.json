@@ -4,286 +4,165 @@
       "python-6-functions-and-modularity": {
         "scope-and-local-variables": {
           "label": "Scope and Local Variables",
-          "summary": "Understand where variables exist and why local scope matters.",
+          "summary": "Use local variables safely inside functions, recognize that parameters are local names, keep same-named outside values separate, and return local results when the caller needs them.",
           "cards": {
             "sketch0": {
-              "title": "What local scope means"
+              "title": "Local variables belong to the function call"
             },
             "sketch1": {
-              "title": "Inside a function is different from outside"
+              "title": "Parameters are local, even when names match outside"
             },
             "sketch2": {
-              "title": "Parameters are local too"
+              "title": "Return local results to the caller"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-q1": {
-              "title": "Find the local variable",
-              "prompt": "In this code, which name is local to the function?\n\n```python\ncolor = \"blue\"\n\ndef paint():\n    shade = \"dark\"\n    return color + \" \" + shade\n```",
-              "hint": "Look for the name created inside `paint()`.",
+            "sc-local-variable": {
+              "title": "Identify a local variable",
+              "prompt": "In `def total(price): fee = 2; return price + fee`, which name is created locally inside the function body?",
+              "hint": "Look for the assignment that happens inside the function.",
               "help": {
-                "concept": "A local variable is created inside a function and is meant to be used only during that function call.",
-                "hint_1": "`color` is assigned before the function starts. Check which name is assigned inside the function body.",
-                "hint_2": "The local name is the one introduced on the line `... = \"dark\"` inside `paint()`."
+                "concept": "A name assigned inside a function is local to that function call unless Python is explicitly told otherwise.",
+                "hint_1": "`price` is a parameter; it receives its value when the function is called.",
+                "hint_2": "`fee = 2` creates a working variable inside the function body."
               },
               "options": {
-                "a": "color",
-                "b": "paint",
-                "c": "shade",
-                "d": "return"
+                "a": "fee",
+                "b": "total",
+                "c": "return",
+                "d": "def"
               }
             },
-            "sc-q2": {
+            "sc-local-outside": {
+              "title": "Use a local name outside the function",
+              "prompt": "A function creates `message = \"Ready\"` inside its body but does not return it. What happens if code after the function call tries `print(message)`?",
+              "hint": "The name was created only inside the function.",
+              "help": {
+                "concept": "A local variable is not directly available to unrelated code after the function call finishes.",
+                "hint_1": "Displaying or returning a value is different from making the local variable itself available outside.",
+                "hint_2": "The outside code does not have its own `message` assignment."
+              },
+              "options": {
+                "a": "It prints Ready",
+                "b": "Python reports that `message` is not defined there",
+                "c": "It automatically calls the function again",
+                "d": "It turns `message` into a parameter"
+              }
+            },
+            "sc-parameter-local": {
               "title": "Parameter scope",
-              "prompt": "What is true about a parameter like `name` in `def greet(name):`?",
-              "hint": "Think about where the parameter can be used directly.",
+              "prompt": "What is true about `count` in `def add_one(count):`?",
+              "hint": "A parameter is a name that receives an argument for one function call.",
               "help": {
-                "concept": "Parameters are local names created for a function call, so they belong to that function's scope.",
-                "hint_1": "A parameter gets its value when the function is called, not everywhere in the program.",
-                "hint_2": "Ask whether `name` is meant to exist only inside `greet(...)` or in all code automatically."
+                "concept": "Parameters are local names inside the function call.",
+                "hint_1": "The caller supplies an argument value.",
+                "hint_2": "Inside the function, that value is available through the local parameter name `count`."
               },
               "options": {
-                "a": "It exists only inside the function call unless returned or passed elsewhere.",
-                "b": "It automatically becomes a global variable.",
-                "c": "It can only store numbers.",
-                "d": "It disappears before the function starts."
+                "a": "It is local to the function call",
+                "b": "It automatically changes every outside variable named count",
+                "c": "It can only hold integers",
+                "d": "It exists before the function is called"
               }
             },
-            "mc-q1": {
-              "title": "Choose the local names",
-              "prompt": "Which names are local in this code? Choose all that apply.\n\n```python\ntax = 5\n\ndef total(price):\n    fee = 2\n    final_price = price + fee + tax\n    return final_price\n```",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
+            "sc-same-name-separate": {
+              "title": "Same name, separate value",
+              "prompt": "Suppose `count = 5` exists outside a function and `def add_one(count): return count + 1`. After `print(add_one(count))`, what is the outside `count` still equal to?",
+              "hint": "The parameter receives the value 5, but the function does not assign to the outside variable.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "A parameter can have the same spelling as an outside variable while still being a separate local name.",
+                "hint_1": "The call returns `6`.",
+                "hint_2": "Nothing in the function changes the caller's `count = 5` assignment."
               },
               "options": {
-                "a": "tax",
-                "b": "price",
-                "c": "fee",
-                "d": "final_price"
+                "a": "5",
+                "b": "6",
+                "c": "None",
+                "d": "The function name"
               }
-            },
-            "mc-q2": {
-              "title": "Why local scope helps",
-              "prompt": "Why are local variables useful? Choose all correct answers.",
-              "hint": "Think about how functions stay organized and avoid name mix-ups.",
-              "help": {
-                "concept": "Local scope helps functions stay independent, readable, and safer because temporary names do not leak into the rest of the program.",
-                "hint_1": "A good answer should mention keeping function work separate or preventing accidental reuse of temporary names.",
-                "hint_2": "Look for benefits like reducing conflicts and making each function manage its own temporary data."
-              },
-              "options": {
-                "a": "They help prevent temporary names inside one function from interfering with other code.",
-                "b": "They make it easier for a function to keep its own working values.",
-                "c": "They force every variable in a program to have the same name.",
-                "d": "They automatically print returned values."
-              }
-            },
-            "dr-q1": {
-              "title": "Order a function call",
-              "prompt": "Put these steps in the correct order for what happens when `double(4)` runs in a function that returns `number * 2`.",
-              "hint": "Start with the call, then the parameter gets a value, then the calculation happens, then the result is returned.",
-              "help": {
-                "concept": "A function call gives values to parameters, runs the function body, computes a result, and then returns that result.",
-                "hint_1": "The parameter cannot be used until the function is called with an argument.",
-                "hint_2": "After `number` gets `4`, the multiplication happens before the value is sent back."
-              },
-              "tokens": {
-                "t1": "Call `double(4)`",
-                "t2": "Set local parameter `number` to `4`",
-                "t3": "Compute `number * 2`",
-                "t4": "Return the result"
-              }
-            },
-            "dr-q2": {
-              "title": "Trace local variable creation",
-              "prompt": "Arrange the steps to describe this function call correctly.\n\n```python\ndef greet(person):\n    message = \"Hi \" + person\n    return message\n```",
-              "hint": "The argument fills the parameter first, then the local variable is built, then the function returns it.",
-              "help": {
-                "concept": "During a function call, the argument becomes the parameter value, local variables are created from that value, and the return statement sends the final result back.",
-                "hint_1": "`person` gets its value before `message` can be created.",
-                "hint_2": "The returned value comes last, after the string has been built inside the function."
-              },
-              "tokens": {
-                "t1": "Pass an argument into `person`",
-                "t2": "Create local variable `message`",
-                "t3": "Build the text `\"Hi \" + person`",
-                "t4": "Return `message`"
-              }
-            },
-            "fb-q1": {
-              "title": "Complete the local assignment",
-              "prompt": "Choose the missing word to make `score` a local variable inside the function.",
-              "hint": "The blank should be the variable name being assigned inside the function.",
-              "help": {
-                "concept": "A variable assigned inside a function becomes local to that function call.",
-                "hint_1": "The line is creating a new name inside the function body.",
-                "hint_2": "Match the blank to the variable described as belonging only to the function call."
-              },
-              "template": "def show_score():\n    [blank1] = 10\n    return score",
-              "choices": [
-                "score",
-                "return",
-                "show_score",
-                "def"
-              ]
-            },
-            "fb-q2": {
-              "title": "Complete the parameter use",
-              "prompt": "Fill the blank with the correct local name.",
-              "hint": "Use the parameter name from the function header.",
-              "help": {
-                "concept": "A parameter is a local name, so code inside the function should use that parameter name directly.",
-                "hint_1": "The function header already tells you the local name to use.",
-                "hint_2": "Look at the parameter position inside the function header and choose the same name used by the function body."
-              },
-              "template": "def triple(value):\n    return [blank1] * 3",
-              "choices": [
-                "value",
-                "triple",
-                "return",
-                "3"
-              ]
-            },
-            "code-q1": {
-              "title": "Return a local calculation",
-              "prompt": "Write `add_tax(price)` so it calculates `price + 5`, stores that result in a local variable named `total`, and then returns `total`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
-              "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
-              "checks": {
-                "0": {
-                  "message": "add_tax should return price plus 5."
-                },
-                "1": {
-                  "message": "add_tax should work for a different number too."
-                },
-                "2": {
-                  "message": "Return the value instead of printing it."
-                }
-              }
-            },
-            "code-q2": {
-              "title": "Use a parameter as a local name",
-              "prompt": "Write `make_label(word)` so it builds the finished string in a local variable named `label`, then returns `label`.",
-              "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
-              "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
-              "checks": {
-                "0": {
-                  "message": "make_label should prefix the word with `Item: `."
-                },
-                "1": {
-                  "message": "make_label should work with another input word."
-                },
-                "2": {
-                  "message": "Return the string instead of printing it."
-                }
-              }
-            },
-            "code-q3": {
-              "title": "Compute with two local variables",
-              "prompt": "Write `rectangle_area(width, height)` so it computes the area, stores it in a local variable named `area`, and returns `area`.",
-              "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
-              "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
-              "checks": {
-                "0": {
-                  "message": "rectangle_area should multiply width by height."
-                },
-                "1": {
-                  "message": "rectangle_area should work for another pair of numbers."
-                },
-                "2": {
-                  "message": "Return the area instead of printing it."
-                }
-              }
-            },
-            "try-scope-and-local-variables-checkpoint": {
-              "title": "Use a local variable",
-              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`.",
-              "hint": "Create the message inside the function.",
-              "help": {
-                "concept": "A local variable exists inside the function where it is created.",
-                "hint_1": "Create the message inside the function.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
-              "solutionCode": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n"
             },
             "try-scope-and-local-variables-sketch0": {
-              "title": "Use a local variable",
-              "prompt": "A local variable exists inside the function that creates it.",
-              "hint": "Create local variable total = price + 2.",
+              "title": "Create and return a local calculation",
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable `total = price + 3`, then return `total`. The caller already reads a price and prints the returned result.",
+              "hint": "Both the `total` assignment and `return total` belong inside the function body.",
               "help": {
-                "concept": "Create local variable total = price + 2.",
-                "hint_1": "Create local variable total = price + 2 Then return total.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A local variable can hold an intermediate result while the function is running.",
+                "hint_1": "Create `total = price + 3` under the `def` line.",
+                "hint_2": "Return that local value with `return total`."
               },
-              "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
-              "solutionCode": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n"
+              "starterCode": "def add_fee(price):\n    # Create local variable total = price + 3.\n    # Then return total.\n    pass\n\nprice = int(input())\nprint(add_fee(price))\n",
+              "solutionCode": "def add_fee(price):\n    total = price + 3\n    return total\n\nprice = int(input())\nprint(add_fee(price))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create the local assignment `total = price + 3` inside `add_fee`."
+                },
+                "1": {
+                  "message": "Return the local variable with `return total`."
+                }
+              }
             },
             "try-scope-and-local-variables-sketch1": {
-              "title": "Pass data as a parameter",
-              "prompt": "Pass the outside value into the function as an argument.",
-              "hint": "Return 'Welcome, ' + person.",
+              "title": "Keep an outside value separate from a parameter",
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable `updated = count + 1` and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
+              "hint": "The parameter named `count` is local to `next_count`; calculate a new local `updated` value instead of changing the outside assignment.",
               "help": {
-                "concept": "Return 'Welcome, ' + person.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "A parameter can have the same name as an outside variable without turning that outside variable into the function's local storage.",
+                "hint_1": "Inside the function, write `updated = count + 1`.",
+                "hint_2": "Return `updated`; do not add another top-level assignment to `count`."
               },
-              "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
-              "solutionCode": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n"
+              "starterCode": "count = int(input())\n\ndef next_count(count):\n    # Create local variable updated = count + 1.\n    # Return updated.\n    pass\n\nprint(next_count(count))\nprint(count)\n",
+              "solutionCode": "count = int(input())\n\ndef next_count(count):\n    updated = count + 1\n    return updated\n\nprint(next_count(count))\nprint(count)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `count` as the function parameter in `next_count(count)`."
+                },
+                "1": {
+                  "message": "Create local variable `updated = count + 1` inside the function."
+                },
+                "2": {
+                  "message": "Return `updated` instead of trying to change the outside `count`."
+                }
+              }
             },
             "try-scope-and-local-variables-sketch2": {
-              "title": "Keep variables separate",
-              "prompt": "A parameter can have the same name but still be local to the function.",
-              "hint": "Return count plus one.",
+              "title": "Return a local value to the caller",
+              "prompt": "The starter creates local variable `message` inside `make_message(name)`, but then incorrectly tries to use `message` outside the function. Fix the program by returning the local `message`, storing the returned value in a caller-side variable named `result`, and printing `result`.",
+              "hint": "The outside code cannot reach the function's local `message` directly; send its value back with `return`.",
               "help": {
-                "concept": "Return count plus one.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "Returning a local value does not expose the local variable itself; it gives the caller a value that the caller can store under its own name.",
+                "hint_1": "Inside the function, add `return message`.",
+                "hint_2": "Outside the function, use `result = make_message(name)` and then `print(result)`."
               },
-              "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
-              "solutionCode": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n"
+              "starterCode": "def make_message(name):\n    message = \"Hello, \" + name\n    # Return the local message so the caller can use its value.\n    pass\n\nname = input()\nmake_message(name)\nprint(message)\n",
+              "solutionCode": "def make_message(name):\n    message = \"Hello, \" + name\n    return message\n\nname = input()\nresult = make_message(name)\nprint(result)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Return the local variable with `return message` inside `make_message`."
+                },
+                "1": {
+                  "message": "Store the returned value in caller-side variable `result`."
+                },
+                "2": {
+                  "message": "Print the caller-side `result`, not the function's local variable `message`."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_scope_and_local_variables_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`."
-            },
             "try_scope_and_local_variables_sketch0": {
               "title": "Try it yourself",
-              "prompt": "A local variable exists inside the function that creates it."
+              "prompt": "Create a local intermediate value inside a function and return it."
             },
             "try_scope_and_local_variables_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Pass the outside value into the function as an argument."
+              "prompt": "Use a local parameter without changing a same-named value outside the function."
             },
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",
-              "prompt": "A parameter can have the same name but still be local to the function."
+              "prompt": "Return a local result and store that value under a caller-side variable."
             },
             "allowReveal": true
           }
@@ -295,17 +174,17 @@
     "python-data-functions": {
       "python-6-functions-and-modularity": {
         "scope-and-local-variables": {
-          "scope-basics": {
-            "title": "What local scope means",
-            "bodyMarkdown": "A variable's **scope** is where that variable can be used.\n\nWhen you create a variable **inside a function**, it is usually a **local variable**. That means it exists only while that function is running.\n\n```python\ndef greet():\n    name = \"Ava\"\n    print(\"Hello\", name)\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`.\n- `name = \"Ava\"` creates a local variable inside that function.\n- `print(\"Hello\", name)` uses that local variable.\n- After the function finishes, that local variable is no longer available outside the function.\n\nA helpful way to think about it: local variables are like notes used inside one small task. When the task ends, the note is gone."
+          "local-lifetime": {
+            "title": "Local variables belong to the function call",
+            "bodyMarkdown": "A variable created inside a function is usually **local** to that function call.\n\n```python\ndef build_total(price):\n    fee = 2\n    total = price + fee\n    return total\n\nprint(build_total(8))\n```\n\n`fee` and `total` are working names used inside `build_total`. They can be used while that function call is running, but code after the call cannot directly refer to those local names.\n\nLocal variables are useful because a function can keep its temporary work inside its own boundary."
           },
-          "inside-vs-outside": {
-            "title": "Inside a function is different from outside",
-            "bodyMarkdown": "Code inside a function and code outside a function do not share every variable automatically.\n\n```python\ncity = \"Lima\"\n\ndef show_place():\n    country = \"Peru\"\n    print(city)\n    print(country)\n\nshow_place()\n```\n\nFollow the execution: - `city = \"Lima\"` is created outside the function.\n- Inside `show_place()`, a new local variable `country` is created.\n- `print(city)` works here because the function can read the outside variable.\n- `print(country)` also works here because `country` exists inside the function.\n- But `country` would not work outside the function, because it is local to `show_place()`.\n\nWorked example:\n\nIf you tried to use `country` after calling `show_place()`, Python would complain because that name only existed inside the function."
+          "parameter-local": {
+            "title": "Parameters are local, even when names match outside",
+            "bodyMarkdown": "Function parameters are local names too.\n\n```python\nscore = 10\n\ndef add_bonus(score):\n    updated = score + 2\n    return updated\n\nprint(add_bonus(score))\nprint(score)\n```\n\nThe call passes the outside value `10` into the local parameter also named `score`. Inside the function, `updated` becomes `12` and is returned. The outside `score` is still `10` because the function did not assign a new value to that outside variable.\n\nSame spelling does not mean the two names are the same storage location."
           },
-          "parameters-create-local-names": {
-            "title": "Parameters are local too",
-            "bodyMarkdown": "Function parameters also act like local variables.\n\n```python\ndef double(number):\n    result = number * 2\n    return result\n\nprint(double(5))\n```\n\nStep by step:\n\n- `number` is a parameter.\n- When you call `double(5)`, the value `5` is stored in the local name `number`.\n- `result` is another local variable created inside the function.\n- `return result` sends the answer back.\n\nBoth `number` and `result` belong to that function call.\n\nConcrete example:\n\n- In `double(5)`, `number` is `5`, so `result` becomes `10`.\n- In `double(8)`, `number` is `8`, so `result` becomes `16`.\n\nThe names are reused safely each time because they are local to each call."
+          "return-local": {
+            "title": "Return local results to the caller",
+            "bodyMarkdown": "If code outside a function needs a value created locally, the usual beginner pattern is to **return the value**.\n\n```python\ndef build_label(item):\n    label = \"Item: \" + item\n    return label\n\nresult = build_label(\"Book\")\nprint(result)\n```\n\n`label` is still local to `build_label`. Returning it does not make the local variable itself global. Instead, the value comes back to the caller, and the caller stores that value in a different variable named `result`.\n\nThis keeps function internals separate while still allowing useful results to leave the function."
           }
         }
       }

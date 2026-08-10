@@ -4,283 +4,198 @@
       "python-5-lists-tuples-and-dictionaries": {
         "looping-through-lists": {
           "label": "Looping Through Lists",
-          "summary": "Process each list item and build derived results.",
+          "summary": "Loop through list items to print values, accumulate totals, build transformed lists, and keep only values that meet a condition.",
           "cards": {
             "sketch0": {
-              "title": "What a list loop does"
+              "title": "Processing each item in a list"
             },
             "sketch1": {
-              "title": "Using a loop to build a new list"
+              "title": "Building a running total"
             },
             "sketch2": {
-              "title": "Choosing clear loop variable names"
+              "title": "Building a transformed list"
+            },
+            "sketch3": {
+              "title": "Filtering items while you loop"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
             "sc-loop-item-name": {
-              "title": "Pick the loop variable",
-              "prompt": "In this code, what does `fruit` represent?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
-              "hint": "Look at what comes after `for` and before `in`.",
+              "title": "What the loop variable holds",
+              "prompt": "In this loop, what does `fruit` hold during each iteration?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
+              "hint": "Look at the name immediately after `for`.",
               "help": {
-                "concept": "In a `for item in list` loop, the variable after `for` stores one current item from the list during each loop.",
-                "hint_1": "`fruit` changes as the loop moves through `\"apple\"`, then `\"banana\"`, then `\"pear\"`.",
-                "hint_2": "It is not the whole list name. It is the single value being processed on each pass."
+                "concept": "The loop variable holds one current item from the list at a time.",
+                "hint_1": "The list itself is named `fruits`; the singular name `fruit` changes on each pass.",
+                "hint_2": "`fruit` is `\"apple\"`, then `\"banana\"`, then `\"pear\"`."
               },
               "options": {
-                "a": "The whole list of fruits",
-                "b": "One item from the list at a time",
-                "c": "The index number of each fruit",
-                "d": "A built-in Python keyword"
+                "a": "The entire fruits list",
+                "b": "One current item from fruits",
+                "c": "The numeric index of the current item",
+                "d": "The number of items in fruits"
               }
             },
             "sc-empty-list-start": {
-              "title": "Start a new result list",
-              "prompt": "You want to loop through a list and collect changed values into a new list. Which line correctly creates an empty list to start with?",
-              "hint": "You need the syntax for an empty list literal.",
+              "title": "Start a result list",
+              "prompt": "You want to collect new values while looping. Which line correctly creates an empty list named `result`?",
+              "hint": "An empty list literal uses square brackets with nothing between them.",
               "help": {
-                "concept": "When building a derived list, you usually begin with an empty list and add items with `append()` inside the loop.",
-                "hint_1": "An empty list uses square brackets with nothing inside.",
-                "hint_2": "Look for the choice that creates a list, not a string, number, or print call."
+                "concept": "A common list-building pattern starts with an empty list and appends values during the loop.",
+                "hint_1": "Parentheses create a tuple, while square brackets create a list.",
+                "hint_2": "Use `result = []`."
               },
               "options": {
-                "a": "result = ()",
-                "b": "print(result)"
+                "a": "result = []",
+                "b": "result = ()",
+                "c": "result = \"\"",
+                "d": "print(result)"
               }
             },
-            "mc-loop-uses": {
-              "title": "What loops through a list can do",
-              "prompt": "Which actions are common reasons to loop through a list? Choose all that apply.",
-              "hint": "Think about tasks you repeat once for each item.",
+            "sc-running-total": {
+              "title": "Update a running total",
+              "prompt": "Which line belongs inside this loop to add every score into `total`?\n\n```python\nscores = [4, 7, 3]\ntotal = 0\nfor score in scores:\n    # missing line\n```",
+              "hint": "The current item is stored in `score`, and the accumulated value is stored in `total`.",
               "help": {
-                "concept": "List loops are used to process each item, such as printing values, checking conditions, or building a new list from transformed items.",
-                "hint_1": "A loop is useful when the same action should happen for every item in the list.",
-                "hint_2": "Look for choices about repeated processing of items, not choices about changing Python syntax itself."
+                "concept": "A running total repeatedly adds the current item to an accumulator variable.",
+                "hint_1": "The new total should include the old `total` plus the current `score`.",
+                "hint_2": "Use `total += score`."
               },
               "options": {
-                "a": "Print each item",
-                "b": "Build a new list from changed items",
-                "c": "Check whether items meet a condition",
-                "d": "Rename Python keywords"
+                "a": "total += score",
+                "b": "score += total",
+                "c": "total = 0",
+                "d": "scores.append(total)"
               }
             },
-            "mc-good-loop-names": {
-              "title": "Choose clear loop variable names",
-              "prompt": "For the list `scores = [88, 91, 76]`, which loop variable names are clear and appropriate? Choose all that apply.",
-              "hint": "Trace the code before choosing the option that matches its actual behavior.",
+            "sc-filter-append": {
+              "title": "Append only matching items",
+              "prompt": "You want `passing` to contain only scores that are at least 60. Where should `passing.append(score)` run?",
+              "hint": "Only matching scores should be appended.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Filtering combines a loop with a condition so only selected items are added to the result list.",
+                "hint_1": "The append should not run for scores below 60.",
+                "hint_2": "Put the append inside `if score >= 60:`."
               },
               "options": {
-                "a": "score",
-                "b": "item",
-                "c": "scores",
-                "d": "score_value"
-              }
-            },
-            "dr-build-derived-list": {
-              "title": "Order the steps to build a derived list",
-              "prompt": "Arrange these steps in the correct order for building a new list from an existing list.",
-              "hint": "Start by creating the new list before the loop begins.",
-              "help": {
-                "concept": "To build a derived list, first create an empty list, then loop through the original list, compute each new value, and append it.",
-                "hint_1": "The empty list setup happens before any items are processed.",
-                "hint_2": "Inside the loop, you first get the current item, then create the changed value, then add it to the result list."
-              },
-              "tokens": {
-                "t1": "Create an empty result list",
-                "t2": "Start a loop over the original list",
-                "t3": "Compute the changed value for the current item",
-                "t4": "Append the changed value to the result list"
-              }
-            },
-            "dr-read-loop-header": {
-              "title": "Read the loop in order",
-              "prompt": "Put these parts of the loop statement in the correct order to make a valid Python loop header.",
-              "hint": "Focus on the logical order of the parts.",
-              "help": {
-                "concept": "Arrange the pieces according to the structure of the statement.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Put the pieces in the order that makes the statement valid."
-              },
-              "tokens": {
-                "t1": "for",
-                "t2": "color",
-                "t3": "in",
-                "t4": "colors",
-                "t5": ":"
-              }
-            },
-            "fb-append-call": {
-              "title": "Complete the append line",
-              "prompt": "Fill in the missing method name to add each changed item to the result list.",
-              "hint": "Use the list method that adds one item to the end.",
-              "help": {
-                "concept": "Choose the list method that adds one new value to the end during each iteration.",
-                "hint_1": "The method is called on the list you are building, like `result.method(value)`.",
-                "hint_2": "It is the common list method used in beginner loops to collect new values."
-              },
-              "template": "result.[blank1](number * 2)",
-              "choices": [
-                "append",
-                "add",
-                "insert",
-                "print"
-              ]
-            },
-            "fb-loop-keyword": {
-              "title": "Complete the loop header",
-              "prompt": "Fill in the missing keyword to start a loop over a list.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "template": "[blank1] item in items:",
-              "choices": [
-                "for",
-                "if",
-                "while",
-                "def"
-              ]
-            },
-            "ci-print-each-item": {
-              "title": "Print each item in a list",
-              "prompt": "A shelter roll call stores three animal names in `animals`. Loop through `animals` and print each name on its own line.\n\nFor example, if the inputs are `cat`, `dog`, and `fox`, your program should print:\n`cat`\n`dog`\n`fox`.",
-              "hint": "Build the list from the three input values before the loop starts.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
-              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a for loop over animals instead of printing each variable manually."
-                }
-              }
-            },
-            "ci-double-list-function": {
-              "title": "Return a doubled list",
-              "prompt": "Write `double_numbers(numbers)` so it builds a new list containing each number doubled, then returns that new list.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
-              "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
-            },
-            "ci-count-long-words": {
-              "title": "Count words longer than 4 letters",
-              "prompt": "Write `count_long_words(words)` so it returns how many words in the list are longer than 4 letters.",
-              "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
-              "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
-            },
-            "try-looping-through-lists-checkpoint": {
-              "title": "Loop through names",
-              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line.",
-              "hint": "Use a `for` loop.",
-              "help": {
-                "concept": "A `for` loop can visit each value in a list.",
-                "hint_1": "Use a `for` loop.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
-              "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a for loop over names instead of printing each name manually."
-                }
+                "a": "Inside `if score >= 60:`",
+                "b": "Before the `for` loop",
+                "c": "After the loop finishes",
+                "d": "Inside `if score < 60:`"
               }
             },
             "try-looping-through-lists-sketch0": {
-              "title": "Print each animal",
-              "prompt": "Loop through the list and print each item.",
-              "hint": "Use a for loop to print each animal on its own line.",
+              "title": "Print room labels from input",
+              "prompt": "Three room names arrive as input. Store them in a list named `rooms`. Loop through `rooms` and print each room as `Room: <name>` on its own line.",
+              "hint": "Build `rooms` first, then use one `for` loop so the same print statement runs for every room.",
               "help": {
-                "concept": "Use a for loop to print each animal on its own line.",
-                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "A loop lets one block of code process every item in a list.",
+                "hint_1": "Use a singular loop variable such as `room` for one current value from `rooms`.",
+                "hint_2": "Inside the loop, print `\"Room:\"` and the current `room`."
               },
-              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
-              "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\n# Create a list named rooms from the three inputs.\n# Loop through rooms.\n# Print each item as: Room: <name>\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nrooms = [first, second, third]\nfor room in rooms:\n    print(\"Room:\", room)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use a for loop over animals instead of typing each animal directly."
+                  "message": "Build `rooms` from `first`, `second`, and `third` before looping."
+                },
+                "1": {
+                  "message": "Use a `for` loop over `rooms` instead of printing the three inputs separately."
                 }
               }
             },
             "try-looping-through-lists-sketch1": {
-              "title": "Total the scores",
-              "prompt": "Use a running total inside a loop.",
-              "hint": "Add each score to total using a loop.",
+              "title": "Total four delivery times",
+              "prompt": "Four delivery times arrive as integers. Store them in a list named `minutes`. Start `total` at 0, loop through `minutes`, add each value into `total`, then print the final total.",
+              "hint": "Initialize `total = 0` before the loop, then update it once for each current value.",
               "help": {
-                "concept": "Add each score to total using a loop.",
-                "hint_1": "Add each score to total using a loop, then print total.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "An accumulator stores a result that grows as the loop processes each item.",
+                "hint_1": "The loop variable can be named `minute` because it represents one value from `minutes`.",
+                "hint_2": "Inside the loop, use `total += minute`. Print `total` after the loop."
               },
-              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
-              "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\n# Create a list named minutes from the four inputs.\n# Start total at 0.\n# Add each minute value into total with a loop.\n# Print the final total.\n",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nminutes = [a, b, c, d]\ntotal = 0\nfor minute in minutes:\n    total += minute\nprint(total)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through scores instead of typing the final total."
+                  "message": "Build `minutes` from all four input variables before the loop."
                 },
                 "1": {
-                  "message": "Add each score into total inside the loop."
+                  "message": "Loop through `minutes` instead of adding the four variables manually."
+                },
+                "2": {
+                  "message": "Update `total` with the current `minute` inside the loop."
                 }
               }
             },
             "try-looping-through-lists-sketch2": {
-              "title": "Build doubled numbers",
-              "prompt": "Append a derived result for each item in the input list.",
-              "hint": "Loop through numbers and append each doubled value.",
+              "title": "Build adjusted values",
+              "prompt": "Three integer readings arrive as input. Store them in `readings`. Create an empty list named `adjusted`, then loop through `readings` and append each value plus 5. Print the completed `adjusted` list.",
+              "hint": "The result list starts empty and receives one transformed value during each loop iteration.",
               "help": {
-                "concept": "Loop through numbers and append each doubled value.",
-                "hint_1": "Loop through numbers and append each doubled value, then print doubled.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "A transformation loop creates one new value for every item in the original list.",
+                "hint_1": "Create `adjusted = []` before the loop.",
+                "hint_2": "Inside the loop, use `adjusted.append(reading + 5)`."
               },
-              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
-              "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+              "starterCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\n# Create readings from the three inputs.\n# Create an empty list named adjusted.\n# Append each reading plus 5 to adjusted.\n# Print adjusted.\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\nreadings = [first, second, third]\nadjusted = []\nfor reading in readings:\n    adjusted.append(reading + 5)\nprint(adjusted)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through numbers instead of typing the final doubled list."
+                  "message": "Build `readings` from the three input variables before looping."
                 },
                 "1": {
-                  "message": "Use doubled.append(...) to build the list."
+                  "message": "Use a `for` loop over `readings` so every value is transformed."
+                },
+                "2": {
+                  "message": "Use `adjusted.append(...)` inside the loop to build the result list."
+                }
+              }
+            },
+            "try-looping-through-lists-sketch3": {
+              "title": "Keep only high scores",
+              "prompt": "Four scores arrive as integers. Store them in `scores`. Create an empty list named `high_scores`, then loop through `scores` and append only values that are 80 or higher. Print the completed `high_scores` list.",
+              "hint": "The append should run only when the current score passes the condition.",
+              "help": {
+                "concept": "Filtering keeps some list items and skips others based on a condition.",
+                "hint_1": "Inside the loop, check `if score >= 80:`.",
+                "hint_2": "Indent `high_scores.append(score)` inside that `if` block."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\n# Create scores from the four inputs.\n# Create an empty list named high_scores.\n# Keep only scores that are 80 or higher.\n# Print high_scores.\n",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nscores = [a, b, c, d]\nhigh_scores = []\nfor score in scores:\n    if score >= 80:\n        high_scores.append(score)\nprint(high_scores)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `scores` from all four input variables before looping."
+                },
+                "1": {
+                  "message": "Use a `for` loop over `scores` instead of checking each input separately."
+                },
+                "2": {
+                  "message": "Check whether the current `score` is at least 80 inside the loop."
+                },
+                "3": {
+                  "message": "Append the current `score` to `high_scores` only when it meets the condition."
                 }
               }
             }
           },
           "tryIt": {
-            "try_looping_through_lists_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line."
-            },
             "try_looping_through_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Loop through the list and print each item."
+              "prompt": "Three room names arrive as input. Store them in a list named `rooms`. Loop through `rooms` and print each room as `Room: <name>` on its own line."
             },
             "try_looping_through_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use a running total inside a loop."
+              "prompt": "Four delivery times arrive as integers. Store them in a list named `minutes`. Use a running total in a loop, then print the final total."
             },
             "try_looping_through_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Append a derived result for each item in the input list."
+              "prompt": "Three integer readings arrive as input. Build a new `adjusted` list containing each reading plus 5, then print the completed list."
+            },
+            "try_looping_through_lists_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "Four scores arrive as input. Build `high_scores` containing only scores that are 80 or higher, then print the completed list."
             },
             "allowReveal": true
           }
@@ -293,16 +208,20 @@
       "python-5-lists-tuples-and-dictionaries": {
         "looping-through-lists": {
           "loop-basics": {
-            "title": "What a list loop does",
-            "bodyMarkdown": "A `for` loop lets you visit each item in a list one at a time. This is useful when you want to print every value, count things, or build a new result from the original list.\n\nHere is a simple example:\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(color)\n```\n\nStep by step:\n\n- `colors` stores three strings in a list.\n- `for color in colors:` means: take each item from the list, one by one.\n- On the first loop, `color` is `\"red\"`.\n- On the second loop, `color` is `\"blue\"`.\n- On the third loop, `color` is `\"green\"`.\n- `print(color)` runs each time, so all three items appear in the output panel.\n\nWorked example output:\n\n```python\nred\nblue\ngreen\n```"
+            "title": "Processing each item in a list",
+            "bodyMarkdown": "You already know that a `for` loop repeats a block of code. When the iterable is a list, the loop variable receives **one list item at a time**.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(\"Color:\", color)\n```\n\nOutput:\n\n```text\nColor: red\nColor: blue\nColor: green\n```\n\nStep by step:\n\n- `colors` is the list being traversed.\n- `color` is the loop variable. It holds one current item.\n- The indented `print()` runs once for each item.\n\nA clear loop variable usually describes **one item** from the collection. For `colors`, `color` is clearer than a vague name such as `x`."
+          },
+          "running-total": {
+            "title": "Building a running total",
+            "bodyMarkdown": "A loop can combine many list values into one result. A variable that keeps the growing result is often called an **accumulator**.\n\n```python\nprices = [5, 8, 3]\ntotal = 0\n\nfor price in prices:\n    total += price\n\nprint(total)\n```\n\nOutput:\n\n```text\n16\n```\n\nThe important order is:\n\n1. Start `total` before the loop.\n2. Visit one `price` at a time.\n3. Add the current value into `total`.\n4. Print the final total after the loop.\n\nIf `total = 0` were placed inside the loop, it would reset on every iteration instead of accumulating."
           },
           "loop-and-build": {
-            "title": "Using a loop to build a new list",
-            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nFollow the execution: - `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list."
+            "title": "Building a transformed list",
+            "bodyMarkdown": "Sometimes you want one new value for every value in the original list. Start with an empty result list, then append one transformed value during each iteration.\n\n```python\nlengths = [2, 4, 6]\ndoubled = []\n\nfor length in lengths:\n    doubled.append(length * 2)\n\nprint(doubled)\n```\n\nOutput:\n\n```text\n[4, 8, 12]\n```\n\nThis pattern has four steps:\n\n1. Create the empty result list.\n2. Loop through the original list.\n3. Compute a new value from the current item.\n4. Append that new value to the result list.\n\nThe original `lengths` list is unchanged; the transformed values are collected in `doubled`."
           },
-          "loop-variables": {
-            "title": "Choosing clear loop variable names",
-            "bodyMarkdown": "The loop variable should describe one item from the list.\n\nExample:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)\n```\n\n`animal` is a good name because each item in `animals` is one animal.\n\nLess clear code would be:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor x in animals:\n    print(x)\n```\n\nThis still works, but `x` does not explain what the value means.\n\nWorked example:\n\n- List name: `scores`\n- Good loop variable: `score`\n\n```python\nscores = [88, 91, 76]\n\nfor score in scores:\n    print(score)\n```"
+          "filter-with-condition": {
+            "title": "Filtering items while you loop",
+            "bodyMarkdown": "You can combine a list loop with an `if` statement to keep only items that meet a condition. This is called **filtering**.\n\n```python\ntemperatures = [68, 75, 61, 82]\nwarm = []\n\nfor temperature in temperatures:\n    if temperature >= 70:\n        warm.append(temperature)\n\nprint(warm)\n```\n\nOutput:\n\n```text\n[75, 82]\n```\n\nEvery temperature is visited, but `append()` runs only when the condition is true. That is the difference between **transforming every item** and **filtering some items**."
           }
         }
       }

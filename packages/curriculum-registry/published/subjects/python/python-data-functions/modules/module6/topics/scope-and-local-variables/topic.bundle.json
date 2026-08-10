@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch0.title",
-      "sketchId": "scope-basics",
+      "sketchId": "local-lifetime",
       "height": 420,
       "tryIt": {
         "id": "try-scope-and-local-variables-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch1.title",
-      "sketchId": "inside-vs-outside",
+      "sketchId": "parameter-local",
       "height": 420,
       "tryIt": {
         "id": "try-scope-and-local-variables-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch2.title",
-      "sketchId": "parameters-create-local-names",
+      "sketchId": "return-local",
       "height": 420,
       "tryIt": {
         "id": "try-scope-and-local-variables-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,48 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "scope-basics",
+      "id": "local-lifetime",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.local-lifetime.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.local-lifetime.bodyMarkdown"
     },
     {
-      "id": "inside-vs-outside",
+      "id": "parameter-local",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameter-local.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameter-local.bodyMarkdown"
     },
     {
-      "id": "parameters-create-local-names",
+      "id": "return-local",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.return-local.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.return-local.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-q1",
+      "id": "sc-local-variable",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "sc-q2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-local-variable",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +131,11 @@
       }
     },
     {
-      "id": "mc-q1",
-      "kind": "multi_choice",
+      "id": "sc-local-outside",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-local-outside",
       "optionIds": [
         "a",
         "b",
@@ -160,20 +143,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b",
-          "c",
-          "d"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
-      "id": "mc-q2",
-      "kind": "multi_choice",
+      "id": "sc-parameter-local",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-parameter-local",
       "optionIds": [
         "a",
         "b",
@@ -181,79 +160,25 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "dr-q1",
-      "kind": "drag_reorder",
+      "id": "sc-same-name-separate",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-same-name-separate",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-q2",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q2",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "fb-q1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "score"
-      }
-    },
-    {
-      "id": "fb-q2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "value"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -298,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -307,27 +232,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "add_tax",
-            "args": [
-              8
-            ],
-            "expected": 10
+            "stdin": "8\n",
+            "stdout": "11\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "add_tax",
-            "args": [
-              0
-            ],
-            "expected": 2
+            "stdin": "0\n",
+            "stdout": "3\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -336,8 +254,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+total\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+total\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-scope-and-local-variables-sketch1",
@@ -381,7 +323,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -390,27 +332,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "welcome",
-            "args": [
-              "Ava"
-            ],
-            "expected": "Welcome, Ava"
+            "stdin": "5\n",
+            "stdout": "6\n5\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "welcome",
-            "args": [
-              "Mia"
-            ],
-            "expected": "Welcome, Mia"
+            "stdin": "-2\n",
+            "stdout": "-1\n-2\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -419,8 +354,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+next_count\\s*\\(\\s*count\\s*\\)\\s*:",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+updated\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+next_count\\s*\\(\\s*count\\s*\\)\\s*:",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+updated\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "try-scope-and-local-variables-sketch2",
@@ -464,7 +433,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -473,27 +442,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "add_one",
-            "args": [
-              5
-            ],
-            "expected": 6
+            "stdin": "Ava\n",
+            "stdout": "Hello, Ava\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "add_one",
-            "args": [
-              0
-            ],
-            "expected": 1
+            "stdin": "Mia\n",
+            "stdout": "Hello, Mia\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -502,8 +464,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+message\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+message\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

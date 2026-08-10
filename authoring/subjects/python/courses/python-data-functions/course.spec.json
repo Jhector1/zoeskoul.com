@@ -274,6 +274,7 @@
       ],
       "guidedExercises": [
         "Build lists",
+        "Unpack fixed tuple records",
         "Look up dictionary values",
         "Transform collections"
       ],
@@ -282,7 +283,7 @@
         "indexing",
         "dictionary operations"
       ],
-      "moduleProject": "Build a small contact book or inventory tracker using lists and dictionaries.",
+      "moduleProject": "Build a workshop schedule from fixed tuple records, an ordered list, dictionary lookups, and nested room groupings.",
       "sections": [
         {
           "sectionSlug": "python-5-list-basics",
@@ -319,6 +320,18 @@
               "learningGoals": [
                 "Loop through lists",
                 "Build new list results"
+              ]
+            },
+            {
+              "topicId": "tuple-records-and-unpacking",
+              "title": "Tuple Records and Unpacking",
+              "summary": "Use fixed tuple records, unpack fields into names, and loop through lists of tuple records.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Use tuples for fixed-shape records",
+                "Unpack tuple fields into meaningful names",
+                "Loop through a list of tuple records"
               ]
             }
           ]
@@ -368,14 +381,15 @@
           "role": "module_project",
           "topics": [
             {
-              "topicId": "module-5-gradebook-project",
-              "title": "Module 5 Gradebook Project",
-              "summary": "Build a small gradebook project in focused steps that keep the previous working version and add one collection idea at a time.",
-              "minutes": 24,
+              "topicId": "module-5-workshop-schedule-project",
+              "title": "Module 5 Workshop Schedule Project",
+              "summary": "Build a workshop schedule in cumulative steps using fixed tuple records, an ordered list, a workshop-to-room lookup, and a room-to-workshops nested dictionary.",
+              "minutes": 40,
               "technical": true,
               "learningGoals": [
-                "Extend a working collections program without starting over",
-                "Use lists and dictionaries together in a small summary tool"
+                "Carry one working collections project through cumulative steps",
+                "Combine tuple records, lists, dictionaries, and nested data",
+                "Choose a collection structure that matches each lookup or grouping job"
               ],
               "practice": {
                 "tryIt": true,

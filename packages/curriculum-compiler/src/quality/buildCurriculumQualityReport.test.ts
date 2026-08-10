@@ -146,6 +146,129 @@ describe("buildCurriculumQualityReport", () => {
         expect(buildCurriculumQualityReport({ profileId: "math", subjectSlug: "math", topics: [{ seed: mSeed, draft: mDraft, topicBundle: mBundle }] }).ok).toBe(true);
     });
 
+    it("uses topicLearningGoals as the canonical topic-goal metadata", () => {
+        const pySeed = seed({
+            topicLearningGoals: ["Read input and add one"],
+            learningGoals: undefined,
+        });
+        const draft = pythonDraft();
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed, draft }],
+        });
+
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "MISSING_TOPIC_LEARNING_GOALS",
+            ),
+        ).toBe(false);
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "LEARNING_GOAL_ALIGNMENT_WEAK",
+            ),
+        ).toBe(false);
+    });
+
+    it("keeps legacy learningGoals as a compatibility fallback", () => {
+        const pySeed = seed({
+            topicLearningGoals: undefined,
+            learningGoals: ["Read input and add one"],
+        });
+        const draft = pythonDraft();
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed, draft }],
+        });
+
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "MISSING_TOPIC_LEARNING_GOALS",
+            ),
+        ).toBe(false);
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "LEARNING_GOAL_ALIGNMENT_WEAK",
+            ),
+        ).toBe(false);
+    });
+
+    it("uses canonical topicLearningGoals for reserved-concept checks", () => {
+        const pySeed = seed({
+            moduleOrder: 1,
+            topicLearningGoals: ["Use decorators safely"],
+            learningGoals: undefined,
+        });
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed, draft: pythonDraft() }],
+            spec: {
+                policy: {
+                    qualityPolicy: {
+                        reservedConceptsByModule: [
+                            {
+                                concept: "decorators",
+                                earliestModuleNumber: 2,
+                            },
+                        ],
+                    },
+                },
+            } as any,
+        });
+
+        expect(
+            report.issues.some(
+                (issue) =>
+                    issue.code === "CONCEPT_INTRODUCED_TOO_EARLY" &&
+                    issue.topicId === pySeed.topicId,
+            ),
+        ).toBe(true);
+    });
+
+    it("does not report weak goal alignment when current-output compilation has no authoring draft text", () => {
+        const pySeed = seed({
+            topicLearningGoals: ["Read input and add one"],
+            learningGoals: undefined,
+        });
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed }],
+        });
+
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "MISSING_TOPIC_LEARNING_GOALS",
+            ),
+        ).toBe(false);
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "LEARNING_GOAL_ALIGNMENT_WEAK",
+            ),
+        ).toBe(false);
+    });
+
+    it("still reports weak goal alignment when authored exercise text is present but unrelated", () => {
+        const pySeed = seed({
+            topicLearningGoals: ["Build dictionaries from key value pairs"],
+            learningGoals: undefined,
+        });
+        const draft = pythonDraft();
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed, draft }],
+        });
+
+        expect(
+            report.issues.some(
+                (issue) => issue.code === "LEARNING_GOAL_ALIGNMENT_WEAK",
+            ),
+        ).toBe(true);
+    });
+
     it("flags weak fixed_tests coverage", () => {
         const pySeed = seed();
         const draft = pythonDraft({ tests: [{ stdin: "1\n", stdout: "2\n" }] });

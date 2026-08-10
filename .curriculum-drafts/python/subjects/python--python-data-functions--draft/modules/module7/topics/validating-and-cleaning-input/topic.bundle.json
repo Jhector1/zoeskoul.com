@@ -9,8 +9,8 @@
     "kind": "code",
     "language": "python",
     "supportsTerminal": false,
-    "supportsMultiFile": true,
-    "supportsFileSystem": true,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
     "supportsStdInStdOut": true,
     "supportsPackageInstall": false
   },
@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch0.title",
-      "sketchId": "clean-basics",
+      "sketchId": "clean-first",
       "height": 420,
       "tryIt": {
         "id": "try-validating-and-cleaning-input-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch1.title",
-      "sketchId": "missing-invalid",
+      "sketchId": "validate-number",
       "height": 420,
       "tryIt": {
         "id": "try-validating-and-cleaning-input-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch2.title",
-      "sketchId": "cleaning-functions",
+      "sketchId": "cleaning-function",
       "height": 420,
       "tryIt": {
         "id": "try-validating-and-cleaning-input-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "clean-basics",
+      "id": "clean-first",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-first.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-first.bodyMarkdown"
     },
     {
-      "id": "missing-invalid",
+      "id": "validate-number",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.validate-number.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.validate-number.bodyMarkdown"
     },
     {
-      "id": "cleaning-functions",
+      "id": "cleaning-function",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-function.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-function.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-valid-row",
+      "id": "sc-clean-before-check",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-valid-row",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-clean-before-check",
       "optionIds": [
         "a",
         "b",
@@ -131,11 +131,11 @@
       }
     },
     {
-      "id": "sc-except-flow",
+      "id": "sc-empty-string",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-except-flow",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-empty-string",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +148,11 @@
       }
     },
     {
-      "id": "mc-clean-steps",
-      "kind": "multi_choice",
+      "id": "sc-invalid-integer",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-clean-steps",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-invalid-integer",
       "optionIds": [
         "a",
         "b",
@@ -160,19 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-reject-row",
-      "kind": "multi_choice",
+      "id": "sc-score-range",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-reject-row",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-score-range",
       "optionIds": [
         "a",
         "b",
@@ -180,80 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b",
-          "c",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr-clean-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-clean-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-try-except-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-try-except-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "fb-strip-name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-strip-name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "strip"
-      }
-    },
-    {
-      "id": "fb-empty-check",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-empty-check",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "0"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -263,11 +188,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -276,7 +202,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -289,7 +215,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -298,20 +224,34 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "  aVA smith  \n",
             "stdout": "Ava Smith\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "   \n",
+            "stdout": "Missing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mIA\n",
+            "stdout": "Mia\n",
             "match": "exact"
           }
         ],
@@ -319,43 +259,55 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "clean",
-            "expected": "Ava Smith",
-            "expectedKind": "json"
           }
         ],
         "sourceChecks": [
           {
             "type": "uses_method",
             "method": "strip",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "uses_method",
-            "method": "title",
+            "type": "source_regex",
+            "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
           }
         ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
           "type": "uses_method",
           "method": "strip",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "uses_method",
-          "method": "title",
+          "type": "source_regex",
+          "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -366,11 +318,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -379,7 +332,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -392,7 +345,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -401,20 +354,39 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "valid\n",
+            "stdin": " 92 \n",
+            "stdout": "Valid score\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "ten\n",
+            "stdout": "Invalid score\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "105\n",
+            "stdout": "Invalid score\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-1\n",
+            "stdout": "Invalid score\n",
             "match": "exact"
           }
         ],
@@ -422,7 +394,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -430,27 +402,47 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_call",
-            "functionName": "int",
+            "type": "uses_method",
+            "method": "strip",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "0\\s*<=|<=\\s*100",
+            "pattern": "\\bexcept\\s+ValueError\\s*:",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
           }
         ]
       },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      },
       "sourceChecks": [
         {
-          "type": "uses_call",
-          "functionName": "int",
+          "type": "uses_method",
+          "method": "strip",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "0\\s*<=|<=\\s*100",
+          "pattern": "\\bexcept\\s+ValueError\\s*:",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -461,11 +453,12 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -474,7 +467,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -487,7 +480,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -496,20 +489,44 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Ava:92\nMia:85\n",
+            "stdin": "  ava  \n 92 \n",
+            "stdout": "Ava:92\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "   \n75\n",
+            "stdout": "Rejected\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\nten\n",
+            "stdout": "Rejected\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Mia\n105\n",
+            "stdout": "Rejected\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "  noah lee \n0\n",
+            "stdout": "Noah Lee:0\n",
             "match": "exact"
           }
         ],
@@ -517,7 +534,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -525,46 +542,58 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "rows",
+            "type": "source_regex",
+            "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
           },
           {
-            "type": "uses_method",
-            "method": "split",
+            "type": "source_regex",
+            "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
           },
           {
-            "type": "uses_method",
-            "method": "strip",
+            "type": "source_regex",
+            "pattern": "\\bexcept\\s+ValueError\\s*:",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
           },
           {
-            "type": "uses_method",
-            "method": "title",
+            "type": "source_regex",
+            "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+            "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
           }
         ]
       },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "rows",
+          "type": "source_regex",
+          "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
         },
         {
-          "type": "uses_method",
-          "method": "split",
+          "type": "source_regex",
+          "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
         },
         {
-          "type": "uses_method",
-          "method": "strip",
+          "type": "source_regex",
+          "pattern": "\\bexcept\\s+ValueError\\s*:",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
         },
         {
-          "type": "uses_method",
-          "method": "title",
+          "type": "source_regex",
+          "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+          "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
         }
       ]

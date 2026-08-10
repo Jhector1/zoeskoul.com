@@ -4,7 +4,7 @@
   "moduleSlug": "python-5-lists-tuples-and-dictionaries",
   "sectionSlug": "python-data-functions-python-5-module-project",
   "prefix": "py5",
-  "minutes": 34,
+  "minutes": 40,
   "topic": {
     "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.label",
     "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.summary"
@@ -18,8 +18,8 @@
       "height": 420,
       "tryIt": {
         "id": "try-workshop-schedule-sketch0",
-        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.title",
-        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.prompt",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.tryIt.try_workshop_schedule_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.tryIt.try_workshop_schedule_sketch0.prompt",
         "exerciseKey": "try-workshop-schedule-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -34,7 +34,7 @@
       "kind": "project",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.cards.project.title",
       "project": {
-        "difficulty": "easy",
+        "difficulty": "medium",
         "allowReveal": true,
         "preferKind": "code_input",
         "maxAttempts": null,
@@ -52,7 +52,7 @@
             "id": "exercise2",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise2.title",
             "exerciseKey": "exercise2",
-            "difficulty": "easy",
+            "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
@@ -61,7 +61,7 @@
             "id": "exercise3",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise3.title",
             "exerciseKey": "exercise3",
-            "difficulty": "easy",
+            "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
@@ -144,8 +144,13 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+            "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -161,8 +166,13 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+          "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -209,28 +219,18 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
-        "semanticChecks": [
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "create_schedule",
-            "args": [],
-            "expected": [
-              [
-                "Python Basics",
-                "Room A"
-              ],
-              [
-                "Data Lab",
-                "Room B"
-              ],
-              [
-                "Web Starter",
-                "Room C"
-              ]
-            ],
-            "expectedKind": "value"
+            "stdin": "Data Lab\nRoom B\nWeb Starter\nRoom C\n",
+            "stdout": "Python Basics — Room A\nData Lab — Room B\nWeb Starter — Room C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom E\n",
+            "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room E\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
@@ -242,6 +242,23 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
+          }
         ]
       },
       "solutionFiles": [
@@ -251,6 +268,23 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
         }
       ]
     },
@@ -297,38 +331,18 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
-        "semanticChecks": [
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "build_room_lookup",
-            "args": [
-              [
-                [
-                  "Python Basics",
-                  "Room A"
-                ],
-                [
-                  "Data Lab",
-                  "Room B"
-                ]
-              ]
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": [
-              [
-                "Python Basics",
-                "Room A"
-              ],
-              [
-                "Data Lab",
-                "Room B"
-              ]
-            ],
-            "expectedKind": "dict_entries"
+            "stdin": "Data Lab\nRoom B\nWeb Starter\nRoom C\nData Lab\n",
+            "stdout": "Python Basics — Room A\nData Lab — Room B\nWeb Starter — Room C\nRoom B\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom E\nGit Lab\n",
+            "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room E\nRoom E\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
@@ -340,6 +354,23 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+          }
         ]
       },
       "solutionFiles": [
@@ -349,6 +380,23 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
         }
       ]
     },
@@ -395,32 +443,18 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
-        "semanticChecks": [
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "format_schedule",
-            "args": [
-              [
-                [
-                  "Python Basics",
-                  "Room A"
-                ],
-                [
-                  "Data Lab",
-                  "Room B"
-                ]
-              ]
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": [
-              "Python Basics — Room A",
-              "Data Lab — Room B"
-            ],
-            "expectedKind": "value"
+            "stdin": "Data Lab\nRoom A\nWeb Starter\nRoom B\nData Lab\nRoom A\n",
+            "stdout": "Python Basics — Room A\nData Lab — Room A\nWeb Starter — Room B\nRoom A\n['Python Basics', 'Data Lab']\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom D\nGit Lab\nRoom D\n",
+            "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room D\nRoom D\n['Excel Clinic', 'Git Lab']\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
@@ -432,6 +466,33 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+          }
         ]
       },
       "solutionFiles": [
@@ -441,6 +502,33 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
         }
       ]
     }

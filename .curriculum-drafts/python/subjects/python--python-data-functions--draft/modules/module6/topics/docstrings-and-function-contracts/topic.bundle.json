@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch0.title",
-      "sketchId": "docstrings-idea",
+      "sketchId": "real-docstring",
       "height": 420,
       "tryIt": {
         "id": "try-docstrings-and-function-contracts-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch1.title",
-      "sketchId": "good-docstrings",
+      "sketchId": "contract-input-output",
       "height": 420,
       "tryIt": {
         "id": "try-docstrings-and-function-contracts-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch2.title",
-      "sketchId": "contracts-print-vs-return",
+      "sketchId": "contract-must-match",
       "height": 420,
       "tryIt": {
         "id": "try-docstrings-and-function-contracts-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "docstrings-idea",
+      "id": "real-docstring",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.real-docstring.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.real-docstring.bodyMarkdown"
     },
     {
-      "id": "good-docstrings",
+      "id": "contract-input-output",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-input-output.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-input-output.bodyMarkdown"
     },
     {
-      "id": "contracts-print-vs-return",
+      "id": "contract-must-match",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-must-match.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-must-match.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-docstring-location",
+      "id": "sc-real-docstring",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-docstring-location",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-real-docstring",
       "optionIds": [
         "a",
         "b",
@@ -131,11 +131,11 @@
       }
     },
     {
-      "id": "sc-contract-purpose",
+      "id": "sc-contract-content",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-purpose",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-content",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +148,11 @@
       }
     },
     {
-      "id": "mc-good-docstring-features",
-      "kind": "multi_choice",
+      "id": "sc-contract-match",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-good-docstring-features",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-match",
       "optionIds": [
         "a",
         "b",
@@ -160,20 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-return-vs-print-contract",
-      "kind": "multi_choice",
+      "id": "sc-read-contract",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-return-vs-print-contract",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-read-contract",
       "optionIds": [
         "a",
         "b",
@@ -181,75 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "dr-docstring-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-docstring-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "dr-contract-reading",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-contract-reading",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "fb-return-word",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-return-word",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Return"
-      }
-    },
-    {
-      "id": "fb-docstring-position",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-docstring-position",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "`\"\"\"Return the square of number.\"\"\"`"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -294,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -303,27 +232,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "  aVA smith  "
-            ],
-            "expected": "Ava Smith"
+            "stdin": "  new york  \n",
+            "stdout": "New York\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "zoe"
-            ],
-            "expected": "Zoe"
+            "stdin": "lOS aNGeLES\n",
+            "stdout": "Los Angeles\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -332,8 +254,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-docstrings-and-function-contracts-sketch1",
@@ -377,7 +323,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -386,27 +332,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "fahrenheit_to_celsius",
-            "args": [
-              32
-            ],
-            "expected": 0
+            "stdin": "10\n2\n",
+            "stdout": "12\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "fahrenheit_to_celsius",
-            "args": [
-              212
-            ],
-            "expected": 100
+            "stdin": "-3\n5\n",
+            "stdout": "2\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -415,8 +354,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-docstrings-and-function-contracts-sketch2",
@@ -460,7 +423,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -469,27 +432,25 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "is_valid_score",
-            "args": [
-              105
-            ],
-            "expected": false
+            "stdin": "69\n",
+            "stdout": "False\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "is_valid_score",
-            "args": [
-              95
-            ],
-            "expected": true
+            "stdin": "70\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "95\n",
+            "stdout": "True\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -498,8 +459,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
+        }
+      ]
     }
   ]
 }

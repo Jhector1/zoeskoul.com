@@ -192,11 +192,30 @@ function countSubstantiveLines(value: unknown): number {
         .filter(Boolean).length;
 }
 
+function effectiveTopicLearningGoals(seed: TopicSeed): string[] {
+    const canonical = (seed.topicLearningGoals ?? []).filter((goal) =>
+        Boolean(normalizeText(goal)),
+    );
+    if (canonical.length > 0) return canonical;
+
+    return (seed.learningGoals ?? []).filter((goal) =>
+        Boolean(normalizeText(goal)),
+    );
+}
+
+function hasExerciseLanguageForLearningGoalAlignment(
+    draft?: TopicAuthoringDraft,
+): boolean {
+    return (draft?.quizDraft ?? []).some((exercise) =>
+        Boolean(normalizeText(`${exercise.title} ${exercise.prompt}`)),
+    );
+}
+
 function containsLearningGoalLanguage(args: {
     seed: TopicSeed;
     draft?: TopicAuthoringDraft;
 }): boolean {
-    const learningGoals = args.seed.learningGoals ?? [];
+    const learningGoals = effectiveTopicLearningGoals(args.seed);
     if (learningGoals.length === 0) return false;
 
     const exerciseText = collapseText(
@@ -253,8 +272,9 @@ export function buildCurriculumQualityReport(args: {
         const path = topicPath(topic.seed);
         const repeatedThreshold =
             profile.qualityPolicy?.repeatedExerciseTextThreshold ?? 2;
+        const learningGoals = effectiveTopicLearningGoals(topic.seed);
 
-        if ((topic.seed.learningGoals?.length ?? 0) === 0) {
+        if (learningGoals.length === 0) {
             addIssue(issues, {
                 code: "MISSING_TOPIC_LEARNING_GOALS",
                 severity: "warning",
@@ -264,7 +284,10 @@ export function buildCurriculumQualityReport(args: {
                 topicId,
                 message: `Topic "${topicId}" has no learning goals on its seed metadata.`,
             });
-        } else if (!containsLearningGoalLanguage({ seed: topic.seed, draft: topic.draft })) {
+        } else if (
+            hasExerciseLanguageForLearningGoalAlignment(topic.draft) &&
+            !containsLearningGoalLanguage({ seed: topic.seed, draft: topic.draft })
+        ) {
             addIssue(issues, {
                 code: "LEARNING_GOAL_ALIGNMENT_WEAK",
                 severity: "warning",
@@ -549,7 +572,7 @@ export function buildCurriculumQualityReport(args: {
                 [
                     topic.seed.title,
                     topic.seed.summary,
-                    ...(topic.seed.learningGoals ?? []),
+                    ...effectiveTopicLearningGoals(topic.seed),
                     topic.draft?.title,
                     topic.draft?.summary,
                 ].join(" "),

@@ -51,7 +51,7 @@
           {
             "id": "mp_1",
             "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_1.title",
-            "exerciseKey": "mp-1-create-clean-name-module",
+            "exerciseKey": "mp-1-move-name-helper",
             "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -60,7 +60,7 @@
           {
             "id": "mp_2",
             "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_2.title",
-            "exerciseKey": "mp-2-add-badge-helper",
+            "exerciseKey": "mp-2-move-badge-helper",
             "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -69,7 +69,7 @@
           {
             "id": "mp_3",
             "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_3.title",
-            "exerciseKey": "mp-3-document-badge-helper",
+            "exerciseKey": "mp-3-document-helper-contracts",
             "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -78,7 +78,7 @@
           {
             "id": "mp_4",
             "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_4.title",
-            "exerciseKey": "mp-4-package-welcome-message",
+            "exerciseKey": "mp-4-add-welcome-helper",
             "difficulty": "medium",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -98,871 +98,18 @@
   ],
   "exercises": [
     {
-      "id": "mp-1-create-clean-name-module",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module",
-      "language": "python",
-      "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "tools"
-          ],
-          "requiredFiles": [
-            "tools/__init__.py",
-            "tools/names.py"
-          ]
-        },
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          }
-        ],
-        "files": [
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  aVA  \n",
-            "stdout": "Ava\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
-            "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "tools.names",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
-            "importName": "clean_name",
-            "path": "main.py"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
-            "path": "tools/names.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
-            "path": "tools/names.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
-            "path": "tools/names.py"
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
-          "language": "python"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "tools"
-        ],
-        "requiredFiles": [
-          "tools/__init__.py",
-          "tools/names.py"
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "uses_import",
-          "module": "tools.names",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
-          "importName": "clean_name",
-          "path": "main.py"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
-          "path": "tools/names.py"
-        },
-        {
-          "type": "uses_method",
-          "method": "strip",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
-          "path": "tools/names.py"
-        },
-        {
-          "type": "uses_method",
-          "method": "title",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
-          "path": "tools/names.py"
-        }
-      ]
-    },
-    {
-      "id": "mp-2-add-badge-helper",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper",
-      "language": "python",
-      "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "tools"
-          ],
-          "requiredFiles": [
-            "tools/__init__.py",
-            "tools/badges.py",
-            "tools/names.py"
-          ]
-        },
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-            "language": "python"
-          }
-        ],
-        "files": [
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-            "language": "python"
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  aVA  \nstudent\n",
-            "stdout": "STUDENT badge: Ava\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "tools.badges",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
-            "importName": "make_badge",
-            "path": "main.py"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "def\\s+make_badge\\s*\\(",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
-            "path": "tools/badges.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "upper",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
-            "path": "tools/badges.py"
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "tools"
-        ],
-        "requiredFiles": [
-          "tools/__init__.py",
-          "tools/badges.py",
-          "tools/names.py"
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "uses_import",
-          "module": "tools.badges",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
-          "importName": "make_badge",
-          "path": "main.py"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "def\\s+make_badge\\s*\\(",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
-          "path": "tools/badges.py"
-        },
-        {
-          "type": "uses_method",
-          "method": "upper",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
-          "path": "tools/badges.py"
-        }
-      ]
-    },
-    {
-      "id": "mp-3-document-badge-helper",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper",
-      "language": "python",
-      "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "tools"
-          ],
-          "requiredFiles": [
-            "tools/__init__.py",
-            "tools/badges.py",
-            "tools/names.py"
-          ]
-        },
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-            "language": "python"
-          }
-        ],
-        "files": [
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-            "language": "python"
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  mia  \n  mentor  \n",
-            "stdout": "MENTOR badge: Mia\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains_any",
-            "patterns": [
-              "\"\"\"",
-              "'''"
-            ],
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
-            "path": "tools/badges.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
-            "path": "tools/badges.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "upper",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
-            "path": "tools/badges.py"
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "tools"
-        ],
-        "requiredFiles": [
-          "tools/__init__.py",
-          "tools/badges.py",
-          "tools/names.py"
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains_any",
-          "patterns": [
-            "\"\"\"",
-            "'''"
-          ],
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
-          "path": "tools/badges.py"
-        },
-        {
-          "type": "uses_method",
-          "method": "strip",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
-          "path": "tools/badges.py"
-        },
-        {
-          "type": "uses_method",
-          "method": "upper",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
-          "path": "tools/badges.py"
-        }
-      ]
-    },
-    {
-      "id": "mp-4-package-welcome-message",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message",
-      "language": "python",
-      "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "tools"
-          ],
-          "requiredFiles": [
-            "tools/__init__.py",
-            "tools/badges.py",
-            "tools/names.py"
-          ]
-        },
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-            "language": "python"
-          }
-        ],
-        "files": [
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-            "language": "python"
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "  zoe  \ncoach\n",
-            "stdout": "Welcome! COACH badge: Zoe\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "tools/__init__.py",
-            "content": "",
-            "language": "python"
-          },
-          {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
-            "language": "python"
-          },
-          {
-            "path": "tools/badges.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
-            "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_call",
-            "functionName": "make_badge",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
-            "path": "main.py"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "Welcome!",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
-            "path": "main.py"
-          }
-        ]
-      },
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "",
-          "language": "python"
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
-          "language": "python"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "tools"
-        ],
-        "requiredFiles": [
-          "tools/__init__.py",
-          "tools/badges.py",
-          "tools/names.py"
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "uses_call",
-          "functionName": "make_badge",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
-          "path": "main.py"
-        },
-        {
-          "type": "source_contains",
-          "pattern": "Welcome!",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
-          "path": "main.py"
-        }
-      ]
-    },
-    {
       "id": "try-module-6-name-badge-package-sketch0",
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -975,11 +122,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
-          "language": "python"
         }
       ],
       "workspace": {
@@ -989,7 +131,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -998,24 +140,14 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
-            "language": "python"
           }
         ],
         "workspaceExpectations": {
-          "requiredFolders": [
-            "tools"
-          ],
-          "requiredFiles": [
-            "tools/names.py"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -1023,21 +155,14 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Ava\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "tools/__init__.py",
-                "content": "# tools package\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              }
-            ]
+            "stdin": "  ava  \nstudent\n",
+            "stdout": "STUDENT badge: Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mIA\n  mentor  \n",
+            "stdout": "MENTOR badge: Mia\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionCode",
@@ -1048,74 +173,718 @@
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": []
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "mp-1-move-name-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           },
           {
-            "path": "tools/names.py",
-            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "names.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  ava  \nstudent\n",
+            "stdout": "STUDENT badge: Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mIA\n  mentor  \n",
+            "stdout": "MENTOR badge: Mia\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
             "language": "python"
           }
         ],
         "sourceChecks": [
           {
             "type": "uses_import",
-            "module": "tools.names",
+            "module": "names",
             "importName": "clean_name",
             "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "def\\s+clean_name\\s*\\(",
-            "path": "tools/names.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
+            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "path": "names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
           },
           {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "tools/names.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "path": "tools/names.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
           }
         ]
       },
       "workspaceExpectations": {
-        "requiredFolders": [
-          "tools"
-        ],
         "requiredFiles": [
-          "tools/names.py"
+          "names.py"
         ]
       },
       "sourceChecks": [
         {
           "type": "uses_import",
-          "module": "tools.names",
+          "module": "names",
           "importName": "clean_name",
           "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "def\\s+clean_name\\s*\\(",
-          "path": "tools/names.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
+          "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "path": "names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
         },
         {
-          "type": "uses_method",
-          "method": "strip",
-          "path": "tools/names.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "mp-2-move-badge-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
         },
         {
-          "type": "uses_method",
-          "method": "title",
-          "path": "tools/names.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.names_py.content",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.names_py.content",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "names.py",
+            "badges.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe  \ncoach\n",
+            "stdout": "COACH badge: Zoe\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "ALex\n  volunteer  \n",
+            "stdout": "VOLUNTEER badge: Alex\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "badges",
+            "importName": "make_badge",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+            "path": "badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "names.py",
+          "badges.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "badges",
+          "importName": "make_badge",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+          "path": "badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "mp-3-document-helper-contracts",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.badges_py.content",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "names.py",
+            "badges.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe  \ncoach\n",
+            "stdout": "COACH badge: Zoe\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "ALex\n  volunteer  \n",
+            "stdout": "VOLUNTEER badge: Alex\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+            "path": "names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
+            "path": "badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
+            "path": "badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "names.py",
+          "badges.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+          "path": "names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
+          "path": "badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
+          "path": "badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "mp-4-add-welcome-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.badges_py.content",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+          "language": "python"
+        },
+        {
+          "path": "messages.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.badges_py.content",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+            "language": "python"
+          },
+          {
+            "path": "messages.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "names.py",
+            "badges.py",
+            "messages.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe  \ncoach\n",
+            "stdout": "Welcome! COACH badge: Zoe\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "ALex\n  volunteer  \n",
+            "stdout": "Welcome! VOLUNTEER badge: Alex\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+            "language": "python"
+          },
+          {
+            "path": "messages.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "messages",
+            "importName": "welcome_message",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
+            "path": "messages.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
+            "path": "messages.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "names.py",
+          "badges.py",
+          "messages.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "messages",
+          "importName": "welcome_message",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
+          "path": "messages.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
+          "path": "messages.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
         }
       ]
     }

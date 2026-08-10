@@ -543,6 +543,214 @@ describe("validatePythonGolden", () => {
         expect(calls).toBe(0);
     });
 
+    it("accepts workspace starter files as baseline fixtures for file-reading goldens", async () => {
+        let calls = 0;
+
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "Ada\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const solutionCode =
+            "with open('names.txt') as f:\n    print(f.readline().strip())\n";
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        starterCode: "# Read names.txt\n",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# Read names.txt\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "names.txt",
+                                content: "Ada\n",
+                                language: "text",
+                            },
+                        ],
+                        workspace: {
+                            language: "python",
+                            entryFilePath: "main.py",
+                            starterCode: "# Read names.txt\n",
+                            starterFiles: [
+                                {
+                                    path: "main.py",
+                                    content: "# Read names.txt\n",
+                                    language: "python",
+                                    isEntry: true,
+                                },
+                                {
+                                    path: "names.txt",
+                                    content: "Ada\n",
+                                    language: "text",
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "Ada\n", match: "exact" }],
+                            solutionCode,
+                            solutionFiles: [
+                                {
+                                    path: "main.py",
+                                    content: solutionCode,
+                                    language: "python",
+                                    isEntry: true,
+                                },
+                                {
+                                    path: "names.txt",
+                                    content: "Ada\n",
+                                    language: "text",
+                                },
+                            ],
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(
+            result.issues.map((issue) => issue.code),
+        ).not.toContain("PYTHON_FILE_FIXTURE_MISSING");
+        expect(calls).toBeGreaterThan(0);
+    });
+
+    it("allows a solution to write a file before reading it without a baseline fixture", async () => {
+        let calls = 0;
+
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "Name: Ava\nScore: 92\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const solutionCode = [
+            "name = 'Ava'",
+            "score = 92",
+            "with open('report.txt', 'w') as file:",
+            "    file.write(f'Name: {name}\\n')",
+            "    file.write(f'Score: {score}\\n')",
+            "with open('report.txt') as file:",
+            "    print(file.read(), end='')",
+            "",
+        ].join("\n");
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "writing-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "writing-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.writing-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        starterCode: "# Write report.txt, then read it back\n",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# Write report.txt, then read it back\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                        ],
+                        workspace: {
+                            language: "python",
+                            entryFilePath: "main.py",
+                            starterCode: "# Write report.txt, then read it back\n",
+                            starterFiles: [
+                                {
+                                    path: "main.py",
+                                    content: "# Write report.txt, then read it back\n",
+                                    language: "python",
+                                    isEntry: true,
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [
+                                {
+                                    stdout: "Name: Ava\nScore: 92\n",
+                                    match: "exact",
+                                },
+                            ],
+                            solutionCode,
+                            solutionFiles: [
+                                {
+                                    path: "main.py",
+                                    content: solutionCode,
+                                    language: "python",
+                                    isEntry: true,
+                                },
+                            ],
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(
+            result.issues.map((issue) => issue.code),
+        ).not.toContain("PYTHON_FILE_FIXTURE_MISSING");
+        expect(calls).toBeGreaterThan(0);
+    });
+
     it("fails before execution when requiredFiles contains an output file created at runtime", async () => {
         let calls = 0;
         setCodeRunner(async () => {

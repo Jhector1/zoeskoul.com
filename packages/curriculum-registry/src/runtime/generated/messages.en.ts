@@ -13193,129 +13193,49 @@ const messages: Record<string, any> = {
       "python-5-lists-tuples-and-dictionaries": {
         "creating-and-indexing-lists": {
           "label": "Creating and Indexing Lists",
-          "summary": "Create lists and access items by position.",
+          "summary": "Create ordered lists and read items with positive and negative indexes.",
           "cards": {
             "course-introduction": {
               "title": "Course introduction"
             },
             "sketch0": {
-              "title": "What a list is"
+              "title": "Creating lists"
             },
             "sketch1": {
-              "title": "How indexing works"
+              "title": "Reading items by index"
             },
             "sketch2": {
-              "title": "Using list values in output"
+              "title": "Reading from the end"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-first-index": {
-              "title": "First item index",
-              "prompt": "Which index gets the first item from a Python list?",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "options": {
-                "a": "0",
-                "b": "1",
-                "c": "-1",
-                "d": "first"
-              }
-            },
             "sc-whole-list": {
               "title": "Create a list",
-              "prompt": "Which line of code correctly creates a list with the values 3, 5, and 7?",
-              "hint": "Look for square brackets with comma-separated values.",
+              "prompt": "Which line correctly creates a Python list containing the numbers 3, 5, and 7 in that order?",
+              "hint": "Python list literals use square brackets and commas.",
               "help": {
-                "concept": "Python lists are written with square brackets around ordered items separated by commas.",
-                "hint_1": "Parentheses and braces create different kinds of structures.",
-                "hint_2": "Choose the option that uses `[` and `]` with `3, 5, 7` inside."
+                "concept": "A list literal uses square brackets around comma-separated items.",
+                "hint_1": "Look at the outer punctuation around the three values.",
+                "hint_2": "Choose the option written as `[3, 5, 7]`."
               },
               "options": {
                 "a": "numbers = [3, 5, 7]",
-                "b": "numbers = 3, 5, 7, list"
-              }
-            },
-            "mc-valid-index-expressions": {
-              "title": "Valid list access",
-              "prompt": "Choose all expressions that correctly access an item from `letters = [\"a\", \"b\", \"c\"]`.",
-              "hint": "A valid access uses the list name followed by an index in square brackets.",
-              "help": {
-                "concept": "To access a list item, Python uses the syntax `list_name[index]` with a numeric index.",
-                "hint_1": "Check which choices use square brackets after `letters`.",
-                "hint_2": "Two choices use the correct indexing pattern and refer to real positions in this three-item list."
-              },
-              "options": {
-                "a": "letters[0]",
-                "b": "letters[2]",
-                "c": "letters(1)"
-              }
-            },
-            "mc-true-about-lists": {
-              "title": "Facts about lists",
-              "prompt": "Choose all true statements about Python lists.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "options": {
-                "a": "Lists keep items in order.",
-                "b": "The first item in a list has index 0.",
-                "c": "Lists must contain only numbers.",
-                "d": "Square brackets are used to create lists."
-              }
-            },
-            "dr-build-list-line": {
-              "title": "Build the list line",
-              "prompt": "Put the tokens in order to create a line of code that stores `\"pen\"`, `\"pencil\"`, and `\"eraser\"` in a list named `items`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "tokens": {
-                "t1": "items",
-                "t2": "=",
-                "t3": "[",
-                "t4": "\"pen\"",
-                "t5": ",",
-                "t6": "\"pencil\"",
-                "t7": "\"eraser\"",
-                "t8": "]"
-              }
-            },
-            "dr-index-output-order": {
-              "title": "Order the outputs",
-              "prompt": "A program runs this code:\n\n`colors = [\"red\", \"blue\", \"green\"]`\n`print(colors[2])`\n`print(colors[0])`\n`print(colors[1])`\n\nArrange the printed lines in the order they appear in the output panel.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "green",
-                "t2": "red",
-                "t3": "blue"
+                "b": "numbers = (3, 5, 7)",
+                "c": "numbers = {3, 5, 7}",
+                "d": "numbers = \"3, 5, 7\""
               }
             },
             "fb-second-item": {
-              "title": "Pick the second item",
-              "prompt": "Complete the code to print the second item from the list.",
-              "hint": "Count list positions from zero before selecting the second item.",
+              "title": "Read the second item",
+              "prompt": "Complete the code so it prints the second item in `letters`.",
+              "hint": "Python starts list indexes at 0.",
               "help": {
-                "concept": "Python counts the first position as zero, so move forward one position to reach the second item.",
-                "hint_1": "Write the first three positions in zero-based order before choosing the middle one.",
-                "hint_2": "Use the index that points to the item after the first one."
+                "concept": "The first three list positions use indexes 0, 1, and 2.",
+                "hint_1": "If the first item is index 0, move forward one index to reach the second item.",
+                "hint_2": "Use index `1`."
               },
               "template": "letters = [\"a\", \"b\", \"c\"]\nprint(letters[[blank1]])",
               "choices": [
@@ -13325,201 +13245,137 @@ const messages: Record<string, any> = {
                 "3"
               ]
             },
-            "fb-list-name": {
-              "title": "Complete the list assignment",
-              "prompt": "Choose the missing variable name so the list is stored in `numbers`.",
-              "hint": "Only the name before `=` is missing.",
+            "dr-index-output-order": {
+              "title": "Trace indexed output",
+              "prompt": "A program runs this code:\n\n`colors = [\"red\", \"blue\", \"green\"]`\n`print(colors[2])`\n`print(colors[0])`\n`print(colors[1])`\n\nArrange the printed lines in the order they appear.",
+              "hint": "Resolve each index before ordering the three printed values.",
               "help": {
-                "concept": "In an assignment, the variable name goes on the left side of `=` and receives the list value on the right.",
-                "hint_1": "The blank should be the variable that will hold `[4, 8, 12]`.",
-                "hint_2": "Pick the choice that is a sensible variable name, not a keyword or function."
+                "concept": "Index 0 is the first item, index 1 is the second, and index 2 is the third.",
+                "hint_1": "Work through the three `print()` calls from top to bottom.",
+                "hint_2": "The calls read indexes 2, 0, then 1."
               },
-              "template": "[blank1] = [4, 8, 12]",
-              "choices": [
-                "numbers",
-                "print",
-                "index",
-                "list()"
-              ]
-            },
-            "ci-print-first-last": {
-              "title": "Print the first and last list items",
-              "prompt": "Three fruit labels come in one at a time. Store the inputs in a list, then print the first fruit and the last fruit on separate lines.\n\nFor example, if the inputs are `apple`, `banana`, and `cherry`, your program should print:\n`apple`\n`cherry`.",
-              "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
-              "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use index 0 to read the first item instead of printing the input directly."
-                },
-                "1": {
-                  "message": "Use an index to read the last item from the list."
-                }
+              "tokens": {
+                "t1": "green",
+                "t2": "red",
+                "t3": "blue"
               }
             },
-            "ci-print-second-number": {
-              "title": "Print the second number",
-              "prompt": "A scoreboard sends three numbers in order. Put them into a list, then print the second item from that list.\n\nFor example, if the inputs are `4`, `9`, and `2`, your program should print:\n`9`.",
-              "hint": "The second item in a list is at index 1.",
+            "sc-last-negative-index": {
+              "title": "Read the last item",
+              "prompt": "Which expression gets the last item from `tasks` without needing to know how many items are in the list?",
+              "hint": "Python can count backward from the end of a list with negative indexes.",
               "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
+                "concept": "Index `-1` always refers to the final item in a non-empty list.",
+                "hint_1": "Positive indexes count from the beginning; negative indexes count from the end.",
+                "hint_2": "Use `tasks[-1]`."
               },
-              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
-              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use index 1 to read the second item from the list."
-                }
-              }
-            },
-            "ci-build-and-show-list": {
-              "title": "Build a list from input",
-              "prompt": "A paint shelf needs a quick inventory. Collect the three input colors into one list and print the finished list.\n\nFor example, if the inputs are `red`, `blue`, and `green`, your program should print:\n`['red', 'blue', 'green']`.",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
-              "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Create a list with color1, color2, and color3 before printing it."
-                }
-              }
-            },
-            "try-creating-and-indexing-lists-checkpoint": {
-              "title": "Index and print list values",
-              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name.",
-              "hint": "Use index `0` for the first item and `-1` for the last item.",
-              "help": {
-                "concept": "List indexing lets you retrieve a value by position.",
-                "hint_1": "Use index `0` for the first item and `-1` for the last item.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
-              "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Create the names list instead of only printing the final answers."
-                },
-                "1": {
-                  "message": "Use names[0] to print the first name instead of typing Ava directly."
-                },
-                "2": {
-                  "message": "Use an index on names to print the last name instead of typing Zoe directly."
-                }
+              "options": {
+                "a": "tasks[-1]",
+                "b": "tasks[0]",
+                "c": "tasks[1]",
+                "d": "tasks[\"last\"]"
               }
             },
             "try-creating-and-indexing-lists-sketch0": {
-              "title": "Print the first and last list items",
-              "prompt": "Use list indexes to print the first and last values from `items`.",
-              "hint": "Lists keep their items in order. Start by printing the first item in items.",
+              "title": "Build a list from input",
+              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list.",
+              "hint": "Put `club1`, `club2`, and `club3` inside square brackets in the order they were read.",
               "help": {
-                "concept": "Lists keep their items in order. Start by printing the first item in items.",
-                "hint_1": "The first item is items[0]. The last item is items[-1].",
-                "hint_2": "Print each value on its own line: first red, then green."
+                "concept": "A list can collect values that are already stored in variables.",
+                "hint_1": "Read all three inputs first, then create one list from the three variables.",
+                "hint_2": "Create `clubs = [club1, club2, club3]`, then print `clubs`."
               },
-              "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
-              "solutionCode": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+              "starterCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\n# Create a list named clubs containing the three inputs.\n# Print the whole list.\n",
+              "solutionCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\nclubs = [club1, club2, club3]\nprint(clubs)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use items[0] for the first item instead of typing red."
-                },
-                "1": {
-                  "message": "Use an index on items for the last item instead of typing green."
+                  "message": "Build `clubs` from `club1`, `club2`, and `club3` in that order instead of printing a hard-coded list."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch1": {
-              "title": "Print the second number",
-              "prompt": "Use index `1` to print the second value in `numbers`.",
-              "hint": "Print the second number in the list.",
+              "title": "Read two different positions",
+              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line.",
+              "hint": "For a four-item list, the third item is at index 2 and the first item is at index 0.",
               "help": {
-                "concept": "Print the second number in the list.",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "List indexes let you read specific positions without changing the list.",
+                "hint_1": "Use one indexed expression for the third station and another for the first station.",
+                "hint_2": "Print `stations[2]` first, then `stations[0]`."
               },
-              "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
-              "solutionCode": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+              "starterCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\n\n# Print the third station.\n# Then print the first station.\n",
+              "solutionCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\nprint(stations[2])\nprint(stations[0])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use numbers[1] instead of typing 9 directly."
+                  "message": "Use `stations[2]` to read the third station instead of typing `Lake` directly."
+                },
+                "1": {
+                  "message": "Use `stations[0]` to read the first station instead of typing `Oak` directly."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch2": {
-              "title": "Build and print a list",
-              "prompt": "Create a list named `names` from the two variables, then print it.",
-              "hint": "Build a list named names with first and second.",
+              "title": "Use the last item after building a list",
+              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing.",
+              "hint": "Build the list first, then use index `-1` to read its final item.",
               "help": {
-                "concept": "Build a list named names with first and second.",
-                "hint_1": "Build a list named names with first and second, then print names.",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
+                "concept": "Negative indexing is useful when you want an item relative to the end of a list.",
+                "hint_1": "Create `stops` from the four input variables in their original order.",
+                "hint_2": "Print `stops[-1]` rather than printing `stop4` directly."
               },
-              "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
-              "solutionCode": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+              "starterCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\n# Create a list named stops containing the four inputs.\n# Print the final stop using negative indexing.\n",
+              "solutionCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\nstops = [stop1, stop2, stop3, stop4]\nprint(stops[-1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build names from the variables first and second, not by typing the final list directly."
+                  "message": "Build `stops` from `stop1`, `stop2`, `stop3`, and `stop4` in that order."
+                },
+                "1": {
+                  "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
                 }
               }
             }
           },
           "tryIt": {
-            "try_creating_and_indexing_lists_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name."
-            },
             "try_creating_and_indexing_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use list indexes to print the first and last values from `items`."
+              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list."
             },
             "try_creating_and_indexing_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use index `1` to print the second value in `numbers`."
+              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line."
             },
             "try_creating_and_indexing_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Create a list named `names` from the two variables, then print it."
+              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing."
             },
             "allowReveal": true
           }
         },
         "dictionary-basics": {
           "label": "Dictionary Basics",
-          "summary": "Store and retrieve values using keys.",
+          "summary": "Create dictionaries with labeled key-value pairs, retrieve values by key, and check whether a key exists before reading it.",
           "cards": {
             "sketch0": {
-              "title": "What a dictionary is"
+              "title": "Creating labeled dictionary records"
             },
             "sketch1": {
-              "title": "Looking up values by key"
+              "title": "Reading values by key"
             },
             "sketch2": {
-              "title": "Creating and updating dictionary entries"
+              "title": "Checking whether a key exists"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
             "sc-dict-best-choice": {
-              "title": "Choose the best collection",
-              "prompt": "Which collection is the best fit for storing a person's name, age, and city with labels for each value?",
-              "hint": "Pick the collection that stores labeled key-value pairs.",
+              "title": "Choose labeled data",
+              "prompt": "You need to store a person's name, age, and city so each value has a clear label. Which collection is the best fit?",
+              "hint": "Choose the collection designed around key-value pairs.",
               "help": {
-                "concept": "Dictionaries are designed for data where each value has a label, such as name, age, or city.",
-                "hint_1": "A list stores items by position, but this question needs labels tied to values.",
-                "hint_2": "Look for the collection that lets you write keys like \"name\" and \"age\"."
+                "concept": "A dictionary connects each value to a key such as `\"name\"`, `\"age\"`, or `\"city\"`.",
+                "hint_1": "A list or tuple relies mainly on positions.",
+                "hint_2": "Choose the collection that lets you look up a value by a label."
               },
               "options": {
                 "a": "A dictionary",
@@ -13531,828 +13387,524 @@ const messages: Record<string, any> = {
             "sc-dict-lookup": {
               "title": "Read a value by key",
               "prompt": "Given `pet = {\"type\": \"cat\", \"age\": 3}`, which expression gets the value `\"cat\"`?",
-              "hint": "Use the key, not a numeric position.",
+              "hint": "Use the dictionary name followed by the exact key in square brackets.",
               "help": {
-                "concept": "Dictionary values are accessed with their keys inside square brackets.",
-                "hint_1": "The key for `\"cat\"` is `\"type\"`.",
-                "hint_2": "Use the dictionary name followed by square brackets containing the string key."
+                "concept": "Dictionary lookup uses `dictionary[key]`.",
+                "hint_1": "The value `\"cat\"` is stored under the key `\"type\"`.",
+                "hint_2": "Use `pet[\"type\"]`."
               },
               "options": {
                 "a": "pet[0]",
                 "b": "pet(\"type\")",
-                "c": "type[\"pet\"]"
+                "c": "pet[\"type\"]",
+                "d": "type[\"pet\"]"
               }
             },
-            "mc-dict-parts": {
-              "title": "Identify dictionary parts",
-              "prompt": "Which statements about this dictionary are correct?\n\n`item = {\"name\": \"pen\", \"price\": 2}`\n\nChoose all correct answers.",
-              "hint": "Separate keys from values in each pair.",
+            "sc-key-value-role": {
+              "title": "Identify a key and its value",
+              "prompt": "In `book = {\"title\": \"Kindred\", \"pages\": 264}`, what is `\"pages\"`?",
+              "hint": "Look at which side of the colon the item appears on.",
               "help": {
-                "concept": "In a dictionary, each entry has a key on the left of the colon and a value on the right.",
-                "hint_1": "Check the pair `\"name\": \"pen\"` and the pair `\"price\": 2`.",
-                "hint_2": "The strings before colons are keys; the data after colons are values."
+                "concept": "In a dictionary entry, the key appears before the colon and its value appears after the colon.",
+                "hint_1": "The pair here is `\"pages\": 264`.",
+                "hint_2": "`\"pages\"` is the key; `264` is the value."
               },
               "options": {
-                "a": "`\"name\"` is a key",
-                "b": "`\"pen\"` is a value",
-                "c": "`2` is a value",
-                "d": "`\"price\"` is a value"
+                "a": "A key",
+                "b": "A value",
+                "c": "A list index",
+                "d": "A method"
               }
             },
-            "mc-dict-operations": {
-              "title": "Valid dictionary actions",
-              "prompt": "Which lines correctly work with a dictionary named `scores = {\"Ava\": 10, \"Ben\": 8}`? Choose all correct answers.",
-              "hint": "Think about looking up by key and assigning by key.",
+            "sc-key-membership": {
+              "title": "Check for a key safely",
+              "prompt": "Given `profile = {\"name\": \"Ava\", \"age\": 12}`, which expression checks whether the key `\"city\"` exists in the dictionary?",
+              "hint": "Use the membership operator with the key on the left and the dictionary on the right.",
               "help": {
-                "concept": "You can read a dictionary value with `dict[key]` and update or add entries with `dict[key] = value`.",
-                "hint_1": "One correct pattern reads a value using a name key in square brackets.",
-                "hint_2": "Another correct pattern changes or adds a value by putting a key in square brackets on the left side of `=`."
+                "concept": "For dictionaries, `key in dictionary` checks whether that key exists.",
+                "hint_1": "You are checking for a key, not reading its value yet.",
+                "hint_2": "Use `\"city\" in profile`."
               },
               "options": {
-                "a": "`scores[\"Ava\"]`",
-                "b": "`scores[1]`",
-                "c": "`scores[\"Ben\"] = 9`",
-                "d": "`scores.add(\"Kai\", 7)`"
-              }
-            },
-            "dr-dict-create-order": {
-              "title": "Build a dictionary step by step",
-              "prompt": "Put these code pieces in the correct order to create a dictionary and print one value.",
-              "hint": "Create the dictionary first, then read from it.",
-              "help": {
-                "concept": "Python must create and assign the dictionary before you can look up a value from it.",
-                "hint_1": "Start with the variable name and assignment to a dictionary literal.",
-                "hint_2": "The print line should come after the dictionary exists, and the lookup uses the key `\"name\"`."
-              },
-              "tokens": {
-                "t1": "person = {",
-                "t2": "\"name\": \"Ava\"",
-                "t3": "}",
-                "t4": "print(person[\"name\"])"
-              }
-            },
-            "dr-dict-update-order": {
-              "title": "Order an update example",
-              "prompt": "Arrange these lines to create a dictionary, update a value, and print the updated result.",
-              "hint": "The dictionary must exist before the update line.",
-              "help": {
-                "concept": "Updating a dictionary uses assignment with a key after the dictionary has already been created.",
-                "hint_1": "First create `stock`, then change the value for `\"apples\"`, then print it.",
-                "hint_2": "The print line belongs last because it should show the updated value, not the original one."
-              },
-              "tokens": {
-                "t1": "stock = {\"apples\": 5}",
-                "t2": "stock[\"apples\"] = 7",
-                "t3": "print(stock[\"apples\"])"
-              }
-            },
-            "fb-dict-literal": {
-              "title": "Complete a dictionary literal",
-              "prompt": "Choose the missing value to finish the dictionary entry.",
-              "hint": "The blank should be the value paired with the key `\"color\"`.",
-              "help": {
-                "concept": "A dictionary entry has the form `key: value`, so the missing part here is the value for one key.",
-                "hint_1": "The key is already written as `\"color\"`.",
-                "hint_2": "Pick the choice that can act as the string value stored for that key."
-              },
-              "template": "paint = {\"color\": [blank1]}",
-              "choices": [
-                "\"blue\"",
-                "color",
-                "Lesson notes panel",
-                "Color theme picker"
-              ]
-            },
-            "fb-dict-key-lookup": {
-              "title": "Complete a key lookup",
-              "prompt": "Choose the missing key so the expression gets the age value.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "person = {\"name\": \"Ivy\", \"age\": 12}\nprint(person[[blank1]])",
-              "choices": [
-                "\"age\"",
-                "12",
-                "\"Ivy\"",
-                "0"
-              ]
-            },
-            "ci-make-dictionary": {
-              "title": "Return a simple dictionary",
-              "prompt": "Write `make_book(title, pages)` so it returns one dictionary describing the book. The dictionary should use the keys `\"title\"` and `\"pages\"`.",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
-              "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}"
-            },
-            "ci-get-score": {
-              "title": "Look up a value in a dictionary",
-              "prompt": "Write `get_score(scores, name)` so it looks up `name` in the `scores` dictionary and returns that score.",
-              "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
-              "solutionCode": "def get_score(scores, name):\n    return scores[name]"
-            },
-            "ci-update-dictionary": {
-              "title": "Add or update a dictionary entry",
-              "prompt": "Write `set_price(prices, item, amount)` so it updates the `prices` dictionary with the given item and amount, then returns the updated dictionary.",
-              "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
-              "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices"
-            },
-            "try-dictionary-basics-checkpoint": {
-              "title": "Create and read a dictionary",
-              "prompt": "Create a dictionary for `name` and `score`, then print the score.",
-              "hint": "Use the key `\"score\"` to read the value.",
-              "help": {
-                "concept": "A dictionary stores values under named keys.",
-                "hint_1": "Use the key `\"score\"` to read the value.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
-              "solutionCode": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Create a dictionary variable named student."
-                },
-                "1": {
-                  "message": "Use the score key to read the score from student."
-                }
+                "a": "\"city\" in profile",
+                "b": "profile[\"city\"]",
+                "c": "\"city\" == profile",
+                "d": "profile.in(\"city\")"
               }
             },
             "try-dictionary-basics-sketch0": {
-              "title": "Print a dictionary value",
-              "prompt": "Use the key `'name'` to read a value from the dictionary.",
-              "hint": "Print the name from profile.",
+              "title": "Build a profile dictionary",
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary.",
+              "hint": "Use a dictionary literal with two `key: value` pairs.",
               "help": {
-                "concept": "Print the name from profile.",
-                "hint_1": "Test this single step before combining it with later behavior.",
-                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
+                "concept": "A dictionary literal uses `{}` and separates each key from its value with a colon.",
+                "hint_1": "Store the variable `name` under the key `\"name\"` and `age` under the key `\"age\"`.",
+                "hint_2": "Create `profile = {\"name\": name, \"age\": age}`, then print `profile`."
               },
-              "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
-              "solutionCode": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+              "starterCode": "name = input()\nage = int(input())\n\n# Create profile with the keys \"name\" and \"age\".\n# Store the input values under those keys.\n# Print the whole dictionary.\n",
+              "solutionCode": "name = input()\nage = int(input())\n\nprofile = {\"name\": name, \"age\": age}\nprint(profile)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use profile[\"name\"] instead of typing Ava directly."
+                  "message": "Create `profile` as a dictionary that stores `name` and `age` under matching string keys."
                 }
               }
             },
             "try-dictionary-basics-sketch1": {
-              "title": "Update an age",
-              "prompt": "Assign a new value to an existing dictionary key.",
-              "hint": "Change age to 12.",
+              "title": "Look up a price from input",
+              "prompt": "The dictionary `prices` is already defined. Read an item name from input and print the price stored under that key. The test inputs will always be keys that exist in `prices`.",
+              "hint": "Use the input variable as the key inside square brackets.",
               "help": {
-                "concept": "Change age to 12.",
-                "hint_1": "Change age to 12, then print the profile dictionary.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "A dictionary lookup can use a variable key, not only a literal string.",
+                "hint_1": "The selected key is stored in `item`.",
+                "hint_2": "Print `prices[item]`."
               },
-              "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
-              "solutionCode": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+              "starterCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\n# Print the value stored under the key in item.\n",
+              "solutionCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\nprint(prices[item])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Update profile['age'] to 12 instead of replacing the final dictionary."
+                  "message": "Use `prices[item]` so the program looks up whichever valid key arrives as input."
                 }
               }
             },
             "try-dictionary-basics-sketch2": {
-              "title": "Create and print a score dictionary",
-              "prompt": "Build a dictionary with two key-value pairs, then print it.",
-              "hint": "Create a dictionary named scores with Ava: 92 and Mia: 85.",
+              "title": "Check whether a setting exists",
+              "prompt": "The dictionary `settings` contains several configuration keys. Read a key from input. If that key exists in `settings`, print `found`; otherwise print `missing`.",
+              "hint": "Use `key in settings` as the condition.",
               "help": {
-                "concept": "Create a dictionary named scores with Ava: 92 and Mia: 85.",
-                "hint_1": "Create a dictionary named scores with Ava: 92 and Mia: 85, then print scores.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "The `in` operator checks whether a dictionary contains a key without trying to read its value.",
+                "hint_1": "Use `if key in settings:` for the found case.",
+                "hint_2": "Print `found` in the `if` block and `missing` in the `else` block."
               },
-              "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
-              "solutionCode": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+              "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
+              "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create a dictionary variable named scores."
-                },
-                "1": {
-                  "message": "Use Ava as a key in scores."
-                },
-                "2": {
-                  "message": "Use Mia as a key in scores."
+                  "message": "Use `if key in settings:` so the program checks dictionary membership before reading anything."
                 }
               }
             }
           },
           "tryIt": {
-            "try_dictionary_basics_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Create a dictionary for `name` and `score`, then print the score."
-            },
             "try_dictionary_basics_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use the key `'name'` to read a value from the dictionary."
+              "prompt": "Build a profile dictionary from a name and age supplied as input, then print the dictionary."
             },
             "try_dictionary_basics_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Assign a new value to an existing dictionary key."
+              "prompt": "Read a valid item key from input and print the matching value from `prices`."
             },
             "try_dictionary_basics_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Build a dictionary with two key-value pairs, then print it."
+              "prompt": "Read a key from input and print whether that key exists in `settings`."
             },
             "allowReveal": true
           }
         },
         "list-methods-and-mutation": {
           "label": "List Methods and Mutation",
-          "summary": "Use common list methods like append, remove, pop, and sort, and learn how they change the original list.",
+          "summary": "Change existing list items, add and remove values, capture removed items with pop(), and sort a list in place.",
           "cards": {
             "sketch0": {
-              "title": "What mutation means for lists"
+              "title": "Replacing an item by index"
             },
             "sketch1": {
-              "title": "Using append, remove, and pop"
+              "title": "Adding an item with append()"
             },
             "sketch2": {
-              "title": "Sorting lists and watching for common mistakes"
+              "title": "Removing a matching value"
+            },
+            "sketch3": {
+              "title": "Removing by position with pop()"
+            },
+            "sketch4": {
+              "title": "Sorting the same list"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-1": {
-              "title": "Which method adds to the end?",
-              "prompt": "Which list method adds one new item to the end of a list?",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
+            "sc-index-assignment": {
+              "title": "Replace one list item",
+              "prompt": "The list is `tasks = [\"email\", \"meeting\", \"backup\"]`. Which line replaces the second item with `\"study\"`?",
+              "hint": "Reading an item uses an index. Replacing an item uses that same indexed position on the left side of `=`.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Assigning to `list[index]` changes the item stored at that position.",
+                "hint_1": "The second item is at index `1` because Python starts counting at 0.",
+                "hint_2": "Use `tasks[1] = \"study\"`."
               },
               "options": {
-                "a": "append()",
-                "b": "remove()",
-                "c": "pop()",
-                "d": "sort()"
+                "a": "tasks[1] = \"study\"",
+                "b": "tasks[0] = \"study\"",
+                "c": "tasks.append(\"study\")",
+                "d": "tasks(1) = \"study\""
               }
             },
-            "sc-2": {
-              "title": "What does pop return?",
-              "prompt": "In Python, what does `items.pop(1)` return?",
-              "hint": "`pop()` both changes the list and gives you something back.",
+            "mc-mutates-original": {
+              "title": "Operations that mutate a list",
+              "prompt": "Which operations change the existing list itself? Assume `items` is already a list. Choose all that apply.",
+              "hint": "Think about whether the list's stored items are different after the operation runs.",
               "help": {
-                "concept": "`pop(index)` removes the item at the given index and returns that removed item.",
-                "hint_1": "Index `1` means the second item in the list.",
-                "hint_2": "The return value is not the shortened list itself; it is the element that was taken out."
+                "concept": "Index assignment and list methods such as `append`, `remove`, `pop`, and `sort` mutate the existing list.",
+                "hint_1": "`len(items)` reads information but does not change any item.",
+                "hint_2": "Choose the operations that replace, add, remove, or reorder list items."
               },
               "options": {
-                "a": "The item that was removed at index 1",
-                "b": "A copy of the whole list",
-                "c": "The length of the list after removal",
-                "d": "Nothing at all"
+                "a": "items[0] = \"new\"",
+                "b": "items.append(\"new\")",
+                "c": "items.pop()",
+                "d": "len(items)"
               }
             },
-            "mc-1": {
-              "title": "Methods that mutate a list",
-              "prompt": "Which of these operations change the original list? Choose all that apply.",
-              "hint": "Check every option against the complete behavior described in the question.",
+            "sc-remove-vs-pop": {
+              "title": "Remove by position and keep the value",
+              "prompt": "You need to remove the item at index `1` from `colors` and store the removed value in `removed`. Which line does both?",
+              "hint": "`remove()` looks for a matching value. `pop()` removes by position and returns what it removed.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "`pop(index)` removes the item at that index and returns the removed value.",
+                "hint_1": "The task gives a position, not a value to search for.",
+                "hint_2": "Assign the result of `colors.pop(1)` to `removed`."
               },
               "options": {
-                "a": "append(5)",
-                "b": "remove(5)",
-                "c": "sort()",
-                "d": "len(my_list)"
+                "a": "removed = colors.pop(1)",
+                "b": "removed = colors.remove(1)",
+                "c": "colors.remove(removed)",
+                "d": "removed = colors[1]"
               }
             },
-            "mc-2": {
-              "title": "Valid list method uses",
-              "prompt": "Which lines are valid ways to use common list methods on `numbers = [3, 1, 2]`? Choose all that apply.",
-              "hint": "Check whether each method name matches the kind of argument it expects.",
+            "sc-sort-return": {
+              "title": "What sort() returns",
+              "prompt": "What is printed by this code?\n\n`scores = [8, 3, 5]`\n`result = scores.sort()`\n`print(result)`",
+              "hint": "`sort()` changes `scores` in place; it does not return the sorted list.",
               "help": {
-                "concept": "Different list methods expect different inputs: `append` takes a value, `remove` takes a value, and `pop` usually takes an index.",
-                "hint_1": "Ask whether the method is removing by value or by position.",
-                "hint_2": "One choice mixes up `remove` with index behavior, and one choice uses `sort` with an argument it does not need here."
+                "concept": "`list.sort()` mutates the list and returns `None`.",
+                "hint_1": "After sorting, `scores` is ordered, but `result` receives the method's return value.",
+                "hint_2": "That return value is `None`."
               },
               "options": {
-                "a": "numbers.append(4)",
-                "b": "numbers.remove(1)",
-                "c": "numbers.pop(0)",
-                "d": "numbers.sort(2)"
-              }
-            },
-            "dr-1": {
-              "title": "Append then inspect",
-              "prompt": "Put these steps in the correct order to add `7` to a list and display the updated list.",
-              "hint": "First create the list, then change it, then print it.",
-              "help": {
-                "concept": "A short list program usually follows a sequence: create data, mutate data, then inspect the result with `print()`.",
-                "hint_1": "You cannot append to a list before the list exists.",
-                "hint_2": "Printing should happen after the append if you want to see the changed list."
-              },
-              "tokens": {
-                "t1": "numbers = [1, 2]",
-                "t2": "numbers.append(7)",
-                "t3": "print(numbers)"
-              }
-            },
-            "dr-2": {
-              "title": "Remove, pop, then print",
-              "prompt": "Arrange the lines to produce a program that removes `\"b\"`, then pops the last remaining item into `taken`, then prints `taken`.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "letters = [\"a\", \"b\", \"c\"]",
-                "t2": "letters.remove(\"b\")",
-                "t3": "taken = letters.pop()",
-                "t4": "print(taken)"
-              }
-            },
-            "fb-1": {
-              "title": "Complete an append call",
-              "prompt": "Choose the value that makes `numbers.append(...)` add `10` to the list.",
-              "hint": "`append()` needs the item you want to add inside the parentheses.",
-              "help": {
-                "concept": "To add one item to the end of a list, place that item as the argument to `append()`.",
-                "hint_1": "The blank is the new value being added, not the list name or method name.",
-                "hint_2": "Pick the choice that would make the list gain the number ten."
-              },
-              "template": "numbers = [1, 2]\nnumbers.append([blank1])",
-              "choices": [
-                "numbers",
-                "append",
-                "10",
-                "pop"
-              ]
-            },
-            "fb-2": {
-              "title": "Complete a sort statement",
-              "prompt": "Choose the method name that sorts `scores` in place.",
-              "hint": "This method puts list items in order and changes the list itself.",
-              "help": {
-                "concept": "Choose the list method that rearranges the existing list into order instead of returning a separate sorted copy.",
-                "hint_1": "The blank should be a method that works directly on a list variable.",
-                "hint_2": "It is not a method for adding or removing items."
-              },
-              "template": "scores = [4, 1, 3]\nscores.[blank1]()",
-              "choices": [
-                "append",
-                "remove",
-                "sort",
-                "pop"
-              ]
-            },
-            "ci-1": {
-              "title": "Add an item and print the list",
-              "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
-              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use items.append(item) so the list is really mutated."
-                }
-              }
-            },
-            "ci-2": {
-              "title": "Remove a value and show the result",
-              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
-              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use colors.remove(color) so the list is really mutated."
-                }
-              }
-            },
-            "ci-3": {
-              "title": "Sort numbers from input",
-              "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
-              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use numbers.sort() so the list is really sorted in place."
-                }
-              }
-            },
-            "try-list-methods-and-mutation-checkpoint": {
-              "title": "Append 10 to a list",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list.",
-              "hint": "Use `append()` to add one item to the end.",
-              "help": {
-                "concept": "`append(value)` mutates the original list by adding one item to the end.",
-                "hint_1": "Use `append()` to add one item to the end.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
-              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use numbers.append(10) so the list is really changed."
-                }
+                "a": "None",
+                "b": "[3, 5, 8]",
+                "c": "8",
+                "d": "Nothing is printed because the program crashes"
               }
             },
             "try-list-methods-and-mutation-sketch0": {
-              "title": "Append 10 and print the list",
-              "prompt": "Use `append(10)` to add `10` to the list, then print the updated list.",
-              "hint": "Add 10 to the end of the list.",
+              "title": "Correct one score",
+              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list.",
+              "hint": "The last item in this three-item list is at index `2`.",
               "help": {
-                "concept": "Add 10 to the end of the list.",
-                "hint_1": "Add 10 to the end of the list, then print the updated list.",
-                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
+                "concept": "Assigning to an indexed list position replaces the value already stored there.",
+                "hint_1": "Keep the existing list and change only its last position.",
+                "hint_2": "Use `scores[2] = corrected_score`, then print `scores`."
               },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
-              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "starterCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\n# Replace the last score with corrected_score.\n# Then print the updated list.\n",
+              "solutionCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\nscores[2] = corrected_score\nprint(scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use numbers.append(10) so the list is really changed."
+                  "message": "Replace the last item with `scores[2] = corrected_score` instead of creating a different final list."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch1": {
-              "title": "Remove banana and pop the last item",
-              "prompt": "Use `remove()` and `pop()` to change the list and show what remains.",
-              "hint": "Remove 'banana'.",
+              "title": "Add a new attendee",
+              "prompt": "A new attendee name arrives as input. Add that name to the end of `attendees` with `append()`, then print the updated list.",
+              "hint": "Pass the input variable to `attendees.append(...)`.",
               "help": {
-                "concept": "Remove 'banana'.",
-                "hint_1": "Remove 'banana' Then pop the last remaining item into last_item.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "`append(value)` adds exactly one new item to the end of the existing list.",
+                "hint_1": "Do not type the incoming name directly into the list; use the value stored in `new_attendee`.",
+                "hint_2": "Call `attendees.append(new_attendee)`, then print `attendees`."
               },
-              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
-              "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+              "starterCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\n# Add new_attendee to the end of attendees.\n# Then print the updated list.\n",
+              "solutionCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\nattendees.append(new_attendee)\nprint(attendees)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Call fruits.remove('banana') instead of replacing the final list directly."
-                },
-                "1": {
-                  "message": "Store the result of fruits.pop() in last_item instead of typing cherry directly."
+                  "message": "Use `attendees.append(new_attendee)` so the input value is added to the existing list."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch2": {
-              "title": "Sort and print names",
-              "prompt": "Call `sort()` before printing so the original list is ordered.",
-              "hint": "Sort the list alphabetically.",
+              "title": "Remove a canceled workshop",
+              "prompt": "One workshop has been canceled. Read its name from input, remove that matching value from `workshops` with `remove()`, then print the remaining workshops.",
+              "hint": "`remove(value)` searches for a matching value and deletes the first match.",
               "help": {
-                "concept": "Sort the list alphabetically.",
-                "hint_1": "Sort the list alphabetically, then print the sorted list.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "`remove(value)` changes the list by deleting the first item equal to that value.",
+                "hint_1": "Use the input stored in `canceled` rather than hard-coding one workshop name.",
+                "hint_2": "Call `workshops.remove(canceled)`, then print `workshops`."
               },
-              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
-              "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+              "starterCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\n# Remove the workshop whose name is stored in canceled.\n# Then print the updated list.\n",
+              "solutionCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\nworkshops.remove(canceled)\nprint(workshops)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use names.sort() so the list is actually sorted."
+                  "message": "Use `workshops.remove(canceled)` so the program removes whichever workshop arrives as input."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch3": {
+              "title": "Take the second ticket",
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list.",
+              "hint": "`pop(1)` removes the item at index 1 and returns that removed item.",
+              "help": {
+                "concept": "`pop(index)` is useful when you know the position and also need the removed value.",
+                "hint_1": "Assign the result of `tickets.pop(1)` to `next_ticket`.",
+                "hint_2": "Print `next_ticket` first, then print `tickets`."
+              },
+              "starterCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\n# Remove the second ticket with pop(1) and store it in next_ticket.\n# Print next_ticket.\n# Then print the remaining tickets list.\n",
+              "solutionCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\nnext_ticket = tickets.pop(1)\nprint(next_ticket)\nprint(tickets)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store the returned value with `next_ticket = tickets.pop(1)` instead of typing `T-105` directly."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch4": {
+              "title": "Sort three incoming times",
+              "prompt": "Three completion times arrive as integers. Store them in a list named `times`, sort the same list from smallest to largest with `sort()`, then print the sorted list.",
+              "hint": "Create `times` from the three input variables before calling `times.sort()`.",
+              "help": {
+                "concept": "`sort()` rearranges the existing list in ascending order.",
+                "hint_1": "Build one list from `first`, `second`, and `third` in that order.",
+                "hint_2": "Call `times.sort()` before printing `times`."
+              },
+              "starterCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\n# Create a list named times from the three inputs.\n# Sort times from smallest to largest.\n# Print the sorted list.\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\ntimes = [first, second, third]\ntimes.sort()\nprint(times)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `times` from `first`, `second`, and `third` instead of printing a hard-coded sorted list."
+                },
+                "1": {
+                  "message": "Call `times.sort()` so the existing list is actually sorted in place."
                 }
               }
             }
           },
           "tryIt": {
-            "try_list_methods_and_mutation_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list."
-            },
             "try_list_methods_and_mutation_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use `append(10)` to add `10` to the list, then print the updated list."
+              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list."
             },
             "try_list_methods_and_mutation_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use `remove()` and `pop()` to change the list and show what remains."
+              "prompt": "A new attendee name arrives as input. Add that name to the end of `attendees` with `append()`, then print the updated list."
             },
             "try_list_methods_and_mutation_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Call `sort()` before printing so the original list is ordered."
+              "prompt": "One workshop has been canceled. Read its name from input, remove that matching value from `workshops` with `remove()`, then print the remaining workshops."
+            },
+            "try_list_methods_and_mutation_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list."
+            },
+            "try_list_methods_and_mutation_sketch4": {
+              "title": "Try it yourself",
+              "prompt": "Three completion times arrive as integers. Store them in a list named `times`, sort the same list from smallest to largest with `sort()`, then print the sorted list."
             },
             "allowReveal": true
           }
         },
         "looping-through-lists": {
           "label": "Looping Through Lists",
-          "summary": "Process each list item and build derived results.",
+          "summary": "Loop through list items to print values, accumulate totals, build transformed lists, and keep only values that meet a condition.",
           "cards": {
             "sketch0": {
-              "title": "What a list loop does"
+              "title": "Processing each item in a list"
             },
             "sketch1": {
-              "title": "Using a loop to build a new list"
+              "title": "Building a running total"
             },
             "sketch2": {
-              "title": "Choosing clear loop variable names"
+              "title": "Building a transformed list"
+            },
+            "sketch3": {
+              "title": "Filtering items while you loop"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
             "sc-loop-item-name": {
-              "title": "Pick the loop variable",
-              "prompt": "In this code, what does `fruit` represent?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
-              "hint": "Look at what comes after `for` and before `in`.",
+              "title": "What the loop variable holds",
+              "prompt": "In this loop, what does `fruit` hold during each iteration?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
+              "hint": "Look at the name immediately after `for`.",
               "help": {
-                "concept": "In a `for item in list` loop, the variable after `for` stores one current item from the list during each loop.",
-                "hint_1": "`fruit` changes as the loop moves through `\"apple\"`, then `\"banana\"`, then `\"pear\"`.",
-                "hint_2": "It is not the whole list name. It is the single value being processed on each pass."
+                "concept": "The loop variable holds one current item from the list at a time.",
+                "hint_1": "The list itself is named `fruits`; the singular name `fruit` changes on each pass.",
+                "hint_2": "`fruit` is `\"apple\"`, then `\"banana\"`, then `\"pear\"`."
               },
               "options": {
-                "a": "The whole list of fruits",
-                "b": "One item from the list at a time",
-                "c": "The index number of each fruit",
-                "d": "A built-in Python keyword"
+                "a": "The entire fruits list",
+                "b": "One current item from fruits",
+                "c": "The numeric index of the current item",
+                "d": "The number of items in fruits"
               }
             },
             "sc-empty-list-start": {
-              "title": "Start a new result list",
-              "prompt": "You want to loop through a list and collect changed values into a new list. Which line correctly creates an empty list to start with?",
-              "hint": "You need the syntax for an empty list literal.",
+              "title": "Start a result list",
+              "prompt": "You want to collect new values while looping. Which line correctly creates an empty list named `result`?",
+              "hint": "An empty list literal uses square brackets with nothing between them.",
               "help": {
-                "concept": "When building a derived list, you usually begin with an empty list and add items with `append()` inside the loop.",
-                "hint_1": "An empty list uses square brackets with nothing inside.",
-                "hint_2": "Look for the choice that creates a list, not a string, number, or print call."
+                "concept": "A common list-building pattern starts with an empty list and appends values during the loop.",
+                "hint_1": "Parentheses create a tuple, while square brackets create a list.",
+                "hint_2": "Use `result = []`."
               },
               "options": {
-                "a": "result = ()",
-                "b": "print(result)"
+                "a": "result = []",
+                "b": "result = ()",
+                "c": "result = \"\"",
+                "d": "print(result)"
               }
             },
-            "mc-loop-uses": {
-              "title": "What loops through a list can do",
-              "prompt": "Which actions are common reasons to loop through a list? Choose all that apply.",
-              "hint": "Think about tasks you repeat once for each item.",
+            "sc-running-total": {
+              "title": "Update a running total",
+              "prompt": "Which line belongs inside this loop to add every score into `total`?\n\n```python\nscores = [4, 7, 3]\ntotal = 0\nfor score in scores:\n    # missing line\n```",
+              "hint": "The current item is stored in `score`, and the accumulated value is stored in `total`.",
               "help": {
-                "concept": "List loops are used to process each item, such as printing values, checking conditions, or building a new list from transformed items.",
-                "hint_1": "A loop is useful when the same action should happen for every item in the list.",
-                "hint_2": "Look for choices about repeated processing of items, not choices about changing Python syntax itself."
+                "concept": "A running total repeatedly adds the current item to an accumulator variable.",
+                "hint_1": "The new total should include the old `total` plus the current `score`.",
+                "hint_2": "Use `total += score`."
               },
               "options": {
-                "a": "Print each item",
-                "b": "Build a new list from changed items",
-                "c": "Check whether items meet a condition",
-                "d": "Rename Python keywords"
+                "a": "total += score",
+                "b": "score += total",
+                "c": "total = 0",
+                "d": "scores.append(total)"
               }
             },
-            "mc-good-loop-names": {
-              "title": "Choose clear loop variable names",
-              "prompt": "For the list `scores = [88, 91, 76]`, which loop variable names are clear and appropriate? Choose all that apply.",
-              "hint": "Trace the code before choosing the option that matches its actual behavior.",
+            "sc-filter-append": {
+              "title": "Append only matching items",
+              "prompt": "You want `passing` to contain only scores that are at least 60. Where should `passing.append(score)` run?",
+              "hint": "Only matching scores should be appended.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Filtering combines a loop with a condition so only selected items are added to the result list.",
+                "hint_1": "The append should not run for scores below 60.",
+                "hint_2": "Put the append inside `if score >= 60:`."
               },
               "options": {
-                "a": "score",
-                "b": "item",
-                "c": "scores",
-                "d": "score_value"
-              }
-            },
-            "dr-build-derived-list": {
-              "title": "Order the steps to build a derived list",
-              "prompt": "Arrange these steps in the correct order for building a new list from an existing list.",
-              "hint": "Start by creating the new list before the loop begins.",
-              "help": {
-                "concept": "To build a derived list, first create an empty list, then loop through the original list, compute each new value, and append it.",
-                "hint_1": "The empty list setup happens before any items are processed.",
-                "hint_2": "Inside the loop, you first get the current item, then create the changed value, then add it to the result list."
-              },
-              "tokens": {
-                "t1": "Create an empty result list",
-                "t2": "Start a loop over the original list",
-                "t3": "Compute the changed value for the current item",
-                "t4": "Append the changed value to the result list"
-              }
-            },
-            "dr-read-loop-header": {
-              "title": "Read the loop in order",
-              "prompt": "Put these parts of the loop statement in the correct order to make a valid Python loop header.",
-              "hint": "Focus on the logical order of the parts.",
-              "help": {
-                "concept": "Arrange the pieces according to the structure of the statement.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Put the pieces in the order that makes the statement valid."
-              },
-              "tokens": {
-                "t1": "for",
-                "t2": "color",
-                "t3": "in",
-                "t4": "colors",
-                "t5": ":"
-              }
-            },
-            "fb-append-call": {
-              "title": "Complete the append line",
-              "prompt": "Fill in the missing method name to add each changed item to the result list.",
-              "hint": "Use the list method that adds one item to the end.",
-              "help": {
-                "concept": "Choose the list method that adds one new value to the end during each iteration.",
-                "hint_1": "The method is called on the list you are building, like `result.method(value)`.",
-                "hint_2": "It is the common list method used in beginner loops to collect new values."
-              },
-              "template": "result.[blank1](number * 2)",
-              "choices": [
-                "append",
-                "add",
-                "insert",
-                "print"
-              ]
-            },
-            "fb-loop-keyword": {
-              "title": "Complete the loop header",
-              "prompt": "Fill in the missing keyword to start a loop over a list.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "template": "[blank1] item in items:",
-              "choices": [
-                "for",
-                "if",
-                "while",
-                "def"
-              ]
-            },
-            "ci-print-each-item": {
-              "title": "Print each item in a list",
-              "prompt": "A shelter roll call stores three animal names in `animals`. Loop through `animals` and print each name on its own line.\n\nFor example, if the inputs are `cat`, `dog`, and `fox`, your program should print:\n`cat`\n`dog`\n`fox`.",
-              "hint": "Build the list from the three input values before the loop starts.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
-              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a for loop over animals instead of printing each variable manually."
-                }
-              }
-            },
-            "ci-double-list-function": {
-              "title": "Return a doubled list",
-              "prompt": "Write `double_numbers(numbers)` so it builds a new list containing each number doubled, then returns that new list.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
-              "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
-            },
-            "ci-count-long-words": {
-              "title": "Count words longer than 4 letters",
-              "prompt": "Write `count_long_words(words)` so it returns how many words in the list are longer than 4 letters.",
-              "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
-              "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
-            },
-            "try-looping-through-lists-checkpoint": {
-              "title": "Loop through names",
-              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line.",
-              "hint": "Use a `for` loop.",
-              "help": {
-                "concept": "A `for` loop can visit each value in a list.",
-                "hint_1": "Use a `for` loop.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
-              "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a for loop over names instead of printing each name manually."
-                }
+                "a": "Inside `if score >= 60:`",
+                "b": "Before the `for` loop",
+                "c": "After the loop finishes",
+                "d": "Inside `if score < 60:`"
               }
             },
             "try-looping-through-lists-sketch0": {
-              "title": "Print each animal",
-              "prompt": "Loop through the list and print each item.",
-              "hint": "Use a for loop to print each animal on its own line.",
+              "title": "Print room labels from input",
+              "prompt": "Three room names arrive as input. Store them in a list named `rooms`. Loop through `rooms` and print each room as `Room: <name>` on its own line.",
+              "hint": "Build `rooms` first, then use one `for` loop so the same print statement runs for every room.",
               "help": {
-                "concept": "Use a for loop to print each animal on its own line.",
-                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "A loop lets one block of code process every item in a list.",
+                "hint_1": "Use a singular loop variable such as `room` for one current value from `rooms`.",
+                "hint_2": "Inside the loop, print `\"Room:\"` and the current `room`."
               },
-              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
-              "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\n# Create a list named rooms from the three inputs.\n# Loop through rooms.\n# Print each item as: Room: <name>\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nrooms = [first, second, third]\nfor room in rooms:\n    print(\"Room:\", room)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use a for loop over animals instead of typing each animal directly."
+                  "message": "Build `rooms` from `first`, `second`, and `third` before looping."
+                },
+                "1": {
+                  "message": "Use a `for` loop over `rooms` instead of printing the three inputs separately."
                 }
               }
             },
             "try-looping-through-lists-sketch1": {
-              "title": "Total the scores",
-              "prompt": "Use a running total inside a loop.",
-              "hint": "Add each score to total using a loop.",
+              "title": "Total four delivery times",
+              "prompt": "Four delivery times arrive as integers. Store them in a list named `minutes`. Start `total` at 0, loop through `minutes`, add each value into `total`, then print the final total.",
+              "hint": "Initialize `total = 0` before the loop, then update it once for each current value.",
               "help": {
-                "concept": "Add each score to total using a loop.",
-                "hint_1": "Add each score to total using a loop, then print total.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "An accumulator stores a result that grows as the loop processes each item.",
+                "hint_1": "The loop variable can be named `minute` because it represents one value from `minutes`.",
+                "hint_2": "Inside the loop, use `total += minute`. Print `total` after the loop."
               },
-              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
-              "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\n# Create a list named minutes from the four inputs.\n# Start total at 0.\n# Add each minute value into total with a loop.\n# Print the final total.\n",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nminutes = [a, b, c, d]\ntotal = 0\nfor minute in minutes:\n    total += minute\nprint(total)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through scores instead of typing the final total."
+                  "message": "Build `minutes` from all four input variables before the loop."
                 },
                 "1": {
-                  "message": "Add each score into total inside the loop."
+                  "message": "Loop through `minutes` instead of adding the four variables manually."
+                },
+                "2": {
+                  "message": "Update `total` with the current `minute` inside the loop."
                 }
               }
             },
             "try-looping-through-lists-sketch2": {
-              "title": "Build doubled numbers",
-              "prompt": "Append a derived result for each item in the input list.",
-              "hint": "Loop through numbers and append each doubled value.",
+              "title": "Build adjusted values",
+              "prompt": "Three integer readings arrive as input. Store them in `readings`. Create an empty list named `adjusted`, then loop through `readings` and append each value plus 5. Print the completed `adjusted` list.",
+              "hint": "The result list starts empty and receives one transformed value during each loop iteration.",
               "help": {
-                "concept": "Loop through numbers and append each doubled value.",
-                "hint_1": "Loop through numbers and append each doubled value, then print doubled.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "A transformation loop creates one new value for every item in the original list.",
+                "hint_1": "Create `adjusted = []` before the loop.",
+                "hint_2": "Inside the loop, use `adjusted.append(reading + 5)`."
               },
-              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
-              "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+              "starterCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\n# Create readings from the three inputs.\n# Create an empty list named adjusted.\n# Append each reading plus 5 to adjusted.\n# Print adjusted.\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\nreadings = [first, second, third]\nadjusted = []\nfor reading in readings:\n    adjusted.append(reading + 5)\nprint(adjusted)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through numbers instead of typing the final doubled list."
+                  "message": "Build `readings` from the three input variables before looping."
                 },
                 "1": {
-                  "message": "Use doubled.append(...) to build the list."
+                  "message": "Use a `for` loop over `readings` so every value is transformed."
+                },
+                "2": {
+                  "message": "Use `adjusted.append(...)` inside the loop to build the result list."
+                }
+              }
+            },
+            "try-looping-through-lists-sketch3": {
+              "title": "Keep only high scores",
+              "prompt": "Four scores arrive as integers. Store them in `scores`. Create an empty list named `high_scores`, then loop through `scores` and append only values that are 80 or higher. Print the completed `high_scores` list.",
+              "hint": "The append should run only when the current score passes the condition.",
+              "help": {
+                "concept": "Filtering keeps some list items and skips others based on a condition.",
+                "hint_1": "Inside the loop, check `if score >= 80:`.",
+                "hint_2": "Indent `high_scores.append(score)` inside that `if` block."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\n# Create scores from the four inputs.\n# Create an empty list named high_scores.\n# Keep only scores that are 80 or higher.\n# Print high_scores.\n",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nscores = [a, b, c, d]\nhigh_scores = []\nfor score in scores:\n    if score >= 80:\n        high_scores.append(score)\nprint(high_scores)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `scores` from all four input variables before looping."
+                },
+                "1": {
+                  "message": "Use a `for` loop over `scores` instead of checking each input separately."
+                },
+                "2": {
+                  "message": "Check whether the current `score` is at least 80 inside the loop."
+                },
+                "3": {
+                  "message": "Append the current `score` to `high_scores` only when it meets the condition."
                 }
               }
             }
           },
           "tryIt": {
-            "try_looping_through_lists_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line."
-            },
             "try_looping_through_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Loop through the list and print each item."
+              "prompt": "Three room names arrive as input. Store them in a list named `rooms`. Loop through `rooms` and print each room as `Room: <name>` on its own line."
             },
             "try_looping_through_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use a running total inside a loop."
+              "prompt": "Four delivery times arrive as integers. Store them in a list named `minutes`. Use a running total in a loop, then print the final total."
             },
             "try_looping_through_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Append a derived result for each item in the input list."
+              "prompt": "Three integer readings arrive as input. Build a new `adjusted` list containing each reading plus 5, then print the completed list."
+            },
+            "try_looping_through_lists_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "Four scores arrive as input. Build `high_scores` containing only scores that are 80 or higher, then print the completed list."
             },
             "allowReveal": true
           }
         },
         "module-5-workshop-schedule-project": {
           "label": "Module 5 Workshop Schedule Project",
-          "summary": "A community learning center needs one schedule board built from fixed session records, an ordered list, and a fast room lookup.",
+          "summary": "Build a community workshop schedule from tuple records, preserve their order in a list, create a direct room lookup, and group workshop names inside room lists.",
           "cards": {
             "sketch0": {
-              "title": "Choose a structure for each job"
+              "title": "Plan the schedule data"
             },
             "project": {
               "title": "Workshop Schedule Builder"
@@ -14360,770 +13912,677 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "exercise1": {
-              "title": "Create the fixed workshop schedule"
+              "title": "Expand the ordered schedule"
             },
             "exercise2": {
               "title": "Build a room lookup"
             },
             "exercise3": {
-              "title": "Format the schedule board"
+              "title": "Group workshops by room"
             }
           },
           "quiz": {
             "try-workshop-schedule-sketch0": {
-              "title": "Unpack one workshop record",
-              "prompt": "The starter defines `session = (\"Python Basics\", \"Room A\")`. Unpack it into `name` and `room`, then print `Python Basics — Room A`.",
-              "hint": "Use one unpacking assignment before the f-string.",
+              "title": "Preview the schedule pattern",
+              "prompt": "Create `schedule` as a list containing one tuple: `(\"Python Basics\", \"Room A\")`. Loop through `schedule`, unpack each tuple into `name` and `room`, and print each workshop as `name — room`.",
+              "hint": "The outer structure is a list; each item is a two-field tuple that can be unpacked in the loop header.",
               "help": {
-                "concept": "A tuple keeps the two fields together while unpacking gives each position a readable name.",
-                "hint_1": "The left side needs two names.",
-                "hint_2": "Use the supplied tuple instead of typing the output directly."
+                "concept": "The project will use a list to preserve workshop order and a tuple for each fixed `(name, room)` record.",
+                "hint_1": "Start with `schedule = [(\"Python Basics\", \"Room A\")]`.",
+                "hint_2": "Use `for name, room in schedule:` and print the two unpacked values."
               },
-              "starterCode": "session = (\"Python Basics\", \"Room A\")\n# Unpack the tuple and print: Python Basics — Room A\n",
-              "solutionCode": "session = (\"Python Basics\", \"Room A\")\nname, room = session\nprint(f\"{name} — {room}\")\n",
+              "starterCode": "# Create schedule as a list containing one (name, room) tuple.\n# Loop through schedule, unpack each tuple, and print: name — room\n",
+              "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack session into name and room."
+                  "message": "Create `schedule` as a list containing the required tuple record."
+                },
+                "1": {
+                  "message": "Loop with `for name, room in schedule:` so each tuple is unpacked."
                 }
               }
             },
             "exercise1": {
-              "title": "Create the fixed workshop schedule",
-              "prompt": "Start the workshop schedule project. In step 1 of 3, implement `create_schedule()` so it returns a list containing exactly these tuples in order: `(\"Python Basics\", \"Room A\")`, `(\"Data Lab\", \"Room B\")`, and `(\"Web Starter\", \"Room C\")`.",
-              "hint": "Return the exact three records before adding lookup behavior.",
+              "title": "Expand the ordered schedule",
+              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line.",
+              "hint": "Read the four input values first, append two tuple records, then let the existing loop print the ordered list.",
               "help": {
-                "concept": "A list can hold several fixed tuple records in a predictable order.",
-                "hint_1": "Keep every workshop record as a two-value tuple.",
-                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+                "concept": "A list preserves workshop order, and `.append()` can add new fixed tuple records without replacing the existing schedule.",
+                "hint_1": "Use `schedule.append((name2, room2))` and then append the third record.",
+                "hint_2": "Do not hard-code the two new workshop names or rooms; the tests provide different input values."
               },
-              "starterCode": "def create_schedule():\n    # Return the three required (session, room) tuples in a list.\n    return []\n",
-              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n"
+              "starterCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
+              "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Append the second workshop as `(name2, room2)`."
+                },
+                "1": {
+                  "message": "Append the third workshop as `(name3, room3)`."
+                },
+                "2": {
+                  "message": "Loop through `schedule` and unpack each tuple into `name` and `room`."
+                }
+              }
             },
             "exercise2": {
               "title": "Build a room lookup",
-              "prompt": "Continue the workshop schedule project. In step 2 of 3, keep `create_schedule()` unchanged. Implement `build_room_lookup(schedule)` so it returns a dictionary mapping each workshop name to its room.",
-              "hint": "Unpack each tuple into a session name and room.",
+              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop with `room_lookup[name] = room`. Then read one workshop name into `requested` and print its room using `room_lookup[requested]`.",
+              "hint": "Build the dictionary from the tuple records instead of writing the room mappings by hand.",
               "help": {
-                "concept": "A dictionary turns a repeated search by position into a direct lookup by name.",
-                "hint_1": "Use the tuple values as the dictionary key and value.",
-                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+                "concept": "The ordered list remains useful for the board, while a dictionary gives direct lookup by workshop name.",
+                "hint_1": "Initialize `room_lookup = {}` and fill it inside a loop over `schedule`.",
+                "hint_2": "After the dictionary is built, read `requested` and print `room_lookup[requested]`."
               },
-              "starterCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    # Return a dictionary that maps every session name to its room.\n    pass\n",
-              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n"
+              "starterCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
+              "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create an empty `room_lookup` dictionary before filling it."
+                },
+                "1": {
+                  "message": "Store each current tuple with `room_lookup[name] = room` inside a loop."
+                },
+                "2": {
+                  "message": "Use `room_lookup[requested]` for the requested workshop instead of hard-coding a room."
+                }
+              }
             },
             "exercise3": {
-              "title": "Format the schedule board",
-              "prompt": "Continue the workshop schedule project. In step 3 of 3, keep the schedule and lookup helpers. Implement `format_schedule(schedule)` so it returns a list of strings in the same order, using the format `<session> — <room>` for every tuple.",
-              "hint": "Build a new list in the same order as the schedule.",
+              "title": "Group workshops by room",
+              "prompt": "Step 3 of 3 starts from the schedule board and direct lookup. Keep both. Build a nested dictionary named `room_sessions` where each room key stores a list of workshop names held in that room. Loop through `schedule`. If the room already exists in `room_sessions`, append the current workshop name to its list; otherwise create a new one-item list. Finally read `room_query` and print `room_sessions[room_query]`.",
+              "hint": "Use dictionary membership to decide whether to append to an existing room list or create that list.",
               "help": {
-                "concept": "Formatting belongs in a separate helper so the stored records remain reusable.",
-                "hint_1": "Return strings; do not print them inside the helper.",
-                "hint_2": "Run the helper with the sample schedule before moving to the next step."
+                "concept": "A dictionary whose values are lists can group several workshop names under the same room key.",
+                "hint_1": "Inside the loop, use `if room in room_sessions:` and append `name` to the existing list.",
+                "hint_2": "In the `else` branch, create the first list with `room_sessions[room] = [name]`."
               },
-              "starterCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n\ndef format_schedule(schedule):\n    # Return one \"<session> — <room>\" string for every tuple.\n    pass\n",
-              "solutionCode": "def create_schedule():\n    return [(\"Python Basics\", \"Room A\"), (\"Data Lab\", \"Room B\"), (\"Web Starter\", \"Room C\")]\n\ndef build_room_lookup(schedule):\n    return {name: room for name, room in schedule}\n\ndef format_schedule(schedule):\n    return [f\"{name} — {room}\" for name, room in schedule]\n"
+              "starterCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n",
+              "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n\nroom_sessions = {}\nfor name, room in schedule:\n    if room in room_sessions:\n        room_sessions[room].append(name)\n    else:\n        room_sessions[room] = [name]\n\nroom_query = input()\nprint(room_sessions[room_query])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create an empty `room_sessions` dictionary before grouping workshops."
+                },
+                "1": {
+                  "message": "Check whether the current `room` key already exists in `room_sessions`."
+                },
+                "2": {
+                  "message": "Append the workshop name to the existing list for that room."
+                },
+                "3": {
+                  "message": "Create a one-item list for a room the first time it appears."
+                },
+                "4": {
+                  "message": "Use `room_sessions[room_query]` to retrieve the requested room's workshop list."
+                }
+              }
             }
           },
           "tryIt": {
             "try_workshop_schedule_sketch0": {
               "title": "Try it yourself",
-              "prompt": "The starter defines `session = (\"Python Basics\", \"Room A\")`. Unpack it into `name` and `room`, then print `Python Basics — Room A`."
+              "prompt": "Create a one-workshop schedule as a list of tuples, then loop through it and unpack the record."
             },
             "allowReveal": true
           }
         },
         "nested-data-structures": {
           "label": "Nested Data Structures",
-          "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+          "summary": "Work with lists of dictionaries, dictionaries inside dictionaries, and lists stored inside dictionaries by accessing, updating, and looping through one layer at a time.",
           "cards": {
             "sketch0": {
-              "title": "What nested data structures are"
+              "title": "Reading from a list of dictionaries"
             },
             "sketch1": {
-              "title": "Reading values from nested containers"
+              "title": "Reading and updating a nested dictionary"
             },
             "sketch2": {
-              "title": "Looping through a list of dictionaries"
+              "title": "Changing a list stored inside a dictionary"
+            },
+            "sketch3": {
+              "title": "Looping through a list of records"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-1": {
-              "title": "Choose the best structure",
-              "prompt": "You want to store several products, and each product has a name and a price. Which structure is the best fit?",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
+            "sc-best-structure": {
+              "title": "Choose a structure for repeated records",
+              "prompt": "You need to store several products, and every product has a `name` and a `price`. Which structure best represents that data?",
+              "hint": "You need one collection for the whole group and labeled fields for each individual product.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "A list of dictionaries is a common structure for several records that share the same labeled fields.",
+                "hint_1": "The outer list stores all products.",
+                "hint_2": "Each dictionary can store one product with keys such as `\"name\"` and `\"price\"`."
               },
               "options": {
-                "a": "A single string with all product names",
-                "b": "A list of dictionaries",
-                "c": "One number for each product",
-                "d": "A tuple with only one product"
+                "a": "A list of dictionaries",
+                "b": "One long string",
+                "c": "A single dictionary for every product combined",
+                "d": "One integer"
               }
             },
-            "sc-2": {
-              "title": "Read a nested value",
-              "prompt": "Given `item = {\"name\": \"Pen\", \"info\": {\"price\": 2, \"stock\": 9}}`, which expression gets the value `9`?",
-              "hint": "First access the inner dictionary stored at `\"info\"`.",
+            "sc-list-then-key": {
+              "title": "Read from a list of dictionaries",
+              "prompt": "Given `players = [{\"name\": \"Mia\", \"score\": 7}, {\"name\": \"Leo\", \"score\": 5}]`, which expression gets Leo's score?",
+              "hint": "Select the second dictionary first, then read its `\"score\"` key.",
               "help": {
-                "concept": "To read a nested dictionary value, access the outer key first, then the inner key.",
-                "hint_1": "`\"stock\"` is not at the top level of `item`; it is inside `item[\"info\"]`.",
-                "hint_2": "The correct expression uses two bracket lookups in order: outer key, then inner key."
+                "concept": "For a list of dictionaries, access happens in layers: list index first, dictionary key second.",
+                "hint_1": "Leo is the second list item, so use index `1`.",
+                "hint_2": "Then use `['score']` on that dictionary."
               },
               "options": {
-                "a": "item[\"stock\"]",
-                "b": "item[\"info\"][\"stock\"]",
-                "c": "item[\"name\"][\"stock\"]",
-                "d": "item[0][\"stock\"]"
+                "a": "players[1][\"score\"]",
+                "b": "players[\"score\"][1]",
+                "c": "players[1][1]",
+                "d": "players[\"Leo\"][\"score\"]"
               }
             },
-            "mc-1": {
-              "title": "Valid nested structures",
-              "prompt": "Which of these are examples of nested data structures in Python? Choose all that apply.",
-              "hint": "A structure is nested when one collection is stored inside another.",
+            "sc-dict-then-key": {
+              "title": "Read from a dictionary inside a dictionary",
+              "prompt": "Given `item = {\"name\": \"Pen\", \"info\": {\"price\": 2, \"stock\": 9}}`, which expression gets the stock value?",
+              "hint": "Open the outer `\"info\"` field before reading `\"stock\"` from the inner dictionary.",
               "help": {
-                "concept": "Nested data structures contain collections inside collections, such as a list inside a dictionary or dictionaries inside a list.",
-                "hint_1": "Check whether each option includes one container placed inside another container.",
-                "hint_2": "A plain number or plain string alone is not nested; combinations like list-of-dicts or dict-with-list are."
+                "concept": "A dictionary nested inside another dictionary is read with one key lookup per layer.",
+                "hint_1": "`item[\"info\"]` gives the inner dictionary.",
+                "hint_2": "Then add `[\"stock\"]`."
               },
               "options": {
-                "a": "[{\"name\": \"Ava\"}, {\"name\": \"Ben\"}]",
-                "b": "{\"scores\": [10, 20, 30]}",
-                "c": "42",
-                "d": "\"hello\""
+                "a": "item[\"info\"][\"stock\"]",
+                "b": "item[\"stock\"]",
+                "c": "item[0][\"stock\"]",
+                "d": "item[\"name\"][\"stock\"]"
               }
             },
-            "mc-2": {
-              "title": "Useful access patterns",
-              "prompt": "Suppose `players = [{\"name\": \"Mia\", \"points\": 7}, {\"name\": \"Leo\", \"points\": 5}]`. Which expressions are valid ways to read data from this structure? Choose all that apply.",
-              "hint": "Start by deciding whether you need a list index first or a dictionary key first.",
+            "sc-loop-record": {
+              "title": "Understand the loop variable",
+              "prompt": "If `students` is a list of dictionaries, what does `student` hold during `for student in students:`?",
+              "hint": "The loop visits one item from the outer list at a time.",
               "help": {
-                "concept": "For a list of dictionaries, you use a numeric index to choose one dictionary, then a string key to read a value from that dictionary.",
-                "hint_1": "`players` is a list first, so expressions that begin with a string key on `players` are not correct.",
-                "hint_2": "Look for expressions that use `[0]` or `[1]` before `['name']` or `['points']`."
+                "concept": "When a list contains dictionaries, the loop variable receives one whole dictionary record on each iteration.",
+                "hint_1": "`student` is not only a name or score.",
+                "hint_2": "Inside the loop you can read fields such as `student[\"name\"]`."
               },
               "options": {
-                "a": "players[0][\"name\"]",
-                "b": "players[1][\"points\"]",
-                "c": "players[\"name\"]",
-                "d": "players[0][0]"
-              }
-            },
-            "dr-1": {
-              "title": "Access a city name",
-              "prompt": "Put these tokens in order to build the expression that gets `\"Paris\"` from `trip = {\"destination\": {\"city\": \"Paris\"}}`.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "trip",
-                "t2": "[\"destination\"]",
-                "t3": "[\"city\"]"
-              }
-            },
-            "dr-2": {
-              "title": "Build a loop over records",
-              "prompt": "Arrange these lines to make a loop that prints each student's name from `students`, a list of dictionaries.",
-              "hint": "The loop header comes first, and the indented print line comes after it.",
-              "help": {
-                "concept": "To loop through a list of dictionaries, write a `for` loop that takes one dictionary at a time, then access a key from that dictionary inside the loop.",
-                "hint_1": "Use `student` as the loop variable for each dictionary in `students`.",
-                "hint_2": "After the loop header, the print line should use `student[\"name\"]`."
-              },
-              "tokens": {
-                "t1": "for student in students:",
-                "t2": "print(student[\"name\"])"
-              }
-            },
-            "fb-1": {
-              "title": "Fill the missing key",
-              "prompt": "Complete the expression so it reads the score from the first dictionary in the list.",
-              "hint": "The first part `records[0]` gives you one dictionary.",
-              "help": {
-                "concept": "After selecting one dictionary from a list, use the correct key name to read the needed value.",
-                "hint_1": "You already have the first record. Now choose the key that stores the numeric result.",
-                "hint_2": "Use the dictionary key that names the requested field, not a list index or an unrelated variable."
-              },
-              "template": "records[0][\"[blank1]\"]",
-              "choices": [
-                "score",
-                "records",
-                "0",
-                "name"
-              ]
-            },
-            "fb-2": {
-              "title": "Fill the missing outer key",
-              "prompt": "Complete the expression so it reads the list stored inside the dictionary `data = {\"items\": [1, 2, 3]}`.",
-              "hint": "You need the key that points to the inner list.",
-              "help": {
-                "concept": "When a dictionary stores a list, you use the dictionary key first to get that list.",
-                "hint_1": "The list `[1, 2, 3]` is stored under one named key in `data`.",
-                "hint_2": "Choose the key that matches the label attached to the list value."
-              },
-              "template": "data[\"[blank1]\"]",
-              "choices": [
-                "items",
-                "data",
-                "list",
-                "0"
-              ]
-            },
-            "code-1": {
-              "title": "Return all names",
-              "prompt": "Each item in `records` stores a person's data. Finish `get_names(records)` by adding every record's `\"name\"` value to the `names` list, then return `names`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
-              "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
-            },
-            "code-2": {
-              "title": "Count total stock",
-              "prompt": "Finish `total_stock(items)` so it loops through the item dictionaries, adds each `\"stock\"` value into `total`, and returns the final total.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
-              "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
-            },
-            "code-3": {
-              "title": "Find the highest score",
-              "prompt": "Finish `highest_score(players)` so it compares each later player's `\"score\"` with `best` and returns the highest score in the list.",
-              "hint": "Read the task \"Find the highest score\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
-              "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
-            },
-            "try-nested-data-structures-checkpoint": {
-              "title": "Read nested data",
-              "prompt": "Use a list of dictionaries. Print the second student’s name and score.",
-              "hint": "Use index `1`, then dictionary keys.",
-              "help": {
-                "concept": "Nested data combines containers, such as a list of dictionaries.",
-                "hint_1": "Use index `1`, then dictionary keys.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
-              "solutionCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use students[1] to reach Mia instead of typing Mia directly."
-                },
-                "1": {
-                  "message": "Use the name key from the student dictionary."
-                },
-                "2": {
-                  "message": "Use the score key from the student dictionary."
-                }
+                "a": "One student dictionary at a time",
+                "b": "Only the student's name",
+                "c": "Only the list index",
+                "d": "The entire students list every time"
               }
             },
             "try-nested-data-structures-sketch0": {
-              "title": "Read a nested value",
-              "prompt": "Use a list index first, then a dictionary key.",
-              "hint": "Print the first student's name.",
+              "title": "Build records and read the second score",
+              "prompt": "Two student names and scores arrive as input. Build `students` as a list containing two dictionaries. Each dictionary must use the keys `\"name\"` and `\"score\"`. Then print the second student's name and score on separate lines by accessing `students[1]` first.",
+              "hint": "Build the two dictionaries inside one list, then access the second record with index `1`.",
               "help": {
-                "concept": "Print the first student's name.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A list of dictionaries combines positional access for the outer list with key access for each record.",
+                "hint_1": "Create `students = [{\"name\": name1, \"score\": score1}, {\"name\": name2, \"score\": score2}]`.",
+                "hint_2": "Print `students[1][\"name\"]` and `students[1][\"score\"]`."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
-              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+              "starterCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\n# Build students as a list of two dictionaries.\n# Print the second student's name using students[1].\n# Print the second student's score using students[1].\n",
+              "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use students[0] to reach the first student instead of typing Ava directly."
+                  "message": "Build `students` from the two input name/score pairs instead of hard-coding the output."
                 },
                 "1": {
-                  "message": "Use the name key from the student dictionary."
+                  "message": "Use `students[1][\"name\"]` to read the second student's name."
+                },
+                "2": {
+                  "message": "Use `students[1][\"score\"]` to read the second student's score."
                 }
               }
             },
             "try-nested-data-structures-sketch1": {
-              "title": "Print names and scores",
-              "prompt": "Loop through a list of dictionaries.",
-              "hint": "Loop through students and print: name: score.",
+              "title": "Update stock inside a nested dictionary",
+              "prompt": "The dictionary `product` contains an inner dictionary under the key `\"details\"`. Read a new stock count from input, update only `product[\"details\"][\"stock\"]`, then print the updated stock value.",
+              "hint": "Use one key lookup to reach `details`, then another key lookup to reach `stock`.",
               "help": {
-                "concept": "Loop through students and print: name: score.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "Nested assignment follows the same path as nested reading, with the final lookup placed on the left side of `=`.",
+                "hint_1": "Do not replace the whole `details` dictionary.",
+                "hint_2": "Assign with `product[\"details\"][\"stock\"] = new_stock`."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
-              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+              "starterCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\n# Update only the nested stock value.\n# Print the updated stock value.\n",
+              "solutionCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\nproduct[\"details\"][\"stock\"] = new_stock\nprint(product[\"details\"][\"stock\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through students instead of typing each line directly."
-                },
-                "1": {
-                  "message": "Use the name key while building each line."
-                },
-                "2": {
-                  "message": "Use the score key while building each line."
+                  "message": "Update the nested field with `product[\"details\"][\"stock\"] = new_stock`."
                 }
               }
             },
             "try-nested-data-structures-sketch2": {
-              "title": "Add a nested value",
-              "prompt": "Add a new value to the list stored inside the dictionary, then print the updated record.",
-              "hint": "Add 'Mia' to the students list.",
+              "title": "Add an attendee to a nested list",
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list.",
+              "hint": "First access the list stored under `\"students\"`, then call `.append()` on that list.",
               "help": {
-                "concept": "Add 'Mia' to the students list.",
-                "hint_1": "Add 'Mia' to the students list, then print course.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "When a dictionary value is a list, you can access that list by key and use normal list methods on it.",
+                "hint_1": "The input name is stored in `new_student`.",
+                "hint_2": "Use `course[\"students\"].append(new_student)`, then print `course[\"students\"]`."
               },
-              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
-              "solutionCode": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+              "starterCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\n# Append new_student to the list stored under \"students\".\n# Print the updated students list.\n",
+              "solutionCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\ncourse[\"students\"].append(new_student)\nprint(course[\"students\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the students key in the course dictionary."
+                  "message": "Append the input value with `course[\"students\"].append(new_student)`."
+                }
+              }
+            },
+            "try-nested-data-structures-sketch3": {
+              "title": "Loop through dynamic student records",
+              "prompt": "Two student names and scores arrive as input. Build `students` as a list of two dictionaries using the keys `\"name\"` and `\"score\"`. Loop through `students` so `student` receives one dictionary at a time. Print each record exactly as `name: score`.",
+              "hint": "Build the records first, then use one loop over `students` and read both keys from the current `student`.",
+              "help": {
+                "concept": "A loop over a list of dictionaries processes one whole record per iteration.",
+                "hint_1": "Use `for student in students:`.",
+                "hint_2": "Inside the loop, print `f\"{student['name']}: {student['score']}\"`."
+              },
+              "starterCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\n# Build students as a list of two dictionaries.\n# Loop through students.\n# Print each student as: name: score\n",
+              "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `students` from the two input name/score pairs before looping."
                 },
                 "1": {
-                  "message": "Append Mia to course['students'] instead of replacing the whole course."
+                  "message": "Loop with `for student in students:` so one dictionary record is processed at a time."
                 },
                 "2": {
-                  "message": "Call course['students'].append('Mia')."
+                  "message": "Read the current student's `\"name\"` key inside the loop."
+                },
+                "3": {
+                  "message": "Read the current student's `\"score\"` key inside the loop."
                 }
               }
             }
           },
           "tryIt": {
-            "try_nested_data_structures_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Use a list of dictionaries. Print the second student’s name and score."
-            },
             "try_nested_data_structures_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use a list index first, then a dictionary key."
+              "prompt": "Build two student dictionaries inside a list, then read the second record by index and key."
             },
             "try_nested_data_structures_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Loop through a list of dictionaries."
+              "prompt": "Update a stock value stored inside a nested dictionary."
             },
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Add a new value to the list stored inside the dictionary, then print the updated record."
+              "prompt": "Append an input name to a list stored inside a dictionary."
+            },
+            "try_nested_data_structures_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "Build student records from input and loop through the list one dictionary at a time."
             },
             "allowReveal": true
           }
         },
         "tuple-records-and-unpacking": {
           "label": "Tuple Records and Unpacking",
-          "summary": "Use tuples when a small record should keep a fixed shape, then unpack each position into a meaningful name.",
+          "summary": "Use tuples for fixed-shape records, read fields by position, unpack fields into meaningful names, and process tuple records in a loop.",
           "cards": {
             "sketch0": {
-              "title": "A fixed record has a clear shape"
+              "title": "Tuples as fixed-shape records"
             },
             "sketch1": {
-              "title": "Unpack positions into names"
+              "title": "Unpacking fields into names"
+            },
+            "sketch2": {
+              "title": "Looping through tuple records"
             },
             "quiz": {
-              "title": "Check your tuple understanding"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "try-tuple-records-sketch0": {
-              "title": "Create a location tuple",
-              "prompt": "In `main.py`, create `location` as the tuple `(\"Austin\", \"TX\")`. Print the city from index 0 and the state from index 1 on separate lines.",
-              "hint": "Use parentheses for the fixed pair, then read each position with square brackets.",
+            "sc-tuple-purpose": {
+              "title": "Choose a fixed-shape record",
+              "prompt": "A coordinate always has exactly two ordered fields: x and y. Which value best communicates that fixed two-field shape?",
+              "hint": "Use the collection type intended for an ordered record whose fields should not be changed in place.",
               "help": {
-                "concept": "A tuple stores an ordered record whose positions should not be changed after creation.",
-                "hint_1": "The first position uses index 0.",
-                "hint_2": "Print the two fields separately."
+                "concept": "A tuple is useful when a small ordered record has a stable shape.",
+                "hint_1": "A list is better when items are expected to be added, removed, or replaced.",
+                "hint_2": "Choose the value written with parentheses."
               },
-              "starterCode": "# Create a fixed location record and print both fields.\n",
-              "solutionCode": "location = (\"Austin\", \"TX\")\nprint(location[0])\nprint(location[1])\n",
+              "options": {
+                "a": "[4, 9]",
+                "b": "(4, 9)",
+                "c": "{\"x\": 4, \"y\": 9}",
+                "d": "\"4, 9\""
+              }
+            },
+            "sc-tuple-immutable": {
+              "title": "Recognize an invalid tuple mutation",
+              "prompt": "Given `point = (4, 9)`, which line tries to mutate the tuple and therefore cannot be used?",
+              "hint": "Tuples can be read and unpacked, but their existing positions cannot be reassigned.",
+              "help": {
+                "concept": "Tuple values are ordered and indexable, but the tuple itself is immutable.",
+                "hint_1": "`point[0]` can be read.",
+                "hint_2": "Assigning a new value to `point[0]` attempts to change the tuple in place."
+              },
+              "options": {
+                "a": "print(point[0])",
+                "b": "x, y = point",
+                "c": "point[0] = 7",
+                "d": "print(point)"
+              }
+            },
+            "sc-unpack-shape": {
+              "title": "Match names to tuple fields",
+              "prompt": "Given `student = (\"Ava\", 91, \"A\")`, which line correctly unpacks all three fields?",
+              "hint": "Unpacking needs one target name for each tuple position.",
+              "help": {
+                "concept": "Tuple unpacking assigns positions from left to right into the same number of target names.",
+                "hint_1": "This tuple contains three fields.",
+                "hint_2": "Choose the assignment with three names on the left side."
+              },
+              "options": {
+                "a": "name, score, grade = student",
+                "b": "name, score = student",
+                "c": "student = name, score, grade",
+                "d": "name = student"
+              }
+            },
+            "sc-loop-unpack": {
+              "title": "Unpack each record in a loop",
+              "prompt": "Given `registrations = [(\"Ava\", 2), (\"Noah\", 1)]`, which loop header gives meaningful names to both fields of each tuple?",
+              "hint": "Each item in `registrations` is a two-field tuple.",
+              "help": {
+                "concept": "A `for` loop can unpack each tuple item directly into one variable per field.",
+                "hint_1": "Each record contains a name and a seat count.",
+                "hint_2": "Use `for name, seats in registrations:`."
+              },
+              "options": {
+                "a": "for name, seats in registrations:",
+                "b": "for registrations in name, seats:",
+                "c": "for name in seats:",
+                "d": "for 0, 1 in registrations:"
+              }
+            },
+            "try-tuple-records-sketch0": {
+              "title": "Build and read a shipment record",
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line.",
+              "hint": "Create one two-field tuple from the input variables, then read its two positions.",
+              "help": {
+                "concept": "A tuple can hold related fields in a fixed order, and tuple indexes work like list indexes.",
+                "hint_1": "Build `shipment = (product, quantity)`.",
+                "hint_2": "Print `shipment[0]`, then `shipment[1]`."
+              },
+              "starterCode": "product = input()\nquantity = int(input())\n\n# Create shipment as a two-field tuple: product, then quantity.\n# Print the product using index 0.\n# Print the quantity using index 1.\n",
+              "solutionCode": "product = input()\nquantity = int(input())\n\nshipment = (product, quantity)\nprint(shipment[0])\nprint(shipment[1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create location as the required two-value tuple."
+                  "message": "Create `shipment` as the tuple `(product, quantity)` instead of printing the inputs directly."
                 },
                 "1": {
-                  "message": "Read the first tuple position with location[0]."
+                  "message": "Read the product from `shipment[0]`."
+                },
+                "2": {
+                  "message": "Read the quantity from `shipment[1]`."
                 }
               }
             },
             "try-tuple-unpacking-sketch1": {
-              "title": "Unpack an event tuple",
-              "prompt": "The starter defines `event = (\"Workshop\", 24)`. Unpack it into `title` and `seats`, then print the two variables on separate lines.",
-              "hint": "Place both new names on the left side of one assignment.",
+              "title": "Unpack a booking record",
+              "prompt": "A booking record is already stored as `booking = (\"Workshop\", 24, \"Friday\")`. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order.",
+              "hint": "The tuple has three fields, so use three target names on the left side of one assignment.",
               "help": {
-                "concept": "Tuple unpacking gives a meaningful name to each position in a fixed record.",
-                "hint_1": "The number of names must match the number of tuple values.",
-                "hint_2": "Print the unpacked variables, not hard-coded literals."
+                "concept": "Unpacking replaces positional lookups with meaningful variable names.",
+                "hint_1": "Write `title, seats, day = booking`.",
+                "hint_2": "After unpacking, print `title`, `seats`, and `day` instead of hard-coding the values."
               },
-              "starterCode": "event = (\"Workshop\", 24)\n# Unpack event into title and seats, then print both values.\n",
-              "solutionCode": "event = (\"Workshop\", 24)\ntitle, seats = event\nprint(title)\nprint(seats)\n",
+              "starterCode": "booking = (\"Workshop\", 24, \"Friday\")\n\n# Unpack booking into title, seats, and day.\n# Print title, seats, and day on separate lines.\n",
+              "solutionCode": "booking = (\"Workshop\", 24, \"Friday\")\n\ntitle, seats, day = booking\nprint(title)\nprint(seats)\nprint(day)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack event into title and seats in one assignment."
+                  "message": "Unpack all three fields with `title, seats, day = booking`."
                 }
               }
             },
-            "sc-tuple-purpose": {
-              "title": "Choose the fixed record",
-              "prompt": "Which value is the best tuple when a coordinate should keep exactly two ordered positions?",
-              "options": {
-                "a": "[4, 9]",
-                "b": "(4, 9)",
-                "c": "{\"x\": 4, \"y\": 9}"
-              },
-              "hint": "Look for the ordered collection whose structure is intended to stay fixed.",
+            "try-tuple-loop-sketch2": {
+              "title": "Build and loop through registration records",
+              "prompt": "Two registrations arrive as a name followed by a seat count. Create `registrations` as a list containing two tuples: `(name1, seats1)` and `(name2, seats2)`. Loop through the list by unpacking each tuple into `name` and `seats`, then print `name` and `seats` on one line for each registration.",
+              "hint": "Build a list of two tuple records first, then unpack each record directly in the `for` loop header.",
               "help": {
-                "concept": "Tuples are useful for compact ordered records that should not be mutated.",
-                "hint_1": "Parentheses distinguish this literal from a list.",
-                "hint_2": "A dictionary names fields rather than relying on positions."
-              }
-            },
-            "mc-tuple-facts": {
-              "title": "Recognize tuple behavior",
-              "prompt": "Which statements about tuples are true?",
-              "options": {
-                "a": "Tuple positions use zero-based indexes.",
-                "b": "append() adds a value to an existing tuple.",
-                "c": "A tuple can be unpacked into multiple names.",
-                "d": "Tuples can contain only strings."
+                "concept": "A list can hold several fixed-shape tuple records, and a loop can unpack each record as it visits it.",
+                "hint_1": "Create `registrations = [(name1, seats1), (name2, seats2)]`.",
+                "hint_2": "Use `for name, seats in registrations:` and print the two current fields."
               },
-              "hint": "Separate how a tuple is read from whether its structure can be mutated.",
-              "help": {
-                "concept": "Tuples are ordered and indexable, but they do not support list-style mutation methods.",
-                "hint_1": "Unpacking follows position order.",
-                "hint_2": "A tuple may hold values of different types."
-              }
-            },
-            "fb-tuple-index": {
-              "title": "Read the first tuple field",
-              "prompt": "Complete the expression that reads `\"North\"` from `direction = (\"North\", 12)`: `direction[___]`",
-              "options": {
-                "a": "0",
-                "b": "1",
-                "c": "-2 + 1"
-              },
-              "hint": "Tuple indexing begins at the same position as list and string indexing.",
-              "help": {
-                "concept": "Every Python sequence begins with the zero index.",
-                "hint_1": "The requested value is the first field.",
-                "hint_2": "Use the simplest direct index."
-              }
-            },
-            "dr-tuple-unpack": {
-              "title": "Build an unpacking assignment",
-              "prompt": "Arrange the tokens to unpack `record` into `name` and `score`.",
-              "tokens": {
-                "t1": "name",
-                "t2": ",",
-                "t3": "score",
-                "t4": "=",
-                "t5": "record"
-              },
-              "hint": "Put the target names on the left and the tuple variable on the right.",
-              "help": {
-                "concept": "Unpacking is one assignment with one target name per tuple position.",
-                "hint_1": "The comma separates the two target names.",
-                "hint_2": "The tuple variable appears after the equals sign."
+              "starterCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\n# Create registrations as a list of two (name, seats) tuples.\n# Loop through registrations and unpack each tuple into name and seats.\n# Print name and seats on one line for each record.\n",
+              "solutionCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\nregistrations = [(name1, seats1), (name2, seats2)]\nfor name, seats in registrations:\n    print(name, seats)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `registrations` from the two input name/seat pairs instead of hard-coding the final output."
+                },
+                "1": {
+                  "message": "Unpack each tuple in the loop with `for name, seats in registrations:`."
+                }
               }
             }
           },
           "tryIt": {
             "try_tuple_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Create and read a location tuple."
+              "prompt": "Build a two-field shipment tuple from input, then read and print both fields by index."
             },
             "try_tuple_unpacking_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Unpack an event tuple into two names."
+              "prompt": "Unpack a three-field booking tuple into meaningful names and print the fields."
+            },
+            "try_tuple_loop_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Build two tuple records from input, store them in a list, and unpack each record in a loop."
             },
             "allowReveal": true
           }
         },
         "updating-and-looping-dictionaries": {
           "label": "Updating and Looping Dictionaries",
-          "summary": "Add, update, remove, and loop through dictionary data.",
+          "summary": "Add or update dictionary entries, remove keys safely, loop through keys or key-value pairs, and build a dictionary from repeated data.",
           "cards": {
             "sketch0": {
-              "title": "Adding, changing, and removing dictionary entries"
+              "title": "Adding and updating entries"
             },
             "sketch1": {
-              "title": "Looping through keys and values"
+              "title": "Removing a key safely"
             },
             "sketch2": {
-              "title": "Common dictionary patterns"
+              "title": "Looping through dictionary keys"
+            },
+            "sketch3": {
+              "title": "Looping through key-value pairs"
+            },
+            "sketch4": {
+              "title": "Building a dictionary in a loop"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-dict-update-existing": {
-              "title": "Updating an existing key",
-              "prompt": "What happens in Python when you run `profile[\"age\"] = 13` and the key `\"age\"` is already in the dictionary?",
-              "hint": "Assignment with an existing key replaces that key's old value.",
+            "sc-add-or-update": {
+              "title": "Use one assignment for add or update",
+              "prompt": "What does `stock[item] = amount` do when `item` is used as a dictionary key?",
+              "hint": "The same square-bracket assignment works whether the key already exists or not.",
               "help": {
-                "concept": "Dictionary assignment uses the key to decide where the value goes. If the key already exists, Python keeps the key and changes only its stored value.",
-                "hint_1": "This is not a list index operation. Python looks up the key `\"age\"` in the dictionary.",
-                "hint_2": "Ask whether the key is new or already present. Existing keys are changed, not duplicated."
+                "concept": "Dictionary assignment adds a new key when it is missing and updates the value when the key already exists.",
+                "hint_1": "Python checks whether the key stored in `item` is already present in `stock`.",
+                "hint_2": "A missing key is added; an existing key receives the new value."
               },
               "options": {
-                "a": "It updates the value stored for `\"age\"`",
-                "b": "It creates a second separate `\"age\"` entry",
-                "c": "It removes the `\"age\"` key",
-                "d": "It turns the dictionary into a list"
+                "a": "It adds the key if missing or updates its value if it already exists",
+                "b": "It can only add new keys",
+                "c": "It can only change existing keys",
+                "d": "It removes the key from the dictionary"
+              }
+            },
+            "sc-safe-delete": {
+              "title": "Remove a key only when it exists",
+              "prompt": "Which pattern safely removes the key stored in `key` from `settings` only when that key exists?",
+              "hint": "Check membership before using `del`.",
+              "help": {
+                "concept": "A membership check can guard a deletion so a missing key does not cause an error.",
+                "hint_1": "Use `key in settings` as the condition.",
+                "hint_2": "Place `del settings[key]` inside that `if` block."
+              },
+              "options": {
+                "a": "if key in settings:\n    del settings[key]",
+                "b": "if settings[key]:\n    del key",
+                "c": "settings.remove(key)",
+                "d": "del key in settings"
               }
             },
             "sc-loop-direct-dict": {
-              "title": "Looping over a dictionary directly",
-              "prompt": "If `colors = {\"red\": 1, \"blue\": 2}`, what does `for item in colors:` give you on each loop?",
-              "hint": "Looping over a dictionary by itself gives one part of each key-value pair, not both parts.",
+              "title": "What direct dictionary iteration gives you",
+              "prompt": "If `colors = {\"red\": 1, \"blue\": 2}`, what does `for color in colors:` store in `color` on each iteration?",
+              "hint": "A plain loop over a dictionary visits its lookup labels.",
               "help": {
-                "concept": "A plain `for` loop over a dictionary iterates through its keys. To get both keys and values together, you use `.items()`.",
-                "hint_1": "Think about what `item` would be first: a color name or a number?",
-                "hint_2": "The loop variable matches the dictionary's lookup labels, the parts you use inside square brackets."
+                "concept": "Direct dictionary iteration yields one key at a time.",
+                "hint_1": "The keys are `\"red\"` and `\"blue\"`.",
+                "hint_2": "To obtain the matching value inside the loop, you could use `colors[color]`."
               },
               "options": {
                 "a": "Each key, such as `\"red\"` and `\"blue\"`",
                 "b": "Each value, such as `1` and `2`",
-                "c": "Each key and value together automatically",
-                "d": "The dictionary length each time"
+                "c": "A key and value pair automatically",
+                "d": "The dictionary length"
               }
             },
-            "mc-valid-dict-changes": {
-              "title": "Ways to change a dictionary",
-              "prompt": "Which statements can change the contents of a dictionary named `stock`? Choose all that apply.",
-              "hint": "Think about adding or updating with square brackets, and removing with `del`.",
+            "sc-items-loop": {
+              "title": "Get keys and values together",
+              "prompt": "Which loop header gives both the key and value from each entry in `scores`?",
+              "hint": "Use the dictionary method that provides key-value pairs.",
               "help": {
-                "concept": "Dictionaries can be changed by assigning to a key or deleting a key. Reading a value or printing the dictionary does not modify it.",
-                "hint_1": "Look for statements that either store a value into `stock[...]` or remove a key from `stock`.",
-                "hint_2": "One correct choice adds or updates a key, and another correct choice removes a key entirely."
+                "concept": "`.items()` provides each dictionary entry as a key-value pair that can be unpacked into two loop variables.",
+                "hint_1": "The loop needs two variables because each item contains two pieces.",
+                "hint_2": "Use `for name, score in scores.items():`."
               },
               "options": {
-                "a": "`stock[\"pens\"] = 12`",
-                "b": "`del stock[\"pens\"]`",
-                "c": "`print(stock[\"pens\"])`",
-                "d": "`len(stock)`"
-              }
-            },
-            "mc-items-loop": {
-              "title": "Using `.items()`",
-              "prompt": "Which statements about `for key, value in data.items():` are correct? Choose all that apply.",
-              "hint": "Focus on what `.items()` provides to the loop.",
-              "help": {
-                "concept": "The `.items()` method gives key-value pairs, so the loop can unpack each pair into two variables.",
-                "hint_1": "Check whether the loop receives one thing or two things from each dictionary entry.",
-                "hint_2": "Two statements are true: one about getting both parts of each entry, and one about the meaning of `key` and `value`."
-              },
-              "options": {
-                "a": "It lets you work with both the key and the value in each loop",
-                "b": "`key` stores the dictionary key for the current pair",
-                "c": "It only works for lists, not dictionaries",
-                "d": "It removes entries as it loops"
-              }
-            },
-            "dr-update-sequence": {
-              "title": "Order the dictionary changes",
-              "prompt": "Put these lines in the correct order to create a dictionary, update one value, add one new key, and print the result.",
-              "hint": "Start by creating the dictionary before trying to change it.",
-              "help": {
-                "concept": "A dictionary must exist before you can update or add entries. After the changes, printing shows the final state.",
-                "hint_1": "The dictionary literal line comes first, and `print` comes last.",
-                "hint_2": "Between those, update the existing `\"tea\"` key and add the new `\"juice\"` key."
-              },
-              "tokens": {
-                "t1": "drinks = {\"tea\": 2}",
-                "t2": "drinks[\"tea\"] = 3",
-                "t3": "drinks[\"juice\"] = 1",
-                "t4": "print(drinks)"
-              }
-            },
-            "dr-loop-items-order": {
-              "title": "Build a loop with `.items()`",
-              "prompt": "Arrange the tokens to make a loop that prints each key and value from `scores`.",
-              "hint": "The loop header comes first, then the indented print line.",
-              "help": {
-                "concept": "A dictionary loop with `.items()` uses `for key, value in scores.items():` and then an indented statement inside the loop.",
-                "hint_1": "Use `.items()` in the loop header so both variables receive data.",
-                "hint_2": "After the colon, the next line should be indented and print both loop variables."
-              },
-              "tokens": {
-                "t1": "for name, score in scores.items():",
-                "t2": "print(name, score)"
-              }
-            },
-            "fb-remove-key": {
-              "title": "Remove a dictionary entry",
-              "prompt": "Choose the missing code to remove the key `\"done\"` from the dictionary.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "[blank1] tasks[\"done\"]",
-              "choices": [
-                "del",
-                "print",
-                "return",
-                "for"
-              ]
-            },
-            "fb-items-method": {
-              "title": "Complete the loop method",
-              "prompt": "Choose the missing method so the loop gets both keys and values.",
-              "hint": "Use the dictionary method that returns key-value pairs.",
-              "help": {
-                "concept": "Choose the dictionary method that yields key-value pairs so each pair can be unpacked into two loop variables.",
-                "hint_1": "Methods like `.keys()` and `.values()` give only one part each.",
-                "hint_2": "You need the method that matches `for key, value in ...`."
-              },
-              "template": "for key, value in data.[blank1]():",
-              "choices": [
-                "items",
-                "keys",
-                "values",
-                "append"
-              ]
-            },
-            "ci-update-score": {
-              "title": "Update one score and return the dictionary",
-              "prompt": "Write `update_score(scores, name, new_score)` so it updates the existing entry for `name` or adds it if it is missing, then returns the `scores` dictionary.",
-              "hint": "Trace the code before choosing the option that matches its actual behavior.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
-              "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores"
-            },
-            "ci-remove-key": {
-              "title": "Remove a key if it exists",
-              "prompt": "Write `remove_item(data, key_name)` so it removes `key_name` from the dictionary when that key is present, then returns the dictionary.",
-              "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
-              "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data"
-            },
-            "ci-format-items": {
-              "title": "Build lines from dictionary pairs",
-              "prompt": "Write `format_inventory(items)` so it builds and returns a list of strings in the format `\"name: count\"`, such as `\"pens: 3\"`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
-              "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result"
-            },
-            "try-updating-and-looping-dictionaries-checkpoint": {
-              "title": "Update and loop through scores",
-              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`.",
-              "hint": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
-              "help": {
-                "concept": "Dictionaries can be updated by assigning to an existing key.",
-                "hint_1": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "scores = {\"Ava\": 88, \"Mia\": 79}\n\n# Update Mia to 91.\n# Print each name and score.\n",
-              "solutionCode": "scores = {\"Ava\": 88, \"Mia\": 79}\nscores[\"Mia\"] = 91\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Update scores['Mia'] to 91 instead of printing the final result directly."
-                }
+                "a": "for name, score in scores.items():",
+                "b": "for name, score in scores:",
+                "c": "for score in scores.values, names:",
+                "d": "for scores.items() in name, score:"
               }
             },
             "try-updating-and-looping-dictionaries-sketch0": {
-              "title": "Update a count",
-              "prompt": "Read, update, and store a dictionary value.",
-              "hint": "Increase apples by 3.",
+              "title": "Add or update stock from input",
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new.",
+              "hint": "Use the input variable itself as the key: `stock[item] = amount`.",
               "help": {
-                "concept": "Increase apples by 3.",
-                "hint_1": "Increase apples by 3, then print counts.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "Dictionary assignment uses the same syntax for both adding a new key and updating an existing one.",
+                "hint_1": "Do not write separate code for `\"pens\"` and new item names.",
+                "hint_2": "Assign `amount` to `stock[item]`, then print `stock`."
               },
-              "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n",
-              "solutionCode": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
+              "starterCode": "stock = {\"pens\": 4, \"paper\": 2}\nitem = input()\namount = int(input())\n\n# Store amount under the key in item.\n# Print the updated stock dictionary.\n",
+              "solutionCode": "stock = {\"pens\": 4, \"paper\": 2}\nitem = input()\namount = int(input())\n\nstock[item] = amount\nprint(stock)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Increase counts['apples'] by 3 instead of replacing the final dictionary."
+                  "message": "Use `stock[item] = amount` so the same code can add a new key or update an existing one."
                 }
               }
             },
             "try-updating-and-looping-dictionaries-sketch1": {
-              "title": "Print inventory lines",
-              "prompt": "Use `.items()` to loop through keys and values together.",
-              "hint": "Loop through inventory and print lines like: pens: 3.",
+              "title": "Remove an optional setting",
+              "prompt": "The dictionary `settings` contains three keys. Read a key from input. If that key exists, remove it with `del`. If it does not exist, leave the dictionary unchanged. Print the final dictionary.",
+              "hint": "Guard the deletion with `if key in settings:`.",
               "help": {
-                "concept": "Loop through inventory and print lines like: pens: 3.",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "Checking membership before `del` lets the same program handle present and missing keys safely.",
+                "hint_1": "Use `key in settings` as the condition.",
+                "hint_2": "Inside the `if` block, write `del settings[key]`. Print the dictionary after the condition."
               },
-              "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n",
-              "solutionCode": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
+              "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# If key exists in settings, remove that entry with del.\n# Print the final settings dictionary.\n",
+              "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    del settings[key]\nprint(settings)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through inventory instead of typing the inventory lines directly."
+                  "message": "Check `if key in settings:` before deleting an optional key."
+                },
+                "1": {
+                  "message": "Remove the matching entry with `del settings[key]`."
                 }
               }
             },
             "try-updating-and-looping-dictionaries-sketch2": {
-              "title": "Build a length dictionary",
-              "prompt": "Loop through a list and fill a dictionary.",
-              "hint": "Store each word's length in lengths.",
+              "title": "Loop through keys and look up each value",
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line.",
+              "hint": "Use `for item in inventory:` and retrieve the current value with `inventory[item]`.",
               "help": {
-                "concept": "Store each word's length in lengths.",
-                "hint_1": "Store each word's length in lengths, then print lengths.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "A direct dictionary loop yields keys; use the current key to look up its value.",
+                "hint_1": "The loop header should not call `.items()` in this exercise.",
+                "hint_2": "Inside the loop, print `item` and `inventory[item]`."
               },
-              "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n",
-              "solutionCode": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+              "starterCode": "inventory = {\"pens\": 3, \"markers\": 2, \"folders\": 5}\n\n# Loop directly through inventory so item receives each key.\n# Print the current key and inventory[item] on one line.\n",
+              "solutionCode": "inventory = {\"pens\": 3, \"markers\": 2, \"folders\": 5}\n\nfor item in inventory:\n    print(item, inventory[item])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through words instead of typing the final lengths dictionary."
+                  "message": "Loop directly with `for item in inventory:` so `item` receives each dictionary key."
                 },
                 "1": {
-                  "message": "Use len(word) to calculate each word length."
+                  "message": "Use `inventory[item]` to retrieve the value for the current key."
+                }
+              }
+            },
+            "try-updating-and-looping-dictionaries-sketch3": {
+              "title": "Print dynamic score pairs with .items()",
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through `scores.items()` by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
+              "hint": "Build the dictionary first, then use `for name, score in scores.items():`.",
+              "help": {
+                "concept": "`.items()` lets a loop work with the key and value together without a separate lookup.",
+                "hint_1": "Create `scores = {name1: score1, name2: score2}`.",
+                "hint_2": "In the loop, print `f\"{name}: {score}\"`."
+              },
+              "starterCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\n# Create scores from the two name/score pairs.\n# Loop through scores.items() as name, score.\n# Print each entry as: name: score\n",
+              "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nscores = {name1: score1, name2: score2}\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `scores` from the two input name/score pairs instead of hard-coding the output."
+                },
+                "1": {
+                  "message": "Loop with `for name, score in scores.items():` so each key-value pair is unpacked correctly."
+                }
+              }
+            },
+            "try-updating-and-looping-dictionaries-sketch4": {
+              "title": "Build word lengths in a dictionary",
+              "prompt": "Three words arrive as input. Store them in a list named `words`. Create an empty dictionary named `lengths`. Loop through `words` and store each word as a key with `len(word)` as its value. Print the completed `lengths` dictionary.",
+              "hint": "Inside the loop, assign to a dictionary key with `lengths[word] = len(word)`.",
+              "help": {
+                "concept": "A loop can build a dictionary one key-value pair at a time.",
+                "hint_1": "Create `words` from the three inputs and initialize `lengths = {}` before the loop.",
+                "hint_2": "For each `word`, store its calculated length with `lengths[word] = len(word)`."
+              },
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\n# Create words from the three input values.\n# Create an empty dictionary named lengths.\n# Loop through words and store each word's length.\n# Print lengths.\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nwords = [first, second, third]\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `words` from `first`, `second`, and `third` before the loop."
+                },
+                "1": {
+                  "message": "Use a `for` loop over `words` so every input word is processed."
                 },
                 "2": {
-                  "message": "Store each length with lengths[word] = len(word)."
+                  "message": "Store each calculated value with `lengths[word] = len(word)`."
                 }
               }
             }
           },
           "tryIt": {
-            "try_updating_and_looping_dictionaries_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`."
-            },
             "try_updating_and_looping_dictionaries_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read, update, and store a dictionary value."
+              "prompt": "Use one dictionary assignment to add or update a stock count supplied as input."
             },
             "try_updating_and_looping_dictionaries_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use `.items()` to loop through keys and values together."
+              "prompt": "Remove an input key from `settings` only when that key exists."
             },
             "try_updating_and_looping_dictionaries_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Loop through a list and fill a dictionary."
+              "prompt": "Loop directly through dictionary keys and use each key to retrieve its value."
+            },
+            "try_updating_and_looping_dictionaries_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "Build scores from input and unpack each key-value pair with `.items()`."
+            },
+            "try_updating_and_looping_dictionaries_sketch4": {
+              "title": "Try it yourself",
+              "prompt": "Build a word-length dictionary one entry at a time inside a loop."
             },
             "allowReveal": true
           }
@@ -15132,288 +14591,192 @@ const messages: Record<string, any> = {
       "python-6-functions-and-modularity": {
         "decomposition-and-refactoring": {
           "label": "Decomposition and Refactoring",
-          "summary": "Break a larger task into clear helper functions.",
+          "summary": "Refactor working code by extracting repeated or separate responsibilities into helper functions while preserving the program's behavior.",
           "cards": {
             "sketch0": {
-              "title": "Why break a program into helper functions?"
+              "title": "Extract repeated work into one helper"
             },
             "sketch1": {
-              "title": "Spotting repeated code"
+              "title": "Move one responsibility out of the main flow"
             },
             "sketch2": {
-              "title": "Make each function do one clear job"
+              "title": "Reuse helpers instead of duplicating their logic"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-1": {
-              "title": "Best reason to extract a helper",
-              "prompt": "Which situation is the strongest reason to move code into a helper function?",
-              "hint": "Look for repeated logic that does the same job in more than one place.",
-              "help": {
-                "concept": "Helper functions are especially useful when the same logic appears multiple times, because one function can replace repeated code and make updates easier.",
-                "hint_1": "Compare the choices and find the one where the same steps would otherwise be copied.",
-                "hint_2": "A helper is most valuable when one reusable task appears in several places, not just because a program has many lines."
-              },
-              "options": {
-                "a": "A variable name is short",
-                "b": "The same cleanup steps are written in several places",
-                "c": "The program uses input() once",
-                "d": "A print statement appears at the end"
-              }
-            },
-            "sc-2": {
+            "sc-refactor-goal": {
               "title": "What refactoring should preserve",
-              "prompt": "When you refactor a working program, what should stay the same?",
-              "hint": "Refactoring changes structure, not the program's intended result.",
+              "prompt": "What is the main goal when refactoring code that already works?",
+              "hint": "The structure may improve, but the program should still do the same job for the same inputs.",
               "help": {
-                "concept": "Refactoring improves readability or organization while preserving behavior, so the program should still produce the same results for the same inputs.",
-                "hint_1": "Think about what users notice: the program should still solve the same problem correctly.",
-                "hint_2": "The code layout may change, but the output and behavior for the same input should not change."
+                "concept": "Refactoring changes code structure without intentionally changing observable behavior.",
+                "hint_1": "Function names and line layout may change.",
+                "hint_2": "The same inputs should still produce the same intended results."
               },
               "options": {
-                "a": "The number of functions must decrease",
-                "b": "The variable names must stay identical",
-                "c": "The program's behavior for the same input should remain correct",
-                "d": "Every line must stay in the same order"
+                "a": "Improve the structure while preserving the program's behavior",
+                "b": "Change the output so the refactor is easy to notice",
+                "c": "Remove every function from the program",
+                "d": "Keep every original line in exactly the same place"
               }
             },
-            "mc-1": {
-              "title": "Signs a function is doing too much",
-              "prompt": "Which choices suggest a function should be split into smaller helpers? Choose all that apply.",
-              "hint": "Look for mixed responsibilities and repeated chunks of logic.",
+            "sc-extract-repetition": {
+              "title": "Spot a helper candidate",
+              "prompt": "A program uses `name.strip().title()` in four different places. Which refactor best reduces that duplication?",
+              "hint": "Move the repeated transformation into one named operation.",
               "help": {
-                "concept": "A function often needs decomposition when it handles several different jobs or contains repeated logic that could be reused elsewhere.",
-                "hint_1": "One clue is that the function both transforms data and formats final output in a long block.",
-                "hint_2": "Another clue is seeing nearly identical code chunks or a function that tries to clean, calculate, and display all at once."
+                "concept": "Repeated logic is a strong candidate for a helper function.",
+                "hint_1": "The cleanup should have one definition.",
+                "hint_2": "Each old duplicate can then be replaced by a helper call."
               },
               "options": {
-                "a": "It cleans text, calculates a result, and formats a message in one long block",
-                "b": "It contains repeated code chunks with only small changes",
-                "c": "It has one short return statement for one clear task",
-                "d": "It is hard to describe the function's job in one sentence"
+                "a": "Create `clean_name(name)` and call it from each place",
+                "b": "Copy the cleanup into four more places",
+                "c": "Rename all four variables but keep the duplicate cleanup",
+                "d": "Add extra print statements around each copy"
               }
             },
-            "mc-2": {
-              "title": "Benefits of helper functions",
-              "prompt": "Which are real benefits of breaking code into helper functions? Choose all that apply.",
-              "hint": "Think about readability, reuse, and testing.",
+            "sc-one-responsibility": {
+              "title": "Give a helper one clear job",
+              "prompt": "Which helper has the clearest single responsibility in a program that reads text, counts words, and formats a report?",
+              "hint": "A helper is easiest to understand when its name describes one focused task.",
               "help": {
-                "concept": "Helper functions improve organization by giving small tasks clear names, reducing duplication, and making logic easier to test separately.",
-                "hint_1": "Useful helpers usually make code easier to read and let you reuse one piece of logic in multiple places.",
-                "hint_2": "They also help you test one small behavior at a time; they do not automatically make every program shorter in line count."
+                "concept": "Decomposition separates distinct jobs so each function has a clear responsibility.",
+                "hint_1": "Counting words is one focused transformation.",
+                "hint_2": "Reading input, counting, formatting, and printing all at once mixes several responsibilities."
               },
               "options": {
-                "a": "You can reuse the same logic from multiple places",
-                "b": "Small pieces are easier to test one at a time",
-                "c": "Every program will always use fewer total lines",
-                "d": "Function names can explain what each step does"
+                "a": "`word_count(text)` returns the number of words",
+                "b": "`do_everything()` reads input, counts, formats, and prints",
+                "c": "`stuff(x)` performs several unrelated actions",
+                "d": "`run()` duplicates the whole program twice"
               }
             },
-            "dr-1": {
-              "title": "Refactor repeated cleanup",
-              "prompt": "Put these steps in the best order for refactoring repeated text-cleaning code into a helper function.",
-              "hint": "First identify the repeated task, then define the helper, then replace the duplicates.",
+            "sc-helper-reuse": {
+              "title": "Reuse an existing helper",
+              "prompt": "`clean_name(name)` already returns a cleaned name. Inside `build_badge(name)`, which line best reuses that existing responsibility?",
+              "hint": "Call the helper instead of rewriting its `.strip().title()` logic.",
               "help": {
-                "concept": "A clean refactor usually starts by noticing repeated logic, extracting it into a function, and then calling that function where needed.",
-                "hint_1": "You should not replace old code with helper calls before the helper exists.",
-                "hint_2": "The repeated behavior must be identified first, then moved into a function, then used from the original locations."
+                "concept": "Once a responsibility has a helper, other functions should call that helper instead of duplicating its implementation.",
+                "hint_1": "The helper call should receive `name`.",
+                "hint_2": "Store or use the value returned by `clean_name(name)`."
               },
-              "tokens": {
-                "t1": "Notice the same cleanup logic appears more than once",
-                "t2": "Write a helper function for that cleanup task",
-                "t3": "Replace the repeated code with calls to the helper",
-                "t4": "Run the program and confirm the behavior still matches"
+              "options": {
+                "a": "nice_name = clean_name(name)",
+                "b": "nice_name = name.strip().title()",
+                "c": "clean_name = name",
+                "d": "print = clean_name"
               }
-            },
-            "dr-2": {
-              "title": "How a helper-based program flows",
-              "prompt": "Arrange the steps in the order they happen when this pattern runs: input is cleaned, then used to build a message, then printed.",
-              "hint": "A helper returns a value before the next function uses it.",
-              "help": {
-                "concept": "In decomposed code, one function often returns a cleaned value, another function uses that value to build a result, and then the main code prints the final result.",
-                "hint_1": "The cleaned text must exist before a greeting or summary can be built from it.",
-                "hint_2": "Printing is usually the last step after helper functions have returned the needed values."
-              },
-              "tokens": {
-                "t1": "Call the cleaning helper with the original text",
-                "t2": "Receive the cleaned text as a return value",
-                "t3": "Use the cleaned text to build the final message",
-                "t4": "Print the final message"
-              }
-            },
-            "fb-1": {
-              "title": "Call the helper",
-              "prompt": "Choose the function call that uses the helper to clean the variable `name`.",
-              "hint": "The blank should be a call that passes `name` into the helper.",
-              "help": {
-                "concept": "To use a helper function, write its name followed by parentheses and pass the needed argument inside.",
-                "hint_1": "You are filling the right side of an assignment, so the blank should produce a value.",
-                "hint_2": "Look for the choice that calls `clean_name` with `name` inside the parentheses."
-              },
-              "template": "nice_name = [blank1]",
-              "choices": [
-                "clean_name(name)",
-                "name = clean_name",
-                "print(name)",
-                "return clean_name"
-              ]
-            },
-            "fb-2": {
-              "title": "Return from a helper",
-              "prompt": "Choose the missing word that sends the computed value back from the function.",
-              "hint": "Inside a function, one keyword sends a value back to the caller.",
-              "help": {
-                "concept": "A helper function should send its result back so other code can store, display, or combine that value.",
-                "hint_1": "`print` shows text in the output panel, but it does not send a reusable value back to the caller.",
-                "hint_2": "The missing word is the keyword used before an expression like `text.strip()` when the function should produce a value."
-              },
-              "template": "def clean_text(text):\n    [blank1] text.strip().lower()",
-              "choices": [
-                "return",
-                "print",
-                "input",
-                "def"
-              ]
-            },
-            "ci-1": {
-              "title": "Extract a cleaning helper",
-              "prompt": "Write `clean_name(name)` so it returns the cleaned version of `name`. This helper should do the name-cleaning work instead of leaving it repeated elsewhere.",
-              "hint": "Read the task \"Extract a cleaning helper\" and identify the required result.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
-              "solutionCode": "def clean_name(name):\n    return name.strip().title()"
-            },
-            "ci-2": {
-              "title": "Build a summary with helpers",
-              "prompt": "Split this job into two helpers. `word_count(text)` should return the number of words, and `summary(text)` should call that helper and return a string like `Words: 3`.",
-              "hint": "Read the task \"Build a summary with helpers\" and identify the required result.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
-              "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\""
-            },
-            "ci-3": {
-              "title": "Refactor repeated math into helpers",
-              "prompt": "Finish `double(number)` and `triple(number)`, then use those helper functions inside `combined_total(a, b)` instead of repeating the math there.",
-              "hint": "Read the task \"Refactor repeated math into helpers\" and identify the required result.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
-              "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)"
-            },
-            "try-decomposition-and-refactoring-checkpoint": {
-              "title": "Use a helper function",
-              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`.",
-              "hint": "Use `.strip().title()` inside a helper function.",
-              "help": {
-                "concept": "Decomposition means moving one clear step into a helper function.",
-                "hint_1": "Use `.strip().title()` inside a helper function.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
-              "solutionCode": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n"
             },
             "try-decomposition-and-refactoring-sketch0": {
-              "title": "Clean text with a helper",
-              "prompt": "Move one clear step into a helper function.",
-              "hint": "Strip whitespace and lowercase the text.",
+              "title": "Refactor repeated name cleanup",
+              "prompt": "This program already produces the correct output, but it repeats `strip().title()` for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
+              "hint": "The finished program should still print the same two cleaned names; only the structure changes.",
               "help": {
-                "concept": "Strip whitespace and lowercase the text.",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
+                "concept": "A refactor can preserve output while moving repeated logic into one reusable helper.",
+                "hint_1": "Define `clean_name(name)` once using `name.strip().title()`.",
+                "hint_2": "Use `clean_name(first)` and `clean_name(second)` instead of repeating the method chain."
               },
-              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
-              "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n"
-            },
-            "try-decomposition-and-refactoring-sketch1": {
-              "title": "Split a full name",
-              "prompt": "A helper can hide a small string-processing step.",
-              "hint": "Return the first word from full_name.",
-              "help": {
-                "concept": "Return the first word from full_name.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
-              },
-              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
-              "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n"
-            },
-            "try-decomposition-and-refactoring-sketch2": {
-              "title": "Combine two helpers",
-              "prompt": "One helper can call another helper.",
-              "hint": "Return 'Badge: ' plus the cleaned name.",
-              "help": {
-                "concept": "Return 'Badge: ' plus the cleaned name.",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
-              },
-              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
-              "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+              "starterCode": "first = input()\nsecond = input()\n\nfirst_clean = first.strip().title()\nsecond_clean = second.strip().title()\n\nprint(first_clean)\nprint(second_clean)\n",
+              "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\nfirst = input()\nsecond = input()\n\nfirst_clean = clean_name(first)\nsecond_clean = clean_name(second)\n\nprint(first_clean)\nprint(second_clean)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use clean(name) inside badge instead of hard-coding one example."
+                  "message": "Extract the repeated cleanup into `clean_name(name)`."
+                },
+                "1": {
+                  "message": "Use `clean_name(first)` for the first input."
+                },
+                "2": {
+                  "message": "Use `clean_name(second)` for the second input."
+                }
+              }
+            },
+            "try-decomposition-and-refactoring-sketch1": {
+              "title": "Extract word counting from the main flow",
+              "prompt": "This working program counts words directly in the main flow. Refactor it without changing its output: create `word_count(text)` that returns the number of words, then use that helper to compute `count`.",
+              "hint": "Move the split-and-count responsibility into `word_count(text)` and leave formatting in the main flow.",
+              "help": {
+                "concept": "Decomposition can move one responsibility into a helper while the rest of the program keeps its original job.",
+                "hint_1": "Inside `word_count`, return `len(text.split())`.",
+                "hint_2": "Replace the inline counting lines with `count = word_count(text)`."
+              },
+              "starterCode": "text = input()\nwords = text.split()\ncount = len(words)\nprint(f\"Words: {count}\")\n",
+              "solutionCode": "def word_count(text):\n    return len(text.split())\n\ntext = input()\ncount = word_count(text)\nprint(f\"Words: {count}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Extract the counting responsibility into `word_count(text)`."
+                },
+                "1": {
+                  "message": "Use `count = word_count(text)` in the main flow."
+                }
+              }
+            },
+            "try-decomposition-and-refactoring-sketch2": {
+              "title": "Replace duplicated cleanup with a helper call",
+              "prompt": "`clean_name(name)` already owns the cleanup rule. `build_badge(name)` currently duplicates that rule. Refactor `build_badge` so it calls `clean_name(name)` and returns `\"Badge: \" + nice_name`. Keep the program's output unchanged.",
+              "hint": "The goal is not a new result; it is to make `build_badge` reuse the existing helper.",
+              "help": {
+                "concept": "When one helper already owns a responsibility, another helper should call it instead of copying the same implementation.",
+                "hint_1": "Inside `build_badge`, assign `nice_name = clean_name(name)`.",
+                "hint_2": "Then return `\"Badge: \" + nice_name`."
+              },
+              "starterCode": "def clean_name(name):\n    return name.strip().title()\n\ndef build_badge(name):\n    nice_name = name.strip().title()\n    return \"Badge: \" + nice_name\n\nname = input()\nprint(build_badge(name))\n",
+              "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\ndef build_badge(name):\n    nice_name = clean_name(name)\n    return \"Badge: \" + nice_name\n\nname = input()\nprint(build_badge(name))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Call `clean_name(name)` inside `build_badge` instead of duplicating its cleanup logic."
+                },
+                "1": {
+                  "message": "Return the badge using the cleaned `nice_name` value."
                 }
               }
             }
           },
           "tryIt": {
-            "try_decomposition_and_refactoring_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`."
-            },
             "try_decomposition_and_refactoring_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Move one clear step into a helper function."
+              "prompt": "Extract repeated cleanup into one helper while preserving the program's output."
             },
             "try_decomposition_and_refactoring_sketch1": {
               "title": "Try it yourself",
-              "prompt": "A helper can hide a small string-processing step."
+              "prompt": "Move one responsibility from the main flow into a helper without changing behavior."
             },
             "try_decomposition_and_refactoring_sketch2": {
               "title": "Try it yourself",
-              "prompt": "One helper can call another helper."
+              "prompt": "Replace duplicated helper logic with a call to the helper that already owns that responsibility."
             },
             "allowReveal": true
           }
         },
         "defining-and-calling-functions": {
           "label": "Defining and Calling Functions",
-          "summary": "Create functions and call them with arguments.",
+          "summary": "Define reusable no-argument functions, call them after their definitions, and reuse a function by calling it more than once.",
           "cards": {
             "sketch0": {
-              "title": "What a function does"
+              "title": "Defining a function and calling it"
             },
             "sketch1": {
-              "title": "Calling functions with arguments"
+              "title": "Calling the same function more than once"
             },
             "sketch2": {
-              "title": "Functions can return values"
+              "title": "Putting several statements inside a function"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-function-call": {
-              "title": "Recognize a function call",
-              "prompt": "Which line calls a function named `greet`?",
-              "hint": "Check every option against the complete behavior described in the question.",
+            "sc-definition-vs-call": {
+              "title": "Definition or call?",
+              "prompt": "Which line calls an already-defined function named `greet`?",
+              "hint": "A call uses the function name followed by parentheses, without the `def` keyword.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "A function definition creates the named block of code; a function call runs that block.",
+                "hint_1": "`def greet():` starts the definition.",
+                "hint_2": "To run the function later, write `greet()`."
               },
               "options": {
                 "a": "def greet():",
@@ -15422,1928 +14785,1236 @@ const messages: Record<string, any> = {
                 "d": "return greet"
               }
             },
-            "sc-parameter-meaning": {
-              "title": "Understand a parameter",
-              "prompt": "In `def greet(name):`, what is `name`?",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
+            "sc-function-body-indent": {
+              "title": "Identify the function body",
+              "prompt": "Which line correctly belongs inside the body of `def show_message():`?",
+              "hint": "Statements inside a function body are indented under the `def` line.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Indentation tells Python which statements belong to the function body.",
+                "hint_1": "The body line must be indented.",
+                "hint_2": "The call itself belongs after the definition, not inside its body."
               },
               "options": {
-                "a": "A printed message",
-                "b": "A parameter",
-                "c": "A return value",
-                "d": "A list"
+                "a": "    print(\"Ready\")",
+                "b": "def print(\"Ready\")",
+                "c": "show_message():",
+                "d": "return = \"Ready\""
               }
             },
-            "mc-valid-calls": {
-              "title": "Pick the valid function calls",
-              "prompt": "A function is defined as `def greet(name):`. Which calls are valid? Choose all correct answers.",
-              "hint": "The function expects exactly one argument.",
+            "sc-call-count": {
+              "title": "Count function calls",
+              "prompt": "A function `ping()` prints `Ping` once. If the program contains `ping()` on two separate lines, how many times is `Ping` printed?",
+              "hint": "Each function call runs the function body once.",
               "help": {
-                "concept": "When a function has one parameter, each call must provide one argument inside the parentheses.",
-                "hint_1": "Check how many values each call passes to `greet(...)`.",
-                "hint_2": "Valid calls have exactly one value between the parentheses, not zero and not two."
+                "concept": "Calling the same function repeatedly reuses the same body each time.",
+                "hint_1": "The first call runs the print once.",
+                "hint_2": "The second call runs that same print once again."
               },
               "options": {
-                "a": "greet(\"Ava\")",
-                "b": "greet()",
-                "c": "greet(\"Ava\", \"Leo\")",
-                "d": "greet(\"Mina\")"
+                "a": "Two times",
+                "b": "One time",
+                "c": "Zero times",
+                "d": "The function can only be called once"
               }
             },
-            "mc-return-uses": {
-              "title": "Ways to use a returned value",
-              "prompt": "A function `double(x)` returns a number. Which lines use that returned value correctly? Choose all correct answers.",
-              "hint": "A returned value can be stored or printed.",
+            "sc-define-before-call": {
+              "title": "Place the call after the definition",
+              "prompt": "Which program order correctly defines `cheer()` before trying to call it?",
+              "hint": "Python runs top-level statements from top to bottom.",
               "help": {
-                "concept": "When a function returns a value, you can place the call anywhere a normal value can be used, such as in an assignment or inside `print(...)`.",
-                "hint_1": "Look for lines where `double(4)` is treated like a value.",
-                "hint_2": "The correct lines either store the result in a variable or pass the result into another function like `print`."
+                "concept": "The function name must already be defined by the time Python reaches the call.",
+                "hint_1": "Put the `def cheer():` block first.",
+                "hint_2": "Place `cheer()` after the indented function body."
               },
               "options": {
-                "a": "result = double(4)",
-                "b": "print(double(4))",
-                "c": "return = double(4)",
-                "d": "def double(4):"
-              }
-            },
-            "dr-define-then-call": {
-              "title": "Order a simple function program",
-              "prompt": "Put these lines in the correct order to define a function and then call it.",
-              "hint": "The function must be defined before it is called.",
-              "help": {
-                "concept": "Python reads code from top to bottom. A function definition comes first, its body stays indented under it, and the call comes after the definition.",
-                "hint_1": "Start with the `def` line, then place the indented body line under it.",
-                "hint_2": "After the two definition lines are together, put the function call last."
-              },
-              "tokens": {
-                "t1": "def say_hi():",
-                "t2": "print(\"Hi\")",
-                "t3": "say_hi()"
-              }
-            },
-            "dr-call-with-argument": {
-              "title": "Order a function with one parameter",
-              "prompt": "Arrange the lines to define `show_name` and call it with `\"Ava\"`.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "def show_name(name):",
-                "t2": "print(name)",
-                "t3": "show_name(\"Ava\")"
-              }
-            },
-            "fb-def-keyword": {
-              "title": "Complete a function definition",
-              "prompt": "Choose the word that starts a function definition.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "[blank1] greet():",
-              "choices": [
-                "def",
-                "print",
-                "call",
-                "return"
-              ]
-            },
-            "fb-call-argument": {
-              "title": "Fill in the argument",
-              "prompt": "Choose the value that completes the function call.",
-              "hint": "The function call should pass the name shown in quotes.",
-              "help": {
-                "concept": "An argument is the value placed inside the parentheses when calling a function.",
-                "hint_1": "Look at the quotes already shown in the call.",
-                "hint_2": "The missing part is the exact text value between the parentheses, including the capital letter."
-              },
-              "template": "greet([blank1])",
-              "choices": [
-                "\"Ava\"",
-                "name",
-                "greet",
-                "print"
-              ]
-            },
-            "ci-make-greeting": {
-              "title": "Write a greeting function",
-              "prompt": "Write `make_greeting(name)` so it returns a greeting string for that name.",
-              "hint": "Read the task \"Write a greeting function\" and identify the required result.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
-              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
-            },
-            "ci-square-number": {
-              "title": "Return the square",
-              "prompt": "Write `square(number)` so it returns the square of `number`.",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def square(number):\n    # return the square of number\n    pass",
-              "solutionCode": "def square(number):\n    return number * number"
-            },
-            "ci-full-name": {
-              "title": "Combine first and last name",
-              "prompt": "Write `full_name(first, last)` so it returns the first and last name joined into one string.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
-              "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
-            },
-            "try-defining-and-calling-functions-checkpoint": {
-              "title": "Define and call a function",
-              "prompt": "Define `say_hello()` so it prints `Hello from a function!`, then call it.",
-              "hint": "Put the `print()` inside the function body, then call the function below it.",
-              "help": {
-                "concept": "A function groups statements that can be run by calling the function name.",
-                "hint_1": "Put the `print()` inside the function body, then call the function below it.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "# Define say_hello() below.\n\n",
-              "solutionCode": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Define a function named say_hello()."
-                },
-                "1": {
-                  "message": "Call say_hello() after defining it."
-                }
+                "a": "define `cheer()`, then call `cheer()`",
+                "b": "call `cheer()`, then define `cheer()`",
+                "c": "call `cheer()` without defining it",
+                "d": "put the call before the indented body"
               }
             },
             "try-defining-and-calling-functions-sketch0": {
-              "title": "Define and call greet",
-              "prompt": "Define the function before you call it.",
-              "hint": "Define greet(name) so it returns 'Hello, ' + name.",
+              "title": "Define and call a message function",
+              "prompt": "Define a no-argument function named `show_message()`. Inside the function, print exactly `Functions are reusable!`. After the definition, call `show_message()` once.",
+              "hint": "Write the `def` line, indent the `print()` inside it, then place the call after the function body.",
               "help": {
-                "concept": "Define greet(name) so it returns 'Hello, ' + name.",
-                "hint_1": "Define greet(name) so it returns 'Hello, ' + name, then print greet('Ava').",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
+                "concept": "Defining the function creates the reusable block; calling the function is what makes its body run.",
+                "hint_1": "Your first line should be `def show_message():`.",
+                "hint_2": "After the indented print line, call `show_message()` with no arguments."
               },
-              "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
-              "solutionCode": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n"
+              "starterCode": "# Define show_message() so its body prints: Functions are reusable!\n# Then call show_message() once.\n",
+              "solutionCode": "def show_message():\n    print(\"Functions are reusable!\")\n\nshow_message()\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define a no-argument function named `show_message()`."
+                },
+                "1": {
+                  "message": "Put the required `print()` inside the body of `show_message()`."
+                },
+                "2": {
+                  "message": "Call `show_message()` after the definition."
+                }
+              }
             },
             "try-defining-and-calling-functions-sketch1": {
-              "title": "Call a square function",
-              "prompt": "Call the function and print its return value.",
-              "hint": "Print square(5).",
+              "title": "Call one function three times",
+              "prompt": "The starter already defines `ring_bell()` so one call prints `Ding!`. Below the definition, call `ring_bell()` exactly three times so the program prints three `Ding!` lines.",
+              "hint": "Do not copy the `print()` statement. Reuse the function by writing three calls.",
               "help": {
-                "concept": "Print square(5).",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A function can be reused by calling its name again instead of repeating the statements inside its body.",
+                "hint_1": "Leave the function definition unchanged.",
+                "hint_2": "Add three separate `ring_bell()` calls below the definition."
               },
-              "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
-              "solutionCode": "def square(number):\n    return number * number\n\nprint(square(5))\n"
+              "starterCode": "def ring_bell():\n    print(\"Ding!\")\n\n# Call ring_bell() exactly three times below.\n",
+              "solutionCode": "def ring_bell():\n    print(\"Ding!\")\n\nring_bell()\nring_bell()\nring_bell()\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the `ring_bell()` body and reuse it with exactly three top-level calls."
+                }
+              }
             },
             "try-defining-and-calling-functions-sketch2": {
-              "title": "Use a helper function twice",
-              "prompt": "Reuse the same function for two different inputs.",
-              "hint": "Print shout('go') and shout('team'), one per line.",
+              "title": "Put a loop inside a function",
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create `colors = [\"red\", \"blue\", \"green\"]`, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
+              "hint": "The list and the `for` loop both belong inside the indented function body.",
               "help": {
-                "concept": "Print shout('go') and shout('team'), one per line.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "A function body can contain several statements, including list creation and loops you already know.",
+                "hint_1": "Indent both `colors = [...]` and the `for color in colors:` loop under `def show_colors():`.",
+                "hint_2": "After the function body ends, call `show_colors()` once."
               },
-              "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
-              "solutionCode": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n"
+              "starterCode": "# Define show_colors().\n# Inside it, create colors = [\"red\", \"blue\", \"green\"].\n# Loop through colors and print each color.\n# Then call show_colors() once.\n",
+              "solutionCode": "def show_colors():\n    colors = [\"red\", \"blue\", \"green\"]\n    for color in colors:\n        print(color)\n\nshow_colors()\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define a no-argument function named `show_colors()`."
+                },
+                "1": {
+                  "message": "Keep the list, loop, and `print(color)` inside `show_colors()`."
+                },
+                "2": {
+                  "message": "Call `show_colors()` after defining it."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_defining_and_calling_functions_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `say_hello()` so it prints `Hello from a function!`, then call it."
-            },
             "try_defining_and_calling_functions_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Define the function before you call it."
+              "prompt": "Define a no-argument function, put its work in the indented body, and call it once."
             },
             "try_defining_and_calling_functions_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Call the function and print its return value."
+              "prompt": "Reuse one already-defined function by calling it exactly three times."
             },
             "try_defining_and_calling_functions_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Reuse the same function for two different inputs."
+              "prompt": "Put a familiar list-and-loop task inside a function, then call that function."
             },
             "allowReveal": true
           }
         },
         "docstrings-and-function-contracts": {
           "label": "Docstrings and Function Contracts",
-          "summary": "Document what a function expects, what it returns, and how to use it correctly.",
+          "summary": "Write real function docstrings as the first statement in a function, use them to describe inputs and returned results, and keep implementation behavior consistent with the documented contract.",
           "cards": {
             "sketch0": {
-              "title": "What a docstring and contract do"
+              "title": "A docstring is the function's first statement"
             },
             "sketch1": {
-              "title": "Writing clear docstrings"
+              "title": "A contract explains inputs and returned results"
             },
             "sketch2": {
-              "title": "Contracts should say return vs print"
+              "title": "The implementation must match the contract"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-docstring-location": {
-              "title": "Where a docstring goes",
-              "prompt": "Where should a function's docstring be placed?",
-              "hint": "Look for the string that appears immediately inside the function.",
+            "sc-real-docstring": {
+              "title": "Identify a real function docstring",
+              "prompt": "Which placement makes a string the docstring for `clean(text)`?",
+              "hint": "Python recognizes the first string literal in the function body as its docstring.",
               "help": {
-                "concept": "A function docstring is the first string literal inside the function body, directly under the `def` line.",
-                "hint_1": "It is not placed before the function definition or after the return statement.",
-                "hint_2": "Choose the option where the triple-quoted string comes right after `def ...:`."
+                "concept": "A function docstring is a string literal used as the first statement inside that function.",
+                "hint_1": "A comment does not become the function's docstring.",
+                "hint_2": "The triple-quoted string belongs directly under the `def` line, before executable statements."
               },
               "options": {
-                "a": "Directly under the function definition as the first statement",
-                "b": "Inside the parameter list",
-                "c": "After the return statement",
-                "d": "Only at the end of the program"
+                "a": "def clean(text):\n    \"\"\"Return cleaned text.\"\"\"\n    return text.strip()",
+                "b": "\"\"\"Return cleaned text.\"\"\"\ndef clean(text):\n    return text.strip()",
+                "c": "def clean(text):\n    return text.strip()\n    \"\"\"Return cleaned text.\"\"\"",
+                "d": "def clean(text):\n    # \"\"\"Return cleaned text.\"\"\"\n    return text.strip()"
               }
             },
-            "sc-contract-purpose": {
-              "title": "What a function contract explains",
-              "prompt": "What is the main purpose of a function contract?",
-              "hint": "Think about inputs and outputs.",
+            "sc-contract-content": {
+              "title": "What a useful contract explains",
+              "prompt": "Which docstring most clearly describes the contract of `double(number)`?",
+              "hint": "A useful beginner contract says what input the function works with and what result comes back.",
               "help": {
-                "concept": "A function contract tells other programmers what values a function expects and what result or behavior it provides.",
-                "hint_1": "A contract is about how to use the function correctly, not about changing Python syntax.",
-                "hint_2": "Pick the option that mentions expected arguments and returned result."
+                "concept": "A clear contract describes the function's expected input and the result or behavior it provides.",
+                "hint_1": "Avoid vague wording such as 'Do something with a number.'",
+                "hint_2": "The best choice states that the function returns twice the given number."
               },
               "options": {
-                "a": "It explains what inputs the function expects and what it returns",
-                "b": "It automatically fixes bugs in the function",
-                "c": "It makes the function run faster",
-                "d": "It replaces the need for function names"
+                "a": "\"\"\"Return twice the given number.\"\"\"",
+                "b": "\"\"\"Do something.\"\"\"",
+                "c": "\"\"\"This is Python code.\"\"\"",
+                "d": "\"\"\"Print anything eventually.\"\"\""
               }
             },
-            "mc-good-docstring-features": {
-              "title": "Features of a helpful docstring",
-              "prompt": "Which statements describe a helpful function docstring? Choose all that apply.",
-              "hint": "Look for statements that make the function easier to use correctly.",
+            "sc-contract-match": {
+              "title": "Match code to the contract",
+              "prompt": "The docstring says `\"\"\"Return the uppercase version of text.\"\"\"`. Which function body matches that contract?",
+              "hint": "The caller must receive the uppercase string as a value.",
               "help": {
-                "concept": "Helpful docstrings are specific, match the code, and explain the function's behavior clearly enough for someone to call it correctly.",
-                "hint_1": "Good docstrings usually mention what the function returns or does with its inputs.",
-                "hint_2": "Select the choices that are clear and accurate, not vague or unrelated."
+                "concept": "Documentation is useful only when it agrees with the implementation.",
+                "hint_1": "The contract says `Return`, so printing alone is not enough.",
+                "hint_2": "Return `text.upper()`."
               },
               "options": {
-                "a": "It clearly says what the function returns or does",
-                "b": "It matches the actual behavior of the code",
-                "c": "It should be as vague as possible so it works for any function",
-                "d": "It can mention important input expectations"
+                "a": "return text.upper()",
+                "b": "print(text.upper())",
+                "c": "input(text.upper())",
+                "d": "text = \"upper\""
               }
             },
-            "mc-return-vs-print-contract": {
-              "title": "Return vs print in a contract",
-              "prompt": "A docstring says a function returns a value. Which code patterns fit that contract? Choose all that apply.",
-              "hint": "Look for functions that send a value back to the caller.",
+            "sc-read-contract": {
+              "title": "Implement from a stated contract",
+              "prompt": "A function's docstring says `\"\"\"Return True when score is 70 or higher.\"\"\"`. Which expression should the function return?",
+              "hint": "Translate the documented condition directly into a Boolean expression.",
               "help": {
-                "concept": "When a contract says a function returns a value, the function should use `return` so the caller can store or reuse the result.",
-                "hint_1": "Printing shows output, but it does not give the caller a reusable value.",
-                "hint_2": "Choose the options that use `return` to produce the result."
+                "concept": "A contract can guide implementation by stating exactly what result is expected.",
+                "hint_1": "The boundary value 70 should count as True.",
+                "hint_2": "Use a greater-than-or-equal comparison."
               },
               "options": {
-                "a": "`return a + b`",
-                "b": "`return name.upper()`",
-                "c": "`print(a + b)`",
-                "d": "`print(\"Done\")`"
+                "a": "score >= 70",
+                "b": "score > 70",
+                "c": "score == 70",
+                "d": "print(score)"
               }
-            },
-            "dr-docstring-order": {
-              "title": "Order of a documented function",
-              "prompt": "Put these parts in the correct order for a simple documented function.",
-              "hint": "Start with the function header, then the docstring, then the body.",
-              "help": {
-                "concept": "A documented function is written in a standard order: definition line first, docstring next, then the executable code.",
-                "hint_1": "The docstring belongs inside the function, not before the `def` line.",
-                "hint_2": "After the docstring, place the statement that computes or returns the result."
-              },
-              "tokens": {
-                "t1": "`def double(number):`",
-                "t2": "`\"\"\"Return twice number.\"\"\"`",
-                "t3": "`return number * 2`"
-              }
-            },
-            "dr-contract-reading": {
-              "title": "Read a function contract in order",
-              "prompt": "Arrange these ideas in a sensible order for understanding a function contract.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "Inputs the function expects",
-                "t2": "What the function does",
-                "t3": "Value the function returns"
-              }
-            },
-            "fb-return-word": {
-              "title": "Complete the docstring wording",
-              "prompt": "Choose the word that best completes the docstring.",
-              "hint": "The sentence describes giving a value back to the caller.",
-              "help": {
-                "concept": "A docstring should describe the value sent back to the caller when the function does not merely print.",
-                "hint_1": "Choose the verb used in function documentation for a value sent back to the caller.",
-                "hint_2": "Pick the choice that means the function gives a result back to the caller."
-              },
-              "template": "`\"\"\"[blank1] the sum of two numbers.\"\"\"`",
-              "choices": [
-                "Return",
-                "Print",
-                "Loop through",
-                "Import"
-              ]
-            },
-            "fb-docstring-position": {
-              "title": "Complete the function example",
-              "prompt": "Choose the line that correctly fills the blank.",
-              "hint": "The missing line should be the docstring, not code that runs the calculation.",
-              "help": {
-                "concept": "The docstring is a descriptive string placed as the first statement inside the function body.",
-                "hint_1": "The blank comes right after the function header.",
-                "hint_2": "Choose the triple-quoted string that describes the function's result."
-              },
-              "template": "```python\ndef square(number):\n    [blank1]\n    return number * number\n```",
-              "choices": [
-                "`\"\"\"Return the square of number.\"\"\"`",
-                "`print(number * number)`",
-                "`number * number`",
-                "`square(number)`"
-              ]
-            },
-            "ci-add-docstring": {
-              "title": "Add a matching docstring",
-              "prompt": "Add a docstring under `make_lower(text)` that clearly says what the function returns.",
-              "hint": "Read the task \"Add a matching docstring\" and identify the required result.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
-              "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
-            },
-            "ci-write-contract-function": {
-              "title": "Write a documented function with a clear contract",
-              "prompt": "Write `repeat_word(word, times)` so it returns the repeated text, and add a docstring that explains that contract clearly.",
-              "hint": "Read the task \"Write a documented function with a clear contract\" and identify the required result.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
-              "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
-            },
-            "ci-fix-print-vs-return": {
-              "title": "Fix the contract mismatch",
-              "prompt": "The docstring says `total_price(price, tax)` should return the total, but the starter code prints it instead. Fix the function so its behavior matches the docstring.",
-              "hint": "Read the task \"Fix the contract mismatch\" and identify the required result.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
-              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
-            },
-            "try-docstrings-and-function-contracts-checkpoint": {
-              "title": "Write a documented helper",
-              "prompt": "Define `square(number)` with a docstring and return the square of the number. Print `square(5)`.",
-              "hint": "Place a triple-quoted string as the first line inside the function.",
-              "help": {
-                "concept": "A docstring describes the function contract for readers and tools.",
-                "hint_1": "Place a triple-quoted string as the first line inside the function.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
-              "solutionCode": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n"
             },
             "try-docstrings-and-function-contracts-sketch0": {
-              "title": "Write a documented helper",
-              "prompt": "A docstring explains what the function expects and returns.",
-              "hint": "Add a docstring and return text stripped and title-cased.",
+              "title": "Add a real docstring to a working function",
+              "prompt": "The function already works. Add the docstring `\"\"\"Return text stripped and title-cased.\"\"\"` as the first statement inside `normalize_city(text)`. Do not change the function's behavior.",
+              "hint": "Place the triple-quoted string directly under `def normalize_city(text):`, before the return statement.",
               "help": {
-                "concept": "Add a docstring and return text stripped and title-cased.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "A real function docstring is the first string literal in the function body.",
+                "hint_1": "Do not turn the requested docstring into a `#` comment.",
+                "hint_2": "Keep the existing `return text.strip().title()` behavior unchanged."
               },
-              "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
-              "solutionCode": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n"
+              "starterCode": "def normalize_city(text):\n    return text.strip().title()\n\ncity = input()\nprint(normalize_city(city))\n",
+              "solutionCode": "def normalize_city(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n\ncity = input()\nprint(normalize_city(city))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Add the requested string as the actual docstring of `normalize_city`, not as a comment or unrelated string."
+                },
+                "1": {
+                  "message": "Keep `normalize_city` returning `text.strip().title()`."
+                }
+              }
             },
             "try-docstrings-and-function-contracts-sketch1": {
-              "title": "Return the documented result",
-              "prompt": "Make the code match the contract described in the docstring.",
-              "hint": "Finish the return statement.",
+              "title": "Fix code that breaks its return contract",
+              "prompt": "`total_price(price, tax)` already has the contract `\"\"\"Return price plus tax.\"\"\"`, but the implementation prints the total instead of returning it. Fix the function so the caller receives the value. Keep the existing docstring.",
+              "hint": "Replace the display-only behavior inside the function with a return statement.",
               "help": {
-                "concept": "Finish the return statement.",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
+                "concept": "If a contract promises a returned value, the implementation must give that value back to the caller.",
+                "hint_1": "Inside the function, use `return price + tax`.",
+                "hint_2": "Do not replace or remove the existing docstring."
               },
-              "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
-              "solutionCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n"
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return price plus tax.\"\"\"\n    print(price + tax)\n\nprice = int(input())\ntax = int(input())\nresult = total_price(price, tax)\nprint(result)\n",
+              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return price plus tax.\"\"\"\n    return price + tax\n\nprice = int(input())\ntax = int(input())\nresult = total_price(price, tax)\nprint(result)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `\"\"\"Return price plus tax.\"\"\"` as the function's docstring."
+                },
+                "1": {
+                  "message": "Make the implementation return `price + tax` instead of printing it."
+                }
+              }
             },
             "try-docstrings-and-function-contracts-sketch2": {
-              "title": "Use a contract-style check",
-              "prompt": "The implementation should follow the stated contract exactly.",
-              "hint": "Start with the first missing line.",
+              "title": "Implement a function from its contract",
+              "prompt": "`is_passing(score)` already documents its contract: `\"\"\"Return True when score is 70 or higher.\"\"\"`. Complete the function so its returned Boolean value matches that contract for every score.",
+              "hint": "The phrase '70 or higher' translates to a greater-than-or-equal comparison.",
               "help": {
-                "concept": "Start with the first missing line.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "A contract can be read as a precise requirement for the implementation.",
+                "hint_1": "Return a Boolean expression rather than printing a message.",
+                "hint_2": "Use `return score >= 70` so 70 itself is included."
               },
-              "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
-              "solutionCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n"
+              "starterCode": "def is_passing(score):\n    \"\"\"Return True when score is 70 or higher.\"\"\"\n    pass\n\nscore = int(input())\nprint(is_passing(score))\n",
+              "solutionCode": "def is_passing(score):\n    \"\"\"Return True when score is 70 or higher.\"\"\"\n    return score >= 70\n\nscore = int(input())\nprint(is_passing(score))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the stated contract as the real docstring of `is_passing`."
+                },
+                "1": {
+                  "message": "Implement the inclusive boundary with `return score >= 70`."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_docstrings_and_function_contracts_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `square(number)` with a docstring and return the square of the number. Print `square(5)`."
-            },
             "try_docstrings_and_function_contracts_sketch0": {
               "title": "Try it yourself",
-              "prompt": "A docstring explains what the function expects and returns."
+              "prompt": "Add a real function docstring without changing already-correct behavior."
             },
             "try_docstrings_and_function_contracts_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Make the code match the contract described in the docstring."
+              "prompt": "Fix an implementation that prints even though its documented contract promises a returned value."
             },
             "try_docstrings_and_function_contracts_sketch2": {
               "title": "Try it yourself",
-              "prompt": "The implementation should follow the stated contract exactly."
+              "prompt": "Read an existing function contract and implement the exact behavior it describes."
             },
             "allowReveal": true
           }
         },
         "module-6-name-badge-package": {
-          "label": "Module Project: Build a Name Badge Package",
-          "summary": "Build the welcome-table badge app one helper at a time so it grows from name cleanup into a polished multi-file package.",
+          "label": "Module Project: Build a Name Badge App",
+          "summary": "Refactor a working single-file badge program into focused sibling modules, document the helper contracts, and connect the returned values into one polished welcome message.",
           "cards": {
             "sketch0": {
-              "title": "A club needs badges before the event starts"
+              "title": "Start from one working badge program"
             },
             "project": {
-              "title": "Name Badge Package"
+              "title": "Name Badge App"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Create the name cleaner module"
+              "title": "Move name cleanup into names.py"
             },
             "mp_2": {
-              "title": "Add the badge helper module"
+              "title": "Move badge formatting into badges.py"
             },
             "mp_3": {
-              "title": "Document and clean the badge helper"
+              "title": "Document and refine the helper contracts"
             },
             "mp_4": {
-              "title": "Print the final welcome badge"
+              "title": "Add the final welcome-message helper"
             }
           },
           "quiz": {
-            "mp-1-create-clean-name-module": {
-              "title": "Create the name cleaner module",
-              "prompt": "Start the badge app by moving name cleanup into its own helper file. Create `tools/names.py` with `clean_name(text)`, import it in `main.py`, read one name from input, and print the cleaned result.",
-              "hint": "Put the reusable cleaning logic in `tools/names.py`, then let `main.py` call it.",
-              "help": {
-                "concept": "A helper module keeps reusable logic out of `main.py`, which makes the badge app easier to grow.",
-                "hint_1": "In `tools/names.py`, define `clean_name(text)` and return `text.strip().title()`.",
-                "hint_2": "In `main.py`, import `clean_name`, read input, and print the cleaned name."
-              },
-              "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.names."
-                },
-                "1": {
-                  "message": "Define clean_name(text) inside tools/names.py."
-                },
-                "2": {
-                  "message": "clean_name should strip whitespace."
-                },
-                "3": {
-                  "message": "clean_name should title-case the name."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
-            },
-            "mp-2-add-badge-helper": {
-              "title": "Add the badge helper module",
-              "prompt": "Keep the working `clean_name` helper from the last step. Now add `tools/badges.py` with `make_badge(name, role)`, import it in `main.py`, read a role too, and print the finished badge.",
-              "hint": "Leave `tools/names.py` working, add one new helper file, then connect it in `main.py`.",
-              "help": {
-                "concept": "This step adds a second helper file so each module has one clear job: names clean names, badges format badge text.",
-                "hint_1": "Create `tools/badges.py` with `make_badge(name, role)`.",
-                "hint_2": "In `main.py`, clean the name first, then pass `name` and `role` into `make_badge(...)`."
-              },
-              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
-              "starterFiles": {
-                "tools_init_py": {
-                  "content": ""
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.badges."
-                },
-                "1": {
-                  "message": "Define make_badge in tools/badges.py."
-                },
-                "2": {
-                  "message": "make_badge should uppercase the role."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-            },
-            "mp-3-document-badge-helper": {
-              "title": "Document and clean the badge helper",
-              "prompt": "Start from the working two-helper badge app. Keep the output the same, but improve `tools/badges.py` by adding a docstring and cleaning the role before uppercasing it.",
-              "hint": "This step refines the helper in place instead of changing the overall app flow.",
-              "help": {
-                "concept": "Small helper functions are easier to maintain when they explain themselves and handle messy input cleanly.",
-                "hint_1": "Add a triple-quoted docstring under `def make_badge(name, role):`.",
-                "hint_2": "Store `role.strip().upper()` in a variable before returning the badge text."
-              },
-              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
-              "starterFiles": {
-                "tools_init_py": {
-                  "content": ""
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Add a docstring to make_badge in tools/badges.py."
-                },
-                "1": {
-                  "message": "Clean the role before uppercasing it."
-                },
-                "2": {
-                  "message": "Uppercase the role in make_badge."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-            },
-            "mp-4-package-welcome-message": {
-              "title": "Print the final welcome badge",
-              "prompt": "Start from the documented badge app. Keep both helpers, store the badge in a variable, and replace the direct badge print with one friendly final line that begins with `Welcome!`.",
-              "hint": "Reuse the existing helper flow, but make the final output feel like a polished handoff.",
-              "help": {
-                "concept": "The final app uses small helper modules to make the main program read like a simple story: get input, clean it, build the badge, print the welcome message.",
-                "hint_1": "Use `badge = make_badge(name, role)` after cleaning the name.",
-                "hint_2": "Print one line that starts with `Welcome!` and includes the badge text."
-              },
-              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
-              "starterFiles": {
-                "tools_init_py": {
-                  "content": ""
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Build the badge with make_badge() instead of hard-coding the final text."
-                },
-                "1": {
-                  "message": "Print the final welcome message."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
-            },
             "try-module-6-name-badge-package-sketch0": {
-              "title": "Create the first badge helper file",
-              "prompt": "Set up the first helper for the badge app.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print the cleaned version of `\"  ava  \"`.",
-              "hint": "Put `clean_name` in `tools/names.py`, then import it in `main.py`.",
+              "title": "Complete the single-file badge starting point",
+              "prompt": "Complete `clean_name(text)` so the starting badge program works in one file. Return the name with surrounding spaces removed and title-cased. Do not move functions into helper files yet—the project steps will refactor this working version.",
+              "hint": "Return `text.strip().title()` from `clean_name`.",
               "help": {
-                "concept": "The badge project starts by moving name-cleaning into its own helper file.",
-                "hint_1": "In `tools/names.py`, return `text.strip().title()` from `clean_name(text)`.",
-                "hint_2": "In `main.py`, import `clean_name` and print `clean_name(\"  ava  \")`."
+                "concept": "The project begins with working single-file behavior so later steps can focus on refactoring structure without losing correctness.",
+                "hint_1": "Replace `pass` with `return text.strip().title()`.",
+                "hint_2": "Keep `make_badge`, input handling, and the final print unchanged."
               },
-              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n",
+              "starterCode": "def clean_name(text):\n    # Return text stripped and title-cased.\n    pass\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "def clean_name(text):\n    # Return text stripped and title-cased.\n    pass\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                }
+              },
+              "solutionCode": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+                  "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Make `clean_name(text)` return `text.strip().title()`."
+                }
+              }
+            },
+            "mp-1-move-name-helper": {
+              "title": "Move name cleanup into names.py",
+              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`. Keep `make_badge` in `main.py` for this step.",
+              "hint": "Only the name-cleaning responsibility moves in this step.",
+              "help": {
+                "concept": "A refactor can move one helper into its own module while preserving the app's existing behavior.",
+                "hint_1": "Create `names.py` with the existing `clean_name(text)` function.",
+                "hint_2": "Remove that function definition from `main.py` and import it from `names`."
+              },
+              "starterCode": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                }
+              },
+              "solutionCode": "from names import clean_name\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
                 },
-                "tools_names_py": {
+                "names_py": {
                   "content": "def clean_name(text):\n    return text.strip().title()\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import clean_name from tools.names."
+                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
                 },
                 "1": {
-                  "message": "Define clean_name in tools/names.py."
+                  "message": "Define `clean_name(text)` in `names.py`."
                 },
                 "2": {
-                  "message": "clean_name should strip spaces."
+                  "message": "Keep `make_badge(name, role)` in `main.py` until the next project step."
+                }
+              }
+            },
+            "mp-2-move-badge-helper": {
+              "title": "Move badge formatting into badges.py",
+              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with `from badges import make_badge`, and keep the same badge output.",
+              "hint": "After this step, `main.py` should coordinate the two imported helpers instead of defining either one.",
+              "help": {
+                "concept": "Different sibling modules can own different responsibilities while `main.py` connects their returned values.",
+                "hint_1": "Create `badges.py` and move the existing `make_badge` behavior there.",
+                "hint_2": "Import both `clean_name` and `make_badge` in `main.py`."
+              },
+              "starterCode": "from names import clean_name\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
                 },
-                "3": {
-                  "message": "clean_name should title-case the name."
+                "names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
                 }
               },
-              "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+              "solutionCode": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.strip().upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import `make_badge` from sibling module `badges` in `main.py`."
+                },
+                "1": {
+                  "message": "Define `make_badge(name, role)` in `badges.py`."
+                },
+                "2": {
+                  "message": "Use `clean_name(raw_name)` and `make_badge(name, role)` from `main.py`."
+                }
+              }
+            },
+            "mp-3-document-helper-contracts": {
+              "title": "Document and refine the helper contracts",
+              "prompt": "Keep the two-module badge app behavior unchanged. Add the exact docstring `\"\"\"Return text stripped and title-cased.\"\"\"` as the first statement in `clean_name`. Add the exact docstring `\"\"\"Return an uppercase-role badge for the cleaned name.\"\"\"` as the first statement in `make_badge`. In `make_badge`, store `role.strip().upper()` in local variable `clean_role` before returning the badge.",
+              "hint": "This step changes documentation and internal structure, not the app's output.",
+              "help": {
+                "concept": "A documented helper should have a real function docstring that matches its behavior, and local variables can make intermediate work clearer.",
+                "hint_1": "Put each requested triple-quoted string directly under its `def` line.",
+                "hint_2": "In `badges.py`, create `clean_role = role.strip().upper()` and build the returned badge from `clean_role`."
+              },
+              "starterCode": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.strip().upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionCode": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n"
+                },
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return an uppercase-role badge for the cleaned name.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Add the required real docstring to `clean_name` in `names.py`."
+                },
+                "1": {
+                  "message": "Add the required real docstring to `make_badge` in `badges.py`."
+                },
+                "2": {
+                  "message": "Use local variable `clean_role = role.strip().upper()` inside `make_badge`."
+                }
+              }
+            },
+            "mp-4-add-welcome-helper": {
+              "title": "Add the final welcome-message helper",
+              "prompt": "Continue from the documented two-helper app. Create a sibling module `messages.py` with `welcome_message(badge)`. Give it the docstring `\"\"\"Return a welcome message containing the badge.\"\"\"` and return `\"Welcome! \" + badge`. Import it in `main.py` and print the returned welcome message.",
+              "hint": "The new helper owns only the final message; keep name cleanup and badge formatting in their existing modules.",
+              "help": {
+                "concept": "The finished app decomposes three responsibilities across three small sibling modules while `main.py` coordinates their returned values.",
+                "hint_1": "Create `messages.py` with a documented `welcome_message(badge)` function.",
+                "hint_2": "Import it with `from messages import welcome_message` and print `welcome_message(badge)`."
+              },
+              "starterCode": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n"
+                },
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return an uppercase-role badge for the cleaned name.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "solutionCode": "from names import clean_name\nfrom badges import make_badge\nfrom messages import welcome_message\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(welcome_message(badge))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\nfrom messages import welcome_message\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(welcome_message(badge))\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n"
+                },
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return an uppercase-role badge for the cleaned name.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                },
+                "messages_py": {
+                  "content": "def welcome_message(badge):\n    \"\"\"Return a welcome message containing the badge.\"\"\"\n    return \"Welcome! \" + badge\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import `welcome_message` from sibling module `messages` in `main.py`."
+                },
+                "1": {
+                  "message": "Define documented `welcome_message(badge)` in `messages.py`."
+                },
+                "2": {
+                  "message": "Return `\"Welcome! \" + badge` from `welcome_message`."
+                }
+              }
             }
           },
           "tryIt": {
             "try_module_6_name_badge_package_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Set up the first helper for the badge app.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print the cleaned version of `\"  ava  \"`."
+              "prompt": "Complete the working single-file badge baseline that the project will refactor."
             },
             "allowReveal": true
           }
         },
         "parameters-and-return-values": {
           "label": "Parameters and Return Values",
-          "summary": "Pass data into functions and return results.",
+          "summary": "Use parameters to receive argument values, pass multiple arguments in the correct order, and return results that the caller can store or use.",
           "cards": {
             "sketch0": {
-              "title": "Parameters let a function work with different values"
+              "title": "Parameters receive argument values"
             },
             "sketch1": {
-              "title": "Returning a value is different from printing it"
+              "title": "Functions can receive more than one parameter"
+            },
+            "sketch2": {
+              "title": "Return sends a result back to the caller"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-parameter-role": {
-              "title": "What a parameter does",
-              "prompt": "In `def greet(name):`, what is `name`?",
-              "hint": "Look at the value that gets passed into the function call.",
+            "sc-parameter-vs-argument": {
+              "title": "Parameter versus argument",
+              "prompt": "Given `def greet(name):` and the call `greet(\"Ava\")`, which statement is correct?",
+              "hint": "Look separately at the function definition and the function call.",
               "help": {
-                "concept": "A parameter is a variable in a function definition that receives a value when the function is called.",
-                "hint_1": "`name` appears inside the parentheses of the function definition, so it is part of the function's input.",
-                "hint_2": "Ask which choice describes a placeholder that gets its value from a call like `greet(\"Ava\")`."
+                "concept": "A parameter is the variable named in the definition; an argument is the actual value supplied by a call.",
+                "hint_1": "`name` is written in `def greet(name):`, so it is the parameter.",
+                "hint_2": "`\"Ava\"` is supplied by `greet(\"Ava\")`, so it is the argument."
               },
               "options": {
-                "a": "A parameter that receives an argument value",
-                "b": "A printed output line",
-                "c": "A list method",
-                "d": "A return statement"
+                "a": "`name` is the parameter and `\"Ava\"` is the argument",
+                "b": "`\"Ava\"` is the parameter and `name` is the argument",
+                "c": "Both are return values",
+                "d": "Neither one provides input to the function"
               }
             },
-            "sc-return-purpose": {
-              "title": "Why use return",
-              "prompt": "What does `return` do in a Python function?",
-              "hint": "Think about how a function sends a result back to the code that called it.",
+            "sc-argument-order": {
+              "title": "Match arguments to parameters",
+              "prompt": "Given `def subtract(first, second): return first - second`, what does `subtract(10, 3)` return?",
+              "hint": "The first argument goes into `first`; the second argument goes into `second`.",
               "help": {
-                "concept": "The `return` statement ends the function call and gives a value back to the caller.",
-                "hint_1": "Unlike `print`, `return` does not mainly display text in the output panel.",
-                "hint_2": "Choose the option about sending a result out of the function so it can be stored or used later."
+                "concept": "Positional arguments are matched to parameters from left to right.",
+                "hint_1": "For this call, `first` becomes `10`.",
+                "hint_2": "`second` becomes `3`, so evaluate `10 - 3`."
               },
               "options": {
-                "a": "It repeats the function automatically",
-                "b": "It sends a value back to the caller",
-                "c": "It creates a new parameter",
-                "d": "It renames the function"
+                "a": "7",
+                "b": "-7",
+                "c": "13",
+                "d": "3"
               }
             },
-            "mc-return-uses": {
-              "title": "Ways to use a returned value",
-              "prompt": "Which statements correctly use a function's returned value? Choose all that apply.",
-              "hint": "A returned value can be stored, printed, or used inside another expression.",
+            "sc-valid-two-argument-call": {
+              "title": "Call a two-parameter function",
+              "prompt": "A function is defined as `def show_pair(left, right):`. Which call supplies both required arguments?",
+              "hint": "There are two parameters, so the call needs two argument values.",
               "help": {
-                "concept": "Returned values behave like regular values, so they can be assigned, printed, or combined in expressions.",
-                "hint_1": "Look for lines where the function call appears where a normal value could appear.",
-                "hint_2": "A function call that returns a number can go on the right side of `=` or inside `print(...)`."
+                "concept": "A normal call must supply the required number of positional arguments.",
+                "hint_1": "Look for two comma-separated values inside the parentheses.",
+                "hint_2": "The function name in the call must still be `show_pair`."
               },
               "options": {
-                "a": "`total = add(2, 3)`",
-                "b": "`print(add(2, 3))`",
-                "c": "`return = add(2, 3)`",
-                "d": "`def add = (2, 3)`"
+                "a": "show_pair()",
+                "b": "show_pair(\"A\")",
+                "c": "show_pair(\"A\", \"B\")",
+                "d": "def show_pair(\"A\", \"B\")"
               }
             },
-            "mc-print-vs-return": {
-              "title": "Print versus return",
-              "prompt": "Which statements about `print` and `return` are true? Choose all that apply.",
-              "hint": "One shows output now, and the other gives a value back to the caller.",
+            "sc-returned-value": {
+              "title": "Use a returned value",
+              "prompt": "If `double(5)` returns `10`, what value is stored by `result = double(5)`?",
+              "hint": "The returned value replaces the function call in the assignment.",
               "help": {
-                "concept": "`print` displays text in the output panel, while `return` passes a value back from the function.",
-                "hint_1": "Think about whether the result can be reused later in another variable or expression.",
-                "hint_2": "Choose the statements that match these roles: visible output for `print`, reusable result for `return`."
+                "concept": "A returned value can be assigned to a variable just like another computed value.",
+                "hint_1": "`double(5)` produces the value `10`.",
+                "hint_2": "That value is assigned to `result`."
               },
               "options": {
-                "a": "`print` sends visible text to the output panel",
-                "b": "`return` can give a result back to the caller",
-                "c": "`print` and `return` always do exactly the same job",
-                "d": "`return` can only be used outside functions"
+                "a": "5",
+                "b": "10",
+                "c": "double",
+                "d": "Nothing is stored"
               }
-            },
-            "dr-function-flow": {
-              "title": "Order of a function call",
-              "prompt": "Put these steps in the correct order for what happens when a function with parameters is called.",
-              "hint": "Start with the call, then think about values entering the function and a result coming back.",
-              "help": {
-                "concept": "A function call follows a sequence: call the function, pass arguments into parameters, run the body, then return a result.",
-                "hint_1": "The function body cannot run until the arguments have been matched to the parameters.",
-                "hint_2": "The returned value comes after the body finishes its calculation."
-              },
-              "tokens": {
-                "t1": "Call the function with argument values",
-                "t2": "Those values are assigned to the parameters",
-                "t3": "The function body runs using those parameter values",
-                "t4": "The function returns a result to the caller"
-              }
-            },
-            "dr-build-function": {
-              "title": "Build a simple return function",
-              "prompt": "Arrange these lines to make a function that takes one parameter and returns double the value.",
-              "hint": "The function header comes first, then the return line, then the call that uses the result.",
-              "help": {
-                "concept": "A basic function definition needs a header, an indented body, and then any code that calls the function.",
-                "hint_1": "The `return` line must be inside the function, so it belongs directly under the `def` line.",
-                "hint_2": "The line that prints the result should come after the function has been defined."
-              },
-              "tokens": {
-                "t1": "def double(number):",
-                "t2": "return number * 2",
-                "t3": "result = double(5)",
-                "t4": "print(result)"
-              }
-            },
-            "fb-call-argument": {
-              "title": "Fill the argument",
-              "prompt": "Complete the function call so the function receives the number 7.",
-              "hint": "The blank is the value being passed into the function call.",
-              "help": {
-                "concept": "An argument is the actual value you place inside the parentheses when calling a function.",
-                "hint_1": "The function name is already written, so the missing part is the value inside the parentheses.",
-                "hint_2": "Choose the number that would be passed into `show_score` as its input."
-              },
-              "template": "show_score([blank1])",
-              "choices": [
-                "show_score",
-                "7",
-                "return"
-              ]
-            },
-            "fb-return-expression": {
-              "title": "Complete the return line",
-              "prompt": "Choose the expression that makes the function return the sum of `price` and `tax`.",
-              "hint": "The blank should be the value expression after `return`.",
-              "help": {
-                "concept": "A return statement can send back the result of an expression, such as adding two parameters together.",
-                "hint_1": "Both `price` and `tax` are already available as parameter names in the function.",
-                "hint_2": "Pick the choice that adds the two parameter values instead of naming a keyword or only one variable."
-              },
-              "template": "return [blank1]",
-              "choices": [
-                "price + tax",
-                "def",
-                "price"
-              ]
-            },
-            "ci-make-label": {
-              "title": "Return a label string",
-              "prompt": "Write `make_label(item, count)` so it returns a label string like `Apples: 3`.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
-              "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)"
-            },
-            "ci-calculate-tip": {
-              "title": "Return a tip amount",
-              "prompt": "Write `calculate_tip(bill, percent)` so it returns just the tip amount for that bill and percent.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
-              "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100"
-            },
-            "ci-first-item": {
-              "title": "Return the first list item",
-              "prompt": "Write `first_item(items)` so it returns the first element from the list.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
-              "solutionCode": "def first_item(items):\n    return items[0]"
-            },
-            "try-parameters-and-return-values-checkpoint": {
-              "title": "Return a doubled number",
-              "prompt": "Define `double(number)` so it returns twice the input. Print `double(7)`.",
-              "hint": "Use `return number * 2`.",
-              "help": {
-                "concept": "A return value sends a result back to the caller.",
-                "hint_1": "Use `return number * 2`.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
-              "solutionCode": "def double(number):\n    return number * 2\n\nprint(double(7))\n"
             },
             "try-parameters-and-return-values-sketch0": {
-              "title": "Return a sum",
-              "prompt": "Use parameters to receive values and `return` to send back the result.",
-              "hint": "Return the sum of a and b.",
+              "title": "Reuse one parameter with different arguments",
+              "prompt": "Complete `make_badge(name)` so it returns `Badge: ` followed by `name`. The program reads two names. Keep the two calls so the same function produces one badge for each input name.",
+              "hint": "The parameter `name` receives a different argument on each call.",
               "help": {
-                "concept": "Return the sum of a and b.",
-                "hint_1": "Test this single step before combining it with later behavior.",
-                "hint_2": "Use exact spelling and line order without extra printed explanations."
+                "concept": "One parameter lets the same function body work with different argument values.",
+                "hint_1": "Inside the function, return `\"Badge: \" + name`.",
+                "hint_2": "Leave the calls `make_badge(name1)` and `make_badge(name2)` in place."
               },
-              "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
-              "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
+              "starterCode": "def make_badge(name):\n    # Return \"Badge: \" followed by name.\n    pass\n\nname1 = input()\nname2 = input()\nprint(make_badge(name1))\nprint(make_badge(name2))\n",
+              "solutionCode": "def make_badge(name):\n    return \"Badge: \" + name\n\nname1 = input()\nname2 = input()\nprint(make_badge(name1))\nprint(make_badge(name2))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `make_badge` with exactly one parameter named `name`."
+                },
+                "1": {
+                  "message": "Return the badge text from the function using the `name` parameter."
+                },
+                "2": {
+                  "message": "Call `make_badge` with both input variables instead of hard-coding the names."
+                }
+              }
             },
             "try-parameters-and-return-values-sketch1": {
-              "title": "Format a full name",
-              "prompt": "Return a string built from two parameters.",
-              "hint": "Return first and last with one space between them.",
+              "title": "Use two parameters in order",
+              "prompt": "Complete `difference(high, low)` so it returns `high - low`. The program reads two integers and prints the value returned by `difference(high, low)`.",
+              "hint": "The first argument becomes `high`; the second becomes `low`.",
               "help": {
-                "concept": "Return first and last with one space between them.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
+                "concept": "With multiple positional parameters, argument order determines which value each parameter receives.",
+                "hint_1": "Return `high - low` inside the function.",
+                "hint_2": "Keep the call in the same order: `difference(high, low)`."
               },
-              "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
-              "solutionCode": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n"
+              "starterCode": "def difference(high, low):\n    # Return high minus low.\n    pass\n\nhigh = int(input())\nlow = int(input())\nprint(difference(high, low))\n",
+              "solutionCode": "def difference(high, low):\n    return high - low\n\nhigh = int(input())\nlow = int(input())\nprint(difference(high, low))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `difference` with parameters `high` and `low` in that order."
+                },
+                "1": {
+                  "message": "Return `high - low` from the function."
+                },
+                "2": {
+                  "message": "Pass the two input values to `difference(high, low)` in the same order."
+                }
+              }
+            },
+            "try-parameters-and-return-values-sketch2": {
+              "title": "Store a returned result",
+              "prompt": "Complete `rectangle_area(width, height)` so it returns `width * height`. Then keep the caller code that stores the returned value in `area` and prints `area`.",
+              "hint": "The function should return the calculation; the assignment outside the function stores that returned value.",
+              "help": {
+                "concept": "A return value travels back to the call site, where it can be assigned to a variable and used later.",
+                "hint_1": "Inside the function, write `return width * height`.",
+                "hint_2": "Outside the function, `area = rectangle_area(width, height)` stores the returned number."
+              },
+              "starterCode": "def rectangle_area(width, height):\n    # Return the rectangle's area.\n    pass\n\nwidth = int(input())\nheight = int(input())\narea = rectangle_area(width, height)\nprint(area)\n",
+              "solutionCode": "def rectangle_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\narea = rectangle_area(width, height)\nprint(area)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `rectangle_area` with `width` and `height` parameters."
+                },
+                "1": {
+                  "message": "Return `width * height` from the function."
+                },
+                "2": {
+                  "message": "Store the function's returned value in `area` before printing it."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_parameters_and_return_values_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `double(number)` so it returns twice the input. Print `double(7)`."
-            },
             "try_parameters_and_return_values_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use parameters to receive values and `return` to send back the result."
+              "prompt": "Use one parameter with two different argument values and return a result for each call."
             },
             "try_parameters_and_return_values_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Return a string built from two parameters."
+              "prompt": "Use two parameters in order and return a calculation based on both values."
+            },
+            "try_parameters_and_return_values_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Return a computed result and store that returned value in a caller-side variable."
             },
             "allowReveal": true
           }
         },
         "print-vs-return": {
           "label": "Print vs Return",
-          "summary": "Understand when to display output and when to return data from a function so other code can keep using the result.",
+          "summary": "Distinguish display-only functions from functions that return reusable data, understand why printing a print-only call shows `None`, and fix code that prints when the caller needs a value.",
           "cards": {
             "sketch0": {
-              "title": "Printing shows a value; returning gives it back"
+              "title": "Printing displays a value but returns None"
             },
             "sketch1": {
-              "title": "A worked comparison: same output, different usefulness"
+              "title": "Returned values can be stored and reused"
             },
             "sketch2": {
-              "title": "When should you print, and when should you return?"
+              "title": "Fix a function that prints when it should return"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "pvrs-sc-1": {
-              "title": "Which statement describes return?",
-              "prompt": "Which statement best describes what `return` does in a function?",
-              "hint": "Think about whether the value is only shown or sent back to the code that called the function.",
+            "sc-print-only-result": {
+              "title": "What does the caller receive?",
+              "prompt": "A function contains `print(\"Ready\")` but no `return`. What value does the function call give back to its caller?",
+              "hint": "Visible output and a returned value are separate things.",
               "help": {
-                "concept": "`return` gives a result back to the caller so it can be stored, reused, or combined with other values.",
-                "hint_1": "A returned value can be assigned to a variable like `result = my_function()`.",
-                "hint_2": "Look for the option about sending a value back from the function, not just displaying it."
+                "concept": "A function with no explicit `return` gives the caller `None`, even if the function prints something.",
+                "hint_1": "`print(\"Ready\")` displays text in the output panel.",
+                "hint_2": "Because there is no `return`, the call itself evaluates to `None`."
               },
               "options": {
-                "a": "It sends a value back from the function to the caller.",
-                "b": "It always prints a value in the output panel.",
-                "c": "It repeats the function from the beginning.",
-                "d": "It creates a new parameter automatically."
+                "a": "\"Ready\"",
+                "b": "None",
+                "c": "print",
+                "d": "The function name"
               }
             },
-            "pvrs-sc-2": {
-              "title": "Which function result can be reused?",
-              "prompt": "A function should calculate a number and let later code multiply that number by 10. Which approach is best?",
-              "hint": "The later code needs the function's result as a value, not just visible output.",
+            "sc-display-only-call": {
+              "title": "Call a display-only function",
+              "prompt": "`show_status(text)` prints its text and does not return a value. Which line displays `Ready` once without also displaying `None`?",
+              "hint": "If the function already prints, call it directly.",
               "help": {
-                "concept": "When later code must keep using a result, the function should return that result instead of only printing it.",
-                "hint_1": "If the function only prints, another expression cannot directly use that printed value in a calculation.",
-                "hint_2": "Choose the option where the function gives the number back so another line can store it and multiply it."
+                "concept": "Wrapping a display-only function call in another `print()` prints the function's implicit `None` result too.",
+                "hint_1": "`show_status(\"Ready\")` already causes the function body to print `Ready`.",
+                "hint_2": "Avoid `print(show_status(\"Ready\"))` when the function itself is responsible for display."
               },
               "options": {
-                "a": "Use `return` inside the function and store the result in a variable.",
-                "b": "Use `print()` inside the function and assume later code can multiply the printed text.",
-                "c": "Add more parameters until the function becomes reusable.",
-                "d": "Put the multiplication inside the function even if other code needs the original result."
+                "a": "show_status(\"Ready\")",
+                "b": "print(show_status(\"Ready\"))",
+                "c": "return show_status(\"Ready\")",
+                "d": "show_status = \"Ready\""
               }
             },
-            "pvrs-mc-1": {
-              "title": "Choose the true statements",
-              "prompt": "Which statements about `print()` and `return` are true? Choose all that apply.",
-              "hint": "Separate what the user sees in the output panel from what the rest of the program can keep using.",
+            "sc-reuse-returned-value": {
+              "title": "Reuse a function result",
+              "prompt": "`double(6)` returns `12`. Which code correctly stores that returned value and then uses it in another calculation?",
+              "hint": "Store the function call on the right side of an assignment.",
               "help": {
-                "concept": "`print()` is for display, while `return` is for producing a value that calling code can use.",
-                "hint_1": "A returned value can be assigned to a variable; printed output is just displayed.",
-                "hint_2": "Pick the options that describe display versus reusable results correctly."
+                "concept": "A returned value behaves like another value: it can be assigned to a variable and used later.",
+                "hint_1": "First save `double(6)` in a variable.",
+                "hint_2": "Then use that variable in the later expression."
               },
               "options": {
-                "a": "`print()` displays output for the user to see.",
-                "b": "`return` can send a value back to the code that called the function.",
-                "c": "A function can never use both `print()` and `return`.",
-                "d": "If a function only prints a value, that printed value is automatically stored in a variable."
+                "a": "result = double(6)\nprint(result + 1)",
+                "b": "print = double(6)\nresult + 1",
+                "c": "double = 6\nprint(double + 1)",
+                "d": "return double(6)\nprint(result)"
               }
             },
-            "pvrs-mc-2": {
-              "title": "Ways to use a returned value",
-              "prompt": "A function `make_label(name)` returns a string. Which lines use that returned value correctly? Choose all that apply.",
-              "hint": "Look for lines where the function call becomes part of another expression or is stored for later use.",
+            "sc-fix-print-return-bug": {
+              "title": "Fix a print-versus-return bug",
+              "prompt": "The caller does `label = make_label(\"Book\")` and then needs `label + \"!\"`. Inside `make_label`, which statement should produce the label text?",
+              "hint": "The caller needs to receive a string value, not just see it displayed.",
               "help": {
-                "concept": "A returned value behaves like any other value, so it can be stored, printed, or combined with other strings.",
-                "hint_1": "If the function returns text, valid uses include assignment and string concatenation.",
-                "hint_2": "Choose the lines where the function call is treated like a string value produced by the function."
+                "concept": "When later code must store or combine a function result, the function should return that result.",
+                "hint_1": "Printing the label would display it but leave `label` as `None`.",
+                "hint_2": "Return the string so the caller can concatenate `\"!\"`."
               },
               "options": {
-                "a": "`label = make_label(\"Mia\")`",
-                "b": "`print(make_label(\"Mia\"))`",
-                "c": "`message = make_label(\"Mia\") + \"!\"`",
-                "d": "`return = make_label(\"Mia\")`"
+                "a": "print(\"Item: \" + item)",
+                "b": "return \"Item: \" + item",
+                "c": "input(\"Item: \" + item)",
+                "d": "def \"Item: \" + item"
               }
-            },
-            "pvrs-dr-1": {
-              "title": "Order the return flow",
-              "prompt": "Put these steps in the correct order for code that returns a value and then prints it.",
-              "hint": "Start with the function call, then think about what the function sends back, then what gets displayed.",
-              "help": {
-                "concept": "When a function returns a value, the call runs first, the value comes back to the caller, it can be stored, and then it may be printed.",
-                "hint_1": "The function must run before a variable can receive its returned value.",
-                "hint_2": "The displayed output happens after the returned value has already come back and been used by the calling code."
-              },
-              "tokens": {
-                "t1": "Call the function.",
-                "t2": "The function computes a result.",
-                "t3": "The function returns the value.",
-                "t4": "The caller stores or uses that value.",
-                "t5": "`print()` can display it."
-              }
-            },
-            "pvrs-dr-2": {
-              "title": "Build a reusable pattern",
-              "prompt": "Arrange these code pieces into a sensible pattern for using a returned value.",
-              "hint": "First define the function, then call it, then store the result, then display or reuse it.",
-              "help": {
-                "concept": "A common pattern is define a function with `return`, call it, save the returned value, and then use that value later.",
-                "hint_1": "The function definition must come before the call that uses it.",
-                "hint_2": "After the call returns a value, that value should be assigned before a later `print()` uses the variable."
-              },
-              "tokens": {
-                "t1": "`def add_one(n):`",
-                "t2": "`    return n + 1`",
-                "t3": "`result = add_one(4)`",
-                "t4": "`print(result)`"
-              }
-            },
-            "pvrs-fb-1": {
-              "title": "Complete the keyword",
-              "prompt": "Choose the word that correctly completes the function so it sends a value back.",
-              "hint": "The missing word should give the result back to the caller.",
-              "help": {
-                "concept": "A function uses a dedicated statement to send a computed value back to its caller.",
-                "hint_1": "`print` shows output, but this blank needs the keyword that hands the value back.",
-                "hint_2": "Choose the Python keyword used before an expression like `n * 2` when a function should produce a reusable result."
-              },
-              "template": "def double(n):\n    [blank1] n * 2",
-              "choices": [
-                "print",
-                "return",
-                "input",
-                "def"
-              ]
-            },
-            "pvrs-fb-2": {
-              "title": "Complete the display line",
-              "prompt": "Choose the code that displays the returned value from `get_name()` in the output panel.",
-              "hint": "The function already returns the value, so the missing part should show that value.",
-              "help": {
-                "concept": "If a function returns a value and you want to display it, wrap the function call in `print()`.",
-                "hint_1": "The blank is not inside the function definition; it is the line that shows the returned result.",
-                "hint_2": "Choose the option that calls the function and sends its result to the output panel."
-              },
-              "template": "[blank1]",
-              "choices": [
-                "print(get_name())",
-                "return get_name()",
-                "def get_name()",
-                "get_name = print()"
-              ]
-            },
-            "pvrs-code-1": {
-              "title": "Return a doubled value",
-              "prompt": "Write `double_number(n)` so it returns double the input instead of printing it.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def double_number(n):\n    # return double the input\n    pass",
-              "solutionCode": "def double_number(n):\n    return n * 2"
-            },
-            "pvrs-code-2": {
-              "title": "Return a greeting string",
-              "prompt": "Write `make_greeting(name)` so it returns a greeting string like `Hello, Ava`.",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
-              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
-            },
-            "pvrs-code-3": {
-              "title": "Return a total instead of printing it",
-              "prompt": "Write `add_prices(price1, price2)` so it returns the total of the two prices instead of printing it.",
-              "hint": "Trace the code before choosing the option that matches its actual behavior.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
-              "solutionCode": "def add_prices(price1, price2):\n    return price1 + price2"
-            },
-            "try-print-vs-return-checkpoint": {
-              "title": "Return, then print",
-              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`.",
-              "hint": "The function should return the value; the call site should print it.",
-              "help": {
-                "concept": "Returning a value and printing a value are separate actions.",
-                "hint_1": "The function should return the value; the call site should print it.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def add(a, b):\n    # Return the sum.\n    pass\n\n# Print the result of add(3, 4).\n",
-              "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
             },
             "try-print-vs-return-sketch0": {
-              "title": "Return then print",
-              "prompt": "The function returns the value; the caller prints it.",
-              "hint": "Return 'Hi, ' + name instead of printing inside the function.",
+              "title": "Call a display-only function directly",
+              "prompt": "The starter defines `show_status(text)` as a display-only function: it prints the text and returns no value. The final line incorrectly wraps the call in `print(...)`, which would display an extra `None`. Change only the caller behavior so the status is displayed exactly once.",
+              "hint": "Because `show_status` already prints, call `show_status(status)` directly.",
               "help": {
-                "concept": "Return 'Hi, ' + name instead of printing inside the function.",
-                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A display-only function should usually be called directly rather than wrapped in another `print()`.",
+                "hint_1": "Keep `print(text)` inside `show_status`.",
+                "hint_2": "Replace `print(show_status(status))` with a standalone `show_status(status)` call."
               },
-              "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n",
-              "solutionCode": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n"
+              "starterCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nprint(show_status(status))\n",
+              "solutionCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nshow_status(status)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `show_status` as a display-only function that prints `text`."
+                },
+                "1": {
+                  "message": "Call `show_status(status)` directly instead of printing the call's `None` result."
+                }
+              }
             },
             "try-print-vs-return-sketch1": {
-              "title": "Use a returned number",
-              "prompt": "Returned values can be stored and used in more expressions.",
-              "hint": "Store double(6) in result, then print result + 1.",
+              "title": "Store and reuse a returned number",
+              "prompt": "The starter defines `double(number)` so it returns twice the number. Read the existing input into `number`, store `double(number)` in a variable named `result`, then print `result + 1`.",
+              "hint": "The returned number can be saved first and used in a later expression.",
               "help": {
-                "concept": "Store double(6) in result, then print result + 1.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A returned value can be assigned to a variable and then reused in additional calculations.",
+                "hint_1": "Write `result = double(number)`.",
+                "hint_2": "Then print `result + 1`."
               },
-              "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n",
-              "solutionCode": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n"
+              "starterCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\n# Store double(number) in result.\n# Then print result + 1.\n",
+              "solutionCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\nresult = double(number)\nprint(result + 1)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store the returned value with `result = double(number)`."
+                },
+                "1": {
+                  "message": "Use the stored result in the later expression `result + 1`."
+                }
+              }
             },
             "try-print-vs-return-sketch2": {
-              "title": "Avoid printing None",
-              "prompt": "Print the returned string, not the function object.",
-              "hint": "Print label('zoe').",
+              "title": "Fix a function that prints instead of returning",
+              "prompt": "The starter's `make_label(item)` prints the label, but the caller needs to store that label and add `!`. Fix `make_label` so it returns `\"Item: \" + item` instead of printing it. Keep the caller-side assignment and final print.",
+              "hint": "The caller needs a string value in `label`, so the function must return the string.",
               "help": {
-                "concept": "Print label('zoe').",
-                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
-                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
+                "concept": "Printing inside the function is not enough when the caller must store and transform the result.",
+                "hint_1": "Replace the function body's `print(...)` with `return \"Item: \" + item`.",
+                "hint_2": "Leave `label = make_label(item)` and `print(label + \"!\")` outside the function."
               },
-              "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n",
-              "solutionCode": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n"
+              "starterCode": "def make_label(item):\n    print(\"Item: \" + item)\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
+              "solutionCode": "def make_label(item):\n    return \"Item: \" + item\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Return the label string from `make_label` instead of printing it inside the function."
+                },
+                "1": {
+                  "message": "Store the returned label with `label = make_label(item)`."
+                },
+                "2": {
+                  "message": "Use the stored label in `print(label + \"!\")`."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_print_vs_return_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`."
-            },
             "try_print_vs_return_sketch0": {
               "title": "Try it yourself",
-              "prompt": "The function returns the value; the caller prints it."
+              "prompt": "Call a display-only function directly so its implicit `None` result is not printed."
             },
             "try_print_vs_return_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Returned values can be stored and used in more expressions."
+              "prompt": "Store a returned number and reuse it in another expression."
             },
             "try_print_vs_return_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Print the returned string, not the function object."
+              "prompt": "Fix a function that prints when its caller needs a returned string."
             },
             "allowReveal": true
           }
         },
         "scope-and-local-variables": {
           "label": "Scope and Local Variables",
-          "summary": "Understand where variables exist and why local scope matters.",
+          "summary": "Use local variables safely inside functions, recognize that parameters are local names, keep same-named outside values separate, and return local results when the caller needs them.",
           "cards": {
             "sketch0": {
-              "title": "What local scope means"
+              "title": "Local variables belong to the function call"
             },
             "sketch1": {
-              "title": "Inside a function is different from outside"
+              "title": "Parameters are local, even when names match outside"
             },
             "sketch2": {
-              "title": "Parameters are local too"
+              "title": "Return local results to the caller"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-q1": {
-              "title": "Find the local variable",
-              "prompt": "In this code, which name is local to the function?\n\n```python\ncolor = \"blue\"\n\ndef paint():\n    shade = \"dark\"\n    return color + \" \" + shade\n```",
-              "hint": "Look for the name created inside `paint()`.",
+            "sc-local-variable": {
+              "title": "Identify a local variable",
+              "prompt": "In `def total(price): fee = 2; return price + fee`, which name is created locally inside the function body?",
+              "hint": "Look for the assignment that happens inside the function.",
               "help": {
-                "concept": "A local variable is created inside a function and is meant to be used only during that function call.",
-                "hint_1": "`color` is assigned before the function starts. Check which name is assigned inside the function body.",
-                "hint_2": "The local name is the one introduced on the line `... = \"dark\"` inside `paint()`."
+                "concept": "A name assigned inside a function is local to that function call unless Python is explicitly told otherwise.",
+                "hint_1": "`price` is a parameter; it receives its value when the function is called.",
+                "hint_2": "`fee = 2` creates a working variable inside the function body."
               },
               "options": {
-                "a": "color",
-                "b": "paint",
-                "c": "shade",
-                "d": "return"
+                "a": "fee",
+                "b": "total",
+                "c": "return",
+                "d": "def"
               }
             },
-            "sc-q2": {
+            "sc-local-outside": {
+              "title": "Use a local name outside the function",
+              "prompt": "A function creates `message = \"Ready\"` inside its body but does not return it. What happens if code after the function call tries `print(message)`?",
+              "hint": "The name was created only inside the function.",
+              "help": {
+                "concept": "A local variable is not directly available to unrelated code after the function call finishes.",
+                "hint_1": "Displaying or returning a value is different from making the local variable itself available outside.",
+                "hint_2": "The outside code does not have its own `message` assignment."
+              },
+              "options": {
+                "a": "It prints Ready",
+                "b": "Python reports that `message` is not defined there",
+                "c": "It automatically calls the function again",
+                "d": "It turns `message` into a parameter"
+              }
+            },
+            "sc-parameter-local": {
               "title": "Parameter scope",
-              "prompt": "What is true about a parameter like `name` in `def greet(name):`?",
-              "hint": "Think about where the parameter can be used directly.",
+              "prompt": "What is true about `count` in `def add_one(count):`?",
+              "hint": "A parameter is a name that receives an argument for one function call.",
               "help": {
-                "concept": "Parameters are local names created for a function call, so they belong to that function's scope.",
-                "hint_1": "A parameter gets its value when the function is called, not everywhere in the program.",
-                "hint_2": "Ask whether `name` is meant to exist only inside `greet(...)` or in all code automatically."
+                "concept": "Parameters are local names inside the function call.",
+                "hint_1": "The caller supplies an argument value.",
+                "hint_2": "Inside the function, that value is available through the local parameter name `count`."
               },
               "options": {
-                "a": "It exists only inside the function call unless returned or passed elsewhere.",
-                "b": "It automatically becomes a global variable.",
-                "c": "It can only store numbers.",
-                "d": "It disappears before the function starts."
+                "a": "It is local to the function call",
+                "b": "It automatically changes every outside variable named count",
+                "c": "It can only hold integers",
+                "d": "It exists before the function is called"
               }
             },
-            "mc-q1": {
-              "title": "Choose the local names",
-              "prompt": "Which names are local in this code? Choose all that apply.\n\n```python\ntax = 5\n\ndef total(price):\n    fee = 2\n    final_price = price + fee + tax\n    return final_price\n```",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
+            "sc-same-name-separate": {
+              "title": "Same name, separate value",
+              "prompt": "Suppose `count = 5` exists outside a function and `def add_one(count): return count + 1`. After `print(add_one(count))`, what is the outside `count` still equal to?",
+              "hint": "The parameter receives the value 5, but the function does not assign to the outside variable.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "A parameter can have the same spelling as an outside variable while still being a separate local name.",
+                "hint_1": "The call returns `6`.",
+                "hint_2": "Nothing in the function changes the caller's `count = 5` assignment."
               },
               "options": {
-                "a": "tax",
-                "b": "price",
-                "c": "fee",
-                "d": "final_price"
+                "a": "5",
+                "b": "6",
+                "c": "None",
+                "d": "The function name"
               }
-            },
-            "mc-q2": {
-              "title": "Why local scope helps",
-              "prompt": "Why are local variables useful? Choose all correct answers.",
-              "hint": "Think about how functions stay organized and avoid name mix-ups.",
-              "help": {
-                "concept": "Local scope helps functions stay independent, readable, and safer because temporary names do not leak into the rest of the program.",
-                "hint_1": "A good answer should mention keeping function work separate or preventing accidental reuse of temporary names.",
-                "hint_2": "Look for benefits like reducing conflicts and making each function manage its own temporary data."
-              },
-              "options": {
-                "a": "They help prevent temporary names inside one function from interfering with other code.",
-                "b": "They make it easier for a function to keep its own working values.",
-                "c": "They force every variable in a program to have the same name.",
-                "d": "They automatically print returned values."
-              }
-            },
-            "dr-q1": {
-              "title": "Order a function call",
-              "prompt": "Put these steps in the correct order for what happens when `double(4)` runs in a function that returns `number * 2`.",
-              "hint": "Start with the call, then the parameter gets a value, then the calculation happens, then the result is returned.",
-              "help": {
-                "concept": "A function call gives values to parameters, runs the function body, computes a result, and then returns that result.",
-                "hint_1": "The parameter cannot be used until the function is called with an argument.",
-                "hint_2": "After `number` gets `4`, the multiplication happens before the value is sent back."
-              },
-              "tokens": {
-                "t1": "Call `double(4)`",
-                "t2": "Set local parameter `number` to `4`",
-                "t3": "Compute `number * 2`",
-                "t4": "Return the result"
-              }
-            },
-            "dr-q2": {
-              "title": "Trace local variable creation",
-              "prompt": "Arrange the steps to describe this function call correctly.\n\n```python\ndef greet(person):\n    message = \"Hi \" + person\n    return message\n```",
-              "hint": "The argument fills the parameter first, then the local variable is built, then the function returns it.",
-              "help": {
-                "concept": "During a function call, the argument becomes the parameter value, local variables are created from that value, and the return statement sends the final result back.",
-                "hint_1": "`person` gets its value before `message` can be created.",
-                "hint_2": "The returned value comes last, after the string has been built inside the function."
-              },
-              "tokens": {
-                "t1": "Pass an argument into `person`",
-                "t2": "Create local variable `message`",
-                "t3": "Build the text `\"Hi \" + person`",
-                "t4": "Return `message`"
-              }
-            },
-            "fb-q1": {
-              "title": "Complete the local assignment",
-              "prompt": "Choose the missing word to make `score` a local variable inside the function.",
-              "hint": "The blank should be the variable name being assigned inside the function.",
-              "help": {
-                "concept": "A variable assigned inside a function becomes local to that function call.",
-                "hint_1": "The line is creating a new name inside the function body.",
-                "hint_2": "Match the blank to the variable described as belonging only to the function call."
-              },
-              "template": "def show_score():\n    [blank1] = 10\n    return score",
-              "choices": [
-                "score",
-                "return",
-                "show_score",
-                "def"
-              ]
-            },
-            "fb-q2": {
-              "title": "Complete the parameter use",
-              "prompt": "Fill the blank with the correct local name.",
-              "hint": "Use the parameter name from the function header.",
-              "help": {
-                "concept": "A parameter is a local name, so code inside the function should use that parameter name directly.",
-                "hint_1": "The function header already tells you the local name to use.",
-                "hint_2": "Look at the parameter position inside the function header and choose the same name used by the function body."
-              },
-              "template": "def triple(value):\n    return [blank1] * 3",
-              "choices": [
-                "value",
-                "triple",
-                "return",
-                "3"
-              ]
-            },
-            "code-q1": {
-              "title": "Return a local calculation",
-              "prompt": "Write `add_tax(price)` so it calculates `price + 5`, stores that result in a local variable named `total`, and then returns `total`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
-              "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
-              "checks": {
-                "0": {
-                  "message": "add_tax should return price plus 5."
-                },
-                "1": {
-                  "message": "add_tax should work for a different number too."
-                },
-                "2": {
-                  "message": "Return the value instead of printing it."
-                }
-              }
-            },
-            "code-q2": {
-              "title": "Use a parameter as a local name",
-              "prompt": "Write `make_label(word)` so it builds the finished string in a local variable named `label`, then returns `label`.",
-              "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
-              "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
-              "checks": {
-                "0": {
-                  "message": "make_label should prefix the word with `Item: `."
-                },
-                "1": {
-                  "message": "make_label should work with another input word."
-                },
-                "2": {
-                  "message": "Return the string instead of printing it."
-                }
-              }
-            },
-            "code-q3": {
-              "title": "Compute with two local variables",
-              "prompt": "Write `rectangle_area(width, height)` so it computes the area, stores it in a local variable named `area`, and returns `area`.",
-              "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
-              "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
-              "checks": {
-                "0": {
-                  "message": "rectangle_area should multiply width by height."
-                },
-                "1": {
-                  "message": "rectangle_area should work for another pair of numbers."
-                },
-                "2": {
-                  "message": "Return the area instead of printing it."
-                }
-              }
-            },
-            "try-scope-and-local-variables-checkpoint": {
-              "title": "Use a local variable",
-              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`.",
-              "hint": "Create the message inside the function.",
-              "help": {
-                "concept": "A local variable exists inside the function where it is created.",
-                "hint_1": "Create the message inside the function.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
-              "solutionCode": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n"
             },
             "try-scope-and-local-variables-sketch0": {
-              "title": "Use a local variable",
-              "prompt": "A local variable exists inside the function that creates it.",
-              "hint": "Create local variable total = price + 2.",
+              "title": "Create and return a local calculation",
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable `total = price + 3`, then return `total`. The caller already reads a price and prints the returned result.",
+              "hint": "Both the `total` assignment and `return total` belong inside the function body.",
               "help": {
-                "concept": "Create local variable total = price + 2.",
-                "hint_1": "Create local variable total = price + 2 Then return total.",
-                "hint_2": "Print the required lines in order, with no extra commentary."
+                "concept": "A local variable can hold an intermediate result while the function is running.",
+                "hint_1": "Create `total = price + 3` under the `def` line.",
+                "hint_2": "Return that local value with `return total`."
               },
-              "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
-              "solutionCode": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n"
+              "starterCode": "def add_fee(price):\n    # Create local variable total = price + 3.\n    # Then return total.\n    pass\n\nprice = int(input())\nprint(add_fee(price))\n",
+              "solutionCode": "def add_fee(price):\n    total = price + 3\n    return total\n\nprice = int(input())\nprint(add_fee(price))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create the local assignment `total = price + 3` inside `add_fee`."
+                },
+                "1": {
+                  "message": "Return the local variable with `return total`."
+                }
+              }
             },
             "try-scope-and-local-variables-sketch1": {
-              "title": "Pass data as a parameter",
-              "prompt": "Pass the outside value into the function as an argument.",
-              "hint": "Return 'Welcome, ' + person.",
+              "title": "Keep an outside value separate from a parameter",
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable `updated = count + 1` and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
+              "hint": "The parameter named `count` is local to `next_count`; calculate a new local `updated` value instead of changing the outside assignment.",
               "help": {
-                "concept": "Return 'Welcome, ' + person.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "A parameter can have the same name as an outside variable without turning that outside variable into the function's local storage.",
+                "hint_1": "Inside the function, write `updated = count + 1`.",
+                "hint_2": "Return `updated`; do not add another top-level assignment to `count`."
               },
-              "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
-              "solutionCode": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n"
+              "starterCode": "count = int(input())\n\ndef next_count(count):\n    # Create local variable updated = count + 1.\n    # Return updated.\n    pass\n\nprint(next_count(count))\nprint(count)\n",
+              "solutionCode": "count = int(input())\n\ndef next_count(count):\n    updated = count + 1\n    return updated\n\nprint(next_count(count))\nprint(count)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `count` as the function parameter in `next_count(count)`."
+                },
+                "1": {
+                  "message": "Create local variable `updated = count + 1` inside the function."
+                },
+                "2": {
+                  "message": "Return `updated` instead of trying to change the outside `count`."
+                }
+              }
             },
             "try-scope-and-local-variables-sketch2": {
-              "title": "Keep variables separate",
-              "prompt": "A parameter can have the same name but still be local to the function.",
-              "hint": "Return count plus one.",
+              "title": "Return a local value to the caller",
+              "prompt": "The starter creates local variable `message` inside `make_message(name)`, but then incorrectly tries to use `message` outside the function. Fix the program by returning the local `message`, storing the returned value in a caller-side variable named `result`, and printing `result`.",
+              "hint": "The outside code cannot reach the function's local `message` directly; send its value back with `return`.",
               "help": {
-                "concept": "Return count plus one.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "Returning a local value does not expose the local variable itself; it gives the caller a value that the caller can store under its own name.",
+                "hint_1": "Inside the function, add `return message`.",
+                "hint_2": "Outside the function, use `result = make_message(name)` and then `print(result)`."
               },
-              "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
-              "solutionCode": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n"
+              "starterCode": "def make_message(name):\n    message = \"Hello, \" + name\n    # Return the local message so the caller can use its value.\n    pass\n\nname = input()\nmake_message(name)\nprint(message)\n",
+              "solutionCode": "def make_message(name):\n    message = \"Hello, \" + name\n    return message\n\nname = input()\nresult = make_message(name)\nprint(result)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Return the local variable with `return message` inside `make_message`."
+                },
+                "1": {
+                  "message": "Store the returned value in caller-side variable `result`."
+                },
+                "2": {
+                  "message": "Print the caller-side `result`, not the function's local variable `message`."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_scope_and_local_variables_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`."
-            },
             "try_scope_and_local_variables_sketch0": {
               "title": "Try it yourself",
-              "prompt": "A local variable exists inside the function that creates it."
+              "prompt": "Create a local intermediate value inside a function and return it."
             },
             "try_scope_and_local_variables_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Pass the outside value into the function as an argument."
+              "prompt": "Use a local parameter without changing a same-named value outside the function."
             },
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",
-              "prompt": "A parameter can have the same name but still be local to the function."
+              "prompt": "Return a local result and store that value under a caller-side variable."
             },
             "allowReveal": true
           }
         },
         "using-imports-and-helper-files": {
-          "label": "Building a Multi-File Python App",
-          "summary": "Create module files inside a folder, import your own functions into main.py, and connect the pieces into a small app.",
+          "label": "Using Imports and Helper Files",
+          "summary": "Move reusable functions into sibling Python module files, import those functions into `main.py`, and connect multiple focused modules without changing the program's behavior.",
           "cards": {
             "sketch0": {
-              "title": "Your app can have more than one file"
+              "title": "A Python file can be imported as a module"
             },
             "sketch1": {
-              "title": "Import from a file inside a folder"
+              "title": "One module can hold related helpers"
             },
             "sketch2": {
-              "title": "Build a small tool folder"
+              "title": "main.py can connect multiple helper modules"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "q1": {
-              "title": "Why split code into files?",
-              "prompt": "Why would a Python project put reusable functions in files such as `tools/names.py` instead of putting every line in `main.py`?",
-              "hint": "Think about keeping the main app readable and reusing the same logic later.",
+            "sc-file-to-module": {
+              "title": "Import from a sibling file",
+              "prompt": "`names.py` is beside `main.py` and defines `clean_name`. Which line imports that function into `main.py`?",
+              "hint": "Use the Python file name without the `.py` extension.",
               "help": {
-                "concept": "A module file can hold reusable functions. `main.py` can stay focused on the app flow: read input, call functions, and print results.",
-                "hint_1": "Look for the option about organization and reuse.",
-                "hint_2": "The goal is not to make more work. The goal is to keep each file responsible for a clear job."
+                "concept": "A sibling file such as `names.py` can be imported by its module name `names`.",
+                "hint_1": "The module part is `names`, not `names.py`.",
+                "hint_2": "A direct function import uses `from names import clean_name`."
               },
               "options": {
-                "a": "It keeps reusable code organized and lets `main.py` import it",
-                "b": "It makes Python ignore errors in the imported file",
-                "c": "It means the project can only run with one input value",
-                "d": "It prevents functions from returning values"
+                "a": "from names import clean_name",
+                "b": "from names.py import clean_name",
+                "c": "from clean_name import names",
+                "d": "import clean_name from names"
               }
             },
-            "q2": {
-              "title": "Choose the direct import",
-              "prompt": "You created `tools/names.py` with a function named `clean_name`. Which line imports that function into `main.py`?",
-              "hint": "The path uses the folder name, then the file name without `.py`, then the function name.",
+            "sc-direct-call": {
+              "title": "Call a directly imported function",
+              "prompt": "After `from names import clean_name`, which expression calls the imported function with `raw_name`?",
+              "hint": "A directly imported function is called by its function name.",
               "help": {
-                "concept": "To import from a module inside a folder, use `from folder.file import function`. For `tools/names.py`, the module path is `tools.names`.",
-                "hint_1": "Do not include `.py` in the import line.",
-                "hint_2": "The correct form starts with `from tools.names import ...`."
+                "concept": "With `from module import function`, the imported function name is available directly in the importing file.",
+                "hint_1": "You do not include `.py` when calling the function.",
+                "hint_2": "Use `clean_name(raw_name)`."
               },
               "options": {
-                "a": "from tools.names import clean_name",
-                "b": "from tools/names.py import clean_name",
-                "c": "import clean_name from tools.names",
-                "d": "from clean_name import tools.names"
+                "a": "clean_name(raw_name)",
+                "b": "names.py.clean_name(raw_name)",
+                "c": "import clean_name(raw_name)",
+                "d": "from clean_name(raw_name)"
               }
             },
-            "q3": {
-              "title": "Good module responsibilities",
-              "prompt": "Choose all examples that are good jobs for a small module file in this lesson.",
-              "hint": "Pick jobs that are reusable and focused.",
+            "sc-module-responsibility": {
+              "title": "Choose a focused helper module",
+              "prompt": "Which file responsibility is the clearest fit for a small helper module?",
+              "hint": "Keep related reusable functions together.",
               "help": {
-                "concept": "Good module files usually hold related functions, such as text cleanup, formatting, scoring, or report building.",
-                "hint_1": "A module should have a clear purpose.",
-                "hint_2": "Avoid choices that put unrelated random code into one file."
+                "concept": "A helper module is easiest to understand when its functions serve one related responsibility.",
+                "hint_1": "Name-related cleanup functions belong naturally together.",
+                "hint_2": "Avoid a file that mixes unrelated input, math, formatting, and random experiments."
               },
               "options": {
-                "a": "`tools/names.py` cleans and formats names",
-                "b": "`tools/badges.py` builds badge text from a name and role",
-                "c": "`tools/random_everything.py` mixes unrelated code with no clear job",
-                "d": "`main.py` must copy every function from every module before it can run"
+                "a": "`names.py` contains functions for cleaning and formatting names",
+                "b": "`everything.py` contains unrelated code from the entire program",
+                "c": "`main.py` copies every helper function before using it",
+                "d": "`random.py` stores unrelated temporary experiments"
               }
             },
-            "q4": {
-              "title": "Valid imported calls",
-              "prompt": "Which calls are valid after the matching import? Choose all correct answers.",
-              "hint": "Match the call style to the import style.",
+            "sc-main-role": {
+              "title": "What main.py should do",
+              "prompt": "After name cleanup lives in `names.py` and badge formatting lives in `badges.py`, what is a good responsibility for `main.py`?",
+              "hint": "The main file can coordinate the app instead of duplicating helper logic.",
               "help": {
-                "concept": "After `from tools.names import clean_name`, call `clean_name(...)` directly. After `import tools.badges as badges`, call `badges.make_badge(...)`.",
-                "hint_1": "Direct imports use the function name directly.",
-                "hint_2": "Alias imports use the alias before the dot."
+                "concept": "`main.py` can read input, call imported helpers, and connect their returned values into the program flow.",
+                "hint_1": "The helper modules already own cleanup and badge formatting.",
+                "hint_2": "The main file should import and call them rather than rewrite them."
               },
               "options": {
-                "a": "After `from tools.names import clean_name`, use `clean_name(\" ava \")`",
-                "b": "After `import tools.badges as badges`, use `badges.make_badge(\"Ava\", \"coder\")`",
-                "c": "After `from tools.names import clean_name`, use `tools.names.clean_name(\"Ava\")` without importing `tools`",
-                "d": "After `import tools.badges as badges`, use `make_badge.badges(\"Ava\")`"
+                "a": "Read input and connect the imported helper functions",
+                "b": "Copy the full contents of every helper file",
+                "c": "Rename every imported function before it can run",
+                "d": "Avoid calling any helper function"
               }
-            },
-            "q5": {
-              "title": "Order the module workflow",
-              "prompt": "Put these steps in the order you would use when adding your own module file to a small app.",
-              "hint": "Create the file before importing from it.",
-              "help": {
-                "concept": "Python can import a module only after the file exists in the expected folder path. Then `main.py` can call functions from that file.",
-                "hint_1": "The folder and file come before the import.",
-                "hint_2": "The function call happens after the import line."
-              },
-              "tokens": {
-                "t1": "Create the `tools` folder",
-                "t2": "Create a module file such as `tools/names.py`",
-                "t3": "Define a function inside that module file",
-                "t4": "Import and call the function from `main.py`"
-              }
-            },
-            "q6": {
-              "title": "Build the import flow",
-              "prompt": "Arrange these lines so `main.py` imports a formatter and prints the returned result.",
-              "hint": "Import first, then call, then print.",
-              "help": {
-                "concept": "A main file usually imports the function it needs, calls it with data, and prints or stores the returned value.",
-                "hint_1": "The import line must run before the function call.",
-                "hint_2": "Print the stored message after the function returns it."
-              },
-              "tokens": {
-                "t1": "from tools.reports import mission_report",
-                "t2": "message = mission_report(\"SCOUT badge: Zoe\", 18)",
-                "t3": "print(message)"
-              }
-            },
-            "q7": {
-              "title": "Complete the function import",
-              "prompt": "Fill in the missing function name to import it from `tools.names`.",
-              "hint": "This is the function that cleans extra spaces and capitalization.",
-              "help": {
-                "concept": "`from tools.names import clean_name` imports the `clean_name` function from the `names.py` file inside the `tools` folder.",
-                "hint_1": "The missing word is the function name, not the folder name.",
-                "hint_2": "Choose the name that describes cleaning a name."
-              },
-              "template": "from tools.names import [blank1]",
-              "choices": [
-                "clean_name",
-                "tools",
-                "names.py",
-                "input"
-              ]
-            },
-            "q8": {
-              "title": "Complete the module path",
-              "prompt": "Fill in the missing folder name in this import line.",
-              "hint": "The module files for this project live inside one folder.",
-              "help": {
-                "concept": "The import path `tools.badges` means Python should look for `badges.py` inside the `tools` folder.",
-                "hint_1": "Do not type `.py` in the import path.",
-                "hint_2": "Choose the folder that contains `badges.py`."
-              },
-              "template": "from [blank1].badges import make_badge",
-              "choices": [
-                "tools",
-                "badges.py",
-                "main",
-                "print"
-              ]
-            },
-            "q9": {
-              "title": "Create a name-cleaning module",
-              "prompt": "This project is starting a small helper package. Create a `tools` folder, add `tools/names.py`, and define `clean_name(text)` there. Then import `clean_name` from `tools.names` in `main.py`, clean the input name, and print it.\n\nFor example, if the input is `aVA`, your program should print:\n`Ava`.",
-              "hint": "The required path is `tools/names.py`. The import line in `main.py` should be `from tools.names import clean_name`.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
-                },
-                "tools_init_py": {
-                  "content": "# Tools package for this mini app.\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.names."
-                },
-                "1": {
-                  "message": "Define clean_name(text) inside tools/names.py."
-                },
-                "2": {
-                  "message": "clean_name should strip whitespace."
-                },
-                "3": {
-                  "message": "clean_name should title-case the name."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
-            },
-            "q10": {
-              "title": "Add a badge module",
-              "prompt": "The helper folder needs one more tool. Create `tools/badges.py`, import `make_badge` from `tools.badges`, clean the input name, build the badge text, and print it.\n\nFor example, if the inputs are `lina` and `artist`, your program should print:\n`ARTIST badge: Lina`.",
-              "hint": "Create `tools/badges.py`, then import with `from tools.badges import make_badge`.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
-              "starterFiles": {
-                "tools_init_py": {
-                  "content": "# Tools package for this mini app.\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-                },
-                "tools_init_py": {
-                  "content": "# Tools package for this mini app.\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.badges."
-                },
-                "1": {
-                  "message": "Define make_badge in tools/badges.py."
-                },
-                "2": {
-                  "message": "make_badge should uppercase the role."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
-            },
-            "q11": {
-              "title": "Build a mission report module",
-              "prompt": "Now connect the helper modules into one final report. Create `tools/reports.py`, import `mission_report` from `tools.reports`, and print the finished mission report.\n\nFor example, if the inputs are `zoe`, `scout`, and `18`, your program should print:\n`Mission report: SCOUT badge: Zoe has 18 points`.",
-              "hint": "This step combines three files: `tools/names.py`, `tools/badges.py`, and your new `tools/reports.py`.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
-              "starterFiles": {
-                "tools_init_py": {
-                  "content": "# Tools package for this mini app.\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
-                },
-                "tools_init_py": {
-                  "content": "# Tools package for this mini app.\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
-                },
-                "tools_reports_py": {
-                  "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.reports."
-                },
-                "1": {
-                  "message": "Define mission_report in tools/reports.py."
-                },
-                "2": {
-                  "message": "Call mission_report() from main.py."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
-            },
-            "try-using-imports-and-helper-files-checkpoint": {
-              "title": "Import from a helper file",
-              "prompt": "Build this as a small two-file program.\n\n1. Create `tools/names.py`.\n2. In `tools/names.py`, define `clean_name(text)`.\n3. In `main.py`, import `clean_name` with `from tools.names import clean_name`.\n4. Read one name with `input()`, clean it, and print the result.",
-              "hint": "Create `tools/names.py` first, then import `clean_name` in `main.py`.",
-              "help": {
-                "concept": "A helper module lets `main.py` stay short while another file handles one focused job.",
-                "hint_1": "Put `clean_name(text)` in `tools/names.py`.",
-                "hint_2": "In `main.py`, import `clean_name`, call it with the raw input, and print the cleaned name."
-              },
-              "starterCode": "raw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
-                },
-                "tools_names_py": {
-                  "content": "def clean_name(text):\n    return text.strip().title()\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Import from tools.names."
-                },
-                "1": {
-                  "message": "Define clean_name(text) inside tools/names.py."
-                },
-                "2": {
-                  "message": "clean_name should strip whitespace."
-                },
-                "3": {
-                  "message": "clean_name should title-case the name."
-                }
-              },
-              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
             },
             "try-using-imports-and-helper-files-sketch0": {
-              "title": "Create and import a name helper",
-              "prompt": "Build this as a two-file program.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print `clean_name(\"  ava  \")`.",
-              "hint": "Put `clean_name` in `tools/names.py`, then import it in `main.py`.",
+              "title": "Move a helper into names.py",
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`.",
+              "hint": "The function body moves to `names.py`; `main.py` keeps the input and output flow.",
               "help": {
-                "concept": "This card is about moving the helper out of `main.py`, not keeping everything in one file.",
-                "hint_1": "In `tools/names.py`, return `text.strip().title()` from `clean_name(text)`.",
-                "hint_2": "In `main.py`, use `from tools.names import clean_name`, then print `clean_name(\"  ava  \")`."
+                "concept": "A Python helper file becomes a module that another file can import.",
+                "hint_1": "Create `names.py` beside `main.py` and put `clean_name(text)` there.",
+                "hint_2": "Remove the local definition from `main.py` and add `from names import clean_name`."
               },
-              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n",
+              "starterCode": "def clean_name(text):\n    return text.strip().title()\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                }
+              },
+              "solutionCode": "from names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+                  "content": "from names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
                 },
-                "tools_names_py": {
+                "names_py": {
                   "content": "def clean_name(text):\n    return text.strip().title()\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import clean_name from tools.names."
+                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
                 },
                 "1": {
-                  "message": "Define clean_name in tools/names.py."
+                  "message": "Define `clean_name(text)` in `names.py`, not in `main.py`."
                 },
                 "2": {
-                  "message": "clean_name should strip spaces."
-                },
-                "3": {
-                  "message": "clean_name should title-case the name."
+                  "message": "Keep the name-cleaning behavior inside `names.py`."
                 }
-              },
-              "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+              }
             },
             "try-using-imports-and-helper-files-sketch1": {
-              "title": "Create and import a badge helper",
-              "prompt": "Build this as a two-file program.\n\n1. Create `tools/badges.py`.\n2. In `tools/badges.py`, define `make_badge(name, role)`.\n3. Return `ROLE badge: Name` with the role uppercased.\n4. In `main.py`, import `make_badge`.\n5. Print a student badge for Ava.",
-              "hint": "Create `tools/badges.py`, then import `make_badge` in `main.py`.",
+              "title": "Move related helpers into text_tools.py",
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with `from text_tools import clean_word, make_label`.",
+              "hint": "Both related helper functions move to the same module; the input and print stay in `main.py`.",
               "help": {
-                "concept": "The formatting helper belongs in its own module so `main.py` only connects the pieces.",
-                "hint_1": "In `tools/badges.py`, return `f\"{role.upper()} badge: {name}\"`.",
-                "hint_2": "In `main.py`, import `make_badge` and print `make_badge(\"Ava\", \"student\")`."
+                "concept": "One module can expose several related helper functions.",
+                "hint_1": "Create `text_tools.py` with both function definitions.",
+                "hint_2": "In `main.py`, import both names from `text_tools` and keep calling them in the existing flow."
               },
-              "starterCode": "# Create a folder named tools.\n# Create tools/badges.py with make_badge(name, role).\n# Then import make_badge from tools.badges and print a student badge for Ava.\n",
+              "starterCode": "def clean_word(text):\n    return text.strip().lower()\n\ndef make_label(word):\n    return \"Word: \" + word\n\nraw_word = input()\nword = clean_word(raw_word)\nprint(make_label(word))\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "def clean_word(text):\n    return text.strip().lower()\n\ndef make_label(word):\n    return \"Word: \" + word\n\nraw_word = input()\nword = clean_word(raw_word)\nprint(make_label(word))\n"
+                }
+              },
+              "solutionCode": "from text_tools import clean_word, make_label\n\nraw_word = input()\nword = clean_word(raw_word)\nprint(make_label(word))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n"
+                  "content": "from text_tools import clean_word, make_label\n\nraw_word = input()\nword = clean_word(raw_word)\nprint(make_label(word))\n"
                 },
-                "tools_badges_py": {
-                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                "text_tools_py": {
+                  "content": "def clean_word(text):\n    return text.strip().lower()\n\ndef make_label(word):\n    return \"Word: \" + word\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import make_badge from tools.badges."
+                  "message": "Import both `clean_word` and `make_label` from `text_tools` in `main.py`."
                 },
                 "1": {
-                  "message": "Define make_badge in tools/badges.py."
+                  "message": "Define `clean_word(text)` in `text_tools.py`."
                 },
                 "2": {
-                  "message": "Uppercase the role inside make_badge."
+                  "message": "Define `make_label(word)` in `text_tools.py`."
                 }
-              },
-              "solutionCode": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n"
+              }
             },
             "try-using-imports-and-helper-files-sketch2": {
-              "title": "Connect two helper modules",
-              "prompt": "Build this as a small multi-file program.\n\n1. Create `tools/names.py` with `clean_name(text)`.\n2. Create `tools/badges.py` with `make_badge(name, role)`.\n3. In `main.py`, import both helpers.\n4. Clean `\"  mia  \"`.\n5. Build a mentor badge from the cleaned name and print it.",
-              "hint": "Import both helpers in `main.py`, then clean the name before calling `make_badge`.",
+              "title": "Connect two existing helper modules",
+              "prompt": "`names.py` already defines `clean_name(text)` and `badges.py` already defines `make_badge(name, role)`. `main.py` currently duplicates both jobs inline. Refactor only the main flow so it imports both helpers, cleans the input name with `clean_name`, then builds the badge with `make_badge`. The program's output must stay the same.",
+              "hint": "The helper files are already complete; `main.py` should import and connect them.",
               "help": {
-                "concept": "This card practices the full pattern: helper files do the work, and `main.py` wires them together.",
-                "hint_1": "Use `from tools.names import clean_name` and `from tools.badges import make_badge`.",
-                "hint_2": "Clean `\"  mia  \"`, pass the result into `make_badge(..., \"mentor\")`, and print the badge."
+                "concept": "A main file can coordinate multiple focused modules by passing one helper's returned value into another.",
+                "hint_1": "Import `clean_name` from `names` and `make_badge` from `badges`.",
+                "hint_2": "Use `name = clean_name(raw_name)` and then `print(make_badge(name, role))`."
               },
-              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Create tools/badges.py with make_badge(name, role).\n# Then import both helpers, clean \"  mia  \", and print a mentor badge.\n",
-              "solutionFiles": {
+              "starterCode": "raw_name = input()\nrole = input()\n\nname = raw_name.strip().title()\nprint(f\"{role.upper()} badge: {name}\")\n",
+              "starterFiles": {
                 "main_py": {
-                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n"
+                  "content": "raw_name = input()\nrole = input()\n\nname = raw_name.strip().title()\nprint(f\"{role.upper()} badge: {name}\")\n"
                 },
-                "tools_names_py": {
+                "names_py": {
                   "content": "def clean_name(text):\n    return text.strip().title()\n"
                 },
-                "tools_badges_py": {
+                "badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionCode": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\n\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from names import clean_name\nfrom badges import make_badge\n\nraw_name = input()\nrole = input()\n\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "badges_py": {
                   "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import clean_name from tools.names."
+                  "message": "Import `clean_name` from `names` in `main.py`."
                 },
                 "1": {
-                  "message": "Import make_badge from tools.badges."
+                  "message": "Import `make_badge` from `badges` in `main.py`."
                 },
                 "2": {
-                  "message": "Define clean_name in tools/names.py."
+                  "message": "Call `clean_name(raw_name)` in `main.py`."
                 },
                 "3": {
-                  "message": "Define make_badge in tools/badges.py."
-                },
-                "4": {
-                  "message": "Call clean_name in main.py."
-                },
-                "5": {
-                  "message": "Call make_badge in main.py."
+                  "message": "Call `make_badge(name, role)` in `main.py`."
                 }
-              },
-              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n"
+              }
             }
           },
           "tryIt": {
-            "try_using_imports_and_helper_files_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Build this as a small two-file program.\n\n1. Create `tools/names.py`.\n2. In `tools/names.py`, define `clean_name(text)`.\n3. In `main.py`, import `clean_name` with `from tools.names import clean_name`.\n4. Read one name with `input()`, clean it, and print the result."
-            },
             "try_using_imports_and_helper_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build this as a two-file program.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print `clean_name(\"  ava  \")`."
+              "prompt": "Move one working helper out of `main.py` into `names.py` and import it back."
             },
             "try_using_imports_and_helper_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Build this as a two-file program.\n\n1. Create `tools/badges.py`.\n2. In `tools/badges.py`, define `make_badge(name, role)`.\n3. Return `ROLE badge: Name` with the role uppercased.\n4. In `main.py`, import `make_badge`.\n5. Print a student badge for Ava."
+              "prompt": "Move two related helpers into one module and import both function names."
             },
             "try_using_imports_and_helper_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Build this as a small multi-file program.\n\n1. Create `tools/names.py` with `clean_name(text)`.\n2. Create `tools/badges.py` with `make_badge(name, role)`.\n3. In `main.py`, import both helpers.\n4. Clean `\"  mia  \"`.\n5. Build a mentor badge from the cleaned name and print it."
+              "prompt": "Refactor `main.py` to connect two existing sibling helper modules."
             },
             "allowReveal": true
           }
@@ -17352,10 +16023,10 @@ const messages: Record<string, any> = {
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "label": "Module Project: Clean Student Records",
-          "summary": "Grow one small cleaner from a raw file preview into a shareable cleaned output file.",
+          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing.",
           "cards": {
             "sketch0": {
-              "title": "A messy student file lands in your inbox"
+              "title": "A messy student export needs a reliable cleaner"
             },
             "project": {
               "title": "Clean Student Records"
@@ -17363,160 +16034,247 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Read the student file"
+              "title": "Clean and validate each CSV row"
             },
             "mp_2": {
-              "title": "Clean and validate one row"
+              "title": "Collect only valid student records"
             },
             "mp_3": {
-              "title": "Skip bad rows and collect records"
+              "title": "Write the cleaned CSV file"
             },
             "mp_4": {
-              "title": "Write cleaned records"
+              "title": "Verify the saved clean CSV"
             }
           },
           "quiz": {
-            "mp-1-read-student-file": {
-              "title": "Read the student file",
-              "prompt": "A student group emailed you `data/students.csv` and asked what is inside it. Read the file and print every raw row without extra blank lines so you can inspect the data before cleaning it.",
-              "hint": "Open the file, loop through each line, and print the stripped line.",
-              "help": {
-                "concept": "A real cleaning job usually starts by inspecting the raw file before changing anything.",
-                "hint_1": "Use `with open(\"data/students.csv\") as file:`.",
-                "hint_2": "Inside the loop, print `line.strip()` to avoid extra blank lines."
-              },
-              "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n",
-              "starterFiles": {
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
-                },
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Read data/students.csv instead of typing the file contents."
-                }
-              },
-              "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
-            },
-            "mp-2-clean-one-row": {
-              "title": "Clean and validate one row",
-              "prompt": "Start from the raw-file preview you already built. Keep that context, then add `clean_row(line)` so one row becomes a dictionary with a cleaned name and integer score. Read the first row again and print the cleaned dictionary.",
-              "hint": "Leave the file shape familiar: define one helper, then reuse the file to test it on the first row.",
-              "help": {
-                "concept": "A cleaning function gives the rest of the program one dependable shape for each valid row.",
-                "hint_1": "Split the row with `line.strip().split(\",\")`.",
-                "hint_2": "Return `{\"name\": ..., \"score\": ...}` with a title-cased name and an integer score."
-              },
-              "starterCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw-file preview above as your starting point.\n# Next, write clean_row(line) so one row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split the row, clean the name, and convert the score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Print the cleaned first row dictionary.\nprint(clean_row(first_row))\n",
-              "starterFiles": {
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nprint(clean_row(first_row))\n"
-                },
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nprint(clean_row(first_row))\n"
-            },
-            "mp-3-skip-bad-rows": {
-              "title": "Skip bad rows and collect records",
-              "prompt": "Keep `clean_row(line)` from the last step. Now build a list named `records` by looping through the file, appending valid cleaned rows, and skipping `ValueError` rows so the cleaner keeps moving.",
-              "hint": "Reuse `clean_row(line)` inside the loop instead of re-cleaning the pieces by hand.",
-              "help": {
-                "concept": "In real data files, some rows are broken. A cleaner should keep good rows and quietly move past bad ones.",
-                "hint_1": "Start with `records = []` before the loop.",
-                "hint_2": "Append inside `try`, then skip `ValueError` rows in `except`."
-              },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # Keep using clean_row(line), but only save the rows that work.\n        # Skip ValueError rows so the project keeps moving.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
-              "starterFiles": {
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
-                },
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Use try/except to skip bad rows."
-                }
-              },
-              "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
-            },
-            "mp-4-write-clean-records": {
-              "title": "Write cleaned records",
-              "prompt": "Start from the cleaned-record builder you already have. Keep that logic, then write the valid rows to `output/clean_students.csv` and replace the preview print with a short completion message.",
-              "hint": "Turn the working `records` list into a deliverable file and a quick confirmation.",
-              "help": {
-                "concept": "The final step of a cleaning job is delivering a clean artifact, not just printing data to the screen.",
-                "hint_1": "Create `output/` if needed, then open `output/clean_students.csv` in write mode.",
-                "hint_2": "Write one cleaned record per line, then print how many clean records were saved."
-              },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the preview print with the shareable output file.\n# Create output/, write output/clean_students.csv, and print how many clean records were saved.\n",
-              "starterFiles": {
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
-                },
-                "data_students_csv": {
-                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Write the clean records file."
-                },
-                "1": {
-                  "message": "Use file.write() to create the output CSV."
-                }
-              },
-              "solutionCode": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
-            },
             "try-module-7-clean-student-records-sketch0": {
-              "title": "Clean the first row from the file",
-              "prompt": "Open `data/students.csv`, read the first row, clean the name and score, and print `Ava:92`.",
-              "hint": "Read the first line from the file, split it, clean both pieces, and print them with a colon.",
+              "title": "Inspect the student export",
+              "prompt": "Open `data/students.csv` in read mode with `csv.DictReader`. Loop through every row and print `name:score` using the named CSV columns. Do not clean or reject anything yet; this preview is only for seeing the imported data.",
+              "hint": "Start with the file exactly as it arrived so you can see which rows need cleaning.",
               "help": {
-                "concept": "This card practices cleaning a real row from the same file shape used in the project.",
-                "hint_1": "Use `with open(\"data/students.csv\") as file:` and `first_row = file.readline()`.",
-                "hint_2": "Split the row, use `.strip().title()` for the name, and print `name:score`."
+                "concept": "A data-cleaning project begins by reading the real source file and understanding its shape before transforming it.",
+                "hint_1": "Create `reader = csv.DictReader(file)` inside the open-file block.",
+                "hint_2": "Loop through `reader` and use `row[\"name\"]` and `row[\"score\"]` rather than hard-coded output."
               },
-              "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
-              "solutionCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
+              "starterCode": "import csv\n\n# Open data/students.csv in read mode.\n# Use csv.DictReader and print each row as name:score.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\n# Open data/students.csv in read mode.\n# Use csv.DictReader and print each row as name:score.\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "solutionCode": "import csv\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Read the row from data/students.csv."
+                  "message": "Read `data/students.csv` with `csv.DictReader`."
                 },
                 "1": {
-                  "message": "Split the row into name and score."
+                  "message": "Loop through every CSV row."
                 },
                 "2": {
-                  "message": "Strip spaces from the name and score."
+                  "message": "Access both the `name` and `score` columns from each row."
+                }
+              }
+            },
+            "mp-1-read-student-file": {
+              "title": "Clean and validate each CSV row",
+              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
+              "hint": "Reuse the exact validation sequence from 7.5, but apply it to dictionary-like CSV rows.",
+              "help": {
+                "concept": "The helper should produce one dependable result: a cleaned dictionary for valid input or `None` for rejected input.",
+                "hint_1": "Check `name == \"\"` before attempting the score conversion.",
+                "hint_2": "Catch exactly `ValueError`, then apply the 0-through-100 range check."
+              },
+              "starterCode": "import csv\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `clean_row(row)` and read both named CSV fields from `row`."
+                },
+                "1": {
+                  "message": "Reject an empty cleaned name with `name == \"\"`."
+                },
+                "2": {
+                  "message": "Catch exactly `ValueError` from the score conversion."
                 },
                 "3": {
-                  "message": "Title-case the student name."
+                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                }
+              }
+            },
+            "mp-2-clean-one-row": {
+              "title": "Collect only valid student records",
+              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop.",
+              "hint": "The cleaner already decides whether a row is valid; this step should only collect accepted results.",
+              "help": {
+                "concept": "Separating row validation from record collection keeps each responsibility small and reusable.",
+                "hint_1": "Store the helper result in `record` instead of calling the function several times.",
+                "hint_2": "Append only when `record is not None`."
+              },
+              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Create `records = []` before reading the file."
+                },
+                "1": {
+                  "message": "Call `clean_row(row)` inside the DictReader loop."
+                },
+                "2": {
+                  "message": "Append only when the returned record is not `None`."
+                }
+              }
+            },
+            "mp-3-skip-bad-rows": {
+              "title": "Write the cleaned CSV file",
+              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it.",
+              "hint": "Use the `records` list as the source for the final file instead of cleaning the CSV a second time.",
+              "help": {
+                "concept": "Write mode should replace the old export, then one `file.write(...)` call can write each cleaned record.",
+                "hint_1": "Write the header first: `name,score\\n`.",
+                "hint_2": "Loop through `records` and write each name and numeric score on one line."
+              },
+              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open `output/clean_students.csv` with mode `\"w\"`."
+                },
+                "1": {
+                  "message": "Write the `name,score` header before the record rows."
+                },
+                "2": {
+                  "message": "Loop through `records` and write each cleaned record with `file.write()`."
+                },
+                "3": {
+                  "message": "Print the number of clean records written."
+                }
+              }
+            },
+            "mp-4-write-clean-records": {
+              "title": "Verify the saved clean CSV",
+              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records.",
+              "hint": "The saved file is the deliverable, so verify the artifact itself instead of trusting only the in-memory list.",
+              "help": {
+                "concept": "Reopen the same path after the write block has finished.",
+                "hint_1": "Print `file.read()` with `end=\"\"` so the file contents appear exactly as saved.",
+                "hint_2": "The output file should contain only the header and accepted cleaned rows."
+              },
+              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "data_students_csv": {
+                  "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
+                },
+                "output_clean_students_csv": {
+                  "content": "old export\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep writing `output/clean_students.csv` in write mode."
+                },
+                "1": {
+                  "message": "Reopen the same output path in read mode after writing it."
+                },
+                "2": {
+                  "message": "Print the actual saved file contents."
                 }
               }
             }
@@ -17524,1904 +16282,1303 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_module_7_clean_student_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Open `data/students.csv`, read the first row, clean the name and score, and print `Ava:92`."
+              "prompt": "Inspect the student export with `csv.DictReader` before the project starts."
             },
             "allowReveal": true
           }
         },
         "reading-text-files": {
           "label": "Reading Text Files",
-          "summary": "Open files, read text, and close resources safely.",
+          "summary": "Open existing text files with `with open(..., \"r\")`, read a whole file with `.read()` or process it one line at a time, and use relative paths for files inside the workspace.",
           "cards": {
             "sketch0": {
-              "title": "Why read text files?"
+              "title": "Open and read a whole text file"
             },
             "sketch1": {
-              "title": "Reading all text or line by line"
+              "title": "Process a file one line at a time"
             },
             "sketch2": {
-              "title": "Relative paths and safe file access"
+              "title": "Read a file from a relative path"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-read-mode": {
-              "title": "Read mode",
-              "prompt": "Which file mode is used to open a text file for reading?",
-              "hint": "Use the question wording and the lesson example to narrow the choices.",
+            "sc-open-read": {
+              "title": "Open a nested file for reading",
+              "prompt": "Which line safely opens `data/story.txt` for reading and gives the open file the name `file`?",
+              "hint": "Use a `with` block, the relative path, and read mode `r`.",
               "help": {
-                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Remove options that do not match the concept or evidence named in the question."
+                "concept": "`with open(path, \"r\") as file:` opens an existing text file for reading and closes it automatically when the block ends.",
+                "hint_1": "The relative path keeps the folder before the file name: `data/story.txt`.",
+                "hint_2": "Read mode is written as `\"r\"`."
               },
               "options": {
-                "a": "r",
-                "b": "w",
-                "c": "a",
-                "d": "x"
+                "a": "with open(\"data/story.txt\", \"r\") as file:",
+                "b": "with open(\"story.txt/data\", \"w\") as file:",
+                "c": "open.read(\"data/story.txt\") as file:",
+                "d": "with read(\"data/story.txt\") as file:"
               }
             },
-            "sc-relative-path": {
-              "title": "Relative path example",
-              "prompt": "Which path correctly refers to a file named `story.txt` inside a folder named `data`?",
-              "hint": "Use the folder name, then the file name.",
+            "sc-read-all": {
+              "title": "What .read() returns",
+              "prompt": "What does `file.read()` give you when `file` is an open text file?",
+              "hint": "Think about reading the complete contents at once.",
               "help": {
-                "concept": "A relative path describes a file's location from the current workspace location using folder names separated by `/`.",
-                "hint_1": "The folder should come before the file name.",
-                "hint_2": "Choose the option that looks like folder slash file."
+                "concept": "For a text file, `.read()` returns the remaining file contents as one string.",
+                "hint_1": "It does not return one number per line.",
+                "hint_2": "Choose the option describing one string containing the file text."
               },
               "options": {
-                "a": "story.txt/data",
-                "b": "data/story.txt",
-                "c": "/data/story.txt",
-                "d": "data-story.txt"
+                "a": "One string containing the remaining text",
+                "b": "A new file on disk",
+                "c": "Only the file name",
+                "d": "The number of lines in the file"
               }
             },
-            "mc-with-open-benefits": {
+            "sc-line-loop": {
+              "title": "Read one line at a time",
+              "prompt": "Which pattern processes an open text file one line at a time?",
+              "hint": "An open file can be used directly in a `for` loop.",
+              "help": {
+                "concept": "`for line in file:` gives the loop one line from the open file at a time.",
+                "hint_1": "You do not need `.read()` when you want to iterate through the file directly.",
+                "hint_2": "Look for the `for line in file:` pattern."
+              },
+              "options": {
+                "a": "for line in file:",
+                "b": "for file in line:",
+                "c": "line = file.read()",
+                "d": "while file = line:"
+              }
+            },
+            "sc-with-cleanup": {
               "title": "Why use with open",
-              "prompt": "Choose all true statements about using `with open(...) as file:` when reading text files.",
-              "hint": "Think about what `with` does for the file resource and how you access the file inside the block.",
+              "prompt": "What happens to the file when execution leaves a `with open(...) as file:` block?",
+              "hint": "The `with` statement manages the file resource for you.",
               "help": {
-                "concept": "`with open(...) as file:` creates a managed file block. You use the file variable inside the block, and Python handles closing the file afterward.",
-                "hint_1": "Look for statements about automatic closing and using the variable after `as`.",
-                "hint_2": "Two statements are correct: one about cleanup and one about the file variable name."
+                "concept": "The `with` statement closes the file automatically when the block ends, even though you did not call `file.close()` yourself.",
+                "hint_1": "The file is not deleted or rewritten.",
+                "hint_2": "The managed file is closed after the block."
               },
               "options": {
-                "a": "It helps make sure the file is closed after the block ends.",
-                "b": "It creates a variable like `file` that you can call `.read()` on.",
-                "c": "It always writes new text into the file before reading.",
-                "d": "It only works for files in the same folder, not nested folders."
+                "a": "Python closes the file automatically",
+                "b": "Python deletes the file",
+                "c": "Python changes the file to write mode",
+                "d": "Python keeps the file open forever"
               }
-            },
-            "mc-read-methods": {
-              "title": "Reading methods",
-              "prompt": "Choose all statements that are true about `read()` and `readlines()`.",
-              "hint": "One returns a single string, and the other returns a list of lines.",
-              "help": {
-                "concept": "`read()` gets the whole file as one string, while `readlines()` returns a list where each item is a line, often including newline characters.",
-                "hint_1": "Look for the options describing one big string and a list of lines.",
-                "hint_2": "Two options are correct: one mentions a single string, and one mentions newline characters in line items."
-              },
-              "options": {
-                "a": "`read()` can return the whole file as one string.",
-                "b": "`readlines()` returns a list of lines.",
-                "c": "`read()` always removes every newline character automatically.",
-                "d": "`readlines()` returns one number for each line."
-              }
-            },
-            "dr-read-file-steps": {
-              "title": "Order the reading steps",
-              "prompt": "Put these steps in the correct order for reading and printing a file's contents.",
-              "hint": "Start by opening the file, then read, then print.",
-              "help": {
-                "concept": "A basic file-reading flow is: open the file, read its contents into a variable, then use that value such as by printing it.",
-                "hint_1": "The file must be opened before `.read()` can be used.",
-                "hint_2": "After reading into a variable, the last step is showing the result in the output panel."
-              },
-              "tokens": {
-                "t1": "Open the file with `with open(..., \"r\") as file:`",
-                "t2": "Read the text with `file.read()`",
-                "t3": "Store the result in a variable",
-                "t4": "Print the variable"
-              }
-            },
-            "dr-build-path": {
-              "title": "Build a relative path",
-              "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "data",
-                "t2": "/",
-                "t3": "report.txt"
-              }
-            },
-            "fb-read-call": {
-              "title": "Complete the read call",
-              "prompt": "Fill in the missing method name to read all text from an open file.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
-              },
-              "template": "text = file.[blank1]()",
-              "choices": [
-                "read",
-                "write",
-                "close",
-                "open"
-              ]
-            },
-            "fb-open-mode": {
-              "title": "Complete the open mode",
-              "prompt": "Fill in the missing mode so the file is opened for reading.",
-              "hint": "Focus on the missing concept rather than the exact missing term.",
-              "help": {
-                "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Think about what the missing part needs to do in the statement.",
-                "hint_2": "Choose the term that best completes the meaning of the statement."
-              },
-              "template": "with open(\"notes.txt\", \"[blank1]\") as file:",
-              "choices": [
-                "r",
-                "w",
-                "a",
-                "x"
-              ]
-            },
-            "ci-read-and-print": {
-              "title": "Print a file's contents",
-              "prompt": "Open `data/message.txt`, read the file's contents, and print the text you find there.\n\nYour output should be exactly:\n`Hello from file reading!`.",
-              "hint": "Read the task \"Print a file's contents\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run the completed step and verify every output line before submitting it."
-              },
-              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
-              "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/message.txt to read the file."
-                }
-              }
-            },
-            "ci-first-line": {
-              "title": "Print only the first line",
-              "prompt": "Open `data/notes.txt`, read only the first line, and print it without the ending newline character.\n\nYour output should be exactly:\n`Apples`.",
-              "hint": "Read the task \"Print only the first line\" and identify the required result.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
-              "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/notes.txt to read the file."
-                }
-              }
-            },
-            "ci-count-lines": {
-              "title": "Count lines in a text file",
-              "prompt": "Open `data/list.txt`, count how many lines are in the file, and print that number.\n\nYour output should be exactly:\n`3`.",
-              "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
-              "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/list.txt to count the lines."
-                }
-              }
-            },
-            "try-reading-text-files-checkpoint": {
-              "title": "Read a text file",
-              "prompt": "Read `data/note.txt` and print its contents without adding extra text.",
-              "hint": "Use `with open(\"data/note.txt\") as file:` and `file.read()`.",
-              "help": {
-                "concept": "Open the file, read the text, and print exactly what was stored there.",
-                "hint_1": "Use `with open(\"data/note.txt\") as file:`.",
-                "hint_2": "Call `file.read()` and print the result without adding extra words."
-              },
-              "starterCode": "# Read data/note.txt and print its contents.\n",
-              "starterFiles": {
-                "data_note_txt": {
-                  "content": "Hello from a file!\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
-                },
-                "data_note_txt": {
-                  "content": "Hello from a file!\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/note.txt instead of typing the file contents."
-                }
-              },
-              "solutionCode": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
             },
             "try-reading-text-files-sketch0": {
-              "title": "Read and print a note file",
-              "prompt": "Open `note.txt`, read all of its text, and print exactly what is in the file.",
-              "hint": "Use `with open(\"note.txt\") as file:` and print `file.read()`.",
+              "title": "Read the whole message file",
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file.",
+              "hint": "Use `with open(\"message.txt\", \"r\") as file:` and `message = file.read()`.",
               "help": {
-                "concept": "This card practices reading one whole file at once.",
-                "hint_1": "Open `note.txt` first, then call `file.read()` inside the `with` block.",
-                "hint_2": "Print only the saved text from the file."
+                "concept": "Use `.read()` when you want the complete text file as one string.",
+                "hint_1": "Store the result of `file.read()` in `message`.",
+                "hint_2": "Print the variable instead of typing the file's contents into your program."
               },
-              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+              "starterCode": "# Open message.txt in read mode.\n# Read all of its text into message, then print message.\n",
               "starterFiles": {
-                "note_txt": {
-                  "content": "Hello from a file\n"
+                "main_py": {
+                  "content": "# Open message.txt in read mode.\n# Read all of its text into message, then print message.\n"
+                },
+                "message_txt": {
+                  "content": "Keep learning."
                 }
               },
+              "solutionCode": "with open(\"message.txt\", \"r\") as file:\n    message = file.read()\n\nprint(message)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "with open('note.txt') as file:\n    print(file.read().strip())\n"
+                  "content": "with open(\"message.txt\", \"r\") as file:\n    message = file.read()\n\nprint(message)\n"
                 },
-                "note_txt": {
-                  "content": "Hello from a file\n"
+                "message_txt": {
+                  "content": "Keep learning."
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open note.txt instead of typing the file contents."
-                }
-              },
-              "solutionCode": "with open('note.txt') as file:\n    print(file.read().strip())\n"
-            },
-            "try-reading-text-files-sketch1": {
-              "title": "Print each line from a file",
-              "prompt": "Open `names.txt`, loop through the file, and print each name on its own line.",
-              "hint": "Use `for line in file:` and print `line.strip()`.",
-              "help": {
-                "concept": "This card practices reading one line at a time with a loop.",
-                "hint_1": "Open `names.txt`, then use `for line in file:`.",
-                "hint_2": "Print `line.strip()` so each name shows once without extra blank lines."
-              },
-              "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
-              "starterFiles": {
-                "names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
-                },
-                "names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Open names.txt instead of typing the names directly."
-                }
-              },
-              "solutionCode": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
-            },
-            "try-reading-text-files-sketch2": {
-              "title": "Count file lines",
-              "prompt": "Open `names.txt`, count how many lines it has, and print the number.",
-              "hint": "Start with `count = 0`, then add 1 for each line in the file.",
-              "help": {
-                "concept": "This card practices using a counter while you read a file line by line.",
-                "hint_1": "Open `names.txt`, loop through it, and increase `count` inside the loop.",
-                "hint_2": "After the loop ends, print the final count."
-              },
-              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
-              "starterFiles": {
-                "names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
-                },
-                "names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Read names.txt instead of typing the final count."
+                  "message": "Open `message.txt` with a `with open(..., \"r\") as file:` block."
                 },
                 "1": {
-                  "message": "Loop through the file lines to count them."
+                  "message": "Use `file.read()` to read the whole file."
                 },
                 "2": {
-                  "message": "Use open(...) to read the file."
+                  "message": "Store the result of `file.read()` in `message` before printing it."
+                }
+              }
+            },
+            "try-reading-text-files-sketch1": {
+              "title": "Process names one line at a time",
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with `for line in file:` and print each name with surrounding whitespace removed.",
+              "hint": "Inside the `with` block, use `for line in file:` and `print(line.strip())`.",
+              "help": {
+                "concept": "Iterating over an open file lets you process one line at a time without first reading the whole file into one string.",
+                "hint_1": "The loop iterable should be the open variable `file`.",
+                "hint_2": "Use `line.strip()` before printing so the stored newline does not create extra blank lines."
+              },
+              "starterCode": "# Open names.txt in read mode.\n# Loop through the open file and print each stripped line.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Open names.txt in read mode.\n# Loop through the open file and print each stripped line.\n"
+                },
+                "names_txt": {
+                  "content": "  Ava  \nMia\n  Noah\n"
                 }
               },
-              "solutionCode": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
+              "solutionCode": "with open(\"names.txt\", \"r\") as file:\n    for line in file:\n        print(line.strip())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"names.txt\", \"r\") as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "names_txt": {
+                  "content": "  Ava  \nMia\n  Noah\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open `names.txt` in read mode with a `with` block."
+                },
+                "1": {
+                  "message": "Loop directly through the open `file` one line at a time."
+                },
+                "2": {
+                  "message": "Strip each line before printing it."
+                }
+              }
+            },
+            "try-reading-text-files-sketch2": {
+              "title": "Read and clean text from a data folder",
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name.",
+              "hint": "Open `data/city.txt`, then use `.read().strip().title()` on the open file.",
+              "help": {
+                "concept": "A relative path can point to a file inside a workspace folder, and the string returned by `.read()` can be processed like any other string.",
+                "hint_1": "The path is exactly `data/city.txt`.",
+                "hint_2": "Read the text first, then apply `.strip()` and `.title()` before printing."
+              },
+              "starterCode": "# Read data/city.txt in read mode.\n# Clean the file text with strip() and title(), then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Read data/city.txt in read mode.\n# Clean the file text with strip() and title(), then print it.\n"
+                },
+                "data_city_txt": {
+                  "content": "  seAttle  \n"
+                }
+              },
+              "solutionCode": "with open(\"data/city.txt\", \"r\") as file:\n    city = file.read().strip().title()\n\nprint(city)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/city.txt\", \"r\") as file:\n    city = file.read().strip().title()\n\nprint(city)\n"
+                },
+                "data_city_txt": {
+                  "content": "  seAttle  \n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open the relative path `data/city.txt` in read mode."
+                },
+                "1": {
+                  "message": "Read the city text from the file instead of hard-coding a city name."
+                },
+                "2": {
+                  "message": "Remove surrounding whitespace from the text read from the file."
+                },
+                "3": {
+                  "message": "Convert the city text to title case."
+                }
+              }
             }
           },
           "tryIt": {
-            "try_reading_text_files_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Read `data/note.txt` and print its contents without adding extra text."
-            },
             "try_reading_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Open `note.txt`, read all of its text, and print exactly what is in the file."
+              "prompt": "Read a complete text file into one string and print the value you read."
             },
             "try_reading_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Open `names.txt`, loop through the file, and print each name on its own line."
+              "prompt": "Process an open text file one line at a time."
             },
             "try_reading_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Open `names.txt`, count how many lines it has, and print the number."
+              "prompt": "Read text from a relative path and use the returned string."
             },
             "allowReveal": true
           }
         },
         "simple-csv-processing": {
           "label": "Simple CSV Processing",
-          "summary": "Use the csv module to read comma-separated rows, access values by column name, and clean simple data while processing rows safely.",
+          "summary": "Read CSV files with `csv.DictReader`, access values by header name, clean and convert row values, and keep valid rows moving through a simple processing loop.",
           "cards": {
             "sketch0": {
-              "title": "Reading CSV rows as dictionaries"
+              "title": "Read CSV rows by column name"
             },
             "sketch1": {
-              "title": "Cleaning values from CSV rows"
+              "title": "Clean and convert CSV values"
             },
             "sketch2": {
-              "title": "Skipping bad rows safely"
+              "title": "Process valid rows and reject bad data safely"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-import-csv": {
-              "title": "Why import csv?",
-              "prompt": "Why do you write `import csv` before using `csv.DictReader`?",
-              "hint": "Think about where `DictReader` comes from.",
+            "sc-dictreader-purpose": {
+              "title": "Why use DictReader?",
+              "prompt": "What is the main beginner benefit of `csv.DictReader(file)` when the CSV has a header row such as `name,score`?",
+              "hint": "Think about how you access `row[\"name\"]`.",
               "help": {
-                "concept": "`DictReader` is part of Python's standard library `csv` module, so the module must be imported before you can use `csv.DictReader`.",
-                "hint_1": "Look for the choice that says the code is making CSV tools available from a module.",
-                "hint_2": "Without the import, Python does not know what `csv` refers to."
+                "concept": "`csv.DictReader` uses the header row as keys, so later rows can be accessed by meaningful column names.",
+                "hint_1": "The header labels become names such as `name` and `score`.",
+                "hint_2": "Choose the answer about dictionary-like rows and named columns."
               },
               "options": {
-                "a": "It makes the `csv` module available so you can use `csv.DictReader`.",
-                "b": "It automatically cleans spaces from every CSV value.",
-                "c": "It turns every CSV value into an integer.",
-                "d": "It creates a new CSV file if one does not exist."
+                "a": "Each row can be accessed with keys such as `row[\"name\"]` and `row[\"score\"]`",
+                "b": "Every value is automatically converted to an integer",
+                "c": "The CSV file is rewritten with cleaner spacing",
+                "d": "The header row is deleted from disk"
               }
             },
-            "sc-dictreader-row-type": {
-              "title": "What does DictReader produce?",
-              "prompt": "When you loop through `csv.DictReader(file)`, what is each `row` most like?",
-              "hint": "Think about accessing values with column names like `row[\"name\"]`.",
+            "sc-csv-value-type": {
+              "title": "CSV values start as text",
+              "prompt": "If a CSV row contains `Ava,92`, what kind of value is `row[\"score\"]` when it first comes from `csv.DictReader`?",
+              "hint": "Reading CSV data does not automatically perform numeric conversion.",
               "help": {
-                "concept": "`csv.DictReader` uses the header row as keys, so each row behaves like a dictionary mapping column names to text values.",
-                "hint_1": "If you can use a column name inside square brackets, the row is key-based.",
-                "hint_2": "The header labels become keys such as `name` and `score`."
+                "concept": "`csv.DictReader` reads field values as strings. Numeric-looking text must still be converted before numeric calculations.",
+                "hint_1": "The characters `92` came from a text file.",
+                "hint_2": "Choose the string value rather than the integer value."
               },
               "options": {
-                "a": "A dictionary that maps column names to values",
-                "b": "A single integer from the row",
-                "c": "A list of file names",
-                "d": "A function that cleans the row"
+                "a": "The string `\"92\"`",
+                "b": "The integer `92`",
+                "c": "The float `92.0`",
+                "d": "A dictionary containing only the score"
               }
             },
-            "mc-clean-score-steps": {
-              "title": "Clean a score value",
-              "prompt": "A CSV row has `row[\"score\"] == \" 12 \"`. Which steps correctly prepare it for math? Choose all that apply.",
-              "hint": "You need a number, not spaced text.",
+            "sc-clean-convert-order": {
+              "title": "Clean before numeric conversion",
+              "prompt": "A CSV score field is `\" 92 \"`. Which expression correctly removes surrounding spaces and converts it to an integer?",
+              "hint": "Clean the string first, then pass the cleaned text to `int(...)`.",
               "help": {
-                "concept": "CSV values are read as strings. To use a numeric field in math, remove extra spaces if needed and convert the cleaned text to an integer.",
-                "hint_1": "One correct step removes surrounding spaces, and another converts text to a number.",
-                "hint_2": "Methods like `.strip()` clean text, while `int(...)` changes the type."
+                "concept": "CSV values are strings, so a common numeric-field pattern is `int(row[\"score\"].strip())`.",
+                "hint_1": "`.strip()` removes surrounding whitespace.",
+                "hint_2": "`int(...)` performs the numeric conversion after cleaning."
               },
               "options": {
-                "a": "Use `.strip()` on the score text",
-                "b": "Use `int(...)` on the cleaned score text",
-                "c": "Leave it as text and add 1 directly",
-                "d": "Use `dict(row)` to turn the score into a number"
+                "a": "int(row[\"score\"].strip())",
+                "b": "row[\"score\"].int().strip()",
+                "c": "row[\"score\"] + 1",
+                "d": "csv.int(row[\"score\"])"
               }
             },
-            "mc-good-csv-processing": {
-              "title": "Useful CSV processing patterns",
-              "prompt": "Which snippets are good beginner patterns for simple CSV processing? Choose all that apply.",
-              "hint": "Look for patterns that use the csv module and column names clearly.",
+            "sc-bad-row-policy": {
+              "title": "Reject one bad row without stopping later rows",
+              "prompt": "While processing many CSV rows, one cleaned score contains `\"oops\"`. What beginner pattern lets the program reject that row and continue processing later rows?",
+              "hint": "Use the specific conversion exception from the previous topics.",
               "help": {
-                "concept": "Good beginner CSV processing uses `import csv`, `csv.DictReader`, and clear access by header names. Printing `dict(row)` is also useful for inspecting a row safely.",
-                "hint_1": "One correct option reads rows with `csv.DictReader`, and another prints a full row dictionary for inspection.",
-                "hint_2": "Avoid choices that claim CSV values become numbers automatically or that skip importing the module."
+                "concept": "Catch `ValueError` around the integer conversion for that row, then continue the surrounding row-processing logic.",
+                "hint_1": "The problem is invalid integer text, not a missing file.",
+                "hint_2": "Choose the pattern that handles `ValueError` rather than crashing the whole CSV loop."
               },
               "options": {
-                "a": "`import csv` followed by `reader = csv.DictReader(file)`",
-                "b": "`print(dict(row))` inside a loop to inspect each row",
-                "c": "Using `row[\"score\"]` to access a named column",
-                "d": "Assuming `row[\"score\"]` is already an integer without conversion"
-              }
-            },
-            "dr-read-csv-order": {
-              "title": "Order the CSV reading steps",
-              "prompt": "Put these steps in the correct order for reading a CSV file with `DictReader` and printing one column.",
-              "hint": "Start by making the csv tools available, then open the file, then create the reader.",
-              "help": {
-                "concept": "A CSV-reading script usually follows a sequence: import the module, open the file, create a `DictReader`, loop through rows, then access values by column name.",
-                "hint_1": "The loop happens after the reader is created.",
-                "hint_2": "Accessing `row[\"name\"]` must happen inside the loop, after a row exists."
-              },
-              "tokens": {
-                "t1": "print(row[\"name\"])",
-                "t2": ": for row in reader",
-                "t3": "reader = csv.DictReader(file)",
-                "t4": "with open(\"names.csv\") as file",
-                "t5": "import csv"
-              }
-            },
-            "dr-clean-row-order": {
-              "title": "Order the row-cleaning steps",
-              "prompt": "Arrange these actions in the order that cleans a score and then uses it in math.",
-              "hint": "Get the text first, clean it, convert it, then calculate.",
-              "help": {
-                "concept": "When cleaning numeric CSV data, first read the text value, then strip spaces, then convert to `int`, and only after that use it in arithmetic.",
-                "hint_1": "Arithmetic should happen after conversion to an integer.",
-                "hint_2": "`.strip()` belongs before `int(...)`, because it cleans the text that `int` will read."
-              },
-              "tokens": {
-                "t1": "add 1 to the integer score",
-                "t2": "convert the cleaned text with `int(...)`",
-                "t3": "read `row[\"score\"]`",
-                "t4": "remove spaces with `.strip()`"
-              }
-            },
-            "fb-dictreader-name": {
-              "title": "Choose the CSV reader tool",
-              "prompt": "Complete the code so rows can be accessed by column name.",
-              "hint": "Use the csv tool that creates dictionary-like rows.",
-              "help": {
-                "concept": "Choose the csv reader that uses the header row as dictionary keys for every later record.",
-                "hint_1": "The missing value is the reader class name after `csv.`.",
-                "hint_2": "It is not `reader` or `split`; it is the CSV helper that starts with `Dict`."
-              },
-              "template": "reader = csv.[blank1](file)",
-              "choices": [
-                "DictReader",
-                "reader",
-                "split",
-                "Writer"
-              ]
-            },
-            "fb-strip-choice": {
-              "title": "Choose the cleaning method",
-              "prompt": "Fill in the missing method to remove spaces around a CSV value.",
-              "hint": "This string method removes spaces from both ends.",
-              "help": {
-                "concept": "Choose the string-cleaning method that removes whitespace from both ends before conversion.",
-                "hint_1": "The missing method is called on a string like `row[\"name\"]`.",
-                "hint_2": "It is the method that turns `\" Ava \"` into `\"Ava\"`."
-              },
-              "template": "clean_name = row[\"name\"].[blank1]()",
-              "choices": [
-                "strip",
-                "append",
-                "write",
-                "read"
-              ]
-            },
-            "ci-print-clean-names": {
-              "title": "Print cleaned names from a CSV file",
-              "prompt": "Read `students.csv` with `csv.DictReader`, clean each name as you loop through the rows, and print the cleaned names.\n\nYour output should be exactly:\n`Ava`\n`Ben`.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
-              "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
-              "sourceChecks": {
-                "0": {
-                  "message": "Strip each CSV name before printing it."
-                }
-              }
-            },
-            "ci-sum-valid-scores": {
-              "title": "Sum valid scores from CSV",
-              "prompt": "Read `scores.csv`, clean each score, try to convert it to an integer, and add only the valid numbers to `total`. Print `total` after the loop.\n\nYour output should be exactly:\n`16`.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
-              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use try/except for invalid score values."
-                },
-                "1": {
-                  "message": "Convert score text with int()."
-                }
-              }
-            },
-            "ci-write-summary-file": {
-              "title": "Write a CSV summary file",
-              "prompt": "Build a short report from `scores.csv`. As you loop, update `valid_rows` and `total_score` for rows with valid integer scores, then write those results to `summary.txt` and print the file contents.\n\nYour output should be exactly:\n`valid_rows: 2`\n`total_score: 16`.",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
-              "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use try/except for invalid score values."
-                },
-                "1": {
-                  "message": "Write the summary to summary.txt."
-                }
-              }
-            },
-            "try-simple-csv-processing-checkpoint": {
-              "title": "Read the first CSV row",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, and print the name on one line and the score on the next line.",
-              "hint": "Import `csv`, create `csv.DictReader(file)`, then use the first row.",
-              "help": {
-                "concept": "This card starts the lesson with a real CSV file instead of a hard-coded string row.",
-                "hint_1": "Use `import csv` and `with open(\"scores.csv\") as file:`.",
-                "hint_2": "Create `reader = csv.DictReader(file)`, get the first row, and print `row[\"name\"]` and `row[\"score\"]`."
-              },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
-              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use csv.DictReader to read scores.csv."
-                },
-                "1": {
-                  "message": "Open scores.csv for this step."
-                }
+                "a": "Use `try` around `int(...)` and catch `ValueError` for that row",
+                "b": "Assume every score is already valid",
+                "c": "Catch `FileNotFoundError` around the integer conversion",
+                "d": "Convert every bad score to 0 automatically"
               }
             },
             "try-simple-csv-processing-sketch0": {
-              "title": "Clean one CSV row from a file",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, strip spaces from the `name` and `score`, and print each cleaned value on its own line.",
-              "hint": "Read the first row from `csv.DictReader`, then use `.strip()` on both values.",
+              "title": "Read rows by header name",
+              "prompt": "Read a CSV filename from input and build `path = \"data/\" + filename`. Open that file in read mode, create `csv.DictReader(file)`, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
+              "hint": "Use the CSV header names instead of splitting each line manually.",
               "help": {
-                "concept": "This card practices cleaning text values after reading them from a CSV file.",
-                "hint_1": "Use `row[\"name\"].strip()` and `row[\"score\"].strip()`.",
-                "hint_2": "Print the cleaned name first, then the cleaned score."
+                "concept": "`csv.DictReader` turns each data row into a dictionary-like object whose keys come from the header row.",
+                "hint_1": "Create `reader = csv.DictReader(file)` inside the open-file block.",
+                "hint_2": "Use a `for row in reader:` loop and access both named columns from `row`."
               },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
-              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+              "starterCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\n# Open path in read mode with csv.DictReader.\n# Loop through every row and print name:score using the named columns.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\n# Open path in read mode with csv.DictReader.\n# Loop through every row and print name:score using the named columns.\n"
+                },
+                "data_class_a_csv": {
+                  "content": "name,score\nAva,92\nBen,85\n"
+                },
+                "data_class_b_csv": {
+                  "content": "name,score\nMia,78\nNoah,88\nLiam,91\n"
+                }
+              },
+              "solutionCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \":\" + row[\"score\"])\n"
+                },
+                "data_class_a_csv": {
+                  "content": "name,score\nAva,92\nBen,85\n"
+                },
+                "data_class_b_csv": {
+                  "content": "name,score\nMia,78\nNoah,88\nLiam,91\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use csv.DictReader to read the row."
+                  "message": "Import `csv` and create `csv.DictReader(file)`."
                 },
                 "1": {
-                  "message": "Strip spaces from the CSV values."
+                  "message": "Loop through `reader` instead of hard-coding the rows."
+                },
+                "2": {
+                  "message": "Access both `row[\"name\"]` and `row[\"score\"]`."
                 }
               }
             },
             "try-simple-csv-processing-sketch1": {
-              "title": "Loop through CSV rows",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, loop through every row, and print each one as `name: score`.",
-              "hint": "Loop through the reader and build one formatted line from each row.",
+              "title": "Clean and convert CSV fields",
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with `.strip().title()`, clean and convert the score with `int(row[\"score\"].strip())`, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
+              "hint": "CSV field values are strings, so clean the text before converting the score.",
               "help": {
-                "concept": "This card practices row-by-row CSV processing with named columns.",
-                "hint_1": "Use `for row in reader:` after you create `csv.DictReader(file)`.",
-                "hint_2": "Print `f\"{row[\"name\"]}: {row[\"score\"]}\"` for each row."
+                "concept": "This step combines named-column access with the cleaning and integer-conversion skills you already know.",
+                "hint_1": "Store a cleaned `name` and numeric `score` inside the row loop.",
+                "hint_2": "Do not hard-code the displayed names or scores; use the values from each CSV row."
               },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
-              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+              "starterCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\n# Read every row with csv.DictReader.\n# Clean the name with strip().title(), convert the cleaned score with int(),\n# and print Name:score for each row.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\n# Read every row with csv.DictReader.\n# Clean the name with strip().title(), convert the cleaned score with int(),\n# and print Name:score for each row.\n"
+                },
+                "data_clean_a_csv": {
+                  "content": "name,score\n aVA , 92 \n ben lee , 85\n"
+                },
+                "data_clean_b_csv": {
+                  "content": "name,score\n mIA , 70 \n NOAH , 100 \n"
+                }
+              },
+              "solutionCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score = int(row[\"score\"].strip())\n        print(name + \":\" + str(score))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score = int(row[\"score\"].strip())\n        print(name + \":\" + str(score))\n"
+                },
+                "data_clean_a_csv": {
+                  "content": "name,score\n aVA , 92 \n ben lee , 85\n"
+                },
+                "data_clean_b_csv": {
+                  "content": "name,score\n mIA , 70 \n NOAH , 100 \n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use csv.DictReader to read the rows."
+                  "message": "Read rows with `csv.DictReader` and loop through `reader`."
                 },
                 "1": {
-                  "message": "Loop through the CSV rows instead of hard-coding the output."
+                  "message": "Clean each `name` field with both `strip()` and `title()`."
+                },
+                "2": {
+                  "message": "Convert the cleaned `score` field with `int(...)`."
                 }
               }
             },
             "try-simple-csv-processing-sketch2": {
-              "title": "Add CSV scores",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, convert each score to an integer, add the scores into `total`, and print `total`.",
-              "hint": "Loop through the reader, convert `row[\"score\"]` with `int(...)`, and add it to `total`.",
+              "title": "Summarize only valid CSV rows",
+              "prompt": "Read a CSV filename from input and process `data/<filename>` with `csv.DictReader`. Clean each name and score field. Count and sum only rows whose cleaned name is not empty and whose score converts to an integer from 0 through 100. After the loop, print exactly `valid_rows: <count>` and `total_score: <sum>`. Invalid rows should not stop later rows from being processed.",
+              "hint": "Apply the 7.5 validation rules inside the CSV row loop.",
               "help": {
-                "concept": "This card practices the full CSV pattern: read rows, convert score text, and do math safely.",
-                "hint_1": "Start with `total = 0`, then loop through `csv.DictReader(file)`.",
-                "hint_2": "Use `int(row[\"score\"])` inside the loop before adding to `total`."
+                "concept": "A CSV row is accepted only after the name, conversion, and range checks all succeed.",
+                "hint_1": "Catch exactly `ValueError` and set `score = None` so invalid numeric text has an explicit rejection value.",
+                "hint_2": "Increment `valid_rows` and `total_score` only inside the valid 0-through-100 branch."
               },
-              "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
-              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+              "starterCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\nvalid_rows = 0\ntotal_score = 0\n\n# Read every CSV row.\n# Clean the name and score text.\n# Count and sum only rows with a non-empty name and an integer score from 0..100.\n# Print valid_rows and total_score after the loop.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\nvalid_rows = 0\ntotal_score = 0\n\n# Read every CSV row.\n# Clean the name and score text.\n# Count and sum only rows with a non-empty name and an integer score from 0..100.\n# Print valid_rows and total_score after the loop.\n"
+                },
+                "data_mixed_a_csv": {
+                  "content": "name,score\n Ava ,92\n ,75\nLeo,ten\nMia,105\nNoah,80\n"
+                },
+                "data_mixed_b_csv": {
+                  "content": "name,score\n kai ,0\nLena,100\nOmar,-2\nIvy,55\nNia,oops\n"
+                }
+              },
+              "solutionCode": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\nvalid_rows = 0\ntotal_score = 0\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score_text = row[\"score\"].strip()\n\n        if name != \"\":\n            try:\n                score = int(score_text)\n            except ValueError:\n                score = None\n\n            if score is not None and 0 <= score <= 100:\n                valid_rows += 1\n                total_score += score\n\nprint(\"valid_rows: \" + str(valid_rows))\nprint(\"total_score: \" + str(total_score))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\nfilename = input().strip()\npath = \"data/\" + filename\nvalid_rows = 0\ntotal_score = 0\n\nwith open(path, \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score_text = row[\"score\"].strip()\n\n        if name != \"\":\n            try:\n                score = int(score_text)\n            except ValueError:\n                score = None\n\n            if score is not None and 0 <= score <= 100:\n                valid_rows += 1\n                total_score += score\n\nprint(\"valid_rows: \" + str(valid_rows))\nprint(\"total_score: \" + str(total_score))\n"
+                },
+                "data_mixed_a_csv": {
+                  "content": "name,score\n Ava ,92\n ,75\nLeo,ten\nMia,105\nNoah,80\n"
+                },
+                "data_mixed_b_csv": {
+                  "content": "name,score\n kai ,0\nLena,100\nOmar,-2\nIvy,55\nNia,oops\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use csv.DictReader to read the rows."
+                  "message": "Read every row with `csv.DictReader` and a `for row in reader:` loop."
                 },
                 "1": {
-                  "message": "Loop through the CSV rows instead of hard-coding the total."
+                  "message": "Reject an empty cleaned name before counting the row."
                 },
                 "2": {
-                  "message": "Convert the score text with int()."
+                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
                 },
                 "3": {
-                  "message": "Add each numeric score into total."
+                  "message": "Count and sum only scores in the inclusive range 0 through 100."
                 }
               }
             }
           },
           "tryIt": {
-            "try_simple_csv_processing_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, and print the name on one line and the score on the next line."
-            },
             "try_simple_csv_processing_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, strip spaces from the `name` and `score`, and print each cleaned value on its own line."
+              "prompt": "Read a selected CSV file with `csv.DictReader` and use named columns."
             },
             "try_simple_csv_processing_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, loop through every row, and print each one as `name: score`."
+              "prompt": "Clean CSV text values and convert a numeric column."
             },
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Open `scores.csv` with `csv.DictReader`, convert each score to an integer, add the scores into `total`, and print `total`."
+              "prompt": "Process only valid CSV rows and summarize the accepted scores."
             },
             "allowReveal": true
           }
         },
         "try-except-basics": {
           "label": "Try/Except Basics",
-          "summary": "Catch expected errors and keep programs usable.",
+          "summary": "Protect an operation that may fail with `try`, catch the specific expected exception, and keep the program usable with a clear fallback instead of a crash.",
           "cards": {
             "sketch0": {
-              "title": "What try/except does"
+              "title": "Catch ValueError from a risky conversion"
             },
             "sketch1": {
-              "title": "Only the risky line needs protection"
+              "title": "Catch FileNotFoundError when opening a path"
             },
             "sketch2": {
-              "title": "Use exceptions to keep programs usable"
+              "title": "Continue after a handled exception"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "q1": {
-              "title": "What happens after a caught conversion error?",
-              "prompt": "A program runs this pattern:\n\n```python\ntry:\n    number = int(text)\nexcept ValueError:\n    print(\"Bad number\")\n```\n\nIf `text` is `\"cat\"`, what happens?",
-              "hint": "Think about what `int()` does with text that is not a valid whole number.",
+            "sc-value-error": {
+              "title": "Match the conversion error",
+              "prompt": "Which exception should handle `int(text)` when `text` might contain something like `\"apple\"`?",
+              "hint": "An invalid value is being passed to a valid conversion function.",
               "help": {
-                "concept": "`except ValueError` handles failures from `int()` when text cannot be converted to an integer.",
-                "hint_1": "`int(\"cat\")` cannot produce a number, so Python raises a `ValueError`.",
-                "hint_2": "Because that specific error is caught, the program runs the `except` block instead of stopping immediately."
+                "concept": "`int(...)` raises `ValueError` when the text cannot represent a whole number.",
+                "hint_1": "The function name `int` exists, so this is not a `NameError`.",
+                "hint_2": "Choose the exception for a value that cannot be converted."
               },
               "options": {
-                "a": "The `except` block runs and prints `Bad number`",
-                "b": "The `try` block prints the converted number",
-                "c": "Python ignores the bad text and uses 0",
-                "d": "The program always stops before reaching `except`"
+                "a": "ValueError",
+                "b": "FileNotFoundError",
+                "c": "NameError",
+                "d": "IndexError"
               }
             },
-            "q2": {
-              "title": "Which error fits int conversion?",
-              "prompt": "Which exception type should you catch when `int(user_text)` might fail because the text is not a valid integer?",
-              "hint": "Work through the operation in Python terms, then select the matching option.",
+            "sc-file-not-found": {
+              "title": "Match the missing-file error",
+              "prompt": "Which exception should handle `open(\"data/missing.txt\", \"r\")` when the file does not exist?",
+              "hint": "The path points to a file that Python cannot find.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Opening a missing path for reading raises `FileNotFoundError`.",
+                "hint_1": "This is a file-location problem, not an integer-conversion problem.",
+                "hint_2": "Choose the exception whose name describes a missing file."
               },
               "options": {
-                "a": "NameError",
+                "a": "FileNotFoundError",
                 "b": "ValueError",
-                "c": "IndexError",
-                "d": "SyntaxError"
+                "c": "TypeError",
+                "d": "IndexError"
               }
             },
-            "q3": {
-              "title": "Why use try/except here?",
-              "prompt": "Choose all true reasons to use `try/except` around `int(text)` when cleaning messy input.",
-              "hint": "Look for benefits related to handling bad numeric text safely.",
+            "sc-matching-handler": {
+              "title": "What happens after an exception is caught",
+              "prompt": "When code inside `try` raises a `ValueError` and the program has `except ValueError:`, what happens next?",
+              "hint": "Python stops the remaining statements in that `try` block and jumps to the matching handler.",
               "help": {
-                "concept": "`try/except` is useful when some values may be invalid and you want the program to respond safely instead of crashing.",
-                "hint_1": "Think about what happens when one item is bad in a larger set of inputs.",
-                "hint_2": "Correct choices should mention graceful handling and continued program flow, not guaranteed conversion success."
+                "concept": "A matching `except` block handles the raised exception; statements after the failing line inside `try` are skipped.",
+                "hint_1": "Python does not continue the rest of the `try` block after the exception.",
+                "hint_2": "Choose the option where the matching `except` block runs."
               },
               "options": {
-                "a": "It lets the program handle invalid numeric text without crashing immediately",
-                "b": "It can show a fallback message when conversion fails",
-                "c": "It guarantees every string will become an integer",
-                "d": "It can help a loop continue processing later values after one bad value"
+                "a": "Python runs the matching `except ValueError` block",
+                "b": "Python ignores the error and continues the next line inside `try`",
+                "c": "Python changes the bad value to 0",
+                "d": "Python always stops before checking `except`"
               }
             },
-            "q4": {
-              "title": "Which inputs would trigger ValueError?",
-              "prompt": "Choose all values that would raise `ValueError` in `int(value)`.",
-              "hint": "Pick the strings that are not valid whole-number text.",
+            "sc-specific-exception": {
+              "title": "Why catch a specific exception",
+              "prompt": "Why is `except ValueError:` better here than a broad bare `except:` when the risky operation is `int(text)`?",
+              "hint": "Handle the error you expect instead of hiding unrelated problems.",
               "help": {
-                "concept": "`int()` accepts strings like `\"12\"` or `\"-3\"`, but rejects text with letters or decimal points in string form for plain integer conversion.",
-                "hint_1": "A minus sign with digits is still a valid integer string.",
-                "hint_2": "Look for values containing letters or a decimal point as text."
+                "concept": "Catching the specific expected exception makes the program's intent clearer and avoids silently swallowing unrelated bugs.",
+                "hint_1": "The known risk is an invalid integer value.",
+                "hint_2": "Choose the answer about handling that known error while leaving unrelated errors visible."
               },
               "options": {
-                "a": "\"18\"",
-                "b": "\"blue\"",
-                "c": "\"4.5\"",
-                "d": "\"-2\""
-              }
-            },
-            "q5": {
-              "title": "Order of execution when conversion fails",
-              "prompt": "Put these steps in the order they happen when `int(text)` raises `ValueError` inside a `try/except` block.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "Python enters the `try` block",
-                "t2": "`int(text)` raises `ValueError`",
-                "t3": "The rest of the `try` block is skipped",
-                "t4": "The matching `except` block runs"
-              }
-            },
-            "q6": {
-              "title": "Build a basic try/except pattern",
-              "prompt": "Arrange these code pieces into a correct basic pattern that converts input text to an integer and handles bad input.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "try:",
-                "t2": "number = int(text)",
-                "t3": "print(number)",
-                "t4": "except ValueError:",
-                "t5": "print(\"Invalid input\")"
-              }
-            },
-            "q7": {
-              "title": "Name the catching keyword",
-              "prompt": "Complete the code keyword that handles the error after `try`.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "try:\n    number = int(text)\n[blank1] ValueError:\n    print(\"Bad input\")",
-              "choices": [
-                "except",
-                "return",
-                "while",
-                "import"
-              ]
-            },
-            "q8": {
-              "title": "Choose the risky conversion",
-              "prompt": "Fill in the expression that can raise `ValueError` when the text is not a valid integer.",
-              "hint": "Use the built-in conversion from text to integer.",
-              "help": {
-                "concept": "The risky step in this pattern is converting text with `int(...)`, because some strings are not valid integers.",
-                "hint_1": "The missing code should attempt to turn `user_text` into a whole number.",
-                "hint_2": "Choose the expression that calls Python's integer conversion function on the variable."
-              },
-              "template": "try:\n    number = [blank1]\n    print(number)\nexcept ValueError:\n    print(\"Invalid\")",
-              "choices": [
-                "int(user_text)",
-                "print(user_text)",
-                "len(user_text)",
-                "str(user_text)"
-              ]
-            },
-            "q9": {
-              "title": "Catch a bad integer input",
-              "prompt": "A number scanner might receive invalid text. Convert the input inside a `try` block, then print either the formatted number or an invalid message.\n\nFor example, if the input is `27`, your program should print:\n`Number: 27`.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
-              "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a try block for the conversion."
-                },
-                "1": {
-                  "message": "Convert the text with int()."
-                }
-              }
-            },
-            "q10": {
-              "title": "Add two inputs safely",
-              "prompt": "Two score entries arrive as text. Convert both values inside `try`, then print the sum or an invalid message if either value cannot be turned into an integer.\n\nFor example, if the inputs are `8` and `5`, your program should print:\n`Sum: 13`.",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
-              "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a try block for the conversion."
-                },
-                "1": {
-                  "message": "Convert the text with int()."
-                }
-              }
-            },
-            "q11": {
-              "title": "Count valid numbers",
-              "prompt": "A comma-separated list may contain bad entries. Loop through each part, try to convert it to `int`, count only the valid integers, and print the final count.\n\nFor example, if the input is `3,7,bad,10`, your program should print:\n`Valid count: 3`.",
-              "hint": "Compare the options with the exact syntax and result required by the prompt.",
-              "help": {
-                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
-              "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Loop through each part."
-                },
-                "1": {
-                  "message": "Use try/except around the int conversion."
-                },
-                "2": {
-                  "message": "Convert each value with int()."
-                }
-              }
-            },
-            "try-try-except-basics-checkpoint": {
-              "title": "Handle a bad number",
-              "prompt": "Read input and try to convert it to an integer. Print `Valid` if it works, otherwise print `Invalid`.",
-              "hint": "Use `try`, `except ValueError`.",
-              "help": {
-                "concept": "A `try/except` block handles errors without crashing the program.",
-                "hint_1": "Use `try`, `except ValueError`.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "text = input()\n\n# Print Valid for an integer, otherwise Invalid.\n",
-              "solutionCode": "text = input()\ntry:\n    int(text)\n    print(\"Valid\")\nexcept ValueError:\n    print(\"Invalid\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use a try block for the conversion."
-                },
-                "1": {
-                  "message": "Convert the text with int()."
-                }
+                "a": "It handles the expected conversion error without hiding every unrelated exception",
+                "b": "It guarantees every string becomes an integer",
+                "c": "It makes `try` unnecessary",
+                "d": "It turns all exceptions into `ValueError`"
               }
             },
             "try-try-except-basics-sketch0": {
-              "title": "Catch a ValueError",
-              "prompt": "Catch the specific error caused by an invalid integer conversion.",
-              "hint": "Try to convert text to int. Print 'bad number' if it fails.",
+              "title": "Handle an invalid integer",
+              "prompt": "Read one line of text. Inside `try`, convert it with `int(text)` and print `Number: <value>`. Catch exactly `ValueError` and print `Invalid number` when conversion fails.",
+              "hint": "The conversion belongs inside `try`, and the handler should name `ValueError`.",
               "help": {
-                "concept": "Try to convert text to int. Print 'bad number' if it fails.",
-                "hint_1": "Apply one small change and inspect the new program state.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "`int(text)` can raise `ValueError`; catching that specific exception lets the program show a clear fallback instead of crashing.",
+                "hint_1": "Keep `number = int(text)` inside the `try` block.",
+                "hint_2": "Use `except ValueError:` followed by `print(\"Invalid number\")`."
               },
-              "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n",
-              "solutionCode": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+              "starterCode": "text = input().strip()\n\n# Convert text with int(...) inside try.\n# Print Number: <value> or Invalid number.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\n# Convert text with int(...) inside try.\n# Print Number: <value> or Invalid number.\n"
+                }
+              },
+              "solutionCode": "text = input().strip()\n\ntry:\n    number = int(text)\n    print(\"Number: \" + str(number))\nexcept ValueError:\n    print(\"Invalid number\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\ntry:\n    number = int(text)\n    print(\"Number: \" + str(number))\nexcept ValueError:\n    print(\"Invalid number\")\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use a try block for the conversion."
+                  "message": "Put the integer conversion inside a `try` block."
                 },
                 "1": {
-                  "message": "Convert the text with int()."
+                  "message": "Catch exactly `ValueError` for invalid integer text."
+                },
+                "2": {
+                  "message": "Print the converted number on the success path and `Invalid number` on the failure path."
                 }
               }
             },
             "try-try-except-basics-sketch1": {
-              "title": "Use else after try",
-              "prompt": "The `else` block runs when no exception happened.",
-              "hint": "Convert text to int and print 'ok' only if conversion succeeds.",
+              "title": "Handle a missing data file",
+              "prompt": "Read a file name from input and build `path = \"data/\" + filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
+              "hint": "The risky operation is opening the selected path for reading.",
               "help": {
-                "concept": "Convert text to int and print 'ok' only if conversion succeeds.",
-                "hint_1": "Add the requested statement and run the program to observe its effect.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "A missing read path raises `FileNotFoundError`, which is different from the `ValueError` raised by a bad integer conversion.",
+                "hint_1": "Keep `with open(path, \"r\") as file:` inside `try`.",
+                "hint_2": "Use `except FileNotFoundError:` for the missing-file fallback."
               },
-              "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n",
-              "solutionCode": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+              "starterCode": "filename = input().strip()\npath = \"data/\" + filename\n\n# Try to open path in read mode and print its stripped text.\n# If the file is missing, print Missing file.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "filename = input().strip()\npath = \"data/\" + filename\n\n# Try to open path in read mode and print its stripped text.\n# If the file is missing, print Missing file.\n"
+                },
+                "data_note_txt": {
+                  "content": "Study exceptions carefully.\n"
+                }
+              },
+              "solutionCode": "filename = input().strip()\npath = \"data/\" + filename\n\ntry:\n    with open(path, \"r\") as file:\n        text = file.read().strip()\n    print(text)\nexcept FileNotFoundError:\n    print(\"Missing file\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "filename = input().strip()\npath = \"data/\" + filename\n\ntry:\n    with open(path, \"r\") as file:\n        text = file.read().strip()\n    print(text)\nexcept FileNotFoundError:\n    print(\"Missing file\")\n"
+                },
+                "data_note_txt": {
+                  "content": "Study exceptions carefully.\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use a try block for the conversion."
+                  "message": "Put the file-open/read operation inside a `try` block."
                 },
                 "1": {
-                  "message": "Convert the text with int()."
+                  "message": "Catch exactly `FileNotFoundError` for a missing selected file."
+                },
+                "2": {
+                  "message": "Print the selected file text on success and `Missing file` when the file is absent."
                 }
               }
             },
             "try-try-except-basics-sketch2": {
-              "title": "Keep looping after a bad value",
-              "prompt": "Use try/except inside the loop so one bad value does not stop the program.",
-              "hint": "Print only the values that can be converted to int.",
+              "title": "Continue after one missing file",
+              "prompt": "Read two file names. Loop through `[first, second]`. For each name, try to open `data/<filename>` and print the stripped text. If that file is missing, catch exactly `FileNotFoundError`, print `Missing: <filename>`, and let the loop continue to the next name. The workspace provides `data/alpha.txt` and `data/beta.txt`.",
+              "hint": "Put the `try/except` inside the loop so one missing file does not stop the second attempt.",
               "help": {
-                "concept": "Print only the values that can be converted to int.",
-                "hint_1": "Test this single step before combining it with later behavior.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "A handled exception ends that iteration's risky work, then normal loop execution continues with the next item.",
+                "hint_1": "Build `path = \"data/\" + filename` inside the loop.",
+                "hint_2": "Catch `FileNotFoundError` and print the missing filename instead of using `pass`."
               },
-              "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n",
-              "solutionCode": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+              "starterCode": "first = input().strip()\nsecond = input().strip()\n\n# Loop through [first, second].\n# For each filename, open data/<filename> and print its stripped text.\n# If that file is missing, print Missing: <filename> and continue.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "first = input().strip()\nsecond = input().strip()\n\n# Loop through [first, second].\n# For each filename, open data/<filename> and print its stripped text.\n# If that file is missing, print Missing: <filename> and continue.\n"
+                },
+                "data_alpha_txt": {
+                  "content": "Alpha file\n"
+                },
+                "data_beta_txt": {
+                  "content": "Beta file\n"
+                }
+              },
+              "solutionCode": "first = input().strip()\nsecond = input().strip()\n\nfor filename in [first, second]:\n    path = \"data/\" + filename\n    try:\n        with open(path, \"r\") as file:\n            text = file.read().strip()\n        print(text)\n    except FileNotFoundError:\n        print(\"Missing: \" + filename)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "first = input().strip()\nsecond = input().strip()\n\nfor filename in [first, second]:\n    path = \"data/\" + filename\n    try:\n        with open(path, \"r\") as file:\n            text = file.read().strip()\n        print(text)\n    except FileNotFoundError:\n        print(\"Missing: \" + filename)\n"
+                },
+                "data_alpha_txt": {
+                  "content": "Alpha file\n"
+                },
+                "data_beta_txt": {
+                  "content": "Beta file\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through values instead of typing 10 and 3 directly."
+                  "message": "Loop through `[first, second]` instead of handling only one filename."
                 },
                 "1": {
-                  "message": "Use try/except around the int conversion."
+                  "message": "Put the file operation inside a `try` block within the loop."
                 },
                 "2": {
-                  "message": "Convert each value with int()."
+                  "message": "Catch exactly `FileNotFoundError` and print `Missing: <filename>`."
                 }
               }
             }
           },
           "tryIt": {
-            "try_try_except_basics_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Read input and try to convert it to an integer. Print `Valid` if it works, otherwise print `Invalid`."
-            },
             "try_try_except_basics_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Catch the specific error caused by an invalid integer conversion."
+              "prompt": "Convert user input safely with `except ValueError`."
             },
             "try_try_except_basics_sketch1": {
               "title": "Try it yourself",
-              "prompt": "The `else` block runs when no exception happened."
+              "prompt": "Open a selected data file safely with `except FileNotFoundError`."
             },
             "try_try_except_basics_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Use try/except inside the loop so one bad value does not stop the program."
+              "prompt": "Keep processing a second file after the first filename is missing."
             },
             "allowReveal": true
           }
         },
         "validating-and-cleaning-input": {
           "label": "Validating and Cleaning Input",
-          "summary": "Clean text values, detect missing data, and reject invalid rows without crashing your program.",
+          "summary": "Clean raw text before using it, detect missing values after cleaning, validate integer ranges safely, and combine those rules in a reusable function.",
           "cards": {
             "sketch0": {
-              "title": "What validation and cleaning do"
+              "title": "Clean text before validating it"
             },
             "sketch1": {
-              "title": "Missing values vs invalid values"
+              "title": "Missing, invalid, and out-of-range values"
             },
             "sketch2": {
-              "title": "Put cleaning rules in functions"
+              "title": "Combine cleaning rules in a function"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-valid-row": {
-              "title": "Which row is valid after cleaning?",
-              "prompt": "A program strips spaces from both fields, then requires a non-empty name and an age that can be converted with `int()`. Which row would be accepted?",
-              "hint": "Look for a row where spaces can be removed and the age text still becomes a whole number.",
+            "sc-clean-before-check": {
+              "title": "Clean before checking",
+              "prompt": "A required name arrives as `\"   \"`. What should the program do before deciding whether the name is missing?",
+              "hint": "Whitespace can hide that nothing meaningful was entered.",
               "help": {
-                "concept": "A row is valid only if cleaning with `strip()` leaves a real name and an age string that `int()` can convert.",
-                "hint_1": "Check each option after removing leading and trailing spaces from both values.",
-                "hint_2": "Reject rows with an empty cleaned name or an age like a word instead of digits."
+                "concept": "Clean text first, then validate the cleaned value. `strip()` turns a spaces-only string into the empty string.",
+                "hint_1": "Checking the raw string would treat several spaces as non-empty text.",
+                "hint_2": "Choose the step that removes surrounding whitespace before the missing-value check."
               },
               "options": {
-                "a": "[' Ava ', ' 12 ']",
-                "b": "['   ', '9']",
-                "c": "['Leo', 'ten']",
-                "d": "['Mia', '4.5']"
+                "a": "Call `.strip()` and then check the cleaned value",
+                "b": "Convert the name with `int()`",
+                "c": "Append another space",
+                "d": "Write the value to a file first"
               }
             },
-            "sc-except-flow": {
-              "title": "What does except catch here?",
-              "prompt": "In a `try`/`except ValueError` block, what kind of problem is the `except` meant to handle during `int(age_text)`?",
-              "hint": "Think about what happens when text cannot be turned into an integer.",
+            "sc-empty-string": {
+              "title": "Detect a missing cleaned value",
+              "prompt": "After `cleaned_name = raw_name.strip()`, which comparison directly checks whether the cleaned name is missing?",
+              "hint": "A spaces-only string becomes an empty string after `strip()`.",
               "help": {
-                "concept": "`ValueError` is raised when a conversion function like `int()` receives a value of the right general type but with unusable content.",
-                "hint_1": "`int()` works for strings like `'7'`, but not for strings that contain words or decimal text in this beginner context.",
-                "hint_2": "The problem is not a missing variable name or a syntax mistake in the code editor; it is bad input content during conversion."
+                "concept": "The empty string is written as `\"\"`. It is not the number `0`, `None`, or `False`.",
+                "hint_1": "Think about the exact value returned by `\"   \".strip()`.",
+                "hint_2": "Choose the comparison against an empty string literal."
               },
               "options": {
-                "a": "A text value such as 'ten' that cannot be converted to an integer",
-                "b": "A missing `print()` statement",
-                "c": "A list index being too large",
-                "d": "A file path always being relative"
+                "a": "cleaned_name == \"\"",
+                "b": "cleaned_name == 0",
+                "c": "cleaned_name == None",
+                "d": "cleaned_name == False"
               }
             },
-            "mc-clean-steps": {
-              "title": "Useful cleaning steps",
-              "prompt": "Choose all steps that help clean a text row before validation.",
-              "hint": "Think about operations that remove formatting noise or standardize text values.",
+            "sc-invalid-integer": {
+              "title": "Handle invalid numeric text",
+              "prompt": "A cleaned score is `\"ten\"`. What should a safe integer-validation step expect from `int(score_text)`?",
+              "hint": "This is the same conversion error handled in the previous topic.",
               "help": {
-                "concept": "Cleaning prepares raw text for validation by removing extra spaces or making formatting more consistent before rule checks happen.",
-                "hint_1": "Methods like `strip()` and case normalization help; actions that only display data do not clean it.",
-                "hint_2": "Pick the options that change messy input into a more consistent form before checking whether it is valid."
+                "concept": "`int(...)` raises `ValueError` when cleaned text still cannot represent a whole number.",
+                "hint_1": "Cleaning whitespace does not make the word `ten` numeric.",
+                "hint_2": "Choose the specific conversion exception introduced in Try/Except Basics."
               },
               "options": {
-                "a": "Use `strip()` to remove extra spaces around a value",
-                "b": "Convert a name like 'aVA' to a consistent case such as title case",
-                "c": "Print the row without changing it",
-                "d": "Keep all spaces exactly as they were so validation sees the mess"
+                "a": "It raises `ValueError`",
+                "b": "It returns 0",
+                "c": "It returns `None` automatically",
+                "d": "It changes the text to `\"10\"`"
               }
             },
-            "mc-reject-row": {
-              "title": "Which rows should be rejected?",
-              "prompt": "A cleaned row is valid only when the name is not empty and the score is an integer from 0 to 100. Choose all rows that should be rejected.",
-              "hint": "Check each row after trimming spaces, then test both rules.",
+            "sc-score-range": {
+              "title": "Validate the allowed range",
+              "prompt": "A score successfully converts to the integer `105`. If valid scores must be from 0 through 100, how should the program classify it?",
+              "hint": "Successful conversion does not guarantee the number satisfies the rule.",
               "help": {
-                "concept": "Validation can involve more than one rule: presence, type conversion, and allowed numeric range.",
-                "hint_1": "A row fails if the cleaned name is empty, if the score cannot become an integer, or if the integer is outside 0 to 100.",
-                "hint_2": "Look closely at the rows with only spaces for the name, word-based scores, and numbers above the allowed maximum."
+                "concept": "Validation can have multiple stages: first confirm conversion works, then check the allowed numeric range.",
+                "hint_1": "105 is an integer, so conversion is not the problem.",
+                "hint_2": "Compare 105 with the maximum allowed score of 100."
               },
               "options": {
-                "a": "['Ava', '90']",
-                "b": "['   ', '75']",
-                "c": "['Leo', 'ten']",
-                "d": "['Mia', '105']"
-              }
-            },
-            "dr-clean-order": {
-              "title": "Order the cleaning process",
-              "prompt": "Put these steps in a sensible order for cleaning and validating one text value that should become an integer.",
-              "hint": "Clean formatting before conversion, and only use the number after conversion succeeds.",
-              "help": {
-                "concept": "A reliable cleaning flow removes extra spaces first, then attempts conversion, then uses the converted value for later checks.",
-                "hint_1": "If you try `int()` before removing spaces and checking the raw text, your code is harder to reason about.",
-                "hint_2": "Start with the original text, clean it, convert it, then continue with numeric validation."
-              },
-              "tokens": {
-                "t1": "Read the text value",
-                "t2": "Remove extra spaces with `strip()`",
-                "t3": "Convert the cleaned text with `int()`",
-                "t4": "Use the integer in later checks"
-              }
-            },
-            "dr-try-except-order": {
-              "title": "Order the try/except flow",
-              "prompt": "Arrange these parts to show the usual flow when converting cleaned text to an integer safely.",
-              "hint": "The risky conversion belongs inside `try`, and the error handling comes after it.",
-              "help": {
-                "concept": "`try` contains code that may fail, while `except` handles a specific error if that failure happens.",
-                "hint_1": "Place the conversion attempt after entering `try`, and place the fallback action inside `except ValueError`.",
-                "hint_2": "The successful path uses the converted number before the error-handling path appears."
-              },
-              "tokens": {
-                "t1": "Start `try:`",
-                "t2": "Attempt `age = int(age_text)`",
-                "t3": "Use `age` if conversion worked",
-                "t4": "Handle bad input in `except ValueError:`"
-              }
-            },
-            "fb-strip-name": {
-              "title": "Fill the cleaning method",
-              "prompt": "Complete the code so it removes extra spaces around the name.",
-              "hint": "Use the string method that trims spaces from both ends.",
-              "help": {
-                "concept": "Choose the string method that removes whitespace from both ends without changing internal spaces.",
-                "hint_1": "The missing value is a method name used like `name.[blank1]()` in Python.",
-                "hint_2": "It is the method that turns `'  Ava  '` into `'Ava'` without changing letters in the middle."
-              },
-              "template": "clean_name = name.[blank1]()",
-              "choices": [
-                "split",
-                "strip",
-                "append",
-                "write"
-              ]
-            },
-            "fb-empty-check": {
-              "title": "Fill the missing comparison",
-              "prompt": "Complete the condition so it detects a missing cleaned value.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "if cleaned_name == [blank1]:",
-              "choices": [
-                "0",
-                "None",
-                "\"\"",
-                "False"
-              ]
-            },
-            "ci-clean-name": {
-              "title": "Write a name cleaning function",
-              "prompt": "Write `clean_name(text)` so it returns a cleaned version of the name text.",
-              "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
-              "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
-            },
-            "ci-parse-age": {
-              "title": "Parse an age safely",
-              "prompt": "Write `parse_age(text)` so it returns an `int` for valid age text and `None` when the text cannot be used as an age.",
-              "hint": "Read the task \"Parse an age safely\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
-              "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
-            },
-            "ci-clean-row": {
-              "title": "Validate and clean one row",
-              "prompt": "Write `clean_row(row)` for rows shaped like `[name_text, score_text]`. Return a cleaned dictionary when both values are valid, or `None` when the row should be rejected.",
-              "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
-                "hint_2": "Test the normal path and inspect the final output before completing the step."
-              },
-              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
-              "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
-            },
-            "try-validating-and-cleaning-input-checkpoint": {
-              "title": "Clean and validate a name",
-              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name.",
-              "hint": "Use `.strip()` before checking whether the value is empty.",
-              "help": {
-                "concept": "Cleaning input before validation helps programs handle messy text.",
-                "hint_1": "Use `.strip()` before checking whether the value is empty.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "name = input()\n\n# Clean and validate the name.\n",
-              "solutionCode": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Strip whitespace from the name."
-                },
-                "1": {
-                  "message": "Title-case the cleaned name."
-                }
+                "a": "Invalid because it is outside 0 through 100",
+                "b": "Valid because every integer is accepted",
+                "c": "Missing because it is greater than zero",
+                "d": "A `FileNotFoundError`"
               }
             },
             "try-validating-and-cleaning-input-sketch0": {
-              "title": "Clean a name",
-              "prompt": "Clean whitespace and capitalization before using user data.",
-              "hint": "Strip extra spaces, convert to title case, and print the result.",
+              "title": "Clean and validate a required name",
+              "prompt": "Read a name. Store `raw_name.strip().title()` in `cleaned_name`. If `cleaned_name == \"\"`, print `Missing`; otherwise print the cleaned name.",
+              "hint": "Clean the text before checking whether anything meaningful remains.",
               "help": {
-                "concept": "Strip extra spaces, convert to title case, and print the result.",
-                "hint_1": "Make the focused edit, then verify how it changes the current output.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "A spaces-only required field becomes `\"\"` after `strip()`, so validation should check the cleaned value rather than the raw input.",
+                "hint_1": "Assign the cleaned result to `cleaned_name`.",
+                "hint_2": "Use the explicit comparison `cleaned_name == \"\"` for the missing-value branch."
               },
-              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
-              "solutionCode": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+              "starterCode": "raw_name = input()\n\n# Clean raw_name with strip() and title().\n# Print Missing if the cleaned name is \"\"; otherwise print the cleaned name.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "raw_name = input()\n\n# Clean raw_name with strip() and title().\n# Print Missing if the cleaned name is \"\"; otherwise print the cleaned name.\n"
+                }
+              },
+              "solutionCode": "raw_name = input()\ncleaned_name = raw_name.strip().title()\n\nif cleaned_name == \"\":\n    print(\"Missing\")\nelse:\n    print(cleaned_name)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "raw_name = input()\ncleaned_name = raw_name.strip().title()\n\nif cleaned_name == \"\":\n    print(\"Missing\")\nelse:\n    print(cleaned_name)\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use strip() to remove extra spaces."
+                  "message": "Clean `raw_name` with both `strip()` and `title()`."
                 },
                 "1": {
-                  "message": "Use title() to normalize the name."
+                  "message": "Check the cleaned value against the empty string `\"\"`."
+                },
+                "2": {
+                  "message": "Print `Missing` only for the empty cleaned value."
                 }
               }
             },
             "try-validating-and-cleaning-input-sketch1": {
-              "title": "Validate a score",
-              "prompt": "Check numeric ranges after conversion.",
-              "hint": "Convert score_text to int. Print 'valid' if it is from 0 to 100.",
+              "title": "Validate integer text and range",
+              "prompt": "Read a score, remove surrounding whitespace, and safely convert it with `int()`. Print `Valid score` only when the integer is from 0 through 100. Print `Invalid score` when conversion raises `ValueError` or when the integer is outside that range.",
+              "hint": "A valid integer conversion and a valid numeric range are two separate checks.",
               "help": {
-                "concept": "Convert score_text to int. Print 'valid' if it is from 0 to 100.",
-                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "Use `try/except ValueError` for bad integer text, then apply the 0-through-100 range rule to successfully converted values.",
+                "hint_1": "Keep `score = int(score_text)` inside `try`.",
+                "hint_2": "Check the inclusive range with `0 <= score <= 100`."
               },
-              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
-              "solutionCode": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+              "starterCode": "score_text = input()\n\n# Strip score_text, convert it safely with int(),\n# and print Valid score only for integers from 0 through 100.\n# Print Invalid score for bad integer text or an out-of-range number.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "score_text = input()\n\n# Strip score_text, convert it safely with int(),\n# and print Valid score only for integers from 0 through 100.\n# Print Invalid score for bad integer text or an out-of-range number.\n"
+                }
+              },
+              "solutionCode": "score_text = input().strip()\n\ntry:\n    score = int(score_text)\n    if 0 <= score <= 100:\n        print(\"Valid score\")\n    else:\n        print(\"Invalid score\")\nexcept ValueError:\n    print(\"Invalid score\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "score_text = input().strip()\n\ntry:\n    score = int(score_text)\n    if 0 <= score <= 100:\n        print(\"Valid score\")\n    else:\n        print(\"Invalid score\")\nexcept ValueError:\n    print(\"Invalid score\")\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Convert score_text to an integer."
+                  "message": "Strip surrounding whitespace from `score_text` before conversion."
                 },
                 "1": {
-                  "message": "Check that the score is within 0 to 100."
+                  "message": "Catch exactly `ValueError` from an invalid integer conversion."
+                },
+                "2": {
+                  "message": "Check that `score` is in the inclusive range 0 through 100."
                 }
               }
             },
             "try-validating-and-cleaning-input-sketch2": {
-              "title": "Clean several rows",
-              "prompt": "Split each row, strip each field, and format the cleaned result.",
-              "hint": "Print cleaned name:score lines like Ava:92.",
+              "title": "Clean and validate a record",
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
+              "hint": "Apply the rules in order: clean, check the required name, convert safely, check the range, then return the cleaned dictionary.",
               "help": {
-                "concept": "Print cleaned name:score lines like Ava:92.",
-                "hint_1": "Test this single step before combining it with later behavior.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "A reusable cleaning function can return `None` for rejected input and structured cleaned data for accepted input.",
+                "hint_1": "Use `name == \"\"` for the missing-name rule and `except ValueError:` for bad score text.",
+                "hint_2": "Return the dictionary only after every rejection condition has been passed."
               },
-              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
-              "solutionCode": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+              "starterCode": "def clean_record(name_text, score_text):\n    # Return {\"name\": cleaned_name, \"score\": score} when both fields are valid.\n    # Return None for a missing name, invalid integer text, or a score outside 0..100.\n    pass\n\nname_text = input()\nscore_text = input()\nrecord = clean_record(name_text, score_text)\n\n# Print Rejected for None; otherwise print Name:score.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "def clean_record(name_text, score_text):\n    # Return {\"name\": cleaned_name, \"score\": score} when both fields are valid.\n    # Return None for a missing name, invalid integer text, or a score outside 0..100.\n    pass\n\nname_text = input()\nscore_text = input()\nrecord = clean_record(name_text, score_text)\n\n# Print Rejected for None; otherwise print Name:score.\n"
+                }
+              },
+              "solutionCode": "def clean_record(name_text, score_text):\n    name = name_text.strip().title()\n    cleaned_score = score_text.strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(cleaned_score)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nname_text = input()\nscore_text = input()\nrecord = clean_record(name_text, score_text)\n\nif record is None:\n    print(\"Rejected\")\nelse:\n    print(record[\"name\"] + \":\" + str(record[\"score\"]))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "def clean_record(name_text, score_text):\n    name = name_text.strip().title()\n    cleaned_score = score_text.strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(cleaned_score)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nname_text = input()\nscore_text = input()\nrecord = clean_record(name_text, score_text)\n\nif record is None:\n    print(\"Rejected\")\nelse:\n    print(record[\"name\"] + \":\" + str(record[\"score\"]))\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through rows instead of typing both cleaned lines."
+                  "message": "Define and call `clean_record(name_text, score_text)`."
                 },
                 "1": {
-                  "message": "Split each row into name and score."
+                  "message": "Reject an empty cleaned name with an explicit `== \"\"` check."
                 },
                 "2": {
-                  "message": "Strip spaces from each part."
+                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
                 },
                 "3": {
-                  "message": "Title-case each name."
+                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
                 }
               }
             }
           },
           "tryIt": {
-            "try_validating_and_cleaning_input_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name."
-            },
             "try_validating_and_cleaning_input_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean whitespace and capitalization before using user data."
+              "prompt": "Clean a required name and detect the empty string after cleaning."
             },
             "try_validating_and_cleaning_input_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Check numeric ranges after conversion."
+              "prompt": "Safely validate integer text and its allowed range."
             },
             "try_validating_and_cleaning_input_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Split each row, strip each field, and format the cleaned result."
+              "prompt": "Combine name cleaning and score validation in a reusable function."
             },
             "allowReveal": true
           }
         },
         "working-with-paths": {
           "label": "Working With Paths",
-          "summary": "Understand relative paths and simple file organization.",
+          "summary": "Use relative paths for same-folder and nested files, build path strings from pieces, and use `pathlib.Path` to join path components before opening a file.",
           "cards": {
             "sketch0": {
-              "title": "Relative paths point to files from your current workspace"
+              "title": "Relative paths describe where a file is"
             },
             "sketch1": {
-              "title": "Folders help organize files clearly"
+              "title": "Build a path from folder and file-name pieces"
             },
             "sketch2": {
-              "title": "Use simple relative paths, not machine-specific ones"
+              "title": "Use pathlib.Path to build and open a path"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-relative-path-folder": {
-              "title": "Choose the relative path",
-              "prompt": "A file named `input.txt` is inside a folder named `data`. Which path correctly refers to that file in this lesson?",
-              "hint": "Use the folder name first, then the file name.",
+            "sc-same-vs-nested": {
+              "title": "Same folder or nested folder",
+              "prompt": "Your program is in the workspace root. Which relative path points to `notes.txt` inside the `data` folder?",
+              "hint": "Put the containing folder before the file name.",
               "help": {
-                "concept": "A relative path names folders in order from the current workspace location to the target file.",
-                "hint_1": "The file is not in the same folder as the code; it is inside `data`.",
-                "hint_2": "Look for the choice that joins the folder and file with a forward slash."
-              },
-              "options": {
-                "a": "input.txt/data",
-                "b": "data/input.txt",
-                "c": "/data/input.txt",
-                "d": "data-input.txt"
-              }
-            },
-            "sc-same-folder-path": {
-              "title": "Path for a nearby file",
-              "prompt": "Your code and a file named `notes.txt` are in the same folder. Which path should you use to open that file?",
-              "hint": "If the file is in the same folder, you do not need to name another folder.",
-              "help": {
-                "concept": "A file in the same folder can be opened with just its file name as a relative path.",
-                "hint_1": "No extra folder name is needed here.",
-                "hint_2": "Choose the shortest valid path that names only the file itself."
+                "concept": "A nested relative path names the folder first and then the file, separated by `/`.",
+                "hint_1": "`notes.txt` by itself would mean the file is beside `main.py`.",
+                "hint_2": "Choose the path that enters `data` before naming `notes.txt`."
               },
               "options": {
                 "a": "data/notes.txt",
-                "b": "notes.txt",
-                "c": "./data/notes.txt",
-                "d": "folder/notes.txt"
+                "b": "notes.txt/data",
+                "c": "/notes.txt",
+                "d": "data-notes.txt"
               }
             },
-            "mc-relative-path-benefits": {
-              "title": "Why use relative paths here?",
-              "prompt": "Choose all true statements about using relative paths in this lesson.",
-              "hint": "Think about paths that work inside the provided workspace and folders.",
+            "sc-path-from-pieces": {
+              "title": "Build a path string from variables",
+              "prompt": "If `folder = \"records\"` and `filename = \"scores.txt\"`, which expression builds the relative path `records/scores.txt` from those variables?",
+              "hint": "Join folder, slash, and file name in that order.",
               "help": {
-                "concept": "Relative paths are useful because they describe file locations within the project structure instead of depending on one specific machine setup.",
-                "hint_1": "Look for statements about project folders and portability inside the lesson workspace.",
-                "hint_2": "Select the choices that describe starting from the current workspace and avoiding machine-specific locations."
+                "concept": "A relative path string can be assembled from existing string variables instead of hard-coding the finished path.",
+                "hint_1": "The folder belongs before the slash.",
+                "hint_2": "Use both variables so the expression still works if either value changes."
               },
               "options": {
-                "a": "They can point to files in folders like `data/input.txt`.",
-                "b": "They depend on one specific computer's full location.",
-                "c": "They help organize files by folder.",
-                "d": "They always require a full machine-specific location."
+                "a": "folder + \"/\" + filename",
+                "b": "filename + \"/\" + folder",
+                "c": "\"records/scores.txt\"",
+                "d": "folder + filename"
               }
             },
-            "mc-open-path-examples": {
-              "title": "Valid relative path examples",
-              "prompt": "Choose all paths that are valid relative path examples for this lesson's workspace style.",
-              "hint": "Reject any choice that changes the named values, branch order, or output.",
+            "sc-pathlib-join": {
+              "title": "Join path parts with Path",
+              "prompt": "After `from pathlib import Path`, which expression builds a path from `folder` and `filename`?",
+              "hint": "`Path(...)` can be combined with another path part using `/`.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "`Path(folder) / filename` joins path components without manually inserting a slash string.",
+                "hint_1": "Wrap the first path component in `Path(...)`.",
+                "hint_2": "Use `/` between the `Path` object and the file-name variable."
               },
               "options": {
-                "a": "notes.txt",
-                "b": "data/input.txt",
-                "c": "folder -> input.txt",
-                "d": "name of the output panel"
+                "a": "Path(folder) / filename",
+                "b": "Path(folder + filename)",
+                "c": "folder.read(filename)",
+                "d": "Path / folder / filename()"
               }
             },
-            "dr-read-file-steps": {
-              "title": "Order the file-reading steps",
-              "prompt": "Put these steps in the correct order for reading a file with a relative path and showing its contents.",
-              "hint": "Open first, then read, then display.",
+            "sc-open-path-object": {
+              "title": "Use a Path object with open",
+              "prompt": "If `path` is a `Path` object pointing to a text file, which line opens that path for reading?",
+              "hint": "`open(...)` can receive the path object directly.",
               "help": {
-                "concept": "Reading a file follows a sequence: open the file, get its contents, then print the result.",
-                "hint_1": "You cannot read from the file before opening it.",
-                "hint_2": "After reading the text into a variable, the last step is to show it in the output panel."
+                "concept": "A `Path` object can be passed directly to `open`, just like a relative path string.",
+                "hint_1": "Do not convert it to a machine-specific absolute path.",
+                "hint_2": "Use the existing `path` variable as the first argument to `open`."
               },
-              "tokens": {
-                "t1": "Open `data/input.txt` in read mode",
-                "t2": "Store the contents in a variable",
-                "t3": "Print the variable"
+              "options": {
+                "a": "with open(path, \"r\") as file:",
+                "b": "with path(\"r\") as file:",
+                "c": "with open(\"path\", \"r\") as file:",
+                "d": "with file.open(\"r\") as path:"
               }
-            },
-            "dr-build-nested-path": {
-              "title": "Build the path in order",
-              "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
-              "hint": "Folder name comes before the slash and file name.",
-              "help": {
-                "concept": "A nested relative path is built as folder, slash, then file name.",
-                "hint_1": "Start with the folder that contains the file.",
-                "hint_2": "The slash separates the folder name from the file name."
-              },
-              "tokens": {
-                "t1": "data",
-                "t2": "/",
-                "t3": "report.txt"
-              }
-            },
-            "fb-folder-part": {
-              "title": "Complete the folder path",
-              "prompt": "Fill in the missing folder name.",
-              "hint": "Read the complete relative path and include the folder that appears before the filename.",
-              "help": {
-                "concept": "A relative path to a file inside a folder includes the folder name before the slash.",
-                "hint_1": "The missing part is the folder that contains `input.txt`.",
-                "hint_2": "Use the folder name shown throughout the lesson examples."
-              },
-              "template": "[blank1]/input.txt",
-              "choices": [
-                "data",
-                "input",
-                "files",
-                "read"
-              ]
-            },
-            "fb-same-folder-file": {
-              "title": "Complete the same-folder path",
-              "prompt": "Fill in the missing file name for a file in the same folder.",
-              "hint": "No folder name is needed here.",
-              "help": {
-                "concept": "When a file is in the same folder, the relative path is just the file name.",
-                "hint_1": "The blank should be the exact file name, not a folder.",
-                "hint_2": "Choose the option that is a plain file name ending with `.txt`."
-              },
-              "template": "[blank1]",
-              "choices": [
-                "data/notes.txt",
-                "notes.txt",
-                "/notes.txt",
-                "folder/notes.txt"
-              ]
-            },
-            "ci-read-nested-file": {
-              "title": "Read from a nested relative path",
-              "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
-              "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
-              "help": {
-                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Use the expected result as a final contract check after your implementation runs."
-              },
-              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
-              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/input.txt to read the nested file."
-                }
-              }
-            },
-            "ci-copy-between-paths": {
-              "title": "Copy text to another relative path",
-              "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
-              "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
-              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Read from data/source.txt."
-                },
-                "1": {
-                  "message": "Write to data/copy.txt."
-                },
-                "2": {
-                  "message": "Use file.write() to create the copy."
-                }
-              }
-            },
-            "ci-count-lines-in-folder": {
-              "title": "Count lines from a file path",
-              "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
-              "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
-              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
-              "sourceChecks": {
-                "0": {
-                  "message": "Open data/items.txt to count its lines."
-                }
-              }
-            },
-            "try-working-with-paths-checkpoint": {
-              "title": "Use a relative path",
-              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters.",
-              "hint": "Use `Path(\"data\") / \"names.txt\"`.",
-              "help": {
-                "concept": "Build the relative path first, then use it to read the file.",
-                "hint_1": "Create the path with `Path(\"data\") / \"names.txt\"`.",
-                "hint_2": "Read that path and print the file text without extra characters."
-              },
-              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
-              "starterFiles": {
-                "data_names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
-                },
-                "data_names_txt": {
-                  "content": "Ava\nMia\n"
-                }
-              },
-              "sourceChecks": {
-                "0": {
-                  "message": "Use Path(...) to build the path."
-                },
-                "1": {
-                  "message": "Build the path with Path('data') / 'names.txt'."
-                }
-              },
-              "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
             },
             "try-working-with-paths-sketch0": {
-              "title": "Build a relative path",
-              "prompt": "Build the relative path `data/scores.txt` from the `folder` and `filename` variables, then print the path.",
-              "hint": "Combine the folder name, a slash, and the file name.",
+              "title": "Build a relative path from input",
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`.",
+              "hint": "Use both variables instead of typing a completed path.",
               "help": {
-                "concept": "This card practices writing a relative path as text.",
-                "hint_1": "Use the `folder` variable first, then `/`, then `filename`.",
-                "hint_2": "Print the finished path string `data/scores.txt`."
+                "concept": "A path string can be assembled from folder and file-name pieces that are already stored in variables.",
+                "hint_1": "Keep `folder` first and `filename` last.",
+                "hint_2": "Put the slash string between the two variables."
               },
-              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
-              "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+              "starterCode": "folder = input().strip()\nfilename = input().strip()\n\n# Build the relative path from folder and filename, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "folder = input().strip()\nfilename = input().strip()\n\n# Build the relative path from folder and filename, then print it.\n"
+                }
+              },
+              "solutionCode": "folder = input().strip()\nfilename = input().strip()\npath = folder + \"/\" + filename\nprint(path)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "folder = input().strip()\nfilename = input().strip()\npath = folder + \"/\" + filename\nprint(path)\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Build the path from folder and filename instead of typing the final path."
+                  "message": "Build `path` from `folder + \"/\" + filename`."
+                },
+                "1": {
+                  "message": "Print the `path` variable after building it."
                 }
               }
             },
             "try-working-with-paths-sketch1": {
-              "title": "Use pathlib for a path",
-              "prompt": "Use `Path(\"data\") / \"scores.txt\"`, store it in a variable, and print the path.",
-              "hint": "Import `Path`, join the two pieces with `/`, and print the result.",
+              "title": "Join path pieces with pathlib.Path",
+              "prompt": "Read a folder name and file name from input. Use `Path(folder) / filename` to build the path, store it in `path`, and print `path`.",
+              "hint": "Use the imported `Path` class and the `/` operator between path components.",
               "help": {
-                "concept": "This card practices building a path object instead of a plain string.",
-                "hint_1": "Create a variable like `path = Path(\"data\") / \"scores.txt\"`.",
-                "hint_2": "Print the path variable after you build it."
+                "concept": "`Path(folder) / filename` joins path components while keeping the result as a path object.",
+                "hint_1": "Do not build the finished path by manually typing a slash string in this exercise.",
+                "hint_2": "Print the `path` object after joining the components."
               },
-              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
-              "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+              "starterCode": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\n\n# Build a Path from folder and filename, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\n\n# Build a Path from folder and filename, then print it.\n"
+                }
+              },
+              "solutionCode": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\npath = Path(folder) / filename\nprint(path)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfolder = input().strip()\nfilename = input().strip()\npath = Path(folder) / filename\nprint(path)\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use Path(...) to build the path."
+                  "message": "Import `Path` from `pathlib`."
                 },
                 "1": {
-                  "message": "Build the path with Path('data') / 'scores.txt'."
+                  "message": "Build the path with `Path(folder) / filename`."
+                },
+                "2": {
+                  "message": "Print the resulting `path` object."
                 }
               }
             },
             "try-working-with-paths-sketch2": {
-              "title": "Read from a folder path",
-              "prompt": "Open `data/message.txt`, read the text from that relative path, and print it.",
-              "hint": "Use the full relative path `data/message.txt` inside `open(...)`.",
+              "title": "Open a file through a Path object",
+              "prompt": "Read a file name from input. Build `path = Path(\"data\") / filename`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
+              "hint": "Build the path first, then pass the `path` variable directly to `open`.",
               "help": {
-                "concept": "This card practices using a folder path when the file is not next to `main.py`.",
-                "hint_1": "Open `data/message.txt` inside a `with open(...)` block.",
-                "hint_2": "Read the file text and print only that text."
+                "concept": "A `Path` object can represent the nested relative location and can be passed directly to `open(...)`.",
+                "hint_1": "Use `Path(\"data\") / filename` so the input selects the supplied file.",
+                "hint_2": "Inside the `with open(path, \"r\")` block, read and strip the text before printing it."
               },
-              "starterCode": "# Open data/message.txt and print its text.\n",
+              "starterCode": "from pathlib import Path\n\nfilename = input().strip()\n\n# Build a Path inside the data folder.\n# Open that path in read mode and print the stripped text.\n",
               "starterFiles": {
-                "data_message_txt": {
-                  "content": "Nested hello\n"
+                "main_py": {
+                  "content": "from pathlib import Path\n\nfilename = input().strip()\n\n# Build a Path inside the data folder.\n# Open that path in read mode and print the stripped text.\n"
+                },
+                "data_welcome_txt": {
+                  "content": "Welcome to Python paths!\n"
+                },
+                "data_reminder_txt": {
+                  "content": "Remember to save your work.\n"
                 }
               },
+              "solutionCode": "from pathlib import Path\n\nfilename = input().strip()\npath = Path(\"data\") / filename\n\nwith open(path, \"r\") as file:\n    text = file.read().strip()\n\nprint(text)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+                  "content": "from pathlib import Path\n\nfilename = input().strip()\npath = Path(\"data\") / filename\n\nwith open(path, \"r\") as file:\n    text = file.read().strip()\n\nprint(text)\n"
                 },
-                "data_message_txt": {
-                  "content": "Nested hello\n"
+                "data_welcome_txt": {
+                  "content": "Welcome to Python paths!\n"
+                },
+                "data_reminder_txt": {
+                  "content": "Remember to save your work.\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open data/message.txt instead of typing Nested hello."
+                  "message": "Import `Path` from `pathlib`."
+                },
+                "1": {
+                  "message": "Build `path` with `Path(\"data\") / filename`."
+                },
+                "2": {
+                  "message": "Open the `path` variable in read mode."
+                },
+                "3": {
+                  "message": "Read and strip the selected file text before printing it."
                 }
-              },
-              "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+              }
             }
           },
           "tryIt": {
-            "try_working_with_paths_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters."
-            },
             "try_working_with_paths_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build the relative path `data/scores.txt` from the `folder` and `filename` variables, then print the path."
+              "prompt": "Build and print a relative path string from folder and file-name input."
             },
             "try_working_with_paths_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use `Path(\"data\") / \"scores.txt\"`, store it in a variable, and print the path."
+              "prompt": "Use `Path` to join folder and file-name variables."
             },
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Open `data/message.txt`, read the text from that relative path, and print it."
+              "prompt": "Build a `Path` to a supplied data file and open that path."
             },
             "allowReveal": true
           }
         },
         "writing-text-files": {
           "label": "Writing Text Files",
-          "summary": "Create or overwrite text files by opening paths in write or append mode and writing text that you can verify with printed output.",
+          "summary": "Create or replace text with write mode, preserve existing text with append mode, control line breaks with `\\n`, and reopen the file to verify what was saved.",
           "cards": {
             "sketch0": {
-              "title": "Write mode creates or replaces text"
+              "title": "Write mode creates or replaces a file"
             },
             "sketch1": {
-              "title": "Append mode adds to the end"
+              "title": "Append mode keeps the existing text"
             },
             "sketch2": {
-              "title": "Use newline characters and verify what you wrote"
+              "title": "Write multiple lines and verify the saved file"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-write-vs-append": {
-              "title": "Choose the mode that replaces old text",
-              "prompt": "Which file mode should you use when you want to overwrite any existing text in a file with new text?",
-              "hint": "Use the question wording and the lesson example to narrow the choices.",
+            "sc-write-mode-effect": {
+              "title": "What write mode does",
+              "prompt": "A file already contains `Old text`. What happens when you open that same path with mode `\"w\"` and write `New text`?",
+              "hint": "Write mode does not keep the old contents.",
               "help": {
-                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Remove options that do not match the concept or evidence named in the question."
+                "concept": "Opening a text file with mode `\"w\"` creates the file if needed or replaces its existing contents before new text is written.",
+                "hint_1": "The old text is not appended after the new text.",
+                "hint_2": "Choose the result containing only the newly written text."
               },
               "options": {
-                "a": "\"a\"",
-                "b": "\"w\"",
-                "c": "\"r\"",
-                "d": "\"x\""
+                "a": "The file contains only `New text`",
+                "b": "The file contains `Old textNew text`",
+                "c": "The file stays unchanged",
+                "d": "Python automatically switches to read mode"
               }
             },
-            "sc-verify-written-text": {
-              "title": "Best way to confirm saved text",
-              "prompt": "After writing text to a file in this lesson, what is the best way to make the result visible in the output panel?",
-              "hint": "Think about reopening the path and showing the saved contents.",
+            "sc-append-mode-effect": {
+              "title": "What append mode does",
+              "prompt": "Which statement correctly describes opening an existing text file with mode `\"a\"`?",
+              "hint": "Append mode preserves what is already there.",
               "help": {
-                "concept": "File-writing exercises should produce observable output, so a common pattern is to reopen the file and print what was written.",
-                "hint_1": "Writing changes the file, but the output panel only shows text you print.",
-                "hint_2": "Choose the option that reads the saved text back and displays it."
+                "concept": "Append mode keeps the existing contents and writes new text at the end of the file.",
+                "hint_1": "It does not clear the file first.",
+                "hint_2": "Choose the option that preserves old text and adds new text after it."
               },
               "options": {
-                "a": "Change the editor theme",
-                "b": "Reopen the file and print its contents",
-                "c": "Open the notes panel",
-                "d": "Rename the variable"
+                "a": "It keeps the existing text and writes new text at the end",
+                "b": "It always erases the file before writing",
+                "c": "It can only read the existing text",
+                "d": "It automatically sorts every line"
               }
             },
-            "mc-append-true-statements": {
-              "title": "Facts about append mode",
-              "prompt": "Choose all true statements about opening a file with append mode (`\"a\"`).",
-              "hint": "Append mode keeps old text and adds new text after it.",
+            "sc-newline-writing": {
+              "title": "Write the next value on a new line",
+              "prompt": "Which string contains two lines when written to a text file?",
+              "hint": "The newline escape sequence is `\\n`.",
               "help": {
-                "concept": "Append mode writes at the end of existing contents instead of clearing the file first.",
-                "hint_1": "Look for statements that describe keeping existing text.",
-                "hint_2": "Reject any option that says append mode erases the file before writing."
+                "concept": "`\\n` represents a line break inside a Python string.",
+                "hint_1": "The line break belongs between the two pieces of text.",
+                "hint_2": "Choose the string containing `\\n` between `First` and `Second`."
               },
               "options": {
-                "a": "It keeps the existing contents.",
-                "b": "It adds new text at the end of the file.",
-                "c": "It always removes everything already in the file.",
-                "d": "It can be used to add another line to a log."
+                "a": "\"First\\nSecond\"",
+                "b": "\"First Second\"",
+                "c": "\"First\\tSecond\"",
+                "d": "\"First/Second\""
               }
             },
-            "mc-good-writing-patterns": {
-              "title": "Useful patterns when writing text files",
-              "prompt": "Choose all practices that fit this topic's file-writing workflow.",
-              "hint": "Think about writing text, then making the result observable.",
+            "sc-verify-saved-file": {
+              "title": "Verify what was saved",
+              "prompt": "After a program finishes writing a file, which pattern lets you show the actual saved contents in the output panel?",
+              "hint": "Reopen the same path for reading and print what `.read()` returns.",
               "help": {
-                "concept": "Beginner file-writing programs often use `with open(...)` for safe access, newline characters for line breaks, and printed verification after writing.",
-                "hint_1": "Look for patterns involving `with open`, `\\n`, and printing saved text.",
-                "hint_2": "Avoid choices unrelated to writing or checking file contents."
+                "concept": "Writing changes the file, while reopening it in read mode and printing `.read()` makes the saved contents visible.",
+                "hint_1": "Use the same path that was written.",
+                "hint_2": "Choose the option that reads the file back instead of printing a separate hard-coded message."
               },
               "options": {
-                "a": "Use `with open(...)` so the file is handled cleanly.",
-                "b": "Use `\\n` when you want the next text on a new line.",
-                "c": "Print the saved contents after writing so the result is visible.",
-                "d": "Change the notes panel before writing."
-              }
-            },
-            "dr-write-file-steps": {
-              "title": "Order the write-and-check steps",
-              "prompt": "Put these steps in the correct order for a simple program that writes text and then verifies it.",
-              "hint": "Write first, then reopen and display the saved text.",
-              "help": {
-                "concept": "A common workflow is open in write mode, write text, reopen in read mode, then print the contents.",
-                "hint_1": "The file must be opened for writing before `write()` can happen.",
-                "hint_2": "Printing comes after reading the saved contents back."
-              },
-              "tokens": {
-                "t1": "Open the path with mode \"w\"",
-                "t2": "Write the text",
-                "t3": "Open the same path for reading",
-                "t4": "Print the file contents"
-              }
-            },
-            "dr-append-log-sequence": {
-              "title": "Order the append workflow",
-              "prompt": "Arrange these actions to show how a program can create a starting log entry, append another entry, and then display the full log.",
-              "hint": "The first write creates the starting text before append adds more.",
-              "help": {
-                "concept": "To demonstrate append mode clearly, first create initial contents, then append new text, then read the whole file back.",
-                "hint_1": "You need some starting text before the append step makes sense.",
-                "hint_2": "Reading and printing the full log should happen after both writes are finished."
-              },
-              "tokens": {
-                "t1": "Open the log with mode \"w\" and write the first line",
-                "t2": "Open the log with mode \"a\" and add another line",
-                "t3": "Open the log for reading",
-                "t4": "Print the full log text"
-              }
-            },
-            "fb-write-mode-code": {
-              "title": "Fill the write mode",
-              "prompt": "Complete the mode so this code opens the file for overwriting text.",
-              "hint": "Focus on the missing concept rather than the exact missing term.",
-              "help": {
-                "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Choose the term that best completes the meaning of the statement."
-              },
-              "template": "with open(\"report.txt\", [blank1]) as file:",
-              "choices": [
-                "\"r\"",
-                "\"a\"",
-                "\"w\"",
-                "\"x\""
-              ]
-            },
-            "fb-newline-choice": {
-              "title": "Fill the line break",
-              "prompt": "Choose the text that starts a new line after `First line`.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
-                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
-                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
-              },
-              "template": "file.write(\"First line[blank1]Second line\")",
-              "choices": [
-                "\\t",
-                "\\n",
-                "\\r"
-              ]
-            },
-            "ci-write-greeting-file": {
-              "title": "Write a personalized greeting file",
-              "prompt": "Write a greeting into `greeting.txt` using the input name in title case, then open `greeting.txt` and print its contents.\n\nFor example, if the input is `zoe`, your program should print:\n`Hello, Zoe!`.",
-              "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
-              "help": {
-                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
-                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
-                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
-              },
-              "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
-              "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Write to greeting.txt instead of only printing the answer."
-                },
-                "1": {
-                  "message": "Use file.write() to write greeting.txt."
-                }
-              }
-            },
-            "ci-overwrite-shopping-list": {
-              "title": "Overwrite a shopping list from input",
-              "prompt": "A shopping list needs to be rewritten from fresh input. Write both items to `shopping.txt`, one per line and in title case, then print the file contents.\n\nFor example, if the inputs are `bread` and `apples`, your program should print:\n`Bread`\n`Apples`.",
-              "hint": "Opening a file with `\"w\"` replaces the old contents.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
-                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
-              },
-              "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
-              "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Write to shopping.txt instead of only printing the answer."
-                },
-                "1": {
-                  "message": "Use file.write() to write shopping.txt."
-                }
-              }
-            },
-            "ci-append-log-entry": {
-              "title": "Append a log entry",
-              "prompt": "The log already starts with one line. Append the new input entry to `log.txt` on a new line, then print the full file.\n\nFor example, if the input is `Checked sensors`, your program should print:\n`Start shift`\n`Checked sensors`.",
-              "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
-              "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Append to log.txt instead of only printing the answer."
-                },
-                "1": {
-                  "message": "Open log.txt in append mode."
-                }
-              }
-            },
-            "try-writing-text-files-checkpoint": {
-              "title": "Write and read a text file",
-              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text.",
-              "hint": "Open the file in write mode first, then reopen it for reading.",
-              "help": {
-                "concept": "Write the file first, then reopen it so you can show exactly what was saved.",
-                "hint_1": "Open `note.txt` in write mode and save `Hello from a file!`.",
-                "hint_2": "Reopen `note.txt` in read mode and print the text you just wrote."
-              },
-              "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
-              "solutionCode": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Write to note.txt instead of only printing the answer."
-                },
-                "1": {
-                  "message": "Use file.write() to write the file."
-                }
+                "a": "Reopen the file in read mode and print `file.read()`",
+                "b": "Print the file name as a string",
+                "c": "Open a different file and ignore the saved one",
+                "d": "Change the variable name used for the writer"
               }
             },
             "try-writing-text-files-sketch0": {
-              "title": "Write and read a message",
-              "prompt": "Write `Done` to `note.txt`, then reopen `note.txt` and print the saved text.",
-              "hint": "Use write mode first, then read the same file back.",
+              "title": "Replace an old status with fresh input",
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with `.strip().title()`, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
+              "hint": "Write mode should replace the supplied old contents, not add after them.",
               "help": {
-                "concept": "This card practices the full write-then-check workflow with one file.",
-                "hint_1": "Open `note.txt` with mode `\"w\"` and write `Done`.",
-                "hint_2": "Open `note.txt` again and print `file.read()`."
+                "concept": "Use mode `\"w\"` when the new text should replace whatever the file contained before.",
+                "hint_1": "Store `input().strip().title()` in `status`.",
+                "hint_2": "Write `status + \"\\n\"`, then reopen the same file with `\"r\"` and print its contents."
               },
-              "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
-              "solutionCode": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+              "starterCode": "status = input()\n\n# Clean status, replace status.txt with the new line,\n# then reopen the file and print what was saved.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "status = input()\n\n# Clean status, replace status.txt with the new line,\n# then reopen the file and print what was saved.\n"
+                },
+                "status_txt": {
+                  "content": "Old status\n"
+                }
+              },
+              "solutionCode": "status = input().strip().title()\n\nwith open(\"status.txt\", \"w\") as file:\n    file.write(status + \"\\n\")\n\nwith open(\"status.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "status = input().strip().title()\n\nwith open(\"status.txt\", \"w\") as file:\n    file.write(status + \"\\n\")\n\nwith open(\"status.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "status_txt": {
+                  "content": "Old status\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Write to note.txt instead of only printing Done."
+                  "message": "Open `status.txt` with mode `\"w\"` so the old contents are replaced."
                 },
                 "1": {
-                  "message": "Use file.write() to write note.txt."
+                  "message": "Write the cleaned `status` value to the file."
+                },
+                "2": {
+                  "message": "Reopen `status.txt` in read mode and print the saved contents."
                 }
               }
             },
             "try-writing-text-files-sketch1": {
-              "title": "Append a second line",
-              "prompt": "Create `log.txt` with `Start`, reopen it in append mode, add `End` on a new line, then print the full file.",
-              "hint": "Use write mode for the first line and append mode for the second line.",
+              "title": "Append a new log entry",
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log.",
+              "hint": "Append mode should preserve `Start shift` and add the new entry after it.",
               "help": {
-                "concept": "This card compares write mode and append mode in one short program.",
-                "hint_1": "First open `log.txt` with `\"w\"` and write `Start\n`.",
-                "hint_2": "Then open `log.txt` with `\"a\"`, write `End`, and print the full file."
+                "concept": "Use mode `\"a\"` when existing text must remain and the new text belongs at the end.",
+                "hint_1": "Store `input().strip()` in `entry`.",
+                "hint_2": "Write `entry + \"\\n\"` in append mode, then read the whole log back."
               },
-              "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
-              "solutionCode": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+              "starterCode": "entry = input()\n\n# Clean entry, append it to log.txt on a new line,\n# then reopen the file and print the complete log.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "entry = input()\n\n# Clean entry, append it to log.txt on a new line,\n# then reopen the file and print the complete log.\n"
+                },
+                "log_txt": {
+                  "content": "Start shift\n"
+                }
+              },
+              "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(entry + \"\\n\")\n\nwith open(\"log.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(entry + \"\\n\")\n\nwith open(\"log.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "log_txt": {
+                  "content": "Start shift\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Create and append to log.txt."
+                  "message": "Open `log.txt` with mode `\"a\"` so the existing first line is preserved."
                 },
                 "1": {
-                  "message": "Use file.write() to write the log file."
+                  "message": "Append the cleaned `entry` followed by a newline."
+                },
+                "2": {
+                  "message": "Reopen `log.txt` in read mode and print the complete saved log."
                 }
               }
             },
             "try-writing-text-files-sketch2": {
-              "title": "Write a simple report",
-              "prompt": "Write `Ava: 92` to `report.txt`, then reopen the file and print it.",
-              "hint": "Use the `name` and `score` variables to build the text before you write it.",
+              "title": "Create a two-line report",
+              "prompt": "Read a name and a score from input. Clean the name with `.strip().title()` and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
+              "hint": "Use two `file.write(...)` calls so each report line ends with `\\n`.",
               "help": {
-                "concept": "This card practices formatting a line of text before saving it to a file.",
-                "hint_1": "Build the text with `f\"{name}: {score}\"` and write it to `report.txt`.",
-                "hint_2": "Reopen `report.txt` and print the saved line."
+                "concept": "Several calls to `file.write()` can build a multi-line text file deliberately.",
+                "hint_1": "Write the name line first and the score line second.",
+                "hint_2": "After the write block ends, reopen `report.txt` in read mode and print its contents."
               },
-              "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
-              "solutionCode": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+              "starterCode": "name = input()\nscore = input()\n\n# Clean the inputs, create report.txt with two labeled lines,\n# then reopen the file and print exactly what was saved.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "name = input()\nscore = input()\n\n# Clean the inputs, create report.txt with two labeled lines,\n# then reopen the file and print exactly what was saved.\n"
+                }
+              },
+              "solutionCode": "name = input().strip().title()\nscore = input().strip()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score + \"\\n\")\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "name = input().strip().title()\nscore = input().strip()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score + \"\\n\")\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Write to report.txt instead of only printing the answer."
+                  "message": "Create `report.txt` with mode `\"w\"`."
                 },
                 "1": {
-                  "message": "Use file.write() to write report.txt."
+                  "message": "Write the report text with `file.write()`."
+                },
+                "2": {
+                  "message": "Use newline characters so the report has two separate lines."
+                },
+                "3": {
+                  "message": "Reopen `report.txt` in read mode and print the saved file."
                 }
               }
             }
           },
           "tryIt": {
-            "try_writing_text_files_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text."
-            },
             "try_writing_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Write `Done` to `note.txt`, then reopen `note.txt` and print the saved text."
+              "prompt": "Replace an existing file with fresh input using write mode."
             },
             "try_writing_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Create `log.txt` with `Start`, reopen it in append mode, add `End` on a new line, then print the full file."
+              "prompt": "Preserve existing text and add a new line with append mode."
             },
             "try_writing_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Write `Ava: 92` to `report.txt`, then reopen the file and print it."
+              "prompt": "Create a multi-line text report and verify the saved contents."
             },
             "allowReveal": true
           }
@@ -19430,7 +17587,7 @@ const messages: Record<string, any> = {
       "python-8-real-world-project": {
         "community-event-registration-cleaner": {
           "label": "Final Capstone: Community Event Registration Cleaner",
-          "summary": "A community center receives messy registration exports. Build a modular cleaner that preserves valid registrations, summarizes seats by event, and writes dependable output files.",
+          "summary": "Build one cumulative registration-cleaning tool that reads CSV rows, validates messy data, moves reusable logic into sibling helper modules, summarizes accepted registrations, writes two report files, and verifies the saved artifacts.",
           "cards": {
             "sketch0": {
               "title": "A new domain, the same engineering habits"
@@ -19441,315 +17598,436 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "cp_1": {
-              "title": "Preview the registration file"
+              "title": "Clean and validate one registration"
             },
             "cp_2": {
-              "title": "Clean one registration row"
+              "title": "Collect only valid registrations"
             },
             "cp_3": {
-              "title": "Skip invalid seat counts"
-            },
-            "cp_4": {
               "title": "Move cleaning into a helper module"
             },
+            "cp_4": {
+              "title": "Add summary helper functions"
+            },
             "cp_5": {
-              "title": "Add event summary functions"
+              "title": "Write the final report files"
             },
             "cp_6": {
-              "title": "Write the final registration reports"
+              "title": "Verify the saved artifacts"
             }
           },
           "quiz": {
             "try-community-event-registration-cleaner-sketch0": {
-              "title": "Clean one registration preview",
-              "prompt": "Read the first data row from `data/registration.csv`. Split the four fields, title-case the name, convert seats to an integer, lowercase the email, and print `Ava Smith reserved 2 seat(s) for Python Night <ava@example.com>`.",
-              "hint": "Skip the header before splitting the first data row.",
+              "title": "Inspect the registration export",
+              "prompt": "Open `data/registrations.csv` in read mode with `csv.DictReader`. Loop through every data row and print `name|event|seats|email` using the named columns exactly as they appear in the file. Do not clean or reject anything yet.",
+              "hint": "Inspect the real CSV shape before you design the cleaner.",
               "help": {
-                "concept": "A small preview verifies the input shape before the larger capstone adds error handling and modules.",
-                "hint_1": "Clean each field after splitting the row.",
-                "hint_2": "Use the values from the file instead of hard-coding the final line."
+                "concept": "The preview establishes that the capstone uses a header-based CSV file and named columns, not hand-written row splitting.",
+                "hint_1": "Create `reader = csv.DictReader(file)` inside the open-file block.",
+                "hint_2": "Loop through `reader` and use all four named columns from each row."
               },
-              "starterCode": "with open(\"data/registration.csv\") as file:\n    next(file)\n    row = next(file).strip()\n\n# Split the row, clean name/email, convert seats, and print the required line.\n",
+              "starterCode": "import csv\n\n# Open data/registrations.csv in read mode.\n# Use csv.DictReader and print every row as name|event|seats|email.\n",
               "starterFiles": {
-                "data_registration_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \n"
+                "main_py": {
+                  "content": "import csv\n\n# Open data/registrations.csv in read mode.\n# Use csv.DictReader and print every row as name|event|seats|email.\n"
+                },
+                "data_registrations_csv": {
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
+              "solutionCode": "import csv\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \"|\" + row[\"event\"] + \"|\" + row[\"seats\"] + \"|\" + row[\"email\"])\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "with open(\"data/registration.csv\") as file:\n    next(file)\n    row = next(file).strip()\n\nname, event, seats, email = row.split(\",\")\nprint(f\"{name.strip().title()} reserved {int(seats)} seat(s) for {event.strip()} <{email.strip().lower()}>\")\n"
+                  "content": "import csv\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \"|\" + row[\"event\"] + \"|\" + row[\"seats\"] + \"|\" + row[\"email\"])\n"
                 },
-                "data_registration_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \n"
+                "data_registrations_csv": {
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "with open(\"data/registration.csv\") as file:\n    next(file)\n    row = next(file).strip()\n\nname, event, seats, email = row.split(\",\")\nprint(f\"{name.strip().title()} reserved {int(seats)} seat(s) for {event.strip()} <{email.strip().lower()}>\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Read the supplied registration file."
+                  "message": "Import `csv` and read `data/registrations.csv` with `csv.DictReader`."
                 },
                 "1": {
-                  "message": "Split the row into fields."
+                  "message": "Loop through every row from `reader`."
                 },
                 "2": {
-                  "message": "Normalize the attendee name."
-                },
-                "3": {
-                  "message": "Normalize the email address."
+                  "message": "Read the `name`, `event`, `seats`, and `email` values from the row."
                 }
               }
             },
             "cp-1-read-registration-file": {
-              "title": "Preview the registration file",
-              "prompt": "Continue the community-event registration cleaner. In step 1 of 6, open `data/registrations.csv` and print every row with surrounding whitespace removed. Do not type the CSV contents into main.py.",
-              "hint": "Inspect the real file before designing the cleaner.",
+              "title": "Clean and validate one registration",
+              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with `strip().title()`, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted.",
+              "hint": "Apply the cleaning and validation rules inside one reusable function.",
               "help": {
-                "concept": "A production data task begins by confirming the actual columns and row shape.",
-                "hint_1": "Use the exact relative path from the prompt.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
+                "concept": "`clean_row(row)` should return one dependable shape for valid data and `None` for every rejected registration.",
+                "hint_1": "Check missing cleaned text before converting the seat count.",
+                "hint_2": "Catch exactly `ValueError`, then reject seat counts below 1."
               },
-              "starterCode": "# Read data/registrations.csv and print each stripped row.\n",
+              "starterCode": "import csv\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \"|\" + row[\"event\"] + \"|\" + row[\"seats\"] + \"|\" + row[\"email\"])\n",
               "starterFiles": {
-                "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
-                }
-              },
-              "solutionFiles": {
                 "main_py": {
-                  "content": "with open(\"data/registrations.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+                  "content": "import csv\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"] + \"|\" + row[\"event\"] + \"|\" + row[\"seats\"] + \"|\" + row[\"email\"])\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "with open(\"data/registrations.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                },
+                "data_registrations_csv": {
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
+                }
+              },
               "sourceChecks": {
                 "0": {
-                  "message": "Use the named file and required operation."
+                  "message": "Define `clean_row(row)` and clean all four named CSV fields."
+                },
+                "1": {
+                  "message": "Reject empty cleaned name, event, or email values."
+                },
+                "2": {
+                  "message": "Catch exactly `ValueError` from the seat conversion."
+                },
+                "3": {
+                  "message": "Reject seat counts below 1 before returning the cleaned dictionary."
                 }
               }
             },
             "cp-2-clean-one-registration": {
-              "title": "Clean one registration row",
-              "prompt": "Continue the community-event registration cleaner. In step 2 of 6, keep the file-preview context, then add `clean_row(line)`. Return a dictionary with title-cased `name`, stripped `event`, integer `seats`, and lowercase `email`. Read the first data row and print the cleaned dictionary.",
-              "hint": "Make one row dependable before processing the complete file.",
+              "title": "Collect only valid registrations",
+              "prompt": "Keep the working `clean_row(row)` function. Replace the row-by-row preview with a list named `records`. For each CSV row, call `clean_row(row)` once, store the result in `record`, and append it only when it is not `None`. Print the final `records` list.",
+              "hint": "Let `clean_row` decide validity; this step should only collect accepted results.",
               "help": {
-                "concept": "A single-row helper creates one tested contract for every later row.",
-                "hint_1": "Split into four names before cleaning each field.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
+                "concept": "Separating cleaning from collection keeps the workflow readable and prevents duplicated validation logic.",
+                "hint_1": "Create `records = []` before opening the file.",
+                "hint_2": "Use `if record is not None:` before `records.append(record)`."
               },
-              "starterCode": "with open(\"data/registrations.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    # Split and clean name, event, seats, and email.\n    pass\n\n\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "starterFiles": {
-                "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
-                }
-              },
-              "solutionFiles": {
                 "main_py": {
-                  "content": "with open(\"data/registrations.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n\n\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n"
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "with open(\"data/registrations.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n\n\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
-              "sourceChecks": {}
-            },
-            "cp-3-skip-bad-registration-rows": {
-              "title": "Skip invalid seat counts",
-              "prompt": "Continue the community-event registration cleaner. In step 3 of 6, keep `clean_row(line)`. Loop through the data rows, collect valid dictionaries in `records`, and skip rows whose seat value raises `ValueError`.",
-              "hint": "Protect the loop from bad seat values without discarding valid registrations.",
-              "help": {
-                "concept": "Expected conversion failures should be handled at the narrow point where they occur.",
-                "hint_1": "Append only inside the try block.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
-              },
-              "starterCode": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
-              "starterFiles": {
-                "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
-                }
-              },
+              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the named file and required operation."
+                  "message": "Create `records = []` before reading the CSV."
                 },
                 "1": {
-                  "message": "Keep the function or import in the file named by the prompt."
+                  "message": "Call `clean_row(row)` once for each CSV row."
                 },
                 "2": {
-                  "message": "Preserve the deterministic output contract."
+                  "message": "Append only records that are not `None`."
+                }
+              }
+            },
+            "cp-3-skip-bad-registration-rows": {
+              "title": "Move cleaning into a helper module",
+              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with `from cleaning import clean_row`. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
+              "hint": "Move one responsibility without changing the program's behavior.",
+              "help": {
+                "concept": "A sibling helper module lets `main.py` orchestrate the workflow while `cleaning.py` owns row cleaning and validation.",
+                "hint_1": "Create `cleaning.py` beside `main.py` and place the complete working function there.",
+                "hint_2": "Remove the local function definition from `main.py` and import `clean_row` directly."
+              },
+              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                },
+                "data_registrations_csv": {
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
+                }
+              },
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
+                },
+                "data_registrations_csv": {
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import `clean_row` from the sibling `cleaning` module."
+                },
+                "1": {
+                  "message": "Keep the complete `clean_row(row)` function in `cleaning.py`."
+                },
+                "2": {
+                  "message": "Preserve the accepted-record output from the previous step."
                 }
               }
             },
             "cp-4-move-cleaning-to-module": {
-              "title": "Move cleaning into a helper module",
-              "prompt": "Continue the community-event registration cleaner. In step 4 of 6, move `clean_row(line)` into `tools/cleaning.py`. Import it in `main.py`, keep the same valid `records` list, and preserve the printed output.",
-              "hint": "Move only the cleaning responsibility; the workflow remains in main.py.",
+              "title": "Add summary helper functions",
+              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order.",
+              "hint": "Use normal loops and dictionaries so the summary stays within concepts already taught.",
               "help": {
-                "concept": "A helper module removes repeated logic without giving the model responsibility for file orchestration.",
-                "hint_1": "Import clean_row from tools.cleaning in main.py.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
+                "concept": "Summary helpers should accept `records` and return values without reading or writing files themselves.",
+                "hint_1": "Build the seat total with an accumulator loop.",
+                "hint_2": "For counts, use `if event in counts:` to increment an existing key or create it with 1."
               },
-              "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "starterFiles": {
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    # Move the working cleaning logic here.\n    pass\n"
+                "main_py": {
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
-                "tools___init___py": {
-                  "content": ""
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
+              "solutionCode": "import csv\nfrom cleaning import clean_row\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
+                },
+                "summary_py": {
+                  "content": "def total_seats(records):\n    total = 0\n    for record in records:\n        total += record[\"seats\"]\n    return total\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        if event in counts:\n            counts[event] += 1\n        else:\n            counts[event] = 1\n    return counts\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
                 },
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n"
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
                 },
-                "tools___init___py": {
-                  "content": ""
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the named file and required operation."
+                  "message": "Import `total_seats` and `event_counts` from sibling `summary.py`."
                 },
                 "1": {
-                  "message": "Keep the function or import in the file named by the prompt."
+                  "message": "Implement `total_seats(records)` with an explicit accumulator loop."
+                },
+                "2": {
+                  "message": "Implement `event_counts(records)` with a dictionary and membership check."
+                },
+                "3": {
+                  "message": "Print the returned total and counts without `sorted()` or comprehensions."
                 }
               }
             },
             "cp-5-add-summary-functions": {
-              "title": "Add event summary functions",
-              "prompt": "Continue the community-event registration cleaner. In step 5 of 6, create `tools/summary.py` with `total_seats(records)` and `event_counts(records)`. Import both helpers in `main.py`, print the total seats, then print each event count in sorted event-name order.",
-              "hint": "Keep summary calculations pure so they can be reused by the console and file reports.",
+              "title": "Write the final report files",
+              "prompt": "Create a sibling file named `reports.py` with `write_clean_registrations(records)` and `write_summary(total, counts)`. Write `output/clean_registrations.csv` in `\"w\"` mode with the header `name,event,seats,email` and one accepted record per line. Write `output/summary.txt` in `\"w\"` mode with `Total seats: <total>` followed by each `event: count`. Import and call both helpers from `main.py`, then print the concise console summary. The old output files already exist and must be replaced.",
+              "hint": "The output files already exist, so ordinary write mode is enough; no directory-creation API is needed.",
               "help": {
-                "concept": "Summary functions should accept records and return values without depending on a specific output surface.",
-                "hint_1": "Sort the event names before printing for deterministic output.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
+                "concept": "Keep file writing in `reports.py` while `main.py` coordinates cleaning, summarizing, and reporting.",
+                "hint_1": "Use fixed output paths inside the report functions rather than default parameters.",
+                "hint_2": "Write event counts by looping directly through the counts dictionary; do not sort them."
               },
-              "starterCode": "from tools.cleaning import clean_row\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Total seats: {total_seats(records)}\")\nfor event, count in sorted(event_counts(records).items()):\n    print(f\"{event}: {count}\")\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n",
               "starterFiles": {
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n"
+                "main_py": {
+                  "content": "import csv\nfrom cleaning import clean_row\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n"
                 },
-                "tools_summary_py": {
-                  "content": "def total_seats(records):\n    pass\n\n\ndef event_counts(records):\n    pass\n"
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
                 },
-                "tools___init___py": {
-                  "content": ""
+                "summary_py": {
+                  "content": "def total_seats(records):\n    total = 0\n    for record in records:\n        total += record[\"seats\"]\n    return total\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        if event in counts:\n            counts[event] += 1\n        else:\n            counts[event] = 1\n    return counts\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
+              "solutionCode": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.cleaning import clean_row\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Total seats: {total_seats(records)}\")\nfor event, count in sorted(event_counts(records).items()):\n    print(f\"{event}: {count}\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
+                },
+                "summary_py": {
+                  "content": "def total_seats(records):\n    total = 0\n    for record in records:\n        total += record[\"seats\"]\n    return total\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        if event in counts:\n            counts[event] += 1\n        else:\n            counts[event] = 1\n    return counts\n"
+                },
+                "reports_py": {
+                  "content": "def write_clean_registrations(records):\n    with open(\"output/clean_registrations.csv\", \"w\") as file:\n        file.write(\"name,event,seats,email\\n\")\n        for record in records:\n            file.write(\n                record[\"name\"] + \",\" +\n                record[\"event\"] + \",\" +\n                str(record[\"seats\"]) + \",\" +\n                record[\"email\"] + \"\\n\"\n            )\n\n\ndef write_summary(total, counts):\n    with open(\"output/summary.txt\", \"w\") as file:\n        file.write(\"Total seats: \" + str(total) + \"\\n\")\n        for event in counts:\n            file.write(event + \": \" + str(counts[event]) + \"\\n\")\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
                 },
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n"
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
                 },
-                "tools_summary_py": {
-                  "content": "def total_seats(records):\n    return sum(record[\"seats\"] for record in records)\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        counts[event] = counts.get(event, 0) + 1\n    return counts\n"
-                },
-                "tools___init___py": {
-                  "content": ""
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "from tools.cleaning import clean_row\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Total seats: {total_seats(records)}\")\nfor event, count in sorted(event_counts(records).items()):\n    print(f\"{event}: {count}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the named file and required operation."
+                  "message": "Import both report helpers from sibling `reports.py`."
                 },
                 "1": {
-                  "message": "Keep the function or import in the file named by the prompt."
+                  "message": "Write `output/clean_registrations.csv` in write mode from `reports.py`."
                 },
                 "2": {
-                  "message": "Preserve the deterministic output contract."
+                  "message": "Write `output/summary.txt` in write mode from `reports.py`."
+                },
+                "3": {
+                  "message": "Keep report functions free of default parameters, pathlib, and sorted output."
                 }
               }
             },
             "cp-6-write-final-reports": {
-              "title": "Write the final registration reports",
-              "prompt": "Continue the community-event registration cleaner. In step 6 of 6, create `tools/reports.py`. Write cleaned records to `output/clean_registrations.csv`, write the seat and event summary to `output/summary.txt`, call both helpers from `main.py`, and print the final deterministic summary.",
-              "hint": "The final step should leave both output files and a concise console handoff.",
+              "title": "Verify the saved artifacts",
+              "prompt": "Keep the complete cleaner, helper modules, summaries, and report writers. After writing both output files, print `Cleaned <count> registrations`, then reopen `output/clean_registrations.csv` and `output/summary.txt` in read mode and print their exact saved contents. The grader checks the files themselves as well as the console output.",
+              "hint": "Verify the durable artifacts rather than trusting only the in-memory values.",
               "help": {
-                "concept": "A finished data tool produces durable artifacts and reports enough information to verify the run.",
-                "hint_1": "Create output/ through pathlib before opening the report paths.",
-                "hint_2": "Run the complete supplied dataset and compare every output line with the expected result."
+                "concept": "The final capstone should prove that the CSV and summary files were actually overwritten with the cleaned data.",
+                "hint_1": "Reopen each output path after the report functions finish.",
+                "hint_2": "Use `print(file.read(), end=\"\")` so the saved contents appear exactly as written."
               },
-              "starterCode": "from tools.cleaning import clean_row\nfrom tools.reports import write_clean_registrations, write_summary\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\ntotal = total_seats(records)\ncounts = event_counts(records)\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(f\"Cleaned {len(records)} registrations\")\nprint(f\"Total seats: {total}\")\nfor event, count in sorted(counts.items()):\n    print(f\"{event}: {count}\")\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n",
               "starterFiles": {
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n"
+                "main_py": {
+                  "content": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\nprint(\"Total seats: \" + str(total))\nfor event in counts:\n    print(event + \": \" + str(counts[event]))\n"
                 },
-                "tools_summary_py": {
-                  "content": "def total_seats(records):\n    return sum(record[\"seats\"] for record in records)\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        counts[event] = counts.get(event, 0) + 1\n    return counts\n"
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
                 },
-                "tools_reports_py": {
-                  "content": "from pathlib import Path\n\n\ndef write_clean_registrations(records, path=\"output/clean_registrations.csv\"):\n    pass\n\n\ndef write_summary(total, counts, path=\"output/summary.txt\"):\n    pass\n"
+                "summary_py": {
+                  "content": "def total_seats(records):\n    total = 0\n    for record in records:\n        total += record[\"seats\"]\n    return total\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        if event in counts:\n            counts[event] += 1\n        else:\n            counts[event] = 1\n    return counts\n"
                 },
-                "tools___init___py": {
-                  "content": ""
+                "reports_py": {
+                  "content": "def write_clean_registrations(records):\n    with open(\"output/clean_registrations.csv\", \"w\") as file:\n        file.write(\"name,event,seats,email\\n\")\n        for record in records:\n            file.write(\n                record[\"name\"] + \",\" +\n                record[\"event\"] + \",\" +\n                str(record[\"seats\"]) + \",\" +\n                record[\"email\"] + \"\\n\"\n            )\n\n\ndef write_summary(total, counts):\n    with open(\"output/summary.txt\", \"w\") as file:\n        file.write(\"Total seats: \" + str(total) + \"\\n\")\n        for event in counts:\n            file.write(event + \": \" + str(counts[event]) + \"\\n\")\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
+                },
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
+                },
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
+              "solutionCode": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\n\nwith open(\"output/clean_registrations.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n\nwith open(\"output/summary.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from tools.cleaning import clean_row\nfrom tools.reports import write_clean_registrations, write_summary\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\ntotal = total_seats(records)\ncounts = event_counts(records)\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(f\"Cleaned {len(records)} registrations\")\nprint(f\"Total seats: {total}\")\nfor event, count in sorted(counts.items()):\n    print(f\"{event}: {count}\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\nfrom reports import write_clean_registrations, write_summary\nfrom summary import event_counts, total_seats\n\nrecords = []\n\nwith open(\"data/registrations.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\ntotal = total_seats(records)\ncounts = event_counts(records)\n\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(\"Cleaned \" + str(len(records)) + \" registrations\")\n\nwith open(\"output/clean_registrations.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n\nwith open(\"output/summary.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    event = row[\"event\"].strip()\n    seats_text = row[\"seats\"].strip()\n    email = row[\"email\"].strip().lower()\n\n    if name == \"\" or event == \"\" or email == \"\":\n        return None\n\n    try:\n        seats = int(seats_text)\n    except ValueError:\n        return None\n\n    if seats < 1:\n        return None\n\n    return {\"name\": name, \"event\": event, \"seats\": seats, \"email\": email}\n"
+                },
+                "summary_py": {
+                  "content": "def total_seats(records):\n    total = 0\n    for record in records:\n        total += record[\"seats\"]\n    return total\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        if event in counts:\n            counts[event] += 1\n        else:\n            counts[event] = 1\n    return counts\n"
+                },
+                "reports_py": {
+                  "content": "def write_clean_registrations(records):\n    with open(\"output/clean_registrations.csv\", \"w\") as file:\n        file.write(\"name,event,seats,email\\n\")\n        for record in records:\n            file.write(\n                record[\"name\"] + \",\" +\n                record[\"event\"] + \",\" +\n                str(record[\"seats\"]) + \",\" +\n                record[\"email\"] + \"\\n\"\n            )\n\n\ndef write_summary(total, counts):\n    with open(\"output/summary.txt\", \"w\") as file:\n        file.write(\"Total seats: \" + str(total) + \"\\n\")\n        for event in counts:\n            file.write(event + \": \" + str(counts[event]) + \"\\n\")\n"
                 },
                 "data_registrations_csv": {
-                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \n"
+                  "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \nMia Chen,Data Clinic,not-a-number,mia@example.com\n   ,Python Night,1,blank@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com \nNia Moss,Data Clinic,0,nia@example.com\nOmar Hill,Data Clinic,2,   \n"
                 },
-                "tools_cleaning_py": {
-                  "content": "def clean_row(line):\n    name, event, seats, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"event\": event.strip(), \"seats\": int(seats), \"email\": email.strip().lower()}\n"
+                "output_clean_registrations_csv": {
+                  "content": "old registrations export\n"
                 },
-                "tools_summary_py": {
-                  "content": "def total_seats(records):\n    return sum(record[\"seats\"] for record in records)\n\n\ndef event_counts(records):\n    counts = {}\n    for record in records:\n        event = record[\"event\"]\n        counts[event] = counts.get(event, 0) + 1\n    return counts\n"
-                },
-                "tools_reports_py": {
-                  "content": "from pathlib import Path\n\n\ndef write_clean_registrations(records, path=\"output/clean_registrations.csv\"):\n    output_path = Path(path)\n    output_path.parent.mkdir(parents=True, exist_ok=True)\n    with output_path.open(\"w\") as file:\n        file.write(\"name,event,seats,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['event']},{record['seats']},{record['email']}\\n\")\n\n\ndef write_summary(total, counts, path=\"output/summary.txt\"):\n    output_path = Path(path)\n    output_path.parent.mkdir(parents=True, exist_ok=True)\n    with output_path.open(\"w\") as file:\n        file.write(f\"Total seats: {total}\\n\")\n        for event, count in sorted(counts.items()):\n            file.write(f\"{event}: {count}\\n\")\n"
-                },
-                "tools___init___py": {
-                  "content": ""
+                "output_summary_txt": {
+                  "content": "old summary\n"
                 }
               },
-              "solutionCode": "from tools.cleaning import clean_row\nfrom tools.reports import write_clean_registrations, write_summary\nfrom tools.summary import event_counts, total_seats\n\nrecords = []\nwith open(\"data/registrations.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\ntotal = total_seats(records)\ncounts = event_counts(records)\nwrite_clean_registrations(records)\nwrite_summary(total, counts)\n\nprint(f\"Cleaned {len(records)} registrations\")\nprint(f\"Total seats: {total}\")\nfor event, count in sorted(counts.items()):\n    print(f\"{event}: {count}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the named file and required operation."
+                  "message": "Keep calling both report-writing helpers before verification."
                 },
                 "1": {
-                  "message": "Keep the function or import in the file named by the prompt."
+                  "message": "Reopen `output/clean_registrations.csv` in read mode and print it."
                 },
                 "2": {
-                  "message": "Preserve the deterministic output contract."
+                  "message": "Reopen `output/summary.txt` in read mode and print it."
                 },
                 "3": {
-                  "message": "Create the requested output artifact."
+                  "message": "Verify the saved artifact contents rather than reconstructing them in `main.py`."
                 }
               }
             }
@@ -19757,7 +18035,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_community_event_registration_cleaner_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read the first data row from `data/registration.csv`. Split the four fields, title-case the name, convert seats to an integer, lowercase the email, and print `Ava Smith reserved 2 seat(s) for Python Night <ava@example.com>`."
+              "prompt": "Inspect the complete registration export with `csv.DictReader` before the capstone starts."
             },
             "allowReveal": true
           }
@@ -51718,300 +49996,332 @@ const messages: Record<string, any> = {
       "python-5-lists-tuples-and-dictionaries": {
         "creating-and-indexing-lists": {
           "course-introduction": {
-            "title": "Welcome to Python Data and Functions",
-            "bodyMarkdown": "This course begins after Python for Beginners. Before starting, you should already be comfortable with **variables, strings, `if` statements, loops, and basic Python syntax**. You do not need advanced knowledge, but you should be able to read a short program and explain what its main lines are doing.\n\nNow your programs will begin working with more realistic information. You will learn how lists, tuples, and dictionaries organize related values; how functions turn repeated logic into reusable tools; and how files let a program read, clean, and save data. Later projects bring those ideas together in small multi-file applications.\n\nThe course starts with lists because they introduce an important shift: one variable can hold an ordered collection instead of a single value. After this introduction, the lesson **What a list is** begins the first technical chapter without losing the larger story of where the course is going."
+            "title": "Welcome to Python Data & Functions",
+            "bodyMarkdown": "This course begins after the introductory Python course. You should already be comfortable with **variables, strings, input and output, conditionals, loops, and basic Python syntax**.\n\nNow your programs will start working with collections of related values instead of handling everything one value at a time. You will learn how lists, tuples, and dictionaries organize data; how functions turn repeated logic into reusable tools; and how files let programs read, clean, and save information.\n\nWe begin with lists because they introduce the key idea behind this module: **one variable can hold an ordered collection of values**."
           },
           "list-creation-basics": {
-            "title": "What a list is",
-            "bodyMarkdown": "A **list** stores multiple values in one variable, in a specific order. In Python, you create a list with square brackets.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nWhen you click **Run**, the output panel shows the whole list:\n\n```python\n['red', 'blue', 'green']\n```\n\nHere is what each part does:\n- `colors` is the variable name.\n- `[` and `]` mark the list.\n- Each item is separated by a comma.\n- The items stay in order.\n\nWorked example:\n\n```python\nnumbers = [10, 20, 30]\nprint(numbers)\nprint(numbers[0])\n```\n\nStep by step:\n- `numbers` stores three values.\n- `numbers[0]` means \"get the item at index 0.\"\n- The first item is `10`, so that line prints `10`."
+            "title": "Creating lists",
+            "bodyMarkdown": "A **list** stores multiple values in one ordered collection. In Python, a list literal uses square brackets, with commas between the items.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nOutput:\n\n```text\n['red', 'blue', 'green']\n```\n\nThe important pieces are:\n\n- `colors` is the variable that holds the list.\n- `[` and `]` mark the beginning and end of the list.\n- Commas separate the items.\n- The items keep the order in which you place them.\n\nA list can also be built from values already stored in variables.\n\n```python\nmorning = \"math\"\nafternoon = \"science\"\nclasses = [morning, afternoon]\nprint(classes)\n```\n\nOutput:\n\n```text\n['math', 'science']\n```\n\nHere, Python uses the values inside `morning` and `afternoon` as the two list items."
           },
           "indexing-basics": {
-            "title": "How indexing works",
-            "bodyMarkdown": "An **index** is the position of an item in a list. Python starts counting at **0**, not 1.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nThis prints:\n\n```python\ncat\ndog\nfox\n```\n\nFollow the execution: - `animals[0]` gets the first item: `\"cat\"`\n- `animals[1]` gets the second item: `\"dog\"`\n- `animals[2]` gets the third item: `\"fox\"`\n\nA common beginner mistake is thinking the first item is index 1. In Python, the first item is always index 0.\n\nWorked example:\n\n```python\nscores = [88, 91, 75]\nprint(scores[1])\n```\n\nThis prints `91` because index `1` means the second item."
+            "title": "Reading items by index",
+            "bodyMarkdown": "An **index** is the position Python uses to find an item in a list. Python starts counting at **0**.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nOutput:\n\n```text\ncat\ndog\nfox\n```\n\nFor this list:\n\n| Item | Position in the list | Python index |\n| --- | ---: | ---: |\n| `\"cat\"` | first | `0` |\n| `\"dog\"` | second | `1` |\n| `\"fox\"` | third | `2` |\n\nA common mistake is to use index `1` for the first item. In Python, index `1` means the **second** item.\n\nWorked example:\n\n```python\nprices = [12, 15, 9, 20]\nprint(prices[2])\n```\n\nThis prints `9` because index `2` points to the third item.\n\nIndexes must refer to a real position. For example, `animals[3]` would raise an `IndexError` because this three-item list only has indexes `0`, `1`, and `2`."
           },
-          "using-lists-in-small-programs": {
-            "title": "Using list values in output",
-            "bodyMarkdown": "You can take one item from a list and use it in `print()`.\n\n```python\ncities = [\"Lima\", \"Oslo\", \"Seoul\"]\nprint(\"First city:\", cities[0])\nprint(\"Last shown city:\", cities[2])\n```\n\nStep by step:\n- `cities` stores three strings.\n- `cities[0]` gets `\"Lima\"`.\n- `cities[2]` gets `\"Seoul\"`.\n- `print()` combines text and list values in the output panel.\n\nWorked example:\n\n```python\nitems = [\"pen\", \"book\", \"bag\"]\nprint(\"I packed a\", items[1])\n```\n\nThis prints:\n\n```python\nI packed a book\n```"
+          "negative-indexes": {
+            "title": "Reading from the end",
+            "bodyMarkdown": "Python also lets you count backward from the end of a list with **negative indexes**.\n\n```python\ntasks = [\"email\", \"report\", \"meeting\", \"backup\"]\nprint(tasks[-1])\nprint(tasks[-2])\n```\n\nOutput:\n\n```text\nbackup\nmeeting\n```\n\nNegative indexes work from right to left:\n\n- `-1` means the last item.\n- `-2` means the second-to-last item.\n- `-3` means the third-to-last item.\n\nThis is useful when you care about the end of a list but do not want to calculate its final positive index."
           }
         },
         "dictionary-basics": {
-          "dict-idea": {
-            "title": "What a dictionary is",
-            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key helps you look up a value.\n\nThink of it like a labeled container:\n\n- `\"name\"` → `\"Ava\"`\n- `\"score\"` → `42`\n- `\"in_stock\"` → `True`\n\nIn Python, dictionaries use curly braces `{}`.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 42,\n    \"in_stock\": True\n}\n\nprint(student)\n```\n\nThis creates one dictionary with three labeled pieces of information.\n\nFollow the execution: - `student = { ... }` creates the dictionary and stores it in `student`\n- `\"name\": \"Ava\"` means the key `\"name\"` has the value `\"Ava\"`\n- `\"score\": 42` means the key `\"score\"` has the value `42`\n- `print(student)` shows the whole dictionary in the output panel\n\nA dictionary is useful when each value has a clear label.\n\nWorked example:\n\n```python\nbook = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120\n}\n\nprint(book[\"title\"])\n```\n\nThis prints `Python Basics` because the key `\"title\"` points to that value."
+          "dict-create": {
+            "title": "Creating labeled dictionary records",
+            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key is a label that identifies one value.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 92\n}\nprint(student)\n```\n\nOutput:\n\n```text\n{'name': 'Ava', 'score': 92}\n```\n\nIn each entry, the key comes before the colon and the value comes after it:\n\n- `\"name\"` is a key and `\"Ava\"` is its value.\n- `\"score\"` is a key and `92` is its value.\n\nA dictionary is useful when positions such as `0` and `1` would be less clear than labels such as `\"name\"` and `\"score\"`.\n\nValues can also come from variables:\n\n```python\ncity = \"Lima\"\ntemperature = 24\nweather = {\"city\": city, \"temperature\": temperature}\n```\n\nThe keys describe what each stored value means."
           },
           "dict-lookup": {
-            "title": "Looking up values by key",
-            "bodyMarkdown": "You get a value from a dictionary by writing the dictionary name, then the key in square brackets.\n\n```python\nprices = {\n    \"apple\": 2,\n    \"banana\": 3,\n    \"orange\": 4\n}\n\nprint(prices[\"banana\"])\n```\n\nThis prints `3`.\n\nStep by step:\n\n- `prices` is the dictionary\n- `\"banana\"` is the key you want to use\n- `prices[\"banana\"]` means “find the value stored under the key `\"banana\"`”\n\nWorked example:\n\n```python\nplayer = {\n    \"name\": \"Mina\",\n    \"level\": 5\n}\n\nprint(player[\"name\"])\nprint(player[\"level\"])\n```\n\nThis prints:\n\n```python\nMina\n5\n```\n\nNotice that dictionary lookup uses **keys**, not positions. Lists use indexes like `items[0]`, but dictionaries use labels like `player[\"name\"]`."
+            "title": "Reading values by key",
+            "bodyMarkdown": "To retrieve a dictionary value, put its key in square brackets after the dictionary name.\n\n```python\ninventory = {\n    \"pens\": 10,\n    \"notebooks\": 4\n}\nprint(inventory[\"notebooks\"])\n```\n\nOutput:\n\n```text\n4\n```\n\nDictionary lookup is different from list or tuple indexing:\n\n- `items[0]` means “read position 0.”\n- `inventory[\"notebooks\"]` means “read the value stored under this key.”\n\nThe key can also come from a variable:\n\n```python\nselected = \"pens\"\nprint(inventory[selected])\n```\n\nThis prints `10` because `selected` contains the key `\"pens\"`.\n\nIf you use square-bracket lookup with a key that is not present, Python raises a `KeyError`. The next pattern shows how to check for a key first."
           },
-          "dict-create-update": {
-            "title": "Creating and updating dictionary entries",
-            "bodyMarkdown": "You can add a new key-value pair or change an existing value with assignment.\n\n```python\ninventory = {\n    \"pens\": 10,\n    \"notebooks\": 4\n}\n\ninventory[\"pens\"] = 12\ninventory[\"erasers\"] = 6\n\nprint(inventory)\n```\n\nWhat happens here:\n\n- `inventory[\"pens\"] = 12` updates the existing value for `\"pens\"`\n- `inventory[\"erasers\"] = 6` adds a brand new key-value pair\n\nWorked example:\n\n```python\nprofile = {\n    \"name\": \"Leo\",\n    \"age\": 14\n}\n\nprofile[\"age\"] = 15\nprofile[\"city\"] = \"Lima\"\n\nprint(profile[\"age\"])\nprint(profile[\"city\"])\n```\n\nThis prints:\n\n```python\n15\nLima\n```\n\nSo the same assignment pattern works for both updating and adding."
+          "dict-membership": {
+            "title": "Checking whether a key exists",
+            "bodyMarkdown": "Use the `in` operator when you need to know whether a dictionary contains a key.\n\n```python\nprofile = {\"name\": \"Mia\", \"age\": 13}\n\nif \"city\" in profile:\n    print(profile[\"city\"])\nelse:\n    print(\"city is missing\")\n```\n\nOutput:\n\n```text\ncity is missing\n```\n\nFor a dictionary, `\"city\" in profile` checks the **keys**, not the values. That makes membership useful when a key might be optional.\n\nA key can also come from a variable:\n\n```python\nfield = \"age\"\nif field in profile:\n    print(profile[field])\n```\n\nHere the condition is true, so the program safely reads the value stored under `\"age\"`."
           }
         },
         "list-methods-and-mutation": {
-          "sketch-1": {
-            "title": "What mutation means for lists",
-            "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself."
+          "replace-by-index": {
+            "title": "Replacing an item by index",
+            "bodyMarkdown": "In the previous lesson, you used an index to **read** a value from a list. Lists are also **mutable**, which means you can change the values already stored inside the same list.\n\nTo replace one item, put the indexed position on the left side of `=`:\n\n```python\ntasks = [\"email\", \"meeting\", \"backup\"]\ntasks[1] = \"study\"\nprint(tasks)\n```\n\nOutput:\n\n```text\n['email', 'study', 'backup']\n```\n\nStep by step:\n\n- `tasks[1]` refers to the second item.\n- `tasks[1] = \"study\"` replaces only that item.\n- The variable `tasks` still refers to the same list; its contents have changed.\n\nThis is **mutation**: changing an existing list instead of creating a separate replacement list."
           },
-          "sketch-2": {
-            "title": "Using append, remove, and pop",
-            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nFollow the execution: - The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
+          "append-item": {
+            "title": "Adding an item with append()",
+            "bodyMarkdown": "`append(value)` adds one item to the **end** of an existing list.\n\n```python\nguests = [\"Mia\", \"Leo\"]\nguests.append(\"Zoe\")\nprint(guests)\n```\n\nOutput:\n\n```text\n['Mia', 'Leo', 'Zoe']\n```\n\nThe method call changes `guests` itself. You do not need to assign the list again.\n\nA common mistake is writing something like `guests = guests.append(\"Zoe\")`. `append()` changes the list in place; it is not used to produce a new list value."
           },
-          "sketch-3": {
-            "title": "Sorting lists and watching for common mistakes",
-            "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order."
+          "remove-value": {
+            "title": "Removing a matching value",
+            "bodyMarkdown": "`remove(value)` deletes the **first item equal to that value**.\n\n```python\nsupplies = [\"paper\", \"tape\", \"marker\", \"tape\"]\nsupplies.remove(\"tape\")\nprint(supplies)\n```\n\nOutput:\n\n```text\n['paper', 'marker', 'tape']\n```\n\nNotice that only the first matching `\"tape\"` was removed.\n\nUse `remove()` when you know **which value** should disappear. If the value is not in the list, Python raises a `ValueError`; later in the course you will learn how to handle errors like that."
+          },
+          "pop-by-position": {
+            "title": "Removing by position with pop()",
+            "bodyMarkdown": "`pop(index)` removes an item by **position** and returns the removed value so you can keep using it.\n\n```python\nqueue = [\"Ari\", \"Bea\", \"Chen\"]\nserved = queue.pop(0)\nprint(served)\nprint(queue)\n```\n\nOutput:\n\n```text\nAri\n['Bea', 'Chen']\n```\n\nHere, index `0` identifies the first item. `pop(0)` removes `\"Ari\"`, and the assignment stores that removed value in `served`.\n\nIf you call `pop()` with no index, Python removes and returns the last item.\n\nUse the distinction as a guide:\n\n- `remove(value)` — remove by matching **value**.\n- `pop(index)` — remove by **position** and receive the removed value."
+          },
+          "sort-in-place": {
+            "title": "Sorting the same list",
+            "bodyMarkdown": "`sort()` rearranges the items in an existing list.\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nOutput:\n\n```text\n[10, 20, 30, 40]\n```\n\nThe list stored in `scores` is now sorted. The method does **not** return a new sorted list.\n\nFor example:\n\n```python\nnumbers = [3, 1, 2]\nresult = numbers.sort()\nprint(numbers)\nprint(result)\n```\n\nOutput:\n\n```text\n[1, 2, 3]\nNone\n```\n\nSo when you want to sort the existing list, call `numbers.sort()` and then keep using `numbers`."
           }
         },
         "looping-through-lists": {
           "loop-basics": {
-            "title": "What a list loop does",
-            "bodyMarkdown": "A `for` loop lets you visit each item in a list one at a time. This is useful when you want to print every value, count things, or build a new result from the original list.\n\nHere is a simple example:\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(color)\n```\n\nStep by step:\n\n- `colors` stores three strings in a list.\n- `for color in colors:` means: take each item from the list, one by one.\n- On the first loop, `color` is `\"red\"`.\n- On the second loop, `color` is `\"blue\"`.\n- On the third loop, `color` is `\"green\"`.\n- `print(color)` runs each time, so all three items appear in the output panel.\n\nWorked example output:\n\n```python\nred\nblue\ngreen\n```"
+            "title": "Processing each item in a list",
+            "bodyMarkdown": "You already know that a `for` loop repeats a block of code. When the iterable is a list, the loop variable receives **one list item at a time**.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(\"Color:\", color)\n```\n\nOutput:\n\n```text\nColor: red\nColor: blue\nColor: green\n```\n\nStep by step:\n\n- `colors` is the list being traversed.\n- `color` is the loop variable. It holds one current item.\n- The indented `print()` runs once for each item.\n\nA clear loop variable usually describes **one item** from the collection. For `colors`, `color` is clearer than a vague name such as `x`."
+          },
+          "running-total": {
+            "title": "Building a running total",
+            "bodyMarkdown": "A loop can combine many list values into one result. A variable that keeps the growing result is often called an **accumulator**.\n\n```python\nprices = [5, 8, 3]\ntotal = 0\n\nfor price in prices:\n    total += price\n\nprint(total)\n```\n\nOutput:\n\n```text\n16\n```\n\nThe important order is:\n\n1. Start `total` before the loop.\n2. Visit one `price` at a time.\n3. Add the current value into `total`.\n4. Print the final total after the loop.\n\nIf `total = 0` were placed inside the loop, it would reset on every iteration instead of accumulating."
           },
           "loop-and-build": {
-            "title": "Using a loop to build a new list",
-            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nFollow the execution: - `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list."
+            "title": "Building a transformed list",
+            "bodyMarkdown": "Sometimes you want one new value for every value in the original list. Start with an empty result list, then append one transformed value during each iteration.\n\n```python\nlengths = [2, 4, 6]\ndoubled = []\n\nfor length in lengths:\n    doubled.append(length * 2)\n\nprint(doubled)\n```\n\nOutput:\n\n```text\n[4, 8, 12]\n```\n\nThis pattern has four steps:\n\n1. Create the empty result list.\n2. Loop through the original list.\n3. Compute a new value from the current item.\n4. Append that new value to the result list.\n\nThe original `lengths` list is unchanged; the transformed values are collected in `doubled`."
           },
-          "loop-variables": {
-            "title": "Choosing clear loop variable names",
-            "bodyMarkdown": "The loop variable should describe one item from the list.\n\nExample:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)\n```\n\n`animal` is a good name because each item in `animals` is one animal.\n\nLess clear code would be:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor x in animals:\n    print(x)\n```\n\nThis still works, but `x` does not explain what the value means.\n\nWorked example:\n\n- List name: `scores`\n- Good loop variable: `score`\n\n```python\nscores = [88, 91, 76]\n\nfor score in scores:\n    print(score)\n```"
+          "filter-with-condition": {
+            "title": "Filtering items while you loop",
+            "bodyMarkdown": "You can combine a list loop with an `if` statement to keep only items that meet a condition. This is called **filtering**.\n\n```python\ntemperatures = [68, 75, 61, 82]\nwarm = []\n\nfor temperature in temperatures:\n    if temperature >= 70:\n        warm.append(temperature)\n\nprint(warm)\n```\n\nOutput:\n\n```text\n[75, 82]\n```\n\nEvery temperature is visited, but `append()` runs only when the condition is true. That is the difference between **transforming every item** and **filtering some items**."
           }
         },
         "module-5-workshop-schedule-project": {
           "sketch-1": {
-            "title": "Choose a structure for each job",
-            "bodyMarkdown": "A community learning center schedules several workshops. Each workshop has a fixed pair of fields: its name and room. The complete schedule needs to preserve order, while staff also need a quick lookup by workshop name.\n\nThis project uses a tuple for each fixed record, a list for the ordered schedule, and a dictionary for direct lookup. The final helper formats the same data for a public schedule board without changing how the records are stored."
+            "title": "Plan the schedule data",
+            "bodyMarkdown": "A community learning center needs one schedule that supports several jobs without storing the same information in an awkward format.\n\nEach workshop has two fields that belong together: its **name** and **room**. A tuple is a good fit for that fixed two-field record:\n\n```python\n(\"Python Basics\", \"Room A\")\n```\n\nThe center also cares about the order workshops appear on the public board, so the records belong in a list:\n\n```python\nschedule = [\n    (\"Python Basics\", \"Room A\"),\n    (\"Data Lab\", \"Room B\")\n]\n```\n\nLater, staff will need two additional views of the same schedule:\n\n- a dictionary that maps a workshop name directly to its room;\n- a dictionary that maps each room to a **list** of workshops held there.\n\nThe project builds those structures with ordinary loops and assignments. You do not need functions, comprehensions, imports, or advanced helpers."
           }
         },
         "nested-data-structures": {
-          "sketch-1": {
-            "title": "What nested data structures are",
-            "bodyMarkdown": "Nested data structures are collections inside other collections. In Python, a very common pattern is a **list of dictionaries**.\n\nThis is useful when you have many items that all share the same kinds of details.\n\n```python\nstudents = [\n    {\"name\": \"Ava\", \"score\": 92},\n    {\"name\": \"Ben\", \"score\": 85},\n    {\"name\": \"Cara\", \"score\": 97}\n]\n\nprint(students[0][\"name\"])\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- `students[0]` gets the first dictionary in the list.\n- `students[0][\"name\"]` gets the value stored under the key `\"name\"` in that dictionary.\n\nA list keeps the whole group together, and each dictionary stores details about one item."
+          "list-of-dicts": {
+            "title": "Reading from a list of dictionaries",
+            "bodyMarkdown": "A **nested data structure** stores one collection inside another. A common example is a list whose items are dictionaries.\n\n```python\nstudents = [\n    {\"name\": \"Ava\", \"score\": 92},\n    {\"name\": \"Mia\", \"score\": 85}\n]\n\nprint(students[1][\"score\"])\n```\n\nOutput:\n\n```text\n85\n```\n\nRead the expression one layer at a time:\n\n1. `students[1]` selects the second item from the outer list.\n2. That item is a dictionary.\n3. `[\"score\"]` reads the `\"score\"` value from that dictionary.\n\nWhen the outer container is a list, start with a numeric index. After you reach a dictionary, use its key."
           },
-          "sketch-2": {
-            "title": "Reading values from nested containers",
-            "bodyMarkdown": "When data is nested, you read it one layer at a time.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nThis prints `12`.\n\nFollow the execution: - `product[\"details\"]` gets the inner dictionary.\n- `product[\"details\"][\"stock\"]` gets the `stock` value from that inner dictionary.\n\nYou can think of it as opening one box, then opening the smaller box inside it.\n\nWorked example: if you changed `\"stock\"` to `\"price\"`, the output would be `4`."
+          "dict-in-dict": {
+            "title": "Reading and updating a nested dictionary",
+            "bodyMarkdown": "A dictionary value can itself be another dictionary.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nOutput:\n\n```text\n12\n```\n\nAgain, follow the layers:\n\n- `product[\"details\"]` gets the inner dictionary.\n- `[\"stock\"]` reads one value from that inner dictionary.\n\nYou can update the same nested field by using that path on the left side of `=`:\n\n```python\nproduct[\"details\"][\"stock\"] = 20\n```\n\nOnly the nested `\"stock\"` value changes; the rest of `product` stays in place."
           },
-          "sketch-3": {
-            "title": "Looping through a list of dictionaries",
-            "bodyMarkdown": "A loop is a great way to work with every dictionary in a list.\n\n```python\nbooks = [\n    {\"title\": \"Sky\", \"pages\": 120},\n    {\"title\": \"River\", \"pages\": 95}\n]\n\nfor book in books:\n    print(book[\"title\"])\n```\n\nThis prints:\n\n```python\nSky\nRiver\n```\n\nStep by step:\n\n- `for book in books:` takes one dictionary at a time from the list.\n- On the first loop, `book` is `{\"title\": \"Sky\", \"pages\": 120}`.\n- On the second loop, `book` is `{\"title\": \"River\", \"pages\": 95}`.\n- `book[\"title\"]` reads the title from each dictionary.\n\nThis pattern is useful for contact books, inventories, and score lists."
+          "dict-with-list": {
+            "title": "Changing a list stored inside a dictionary",
+            "bodyMarkdown": "A dictionary can also store a list as one of its values.\n\n```python\ncourse = {\n    \"title\": \"Python\",\n    \"students\": [\"Ava\", \"Mia\"]\n}\n\ncourse[\"students\"].append(\"Noah\")\nprint(course[\"students\"])\n```\n\nOutput:\n\n```text\n['Ava', 'Mia', 'Noah']\n```\n\nThe expression `course[\"students\"]` first retrieves the inner list. Because that value is a list, normal list methods such as `.append()` work on it.\n\nThe useful question is always: **What type of value did the first access give me?** That tells you what operation comes next."
+          },
+          "loop-records": {
+            "title": "Looping through a list of records",
+            "bodyMarkdown": "When a list contains many dictionaries with the same shape, loop through the outer list and process one dictionary at a time.\n\n```python\nbooks = [\n    {\"title\": \"Sky\", \"pages\": 120},\n    {\"title\": \"River\", \"pages\": 95}\n]\n\nfor book in books:\n    print(book[\"title\"], book[\"pages\"])\n```\n\nOutput:\n\n```text\nSky 120\nRiver 95\n```\n\nDuring each iteration, `book` is one whole dictionary record. That means you can use dictionary keys such as `book[\"title\"]` and `book[\"pages\"]` inside the loop.\n\nThis pattern is the foundation for processing collections of users, products, events, scores, and other records."
           }
         },
         "tuple-records-and-unpacking": {
-          "sketch-1": {
-            "title": "A fixed record has a clear shape",
-            "bodyMarkdown": "A list is useful when a program expects items to grow, shrink, or change. A tuple communicates a different intention: these values form one ordered record whose shape should remain stable.\n\n```python\nrgb = (240, 128, 64)\nprint(rgb[0])\n```\n\nThe positions still use zero-based indexing, but methods such as `append()` are not available. That limitation is useful when the record represents something fixed, such as a coordinate, color, or date."
+          "tuple-fixed-record": {
+            "title": "Tuples as fixed-shape records",
+            "bodyMarkdown": "A **tuple** is an ordered collection, like a list, but it is meant for data whose shape should stay fixed.\n\n```python\npoint = (12, 7)\nprint(point[0])\nprint(point[1])\n```\n\nOutput:\n\n```text\n12\n7\n```\n\nThe important ideas are:\n\n- Parentheses and commas create the tuple record.\n- Positions still use zero-based indexes.\n- A tuple can hold different kinds of values.\n- The tuple itself is **immutable**: you do not replace positions or call list methods such as `append()` on it.\n\nUse a list when the collection is expected to grow, shrink, or change. Use a tuple when the positions form a small record with a stable meaning, such as `(x, y)` or `(name, score)`."
           },
-          "sketch-2": {
-            "title": "Unpack positions into names",
-            "bodyMarkdown": "Indexes are compact, but named variables make the meaning of each field easier to read. Tuple unpacking assigns every position in one step.\n\n```python\nbook = (\"Kindred\", 1979)\ntitle, year = book\nprint(f\"{title} was published in {year}.\")\n```\n\nThe number of target names must match the number of tuple fields. Once unpacked, the rest of the program can work with `title` and `year` instead of remembering what positions 0 and 1 mean."
+          "tuple-unpacking": {
+            "title": "Unpacking fields into names",
+            "bodyMarkdown": "Indexes work, but code is easier to read when each field has a meaningful name. **Tuple unpacking** assigns every field in one statement.\n\n```python\nbook = (\"Kindred\", 1979, \"Octavia Butler\")\ntitle, year, author = book\nprint(title)\nprint(year)\nprint(author)\n```\n\nOutput:\n\n```text\nKindred\n1979\nOctavia Butler\n```\n\nPython matches values from left to right:\n\n- `title` receives the first field.\n- `year` receives the second field.\n- `author` receives the third field.\n\nThe number of target names must match the number of tuple fields. If a three-field tuple is unpacked into only two names, the assignment cannot succeed."
+          },
+          "tuple-record-loop": {
+            "title": "Looping through tuple records",
+            "bodyMarkdown": "A list can contain several tuple records. Because every tuple has the same shape, a `for` loop can unpack each record as it visits it.\n\n```python\nroutes = [(\"North\", 4), (\"South\", 7)]\n\nfor route, stops in routes:\n    print(route, stops)\n```\n\nOutput:\n\n```text\nNorth 4\nSouth 7\n```\n\nDuring the first iteration, `route` is `\"North\"` and `stops` is `4`. During the second iteration, they receive the fields from the second tuple.\n\nThis combines ideas you already know:\n\n1. A list holds several items.\n2. Each item is a fixed-shape tuple record.\n3. The loop visits one tuple at a time.\n4. The loop header unpacks that tuple into meaningful field names."
           }
         },
         "updating-and-looping-dictionaries": {
-          "dict-update-basics": {
-            "title": "Adding, changing, and removing dictionary entries",
-            "bodyMarkdown": "A dictionary stores data as **key-value pairs**. You can change a dictionary after creating it.\n\nHere is a simple example:\n\n```python\nscores = {\"Ava\": 8, \"Ben\": 5}\n\nscores[\"Cara\"] = 7\nscores[\"Ben\"] = 6\ndel scores[\"Ava\"]\n\nprint(scores)\n```\n\nStep by step:\n\n- `scores[\"Cara\"] = 7` adds a new key called `\"Cara\"`.\n- `scores[\"Ben\"] = 6` updates the existing value for `\"Ben\"`.\n- `del scores[\"Ava\"]` removes the key `\"Ava\"` and its value.\n\nThe output is:\n\n```python\n{'Ben': 6, 'Cara': 7}\n```\n\nA useful rule:\n\n- If the key does **not** exist, assignment adds it.\n- If the key **does** exist, assignment updates it."
+          "dict-add-update": {
+            "title": "Adding and updating entries",
+            "bodyMarkdown": "Dictionary assignment uses the same syntax for **adding** a new key and **updating** an existing key.\n\n```python\nscores = {\"Ava\": 88, \"Mia\": 79}\nscores[\"Mia\"] = 91\nscores[\"Noah\"] = 84\nprint(scores)\n```\n\nOutput:\n\n```text\n{'Ava': 88, 'Mia': 91, 'Noah': 84}\n```\n\nThe two assignments use identical syntax, but Python handles them differently based on the key:\n\n- `\"Mia\"` already exists, so its value changes from `79` to `91`.\n- `\"Noah\"` is new, so a new entry is added.\n\nThe key can also come from a variable:\n\n```python\nname = \"Ava\"\nnew_score = 95\nscores[name] = new_score\n```\n\nThat pattern is useful when the key is supplied by input or calculated by the program."
           },
-          "dict-looping": {
-            "title": "Looping through keys and values",
-            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nFollow the execution: - `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```"
+          "dict-safe-delete": {
+            "title": "Removing a key safely",
+            "bodyMarkdown": "The `del` statement removes a key-value pair from a dictionary.\n\n```python\ntasks = {\"email\": \"done\", \"backup\": \"waiting\"}\ndel tasks[\"email\"]\nprint(tasks)\n```\n\nOutput:\n\n```text\n{'backup': 'waiting'}\n```\n\nIf a key might be missing, combine the membership check from the previous lesson with `del`:\n\n```python\nkey = \"archive\"\nif key in tasks:\n    del tasks[key]\n```\n\nBecause `\"archive\"` is not present, the deletion is skipped. This guard is useful when a program cannot assume that every requested key exists."
           },
-          "dict-common-patterns": {
-            "title": "Common dictionary patterns",
-            "bodyMarkdown": "A common pattern is to update values and then loop through the final result.\n\nExample:\n\n```python\ninventory = {\"pens\": 10, \"notebooks\": 4}\n\ninventory[\"pens\"] = inventory[\"pens\"] - 2\ninventory[\"erasers\"] = 6\n\nfor name, count in inventory.items():\n    print(name, count)\n```\n\nWhat happens here?\n\n- `inventory[\"pens\"]` starts at `10`.\n- `inventory[\"pens\"] - 2` gives `8`, so the value is updated.\n- `inventory[\"erasers\"] = 6` adds a new entry.\n- The loop prints each item and its count.\n\nThis kind of pattern is useful for contact books, scoreboards, and inventory trackers."
+          "dict-key-loop": {
+            "title": "Looping through dictionary keys",
+            "bodyMarkdown": "A plain `for` loop over a dictionary visits its **keys** one at a time.\n\n```python\nroutes = {\"north\": 4, \"south\": 7}\n\nfor route in routes:\n    print(route)\n```\n\nOutput:\n\n```text\nnorth\nsouth\n```\n\nBecause the loop variable contains a key, you can use it to look up the matching value:\n\n```python\nfor route in routes:\n    print(route, routes[route])\n```\n\nOutput:\n\n```text\nnorth 4\nsouth 7\n```\n\nUse direct dictionary iteration when working with the keys themselves is useful."
+          },
+          "dict-items-loop": {
+            "title": "Looping through key-value pairs",
+            "bodyMarkdown": "When you want both parts of each dictionary entry together, use `.items()`.\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nOutput:\n\n```text\napple 2\nbanana 1\npear 3\n```\n\nEach entry from `.items()` behaves like a two-field pair. The loop header unpacks the current key into `item` and the current value into `price`.\n\nCompare the two patterns:\n\n- `for item in prices:` — iterate through keys.\n- `for item, price in prices.items():` — iterate through key-value pairs.\n\nChoose the form that matches the data you need inside the loop."
+          },
+          "dict-build-loop": {
+            "title": "Building a dictionary in a loop",
+            "bodyMarkdown": "A loop can create dictionary entries one at a time. Start with an empty dictionary, then assign one key-value pair during each iteration.\n\n```python\nnumbers = [2, 3, 4]\nsquares = {}\n\nfor number in numbers:\n    squares[number] = number * number\n\nprint(squares)\n```\n\nOutput:\n\n```text\n{2: 4, 3: 9, 4: 16}\n```\n\nThe loop performs the same pattern for every item:\n\n1. `number` receives one list value.\n2. That value becomes a dictionary key.\n3. `number * number` becomes the value stored under that key.\n\nThis pattern is useful when you need to derive labeled data from another collection."
           }
         }
       },
       "python-6-functions-and-modularity": {
         "decomposition-and-refactoring": {
-          "sketch-1": {
-            "title": "Why break a program into helper functions?",
-            "bodyMarkdown": "Decomposition means splitting one larger task into smaller jobs. Refactoring means improving the structure of code without changing what the program does.\n\nA beginner-friendly rule is: if you see the same idea repeated, or one block of code is doing too many things, that is a good time to make a helper function.\n\nHere is a small example. Suppose you want to format a name and then build a greeting.\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\ndef make_greeting(name):\n    nice_name = clean_name(name)\n    return f\"Hello, {nice_name}!\"\n\nprint(make_greeting(\"  aVA  \"))\n```\n\nStep by step:\n\n- `clean_name(name)` handles one job: fixing spaces and capitalization.\n- `make_greeting(name)` handles a different job: building the final message.\n- Inside `make_greeting`, the program calls `clean_name` instead of repeating that cleanup logic.\n- `print(make_greeting(\"  aVA  \"))` shows the returned result in the output panel.\n\nThe output is:\n\n```python\nHello, Ava!\n```\n\nThis version is easier to read, easier to test, and easier to reuse."
+          "extract-repetition": {
+            "title": "Extract repeated work into one helper",
+            "bodyMarkdown": "**Refactoring** improves the structure of working code without intentionally changing what the program does.\n\nSuppose this program already works:\n\n```python\nfirst = \"  ava  \"\nsecond = \"  mia  \"\n\nprint(first.strip().title())\nprint(second.strip().title())\n```\n\nThe cleanup rule is repeated. A refactor can give that responsibility one name:\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\nfirst = \"  ava  \"\nsecond = \"  mia  \"\n\nprint(clean_name(first))\nprint(clean_name(second))\n```\n\nBoth versions produce the same output. The second version is easier to change because the cleanup rule lives in one place."
           },
-          "sketch-2": {
-            "title": "Spotting repeated code",
-            "bodyMarkdown": "One common reason to refactor is repeated code. If two parts of a program do the same cleanup or calculation, that logic usually belongs in one helper function.\n\nBefore refactoring:\n\n```python\nfirst = input()\nsecond = input()\n\nfirst_clean = first.strip().lower()\nsecond_clean = second.strip().lower()\n\nprint(first_clean)\nprint(second_clean)\n```\n\nThis works, but the cleanup logic is repeated.\n\nAfter refactoring:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\nfirst = input()\nsecond = input()\n\nprint(clean_text(first))\nprint(clean_text(second))\n```\n\nFollow the execution: - `def clean_text(text):` creates a reusable helper.\n- `return text.strip().lower()` sends back cleaned text.\n- Each `print(clean_text(...))` call uses the same helper instead of copying the cleanup steps.\n\nNow if you want different cleanup later, you only change one function."
+          "extract-responsibility": {
+            "title": "Move one responsibility out of the main flow",
+            "bodyMarkdown": "Decomposition is not only about repeated code. A block can also become clearer when one distinct job gets its own helper.\n\nBefore refactoring:\n\n```python\ntext = \"one two three\"\nwords = text.split()\ncount = len(words)\nprint(f\"Words: {count}\")\n```\n\nAfter extracting the counting responsibility:\n\n```python\ndef count_words(text):\n    return len(text.split())\n\ntext = \"one two three\"\ncount = count_words(text)\nprint(f\"Words: {count}\")\n```\n\n`count_words` now has one clear job: produce a word count. The main flow still decides how that count is displayed."
           },
-          "sketch-3": {
-            "title": "Make each function do one clear job",
-            "bodyMarkdown": "A good helper function usually has one clear responsibility. That makes code easier to understand and debug.\n\nHere is a worked example that separates counting from message building.\n\n```python\ndef word_count(text):\n    words = text.split()\n    return len(words)\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"\n\nprint(summary(\"Python makes refactoring easier\"))\n```\n\nStep by step:\n\n- `word_count(text)` splits the text into words and returns the number.\n- `summary(text)` calls `word_count(text)` instead of doing the counting itself.\n- `summary` builds the final string.\n- `print(...)` displays that string.\n\nThe output is:\n\n```python\nWords: 4\n```\n\nThis is better than one long function because each part has a clear purpose."
+          "reuse-helper": {
+            "title": "Reuse helpers instead of duplicating their logic",
+            "bodyMarkdown": "After a helper owns a responsibility, other functions should usually call it rather than copy its implementation.\n\nAvoid duplicating the cleanup rule:\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\ndef greeting(name):\n    nice_name = name.strip().title()\n    return \"Hello, \" + nice_name\n```\n\nInstead, reuse the helper:\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\ndef greeting(name):\n    nice_name = clean_name(name)\n    return \"Hello, \" + nice_name\n```\n\nThe behavior stays the same, but the cleanup responsibility now has one source. If the cleanup rule changes later, only `clean_name` needs to change."
           }
         },
         "defining-and-calling-functions": {
-          "sketch-1": {
-            "title": "What a function does",
-            "bodyMarkdown": "A **function** is a named block of code that does a job. You define it once, then call it whenever you need that job again.\n\nIn Python, you define a function with `def`:\n\n```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`\n- The indented line is the code that runs when the function is called\n- `greet()` calls the function\n- The output panel shows `Hello!`\n\nThis is useful because you can avoid repeating the same code many times.\n\nWorked example:\n\n```python\ndef cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()\n```\n\nBecause `cheer()` is called twice, the output is:\n\n```python\nGo!\nGo!\n```"
+          "function-define-call": {
+            "title": "Defining a function and calling it",
+            "bodyMarkdown": "A **function** is a named block of code. Defining the function tells Python what that block should do; calling the function tells Python to run it.\n\n```python\ndef welcome():\n    print(\"Welcome!\")\n\nwelcome()\n```\n\nThere are two different actions here:\n\n- `def welcome():` starts the function definition.\n- The indented `print()` line belongs to the function body.\n- `welcome()` is the function call.\n\nPython reads the top-level program from top to bottom, so the definition appears before the call. The body does not run merely because it was defined; it runs when `welcome()` is called."
           },
-          "sketch-2": {
-            "title": "Calling functions with arguments",
-            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nFollow the execution: - `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function."
+          "function-reuse": {
+            "title": "Calling the same function more than once",
+            "bodyMarkdown": "Once a function is defined, you can call it again whenever you need the same job.\n\n```python\ndef beep():\n    print(\"Beep\")\n\nbeep()\nbeep()\n```\n\nOutput:\n\n```text\nBeep\nBeep\n```\n\nEach call runs the function body once. The `print(\"Beep\")` statement is written only once, but two calls produce two output lines. This is the basic reason functions are reusable."
           },
-          "sketch-3": {
-            "title": "Functions can return values",
-            "bodyMarkdown": "A function can also **return** a result instead of printing it directly.\n\n```python\ndef double(number):\n    return number * 2\n\nresult = double(5)\nprint(result)\n```\n\nStep by step:\n\n- `double(number)` receives a value\n- `return number * 2` sends back the result\n- `result = double(5)` stores that returned value\n- `print(result)` shows it in the output panel\n\nThe output is:\n\n```python\n10\n```\n\nWorked example:\n\n```python\ndef make_label(text):\n    return \"Item: \" + text\n\nlabel = make_label(\"Book\")\nprint(label)\n```\n\nThis prints:\n\n```python\nItem: Book\n```\n\nWhy return instead of print? Returning lets you reuse the result later in your code."
+          "function-body": {
+            "title": "Putting several statements inside a function",
+            "bodyMarkdown": "A function body can contain more than one statement. Every statement that belongs to the function stays indented under the `def` line.\n\n```python\ndef show_card():\n    print(\"Python Workshop\")\n    print(\"Room A\")\n\nshow_card()\n```\n\nOutput:\n\n```text\nPython Workshop\nRoom A\n```\n\nThe two `print()` statements are both part of `show_card()` because they share the same indentation. A function can also contain other Python statements you already know, such as assignments, lists, conditionals, and loops. The call remains outside the function body."
           }
         },
         "docstrings-and-function-contracts": {
-          "docstrings-idea": {
-            "title": "What a docstring and contract do",
-            "bodyMarkdown": "A **docstring** is a short string placed right under a function definition. It explains what the function does.\n\nA **function contract** describes the function's inputs and output:\n- what arguments it expects\n- what kind of value it returns\n- any important assumptions\n\nHere is a simple example:\n\n```python\ndef square(number):\n    \"\"\"Return the square of number.\"\"\"\n    return number * number\n```\n\nFollow the execution: - `def square(number):` defines a function named `square` with one parameter.\n- The triple-quoted string is the docstring.\n- `return number * number` sends the result back to the caller.\n\nIf you call `square(4)`, the function returns `16`.\n\nA good beginner-friendly contract might answer questions like:\n- Should `number` be an integer or float?\n- Does the function print something, or return something?\n- What comes back after the call?"
+          "real-docstring": {
+            "title": "A docstring is the function's first statement",
+            "bodyMarkdown": "A **docstring** is not just any comment or string near a function. For Python to recognize a function docstring, the string literal must be the **first statement inside the function body**.\n\n```python\ndef tidy_word(text):\n    \"\"\"Return text with surrounding spaces removed.\"\"\"\n    return text.strip()\n```\n\nThe triple-quoted string is the docstring because it comes directly after the `def` line, before executable statements.\n\nThis is only a comment, not a docstring:\n\n```python\ndef tidy_word(text):\n    # Return text with surrounding spaces removed.\n    return text.strip()\n```\n\nComments can still help readers, but they are not the function's docstring."
           },
-          "good-docstrings": {
-            "title": "Writing clear docstrings",
-            "bodyMarkdown": "A useful docstring is short, specific, and matches the code.\n\nCompare these two versions:\n\n```python\ndef greet(name):\n    \"\"\"Does stuff.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis is too vague. Now look at this:\n\n```python\ndef greet(name):\n    \"\"\"Return a greeting for the given name.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis version is better because it tells you:\n- the function **returns** a greeting\n- the input is a `name`\n- the result is not printed directly by the function\n\nWorked example:\n\n```python\ndef is_even(number):\n    \"\"\"Return True if number is even, otherwise return False.\"\"\"\n    return number % 2 == 0\n```\n\nStep by step:\n- The docstring says exactly what the function returns.\n- The code checks whether the remainder after dividing by 2 is 0.\n- `is_even(8)` returns `True`.\n- `is_even(5)` returns `False`."
+          "contract-input-output": {
+            "title": "A contract explains inputs and returned results",
+            "bodyMarkdown": "A beginner-friendly **function contract** explains what a caller should provide and what the function gives back.\n\n```python\ndef make_tag(word):\n    \"\"\"Return the given word surrounded by square brackets.\"\"\"\n    return \"[\" + word + \"]\"\n```\n\nFrom the docstring, a reader can understand that:\n\n- the function expects a word through the parameter `word`;\n- the function returns a string;\n- the returned string surrounds that word with brackets.\n\nThe contract should be specific enough to guide correct use and should match what the code actually does."
           },
-          "contracts-print-vs-return": {
-            "title": "Contracts should say return vs print",
-            "bodyMarkdown": "One common mistake is mixing up **printing** and **returning**.\n\nLook at these two functions:\n\n```python\ndef show_total(a, b):\n    \"\"\"Print the total of a and b.\"\"\"\n    print(a + b)\n\n\ndef get_total(a, b):\n    \"\"\"Return the total of a and b.\"\"\"\n    return a + b\n```\n\nThese functions are different:\n- `show_total` sends text to the output panel.\n- `get_total` gives a value back to the caller.\n\nWorked example:\n\n```python\nresult = get_total(3, 4)\nprint(result)\n```\n\nStep by step:\n- `get_total(3, 4)` returns `7`.\n- That returned value is stored in `result`.\n- `print(result)` displays `7` in the output panel.\n\nIf a docstring says **return**, the function should usually use `return`, not only `print`."
+          "contract-must-match": {
+            "title": "The implementation must match the contract",
+            "bodyMarkdown": "Documentation and implementation can disagree. When that happens, the function is confusing to use.\n\nHere is a mismatch:\n\n```python\ndef add_points(a, b):\n    \"\"\"Return the total points.\"\"\"\n    print(a + b)\n```\n\nThe docstring promises a returned value, but the function only displays the total. A caller such as `result = add_points(2, 3)` would receive `None`.\n\nThe matching implementation is:\n\n```python\ndef add_points(a, b):\n    \"\"\"Return the total points.\"\"\"\n    return a + b\n```\n\nA useful habit is to read the contract before implementing or changing a function, then check that the code fulfills exactly what the documentation says."
           }
         },
         "module-6-name-badge-package": {
           "sketch-1": {
-            "title": "A club needs badges before the event starts",
-            "bodyMarkdown": "The student welcome club is setting up a check-in table and needs clean, consistent badges before guests arrive. Names come in with extra spaces, roles need consistent formatting, and the app should be easy for another volunteer to maintain.\n\nYou will grow the badge tool one step at a time. Each step starts from the previous canonical solution, then adds a new helper, import, docstring, or final output."
+            "title": "Start from one working badge program",
+            "bodyMarkdown": "The welcome table needs a small badge program. Before splitting the app into files, start with one version whose behavior is easy to understand:\n\n```python\ndef clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(badge)\n```\n\nThe project will **refactor this same behavior cumulatively**. First move name cleanup to `names.py`. Then move badge formatting to `badges.py`. Next document the helper contracts. Finally add a small `messages.py` helper for the welcome line.\n\nEach project step starts from the exact previous solution, so you never restart from an unrelated file."
           }
         },
         "parameters-and-return-values": {
-          "sketch-parameters-basics": {
-            "title": "Parameters let a function work with different values",
-            "bodyMarkdown": "A function becomes more useful when it can accept input. That input is called a **parameter**.\n\nHere is a simple example:\n\n```python\ndef greet(name):\n    return \"Hello, \" + name\n\nmessage = greet(\"Ava\")\nprint(message)\n```\n\nStep by step:\n\n- `def greet(name):` defines a function with one parameter named `name`.\n- When we call `greet(\"Ava\")`, the value `\"Ava\"` is passed into `name`.\n- The function builds a new string and **returns** it.\n- `print(message)` sends the returned value to the output panel.\n\nBecause the function uses a parameter, you can call it with different values:\n\n```python\nprint(greet(\"Ava\"))\nprint(greet(\"Leo\"))\n```\n\nThat gives different results without rewriting the function."
+          "parameter-argument": {
+            "title": "Parameters receive argument values",
+            "bodyMarkdown": "A function becomes reusable when its body can work with values supplied by the caller. The variable named in the function definition is a **parameter**. The value supplied by a particular call is an **argument**.\n\n```python\ndef welcome(person):\n    return \"Welcome, \" + person\n\nprint(welcome(\"Mia\"))\nprint(welcome(\"Noah\"))\n```\n\nFor the first call, the argument `\"Mia\"` is assigned to the parameter `person`. For the second call, `person` receives `\"Noah\"` instead. The function body stays the same while the argument value changes."
           },
-          "sketch-return-vs-print": {
-            "title": "Returning a value is different from printing it",
-            "bodyMarkdown": "`print()` shows something in the output panel. `return` sends a value back to the place where the function was called.\n\nCompare these two functions:\n\n```python\ndef show_total(price, tax):\n    print(price + tax)\n\ndef get_total(price, tax):\n    return price + tax\n```\n\nWhat happens?\n\n- `show_total(10, 2)` displays `12` in the output panel.\n- `get_total(10, 2)` does **not** display anything by itself.\n- But `get_total(10, 2)` gives back the value `12`, so you can store it or print it later.\n\nExample:\n\n```python\ntotal = get_total(10, 2)\nprint(total)\n```\n\nThis prints `12` because the returned value was saved in `total` first.\n\nA good rule:\n\n- Use **parameters** to send data **into** a function.\n- Use **return** to send a result **out of** a function."
+          "multiple-parameters": {
+            "title": "Functions can receive more than one parameter",
+            "bodyMarkdown": "A function can name several parameters when it needs several pieces of input.\n\n```python\ndef remaining(total, used):\n    return total - used\n\nprint(remaining(12, 5))\n```\n\nThe arguments are matched to parameters from left to right:\n\n- `total` receives `12`.\n- `used` receives `5`.\n- The function returns `12 - 5`, which is `7`.\n\nOrder matters. Calling `remaining(5, 12)` would assign the values in the opposite way and return `-7`."
+          },
+          "return-to-caller": {
+            "title": "Return sends a result back to the caller",
+            "bodyMarkdown": "A function can compute a value and send that value back with `return`.\n\n```python\ndef total_points(first, second):\n    return first + second\n\nscore = total_points(8, 6)\nprint(score)\n```\n\nWhen `total_points(8, 6)` runs, the function returns `14`. That returned value is assigned to `score`, so the caller can use it later.\n\nFor now, remember the direction of data:\n\n- **arguments → parameters** send data into the function;\n- **return → caller** sends a result back out.\n\nThe next lesson will examine the difference between returning a value and printing inside a function in more detail."
           }
         },
         "print-vs-return": {
-          "print-vs-return-idea": {
-            "title": "Printing shows a value; returning gives it back",
-            "bodyMarkdown": "`print()` and `return` do different jobs.\n\n- `print()` sends text or values to the **output panel** so a person can see them.\n- `return` sends a value back from a function so the rest of your code can use it.\n\nHere is a simple example:\n\n```python\ndef double_number(n):\n    return n * 2\n\nresult = double_number(5)\nprint(result)\n```\n\nStep by step:\n\n1. `double_number(5)` runs the function.\n2. `return n * 2` sends back `10`.\n3. That returned value is stored in `result`.\n4. `print(result)` displays `10` in the output panel.\n\nThe important idea: the function itself **returns** the value, and then another line **prints** it.\n\nIf you only print inside a function, the value appears on screen, but other code may not be able to reuse it."
+          "print-returns-none": {
+            "title": "Printing displays a value but returns None",
+            "bodyMarkdown": "`print()` and `return` affect different parts of a program. `print()` displays something for a person to see. `return` gives a value back to the caller.\n\nConsider a function that only prints:\n\n```python\ndef show_score(score):\n    print(score)\n\nresult = show_score(8)\nprint(result)\n```\n\nThe output is:\n\n```text\n8\nNone\n```\n\nThe first line appears because `show_score` prints `8`. The second line is `None` because the function has no explicit `return`. In Python, such a function still gives the caller the special value `None`.\n\nIf a function's job is only to display something, call it directly:\n\n```python\nshow_score(8)\n```\n\nDo not wrap a display-only call in another `print()` unless you actually want to display its `None` result."
           },
-          "print-vs-return-compare": {
-            "title": "A worked comparison: same output, different usefulness",
-            "bodyMarkdown": "These two functions may look similar, but they behave differently.\n\n```python\ndef show_total(a, b):\n    print(a + b)\n\ndef get_total(a, b):\n    return a + b\n```\n\nNow compare how they are used:\n\n```python\nshow_total(2, 3)\nvalue = get_total(2, 3)\nprint(value)\n```\n\nWhat happens?\n\n- `show_total(2, 3)` prints `5` right away.\n- `get_total(2, 3)` does **not** display anything by itself.\n- Instead, it returns `5`, which gets stored in `value`.\n- Then `print(value)` displays `5`.\n\nWhy does this matter?\n\nWith `return`, you can keep working with the result:\n\n```python\ntotal = get_total(2, 3)\nprint(total * 10)\n```\n\nThis prints `50` because the returned value can be reused in another calculation."
+          "reuse-returned-value": {
+            "title": "Returned values can be stored and reused",
+            "bodyMarkdown": "When a function uses `return`, the caller receives a real value that can keep participating in the program.\n\n```python\ndef triple(number):\n    return number * 3\n\nresult = triple(4)\nprint(result)\nprint(result + 2)\n```\n\nHere `triple(4)` returns `12`. The assignment stores that value in `result`. The caller can display `12`, add `2`, put it in a list, compare it, or pass it to another function.\n\nThat is the key advantage of `return`: the function produces data rather than only showing output."
           },
-          "print-vs-return-when": {
-            "title": "When should you print, and when should you return?",
-            "bodyMarkdown": "A good beginner rule is:\n\n- Use **`print()`** when you want to **show** something to the user.\n- Use **`return`** when you want a function to **produce a result** for other code to use.\n\nExample:\n\n```python\ndef make_greeting(name):\n    return \"Hello, \" + name\n\ngreeting = make_greeting(\"Ava\")\nprint(greeting)\n```\n\nFollow the execution: - The function builds a greeting.\n- `return` sends that greeting back.\n- The returned text is stored in `greeting`.\n- `print(greeting)` shows it in the output panel.\n\nIf the function used `print(\"Hello, \" + name)` instead, you would see the text, but you could not easily combine it with other strings later.\n\nFor example, this works well with `return`:\n\n```python\nmessage = make_greeting(\"Ava\")\nprint(message + \"!\")\n```"
+          "fix-print-bug": {
+            "title": "Fix a function that prints when it should return",
+            "bodyMarkdown": "A common beginner bug is to print a value inside a function even though later code needs to reuse that value.\n\nThis version has a problem:\n\n```python\ndef build_name(first, last):\n    print(first + \" \" + last)\n\nname = build_name(\"Mia\", \"Chen\")\nprint(name + \"!\")\n```\n\n`build_name` displays `Mia Chen`, but it does not return that string. So `name` receives `None`, and `name + \"!\"` cannot work.\n\nThe reusable version returns the string:\n\n```python\ndef build_name(first, last):\n    return first + \" \" + last\n\nname = build_name(\"Mia\", \"Chen\")\nprint(name + \"!\")\n```\n\nNow the function produces data, and the caller decides how to display or transform it."
           }
         },
         "scope-and-local-variables": {
-          "scope-basics": {
-            "title": "What local scope means",
-            "bodyMarkdown": "A variable's **scope** is where that variable can be used.\n\nWhen you create a variable **inside a function**, it is usually a **local variable**. That means it exists only while that function is running.\n\n```python\ndef greet():\n    name = \"Ava\"\n    print(\"Hello\", name)\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`.\n- `name = \"Ava\"` creates a local variable inside that function.\n- `print(\"Hello\", name)` uses that local variable.\n- After the function finishes, that local variable is no longer available outside the function.\n\nA helpful way to think about it: local variables are like notes used inside one small task. When the task ends, the note is gone."
+          "local-lifetime": {
+            "title": "Local variables belong to the function call",
+            "bodyMarkdown": "A variable created inside a function is usually **local** to that function call.\n\n```python\ndef build_total(price):\n    fee = 2\n    total = price + fee\n    return total\n\nprint(build_total(8))\n```\n\n`fee` and `total` are working names used inside `build_total`. They can be used while that function call is running, but code after the call cannot directly refer to those local names.\n\nLocal variables are useful because a function can keep its temporary work inside its own boundary."
           },
-          "inside-vs-outside": {
-            "title": "Inside a function is different from outside",
-            "bodyMarkdown": "Code inside a function and code outside a function do not share every variable automatically.\n\n```python\ncity = \"Lima\"\n\ndef show_place():\n    country = \"Peru\"\n    print(city)\n    print(country)\n\nshow_place()\n```\n\nFollow the execution: - `city = \"Lima\"` is created outside the function.\n- Inside `show_place()`, a new local variable `country` is created.\n- `print(city)` works here because the function can read the outside variable.\n- `print(country)` also works here because `country` exists inside the function.\n- But `country` would not work outside the function, because it is local to `show_place()`.\n\nWorked example:\n\nIf you tried to use `country` after calling `show_place()`, Python would complain because that name only existed inside the function."
+          "parameter-local": {
+            "title": "Parameters are local, even when names match outside",
+            "bodyMarkdown": "Function parameters are local names too.\n\n```python\nscore = 10\n\ndef add_bonus(score):\n    updated = score + 2\n    return updated\n\nprint(add_bonus(score))\nprint(score)\n```\n\nThe call passes the outside value `10` into the local parameter also named `score`. Inside the function, `updated` becomes `12` and is returned. The outside `score` is still `10` because the function did not assign a new value to that outside variable.\n\nSame spelling does not mean the two names are the same storage location."
           },
-          "parameters-create-local-names": {
-            "title": "Parameters are local too",
-            "bodyMarkdown": "Function parameters also act like local variables.\n\n```python\ndef double(number):\n    result = number * 2\n    return result\n\nprint(double(5))\n```\n\nStep by step:\n\n- `number` is a parameter.\n- When you call `double(5)`, the value `5` is stored in the local name `number`.\n- `result` is another local variable created inside the function.\n- `return result` sends the answer back.\n\nBoth `number` and `result` belong to that function call.\n\nConcrete example:\n\n- In `double(5)`, `number` is `5`, so `result` becomes `10`.\n- In `double(8)`, `number` is `8`, so `result` becomes `16`.\n\nThe names are reused safely each time because they are local to each call."
+          "return-local": {
+            "title": "Return local results to the caller",
+            "bodyMarkdown": "If code outside a function needs a value created locally, the usual beginner pattern is to **return the value**.\n\n```python\ndef build_label(item):\n    label = \"Item: \" + item\n    return label\n\nresult = build_label(\"Book\")\nprint(result)\n```\n\n`label` is still local to `build_label`. Returning it does not make the local variable itself global. Instead, the value comes back to the caller, and the caller stores that value in a different variable named `result`.\n\nThis keeps function internals separate while still allowing useful results to leave the function."
           }
         },
         "using-imports-and-helper-files": {
-          "sk1": {
-            "title": "Your app can have more than one file",
-            "bodyMarkdown": "A Python project does not have to keep every function in `main.py`. When a program grows, it is cleaner to move focused functions into small module files.\n\nFor this lesson, imagine a tiny **Mission Control** app:\n\n```text\nmain.py\ntools/\n  names.py\n  badges.py\n  reports.py\n```\n\nEach file has a job:\n\n- `main.py` reads input and connects the pieces.\n- `tools/names.py` cleans names.\n- `tools/badges.py` builds badge text.\n- `tools/reports.py` formats the final report.\n\nThe folder name and file name become the import path. A function inside `tools/names.py` can be imported like this:\n\n```python\nfrom tools.names import clean_name\n```\n\nNotice that the import uses `tools.names`, not `tools/names.py`. Python import paths use dots and leave off `.py`.\n\nIn the project, you will create module files in a folder and import your own functions into `main.py`."
+          "sibling-module": {
+            "title": "A Python file can be imported as a module",
+            "bodyMarkdown": "A helper function does not have to stay in `main.py`. A sibling Python file can hold that function instead.\n\nSuppose these two files sit beside each other:\n\n```text\nmain.py\nnames.py\n```\n\n`names.py` can contain:\n\n```python\ndef display_name(text):\n    return text.strip().title()\n```\n\nThen `main.py` can import that function:\n\n```python\nfrom names import display_name\n\nraw = input()\nprint(display_name(raw))\n```\n\nThe file `names.py` becomes the module named `names`. The import uses the module name without `.py`: `from names import display_name`.\n\nFor this lesson, helper modules live beside `main.py`; no package folders are needed."
           },
-          "sk2": {
-            "title": "Import from a file inside a folder",
-            "bodyMarkdown": "Suppose you create this file:\n\n```text\ntools/names.py\n```\n\nInside `tools/names.py`, you can define a function:\n\n```python\ndef clean_name(text):\n    return text.strip().title()\n```\n\nThen `main.py` can import and use it:\n\n```python\nfrom tools.names import clean_name\n\nraw_name = input()\nname = clean_name(raw_name)\nprint(name)\n```\n\nStep by step:\n\n1. Python looks inside the `tools` folder.\n2. It finds the `names.py` module.\n3. It imports the `clean_name` function.\n4. `main.py` calls that function like any other function.\n\nThis keeps your main app clean. Instead of filling `main.py` with every detail, you give each module a focused job."
+          "related-helpers": {
+            "title": "One module can hold related helpers",
+            "bodyMarkdown": "A module can contain more than one function when those functions share a clear responsibility.\n\nFor example, `text_tools.py` might contain two text-formatting helpers:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\ndef emphasize(text):\n    return text.upper() + \"!\"\n```\n\n`main.py` can import both names directly:\n\n```python\nfrom text_tools import clean_text, emphasize\n\ntext = clean_text(\"  Hello  \")\nprint(emphasize(text))\n```\n\nThe module name is `text_tools`; `clean_text` and `emphasize` are function names defined inside that module."
           },
-          "sk3": {
-            "title": "Build a small tool folder",
-            "bodyMarkdown": "A nice multi-file project is not just random files. Each module should have a clear purpose.\n\nExample:\n\n```text\ntools/\n  names.py     # clean and format names\n  badges.py    # build badge labels\n  reports.py   # format final messages\n```\n\nThe files can work together through imports:\n\n```python\nfrom tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nname = clean_name(\"  zoe  \")\nbadge = make_badge(name, \"scout\")\nprint(mission_report(badge, 18))\n```\n\nOutput:\n\n```python\nMission report: SCOUT badge: Zoe has 18 points\n```\n\nThis is the main idea of the project: create small module files, put reusable functions inside them, import those functions into `main.py`, and connect them into one clean app."
+          "connect-modules": {
+            "title": "main.py can connect multiple helper modules",
+            "bodyMarkdown": "As a program grows, different helper files can own different jobs while `main.py` connects them.\n\n```text\nmain.py\nnames.py\nlabels.py\n```\n\n`main.py` can import from both modules:\n\n```python\nfrom names import display_name\nfrom labels import make_label\n\nname = display_name(\"  mia  \")\nprint(make_label(name))\n```\n\nHere `names.py` owns name cleanup, `labels.py` owns label formatting, and `main.py` owns the application flow that passes one returned value into the next helper.\n\nThis keeps each responsibility in one place without introducing package folders or advanced import patterns."
           }
         }
       },
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "sketch-1": {
-            "title": "A messy student file lands in your inbox",
-            "bodyMarkdown": "A student group exported a file of names and scores, but some rows are messy and some are broken. They do not need a lecture about data cleaning; they need a small Python tool that reads the file, keeps the good records, skips the bad ones, and writes something usable.\n\nThis module project grows one careful step at a time. Each starter is the previous canonical solution plus the next realistic job."
+            "title": "A messy student export needs a reliable cleaner",
+            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
           }
         },
         "reading-text-files": {
-          "why-read-files": {
-            "title": "Why read text files?",
-            "bodyMarkdown": "Programs often need data that already exists in a file, such as notes, logs, or a list of names. Reading a text file lets your program bring that text into memory and use it.\n\nA beginner-friendly pattern is to use `with open(...)` so Python closes the file for you when you're done.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n    print(text)\n```\n\nStep by step:\n\n- `open(\"notes.txt\", \"r\")` opens the file in read mode.\n- `as file` gives that open file a variable name.\n- `file.read()` gets all the text from the file.\n- `print(text)` sends the text to the output panel.\n- `with` makes cleanup automatic.\n\nWorked example:\n\nIf `notes.txt` contains:\n\n```text\nBuy milk\nCall Sam\n```\n\nthen the program prints:\n\n```text\nBuy milk\nCall Sam\n```"
+          "read-whole-file": {
+            "title": "Open and read a whole text file",
+            "bodyMarkdown": "Programs often need text that already exists in a file. To read an existing text file, use a managed `with open(...)` block.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nHere:\n\n- `\"notes.txt\"` is the file path.\n- `\"r\"` means **read mode**.\n- `as file` gives the open file a variable name.\n- `file.read()` returns the remaining text as one string.\n- when the `with` block ends, Python closes the file automatically.\n\nUse `.read()` when you want the file's contents as one complete string."
           },
-          "read-vs-lines": {
-            "title": "Reading all text or line by line",
-            "bodyMarkdown": "You can read a whole file at once, or read its lines.\n\nReading the whole file:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n```\n\nReading lines into a list:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(lines)\n```\n\nWorked example:\n\nIf `poem.txt` contains:\n\n```text\nred\nblue\n```\n\nthen `file.read()` gives one string containing both lines, while `file.readlines()` gives a list like:\n\n```python\n['red\\n', 'blue\\n']\n```\n\nThat `\\n` means a newline character at the end of a line."
+          "iterate-lines": {
+            "title": "Process a file one line at a time",
+            "bodyMarkdown": "You do not have to read the whole file into one string. An open text file can be used directly in a `for` loop.\n\nIf `colors.txt` contains:\n\n```text\nred\nblue\ngreen\n```\n\nyou can process each stored line separately:\n\n```python\nwith open(\"colors.txt\", \"r\") as file:\n    for line in file:\n        color = line.strip()\n        print(color.upper())\n```\n\n`for line in file:` gives the loop one line at a time. `line.strip()` removes the newline and surrounding whitespace before the program uses that line."
           },
-          "relative-paths-and-safety": {
-            "title": "Relative paths and safe file access",
-            "bodyMarkdown": "A relative path tells Python where a file is inside the lesson workspace, such as `data/story.txt`.\n\n```python\nwith open(\"data/story.txt\", \"r\") as file:\n    print(file.read())\n```\n\nHere:\n\n- `data/story.txt` means a file named `story.txt` inside the `data` folder.\n- You do not need an absolute computer-specific location.\n- In this lesson, use the provided files from the files panel.\n\nWorked example:\n\nIf the workspace includes a folder `data` and inside it a file `story.txt` with:\n\n```text\nChapter 1\n```\n\nthen the code prints:\n\n```text\nChapter 1\n```"
+          "relative-path": {
+            "title": "Read a file from a relative path",
+            "bodyMarkdown": "A file can live inside a folder in the workspace. Write the folder and file name together as a **relative path**.\n\nFor this workspace:\n\n```text\nmain.py\ndata/\n  team.txt\n```\n\n`main.py` can read the nested text file like this:\n\n```python\nwith open(\"data/team.txt\", \"r\") as file:\n    team = file.read().strip()\n\nprint(team)\n```\n\nThe path `data/team.txt` means \"the file `team.txt` inside the `data` folder.\" After `.read()` returns the text, you can store and process that string using string operations you already know."
           }
         },
         "simple-csv-processing": {
-          "csv-dictreader-basics": {
-            "title": "Reading CSV rows as dictionaries",
-            "bodyMarkdown": "The `csv` module helps Python read comma-separated data without you splitting each line by hand. A very useful tool is `csv.DictReader`, which turns each row into a dictionary.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"], row[\"score\"])\n```\n\nIf `scores.csv` contains:\n\n```text\nname,score\nAva,9\nBen,7\n```\n\nthe output is:\n\n```text\nAva 9\nBen 7\n```\n\nStep by step:\n\n- `import csv` makes the standard library CSV tools available.\n- `open(\"scores.csv\")` opens the file for reading.\n- `csv.DictReader(file)` reads the header row first.\n- Each later row becomes a dictionary like `{\"name\": \"Ava\", \"score\": \"9\"}`.\n- `row[\"name\"]` gets the value from the `name` column.\n\nWorked example: if a row is `Cara,12`, then `row[\"name\"]` is `\"Cara\"` and `row[\"score\"]` is `\"12\"`."
+          "dictreader-basics": {
+            "title": "Read CSV rows by column name",
+            "bodyMarkdown": "A CSV file stores rows of comma-separated values. Python's standard-library `csv` module can read that structure for you.\n\nSuppose `students.csv` contains:\n\n```text\nname,score\nAva,92\nBen,85\n```\n\nUse `csv.DictReader` when you want the header row to become dictionary keys:\n\n```python\nimport csv\n\nwith open(\"students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"], row[\"score\"])\n```\n\nEach `row` is dictionary-like: `row[\"name\"]` reads the `name` column and `row[\"score\"]` reads the `score` column."
           },
-          "csv-cleaning-values": {
-            "title": "Cleaning values from CSV rows",
-            "bodyMarkdown": "CSV data often has extra spaces or values stored as text. Cleaning means fixing those values before using them.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        score = int(row[\"score\"].strip())\n        print(name, score + 1)\n```\n\nSuppose the file contains:\n\n```text\nname,score\n Ava , 9\nBen, 7\n```\n\nFollow the execution: - `row[\"name\"]` gets the text from the `name` column.\n- `.strip()` removes spaces around the text.\n- `row[\"score\"]` is still text, not a number.\n- `int(...)` converts that cleaned text into an integer.\n- `print(name, score + 1)` prints the cleaned name and a changed numeric value.\n\nWorked example:\n\n- For the first row, `row[\"name\"]` is `\" Ava \"`, so `strip()` makes it `\"Ava\"`.\n- `row[\"score\"]` is `\" 9\"`, so after cleaning and converting it becomes `9`."
+          "clean-values": {
+            "title": "Clean and convert CSV values",
+            "bodyMarkdown": "Values read from a CSV file begin as **text**, even when they look numeric.\n\n```python\nimport csv\n\nwith open(\"students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score = int(row[\"score\"].strip())\n        print(name, score + 1)\n```\n\nThe cleaning and conversion responsibilities are separate:\n\n- `.strip()` removes surrounding whitespace.\n- `.title()` can normalize a name.\n- `int(...)` converts cleaned score text to an integer for math.\n\nThis reuses the cleaning rules from the previous topic on values that came from a CSV row."
           },
-          "csv-safe-processing": {
-            "title": "Skipping bad rows safely",
-            "bodyMarkdown": "Sometimes a CSV file has messy data. A score might be missing or contain text like `oops`. You can use `try` and `except` to skip rows that cannot be converted.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            name = row[\"name\"].strip()\n            score = int(row[\"score\"].strip())\n            print(name, score)\n        except ValueError:\n            print(\"skipping bad score\")\n```\n\nIf the file contains:\n\n```text\nname,score\nAva,9\nBen,oops\nCara,12\n```\n\nthen the program prints:\n\n```text\nAva 9\nskipping bad score\nCara 12\n```\n\nWhat happens here:\n\n- Python reads one row at a time.\n- `int(...)` works for `\"9\"` and `\"12\"`.\n- `int(\"oops\")` raises a `ValueError`.\n- The `except ValueError:` block handles that problem so the program keeps going."
+          "safe-rows": {
+            "title": "Process valid rows and reject bad data safely",
+            "bodyMarkdown": "Real CSV data can contain a missing name, invalid score text, or an out-of-range score. Apply the same validation rules to each row instead of assuming every row is valid.\n\n```python\nimport csv\n\nwith open(\"students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip().title()\n        score_text = row[\"score\"].strip()\n\n        if name == \"\":\n            print(\"Rejected\")\n        else:\n            try:\n                score = int(score_text)\n                if 0 <= score <= 100:\n                    print(name, score)\n                else:\n                    print(\"Rejected\")\n            except ValueError:\n                print(\"Rejected\")\n```\n\nThe important new skill is not a new validation rule; it is applying known cleaning and validation rules **row by row through `csv.DictReader`**."
           }
         },
         "try-except-basics": {
-          "s1": {
-            "title": "What try/except does",
-            "bodyMarkdown": "`try` lets your program attempt code that might fail. If an expected error happens, `except` runs instead of letting the whole program crash.\n\n```python\ntext = \"42\"\n\ntry:\n    number = int(text)\n    print(number + 1)\nexcept ValueError:\n    print(\"That was not a whole number.\")\n```\n\nStep by step:\n- `int(text)` tries to turn the string into an integer.\n- If `text` looks like a number, the `try` block keeps going.\n- If `text` cannot be converted, Python jumps to the `except ValueError` block.\n\nFor example, if `text` is `\"42\"`, the output is `43`.\nIf `text` is `\"apple\"`, the output is `That was not a whole number.`"
+          "value-error": {
+            "title": "Catch ValueError from a risky conversion",
+            "bodyMarkdown": "Some operations work for many inputs but fail for others. Put the **risky operation** inside `try` and catch the specific exception you expect.\n\n```python\ntext = \"18\"\n\ntry:\n    number = int(text)\n    print(\"Number:\", number)\nexcept ValueError:\n    print(\"Invalid number\")\n```\n\n`int(text)` is the risky operation. If `text` is valid whole-number text, the `try` block continues. If conversion fails, Python skips the remaining statements in that `try` block and runs `except ValueError:`.\n\nCatch the specific error you expect. Avoid a bare `except:` here because it could hide a different bug."
           },
-          "s2": {
-            "title": "Only the risky line needs protection",
-            "bodyMarkdown": "A common beginner pattern is to put the risky conversion inside `try`, then handle the problem in `except`.\n\n```python\nuser_text = \"9a\"\n\ntry:\n    score = int(user_text)\n    print(\"Valid score:\", score)\nexcept ValueError:\n    print(\"Invalid score\")\n```\n\nFollow the execution: - `user_text` stores text.\n- `int(user_text)` is the risky step because some text cannot become an integer.\n- If conversion works, `print(\"Valid score:\", score)` runs.\n- If conversion fails, Python skips that print and runs the `except` block.\n\nThis is useful when cleaning messy input, such as numbers typed by a user or values read from text data."
+          "file-not-found": {
+            "title": "Catch FileNotFoundError when opening a path",
+            "bodyMarkdown": "File operations can fail too. Opening a path for reading raises `FileNotFoundError` when that file does not exist.\n\n```python\npath = \"data/message.txt\"\n\ntry:\n    with open(path, \"r\") as file:\n        message = file.read().strip()\n    print(message)\nexcept FileNotFoundError:\n    print(\"Missing file\")\n```\n\nThe exception type matches the risky operation: conversion problems use `ValueError`, while a missing read path uses `FileNotFoundError`."
           },
-          "s3": {
-            "title": "Use exceptions to keep programs usable",
-            "bodyMarkdown": "Without `try/except`, one bad value can stop the whole program. With it, you can show a helpful message and continue.\n\n```python\nfirst = \"10\"\nsecond = \"oops\"\n\nfor item in [first, second]:\n    try:\n        value = int(item)\n        print(\"Clean value:\", value)\n    except ValueError:\n        print(\"Skipped bad value:\", item)\n```\n\nWhat happens:\n- The loop checks each text value.\n- `\"10\"` converts successfully, so it prints `Clean value: 10`.\n- `\"oops\"` raises `ValueError`, so it prints `Skipped bad value: oops`.\n- The program keeps going instead of stopping on the bad value."
+          "continue-after-error": {
+            "title": "Continue after a handled exception",
+            "bodyMarkdown": "Handling an expected exception lets the surrounding program keep working. This is especially useful when processing more than one item.\n\n```python\nfilenames = [\"first.txt\", \"missing.txt\", \"second.txt\"]\n\nfor filename in filenames:\n    path = \"data/\" + filename\n    try:\n        with open(path, \"r\") as file:\n            print(file.read().strip())\n    except FileNotFoundError:\n        print(\"Missing: \" + filename)\n```\n\nIf one file is missing, the handler prints a clear fallback message. The loop then continues to the next filename instead of stopping the whole program."
           }
         },
         "validating-and-cleaning-input": {
-          "clean-basics": {
-            "title": "What validation and cleaning do",
-            "bodyMarkdown": "Validation checks whether data is acceptable. Cleaning fixes small problems so valid data becomes easier to use.\n\nFor example, imagine a row of text:\n\n```python\nname = \"  Ava  \"\nage_text = \" 12 \"\n```\n\nYou can clean it like this:\n\n```python\nname = name.strip()\nage_text = age_text.strip()\nage = int(age_text)\nprint(name)\nprint(age)\n```\n\nStep by step:\n\n- `strip()` removes extra spaces at the start and end.\n- `int(age_text)` converts the cleaned text into a number.\n- `print(name)` shows `Ava`.\n- `print(age)` shows `12`.\n\nValidation often happens after cleaning. If `age_text` were `\"twelve\"`, `int(age_text)` would fail, so that row should be rejected or handled with `try`/`except`.\n\nA simple rule is:\n\n1. Clean small formatting issues.\n2. Check for missing values.\n3. Reject values that still do not fit the rules."
+          "clean-first": {
+            "title": "Clean text before validating it",
+            "bodyMarkdown": "Raw text often contains harmless formatting noise. **Clean first, then validate the cleaned value.**\n\n```python\nraw_city = \"  new YORK  \"\ncity = raw_city.strip().title()\nprint(city)\n```\n\n`strip()` removes whitespace from both ends, and `title()` normalizes capitalization. The result is `New York`.\n\nCleaning also makes missing-value checks reliable:\n\n```python\nraw_code = \"   \"\ncode = raw_code.strip()\n\nif code == \"\":\n    print(\"Missing code\")\n```\n\nAfter `strip()`, a spaces-only value becomes the empty string `\"\"`."
           },
-          "missing-invalid": {
-            "title": "Missing values vs invalid values",
-            "bodyMarkdown": "A missing value is absent or empty. An invalid value is present, but wrong for the rule you need.\n\nExample:\n\n```python\nrows = [\n    [\"Ava\", \"12\"],\n    [\"\", \"15\"],\n    [\"Leo\", \"ten\"]\n]\n```\n\nYou might read these rows like this:\n\n- `['Ava', '12']` → usable after conversion\n- `['', '15']` → missing name\n- `['Leo', 'ten']` → invalid age\n\nHere is a small checker:\n\n```python\nfor row in rows:\n    name = row[0].strip()\n    age_text = row[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(name, age)\n        except ValueError:\n            print(\"invalid age\")\n```\n\nFollow the execution: - The loop checks one row at a time.\n- `strip()` cleans spaces before checking.\n- `if name == \"\"` catches an empty name.\n- `try` attempts the number conversion.\n- `except ValueError` handles text like `\"ten\"`."
+          "validate-number": {
+            "title": "Missing, invalid, and out-of-range values",
+            "bodyMarkdown": "A value can fail validation in different ways.\n\n- **Missing:** the cleaned text is empty.\n- **Invalid type:** the text cannot be converted to the required type.\n- **Out of range:** conversion succeeds, but the number violates the rule.\n\nExample:\n\n```python\nage_text = \" 17 \".strip()\n\ntry:\n    age = int(age_text)\n    if 0 <= age <= 120:\n        print(\"Valid age\")\n    else:\n        print(\"Invalid age\")\nexcept ValueError:\n    print(\"Invalid age\")\n```\n\n`\"seventeen\"` fails conversion, while `150` converts successfully but fails the allowed range."
           },
-          "cleaning-functions": {
-            "title": "Put cleaning rules in functions",
-            "bodyMarkdown": "When the same cleaning logic is used many times, put it in a function. This makes your code easier to read and reuse.\n\nExample:\n\n```python\ndef clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()\n\nprint(clean_name(\"  aVA  \"))\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- The function receives some text.\n- `strip()` removes extra spaces.\n- `title()` changes the capitalization.\n- `return` sends the cleaned result back.\n\nYou can do the same for validation:\n\n```python\ndef is_missing(text):\n    return text.strip() == \"\"\n\nprint(is_missing(\"   \"))\nprint(is_missing(\"Mila\"))\n```\n\nThis prints:\n\n```python\nTrue\nFalse\n```\n\nFunctions are especially helpful when cleaning many rows from a file."
+          "cleaning-function": {
+            "title": "Combine cleaning rules in a function",
+            "bodyMarkdown": "When the same rules belong together, a function can return either cleaned data or a clear rejection value.\n\n```python\ndef clean_quantity(text):\n    cleaned = text.strip()\n    if cleaned == \"\":\n        return None\n\n    try:\n        quantity = int(cleaned)\n    except ValueError:\n        return None\n\n    if quantity < 1:\n        return None\n\n    return quantity\n```\n\n`None` means the input was rejected. A returned integer means it survived all of the cleaning and validation rules."
           }
         },
         "working-with-paths": {
-          "paths-relative-basics": {
-            "title": "Relative paths point to files from your current workspace",
-            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”"
+          "relative-paths": {
+            "title": "Relative paths describe where a file is",
+            "bodyMarkdown": "A **relative path** describes a file from the current workspace instead of from one specific computer.\n\nIf the workspace looks like this:\n\n```text\nmain.py\nnotes.txt\ndata/\n  scores.txt\n```\n\nthen these two paths mean different locations:\n\n- `notes.txt` means the file beside `main.py`.\n- `data/scores.txt` means `scores.txt` inside the `data` folder.\n\nYou can pass either relative path directly to `open(...)`:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    text = file.read()\n```\n\nRelative paths keep the program tied to the project layout rather than to a machine-specific full location."
           },
-          "paths-folders-and-organization": {
-            "title": "Folders help organize files clearly",
-            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nFollow the execution: - `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
+          "path-pieces": {
+            "title": "Build a path from folder and file-name pieces",
+            "bodyMarkdown": "Sometimes the folder or file name comes from a variable. You can build the relative path from those pieces.\n\n```python\nfolder = \"reports\"\nfilename = \"today.txt\"\npath = folder + \"/\" + filename\nprint(path)\n```\n\nThe output is:\n\n```text\nreports/today.txt\n```\n\nUsing the variables matters: if `folder` or `filename` changes, the finished path changes too. The goal is to represent the location from its parts instead of typing the completed path separately."
           },
-          "paths-safe-habits": {
-            "title": "Use simple relative paths, not machine-specific ones",
-            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written."
+          "pathlib-path": {
+            "title": "Use pathlib.Path to build and open a path",
+            "bodyMarkdown": "Python's standard library includes `Path`, a small object for working with path components.\n\n```python\nfrom pathlib import Path\n\nfolder = \"data\"\nfilename = \"message.txt\"\npath = Path(folder) / filename\nprint(path)\n```\n\n`Path(folder) / filename` joins the two pieces as a path. You can then give that `Path` object directly to `open(...)`:\n\n```python\nwith open(path, \"r\") as file:\n    message = file.read().strip()\n\nprint(message)\n```\n\nFor this topic, keep `Path` simple: use it to join relative path pieces and pass the result to `open`."
           }
         },
         "writing-text-files": {
-          "sketch-write-mode-basics": {
-            "title": "Write mode creates or replaces text",
-            "bodyMarkdown": "When you open a path with write mode (`\"w\"`), Python prepares that path for new text. If the path already has text, write mode replaces the old contents.\n\n```python\nwith open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello\\n\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n```\n\nStep by step:\n\n- `open(\"note.txt\", \"w\")` opens the path for writing.\n- `file.write(\"Hello\\n\")` puts text into the file.\n- Opening the same path again in read mode lets you check what was saved.\n- `print(file.read())` sends the saved text to the output panel.\n\nIn this example, the output is:\n\n```python\nHello\n```"
+          "write-mode": {
+            "title": "Write mode creates or replaces a file",
+            "bodyMarkdown": "Open a path with mode `\"w\"` when you want to **write new text that replaces any old contents**.\n\n```python\nwith open(\"message.txt\", \"w\") as file:\n    file.write(\"Ready\\n\")\n```\n\nIf `message.txt` did not exist, Python creates it. If it already contained text, opening it with `\"w\"` clears that old text before the new write.\n\n`file.write(...)` saves the string you give it. It does not automatically print anything to the output panel.\n\nTo inspect what was actually saved, reopen the same path for reading:\n\n```python\nwith open(\"message.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n```"
           },
-          "sketch-append-mode-basics": {
-            "title": "Append mode adds to the end",
-            "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nFollow the execution: - The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```"
+          "append-mode": {
+            "title": "Append mode keeps the existing text",
+            "bodyMarkdown": "Use mode `\"a\"` when the old contents must stay and the new text belongs at the **end** of the file.\n\nSuppose `events.txt` already contains:\n\n```text\nDoors opened\n```\n\nThis code adds another line without deleting the first one:\n\n```python\nwith open(\"events.txt\", \"a\") as file:\n    file.write(\"Guests arrived\\n\")\n```\n\nAfterward the file contains both lines. Append mode does not insert a newline automatically, so include `\\n` when the appended text should end on its own line."
           },
-          "sketch-newlines-and-verifying": {
-            "title": "Use newline characters and verify what you wrote",
-            "bodyMarkdown": "When writing several lines, `\\n` starts a new line. It is also helpful to reopen the file and print its contents so you can verify the result.\n\n```python\nwith open(\"tasks.txt\", \"w\") as file:\n    file.write(\"Buy milk\\nWash dishes\\n\")\n\nwith open(\"tasks.txt\") as file:\n    saved_text = file.read()\n    print(saved_text)\n```\n\nWhat this does:\n\n- `Buy milk\\n` writes one line and moves to the next line.\n- `Wash dishes\\n` writes the second line.\n- `file.read()` gets the full saved text.\n- Printing `saved_text` lets you confirm the file contents in the output panel.\n\nWithout `\\n`, both tasks would appear on the same line."
+          "multiple-lines": {
+            "title": "Write multiple lines and verify the saved file",
+            "bodyMarkdown": "A text file can be built one line at a time with repeated `file.write(...)` calls.\n\n```python\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(\"Course: Python\\n\")\n    file.write(\"Status: Active\\n\")\n```\n\nEach `\\n` places the next text on a new line. When the write block finishes, the file is closed automatically.\n\nYou can then use the reading pattern from the previous topic to verify the saved result:\n\n```python\nwith open(\"summary.txt\", \"r\") as file:\n    saved = file.read()\n\nprint(saved, end=\"\")\n```\n\nThe important distinction is that `.write()` changes the file, while `.read()` brings saved text back into the program."
           }
         }
       },
@@ -52019,7 +50329,7 @@ const messages: Record<string, any> = {
         "community-event-registration-cleaner": {
           "sketch-1": {
             "title": "A new domain, the same engineering habits",
-            "bodyMarkdown": "The module project cleaned student scores. The capstone deliberately changes the domain and the record shape: a community center needs attendee names, event names, seat counts, and email addresses cleaned from a registration export.\n\nYou will inspect the file, make one row dependable, skip invalid seat counts, move cleaning and summaries into helper modules, and write two final artifacts. The workflow reuses the course skills without copying the earlier school-record project."
+            "bodyMarkdown": "The Module 7 project cleaned student scores. This capstone changes both the domain and the record shape: a community center needs attendee names, event names, seat counts, and email addresses cleaned from a CSV export.\n\nYou will build one working program across six cumulative steps. The capstone reuses skills already taught:\n\n- `csv.DictReader` for named CSV columns\n- text cleaning with `strip()`, `title()`, and `lower()`\n- explicit missing-value and numeric validation\n- specific `ValueError` handling\n- lists and dictionaries for accepted records and summaries\n- sibling Python helper modules with direct imports\n- text-file writing with `file.write()`\n- reopening saved files to verify the deliverables\n\nThe workspace already contains the input export and two old output files. When the reporting step arrives, opening those output paths with mode `\"w\"` will replace the old contents. No new directory API is needed."
           }
         }
       }

@@ -4,290 +4,201 @@
       "python-5-lists-tuples-and-dictionaries": {
         "list-methods-and-mutation": {
           "label": "List Methods and Mutation",
-          "summary": "Use common list methods like append, remove, pop, and sort, and learn how they change the original list.",
+          "summary": "Change existing list items, add and remove values, capture removed items with pop(), and sort a list in place.",
           "cards": {
             "sketch0": {
-              "title": "What mutation means for lists"
+              "title": "Replacing an item by index"
             },
             "sketch1": {
-              "title": "Using append, remove, and pop"
+              "title": "Adding an item with append()"
             },
             "sketch2": {
-              "title": "Sorting lists and watching for common mistakes"
+              "title": "Removing a matching value"
+            },
+            "sketch3": {
+              "title": "Removing by position with pop()"
+            },
+            "sketch4": {
+              "title": "Sorting the same list"
             },
             "quiz": {
-              "title": "Quiz"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "sc-1": {
-              "title": "Which method adds to the end?",
-              "prompt": "Which list method adds one new item to the end of a list?",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
+            "sc-index-assignment": {
+              "title": "Replace one list item",
+              "prompt": "The list is `tasks = [\"email\", \"meeting\", \"backup\"]`. Which line replaces the second item with `\"study\"`?",
+              "hint": "Reading an item uses an index. Replacing an item uses that same indexed position on the left side of `=`.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "Assigning to `list[index]` changes the item stored at that position.",
+                "hint_1": "The second item is at index `1` because Python starts counting at 0.",
+                "hint_2": "Use `tasks[1] = \"study\"`."
               },
               "options": {
-                "a": "append()",
-                "b": "remove()",
-                "c": "pop()",
-                "d": "sort()"
+                "a": "tasks[1] = \"study\"",
+                "b": "tasks[0] = \"study\"",
+                "c": "tasks.append(\"study\")",
+                "d": "tasks(1) = \"study\""
               }
             },
-            "sc-2": {
-              "title": "What does pop return?",
-              "prompt": "In Python, what does `items.pop(1)` return?",
-              "hint": "`pop()` both changes the list and gives you something back.",
+            "mc-mutates-original": {
+              "title": "Operations that mutate a list",
+              "prompt": "Which operations change the existing list itself? Assume `items` is already a list. Choose all that apply.",
+              "hint": "Think about whether the list's stored items are different after the operation runs.",
               "help": {
-                "concept": "`pop(index)` removes the item at the given index and returns that removed item.",
-                "hint_1": "Index `1` means the second item in the list.",
-                "hint_2": "The return value is not the shortened list itself; it is the element that was taken out."
+                "concept": "Index assignment and list methods such as `append`, `remove`, `pop`, and `sort` mutate the existing list.",
+                "hint_1": "`len(items)` reads information but does not change any item.",
+                "hint_2": "Choose the operations that replace, add, remove, or reorder list items."
               },
               "options": {
-                "a": "The item that was removed at index 1",
-                "b": "A copy of the whole list",
-                "c": "The length of the list after removal",
-                "d": "Nothing at all"
+                "a": "items[0] = \"new\"",
+                "b": "items.append(\"new\")",
+                "c": "items.pop()",
+                "d": "len(items)"
               }
             },
-            "mc-1": {
-              "title": "Methods that mutate a list",
-              "prompt": "Which of these operations change the original list? Choose all that apply.",
-              "hint": "Check every option against the complete behavior described in the question.",
+            "sc-remove-vs-pop": {
+              "title": "Remove by position and keep the value",
+              "prompt": "You need to remove the item at index `1` from `colors` and store the removed value in `removed`. Which line does both?",
+              "hint": "`remove()` looks for a matching value. `pop()` removes by position and returns what it removed.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
-                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+                "concept": "`pop(index)` removes the item at that index and returns the removed value.",
+                "hint_1": "The task gives a position, not a value to search for.",
+                "hint_2": "Assign the result of `colors.pop(1)` to `removed`."
               },
               "options": {
-                "a": "append(5)",
-                "b": "remove(5)",
-                "c": "sort()",
-                "d": "len(my_list)"
+                "a": "removed = colors.pop(1)",
+                "b": "removed = colors.remove(1)",
+                "c": "colors.remove(removed)",
+                "d": "removed = colors[1]"
               }
             },
-            "mc-2": {
-              "title": "Valid list method uses",
-              "prompt": "Which lines are valid ways to use common list methods on `numbers = [3, 1, 2]`? Choose all that apply.",
-              "hint": "Check whether each method name matches the kind of argument it expects.",
+            "sc-sort-return": {
+              "title": "What sort() returns",
+              "prompt": "What is printed by this code?\n\n`scores = [8, 3, 5]`\n`result = scores.sort()`\n`print(result)`",
+              "hint": "`sort()` changes `scores` in place; it does not return the sorted list.",
               "help": {
-                "concept": "Different list methods expect different inputs: `append` takes a value, `remove` takes a value, and `pop` usually takes an index.",
-                "hint_1": "Ask whether the method is removing by value or by position.",
-                "hint_2": "One choice mixes up `remove` with index behavior, and one choice uses `sort` with an argument it does not need here."
+                "concept": "`list.sort()` mutates the list and returns `None`.",
+                "hint_1": "After sorting, `scores` is ordered, but `result` receives the method's return value.",
+                "hint_2": "That return value is `None`."
               },
               "options": {
-                "a": "numbers.append(4)",
-                "b": "numbers.remove(1)",
-                "c": "numbers.pop(0)",
-                "d": "numbers.sort(2)"
-              }
-            },
-            "dr-1": {
-              "title": "Append then inspect",
-              "prompt": "Put these steps in the correct order to add `7` to a list and display the updated list.",
-              "hint": "First create the list, then change it, then print it.",
-              "help": {
-                "concept": "A short list program usually follows a sequence: create data, mutate data, then inspect the result with `print()`.",
-                "hint_1": "You cannot append to a list before the list exists.",
-                "hint_2": "Printing should happen after the append if you want to see the changed list."
-              },
-              "tokens": {
-                "t1": "numbers = [1, 2]",
-                "t2": "numbers.append(7)",
-                "t3": "print(numbers)"
-              }
-            },
-            "dr-2": {
-              "title": "Remove, pop, then print",
-              "prompt": "Arrange the lines to produce a program that removes `\"b\"`, then pops the last remaining item into `taken`, then prints `taken`.",
-              "hint": "Arrange the code pieces in the order Python should run them.",
-              "help": {
-                "concept": "The pieces should form valid Python code in the order it should run.",
-                "hint_1": "Start with the line that sets up the Python action.",
-                "hint_2": "Place lines that depend on earlier values after those values exist."
-              },
-              "tokens": {
-                "t1": "letters = [\"a\", \"b\", \"c\"]",
-                "t2": "letters.remove(\"b\")",
-                "t3": "taken = letters.pop()",
-                "t4": "print(taken)"
-              }
-            },
-            "fb-1": {
-              "title": "Complete an append call",
-              "prompt": "Choose the value that makes `numbers.append(...)` add `10` to the list.",
-              "hint": "`append()` needs the item you want to add inside the parentheses.",
-              "help": {
-                "concept": "To add one item to the end of a list, place that item as the argument to `append()`.",
-                "hint_1": "The blank is the new value being added, not the list name or method name.",
-                "hint_2": "Pick the choice that would make the list gain the number ten."
-              },
-              "template": "numbers = [1, 2]\nnumbers.append([blank1])",
-              "choices": [
-                "numbers",
-                "append",
-                "10",
-                "pop"
-              ]
-            },
-            "fb-2": {
-              "title": "Complete a sort statement",
-              "prompt": "Choose the method name that sorts `scores` in place.",
-              "hint": "This method puts list items in order and changes the list itself.",
-              "help": {
-                "concept": "Choose the list method that rearranges the existing list into order instead of returning a separate sorted copy.",
-                "hint_1": "The blank should be a method that works directly on a list variable.",
-                "hint_2": "It is not a method for adding or removing items."
-              },
-              "template": "scores = [4, 1, 3]\nscores.[blank1]()",
-              "choices": [
-                "append",
-                "remove",
-                "sort",
-                "pop"
-              ]
-            },
-            "ci-1": {
-              "title": "Add an item and print the list",
-              "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
-                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
-              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use items.append(item) so the list is really mutated."
-                }
-              }
-            },
-            "ci-2": {
-              "title": "Remove a value and show the result",
-              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
-              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
-              "help": {
-                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
-              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use colors.remove(color) so the list is really mutated."
-                }
-              }
-            },
-            "ci-3": {
-              "title": "Sort numbers from input",
-              "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
-              "hint": "Check every option against the complete behavior described in the question.",
-              "help": {
-                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
-                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
-                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
-              },
-              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
-              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use numbers.sort() so the list is really sorted in place."
-                }
-              }
-            },
-            "try-list-methods-and-mutation-checkpoint": {
-              "title": "Append 10 to a list",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list.",
-              "hint": "Use `append()` to add one item to the end.",
-              "help": {
-                "concept": "`append(value)` mutates the original list by adding one item to the end.",
-                "hint_1": "Use `append()` to add one item to the end.",
-                "hint_2": "Run your code and compare the output with the expected result."
-              },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
-              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use numbers.append(10) so the list is really changed."
-                }
+                "a": "None",
+                "b": "[3, 5, 8]",
+                "c": "8",
+                "d": "Nothing is printed because the program crashes"
               }
             },
             "try-list-methods-and-mutation-sketch0": {
-              "title": "Append 10 and print the list",
-              "prompt": "Use `append(10)` to add `10` to the list, then print the updated list.",
-              "hint": "Add 10 to the end of the list.",
+              "title": "Correct one score",
+              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list.",
+              "hint": "The last item in this three-item list is at index `2`.",
               "help": {
-                "concept": "Add 10 to the end of the list.",
-                "hint_1": "Add 10 to the end of the list, then print the updated list.",
-                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
+                "concept": "Assigning to an indexed list position replaces the value already stored there.",
+                "hint_1": "Keep the existing list and change only its last position.",
+                "hint_2": "Use `scores[2] = corrected_score`, then print `scores`."
               },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
-              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "starterCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\n# Replace the last score with corrected_score.\n# Then print the updated list.\n",
+              "solutionCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\nscores[2] = corrected_score\nprint(scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use numbers.append(10) so the list is really changed."
+                  "message": "Replace the last item with `scores[2] = corrected_score` instead of creating a different final list."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch1": {
-              "title": "Remove banana and pop the last item",
-              "prompt": "Use `remove()` and `pop()` to change the list and show what remains.",
-              "hint": "Remove 'banana'.",
+              "title": "Add a new attendee",
+              "prompt": "A new attendee name arrives as input. Add that name to the end of `attendees` with `append()`, then print the updated list.",
+              "hint": "Pass the input variable to `attendees.append(...)`.",
               "help": {
-                "concept": "Remove 'banana'.",
-                "hint_1": "Remove 'banana' Then pop the last remaining item into last_item.",
-                "hint_2": "Keep the output deterministic and limited to the requested values."
+                "concept": "`append(value)` adds exactly one new item to the end of the existing list.",
+                "hint_1": "Do not type the incoming name directly into the list; use the value stored in `new_attendee`.",
+                "hint_2": "Call `attendees.append(new_attendee)`, then print `attendees`."
               },
-              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
-              "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+              "starterCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\n# Add new_attendee to the end of attendees.\n# Then print the updated list.\n",
+              "solutionCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\nattendees.append(new_attendee)\nprint(attendees)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Call fruits.remove('banana') instead of replacing the final list directly."
-                },
-                "1": {
-                  "message": "Store the result of fruits.pop() in last_item instead of typing cherry directly."
+                  "message": "Use `attendees.append(new_attendee)` so the input value is added to the existing list."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch2": {
-              "title": "Sort and print names",
-              "prompt": "Call `sort()` before printing so the original list is ordered.",
-              "hint": "Sort the list alphabetically.",
+              "title": "Remove a canceled workshop",
+              "prompt": "One workshop has been canceled. Read its name from input, remove that matching value from `workshops` with `remove()`, then print the remaining workshops.",
+              "hint": "`remove(value)` searches for a matching value and deletes the first match.",
               "help": {
-                "concept": "Sort the list alphabetically.",
-                "hint_1": "Sort the list alphabetically, then print the sorted list.",
-                "hint_2": "Return to the output contract and remove any line the task did not request."
+                "concept": "`remove(value)` changes the list by deleting the first item equal to that value.",
+                "hint_1": "Use the input stored in `canceled` rather than hard-coding one workshop name.",
+                "hint_2": "Call `workshops.remove(canceled)`, then print `workshops`."
               },
-              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
-              "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+              "starterCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\n# Remove the workshop whose name is stored in canceled.\n# Then print the updated list.\n",
+              "solutionCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\nworkshops.remove(canceled)\nprint(workshops)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use names.sort() so the list is actually sorted."
+                  "message": "Use `workshops.remove(canceled)` so the program removes whichever workshop arrives as input."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch3": {
+              "title": "Take the second ticket",
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list.",
+              "hint": "`pop(1)` removes the item at index 1 and returns that removed item.",
+              "help": {
+                "concept": "`pop(index)` is useful when you know the position and also need the removed value.",
+                "hint_1": "Assign the result of `tickets.pop(1)` to `next_ticket`.",
+                "hint_2": "Print `next_ticket` first, then print `tickets`."
+              },
+              "starterCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\n# Remove the second ticket with pop(1) and store it in next_ticket.\n# Print next_ticket.\n# Then print the remaining tickets list.\n",
+              "solutionCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\nnext_ticket = tickets.pop(1)\nprint(next_ticket)\nprint(tickets)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store the returned value with `next_ticket = tickets.pop(1)` instead of typing `T-105` directly."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch4": {
+              "title": "Sort three incoming times",
+              "prompt": "Three completion times arrive as integers. Store them in a list named `times`, sort the same list from smallest to largest with `sort()`, then print the sorted list.",
+              "hint": "Create `times` from the three input variables before calling `times.sort()`.",
+              "help": {
+                "concept": "`sort()` rearranges the existing list in ascending order.",
+                "hint_1": "Build one list from `first`, `second`, and `third` in that order.",
+                "hint_2": "Call `times.sort()` before printing `times`."
+              },
+              "starterCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\n# Create a list named times from the three inputs.\n# Sort times from smallest to largest.\n# Print the sorted list.\n",
+              "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\ntimes = [first, second, third]\ntimes.sort()\nprint(times)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `times` from `first`, `second`, and `third` instead of printing a hard-coded sorted list."
+                },
+                "1": {
+                  "message": "Call `times.sort()` so the existing list is actually sorted in place."
                 }
               }
             }
           },
           "tryIt": {
-            "try_list_methods_and_mutation_checkpoint": {
-              "title": "Try it yourself",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list."
-            },
             "try_list_methods_and_mutation_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use `append(10)` to add `10` to the list, then print the updated list."
+              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list."
             },
             "try_list_methods_and_mutation_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use `remove()` and `pop()` to change the list and show what remains."
+              "prompt": "A new attendee name arrives as input. Add that name to the end of `attendees` with `append()`, then print the updated list."
             },
             "try_list_methods_and_mutation_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Call `sort()` before printing so the original list is ordered."
+              "prompt": "One workshop has been canceled. Read its name from input, remove that matching value from `workshops` with `remove()`, then print the remaining workshops."
+            },
+            "try_list_methods_and_mutation_sketch3": {
+              "title": "Try it yourself",
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list."
+            },
+            "try_list_methods_and_mutation_sketch4": {
+              "title": "Try it yourself",
+              "prompt": "Three completion times arrive as integers. Store them in a list named `times`, sort the same list from smallest to largest with `sort()`, then print the sorted list."
             },
             "allowReveal": true
           }
@@ -299,17 +210,25 @@
     "python--python-data-functions--draft": {
       "python-5-lists-tuples-and-dictionaries": {
         "list-methods-and-mutation": {
-          "sketch-1": {
-            "title": "What mutation means for lists",
-            "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself."
+          "replace-by-index": {
+            "title": "Replacing an item by index",
+            "bodyMarkdown": "In the previous lesson, you used an index to **read** a value from a list. Lists are also **mutable**, which means you can change the values already stored inside the same list.\n\nTo replace one item, put the indexed position on the left side of `=`:\n\n```python\ntasks = [\"email\", \"meeting\", \"backup\"]\ntasks[1] = \"study\"\nprint(tasks)\n```\n\nOutput:\n\n```text\n['email', 'study', 'backup']\n```\n\nStep by step:\n\n- `tasks[1]` refers to the second item.\n- `tasks[1] = \"study\"` replaces only that item.\n- The variable `tasks` still refers to the same list; its contents have changed.\n\nThis is **mutation**: changing an existing list instead of creating a separate replacement list."
           },
-          "sketch-2": {
-            "title": "Using append, remove, and pop",
-            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nFollow the execution: - The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
+          "append-item": {
+            "title": "Adding an item with append()",
+            "bodyMarkdown": "`append(value)` adds one item to the **end** of an existing list.\n\n```python\nguests = [\"Mia\", \"Leo\"]\nguests.append(\"Zoe\")\nprint(guests)\n```\n\nOutput:\n\n```text\n['Mia', 'Leo', 'Zoe']\n```\n\nThe method call changes `guests` itself. You do not need to assign the list again.\n\nA common mistake is writing something like `guests = guests.append(\"Zoe\")`. `append()` changes the list in place; it is not used to produce a new list value."
           },
-          "sketch-3": {
-            "title": "Sorting lists and watching for common mistakes",
-            "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order."
+          "remove-value": {
+            "title": "Removing a matching value",
+            "bodyMarkdown": "`remove(value)` deletes the **first item equal to that value**.\n\n```python\nsupplies = [\"paper\", \"tape\", \"marker\", \"tape\"]\nsupplies.remove(\"tape\")\nprint(supplies)\n```\n\nOutput:\n\n```text\n['paper', 'marker', 'tape']\n```\n\nNotice that only the first matching `\"tape\"` was removed.\n\nUse `remove()` when you know **which value** should disappear. If the value is not in the list, Python raises a `ValueError`; later in the course you will learn how to handle errors like that."
+          },
+          "pop-by-position": {
+            "title": "Removing by position with pop()",
+            "bodyMarkdown": "`pop(index)` removes an item by **position** and returns the removed value so you can keep using it.\n\n```python\nqueue = [\"Ari\", \"Bea\", \"Chen\"]\nserved = queue.pop(0)\nprint(served)\nprint(queue)\n```\n\nOutput:\n\n```text\nAri\n['Bea', 'Chen']\n```\n\nHere, index `0` identifies the first item. `pop(0)` removes `\"Ari\"`, and the assignment stores that removed value in `served`.\n\nIf you call `pop()` with no index, Python removes and returns the last item.\n\nUse the distinction as a guide:\n\n- `remove(value)` — remove by matching **value**.\n- `pop(index)` — remove by **position** and receive the removed value."
+          },
+          "sort-in-place": {
+            "title": "Sorting the same list",
+            "bodyMarkdown": "`sort()` rearranges the items in an existing list.\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nOutput:\n\n```text\n[10, 20, 30, 40]\n```\n\nThe list stored in `scores` is now sorted. The method does **not** return a new sorted list.\n\nFor example:\n\n```python\nnumbers = [3, 1, 2]\nresult = numbers.sort()\nprint(numbers)\nprint(result)\n```\n\nOutput:\n\n```text\n[1, 2, 3]\nNone\n```\n\nSo when you want to sort the existing list, call `numbers.sort()` and then keep using `numbers`."
           }
         }
       }

@@ -68,7 +68,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
-      "sketchId": "using-lists-in-small-programs",
+      "sketchId": "negative-indexes",
       "height": 420,
       "tryIt": {
         "id": "try-creating-and-indexing-lists-sketch2",
@@ -91,7 +91,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -119,30 +119,13 @@
       "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.indexing-basics.bodyMarkdown"
     },
     {
-      "id": "using-lists-in-small-programs",
+      "id": "negative-indexes",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.negative-indexes.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.negative-indexes.bodyMarkdown"
     }
   ],
   "exercises": [
-    {
-      "id": "sc-first-index",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-first-index",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
     {
       "id": "sc-whole-list",
       "kind": "single_choice",
@@ -151,7 +134,9 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-whole-list",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
@@ -159,73 +144,15 @@
       }
     },
     {
-      "id": "mc-valid-index-expressions",
-      "kind": "multi_choice",
+      "id": "fb-second-item",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-valid-index-expressions",
-      "optionIds": [
-        "a",
-        "b",
-        "c"
-      ],
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-second-item",
+      "choiceCount": 4,
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "mc-true-about-lists",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-true-about-lists",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr-build-list-line",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.dr-build-list-line",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5",
-        "t6",
-        "t7",
-        "t8"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5",
-          "t6",
-          "t7",
-          "t8"
-        ]
+        "kind": "fill_blank_choice",
+        "value": "1"
       }
     },
     {
@@ -249,27 +176,20 @@
       }
     },
     {
-      "id": "fb-second-item",
-      "kind": "fill_blank_choice",
+      "id": "sc-last-negative-index",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-second-item",
-      "choiceCount": 4,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-last-negative-index",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "1"
-      }
-    },
-    {
-      "id": "fb-list-name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-list-name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "numbers"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -314,7 +234,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -326,8 +246,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "red\ngreen\n",
+            "stdin": "chess\nrobotics\nart\n",
+            "stdout": "['chess', 'robotics', 'art']\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "music\ndebate\ngarden\n",
+            "stdout": "['music', 'debate', 'garden']\n",
             "match": "exact"
           }
         ],
@@ -343,37 +268,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_contains",
-            "pattern": "items[0]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains_any",
-            "patterns": [
-              "items[-1]",
-              "items[2]"
-            ],
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
-            "normalizeWhitespace": true
+            "type": "source_regex",
+            "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "items[0]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains_any",
-          "patterns": [
-            "items[-1]",
-            "items[2]"
-          ],
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
-          "normalizeWhitespace": true
+          "type": "source_regex",
+          "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -419,7 +324,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -432,7 +337,7 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "9\n",
+            "stdout": "Lake\nOak\n",
             "match": "exact"
           }
         ],
@@ -449,8 +354,14 @@
         "sourceChecks": [
           {
             "type": "source_contains",
-            "pattern": "numbers[1]",
+            "pattern": "stations[2]",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "stations[0]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -458,8 +369,14 @@
       "sourceChecks": [
         {
           "type": "source_contains",
-          "pattern": "numbers[1]",
+          "pattern": "stations[2]",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "stations[0]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]
@@ -506,7 +423,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -518,8 +435,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "['Ava', 'Mia']\n",
+            "stdin": "Depot\nSchool\nLibrary\nPark\n",
+            "stdout": "Park\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "North\nEast\nSouth\nWest\n",
+            "stdout": "West\n",
             "match": "exact"
           }
         ],
@@ -533,30 +455,31 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "names",
-            "expected": [
-              "Ava",
-              "Mia"
-            ],
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+            "pattern": "\\bstops\\s*=\\s*\\[\\s*stop1\\s*,\\s*stop2\\s*,\\s*stop3\\s*,\\s*stop4\\s*\\]",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "stops[-1]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.1.message",
+            "normalizeWhitespace": true
           }
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+          "pattern": "\\bstops\\s*=\\s*\\[\\s*stop1\\s*,\\s*stop2\\s*,\\s*stop3\\s*,\\s*stop4\\s*\\]",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "stops[-1]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.1.message",
+          "normalizeWhitespace": true
         }
       ]
     }

@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch0.title",
-      "sketchId": "csv-dictreader-basics",
+      "sketchId": "dictreader-basics",
       "height": 420,
       "tryIt": {
         "id": "try-simple-csv-processing-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch1.title",
-      "sketchId": "csv-cleaning-values",
+      "sketchId": "clean-values",
       "height": 420,
       "tryIt": {
         "id": "try-simple-csv-processing-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch2.title",
-      "sketchId": "csv-safe-processing",
+      "sketchId": "safe-rows",
       "height": 420,
       "tryIt": {
         "id": "try-simple-csv-processing-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "csv-dictreader-basics",
+      "id": "dictreader-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.dictreader-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.dictreader-basics.bodyMarkdown"
     },
     {
-      "id": "csv-cleaning-values",
+      "id": "clean-values",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.clean-values.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.clean-values.bodyMarkdown"
     },
     {
-      "id": "csv-safe-processing",
+      "id": "safe-rows",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.safe-rows.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.safe-rows.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-import-csv",
+      "id": "sc-dictreader-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-import-csv",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-dictreader-purpose",
       "optionIds": [
         "a",
         "b",
@@ -131,11 +131,11 @@
       }
     },
     {
-      "id": "sc-dictreader-row-type",
+      "id": "sc-csv-value-type",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-dictreader-row-type",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-csv-value-type",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +148,11 @@
       }
     },
     {
-      "id": "mc-clean-score-steps",
-      "kind": "multi_choice",
+      "id": "sc-clean-convert-order",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-clean-score-steps",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-clean-convert-order",
       "optionIds": [
         "a",
         "b",
@@ -160,19 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-good-csv-processing",
-      "kind": "multi_choice",
+      "id": "sc-bad-row-policy",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-good-csv-processing",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-bad-row-policy",
       "optionIds": [
         "a",
         "b",
@@ -180,82 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "dr-read-csv-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-read-csv-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t5",
-          "t4",
-          "t3",
-          "t2",
-          "t1"
-        ]
-      }
-    },
-    {
-      "id": "dr-clean-row-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-clean-row-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t3",
-          "t4",
-          "t2",
-          "t1"
-        ]
-      }
-    },
-    {
-      "id": "fb-dictreader-name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-dictreader-name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "DictReader"
-      }
-    },
-    {
-      "id": "fb-strip-choice",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-strip-choice",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "strip"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -265,23 +188,52 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/class_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/class_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/class_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/class_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -291,95 +243,150 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/class_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/class_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/class_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/class_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "workspaceExpectations": {
-          "requiredFolders": [],
+          "requiredFolders": [
+            "data"
+          ],
           "requiredFiles": [
-            "scores.csv"
+            "data/class_a.csv",
+            "data/class_b.csv"
           ]
-        },
-        "files": [
-          {
-            "path": "scores.csv",
-            "content": "name,score\n Ava , 92 \n",
-            "readOnly": false
-          }
-        ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Ava\n92\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\n Ava , 92 \n",
-                "readOnly": false
-              }
-            ]
+            "stdin": "class_a.csv\n",
+            "stdout": "Ava:92\nBen:85\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "class_b.csv\n",
+            "stdout": "Mia:78\nNoah:88\nLiam:91\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/class_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/class_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "sourceChecks": [
           {
+            "type": "uses_import",
+            "module": "csv",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
+          },
+          {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
             "normalizeWhitespace": true
           },
           {
-            "type": "uses_method",
-            "method": "strip",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
+            "type": "source_regex",
+            "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
           }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/class_a.csv",
+          "data/class_b.csv"
         ]
       },
       "sourceChecks": [
         {
+          "type": "uses_import",
+          "module": "csv",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
+        },
+        {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
           "normalizeWhitespace": true
         },
         {
-          "type": "uses_method",
-          "method": "strip",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
+          "type": "source_regex",
+          "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
         }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [],
-        "requiredFiles": [
-          "scores.csv"
-        ]
-      }
+      ]
     },
     {
       "id": "try-simple-csv-processing-sketch1",
@@ -388,23 +395,52 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/clean_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/clean_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/clean_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/clean_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -414,95 +450,150 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/clean_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/clean_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/clean_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/clean_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "workspaceExpectations": {
-          "requiredFolders": [],
+          "requiredFolders": [
+            "data"
+          ],
           "requiredFiles": [
-            "scores.csv"
+            "data/clean_a.csv",
+            "data/clean_b.csv"
           ]
-        },
-        "files": [
-          {
-            "path": "scores.csv",
-            "content": "name,score\nAva,92\nMia,85\n",
-            "readOnly": false
-          }
-        ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Ava: 92\nMia: 85\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\nAva,92\nMia,85\n",
-                "readOnly": false
-              }
-            ]
+            "stdin": "clean_a.csv\n",
+            "stdout": "Ava:92\nBen Lee:85\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "clean_b.csv\n",
+            "stdout": "Mia:70\nNoah:100\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/clean_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/clean_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "sourceChecks": [
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
-            "type": "uses_for_loop",
-            "iterable": "reader",
+            "type": "source_regex",
+            "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
           }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/clean_a.csv",
+          "data/clean_b.csv"
         ]
       },
       "sourceChecks": [
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
-          "type": "uses_for_loop",
-          "iterable": "reader",
+          "type": "source_regex",
+          "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
         }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [],
-        "requiredFiles": [
-          "scores.csv"
-        ]
-      }
+      ]
     },
     {
       "id": "try-simple-csv-processing-sketch2",
@@ -511,23 +602,52 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
       "language": "python",
+      "entryFilePath": "main.py",
       "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/mixed_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/mixed_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "data/mixed_a.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/mixed_b.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -537,115 +657,162 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/mixed_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/mixed_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/mixed_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/mixed_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "workspaceExpectations": {
-          "requiredFolders": [],
+          "requiredFolders": [
+            "data"
+          ],
           "requiredFiles": [
-            "scores.csv"
+            "data/mixed_a.csv",
+            "data/mixed_b.csv"
           ]
-        },
-        "files": [
-          {
-            "path": "scores.csv",
-            "content": "name,score\nAva,92\nMia,85\n",
-            "readOnly": false
-          }
-        ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "177\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\nAva,92\nMia,85\n",
-                "readOnly": false
-              }
-            ]
+            "stdin": "mixed_a.csv\n",
+            "stdout": "valid_rows: 2\ntotal_score: 172\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mixed_b.csv\n",
+            "stdout": "valid_rows: 3\ntotal_score: 155\n",
+            "match": "exact"
           }
         ],
         "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "data/mixed_a.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/mixed_b.csv",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "sourceChecks": [
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
-            "type": "uses_for_loop",
-            "iterable": "reader",
+            "type": "source_regex",
+            "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
           },
           {
-            "type": "uses_call",
-            "functionName": "int",
+            "type": "source_regex",
+            "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
+            "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
           }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/mixed_a.csv",
+          "data/mixed_b.csv"
         ]
       },
       "sourceChecks": [
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
-          "type": "uses_for_loop",
-          "iterable": "reader",
+          "type": "source_regex",
+          "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
         },
         {
-          "type": "uses_call",
-          "functionName": "int",
+          "type": "source_regex",
+          "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
+          "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
         }
-      ],
-      "workspaceExpectations": {
-        "requiredFolders": [],
-        "requiredFiles": [
-          "scores.csv"
-        ]
-      }
+      ]
     }
   ]
 }

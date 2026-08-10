@@ -51978,7 +51978,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
-          "sketchId": "using-lists-in-small-programs",
+          "sketchId": "negative-indexes",
           "height": 420,
           "tryIt": {
             "id": "try-creating-and-indexing-lists-sketch2",
@@ -52001,7 +52001,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -52029,30 +52029,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.indexing-basics.bodyMarkdown"
         },
         {
-          "id": "using-lists-in-small-programs",
+          "id": "negative-indexes",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.negative-indexes.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.negative-indexes.bodyMarkdown"
         }
       ],
       "exercises": [
-        {
-          "id": "sc-first-index",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-first-index",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
         {
           "id": "sc-whole-list",
           "kind": "single_choice",
@@ -52061,7 +52044,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-whole-list",
           "optionIds": [
             "a",
-            "b"
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
             "kind": "single_choice",
@@ -52069,73 +52054,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-valid-index-expressions",
-          "kind": "multi_choice",
+          "id": "fb-second-item",
+          "kind": "fill_blank_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-valid-index-expressions",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-second-item",
+          "choiceCount": 4,
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "mc-true-about-lists",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-true-about-lists",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr-build-list-line",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.dr-build-list-line",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6",
-            "t7",
-            "t8"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5",
-              "t6",
-              "t7",
-              "t8"
-            ]
+            "kind": "fill_blank_choice",
+            "value": "1"
           }
         },
         {
@@ -52159,27 +52086,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "fb-second-item",
-          "kind": "fill_blank_choice",
+          "id": "sc-last-negative-index",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-second-item",
-          "choiceCount": 4,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-last-negative-index",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
           "expected": {
-            "kind": "fill_blank_choice",
-            "value": "1"
-          }
-        },
-        {
-          "id": "fb-list-name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-list-name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "numbers"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -52224,7 +52144,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52236,8 +52156,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "red\ngreen\n",
+                "stdin": "chess\nrobotics\nart\n",
+                "stdout": "['chess', 'robotics', 'art']\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "music\ndebate\ngarden\n",
+                "stdout": "['music', 'debate', 'garden']\n",
                 "match": "exact"
               }
             ],
@@ -52253,37 +52178,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "items[0]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "source_contains_any",
-                "patterns": [
-                  "items[-1]",
-                  "items[2]"
-                ],
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "items[0]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
-            },
-            {
-              "type": "source_contains_any",
-              "patterns": [
-                "items[-1]",
-                "items[2]"
-              ],
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
             }
           ]
         },
@@ -52329,7 +52234,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52342,7 +52247,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "9\n",
+                "stdout": "Lake\nOak\n",
                 "match": "exact"
               }
             ],
@@ -52359,8 +52264,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_contains",
-                "pattern": "numbers[1]",
+                "pattern": "stations[2]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+                "normalizeWhitespace": true
+              },
+              {
+                "type": "source_contains",
+                "pattern": "stations[0]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.1.message",
                 "normalizeWhitespace": true
               }
             ]
@@ -52368,8 +52279,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_contains",
-              "pattern": "numbers[1]",
+              "pattern": "stations[2]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+              "normalizeWhitespace": true
+            },
+            {
+              "type": "source_contains",
+              "pattern": "stations[0]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.1.message",
               "normalizeWhitespace": true
             }
           ]
@@ -52416,7 +52333,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52428,8 +52345,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "['Ava', 'Mia']\n",
+                "stdin": "Depot\nSchool\nLibrary\nPark\n",
+                "stdout": "Park\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "North\nEast\nSouth\nWest\n",
+                "stdout": "West\n",
                 "match": "exact"
               }
             ],
@@ -52443,30 +52365,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "names",
-                "expected": [
-                  "Ava",
-                  "Mia"
-                ],
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+                "pattern": "\\bstops\\s*=\\s*\\[\\s*stop1\\s*,\\s*stop2\\s*,\\s*stop3\\s*,\\s*stop4\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_contains",
+                "pattern": "stops[-1]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.1.message",
+                "normalizeWhitespace": true
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+              "pattern": "\\bstops\\s*=\\s*\\[\\s*stop1\\s*,\\s*stop2\\s*,\\s*stop3\\s*,\\s*stop4\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_contains",
+              "pattern": "stops[-1]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.1.message",
+              "normalizeWhitespace": true
             }
           ]
         }
@@ -52497,7 +52420,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch0.title",
-          "sketchId": "sketch-1",
+          "sketchId": "replace-by-index",
           "height": 420,
           "tryIt": {
             "id": "try-list-methods-and-mutation-sketch0",
@@ -52516,7 +52439,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch1.title",
-          "sketchId": "sketch-2",
+          "sketchId": "append-item",
           "height": 420,
           "tryIt": {
             "id": "try-list-methods-and-mutation-sketch1",
@@ -52535,13 +52458,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch2.title",
-          "sketchId": "sketch-3",
+          "sketchId": "remove-value",
           "height": 420,
           "tryIt": {
             "id": "try-list-methods-and-mutation-sketch2",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.title",
             "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.prompt",
             "exerciseKey": "try-list-methods-and-mutation-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch3",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch3.title",
+          "sketchId": "pop-by-position",
+          "height": 420,
+          "tryIt": {
+            "id": "try-list-methods-and-mutation-sketch3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch3.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch3.prompt",
+            "exerciseKey": "try-list-methods-and-mutation-sketch3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch4",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch4.title",
+          "sketchId": "sort-in-place",
+          "height": 420,
+          "tryIt": {
+            "id": "try-list-methods-and-mutation-sketch4",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch4.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch4.prompt",
+            "exerciseKey": "try-list-methods-and-mutation-sketch4",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -52558,7 +52519,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -52568,31 +52529,43 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-1",
+          "id": "replace-by-index",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-1.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.replace-by-index.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.replace-by-index.bodyMarkdown"
         },
         {
-          "id": "sketch-2",
+          "id": "append-item",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-2.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.append-item.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.append-item.bodyMarkdown"
         },
         {
-          "id": "sketch-3",
+          "id": "remove-value",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-3.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch-3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.remove-value.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.remove-value.bodyMarkdown"
+        },
+        {
+          "id": "pop-by-position",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.pop-by-position.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.pop-by-position.bodyMarkdown"
+        },
+        {
+          "id": "sort-in-place",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sort-in-place.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sort-in-place.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-1",
+          "id": "sc-index-assignment",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-1",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-index-assignment",
           "optionIds": [
             "a",
             "b",
@@ -52605,28 +52578,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-2",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc-1",
+          "id": "mc-mutates-original",
           "kind": "multi_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-1",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-mutates-original",
           "optionIds": [
             "a",
             "b",
@@ -52643,11 +52599,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-2",
-          "kind": "multi_choice",
+          "id": "sc-remove-vs-pop",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.mc-2",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-remove-vs-pop",
           "optionIds": [
             "a",
             "b",
@@ -52655,78 +52611,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "dr-1",
-          "kind": "drag_reorder",
+          "id": "sc-sort-return",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.dr-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.sc-sort-return",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr-2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.dr-2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.fb-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "10"
-          }
-        },
-        {
-          "id": "fb-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.fb-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "sort"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -52771,7 +52674,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52783,8 +52686,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "[3, 1, 2, 10]\n",
+                "stdin": "21\n",
+                "stdout": "[12, 15, 21]\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "9\n",
+                "stdout": "[12, 15, 9]\n",
                 "match": "exact"
               }
             ],
@@ -52798,34 +52706,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "numbers",
-                "expected": [
-                  3,
-                  1,
-                  2,
-                  10
-                ],
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_method",
-                "method": "append",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
-                "target": "numbers"
+                "type": "source_regex",
+                "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_method",
-              "method": "append",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
-              "target": "numbers"
+              "type": "source_regex",
+              "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
             }
           ]
         },
@@ -52871,7 +52764,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52883,8 +52776,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "['apple']\ncherry\n",
+                "stdin": "Zoe\n",
+                "stdout": "['Ava', 'Noah', 'Zoe']\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Mia\n",
+                "stdout": "['Ava', 'Noah', 'Mia']\n",
                 "match": "exact"
               }
             ],
@@ -52898,45 +52796,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "fruits",
-                "expected": [
-                  "apple"
-                ],
-                "expectedKind": "json"
-              },
-              {
-                "type": "variable_equals",
-                "name": "last_item",
-                "expected": "cherry",
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+                "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+              "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
             }
           ]
         },
@@ -52982,7 +52854,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -52994,8 +52866,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "['Ava', 'Mia', 'Zoe']\n",
+                "stdin": "Excel\n",
+                "stdout": "['Python', 'SQL', 'Git']\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "SQL\n",
+                "stdout": "['Python', 'Excel', 'Git']\n",
                 "match": "exact"
               }
             ],
@@ -53009,33 +52886,206 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "names",
-                "expected": [
-                  "Ava",
-                  "Mia",
-                  "Zoe"
-                ],
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_method",
-                "method": "sort",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
-                "target": "names"
+                "type": "source_regex",
+                "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
+              "type": "source_regex",
+              "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+            }
+          ]
+        },
+        {
+          "id": "try-list-methods-and-mutation-sketch3",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "T-105\n['T-104', 'T-106', 'T-107']\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+            }
+          ]
+        },
+        {
+          "id": "try-list-methods-and-mutation-sketch4",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "42\n17\n30\n",
+                "stdout": "[17, 30, 42]\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "5\n9\n1\n",
+                "stdout": "[1, 5, 9]\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "sort",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
+                "target": "times"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
+            },
+            {
               "type": "uses_method",
               "method": "sort",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
-              "target": "names"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
+              "target": "times"
             }
           ]
         }
@@ -53085,7 +53135,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch1.title",
-          "sketchId": "loop-and-build",
+          "sketchId": "running-total",
           "height": 420,
           "tryIt": {
             "id": "try-looping-through-lists-sketch1",
@@ -53104,13 +53154,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch2.title",
-          "sketchId": "loop-variables",
+          "sketchId": "loop-and-build",
           "height": 420,
           "tryIt": {
             "id": "try-looping-through-lists-sketch2",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch2.title",
             "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch2.prompt",
             "exerciseKey": "try-looping-through-lists-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch3",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch3.title",
+          "sketchId": "filter-with-condition",
+          "height": 420,
+          "tryIt": {
+            "id": "try-looping-through-lists-sketch3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch3.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.tryIt.try_looping_through_lists_sketch3.prompt",
+            "exerciseKey": "try-looping-through-lists-sketch3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -53127,7 +53196,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -53143,16 +53212,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-basics.bodyMarkdown"
         },
         {
+          "id": "running-total",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.running-total.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.running-total.bodyMarkdown"
+        },
+        {
           "id": "loop-and-build",
           "archetype": "paragraph",
           "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.title",
           "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.bodyMarkdown"
         },
         {
-          "id": "loop-variables",
+          "id": "filter-with-condition",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.filter-with-condition.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.filter-with-condition.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -53181,19 +53256,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-empty-list-start",
           "optionIds": [
             "a",
-            "b"
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-loop-uses",
-          "kind": "multi_choice",
+          "id": "sc-running-total",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-loop-uses",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-running-total",
           "optionIds": [
             "a",
             "b",
@@ -53201,20 +53278,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-good-loop-names",
-          "kind": "multi_choice",
+          "id": "sc-filter-append",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-good-loop-names",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-filter-append",
           "optionIds": [
             "a",
             "b",
@@ -53222,82 +53295,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr-build-derived-list",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-build-derived-list",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-read-loop-header",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-read-loop-header",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
-          "id": "fb-append-call",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-append-call",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "append"
-          }
-        },
-        {
-          "id": "fb-loop-keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-loop-keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "for"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -53342,7 +53341,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -53354,8 +53353,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "cat\ndog\nfox\n",
+                "stdin": "Kitchen\nStudio\nLab\n",
+                "stdout": "Room: Kitchen\nRoom: Studio\nRoom: Lab\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "A\nB\nC\n",
+                "stdout": "Room: A\nRoom: B\nRoom: C\n",
                 "match": "exact"
               }
             ],
@@ -53371,17 +53375,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "animals",
+                "type": "source_regex",
+                "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_for_loop",
+                "iterable": "rooms",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "animals",
+              "type": "source_regex",
+              "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_for_loop",
+              "iterable": "rooms",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -53427,7 +53441,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -53439,7 +53453,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
+                "stdin": "5\n8\n3\n4\n",
+                "stdout": "20\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "10\n1\n7\n2\n",
                 "stdout": "20\n",
                 "match": "exact"
               }
@@ -53454,37 +53473,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "total",
-                "expected": 20,
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "scores",
+                "type": "source_regex",
+                "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+                "type": "uses_for_loop",
+                "iterable": "minutes",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "scores",
+              "type": "source_regex",
+              "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+              "type": "uses_for_loop",
+              "iterable": "minutes",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -53530,7 +53551,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -53542,8 +53563,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "[2, 4, 6]\n",
+                "stdin": "1\n4\n9\n",
+                "stdout": "[6, 9, 14]\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "10\n0\n-2\n",
+                "stdout": "[15, 5, 3]\n",
                 "match": "exact"
               }
             ],
@@ -53557,43 +53583,161 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "doubled",
-                "expected": [
-                  2,
-                  4,
-                  6
-                ],
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "numbers",
+                "type": "source_regex",
+                "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_for_loop",
+                "iterable": "readings",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
               },
               {
                 "type": "uses_method",
                 "method": "append",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
-                "target": "doubled"
+                "target": "adjusted",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "numbers",
+              "type": "source_regex",
+              "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_for_loop",
+              "iterable": "readings",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
             },
             {
               "type": "uses_method",
               "method": "append",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
-              "target": "doubled"
+              "target": "adjusted",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
+          "id": "try-looping-through-lists-sketch3",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "95\n72\n80\n61\n",
+                "stdout": "[95, 80]\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "79\n80\n100\n81\n",
+                "stdout": "[80, 100, 81]\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_for_loop",
+                "iterable": "scores",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_for_loop",
+              "iterable": "scores",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
             }
           ]
         }
@@ -53605,7 +53749,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
       "sectionSlug": "python-data-functions-python-5-list-basics",
       "prefix": "py5",
-      "minutes": 28,
+      "minutes": 30,
       "topic": {
         "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.label",
         "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.summary"
@@ -53615,12 +53759,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.sketch0.title",
-          "sketchId": "sketch-1",
+          "sketchId": "tuple-fixed-record",
           "height": 420,
           "tryIt": {
             "id": "try-tuple-records-sketch0",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.title",
-            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.prompt",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_records_sketch0.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_records_sketch0.prompt",
             "exerciseKey": "try-tuple-records-sketch0",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -53634,13 +53778,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.sketch1.title",
-          "sketchId": "sketch-2",
+          "sketchId": "tuple-unpacking",
           "height": 420,
           "tryIt": {
             "id": "try-tuple-unpacking-sketch1",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.title",
-            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.prompt",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_unpacking_sketch1.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_unpacking_sketch1.prompt",
             "exerciseKey": "try-tuple-unpacking-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.cards.sketch2.title",
+          "sketchId": "tuple-record-loop",
+          "height": 420,
+          "tryIt": {
+            "id": "try-tuple-loop-sketch2",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_loop_sketch2.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tryIt.try_tuple_loop_sketch2.prompt",
+            "exerciseKey": "try-tuple-loop-sketch2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -53667,19 +53830,93 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-1",
+          "id": "tuple-fixed-record",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-1.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-fixed-record.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-fixed-record.bodyMarkdown"
         },
         {
-          "id": "sketch-2",
+          "id": "tuple-unpacking",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-2.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.sketch-2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-unpacking.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-unpacking.bodyMarkdown"
+        },
+        {
+          "id": "tuple-record-loop",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-record-loop.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.tuple-record-loop.bodyMarkdown"
         }
       ],
       "exercises": [
+        {
+          "id": "sc-tuple-purpose",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-tuple-purpose",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "b"
+          }
+        },
+        {
+          "id": "sc-tuple-immutable",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-tuple-immutable",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "c"
+          }
+        },
+        {
+          "id": "sc-unpack-shape",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-unpack-shape",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "sc-loop-unpack",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-loop-unpack",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
         {
           "id": "try-tuple-records-sketch0",
           "kind": "code_input",
@@ -53727,8 +53964,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "language": "python",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Austin\nTX\n",
+                "stdin": "Markers\n12\n",
+                "stdout": "Markers\n12\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Folders\n3\n",
+                "stdout": "Folders\n3\n",
                 "match": "exact"
               }
             ],
@@ -53745,13 +53987,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\blocation\\s*=\\s*\\(\\s*[\\'\\\"]Austin[\\'\\\"]\\s*,\\s*[\\'\\\"]TX[\\'\\\"]\\s*\\)",
+                "pattern": "\\bshipment\\s*=\\s*\\(\\s*product\\s*,\\s*quantity\\s*\\)",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
               },
               {
                 "type": "source_contains",
-                "pattern": "location[0]",
+                "pattern": "shipment[0]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
+                "normalizeWhitespace": true
+              },
+              {
+                "type": "source_contains",
+                "pattern": "shipment[1]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message",
                 "normalizeWhitespace": true
               }
             ]
@@ -53768,13 +54016,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\blocation\\s*=\\s*\\(\\s*[\\'\\\"]Austin[\\'\\\"]\\s*,\\s*[\\'\\\"]TX[\\'\\\"]\\s*\\)",
+              "pattern": "\\bshipment\\s*=\\s*\\(\\s*product\\s*,\\s*quantity\\s*\\)",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
             },
             {
               "type": "source_contains",
-              "pattern": "location[0]",
+              "pattern": "shipment[0]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
+              "normalizeWhitespace": true
+            },
+            {
+              "type": "source_contains",
+              "pattern": "shipment[1]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message",
               "normalizeWhitespace": true
             }
           ]
@@ -53827,7 +54081,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Workshop\n24\n",
+                "stdout": "Workshop\n24\nFriday\n",
                 "match": "exact"
               }
             ],
@@ -53844,7 +54098,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\btitle\\s*,\\s*seats\\s*=\\s*event\\b",
+                "pattern": "\\btitle\\s*,\\s*seats\\s*,\\s*day\\s*=\\s*booking\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.sourceChecks.0.message"
               }
             ]
@@ -53861,86 +54115,112 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\btitle\\s*,\\s*seats\\s*=\\s*event\\b",
+              "pattern": "\\btitle\\s*,\\s*seats\\s*,\\s*day\\s*=\\s*booking\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.sourceChecks.0.message"
             }
           ]
         },
         {
-          "id": "sc-tuple-purpose",
-          "kind": "single_choice",
-          "purpose": "quiz",
+          "id": "try-tuple-loop-sketch2",
+          "kind": "code_input",
+          "purpose": "try_it",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.sc-tuple-purpose",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
           ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "mc-tuple-facts",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.mc-tuple-facts",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c"
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
             ]
-          }
-        },
-        {
-          "id": "fb-tuple-index",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.fb-tuple-index",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "fill_blank_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "dr-tuple-unpack",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.dr-tuple-unpack",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "Ava\n2\nNoah\n1\n",
+                "stdout": "Ava 2\nNoah 1\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Mia\n4\nZoe\n3\n",
+                "stdout": "Mia 4\nZoe 3\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bregistrations\\s*=\\s*\\[\\s*\\(\\s*name1\\s*,\\s*seats1\\s*\\)\\s*,\\s*\\(\\s*name2\\s*,\\s*seats2\\s*\\)\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+name\\s*,\\s*seats\\s+in\\s+registrations\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bregistrations\\s*=\\s*\\[\\s*\\(\\s*name1\\s*,\\s*seats1\\s*\\)\\s*,\\s*\\(\\s*name2\\s*,\\s*seats2\\s*\\)\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+name\\s*,\\s*seats\\s+in\\s+registrations\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -53969,7 +54249,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
-          "sketchId": "dict-idea",
+          "sketchId": "dict-create",
           "height": 420,
           "tryIt": {
             "id": "try-dictionary-basics-sketch0",
@@ -54007,7 +54287,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch2.title",
-          "sketchId": "dict-create-update",
+          "sketchId": "dict-membership",
           "height": 420,
           "tryIt": {
             "id": "try-dictionary-basics-sketch2",
@@ -54030,7 +54310,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -54040,10 +54320,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "dict-idea",
+          "id": "dict-create",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create.bodyMarkdown"
         },
         {
           "id": "dict-lookup",
@@ -54052,10 +54332,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-lookup.bodyMarkdown"
         },
         {
-          "id": "dict-create-update",
+          "id": "dict-membership",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-membership.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-membership.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -54085,7 +54365,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "optionIds": [
             "a",
             "b",
-            "c"
+            "c",
+            "d"
           ],
           "expected": {
             "kind": "single_choice",
@@ -54093,11 +54374,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-dict-parts",
-          "kind": "multi_choice",
+          "id": "sc-key-value-role",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-parts",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-key-value-role",
           "optionIds": [
             "a",
             "b",
@@ -54105,20 +54386,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-dict-operations",
-          "kind": "multi_choice",
+          "id": "sc-key-membership",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-operations",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-key-membership",
           "optionIds": [
             "a",
             "b",
@@ -54126,77 +54403,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr-dict-create-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-create-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-dict-update-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-update-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb-dict-literal",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-literal",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "\"blue\""
-          }
-        },
-        {
-          "id": "fb-dict-key-lookup",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-key-lookup",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "\"age\""
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -54241,7 +54449,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -54253,8 +54461,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava\n",
+                "stdin": "Ava\n12\n",
+                "stdout": "{'name': 'Ava', 'age': 12}\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noah\n15\n",
+                "stdout": "{'name': 'Noah', 'age': 15}\n",
                 "match": "exact"
               }
             ],
@@ -54270,19 +54483,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_dict_key",
-                "key": "name",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
-                "variable": "profile"
+                "type": "source_regex",
+                "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_dict_key",
-              "key": "name",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
-              "variable": "profile"
+              "type": "source_regex",
+              "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
             }
           ]
         },
@@ -54328,7 +54539,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -54340,8 +54551,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "{'name': 'Mia', 'age': 12}\n",
+                "stdin": "notebook\n",
+                "stdout": "4\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "folder\n",
+                "stdout": "3\n",
                 "match": "exact"
               }
             ],
@@ -54355,27 +54571,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "profile",
-                "expected": [
-                  [
-                    "name",
-                    "Mia"
-                  ],
-                  [
-                    "age",
-                    12
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+                "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
               }
             ]
@@ -54383,7 +54582,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+              "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
             }
           ]
@@ -54430,7 +54629,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -54442,8 +54641,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "{'Ava': 92, 'Mia': 85}\n",
+                "stdin": "theme\n",
+                "stdout": "found\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "language\n",
+                "stdout": "missing\n",
                 "match": "exact"
               }
             ],
@@ -54457,56 +54661,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "scores",
-                "expected": [
-                  [
-                    "Ava",
-                    92
-                  ],
-                  [
-                    "Mia",
-                    85
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bscores\\s*=",
+                "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_dict_key",
-                "key": "Ava",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_dict_key",
-                "key": "Mia",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bscores\\s*=",
+              "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "uses_dict_key",
-              "key": "Ava",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "uses_dict_key",
-              "key": "Mia",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -54537,7 +54704,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch0.title",
-          "sketchId": "dict-update-basics",
+          "sketchId": "dict-add-update",
           "height": 420,
           "tryIt": {
             "id": "try-updating-and-looping-dictionaries-sketch0",
@@ -54556,7 +54723,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch1.title",
-          "sketchId": "dict-looping",
+          "sketchId": "dict-safe-delete",
           "height": 420,
           "tryIt": {
             "id": "try-updating-and-looping-dictionaries-sketch1",
@@ -54575,13 +54742,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch2.title",
-          "sketchId": "dict-common-patterns",
+          "sketchId": "dict-key-loop",
           "height": 420,
           "tryIt": {
             "id": "try-updating-and-looping-dictionaries-sketch2",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch2.title",
             "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch2.prompt",
             "exerciseKey": "try-updating-and-looping-dictionaries-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch3",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch3.title",
+          "sketchId": "dict-items-loop",
+          "height": 420,
+          "tryIt": {
+            "id": "try-updating-and-looping-dictionaries-sketch3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch3.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch3.prompt",
+            "exerciseKey": "try-updating-and-looping-dictionaries-sketch3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch4",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch4.title",
+          "sketchId": "dict-build-loop",
+          "height": 420,
+          "tryIt": {
+            "id": "try-updating-and-looping-dictionaries-sketch4",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch4.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch4.prompt",
+            "exerciseKey": "try-updating-and-looping-dictionaries-sketch4",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -54598,7 +54803,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -54608,31 +54813,60 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "dict-update-basics",
+          "id": "dict-add-update",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-update-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-update-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-add-update.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-add-update.bodyMarkdown"
         },
         {
-          "id": "dict-looping",
+          "id": "dict-safe-delete",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-looping.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-looping.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-safe-delete.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-safe-delete.bodyMarkdown"
         },
         {
-          "id": "dict-common-patterns",
+          "id": "dict-key-loop",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-common-patterns.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-common-patterns.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-key-loop.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-key-loop.bodyMarkdown"
+        },
+        {
+          "id": "dict-items-loop",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-items-loop.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-items-loop.bodyMarkdown"
+        },
+        {
+          "id": "dict-build-loop",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-build-loop.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-build-loop.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-dict-update-existing",
+          "id": "sc-add-or-update",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-dict-update-existing",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-add-or-update",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "sc-safe-delete",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-safe-delete",
           "optionIds": [
             "a",
             "b",
@@ -54662,11 +54896,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-valid-dict-changes",
-          "kind": "multi_choice",
+          "id": "sc-items-loop",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.mc-valid-dict-changes",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-items-loop",
           "optionIds": [
             "a",
             "b",
@@ -54674,95 +54908,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "mc-items-loop",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.mc-items-loop",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-update-sequence",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.dr-update-sequence",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-loop-items-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.dr-loop-items-order",
-          "tokenIds": [
-            "t1",
-            "t2"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2"
-            ]
-          }
-        },
-        {
-          "id": "fb-remove-key",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.fb-remove-key",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "del"
-          }
-        },
-        {
-          "id": "fb-items-method",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.fb-items-method",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "items"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -54807,7 +54954,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -54819,8 +54966,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "{'apples': 5, 'bananas': 1}\n",
+                "stdin": "pens\n7\n",
+                "stdout": "{'pens': 7, 'paper': 2}\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "markers\n3\n",
+                "stdout": "{'pens': 4, 'paper': 2, 'markers': 3}\n",
                 "match": "exact"
               }
             ],
@@ -54834,27 +54986,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "counts",
-                "expected": [
-                  [
-                    "apples",
-                    5
-                  ],
-                  [
-                    "bananas",
-                    1
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+                "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
               }
             ]
@@ -54862,7 +54997,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+              "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
             }
           ]
@@ -54909,7 +55044,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -54921,8 +55056,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "pens: 3\nmarkers: 2\n",
+                "stdin": "sound\n",
+                "stdout": "{'theme': 'dark', 'font_size': 16}\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "language\n",
+                "stdout": "{'theme': 'dark', 'sound': True, 'font_size': 16}\n",
                 "match": "exact"
               }
             ],
@@ -54938,17 +55078,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "inventory",
+                "type": "source_regex",
+                "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "inventory",
+              "type": "source_regex",
+              "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
             }
           ]
         },
@@ -54994,7 +55144,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -55007,7 +55157,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "{'red': 3, 'blue': 4}\n",
+                "stdout": "pens 3\nmarkers 2\nfolders 5\n",
                 "match": "exact"
               }
             ],
@@ -55021,56 +55171,239 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "lengths",
-                "expected": [
-                  [
-                    "red",
-                    3
-                  ],
-                  [
-                    "blue",
-                    4
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "words",
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "len",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.1.message"
-              },
-              {
                 "type": "source_regex",
-                "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.2.message"
+                "pattern": "\\binventory\\s*\\[\\s*item\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "words",
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "len",
+              "type": "source_regex",
+              "pattern": "\\binventory\\s*\\[\\s*item\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "try-updating-and-looping-dictionaries-sketch3",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "Ava\n88\nMia\n91\n",
+                "stdout": "Ava: 88\nMia: 91\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noah\n72\nZoe\n95\n",
+                "stdout": "Noah: 72\nZoe: 95\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "try-updating-and-looping-dictionaries-sketch4",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "red\nblue\ngold\n",
+                "stdout": "{'red': 3, 'blue': 4, 'gold': 4}\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "cat\nelephant\nox\n",
+                "stdout": "{'cat': 3, 'elephant': 8, 'ox': 2}\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
             },
             {
               "type": "source_regex",
               "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
             }
           ]
         }
@@ -55101,7 +55434,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch0.title",
-          "sketchId": "sketch-1",
+          "sketchId": "list-of-dicts",
           "height": 420,
           "tryIt": {
             "id": "try-nested-data-structures-sketch0",
@@ -55120,7 +55453,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch1.title",
-          "sketchId": "sketch-2",
+          "sketchId": "dict-in-dict",
           "height": 420,
           "tryIt": {
             "id": "try-nested-data-structures-sketch1",
@@ -55139,13 +55472,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch2.title",
-          "sketchId": "sketch-3",
+          "sketchId": "dict-with-list",
           "height": 420,
           "tryIt": {
             "id": "try-nested-data-structures-sketch2",
             "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.tryIt.try_nested_data_structures_sketch2.title",
             "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.tryIt.try_nested_data_structures_sketch2.prompt",
             "exerciseKey": "try-nested-data-structures-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch3",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch3.title",
+          "sketchId": "loop-records",
+          "height": 420,
+          "tryIt": {
+            "id": "try-nested-data-structures-sketch3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.tryIt.try_nested_data_structures_sketch3.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.tryIt.try_nested_data_structures_sketch3.prompt",
+            "exerciseKey": "try-nested-data-structures-sketch3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -55162,7 +55514,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -55172,31 +55524,37 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-1",
+          "id": "list-of-dicts",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-1.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.list-of-dicts.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.list-of-dicts.bodyMarkdown"
         },
         {
-          "id": "sketch-2",
+          "id": "dict-in-dict",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-2.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.dict-in-dict.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.dict-in-dict.bodyMarkdown"
         },
         {
-          "id": "sketch-3",
+          "id": "dict-with-list",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-3.title",
-          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.dict-with-list.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.dict-with-list.bodyMarkdown"
+        },
+        {
+          "id": "loop-records",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.loop-records.title",
+          "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.loop-records.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-1",
+          "id": "sc-best-structure",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-1",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-best-structure",
           "optionIds": [
             "a",
             "b",
@@ -55205,15 +55563,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "sc-2",
+          "id": "sc-list-then-key",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-2",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-list-then-key",
           "optionIds": [
             "a",
             "b",
@@ -55222,15 +55580,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-1",
-          "kind": "multi_choice",
+          "id": "sc-dict-then-key",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.mc-1",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-dict-then-key",
           "optionIds": [
             "a",
             "b",
@@ -55238,19 +55596,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-2",
-          "kind": "multi_choice",
+          "id": "sc-loop-record",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.mc-2",
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-loop-record",
           "optionIds": [
             "a",
             "b",
@@ -55258,73 +55613,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.dr-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr-2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.dr-2",
-          "tokenIds": [
-            "t1",
-            "t2"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2"
-            ]
-          }
-        },
-        {
-          "id": "fb-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.fb-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "score"
-          }
-        },
-        {
-          "id": "fb-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.fb-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "items"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -55369,7 +55659,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -55381,8 +55671,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava\n",
+                "stdin": "Ava\n88\nMia\n91\n",
+                "stdout": "Mia\n91\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noah\n72\nZoe\n95\n",
+                "stdout": "Zoe\n95\n",
                 "match": "exact"
               }
             ],
@@ -55398,29 +55693,37 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "students[0]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "uses_dict_key",
-                "key": "name",
+                "type": "source_regex",
+                "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "students[0]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "uses_dict_key",
-              "key": "name",
+              "type": "source_regex",
+              "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -55466,7 +55769,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -55478,8 +55781,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava: 92\nMia: 85\n",
+                "stdin": "20\n",
+                "stdout": "20\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "7\n",
+                "stdout": "7\n",
                 "match": "exact"
               }
             ],
@@ -55495,37 +55803,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "students",
+                "type": "source_regex",
+                "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_dict_key",
-                "key": "name",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_dict_key",
-                "key": "score",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "students",
+              "type": "source_regex",
+              "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "uses_dict_key",
-              "key": "name",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "uses_dict_key",
-              "key": "score",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -55571,7 +55859,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -55583,8 +55871,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "{'title': 'Python', 'students': ['Ava', 'Mia']}\n",
+                "stdin": "Mia\n",
+                "stdout": "['Ava', 'Mia']\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noah\n",
+                "stdout": "['Ava', 'Noah']\n",
                 "match": "exact"
               }
             ],
@@ -55598,59 +55891,139 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "course",
-                "expected": [
-                  [
-                    "title",
-                    "Python"
-                  ],
-                  [
-                    "students",
-                    [
-                      "Ava",
-                      "Mia"
-                    ]
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_dict_key",
-                "key": "students",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "append",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
-              },
-              {
                 "type": "source_regex",
-                "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
+                "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_dict_key",
-              "key": "students",
+              "type": "source_regex",
+              "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
-            },
+            }
+          ]
+        },
+        {
+          "id": "try-nested-data-structures-sketch3",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.starterCode",
+          "starterFiles": [
             {
-              "type": "uses_method",
-              "method": "append",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "Ava\n92\nMia\n85\n",
+                "stdout": "Ava: 92\nMia: 85\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Kai\n77\nZoe\n100\n",
+                "stdout": "Kai: 77\nZoe: 100\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
+              "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
             }
           ]
         }
@@ -55662,7 +56035,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
       "sectionSlug": "python-data-functions-python-5-module-project",
       "prefix": "py5",
-      "minutes": 34,
+      "minutes": 40,
       "topic": {
         "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.label",
         "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.summary"
@@ -55676,8 +56049,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "height": 420,
           "tryIt": {
             "id": "try-workshop-schedule-sketch0",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.title",
-            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.prompt",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.tryIt.try_workshop_schedule_sketch0.title",
+            "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.tryIt.try_workshop_schedule_sketch0.prompt",
             "exerciseKey": "try-workshop-schedule-sketch0",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -55692,7 +56065,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "project",
           "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.cards.project.title",
           "project": {
-            "difficulty": "easy",
+            "difficulty": "medium",
             "allowReveal": true,
             "preferKind": "code_input",
             "maxAttempts": null,
@@ -55710,7 +56083,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "id": "exercise2",
                 "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise2.title",
                 "exerciseKey": "exercise2",
-                "difficulty": "easy",
+                "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
                 "maxAttempts": null
@@ -55719,7 +56092,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "id": "exercise3",
                 "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise3.title",
                 "exerciseKey": "exercise3",
-                "difficulty": "easy",
+                "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
                 "maxAttempts": null
@@ -55802,8 +56175,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+                "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
               }
             ]
           },
@@ -55819,8 +56197,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+              "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -55867,28 +56250,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
-            "semanticChecks": [
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "create_schedule",
-                "args": [],
-                "expected": [
-                  [
-                    "Python Basics",
-                    "Room A"
-                  ],
-                  [
-                    "Data Lab",
-                    "Room B"
-                  ],
-                  [
-                    "Web Starter",
-                    "Room C"
-                  ]
-                ],
-                "expectedKind": "value"
+                "stdin": "Data Lab\nRoom B\nWeb Starter\nRoom C\n",
+                "stdout": "Python Basics — Room A\nData Lab — Room B\nWeb Starter — Room C\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom E\n",
+                "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room E\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
@@ -55900,6 +56273,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
+              }
             ]
           },
           "solutionFiles": [
@@ -55909,6 +56299,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
             }
           ]
         },
@@ -55955,38 +56362,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
-            "semanticChecks": [
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "build_room_lookup",
-                "args": [
-                  [
-                    [
-                      "Python Basics",
-                      "Room A"
-                    ],
-                    [
-                      "Data Lab",
-                      "Room B"
-                    ]
-                  ]
-                ],
-                "argKinds": [
-                  "value"
-                ],
-                "expected": [
-                  [
-                    "Python Basics",
-                    "Room A"
-                  ],
-                  [
-                    "Data Lab",
-                    "Room B"
-                  ]
-                ],
-                "expectedKind": "dict_entries"
+                "stdin": "Data Lab\nRoom B\nWeb Starter\nRoom C\nData Lab\n",
+                "stdout": "Python Basics — Room A\nData Lab — Room B\nWeb Starter — Room C\nRoom B\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom E\nGit Lab\n",
+                "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room E\nRoom E\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
@@ -55998,6 +56385,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+              }
             ]
           },
           "solutionFiles": [
@@ -56007,6 +56411,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
             }
           ]
         },
@@ -56053,32 +56474,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
-            "semanticChecks": [
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "format_schedule",
-                "args": [
-                  [
-                    [
-                      "Python Basics",
-                      "Room A"
-                    ],
-                    [
-                      "Data Lab",
-                      "Room B"
-                    ]
-                  ]
-                ],
-                "argKinds": [
-                  "value"
-                ],
-                "expected": [
-                  "Python Basics — Room A",
-                  "Data Lab — Room B"
-                ],
-                "expectedKind": "value"
+                "stdin": "Data Lab\nRoom A\nWeb Starter\nRoom B\nData Lab\nRoom A\n",
+                "stdout": "Python Basics — Room A\nData Lab — Room A\nWeb Starter — Room B\nRoom A\n['Python Basics', 'Data Lab']\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Excel Clinic\nRoom D\nGit Lab\nRoom D\nGit Lab\nRoom D\n",
+                "stdout": "Python Basics — Room A\nExcel Clinic — Room D\nGit Lab — Room D\nRoom D\n['Excel Clinic', 'Git Lab']\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
@@ -56090,6 +56497,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+              }
             ]
           },
           "solutionFiles": [
@@ -56099,6 +56533,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
             }
           ]
         }
@@ -56129,7 +56590,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch0.title",
-          "sketchId": "sketch-1",
+          "sketchId": "function-define-call",
           "height": 420,
           "tryIt": {
             "id": "try-defining-and-calling-functions-sketch0",
@@ -56148,7 +56609,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch1.title",
-          "sketchId": "sketch-2",
+          "sketchId": "function-reuse",
           "height": 420,
           "tryIt": {
             "id": "try-defining-and-calling-functions-sketch1",
@@ -56167,7 +56628,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch2.title",
-          "sketchId": "sketch-3",
+          "sketchId": "function-body",
           "height": 420,
           "tryIt": {
             "id": "try-defining-and-calling-functions-sketch2",
@@ -56190,7 +56651,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -56200,31 +56661,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-1",
+          "id": "function-define-call",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-define-call.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-define-call.bodyMarkdown"
         },
         {
-          "id": "sketch-2",
+          "id": "function-reuse",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-reuse.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-reuse.bodyMarkdown"
         },
         {
-          "id": "sketch-3",
+          "id": "function-body",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-body.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.function-body.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-function-call",
+          "id": "sc-definition-vs-call",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-function-call",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-definition-vs-call",
           "optionIds": [
             "a",
             "b",
@@ -56237,11 +56698,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-parameter-meaning",
+          "id": "sc-function-body-indent",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-parameter-meaning",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-function-body-indent",
           "optionIds": [
             "a",
             "b",
@@ -56250,15 +56711,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-valid-calls",
-          "kind": "multi_choice",
+          "id": "sc-call-count",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-valid-calls",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-call-count",
           "optionIds": [
             "a",
             "b",
@@ -56266,19 +56727,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-return-uses",
-          "kind": "multi_choice",
+          "id": "sc-define-before-call",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-return-uses",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-define-before-call",
           "optionIds": [
             "a",
             "b",
@@ -56286,75 +56744,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-define-then-call",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-define-then-call",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr-call-with-argument",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-call-with-argument",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb-def-keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-def-keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "def"
-          }
-        },
-        {
-          "id": "fb-call-argument",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-call-argument",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "\"Ava\""
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -56399,7 +56790,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -56408,27 +56799,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "greet",
-                "args": [
-                  "Ava"
-                ],
-                "expected": "Hello, Ava"
-              },
-              {
-                "type": "function_returns",
-                "functionName": "greet",
-                "args": [
-                  "Mia"
-                ],
-                "expected": "Hello, Mia"
+                "stdin": "",
+                "stdout": "Functions are reusable!\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -56437,8 +56816,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-defining-and-calling-functions-sketch1",
@@ -56482,7 +56895,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -56491,27 +56904,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "square",
-                "args": [
-                  5
-                ],
-                "expected": 25
-              },
-              {
-                "type": "function_returns",
-                "functionName": "square",
-                "args": [
-                  -4
-                ],
-                "expected": 16
+                "stdin": "",
+                "stdout": "Ding!\nDing!\nDing!\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -56520,8 +56921,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+ring_bell\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Ding![\\'\\\"]\\s*\\)\\s*\\n(?:[ \\t]*\\n)*ring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*$",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.sourceChecks.0.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+ring_bell\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Ding![\\'\\\"]\\s*\\)\\s*\\n(?:[ \\t]*\\n)*ring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*\\nring_bell\\s*\\(\\s*\\)\\s*$",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-defining-and-calling-functions-sketch2",
@@ -56565,7 +56980,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -56574,27 +56989,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "shout",
-                "args": [
-                  "go"
-                ],
-                "expected": "GO"
-              },
-              {
-                "type": "function_returns",
-                "functionName": "shout",
-                "args": [
-                  "team"
-                ],
-                "expected": "TEAM"
+                "stdin": "",
+                "stdout": "red\nblue\ngreen\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -56603,8 +57006,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -56633,7 +57070,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch0.title",
-          "sketchId": "sketch-parameters-basics",
+          "sketchId": "parameter-argument",
           "height": 420,
           "tryIt": {
             "id": "try-parameters-and-return-values-sketch0",
@@ -56652,13 +57089,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch1.title",
-          "sketchId": "sketch-return-vs-print",
+          "sketchId": "multiple-parameters",
           "height": 420,
           "tryIt": {
             "id": "try-parameters-and-return-values-sketch1",
             "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.title",
             "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.prompt",
             "exerciseKey": "try-parameters-and-return-values-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch2.title",
+          "sketchId": "return-to-caller",
+          "height": 420,
+          "tryIt": {
+            "id": "try-parameters-and-return-values-sketch2",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch2.title",
+            "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch2.prompt",
+            "exerciseKey": "try-parameters-and-return-values-sketch2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -56675,7 +57131,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -56685,25 +57141,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-parameters-basics",
+          "id": "parameter-argument",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.parameter-argument.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.parameter-argument.bodyMarkdown"
         },
         {
-          "id": "sketch-return-vs-print",
+          "id": "multiple-parameters",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.multiple-parameters.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.multiple-parameters.bodyMarkdown"
+        },
+        {
+          "id": "return-to-caller",
+          "archetype": "paragraph",
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.return-to-caller.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.return-to-caller.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-parameter-role",
+          "id": "sc-parameter-vs-argument",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-parameter-role",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-parameter-vs-argument",
           "optionIds": [
             "a",
             "b",
@@ -56716,11 +57178,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-return-purpose",
+          "id": "sc-argument-order",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-return-purpose",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-argument-order",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "sc-valid-two-argument-call",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-valid-two-argument-call",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "c"
+          }
+        },
+        {
+          "id": "sc-returned-value",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-returned-value",
           "optionIds": [
             "a",
             "b",
@@ -56730,114 +57226,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "b"
-          }
-        },
-        {
-          "id": "mc-return-uses",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-return-uses",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "mc-print-vs-return",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-print-vs-return",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-function-flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-function-flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-build-function",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-build-function",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-call-argument",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-call-argument",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "7"
-          }
-        },
-        {
-          "id": "fb-return-expression",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-return-expression",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "price + tax"
           }
         },
         {
@@ -56882,7 +57270,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -56891,29 +57279,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "add",
-                "args": [
-                  3,
-                  4
-                ],
-                "expected": 7
+                "stdin": "Ava\nMia\n",
+                "stdout": "Badge: Ava\nBadge: Mia\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "add",
-                "args": [
-                  -2,
-                  5
-                ],
-                "expected": 3
+                "stdin": "Noah\nZoe\n",
+                "stdout": "Badge: Noah\nBadge: Zoe\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -56922,8 +57301,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-parameters-and-return-values-sketch1",
@@ -56967,7 +57380,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -56976,29 +57389,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "full_name",
-                "args": [
-                  "Ava",
-                  "Smith"
-                ],
-                "expected": "Ava Smith"
+                "stdin": "10\n3\n",
+                "stdout": "7\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "full_name",
-                "args": [
-                  "Mia",
-                  "Chen"
-                ],
-                "expected": "Mia Chen"
+                "stdin": "3\n10\n",
+                "stdout": "-7\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57007,8 +57411,152 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
+          "id": "try-parameters-and-return-values-sketch2",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2",
+          "language": "python",
+          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "6\n4\n",
+                "stdout": "24\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "9\n5\n",
+                "stdout": "45\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -57037,7 +57585,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch0.title",
-          "sketchId": "print-vs-return-idea",
+          "sketchId": "print-returns-none",
           "height": 420,
           "tryIt": {
             "id": "try-print-vs-return-sketch0",
@@ -57056,7 +57604,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch1.title",
-          "sketchId": "print-vs-return-compare",
+          "sketchId": "reuse-returned-value",
           "height": 420,
           "tryIt": {
             "id": "try-print-vs-return-sketch1",
@@ -57075,7 +57623,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch2.title",
-          "sketchId": "print-vs-return-when",
+          "sketchId": "fix-print-bug",
           "height": 420,
           "tryIt": {
             "id": "try-print-vs-return-sketch2",
@@ -57098,7 +57646,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -57108,31 +57656,48 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "print-vs-return-idea",
+          "id": "print-returns-none",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-idea.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-idea.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-returns-none.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-returns-none.bodyMarkdown"
         },
         {
-          "id": "print-vs-return-compare",
+          "id": "reuse-returned-value",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-compare.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-compare.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.reuse-returned-value.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.reuse-returned-value.bodyMarkdown"
         },
         {
-          "id": "print-vs-return-when",
+          "id": "fix-print-bug",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-when.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-when.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.fix-print-bug.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.fix-print-bug.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "pvrs-sc-1",
+          "id": "sc-print-only-result",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-sc-1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-print-only-result",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "b"
+          }
+        },
+        {
+          "id": "sc-display-only-call",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-display-only-call",
           "optionIds": [
             "a",
             "b",
@@ -57145,11 +57710,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "pvrs-sc-2",
+          "id": "sc-reuse-returned-value",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-sc-2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-reuse-returned-value",
           "optionIds": [
             "a",
             "b",
@@ -57162,11 +57727,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "pvrs-mc-1",
-          "kind": "multi_choice",
+          "id": "sc-fix-print-return-bug",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-mc-1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-fix-print-return-bug",
           "optionIds": [
             "a",
             "b",
@@ -57174,102 +57739,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "pvrs-mc-2",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-mc-2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "pvrs-dr-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-dr-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
-          "id": "pvrs-dr-2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-dr-2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "pvrs-fb-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-fb-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "return"
-          }
-        },
-        {
-          "id": "pvrs-fb-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-fb-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "print(get_name())"
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
@@ -57314,7 +57785,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57323,27 +57794,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "make_message",
-                "args": [
-                  "Ava"
-                ],
-                "expected": "Hi, Ava"
+                "stdin": "Ready\n",
+                "stdout": "Ready\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "make_message",
-                "args": [
-                  "Mia"
-                ],
-                "expected": "Hi, Mia"
+                "stdin": "Waiting\n",
+                "stdout": "Waiting\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57352,8 +57816,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+show_status\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*text\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+show_status\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*text\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-print-vs-return-sketch1",
@@ -57397,7 +57885,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57406,27 +57894,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "double",
-                "args": [
-                  7
-                ],
-                "expected": 14
+                "stdin": "6\n",
+                "stdout": "13\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "double",
-                "args": [
-                  -3
-                ],
-                "expected": -6
+                "stdin": "-3\n",
+                "stdout": "-5\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57435,8 +57916,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-print-vs-return-sketch2",
@@ -57480,7 +57985,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57489,27 +57994,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "label",
-                "args": [
-                  "zoe"
-                ],
-                "expected": "ZOE"
+                "stdin": "Book\n",
+                "stdout": "Item: Book!\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "label",
-                "args": [
-                  "Ava"
-                ],
-                "expected": "AVA"
+                "stdin": "Pencil\n",
+                "stdout": "Item: Pencil!\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57518,8 +58016,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_label\\s*\\(\\s*item\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+[\\'\\\"]Item:\\s[\\'\\\"]\\s*\\+\\s*item\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_label\\s*\\(\\s*item\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+[\\'\\\"]Item:\\s[\\'\\\"]\\s*\\+\\s*item\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -57548,7 +58080,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch0.title",
-          "sketchId": "scope-basics",
+          "sketchId": "local-lifetime",
           "height": 420,
           "tryIt": {
             "id": "try-scope-and-local-variables-sketch0",
@@ -57567,7 +58099,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch1.title",
-          "sketchId": "inside-vs-outside",
+          "sketchId": "parameter-local",
           "height": 420,
           "tryIt": {
             "id": "try-scope-and-local-variables-sketch1",
@@ -57586,7 +58118,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch2.title",
-          "sketchId": "parameters-create-local-names",
+          "sketchId": "return-local",
           "height": 420,
           "tryIt": {
             "id": "try-scope-and-local-variables-sketch2",
@@ -57609,7 +58141,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -57619,48 +58151,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "scope-basics",
+          "id": "local-lifetime",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.local-lifetime.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.local-lifetime.bodyMarkdown"
         },
         {
-          "id": "inside-vs-outside",
+          "id": "parameter-local",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameter-local.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameter-local.bodyMarkdown"
         },
         {
-          "id": "parameters-create-local-names",
+          "id": "return-local",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.return-local.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.return-local.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-q1",
+          "id": "sc-local-variable",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
-          "id": "sc-q2",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-local-variable",
           "optionIds": [
             "a",
             "b",
@@ -57673,11 +58188,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-q1",
-          "kind": "multi_choice",
+          "id": "sc-local-outside",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-local-outside",
           "optionIds": [
             "a",
             "b",
@@ -57685,20 +58200,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "b",
-              "c",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
-          "id": "mc-q2",
-          "kind": "multi_choice",
+          "id": "sc-parameter-local",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-parameter-local",
           "optionIds": [
             "a",
             "b",
@@ -57706,79 +58217,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "dr-q1",
-          "kind": "drag_reorder",
+          "id": "sc-same-name-separate",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-same-name-separate",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-q2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-q1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "score"
-          }
-        },
-        {
-          "id": "fb-q2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "value"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -57823,7 +58280,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57832,27 +58289,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "add_tax",
-                "args": [
-                  8
-                ],
-                "expected": 10
+                "stdin": "8\n",
+                "stdout": "11\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "add_tax",
-                "args": [
-                  0
-                ],
-                "expected": 2
+                "stdin": "0\n",
+                "stdout": "3\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57861,8 +58311,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+total\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+total\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-scope-and-local-variables-sketch1",
@@ -57906,7 +58380,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57915,27 +58389,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "welcome",
-                "args": [
-                  "Ava"
-                ],
-                "expected": "Welcome, Ava"
+                "stdin": "5\n",
+                "stdout": "6\n5\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "welcome",
-                "args": [
-                  "Mia"
-                ],
-                "expected": "Welcome, Mia"
+                "stdin": "-2\n",
+                "stdout": "-1\n-2\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -57944,8 +58411,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+next_count\\s*\\(\\s*count\\s*\\)\\s*:",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+updated\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+next_count\\s*\\(\\s*count\\s*\\)\\s*:",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+updated\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-scope-and-local-variables-sketch2",
@@ -57989,7 +58490,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -57998,27 +58499,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "add_one",
-                "args": [
-                  5
-                ],
-                "expected": 6
+                "stdin": "Ava\n",
+                "stdout": "Hello, Ava\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "add_one",
-                "args": [
-                  0
-                ],
-                "expected": 1
+                "stdin": "Mia\n",
+                "stdout": "Hello, Mia\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -58027,8 +58521,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+message\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+message\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -58057,7 +58585,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch0.title",
-          "sketchId": "sketch-1",
+          "sketchId": "extract-repetition",
           "height": 420,
           "tryIt": {
             "id": "try-decomposition-and-refactoring-sketch0",
@@ -58076,7 +58604,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch1.title",
-          "sketchId": "sketch-2",
+          "sketchId": "extract-responsibility",
           "height": 420,
           "tryIt": {
             "id": "try-decomposition-and-refactoring-sketch1",
@@ -58095,7 +58623,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch2.title",
-          "sketchId": "sketch-3",
+          "sketchId": "reuse-helper",
           "height": 420,
           "tryIt": {
             "id": "try-decomposition-and-refactoring-sketch2",
@@ -58118,7 +58646,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -58128,31 +58656,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-1",
+          "id": "extract-repetition",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-repetition.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-repetition.bodyMarkdown"
         },
         {
-          "id": "sketch-2",
+          "id": "extract-responsibility",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-responsibility.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.extract-responsibility.bodyMarkdown"
         },
         {
-          "id": "sketch-3",
+          "id": "reuse-helper",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.reuse-helper.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.reuse-helper.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-1",
+          "id": "sc-refactor-goal",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-refactor-goal",
           "optionIds": [
             "a",
             "b",
@@ -58161,15 +58689,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "sc-2",
+          "id": "sc-extract-repetition",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-extract-repetition",
           "optionIds": [
             "a",
             "b",
@@ -58178,15 +58706,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "c"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-1",
-          "kind": "multi_choice",
+          "id": "sc-one-responsibility",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-one-responsibility",
           "optionIds": [
             "a",
             "b",
@@ -58194,20 +58722,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-2",
-          "kind": "multi_choice",
+          "id": "sc-helper-reuse",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-helper-reuse",
           "optionIds": [
             "a",
             "b",
@@ -58215,80 +58739,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "clean_name(name)"
-          }
-        },
-        {
-          "id": "fb-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "return"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -58333,7 +58785,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -58342,27 +58794,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "clean_text",
-                "args": [
-                  "  HELLO  "
-                ],
-                "expected": "hello"
+                "stdin": "  ava  \n  mia  \n",
+                "stdout": "Ava\nMia\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "clean_text",
-                "args": [
-                  " MiXeD "
-                ],
-                "expected": "mixed"
+                "stdin": "  jean  \nzoE\n",
+                "stdout": "Jean\nZoe\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -58371,8 +58816,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+name\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+name\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-decomposition-and-refactoring-sketch1",
@@ -58416,7 +58895,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -58425,27 +58904,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "get_first_name",
-                "args": [
-                  "Ava Smith"
-                ],
-                "expected": "Ava"
+                "stdin": "one two three\n",
+                "stdout": "Words: 3\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "get_first_name",
-                "args": [
-                  "Mia Chen"
-                ],
-                "expected": "Mia"
+                "stdin": "python functions are useful\n",
+                "stdout": "Words: 4\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -58454,8 +58926,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+word_count\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+len\\s*\\(\\s*text\\.split\\s*\\(\\s*\\)\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+word_count\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+len\\s*\\(\\s*text\\.split\\s*\\(\\s*\\)\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-decomposition-and-refactoring-sketch2",
@@ -58499,7 +58995,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -58511,8 +59007,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
+                "stdin": "  ava  \n",
                 "stdout": "Badge: Ava\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\n",
+                "stdout": "Badge: Mia\n",
                 "match": "exact"
               }
             ],
@@ -58528,37 +59029,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_call",
-                "functionName": "clean",
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "function_returns",
-                "functionName": "badge",
-                "args": [
-                  "  mia  "
-                ],
-                "expected": "Badge: Mia",
-                "expectedKind": "json"
               },
               {
-                "type": "function_returns",
-                "functionName": "badge",
-                "args": [
-                  "zoe"
-                ],
-                "expected": "Badge: Zoe",
-                "expectedKind": "json"
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "uses_call",
-              "functionName": "clean",
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
             }
           ]
         }
@@ -58589,7 +59080,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch0.title",
-          "sketchId": "sk1",
+          "sketchId": "sibling-module",
           "height": 420,
           "tryIt": {
             "id": "try-using-imports-and-helper-files-sketch0",
@@ -58608,7 +59099,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch1.title",
-          "sketchId": "sk2",
+          "sketchId": "related-helpers",
           "height": 420,
           "tryIt": {
             "id": "try-using-imports-and-helper-files-sketch1",
@@ -58627,7 +59118,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch2.title",
-          "sketchId": "sk3",
+          "sketchId": "connect-modules",
           "height": 420,
           "tryIt": {
             "id": "try-using-imports-and-helper-files-sketch2",
@@ -58650,7 +59141,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -58660,31 +59151,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sk1",
+          "id": "sibling-module",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sibling-module.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sibling-module.bodyMarkdown"
         },
         {
-          "id": "sk2",
+          "id": "related-helpers",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.related-helpers.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.related-helpers.bodyMarkdown"
         },
         {
-          "id": "sk3",
+          "id": "connect-modules",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.connect-modules.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.connect-modules.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "q1",
+          "id": "sc-file-to-module",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q1",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.sc-file-to-module",
           "optionIds": [
             "a",
             "b",
@@ -58697,11 +59188,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "q2",
+          "id": "sc-direct-call",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q2",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.sc-direct-call",
           "optionIds": [
             "a",
             "b",
@@ -58714,11 +59205,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "q3",
-          "kind": "multi_choice",
+          "id": "sc-module-responsibility",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q3",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.sc-module-responsibility",
           "optionIds": [
             "a",
             "b",
@@ -58726,19 +59217,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "q4",
-          "kind": "multi_choice",
+          "id": "sc-main-role",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q4",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.sc-main-role",
           "optionIds": [
             "a",
             "b",
@@ -58746,77 +59234,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "q5",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q5",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "q6",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q6",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "q7",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q7",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "clean_name"
-          }
-        },
-        {
-          "id": "q8",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q8",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "tools"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -58830,7 +59249,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -58845,8 +59264,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.tools_names_py.content",
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.names_py.content",
               "language": "python"
             }
           ],
@@ -58857,7 +59276,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -58866,23 +59285,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.names_py.content",
                 "language": "python"
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
               "requiredFiles": [
-                "tools/names.py"
+                "names.py"
               ]
             }
           },
@@ -58891,21 +59307,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
+                "stdin": "  ava  \n",
                 "stdout": "Ava\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "tools/__init__.py",
-                    "content": "# tools package\n",
-                    "language": "python"
-                  },
-                  {
-                    "path": "tools/names.py",
-                    "content": "def clean_name(text):\n    return text.strip().title()\n",
-                    "language": "python"
-                  }
-                ]
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\n",
+                "stdout": "Mia\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionCode",
@@ -58918,72 +59327,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.tools_names_py.content",
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.names_py.content",
                 "language": "python"
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.names",
+                "module": "names",
                 "importName": "clean_name",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+clean_name\\s*\\(",
-                "path": "tools/names.py",
+                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+                "path": "names.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "uses_method",
-                "method": "strip",
-                "path": "tools/names.py",
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "path": "names.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "title",
-                "path": "tools/names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.3.message"
               }
             ]
           },
           "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
             "requiredFiles": [
-              "tools/names.py"
+              "names.py"
             ]
           },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.names",
+              "module": "names",
               "importName": "clean_name",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+clean_name\\s*\\(",
-              "path": "tools/names.py",
+              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+              "path": "names.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "uses_method",
-              "method": "strip",
-              "path": "tools/names.py",
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "path": "names.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "title",
-              "path": "tools/names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.3.message"
             }
           ]
         },
@@ -58998,7 +59392,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -59013,8 +59407,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.tools_badges_py.content",
+              "path": "text_tools.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.text_tools_py.content",
               "language": "python"
             }
           ],
@@ -59025,7 +59419,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -59034,23 +59428,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "path": "text_tools.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.text_tools_py.content",
                 "language": "python"
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
               "requiredFiles": [
-                "tools/badges.py"
+                "text_tools.py"
               ]
             }
           },
@@ -59059,21 +59450,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "STUDENT badge: Ava\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "tools/__init__.py",
-                    "content": "# tools package\n",
-                    "language": "python"
-                  },
-                  {
-                    "path": "tools/badges.py",
-                    "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-                    "language": "python"
-                  }
-                ]
+                "stdin": "  HELLO  \n",
+                "stdout": "Word: hello\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "PyThOn\n",
+                "stdout": "Word: python\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionCode",
@@ -59086,59 +59470,70 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.tools_badges_py.content",
+                "path": "text_tools.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.text_tools_py.content",
                 "language": "python"
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.badges",
-                "importName": "make_badge",
+                "module": "text_tools",
+                "importName": "clean_word",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_import",
+                "module": "text_tools",
+                "importName": "make_label",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+make_badge\\s*\\(",
-                "path": "tools/badges.py",
+                "pattern": "\\bdef\\s+clean_word\\s*\\(\\s*text\\s*\\)\\s*:",
+                "path": "text_tools.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.1.message"
               },
               {
-                "type": "uses_method",
-                "method": "upper",
-                "path": "tools/badges.py",
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_label\\s*\\(\\s*word\\s*\\)\\s*:",
+                "path": "text_tools.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.2.message"
               }
             ]
           },
           "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
             "requiredFiles": [
-              "tools/badges.py"
+              "text_tools.py"
             ]
           },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.badges",
-              "importName": "make_badge",
+              "module": "text_tools",
+              "importName": "clean_word",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_import",
+              "module": "text_tools",
+              "importName": "make_label",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+make_badge\\s*\\(",
-              "path": "tools/badges.py",
+              "pattern": "\\bdef\\s+clean_word\\s*\\(\\s*text\\s*\\)\\s*:",
+              "path": "text_tools.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.1.message"
             },
             {
-              "type": "uses_method",
-              "method": "upper",
-              "path": "tools/badges.py",
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_label\\s*\\(\\s*word\\s*\\)\\s*:",
+              "path": "text_tools.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.2.message"
             }
           ]
@@ -59154,10 +59549,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.badges_py.content",
+              "language": "python"
             }
           ],
           "solutionFiles": [
@@ -59169,13 +59574,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_names_py.content",
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.names_py.content",
               "language": "python"
             },
             {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_badges_py.content",
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.badges_py.content",
               "language": "python"
             }
           ],
@@ -59186,38 +59591,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.badges_py.content",
+                "language": "python"
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.names_py.content",
                 "language": "python"
               },
               {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.badges_py.content",
                 "language": "python"
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
               "requiredFiles": [
-                "tools/names.py",
-                "tools/badges.py"
+                "names.py",
+                "badges.py"
               ]
             }
           },
@@ -59226,26 +59638,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
+                "stdin": "  ava  \nstudent\n",
+                "stdout": "STUDENT badge: Ava\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\nmentor\n",
                 "stdout": "MENTOR badge: Mia\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "tools/__init__.py",
-                    "content": "# tools package\n",
-                    "language": "python"
-                  },
-                  {
-                    "path": "tools/names.py",
-                    "content": "def clean_name(text):\n    return text.strip().title()\n",
-                    "language": "python"
-                  },
-                  {
-                    "path": "tools/badges.py",
-                    "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-                    "language": "python"
-                  }
-                ]
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionCode",
@@ -59258,104 +59658,77 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_names_py.content",
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.names_py.content",
                 "language": "python"
               },
               {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_badges_py.content",
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.badges_py.content",
                 "language": "python"
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.names",
+                "module": "names",
                 "importName": "clean_name",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
               },
               {
                 "type": "uses_import",
-                "module": "tools.badges",
+                "module": "badges",
                 "importName": "make_badge",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "def\\s+clean_name\\s*\\(",
-                "path": "tools/names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+make_badge\\s*\\(",
-                "path": "tools/badges.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
-              },
-              {
                 "type": "uses_call",
                 "functionName": "clean_name",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.4.message"
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
               },
               {
                 "type": "uses_call",
                 "functionName": "make_badge",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.5.message"
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
               }
             ]
           },
           "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
             "requiredFiles": [
-              "tools/names.py",
-              "tools/badges.py"
+              "names.py",
+              "badges.py"
             ]
           },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.names",
+              "module": "names",
               "importName": "clean_name",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
             },
             {
               "type": "uses_import",
-              "module": "tools.badges",
+              "module": "badges",
               "importName": "make_badge",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "def\\s+clean_name\\s*\\(",
-              "path": "tools/names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "def\\s+make_badge\\s*\\(",
-              "path": "tools/badges.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
-            },
-            {
               "type": "uses_call",
               "functionName": "clean_name",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.4.message"
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
             },
             {
               "type": "uses_call",
               "functionName": "make_badge",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.5.message"
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
             }
           ]
         }
@@ -59386,7 +59759,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch0.title",
-          "sketchId": "docstrings-idea",
+          "sketchId": "real-docstring",
           "height": 420,
           "tryIt": {
             "id": "try-docstrings-and-function-contracts-sketch0",
@@ -59405,7 +59778,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch1.title",
-          "sketchId": "good-docstrings",
+          "sketchId": "contract-input-output",
           "height": 420,
           "tryIt": {
             "id": "try-docstrings-and-function-contracts-sketch1",
@@ -59424,7 +59797,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch2.title",
-          "sketchId": "contracts-print-vs-return",
+          "sketchId": "contract-must-match",
           "height": 420,
           "tryIt": {
             "id": "try-docstrings-and-function-contracts-sketch2",
@@ -59447,7 +59820,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -59457,31 +59830,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "docstrings-idea",
+          "id": "real-docstring",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.real-docstring.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.real-docstring.bodyMarkdown"
         },
         {
-          "id": "good-docstrings",
+          "id": "contract-input-output",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-input-output.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-input-output.bodyMarkdown"
         },
         {
-          "id": "contracts-print-vs-return",
+          "id": "contract-must-match",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.title",
-          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-must-match.title",
+          "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contract-must-match.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-docstring-location",
+          "id": "sc-real-docstring",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-docstring-location",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-real-docstring",
           "optionIds": [
             "a",
             "b",
@@ -59494,11 +59867,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-contract-purpose",
+          "id": "sc-contract-content",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-purpose",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-content",
           "optionIds": [
             "a",
             "b",
@@ -59511,11 +59884,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-good-docstring-features",
-          "kind": "multi_choice",
+          "id": "sc-contract-match",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-good-docstring-features",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-match",
           "optionIds": [
             "a",
             "b",
@@ -59523,20 +59896,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-return-vs-print-contract",
-          "kind": "multi_choice",
+          "id": "sc-read-contract",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-return-vs-print-contract",
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-read-contract",
           "optionIds": [
             "a",
             "b",
@@ -59544,75 +59913,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-docstring-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-docstring-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr-contract-reading",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-contract-reading",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb-return-word",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-return-word",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Return"
-          }
-        },
-        {
-          "id": "fb-docstring-position",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-docstring-position",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "`\"\"\"Return the square of number.\"\"\"`"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -59657,7 +59959,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -59666,27 +59968,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "clean_name",
-                "args": [
-                  "  aVA smith  "
-                ],
-                "expected": "Ava Smith"
+                "stdin": "  new york  \n",
+                "stdout": "New York\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "clean_name",
-                "args": [
-                  "zoe"
-                ],
-                "expected": "Zoe"
+                "stdin": "lOS aNGeLES\n",
+                "stdout": "Los Angeles\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -59695,8 +59990,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-docstrings-and-function-contracts-sketch1",
@@ -59740,7 +60059,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -59749,27 +60068,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "fahrenheit_to_celsius",
-                "args": [
-                  32
-                ],
-                "expected": 0
+                "stdin": "10\n2\n",
+                "stdout": "12\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "fahrenheit_to_celsius",
-                "args": [
-                  212
-                ],
-                "expected": 100
+                "stdin": "-3\n5\n",
+                "stdout": "2\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -59778,8 +60090,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-docstrings-and-function-contracts-sketch2",
@@ -59823,7 +60159,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -59832,27 +60168,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "is_valid_score",
-                "args": [
-                  105
-                ],
-                "expected": false
+                "stdin": "69\n",
+                "stdout": "False\n",
+                "match": "exact"
               },
               {
-                "type": "function_returns",
-                "functionName": "is_valid_score",
-                "args": [
-                  95
-                ],
-                "expected": true
+                "stdin": "70\n",
+                "stdout": "True\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "95\n",
+                "stdout": "True\n",
+                "match": "exact"
               }
             ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
@@ -59861,8 +60195,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -59919,7 +60277,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "id": "mp_1",
                 "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_1.title",
-                "exerciseKey": "mp-1-create-clean-name-module",
+                "exerciseKey": "mp-1-move-name-helper",
                 "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
@@ -59928,7 +60286,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "id": "mp_2",
                 "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_2.title",
-                "exerciseKey": "mp-2-add-badge-helper",
+                "exerciseKey": "mp-2-move-badge-helper",
                 "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
@@ -59937,7 +60295,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "id": "mp_3",
                 "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_3.title",
-                "exerciseKey": "mp-3-document-badge-helper",
+                "exerciseKey": "mp-3-document-helper-contracts",
                 "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
@@ -59946,7 +60304,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "id": "mp_4",
                 "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.mp_4.title",
-                "exerciseKey": "mp-4-package-welcome-message",
+                "exerciseKey": "mp-4-add-welcome-helper",
                 "difficulty": "medium",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
@@ -59966,871 +60324,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "mp-1-create-clean-name-module",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module",
-          "language": "python",
-          "entryFilePath": "main.py",
-          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
-              "requiredFiles": [
-                "tools/__init__.py",
-                "tools/names.py"
-              ]
-            },
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              }
-            ],
-            "files": [
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "fixed_tests",
-            "tests": [
-              {
-                "stdin": "  aVA  \n",
-                "stdout": "Ava\n",
-                "match": "exact"
-              }
-            ],
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
-                "language": "python"
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_import",
-                "module": "tools.names",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
-                "importName": "clean_name",
-                "path": "main.py"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
-                "path": "tools/names.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
-                "path": "tools/names.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "title",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
-                "path": "tools/names.py"
-              }
-            ]
-          },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
-              "language": "python"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
-            "requiredFiles": [
-              "tools/__init__.py",
-              "tools/names.py"
-            ]
-          },
-          "sourceChecks": [
-            {
-              "type": "uses_import",
-              "module": "tools.names",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
-              "importName": "clean_name",
-              "path": "main.py"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
-              "path": "tools/names.py"
-            },
-            {
-              "type": "uses_method",
-              "method": "strip",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
-              "path": "tools/names.py"
-            },
-            {
-              "type": "uses_method",
-              "method": "title",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
-              "path": "tools/names.py"
-            }
-          ]
-        },
-        {
-          "id": "mp-2-add-badge-helper",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper",
-          "language": "python",
-          "entryFilePath": "main.py",
-          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
-              "requiredFiles": [
-                "tools/__init__.py",
-                "tools/badges.py",
-                "tools/names.py"
-              ]
-            },
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-                "language": "python"
-              }
-            ],
-            "files": [
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
-                "language": "python"
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "fixed_tests",
-            "tests": [
-              {
-                "stdin": "  aVA  \nstudent\n",
-                "stdout": "STUDENT badge: Ava\n",
-                "match": "exact"
-              }
-            ],
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_import",
-                "module": "tools.badges",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
-                "importName": "make_badge",
-                "path": "main.py"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+make_badge\\s*\\(",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
-                "path": "tools/badges.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "upper",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
-                "path": "tools/badges.py"
-              }
-            ]
-          },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
-            "requiredFiles": [
-              "tools/__init__.py",
-              "tools/badges.py",
-              "tools/names.py"
-            ]
-          },
-          "sourceChecks": [
-            {
-              "type": "uses_import",
-              "module": "tools.badges",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
-              "importName": "make_badge",
-              "path": "main.py"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "def\\s+make_badge\\s*\\(",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
-              "path": "tools/badges.py"
-            },
-            {
-              "type": "uses_method",
-              "method": "upper",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
-              "path": "tools/badges.py"
-            }
-          ]
-        },
-        {
-          "id": "mp-3-document-badge-helper",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper",
-          "language": "python",
-          "entryFilePath": "main.py",
-          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
-              "requiredFiles": [
-                "tools/__init__.py",
-                "tools/badges.py",
-                "tools/names.py"
-              ]
-            },
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-                "language": "python"
-              }
-            ],
-            "files": [
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-                "language": "python"
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "fixed_tests",
-            "tests": [
-              {
-                "stdin": "  mia  \n  mentor  \n",
-                "stdout": "MENTOR badge: Mia\n",
-                "match": "exact"
-              }
-            ],
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains_any",
-                "patterns": [
-                  "\"\"\"",
-                  "'''"
-                ],
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
-                "path": "tools/badges.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
-                "path": "tools/badges.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "upper",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
-                "path": "tools/badges.py"
-              }
-            ]
-          },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
-            "requiredFiles": [
-              "tools/__init__.py",
-              "tools/badges.py",
-              "tools/names.py"
-            ]
-          },
-          "sourceChecks": [
-            {
-              "type": "source_contains_any",
-              "patterns": [
-                "\"\"\"",
-                "'''"
-              ],
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
-              "path": "tools/badges.py"
-            },
-            {
-              "type": "uses_method",
-              "method": "strip",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
-              "path": "tools/badges.py"
-            },
-            {
-              "type": "uses_method",
-              "method": "upper",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
-              "path": "tools/badges.py"
-            }
-          ]
-        },
-        {
-          "id": "mp-4-package-welcome-message",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message",
-          "language": "python",
-          "entryFilePath": "main.py",
-          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
-              "requiredFiles": [
-                "tools/__init__.py",
-                "tools/badges.py",
-                "tools/names.py"
-              ]
-            },
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-                "language": "python"
-              }
-            ],
-            "files": [
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
-                "language": "python"
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "fixed_tests",
-            "tests": [
-              {
-                "stdin": "  zoe  \ncoach\n",
-                "stdout": "Welcome! COACH badge: Zoe\n",
-                "match": "exact"
-              }
-            ],
-            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "tools/__init__.py",
-                "content": "",
-                "language": "python"
-              },
-              {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/badges.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
-                "language": "python"
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_call",
-                "functionName": "make_badge",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
-                "path": "main.py"
-              },
-              {
-                "type": "source_contains",
-                "pattern": "Welcome!",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
-                "path": "main.py"
-              }
-            ]
-          },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "",
-              "language": "python"
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/badges.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
-              "language": "python"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
-            "requiredFiles": [
-              "tools/__init__.py",
-              "tools/badges.py",
-              "tools/names.py"
-            ]
-          },
-          "sourceChecks": [
-            {
-              "type": "uses_call",
-              "functionName": "make_badge",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
-              "path": "main.py"
-            },
-            {
-              "type": "source_contains",
-              "pattern": "Welcome!",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
-              "path": "main.py"
-            }
-          ]
-        },
-        {
           "id": "try-module-6-name-badge-package-sketch0",
           "kind": "code_input",
           "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -60843,11 +60348,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
-            },
-            {
-              "path": "tools/names.py",
-              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
-              "language": "python"
             }
           ],
           "workspace": {
@@ -60857,7 +60357,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -60866,24 +60366,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              },
-              {
-                "path": "tools/names.py",
-                "content": "def clean_name(text):\n    return text.strip().title()\n",
-                "language": "python"
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [
-                "tools"
-              ],
-              "requiredFiles": [
-                "tools/names.py"
-              ]
+              "requiredFiles": []
             }
           },
           "showExpectedExample": true,
@@ -60891,21 +60381,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "tools/__init__.py",
-                    "content": "# tools package\n",
-                    "language": "python"
-                  },
-                  {
-                    "path": "tools/names.py",
-                    "content": "def clean_name(text):\n    return text.strip().title()\n",
-                    "language": "python"
-                  }
-                ]
+                "stdin": "  ava  \nstudent\n",
+                "stdout": "STUDENT badge: Ava\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\n  mentor  \n",
+                "stdout": "MENTOR badge: Mia\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionCode",
@@ -60916,74 +60399,718 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+              }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFiles": []
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+            }
+          ]
+        },
+        {
+          "id": "mp-1-move-name-helper",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
+              "language": "python"
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
               },
               {
-                "path": "tools/names.py",
-                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
+                "language": "python"
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "names.py"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "  ava  \nstudent\n",
+                "stdout": "STUDENT badge: Ava\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\n  mentor  \n",
+                "stdout": "MENTOR badge: Mia\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.solutionFiles.names_py.content",
                 "language": "python"
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.names",
+                "module": "names",
                 "importName": "clean_name",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+clean_name\\s*\\(",
-                "path": "tools/names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
+                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+                "path": "names.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
               },
               {
-                "type": "uses_method",
-                "method": "strip",
-                "path": "tools/names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "title",
-                "path": "tools/names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
               }
             ]
           },
           "workspaceExpectations": {
-            "requiredFolders": [
-              "tools"
-            ],
             "requiredFiles": [
-              "tools/names.py"
+              "names.py"
             ]
           },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.names",
+              "module": "names",
               "importName": "clean_name",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+clean_name\\s*\\(",
-              "path": "tools/names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
+              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+              "path": "names.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
             },
             {
-              "type": "uses_method",
-              "method": "strip",
-              "path": "tools/names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
+          "id": "mp-2-move-badge-helper",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
-              "type": "uses_method",
-              "method": "title",
-              "path": "tools/names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.names_py.content",
+              "language": "python"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+              "language": "python"
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.names_py.content",
+                "language": "python"
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "names.py",
+                "badges.py"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "  zoe  \ncoach\n",
+                "stdout": "COACH badge: Zoe\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "ALex\n  volunteer  \n",
+                "stdout": "VOLUNTEER badge: Alex\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.solutionFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "uses_import",
+                "module": "badges",
+                "importName": "make_badge",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+                "path": "badges.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
+              }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "names.py",
+              "badges.py"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "module": "badges",
+              "importName": "make_badge",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
+              "path": "badges.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
+          "id": "mp-3-document-helper-contracts",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.badges_py.content",
+              "language": "python"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+              "language": "python"
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "names.py",
+                "badges.py"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "  zoe  \ncoach\n",
+                "stdout": "COACH badge: Zoe\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "ALex\n  volunteer  \n",
+                "stdout": "VOLUNTEER badge: Alex\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.solutionFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+                "path": "names.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
+                "path": "badges.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
+                "path": "badges.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
+              }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "names.py",
+              "badges.py"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
+              "path": "names.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
+              "path": "badges.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
+              "path": "badges.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
+          "id": "mp-4-add-welcome-helper",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.badges_py.content",
+              "language": "python"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "names.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+              "language": "python"
+            },
+            {
+              "path": "badges.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+              "language": "python"
+            },
+            {
+              "path": "messages.py",
+              "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+              "language": "python"
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.badges_py.content",
+                "language": "python"
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+                "language": "python"
+              },
+              {
+                "path": "messages.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+                "language": "python"
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "names.py",
+                "badges.py",
+                "messages.py"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "  zoe  \ncoach\n",
+                "stdout": "Welcome! COACH badge: Zoe\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "ALex\n  volunteer  \n",
+                "stdout": "Welcome! VOLUNTEER badge: Alex\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "names.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.names_py.content",
+                "language": "python"
+              },
+              {
+                "path": "badges.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.badges_py.content",
+                "language": "python"
+              },
+              {
+                "path": "messages.py",
+                "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.solutionFiles.messages_py.content",
+                "language": "python"
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "uses_import",
+                "module": "messages",
+                "importName": "welcome_message",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
+                "path": "messages.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
+                "path": "messages.py",
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+              }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "names.py",
+              "badges.py",
+              "messages.py"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "module": "messages",
+              "importName": "welcome_message",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
+              "path": "messages.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
+              "path": "messages.py",
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
             }
           ]
         }
@@ -61014,7 +61141,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch0.title",
-          "sketchId": "why-read-files",
+          "sketchId": "read-whole-file",
           "height": 420,
           "tryIt": {
             "id": "try-reading-text-files-sketch0",
@@ -61033,7 +61160,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch1.title",
-          "sketchId": "read-vs-lines",
+          "sketchId": "iterate-lines",
           "height": 420,
           "tryIt": {
             "id": "try-reading-text-files-sketch1",
@@ -61052,7 +61179,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch2.title",
-          "sketchId": "relative-paths-and-safety",
+          "sketchId": "relative-path",
           "height": 420,
           "tryIt": {
             "id": "try-reading-text-files-sketch2",
@@ -61075,7 +61202,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -61085,31 +61212,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "why-read-files",
+          "id": "read-whole-file",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.why-read-files.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.why-read-files.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-whole-file.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-whole-file.bodyMarkdown"
         },
         {
-          "id": "read-vs-lines",
+          "id": "iterate-lines",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-vs-lines.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-vs-lines.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.iterate-lines.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.iterate-lines.bodyMarkdown"
         },
         {
-          "id": "relative-paths-and-safety",
+          "id": "relative-path",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-paths-and-safety.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-paths-and-safety.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-path.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-path.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-read-mode",
+          "id": "sc-open-read",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-read-mode",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-open-read",
           "optionIds": [
             "a",
             "b",
@@ -61122,11 +61249,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-relative-path",
+          "id": "sc-read-all",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-relative-path",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-read-all",
           "optionIds": [
             "a",
             "b",
@@ -61135,15 +61262,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-with-open-benefits",
-          "kind": "multi_choice",
+          "id": "sc-line-loop",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.mc-with-open-benefits",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-line-loop",
           "optionIds": [
             "a",
             "b",
@@ -61151,19 +61278,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-read-methods",
-          "kind": "multi_choice",
+          "id": "sc-with-cleanup",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.mc-read-methods",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-with-cleanup",
           "optionIds": [
             "a",
             "b",
@@ -61171,77 +61295,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-read-file-steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.dr-read-file-steps",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-build-path",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.dr-build-path",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb-read-call",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.fb-read-call",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "read"
-          }
-        },
-        {
-          "id": "fb-open-mode",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.fb-open-mode",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "r"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -61251,18 +61306,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
-              "path": "note.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.note_txt.content",
+              "path": "message.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.message_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -61277,8 +61333,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "note.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.note_txt.content",
+              "path": "message.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.message_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -61291,14 +61347,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "note.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.note_txt.content",
+                "path": "message.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.message_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -61307,14 +61363,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "note.txt",
-                "content": "Hello from a file\n",
+                "path": "message.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.message_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -61323,18 +61379,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "workspaceExpectations": {
               "requiredFolders": [],
               "requiredFiles": [
-                "note.txt"
+                "message.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "note.txt",
-                "content": "Hello from a file\n",
-                "language": "text",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -61342,7 +61389,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Hello from a file\n",
+                "stdout": "Keep learning.\n",
                 "match": "exact"
               }
             ],
@@ -61356,8 +61403,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "note.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.note_txt.content",
+                "path": "message.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.message_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -61365,25 +61412,49 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "note.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "read",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
               }
             ]
           },
           "workspaceExpectations": {
             "requiredFolders": [],
             "requiredFiles": [
-              "note.txt"
+              "message.txt"
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "note.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "read",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -61394,11 +61465,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -61434,7 +61506,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -61450,14 +61522,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "names.txt",
-                "content": "Ava\nMia\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.names_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -61468,16 +61540,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "requiredFiles": [
                 "names.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "names.txt",
-                "content": "Ava\nMia\n",
-                "language": "text",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -61485,7 +61548,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Ava\nMia\n",
+                "stdout": "Ava\nMia\nNoah\n",
                 "match": "exact"
               }
             ],
@@ -61508,10 +61571,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "names.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_for_loop",
+                "iterable": "file",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "strip",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
               }
             ]
           },
@@ -61523,10 +61598,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "names.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_for_loop",
+              "iterable": "file",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "strip",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -61537,18 +61624,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
-              "path": "names.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.names_txt.content",
+              "path": "data/city.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.data_city_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -61563,8 +61651,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "names.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.names_txt.content",
+              "path": "data/city.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.data_city_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -61577,14 +61665,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "names.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.names_txt.content",
+                "path": "data/city.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.data_city_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -61593,34 +61681,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "names.txt",
-                "content": "Ava\nMia\n",
+                "path": "data/city.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.data_city_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [],
+              "requiredFolders": [
+                "data"
+              ],
               "requiredFiles": [
-                "names.txt"
+                "data/city.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "names.txt",
-                "content": "Ava\nMia\n",
-                "language": "text",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -61628,7 +61709,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "2\n",
+                "stdout": "Seattle\n",
                 "match": "exact"
               }
             ],
@@ -61642,62 +61723,72 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "names.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.names_txt.content",
+                "path": "data/city.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.data_city_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "count",
-                "expected": 2,
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "names.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
               },
               {
-                "type": "uses_for_loop",
-                "iterable": "file",
+                "type": "uses_method",
+                "method": "read",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bopen\\s*\\(",
+                "type": "uses_method",
+                "method": "strip",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.2.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "title",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.3.message"
               }
             ]
           },
           "workspaceExpectations": {
-            "requiredFolders": [],
+            "requiredFolders": [
+              "data"
+            ],
             "requiredFiles": [
-              "names.txt"
+              "data/city.txt"
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "names.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
             },
             {
-              "type": "uses_for_loop",
-              "iterable": "file",
+              "type": "uses_method",
+              "method": "read",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bopen\\s*\\(",
+              "type": "uses_method",
+              "method": "strip",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.2.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "title",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.3.message"
             }
           ]
         }
@@ -61728,7 +61819,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
-          "sketchId": "sketch-write-mode-basics",
+          "sketchId": "write-mode",
           "height": 420,
           "tryIt": {
             "id": "try-writing-text-files-sketch0",
@@ -61747,7 +61838,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
-          "sketchId": "sketch-append-mode-basics",
+          "sketchId": "append-mode",
           "height": 420,
           "tryIt": {
             "id": "try-writing-text-files-sketch1",
@@ -61766,7 +61857,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch2.title",
-          "sketchId": "sketch-newlines-and-verifying",
+          "sketchId": "multiple-lines",
           "height": 420,
           "tryIt": {
             "id": "try-writing-text-files-sketch2",
@@ -61789,7 +61880,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -61799,31 +61890,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sketch-write-mode-basics",
+          "id": "write-mode",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-write-mode-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-write-mode-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.write-mode.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.write-mode.bodyMarkdown"
         },
         {
-          "id": "sketch-append-mode-basics",
+          "id": "append-mode",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-append-mode-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-append-mode-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.append-mode.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.append-mode.bodyMarkdown"
         },
         {
-          "id": "sketch-newlines-and-verifying",
+          "id": "multiple-lines",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-newlines-and-verifying.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-newlines-and-verifying.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.multiple-lines.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.multiple-lines.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-write-vs-append",
+          "id": "sc-write-mode-effect",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-write-vs-append",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-write-mode-effect",
           "optionIds": [
             "a",
             "b",
@@ -61832,15 +61923,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "sc-verify-written-text",
+          "id": "sc-append-mode-effect",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-verify-written-text",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-append-mode-effect",
           "optionIds": [
             "a",
             "b",
@@ -61849,15 +61940,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-append-true-statements",
-          "kind": "multi_choice",
+          "id": "sc-newline-writing",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-append-true-statements",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-newline-writing",
           "optionIds": [
             "a",
             "b",
@@ -61865,20 +61956,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-good-writing-patterns",
-          "kind": "multi_choice",
+          "id": "sc-verify-saved-file",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-good-writing-patterns",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-verify-saved-file",
           "optionIds": [
             "a",
             "b",
@@ -61886,80 +61973,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr-write-file-steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-write-file-steps",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-append-log-sequence",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-append-log-sequence",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-write-mode-code",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-write-mode-code",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "\"w\""
-          }
-        },
-        {
-          "id": "fb-newline-choice",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-newline-choice",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "\\n"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -61969,23 +61984,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "status.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.status_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "status.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.status_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -61995,24 +62025,40 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "status.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.status_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "status.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.status_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [],
-              "requiredFiles": []
+              "requiredFiles": [
+                "status.txt"
+              ]
             }
           },
           "showExpectedExample": true,
@@ -62020,57 +62066,78 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Done\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "note.txt",
-                    "content": "",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "ready for guests\n",
+                "stdout": "Ready For Guests\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "doors closed\n",
+                "stdout": "Doors Closed\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "status.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.solutionFiles.status_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "note.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "write",
+                "type": "source_regex",
+                "pattern": "file\\.write\\s*\\(\\s*status\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.2.message"
               }
             ]
           },
           "workspaceExpectations": {
             "requiredFolders": [],
-            "requiredFiles": []
+            "requiredFiles": [
+              "status.txt"
+            ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "note.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "write",
+              "type": "source_regex",
+              "pattern": "file\\.write\\s*\\(\\s*status\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -62081,23 +62148,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "log.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.log_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "log.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.log_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -62107,24 +62189,40 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "log.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.log_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "log.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.log_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [],
-              "requiredFiles": []
+              "requiredFiles": [
+                "log.txt"
+              ]
             }
           },
           "showExpectedExample": true,
@@ -62132,57 +62230,78 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Start\nEnd\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "log.txt",
-                    "content": "",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "Checked sensors\n",
+                "stdout": "Start shift\nChecked sensors\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Opened doors\n",
+                "stdout": "Start shift\nOpened doors\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "log.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.solutionFiles.log_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "log.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']a[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "write",
+                "type": "source_regex",
+                "pattern": "file\\.write\\s*\\(\\s*entry\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.2.message"
               }
             ]
           },
           "workspaceExpectations": {
             "requiredFolders": [],
-            "requiredFiles": []
+            "requiredFiles": [
+              "log.txt"
+            ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "log.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']a[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "write",
+              "type": "source_regex",
+              "pattern": "file\\.write\\s*\\(\\s*entry\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -62193,11 +62312,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62206,7 +62326,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62219,7 +62339,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -62228,7 +62348,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -62244,23 +62364,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava: 92\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "report.txt",
-                    "content": "",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "ava\n92\n",
+                "stdout": "Name: Ava\nScore: 92\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "  mia jones  \n 88 \n",
+                "stdout": "Name: Mia Jones\nScore: 88\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -62268,15 +62386,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "report.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message"
               },
               {
                 "type": "uses_method",
                 "method": "write",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)[\\s\\S]*file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.3.message"
               }
             ]
           },
@@ -62286,15 +62417,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "report.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message"
             },
             {
               "type": "uses_method",
               "method": "write",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)[\\s\\S]*file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.3.message"
             }
           ]
         }
@@ -62325,7 +62469,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch0.title",
-          "sketchId": "paths-relative-basics",
+          "sketchId": "relative-paths",
           "height": 420,
           "tryIt": {
             "id": "try-working-with-paths-sketch0",
@@ -62344,7 +62488,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch1.title",
-          "sketchId": "paths-folders-and-organization",
+          "sketchId": "path-pieces",
           "height": 420,
           "tryIt": {
             "id": "try-working-with-paths-sketch1",
@@ -62363,7 +62507,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch2.title",
-          "sketchId": "paths-safe-habits",
+          "sketchId": "pathlib-path",
           "height": 420,
           "tryIt": {
             "id": "try-working-with-paths-sketch2",
@@ -62386,7 +62530,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -62396,31 +62540,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "paths-relative-basics",
+          "id": "relative-paths",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-relative-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-relative-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.relative-paths.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.relative-paths.bodyMarkdown"
         },
         {
-          "id": "paths-folders-and-organization",
+          "id": "path-pieces",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-folders-and-organization.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-folders-and-organization.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.path-pieces.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.path-pieces.bodyMarkdown"
         },
         {
-          "id": "paths-safe-habits",
+          "id": "pathlib-path",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-safe-habits.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.paths-safe-habits.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.pathlib-path.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.pathlib-path.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-relative-path-folder",
+          "id": "sc-same-vs-nested",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-relative-path-folder",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-same-vs-nested",
           "optionIds": [
             "a",
             "b",
@@ -62429,15 +62573,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "sc-same-folder-path",
+          "id": "sc-path-from-pieces",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-same-folder-path",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-path-from-pieces",
           "optionIds": [
             "a",
             "b",
@@ -62446,15 +62590,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-relative-path-benefits",
-          "kind": "multi_choice",
+          "id": "sc-pathlib-join",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.mc-relative-path-benefits",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-pathlib-join",
           "optionIds": [
             "a",
             "b",
@@ -62462,19 +62606,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-open-path-examples",
-          "kind": "multi_choice",
+          "id": "sc-open-path-object",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.mc-open-path-examples",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.sc-open-path-object",
           "optionIds": [
             "a",
             "b",
@@ -62482,75 +62623,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr-read-file-steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.dr-read-file-steps",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr-build-nested-path",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.dr-build-nested-path",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb-folder-part",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.fb-folder-part",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "data"
-          }
-        },
-        {
-          "id": "fb-same-folder-file",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.fb-same-folder-file",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "notes.txt"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -62560,11 +62634,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62573,7 +62648,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62586,7 +62661,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -62595,20 +62670,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "data/scores.txt\n",
+                "stdin": "records\nscores.txt\n",
+                "stdout": "records/scores.txt\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "data\nreport.txt\n",
+                "stdout": "data/report.txt\n",
                 "match": "exact"
               }
             ],
@@ -62616,33 +62700,43 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "path",
-                "expected": "data/scores.txt",
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+                "pattern": "\\bpath\\s*=\\s*folder\\s*\\+\\s*[\\\"']/[\\\"']\\s*\\+\\s*filename\\b",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.1.message"
               }
             ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+              "pattern": "\\bpath\\s*=\\s*folder\\s*\\+\\s*[\\\"']/[\\\"']\\s*\\+\\s*filename\\b",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -62653,11 +62747,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62666,7 +62761,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -62679,7 +62774,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -62688,20 +62783,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "data/scores.txt\n",
+                "stdin": "records\nscores.txt\n",
+                "stdout": "records/scores.txt\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "archive\nnotes.txt\n",
+                "stdout": "archive/notes.txt\n",
                 "match": "exact"
               }
             ],
@@ -62709,43 +62813,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "path",
-                "expected": "data/scores.txt",
-                "expectedKind": "json"
-              }
-            ],
             "sourceChecks": [
               {
-                "type": "uses_call",
-                "functionName": "Path",
+                "type": "uses_import",
+                "module": "pathlib",
+                "importName": "Path",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+                "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
               }
             ]
           },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
+          },
           "sourceChecks": [
             {
-              "type": "uses_call",
-              "functionName": "Path",
+              "type": "uses_import",
+              "module": "pathlib",
+              "importName": "Path",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+              "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -62756,18 +62874,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
-              "path": "data/message.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
+              "path": "data/welcome.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_welcome_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/reminder.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_reminder_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -62782,8 +62908,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "data/message.txt",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
+              "path": "data/welcome.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_welcome_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/reminder.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_reminder_txt.content",
               "language": "text",
               "isEntry": false,
               "entry": false
@@ -62796,14 +62929,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "data/message.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
+                "path": "data/welcome.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_welcome_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/reminder.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_reminder_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -62812,14 +62952,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "data/message.txt",
-                "content": "Nested hello\n",
+                "path": "data/welcome.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_welcome_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/reminder.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_reminder_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -62830,26 +62977,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "data"
               ],
               "requiredFiles": [
-                "data/message.txt"
+                "data/welcome.txt",
+                "data/reminder.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/message.txt",
-                "content": "Nested hello\n",
-                "language": "text",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Nested hello\n",
+                "stdin": "welcome.txt\n",
+                "stdout": "Welcome to Python paths!\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "reminder.txt\n",
+                "stdout": "Remember to save your work.\n",
                 "match": "exact"
               }
             ],
@@ -62863,8 +63007,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "data/message.txt",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
+                "path": "data/welcome.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_welcome_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/reminder.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_reminder_txt.content",
                 "language": "text",
                 "isEntry": false,
                 "entry": false
@@ -62872,10 +63023,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "data/message.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "uses_import",
+                "module": "pathlib",
+                "importName": "Path",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
               }
             ]
           },
@@ -62884,15 +63054,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "data"
             ],
             "requiredFiles": [
-              "data/message.txt"
+              "data/welcome.txt",
+              "data/reminder.txt"
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "data/message.txt",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "uses_import",
+              "module": "pathlib",
+              "importName": "Path",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
             }
           ]
         }
@@ -62923,7 +63113,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch0.title",
-          "sketchId": "s1",
+          "sketchId": "value-error",
           "height": 420,
           "tryIt": {
             "id": "try-try-except-basics-sketch0",
@@ -62942,7 +63132,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch1.title",
-          "sketchId": "s2",
+          "sketchId": "file-not-found",
           "height": 420,
           "tryIt": {
             "id": "try-try-except-basics-sketch1",
@@ -62961,7 +63151,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch2.title",
-          "sketchId": "s3",
+          "sketchId": "continue-after-error",
           "height": 420,
           "tryIt": {
             "id": "try-try-except-basics-sketch2",
@@ -62984,7 +63174,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -62994,31 +63184,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "s1",
+          "id": "value-error",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s1.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s1.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.value-error.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.value-error.bodyMarkdown"
         },
         {
-          "id": "s2",
+          "id": "file-not-found",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s2.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s2.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.file-not-found.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.file-not-found.bodyMarkdown"
         },
         {
-          "id": "s3",
+          "id": "continue-after-error",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s3.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.s3.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.continue-after-error.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.continue-after-error.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "q1",
+          "id": "sc-value-error",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q1",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.sc-value-error",
           "optionIds": [
             "a",
             "b",
@@ -63031,11 +63221,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "q2",
+          "id": "sc-file-not-found",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q2",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.sc-file-not-found",
           "optionIds": [
             "a",
             "b",
@@ -63044,15 +63234,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "q3",
-          "kind": "multi_choice",
+          "id": "sc-matching-handler",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q3",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.sc-matching-handler",
           "optionIds": [
             "a",
             "b",
@@ -63060,20 +63250,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "q4",
-          "kind": "multi_choice",
+          "id": "sc-specific-exception",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q4",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.sc-specific-exception",
           "optionIds": [
             "a",
             "b",
@@ -63081,81 +63267,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "q5",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q5",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "q6",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q6",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
-          "id": "q7",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q7",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "except"
-          }
-        },
-        {
-          "id": "q8",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q8",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "int(user_text)"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -63165,11 +63278,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63178,7 +63292,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63191,7 +63305,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63200,20 +63314,34 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "bad number\n",
+                "stdin": "27\n",
+                "stdout": "Number: 27\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "cat\n",
+                "stdout": "Invalid number\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "-4\n",
+                "stdout": "Number: -4\n",
                 "match": "exact"
               }
             ],
@@ -63221,7 +63349,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63231,25 +63359,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "source_regex",
                 "pattern": "\\btry\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "int",
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
               }
             ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
           },
           "sourceChecks": [
             {
               "type": "source_regex",
               "pattern": "\\btry\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "int",
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -63260,23 +63408,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/note.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.data_note_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/note.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.data_note_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -63286,29 +63449,56 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/note.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.data_note_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/note.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.data_note_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [
+                "data"
+              ],
+              "requiredFiles": [
+                "data/note.txt"
+              ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "ok\n",
+                "stdin": "note.txt\n",
+                "stdout": "Study exceptions carefully.\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "missing.txt\n",
+                "stdout": "Missing file\n",
                 "match": "exact"
               }
             ],
@@ -63316,35 +63506,66 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/note.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionFiles.data_note_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\btry\\s*:",
+                "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "int",
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
               }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data"
+            ],
+            "requiredFiles": [
+              "data/note.txt"
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\btry\\s*:",
+              "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "int",
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -63355,23 +63576,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/alpha.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_alpha_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/beta.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_beta_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/alpha.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_alpha_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/beta.txt",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_beta_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -63381,29 +63631,76 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/alpha.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_alpha_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/beta.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_beta_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/alpha.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_alpha_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/beta.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_beta_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [
+                "data"
+              ],
+              "requiredFiles": [
+                "data/alpha.txt",
+                "data/beta.txt"
+              ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "10\n3\n",
+                "stdin": "alpha.txt\nmissing.txt\n",
+                "stdout": "Alpha file\nMissing: missing.txt\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "missing.txt\nbeta.txt\n",
+                "stdout": "Missing: missing.txt\nBeta file\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "alpha.txt\nbeta.txt\n",
+                "stdout": "Alpha file\nBeta file\n",
                 "match": "exact"
               }
             ],
@@ -63411,44 +63708,73 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/alpha.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_alpha_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/beta.txt",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionFiles.data_beta_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "values",
+                "type": "source_regex",
+                "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\btry\\s*:",
+                "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "int",
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
               }
             ]
           },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data"
+            ],
+            "requiredFiles": [
+              "data/alpha.txt",
+              "data/beta.txt"
+            ]
+          },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "values",
+              "type": "source_regex",
+              "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\btry\\s*:",
+              "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "int",
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
             }
           ]
@@ -63466,8 +63792,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": true,
-        "supportsFileSystem": true,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
@@ -63480,7 +63806,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch0.title",
-          "sketchId": "clean-basics",
+          "sketchId": "clean-first",
           "height": 420,
           "tryIt": {
             "id": "try-validating-and-cleaning-input-sketch0",
@@ -63499,7 +63825,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch1.title",
-          "sketchId": "missing-invalid",
+          "sketchId": "validate-number",
           "height": 420,
           "tryIt": {
             "id": "try-validating-and-cleaning-input-sketch1",
@@ -63518,7 +63844,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch2.title",
-          "sketchId": "cleaning-functions",
+          "sketchId": "cleaning-function",
           "height": 420,
           "tryIt": {
             "id": "try-validating-and-cleaning-input-sketch2",
@@ -63541,7 +63867,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -63551,31 +63877,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "clean-basics",
+          "id": "clean-first",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-first.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-first.bodyMarkdown"
         },
         {
-          "id": "missing-invalid",
+          "id": "validate-number",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.validate-number.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.validate-number.bodyMarkdown"
         },
         {
-          "id": "cleaning-functions",
+          "id": "cleaning-function",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-function.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-function.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-valid-row",
+          "id": "sc-clean-before-check",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-valid-row",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-clean-before-check",
           "optionIds": [
             "a",
             "b",
@@ -63588,11 +63914,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-except-flow",
+          "id": "sc-empty-string",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-except-flow",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-empty-string",
           "optionIds": [
             "a",
             "b",
@@ -63605,11 +63931,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-clean-steps",
-          "kind": "multi_choice",
+          "id": "sc-invalid-integer",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-clean-steps",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-invalid-integer",
           "optionIds": [
             "a",
             "b",
@@ -63617,19 +63943,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-reject-row",
-          "kind": "multi_choice",
+          "id": "sc-score-range",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-reject-row",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-score-range",
           "optionIds": [
             "a",
             "b",
@@ -63637,80 +63960,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "b",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr-clean-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-clean-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "dr-try-except-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-try-except-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb-strip-name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-strip-name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "strip"
-          }
-        },
-        {
-          "id": "fb-empty-check",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-empty-check",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "0"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -63720,11 +63971,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63733,7 +63985,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63746,7 +63998,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63755,20 +64007,34 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
+                "stdin": "  aVA smith  \n",
                 "stdout": "Ava Smith\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "   \n",
+                "stdout": "Missing\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mIA\n",
+                "stdout": "Mia\n",
                 "match": "exact"
               }
             ],
@@ -63776,43 +64042,55 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "clean",
-                "expected": "Ava Smith",
-                "expectedKind": "json"
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_method",
                 "method": "strip",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "title",
+                "type": "source_regex",
+                "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
               }
             ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
           },
           "sourceChecks": [
             {
               "type": "uses_method",
               "method": "strip",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "title",
+              "type": "source_regex",
+              "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -63823,11 +64101,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63836,7 +64115,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63849,7 +64128,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63858,20 +64137,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "valid\n",
+                "stdin": " 92 \n",
+                "stdout": "Valid score\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "ten\n",
+                "stdout": "Invalid score\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "105\n",
+                "stdout": "Invalid score\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "-1\n",
+                "stdout": "Invalid score\n",
                 "match": "exact"
               }
             ],
@@ -63879,7 +64177,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63887,27 +64185,47 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_call",
-                "functionName": "int",
+                "type": "uses_method",
+                "method": "strip",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "0\\s*<=|<=\\s*100",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
               }
             ]
           },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
+          },
           "sourceChecks": [
             {
-              "type": "uses_call",
-              "functionName": "int",
+              "type": "uses_method",
+              "method": "strip",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "0\\s*<=|<=\\s*100",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -63918,11 +64236,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63931,7 +64250,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -63944,7 +64263,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63953,20 +64272,44 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               }
-            ]
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [],
+              "requiredFiles": []
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava:92\nMia:85\n",
+                "stdin": "  ava  \n 92 \n",
+                "stdout": "Ava:92\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "   \n75\n",
+                "stdout": "Rejected\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Leo\nten\n",
+                "stdout": "Rejected\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Mia\n105\n",
+                "stdout": "Rejected\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "  noah lee \n0\n",
+                "stdout": "Noah Lee:0\n",
                 "match": "exact"
               }
             ],
@@ -63974,7 +64317,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -63982,46 +64325,58 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_for_loop",
-                "iterable": "rows",
+                "type": "source_regex",
+                "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "split",
+                "type": "source_regex",
+                "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
               },
               {
-                "type": "uses_method",
-                "method": "strip",
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
               },
               {
-                "type": "uses_method",
-                "method": "title",
+                "type": "source_regex",
+                "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
               }
             ]
           },
+          "workspaceExpectations": {
+            "requiredFolders": [],
+            "requiredFiles": []
+          },
           "sourceChecks": [
             {
-              "type": "uses_for_loop",
-              "iterable": "rows",
+              "type": "source_regex",
+              "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "split",
+              "type": "source_regex",
+              "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
             },
             {
-              "type": "uses_method",
-              "method": "strip",
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
             },
             {
-              "type": "uses_method",
-              "method": "title",
+              "type": "source_regex",
+              "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
             }
           ]
@@ -64053,7 +64408,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch0.title",
-          "sketchId": "csv-dictreader-basics",
+          "sketchId": "dictreader-basics",
           "height": 420,
           "tryIt": {
             "id": "try-simple-csv-processing-sketch0",
@@ -64072,7 +64427,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch1.title",
-          "sketchId": "csv-cleaning-values",
+          "sketchId": "clean-values",
           "height": 420,
           "tryIt": {
             "id": "try-simple-csv-processing-sketch1",
@@ -64091,7 +64446,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch2.title",
-          "sketchId": "csv-safe-processing",
+          "sketchId": "safe-rows",
           "height": 420,
           "tryIt": {
             "id": "try-simple-csv-processing-sketch2",
@@ -64114,7 +64469,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -64124,31 +64479,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "csv-dictreader-basics",
+          "id": "dictreader-basics",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.dictreader-basics.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.dictreader-basics.bodyMarkdown"
         },
         {
-          "id": "csv-cleaning-values",
+          "id": "clean-values",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.clean-values.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.clean-values.bodyMarkdown"
         },
         {
-          "id": "csv-safe-processing",
+          "id": "safe-rows",
           "archetype": "paragraph",
-          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.title",
-          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.bodyMarkdown"
+          "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.safe-rows.title",
+          "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.safe-rows.bodyMarkdown"
         }
       ],
       "exercises": [
         {
-          "id": "sc-import-csv",
+          "id": "sc-dictreader-purpose",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-import-csv",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-dictreader-purpose",
           "optionIds": [
             "a",
             "b",
@@ -64161,11 +64516,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc-dictreader-row-type",
+          "id": "sc-csv-value-type",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-dictreader-row-type",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-csv-value-type",
           "optionIds": [
             "a",
             "b",
@@ -64178,11 +64533,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc-clean-score-steps",
-          "kind": "multi_choice",
+          "id": "sc-clean-convert-order",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-clean-score-steps",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-clean-convert-order",
           "optionIds": [
             "a",
             "b",
@@ -64190,19 +64545,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
-          "id": "mc-good-csv-processing",
-          "kind": "multi_choice",
+          "id": "sc-bad-row-policy",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-good-csv-processing",
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-bad-row-policy",
           "optionIds": [
             "a",
             "b",
@@ -64210,82 +64562,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr-read-csv-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-read-csv-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t5",
-              "t4",
-              "t3",
-              "t2",
-              "t1"
-            ]
-          }
-        },
-        {
-          "id": "dr-clean-row-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-clean-row-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t3",
-              "t4",
-              "t2",
-              "t1"
-            ]
-          }
-        },
-        {
-          "id": "fb-dictreader-name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-dictreader-name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "DictReader"
-          }
-        },
-        {
-          "id": "fb-strip-choice",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-strip-choice",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "strip"
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -64295,23 +64573,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/class_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/class_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/class_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/class_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -64321,95 +64628,150 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/class_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/class_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/class_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/class_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [],
+              "requiredFolders": [
+                "data"
+              ],
               "requiredFiles": [
-                "scores.csv"
+                "data/class_a.csv",
+                "data/class_b.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\n Ava , 92 \n",
-                "readOnly": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava\n92\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "scores.csv",
-                    "content": "name,score\n Ava , 92 \n",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "class_a.csv\n",
+                "stdout": "Ava:92\nBen:85\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "class_b.csv\n",
+                "stdout": "Mia:78\nNoah:88\nLiam:91\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/class_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/class_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionFiles.data_class_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
+                "type": "uses_import",
+                "module": "csv",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
+              },
+              {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
                 "normalizeWhitespace": true
               },
               {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
+                "type": "source_regex",
+                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
               }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data"
+            ],
+            "requiredFiles": [
+              "data/class_a.csv",
+              "data/class_b.csv"
             ]
           },
           "sourceChecks": [
             {
+              "type": "uses_import",
+              "module": "csv",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
+            },
+            {
               "type": "source_contains",
               "pattern": "csv.DictReader",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
               "normalizeWhitespace": true
             },
             {
-              "type": "uses_method",
-              "method": "strip",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
+              "type": "source_regex",
+              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [],
-            "requiredFiles": [
-              "scores.csv"
-            ]
-          }
+          ]
         },
         {
           "id": "try-simple-csv-processing-sketch1",
@@ -64418,23 +64780,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/clean_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/clean_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/clean_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/clean_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -64444,95 +64835,150 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/clean_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/clean_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/clean_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/clean_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [],
+              "requiredFolders": [
+                "data"
+              ],
               "requiredFiles": [
-                "scores.csv"
+                "data/clean_a.csv",
+                "data/clean_b.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\nAva,92\nMia,85\n",
-                "readOnly": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Ava: 92\nMia: 85\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "scores.csv",
-                    "content": "name,score\nAva,92\nMia,85\n",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "clean_a.csv\n",
+                "stdout": "Ava:92\nBen Lee:85\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "clean_b.csv\n",
+                "stdout": "Mia:70\nNoah:100\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/clean_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/clean_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionFiles.data_clean_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
                 "normalizeWhitespace": true
               },
               {
-                "type": "uses_for_loop",
-                "iterable": "reader",
+                "type": "source_regex",
+                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
               }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data"
+            ],
+            "requiredFiles": [
+              "data/clean_a.csv",
+              "data/clean_b.csv"
             ]
           },
           "sourceChecks": [
             {
               "type": "source_contains",
               "pattern": "csv.DictReader",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
               "normalizeWhitespace": true
             },
             {
-              "type": "uses_for_loop",
-              "iterable": "reader",
+              "type": "source_regex",
+              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [],
-            "requiredFiles": [
-              "scores.csv"
-            ]
-          }
+          ]
         },
         {
           "id": "try-simple-csv-processing-sketch2",
@@ -64541,23 +64987,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
           "language": "python",
+          "entryFilePath": "main.py",
           "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/mixed_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/mixed_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "data/mixed_a.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/mixed_b.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -64567,115 +65042,162 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/mixed_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/mixed_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/mixed_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/mixed_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
-              "requiredFolders": [],
+              "requiredFolders": [
+                "data"
+              ],
               "requiredFiles": [
-                "scores.csv"
+                "data/mixed_a.csv",
+                "data/mixed_b.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "scores.csv",
-                "content": "name,score\nAva,92\nMia,85\n",
-                "readOnly": false
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
             "tests": [
               {
-                "stdin": "",
-                "stdout": "177\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "scores.csv",
-                    "content": "name,score\nAva,92\nMia,85\n",
-                    "readOnly": false
-                  }
-                ]
+                "stdin": "mixed_a.csv\n",
+                "stdout": "valid_rows: 2\ntotal_score: 172\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "mixed_b.csv\n",
+                "stdout": "valid_rows: 3\ntotal_score: 155\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "data/mixed_a.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_a_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/mixed_b.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionFiles.data_mixed_b_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
                 "normalizeWhitespace": true
               },
               {
-                "type": "uses_for_loop",
-                "iterable": "reader",
+                "type": "source_regex",
+                "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "int",
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
+                "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
               }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data"
+            ],
+            "requiredFiles": [
+              "data/mixed_a.csv",
+              "data/mixed_b.csv"
             ]
           },
           "sourceChecks": [
             {
               "type": "source_contains",
               "pattern": "csv.DictReader",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
               "normalizeWhitespace": true
             },
             {
-              "type": "uses_for_loop",
-              "iterable": "reader",
+              "type": "source_regex",
+              "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "int",
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
+              "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [],
-            "requiredFiles": [
-              "scores.csv"
-            ]
-          }
+          ]
         }
       ]
     },
@@ -64779,6 +65301,222 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
+          "id": "try-module-7-clean-student-records-sketch0",
+          "kind": "code_input",
+          "purpose": "try_it",
+          "weight": 1,
+          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0",
+          "language": "python",
+          "entryFilePath": "main.py",
+          "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "workspace": {
+            "language": "python",
+            "entryFilePath": "main.py",
+            "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "data/students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "data/students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [
+                "data",
+                "output"
+              ],
+              "requiredFiles": [
+                "data/students.csv",
+                "output/clean_students.csv"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": " Ava :92\nMia:not-a-score\n   :75\nZoe:87\n  leo  :74\nNia:105\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "data/students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "uses_import",
+                "module": "csv",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_contains",
+                "pattern": "csv.DictReader",
+                "path": "main.py",
+                "normalizeWhitespace": true,
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
+              }
+            ]
+          },
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data",
+              "output"
+            ],
+            "requiredFiles": [
+              "data/students.csv",
+              "output/clean_students.csv"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "module": "csv",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_contains",
+              "pattern": "csv.DictReader",
+              "path": "main.py",
+              "normalizeWhitespace": true,
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
+            }
+          ]
+        },
+        {
           "id": "mp-1-read-student-file",
           "kind": "code_input",
           "purpose": "project",
@@ -64790,7 +65528,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -64798,7 +65536,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/students.csv",
               "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.data_students_csv.content",
-              "language": "csv"
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -64808,7 +65578,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -64816,38 +65586,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/students.csv"
+                "data/students.csv",
+                "output/clean_students.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -64855,8 +65638,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Ava,92\nMia,not-a-score\nZoe,87\nleo  ,74\n",
-                "match": "includes"
+                "stdout": "{'name': 'Ava', 'score': 92}\nNone\nNone\n{'name': 'Zoe', 'score': 87}\n{'name': 'Leo', 'score': 74}\nNone\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionCode",
@@ -64871,46 +65654,79 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "data/students.csv",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/students.csv",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
-              "language": "csv"
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/students.csv"
+              "data/students.csv",
+              "output/clean_students.csv"
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "data/students.csv",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
             }
           ]
         },
@@ -64926,7 +65742,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -64934,7 +65750,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/students.csv",
               "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.data_students_csv.content",
-              "language": "csv"
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -64944,7 +65792,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -64952,80 +65800,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.data_students_csv.content",
-                "language": "csv"
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "try:\n    with open(\"data/students.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\ntry:\n    with open(\"data/students.csv\") as file:\n        first_row = file.readline()\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "data"
-              ],
-              "requiredFiles": [
-                "data/students.csv"
-              ]
-            },
-            "files": [
-              {
-                "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionCode",
-            "semanticChecks": [
-              {
-                "type": "function_returns",
-                "functionName": "clean_row",
-                "args": [
-                  " ava , 92 "
-                ],
-                "expected": [
-                  [
-                    "name",
-                    "Ava"
-                  ],
-                  [
-                    "score",
-                    92
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              },
-              {
-                "type": "function_returns",
-                "functionName": "clean_row",
-                "args": [
-                  "leo  ,74"
-                ],
-                "expected": [
-                  [
-                    "name",
-                    "Leo"
-                  ],
-                  [
-                    "score",
-                    74
-                  ]
-                ],
-                "expectedKind": "dict_entries"
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -65039,32 +65823,114 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFolders": [
+                "data",
+                "output"
+              ],
+              "requiredFiles": [
+                "data/students.csv",
+                "output/clean_students.csv"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "recipe": {
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "[{'name': 'Ava', 'score': 92}, {'name': 'Zoe', 'score': 87}, {'name': 'Leo', 'score': 74}]\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "data/students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/students.csv",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
-              "language": "csv"
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/students.csv"
+              "data/students.csv",
+              "output/clean_students.csv"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "mp-3-skip-bad-rows",
@@ -65078,7 +65944,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -65086,7 +65952,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/students.csv",
               "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.data_students_csv.content",
-              "language": "csv"
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -65096,7 +65994,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -65104,38 +66002,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/students.csv"
+                "data/students.csv",
+                "output/clean_students.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -65143,7 +66054,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "[{'name': 'Ava', 'score': 92}, {'name': 'Zoe', 'score': 87}, {'name': 'Leo', 'score': 74}]\n",
+                "stdout": "Wrote 3 clean records\n",
                 "match": "exact"
               }
             ],
@@ -65159,44 +66070,79 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\btry\\s*:",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/students.csv",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
-              "language": "csv"
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/students.csv"
+              "data/students.csv",
+              "output/clean_students.csv"
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\btry\\s*:",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
             }
           ]
         },
@@ -65212,7 +66158,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterCode",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -65220,7 +66166,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/students.csv",
               "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.data_students_csv.content",
-              "language": "csv"
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_students.csv",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.output_clean_students_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -65230,7 +66208,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterCode",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -65238,38 +66216,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/students.csv"
+                "data/students.csv",
+                "output/clean_students.csv"
               ]
-            },
-            "files": [
-              {
-                "path": "data/students.csv",
-                "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
@@ -65277,7 +66268,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Wrote 3 clean records\n",
+                "stdout": "Wrote 3 clean records\nname,score\nAva,92\nZoe,87\nLeo,74\n",
                 "match": "exact"
               }
             ],
@@ -65293,205 +66284,69 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
-                "language": "csv"
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_students.csv",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.output_clean_students_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "output/clean_students.csv",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "write",
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/students.csv",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
-              "language": "csv"
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/students.csv"
+              "data/students.csv",
+              "output/clean_students.csv"
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "output/clean_students.csv",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "write",
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
             }
           ]
-        },
-        {
-          "id": "try-module-7-clean-student-records-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0",
-          "language": "python",
-          "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionCode",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFolders": [
-                "data"
-              ],
-              "requiredFiles": [
-                "data/students.csv"
-              ]
-            },
-            "files": [
-              {
-                "path": "data/students.csv",
-                "content": " ava , 92 \nMia,85\n",
-                "readOnly": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "fixed_tests",
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Ava:92\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "data/students.csv",
-                    "content": " ava , 92 \nMia,85\n",
-                    "readOnly": false
-                  }
-                ]
-              }
-            ],
-            "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.solutionCode",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/students.csv",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "uses_method",
-                "method": "split",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "title",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.3.message"
-              }
-            ]
-          },
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "pattern": "data/students.csv",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
-            },
-            {
-              "type": "uses_method",
-              "method": "split",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "strip",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "title",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.3.message"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "data"
-            ],
-            "requiredFiles": [
-              "data/students.csv"
-            ]
-          }
         }
       ]
     },
@@ -65524,8 +66379,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "height": 420,
           "tryIt": {
             "id": "try-community-event-registration-cleaner-sketch0",
-            "titleKey": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.title",
-            "promptKey": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.prompt",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.tryIt.try_community_event_registration_cleaner_sketch0.title",
+            "promptKey": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.tryIt.try_community_event_registration_cleaner_sketch0.prompt",
             "exerciseKey": "try-community-event-registration-cleaner-sketch0",
             "difficulty": "medium",
             "preferKind": "code_input",
@@ -65624,15 +66479,61 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
-              "path": "data/registration.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.data_registration_csv.content",
-              "language": "csv"
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -65642,15 +66543,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
-                "path": "data/registration.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.data_registration_csv.content",
-                "language": "csv"
+                "path": "data/registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.data_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -65662,36 +66579,47 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "data/registration.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registration_csv.content",
-                "language": "csv"
+                "path": "data/registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/registration.csv"
+                "data/registrations.csv",
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
             }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Ava Smith reserved 2 seat(s) for Python Night <ava@example.com>\n",
-                "match": "exact",
-                "files": [
-                  {
-                    "path": "data/registration.csv",
-                    "content": "name,event,seats,email\n ava smith ,Python Night,2, AVA@EXAMPLE.COM \n",
-                    "readOnly": false
-                  }
-                ]
+                "stdout": " ava smith |Python Night|2| AVA@EXAMPLE.COM \nMia Chen|Data Clinic|not-a-number|mia@example.com\n   |Python Night|1|blank@example.com\nZoe Ray|Python Night|1|zoe@example.com\nLeo West|Web Workshop|3| leo@example.com \nNia Moss|Data Clinic|0|nia@example.com\nOmar Hill|Data Clinic|2|   \n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionCode",
@@ -65704,80 +66632,93 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "data/registration.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registration_csv.content",
-                "language": "csv"
+                "path": "data/registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "data/registration.csv",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "uses_import",
+                "module": "csv",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "split",
+                "type": "source_contains",
+                "pattern": "csv.DictReader",
+                "path": "main.py",
+                "normalizeWhitespace": true,
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "uses_method",
-                "method": "title",
+                "type": "source_regex",
+                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "lower",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registration.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.solutionFiles.data_registration_csv.content",
-              "language": "csv"
-            }
-          ],
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data",
+              "output"
+            ],
+            "requiredFiles": [
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
+            ]
+          },
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "pattern": "data/registration.csv",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "type": "uses_import",
+              "module": "csv",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "split",
+              "type": "source_contains",
+              "pattern": "csv.DictReader",
+              "path": "main.py",
+              "normalizeWhitespace": true,
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "uses_method",
-              "method": "title",
+              "type": "source_regex",
+              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "lower",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.3.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "data"
-            ],
-            "requiredFiles": [
-              "data/registration.csv"
-            ]
-          }
+          ]
         },
         {
           "id": "cp-1-read-registration-file",
@@ -65791,7 +66732,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -65799,7 +66740,53 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -65809,7 +66796,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -65817,7 +66804,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -65831,34 +66834,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/registrations.csv"
+                "data/registrations.csv",
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
-                "stdout": "name,event,seats,email\nava smith ,Python Night,2, AVA@EXAMPLE.COM\nMia Chen,Data Clinic,not-a-number,mia@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3, leo@example.com\n",
-                "match": "includes"
+                "stdout": "{'name': 'Ava Smith', 'event': 'Python Night', 'seats': 2, 'email': 'ava@example.com'}\nNone\nNone\n{'name': 'Zoe Ray', 'event': 'Python Night', 'seats': 1, 'email': 'zoe@example.com'}\n{'name': 'Leo West', 'event': 'Web Workshop', 'seats': 3, 'email': 'leo@example.com'}\nNone\nNone\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionCode",
@@ -65873,48 +66887,89 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "pattern": "data/registrations.csv",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            }
-          ],
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "pattern": "data/registrations.csv",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message",
-              "normalizeWhitespace": true
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/registrations.csv"
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
+            }
+          ]
         },
         {
           "id": "cp-2-clean-one-registration",
@@ -65928,7 +66983,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -65936,7 +66991,53 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -65946,7 +67047,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -65954,7 +67055,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -65968,81 +67085,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/registrations.csv"
+                "data/registrations.csv",
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "semanticChecks": [
+            "type": "fixed_tests",
+            "tests": [
               {
-                "type": "function_returns",
-                "functionName": "clean_row",
-                "args": [
-                  " ava smith ,Python Night,2, AVA@EXAMPLE.COM "
-                ],
-                "expected": [
-                  [
-                    "name",
-                    "Ava Smith"
-                  ],
-                  [
-                    "event",
-                    "Python Night"
-                  ],
-                  [
-                    "seats",
-                    2
-                  ],
-                  [
-                    "email",
-                    "ava@example.com"
-                  ]
-                ],
-                "expectedKind": "dict_entries"
-              },
-              {
-                "type": "function_returns",
-                "functionName": "clean_row",
-                "args": [
-                  "Leo West,Web Workshop,3, leo@example.com"
-                ],
-                "expected": [
-                  [
-                    "name",
-                    "Leo West"
-                  ],
-                  [
-                    "event",
-                    "Web Workshop"
-                  ],
-                  [
-                    "seats",
-                    3
-                  ],
-                  [
-                    "email",
-                    "leo@example.com"
-                  ]
-                ],
-                "expectedKind": "dict_entries"
+                "stdin": "",
+                "stdout": "[{'name': 'Ava Smith', 'event': 'Python Night', 'seats': 2, 'email': 'ava@example.com'}, {'name': 'Zoe Ray', 'event': 'Python Night', 'seats': 1, 'email': 'zoe@example.com'}, {'name': 'Leo West', 'event': 'Web Workshop', 'seats': 3, 'email': 'leo@example.com'}]\n",
+                "match": "exact"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionCode",
@@ -66057,32 +67138,77 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
-              "data"
+              "data",
+              "output"
             ],
             "requiredFiles": [
-              "data/registrations.csv"
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "cp-3-skip-bad-registration-rows",
@@ -66096,7 +67222,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -66104,7 +67230,60 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -66114,7 +67293,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -66122,7 +67301,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -66134,63 +67329,54 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
-                "data"
+                "data",
+                "output"
               ],
               "requiredFiles": [
-                "data/registrations.csv"
+                "data/registrations.csv",
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
                 "stdout": "[{'name': 'Ava Smith', 'event': 'Python Night', 'seats': 2, 'email': 'ava@example.com'}, {'name': 'Zoe Ray', 'event': 'Python Night', 'seats': 1, 'email': 'zoe@example.com'}, {'name': 'Leo West', 'event': 'Web Workshop', 'seats': 3, 'email': 'leo@example.com'}]\n",
                 "match": "exact"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "records",
-                "expected": [
-                  {
-                    "name": "Ava Smith",
-                    "event": "Python Night",
-                    "seats": 2,
-                    "email": "ava@example.com"
-                  },
-                  {
-                    "name": "Zoe Ray",
-                    "event": "Python Night",
-                    "seats": 1,
-                    "email": "zoe@example.com"
-                  },
-                  {
-                    "name": "Leo West",
-                    "event": "Web Workshop",
-                    "seats": 3,
-                    "email": "leo@example.com"
-                  }
-                ],
-                "expectedKind": "json"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionCode",
@@ -66203,68 +67389,88 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
+                "type": "uses_import",
+                "module": "cleaning",
+                "importName": "clean_row",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "clean_row",
+                "type": "source_regex",
+                "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            }
-          ],
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data",
+              "output"
+            ],
+            "requiredFiles": [
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
+            ]
+          },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\btry\\s*:",
+              "type": "uses_import",
+              "module": "cleaning",
+              "importName": "clean_row",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "clean_row",
+              "type": "source_regex",
+              "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "data"
-            ],
-            "requiredFiles": [
-              "data/registrations.csv"
-            ]
-          }
+          ]
         },
         {
           "id": "cp-4-move-cleaning-to-module",
@@ -66278,25 +67484,82 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.tools___init___py.content",
-              "language": "python"
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.tools_cleaning_py.content",
-              "language": "python"
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "summary.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -66306,25 +67569,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.tools_cleaning_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -66336,76 +67612,62 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
                 "data",
-                "tools"
+                "output"
               ],
               "requiredFiles": [
+                "cleaning.py",
                 "data/registrations.csv",
-                "tools/__init__.py",
-                "tools/cleaning.py"
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
-                "stdout": "[{'name': 'Ava Smith', 'event': 'Python Night', 'seats': 2, 'email': 'ava@example.com'}, {'name': 'Zoe Ray', 'event': 'Python Night', 'seats': 1, 'email': 'zoe@example.com'}, {'name': 'Leo West', 'event': 'Web Workshop', 'seats': 3, 'email': 'leo@example.com'}]\n",
+                "stdout": "Total seats: 6\nPython Night: 2\nWeb Workshop: 1\n",
                 "match": "exact"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "records",
-                "expected": [
-                  {
-                    "name": "Ava Smith",
-                    "event": "Python Night",
-                    "seats": 2,
-                    "email": "ava@example.com"
-                  },
-                  {
-                    "name": "Zoe Ray",
-                    "event": "Python Night",
-                    "seats": 1,
-                    "email": "zoe@example.com"
-                  },
-                  {
-                    "name": "Leo West",
-                    "event": "Web Workshop",
-                    "seats": 3,
-                    "email": "leo@example.com"
-                  }
-                ],
-                "expectedKind": "json"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionCode",
@@ -66418,85 +67680,106 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.cleaning",
-                "importName": "clean_row",
+                "module": "summary",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "clean_row",
+                "type": "source_regex",
+                "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+                "path": "summary.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+                "path": "summary.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools___init___py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.solutionFiles.tools_cleaning_py.content",
-              "language": "python"
-            }
-          ],
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data",
+              "output"
+            ],
+            "requiredFiles": [
+              "cleaning.py",
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
+            ]
+          },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.cleaning",
-              "importName": "clean_row",
+              "module": "summary",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.0.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "clean_row",
+              "type": "source_regex",
+              "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+              "path": "summary.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+              "path": "summary.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "data",
-              "tools"
-            ],
-            "requiredFiles": [
-              "data/registrations.csv",
-              "tools/__init__.py",
-              "tools/cleaning.py"
-            ]
-          }
+          ]
         },
         {
           "id": "cp-5-add-summary-functions",
@@ -66510,30 +67793,96 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "summary.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools___init___py.content",
-              "language": "python"
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools_cleaning_py.content",
-              "language": "python"
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
-              "path": "tools/summary.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools_summary_py.content",
-              "language": "python"
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "summary.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.reports_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -66543,30 +67892,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.tools_summary_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -66578,82 +67942,70 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.reports_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_summary_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
                 "data",
-                "tools"
+                "output"
               ],
               "requiredFiles": [
+                "cleaning.py",
+                "summary.py",
                 "data/registrations.csv",
-                "tools/__init__.py",
-                "tools/cleaning.py",
-                "tools/summary.py"
+                "output/clean_registrations.csv",
+                "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Total seats: 6\nPython Night: 2\nWeb Workshop: 1\n",
+                "stdout": "Cleaned 3 registrations\nTotal seats: 6\nPython Night: 2\nWeb Workshop: 1\n",
                 "match": "exact"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "records",
-                "expected": [
-                  {
-                    "name": "Ava Smith",
-                    "event": "Python Night",
-                    "seats": 2,
-                    "email": "ava@example.com"
-                  },
-                  {
-                    "name": "Zoe Ray",
-                    "event": "Python Night",
-                    "seats": 1,
-                    "email": "zoe@example.com"
-                  },
-                  {
-                    "name": "Leo West",
-                    "event": "Web Workshop",
-                    "seats": 3,
-                    "email": "leo@example.com"
-                  }
-                ],
-                "expectedKind": "json"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionCode",
@@ -66666,104 +68018,114 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.reports_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_summary_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
-                "module": "tools.summary",
+                "module": "reports",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "total_seats",
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "path": "reports.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "event_counts",
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "path": "reports.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+                "path": "reports.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools___init___py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_cleaning_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/summary.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.solutionFiles.tools_summary_py.content",
-              "language": "python"
-            }
-          ],
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "data",
+              "output"
+            ],
+            "requiredFiles": [
+              "cleaning.py",
+              "summary.py",
+              "data/registrations.csv",
+              "output/clean_registrations.csv",
+              "output/summary.txt"
+            ]
+          },
           "sourceChecks": [
             {
               "type": "uses_import",
-              "module": "tools.summary",
+              "module": "reports",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.0.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "total_seats",
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "path": "reports.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
             },
             {
-              "type": "uses_call",
-              "functionName": "event_counts",
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "path": "reports.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+              "path": "reports.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
             }
-          ],
-          "workspaceExpectations": {
-            "requiredFolders": [
-              "data",
-              "tools"
-            ],
-            "requiredFiles": [
-              "data/registrations.csv",
-              "tools/__init__.py",
-              "tools/cleaning.py",
-              "tools/summary.py"
-            ]
-          }
+          ]
         },
         {
           "id": "cp-6-write-final-reports",
@@ -66777,35 +68139,103 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterCode",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "summary.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.reports_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "data/registrations.csv",
               "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.data_registrations_csv.content",
-              "language": "csv"
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools___init___py.content",
-              "language": "python"
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_cleaning_py.content",
-              "language": "python"
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.main_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
-              "path": "tools/summary.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_summary_py.content",
-              "language": "python"
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
-              "path": "tools/reports.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_reports_py.content",
-              "language": "python"
+              "path": "summary.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports.py",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.reports_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.data_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/clean_registrations.csv",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_clean_registrations_csv.content",
+              "language": "csv",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "output/summary.txt",
+              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_summary_txt.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -66815,35 +68245,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterCode",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.reports_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_summary_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/reports.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.tools_reports_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "solutionFiles": [
@@ -66855,90 +68302,71 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.reports_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_summary_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/reports.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_reports_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "workspaceExpectations": {
               "requiredFolders": [
                 "data",
-                "tools",
                 "output"
               ],
               "requiredFiles": [
+                "cleaning.py",
+                "summary.py",
+                "reports.py",
                 "data/registrations.csv",
-                "tools/cleaning.py",
-                "tools/summary.py",
-                "tools/reports.py",
                 "output/clean_registrations.csv",
                 "output/summary.txt"
               ]
-            },
-            "files": [
-              {
-                "path": "data/registrations.csv",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.data_registrations_csv.content",
-                "language": "csv"
-              }
-            ]
+            }
           },
           "showExpectedExample": true,
           "recipe": {
             "type": "fixed_tests",
-            "language": "python",
             "tests": [
               {
                 "stdin": "",
-                "stdout": "Cleaned 3 registrations\nTotal seats: 6\nPython Night: 2\nWeb Workshop: 1\n",
+                "stdout": "Cleaned 3 registrations\nname,event,seats,email\nAva Smith,Python Night,2,ava@example.com\nZoe Ray,Python Night,1,zoe@example.com\nLeo West,Web Workshop,3,leo@example.com\nTotal seats: 6\nPython Night: 2\nWeb Workshop: 1\n",
                 "match": "exact"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "variable_equals",
-                "name": "records",
-                "expected": [
-                  {
-                    "name": "Ava Smith",
-                    "event": "Python Night",
-                    "seats": 2,
-                    "email": "ava@example.com"
-                  },
-                  {
-                    "name": "Zoe Ray",
-                    "event": "Python Night",
-                    "seats": 1,
-                    "email": "zoe@example.com"
-                  },
-                  {
-                    "name": "Leo West",
-                    "event": "Web Workshop",
-                    "seats": 3,
-                    "email": "leo@example.com"
-                  }
-                ],
-                "expectedKind": "json"
               }
             ],
             "solutionCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionCode",
@@ -66951,129 +68379,115 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "summary.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports.py",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.reports_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/registrations.csv",
                 "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.data_registrations_csv.content",
-                "language": "csv"
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/__init__.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools___init___py.content",
-                "language": "python"
+                "path": "output/clean_registrations.csv",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_clean_registrations_csv.content",
+                "language": "csv",
+                "isEntry": false,
+                "entry": false
               },
               {
-                "path": "tools/cleaning.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_cleaning_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/summary.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_summary_py.content",
-                "language": "python"
-              },
-              {
-                "path": "tools/reports.py",
-                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_reports_py.content",
-                "language": "python"
+                "path": "output/summary.txt",
+                "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.output_summary_txt.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "uses_call",
-                "functionName": "write_clean_registrations",
+                "type": "source_regex",
+                "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
               },
               {
-                "type": "uses_call",
-                "functionName": "write_summary",
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
-                "pattern": "output/clean_registrations.csv",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
               },
               {
-                "type": "source_contains",
-                "pattern": "output/summary.txt",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message",
-                "normalizeWhitespace": true
+                "type": "source_regex",
+                "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
               }
             ]
           },
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "data/registrations.csv",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.data_registrations_csv.content",
-              "language": "csv"
-            },
-            {
-              "path": "tools/__init__.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools___init___py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/cleaning.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_cleaning_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/summary.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_summary_py.content",
-              "language": "python"
-            },
-            {
-              "path": "tools/reports.py",
-              "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.solutionFiles.tools_reports_py.content",
-              "language": "python"
-            }
-          ],
-          "sourceChecks": [
-            {
-              "type": "uses_call",
-              "functionName": "write_clean_registrations",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
-            },
-            {
-              "type": "uses_call",
-              "functionName": "write_summary",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
-            },
-            {
-              "type": "source_contains",
-              "pattern": "output/clean_registrations.csv",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message",
-              "normalizeWhitespace": true
-            },
-            {
-              "type": "source_contains",
-              "pattern": "output/summary.txt",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message",
-              "normalizeWhitespace": true
-            }
-          ],
           "workspaceExpectations": {
             "requiredFolders": [
               "data",
-              "tools",
               "output"
             ],
             "requiredFiles": [
+              "cleaning.py",
+              "summary.py",
+              "reports.py",
               "data/registrations.csv",
-              "tools/cleaning.py",
-              "tools/summary.py",
-              "tools/reports.py",
               "output/clean_registrations.csv",
               "output/summary.txt"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
+            }
+          ]
         }
       ]
     }

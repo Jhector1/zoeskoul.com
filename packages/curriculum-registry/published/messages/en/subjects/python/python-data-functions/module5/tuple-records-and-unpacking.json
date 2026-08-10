@@ -4,128 +4,159 @@
       "python-5-lists-tuples-and-dictionaries": {
         "tuple-records-and-unpacking": {
           "label": "Tuple Records and Unpacking",
-          "summary": "Use tuples when a small record should keep a fixed shape, then unpack each position into a meaningful name.",
+          "summary": "Use tuples for fixed-shape records, read fields by position, unpack fields into meaningful names, and process tuple records in a loop.",
           "cards": {
             "sketch0": {
-              "title": "A fixed record has a clear shape"
+              "title": "Tuples as fixed-shape records"
             },
             "sketch1": {
-              "title": "Unpack positions into names"
+              "title": "Unpacking fields into names"
+            },
+            "sketch2": {
+              "title": "Looping through tuple records"
             },
             "quiz": {
-              "title": "Check your tuple understanding"
+              "title": "Check your understanding"
             }
           },
           "quiz": {
-            "try-tuple-records-sketch0": {
-              "title": "Create a location tuple",
-              "prompt": "In `main.py`, create `location` as the tuple `(\"Austin\", \"TX\")`. Print the city from index 0 and the state from index 1 on separate lines.",
-              "hint": "Use parentheses for the fixed pair, then read each position with square brackets.",
+            "sc-tuple-purpose": {
+              "title": "Choose a fixed-shape record",
+              "prompt": "A coordinate always has exactly two ordered fields: x and y. Which value best communicates that fixed two-field shape?",
+              "hint": "Use the collection type intended for an ordered record whose fields should not be changed in place.",
               "help": {
-                "concept": "A tuple stores an ordered record whose positions should not be changed after creation.",
-                "hint_1": "The first position uses index 0.",
-                "hint_2": "Print the two fields separately."
+                "concept": "A tuple is useful when a small ordered record has a stable shape.",
+                "hint_1": "A list is better when items are expected to be added, removed, or replaced.",
+                "hint_2": "Choose the value written with parentheses."
               },
-              "starterCode": "# Create a fixed location record and print both fields.\n",
-              "solutionCode": "location = (\"Austin\", \"TX\")\nprint(location[0])\nprint(location[1])\n",
+              "options": {
+                "a": "[4, 9]",
+                "b": "(4, 9)",
+                "c": "{\"x\": 4, \"y\": 9}",
+                "d": "\"4, 9\""
+              }
+            },
+            "sc-tuple-immutable": {
+              "title": "Recognize an invalid tuple mutation",
+              "prompt": "Given `point = (4, 9)`, which line tries to mutate the tuple and therefore cannot be used?",
+              "hint": "Tuples can be read and unpacked, but their existing positions cannot be reassigned.",
+              "help": {
+                "concept": "Tuple values are ordered and indexable, but the tuple itself is immutable.",
+                "hint_1": "`point[0]` can be read.",
+                "hint_2": "Assigning a new value to `point[0]` attempts to change the tuple in place."
+              },
+              "options": {
+                "a": "print(point[0])",
+                "b": "x, y = point",
+                "c": "point[0] = 7",
+                "d": "print(point)"
+              }
+            },
+            "sc-unpack-shape": {
+              "title": "Match names to tuple fields",
+              "prompt": "Given `student = (\"Ava\", 91, \"A\")`, which line correctly unpacks all three fields?",
+              "hint": "Unpacking needs one target name for each tuple position.",
+              "help": {
+                "concept": "Tuple unpacking assigns positions from left to right into the same number of target names.",
+                "hint_1": "This tuple contains three fields.",
+                "hint_2": "Choose the assignment with three names on the left side."
+              },
+              "options": {
+                "a": "name, score, grade = student",
+                "b": "name, score = student",
+                "c": "student = name, score, grade",
+                "d": "name = student"
+              }
+            },
+            "sc-loop-unpack": {
+              "title": "Unpack each record in a loop",
+              "prompt": "Given `registrations = [(\"Ava\", 2), (\"Noah\", 1)]`, which loop header gives meaningful names to both fields of each tuple?",
+              "hint": "Each item in `registrations` is a two-field tuple.",
+              "help": {
+                "concept": "A `for` loop can unpack each tuple item directly into one variable per field.",
+                "hint_1": "Each record contains a name and a seat count.",
+                "hint_2": "Use `for name, seats in registrations:`."
+              },
+              "options": {
+                "a": "for name, seats in registrations:",
+                "b": "for registrations in name, seats:",
+                "c": "for name in seats:",
+                "d": "for 0, 1 in registrations:"
+              }
+            },
+            "try-tuple-records-sketch0": {
+              "title": "Build and read a shipment record",
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line.",
+              "hint": "Create one two-field tuple from the input variables, then read its two positions.",
+              "help": {
+                "concept": "A tuple can hold related fields in a fixed order, and tuple indexes work like list indexes.",
+                "hint_1": "Build `shipment = (product, quantity)`.",
+                "hint_2": "Print `shipment[0]`, then `shipment[1]`."
+              },
+              "starterCode": "product = input()\nquantity = int(input())\n\n# Create shipment as a two-field tuple: product, then quantity.\n# Print the product using index 0.\n# Print the quantity using index 1.\n",
+              "solutionCode": "product = input()\nquantity = int(input())\n\nshipment = (product, quantity)\nprint(shipment[0])\nprint(shipment[1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create location as the required two-value tuple."
+                  "message": "Create `shipment` as the tuple `(product, quantity)` instead of printing the inputs directly."
                 },
                 "1": {
-                  "message": "Read the first tuple position with location[0]."
+                  "message": "Read the product from `shipment[0]`."
+                },
+                "2": {
+                  "message": "Read the quantity from `shipment[1]`."
                 }
               }
             },
             "try-tuple-unpacking-sketch1": {
-              "title": "Unpack an event tuple",
-              "prompt": "The starter defines `event = (\"Workshop\", 24)`. Unpack it into `title` and `seats`, then print the two variables on separate lines.",
-              "hint": "Place both new names on the left side of one assignment.",
+              "title": "Unpack a booking record",
+              "prompt": "A booking record is already stored as `booking = (\"Workshop\", 24, \"Friday\")`. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order.",
+              "hint": "The tuple has three fields, so use three target names on the left side of one assignment.",
               "help": {
-                "concept": "Tuple unpacking gives a meaningful name to each position in a fixed record.",
-                "hint_1": "The number of names must match the number of tuple values.",
-                "hint_2": "Print the unpacked variables, not hard-coded literals."
+                "concept": "Unpacking replaces positional lookups with meaningful variable names.",
+                "hint_1": "Write `title, seats, day = booking`.",
+                "hint_2": "After unpacking, print `title`, `seats`, and `day` instead of hard-coding the values."
               },
-              "starterCode": "event = (\"Workshop\", 24)\n# Unpack event into title and seats, then print both values.\n",
-              "solutionCode": "event = (\"Workshop\", 24)\ntitle, seats = event\nprint(title)\nprint(seats)\n",
+              "starterCode": "booking = (\"Workshop\", 24, \"Friday\")\n\n# Unpack booking into title, seats, and day.\n# Print title, seats, and day on separate lines.\n",
+              "solutionCode": "booking = (\"Workshop\", 24, \"Friday\")\n\ntitle, seats, day = booking\nprint(title)\nprint(seats)\nprint(day)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack event into title and seats in one assignment."
+                  "message": "Unpack all three fields with `title, seats, day = booking`."
                 }
               }
             },
-            "sc-tuple-purpose": {
-              "title": "Choose the fixed record",
-              "prompt": "Which value is the best tuple when a coordinate should keep exactly two ordered positions?",
-              "options": {
-                "a": "[4, 9]",
-                "b": "(4, 9)",
-                "c": "{\"x\": 4, \"y\": 9}"
-              },
-              "hint": "Look for the ordered collection whose structure is intended to stay fixed.",
+            "try-tuple-loop-sketch2": {
+              "title": "Build and loop through registration records",
+              "prompt": "Two registrations arrive as a name followed by a seat count. Create `registrations` as a list containing two tuples: `(name1, seats1)` and `(name2, seats2)`. Loop through the list by unpacking each tuple into `name` and `seats`, then print `name` and `seats` on one line for each registration.",
+              "hint": "Build a list of two tuple records first, then unpack each record directly in the `for` loop header.",
               "help": {
-                "concept": "Tuples are useful for compact ordered records that should not be mutated.",
-                "hint_1": "Parentheses distinguish this literal from a list.",
-                "hint_2": "A dictionary names fields rather than relying on positions."
-              }
-            },
-            "mc-tuple-facts": {
-              "title": "Recognize tuple behavior",
-              "prompt": "Which statements about tuples are true?",
-              "options": {
-                "a": "Tuple positions use zero-based indexes.",
-                "b": "append() adds a value to an existing tuple.",
-                "c": "A tuple can be unpacked into multiple names.",
-                "d": "Tuples can contain only strings."
+                "concept": "A list can hold several fixed-shape tuple records, and a loop can unpack each record as it visits it.",
+                "hint_1": "Create `registrations = [(name1, seats1), (name2, seats2)]`.",
+                "hint_2": "Use `for name, seats in registrations:` and print the two current fields."
               },
-              "hint": "Separate how a tuple is read from whether its structure can be mutated.",
-              "help": {
-                "concept": "Tuples are ordered and indexable, but they do not support list-style mutation methods.",
-                "hint_1": "Unpacking follows position order.",
-                "hint_2": "A tuple may hold values of different types."
-              }
-            },
-            "fb-tuple-index": {
-              "title": "Read the first tuple field",
-              "prompt": "Complete the expression that reads `\"North\"` from `direction = (\"North\", 12)`: `direction[___]`",
-              "options": {
-                "a": "0",
-                "b": "1",
-                "c": "-2 + 1"
-              },
-              "hint": "Tuple indexing begins at the same position as list and string indexing.",
-              "help": {
-                "concept": "Every Python sequence begins with the zero index.",
-                "hint_1": "The requested value is the first field.",
-                "hint_2": "Use the simplest direct index."
-              }
-            },
-            "dr-tuple-unpack": {
-              "title": "Build an unpacking assignment",
-              "prompt": "Arrange the tokens to unpack `record` into `name` and `score`.",
-              "tokens": {
-                "t1": "name",
-                "t2": ",",
-                "t3": "score",
-                "t4": "=",
-                "t5": "record"
-              },
-              "hint": "Put the target names on the left and the tuple variable on the right.",
-              "help": {
-                "concept": "Unpacking is one assignment with one target name per tuple position.",
-                "hint_1": "The comma separates the two target names.",
-                "hint_2": "The tuple variable appears after the equals sign."
+              "starterCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\n# Create registrations as a list of two (name, seats) tuples.\n# Loop through registrations and unpack each tuple into name and seats.\n# Print name and seats on one line for each record.\n",
+              "solutionCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\nregistrations = [(name1, seats1), (name2, seats2)]\nfor name, seats in registrations:\n    print(name, seats)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build `registrations` from the two input name/seat pairs instead of hard-coding the final output."
+                },
+                "1": {
+                  "message": "Unpack each tuple in the loop with `for name, seats in registrations:`."
+                }
               }
             }
           },
           "tryIt": {
             "try_tuple_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Create and read a location tuple."
+              "prompt": "Build a two-field shipment tuple from input, then read and print both fields by index."
             },
             "try_tuple_unpacking_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Unpack an event tuple into two names."
+              "prompt": "Unpack a three-field booking tuple into meaningful names and print the fields."
+            },
+            "try_tuple_loop_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Build two tuple records from input, store them in a list, and unpack each record in a loop."
             },
             "allowReveal": true
           }
@@ -137,13 +168,17 @@
     "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "tuple-records-and-unpacking": {
-          "sketch-1": {
-            "title": "A fixed record has a clear shape",
-            "bodyMarkdown": "A list is useful when a program expects items to grow, shrink, or change. A tuple communicates a different intention: these values form one ordered record whose shape should remain stable.\n\n```python\nrgb = (240, 128, 64)\nprint(rgb[0])\n```\n\nThe positions still use zero-based indexing, but methods such as `append()` are not available. That limitation is useful when the record represents something fixed, such as a coordinate, color, or date."
+          "tuple-fixed-record": {
+            "title": "Tuples as fixed-shape records",
+            "bodyMarkdown": "A **tuple** is an ordered collection, like a list, but it is meant for data whose shape should stay fixed.\n\n```python\npoint = (12, 7)\nprint(point[0])\nprint(point[1])\n```\n\nOutput:\n\n```text\n12\n7\n```\n\nThe important ideas are:\n\n- Parentheses and commas create the tuple record.\n- Positions still use zero-based indexes.\n- A tuple can hold different kinds of values.\n- The tuple itself is **immutable**: you do not replace positions or call list methods such as `append()` on it.\n\nUse a list when the collection is expected to grow, shrink, or change. Use a tuple when the positions form a small record with a stable meaning, such as `(x, y)` or `(name, score)`."
           },
-          "sketch-2": {
-            "title": "Unpack positions into names",
-            "bodyMarkdown": "Indexes are compact, but named variables make the meaning of each field easier to read. Tuple unpacking assigns every position in one step.\n\n```python\nbook = (\"Kindred\", 1979)\ntitle, year = book\nprint(f\"{title} was published in {year}.\")\n```\n\nThe number of target names must match the number of tuple fields. Once unpacked, the rest of the program can work with `title` and `year` instead of remembering what positions 0 and 1 mean."
+          "tuple-unpacking": {
+            "title": "Unpacking fields into names",
+            "bodyMarkdown": "Indexes work, but code is easier to read when each field has a meaningful name. **Tuple unpacking** assigns every field in one statement.\n\n```python\nbook = (\"Kindred\", 1979, \"Octavia Butler\")\ntitle, year, author = book\nprint(title)\nprint(year)\nprint(author)\n```\n\nOutput:\n\n```text\nKindred\n1979\nOctavia Butler\n```\n\nPython matches values from left to right:\n\n- `title` receives the first field.\n- `year` receives the second field.\n- `author` receives the third field.\n\nThe number of target names must match the number of tuple fields. If a three-field tuple is unpacked into only two names, the assignment cannot succeed."
+          },
+          "tuple-record-loop": {
+            "title": "Looping through tuple records",
+            "bodyMarkdown": "A list can contain several tuple records. Because every tuple has the same shape, a `for` loop can unpack each record as it visits it.\n\n```python\nroutes = [(\"North\", 4), (\"South\", 7)]\n\nfor route, stops in routes:\n    print(route, stops)\n```\n\nOutput:\n\n```text\nNorth 4\nSouth 7\n```\n\nDuring the first iteration, `route` is `\"North\"` and `stops` is `4`. During the second iteration, they receive the fields from the second tuple.\n\nThis combines ideas you already know:\n\n1. A list holds several items.\n2. Each item is a fixed-shape tuple record.\n3. The loop visits one tuple at a time.\n4. The loop header unpacks that tuple into meaningful field names."
           }
         }
       }

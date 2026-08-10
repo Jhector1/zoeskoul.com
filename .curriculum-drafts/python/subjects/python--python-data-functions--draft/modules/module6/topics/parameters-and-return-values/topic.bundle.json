@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch0.title",
-      "sketchId": "sketch-parameters-basics",
+      "sketchId": "parameter-argument",
       "height": 420,
       "tryIt": {
         "id": "try-parameters-and-return-values-sketch0",
@@ -42,13 +42,32 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch1.title",
-      "sketchId": "sketch-return-vs-print",
+      "sketchId": "multiple-parameters",
       "height": 420,
       "tryIt": {
         "id": "try-parameters-and-return-values-sketch1",
         "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.title",
         "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.prompt",
         "exerciseKey": "try-parameters-and-return-values-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch2.title",
+      "sketchId": "return-to-caller",
+      "height": 420,
+      "tryIt": {
+        "id": "try-parameters-and-return-values-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch2.prompt",
+        "exerciseKey": "try-parameters-and-return-values-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -65,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -75,25 +94,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch-parameters-basics",
+      "id": "parameter-argument",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.parameter-argument.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.parameter-argument.bodyMarkdown"
     },
     {
-      "id": "sketch-return-vs-print",
+      "id": "multiple-parameters",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.multiple-parameters.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.multiple-parameters.bodyMarkdown"
+    },
+    {
+      "id": "return-to-caller",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.return-to-caller.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.return-to-caller.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-parameter-role",
+      "id": "sc-parameter-vs-argument",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-parameter-role",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-parameter-vs-argument",
       "optionIds": [
         "a",
         "b",
@@ -106,11 +131,45 @@
       }
     },
     {
-      "id": "sc-return-purpose",
+      "id": "sc-argument-order",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-return-purpose",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-argument-order",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-valid-two-argument-call",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-valid-two-argument-call",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "sc-returned-value",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-returned-value",
       "optionIds": [
         "a",
         "b",
@@ -120,114 +179,6 @@
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
-      }
-    },
-    {
-      "id": "mc-return-uses",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-return-uses",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "mc-print-vs-return",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-print-vs-return",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "dr-function-flow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-function-flow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-build-function",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-build-function",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "fb-call-argument",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-call-argument",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "7"
-      }
-    },
-    {
-      "id": "fb-return-expression",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-return-expression",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "price + tax"
       }
     },
     {
@@ -272,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -281,29 +232,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "add",
-            "args": [
-              3,
-              4
-            ],
-            "expected": 7
+            "stdin": "Ava\nMia\n",
+            "stdout": "Badge: Ava\nBadge: Mia\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "add",
-            "args": [
-              -2,
-              5
-            ],
-            "expected": 3
+            "stdin": "Noah\nZoe\n",
+            "stdout": "Badge: Noah\nBadge: Zoe\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -312,8 +254,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "try-parameters-and-return-values-sketch1",
@@ -357,7 +333,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -366,29 +342,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "full_name",
-            "args": [
-              "Ava",
-              "Smith"
-            ],
-            "expected": "Ava Smith"
+            "stdin": "10\n3\n",
+            "stdout": "7\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "full_name",
-            "args": [
-              "Mia",
-              "Chen"
-            ],
-            "expected": "Mia Chen"
+            "stdin": "3\n10\n",
+            "stdout": "-7\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -397,8 +364,152 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "try-parameters-and-return-values-sketch2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "6\n4\n",
+            "stdout": "24\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "9\n5\n",
+            "stdout": "45\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

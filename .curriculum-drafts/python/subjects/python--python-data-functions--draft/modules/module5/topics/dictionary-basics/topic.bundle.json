@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
-      "sketchId": "dict-idea",
+      "sketchId": "dict-create",
       "height": 420,
       "tryIt": {
         "id": "try-dictionary-basics-sketch0",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch2.title",
-      "sketchId": "dict-create-update",
+      "sketchId": "dict-membership",
       "height": 420,
       "tryIt": {
         "id": "try-dictionary-basics-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,10 +94,10 @@
   ],
   "sketches": [
     {
-      "id": "dict-idea",
+      "id": "dict-create",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create.bodyMarkdown"
     },
     {
       "id": "dict-lookup",
@@ -106,10 +106,10 @@
       "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-lookup.bodyMarkdown"
     },
     {
-      "id": "dict-create-update",
+      "id": "dict-membership",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.bodyMarkdown"
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-membership.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-membership.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -139,7 +139,8 @@
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
@@ -147,11 +148,11 @@
       }
     },
     {
-      "id": "mc-dict-parts",
-      "kind": "multi_choice",
+      "id": "sc-key-value-role",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-parts",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-key-value-role",
       "optionIds": [
         "a",
         "b",
@@ -159,20 +160,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-dict-operations",
-      "kind": "multi_choice",
+      "id": "sc-key-membership",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-operations",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-key-membership",
       "optionIds": [
         "a",
         "b",
@@ -180,77 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "dr-dict-create-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-create-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "dr-dict-update-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-update-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "fb-dict-literal",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-literal",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "\"blue\""
-      }
-    },
-    {
-      "id": "fb-dict-key-lookup",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-key-lookup",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "\"age\""
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
@@ -295,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -307,8 +235,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Ava\n",
+            "stdin": "Ava\n12\n",
+            "stdout": "{'name': 'Ava', 'age': 12}\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Noah\n15\n",
+            "stdout": "{'name': 'Noah', 'age': 15}\n",
             "match": "exact"
           }
         ],
@@ -324,19 +257,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_dict_key",
-            "key": "name",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
-            "variable": "profile"
+            "type": "source_regex",
+            "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_dict_key",
-          "key": "name",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
-          "variable": "profile"
+          "type": "source_regex",
+          "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -382,7 +313,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -394,8 +325,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "{'name': 'Mia', 'age': 12}\n",
+            "stdin": "notebook\n",
+            "stdout": "4\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "folder\n",
+            "stdout": "3\n",
             "match": "exact"
           }
         ],
@@ -409,27 +345,10 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "profile",
-            "expected": [
-              [
-                "name",
-                "Mia"
-              ],
-              [
-                "age",
-                12
-              ]
-            ],
-            "expectedKind": "dict_entries"
-          }
-        ],
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+            "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
           }
         ]
@@ -437,7 +356,7 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+          "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
         }
       ]
@@ -484,7 +403,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -496,8 +415,13 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "{'Ava': 92, 'Mia': 85}\n",
+            "stdin": "theme\n",
+            "stdout": "found\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "language\n",
+            "stdout": "missing\n",
             "match": "exact"
           }
         ],
@@ -511,56 +435,19 @@
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "scores",
-            "expected": [
-              [
-                "Ava",
-                92
-              ],
-              [
-                "Mia",
-                85
-              ]
-            ],
-            "expectedKind": "dict_entries"
-          }
-        ],
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bscores\\s*=",
+            "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "Ava",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "Mia",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bscores\\s*=",
+          "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-        },
-        {
-          "type": "uses_dict_key",
-          "key": "Ava",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "uses_dict_key",
-          "key": "Mia",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
         }
       ]
     }

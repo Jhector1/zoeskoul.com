@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch0.title",
-      "sketchId": "print-vs-return-idea",
+      "sketchId": "print-returns-none",
       "height": 420,
       "tryIt": {
         "id": "try-print-vs-return-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch1.title",
-      "sketchId": "print-vs-return-compare",
+      "sketchId": "reuse-returned-value",
       "height": 420,
       "tryIt": {
         "id": "try-print-vs-return-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.cards.sketch2.title",
-      "sketchId": "print-vs-return-when",
+      "sketchId": "fix-print-bug",
       "height": 420,
       "tryIt": {
         "id": "try-print-vs-return-sketch2",
@@ -84,7 +84,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -94,31 +94,48 @@
   ],
   "sketches": [
     {
-      "id": "print-vs-return-idea",
+      "id": "print-returns-none",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-idea.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-idea.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-returns-none.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-returns-none.bodyMarkdown"
     },
     {
-      "id": "print-vs-return-compare",
+      "id": "reuse-returned-value",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-compare.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-compare.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.reuse-returned-value.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.reuse-returned-value.bodyMarkdown"
     },
     {
-      "id": "print-vs-return-when",
+      "id": "fix-print-bug",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-when.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.print-vs-return-when.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.fix-print-bug.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.print-vs-return.fix-print-bug.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "pvrs-sc-1",
+      "id": "sc-print-only-result",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-sc-1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-print-only-result",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-display-only-call",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-display-only-call",
       "optionIds": [
         "a",
         "b",
@@ -131,11 +148,11 @@
       }
     },
     {
-      "id": "pvrs-sc-2",
+      "id": "sc-reuse-returned-value",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-sc-2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-reuse-returned-value",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +165,11 @@
       }
     },
     {
-      "id": "pvrs-mc-1",
-      "kind": "multi_choice",
+      "id": "sc-fix-print-return-bug",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-mc-1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.sc-fix-print-return-bug",
       "optionIds": [
         "a",
         "b",
@@ -160,102 +177,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "pvrs-mc-2",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-mc-2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "pvrs-dr-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-dr-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5"
-        ]
-      }
-    },
-    {
-      "id": "pvrs-dr-2",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-dr-2",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "pvrs-fb-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-fb-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "return"
-      }
-    },
-    {
-      "id": "pvrs-fb-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-fb-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "print(get_name())"
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
@@ -300,7 +223,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -309,27 +232,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "make_message",
-            "args": [
-              "Ava"
-            ],
-            "expected": "Hi, Ava"
+            "stdin": "Ready\n",
+            "stdout": "Ready\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "make_message",
-            "args": [
-              "Mia"
-            ],
-            "expected": "Hi, Mia"
+            "stdin": "Waiting\n",
+            "stdout": "Waiting\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -338,8 +254,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+show_status\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*text\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+show_status\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*text\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-print-vs-return-sketch1",
@@ -383,7 +323,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -392,27 +332,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "double",
-            "args": [
-              7
-            ],
-            "expected": 14
+            "stdin": "6\n",
+            "stdout": "13\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "double",
-            "args": [
-              -3
-            ],
-            "expected": -6
+            "stdin": "-3\n",
+            "stdout": "-5\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -421,8 +354,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-print-vs-return-sketch2",
@@ -466,7 +423,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -475,27 +432,20 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "label",
-            "args": [
-              "zoe"
-            ],
-            "expected": "ZOE"
+            "stdin": "Book\n",
+            "stdout": "Item: Book!\n",
+            "match": "exact"
           },
           {
-            "type": "function_returns",
-            "functionName": "label",
-            "args": [
-              "Ava"
-            ],
-            "expected": "AVA"
+            "stdin": "Pencil\n",
+            "stdout": "Item: Pencil!\n",
+            "match": "exact"
           }
         ],
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
@@ -504,8 +454,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+make_label\\s*\\(\\s*item\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+[\\'\\\"]Item:\\s[\\'\\\"]\\s*\\+\\s*item\\b",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+make_label\\s*\\(\\s*item\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+[\\'\\\"]Item:\\s[\\'\\\"]\\s*\\+\\s*item\\b",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }
