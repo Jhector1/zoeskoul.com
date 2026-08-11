@@ -304,12 +304,6 @@
             "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
             "path": "names.py",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
           }
         ]
       },
@@ -331,12 +325,6 @@
           "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
           "path": "names.py",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
         }
       ]
     },
@@ -476,8 +464,8 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+            "type": "uses_call",
+            "functionName": "make_badge",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
           }
@@ -504,8 +492,8 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+          "type": "uses_call",
+          "functionName": "make_badge",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
         }
@@ -644,22 +632,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
-            "path": "names.py",
+            "type": "uses_method",
+            "method": "upper",
+            "path": "badges.py",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
-            "path": "badges.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
-            "path": "badges.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
           }
         ]
       },
@@ -671,22 +647,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
-          "path": "names.py",
+          "type": "uses_method",
+          "method": "upper",
+          "path": "badges.py",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
-          "path": "badges.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
-          "path": "badges.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
         }
       ]
     },
@@ -839,23 +803,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_import",
-            "module": "messages",
-            "importName": "welcome_message",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
-          },
-          {
             "type": "source_regex",
             "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
             "path": "messages.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
-            "path": "messages.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
           }
         ]
       },
@@ -868,23 +819,10 @@
       },
       "sourceChecks": [
         {
-          "type": "uses_import",
-          "module": "messages",
-          "importName": "welcome_message",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
-        },
-        {
           "type": "source_regex",
           "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
           "path": "messages.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
-          "path": "messages.py",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
         }
       ]
     }

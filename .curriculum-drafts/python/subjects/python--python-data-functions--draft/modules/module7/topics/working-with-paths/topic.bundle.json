@@ -375,23 +375,15 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_import",
-            "module": "pathlib",
-            "importName": "Path",
+            "type": "uses_call",
+            "functionName": "Path",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
-            "path": "main.py",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*path\\s*\\)",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
           }
         ]
       },
@@ -401,23 +393,15 @@
       },
       "sourceChecks": [
         {
-          "type": "uses_import",
-          "module": "pathlib",
-          "importName": "Path",
+          "type": "uses_call",
+          "functionName": "Path",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
-          "path": "main.py",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*path\\s*\\)",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -577,29 +561,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_import",
-            "module": "pathlib",
-            "importName": "Path",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
-          },
-          {
             "type": "source_regex",
             "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
             "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
           }
         ]
       },
@@ -614,29 +579,10 @@
       },
       "sourceChecks": [
         {
-          "type": "uses_import",
-          "module": "pathlib",
-          "importName": "Path",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
-        },
-        {
           "type": "source_regex",
           "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
           "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
         }
       ]
     }

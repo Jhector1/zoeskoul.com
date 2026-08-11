@@ -303,29 +303,16 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_import",
-            "module": "csv",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
-          },
-          {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "path": "main.py",
             "normalizeWhitespace": true,
+            "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+            "type": "uses_for_loop",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
           }
         ]
       },
@@ -342,29 +329,16 @@
       },
       "sourceChecks": [
         {
-          "type": "uses_import",
-          "module": "csv",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
-        },
-        {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "path": "main.py",
           "normalizeWhitespace": true,
+          "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+          "type": "uses_for_loop",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -557,27 +531,51 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+            "type": "uses_dict_key",
+            "key": "name",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bexcept\\s+ValueError\\s*:",
+            "type": "uses_dict_key",
+            "key": "event",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+            "type": "uses_dict_key",
+            "key": "seats",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "email",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.4.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.5.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.6.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.7.message"
           }
         ]
       },
@@ -595,27 +593,51 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+          "type": "uses_dict_key",
+          "key": "name",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bexcept\\s+ValueError\\s*:",
+          "type": "uses_dict_key",
+          "key": "event",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+          "type": "uses_dict_key",
+          "key": "seats",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "email",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.4.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.5.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.6.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.7.message"
         }
       ]
     },
@@ -807,22 +829,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+            "type": "uses_call",
+            "functionName": "clean_row",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
           }
         ]
       },
@@ -839,22 +849,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+          "type": "uses_call",
+          "functionName": "clean_row",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
         }
       ]
     },
@@ -1075,15 +1073,9 @@
           },
           {
             "type": "source_regex",
-            "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
             "path": "cleaning.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
           }
         ]
       },
@@ -1108,15 +1100,9 @@
         },
         {
           "type": "source_regex",
-          "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
           "path": "cleaning.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
         }
       ]
     },
@@ -1372,21 +1358,25 @@
           },
           {
             "type": "source_regex",
-            "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+            "pattern": "\\bdef\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:",
             "path": "summary.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
-            "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+            "pattern": "\\bdef\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:",
             "path": "summary.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
-            "path": "main.py",
+            "type": "uses_for_loop",
+            "path": "summary.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
+          },
+          {
+            "type": "uses_for_loop",
+            "path": "main.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.4.message"
           }
         ]
       },
@@ -1411,21 +1401,25 @@
         },
         {
           "type": "source_regex",
-          "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+          "pattern": "\\bdef\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:",
           "path": "summary.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
-          "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+          "pattern": "\\bdef\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:",
           "path": "summary.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
-          "path": "main.py",
+          "type": "uses_for_loop",
+          "path": "summary.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
+        },
+        {
+          "type": "uses_for_loop",
+          "path": "main.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.4.message"
         }
       ]
     },
@@ -1717,21 +1711,29 @@
           },
           {
             "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+            "pattern": "\\bdef\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:",
             "path": "reports.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+            "pattern": "\\bdef\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
             "path": "reports.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+            "type": "source_contains",
+            "pattern": "output/clean_registrations.csv",
+            "normalizeWhitespace": true,
             "path": "reports.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "output/summary.txt",
+            "normalizeWhitespace": true,
+            "path": "reports.py",
+            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.4.message"
           }
         ]
       },
@@ -1757,21 +1759,29 @@
         },
         {
           "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+          "pattern": "\\bdef\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:",
           "path": "reports.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+          "pattern": "\\bdef\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
           "path": "reports.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+          "type": "source_contains",
+          "pattern": "output/clean_registrations.csv",
+          "normalizeWhitespace": true,
           "path": "reports.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "output/summary.txt",
+          "normalizeWhitespace": true,
+          "path": "reports.py",
+          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.4.message"
         }
       ]
     },
@@ -2071,28 +2081,18 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+            "type": "source_contains",
+            "pattern": "output/clean_registrations.csv",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+            "type": "source_contains",
+            "pattern": "output/summary.txt",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
           }
         ]
       },
@@ -2112,28 +2112,18 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+          "type": "source_contains",
+          "pattern": "output/clean_registrations.csv",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+          "type": "source_contains",
+          "pattern": "output/summary.txt",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
         }
       ]
     }

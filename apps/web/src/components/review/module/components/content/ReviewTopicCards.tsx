@@ -37,6 +37,7 @@ import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
+import { resolveReviewFreeNavigation } from "@/components/review/module/reviewFreeNavigation";
 
 const TOPIC_PANE_ANIM = {
   initial: { opacity: 0, y: 10 },
@@ -130,7 +131,10 @@ export default function ReviewTopicCards({
   onCompactQuizNavigationChange,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
-  const freeNavigation = !workspaceCapabilities.usesProgressGating;
+  const freeNavigation = resolveReviewFreeNavigation({
+    unlockAll,
+    usesProgressGating: workspaceCapabilities.usesProgressGating,
+  });
   const safeMaxUnlockedCardIndex = unlockAll || freeNavigation
     ? Math.max(0, viewCards.length - 1)
     : Math.max(

@@ -86,7 +86,7 @@
             },
             "try-writing-text-files-sketch0": {
               "title": "Replace an old status with fresh input",
-              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with `.strip().title()`, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
               "hint": "Write mode should replace the supplied old contents, not add after them.",
               "help": {
                 "concept": "Use mode `\"w\"` when the new text should replace whatever the file contained before.",
@@ -111,21 +111,11 @@
                   "content": "Old status\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Open `status.txt` with mode `\"w\"` so the old contents are replaced."
-                },
-                "1": {
-                  "message": "Write the cleaned `status` value to the file."
-                },
-                "2": {
-                  "message": "Reopen `status.txt` in read mode and print the saved contents."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-writing-text-files-sketch1": {
               "title": "Append a new log entry",
-              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log.",
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file.",
               "hint": "Append mode should preserve `Start shift` and add the new entry after it.",
               "help": {
                 "concept": "Use mode `\"a\"` when existing text must remain and the new text belongs at the end.",
@@ -152,19 +142,19 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `log.txt` with mode `\"a\"` so the existing first line is preserved."
+                  "message": "Open `log.txt` in append mode `\"a\"` so the existing line is preserved."
                 },
                 "1": {
-                  "message": "Append the cleaned `entry` followed by a newline."
+                  "message": "Write the new entry to the file with `write()`."
                 },
                 "2": {
-                  "message": "Reopen `log.txt` in read mode and print the complete saved log."
+                  "message": "Read the saved file back with `read()` before displaying the complete log."
                 }
               }
             },
             "try-writing-text-files-sketch2": {
               "title": "Create a two-line report",
-              "prompt": "Read a name and a score from input. Clean the name with `.strip().title()` and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
               "hint": "Use two `file.write(...)` calls so each report line ends with `\\n`.",
               "help": {
                 "concept": "Several calls to `file.write()` can build a multi-line text file deliberately.",
@@ -183,34 +173,21 @@
                   "content": "name = input().strip().title()\nscore = input().strip()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score + \"\\n\")\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Create `report.txt` with mode `\"w\"`."
-                },
-                "1": {
-                  "message": "Write the report text with `file.write()`."
-                },
-                "2": {
-                  "message": "Use newline characters so the report has two separate lines."
-                },
-                "3": {
-                  "message": "Reopen `report.txt` in read mode and print the saved file."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_writing_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Replace an existing file with fresh input using write mode."
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved."
             },
             "try_writing_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Preserve existing text and add a new line with append mode."
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file."
             },
             "try_writing_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Create a multi-line text report and verify the saved contents."
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved."
             },
             "allowReveal": true
           }

@@ -35,6 +35,41 @@ export type SeedPolicy = "actor" | "global";
 
 const practiceGetInFlight = new Map<string, Promise<PracticeGetResponse>>();
 
+const DRAFT_QA_PRACTICE_KEY_PREFIX = "draftqa.";
+
+function currentDraftQaPracticeContext() {
+  if (process.env.NODE_ENV === "production") return null;
+  if (typeof window === "undefined") return null;
+
+  const search = new URLSearchParams(window.location.search);
+  const draftQa = search.get("draftQa");
+  const source = search.get("source");
+
+  if ((draftQa !== "1" && draftQa !== "true") || source !== "draft") {
+    return null;
+  }
+
+  const catalog = search.get("catalog")?.trim() ?? "";
+  const subject = search.get("subject")?.trim() ?? "";
+  const module = search.get("moduleDir")?.trim() ?? "";
+  const topic = search.get("topicDir")?.trim() ?? "";
+
+  if (!catalog || !subject || !module || !topic) return null;
+
+  const locale =
+    window.location.pathname.split("/").filter(Boolean)[0]?.trim() || "en";
+
+  return { catalog, subject, module, topic, locale };
+}
+
+function isDraftQaPracticeKey(key: unknown) {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    typeof key === "string" &&
+    key.startsWith(DRAFT_QA_PRACTICE_KEY_PREFIX)
+  );
+}
+
 function isAbortLikeError(error: unknown) {
   return (
       (error instanceof DOMException && error.name === "AbortError") ||
@@ -158,7 +193,19 @@ function stableJsonForPracticeRequest(value: unknown): string {
 }
 
 export async function fetchPracticeExercise(args: Record<string, any>) {
-  const url = new URL("/api/practice", window.location.origin);
+  const draftQa = currentDraftQaPracticeContext();
+  const url = new URL(
+    draftQa ? "/api/dev/curriculum-drafts/practice" : "/api/practice",
+    window.location.origin,
+  );
+
+  if (draftQa) {
+    url.searchParams.set("draftCatalog", draftQa.catalog);
+    url.searchParams.set("draftSubject", draftQa.subject);
+    url.searchParams.set("draftModule", draftQa.module);
+    url.searchParams.set("draftTopic", draftQa.topic);
+    url.searchParams.set("draftLocale", draftQa.locale);
+  }
 
   for (const [key, value] of Object.entries(args)) {
     if (
@@ -256,7 +303,10 @@ export async function submitPracticeAnswer(args: {
   if (existing) return existing;
 
   const promise = (async () => {
-    const res = await fetch("/api/practice/validate", {
+    const endpoint = isDraftQaPracticeKey(args.key)
+      ? "/api/dev/curriculum-drafts/practice/validate"
+      : "/api/practice/validate";
+    const res = await fetch(endpoint, {
       method: "POST",
       headers: withTutoringContentRequestHeaders({
         "Content-Type": "application/json",
@@ -311,7 +361,10 @@ export async function fetchPracticeHelp(args: {
   userAnswer?: any;
   signal?: AbortSignal;
 }): Promise<PracticeHelpClientResponse> {
-  const res = await fetch("/api/practice/help", {
+  const endpoint = isDraftQaPracticeKey(args.key)
+    ? "/api/dev/curriculum-drafts/practice/help"
+    : "/api/practice/help";
+  const res = await fetch(endpoint, {
     method: "POST",
     headers: withTutoringContentRequestHeaders({
       "Content-Type": "application/json",
@@ -372,7 +425,10 @@ export async function fetchPracticeTutor(args: {
   history?: PracticeTutorMessage[];
   signal?: AbortSignal;
 }): Promise<PracticeTutorClientResponse> {
-  const res = await fetch("/api/practice/explain", {
+  const endpoint = isDraftQaPracticeKey(args.key)
+    ? "/api/dev/curriculum-drafts/practice/explain"
+    : "/api/practice/explain";
+  const res = await fetch(endpoint, {
     method: "POST",
     headers: withTutoringContentRequestHeaders({
       "Content-Type": "application/json",

@@ -273,14 +273,14 @@
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bexcept\\s+ValueError\\s*:",
+            "type": "uses_call",
+            "functionName": "int",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+            "pattern": "\\bexcept\\s+ValueError\\s*:",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
           }
@@ -298,14 +298,14 @@
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bexcept\\s+ValueError\\s*:",
+          "type": "uses_call",
+          "functionName": "int",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+          "pattern": "\\bexcept\\s+ValueError\\s*:",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
         }
@@ -432,21 +432,9 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
             "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
             "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
           }
         ]
       },
@@ -461,21 +449,9 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
           "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
           "path": "main.py",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
         }
       ]
     },
@@ -640,22 +616,15 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+            "type": "uses_for_loop",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+            "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
             "path": "main.py",
             "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -670,22 +639,15 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+          "type": "uses_for_loop",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+          "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
           "path": "main.py",
           "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
         }
       ]
     }

@@ -86,7 +86,7 @@
             },
             "try-reading-text-files-sketch0": {
               "title": "Read the whole message file",
-              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file.",
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents.",
               "hint": "Use `with open(\"message.txt\", \"r\") as file:` and `message = file.read()`.",
               "help": {
                 "concept": "Use `.read()` when you want the complete text file as one string.",
@@ -113,19 +113,22 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `message.txt` with a `with open(..., \"r\") as file:` block."
+                  "message": "Read from the supplied `message.txt` file."
                 },
                 "1": {
-                  "message": "Use `file.read()` to read the whole file."
+                  "message": "Use `read()` to obtain the file's text."
                 },
                 "2": {
-                  "message": "Store the result of `file.read()` in `message` before printing it."
+                  "message": "Store the result of `file.read()` in the explicitly requested variable `message`."
+                },
+                "3": {
+                  "message": "Print the `message` variable itself after reading the file into it."
                 }
               }
             },
             "try-reading-text-files-sketch1": {
               "title": "Process names one line at a time",
-              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with `for line in file:` and print each name with surrounding whitespace removed.",
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed.",
               "hint": "Inside the `with` block, use `for line in file:` and `print(line.strip())`.",
               "help": {
                 "concept": "Iterating over an open file lets you process one line at a time without first reading the whole file into one string.",
@@ -152,19 +155,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `names.txt` in read mode with a `with` block."
-                },
-                "1": {
-                  "message": "Loop directly through the open `file` one line at a time."
-                },
-                "2": {
-                  "message": "Strip each line before printing it."
+                  "message": "Use a `for` loop over `file` as the prompt requests."
                 }
               }
             },
             "try-reading-text-files-sketch2": {
               "title": "Read and clean text from a data folder",
-              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name.",
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name.",
               "hint": "Open `data/city.txt`, then use `.read().strip().title()` on the open file.",
               "help": {
                 "concept": "A relative path can point to a file inside a workspace folder, and the string returned by `.read()` can be processed like any other string.",
@@ -191,16 +188,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open the relative path `data/city.txt` in read mode."
+                  "message": "Open the supplied relative path `data/city.txt`."
                 },
                 "1": {
-                  "message": "Read the city text from the file instead of hard-coding a city name."
+                  "message": "Read the city text from the file with `read()`."
                 },
                 "2": {
-                  "message": "Remove surrounding whitespace from the text read from the file."
+                  "message": "Remove surrounding whitespace with `strip()`."
                 },
                 "3": {
-                  "message": "Convert the city text to title case."
+                  "message": "Convert the cleaned city text to title case with `title()`."
                 }
               }
             }
@@ -208,15 +205,15 @@
           "tryIt": {
             "try_reading_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a complete text file into one string and print the value you read."
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents."
             },
             "try_reading_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Process an open text file one line at a time."
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed."
             },
             "try_reading_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Read text from a relative path and use the returned string."
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name."
             },
             "allowReveal": true
           }

@@ -107,19 +107,19 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the integer conversion inside a `try` block."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Catch exactly `ValueError` for invalid integer text."
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Print the converted number on the success path and `Invalid number` on the failure path."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-try-except-basics-sketch1": {
               "title": "Handle a missing data file",
-              "prompt": "Read a file name from input and build `path = \"data/\" + filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
               "hint": "The risky operation is opening the selected path for reading.",
               "help": {
                 "concept": "A missing read path raises `FileNotFoundError`, which is different from the `ValueError` raised by a bad integer conversion.",
@@ -146,13 +146,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the file-open/read operation inside a `try` block."
-                },
-                "1": {
-                  "message": "Catch exactly `FileNotFoundError` for a missing selected file."
-                },
-                "2": {
-                  "message": "Print the selected file text on success and `Missing file` when the file is absent."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -191,13 +185,10 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through `[first, second]` instead of handling only one filename."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Put the file operation inside a `try` block within the loop."
-                },
-                "2": {
-                  "message": "Catch exactly `FileNotFoundError` and print `Missing: <filename>`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -209,7 +200,7 @@
             },
             "try_try_except_basics_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Open a selected data file safely with `except FileNotFoundError`."
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`."
             },
             "try_try_except_basics_sketch2": {
               "title": "Try it yourself",

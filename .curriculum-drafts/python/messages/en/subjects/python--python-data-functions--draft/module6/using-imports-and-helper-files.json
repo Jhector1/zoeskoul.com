@@ -86,7 +86,7 @@
             },
             "try-using-imports-and-helper-files-sketch0": {
               "title": "Move a helper into names.py",
-              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`.",
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module.",
               "hint": "The function body moves to `names.py`; `main.py` keeps the input and output flow.",
               "help": {
                 "concept": "A Python helper file becomes a module that another file can import.",
@@ -110,19 +110,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`, not in `main.py`."
-                },
-                "2": {
-                  "message": "Keep the name-cleaning behavior inside `names.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-using-imports-and-helper-files-sketch1": {
               "title": "Move related helpers into text_tools.py",
-              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with `from text_tools import clean_word, make_label`.",
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module.",
               "hint": "Both related helper functions move to the same module; the input and print stay in `main.py`.",
               "help": {
                 "concept": "One module can expose several related helper functions.",
@@ -146,13 +143,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both `clean_word` and `make_label` from `text_tools` in `main.py`."
+                  "message": "Use the requested import for `clean_word` from `text_tools`."
                 },
                 "1": {
-                  "message": "Define `clean_word(text)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Define `make_label(word)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -191,16 +188,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from `names` in `main.py`."
+                  "message": "Import the sibling `names` helper module in `main.py` as the prompt requires."
                 },
                 "1": {
-                  "message": "Import `make_badge` from `badges` in `main.py`."
+                  "message": "Import the sibling `badges` helper module in `main.py` as the prompt requires."
                 },
                 "2": {
-                  "message": "Call `clean_name(raw_name)` in `main.py`."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "3": {
-                  "message": "Call `make_badge(name, role)` in `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -208,11 +205,11 @@
           "tryIt": {
             "try_using_imports_and_helper_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Move one working helper out of `main.py` into `names.py` and import it back."
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module."
             },
             "try_using_imports_and_helper_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Move two related helpers into one module and import both function names."
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module."
             },
             "try_using_imports_and_helper_files_sketch2": {
               "title": "Try it yourself",

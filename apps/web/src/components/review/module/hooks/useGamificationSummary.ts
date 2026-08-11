@@ -86,13 +86,17 @@ async function fetchGamificationSummary(args?: {
     return inFlightSummary;
 }
 
-export function useGamificationSummary() {
-    const [loading, setLoading] = useState(() => !cachedSummary);
-    const [summary, setSummary] = useState<GamificationSummary | null>(() => cachedSummary);
+export function useGamificationSummary(args: { enabled?: boolean } = {}) {
+    const enabled = args.enabled !== false;
+    const [loading, setLoading] = useState(() => enabled && !cachedSummary);
+    const [summary, setSummary] = useState<GamificationSummary | null>(() =>
+        enabled ? cachedSummary : null,
+    );
     const mountedRef = useRef(false);
     const lastFocusRefreshAtRef = useRef(0);
 
     const refresh = useCallback(async (options?: { force?: boolean }) => {
+        if (!enabled) return null;
         const next = await fetchGamificationSummary(options);
         if (!mountedRef.current) return next;
 
@@ -106,27 +110,34 @@ export function useGamificationSummary() {
 
         setLoading(false);
         return next;
-    }, []);
+    }, [enabled]);
 
     useEffect(() => {
+        if (!enabled) {
+            setLoading(false);
+            setSummary(null);
+            return;
+        }
         mountedRef.current = true;
         void refresh();
 
         return () => {
             mountedRef.current = false;
         };
-    }, [refresh]);
+    }, [enabled, refresh]);
 
     useEffect(() => {
+        if (!enabled) return;
         return subscribeGamificationUpdate((payload) => {
             cachedSummary = payload.summary;
             cachedSummaryAt = nowMs();
             setSummary(payload.summary);
             setLoading(false);
         });
-    }, []);
+    }, [enabled]);
 
     useEffect(() => {
+        if (!enabled) return;
         const onFocus = () => {
             const now = nowMs();
             if (now - lastFocusRefreshAtRef.current < SUMMARY_CACHE_TTL_MS) return;
@@ -136,7 +147,7 @@ export function useGamificationSummary() {
 
         window.addEventListener("focus", onFocus);
         return () => window.removeEventListener("focus", onFocus);
-    }, [refresh]);
+    }, [enabled, refresh]);
 
     return {
         loading,

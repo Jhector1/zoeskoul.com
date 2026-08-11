@@ -282,27 +282,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
-          },
-          {
             "type": "uses_for_loop",
             "iterable": "rooms",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
-        },
-        {
           "type": "uses_for_loop",
           "iterable": "rooms",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -382,37 +372,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
-          },
-          {
             "type": "uses_for_loop",
             "iterable": "minutes",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
-        },
-        {
           "type": "uses_for_loop",
           "iterable": "minutes",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
         }
       ]
     },
@@ -492,39 +462,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
-          },
-          {
             "type": "uses_for_loop",
             "iterable": "readings",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "append",
-            "target": "adjusted",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
-        },
-        {
           "type": "uses_for_loop",
           "iterable": "readings",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "uses_method",
-          "method": "append",
-          "target": "adjusted",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
         }
       ]
     },
@@ -604,47 +552,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
-          },
-          {
             "type": "uses_for_loop",
             "iterable": "scores",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
-        },
-        {
           "type": "uses_for_loop",
           "iterable": "scores",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
         }
       ]
     }

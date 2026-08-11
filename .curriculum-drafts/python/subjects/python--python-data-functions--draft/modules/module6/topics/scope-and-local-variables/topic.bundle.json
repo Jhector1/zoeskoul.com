@@ -260,11 +260,6 @@
             "type": "source_regex",
             "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+total\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -273,11 +268,6 @@
           "type": "source_regex",
           "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+total\\b",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -365,11 +355,6 @@
             "type": "source_regex",
             "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+updated\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
           }
         ]
       },
@@ -383,11 +368,6 @@
           "type": "source_regex",
           "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+updated\\b",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -467,37 +447,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+message\\b",
+            "type": "uses_call",
+            "functionName": "make_message",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+message\\b",
+          "type": "uses_call",
+          "functionName": "make_message",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
         }
       ]
     }

@@ -52179,16 +52179,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+                "pattern": "\\bclubs\\s*=",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*clubs\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+              "pattern": "\\bclubs\\s*=",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*clubs\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -52709,16 +52719,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+                "pattern": "\\bscores\\s*\\[\\s*[^\\]\\n]+\\s*\\]\\s*=\\s*corrected_score\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*scores\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+              "pattern": "\\bscores\\s*\\[\\s*[^\\]\\n]+\\s*\\]\\s*=\\s*corrected_score\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*scores\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -52798,17 +52818,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
+                "type": "uses_method",
+                "method": "append",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*attendees\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
+              "type": "uses_method",
+              "method": "append",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*attendees\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
             }
           ]
         },
@@ -52888,17 +52918,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+                "type": "uses_method",
+                "method": "remove",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*workshops\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+              "type": "uses_method",
+              "method": "remove",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*workshops\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.1.message"
             }
           ]
         },
@@ -52973,17 +53013,37 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+                "type": "uses_method",
+                "method": "pop",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*next_ticket\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*tickets\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+              "type": "uses_method",
+              "method": "pop",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*next_ticket\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*tickets\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.2.message"
             }
           ]
         },
@@ -53063,29 +53123,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+                "type": "uses_method",
+                "method": "sort",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
               },
               {
-                "type": "uses_method",
-                "method": "sort",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
-                "target": "times"
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*times\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+              "type": "uses_method",
+              "method": "sort",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
             },
             {
-              "type": "uses_method",
-              "method": "sort",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
-              "target": "times"
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*times\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message"
             }
           ]
         }
@@ -53375,27 +53433,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
-              },
-              {
                 "type": "uses_for_loop",
                 "iterable": "rooms",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\brooms\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
-            },
-            {
               "type": "uses_for_loop",
               "iterable": "rooms",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.1.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
             }
           ]
         },
@@ -53475,37 +53523,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
-              },
-              {
                 "type": "uses_for_loop",
                 "iterable": "minutes",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bminutes\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
-            },
-            {
               "type": "uses_for_loop",
               "iterable": "minutes",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\btotal\\s*(?:\\+=\\s*minute|=\\s*total\\s*\\+\\s*minute)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
             }
           ]
         },
@@ -53585,39 +53613,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
-              },
-              {
                 "type": "uses_for_loop",
                 "iterable": "readings",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "append",
-                "target": "adjusted",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\breadings\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
-            },
-            {
               "type": "uses_for_loop",
               "iterable": "readings",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "append",
-              "target": "adjusted",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
             }
           ]
         },
@@ -53697,47 +53703,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
-              },
-              {
                 "type": "uses_for_loop",
                 "iterable": "scores",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bscores\\s*=\\s*\\[\\s*a\\s*,\\s*b\\s*,\\s*c\\s*,\\s*d\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
-            },
-            {
               "type": "uses_for_loop",
               "iterable": "scores",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bif\\s+score\\s*>=\\s*80\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bhigh_scores\\.append\\s*\\(\\s*score\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.3.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch3.sourceChecks.0.message"
             }
           ]
         }
@@ -53991,16 +53967,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_contains",
-                "pattern": "shipment[0]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
-                "normalizeWhitespace": true
+                "type": "uses_subscript",
+                "index": 0,
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
-                "pattern": "shipment[1]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message",
-                "normalizeWhitespace": true
+                "type": "uses_subscript",
+                "index": 1,
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -54020,16 +53994,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_contains",
-              "pattern": "shipment[0]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message",
-              "normalizeWhitespace": true
+              "type": "uses_subscript",
+              "index": 0,
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "source_contains",
-              "pattern": "shipment[1]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message",
-              "normalizeWhitespace": true
+              "type": "uses_subscript",
+              "index": 1,
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -54189,14 +54161,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bregistrations\\s*=\\s*\\[\\s*\\(\\s*name1\\s*,\\s*seats1\\s*\\)\\s*,\\s*\\(\\s*name2\\s*,\\s*seats2\\s*\\)\\s*\\]",
+                "type": "uses_for_loop",
+                "iterable": "registrations",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+name\\s*,\\s*seats\\s+in\\s+registrations\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.1.message"
               }
             ]
           },
@@ -54211,14 +54178,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bregistrations\\s*=\\s*\\[\\s*\\(\\s*name1\\s*,\\s*seats1\\s*\\)\\s*,\\s*\\(\\s*name2\\s*,\\s*seats2\\s*\\)\\s*\\]",
+              "type": "uses_for_loop",
+              "iterable": "registrations",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+name\\s*,\\s*seats\\s+in\\s+registrations\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.1.message"
             }
           ]
         }
@@ -54484,16 +54446,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+                "pattern": "\\bprofile\\s*=\\s*\\{",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_dict_key",
+                "key": "name",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "uses_dict_key",
+                "key": "age",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bprofile\\s*=\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name\\s*,\\s*['\\\"]age['\\\"]\\s*:\\s*age\\s*\\}",
+              "pattern": "\\bprofile\\s*=\\s*\\{",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_dict_key",
+              "key": "name",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "uses_dict_key",
+              "key": "age",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -54571,21 +54553,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
-              }
-            ]
+            "sourceChecks": []
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\bprices\\s*\\[\\s*item\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
-            }
-          ]
+          "sourceChecks": []
         },
         {
           "id": "try-dictionary-basics-sketch2",
@@ -54661,21 +54631,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-              }
-            ]
+            "sourceChecks": []
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
-            }
-          ]
+          "sourceChecks": []
         }
       ]
     },
@@ -54991,6 +54949,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*stock\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.1.message"
               }
             ]
           },
@@ -54999,6 +54962,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*stock\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -55076,31 +55044,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
-              }
-            ]
+            "sourceChecks": []
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
-            }
-          ]
+          "sourceChecks": []
         },
         {
           "id": "try-updating-and-looping-dictionaries-sketch2",
@@ -55173,8 +55119,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
+                "type": "uses_for_loop",
+                "iterable": "inventory",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
               },
               {
@@ -55186,8 +55132,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
+              "type": "uses_for_loop",
+              "iterable": "inventory",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
             },
             {
@@ -55273,27 +55219,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+                "type": "uses_for_loop",
+                "iterable": "scores",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+              "type": "uses_for_loop",
+              "iterable": "scores",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
             }
           ]
         },
@@ -55373,37 +55309,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+                "type": "uses_for_loop",
+                "iterable": "words",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+              "type": "uses_for_loop",
+              "iterable": "words",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
             }
           ]
         }
@@ -55693,37 +55609,27 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+                "type": "uses_subscript",
+                "index": 1,
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+                "type": "uses_subscript",
+                "index": 1,
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+              "type": "uses_subscript",
+              "index": 1,
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+              "type": "uses_subscript",
+              "index": 1,
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -55801,21 +55707,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-              }
-            ]
+            "sourceChecks": []
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-            }
-          ]
+          "sourceChecks": []
         },
         {
           "id": "try-nested-data-structures-sketch2",
@@ -55893,17 +55787,37 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
+                "type": "uses_dict_key",
+                "key": "students",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "append",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*course\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\s*\\)",
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
+              "type": "uses_dict_key",
+              "key": "students",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "append",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*course\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\s*\\)",
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
             }
           ]
         },
@@ -55983,47 +55897,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+                "type": "uses_for_loop",
+                "iterable": "students",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+              "type": "uses_for_loop",
+              "iterable": "students",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
             }
           ]
         }
@@ -56174,14 +56058,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
+                "type": "uses_for_loop",
+                "iterable": "schedule",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
               }
             ]
           },
@@ -56196,14 +56075,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
+              "type": "uses_for_loop",
+              "iterable": "schedule",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -56277,17 +56151,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+                "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+                "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+                "type": "uses_for_loop",
+                "iterable": "schedule",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
               }
             ]
@@ -56304,17 +56178,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+              "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+              "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+              "type": "uses_for_loop",
+              "iterable": "schedule",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
             }
           ]
@@ -56389,18 +56263,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+                "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
                 "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
               }
             ]
           },
@@ -56416,18 +56285,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+              "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
               "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
             }
           ]
         },
@@ -56500,29 +56364,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+                "type": "uses_for_loop",
+                "iterable": "schedule",
                 "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
-              },
-              {
-                "type": "source_regex",
                 "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
               }
             ]
           },
@@ -56537,29 +56386,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+              "type": "uses_for_loop",
+              "iterable": "schedule",
               "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
-            },
-            {
-              "type": "source_regex",
               "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
-              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+              "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
             }
           ]
         }
@@ -56827,11 +56661,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -56845,11 +56674,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -57017,11 +56841,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
               }
             ]
           },
@@ -57035,11 +56854,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -57309,14 +57123,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+                "type": "uses_call",
+                "functionName": "make_badge",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -57327,14 +57136,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+              "type": "uses_call",
+              "functionName": "make_badge",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -57419,14 +57223,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+                "type": "uses_call",
+                "functionName": "difference",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
               }
             ]
           },
@@ -57437,14 +57236,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+              "type": "uses_call",
+              "functionName": "difference",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -57529,14 +57323,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+                "type": "uses_call",
+                "functionName": "rectangle_area",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
               }
             ]
           },
@@ -57547,14 +57336,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+              "type": "uses_call",
+              "functionName": "rectangle_area",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -57824,8 +57608,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+                "type": "uses_call",
+                "functionName": "show_status",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
               }
             ]
@@ -57837,8 +57621,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+              "type": "uses_call",
+              "functionName": "show_status",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
             }
           ]
@@ -57919,27 +57703,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+                "type": "uses_call",
+                "functionName": "double",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+              "type": "uses_call",
+              "functionName": "double",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
             }
           ]
         },
@@ -58024,14 +57798,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+                "type": "uses_call",
+                "functionName": "make_label",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
               }
             ]
           },
@@ -58042,14 +57811,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+              "type": "uses_call",
+              "functionName": "make_label",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -58317,11 +58081,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+total\\b",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
               }
             ]
           },
@@ -58330,11 +58089,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\btotal\\s*=\\s*price\\s*\\+\\s*3\\b",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+total\\b",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -58422,11 +58176,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+updated\\b",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
               }
             ]
           },
@@ -58440,11 +58189,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bupdated\\s*=\\s*count\\s*\\+\\s*1\\b",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+updated\\b",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -58524,37 +58268,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+message\\b",
+                "type": "uses_call",
+                "functionName": "make_message",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
               }
             ]
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+message\\b",
+              "type": "uses_call",
+              "functionName": "make_message",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bresult\\s*=\\s*make_message\\s*\\(\\s*name\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "(?m)^print\\s*\\(\\s*result\\s*\\)\\s*$",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -58824,13 +58548,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+                "type": "uses_call",
+                "functionName": "clean_name",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+                "type": "uses_call",
+                "functionName": "clean_name",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
               }
             ]
@@ -58842,13 +58566,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+              "type": "uses_call",
+              "functionName": "clean_name",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+              "type": "uses_call",
+              "functionName": "clean_name",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
             }
           ]
@@ -58934,8 +58658,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+                "type": "uses_call",
+                "functionName": "word_count",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
               }
             ]
@@ -58947,8 +58671,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+              "type": "uses_call",
+              "functionName": "word_count",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
             }
           ]
@@ -59032,11 +58756,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
               }
             ]
           },
@@ -59045,11 +58764,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
             }
           ]
         }
@@ -59345,12 +59059,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
                 "path": "names.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-                "path": "names.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -59372,12 +59080,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
               "path": "names.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-              "path": "names.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -59484,13 +59186,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "uses_import",
-                "module": "text_tools",
-                "importName": "make_label",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
-              },
-              {
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+clean_word\\s*\\(\\s*text\\s*\\)\\s*:",
                 "path": "text_tools.py",
@@ -59514,13 +59209,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "uses_import",
               "module": "text_tools",
               "importName": "clean_word",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "uses_import",
-              "module": "text_tools",
-              "importName": "make_label",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
             },
@@ -59672,14 +59360,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "uses_import",
                 "module": "names",
-                "importName": "clean_name",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
               },
               {
                 "type": "uses_import",
                 "module": "badges",
-                "importName": "make_badge",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
               },
@@ -59707,14 +59393,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "uses_import",
               "module": "names",
-              "importName": "clean_name",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
             },
             {
               "type": "uses_import",
               "module": "badges",
-              "importName": "make_badge",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
             },
@@ -59996,11 +59680,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
               }
             ]
           },
@@ -60009,11 +59688,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.1.message"
             }
           ]
         },
@@ -60096,11 +59770,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
               }
             ]
           },
@@ -60109,11 +59778,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+price\\s*\\+\\s*tax\\b",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.1.message"
             }
           ]
         },
@@ -60201,11 +59865,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
               }
             ]
           },
@@ -60214,11 +59873,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "type": "source_regex",
               "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+score\\s*>=\\s*70\\b",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.1.message"
             }
           ]
         }
@@ -60530,12 +60184,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
                 "path": "names.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
               }
             ]
           },
@@ -60557,12 +60205,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
               "path": "names.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.sourceChecks.2.message"
             }
           ]
         },
@@ -60702,8 +60344,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+                "type": "uses_call",
+                "functionName": "make_badge",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
               }
@@ -60730,8 +60372,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bname\\s*=\\s*clean_name\\s*\\(\\s*raw_name\\s*\\)[\\s\\S]*\\bbadge\\s*=\\s*make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)",
+              "type": "uses_call",
+              "functionName": "make_badge",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.sourceChecks.2.message"
             }
@@ -60870,22 +60512,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
-                "path": "names.py",
+                "type": "uses_method",
+                "method": "upper",
+                "path": "badges.py",
                 "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
-                "path": "badges.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
-                "path": "badges.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
               }
             ]
           },
@@ -60897,22 +60527,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
-              "path": "names.py",
+              "type": "uses_method",
+              "method": "upper",
+              "path": "badges.py",
               "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*,\\s*role\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return an uppercase-role badge for the cleaned name\\.[\\\"']{3}",
-              "path": "badges.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bclean_role\\s*=\\s*role\\.strip\\s*\\(\\s*\\)\\.upper\\s*\\(\\s*\\)",
-              "path": "badges.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.sourceChecks.2.message"
             }
           ]
         },
@@ -61065,23 +60683,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_import",
-                "module": "messages",
-                "importName": "welcome_message",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
-              },
-              {
                 "type": "source_regex",
                 "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
                 "path": "messages.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
-                "path": "messages.py",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
               }
             ]
           },
@@ -61094,23 +60699,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_import",
-              "module": "messages",
-              "importName": "welcome_message",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
-            },
-            {
               "type": "source_regex",
               "pattern": "\\bdef\\s+welcome_message\\s*\\(\\s*badge\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return a welcome message containing the badge\\.[\\\"']{3}",
               "path": "messages.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\breturn\\s+[\\\"']Welcome!\\s[\\\"']\\s*\\+\\s*badge\\b",
-              "path": "messages.py",
-              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.sourceChecks.0.message"
             }
           ]
         }
@@ -61412,8 +61004,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "type": "source_contains",
+                "pattern": "message.txt",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
               },
@@ -61425,9 +61018,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+                "pattern": "\\bmessage\\s*=\\s*file\\s*\\.\\s*read\\s*\\(\\s*\\)",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*message\\s*\\)",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.3.message"
               }
             ]
           },
@@ -61439,8 +61037,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "type": "source_contains",
+              "pattern": "message.txt",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
             },
@@ -61452,9 +61051,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "type": "source_regex",
-              "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+              "pattern": "\\bmessage\\s*=\\s*file\\s*\\.\\s*read\\s*\\(\\s*\\)",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*message\\s*\\)",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.3.message"
             }
           ]
         },
@@ -61571,22 +61175,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
-              },
-              {
                 "type": "uses_for_loop",
                 "iterable": "file",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
               }
             ]
           },
@@ -61598,22 +61190,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
-            },
-            {
               "type": "uses_for_loop",
               "iterable": "file",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "strip",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
             }
           ]
         },
@@ -61732,8 +61312,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+                "type": "source_contains",
+                "pattern": "data/city.txt",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
               },
@@ -61767,8 +61348,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+              "type": "source_contains",
+              "pattern": "data/city.txt",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
             },
@@ -62093,26 +61675,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "file\\.write\\s*\\(\\s*status\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.2.message"
-              }
-            ]
+            "sourceChecks": []
           },
           "workspaceExpectations": {
             "requiredFolders": [],
@@ -62120,26 +61683,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "status.txt"
             ]
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "file\\.write\\s*\\(\\s*status\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']status\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.sourceChecks.2.message"
-            }
-          ]
+          "sourceChecks": []
         },
         {
           "id": "try-writing-text-files-sketch1",
@@ -62265,14 +61809,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "file\\.write\\s*\\(\\s*entry\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+                "type": "uses_method",
+                "method": "write",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+                "type": "uses_method",
+                "method": "read",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.2.message"
               }
@@ -62292,14 +61836,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "file\\.write\\s*\\(\\s*entry\\s*\\+\\s*[\\\"']\\\\n[\\\"']\\s*\\)",
+              "type": "uses_method",
+              "method": "write",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
+              "type": "uses_method",
+              "method": "read",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.2.message"
             }
@@ -62384,63 +61928,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               }
             ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_method",
-                "method": "write",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)[\\s\\S]*file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.3.message"
-              }
-            ]
+            "sourceChecks": []
           },
           "workspaceExpectations": {
             "requiredFolders": [],
             "requiredFiles": []
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "uses_method",
-              "method": "write",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)[\\s\\S]*file\\.write\\s*\\([^\\n]*\\\\n[^\\n]*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*[\\\"']report\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:[\\s\\S]*print\\s*\\(\\s*file\\.read\\s*\\(",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.sourceChecks.3.message"
-            }
-          ]
+          "sourceChecks": []
         }
       ]
     },
@@ -62821,23 +62315,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_import",
-                "module": "pathlib",
-                "importName": "Path",
+                "type": "uses_call",
+                "functionName": "Path",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
-                "path": "main.py",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*path\\s*\\)",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
               }
             ]
           },
@@ -62847,23 +62333,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_import",
-              "module": "pathlib",
-              "importName": "Path",
+              "type": "uses_call",
+              "functionName": "Path",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*folder\\s*\\)\\s*/\\s*filename\\b",
-              "path": "main.py",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*path\\s*\\)",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bprint\\s*\\(\\s*path\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.2.message"
             }
           ]
         },
@@ -63023,29 +62501,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_import",
-                "module": "pathlib",
-                "importName": "Path",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
-              },
-              {
                 "type": "source_regex",
                 "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
               }
             ]
           },
@@ -63060,29 +62519,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_import",
-              "module": "pathlib",
-              "importName": "Path",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
-            },
-            {
               "type": "source_regex",
               "pattern": "\\bpath\\s*=\\s*Path\\s*\\(\\s*[\\\"']data[\\\"']\\s*\\)\\s*/\\s*filename\\b",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\btext\\s*=\\s*file\\.read\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.3.message"
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message"
             }
           ]
         }
@@ -63363,14 +62803,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "type": "uses_call",
+                "functionName": "int",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+                "pattern": "\\bexcept\\s+ValueError\\s*:",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
               }
@@ -63388,14 +62828,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "type": "uses_call",
+              "functionName": "int",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bnumber\\s*=\\s*int\\s*\\(\\s*text\\s*\\)[\\s\\S]*except\\s+ValueError",
+              "pattern": "\\bexcept\\s+ValueError\\s*:",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.2.message"
             }
@@ -63522,21 +62962,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
                 "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
               }
             ]
           },
@@ -63551,21 +62979,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\btry\\s*:[\\s\\S]*with\\s+open\\s*\\(\\s*path\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
               "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*[\\\"']Missing file[\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
             }
           ]
         },
@@ -63730,22 +63146,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+                "type": "uses_for_loop",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+                "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
               }
             ]
           },
@@ -63760,22 +63169,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\bfor\\s+filename\\s+in\\s+\\[\\s*first\\s*,\\s*second\\s*\\]\\s*:",
+              "type": "uses_for_loop",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "\\bfor\\s+filename[\\s\\S]*\\btry\\s*:",
+              "pattern": "\\bexcept\\s+FileNotFoundError\\s*:",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+FileNotFoundError\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing:\\s[\\\"']\\s*\\+\\s*filename\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
             }
           ]
         }
@@ -64060,12 +63462,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -64085,12 +63481,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -64185,22 +63575,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_method",
-                "method": "strip",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
-              },
-              {
                 "type": "source_regex",
                 "pattern": "\\bexcept\\s+ValueError\\s*:",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
               }
             ]
           },
@@ -64210,22 +63588,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_method",
-              "method": "strip",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
-            },
-            {
               "type": "source_regex",
               "pattern": "\\bexcept\\s+ValueError\\s*:",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
             }
           ]
         },
@@ -64329,24 +63695,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
               }
             ]
           },
@@ -64360,24 +63708,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
             }
           ]
         }
@@ -64722,23 +64052,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_import",
-                "module": "csv",
+                "type": "source_contains",
+                "pattern": "csv.DictReader",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_contains",
-                "pattern": "csv.DictReader",
+                "type": "uses_for_loop",
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
-                "normalizeWhitespace": true
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+                "type": "uses_dict_key",
+                "key": "name",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
+              },
+              {
+                "type": "uses_dict_key",
+                "key": "score",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.3.message"
               }
             ]
           },
@@ -64753,23 +64088,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_import",
-              "module": "csv",
+              "type": "source_contains",
+              "pattern": "csv.DictReader",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_contains",
-              "pattern": "csv.DictReader",
+              "type": "uses_for_loop",
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message",
-              "normalizeWhitespace": true
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+              "type": "uses_dict_key",
+              "key": "name",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
+            },
+            {
+              "type": "uses_dict_key",
+              "key": "score",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.3.message"
             }
           ]
         },
@@ -64931,21 +64271,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
+                "normalizeWhitespace": true,
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
-                "normalizeWhitespace": true
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+                "type": "uses_dict_key",
+                "key": "score",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+                "type": "uses_method",
+                "method": "strip",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "title",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.3.message"
+              },
+              {
+                "type": "uses_call",
+                "functionName": "int",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.4.message"
               }
             ]
           },
@@ -64962,21 +64314,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_contains",
               "pattern": "csv.DictReader",
+              "normalizeWhitespace": true,
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
-              "normalizeWhitespace": true
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
+              "type": "uses_dict_key",
+              "key": "score",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "int\\s*\\(\\s*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]\\.strip\\s*\\(\\s*\\)\\s*\\)",
+              "type": "uses_method",
+              "method": "strip",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "title",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.3.message"
+            },
+            {
+              "type": "uses_call",
+              "functionName": "int",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.4.message"
             }
           ]
         },
@@ -65138,27 +64502,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
+                "normalizeWhitespace": true,
                 "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message"
               }
             ]
           },
@@ -65175,27 +64521,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_contains",
               "pattern": "csv.DictReader",
+              "normalizeWhitespace": true,
               "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
-              "normalizeWhitespace": true
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bif\\s+name\\s*!=\\s*[\\\"'][\\\"']\\s*:",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:\\s*\\n\\s*score\\s*=\\s*None",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "score\\s+is\\s+not\\s+None\\s+and\\s+0\\s*<=\\s*score\\s*<=\\s*100[\\s\\S]*valid_rows\\s*\\+=\\s*1[\\s\\S]*total_score\\s*\\+=\\s*score",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message"
             }
           ]
         }
@@ -65460,19 +64788,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
-                "path": "main.py",
                 "normalizeWhitespace": true,
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+                "type": "uses_for_loop",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
               }
@@ -65498,19 +64819,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_contains",
               "pattern": "csv.DictReader",
-              "path": "main.py",
               "normalizeWhitespace": true,
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+              "type": "uses_for_loop",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
             }
@@ -65555,6 +64869,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -65607,6 +64928,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -65628,7 +64956,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               ],
               "requiredFiles": [
                 "data/students.csv",
-                "output/clean_students.csv"
+                "output/clean_students.csv",
+                "cleaning.py"
               ]
             }
           },
@@ -65652,6 +64981,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -65669,27 +65005,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-                "path": "main.py",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-                "path": "main.py",
+                "type": "uses_dict_key",
+                "key": "name",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:",
-                "path": "main.py",
+                "type": "uses_dict_key",
+                "key": "score",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-                "path": "main.py",
+                "type": "uses_method",
+                "method": "strip",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "title",
+                "path": "cleaning.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.4.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bfrom\\s+cleaning\\s+import\\s+clean_row\\b",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.5.message"
               }
             ]
           },
@@ -65706,27 +65054,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-              "path": "main.py",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-              "path": "main.py",
+              "type": "uses_dict_key",
+              "key": "name",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:",
-              "path": "main.py",
+              "type": "uses_dict_key",
+              "key": "score",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-              "path": "main.py",
+              "type": "uses_method",
+              "method": "strip",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "title",
+              "path": "cleaning.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.4.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bfrom\\s+cleaning\\s+import\\s+clean_row\\b",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.5.message"
             }
           ]
         },
@@ -65746,6 +65106,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -65769,6 +65136,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -65798,6 +65172,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.data_students_csv.content",
                 "language": "text",
@@ -65821,6 +65202,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -65842,7 +65230,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               ],
               "requiredFiles": [
                 "data/students.csv",
-                "output/clean_students.csv"
+                "output/clean_students.csv",
+                "cleaning.py"
               ]
             }
           },
@@ -65866,6 +65255,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -65882,22 +65278,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+                "type": "uses_for_loop",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+                "type": "uses_call",
+                "functionName": "clean_row",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-                "path": "main.py",
+                "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*records\\s*\\)",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "cleaning.py",
+                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.3.message"
               }
             ]
           },
@@ -65913,22 +65313,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+              "type": "uses_for_loop",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+              "type": "uses_call",
+              "functionName": "clean_row",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
             },
             {
               "type": "source_regex",
-              "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-              "path": "main.py",
+              "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*records\\s*\\)",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "cleaning.py",
+              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.3.message"
             }
           ]
         },
@@ -65948,6 +65352,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -65971,6 +65382,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -66000,6 +65418,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.data_students_csv.content",
                 "language": "text",
@@ -66023,6 +65448,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -66044,7 +65476,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               ],
               "requiredFiles": [
                 "data/students.csv",
-                "output/clean_students.csv"
+                "output/clean_students.csv",
+                "cleaning.py"
               ]
             }
           },
@@ -66068,6 +65501,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -66084,28 +65524,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "type": "source_contains",
+                "pattern": "output/clean_students.csv",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
-                "path": "main.py",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
               }
             ]
           },
@@ -66121,28 +65550,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "type": "source_contains",
+              "pattern": "output/clean_students.csv",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
-              "path": "main.py",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
             }
           ]
         },
@@ -66162,6 +65580,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -66185,6 +65610,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "cleaning.py",
+              "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "data/students.csv",
@@ -66214,6 +65646,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.data_students_csv.content",
                 "language": "text",
@@ -66237,6 +65676,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -66258,7 +65704,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               ],
               "requiredFiles": [
                 "data/students.csv",
-                "output/clean_students.csv"
+                "output/clean_students.csv",
+                "cleaning.py"
               ]
             }
           },
@@ -66282,6 +65729,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "cleaning.py",
+                "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "data/students.csv",
                 "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
                 "language": "text",
@@ -66298,22 +65752,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "type": "source_contains",
+                "pattern": "output/clean_students.csv",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-                "path": "main.py",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
               }
             ]
           },
@@ -66329,22 +65778,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "type": "source_contains",
+              "pattern": "output/clean_students.csv",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-              "path": "main.py",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
             }
           ]
         }
@@ -66655,29 +66099,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "uses_import",
-                "module": "csv",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
-              },
-              {
                 "type": "source_contains",
                 "pattern": "csv.DictReader",
-                "path": "main.py",
                 "normalizeWhitespace": true,
+                "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+                "type": "uses_for_loop",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
               }
             ]
           },
@@ -66694,29 +66125,16 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "uses_import",
-              "module": "csv",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
-            },
-            {
               "type": "source_contains",
               "pattern": "csv.DictReader",
-              "path": "main.py",
               "normalizeWhitespace": true,
+              "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
+              "type": "uses_for_loop",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']event[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']email[\\\"']\\s*\\]",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.2.message"
             }
           ]
         },
@@ -66909,27 +66327,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "sourceChecks": [
               {
                 "type": "source_regex",
-                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+                "type": "uses_dict_key",
+                "key": "name",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bexcept\\s+ValueError\\s*:",
+                "type": "uses_dict_key",
+                "key": "event",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+                "type": "uses_dict_key",
+                "key": "seats",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
+              },
+              {
+                "type": "uses_dict_key",
+                "key": "email",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.4.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "strip",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.5.message"
+              },
+              {
+                "type": "uses_method",
+                "method": "title",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.6.message"
+              },
+              {
+                "type": "uses_call",
+                "functionName": "int",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.7.message"
               }
             ]
           },
@@ -66947,27 +66389,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "name\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*event\\s*==\\s*[\\\"'][\\\"'][\\s\\S]*email\\s*==\\s*[\\\"'][\\\"']",
+              "type": "uses_dict_key",
+              "key": "name",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bexcept\\s+ValueError\\s*:",
+              "type": "uses_dict_key",
+              "key": "event",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "\\bif\\s+seats\\s*<\\s*1\\s*:",
+              "type": "uses_dict_key",
+              "key": "seats",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
+            },
+            {
+              "type": "uses_dict_key",
+              "key": "email",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.4.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "strip",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.5.message"
+            },
+            {
+              "type": "uses_method",
+              "method": "title",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.6.message"
+            },
+            {
+              "type": "uses_call",
+              "functionName": "int",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.7.message"
             }
           ]
         },
@@ -67159,22 +66625,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+                "type": "uses_call",
+                "functionName": "clean_row",
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
               }
             ]
           },
@@ -67191,22 +66645,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+              "type": "uses_call",
+              "functionName": "clean_row",
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.2.message"
             }
           ]
         },
@@ -67427,15 +66869,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+                "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
                 "path": "cleaning.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
               }
             ]
           },
@@ -67460,15 +66896,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+              "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
               "path": "cleaning.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "records\\.append\\s*\\(\\s*record\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.2.message"
             }
           ]
         },
@@ -67724,21 +67154,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+                "pattern": "\\bdef\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:",
                 "path": "summary.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+                "pattern": "\\bdef\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:",
                 "path": "summary.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
-                "path": "main.py",
+                "type": "uses_for_loop",
+                "path": "summary.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
+              },
+              {
+                "type": "uses_for_loop",
+                "path": "main.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.4.message"
               }
             ]
           },
@@ -67763,21 +67197,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*total\\s*\\+=\\s*record\\s*\\[\\s*[\\\"']seats[\\\"']\\s*\\]",
+              "pattern": "\\bdef\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:",
               "path": "summary.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
             },
             {
               "type": "source_regex",
-              "pattern": "def\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*if\\s+event\\s+in\\s+counts\\s*:",
+              "pattern": "\\bdef\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:",
               "path": "summary.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "for\\s+event\\s+in\\s+counts\\s*:",
-              "path": "main.py",
+              "type": "uses_for_loop",
+              "path": "summary.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
+            },
+            {
+              "type": "uses_for_loop",
+              "path": "main.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.4.message"
             }
           ]
         },
@@ -68069,21 +67507,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "pattern": "\\bdef\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:",
                 "path": "reports.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
               },
               {
                 "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+                "pattern": "\\bdef\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
                 "path": "reports.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+                "type": "source_contains",
+                "pattern": "output/clean_registrations.csv",
+                "normalizeWhitespace": true,
                 "path": "reports.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
+              },
+              {
+                "type": "source_contains",
+                "pattern": "output/summary.txt",
+                "normalizeWhitespace": true,
+                "path": "reports.py",
+                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.4.message"
               }
             ]
           },
@@ -68109,21 +67555,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "pattern": "\\bdef\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:",
               "path": "reports.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
             },
             {
               "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+              "pattern": "\\bdef\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
               "path": "reports.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "def\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:[\\s\\S]*def\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
+              "type": "source_contains",
+              "pattern": "output/clean_registrations.csv",
+              "normalizeWhitespace": true,
               "path": "reports.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
+            },
+            {
+              "type": "source_contains",
+              "pattern": "output/summary.txt",
+              "normalizeWhitespace": true,
+              "path": "reports.py",
+              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.4.message"
             }
           ]
         },
@@ -68423,28 +67877,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sourceChecks": [
               {
-                "type": "source_regex",
-                "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+                "type": "source_contains",
+                "pattern": "output/clean_registrations.csv",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
               },
               {
-                "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+                "type": "source_contains",
+                "pattern": "output/summary.txt",
+                "normalizeWhitespace": true,
                 "path": "main.py",
                 "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-                "path": "main.py",
-                "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
               }
             ]
           },
@@ -68464,28 +67908,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "sourceChecks": [
             {
-              "type": "source_regex",
-              "pattern": "write_clean_registrations\\s*\\(\\s*records\\s*\\)[\\s\\S]*write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)",
+              "type": "source_contains",
+              "pattern": "output/clean_registrations.csv",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
             },
             {
-              "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/clean_registrations\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
+              "type": "source_contains",
+              "pattern": "output/summary.txt",
+              "normalizeWhitespace": true,
               "path": "main.py",
               "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "open\\s*\\(\\s*[\\\"']output/summary\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.2.message"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-              "path": "main.py",
-              "message": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.3.message"
             }
           ]
         }

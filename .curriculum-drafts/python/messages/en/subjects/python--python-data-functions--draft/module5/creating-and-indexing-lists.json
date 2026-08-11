@@ -89,55 +89,58 @@
             },
             "try-creating-and-indexing-lists-sketch0": {
               "title": "Build a list from input",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list.",
-              "hint": "Put `club1`, `club2`, and `club3` inside square brackets in the order they were read.",
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names.",
+              "hint": "Build `clubs` from the three input variables in their original order, then print `clubs`.",
               "help": {
                 "concept": "A list can collect values that are already stored in variables.",
-                "hint_1": "Read all three inputs first, then create one list from the three variables.",
-                "hint_2": "Create `clubs = [club1, club2, club3]`, then print `clubs`."
+                "hint_1": "Assign the three input variables to a list named `clubs` in their original order.",
+                "hint_2": "After creating `clubs`, print the variable itself with `print(clubs)`."
               },
               "starterCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\n# Create a list named clubs containing the three inputs.\n# Print the whole list.\n",
               "solutionCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\nclubs = [club1, club2, club3]\nprint(clubs)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `clubs` from `club1`, `club2`, and `club3` in that order instead of printing a hard-coded list."
+                  "message": "Create a variable named `clubs` as required by the prompt."
+                },
+                "1": {
+                  "message": "Print `clubs` itself after creating it."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch1": {
               "title": "Read two different positions",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line.",
-              "hint": "For a four-item list, the third item is at index 2 and the first item is at index 0.",
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names.",
+              "hint": "Use the list positions directly: the third item is `stations[2]` and the first is `stations[0]`.",
               "help": {
-                "concept": "List indexes let you read specific positions without changing the list.",
-                "hint_1": "Use one indexed expression for the third station and another for the first station.",
-                "hint_2": "Print `stations[2]` first, then `stations[0]`."
+                "concept": "This exercise practices reading values from a list by index rather than typing the known values directly.",
+                "hint_1": "Print the third item with `stations[2]`.",
+                "hint_2": "Then print the first item with `stations[0]`."
               },
               "starterCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\n\n# Print the third station.\n# Then print the first station.\n",
               "solutionCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\nprint(stations[2])\nprint(stations[0])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stations[2]` to read the third station instead of typing `Lake` directly."
+                  "message": "Use `stations[2]` to read the third station instead of hard-coding `Lake`."
                 },
                 "1": {
-                  "message": "Use `stations[0]` to read the first station instead of typing `Oak` directly."
+                  "message": "Use `stations[0]` to read the first station instead of hard-coding `Oak`."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch2": {
               "title": "Use the last item after building a list",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing.",
-              "hint": "Build the list first, then use index `-1` to read its final item.",
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly.",
+              "hint": "Create `stops = [stop1, stop2, stop3, stop4]`, then use `stops[-1]`.",
               "help": {
-                "concept": "Negative indexing is useful when you want an item relative to the end of a list.",
-                "hint_1": "Create `stops` from the four input variables in their original order.",
-                "hint_2": "Print `stops[-1]` rather than printing `stop4` directly."
+                "concept": "Negative indexing reads relative to the end of a list; `-1` means the final item.",
+                "hint_1": "Build the `stops` list from all four input variables in their original order.",
+                "hint_2": "Print the final item from the list with `print(stops[-1])`, not `print(stop4)`."
               },
               "starterCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\n# Create a list named stops containing the four inputs.\n# Print the final stop using negative indexing.\n",
               "solutionCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\nstops = [stop1, stop2, stop3, stop4]\nprint(stops[-1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `stops` from `stop1`, `stop2`, `stop3`, and `stop4` in that order."
+                  "message": "Create `stops = [stop1, stop2, stop3, stop4]` as the prompt requires."
                 },
                 "1": {
                   "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
@@ -148,15 +151,15 @@
           "tryIt": {
             "try_creating_and_indexing_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list."
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names."
             },
             "try_creating_and_indexing_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line."
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names."
             },
             "try_creating_and_indexing_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing."
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly."
             },
             "allowReveal": true
           }

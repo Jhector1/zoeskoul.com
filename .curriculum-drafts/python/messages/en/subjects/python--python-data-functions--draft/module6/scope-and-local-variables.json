@@ -86,7 +86,7 @@
             },
             "try-scope-and-local-variables-sketch0": {
               "title": "Create and return a local calculation",
-              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable `total = price + 3`, then return `total`. The caller already reads a price and prints the returned result.",
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result.",
               "hint": "Both the `total` assignment and `return total` belong inside the function body.",
               "help": {
                 "concept": "A local variable can hold an intermediate result while the function is running.",
@@ -97,16 +97,13 @@
               "solutionCode": "def add_fee(price):\n    total = price + 3\n    return total\n\nprice = int(input())\nprint(add_fee(price))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create the local assignment `total = price + 3` inside `add_fee`."
-                },
-                "1": {
-                  "message": "Return the local variable with `return total`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-scope-and-local-variables-sketch1": {
               "title": "Keep an outside value separate from a parameter",
-              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable `updated = count + 1` and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
               "hint": "The parameter named `count` is local to `next_count`; calculate a new local `updated` value instead of changing the outside assignment.",
               "help": {
                 "concept": "A parameter can have the same name as an outside variable without turning that outside variable into the function's local storage.",
@@ -117,13 +114,10 @@
               "solutionCode": "count = int(input())\n\ndef next_count(count):\n    updated = count + 1\n    return updated\n\nprint(next_count(count))\nprint(count)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `count` as the function parameter in `next_count(count)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Create local variable `updated = count + 1` inside the function."
-                },
-                "2": {
-                  "message": "Return `updated` instead of trying to change the outside `count`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -140,13 +134,7 @@
               "solutionCode": "def make_message(name):\n    message = \"Hello, \" + name\n    return message\n\nname = input()\nresult = make_message(name)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the local variable with `return message` inside `make_message`."
-                },
-                "1": {
-                  "message": "Store the returned value in caller-side variable `result`."
-                },
-                "2": {
-                  "message": "Print the caller-side `result`, not the function's local variable `message`."
+                  "message": "Call `make_message(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -154,11 +142,11 @@
           "tryIt": {
             "try_scope_and_local_variables_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Create a local intermediate value inside a function and return it."
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result."
             },
             "try_scope_and_local_variables_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use a local parameter without changing a same-named value outside the function."
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged."
             },
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",

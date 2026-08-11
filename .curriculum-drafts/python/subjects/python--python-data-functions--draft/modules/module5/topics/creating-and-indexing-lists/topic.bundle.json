@@ -269,16 +269,26 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+            "pattern": "\\bclubs\\s*=",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*clubs\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bclubs\\s*=\\s*\\[\\s*club1\\s*,\\s*club2\\s*,\\s*club3\\s*\\]",
+          "pattern": "\\bclubs\\s*=",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*clubs\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message"
         }
       ]
     },

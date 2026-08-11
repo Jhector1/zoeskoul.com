@@ -288,12 +288,6 @@
             "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
             "path": "names.py",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-            "path": "names.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
           }
         ]
       },
@@ -315,12 +309,6 @@
           "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
           "path": "names.py",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+text\\.strip\\s*\\(\\s*\\)\\.title\\s*\\(\\s*\\)",
-          "path": "names.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -427,13 +415,6 @@
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
           },
           {
-            "type": "uses_import",
-            "module": "text_tools",
-            "importName": "make_label",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
-          },
-          {
             "type": "source_regex",
             "pattern": "\\bdef\\s+clean_word\\s*\\(\\s*text\\s*\\)\\s*:",
             "path": "text_tools.py",
@@ -457,13 +438,6 @@
           "type": "uses_import",
           "module": "text_tools",
           "importName": "clean_word",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
-        },
-        {
-          "type": "uses_import",
-          "module": "text_tools",
-          "importName": "make_label",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
         },
@@ -615,14 +589,12 @@
           {
             "type": "uses_import",
             "module": "names",
-            "importName": "clean_name",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
           },
           {
             "type": "uses_import",
             "module": "badges",
-            "importName": "make_badge",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
           },
@@ -650,14 +622,12 @@
         {
           "type": "uses_import",
           "module": "names",
-          "importName": "clean_name",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
         },
         {
           "type": "uses_import",
           "module": "badges",
-          "importName": "make_badge",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
         },

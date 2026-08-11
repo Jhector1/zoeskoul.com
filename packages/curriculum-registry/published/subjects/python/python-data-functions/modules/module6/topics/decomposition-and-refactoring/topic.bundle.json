@@ -262,13 +262,13 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+            "type": "uses_call",
+            "functionName": "clean_name",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+            "type": "uses_call",
+            "functionName": "clean_name",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
           }
         ]
@@ -280,13 +280,13 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bfirst_clean\\s*=\\s*clean_name\\s*\\(\\s*first\\s*\\)",
+          "type": "uses_call",
+          "functionName": "clean_name",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bsecond_clean\\s*=\\s*clean_name\\s*\\(\\s*second\\s*\\)",
+          "type": "uses_call",
+          "functionName": "clean_name",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.sourceChecks.2.message"
         }
       ]
@@ -372,8 +372,8 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+            "type": "uses_call",
+            "functionName": "word_count",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
           }
         ]
@@ -385,8 +385,8 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bcount\\s*=\\s*word_count\\s*\\(\\s*text\\s*\\)",
+          "type": "uses_call",
+          "functionName": "word_count",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.sourceChecks.1.message"
         }
       ]
@@ -470,11 +470,6 @@
             "type": "source_regex",
             "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
           }
         ]
       },
@@ -483,11 +478,6 @@
           "type": "source_regex",
           "pattern": "\\bdef\\s+build_badge\\s*\\(\\s*name\\s*\\)\\s*:\\s*\\n[ \\t]+nice_name\\s*=\\s*clean_name\\s*\\(\\s*name\\s*\\)",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*nice_name\\b",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.1.message"
         }
       ]
     }

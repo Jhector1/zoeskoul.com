@@ -114,6 +114,7 @@ export function useReviewProgress(args: {
     gamificationEnabled?: boolean;
     readOnly?: boolean;
     followRemoteNavigation?: boolean;
+    remoteSyncEnabled?: boolean;
 }) {
     const {
         subjectSlug,
@@ -124,6 +125,7 @@ export function useReviewProgress(args: {
         gamificationEnabled = endpoint === "/api/review/progress",
         readOnly = false,
         followRemoteNavigation = true,
+        remoteSyncEnabled = true,
     } = args;
 
     const [progress, setProgress] = useState<ReviewProgressState>(
@@ -1238,6 +1240,29 @@ export function useReviewProgress(args: {
         hydrationCompleteRef.current = false;
         setHydrated(false);
 
+        if (!remoteSyncEnabled) {
+            const ep = emptyReviewProgress();
+
+            applyingRemoteRef.current = true;
+            try {
+                cancel();
+                progressRef.current = ep;
+                setProgressSafe(ep);
+                setActiveTopicId(firstTopicId);
+                setViewTopicId(firstTopicId);
+                pendingRuntimeHydrationRef.current = false;
+                localDirtyRef.current = false;
+                setSaveStatus("idle");
+                setLastSaveError(null);
+            } finally {
+                applyingRemoteRef.current = false;
+                hydrationCompleteRef.current = true;
+                setHydrated(true);
+            }
+
+            return;
+        }
+
         (async () => {
             try {
                 const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
@@ -1317,10 +1342,13 @@ export function useReviewProgress(args: {
         setActiveTopicId,
         prime,
         hydrateRuntimeFromProgress,
+        cancel,
+        remoteSyncEnabled,
     ]);
 
     const syncRemoteProgress = useCallback(
         async (reason: string, signal?: AbortSignal) => {
+            if (!remoteSyncEnabled) return;
             if (!subjectSlug || !moduleSlug) return;
             if (!hydrated || !hydrationCompleteRef.current) return;
             if (typeof document !== "undefined" && document.visibilityState !== "visible") {
@@ -1468,10 +1496,12 @@ export function useReviewProgress(args: {
             meaningfulBodyForPayload,
             prime,
             readOnly,
+            remoteSyncEnabled,
         ],
     );
 
     useEffect(() => {
+        if (!remoteSyncEnabled) return;
         if (!subjectSlug || !moduleSlug) return;
         if (!hydrated || !hydrationCompleteRef.current) return;
         if (typeof document === "undefined") return;
@@ -1518,7 +1548,7 @@ export function useReviewProgress(args: {
             window.removeEventListener("online", onOnline);
             ctrl.abort();
         };
-    }, [subjectSlug, moduleSlug, hydrated, readOnly, syncRemoteProgress]);
+    }, [subjectSlug, moduleSlug, hydrated, readOnly, remoteSyncEnabled, syncRemoteProgress]);
 
     useEffect(() => {
         if (!hydrated || !hydrationCompleteRef.current) return;

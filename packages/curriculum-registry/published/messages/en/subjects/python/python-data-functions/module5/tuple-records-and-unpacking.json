@@ -86,7 +86,7 @@
             },
             "try-tuple-records-sketch0": {
               "title": "Build and read a shipment record",
-              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line.",
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field.",
               "hint": "Create one two-field tuple from the input variables, then read its two positions.",
               "help": {
                 "concept": "A tuple can hold related fields in a fixed order, and tuple indexes work like list indexes.",
@@ -97,19 +97,19 @@
               "solutionCode": "product = input()\nquantity = int(input())\n\nshipment = (product, quantity)\nprint(shipment[0])\nprint(shipment[1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `shipment` as the tuple `(product, quantity)` instead of printing the inputs directly."
+                  "message": "Create `shipment` as the tuple `(product, quantity)`."
                 },
                 "1": {
-                  "message": "Read the product from `shipment[0]`."
+                  "message": "Use index `0` to read the first tuple field."
                 },
                 "2": {
-                  "message": "Read the quantity from `shipment[1]`."
+                  "message": "Use index `1` to read the second tuple field."
                 }
               }
             },
             "try-tuple-unpacking-sketch1": {
               "title": "Unpack a booking record",
-              "prompt": "A booking record is already stored as `booking = (\"Workshop\", 24, \"Friday\")`. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order.",
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output.",
               "hint": "The tuple has three fields, so use three target names on the left side of one assignment.",
               "help": {
                 "concept": "Unpacking replaces positional lookups with meaningful variable names.",
@@ -120,7 +120,7 @@
               "solutionCode": "booking = (\"Workshop\", 24, \"Friday\")\n\ntitle, seats, day = booking\nprint(title)\nprint(seats)\nprint(day)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack all three fields with `title, seats, day = booking`."
+                  "message": "Unpack the tuple with `title, seats, day = booking` before printing the fields."
                 }
               }
             },
@@ -137,10 +137,7 @@
               "solutionCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\nregistrations = [(name1, seats1), (name2, seats2)]\nfor name, seats in registrations:\n    print(name, seats)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `registrations` from the two input name/seat pairs instead of hard-coding the final output."
-                },
-                "1": {
-                  "message": "Unpack each tuple in the loop with `for name, seats in registrations:`."
+                  "message": "Use a `for` loop over `registrations` as the prompt requests."
                 }
               }
             }
@@ -148,11 +145,11 @@
           "tryIt": {
             "try_tuple_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a two-field shipment tuple from input, then read and print both fields by index."
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field."
             },
             "try_tuple_unpacking_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Unpack a three-field booking tuple into meaningful names and print the fields."
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output."
             },
             "try_tuple_loop_sketch2": {
               "title": "Try it yourself",

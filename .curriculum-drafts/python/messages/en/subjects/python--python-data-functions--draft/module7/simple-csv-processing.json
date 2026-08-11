@@ -86,7 +86,7 @@
             },
             "try-simple-csv-processing-sketch0": {
               "title": "Read rows by header name",
-              "prompt": "Read a CSV filename from input and build `path = \"data/\" + filename`. Open that file in read mode, create `csv.DictReader(file)`, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
               "hint": "Use the CSV header names instead of splitting each line manually.",
               "help": {
                 "concept": "`csv.DictReader` turns each data row into a dictionary-like object whose keys come from the header row.",
@@ -119,19 +119,22 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and create `csv.DictReader(file)`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through `reader` instead of hard-coding the rows."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "2": {
-                  "message": "Access both `row[\"name\"]` and `row[\"score\"]`."
+                  "message": "Use the explicitly requested dictionary field `name`."
+                },
+                "3": {
+                  "message": "Use the explicitly requested dictionary field `score`."
                 }
               }
             },
             "try-simple-csv-processing-sketch1": {
               "title": "Clean and convert CSV fields",
-              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with `.strip().title()`, clean and convert the score with `int(row[\"score\"].strip())`, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
               "hint": "CSV field values are strings, so clean the text before converting the score.",
               "help": {
                 "concept": "This step combines named-column access with the cleaning and integer-conversion skills you already know.",
@@ -164,13 +167,19 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read rows with `csv.DictReader` and loop through `reader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Clean each `name` field with both `strip()` and `title()`."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "2": {
-                  "message": "Convert the cleaned `score` field with `int(...)`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "3": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -209,16 +218,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read every row with `csv.DictReader` and a `for row in reader:` loop."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name before counting the row."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Count and sum only scores in the inclusive range 0 through 100."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }
@@ -226,11 +226,11 @@
           "tryIt": {
             "try_simple_csv_processing_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a selected CSV file with `csv.DictReader` and use named columns."
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`."
             },
             "try_simple_csv_processing_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Clean CSV text values and convert a numeric column."
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization."
             },
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",

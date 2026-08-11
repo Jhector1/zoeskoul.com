@@ -86,7 +86,7 @@
             },
             "try-dictionary-basics-sketch0": {
               "title": "Build a profile dictionary",
-              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary.",
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys.",
               "hint": "Use a dictionary literal with two `key: value` pairs.",
               "help": {
                 "concept": "A dictionary literal uses `{}` and separates each key from its value with a colon.",
@@ -97,7 +97,13 @@
               "solutionCode": "name = input()\nage = int(input())\n\nprofile = {\"name\": name, \"age\": age}\nprint(profile)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `profile` as a dictionary that stores `name` and `age` under matching string keys."
+                  "message": "Create the requested dictionary in a variable named `profile`."
+                },
+                "1": {
+                  "message": "Include the explicitly requested `\"name\"` key in the dictionary."
+                },
+                "2": {
+                  "message": "Include the explicitly requested `\"age\"` key in the dictionary."
                 }
               }
             },
@@ -112,11 +118,7 @@
               },
               "starterCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\n# Print the value stored under the key in item.\n",
               "solutionCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\nprint(prices[item])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `prices[item]` so the program looks up whichever valid key arrives as input."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-dictionary-basics-sketch2": {
               "title": "Check whether a setting exists",
@@ -129,17 +131,13 @@
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `if key in settings:` so the program checks dictionary membership before reading anything."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_dictionary_basics_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a profile dictionary from a name and age supplied as input, then print the dictionary."
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys."
             },
             "try_dictionary_basics_sketch1": {
               "title": "Try it yourself",

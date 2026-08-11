@@ -277,12 +277,6 @@
             "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
           }
         ]
       },
@@ -302,12 +296,6 @@
           "pattern": "\\bcleaned_name\\s*==\\s*[\\\"'][\\\"']",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "if\\s+cleaned_name\\s*==\\s*[\\\"'][\\\"']\\s*:[\\s\\S]*print\\s*\\(\\s*[\\\"']Missing[\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -402,22 +390,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
-          },
-          {
             "type": "source_regex",
             "pattern": "\\bexcept\\s+ValueError\\s*:",
             "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
           }
         ]
       },
@@ -427,22 +403,10 @@
       },
       "sourceChecks": [
         {
-          "type": "uses_method",
-          "method": "strip",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
-        },
-        {
           "type": "source_regex",
           "pattern": "\\bexcept\\s+ValueError\\s*:",
           "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b0\\s*<=\\s*score\\s*<=\\s*100\\b",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.2.message"
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
         }
       ]
     },
@@ -546,24 +510,6 @@
             "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bexcept\\s+ValueError\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
           }
         ]
       },
@@ -577,24 +523,6 @@
           "pattern": "def\\s+clean_record\\s*\\(\\s*name_text\\s*,\\s*score_text\\s*\\)\\s*:",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bexcept\\s+ValueError\\s*:",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
         }
       ]
     }

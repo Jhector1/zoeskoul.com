@@ -100,10 +100,7 @@
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nrooms = [first, second, third]\nfor room in rooms:\n    print(\"Room:\", room)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `rooms` from `first`, `second`, and `third` before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `rooms` instead of printing the three inputs separately."
+                  "message": "Use a `for` loop over `rooms` as the prompt requests."
                 }
               }
             },
@@ -120,13 +117,7 @@
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nminutes = [a, b, c, d]\ntotal = 0\nfor minute in minutes:\n    total += minute\nprint(total)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `minutes` from all four input variables before the loop."
-                },
-                "1": {
-                  "message": "Loop through `minutes` instead of adding the four variables manually."
-                },
-                "2": {
-                  "message": "Update `total` with the current `minute` inside the loop."
+                  "message": "Use a `for` loop over `minutes` as the prompt requests."
                 }
               }
             },
@@ -143,13 +134,7 @@
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\nreadings = [first, second, third]\nadjusted = []\nfor reading in readings:\n    adjusted.append(reading + 5)\nprint(adjusted)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `readings` from the three input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `readings` so every value is transformed."
-                },
-                "2": {
-                  "message": "Use `adjusted.append(...)` inside the loop to build the result list."
+                  "message": "Use a `for` loop over `readings` as the prompt requests."
                 }
               }
             },
@@ -166,16 +151,7 @@
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nscores = [a, b, c, d]\nhigh_scores = []\nfor score in scores:\n    if score >= 80:\n        high_scores.append(score)\nprint(high_scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from all four input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `scores` instead of checking each input separately."
-                },
-                "2": {
-                  "message": "Check whether the current `score` is at least 80 inside the loop."
-                },
-                "3": {
-                  "message": "Append the current `score` to `high_scores` only when it meets the condition."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             }

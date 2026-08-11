@@ -97,10 +97,10 @@
               "solutionCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nshow_status(status)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `show_status` as a display-only function that prints `text`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Call `show_status(status)` directly instead of printing the call's `None` result."
+                  "message": "Call `show_status(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -117,10 +117,7 @@
               "solutionCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\nresult = double(number)\nprint(result + 1)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `result = double(number)`."
-                },
-                "1": {
-                  "message": "Use the stored result in the later expression `result + 1`."
+                  "message": "Call `double(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -137,13 +134,10 @@
               "solutionCode": "def make_label(item):\n    return \"Item: \" + item\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the label string from `make_label` instead of printing it inside the function."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store the returned label with `label = make_label(item)`."
-                },
-                "2": {
-                  "message": "Use the stored label in `print(label + \"!\")`."
+                  "message": "Call `make_label(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }

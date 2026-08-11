@@ -294,8 +294,9 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+            "type": "source_contains",
+            "pattern": "message.txt",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
           },
@@ -307,9 +308,14 @@
           },
           {
             "type": "source_regex",
-            "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+            "pattern": "\\bmessage\\s*=\\s*file\\s*\\.\\s*read\\s*\\(\\s*\\)",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*message\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.3.message"
           }
         ]
       },
@@ -321,8 +327,9 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "with\\s+open\\s*\\(\\s*[\\\"']message\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+          "type": "source_contains",
+          "pattern": "message.txt",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
         },
@@ -334,9 +341,14 @@
         },
         {
           "type": "source_regex",
-          "pattern": "\\bmessage\\s*=\\s*file\\.read\\s*\\(\\s*\\)",
+          "pattern": "\\bmessage\\s*=\\s*file\\s*\\.\\s*read\\s*\\(\\s*\\)",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*message\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.3.message"
         }
       ]
     },
@@ -453,22 +465,10 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
-          },
-          {
             "type": "uses_for_loop",
             "iterable": "file",
             "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
           }
         ]
       },
@@ -480,22 +480,10 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "with\\s+open\\s*\\(\\s*[\\\"']names\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
-        },
-        {
           "type": "uses_for_loop",
           "iterable": "file",
           "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "uses_method",
-          "method": "strip",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.2.message"
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
         }
       ]
     },
@@ -614,8 +602,9 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+            "type": "source_contains",
+            "pattern": "data/city.txt",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
           },
@@ -649,8 +638,9 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "with\\s+open\\s*\\(\\s*[\\\"']data/city\\.txt[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
+          "type": "source_contains",
+          "pattern": "data/city.txt",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
         },

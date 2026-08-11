@@ -257,19 +257,12 @@
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "path": "main.py",
             "normalizeWhitespace": true,
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+            "type": "uses_for_loop",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
           }
@@ -295,19 +288,12 @@
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "path": "main.py",
           "normalizeWhitespace": true,
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "for\\s+row\\s+in\\s+reader\\s*:",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "row\\s*\\[\\s*[\\\"']name[\\\"']\\s*\\][\\s\\S]*row\\s*\\[\\s*[\\\"']score[\\\"']\\s*\\]",
+          "type": "uses_for_loop",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.sourceChecks.2.message"
         }
@@ -352,6 +338,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -404,6 +397,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -425,7 +425,8 @@
           ],
           "requiredFiles": [
             "data/students.csv",
-            "output/clean_students.csv"
+            "output/clean_students.csv",
+            "cleaning.py"
           ]
         }
       },
@@ -449,6 +450,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -466,27 +474,39 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-            "path": "main.py",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-            "path": "main.py",
+            "type": "uses_dict_key",
+            "key": "name",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bexcept\\s+ValueError\\s*:",
-            "path": "main.py",
+            "type": "uses_dict_key",
+            "key": "score",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-            "path": "main.py",
+            "type": "uses_method",
+            "method": "strip",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "path": "cleaning.py",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.4.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bfrom\\s+cleaning\\s+import\\s+clean_row\\b",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.5.message"
           }
         ]
       },
@@ -503,27 +523,39 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "def\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-          "path": "main.py",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bname\\s*==\\s*[\\\"'][\\\"']",
-          "path": "main.py",
+          "type": "uses_dict_key",
+          "key": "name",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bexcept\\s+ValueError\\s*:",
-          "path": "main.py",
+          "type": "uses_dict_key",
+          "key": "score",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.2.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "score\\s*<\\s*0\\s+or\\s+score\\s*>\\s*100",
-          "path": "main.py",
+          "type": "uses_method",
+          "method": "strip",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.3.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "path": "cleaning.py",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.4.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bfrom\\s+cleaning\\s+import\\s+clean_row\\b",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.sourceChecks.5.message"
         }
       ]
     },
@@ -543,6 +575,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -566,6 +605,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -595,6 +641,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.data_students_csv.content",
             "language": "text",
@@ -618,6 +671,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -639,7 +699,8 @@
           ],
           "requiredFiles": [
             "data/students.csv",
-            "output/clean_students.csv"
+            "output/clean_students.csv",
+            "cleaning.py"
           ]
         }
       },
@@ -663,6 +724,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -679,22 +747,26 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+            "type": "uses_for_loop",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+            "type": "uses_call",
+            "functionName": "clean_row",
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
-            "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-            "path": "main.py",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*records\\s*\\)",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "path": "cleaning.py",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.3.message"
           }
         ]
       },
@@ -710,22 +782,26 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\brecords\\s*=\\s*\\[\\s*\\]",
+          "type": "uses_for_loop",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\brecord\\s*=\\s*clean_row\\s*\\(\\s*row\\s*\\)",
+          "type": "uses_call",
+          "functionName": "clean_row",
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
-          "pattern": "if\\s+record\\s+is\\s+not\\s+None\\s*:[\\s\\S]*records\\.append\\s*\\(\\s*record\\s*\\)",
-          "path": "main.py",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*records\\s*\\)",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "path": "cleaning.py",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.sourceChecks.3.message"
         }
       ]
     },
@@ -745,6 +821,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -768,6 +851,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -797,6 +887,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.data_students_csv.content",
             "language": "text",
@@ -820,6 +917,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -841,7 +945,8 @@
           ],
           "requiredFiles": [
             "data/students.csv",
-            "output/clean_students.csv"
+            "output/clean_students.csv",
+            "cleaning.py"
           ]
         }
       },
@@ -865,6 +970,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -881,28 +993,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+            "type": "source_contains",
+            "pattern": "output/clean_students.csv",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
-            "path": "main.py",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
           }
         ]
       },
@@ -918,28 +1019,17 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+          "type": "source_contains",
+          "pattern": "output/clean_students.csv",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "file\\.write\\s*\\(\\s*[\\\"']name,score\\\\n[\\\"']\\s*\\)",
-          "path": "main.py",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "for\\s+record\\s+in\\s+records\\s*:[\\s\\S]*file\\.write\\s*\\(",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*[\\\"']Wrote\\s[\\\"']\\s*\\+\\s*str\\s*\\(\\s*len\\s*\\(\\s*records\\s*\\)\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.sourceChecks.3.message"
         }
       ]
     },
@@ -959,6 +1049,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -982,6 +1079,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "data/students.csv",
@@ -1011,6 +1115,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.data_students_csv.content",
             "language": "text",
@@ -1034,6 +1145,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -1055,7 +1173,8 @@
           ],
           "requiredFiles": [
             "data/students.csv",
-            "output/clean_students.csv"
+            "output/clean_students.csv",
+            "cleaning.py"
           ]
         }
       },
@@ -1079,6 +1198,13 @@
             "entry": true
           },
           {
+            "path": "cleaning.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.cleaning_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "data/students.csv",
             "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.solutionFiles.data_students_csv.content",
             "language": "text",
@@ -1095,22 +1221,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+            "type": "source_contains",
+            "pattern": "output/clean_students.csv",
+            "normalizeWhitespace": true,
             "path": "main.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-            "path": "main.py",
+            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+            "path": "cleaning.py",
             "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
           }
         ]
       },
@@ -1126,22 +1247,17 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']w[\\\"']\\s*\\)",
+          "type": "source_contains",
+          "pattern": "output/clean_students.csv",
+          "normalizeWhitespace": true,
           "path": "main.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "open\\s*\\(\\s*[\\\"']output/clean_students\\.csv[\\\"']\\s*,\\s*[\\\"']r[\\\"']\\s*\\)",
-          "path": "main.py",
+          "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
+          "path": "cleaning.py",
           "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*file\\.read\\s*\\(\\s*\\)\\s*,\\s*end\\s*=\\s*[\\\"'][\\\"']\\s*\\)",
-          "path": "main.py",
-          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.sourceChecks.2.message"
         }
       ]
     }

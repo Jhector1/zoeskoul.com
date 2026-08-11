@@ -13278,55 +13278,58 @@ const messages: Record<string, any> = {
             },
             "try-creating-and-indexing-lists-sketch0": {
               "title": "Build a list from input",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list.",
-              "hint": "Put `club1`, `club2`, and `club3` inside square brackets in the order they were read.",
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names.",
+              "hint": "Build `clubs` from the three input variables in their original order, then print `clubs`.",
               "help": {
                 "concept": "A list can collect values that are already stored in variables.",
-                "hint_1": "Read all three inputs first, then create one list from the three variables.",
-                "hint_2": "Create `clubs = [club1, club2, club3]`, then print `clubs`."
+                "hint_1": "Assign the three input variables to a list named `clubs` in their original order.",
+                "hint_2": "After creating `clubs`, print the variable itself with `print(clubs)`."
               },
               "starterCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\n# Create a list named clubs containing the three inputs.\n# Print the whole list.\n",
               "solutionCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\nclubs = [club1, club2, club3]\nprint(clubs)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `clubs` from `club1`, `club2`, and `club3` in that order instead of printing a hard-coded list."
+                  "message": "Create a variable named `clubs` as required by the prompt."
+                },
+                "1": {
+                  "message": "Print `clubs` itself after creating it."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch1": {
               "title": "Read two different positions",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line.",
-              "hint": "For a four-item list, the third item is at index 2 and the first item is at index 0.",
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names.",
+              "hint": "Use the list positions directly: the third item is `stations[2]` and the first is `stations[0]`.",
               "help": {
-                "concept": "List indexes let you read specific positions without changing the list.",
-                "hint_1": "Use one indexed expression for the third station and another for the first station.",
-                "hint_2": "Print `stations[2]` first, then `stations[0]`."
+                "concept": "This exercise practices reading values from a list by index rather than typing the known values directly.",
+                "hint_1": "Print the third item with `stations[2]`.",
+                "hint_2": "Then print the first item with `stations[0]`."
               },
               "starterCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\n\n# Print the third station.\n# Then print the first station.\n",
               "solutionCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\nprint(stations[2])\nprint(stations[0])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stations[2]` to read the third station instead of typing `Lake` directly."
+                  "message": "Use `stations[2]` to read the third station instead of hard-coding `Lake`."
                 },
                 "1": {
-                  "message": "Use `stations[0]` to read the first station instead of typing `Oak` directly."
+                  "message": "Use `stations[0]` to read the first station instead of hard-coding `Oak`."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch2": {
               "title": "Use the last item after building a list",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing.",
-              "hint": "Build the list first, then use index `-1` to read its final item.",
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly.",
+              "hint": "Create `stops = [stop1, stop2, stop3, stop4]`, then use `stops[-1]`.",
               "help": {
-                "concept": "Negative indexing is useful when you want an item relative to the end of a list.",
-                "hint_1": "Create `stops` from the four input variables in their original order.",
-                "hint_2": "Print `stops[-1]` rather than printing `stop4` directly."
+                "concept": "Negative indexing reads relative to the end of a list; `-1` means the final item.",
+                "hint_1": "Build the `stops` list from all four input variables in their original order.",
+                "hint_2": "Print the final item from the list with `print(stops[-1])`, not `print(stop4)`."
               },
               "starterCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\n# Create a list named stops containing the four inputs.\n# Print the final stop using negative indexing.\n",
               "solutionCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\nstops = [stop1, stop2, stop3, stop4]\nprint(stops[-1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `stops` from `stop1`, `stop2`, `stop3`, and `stop4` in that order."
+                  "message": "Create `stops = [stop1, stop2, stop3, stop4]` as the prompt requires."
                 },
                 "1": {
                   "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
@@ -13337,15 +13340,15 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_creating_and_indexing_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list."
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names."
             },
             "try_creating_and_indexing_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line."
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names."
             },
             "try_creating_and_indexing_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing."
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly."
             },
             "allowReveal": true
           }
@@ -13434,7 +13437,7 @@ const messages: Record<string, any> = {
             },
             "try-dictionary-basics-sketch0": {
               "title": "Build a profile dictionary",
-              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary.",
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys.",
               "hint": "Use a dictionary literal with two `key: value` pairs.",
               "help": {
                 "concept": "A dictionary literal uses `{}` and separates each key from its value with a colon.",
@@ -13445,7 +13448,13 @@ const messages: Record<string, any> = {
               "solutionCode": "name = input()\nage = int(input())\n\nprofile = {\"name\": name, \"age\": age}\nprint(profile)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `profile` as a dictionary that stores `name` and `age` under matching string keys."
+                  "message": "Create the requested dictionary in a variable named `profile`."
+                },
+                "1": {
+                  "message": "Include the explicitly requested `\"name\"` key in the dictionary."
+                },
+                "2": {
+                  "message": "Include the explicitly requested `\"age\"` key in the dictionary."
                 }
               }
             },
@@ -13460,11 +13469,7 @@ const messages: Record<string, any> = {
               },
               "starterCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\n# Print the value stored under the key in item.\n",
               "solutionCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\nprint(prices[item])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `prices[item]` so the program looks up whichever valid key arrives as input."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-dictionary-basics-sketch2": {
               "title": "Check whether a setting exists",
@@ -13477,17 +13482,13 @@ const messages: Record<string, any> = {
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `if key in settings:` so the program checks dictionary membership before reading anything."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_dictionary_basics_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a profile dictionary from a name and age supplied as input, then print the dictionary."
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys."
             },
             "try_dictionary_basics_sketch1": {
               "title": "Try it yourself",
@@ -13590,18 +13591,21 @@ const messages: Record<string, any> = {
             },
             "try-list-methods-and-mutation-sketch0": {
               "title": "Correct one score",
-              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list.",
-              "hint": "The last item in this three-item list is at index `2`.",
+              "prompt": "A score was entered incorrectly. Read the corrected score from input. Use indexed assignment on the existing `scores` list to replace its last item with that value, then print the updated list.",
+              "hint": "Use list indexing on the left side of an assignment to change the final item of `scores`. Any valid index expression that selects the last item is acceptable.",
               "help": {
-                "concept": "Assigning to an indexed list position replaces the value already stored there.",
-                "hint_1": "Keep the existing list and change only its last position.",
-                "hint_2": "Use `scores[2] = corrected_score`, then print `scores`."
+                "concept": "Indexed assignment changes an existing list item in place. The index expression inside the brackets can be written in different valid ways.",
+                "hint_1": "Write an assignment to `scores[...]` where the expression inside the brackets selects the final item.",
+                "hint_2": "Assign `corrected_score` to that indexed position, then print `scores` itself."
               },
               "starterCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\n# Replace the last score with corrected_score.\n# Then print the updated list.\n",
               "solutionCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\nscores[2] = corrected_score\nprint(scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Replace the last item with `scores[2] = corrected_score` instead of creating a different final list."
+                  "message": "Use indexed assignment on the existing `scores` list: assign `corrected_score` to a `scores[...]` position that selects the last item."
+                },
+                "1": {
+                  "message": "Print the updated `scores` list itself after changing it."
                 }
               }
             },
@@ -13618,7 +13622,10 @@ const messages: Record<string, any> = {
               "solutionCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\nattendees.append(new_attendee)\nprint(attendees)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `attendees.append(new_attendee)` so the input value is added to the existing list."
+                  "message": "Use `append()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the updated `attendees` list itself after using `append()`."
                 }
               }
             },
@@ -13635,13 +13642,16 @@ const messages: Record<string, any> = {
               "solutionCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\nworkshops.remove(canceled)\nprint(workshops)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `workshops.remove(canceled)` so the program removes whichever workshop arrives as input."
+                  "message": "Use `remove()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the mutated `workshops` list itself after removing the canceled workshop."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch3": {
               "title": "Take the second ticket",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list.",
+              "prompt": " Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket.",
               "hint": "`pop(1)` removes the item at index 1 and returns that removed item.",
               "help": {
                 "concept": "`pop(index)` is useful when you know the position and also need the removed value.",
@@ -13652,7 +13662,13 @@ const messages: Record<string, any> = {
               "solutionCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\nnext_ticket = tickets.pop(1)\nprint(next_ticket)\nprint(tickets)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `next_ticket = tickets.pop(1)` instead of typing `T-105` directly."
+                  "message": "Use `pop()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print `next_ticket` itself instead of typing the known removed ticket."
+                },
+                "2": {
+                  "message": "Print the remaining `tickets` list itself after `pop()` changes it."
                 }
               }
             },
@@ -13669,10 +13685,10 @@ const messages: Record<string, any> = {
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\ntimes = [first, second, third]\ntimes.sort()\nprint(times)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `times` from `first`, `second`, and `third` instead of printing a hard-coded sorted list."
+                  "message": "Use `sort()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Call `times.sort()` so the existing list is actually sorted in place."
+                  "message": "Print the sorted `times` list itself after sorting it in place."
                 }
               }
             }
@@ -13692,7 +13708,7 @@ const messages: Record<string, any> = {
             },
             "try_list_methods_and_mutation_sketch3": {
               "title": "Try it yourself",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list."
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list. Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket."
             },
             "try_list_methods_and_mutation_sketch4": {
               "title": "Try it yourself",
@@ -13799,10 +13815,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nrooms = [first, second, third]\nfor room in rooms:\n    print(\"Room:\", room)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `rooms` from `first`, `second`, and `third` before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `rooms` instead of printing the three inputs separately."
+                  "message": "Use a `for` loop over `rooms` as the prompt requests."
                 }
               }
             },
@@ -13819,13 +13832,7 @@ const messages: Record<string, any> = {
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nminutes = [a, b, c, d]\ntotal = 0\nfor minute in minutes:\n    total += minute\nprint(total)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `minutes` from all four input variables before the loop."
-                },
-                "1": {
-                  "message": "Loop through `minutes` instead of adding the four variables manually."
-                },
-                "2": {
-                  "message": "Update `total` with the current `minute` inside the loop."
+                  "message": "Use a `for` loop over `minutes` as the prompt requests."
                 }
               }
             },
@@ -13842,13 +13849,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\nreadings = [first, second, third]\nadjusted = []\nfor reading in readings:\n    adjusted.append(reading + 5)\nprint(adjusted)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `readings` from the three input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `readings` so every value is transformed."
-                },
-                "2": {
-                  "message": "Use `adjusted.append(...)` inside the loop to build the result list."
+                  "message": "Use a `for` loop over `readings` as the prompt requests."
                 }
               }
             },
@@ -13865,16 +13866,7 @@ const messages: Record<string, any> = {
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nscores = [a, b, c, d]\nhigh_scores = []\nfor score in scores:\n    if score >= 80:\n        high_scores.append(score)\nprint(high_scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from all four input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `scores` instead of checking each input separately."
-                },
-                "2": {
-                  "message": "Check whether the current `score` is at least 80 inside the loop."
-                },
-                "3": {
-                  "message": "Append the current `score` to `high_scores` only when it meets the condition."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             }
@@ -13935,16 +13927,13 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `schedule` as a list containing the required tuple record."
-                },
-                "1": {
-                  "message": "Loop with `for name, room in schedule:` so each tuple is unpacked."
+                  "message": "Use a `for` loop over `schedule` as the prompt requests."
                 }
               }
             },
             "exercise1": {
               "title": "Expand the ordered schedule",
-              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line.",
+              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line. For this step, add the second and third workshop records to `schedule` using `append()`. Then process the completed schedule with a `for` loop over `schedule`.",
               "hint": "Read the four input values first, append two tuple records, then let the existing loop print the ordered list.",
               "help": {
                 "concept": "A list preserves workshop order, and `.append()` can add new fixed tuple records without replacing the existing schedule.",
@@ -13955,19 +13944,19 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the second workshop as `(name2, room2)`."
+                  "message": "Append the second workshop with `schedule.append((name2, room2))`."
                 },
                 "1": {
-                  "message": "Append the third workshop as `(name3, room3)`."
+                  "message": "Append the third workshop with `schedule.append((name3, room3))`."
                 },
                 "2": {
-                  "message": "Loop through `schedule` and unpack each tuple into `name` and `room`."
+                  "message": "Keep a `for` loop over `schedule` so the finished schedule is processed in order."
                 }
               }
             },
             "exercise2": {
               "title": "Build a room lookup",
-              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop with `room_lookup[name] = room`. Then read one workshop name into `requested` and print its room using `room_lookup[requested]`.",
+              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop name as a key in `room_lookup` with its room as the corresponding value. Then read one workshop name into `requested` and look up that workshop in `room_lookup` and print the stored room.",
               "hint": "Build the dictionary from the tuple records instead of writing the room mappings by hand.",
               "help": {
                 "concept": "The ordered list remains useful for the board, while a dictionary gives direct lookup by workshop name.",
@@ -13978,13 +13967,10 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_lookup` dictionary before filling it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store each current tuple with `room_lookup[name] = room` inside a loop."
-                },
-                "2": {
-                  "message": "Use `room_lookup[requested]` for the requested workshop instead of hard-coding a room."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -14001,19 +13987,10 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n\nroom_sessions = {}\nfor name, room in schedule:\n    if room in room_sessions:\n        room_sessions[room].append(name)\n    else:\n        room_sessions[room] = [name]\n\nroom_query = input()\nprint(room_sessions[room_query])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_sessions` dictionary before grouping workshops."
+                  "message": "Use a `for` loop over `schedule` to process each workshop record, as the prompt requests."
                 },
                 "1": {
-                  "message": "Check whether the current `room` key already exists in `room_sessions`."
-                },
-                "2": {
-                  "message": "Append the workshop name to the existing list for that room."
-                },
-                "3": {
-                  "message": "Create a one-item list for a room the first time it appears."
-                },
-                "4": {
-                  "message": "Use `room_sessions[room_query]` to retrieve the requested room's workshop list."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14124,13 +14101,10 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs instead of hard-coding the output."
+                  "message": "Use index `1` as requested in the prompt."
                 },
                 "1": {
-                  "message": "Use `students[1][\"name\"]` to read the second student's name."
-                },
-                "2": {
-                  "message": "Use `students[1][\"score\"]` to read the second student's score."
+                  "message": "Use index `1` as requested in the prompt."
                 }
               }
             },
@@ -14145,15 +14119,11 @@ const messages: Record<string, any> = {
               },
               "starterCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\n# Update only the nested stock value.\n# Print the updated stock value.\n",
               "solutionCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\nproduct[\"details\"][\"stock\"] = new_stock\nprint(product[\"details\"][\"stock\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Update the nested field with `product[\"details\"][\"stock\"] = new_stock`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-nested-data-structures-sketch2": {
               "title": "Add an attendee to a nested list",
-              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list.",
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list.",
               "hint": "First access the list stored under `\"students\"`, then call `.append()` on that list.",
               "help": {
                 "concept": "When a dictionary value is a list, you can access that list by key and use normal list methods on it.",
@@ -14164,7 +14134,13 @@ const messages: Record<string, any> = {
               "solutionCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\ncourse[\"students\"].append(new_student)\nprint(course[\"students\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the input value with `course[\"students\"].append(new_student)`."
+                  "message": "Access the explicitly requested `\"students\"` field from `course`."
+                },
+                "1": {
+                  "message": "Use `append()` to add the input name to the nested students list."
+                },
+                "2": {
+                  "message": "Print the updated student list stored at `course[\"students\"]` itself."
                 }
               }
             },
@@ -14181,16 +14157,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs before looping."
-                },
-                "1": {
-                  "message": "Loop with `for student in students:` so one dictionary record is processed at a time."
-                },
-                "2": {
-                  "message": "Read the current student's `\"name\"` key inside the loop."
-                },
-                "3": {
-                  "message": "Read the current student's `\"score\"` key inside the loop."
+                  "message": "Use a `for` loop over `students` as the prompt requests."
                 }
               }
             }
@@ -14206,7 +14173,7 @@ const messages: Record<string, any> = {
             },
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Append an input name to a list stored inside a dictionary."
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list."
             },
             "try_nested_data_structures_sketch3": {
               "title": "Try it yourself",
@@ -14299,7 +14266,7 @@ const messages: Record<string, any> = {
             },
             "try-tuple-records-sketch0": {
               "title": "Build and read a shipment record",
-              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line.",
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field.",
               "hint": "Create one two-field tuple from the input variables, then read its two positions.",
               "help": {
                 "concept": "A tuple can hold related fields in a fixed order, and tuple indexes work like list indexes.",
@@ -14310,19 +14277,19 @@ const messages: Record<string, any> = {
               "solutionCode": "product = input()\nquantity = int(input())\n\nshipment = (product, quantity)\nprint(shipment[0])\nprint(shipment[1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `shipment` as the tuple `(product, quantity)` instead of printing the inputs directly."
+                  "message": "Create `shipment` as the tuple `(product, quantity)`."
                 },
                 "1": {
-                  "message": "Read the product from `shipment[0]`."
+                  "message": "Use index `0` to read the first tuple field."
                 },
                 "2": {
-                  "message": "Read the quantity from `shipment[1]`."
+                  "message": "Use index `1` to read the second tuple field."
                 }
               }
             },
             "try-tuple-unpacking-sketch1": {
               "title": "Unpack a booking record",
-              "prompt": "A booking record is already stored as `booking = (\"Workshop\", 24, \"Friday\")`. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order.",
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output.",
               "hint": "The tuple has three fields, so use three target names on the left side of one assignment.",
               "help": {
                 "concept": "Unpacking replaces positional lookups with meaningful variable names.",
@@ -14333,7 +14300,7 @@ const messages: Record<string, any> = {
               "solutionCode": "booking = (\"Workshop\", 24, \"Friday\")\n\ntitle, seats, day = booking\nprint(title)\nprint(seats)\nprint(day)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack all three fields with `title, seats, day = booking`."
+                  "message": "Unpack the tuple with `title, seats, day = booking` before printing the fields."
                 }
               }
             },
@@ -14350,10 +14317,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\nregistrations = [(name1, seats1), (name2, seats2)]\nfor name, seats in registrations:\n    print(name, seats)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `registrations` from the two input name/seat pairs instead of hard-coding the final output."
-                },
-                "1": {
-                  "message": "Unpack each tuple in the loop with `for name, seats in registrations:`."
+                  "message": "Use a `for` loop over `registrations` as the prompt requests."
                 }
               }
             }
@@ -14361,11 +14325,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_tuple_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a two-field shipment tuple from input, then read and print both fields by index."
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field."
             },
             "try_tuple_unpacking_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Unpack a three-field booking tuple into meaningful names and print the fields."
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output."
             },
             "try_tuple_loop_sketch2": {
               "title": "Try it yourself",
@@ -14464,7 +14428,7 @@ const messages: Record<string, any> = {
             },
             "try-updating-and-looping-dictionaries-sketch0": {
               "title": "Add or update stock from input",
-              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new.",
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key.",
               "hint": "Use the input variable itself as the key: `stock[item] = amount`.",
               "help": {
                 "concept": "Dictionary assignment uses the same syntax for both adding a new key and updating an existing one.",
@@ -14475,7 +14439,10 @@ const messages: Record<string, any> = {
               "solutionCode": "stock = {\"pens\": 4, \"paper\": 2}\nitem = input()\namount = int(input())\n\nstock[item] = amount\nprint(stock)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stock[item] = amount` so the same code can add a new key or update an existing one."
+                  "message": "Store the input amount with `stock[item] = amount` as requested."
+                },
+                "1": {
+                  "message": "Print the updated `stock` dictionary itself after changing it."
                 }
               }
             },
@@ -14490,18 +14457,11 @@ const messages: Record<string, any> = {
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# If key exists in settings, remove that entry with del.\n# Print the final settings dictionary.\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    del settings[key]\nprint(settings)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Check `if key in settings:` before deleting an optional key."
-                },
-                "1": {
-                  "message": "Remove the matching entry with `del settings[key]`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-updating-and-looping-dictionaries-sketch2": {
               "title": "Loop through keys and look up each value",
-              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line.",
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value.",
               "hint": "Use `for item in inventory:` and retrieve the current value with `inventory[item]`.",
               "help": {
                 "concept": "A direct dictionary loop yields keys; use the current key to look up its value.",
@@ -14512,16 +14472,16 @@ const messages: Record<string, any> = {
               "solutionCode": "inventory = {\"pens\": 3, \"markers\": 2, \"folders\": 5}\n\nfor item in inventory:\n    print(item, inventory[item])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop directly with `for item in inventory:` so `item` receives each dictionary key."
+                  "message": "Loop directly over `inventory` instead of typing the known output."
                 },
                 "1": {
-                  "message": "Use `inventory[item]` to retrieve the value for the current key."
+                  "message": "Use `inventory[item]` to retrieve each current key's value."
                 }
               }
             },
             "try-updating-and-looping-dictionaries-sketch3": {
               "title": "Print dynamic score pairs with .items()",
-              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through `scores.items()` by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
               "hint": "Build the dictionary first, then use `for name, score in scores.items():`.",
               "help": {
                 "concept": "`.items()` lets a loop work with the key and value together without a separate lookup.",
@@ -14532,10 +14492,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nscores = {name1: score1, name2: score2}\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from the two input name/score pairs instead of hard-coding the output."
-                },
-                "1": {
-                  "message": "Loop with `for name, score in scores.items():` so each key-value pair is unpacked correctly."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             },
@@ -14552,13 +14509,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nwords = [first, second, third]\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `words` from `first`, `second`, and `third` before the loop."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `words` so every input word is processed."
-                },
-                "2": {
-                  "message": "Store each calculated value with `lengths[word] = len(word)`."
+                  "message": "Use a `for` loop over `words` as the prompt requests."
                 }
               }
             }
@@ -14566,7 +14517,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_updating_and_looping_dictionaries_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use one dictionary assignment to add or update a stock count supplied as input."
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key."
             },
             "try_updating_and_looping_dictionaries_sketch1": {
               "title": "Try it yourself",
@@ -14574,11 +14525,11 @@ const messages: Record<string, any> = {
             },
             "try_updating_and_looping_dictionaries_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Loop directly through dictionary keys and use each key to retrieve its value."
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value."
             },
             "try_updating_and_looping_dictionaries_sketch3": {
               "title": "Try it yourself",
-              "prompt": "Build scores from input and unpack each key-value pair with `.items()`."
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`."
             },
             "try_updating_and_looping_dictionaries_sketch4": {
               "title": "Try it yourself",
@@ -14673,7 +14624,7 @@ const messages: Record<string, any> = {
             },
             "try-decomposition-and-refactoring-sketch0": {
               "title": "Refactor repeated name cleanup",
-              "prompt": "This program already produces the correct output, but it repeats `strip().title()` for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
               "hint": "The finished program should still print the same two cleaned names; only the structure changes.",
               "help": {
                 "concept": "A refactor can preserve output while moving repeated logic into one reusable helper.",
@@ -14684,13 +14635,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\nfirst = input()\nsecond = input()\n\nfirst_clean = clean_name(first)\nsecond_clean = clean_name(second)\n\nprint(first_clean)\nprint(second_clean)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the repeated cleanup into `clean_name(name)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `clean_name(first)` for the first input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(second)` for the second input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -14707,10 +14658,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def word_count(text):\n    return len(text.split())\n\ntext = input()\ncount = word_count(text)\nprint(f\"Words: {count}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the counting responsibility into `word_count(text)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `count = word_count(text)` in the main flow."
+                  "message": "Call `word_count(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -14727,10 +14678,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\ndef build_badge(name):\n    nice_name = clean_name(name)\n    return \"Badge: \" + nice_name\n\nname = input()\nprint(build_badge(name))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Call `clean_name(name)` inside `build_badge` instead of duplicating its cleanup logic."
-                },
-                "1": {
-                  "message": "Return the badge using the cleaned `nice_name` value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14738,7 +14686,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_decomposition_and_refactoring_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Extract repeated cleanup into one helper while preserving the program's output."
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`."
             },
             "try_decomposition_and_refactoring_sketch1": {
               "title": "Try it yourself",
@@ -14846,13 +14794,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_message():\n    print(\"Functions are reusable!\")\n\nshow_message()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_message()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Put the required `print()` inside the body of `show_message()`."
-                },
-                "2": {
-                  "message": "Call `show_message()` after the definition."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -14869,13 +14814,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def ring_bell():\n    print(\"Ding!\")\n\nring_bell()\nring_bell()\nring_bell()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the `ring_bell()` body and reuse it with exactly three top-level calls."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-defining-and-calling-functions-sketch2": {
               "title": "Put a loop inside a function",
-              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create `colors = [\"red\", \"blue\", \"green\"]`, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
               "hint": "The list and the `for` loop both belong inside the indented function body.",
               "help": {
                 "concept": "A function body can contain several statements, including list creation and loops you already know.",
@@ -14886,13 +14831,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_colors():\n    colors = [\"red\", \"blue\", \"green\"]\n    for color in colors:\n        print(color)\n\nshow_colors()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_colors()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Keep the list, loop, and `print(color)` inside `show_colors()`."
-                },
-                "2": {
-                  "message": "Call `show_colors()` after defining it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14908,7 +14850,7 @@ const messages: Record<string, any> = {
             },
             "try_defining_and_calling_functions_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Put a familiar list-and-loop task inside a function, then call that function."
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once."
             },
             "allowReveal": true
           }
@@ -15008,10 +14950,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def normalize_city(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n\ncity = input()\nprint(normalize_city(city))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Add the requested string as the actual docstring of `normalize_city`, not as a comment or unrelated string."
-                },
-                "1": {
-                  "message": "Keep `normalize_city` returning `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15028,10 +14967,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def total_price(price, tax):\n    \"\"\"Return price plus tax.\"\"\"\n    return price + tax\n\nprice = int(input())\ntax = int(input())\nresult = total_price(price, tax)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `\"\"\"Return price plus tax.\"\"\"` as the function's docstring."
-                },
-                "1": {
-                  "message": "Make the implementation return `price + tax` instead of printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15048,10 +14984,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def is_passing(score):\n    \"\"\"Return True when score is 70 or higher.\"\"\"\n    return score >= 70\n\nscore = int(input())\nprint(is_passing(score))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the stated contract as the real docstring of `is_passing`."
-                },
-                "1": {
-                  "message": "Implement the inclusive boundary with `return score >= 70`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -15121,13 +15054,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Make `clean_name(text)` return `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-1-move-name-helper": {
               "title": "Move name cleanup into names.py",
-              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`. Keep `make_badge` in `main.py` for this step.",
+              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module. Keep `make_badge` in `main.py` for this step.",
               "hint": "Only the name-cleaning responsibility moves in this step.",
               "help": {
                 "concept": "A refactor can move one helper into its own module while preserving the app's existing behavior.",
@@ -15151,19 +15084,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`."
-                },
-                "2": {
-                  "message": "Keep `make_badge(name, role)` in `main.py` until the next project step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-2-move-badge-helper": {
               "title": "Move badge formatting into badges.py",
-              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with `from badges import make_badge`, and keep the same badge output.",
+              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with a from-import that brings `make_badge` in from the `badges` module, and keep the same badge output.",
               "hint": "After this step, `main.py` should coordinate the two imported helpers instead of defining either one.",
               "help": {
                 "concept": "Different sibling modules can own different responsibilities while `main.py` connects their returned values.",
@@ -15193,13 +15123,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `make_badge` from sibling module `badges` in `main.py`."
+                  "message": "Use the requested import for `make_badge` from `badges`."
                 },
                 "1": {
-                  "message": "Define `make_badge(name, role)` in `badges.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(raw_name)` and `make_badge(name, role)` from `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15238,13 +15168,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Add the required real docstring to `clean_name` in `names.py`."
-                },
-                "1": {
-                  "message": "Add the required real docstring to `make_badge` in `badges.py`."
-                },
-                "2": {
-                  "message": "Use local variable `clean_role = role.strip().upper()` inside `make_badge`."
+                  "message": "Use `upper()` because that method is explicitly required by the prompt."
                 }
               }
             },
@@ -15286,13 +15210,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `welcome_message` from sibling module `messages` in `main.py`."
-                },
-                "1": {
-                  "message": "Define documented `welcome_message(badge)` in `messages.py`."
-                },
-                "2": {
-                  "message": "Return `\"Welcome! \" + badge` from `welcome_message`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -15400,13 +15318,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_badge(name):\n    return \"Badge: \" + name\n\nname1 = input()\nname2 = input()\nprint(make_badge(name1))\nprint(make_badge(name2))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `make_badge` with exactly one parameter named `name`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return the badge text from the function using the `name` parameter."
-                },
-                "2": {
-                  "message": "Call `make_badge` with both input variables instead of hard-coding the names."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15423,13 +15338,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def difference(high, low):\n    return high - low\n\nhigh = int(input())\nlow = int(input())\nprint(difference(high, low))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `difference` with parameters `high` and `low` in that order."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `high - low` from the function."
-                },
-                "2": {
-                  "message": "Pass the two input values to `difference(high, low)` in the same order."
+                  "message": "Call `difference(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15446,13 +15358,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def rectangle_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\narea = rectangle_area(width, height)\nprint(area)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `rectangle_area` with `width` and `height` parameters."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `width * height` from the function."
-                },
-                "2": {
-                  "message": "Store the function's returned value in `area` before printing it."
+                  "message": "Call `rectangle_area(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15568,10 +15477,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nshow_status(status)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `show_status` as a display-only function that prints `text`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Call `show_status(status)` directly instead of printing the call's `None` result."
+                  "message": "Call `show_status(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15588,10 +15497,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\nresult = double(number)\nprint(result + 1)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `result = double(number)`."
-                },
-                "1": {
-                  "message": "Use the stored result in the later expression `result + 1`."
+                  "message": "Call `double(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15608,13 +15514,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_label(item):\n    return \"Item: \" + item\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the label string from `make_label` instead of printing it inside the function."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store the returned label with `label = make_label(item)`."
-                },
-                "2": {
-                  "message": "Use the stored label in `print(label + \"!\")`."
+                  "message": "Call `make_label(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15719,7 +15622,7 @@ const messages: Record<string, any> = {
             },
             "try-scope-and-local-variables-sketch0": {
               "title": "Create and return a local calculation",
-              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable `total = price + 3`, then return `total`. The caller already reads a price and prints the returned result.",
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result.",
               "hint": "Both the `total` assignment and `return total` belong inside the function body.",
               "help": {
                 "concept": "A local variable can hold an intermediate result while the function is running.",
@@ -15730,16 +15633,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def add_fee(price):\n    total = price + 3\n    return total\n\nprice = int(input())\nprint(add_fee(price))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create the local assignment `total = price + 3` inside `add_fee`."
-                },
-                "1": {
-                  "message": "Return the local variable with `return total`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-scope-and-local-variables-sketch1": {
               "title": "Keep an outside value separate from a parameter",
-              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable `updated = count + 1` and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
               "hint": "The parameter named `count` is local to `next_count`; calculate a new local `updated` value instead of changing the outside assignment.",
               "help": {
                 "concept": "A parameter can have the same name as an outside variable without turning that outside variable into the function's local storage.",
@@ -15750,13 +15650,10 @@ const messages: Record<string, any> = {
               "solutionCode": "count = int(input())\n\ndef next_count(count):\n    updated = count + 1\n    return updated\n\nprint(next_count(count))\nprint(count)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `count` as the function parameter in `next_count(count)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Create local variable `updated = count + 1` inside the function."
-                },
-                "2": {
-                  "message": "Return `updated` instead of trying to change the outside `count`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15773,13 +15670,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_message(name):\n    message = \"Hello, \" + name\n    return message\n\nname = input()\nresult = make_message(name)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the local variable with `return message` inside `make_message`."
-                },
-                "1": {
-                  "message": "Store the returned value in caller-side variable `result`."
-                },
-                "2": {
-                  "message": "Print the caller-side `result`, not the function's local variable `message`."
+                  "message": "Call `make_message(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15787,11 +15678,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_scope_and_local_variables_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Create a local intermediate value inside a function and return it."
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result."
             },
             "try_scope_and_local_variables_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use a local parameter without changing a same-named value outside the function."
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged."
             },
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",
@@ -15884,7 +15775,7 @@ const messages: Record<string, any> = {
             },
             "try-using-imports-and-helper-files-sketch0": {
               "title": "Move a helper into names.py",
-              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`.",
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module.",
               "hint": "The function body moves to `names.py`; `main.py` keeps the input and output flow.",
               "help": {
                 "concept": "A Python helper file becomes a module that another file can import.",
@@ -15908,19 +15799,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`, not in `main.py`."
-                },
-                "2": {
-                  "message": "Keep the name-cleaning behavior inside `names.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-using-imports-and-helper-files-sketch1": {
               "title": "Move related helpers into text_tools.py",
-              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with `from text_tools import clean_word, make_label`.",
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module.",
               "hint": "Both related helper functions move to the same module; the input and print stay in `main.py`.",
               "help": {
                 "concept": "One module can expose several related helper functions.",
@@ -15944,13 +15832,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both `clean_word` and `make_label` from `text_tools` in `main.py`."
+                  "message": "Use the requested import for `clean_word` from `text_tools`."
                 },
                 "1": {
-                  "message": "Define `clean_word(text)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Define `make_label(word)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15989,16 +15877,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from `names` in `main.py`."
+                  "message": "Import the sibling `names` helper module in `main.py` as the prompt requires."
                 },
                 "1": {
-                  "message": "Import `make_badge` from `badges` in `main.py`."
+                  "message": "Import the sibling `badges` helper module in `main.py` as the prompt requires."
                 },
                 "2": {
-                  "message": "Call `clean_name(raw_name)` in `main.py`."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "3": {
-                  "message": "Call `make_badge(name, role)` in `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -16006,11 +15894,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_using_imports_and_helper_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Move one working helper out of `main.py` into `names.py` and import it back."
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module."
             },
             "try_using_imports_and_helper_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Move two related helpers into one module and import both function names."
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module."
             },
             "try_using_imports_and_helper_files_sketch2": {
               "title": "Try it yourself",
@@ -16023,7 +15911,7 @@ const messages: Record<string, any> = {
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "label": "Module Project: Clean Student Records",
-          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing.",
+          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing, while keeping row-cleaning logic in a reusable helper module.",
           "cards": {
             "sketch0": {
               "title": "A messy student export needs a reliable cleaner"
@@ -16034,7 +15922,7 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Clean and validate each CSV row"
+              "title": "Build the cleaning helper"
             },
             "mp_2": {
               "title": "Collect only valid student records"
@@ -16082,20 +15970,20 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read `data/students.csv` with `csv.DictReader`."
+                  "message": "Use the requested import involving `csv`."
                 },
                 "1": {
-                  "message": "Loop through every CSV row."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "2": {
-                  "message": "Access both the `name` and `score` columns from each row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "mp-1-read-student-file": {
-              "title": "Clean and validate each CSV row",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
-              "hint": "Reuse the exact validation sequence from 7.5, but apply it to dictionary-like CSV rows.",
+              "title": "Build the cleaning helper",
+              "prompt": "Start from the CSV preview. Create a sibling helper file named `cleaning.py` and define `clean_row(row)` there. In `main.py`, import it with `from cleaning import clean_row`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
+              "hint": "Put the reusable row-cleaning function in `cleaning.py`; keep CSV orchestration in `main.py` and import the helper directly.",
               "help": {
                 "concept": "The helper should produce one dependable result: a cleaned dictionary for valid input or `None` for rejected input.",
                 "hint_1": "Check `name == \"\"` before attempting the score conversion.",
@@ -16113,168 +16001,189 @@ const messages: Record<string, any> = {
                   "content": "old export\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and read both named CSV fields from `row`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject an empty cleaned name with `name == \"\"`."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the score conversion."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "5": {
+                  "message": "Import `clean_row` from the sibling `cleaning.py` helper as the project requires."
                 }
               }
             },
             "mp-2-clean-one-row": {
               "title": "Collect only valid student records",
-              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop.",
+              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The cleaner already decides whether a row is valid; this step should only collect accepted results.",
               "help": {
                 "concept": "Separating row validation from record collection keeps each responsibility small and reusable.",
                 "hint_1": "Store the helper result in `record` instead of calling the function several times.",
                 "hint_2": "Append only when `record is not None`."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the file."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Call `clean_row(row)` inside the DictReader loop."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Append only when the returned record is not `None`."
+                  "message": "Print the completed `records` list itself after the collection loop."
+                },
+                "3": {
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-3-skip-bad-rows": {
               "title": "Write the cleaned CSV file",
-              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it.",
+              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "Use the `records` list as the source for the final file instead of cleaning the CSV a second time.",
               "help": {
                 "concept": "Write mode should replace the old export, then one `file.write(...)` call can write each cleaned record.",
                 "hint_1": "Write the header first: `name,score\\n`.",
                 "hint_2": "Loop through `records` and write each name and numeric score on one line."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `output/clean_students.csv` with mode `\"w\"`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Write the `name,score` header before the record rows."
-                },
-                "2": {
-                  "message": "Loop through `records` and write each cleaned record with `file.write()`."
-                },
-                "3": {
-                  "message": "Print the number of clean records written."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-4-write-clean-records": {
               "title": "Verify the saved clean CSV",
-              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records.",
+              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The saved file is the deliverable, so verify the artifact itself instead of trusting only the in-memory list.",
               "help": {
                 "concept": "Reopen the same path after the write block has finished.",
                 "hint_1": "Print `file.read()` with `end=\"\"` so the file contents appear exactly as saved.",
                 "hint_2": "The output file should contain only the header and accepted cleaned rows."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep writing `output/clean_students.csv` in write mode."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen the same output path in read mode after writing it."
-                },
-                "2": {
-                  "message": "Print the actual saved file contents."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             }
@@ -16371,7 +16280,7 @@ const messages: Record<string, any> = {
             },
             "try-reading-text-files-sketch0": {
               "title": "Read the whole message file",
-              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file.",
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents.",
               "hint": "Use `with open(\"message.txt\", \"r\") as file:` and `message = file.read()`.",
               "help": {
                 "concept": "Use `.read()` when you want the complete text file as one string.",
@@ -16398,19 +16307,22 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `message.txt` with a `with open(..., \"r\") as file:` block."
+                  "message": "Read from the supplied `message.txt` file."
                 },
                 "1": {
-                  "message": "Use `file.read()` to read the whole file."
+                  "message": "Use `read()` to obtain the file's text."
                 },
                 "2": {
-                  "message": "Store the result of `file.read()` in `message` before printing it."
+                  "message": "Store the result of `file.read()` in the explicitly requested variable `message`."
+                },
+                "3": {
+                  "message": "Print the `message` variable itself after reading the file into it."
                 }
               }
             },
             "try-reading-text-files-sketch1": {
               "title": "Process names one line at a time",
-              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with `for line in file:` and print each name with surrounding whitespace removed.",
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed.",
               "hint": "Inside the `with` block, use `for line in file:` and `print(line.strip())`.",
               "help": {
                 "concept": "Iterating over an open file lets you process one line at a time without first reading the whole file into one string.",
@@ -16437,19 +16349,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `names.txt` in read mode with a `with` block."
-                },
-                "1": {
-                  "message": "Loop directly through the open `file` one line at a time."
-                },
-                "2": {
-                  "message": "Strip each line before printing it."
+                  "message": "Use a `for` loop over `file` as the prompt requests."
                 }
               }
             },
             "try-reading-text-files-sketch2": {
               "title": "Read and clean text from a data folder",
-              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name.",
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name.",
               "hint": "Open `data/city.txt`, then use `.read().strip().title()` on the open file.",
               "help": {
                 "concept": "A relative path can point to a file inside a workspace folder, and the string returned by `.read()` can be processed like any other string.",
@@ -16476,16 +16382,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open the relative path `data/city.txt` in read mode."
+                  "message": "Open the supplied relative path `data/city.txt`."
                 },
                 "1": {
-                  "message": "Read the city text from the file instead of hard-coding a city name."
+                  "message": "Read the city text from the file with `read()`."
                 },
                 "2": {
-                  "message": "Remove surrounding whitespace from the text read from the file."
+                  "message": "Remove surrounding whitespace with `strip()`."
                 },
                 "3": {
-                  "message": "Convert the city text to title case."
+                  "message": "Convert the cleaned city text to title case with `title()`."
                 }
               }
             }
@@ -16493,15 +16399,15 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_reading_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a complete text file into one string and print the value you read."
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents."
             },
             "try_reading_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Process an open text file one line at a time."
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed."
             },
             "try_reading_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Read text from a relative path and use the returned string."
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name."
             },
             "allowReveal": true
           }
@@ -16590,7 +16496,7 @@ const messages: Record<string, any> = {
             },
             "try-simple-csv-processing-sketch0": {
               "title": "Read rows by header name",
-              "prompt": "Read a CSV filename from input and build `path = \"data/\" + filename`. Open that file in read mode, create `csv.DictReader(file)`, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
               "hint": "Use the CSV header names instead of splitting each line manually.",
               "help": {
                 "concept": "`csv.DictReader` turns each data row into a dictionary-like object whose keys come from the header row.",
@@ -16623,19 +16529,22 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and create `csv.DictReader(file)`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through `reader` instead of hard-coding the rows."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "2": {
-                  "message": "Access both `row[\"name\"]` and `row[\"score\"]`."
+                  "message": "Use the explicitly requested dictionary field `name`."
+                },
+                "3": {
+                  "message": "Use the explicitly requested dictionary field `score`."
                 }
               }
             },
             "try-simple-csv-processing-sketch1": {
               "title": "Clean and convert CSV fields",
-              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with `.strip().title()`, clean and convert the score with `int(row[\"score\"].strip())`, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
               "hint": "CSV field values are strings, so clean the text before converting the score.",
               "help": {
                 "concept": "This step combines named-column access with the cleaning and integer-conversion skills you already know.",
@@ -16668,13 +16577,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read rows with `csv.DictReader` and loop through `reader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Clean each `name` field with both `strip()` and `title()`."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "2": {
-                  "message": "Convert the cleaned `score` field with `int(...)`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "3": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -16713,16 +16628,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read every row with `csv.DictReader` and a `for row in reader:` loop."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name before counting the row."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Count and sum only scores in the inclusive range 0 through 100."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }
@@ -16730,11 +16636,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_simple_csv_processing_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a selected CSV file with `csv.DictReader` and use named columns."
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`."
             },
             "try_simple_csv_processing_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Clean CSV text values and convert a numeric column."
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization."
             },
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",
@@ -16848,19 +16754,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the integer conversion inside a `try` block."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Catch exactly `ValueError` for invalid integer text."
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Print the converted number on the success path and `Invalid number` on the failure path."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-try-except-basics-sketch1": {
               "title": "Handle a missing data file",
-              "prompt": "Read a file name from input and build `path = \"data/\" + filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
               "hint": "The risky operation is opening the selected path for reading.",
               "help": {
                 "concept": "A missing read path raises `FileNotFoundError`, which is different from the `ValueError` raised by a bad integer conversion.",
@@ -16887,13 +16793,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the file-open/read operation inside a `try` block."
-                },
-                "1": {
-                  "message": "Catch exactly `FileNotFoundError` for a missing selected file."
-                },
-                "2": {
-                  "message": "Print the selected file text on success and `Missing file` when the file is absent."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -16932,13 +16832,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through `[first, second]` instead of handling only one filename."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Put the file operation inside a `try` block within the loop."
-                },
-                "2": {
-                  "message": "Catch exactly `FileNotFoundError` and print `Missing: <filename>`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -16950,7 +16847,7 @@ const messages: Record<string, any> = {
             },
             "try_try_except_basics_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Open a selected data file safely with `except FileNotFoundError`."
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`."
             },
             "try_try_except_basics_sketch2": {
               "title": "Try it yourself",
@@ -17043,7 +16940,7 @@ const messages: Record<string, any> = {
             },
             "try-validating-and-cleaning-input-sketch0": {
               "title": "Clean and validate a required name",
-              "prompt": "Read a name. Store `raw_name.strip().title()` in `cleaned_name`. If `cleaned_name == \"\"`, print `Missing`; otherwise print the cleaned name.",
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name.",
               "hint": "Clean the text before checking whether anything meaningful remains.",
               "help": {
                 "concept": "A spaces-only required field becomes `\"\"` after `strip()`, so validation should check the cleaned value rather than the raw input.",
@@ -17064,13 +16961,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Clean `raw_name` with both `strip()` and `title()`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Check the cleaned value against the empty string `\"\"`."
-                },
-                "2": {
-                  "message": "Print `Missing` only for the empty cleaned value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -17097,19 +16991,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Strip surrounding whitespace from `score_text` before conversion."
-                },
-                "1": {
-                  "message": "Catch exactly `ValueError` from an invalid integer conversion."
-                },
-                "2": {
-                  "message": "Check that `score` is in the inclusive range 0 through 100."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-validating-and-cleaning-input-sketch2": {
               "title": "Clean and validate a record",
-              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
               "hint": "Apply the rules in order: clean, check the required name, convert safely, check the range, then return the cleaned dictionary.",
               "help": {
                 "concept": "A reusable cleaning function can return `None` for rejected input and structured cleaned data for accepted input.",
@@ -17130,16 +17018,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define and call `clean_record(name_text, score_text)`."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name with an explicit `== \"\"` check."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -17147,7 +17026,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_validating_and_cleaning_input_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean a required name and detect the empty string after cleaning."
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name."
             },
             "try_validating_and_cleaning_input_sketch1": {
               "title": "Try it yourself",
@@ -17155,7 +17034,7 @@ const messages: Record<string, any> = {
             },
             "try_validating_and_cleaning_input_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Combine name cleaning and score validation in a reusable function."
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`."
             },
             "allowReveal": true
           }
@@ -17244,7 +17123,7 @@ const messages: Record<string, any> = {
             },
             "try-working-with-paths-sketch0": {
               "title": "Build a relative path from input",
-              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`.",
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable.",
               "hint": "Use both variables instead of typing a completed path.",
               "help": {
                 "concept": "A path string can be assembled from folder and file-name pieces that are already stored in variables.",
@@ -17265,10 +17144,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Build `path` from `folder + \"/\" + filename`."
+                  "message": "Build `path` from the two input variables with `folder + \"/\" + filename`."
                 },
                 "1": {
-                  "message": "Print the `path` variable after building it."
+                  "message": "Print the `path` variable itself."
                 }
               }
             },
@@ -17295,19 +17174,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
+                  "message": "Call `Path(...)` because that function call is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Build the path with `Path(folder) / filename`."
-                },
-                "2": {
-                  "message": "Print the resulting `path` object."
+                  "message": "Print the constructed `path` object itself."
                 }
               }
             },
             "try-working-with-paths-sketch2": {
               "title": "Open a file through a Path object",
-              "prompt": "Read a file name from input. Build `path = Path(\"data\") / filename`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
               "hint": "Build the path first, then pass the `path` variable directly to `open`.",
               "help": {
                 "concept": "A `Path` object can represent the nested relative location and can be passed directly to `open(...)`.",
@@ -17340,16 +17216,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
-                },
-                "1": {
-                  "message": "Build `path` with `Path(\"data\") / filename`."
-                },
-                "2": {
-                  "message": "Open the `path` variable in read mode."
-                },
-                "3": {
-                  "message": "Read and strip the selected file text before printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -17357,7 +17224,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_working_with_paths_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build and print a relative path string from folder and file-name input."
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable."
             },
             "try_working_with_paths_sketch1": {
               "title": "Try it yourself",
@@ -17365,7 +17232,7 @@ const messages: Record<string, any> = {
             },
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Build a `Path` to a supplied data file and open that path."
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`."
             },
             "allowReveal": true
           }
@@ -17454,7 +17321,7 @@ const messages: Record<string, any> = {
             },
             "try-writing-text-files-sketch0": {
               "title": "Replace an old status with fresh input",
-              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with `.strip().title()`, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
               "hint": "Write mode should replace the supplied old contents, not add after them.",
               "help": {
                 "concept": "Use mode `\"w\"` when the new text should replace whatever the file contained before.",
@@ -17479,21 +17346,11 @@ const messages: Record<string, any> = {
                   "content": "Old status\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Open `status.txt` with mode `\"w\"` so the old contents are replaced."
-                },
-                "1": {
-                  "message": "Write the cleaned `status` value to the file."
-                },
-                "2": {
-                  "message": "Reopen `status.txt` in read mode and print the saved contents."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-writing-text-files-sketch1": {
               "title": "Append a new log entry",
-              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log.",
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file.",
               "hint": "Append mode should preserve `Start shift` and add the new entry after it.",
               "help": {
                 "concept": "Use mode `\"a\"` when existing text must remain and the new text belongs at the end.",
@@ -17520,19 +17377,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `log.txt` with mode `\"a\"` so the existing first line is preserved."
+                  "message": "Open `log.txt` in append mode `\"a\"` so the existing line is preserved."
                 },
                 "1": {
-                  "message": "Append the cleaned `entry` followed by a newline."
+                  "message": "Write the new entry to the file with `write()`."
                 },
                 "2": {
-                  "message": "Reopen `log.txt` in read mode and print the complete saved log."
+                  "message": "Read the saved file back with `read()` before displaying the complete log."
                 }
               }
             },
             "try-writing-text-files-sketch2": {
               "title": "Create a two-line report",
-              "prompt": "Read a name and a score from input. Clean the name with `.strip().title()` and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
               "hint": "Use two `file.write(...)` calls so each report line ends with `\\n`.",
               "help": {
                 "concept": "Several calls to `file.write()` can build a multi-line text file deliberately.",
@@ -17551,34 +17408,21 @@ const messages: Record<string, any> = {
                   "content": "name = input().strip().title()\nscore = input().strip()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score + \"\\n\")\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Create `report.txt` with mode `\"w\"`."
-                },
-                "1": {
-                  "message": "Write the report text with `file.write()`."
-                },
-                "2": {
-                  "message": "Use newline characters so the report has two separate lines."
-                },
-                "3": {
-                  "message": "Reopen `report.txt` in read mode and print the saved file."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_writing_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Replace an existing file with fresh input using write mode."
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved."
             },
             "try_writing_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Preserve existing text and add a new line with append mode."
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file."
             },
             "try_writing_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Create a multi-line text report and verify the saved contents."
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved."
             },
             "allowReveal": true
           }
@@ -17658,19 +17502,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and read `data/registrations.csv` with `csv.DictReader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through every row from `reader`."
-                },
-                "2": {
-                  "message": "Read the `name`, `event`, `seats`, and `email` values from the row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "cp-1-read-registration-file": {
               "title": "Clean and validate one registration",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with `strip().title()`, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted.",
+              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with whitespace trimming followed by title-case normalization, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted. Inside `clean_row(row)`, clean the required fields with the specified string methods: trim whitespace from each text field, title-case the cleaned name, lowercase the cleaned email, and convert the cleaned seat text to an integer. Catch `ValueError` when the seat conversion fails.",
               "hint": "Apply the cleaning and validation rules inside one reusable function.",
               "help": {
                 "concept": "`clean_row(row)` should return one dependable shape for valid data and `None` for every rejected registration.",
@@ -17709,16 +17550,28 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and clean all four named CSV fields."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject empty cleaned name, event, or email values."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the seat conversion."
+                  "message": "Use the explicitly requested dictionary field `event`."
                 },
                 "3": {
-                  "message": "Reject seat counts below 1 before returning the cleaned dictionary."
+                  "message": "Use the explicitly requested dictionary field `seats`."
+                },
+                "4": {
+                  "message": "Use the explicitly requested dictionary field `email`."
+                },
+                "5": {
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "6": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "7": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -17763,19 +17616,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the CSV."
-                },
-                "1": {
-                  "message": "Call `clean_row(row)` once for each CSV row."
-                },
-                "2": {
-                  "message": "Append only records that are not `None`."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
             "cp-3-skip-bad-registration-rows": {
               "title": "Move cleaning into a helper module",
-              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with `from cleaning import clean_row`. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
+              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with a from-import that brings `clean_row` in from the `cleaning` module. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
               "hint": "Move one responsibility without changing the program's behavior.",
               "help": {
                 "concept": "A sibling helper module lets `main.py` orchestrate the workflow while `cleaning.py` owns row cleaning and validation.",
@@ -17817,19 +17664,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_row` from the sibling `cleaning` module."
+                  "message": "Use the requested import for `clean_row` from `cleaning`."
                 },
                 "1": {
-                  "message": "Keep the complete `clean_row(row)` function in `cleaning.py`."
-                },
-                "2": {
-                  "message": "Preserve the accepted-record output from the previous step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "cp-4-move-cleaning-to-module": {
               "title": "Add summary helper functions",
-              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order.",
+              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order. In `summary.py`, compute the summary values with a `for` loop over `records`. In `main.py`, print each event/count pair with a `for` loop over the dictionary produced by the event-count helper.",
               "hint": "Use normal loops and dictionaries so the summary stays within concepts already taught.",
               "help": {
                 "concept": "Summary helpers should accept `records` and return values without reading or writing files themselves.",
@@ -17877,16 +17721,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `total_seats` and `event_counts` from sibling `summary.py`."
+                  "message": "Use the requested import involving `summary`."
                 },
                 "1": {
-                  "message": "Implement `total_seats(records)` with an explicit accumulator loop."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Implement `event_counts(records)` with a dictionary and membership check."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Print the returned total and counts without `sorted()` or comprehensions."
+                  "message": "Use a `for` loop as the prompt requests."
+                },
+                "4": {
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
@@ -17946,16 +17793,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both report helpers from sibling `reports.py`."
+                  "message": "Use the requested import involving `reports`."
                 },
                 "1": {
-                  "message": "Write `output/clean_registrations.csv` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Write `output/summary.txt` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Keep report functions free of default parameters, pathlib, and sorted output."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
+                },
+                "4": {
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             },
@@ -18018,16 +17868,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep calling both report-writing helpers before verification."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen `output/clean_registrations.csv` in read mode and print it."
-                },
-                "2": {
-                  "message": "Reopen `output/summary.txt` in read mode and print it."
-                },
-                "3": {
-                  "message": "Verify the saved artifact contents rather than reconstructing them in `main.py`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }
@@ -50237,7 +50081,7 @@ const messages: Record<string, any> = {
         "module-7-clean-student-records": {
           "sketch-1": {
             "title": "A messy student export needs a reliable cleaner",
-            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
+            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reuse Module 6 imports by creating a sibling `cleaning.py` helper and importing `clean_row` into `main.py`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
           }
         },
         "reading-text-files": {

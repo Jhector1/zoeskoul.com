@@ -312,16 +312,26 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+            "pattern": "\\bscores\\s*\\[\\s*[^\\]\\n]+\\s*\\]\\s*=\\s*corrected_score\\b",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*scores\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bscores\\s*\\[\\s*2\\s*\\]\\s*=\\s*corrected_score\\b",
+          "pattern": "\\bscores\\s*\\[\\s*[^\\]\\n]+\\s*\\]\\s*=\\s*corrected_score\\b",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*scores\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -401,17 +411,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
+            "type": "uses_method",
+            "method": "append",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*attendees\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\battendees\\.append\\s*\\(\\s*new_attendee\\s*\\)",
+          "type": "uses_method",
+          "method": "append",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*attendees\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -491,17 +511,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+            "type": "uses_method",
+            "method": "remove",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*workshops\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bworkshops\\.remove\\s*\\(\\s*canceled\\s*\\)",
+          "type": "uses_method",
+          "method": "remove",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*workshops\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.1.message"
         }
       ]
     },
@@ -576,17 +606,37 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+            "type": "uses_method",
+            "method": "pop",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*next_ticket\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*tickets\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bnext_ticket\\s*=\\s*tickets\\.pop\\s*\\(\\s*1\\s*\\)",
+          "type": "uses_method",
+          "method": "pop",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*next_ticket\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*tickets\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.2.message"
         }
       ]
     },
@@ -666,29 +716,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+            "type": "uses_method",
+            "method": "sort",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
           },
           {
-            "type": "uses_method",
-            "method": "sort",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
-            "target": "times"
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*times\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\btimes\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+          "type": "uses_method",
+          "method": "sort",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
         },
         {
-          "type": "uses_method",
-          "method": "sort",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message",
-          "target": "times"
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*times\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message"
         }
       ]
     }

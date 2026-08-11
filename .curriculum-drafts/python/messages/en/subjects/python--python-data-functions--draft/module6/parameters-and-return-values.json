@@ -97,13 +97,10 @@
               "solutionCode": "def make_badge(name):\n    return \"Badge: \" + name\n\nname1 = input()\nname2 = input()\nprint(make_badge(name1))\nprint(make_badge(name2))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `make_badge` with exactly one parameter named `name`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return the badge text from the function using the `name` parameter."
-                },
-                "2": {
-                  "message": "Call `make_badge` with both input variables instead of hard-coding the names."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -120,13 +117,10 @@
               "solutionCode": "def difference(high, low):\n    return high - low\n\nhigh = int(input())\nlow = int(input())\nprint(difference(high, low))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `difference` with parameters `high` and `low` in that order."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `high - low` from the function."
-                },
-                "2": {
-                  "message": "Pass the two input values to `difference(high, low)` in the same order."
+                  "message": "Call `difference(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -143,13 +137,10 @@
               "solutionCode": "def rectangle_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\narea = rectangle_area(width, height)\nprint(area)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `rectangle_area` with `width` and `height` parameters."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `width * height` from the function."
-                },
-                "2": {
-                  "message": "Store the function's returned value in `area` before printing it."
+                  "message": "Call `rectangle_area(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }

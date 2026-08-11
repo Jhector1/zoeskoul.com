@@ -437,14 +437,21 @@ function buildDraftPreviewTopic(loadedTopic: LoadedDraftTopic) {
     makeTopicDef: (input) => makeTopicDef(input as any),
   }) as { topic: ReviewTopicShape };
 
+  const reviewTopic = enrichReviewTopic({
+    topic: built.topic,
+    manifest,
+    resolveMessage,
+  });
+
   return {
     manifest,
     resolveMessage,
-    reviewTopic: enrichReviewTopic({
-      topic: built.topic,
-      manifest,
-      resolveMessage,
-    }),
+    reviewTopic: {
+      ...reviewTopic,
+      // Draft QA navigation needs the actual filesystem directory. topicSlug
+      // and topicId are routing identities and are not guaranteed to equal it.
+      draftTopicDir: loadedTopic.topicDir,
+    },
   };
 }
 

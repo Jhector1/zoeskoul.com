@@ -29,6 +29,7 @@ import {
     getAssessmentDisplayKind,
     type AssessmentDisplayKind,
 } from "@zoeskoul/learning-runtime/review/module/tryItProjectCard";
+import { resolveReviewFreeNavigation } from "@/components/review/module/reviewFreeNavigation";
 type ReviewCardSpecRecord = Record<string, unknown> | null | undefined;
 
 function GateBanner({ text }: { text: string }) {
@@ -131,11 +132,15 @@ export default function CardRenderer(props: {
         defaultToolLanguage = "python",
         onNavigateToExerciseRoute,
         onCompactQuizNavigationChange,
+        unlockAll = false,
         workspaceCapabilities,
     } = props;
 
     const readOnlyPractice = !workspaceCapabilities.canSubmitPractice;
-    const freeNavigation = !workspaceCapabilities.usesProgressGating;
+    const freeNavigation = resolveReviewFreeNavigation({
+      unlockAll,
+      usesProgressGating: workspaceCapabilities.usesProgressGating,
+    });
     const mayMutateProgress = workspaceCapabilities.canMutateProgress;
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
