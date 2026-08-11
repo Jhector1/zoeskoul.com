@@ -2,9 +2,9 @@
   "topicId": "polymorphic-collections",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
-  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "sectionSlug": "python--applied-python-projects--draft-python-9-polymorphism-and-abstraction",
   "prefix": "py9",
-  "minutes": 30,
+  "minutes": 32,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -65,38 +65,18 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch2.title",
-      "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-polymorphic-collections-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.prompt",
-        "exerciseKey": "try-polymorphic-collections-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "sc-polymorphism-mixed-list",
           "fb-polymorphism-shared-call",
-          "dr-polymorphism-loop-order",
           "sc-polymorphism-no-type-check"
         ],
         "allowReveal": true,
@@ -117,12 +97,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-1.title",
       "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -208,10 +182,9 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.solutionCode",
         "solutionFiles": [
           {
@@ -236,28 +209,52 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "tests": [
           {
-            "type": "created_instances",
-            "path": "main.py",
-            "className": "Book",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.0.message"
+            "stdin": "Coraline\nArrival\n",
+            "stdout": "Book: Coraline\nMovie: Arrival\n",
+            "match": "exact"
           },
           {
-            "type": "created_instances",
-            "path": "main.py",
-            "className": "Movie",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.1.message"
+            "stdin": "Dune\nMoonlight\n",
+            "stdout": "Book: Dune\nMovie: Moonlight\n",
+            "match": "exact"
           },
           {
-            "type": "no_stdout",
+            "stdin": "Beloved\nSpirited Away\n",
+            "stdout": "Book: Beloved\nMovie: Spirited Away\n",
+            "match": "exact"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "catalog",
             "path": "main.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+catalog\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.label\\s*\\(\\s*\\)\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.1.message"
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "catalog",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+catalog\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.label\\s*\\(\\s*\\)\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-polymorphic-collections-sketch1",
@@ -288,6 +285,13 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "services/catalog_report.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.services_catalog_report_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -308,6 +312,13 @@
         {
           "path": "models/movie.py",
           "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.models_movie_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_report.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.services_catalog_report_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -338,13 +349,19 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "services/catalog_report.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.services_catalog_report_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionCode",
         "solutionFiles": [
           {
@@ -367,195 +384,49 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "created_instances",
-            "path": "main.py",
-            "className": "Book",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.0.message"
           },
           {
-            "type": "created_instances",
-            "path": "main.py",
-            "className": "Movie",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.1.message"
-          },
-          {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.2.message"
+            "path": "services/catalog_report.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.services_catalog_report_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Book: A Wrinkle in Time\nMovie: Up\n",
+            "stdin": "book\nDune\nArrival\n",
+            "stdout": "Book: Dune\nMovie: Arrival\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "movie\nMoonlight\nBeloved\n",
+            "stdout": "Movie: Moonlight\nBook: Beloved\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "book\nCoraline\nSpirited Away\n",
+            "stdout": "Book: Coraline\nMovie: Spirited Away\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
-    },
-    {
-      "id": "try-polymorphic-collections-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/catalog_report.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.services_catalog_report_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/catalog_report.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.services_catalog_report_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterCode",
-        "starterFiles": [
+        "sourceChecks": [
           {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
+            "type": "source_regex",
+            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_labels\\s*\\(\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+\\1\\s*:[\\s\\S]*\\.append\\s*\\(\\s*\\2\\.label\\s*\\(\\s*\\)\\s*\\)[\\s\\S]*\\breturn\\b",
             "path": "services/catalog_report.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.services_catalog_report_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.sourceChecks.0.message"
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "services/catalog_report.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.services_catalog_report_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.checks.0.message"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Book: A Wrinkle in Time\nMovie: Up\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_labels\\s*\\(\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+\\1\\s*:[\\s\\S]*\\.append\\s*\\(\\s*\\2\\.label\\s*\\(\\s*\\)\\s*\\)[\\s\\S]*\\breturn\\b",
+          "path": "services/catalog_report.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "sc-polymorphism-mixed-list",
@@ -582,29 +453,10 @@
       "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphism-shared-call",
       "choiceCount": 4,
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "label"
-      }
-    },
-    {
-      "id": "dr-polymorphism-loop-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.dr-polymorphism-loop-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
         ]
       }
     },
@@ -621,8 +473,8 @@
         "d"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "d"
+        "kind": "fill_blank_choice",
+        "value": "label"
       }
     }
   ]

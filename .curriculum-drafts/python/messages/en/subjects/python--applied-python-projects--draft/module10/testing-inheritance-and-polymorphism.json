@@ -4,213 +4,169 @@
       "python-10-testing-debugging-oop-projects": {
         "testing-inheritance-and-polymorphism": {
           "label": "Testing Inheritance and Polymorphism",
-          "summary": "Test the shared promise across parent and child classes, then prove a mixed list behaves through the same method call.",
+          "summary": "Write regression tests for subclass contracts and mixed-object services without rebuilding the production classes.",
           "cards": {
             "sketch0": {
-              "title": "Test an inherited method"
+              "title": "Test a subclass contract"
             },
             "sketch1": {
-              "title": "Test mixed subclass results"
-            },
-            "sketch2": {
-              "title": "Test a defensive edge case"
+              "title": "Test a mixed polymorphic service"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_testing_inheritance_and_polymorphism_sketch0": {
-              "title": "Test a subclass override",
-              "prompt": "The lesson used notification classes to explain testing an interface. Now practice with media classes. Complete `build_book_label()` so it returns the label for `Book(\"Dune\", \"Frank Herbert\")` exactly as `Book: Dune by Frank Herbert`.",
-              "hint": "The test should prove that the Book subclass override returns the expected label.",
+              "title": "Write a subclass contract test",
+              "prompt": "`CatalogItem` and `Book` are already complete. In `tests/check_book.py`, use the existing `book` fixture to assert that it is an instance of `CatalogItem`, then assert that `book.label()` returns exactly `Book: Dune by Frank Herbert`. Leave both model files unchanged and keep the final `book inheritance tests passed` print.",
+              "hint": "One assertion checks the inheritance relationship; the other checks the subclass's specialized public behavior.",
               "help": {
-                "concept": "Testing subclass behavior means checking the exact result that the shared method should return for one concrete subclass.",
-                "hint_1": "Create the `Book` inside `build_book_label()`, then return the result of calling `label()` on that object.",
-                "hint_2": "Do not remove the existing assertion or success print line."
+                "concept": "A useful subclass regression test checks the relationship and the public contract without inspecting implementation details.",
+                "hint_1": "Use `isinstance(book, CatalogItem)`.",
+                "hint_2": "Assert the exact value returned by `book.label()`."
               },
-              "starterCode": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\n# Assert that book is a CatalogItem.\n# Assert that Book's specialized label() returns:\n# Book: Dune by Frank Herbert\n\nprint(\"book inheritance tests passed\")\n",
               "starterFiles": {
                 "tests_check_book_py": {
-                  "content": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")"
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\n# Assert that book is a CatalogItem.\n# Assert that Book's specialized label() returns:\n# Book: Dune by Frank Herbert\n\nprint(\"book inheritance tests passed\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "# Keep models/catalog_item.py unchanged for this step: Test a subclass override.\nclass CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "# Keep models/book.py unchanged for this step: Test a subclass override.\nfrom models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 }
               },
               "solutionFiles": {
                 "tests_check_book_py": {
-                  "content": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")"
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\nassert isinstance(book, CatalogItem)\nassert book.label() == \"Book: Dune by Frank Herbert\"\n\nprint(\"book inheritance tests passed\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 }
               },
-              "solutionCode": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\nassert isinstance(book, CatalogItem)\nassert book.label() == \"Book: Dune by Frank Herbert\"\n\nprint(\"book inheritance tests passed\")\n",
+              "checks": {},
+              "expectedOutput": "book inheritance tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "build_book_label() should return the Book label from the subclass override."
+                  "message": "Assert that the Book fixture is also a CatalogItem."
                 },
                 "1": {
-                  "message": "Keep the success message print after the assertion passes."
+                  "message": "Assert the exact specialized value returned by `book.label()`."
                 }
               }
             },
             "try_testing_inheritance_and_polymorphism_sketch1": {
-              "title": "Test a polymorphic label service",
-              "prompt": "Practice a mixed polymorphic result. Complete `build_sample_labels()` so it returns labels for a Book and a Game: `Book: Dune by Frank Herbert` and `Game: Portal 2 on PC`.",
-              "hint": "Loop through the mixed list and call the same `label()` method on each object.",
+              "title": "Write mixed-service regression tests",
+              "prompt": "`Book`, `Game`, and `build_labels(items)` are already complete. In `tests/check_catalog_report.py`, use the provided `mixed_items` fixture to assert the normal Book/Game labels in order. Then use the provided `edge_items` fixture to assert `Game: Untitled on Switch` followed by `Book: Beloved by Toni Morrison`. Do not rewrite the models or service. Keep the final `polymorphic report tests passed` print.",
+              "hint": "Call the service on each provided mixed fixture and compare the returned list with the exact expected labels.",
               "help": {
-                "concept": "A polymorphism test should prove the same method call works across different subclasses.",
-                "hint_1": "Start with an empty list, append `item.label()` for each object, and return the finished list.",
-                "hint_2": "Do not rewrite the models in `main.py`; the missing logic belongs in the service file."
+                "concept": "A polymorphic service test passes representative mixed objects through the service and checks observable results.",
+                "hint_1": "The first assertion uses `mixed_items`.",
+                "hint_2": "The second assertion retrieves the empty-title edge case through `edge_items`."
               },
-              "starterCode": "# TODO: complete this step in main.py.\n",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\n# Assert build_labels(mixed_items) returns the two normal labels in order.\n# Assert build_labels(edge_items) returns:\n# Game: Untitled on Switch\n# Book: Beloved by Toni Morrison\n\nprint(\"polymorphic report tests passed\")\n",
               "starterFiles": {
-                "main_py": {
-                  "content": "# TODO: complete this step in main.py.\n"
+                "tests_check_catalog_report_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\n# Assert build_labels(mixed_items) returns the two normal labels in order.\n# Assert build_labels(edge_items) returns:\n# Game: Untitled on Switch\n# Book: Beloved by Toni Morrison\n\nprint(\"polymorphic report tests passed\")\n"
                 },
                 "models_book_py": {
-                  "content": "# Keep models/book.py unchanged for this step: Test a polymorphic label service.\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 },
                 "models_game_py": {
-                  "content": "# Keep models/game.py unchanged for this step: Test a polymorphic label service.\nclass Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
+                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"\n"
                 },
                 "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    # Return one label() result for each item in order.\n    return []"
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 }
               },
               "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())"
+                "tests_check_catalog_report_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\nassert build_labels(mixed_items) == [\n    \"Book: Dune by Frank Herbert\",\n    \"Game: Portal 2 on PC\",\n]\n\nassert build_labels(edge_items) == [\n    \"Game: Untitled on Switch\",\n    \"Book: Beloved by Toni Morrison\",\n]\n\nprint(\"polymorphic report tests passed\")\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 },
                 "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
+                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"\n"
                 },
                 "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels"
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 }
               },
-              "solutionCode": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\nassert build_labels(mixed_items) == [\n    \"Book: Dune by Frank Herbert\",\n    \"Game: Portal 2 on PC\",\n]\n\nassert build_labels(edge_items) == [\n    \"Game: Untitled on Switch\",\n    \"Book: Beloved by Toni Morrison\",\n]\n\nprint(\"polymorphic report tests passed\")\n",
+              "checks": {},
+              "expectedOutput": "polymorphic report tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "build_sample_labels() should return labels from a mixed Book/Game list in order."
+                  "message": "Assert the exact ordered labels returned for `mixed_items`."
                 },
                 "1": {
-                  "message": "Print the returned label list."
-                }
-              }
-            },
-            "try_testing_inheritance_and_polymorphism_sketch2": {
-              "title": "Test validation with a fixture edge case",
-              "prompt": "Practice an edge case. Complete `build_empty_title_label()` so a game with an empty title falls back to `Untitled` and returns `Game: Untitled on Switch`.",
-              "hint": "Replace an empty incoming title before the label method uses it.",
-              "help": {
-                "concept": "A good test includes edge cases. Here, the subclass should still return a useful label when the title is missing.",
-                "hint_1": "In `__init__`, use a fallback like `\"Untitled\"` when the incoming title is empty.",
-                "hint_2": "Leave `label()` using the stored `self.title` so the validation change shows up automatically."
-              },
-              "starterCode": "# TODO: complete this step in main.py.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "# TODO: complete this step in main.py.\n"
-                },
-                "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        # Replace an empty title with \"Untitled\".\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())"
-                },
-                "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
-                }
-              },
-              "solutionCode": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
-              "checks": {
-                "0": {
-                  "message": "build_empty_title_label() should prove the empty title is sanitized before labeling."
-                },
-                "1": {
-                  "message": "Print the sanitized label for the game."
+                  "message": "Assert the exact ordered labels returned for `edge_items`."
                 }
               }
             }
           },
           "practice": {
             "policy_single_choice_1": {
-              "title": "Choose what the test should prove",
-              "prompt": "When you test `Book.label()`, what is the most useful thing to check?",
-              "hint": "Focus on the promised result of the shared method.",
+              "title": "Choose a useful subclass regression test",
+              "prompt": "Which assertion best checks the specialized public contract of `Book.label()`?",
+              "hint": "Test the result callers depend on.",
               "help": {
-                "concept": "A good inheritance test checks the behavior callers depend on, not random details around the class.",
-                "hint_1": "Look for the choice about the exact returned label.",
-                "hint_2": "The best answer checks subclass behavior through the shared method."
+                "concept": "A regression test should assert observable subclass behavior, not reimplement or inspect the method body.",
+                "hint_1": "Call the public method.",
+                "hint_2": "Compare its return value with the promised result."
               },
               "options": {
-                "a": "That `Book.label()` returns the exact expected string",
-                "b": "That the file is named `book.py`",
-                "c": "That the class uses two blank lines before each method",
-                "d": "That Python prints comments automatically"
+                "a": "`assert Book.__name__ == \"Book\"`",
+                "b": "`assert Book(\"Dune\", \"Frank Herbert\").label() == \"Book: Dune by Frank Herbert\"`",
+                "c": "`assert True`",
+                "d": "`assert \"label\" in open(\"models/book.py\").read()`"
               }
             },
             "policy_multi_choice_1": {
-              "title": "Choose good polymorphism test habits",
-              "prompt": "Which habits help when you test a mixed list of `Book` and `Game` objects?",
-              "hint": "Pick the choices that keep the test focused on the shared `label()` contract.",
+              "title": "Choose strong polymorphic-service fixtures",
+              "prompt": "Which TWO tests add meaningful coverage for a service that calls `label()` on a mixed collection?",
+              "hint": "Choose tests that exercise actual mixed objects and observable results.",
               "help": {
-                "concept": "A strong polymorphism test checks that one loop can call the same method on different object types and get the right results back.",
-                "hint_1": "Helpful habits keep the list mixed and check the returned labels in order.",
-                "hint_2": "Avoid choices that add type-checking or ignore the test output."
+                "concept": "Useful polymorphic tests vary the concrete objects or relevant edge cases while checking the shared service result.",
+                "hint_1": "A normal mixed Book/Game list is useful.",
+                "hint_2": "An edge-case object inside a mixed list adds different coverage."
               },
               "options": {
-                "a": "Build one mixed list and call `label()` on each item",
-                "b": "Check that the returned labels stay in the original order",
-                "c": "Add `if type(...)` checks before every call to `label()`",
-                "d": "Compare the test result with the exact expected labels"
-              }
-            },
-            "policy_drag_reorder_1": {
-              "title": "Order the inheritance test steps",
-              "prompt": "Put these steps in a sensible order for testing subclass behavior.",
-              "hint": "Start by creating the object, then call the method, then compare the result.",
-              "help": {
-                "concept": "A clean inheritance test creates a concrete subclass object, calls the shared method, and then checks the returned value.",
-                "hint_1": "The object must exist before you can call the method.",
-                "hint_2": "You compare the returned label after the method call."
-              },
-              "tokens": {
-                "t1": "Create a `Book` object",
-                "t2": "Call `book.label()`",
-                "t3": "Compare the returned string with the expected label"
+                "a": "Assert the labels from a mixed Book/Game list in order.",
+                "b": "Assert only that the service function's name is `build_labels`.",
+                "c": "Assert a mixed list containing a Game with an empty title uses its documented fallback.",
+                "d": "Assert `True` after importing the service."
               }
             },
             "policy_fill_blank_choice_1": {
-              "title": "Choose the parent class name",
-              "prompt": "Fill in the parent class name so `Book` inherits from the shared catalog base class.",
-              "hint": "Use the class that defines the shared `label()` contract.",
+              "title": "Name the shared behavior under test",
+              "prompt": "Complete the shared method name that both Book and Game objects provide to the report service.",
+              "hint": "It is the method the service calls on every object.",
               "help": {
-                "concept": "A subclass names its parent class inside the parentheses of the class definition.",
-                "hint_1": "Use the shared item class from this topic.",
-                "hint_2": "Do not pick a method name or a Python keyword."
+                "concept": "The shared public method is the contract the mixed-object service depends on.",
+                "hint_1": "Book and Game both expose the same method name.",
+                "hint_2": "The report service collects each object's label."
               },
-              "template": "class Book([blank1]):\n    pass",
+              "template": "item.[blank1]()",
               "choices": [
-                "CatalogItem",
                 "label",
-                "author",
-                "return"
+                "book_label",
+                "game_label",
+                "__class__"
               ]
             }
           }
@@ -223,16 +179,12 @@
       "python-10-testing-debugging-oop-projects": {
         "testing-inheritance-and-polymorphism": {
           "testing-inheritance-and-polymorphism-sketch-0": {
-            "title": "Test the contract, not every implementation detail",
-            "bodyMarkdown": "When classes share a method, tests should focus on the behavior promised by that method.\n\nImagine notification classes:\n\n```python\nemail = EmailNotification(\"Welcome\")\nassert email.message() == \"Email: Welcome\"\n```\n\nThe test does not need to inspect every line inside the class. It checks the result that callers depend on.\n\nThat makes the test useful even if the internal code changes later.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
+            "title": "Test the inherited relationship and the specialized result",
+            "bodyMarkdown": "A subclass regression test can protect both the inheritance relationship and specialized public behavior.\n\n```python\ndog = Dog(\"Mochi\")\n\nassert isinstance(dog, Animal)\nassert dog.sound() == \"woof\"\n```\n\nThose assertions answer different questions: is Dog part of the expected hierarchy, and does its override satisfy the promised result?\n\nThe test imports production classes; it does not rebuild them."
           },
           "testing-inheritance-and-polymorphism-sketch-1": {
-            "title": "Test a mixed list through the shared method",
-            "bodyMarkdown": "Polymorphism matters most when a helper works with mixed objects.\n\n```python\nnotifications = [\n    EmailNotification(\"Welcome\"),\n    SmsNotification(\"Code sent\"),\n]\n\nmessages = [note.message() for note in notifications]\nassert messages == [\"Email: Welcome\", \"SMS: Code sent\"]\n```\n\nThe test proves one loop can trust the shared method name.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
-          },
-          "testing-inheritance-and-polymorphism-sketch-2": {
-            "title": "Test edge cases near the shared behavior",
-            "bodyMarkdown": "A subclass should still behave clearly when the input is awkward.\n\n```python\nmessage = SmsNotification(\"\")\nassert message.message() == \"SMS: Untitled\"\n```\n\nThis kind of test protects the interface. It says, \"even when data is missing, this object still returns a predictable label.\"\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
+            "title": "Test polymorphism at the service boundary",
+            "bodyMarkdown": "A polymorphic service is best tested with a mixed collection.\n\n```python\nnotices = [\n    EmailNotice(\"Welcome\"),\n    SmsNotice(\"Code ready\"),\n]\n\nassert render_notices(notices) == [\n    \"EMAIL: Welcome\",\n    \"SMS: Code ready\",\n]\n```\n\nThe test passes representative concrete objects through the real service and checks the returned result.\n\nIt should not copy the service loop or branch on concrete types inside the test."
           }
         }
       }

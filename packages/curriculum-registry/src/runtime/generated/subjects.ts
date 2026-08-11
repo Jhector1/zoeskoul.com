@@ -1347,8 +1347,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "profileId": "python",
       "catalogSlug": "python",
       "genKey": "python_part1",
-      "order": 2,
+      "order": 0,
       "accessPolicy": "paid",
+      "visibility": "public",
       "status": "active",
       "imagePublicId": null,
       "imageAlt": null,
@@ -1358,21 +1359,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 4,
-          "isTerminalRelease": true,
+          "isTerminalRelease": false,
           "moreComingMessageKey": "subjects.applied-python-projects.moreComingSoon"
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,
           "rewardEnabledByDefault": true,
           "certificateEnabledByDefault": true
-        },
-        "versioning": {
-          "family": "applied-python-projects",
-          "version": 1,
-          "status": "active",
-          "defaultForNewEnrollments": true,
-          "supersedes": null,
-          "supersededBy": null
         }
       }
     },
@@ -1403,9 +1396,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           }
         },
         "meta": {
-          "estimatedMinutes": 210,
+          "estimatedMinutes": 195,
           "prereqKeys": [
-            "modules.python--python-data-functions--draft.python-8-real-world-project.title"
+            "modules.applied-python-projects.python-7.title"
           ],
           "outcomeKeys": [
             "modules.applied-python-projects.python-8-object-oriented-foundations.outcomes.0",
@@ -1528,9 +1521,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           }
         },
         "meta": {
-          "estimatedMinutes": 210,
+          "estimatedMinutes": 178,
           "prereqKeys": [
-            "modules.applied-python-projects.python-8-object-oriented-foundations.title"
+            "modules.applied-python-projects.python-8.title"
           ],
           "outcomeKeys": [
             "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.outcomes.0",
@@ -1652,9 +1645,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           }
         },
         "meta": {
-          "estimatedMinutes": 220,
+          "estimatedMinutes": 175,
           "prereqKeys": [
-            "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.title"
+            "modules.applied-python-projects.python-9.title"
           ],
           "outcomeKeys": [
             "modules.applied-python-projects.python-10-testing-debugging-oop-projects.outcomes.0",
@@ -1779,7 +1772,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "meta": {
           "estimatedMinutes": 260,
           "prereqKeys": [
-            "modules.applied-python-projects.python-10-testing-debugging-oop-projects.title"
+            "modules.applied-python-projects.python-10.title"
           ],
           "outcomeKeys": [
             "modules.applied-python-projects.python-11-oop-capstone-project.outcomes.0",
@@ -38577,7 +38570,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-8-object-oriented-foundations",
       "sectionSlug": "applied-python-projects-python-8-object-foundations",
       "prefix": "py8",
-      "minutes": 28,
+      "minutes": 30,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -38669,15 +38662,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "mc-thinking-in-objects-object-idea",
               "sc-thinking-in-objects-attribute-meaning",
-              "fb-thinking-in-objects-method-call",
-              "dr-thinking-in-objects-workflow"
+              "fb-thinking-in-objects-method-call"
             ],
             "allowReveal": true,
             "preferKind": null,
@@ -38835,8 +38827,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.checks.3.message",
                 "path": "main.py"
               }
-            ]
-          }
+            ],
+            "sourceChecks": []
+          },
+          "sourceChecks": []
         },
         {
           "id": "try-thinking-in-objects-sketch1",
@@ -38955,13 +38949,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "models/car.py"
               },
               {
-                "type": "created_instances",
-                "className": "Car",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.checks.3.message",
-                "path": "main.py"
-              },
-              {
                 "type": "printed_line_count",
                 "min": 2,
                 "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.checks.4.message",
@@ -38975,8 +38962,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*corolla_car\\s*\\.\\s*make\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*mazda_car\\s*\\.\\s*miles\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.1.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*corolla_car\\s*\\.\\s*make\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*mazda_car\\s*\\.\\s*miles\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-thinking-in-objects-sketch2",
@@ -39094,13 +39109,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "models/car.py"
               },
               {
-                "type": "created_instances",
-                "className": "Car",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.checks.2.message",
-                "path": "main.py"
-              },
-              {
                 "type": "printed_line_count",
                 "min": 1,
                 "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.checks.3.message",
@@ -39114,8 +39122,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bcar\\s*\\.\\s*drive\\s*\\(\\s*50\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*car\\s*\\.\\s*summary\\s*\\(\\s*\\)\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.1.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bcar\\s*\\.\\s*drive\\s*\\(\\s*50\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*car\\s*\\.\\s*summary\\s*\\(\\s*\\)\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mc-thinking-in-objects-object-idea",
@@ -39162,7 +39198,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.fb-thinking-in-objects-method-call",
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "b"
           },
           "optionIds": [
             "a",
@@ -39170,28 +39206,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "c",
             "d"
           ]
-        },
-        {
-          "id": "dr-thinking-in-objects-workflow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.dr-thinking-in-objects-workflow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
         }
       ]
     },
@@ -39201,7 +39215,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-8-object-oriented-foundations",
       "sectionSlug": "applied-python-projects-python-8-object-foundations",
       "prefix": "py8",
-      "minutes": 26,
+      "minutes": 30,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -39262,40 +39276,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-class-files-and-instances-sketch2",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.prompt",
-            "exerciseKey": "try-class-files-and-instances-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.cards.quiz.title",
-          "studentRuntimeExerciseKey": "mc-class-files-and-instances-class-role",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "mc-class-files-and-instances-class-role",
               "sc-class-files-and-instances-pass-meaning",
-              "fb-class-files-and-instances-import-name",
-              "dr-class-files-and-instances-order"
+              "fb-class-files-and-instances-import-name"
             ],
             "allowReveal": true,
             "preferKind": null,
@@ -39315,12 +39308,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -39420,8 +39407,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "constructorArgs": [],
                 "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.checks.1.message"
               }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+pass\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.sourceChecks.0.message"
+              }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+pass\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-class-files-and-instances-sketch1",
@@ -39526,128 +39529,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "min": 1,
                 "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.2.message"
               }
-            ]
-          }
-        },
-        {
-          "id": "try-class-files-and-instances-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
-            "starterFiles": [
+            ],
+            "sourceChecks": [
               {
+                "type": "source_regex",
+                "pattern": "(?:\\bfrom\\s+models\\.car\\s+import\\s+Car\\b|\\bimport\\s+models\\.car\\b)",
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.sourceChecks.0.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "path": "models/car.py",
-                "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.0.message"
-              },
-              {
-                "type": "constructible",
-                "path": "models/car.py",
-                "className": "Car",
-                "constructorArgs": [],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.1.message"
-              },
-              {
-                "type": "created_instances",
-                "path": "main.py",
-                "className": "Car",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.2.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.3.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Car object ready\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?:\\bfrom\\s+models\\.car\\s+import\\s+Car\\b|\\bimport\\s+models\\.car\\b)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "mc-class-files-and-instances-class-role",
@@ -39665,7 +39564,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "kind": "multi_choice",
             "optionIds": [
               "a",
-              "c"
+              "b"
             ]
           }
         },
@@ -39695,29 +39594,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "choiceCount": 4,
           "expected": {
             "kind": "fill_blank_choice",
-            "value": "Car"
-          }
-        },
-        {
-          "id": "dr-class-files-and-instances-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.dr-class-files-and-instances-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
+            "value": "models.car"
           }
         }
       ]
@@ -39813,15 +39690,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "mc-constructors-and-object-state-storing-values",
               "sc-constructors-and-object-state-purpose",
-              "fb-constructors-and-object-state-init-name",
-              "dr-constructors-and-object-state-flow"
+              "fb-constructors-and-object-state-init-name"
             ],
             "allowReveal": true,
             "preferKind": null,
@@ -39980,8 +39856,60 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*make\\s*,\\s*model\\s*,\\s*miles\\s*\\)\\s*:",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.make\\s*=\\s*make\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.model\\s*=\\s*model\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.3.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*make\\s*,\\s*model\\s*,\\s*miles\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.make\\s*=\\s*make\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.model\\s*=\\s*model\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.3.message"
+            }
+          ]
         },
         {
           "id": "try-constructors-and-object-state-sketch1",
@@ -40120,8 +40048,60 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+wheels\\s*=\\s*4\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*Car\\.wheels\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*outback\\.make\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bprint\\s*\\(\\s*mini\\.make\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.3.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+wheels\\s*=\\s*4\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*Car\\.wheels\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*outback\\.make\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bprint\\s*\\(\\s*mini\\.make\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.3.message"
+            }
+          ]
         },
         {
           "id": "try-constructors-and-object-state-sketch2",
@@ -40261,8 +40241,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+__init__\\s*\\([^)]*\\)\\s*:[\\s\\S]*?\\bself\\.service_notes\\s*=\\s*\\[\\s*\\]",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.sourceChecks.0.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+__init__\\s*\\([^)]*\\)\\s*:[\\s\\S]*?\\bself\\.service_notes\\s*=\\s*\\[\\s*\\]",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "mc-constructors-and-object-state-storing-values",
@@ -40310,29 +40306,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "choiceCount": 4,
           "expected": {
             "kind": "fill_blank_choice",
-            "value": "Car"
-          }
-        },
-        {
-          "id": "dr-constructors-and-object-state-flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.dr-constructors-and-object-state-flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
+            "value": "__init__"
           }
         }
       ]
@@ -40404,39 +40378,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-methods-and-responsibility-sketch2",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.prompt",
-            "exerciseKey": "try-methods-and-responsibility-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "mc-methods-and-responsibility-class-jobs",
               "sc-methods-and-responsibility-main-role",
-              "fb-methods-and-responsibility-call-name",
-              "dr-methods-and-responsibility-flow"
+              "fb-methods-and-responsibility-call-name"
             ],
             "allowReveal": true,
             "preferKind": null,
@@ -40456,12 +40410,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -40551,8 +40499,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message"
               },
               {
                 "type": "constructible",
@@ -40562,8 +40510,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Fit",
                   10000
                 ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message"
               },
               {
                 "type": "instance_attributes",
@@ -40578,8 +40526,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "model",
                   "miles"
                 ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message"
               },
               {
                 "type": "method_returns",
@@ -40597,25 +40545,87 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": 10040,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message"
+              },
+              {
+                "type": "attribute_sequence_equals",
+                "className": "Car",
+                "constructorArgs": [
+                  "Honda",
+                  "Fit",
+                  10000
+                ],
+                "constructorArgKinds": [],
+                "calls": [
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      40
+                    ],
+                    "methodArgKinds": []
+                  }
+                ],
+                "attributeName": "miles",
+                "expected": 10040,
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message"
+              },
+              {
+                "type": "attribute_sequence_equals",
+                "className": "Car",
+                "constructorArgs": [
+                  "Mazda",
+                  "3",
+                  5
+                ],
+                "constructorArgKinds": [],
+                "calls": [
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      7
+                    ],
+                    "methodArgKinds": []
+                  }
+                ],
+                "attributeName": "miles",
+                "expected": 12,
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.5.message"
               },
               {
                 "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message",
-                "path": "main.py"
+                "min": 2,
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.6.message"
               }
             ],
             "tests": [
               {
                 "stdin": "",
-                "stdout": "10040\n",
+                "stdout": "10040\n10040\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.sourceChecks.0.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-methods-and-responsibility-sketch1",
@@ -40703,8 +40713,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message"
+              },
+              {
+                "type": "constructible",
+                "className": "Car",
+                "constructorArgs": [
+                  "Toyota",
+                  "Prius",
+                  62
+                ],
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message"
               },
               {
                 "type": "method_returns",
@@ -40720,14 +40741,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Toyota Prius - 62 miles",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "Car",
+                "constructorArgs": [
+                  "Ford",
+                  "Focus",
+                  12345
+                ],
+                "constructorArgKinds": [],
+                "methodName": "summary",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Ford Focus - 12345 miles",
+                "expectedKind": "value",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.3.message"
               },
               {
                 "type": "printed_line_count",
                 "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message",
-                "path": "main.py"
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.4.message"
               }
             ],
             "tests": [
@@ -40737,157 +40775,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-methods-and-responsibility-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
-            "starterFiles": [
+            "semanticFirst": true,
+            "sourceChecks": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
                 "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.sourceChecks.0.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "constructible",
-                "className": "Car",
-                "constructorArgs": [
-                  "Toyota",
-                  "RAV4",
-                  15000
-                ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.0.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "method_returns",
-                "className": "Car",
-                "constructorArgs": [
-                  "Toyota",
-                  "RAV4",
-                  15000
-                ],
-                "constructorArgKinds": [],
-                "methodName": "is_valid_miles",
-                "methodArgs": [
-                  120
-                ],
-                "methodArgKinds": [],
-                "expected": true,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.1.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "method_returns",
-                "className": "Car",
-                "constructorArgs": [
-                  "Toyota",
-                  "RAV4",
-                  15000
-                ],
-                "constructorArgKinds": [],
-                "methodName": "is_valid_miles",
-                "methodArgs": [
-                  -5
-                ],
-                "methodArgKinds": [],
-                "expected": false,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.2.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.3.message",
-                "path": "main.py"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "True\nFalse\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "mc-methods-and-responsibility-class-jobs",
@@ -40905,8 +40810,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "kind": "multi_choice",
             "optionIds": [
               "a",
-              "b",
-              "c"
+              "b"
             ]
           }
         },
@@ -40924,7 +40828,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "b"
           }
         },
         {
@@ -40936,29 +40840,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "choiceCount": 4,
           "expected": {
             "kind": "fill_blank_choice",
-            "value": "@staticmethod"
-          }
-        },
-        {
-          "id": "dr-methods-and-responsibility-flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.dr-methods-and-responsibility-flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
+            "value": "10040"
           }
         }
       ]
@@ -41030,39 +40912,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-encapsulation-and-validation-sketch2",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.prompt",
-            "exerciseKey": "try-encapsulation-and-validation-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "mc-encapsulation-and-validation-safe-design",
               "sc-encapsulation-and-validation-why-inside-class",
-              "fb-encapsulation-and-validation-condition",
-              "dr-encapsulation-and-validation-update-order"
+              "fb-encapsulation-and-validation-condition"
             ],
             "allowReveal": true,
             "preferKind": null,
@@ -41082,12 +40944,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -41177,8 +41033,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.0.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.0.message"
               },
               {
                 "type": "constructible",
@@ -41188,27 +41044,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Civic",
                   100
                 ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.1.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "method_returns",
-                "className": "Car",
-                "constructorArgs": [
-                  "Honda",
-                  "Civic",
-                  100
-                ],
-                "constructorArgKinds": [],
-                "methodName": "drive",
-                "methodArgs": [
-                  -5
-                ],
-                "methodArgKinds": [],
-                "expected": 100,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.1.message"
               },
               {
                 "type": "method_returns",
@@ -41226,25 +41063,110 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": 110,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message"
               },
               {
-                "type": "printed_line_count",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.4.message",
-                "path": "main.py"
+                "type": "method_sequence_returns",
+                "className": "Car",
+                "constructorArgs": [
+                  "Honda",
+                  "Civic",
+                  100
+                ],
+                "constructorArgKinds": [],
+                "calls": [
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      10
+                    ],
+                    "methodArgKinds": []
+                  }
+                ],
+                "methodName": "drive",
+                "methodArgs": [
+                  -5
+                ],
+                "methodArgKinds": [],
+                "expected": 110,
+                "expectedKind": "value",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message"
+              },
+              {
+                "type": "attribute_sequence_equals",
+                "className": "Car",
+                "constructorArgs": [
+                  "Mazda",
+                  "3",
+                  5
+                ],
+                "constructorArgKinds": [],
+                "calls": [
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      7
+                    ],
+                    "methodArgKinds": []
+                  },
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      0
+                    ],
+                    "methodArgKinds": []
+                  },
+                  {
+                    "methodName": "drive",
+                    "methodArgs": [
+                      -9
+                    ],
+                    "methodArgKinds": []
+                  }
+                ],
+                "attributeName": "miles",
+                "expected": 12,
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.4.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
+                "stdin": "100\n10\n-5\n",
                 "stdout": "110\n110\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "5\n7\n0\n",
+                "stdout": "12\n12\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "40\n3\n-9\n",
+                "stdout": "43\n43\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.sourceChecks.0.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-encapsulation-and-validation-sketch1",
@@ -41332,218 +41254,96 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.0.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.0.message"
               },
               {
-                "type": "method_sequence_returns",
+                "type": "constructible",
                 "className": "Car",
                 "constructorArgs": [
-                  "Ford",
-                  "Escape",
-                  130
+                  "Toyota",
+                  "Prius",
+                  100
                 ],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "drive",
-                    "methodArgs": [
-                      30
-                    ],
-                    "methodArgKinds": []
-                  }
-                ],
-                "methodName": "drive",
-                "methodArgs": [
-                  -70
-                ],
-                "methodArgKinds": [],
-                "expected": 160,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.2.message",
-                "path": "models/car.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message"
               },
               {
-                "type": "method_returns",
+                "type": "instance_attributes",
                 "className": "Car",
                 "constructorArgs": [
-                  "Ford",
-                  "Escape",
-                  130
+                  "Toyota",
+                  "Prius",
+                  100
                 ],
-                "constructorArgKinds": [],
-                "methodName": "drive",
-                "methodArgs": [
-                  30
+                "attributes": [
+                  "make",
+                  "model",
+                  "miles"
                 ],
-                "methodArgKinds": [],
-                "expected": 160,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.3.message",
-                "path": "main.py"
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.2.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "160\n",
+                "stdin": "100\n150\n-20\n",
+                "stdout": "100\n150\n150\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "5\n9\n-1\n",
+                "stdout": "5\n9\n9\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "-5\n12\n-7\n",
+                "stdout": "0\n12\n12\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-encapsulation-and-validation-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/car.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.models_car_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
-            "starterFiles": [
+            "semanticFirst": true,
+            "sourceChecks": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
+                "type": "source_regex",
+                "pattern": "@property\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*\\)\\s*:",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.0.message"
               },
               {
+                "type": "source_regex",
+                "pattern": "@miles\\.setter\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*,\\s*[A-Za-z_]\\w*\\s*\\)\\s*:",
                 "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+                "path": "models/car.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.2.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/car.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.models_car_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "className": "Car",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.0.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "method_sequence_returns",
-                "className": "Car",
-                "constructorArgs": [
-                  "Honda",
-                  "Civic",
-                  0
-                ],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "drive",
-                    "methodArgs": [
-                      20
-                    ],
-                    "methodArgKinds": []
-                  },
-                  {
-                    "methodName": "drive",
-                    "methodArgs": [
-                      -3
-                    ],
-                    "methodArgKinds": []
-                  },
-                  {
-                    "methodName": "drive",
-                    "methodArgs": [
-                      50
-                    ],
-                    "methodArgKinds": []
-                  }
-                ],
-                "methodName": "summary",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "Honda Civic - 70 miles",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.1.message",
-                "path": "models/car.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.2.message",
-                "path": "main.py"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Honda Civic - 70 miles\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "@property\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "@miles\\.setter\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*,\\s*[A-Za-z_]\\w*\\s*\\)\\s*:",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+              "path": "models/car.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "mc-encapsulation-and-validation-safe-design",
@@ -41579,7 +41379,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "b"
           }
         },
         {
@@ -41591,29 +41391,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "choiceCount": 4,
           "expected": {
             "kind": "fill_blank_choice",
-            "value": ">"
-          }
-        },
-        {
-          "id": "dr-encapsulation-and-validation-update-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.dr-encapsulation-and-validation-update-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
+            "value": "150"
           }
         }
       ]
@@ -41624,7 +41402,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-8-object-oriented-foundations",
       "sectionSlug": "applied-python-projects-python-8-module-project",
       "prefix": "py8",
-      "minutes": 42,
+      "minutes": 45,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -41801,25 +41579,54 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message"
               },
               {
                 "type": "constructible",
                 "className": "Account",
                 "constructorArgs": [],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message"
               },
               {
                 "type": "created_instances",
                 "className": "Account",
                 "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message",
-                "path": "main.py"
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message"
               }
-            ]
-          }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+pass\\b",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "(?:\\bfrom\\s+models\\.account\\s+import\\s+Account\\b|\\bimport\\s+models\\.account\\b)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.1.message"
+              }
+            ],
+            "tests": []
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+pass\\b",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?:\\bfrom\\s+models\\.account\\s+import\\s+Account\\b|\\bimport\\s+models\\.account\\b)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "account-tracker-step-2-constructor-attributes",
@@ -41884,8 +41691,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
             "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionCode",
             "solutionFiles": [
               {
@@ -41903,60 +41709,88 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "className": "Account",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message",
-                "path": "models/account.py"
-              },
-              {
-                "type": "constructible",
-                "className": "Account",
-                "constructorArgs": [
-                  "Ava",
-                  125
-                ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message",
-                "path": "models/account.py"
-              },
-              {
-                "type": "instance_attributes",
-                "className": "Account",
-                "constructorArgs": [
-                  "Ava",
-                  125
-                ],
-                "attributes": [
-                  "owner",
-                  "balance"
-                ],
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message",
-                "path": "models/account.py"
-              },
-              {
-                "type": "created_instances",
-                "className": "Account",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message",
-                "path": "main.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message",
-                "path": "main.py"
-              }
-            ],
             "tests": [
               {
-                "stdin": "",
+                "stdin": "Ava\n125\n",
                 "stdout": "Riverside Club\nAva\n125\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Luis\n0\n",
+                "stdout": "Riverside Club\nLuis\n0\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noor\n999\n",
+                "stdout": "Riverside Club\nNoor\n999\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+club_name\\s*=\\s*[\\\"']Riverside Club[\\\"']",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*owner\\s*,\\s*balance\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.owner\\s*=\\s*owner\\b",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.3.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "main.py",
+                "pattern": "\\bAccount\\s*\\(\\s*[^,()]+\\s*,\\s*[^()]+\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+club_name\\s*=\\s*[\\\"']Riverside Club[\\\"']",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*owner\\s*,\\s*balance\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.owner\\s*=\\s*owner\\b",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.3.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "\\bAccount\\s*\\(\\s*[^,()]+\\s*,\\s*[^()]+\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+            }
+          ]
         },
         {
           "id": "account-tracker-step-3-add-methods",
@@ -42056,8 +41890,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": 150,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "Account",
+                "constructorArgs": [
+                  "Ava",
+                  125
+                ],
+                "constructorArgKinds": [],
+                "methodName": "deposit",
+                "methodArgs": [
+                  -5
+                ],
+                "methodArgKinds": [],
+                "expected": 125,
+                "expectedKind": "value",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message"
               },
               {
                 "type": "method_sequence_returns",
@@ -42083,8 +41935,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": 110,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message"
               },
               {
                 "type": "method_returns",
@@ -42094,32 +41946,90 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   125
                 ],
                 "constructorArgKinds": [],
-                "methodName": "is_valid_amount",
+                "methodName": "withdraw",
                 "methodArgs": [
-                  -5
+                  500
                 ],
                 "methodArgKinds": [],
-                "expected": false,
+                "expected": 125,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message"
               },
               {
-                "type": "printed_line_count",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message",
-                "path": "main.py"
+                "type": "attribute_sequence_equals",
+                "className": "Account",
+                "constructorArgs": [
+                  "Noor",
+                  10
+                ],
+                "constructorArgKinds": [],
+                "calls": [
+                  {
+                    "methodName": "deposit",
+                    "methodArgs": [
+                      7
+                    ],
+                    "methodArgKinds": []
+                  },
+                  {
+                    "methodName": "withdraw",
+                    "methodArgs": [
+                      20
+                    ],
+                    "methodArgKinds": []
+                  },
+                  {
+                    "methodName": "deposit",
+                    "methodArgs": [
+                      0
+                    ],
+                    "methodArgKinds": []
+                  }
+                ],
+                "attributeName": "balance",
+                "expected": 17,
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.4.message"
               }
             ],
             "tests": [
               {
                 "stdin": "",
-                "stdout": "150\n110\nFalse\n",
+                "stdout": "150\n110\n110\n110\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+deposit\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+withdraw\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.1.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+deposit\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+withdraw\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "account-tracker-step-4-validation-summary",
@@ -42205,29 +42115,53 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "semanticChecks": [
               {
+                "type": "constructible",
+                "className": "Account",
+                "constructorArgs": [
+                  "Noor",
+                  75
+                ],
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message"
+              },
+              {
+                "type": "instance_attributes",
+                "className": "Account",
+                "constructorArgs": [
+                  "Noor",
+                  75
+                ],
+                "attributes": [
+                  "owner",
+                  "balance"
+                ],
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message"
+              },
+              {
                 "type": "method_returns",
                 "className": "Account",
                 "constructorArgs": [
-                  "Ava",
-                  125
+                  "Noor",
+                  75
                 ],
                 "constructorArgKinds": [],
                 "methodName": "deposit",
                 "methodArgs": [
-                  -5
+                  25
                 ],
                 "methodArgKinds": [],
-                "expected": 125,
+                "expected": 100,
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message",
-                "path": "models/account.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message"
               },
               {
                 "type": "method_sequence_returns",
                 "className": "Account",
                 "constructorArgs": [
-                  "Ava",
-                  125
+                  "Noor",
+                  75
                 ],
                 "constructorArgKinds": [],
                 "calls": [
@@ -42237,46 +42171,118 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                       25
                     ],
                     "methodArgKinds": []
-                  },
-                  {
-                    "methodName": "withdraw",
-                    "methodArgs": [
-                      40
-                    ],
-                    "methodArgKinds": []
-                  },
-                  {
-                    "methodName": "withdraw",
-                    "methodArgs": [
-                      500
-                    ],
-                    "methodArgKinds": []
                   }
                 ],
+                "methodName": "withdraw",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": [],
+                "expected": 60,
+                "expectedKind": "value",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.3.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "Account",
+                "constructorArgs": [
+                  "Noor",
+                  75
+                ],
+                "constructorArgKinds": [],
                 "methodName": "summary",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Riverside Club | Ava: $110.00",
+                "expected": "Riverside Club | Noor: $75.00",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message",
-                "path": "models/account.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message",
-                "path": "main.py"
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.4.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Riverside Club | Ava: $40.00\n",
+                "stdin": "Ava\n125\n40\n-5\n",
+                "stdout": "125\n40\n40\nRiverside Club | Ava: $40.00\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Luis\n-10\n75\n-1\n",
+                "stdout": "0\n75\n75\nRiverside Club | Luis: $75.00\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Noor\n9\n0\n-3\n",
+                "stdout": "9\n0\n0\nRiverside Club | Noor: $0.00\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "@property\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "@balance\\.setter\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*,\\s*value\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\._balance\\s*=\\s*0\\b",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.3.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+                "path": "models/account.py",
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.4.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "@property\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "@balance\\.setter\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*,\\s*value\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\._balance\\s*=\\s*0\\b",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.3.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+              "path": "models/account.py",
+              "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.4.message"
+            }
+          ]
         }
       ]
     },
@@ -42286,7 +42292,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
       "prefix": "py9",
-      "minutes": 30,
+      "minutes": 32,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -42347,38 +42353,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-inheritance-for-shared-behavior-sketch2",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.prompt",
-            "exerciseKey": "try-inheritance-for-shared-behavior-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "sc-inheritance-shared-work",
               "fb-inheritance-subclass-name",
-              "dr-inheritance-build-order",
               "sc-inheritance-method-reuse"
             ],
             "allowReveal": true,
@@ -42399,12 +42385,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -42430,6 +42410,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -42443,6 +42430,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/catalog_item.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_catalog_item_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -42488,39 +42482,46 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
                 "type": "defines_class",
-                "className": "CatalogItem",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message",
-                "path": "models/catalog_item.py"
+                "className": "Book",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message"
               },
               {
                 "type": "constructible",
-                "className": "CatalogItem",
+                "className": "Book",
                 "constructorArgs": [
                   "Hidden Figures"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message",
-                "path": "models/catalog_item.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message"
               },
               {
                 "type": "instance_attributes",
-                "className": "CatalogItem",
+                "className": "Book",
                 "constructorArgs": [
                   "Hidden Figures"
                 ],
                 "attributes": [
                   "title"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message",
-                "path": "models/catalog_item.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message"
               },
               {
                 "type": "method_returns",
-                "className": "CatalogItem",
+                "className": "Book",
                 "constructorArgs": [
                   "Hidden Figures"
                 ],
@@ -42530,19 +42531,45 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Hidden Figures",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message",
-                "path": "models/catalog_item.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
+                "stdin": "Dune\n",
+                "stdout": "Dune\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Hidden Figures\n",
                 "stdout": "Hidden Figures\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Project Hail Mary\n",
+                "stdout": "Project Hail Mary\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.sourceChecks.0.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-inheritance-for-shared-behavior-sketch1",
@@ -42658,8 +42685,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Book",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message",
-                "path": "models/book.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message"
               },
               {
                 "type": "constructible",
@@ -42668,8 +42695,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "The Martian",
                   "Andy Weir"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message",
-                "path": "models/book.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message"
               },
               {
                 "type": "instance_attributes",
@@ -42682,186 +42709,93 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "title",
                   "author"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message",
-                "path": "models/book.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.3.message",
-                "path": "main.py"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "The Martian\nAndy Weir\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-inheritance-for-shared-behavior-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
                 "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message"
               },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
               {
                 "type": "constructible",
                 "className": "Book",
                 "constructorArgs": [
-                  "The Hobbit",
-                  "J. R. R. Tolkien"
+                  "Kindred",
+                  "Octavia Butler"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.0.message",
-                "path": "models/book.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.3.message"
               },
               {
-                "type": "method_returns",
+                "type": "instance_attributes",
                 "className": "Book",
                 "constructorArgs": [
-                  "The Hobbit",
-                  "J. R. R. Tolkien"
+                  "Kindred",
+                  "Octavia Butler"
                 ],
-                "constructorArgKinds": [],
-                "methodName": "label",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "The Hobbit by J. R. R. Tolkien",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message",
-                "path": "models/book.py"
-              },
-              {
-                "type": "created_instances",
-                "className": "Book",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.2.message",
-                "path": "main.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.3.message",
-                "path": "main.py"
+                "attributes": [
+                  "title",
+                  "author"
+                ],
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.4.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "The Hobbit by J. R. R. Tolkien\n",
+                "stdin": "The Martian\nAndy Weir\n",
+                "stdout": "The Martian\nAndy Weir\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Kindred\nOctavia Butler\n",
+                "stdout": "Kindred\nOctavia Butler\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Beloved\nToni Morrison\n",
+                "stdout": "Beloved\nToni Morrison\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*title\\s*\\)",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bself\\.author\\s*=\\s*author\\b",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.2.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*title\\s*\\)",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bself\\.author\\s*=\\s*author\\b",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "sc-inheritance-shared-work",
@@ -42893,28 +42827,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr-inheritance-build-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.dr-inheritance-build-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "sc-inheritance-method-reuse",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -42928,7 +42840,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "c"
           }
         }
       ]
@@ -42939,7 +42851,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
       "prefix": "py9",
-      "minutes": 30,
+      "minutes": 32,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -42981,57 +42893,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch1.title",
-          "sketchId": "sketch-1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-overriding-and-specialization-sketch1",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.title",
-            "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.prompt",
-            "exerciseKey": "try-overriding-and-specialization-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-overriding-and-specialization-sketch2",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.prompt",
-            "exerciseKey": "try-overriding-and-specialization-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "sc-overriding-purpose",
               "fb-overriding-method-name",
-              "dr-overriding-workflow",
               "sc-overriding-shared-contract"
             ],
             "allowReveal": true,
@@ -43046,18 +42919,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-0.title",
           "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-0.bodyMarkdown"
-        },
-        {
-          "id": "sketch-1",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-1.title",
-          "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -43174,6 +43035,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "semanticChecks": [
               {
                 "type": "method_returns",
+                "className": "CatalogItem",
+                "constructorArgs": [
+                  "Atlas"
+                ],
+                "constructorArgKinds": [],
+                "methodName": "label",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Atlas",
+                "expectedKind": "value",
+                "path": "models/catalog_item.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.0.message"
+              },
+              {
+                "type": "method_returns",
                 "className": "Book",
                 "constructorArgs": [
                   "Project Hail Mary"
@@ -43184,296 +43060,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Book: Project Hail Mary",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.0.message",
-                "path": "models/book.py"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Book: Project Hail Mary\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-overriding-and-specialization-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "method_returns",
-                "className": "Movie",
-                "constructorArgs": [
-                  "Inside Out"
-                ],
-                "constructorArgKinds": [],
-                "methodName": "label",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "Movie: Inside Out",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.checks.0.message",
-                "path": "models/movie.py"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Movie: Inside Out\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-overriding-and-specialization-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
                 "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.1.message"
               },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
               {
                 "type": "method_returns",
                 "className": "Book",
@@ -43486,34 +43075,72 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Book: Coraline",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.checks.0.message",
-                "path": "models/book.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.2.message"
               },
               {
                 "type": "method_returns",
-                "className": "Movie",
+                "className": "Book",
                 "constructorArgs": [
-                  "Coco"
+                  "The Left Hand of Darkness"
                 ],
                 "constructorArgKinds": [],
                 "methodName": "label",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Movie: Coco",
+                "expected": "Book: The Left Hand of Darkness",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.checks.1.message",
-                "path": "models/movie.py"
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.3.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Book: Coraline\nMovie: Coco\n",
+                "stdin": "Project Hail Mary\n",
+                "stdout": "Book: Project Hail Mary\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Coraline\n",
+                "stdout": "Book: Coraline\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "The Left Hand of Darkness\n",
+                "stdout": "Book: The Left Hand of Darkness\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+                "path": "models/book.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.1.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "sc-overriding-purpose",
@@ -43545,28 +43172,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr-overriding-workflow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.dr-overriding-workflow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "sc-overriding-shared-contract",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -43580,7 +43185,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "b"
           }
         }
       ]
@@ -43591,7 +43196,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
       "prefix": "py9",
-      "minutes": 30,
+      "minutes": 32,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -43652,38 +43257,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-polymorphic-collections-sketch2",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.prompt",
-            "exerciseKey": "try-polymorphic-collections-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "sc-polymorphism-mixed-list",
               "fb-polymorphism-shared-call",
-              "dr-polymorphism-loop-order",
               "sc-polymorphism-no-type-check"
             ],
             "allowReveal": true,
@@ -43704,12 +43289,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -43795,10 +43374,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
             "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -43823,28 +43401,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "tests": [
               {
-                "type": "created_instances",
-                "path": "main.py",
-                "className": "Book",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.0.message"
+                "stdin": "Coraline\nArrival\n",
+                "stdout": "Book: Coraline\nMovie: Arrival\n",
+                "match": "exact"
               },
               {
-                "type": "created_instances",
-                "path": "main.py",
-                "className": "Movie",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.1.message"
+                "stdin": "Dune\nMoonlight\n",
+                "stdout": "Book: Dune\nMovie: Moonlight\n",
+                "match": "exact"
               },
               {
-                "type": "no_stdout",
+                "stdin": "Beloved\nSpirited Away\n",
+                "stdout": "Book: Beloved\nMovie: Spirited Away\n",
+                "match": "exact"
+              }
+            ],
+            "sourceChecks": [
+              {
+                "type": "uses_for_loop",
+                "iterable": "catalog",
                 "path": "main.py",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.checks.2.message"
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+catalog\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.label\\s*\\(\\s*\\)\\s*\\)",
+                "path": "main.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.1.message"
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "uses_for_loop",
+              "iterable": "catalog",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+catalog\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.label\\s*\\(\\s*\\)\\s*\\)",
+              "path": "main.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-polymorphic-collections-sketch1",
@@ -43875,6 +43477,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "services/catalog_report.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.services_catalog_report_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -43895,6 +43504,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/movie.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.models_movie_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/catalog_report.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.services_catalog_report_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -43925,13 +43541,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.services_catalog_report_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
             "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionCode",
             "solutionFiles": [
               {
@@ -43954,195 +43576,49 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "created_instances",
-                "path": "main.py",
-                "className": "Book",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.0.message"
               },
               {
-                "type": "created_instances",
-                "path": "main.py",
-                "className": "Movie",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.checks.2.message"
+                "path": "services/catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.solutionFiles.services_catalog_report_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Book: A Wrinkle in Time\nMovie: Up\n",
+                "stdin": "book\nDune\nArrival\n",
+                "stdout": "Book: Dune\nMovie: Arrival\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "movie\nMoonlight\nBeloved\n",
+                "stdout": "Movie: Moonlight\nBook: Beloved\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "book\nCoraline\nSpirited Away\n",
+                "stdout": "Book: Coraline\nMovie: Spirited Away\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-polymorphic-collections-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "services/catalog_report.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.services_catalog_report_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "services/catalog_report.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.services_catalog_report_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterCode",
-            "starterFiles": [
+            "sourceChecks": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
+                "type": "source_regex",
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_labels\\s*\\(\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+\\1\\s*:[\\s\\S]*\\.append\\s*\\(\\s*\\2\\.label\\s*\\(\\s*\\)\\s*\\)[\\s\\S]*\\breturn\\b",
                 "path": "services/catalog_report.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.starterFiles.services_catalog_report_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.sourceChecks.0.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "services/catalog_report.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.solutionFiles.services_catalog_report_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.checks.0.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Book: A Wrinkle in Time\nMovie: Up\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_labels\\s*\\(\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+\\1\\s*:[\\s\\S]*\\.append\\s*\\(\\s*\\2\\.label\\s*\\(\\s*\\)\\s*\\)[\\s\\S]*\\breturn\\b",
+              "path": "services/catalog_report.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "sc-polymorphism-mixed-list",
@@ -44169,29 +43645,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphism-shared-call",
           "choiceCount": 4,
           "expected": {
-            "kind": "fill_blank_choice",
-            "value": "label"
-          }
-        },
-        {
-          "id": "dr-polymorphism-loop-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.dr-polymorphism-loop-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "c"
             ]
           }
         },
@@ -44208,8 +43665,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "single_choice",
-            "optionId": "d"
+            "kind": "fill_blank_choice",
+            "value": "label"
           }
         }
       ]
@@ -44220,7 +43677,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
       "prefix": "py9",
-      "minutes": 30,
+      "minutes": 32,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -44281,38 +43738,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch2.title",
-          "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-abstraction-with-base-interfaces-sketch2",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.prompt",
-            "exerciseKey": "try-abstraction-with-base-interfaces-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "exerciseKeys": [
               "sc-interface-purpose",
               "fb-interface-method-name",
-              "dr-interface-build-order",
               "sc-interface-helper-focus"
             ],
             "allowReveal": true,
@@ -44333,12 +43770,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -44364,13 +43795,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.starterFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
             }
           ],
           "solutionFiles": [
@@ -44384,13 +43808,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/catalog_item.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.solutionFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -44414,20 +43831,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
               }
             ]
           },
           "showExpectedExample": true,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
             "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -44443,38 +43852,56 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.solutionFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "path": "models/catalog_item.py",
-                "className": "CatalogItem",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.0.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.1.message"
               }
             ],
             "tests": [
               {
                 "stdin": "",
-                "stdout": "CatalogItem is abstract\n",
+                "stdout": "CatalogItem blocked\nIncompleteItem blocked\nReady\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "path": "models/catalog_item.py",
+                "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/catalog_item.py",
+                "pattern": "\\bclass\\s+CatalogItem\\s*\\(\\s*ABC\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/catalog_item.py",
+                "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.2.message"
+              }
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/catalog_item.py",
+              "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/catalog_item.py",
+              "pattern": "\\bclass\\s+CatalogItem\\s*\\(\\s*ABC\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/catalog_item.py",
+              "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-abstraction-with-base-interfaces-sketch1",
@@ -44505,13 +43932,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.starterFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
             }
           ],
           "solutionFiles": [
@@ -44532,13 +43952,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/book.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.solutionFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.solutionFiles.models_movie_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -44566,13 +43979,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "models/book.py",
                 "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.starterFiles.models_movie_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -44605,13 +44011,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.solutionFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
               }
             ],
             "semanticChecks": [
@@ -44620,231 +44019,79 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "models/book.py",
                 "className": "Book",
                 "constructorArgs": [
-                  "Dune"
+                  "Beloved"
                 ],
                 "constructorArgKinds": [],
                 "methodName": "label",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Book: Dune",
+                "expected": "Book: Beloved",
                 "expectedKind": "value",
                 "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.0.message"
               },
               {
                 "type": "method_returns",
-                "path": "models/movie.py",
-                "className": "Movie",
+                "path": "models/book.py",
+                "className": "Book",
                 "constructorArgs": [
-                  "Moana"
+                  "The Dispossessed"
                 ],
                 "constructorArgKinds": [],
                 "methodName": "label",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Movie: Moana",
+                "expected": "Book: The Dispossessed",
                 "expectedKind": "value",
                 "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.2.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
-                "stdout": "Book: Dune\nMovie: Moana\n",
+                "stdin": "Coraline\n",
+                "stdout": "Book: Coraline\nCatalogItem blocked\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Beloved\n",
+                "stdout": "Book: Beloved\nCatalogItem blocked\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "The Dispossessed\n",
+                "stdout": "Book: The Dispossessed\nCatalogItem blocked\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-abstraction-with-base-interfaces-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "services/catalog_view.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.services_catalog_view_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_catalog_item_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_book_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "models/movie.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_movie_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            },
-            {
-              "path": "services/catalog_view.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.services_catalog_view_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterCode",
-            "starterFiles": [
+            "semanticFirst": true,
+            "sourceChecks": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
+                "type": "source_regex",
                 "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.0.message"
               },
               {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "services/catalog_view.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.starterFiles.services_catalog_view_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "type": "source_regex",
+                "path": "models/book.py",
+                "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.1.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_catalog_item_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/book.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_book_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "models/movie.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.models_movie_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              },
-              {
-                "path": "services/catalog_view.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.solutionFiles.services_catalog_view_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.checks.0.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Book: Dune\nMovie: Moana\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/book.py",
+              "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/book.py",
+              "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "sc-interface-purpose",
@@ -44876,28 +44123,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr-interface-build-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.dr-interface-build-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "sc-interface-helper-focus",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -44911,7 +44136,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "c"
+            "optionId": "b"
           }
         }
       ]
@@ -44922,7 +44147,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "sectionSlug": "applied-python-projects-python-9-module-project",
       "prefix": "py9",
-      "minutes": 55,
+      "minutes": 50,
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -44968,7 +44193,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "difficulty": "easy",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
-                "maxAttempts": null
+                "maxAttempts": null,
+                "carryFromPrev": false
               },
               {
                 "id": "greenhouse_project_step_2_add_humidity_override",
@@ -45049,6 +44275,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "models/humidity_sensor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_humidity_sensor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_greenhouse_monitor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -45076,6 +44316,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/temperature_sensor.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/humidity_sensor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -45110,6 +44364,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "models/temperature_sensor.py",
                 "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_temperature_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/temperature_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -45149,71 +44461,176 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
-                "type": "defines_class",
-                "className": "Sensor",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.0.message",
-                "path": "models/sensor.py"
-              },
-              {
-                "type": "defines_class",
-                "className": "TemperatureSensor",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.3.message",
-                "path": "models/temperature_sensor.py"
-              },
-              {
                 "type": "constructible",
                 "className": "TemperatureSensor",
                 "constructorArgs": [
-                  "North Bed",
-                  21.5
+                  "East Bed",
+                  18.25
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.4.message",
-                "path": "models/temperature_sensor.py"
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.0.message"
               },
               {
                 "type": "instance_attributes",
                 "className": "TemperatureSensor",
                 "constructorArgs": [
-                  "North Bed",
-                  21.5
+                  "East Bed",
+                  18.25
                 ],
                 "attributes": [
                   "zone",
                   "celsius"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
-                "path": "models/temperature_sensor.py"
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.1.message"
               },
               {
                 "type": "method_returns",
                 "className": "TemperatureSensor",
                 "constructorArgs": [
-                  "North Bed",
-                  21.5
+                  "East Bed",
+                  18.25
                 ],
                 "constructorArgKinds": [],
                 "methodName": "reading",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Temperature: North Bed = 21.5 C",
+                "expected": "Temperature: East Bed = 18.25 C",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
-                "path": "models/temperature_sensor.py"
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.2.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "TemperatureSensor",
+                "constructorArgs": [
+                  "South Bench",
+                  19.75
+                ],
+                "constructorArgKinds": [],
+                "methodName": "reading",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Temperature: South Bench = 19.75 C",
+                "expectedKind": "value",
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.3.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
+                "stdin": "North Bed\n21.5\n",
                 "stdout": "Temperature: North Bed = 21.5 C\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "East Bed\n18.25\n",
+                "stdout": "Temperature: East Bed = 18.25 C\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Propagation\n24\n",
+                "stdout": "Temperature: Propagation = 24.0 C\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "path": "models/sensor.py",
+                "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/sensor.py",
+                "pattern": "\\bclass\\s+Sensor\\s*\\(\\s*ABC\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/sensor.py",
+                "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/temperature_sensor.py",
+                "pattern": "\\bclass\\s+TemperatureSensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.3.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/temperature_sensor.py",
+                "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.4.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/temperature_sensor.py",
+                "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.5.message"
+              }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/sensor.py",
+              "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/sensor.py",
+              "pattern": "\\bclass\\s+Sensor\\s*\\(\\s*ABC\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/sensor.py",
+              "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/temperature_sensor.py",
+              "pattern": "\\bclass\\s+TemperatureSensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.3.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/temperature_sensor.py",
+              "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.4.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/temperature_sensor.py",
+              "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.5.message"
+            }
+          ]
         },
         {
           "id": "greenhouse-project-step-2-add-humidity-override",
@@ -45258,6 +44675,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_greenhouse_monitor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -45292,6 +44716,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/humidity_sensor.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -45333,6 +44764,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "models/humidity_sensor.py",
                 "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/temperature_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_temperature_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -45379,73 +44861,149 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
-                "type": "defines_class",
-                "className": "HumiditySensor",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.1.message",
-                "path": "models/humidity_sensor.py"
+                "type": "method_returns",
+                "className": "TemperatureSensor",
+                "constructorArgs": [
+                  "East Bed",
+                  18.25
+                ],
+                "constructorArgKinds": [],
+                "methodName": "reading",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Temperature: East Bed = 18.25 C",
+                "expectedKind": "value",
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.0.message"
               },
               {
                 "type": "constructible",
                 "className": "HumiditySensor",
                 "constructorArgs": [
-                  "Seedling Bench",
-                  64
+                  "Fern House",
+                  72
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.2.message",
-                "path": "models/humidity_sensor.py"
-              },
-              {
-                "type": "method_returns",
-                "className": "TemperatureSensor",
-                "constructorArgs": [
-                  "North Bed",
-                  21.5
-                ],
-                "constructorArgKinds": [],
-                "methodName": "reading",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "Temperature: North Bed = 21.5 C",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.0.message",
-                "path": "models/temperature_sensor.py"
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.1.message"
               },
               {
                 "type": "instance_attributes",
                 "className": "HumiditySensor",
                 "constructorArgs": [
-                  "Seedling Bench",
-                  64
+                  "Fern House",
+                  72
                 ],
                 "attributes": [
                   "zone",
                   "percent"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.3.message",
-                "path": "models/humidity_sensor.py"
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.2.message"
               },
               {
                 "type": "method_returns",
                 "className": "HumiditySensor",
                 "constructorArgs": [
-                  "Seedling Bench",
-                  64
+                  "Fern House",
+                  72
                 ],
                 "constructorArgKinds": [],
                 "methodName": "reading",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Humidity: Seedling Bench = 64%",
+                "expected": "Humidity: Fern House = 72%",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message",
-                "path": "models/humidity_sensor.py"
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.3.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "HumiditySensor",
+                "constructorArgs": [
+                  "Seed Room",
+                  55
+                ],
+                "constructorArgKinds": [],
+                "methodName": "reading",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Humidity: Seed Room = 55%",
+                "expectedKind": "value",
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message"
               }
-            ]
-          }
+            ],
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "path": "models/humidity_sensor.py",
+                "pattern": "\\bclass\\s+HumiditySensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/humidity_sensor.py",
+                "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/humidity_sensor.py",
+                "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.2.message"
+              }
+            ],
+            "tests": [
+              {
+                "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
+                "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "East Bed\n18.25\nFern House\n72\n",
+                "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Propagation\n24\nSeed Room\n55\n",
+                "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
+                "match": "exact"
+              }
+            ],
+            "semanticFirst": true
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/humidity_sensor.py",
+              "pattern": "\\bclass\\s+HumiditySensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/humidity_sensor.py",
+              "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/humidity_sensor.py",
+              "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "greenhouse-project-step-3-mixed-sensor-loop",
@@ -45490,6 +45048,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_greenhouse_monitor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -45524,6 +45089,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "models/humidity_sensor.py",
               "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/greenhouse_monitor.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -45565,6 +45137,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "models/humidity_sensor.py",
                 "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/temperature_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_temperature_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -45611,63 +45234,97 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
-                "type": "created_instances",
-                "className": "TemperatureSensor",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.0.message",
-                "path": "main.py"
-              },
-              {
-                "type": "created_instances",
-                "className": "HumiditySensor",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message",
-                "path": "main.py"
-              },
-              {
                 "type": "method_returns",
                 "className": "TemperatureSensor",
                 "constructorArgs": [
-                  "North Bed",
-                  21.5
+                  "Canopy",
+                  19.75
                 ],
                 "constructorArgKinds": [],
                 "methodName": "reading",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Temperature: North Bed = 21.5 C",
+                "expected": "Temperature: Canopy = 19.75 C",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.2.message",
-                "path": "models/temperature_sensor.py"
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.0.message"
               },
               {
                 "type": "method_returns",
                 "className": "HumiditySensor",
                 "constructorArgs": [
-                  "Seedling Bench",
-                  64
+                  "Canopy",
+                  68
                 ],
                 "constructorArgKinds": [],
                 "methodName": "reading",
                 "methodArgs": [],
                 "methodArgKinds": [],
-                "expected": "Humidity: Seedling Bench = 64%",
+                "expected": "Humidity: Canopy = 68%",
                 "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.3.message",
-                "path": "models/humidity_sensor.py"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.4.message"
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message"
               }
-            ]
-          }
+            ],
+            "sourceChecks": [
+              {
+                "type": "uses_for_loop",
+                "path": "main.py",
+                "iterable": "sensors",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "main.py",
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.1.message"
+              }
+            ],
+            "tests": [
+              {
+                "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
+                "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "East Bed\n18.25\nFern House\n72\n",
+                "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Propagation\n24\nSeed Room\n55\n",
+                "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
+                "match": "exact"
+              }
+            ],
+            "semanticFirst": true
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "uses_for_loop",
+              "path": "main.py",
+              "iterable": "sensors",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "greenhouse-project-step-4-monitor-class-report",
@@ -45812,6 +45469,50 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/temperature_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_temperature_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/humidity_sensor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_humidity_sensor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/greenhouse_monitor.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_greenhouse_monitor_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
           "showExpectedExample": true,
@@ -45865,17 +45566,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "semanticChecks": [
               {
-                "type": "defines_class",
-                "className": "GreenhouseMonitor",
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.0.message",
-                "path": "models/greenhouse_monitor.py"
-              },
-              {
                 "type": "constructible",
                 "className": "GreenhouseMonitor",
                 "constructorArgs": [],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.1.message",
-                "path": "models/greenhouse_monitor.py"
+                "path": "models/greenhouse_monitor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.0.message"
               },
               {
                 "type": "instance_attributes",
@@ -45884,19 +45579,114 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributes": [
                   "sensors"
                 ],
-                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.2.message",
-                "path": "models/greenhouse_monitor.py"
+                "path": "models/greenhouse_monitor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.1.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "TemperatureSensor",
+                "constructorArgs": [
+                  "Orchid House",
+                  20.5
+                ],
+                "constructorArgKinds": [],
+                "methodName": "reading",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Temperature: Orchid House = 20.5 C",
+                "expectedKind": "value",
+                "path": "models/temperature_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.2.message"
+              },
+              {
+                "type": "method_returns",
+                "className": "HumiditySensor",
+                "constructorArgs": [
+                  "Orchid House",
+                  70
+                ],
+                "constructorArgKinds": [],
+                "methodName": "reading",
+                "methodArgs": [],
+                "methodArgKinds": [],
+                "expected": "Humidity: Orchid House = 70%",
+                "expectedKind": "value",
+                "path": "models/humidity_sensor.py",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.3.message"
               }
             ],
             "tests": [
               {
-                "stdin": "",
+                "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
                 "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "East Bed\n18.25\nFern House\n72\n",
+                "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Propagation\n24\nSeed Room\n55\n",
+                "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
                 "match": "exact"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticFirst": true,
+            "sourceChecks": [
+              {
+                "type": "source_regex",
+                "path": "models/greenhouse_monitor.py",
+                "pattern": "\\bclass\\s+GreenhouseMonitor\\s*:",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/greenhouse_monitor.py",
+                "pattern": "\\bself\\.sensors\\s*=\\s*\\[\\s*\\]",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/greenhouse_monitor.py",
+                "pattern": "\\bdef\\s+add_sensor\\s*\\(\\s*self\\s*,\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*?\\bself\\.sensors\\.append\\s*\\(\\s*\\1\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "models/greenhouse_monitor.py",
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+print_report\\s*\\(\\s*self\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+self\\.sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.3.message"
+              }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/greenhouse_monitor.py",
+              "pattern": "\\bclass\\s+GreenhouseMonitor\\s*:",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/greenhouse_monitor.py",
+              "pattern": "\\bself\\.sensors\\s*=\\s*\\[\\s*\\]",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/greenhouse_monitor.py",
+              "pattern": "\\bdef\\s+add_sensor\\s*\\(\\s*self\\s*,\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*?\\bself\\.sensors\\.append\\s*\\(\\s*\\1\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/greenhouse_monitor.py",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+print_report\\s*\\(\\s*self\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+self\\.sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.3.message"
+            }
+          ]
         }
       ]
     },
@@ -45991,13 +45781,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
-            "maxAttempts": null
+            "maxAttempts": null,
+            "exerciseKeys": [
+              "q-testing-object-state-single-1",
+              "q-testing-object-state-multi-1",
+              "q-testing-object-state-multi-2"
+            ]
           }
         }
       ],
@@ -46032,100 +45827,119 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
           "starterFiles": [
             {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
+              "path": "tests/check_book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.tests_check_book_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
-              "path": "models/book.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+              "path": "tests/check_book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "models/book.py",
+            "entryFilePath": "tests/check_book.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
             "starterFiles": [
+              {
+                "path": "tests/check_book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.tests_check_book_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/book.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
                 "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "tests/check_book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
+                "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
           "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "book state tests passed\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
             "solutionFiles": [
+              {
+                "path": "tests/check_book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/book.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
-                "className": "Book",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.0.message",
-                "path": "models/book.py"
-              },
-              {
-                "type": "constructible",
-                "className": "Book",
-                "constructorArgs": [
-                  "Dune"
-                ],
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.1.message",
-                "path": "models/book.py"
-              },
-              {
-                "type": "instance_attributes",
-                "className": "Book",
-                "constructorArgs": [
-                  "Dune"
-                ],
-                "attributes": [
-                  "title",
-                  "available"
-                ],
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.2.message",
-                "path": "models/book.py"
-              },
-              {
-                "type": "attribute_sequence_equals",
-                "className": "Book",
-                "constructorArgs": [
-                  "Dune"
-                ],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "checkout",
-                    "methodArgs": [],
-                    "methodArgKinds": []
-                  }
-                ],
-                "attributeName": "available",
-                "expected": false,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.3.message",
-                "path": "models/book.py"
+                "type": "source_regex",
+                "path": "tests/check_book.py",
+                "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Book\\s*\\([^)]*\\).*?assert\\s+\\1\\.available\\s*(?:is|==)\\s*True.*?\\1\\.checkout\\s*\\(\\s*\\).*?assert\\s+(?:\\1\\.available\\s*(?:is|==)\\s*False|not\\s+\\1\\.available\\b)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.sourceChecks.0.message"
               }
             ]
-          }
+          },
+          "entryFilePath": "tests/check_book.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_book.py",
+              "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Book\\s*\\([^)]*\\).*?assert\\s+\\1\\.available\\s*(?:is|==)\\s*True.*?\\1\\.checkout\\s*\\(\\s*\\).*?assert\\s+(?:\\1\\.available\\s*(?:is|==)\\s*False|not\\s+\\1\\.available\\b)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-testing-object-state-sketch1",
@@ -46137,101 +45951,131 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
           "starterFiles": [
             {
-              "path": "models/task.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
+              "path": "tests/check_task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.tests_check_task_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
-              "path": "models/task.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+              "path": "tests/check_task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "models/task.py",
+            "entryFilePath": "tests/check_task.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
             "starterFiles": [
+              {
+                "path": "tests/check_task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.tests_check_task_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/task.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
                 "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "tests/check_task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
+                "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "models/task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
           "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "task validation tests passed\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
             "solutionFiles": [
+              {
+                "path": "tests/check_task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/task.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
-                "className": "Task",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.0.message",
-                "path": "models/task.py"
+                "type": "source_regex",
+                "path": "tests/check_task.py",
+                "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*2\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*2\\b",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.0.message"
               },
               {
-                "type": "attribute_sequence_equals",
-                "className": "Task",
-                "constructorArgs": [
-                  "Broken input",
-                  -5
-                ],
-                "constructorArgKinds": [],
-                "calls": [],
-                "attributeName": "priority",
-                "expected": 0,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.3.message",
-                "path": "models/task.py"
-              },
-              {
-                "type": "instance_attributes",
-                "className": "Task",
-                "constructorArgs": [
-                  "Email clients",
-                  2
-                ],
-                "attributes": [
-                  "name",
-                  "priority"
-                ],
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.1.message",
-                "path": "models/task.py"
-              },
-              {
-                "type": "attribute_sequence_equals",
-                "className": "Task",
-                "constructorArgs": [
-                  "Email clients",
-                  2
-                ],
-                "constructorArgKinds": [],
-                "calls": [],
-                "attributeName": "priority",
-                "expected": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.2.message",
-                "path": "models/task.py"
+                "type": "source_regex",
+                "path": "tests/check_task.py",
+                "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*-5\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*0\\b",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.1.message"
               }
             ]
-          }
+          },
+          "entryFilePath": "tests/check_task.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_task.py",
+              "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*2\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*2\\b",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_task.py",
+              "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*-5\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*0\\b",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-testing-object-state-sketch2",
@@ -46243,91 +46087,119 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
           "starterFiles": [
             {
-              "path": "models/counter.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
+              "path": "tests/check_counter.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.tests_check_counter_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/counter.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
-              "path": "models/counter.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+              "path": "tests/check_counter.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/counter.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "models/counter.py",
+            "entryFilePath": "tests/check_counter.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
             "starterFiles": [
+              {
+                "path": "tests/check_counter.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.tests_check_counter_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/counter.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
                 "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "tests/check_counter.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
+                "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "models/counter.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
           "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "counter sequence tests passed\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
             "solutionFiles": [
+              {
+                "path": "tests/check_counter.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
               {
                 "path": "models/counter.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
-                "className": "Counter",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.0.message",
-                "path": "models/counter.py"
-              },
-              {
-                "type": "instance_attributes",
-                "className": "Counter",
-                "constructorArgs": [],
-                "attributes": [
-                  "count"
-                ],
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.1.message",
-                "path": "models/counter.py"
-              },
-              {
-                "type": "attribute_sequence_equals",
-                "className": "Counter",
-                "constructorArgs": [],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "increment",
-                    "methodArgs": [],
-                    "methodArgKinds": []
-                  },
-                  {
-                    "methodName": "increment",
-                    "methodArgs": [],
-                    "methodArgKinds": []
-                  }
-                ],
-                "attributeName": "count",
-                "expected": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.2.message",
-                "path": "models/counter.py"
+                "type": "source_regex",
+                "path": "tests/check_counter.py",
+                "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Counter\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*0\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*1\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*2\\b",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.sourceChecks.0.message"
               }
             ]
-          }
+          },
+          "entryFilePath": "tests/check_counter.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_counter.py",
+              "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Counter\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*0\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*1\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*2\\b",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "q-testing-object-state-single-1",
@@ -46367,40 +46239,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "q-testing-object-state-fill-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "0"
-          }
-        },
-        {
-          "id": "q-testing-object-state-drag-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-drag-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t2",
-              "t1",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "q-testing-object-state-multi-2",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -46418,18 +46256,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "a",
               "b"
             ]
-          }
-        },
-        {
-          "id": "q-testing-object-state-fill-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "False"
           }
         }
       ]
@@ -46501,37 +46327,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch2.title",
-          "sketchId": "testing-inheritance-and-polymorphism-sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-testing-inheritance-and-polymorphism-sketch2",
-            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.prompt",
-            "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
-            "maxAttempts": null
+            "maxAttempts": null,
+            "exerciseKeys": [
+              "policy_single_choice_1",
+              "policy_multi_choice_1",
+              "policy_fill_blank_choice_1"
+            ]
           }
         }
       ],
@@ -46547,12 +46359,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "testing-inheritance-and-polymorphism-sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -46636,12 +46442,42 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "tests/check_book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.tests_check_book_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/catalog_item.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.models_catalog_item_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
           "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "book inheritance tests passed\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -46666,25 +46502,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "function_returns",
-                "functionName": "build_book_label",
-                "args": [],
-                "argKinds": [],
-                "expected": "Book: Dune by Frank Herbert",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.checks.0.message",
-                "path": "tests/check_book.py"
+                "type": "source_regex",
+                "path": "tests/check_book.py",
+                "pattern": "(?m)^[ \\t]*assert[ \\t]+isinstance\\(\\s*book\\s*,\\s*CatalogItem\\s*\\)[ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.0.message"
               },
               {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.checks.1.message",
-                "path": "tests/check_book.py"
+                "type": "source_regex",
+                "path": "tests/check_book.py",
+                "pattern": "(?m)^[ \\t]*assert[ \\t]+book\\.label\\s*\\(\\s*\\)[ \\t]*==[ \\t]*[\"']Book: Dune by Frank Herbert[\"'][ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.1.message"
               }
             ]
-          }
+          },
+          "entryFilePath": "tests/check_book.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_book.py",
+              "pattern": "(?m)^[ \\t]*assert[ \\t]+isinstance\\(\\s*book\\s*,\\s*CatalogItem\\s*\\)[ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_book.py",
+              "pattern": "(?m)^[ \\t]*assert[ \\t]+book\\.label\\s*\\(\\s*\\)[ \\t]*==[ \\t]*[\"']Book: Dune by Frank Herbert[\"'][ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "policy_single_choice_1",
@@ -46700,7 +46547,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "a"
+            "optionId": "b"
           }
         },
         {
@@ -46719,27 +46566,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "kind": "multi_choice",
             "optionIds": [
               "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "policy_drag_reorder_1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_drag_reorder_1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
+              "c"
             ]
           }
         },
@@ -46752,7 +46579,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "choiceCount": 4,
           "expected": {
             "kind": "fill_blank_choice",
-            "value": "CatalogItem"
+            "value": "label"
           }
         },
         {
@@ -46765,11 +46592,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
           "starterFiles": [
             {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
+              "path": "tests/check_catalog_report.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.tests_check_catalog_report_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/catalog_item.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_catalog_item_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/book.py",
@@ -46795,11 +46629,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "solutionFiles": [
             {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.main_py.content",
+              "path": "tests/check_catalog_report.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/catalog_item.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/book.py",
@@ -46825,15 +46666,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_catalog_report.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
             "starterFiles": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
+                "path": "tests/check_catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.tests_check_catalog_report_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "models/catalog_item.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_catalog_item_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/book.py",
@@ -46856,20 +46704,71 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "tests/check_catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/catalog_item.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/game.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_game_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.services_catalog_report_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
           "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "polymorphic report tests passed\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionCode",
             "solutionFiles": [
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.main_py.content",
+                "path": "tests/check_catalog_report.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "models/catalog_item.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/book.py",
@@ -46893,130 +46792,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "function_returns",
-                "functionName": "build_sample_labels",
-                "args": [],
-                "argKinds": [],
-                "expected": [
-                  "Book: Dune by Frank Herbert",
-                  "Game: Portal 2 on PC"
-                ],
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.checks.0.message",
-                "path": "main.py"
+                "type": "source_regex",
+                "path": "tests/check_catalog_report.py",
+                "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*mixed_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Book: Dune by Frank Herbert[\"'][\\s\\S]*?[\"']Game: Portal 2 on PC[\"'][\\s\\S]*?\\][ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.0.message"
               },
               {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.checks.1.message",
-                "path": "main.py"
-              }
-            ]
-          }
-        },
-        {
-          "id": "try-testing-inheritance-and-polymorphism-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/game.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.models_game_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/game.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.models_game_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/game.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.models_game_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "type": "source_regex",
+                "path": "tests/check_catalog_report.py",
+                "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*edge_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Game: Untitled on Switch[\"'][\\s\\S]*?[\"']Book: Beloved by Toni Morrison[\"'][\\s\\S]*?\\][ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
               }
             ]
           },
-          "showExpectedExample": false,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/game.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.models_game_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "function_returns",
-                "functionName": "build_empty_title_label",
-                "args": [],
-                "argKinds": [],
-                "expected": "Game: Untitled on Switch",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.checks.0.message",
-                "path": "main.py"
-              },
-              {
-                "type": "printed_line_count",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.checks.1.message",
-                "path": "main.py"
-              }
-            ]
-          }
+          "entryFilePath": "tests/check_catalog_report.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_catalog_report.py",
+              "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*mixed_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Book: Dune by Frank Herbert[\"'][\\s\\S]*?[\"']Game: Portal 2 on PC[\"'][\\s\\S]*?\\][ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_catalog_report.py",
+              "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*edge_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Game: Untitled on Switch[\"'][\\s\\S]*?[\"']Book: Beloved by Toni Morrison[\"'][\\s\\S]*?\\][ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -47111,13 +46916,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
-            "maxAttempts": null
+            "maxAttempts": null,
+            "exerciseKeys": [
+              "q-debugging-imports-state-single-1",
+              "q-debugging-imports-state-multi-1",
+              "q-debugging-imports-state-multi-2"
+            ]
           }
         }
       ],
@@ -47201,12 +47011,44 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "The Hobbit\nTolkien\n",
+                "stdout": "The Hobbit by Tolkien\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Beloved\nToni Morrison\n",
+                "stdout": "Beloved by Toni Morrison\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Dune\nFrank Herbert\n",
+                "stdout": "Dune by Frank Herbert\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -47224,39 +47066,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "method_returns",
-                "path": "models/book.py",
-                "className": "Book",
-                "constructorArgs": [
-                  "The Hobbit",
-                  "Tolkien"
-                ],
-                "constructorArgKinds": [],
-                "methodName": "summary",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "The Hobbit by Tolkien",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.0.message"
-              },
-              {
-                "type": "printed_line_count",
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.1.message"
+                "pattern": "(?m)^[ \\t]*(?:from[ \\t]+models\\.book[ \\t]+import[ \\t]+Book|import[ \\t]+models\\.book(?:[ \\t]+as[ \\t]+[A-Za-z_]\\w*)?)[ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.sourceChecks.0.message"
               }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "The Hobbit by Tolkien\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "(?m)^[ \\t]*(?:from[ \\t]+models\\.book[ \\t]+import[ \\t]+Book|import[ \\t]+models\\.book(?:[ \\t]+as[ \\t]+[A-Za-z_]\\w*)?)[ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "try-debugging-imports-and-state-sketch1",
@@ -47317,12 +47144,44 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/reading_list.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "Ava\nNoah\nDune\n",
+                "stdout": "Ava: 1\nNoah: 0\nProvided: 1\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Mina\nLeo\nBeloved\n",
+                "stdout": "Mina: 1\nLeo: 0\nProvided: 1\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Kai\nNia\nFoundation\n",
+                "stdout": "Kai: 1\nNia: 0\nProvided: 1\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionCode",
             "solutionFiles": [
               {
@@ -47340,29 +47199,36 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
+                "type": "source_regex",
                 "path": "models/reading_list.py",
-                "className": "ReadingList",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.0.message"
+                "pattern": "(?m)^[ \\t]*def[ \\t]+__init__\\(\\s*self\\s*,\\s*owner\\s*,\\s*books\\s*=\\s*None\\s*\\)[ \\t]*:",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.0.message"
               },
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.1.message"
+                "type": "source_regex",
+                "path": "models/reading_list.py",
+                "pattern": "(?m)^[ \\t]*(?:if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]*:|self\\.books[ \\t]*=[ \\t]*\\[\\][ \\t]+if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]+else[ \\t]+books)[ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.1.message"
               }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "1\n0\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/reading_list.py",
+              "pattern": "(?m)^[ \\t]*def[ \\t]+__init__\\(\\s*self\\s*,\\s*owner\\s*,\\s*books\\s*=\\s*None\\s*\\)[ \\t]*:",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "models/reading_list.py",
+              "pattern": "(?m)^[ \\t]*(?:if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]*:|self\\.books[ \\t]*=[ \\t]*\\[\\][ \\t]+if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]+else[ \\t]+books)[ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "try-debugging-imports-and-state-sketch2",
@@ -47381,8 +47247,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "models/stock_item.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+              "path": "models/task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_task_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -47397,8 +47263,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
-              "path": "models/stock_item.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+              "path": "models/task.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -47417,18 +47283,50 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "models/stock_item.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+                "path": "models/task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_task_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "Ship release\n",
+                "stdout": "Ship release: False\nTrue\nShip release: True\nTrue\nShip release: True\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Write tests\n",
+                "stdout": "Write tests: False\nTrue\nWrite tests: True\nTrue\nWrite tests: True\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Refactor service\n",
+                "stdout": "Refactor service: False\nTrue\nRefactor service: True\nTrue\nRefactor service: True\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionCode",
             "solutionFiles": [
               {
@@ -47439,80 +47337,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
-                "path": "models/stock_item.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+                "path": "models/task.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "method_sequence_returns",
-                "path": "models/stock_item.py",
-                "className": "StockItem",
-                "constructorArgs": [
-                  "Pen",
-                  5
-                ],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "sell",
-                    "methodArgs": [
-                      2
-                    ],
-                    "methodArgKinds": []
-                  }
-                ],
-                "methodName": "get_quantity",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": 3,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.0.message"
-              },
-              {
-                "type": "method_sequence_returns",
-                "path": "models/stock_item.py",
-                "className": "StockItem",
-                "constructorArgs": [
-                  "Pen",
-                  5
-                ],
-                "constructorArgKinds": [],
-                "calls": [
-                  {
-                    "methodName": "sell",
-                    "methodArgs": [
-                      10
-                    ],
-                    "methodArgKinds": []
-                  }
-                ],
-                "methodName": "get_quantity",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": 5,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.2.message"
+                "type": "source_regex",
+                "path": "models/task.py",
+                "pattern": "(?ms)^[ \\t]+def[ \\t]+complete\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.done[ \\t]*=[ \\t]*True[ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.sourceChecks.0.message"
               }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "3\n3\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/task.py",
+              "pattern": "(?ms)^[ \\t]+def[ \\t]+complete\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.done[ \\t]*=[ \\t]*True[ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "q-debugging-imports-state-single-1",
@@ -47568,52 +47417,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "optionIds": [
               "a",
               "b"
-            ]
-          }
-        },
-        {
-          "id": "q-debugging-imports-state-fill-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "None"
-          }
-        },
-        {
-          "id": "q-debugging-imports-state-fill-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "book"
-          }
-        },
-        {
-          "id": "q-debugging-imports-state-order-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
             ]
           }
         }
@@ -47686,37 +47489,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch2.title",
-          "sketchId": "refactoring-oop-services-sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-refactoring-oop-services-sketch2",
-            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.title",
-            "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.prompt",
-            "exerciseKey": "try-refactoring-oop-services-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.quiz.title",
           "quiz": {
             "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
+            "n": 3,
+            "min": 3,
+            "max": 3,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
-            "maxAttempts": null
+            "maxAttempts": null,
+            "exerciseKeys": [
+              "mc-refactor-benefits",
+              "mc-safe-refactor-steps",
+              "sc-main-role"
+            ]
           }
         }
       ],
@@ -47732,12 +47521,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.title",
           "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.bodyMarkdown"
-        },
-        {
-          "id": "refactoring-oop-services-sketch-2",
-          "archetype": "paragraph",
-          "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.title",
-          "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -47758,6 +47541,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "services/report_service.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
               "language": "python",
@@ -47772,6 +47562,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "services/report_service.py",
@@ -47794,18 +47591,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "services/report_service.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/report_service.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "Python Basics\n12\nDebugging Guide\n18\n",
+                "stdout": "Python Basics: $12\nDebugging Guide: $18\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Dune\n20\nBeloved\n15\n",
+                "stdout": "Dune: $20\nBeloved: $15\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Clean Code\n31\nRefactoring\n27\n",
+                "stdout": "Clean Code: $31\nRefactoring: $27\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -47816,6 +47659,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "services/report_service.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
                 "language": "python",
@@ -47823,29 +47673,50 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
-                "path": "services/report_service.py",
-                "className": "ReportService",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.0.message"
+                "type": "uses_import",
+                "path": "main.py",
+                "module": "services.report_service",
+                "importName": "ReportService",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.0.message"
               },
               {
-                "type": "printed_line_count",
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.1.message"
-              }
-            ],
-            "tests": [
+                "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:print\\s*\\(\\s*ReportService\\s*\\(\\s*\\)\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)|(?:[A-Za-z_]\\w*\\s*=\\s*ReportService\\s*\\(\\s*\\)[\\s\\S]*?print\\s*\\(\\s*[A-Za-z_]\\w*\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)))",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.1.message"
+              },
               {
-                "stdin": "",
-                "stdout": "Python Basics: $12\nDebugging Guide: $18\n",
-                "match": "exact"
+                "type": "source_regex",
+                "path": "services/report_service.py",
+                "pattern": "(?s)\\bdef\\s+build_report\\s*\\(\\s*self\\s*,\\s*books\\s*\\)\\s*:[\\s\\S]*?\\.display_line\\s*\\(\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.2.message"
               }
-            ],
-            "semanticFirst": true
-          }
+            ]
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "path": "main.py",
+              "module": "services.report_service",
+              "importName": "ReportService",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:print\\s*\\(\\s*ReportService\\s*\\(\\s*\\)\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)|(?:[A-Za-z_]\\w*\\s*=\\s*ReportService\\s*\\(\\s*\\)[\\s\\S]*?print\\s*\\(\\s*[A-Za-z_]\\w*\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)))",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "services/report_service.py",
+              "pattern": "(?s)\\bdef\\s+build_report\\s*\\(\\s*self\\s*,\\s*books\\s*\\)\\s*:[\\s\\S]*?\\.display_line\\s*\\(\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "try-refactoring-oop-services-sketch1",
@@ -47864,6 +47735,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": true
             },
             {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "services/catalog_service.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
               "language": "python",
@@ -47878,6 +47756,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": true,
               "entry": true
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "services/catalog_service.py",
@@ -47900,18 +47785,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "services/catalog_service.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/catalog_service.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "recipe": {
-            "type": "semantic",
-            "language": "python",
+            "type": "fixed_tests",
+            "tests": [
+              {
+                "stdin": "20\nDune\n20\nBeloved\n15\nClean Code\n31\n",
+                "stdout": "Dune | Beloved\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "12\nPython Basics\n12\nDebugging Guide\n18\nRefactoring\n27\n",
+                "stdout": "Python Basics\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "10\nExpensive One\n11\nExpensive Two\n12\nExpensive Three\n13\n",
+                "stdout": "\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionCode",
             "solutionFiles": [
               {
@@ -47922,6 +47853,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": true
               },
               {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "services/catalog_service.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
                 "language": "python",
@@ -47929,191 +47867,50 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "defines_class",
-                "path": "services/catalog_service.py",
-                "className": "CatalogService",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.0.message"
-              },
-              {
-                "type": "method_returns",
-                "path": "services/catalog_service.py",
-                "className": "CatalogService",
-                "constructorArgs": [],
-                "constructorArgKinds": [],
-                "methodName": "total_price",
-                "methodArgs": [
-                  [
-                    {
-                      "price": 12
-                    },
-                    {
-                      "price": 18
-                    },
-                    {
-                      "price": 10
-                    }
-                  ]
-                ],
-                "methodArgKinds": [],
-                "expected": 40,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
+                "type": "uses_import",
                 "path": "main.py",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.2.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "40\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
-        },
-        {
-          "id": "try-refactoring-oop-services-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2",
-          "language": "python",
-          "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "services/catalog_service.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
-              "language": "python",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "services/catalog_service.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
-            }
-          ],
-          "workspace": {
-            "language": "python",
-            "entryFilePath": "main.py",
-            "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
+                "module": "services.catalog_service",
+                "importName": "CatalogService",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.0.message"
               },
               {
+                "type": "source_regex",
+                "path": "main.py",
+                "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\)|[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)[\\s\\S]*?[A-Za-z_]\\w*\\s*=\\s*[A-Za-z_]\\w*\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\))",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
                 "path": "services/catalog_service.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "pattern": "(?s)\\bdef\\s+affordable_titles\\s*\\(\\s*self\\s*,\\s*books\\s*,\\s*max_price\\s*\\)\\s*:[\\s\\S]*?\\.is_affordable\\s*\\(\\s*max_price\\s*\\)[\\s\\S]*?\\.title\\b",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.2.message"
               }
             ]
           },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionCode",
-            "solutionFiles": [
-              {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
-                "language": "python",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "services/catalog_service.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "method_returns",
-                "path": "services/catalog_service.py",
-                "className": "CatalogService",
-                "constructorArgs": [],
-                "constructorArgKinds": [],
-                "methodName": "count_books",
-                "methodArgs": [
-                  [
-                    {
-                      "title": "Dune"
-                    },
-                    {
-                      "title": "Beloved"
-                    }
-                  ]
-                ],
-                "methodArgKinds": [],
-                "expected": 2,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.0.message"
-              },
-              {
-                "type": "method_returns",
-                "path": "services/catalog_service.py",
-                "className": "CatalogService",
-                "constructorArgs": [],
-                "constructorArgKinds": [],
-                "methodName": "count_books",
-                "methodArgs": [
-                  []
-                ],
-                "methodArgKinds": [],
-                "expected": 0,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.2.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "2\n0\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "path": "main.py",
+              "module": "services.catalog_service",
+              "importName": "CatalogService",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\)|[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)[\\s\\S]*?[A-Za-z_]\\w*\\s*=\\s*[A-Za-z_]\\w*\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\))",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "services/catalog_service.py",
+              "pattern": "(?s)\\bdef\\s+affordable_titles\\s*\\(\\s*self\\s*,\\s*books\\s*,\\s*max_price\\s*\\)\\s*:[\\s\\S]*?\\.is_affordable\\s*\\(\\s*max_price\\s*\\)[\\s\\S]*?\\.title\\b",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "mc-refactor-benefits",
@@ -48131,20 +47928,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "kind": "multi_choice",
             "optionIds": [
               "a",
-              "b"
+              "c"
             ]
-          }
-        },
-        {
-          "id": "fb-service-home",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-service-home",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "service"
           }
         },
         {
@@ -48169,18 +47954,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "fb-import-line",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-import-line",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "report_service"
-          }
-        },
-        {
           "id": "sc-main-role",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -48195,28 +47968,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "dr-refactor-order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.dr-refactor-order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
           }
         }
       ]
@@ -48273,7 +48024,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "difficulty": "easy",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
-                "maxAttempts": null
+                "maxAttempts": null,
+                "carryFromPrev": false
               },
               {
                 "id": "project_step_report_service_tests",
@@ -48351,8 +48103,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
@@ -48362,9 +48114,79 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.models_foster_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.services_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/pet_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.storage_pet_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/pets.csv",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.data_pets_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_model.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_model_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -48374,8 +48196,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
@@ -48385,24 +48207,94 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.models_foster_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/pet_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/pets.csv",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_model.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_model.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
@@ -48412,26 +48304,90 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_model.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_model_py.content",
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionCode",
+            ],
             "solutionFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
@@ -48441,64 +48397,232 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_model.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
                 "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "model tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "instance_attributes",
-                "path": "models/shelter_pet.py",
-                "className": "ShelterPet",
-                "constructorArgs": [
-                  "Milo",
-                  "cat",
-                  3
-                ],
-                "attributes": [
-                  "name",
-                  "species",
-                  "age",
-                  "adopted"
-                ],
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.0.message"
+                "type": "source_regex",
+                "path": "tests/check_model.py",
+                "pattern": "(?s)assert\\s+pet\\.name\\s*==\\s*[\\\"']Milo[\\\"'][\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.0.message"
               },
               {
-                "type": "method_returns",
-                "path": "models/shelter_pet.py",
-                "className": "ShelterPet",
-                "constructorArgs": [
-                  "Luna",
-                  "dog",
-                  5
-                ],
-                "constructorArgKinds": [],
-                "methodName": "is_available",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": true,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.1.message"
+                "type": "source_regex",
+                "path": "tests/check_model.py",
+                "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*foster\\s*,\\s*ShelterPet\\s*\\)[\\s\\S]*?assert\\s+foster\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.1.message"
               },
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.2.message"
+                "type": "source_regex",
+                "path": "tests/check_model.py",
+                "pattern": "(?s)ShelterPet\\s*\\([^)]*,\\s*-1\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.2.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Milo\nTrue\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_model.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_model.py",
+              "pattern": "(?s)assert\\s+pet\\.name\\s*==\\s*[\\\"']Milo[\\\"'][\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_model.py",
+              "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*foster\\s*,\\s*ShelterPet\\s*\\)[\\s\\S]*?assert\\s+foster\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_model.py",
+              "pattern": "(?s)ShelterPet\\s*\\([^)]*,\\s*-1\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
           "id": "project-step-report-service-tests",
@@ -48513,12 +48637,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48531,9 +48662,65 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "storage/pet_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.storage_pet_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/pets.csv",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.data_pets_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_reporting.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_reporting_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -48543,12 +48730,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48561,28 +48755,91 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "storage/pet_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/pets.csv",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_reporting.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_reporting_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_reporting.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -48595,30 +48852,87 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_reporting.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_reporting_py.content",
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.storage_pet_loader_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionCode",
-            "solutionFiles": [
+              },
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.main_py.content",
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_reporting_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -48631,30 +48945,230 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_reporting.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_reporting_py.content",
                 "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "reporting tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "printed_line_count",
+                "type": "source_regex",
+                "path": "services/reporting.py",
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)\\s*:[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.checks.0.message"
-              }
-            ],
-            "tests": [
+                "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\s+pets\\b)[\\s\\S]*\\badoption_labels\\s*\\(\\s*pets\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.1.message"
+              },
               {
-                "stdin": "",
-                "stdout": "9\nMilo, Pepper\n",
-                "match": "exact"
+                "type": "source_regex",
+                "path": "tests/check_reporting.py",
+                "pattern": "(?s)assert\\s+adoption_labels\\s*\\(\\s*mixed\\s*\\)\\s*==\\s*\\[[^\\]]*[\\\"']Milo[\\\"'][^\\]]*[\\\"']Pepper \\(foster\\)[\\\"'][^\\]]*\\][\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*reverse_mixed\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "tests/check_reporting.py",
+                "pattern": "(?s)assert\\s+young_pet_names\\s*\\(\\s*mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*reverse_mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Rex[\\\"']\\]",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.3.message"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_reporting.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "services/reporting.py",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)\\s*:[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\s+pets\\b)[\\s\\S]*\\badoption_labels\\s*\\(\\s*pets\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_reporting.py",
+              "pattern": "(?s)assert\\s+adoption_labels\\s*\\(\\s*mixed\\s*\\)\\s*==\\s*\\[[^\\]]*[\\\"']Milo[\\\"'][^\\]]*[\\\"']Pepper \\(foster\\)[\\\"'][^\\]]*\\][\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*reverse_mixed\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_reporting.py",
+              "pattern": "(?s)assert\\s+young_pet_names\\s*\\(\\s*mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*reverse_mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Rex[\\\"']\\]",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.3.message"
+            }
+          ]
         },
         {
           "id": "project-step-storage-loader",
@@ -48669,12 +49183,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48701,9 +49222,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_loader.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_loader_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -48713,12 +49276,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48745,28 +49315,77 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_loader.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_loader_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_loader.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -48793,30 +49412,73 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_loader.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_loader_py.content",
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_model_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionCode",
-            "solutionFiles": [
+              },
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.main_py.content",
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_loader_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -48843,30 +49505,220 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_loader.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_loader_py.content",
                 "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "loader tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.checks.0.message"
+                "type": "uses_import",
+                "path": "storage/pet_loader.py",
+                "module": "models.shelter_pet",
+                "importName": "ShelterPet",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.0.message"
+              },
+              {
+                "type": "uses_import",
+                "path": "storage/pet_loader.py",
+                "module": "models.foster_pet",
+                "importName": "FosterPet",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "tests/check_loader.py",
+                "pattern": "(?s)assert\\s+\\[pet\\.name\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Luna[\\\"']\\s*,\\s*[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+\\[pet\\.age\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[3\\s*,\\s*5\\s*,\\s*1\\]",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.2.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "tests/check_loader.py",
+                "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+pets\\[2\\]\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.3.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "Milo\nLuna\nPepper\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_loader.py",
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "path": "storage/pet_loader.py",
+              "module": "models.shelter_pet",
+              "importName": "ShelterPet",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.0.message"
+            },
+            {
+              "type": "uses_import",
+              "path": "storage/pet_loader.py",
+              "module": "models.foster_pet",
+              "importName": "FosterPet",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_loader.py",
+              "pattern": "(?s)assert\\s+\\[pet\\.name\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Luna[\\\"']\\s*,\\s*[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+\\[pet\\.age\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[3\\s*,\\s*5\\s*,\\s*1\\]",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_loader.py",
+              "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+pets\\[2\\]\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.3.message"
+            }
+          ]
         },
         {
           "id": "project-step-debug-imports-state",
@@ -48881,12 +49733,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48913,9 +49772,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_adoption.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_adoption_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -48925,12 +49826,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -48957,28 +49865,77 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_adoption.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_adoption_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_adoption.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49005,30 +49962,73 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_adoption.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_adoption_py.content",
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_model_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionCode",
-            "solutionFiles": [
+              },
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.main_py.content",
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_adoption_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49055,47 +50055,192 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_adoption.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_adoption_py.content",
                 "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "adoption tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "method_returns",
+                "type": "source_regex",
                 "path": "models/shelter_pet.py",
-                "className": "ShelterPet",
-                "constructorArgs": [
-                  "Luna",
-                  "dog",
-                  5
-                ],
-                "constructorArgKinds": [],
-                "methodName": "mark_adopted",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": true,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.checks.0.message"
+                "pattern": "(?ms)^[ \\t]+def[ \\t]+mark_adopted\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.adopted[ \\t]*=[ \\t]*True[ \\t]*$",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.0.message"
               },
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.checks.1.message"
+                "type": "source_regex",
+                "path": "tests/check_adoption.py",
+                "pattern": "(?s)assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?pet\\.mark_adopted\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.1.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "True\nFalse\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_adoption.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "models/shelter_pet.py",
+              "pattern": "(?ms)^[ \\t]+def[ \\t]+mark_adopted\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.adopted[ \\t]*=[ \\t]*True[ \\t]*$",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_adoption.py",
+              "pattern": "(?s)assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?pet\\.mark_adopted\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "project-step-regression-summary",
@@ -49110,12 +50255,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49142,9 +50294,51 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_summary.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_summary_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -49154,12 +50348,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49186,28 +50387,77 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_model_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_summary.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_summary_py.content",
               "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_summary.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49234,30 +50484,73 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_summary.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_summary_py.content",
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_model_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
-              }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionCode",
-            "solutionFiles": [
+              },
               {
-                "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.main_py.content",
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_summary_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49284,30 +50577,192 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_summary.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_summary_py.content",
                 "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "summary tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.checks.0.message"
+                "type": "source_regex",
+                "path": "services/reporting.py",
+                "pattern": "(?s)\\bdef\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\)\\s*:(?=[\\s\\S]*?\\.is_available\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\))(?=[\\s\\S]*?young_pet_names\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\))[\\s\\S]*",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "tests/check_summary.py",
+                "pattern": "(?s)assert\\s+summary\\s*==\\s*\\{[\\s\\S]*?[\\\"']total_pets[\\\"']\\s*:\\s*3[\\s\\S]*?[\\\"']available_labels[\\\"']\\s*:\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Pepper \\(foster\\)[\\\"']\\][\\s\\S]*?[\\\"']young_pet_count[\\\"']\\s*:\\s*2",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.1.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "3\nMilo, Pepper\n2\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_summary.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "services/reporting.py",
+              "pattern": "(?s)\\bdef\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\)\\s*:(?=[\\s\\S]*?\\.is_available\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\))(?=[\\s\\S]*?young_pet_names\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\))[\\s\\S]*",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_summary.py",
+              "pattern": "(?s)assert\\s+summary\\s*==\\s*\\{[\\s\\S]*?[\\\"']total_pets[\\\"']\\s*:\\s*3[\\s\\S]*?[\\\"']available_labels[\\\"']\\s*:\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Pepper \\(foster\\)[\\\"']\\][\\s\\S]*?[\\\"']young_pet_count[\\\"']\\s*:\\s*2",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "project-step-final-regression",
@@ -49322,12 +50777,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49354,11 +50816,46 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
-              "path": "tests/check_regression.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_regression_py.content",
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_model_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
               "path": "README.md",
@@ -49373,12 +50870,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/shelter_pet.py",
               "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_shelter_pet_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "models/foster_pet.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_foster_pet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49405,11 +50909,46 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
-              "path": "tests/check_regression.py",
-              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_regression_py.content",
+              "path": "tests/check_model.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_model_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "tests/check_reporting.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_reporting_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_loader.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_loader_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_adoption.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_adoption_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_summary.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_regression.py",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_regression_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
               "path": "README.md",
@@ -49421,19 +50960,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_regression.py",
             "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49460,11 +51006,46 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_regression.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_regression_py.content",
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_model_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.starterFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
               },
               {
                 "path": "README.md",
@@ -49473,24 +51054,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": false,
                 "entry": false
               }
-            ]
-          },
-          "showExpectedExample": true,
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionCode",
+            ],
             "solutionFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/shelter_pet.py",
                 "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_foster_pet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49517,11 +51099,152 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_regression.py",
-                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_regression_py.content",
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_model_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "regression checks passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/shelter_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_shelter_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/foster_pet.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.models_foster_pet_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.services_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/pet_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.storage_pet_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/pets.csv",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.data_pets_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_model.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_model_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_reporting.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_reporting_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_loader.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_loader_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_adoption.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_adoption_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_summary.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_regression.py",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.solutionFiles.tests_check_regression_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
               },
               {
                 "path": "README.md",
@@ -49531,23 +51254,49 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ],
-            "semanticChecks": [
+            "sourceChecks": [
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 4,
-                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.checks.0.message"
+                "type": "source_regex",
+                "path": "tests/check_regression.py",
+                "pattern": "(?s)load_pets\\s*\\(\\s*[\\\"']data/pets\\.csv[\\\"']\\s*\\)[\\s\\S]*?assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)[\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.0.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "tests/check_regression.py",
+                "pattern": "(?s)assert\\s+pets\\[1\\]\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pets\\[1\\]\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?assert\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.1.message"
+              },
+              {
+                "type": "source_regex",
+                "path": "README.md",
+                "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*tests/[\\s\\S]*main\\.py",
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.2.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "3\nMilo, Pepper\n2\nregression checks passed\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_regression.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "tests/check_regression.py",
+              "pattern": "(?s)load_pets\\s*\\(\\s*[\\\"']data/pets\\.csv[\\\"']\\s*\\)[\\s\\S]*?assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)[\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_regression.py",
+              "pattern": "(?s)assert\\s+pets\\[1\\]\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pets\\[1\\]\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?assert\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "README.md",
+              "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*tests/[\\s\\S]*main\\.py",
+              "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -49605,7 +51354,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "difficulty": "hard",
                 "preferKind": "code_input",
                 "seedPolicy": "global",
-                "maxAttempts": null
+                "maxAttempts": null,
+                "carryFromPrev": false
               },
               {
                 "id": "project_pantry_request_step_2_models",
@@ -49713,6 +51463,83 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "services/pantry_service.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.services_pantry_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.services___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -49748,6 +51575,83 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "models/__init__.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
               "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/pantry_service.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services_pantry_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -49791,45 +51695,253 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "sourceChecks": [
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "models/pantry_request.py",
-              "pattern": "from abc import ABC, abstractmethod",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.3.message"
+              "pattern": "\\bclass\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)\\s*:",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.0.message"
             },
             {
               "type": "source_regex",
               "path": "models/pantry_request.py",
-              "pattern": "class\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.4.message"
+              "pattern": "(?s)@property\\s+def\\s+household\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@household\\.setter\\s+def\\s+household",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.1.message"
             },
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "models/pantry_request.py",
-              "pattern": "@abstractmethod",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.5.message"
+              "pattern": "(?s)@property\\s+def\\s+priority\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@priority\\.setter\\s+def\\s+priority",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.2.message"
             },
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "models/pantry_request.py",
-              "pattern": "@property",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.6.message"
+              "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@abstractmethod\\s*\\n[ \\t]*def\\s+details",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.3.message"
             },
             {
               "type": "source_regex",
               "path": "models/food_request.py",
-              "pattern": "class\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.7.message"
+              "pattern": "\\bclass\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.4.message"
             }
           ],
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": " Rivera family \nHIGH\nproduce\n",
+                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Davis household\nlow\nbeans\n",
+                "stdout": "FOOD: Davis household | priority=low | food=beans | fulfilled=False\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Nguyen family\n medium \nrice\n",
+                "stdout": "FOOD: Nguyen family | priority=medium | food=rice | fulfilled=False\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionCode",
             "solutionFiles": [
               {
@@ -49866,80 +51978,120 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "models/pantry_request.py",
-                "pattern": "from abc import ABC, abstractmethod",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.3.message"
+                "pattern": "\\bclass\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)\\s*:",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.0.message"
               },
               {
                 "type": "source_regex",
                 "path": "models/pantry_request.py",
-                "pattern": "class\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.4.message"
+                "pattern": "(?s)@property\\s+def\\s+household\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@household\\.setter\\s+def\\s+household",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "models/pantry_request.py",
-                "pattern": "@abstractmethod",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.5.message"
+                "pattern": "(?s)@property\\s+def\\s+priority\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@priority\\.setter\\s+def\\s+priority",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.2.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "models/pantry_request.py",
-                "pattern": "@property",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.6.message"
+                "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@abstractmethod\\s*\\n[ \\t]*def\\s+details",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.3.message"
               },
               {
                 "type": "source_regex",
                 "path": "models/food_request.py",
-                "pattern": "class\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.7.message"
+                "pattern": "\\bclass\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.4.message"
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "path": "models/pantry_request.py",
-                "className": "PantryRequest",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.0.message"
-              },
-              {
-                "type": "method_returns",
-                "path": "models/food_request.py",
-                "className": "FoodRequest",
-                "constructorArgs": [
-                  "Rivera family",
-                  "high",
-                  "produce"
-                ],
-                "constructorArgKinds": [],
-                "methodName": "summary",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 1,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.2.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "project-pantry-request-step-2-models",
@@ -49984,6 +52136,83 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "services/pantry_service.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.services_pantry_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.services___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -50019,6 +52248,83 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "models/__init__.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.models___init___py.content",
               "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/pantry_service.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services_pantry_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "services/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -50062,32 +52368,241 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "sourceChecks": [
             {
               "type": "source_regex",
               "path": "models/hygiene_request.py",
-              "pattern": "class\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.3.message"
+              "pattern": "\\bclass\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.0.message"
             },
             {
-              "type": "uses_for_loop",
-              "path": "main.py",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.4.message"
+              "type": "source_regex",
+              "path": "models/hygiene_request.py",
+              "pattern": "\\bdef\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?\\bdef\\s+details\\s*\\(\\s*self\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.1.message"
             },
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "main.py",
-              "pattern": "request.summary()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.5.message"
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+requests\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.summary\\s*\\(\\s*\\)\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.2.message"
             }
           ],
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "Rivera family\nhigh\nproduce\nChen family\nmedium\n3\n",
+                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Davis family\nlow\nbeans\nMorgan family\nHIGH\n5\n",
+                "stdout": "FOOD: Davis family | priority=low | food=beans | fulfilled=False\nHYGIENE: Morgan family | priority=high | units=5 | fulfilled=False\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Patel household\n medium \nrice\nNguyen household\nlow\n1\n",
+                "stdout": "FOOD: Patel household | priority=medium | food=rice | fulfilled=False\nHYGIENE: Nguyen household | priority=low | units=1 | fulfilled=False\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionCode",
             "solutionFiles": [
               {
@@ -50124,78 +52639,108 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "source_regex",
                 "path": "models/hygiene_request.py",
-                "pattern": "class\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.3.message"
+                "pattern": "\\bclass\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.0.message"
               },
               {
-                "type": "uses_for_loop",
-                "path": "main.py",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.4.message"
-              },
-              {
-                "type": "source_contains",
-                "path": "main.py",
-                "pattern": "request.summary()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.5.message"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "method_returns",
-                "path": "models/food_request.py",
-                "className": "FoodRequest",
-                "constructorArgs": [
-                  "Rivera family",
-                  "high",
-                  "produce"
-                ],
-                "constructorArgKinds": [],
-                "methodName": "summary",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.0.message"
-              },
-              {
-                "type": "method_returns",
+                "type": "source_regex",
                 "path": "models/hygiene_request.py",
-                "className": "HygieneRequest",
-                "constructorArgs": [
-                  "Chen family",
-                  "medium",
-                  3
-                ],
-                "constructorArgKinds": [],
-                "methodName": "summary",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": "HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False",
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.1.message"
+                "pattern": "\\bdef\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?\\bdef\\s+details\\s*\\(\\s*self\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.1.message"
               },
               {
-                "type": "printed_line_count",
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 2,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.2.message"
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+requests\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.summary\\s*\\(\\s*\\)\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.2.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "project-pantry-request-step-3-service",
@@ -50254,6 +52799,69 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -50303,6 +52911,69 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "services/__init__.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services___init___py.content",
               "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/request_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage_request_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "storage/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "data/requests.csv",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.data_requests_csv.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -50360,39 +53031,233 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "sourceChecks": [
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "services/pantry_service.py",
-              "pattern": "self._requests",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.3.message"
+              "pattern": "(?s)\\bself\\._requests\\s*=\\s*\\[\\][\\s\\S]*?@property\\s+def\\s+requests\\s*\\(\\s*self\\s*\\)[\\s\\S]*?tuple\\s*\\(\\s*self\\._requests\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.0.message"
             },
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "services/pantry_service.py",
-              "pattern": "@property",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.4.message"
+              "pattern": "(?s)\\bdef\\s+add_request\\s*\\(\\s*self\\s*,\\s*request\\s*\\)[\\s\\S]*?isinstance\\s*\\(\\s*request\\s*,\\s*PantryRequest\\s*\\)[\\s\\S]*?self\\._requests\\.append\\s*\\(\\s*request\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.1.message"
             },
             {
-              "type": "source_contains",
+              "type": "source_regex",
               "path": "services/pantry_service.py",
-              "pattern": "request.mark_fulfilled()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.5.message"
+              "pattern": "(?s)\\bdef\\s+mark_fulfilled\\b[\\s\\S]*?request\\.mark_fulfilled\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+count_open_requests\\b[\\s\\S]*?request\\.is_open\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+summary_lines\\b[\\s\\S]*?request\\.summary\\s*\\(\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.2.message"
             },
             {
-              "type": "source_contains",
-              "path": "services/pantry_service.py",
-              "pattern": "request.summary()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.6.message"
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "^(?![\\s\\S]*\\._requests\\b)[\\s\\S]*PantryService\\s*\\(",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.3.message"
             }
           ],
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "Rivera family\nhigh\nproduce\nChen family\nmedium\n3\nRivera family\n",
+                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nOPEN: 1\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Davis family\nlow\nbeans\nMorgan family\nhigh\n5\nMorgan family\n",
+                "stdout": "FOOD: Davis family | priority=low | food=beans | fulfilled=False\nHYGIENE: Morgan family | priority=high | units=5 | fulfilled=True\nOPEN: 1\n",
+                "match": "exact"
+              },
+              {
+                "stdin": "Patel family\nmedium\nrice\nNguyen family\nlow\n1\nMissing family\n",
+                "stdout": "FOOD: Patel family | priority=medium | food=rice | fulfilled=False\nHYGIENE: Nguyen family | priority=low | units=1 | fulfilled=False\nOPEN: 2\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionCode",
             "solutionFiles": [
               {
@@ -50443,70 +53308,100 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "services/pantry_service.py",
-                "pattern": "self._requests",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.3.message"
+                "pattern": "(?s)\\bself\\._requests\\s*=\\s*\\[\\][\\s\\S]*?@property\\s+def\\s+requests\\s*\\(\\s*self\\s*\\)[\\s\\S]*?tuple\\s*\\(\\s*self\\._requests\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.0.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "services/pantry_service.py",
-                "pattern": "@property",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.4.message"
+                "pattern": "(?s)\\bdef\\s+add_request\\s*\\(\\s*self\\s*,\\s*request\\s*\\)[\\s\\S]*?isinstance\\s*\\(\\s*request\\s*,\\s*PantryRequest\\s*\\)[\\s\\S]*?self\\._requests\\.append\\s*\\(\\s*request\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "services/pantry_service.py",
-                "pattern": "request.mark_fulfilled()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.5.message"
+                "pattern": "(?s)\\bdef\\s+mark_fulfilled\\b[\\s\\S]*?request\\.mark_fulfilled\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+count_open_requests\\b[\\s\\S]*?request\\.is_open\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+summary_lines\\b[\\s\\S]*?request\\.summary\\s*\\(\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.2.message"
               },
               {
-                "type": "source_contains",
-                "path": "services/pantry_service.py",
-                "pattern": "request.summary()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.6.message"
-              }
-            ],
-            "semanticChecks": [
-              {
-                "type": "defines_class",
-                "path": "services/pantry_service.py",
-                "className": "PantryService",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.0.message"
-              },
-              {
-                "type": "method_returns",
-                "path": "services/pantry_service.py",
-                "className": "PantryService",
-                "constructorArgs": [],
-                "constructorArgKinds": [],
-                "methodName": "count_open_requests",
-                "methodArgs": [],
-                "methodArgKinds": [],
-                "expected": 0,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.1.message"
-              },
-              {
-                "type": "printed_line_count",
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.2.message"
+                "pattern": "^(?![\\s\\S]*\\._requests\\b)[\\s\\S]*PantryService\\s*\\(",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.3.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nOPEN: 1\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "project-pantry-request-step-4-storage",
@@ -50521,8 +53416,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/pantry_request.py",
@@ -50586,6 +53481,48 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "text",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
@@ -50593,8 +53530,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/pantry_request.py",
@@ -50658,19 +53595,61 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "text",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "reports/summary.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports_summary_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "reports/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "tests/__init__.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests___init___py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_storage.py",
             "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/pantry_request.py",
@@ -50734,49 +53713,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "text",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
-            ]
-          },
-          "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "uses_import",
-              "path": "storage/request_storage.py",
-              "module": "models.food_request",
-              "importName": "FoodRequest",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.2.message"
-            },
-            {
-              "type": "uses_import",
-              "path": "storage/request_storage.py",
-              "module": "models.hygiene_request",
-              "importName": "HygieneRequest",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.3.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "storage/request_storage.py",
-              "pattern": "csv.DictReader",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.4.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "main.py",
-              "pattern": "request.summary()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.5.message"
-            }
-          ],
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionCode",
+            ],
             "solutionFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/pantry_request.py",
@@ -50840,65 +53827,232 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "text",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "sourceChecks": [
+            {
+              "type": "uses_import",
+              "path": "storage/request_storage.py",
+              "module": "csv",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "storage/request_storage.py",
+              "pattern": "(?s)\\bdef\\s+parse_fulfilled\\s*\\(\\s*value\\s*\\)[\\s\\S]*?strip\\s*\\(\\s*\\)[\\s\\S]*?lower\\s*\\(\\s*\\)[\\s\\S]*?[\\\"']true[\\\"'][\\s\\S]*?[\\\"']1[\\\"'][\\s\\S]*?[\\\"']yes[\\\"']",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "storage/request_storage.py",
+              "pattern": "\\bcsv\\.DictReader\\s*\\(",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "storage/request_storage.py",
+              "pattern": "(?s)FoodRequest\\s*\\([\\s\\S]*?HygieneRequest\\s*\\([\\s\\S]*?raise\\s+ValueError",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.3.message"
+            }
+          ],
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "storage tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
                 "type": "uses_import",
                 "path": "storage/request_storage.py",
-                "module": "models.food_request",
-                "importName": "FoodRequest",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.2.message"
+                "module": "csv",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.0.message"
               },
               {
-                "type": "uses_import",
+                "type": "source_regex",
                 "path": "storage/request_storage.py",
-                "module": "models.hygiene_request",
-                "importName": "HygieneRequest",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.3.message"
+                "pattern": "(?s)\\bdef\\s+parse_fulfilled\\s*\\(\\s*value\\s*\\)[\\s\\S]*?strip\\s*\\(\\s*\\)[\\s\\S]*?lower\\s*\\(\\s*\\)[\\s\\S]*?[\\\"']true[\\\"'][\\s\\S]*?[\\\"']1[\\\"'][\\s\\S]*?[\\\"']yes[\\\"']",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "storage/request_storage.py",
-                "pattern": "csv.DictReader",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.4.message"
+                "pattern": "\\bcsv\\.DictReader\\s*\\(",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.2.message"
               },
               {
-                "type": "source_contains",
-                "path": "main.py",
-                "pattern": "request.summary()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.5.message"
+                "type": "source_regex",
+                "path": "storage/request_storage.py",
+                "pattern": "(?s)FoodRequest\\s*\\([\\s\\S]*?HygieneRequest\\s*\\([\\s\\S]*?raise\\s+ValueError",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.3.message"
               }
             ],
-            "semanticChecks": [
-              {
-                "type": "function_returns",
-                "path": "storage/request_storage.py",
-                "functionName": "parse_fulfilled",
-                "args": [
-                  "yes"
-                ],
-                "argKinds": [],
-                "expected": true,
-                "expectedKind": "value",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.0.message"
-              },
-              {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 3,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.1.message"
-              }
-            ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_storage.py"
         },
         {
           "id": "project-pantry-request-step-5-reports-tests",
@@ -50913,8 +54067,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/pantry_request.py",
@@ -50994,16 +54148,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
-              "path": "tests/check_requests.py",
-              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_storage_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
+            },
+            {
               "path": "tests/__init__.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests___init___py.content",
               "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.README_md.content",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -51013,8 +54181,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "path": "main.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.main_py.content",
               "language": "python",
-              "isEntry": true,
-              "entry": true
+              "isEntry": false,
+              "entry": false
             },
             {
               "path": "models/pantry_request.py",
@@ -51094,11 +54262,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
-              "path": "tests/check_requests.py",
-              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_storage_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "tests/check_requests.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+              "language": "python",
+              "isEntry": true,
+              "entry": true
             },
             {
               "path": "tests/__init__.py",
@@ -51106,19 +54281,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "README.md",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.README_md.content",
+              "language": "text",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
             "language": "python",
-            "entryFilePath": "main.py",
+            "entryFilePath": "tests/check_requests.py",
             "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterCode",
             "starterFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/pantry_request.py",
@@ -51198,11 +54380,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_requests.py",
-                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_storage_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
               },
               {
                 "path": "tests/__init__.py",
@@ -51210,47 +54399,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
-            ]
-          },
-          "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "reports/summary.py",
-              "pattern": "request.summary()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.1.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "reports/summary.py",
-              "pattern": "request.is_open()",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.2.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "tests/check_requests.py",
-              "pattern": "isabstract(PantryRequest)",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.3.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "tests/check_requests.py",
-              "pattern": "assert",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.4.message"
-            }
-          ],
-          "recipe": {
-            "type": "semantic",
-            "language": "python",
-            "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionCode",
+            ],
             "solutionFiles": [
               {
                 "path": "main.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.main_py.content",
                 "language": "python",
-                "isEntry": true,
-                "entry": true
+                "isEntry": false,
+                "entry": false
               },
               {
                 "path": "models/pantry_request.py",
@@ -51330,11 +54494,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
-                "path": "tests/check_requests.py",
-                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_storage_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
               },
               {
                 "path": "tests/__init__.py",
@@ -51342,51 +54513,209 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "reports/summary.py",
+              "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_summary\\s*\\(\\s*requests\\s*\\)\\s*:(?=[\\s\\S]*?\\.summary\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.is_open\\s*\\(\\s*\\))[\\s\\S]*",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_requests.py",
+              "pattern": "(?s)PantryRequest\\s*\\(\\s*[\\\"']Test family[\\\"']\\s*,\\s*[\\\"']low[\\\"']\\s*\\)[\\s\\S]*?except\\s+TypeError\\s*:",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_requests.py",
+              "pattern": "(?s)FoodRequest\\s*\\(\\s*[\\\"'][\\\"']\\s*,[\\s\\S]*?except\\s+ValueError\\s*:[\\s\\S]*?HygieneRequest\\s*\\([^)]*,\\s*0\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.2.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "tests/check_requests.py",
+              "pattern": "(?s)assert\\s+service\\.summary_lines\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+service\\.mark_fulfilled[\\s\\S]*?assert\\s+service\\.count_open_requests[\\s\\S]*?assert\\s+build_summary\\s*\\(",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.3.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "main.py",
+              "pattern": "(?s)load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)[\\s\\S]*?print\\s*\\(\\s*build_summary\\s*\\(\\s*requests\\s*\\)\\s*\\)",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.4.message"
+            }
+          ],
+          "recipe": {
+            "type": "fixed_tests",
+            "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "request tests passed\n",
+                "match": "exact"
+              }
+            ],
+            "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.README_md.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "reports/summary.py",
-                "pattern": "request.summary()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.1.message"
+                "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_summary\\s*\\(\\s*requests\\s*\\)\\s*:(?=[\\s\\S]*?\\.summary\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.is_open\\s*\\(\\s*\\))[\\s\\S]*",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.0.message"
               },
               {
-                "type": "source_contains",
-                "path": "reports/summary.py",
-                "pattern": "request.is_open()",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.2.message"
-              },
-              {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "tests/check_requests.py",
-                "pattern": "isabstract(PantryRequest)",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.3.message"
+                "pattern": "(?s)PantryRequest\\s*\\(\\s*[\\\"']Test family[\\\"']\\s*,\\s*[\\\"']low[\\\"']\\s*\\)[\\s\\S]*?except\\s+TypeError\\s*:",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.1.message"
               },
               {
-                "type": "source_contains",
+                "type": "source_regex",
                 "path": "tests/check_requests.py",
-                "pattern": "assert",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.4.message"
-              }
-            ],
-            "semanticChecks": [
+                "pattern": "(?s)FoodRequest\\s*\\(\\s*[\\\"'][\\\"']\\s*,[\\s\\S]*?except\\s+ValueError\\s*:[\\s\\S]*?HygieneRequest\\s*\\([^)]*,\\s*0\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.2.message"
+              },
               {
-                "type": "printed_line_count",
+                "type": "source_regex",
+                "path": "tests/check_requests.py",
+                "pattern": "(?s)assert\\s+service\\.summary_lines\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+service\\.mark_fulfilled[\\s\\S]*?assert\\s+service\\.count_open_requests[\\s\\S]*?assert\\s+build_summary\\s*\\(",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.3.message"
+              },
+              {
+                "type": "source_regex",
                 "path": "main.py",
-                "min": 6,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.0.message"
+                "pattern": "(?s)load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)[\\s\\S]*?print\\s*\\(\\s*build_summary\\s*\\(\\s*requests\\s*\\)\\s*\\)",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.4.message"
               }
             ],
-            "tests": [
-              {
-                "stdin": "",
-                "stdout": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 1 | FULFILLED: 3\n",
-                "match": "exact"
-              }
-            ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "tests/check_requests.py"
         },
         {
           "id": "project-pantry-request-step-6-final-handoff",
@@ -51482,6 +54811,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_requests.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_requests_py.content",
               "language": "python",
@@ -51498,7 +54834,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "README.md",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.README_md.content",
-              "language": "markdown",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -51589,6 +54925,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "entry": false
             },
             {
+              "path": "tests/check_storage.py",
+              "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_storage_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
+            },
+            {
               "path": "tests/check_requests.py",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_requests_py.content",
               "language": "python",
@@ -51605,7 +54948,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "README.md",
               "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
-              "language": "markdown",
+              "language": "text",
               "isEntry": false,
               "entry": false
             }
@@ -51700,6 +55043,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_requests.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_requests_py.content",
                 "language": "python",
@@ -51716,42 +55066,157 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "README.md",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.README_md.content",
-                "language": "markdown",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "main.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.main_py.content",
+                "language": "python",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "models/pantry_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.models_pantry_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/food_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.models_food_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/hygiene_request.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.models_hygiene_request_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "models/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.models___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/pantry_service.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.services_pantry_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "services/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.services___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/request_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage_request_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "storage/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "data/requests.csv",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.data_requests_csv.content",
+                "language": "text",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/summary.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.reports_summary_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "reports/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.reports___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/check_requests.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_requests_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "tests/__init__.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests___init___py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "README.md",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ]
           },
-          "showExpectedExample": true,
+          "showExpectedExample": false,
           "sourceChecks": [
             {
-              "type": "source_contains",
-              "path": "README.md",
-              "pattern": "Abstraction",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.1.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "README.md",
-              "pattern": "Polymorphism",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.2.message"
-            },
-            {
-              "type": "source_contains",
-              "path": "README.md",
-              "pattern": "python main.py",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.3.message"
-            },
-            {
-              "type": "uses_call",
+              "type": "source_regex",
               "path": "main.py",
-              "functionName": "run_checks",
-              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.4.message"
+              "pattern": "(?s)run_storage_checks\\s*\\(\\s*\\)[\\s\\S]*?run_checks\\s*\\(\\s*\\)[\\s\\S]*?PantryService\\s*\\(\\s*load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Rivera family[\\\"']\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Chen family[\\\"']\\s*\\)[\\s\\S]*?PANTRY REQUEST COORDINATOR READY",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "README.md",
+              "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*reports/[\\s\\S]*tests/[\\s\\S]*main\\.py",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "path": "README.md",
+              "pattern": "(?is)(?:@property|validated\\s+propert(?:y|ies))[\\s\\S]*ABC[\\s\\S]*@abstractmethod[\\s\\S]*super[\\s\\S]*polymorph[\\s\\S]*python\\s+main\\.py",
+              "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.2.message"
             }
           ],
           "recipe": {
-            "type": "semantic",
+            "type": "fixed_tests",
             "language": "python",
+            "tests": [
+              {
+                "stdin": "",
+                "stdout": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 0 | FULFILLED: 4\nPANTRY REQUEST COORDINATOR READY\n",
+                "match": "exact"
+              }
+            ],
             "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionCode",
             "solutionFiles": [
               {
@@ -51839,6 +55304,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               },
               {
+                "path": "tests/check_storage.py",
+                "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_storage_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
+              },
+              {
                 "path": "tests/check_requests.py",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_requests_py.content",
                 "language": "python",
@@ -51855,54 +55327,34 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "README.md",
                 "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
-                "language": "markdown",
+                "language": "text",
                 "isEntry": false,
                 "entry": false
               }
             ],
             "sourceChecks": [
               {
-                "type": "source_contains",
-                "path": "README.md",
-                "pattern": "Abstraction",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.1.message"
-              },
-              {
-                "type": "source_contains",
-                "path": "README.md",
-                "pattern": "Polymorphism",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.2.message"
-              },
-              {
-                "type": "source_contains",
-                "path": "README.md",
-                "pattern": "python main.py",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.3.message"
-              },
-              {
-                "type": "uses_call",
+                "type": "source_regex",
                 "path": "main.py",
-                "functionName": "run_checks",
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.4.message"
-              }
-            ],
-            "semanticChecks": [
+                "pattern": "(?s)run_storage_checks\\s*\\(\\s*\\)[\\s\\S]*?run_checks\\s*\\(\\s*\\)[\\s\\S]*?PantryService\\s*\\(\\s*load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Rivera family[\\\"']\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Chen family[\\\"']\\s*\\)[\\s\\S]*?PANTRY REQUEST COORDINATOR READY",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.0.message"
+              },
               {
-                "type": "printed_line_count",
-                "path": "main.py",
-                "min": 7,
-                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.0.message"
-              }
-            ],
-            "tests": [
+                "type": "source_regex",
+                "path": "README.md",
+                "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*reports/[\\s\\S]*tests/[\\s\\S]*main\\.py",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.1.message"
+              },
               {
-                "stdin": "",
-                "stdout": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 0 | FULFILLED: 4\nPANTRY REQUEST COORDINATOR READY\n",
-                "match": "exact"
+                "type": "source_regex",
+                "path": "README.md",
+                "pattern": "(?is)(?:@property|validated\\s+propert(?:y|ies))[\\s\\S]*ABC[\\s\\S]*@abstractmethod[\\s\\S]*super[\\s\\S]*polymorph[\\s\\S]*python\\s+main\\.py",
+                "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.2.message"
               }
             ],
-            "semanticFirst": true
-          }
+            "semanticChecks": []
+          },
+          "entryFilePath": "main.py"
         }
       ]
     }

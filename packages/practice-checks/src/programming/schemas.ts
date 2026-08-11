@@ -78,21 +78,25 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         argKinds: z.array(SemanticValueKindSchema).optional().default([]),
         expected: JsonValueSchema,
         expectedKind: SemanticValueKindSchema.optional(),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("no_stdout"),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("defines_class"),
         className: z.string().min(1),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("constructible"),
         className: z.string().min(1),
         constructorArgs: z.array(JsonValueSchema).optional().default([]),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
@@ -100,6 +104,7 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         className: z.string().min(1),
         constructorArgs: z.array(JsonValueSchema).optional().default([]),
         attributes: z.array(z.string().min(1)).min(1),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
@@ -112,6 +117,7 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         methodArgKinds: z.array(SemanticValueKindSchema).optional().default([]),
         expected: JsonValueSchema,
         expectedKind: SemanticValueKindSchema.optional(),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
@@ -129,6 +135,7 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         methodArgKinds: z.array(SemanticValueKindSchema).optional().default([]),
         expected: JsonValueSchema,
         expectedKind: SemanticValueKindSchema.optional(),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
@@ -144,17 +151,20 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         attributeName: z.string().min(1),
         expected: JsonValueSchema,
         expectedKind: SemanticValueKindSchema.optional(),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("created_instances"),
         className: z.string().min(1),
         min: z.number().int().min(1).default(1),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("printed_line_count"),
         min: z.number().int().min(1).default(1),
+        path: z.string().min(1).optional(),
         message: z.string().optional(),
     }),
 ]);

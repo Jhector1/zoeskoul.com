@@ -65,37 +65,23 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch2.title",
-      "sketchId": "testing-inheritance-and-polymorphism-sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-testing-inheritance-and-polymorphism-sketch2",
-        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.title",
-        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.prompt",
-        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": null
+        "maxAttempts": null,
+        "exerciseKeys": [
+          "policy_single_choice_1",
+          "policy_multi_choice_1",
+          "policy_fill_blank_choice_1"
+        ]
       }
     }
   ],
@@ -111,12 +97,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.title",
       "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "testing-inheritance-and-polymorphism-sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.title",
-      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -200,12 +180,42 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.tests_check_book_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
         ]
       },
       "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "book inheritance tests passed\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.solutionCode",
         "solutionFiles": [
           {
@@ -230,25 +240,36 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "function_returns",
-            "functionName": "build_book_label",
-            "args": [],
-            "argKinds": [],
-            "expected": "Book: Dune by Frank Herbert",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.checks.0.message",
-            "path": "tests/check_book.py"
+            "type": "source_regex",
+            "path": "tests/check_book.py",
+            "pattern": "(?m)^[ \\t]*assert[ \\t]+isinstance\\(\\s*book\\s*,\\s*CatalogItem\\s*\\)[ \\t]*$",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.0.message"
           },
           {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.checks.1.message",
-            "path": "tests/check_book.py"
+            "type": "source_regex",
+            "path": "tests/check_book.py",
+            "pattern": "(?m)^[ \\t]*assert[ \\t]+book\\.label\\s*\\(\\s*\\)[ \\t]*==[ \\t]*[\"']Book: Dune by Frank Herbert[\"'][ \\t]*$",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.1.message"
           }
         ]
-      }
+      },
+      "entryFilePath": "tests/check_book.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "tests/check_book.py",
+          "pattern": "(?m)^[ \\t]*assert[ \\t]+isinstance\\(\\s*book\\s*,\\s*CatalogItem\\s*\\)[ \\t]*$",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "tests/check_book.py",
+          "pattern": "(?m)^[ \\t]*assert[ \\t]+book\\.label\\s*\\(\\s*\\)[ \\t]*==[ \\t]*[\"']Book: Dune by Frank Herbert[\"'][ \\t]*$",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "policy_single_choice_1",
@@ -264,7 +285,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
@@ -283,27 +304,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "policy_drag_reorder_1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_drag_reorder_1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
+          "c"
         ]
       }
     },
@@ -316,7 +317,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "CatalogItem"
+        "value": "label"
       }
     },
     {
@@ -329,11 +330,18 @@
       "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
       "starterFiles": [
         {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
+          "path": "tests/check_catalog_report.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.tests_check_catalog_report_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "models/book.py",
@@ -359,11 +367,18 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.main_py.content",
+          "path": "tests/check_catalog_report.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         },
         {
           "path": "models/book.py",
@@ -389,15 +404,22 @@
       ],
       "workspace": {
         "language": "python",
-        "entryFilePath": "main.py",
+        "entryFilePath": "tests/check_catalog_report.py",
         "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
         "starterFiles": [
           {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
+            "path": "tests/check_catalog_report.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.tests_check_catalog_report_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           },
           {
             "path": "models/book.py",
@@ -420,20 +442,71 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_catalog_report.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/game.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_game_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_report.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.services_catalog_report_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
         ]
       },
       "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "polymorphic report tests passed\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionCode",
         "solutionFiles": [
           {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.main_py.content",
+            "path": "tests/check_catalog_report.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.tests_check_catalog_report_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.solutionFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           },
           {
             "path": "models/book.py",
@@ -457,130 +530,36 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "function_returns",
-            "functionName": "build_sample_labels",
-            "args": [],
-            "argKinds": [],
-            "expected": [
-              "Book: Dune by Frank Herbert",
-              "Game: Portal 2 on PC"
-            ],
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.checks.0.message",
-            "path": "main.py"
+            "type": "source_regex",
+            "path": "tests/check_catalog_report.py",
+            "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*mixed_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Book: Dune by Frank Herbert[\"'][\\s\\S]*?[\"']Game: Portal 2 on PC[\"'][\\s\\S]*?\\][ \\t]*$",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.0.message"
           },
           {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.checks.1.message",
-            "path": "main.py"
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-testing-inheritance-and-polymorphism-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/game.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.models_game_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/game.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.models_game_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/game.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.models_game_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "type": "source_regex",
+            "path": "tests/check_catalog_report.py",
+            "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*edge_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Game: Untitled on Switch[\"'][\\s\\S]*?[\"']Book: Beloved by Toni Morrison[\"'][\\s\\S]*?\\][ \\t]*$",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
           }
         ]
       },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/game.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.solutionFiles.models_game_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "function_returns",
-            "functionName": "build_empty_title_label",
-            "args": [],
-            "argKinds": [],
-            "expected": "Game: Untitled on Switch",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.checks.0.message",
-            "path": "main.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.checks.1.message",
-            "path": "main.py"
-          }
-        ]
-      }
+      "entryFilePath": "tests/check_catalog_report.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "tests/check_catalog_report.py",
+          "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*mixed_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Book: Dune by Frank Herbert[\"'][\\s\\S]*?[\"']Game: Portal 2 on PC[\"'][\\s\\S]*?\\][ \\t]*$",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "tests/check_catalog_report.py",
+          "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*edge_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Game: Untitled on Switch[\"'][\\s\\S]*?[\"']Book: Beloved by Toni Morrison[\"'][\\s\\S]*?\\][ \\t]*$",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
+        }
+      ]
     }
   ]
 }

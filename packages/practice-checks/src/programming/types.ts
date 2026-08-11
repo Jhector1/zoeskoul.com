@@ -78,17 +78,20 @@ export type SemanticCheck =
     argKinds?: SemanticValueKind[];
     expected: unknown;
     expectedKind?: SemanticValueKind;
+    path?: string;
     message?: string;
 }
     | {
     type: "defines_class";
     className: string;
+    path?: string;
     message?: string;
 }
     | {
     type: "constructible";
     className: string;
     constructorArgs?: unknown[];
+    path?: string;
     message?: string;
 }
     | {
@@ -96,6 +99,7 @@ export type SemanticCheck =
     className: string;
     constructorArgs?: unknown[];
     attributes: string[];
+    path?: string;
     message?: string;
 }
     | {
@@ -108,6 +112,7 @@ export type SemanticCheck =
     methodArgKinds?: SemanticValueKind[];
     expected: unknown;
     expectedKind?: SemanticValueKind;
+    path?: string;
     message?: string;
 }
     | {
@@ -121,6 +126,7 @@ export type SemanticCheck =
     methodArgKinds?: SemanticValueKind[];
     expected: unknown;
     expectedKind?: SemanticValueKind;
+    path?: string;
     message?: string;
 }
     | {
@@ -132,20 +138,24 @@ export type SemanticCheck =
     attributeName: string;
     expected: unknown;
     expectedKind?: SemanticValueKind;
+    path?: string;
     message?: string;
 }
     | {
     type: "created_instances";
     className: string;
     min?: number;
+    path?: string;
     message?: string;
 }
     | {
     type: "printed_line_count";
     min?: number;
+    path?: string;
     message?: string;
 }  | {
     type: "no_stdout";
+    path?: string;
     message?: string;
 };
 

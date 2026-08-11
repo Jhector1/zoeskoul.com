@@ -13,7 +13,14 @@ import type {
   SeedPolicy,
 } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { PracticeKind } from "@zoeskoul/db";
-import { loadDraftModuleTopics, subjectWithoutDraftWrapper, type DraftRef, type LoadedDraftTopic } from "./fs";
+import {
+  loadDraftModuleAuthoredTopicOrder,
+  loadDraftModuleTopics,
+  subjectWithoutDraftWrapper,
+  type DraftRef,
+  type LoadedDraftTopic,
+} from "./fs";
+import { orderDraftQaTopicsByManifest } from "./draftQaTopicOrder";
 
 type JsonObject = Record<string, unknown>;
 
@@ -490,12 +497,29 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
     throw new Error(`No draft topics found for ${ref.catalog}/${ref.subject}/${ref.module}`);
   }
 
-  const builtTopics = draftModule.topics.map((topic) => buildDraftPreviewTopic(topic));
-  const primary = builtTopics.find((topic, index) => draftModule.topics[index]?.topicDir === draftModule.selectedTopicDir) ?? builtTopics[0];
+  const discoveredBuiltTopics = draftModule.topics.map((topic) =>
+    buildDraftPreviewTopic(topic),
+  );
+  const primary =
+    discoveredBuiltTopics.find(
+      (topic, index) =>
+        draftModule.topics[index]?.topicDir === draftModule.selectedTopicDir,
+    ) ?? discoveredBuiltTopics[0];
   if (!primary) {
     throw new Error(`No draft topics could be built for ${ref.catalog}/${ref.subject}/${ref.module}`);
   }
   const primaryManifest = primary.manifest;
+
+  const authoredTopicOrder = await loadDraftModuleAuthoredTopicOrder({
+    catalog: ref.catalog,
+    subject: ref.subject,
+    moduleSlug: primaryManifest.moduleSlug,
+  });
+  const builtTopics = orderDraftQaTopicsByManifest(
+    discoveredBuiltTopics,
+    authoredTopicOrder,
+    (topic) => asString(topic.manifest.topicId),
+  );
 
   const topics = builtTopics.map((topic) => topic.reviewTopic);
   const sectionBySlug = new Map<string, ReviewModuleSection>();

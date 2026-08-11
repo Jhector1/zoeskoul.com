@@ -2,9 +2,9 @@
   "topicId": "thinking-in-objects",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-8-object-oriented-foundations",
-  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
   "prefix": "py8",
-  "minutes": 28,
+  "minutes": 30,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -96,15 +96,14 @@
       "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "mc-thinking-in-objects-object-idea",
           "sc-thinking-in-objects-attribute-meaning",
-          "fb-thinking-in-objects-method-call",
-          "dr-thinking-in-objects-workflow"
+          "fb-thinking-in-objects-method-call"
         ],
         "allowReveal": true,
         "preferKind": null,
@@ -262,8 +261,10 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.checks.3.message",
             "path": "main.py"
           }
-        ]
-      }
+        ],
+        "sourceChecks": []
+      },
+      "sourceChecks": []
     },
     {
       "id": "try-thinking-in-objects-sketch1",
@@ -382,13 +383,6 @@
             "path": "models/car.py"
           },
           {
-            "type": "created_instances",
-            "className": "Car",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.checks.3.message",
-            "path": "main.py"
-          },
-          {
             "type": "printed_line_count",
             "min": 2,
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.checks.4.message",
@@ -402,8 +396,36 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*corolla_car\\s*\\.\\s*make\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*mazda_car\\s*\\.\\s*miles\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*corolla_car\\s*\\.\\s*make\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*mazda_car\\s*\\.\\s*miles\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-thinking-in-objects-sketch2",
@@ -521,13 +543,6 @@
             "path": "models/car.py"
           },
           {
-            "type": "created_instances",
-            "className": "Car",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.checks.2.message",
-            "path": "main.py"
-          },
-          {
             "type": "printed_line_count",
             "min": 1,
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.checks.3.message",
@@ -541,8 +556,36 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bcar\\s*\\.\\s*drive\\s*\\(\\s*50\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*car\\s*\\.\\s*summary\\s*\\(\\s*\\)\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bcar\\s*\\.\\s*drive\\s*\\(\\s*50\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*car\\s*\\.\\s*summary\\s*\\(\\s*\\)\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mc-thinking-in-objects-object-idea",
@@ -589,7 +632,7 @@
       "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.fb-thinking-in-objects-method-call",
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       },
       "optionIds": [
         "a",
@@ -597,28 +640,6 @@
         "c",
         "d"
       ]
-    },
-    {
-      "id": "dr-thinking-in-objects-workflow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.dr-thinking-in-objects-workflow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
     }
   ]
 }

@@ -19,19 +19,19 @@
               "title": "Call methods"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_thinking_in_objects_sketch0": {
-              "title": "Create two car objects",
-              "prompt": "A `Car` model is already provided in `models/car.py`. You do not need to write that model yet. In `main.py`, create two car objects: `Car(\"Honda\", \"Civic\", 12000)` and `Car(\"Ford\", \"Focus\", 8000)`. Store each object in its own variable. Do not print anything yet. This first exercise is only about creating objects.",
-              "hint": "Create two variables and store one `Car(...)` object in each variable. No `print()` is needed yet.",
+              "title": "Create two objects",
+              "prompt": "A `Car` model is already provided in `models/car.py`. In `main.py`, create two separate `Car` objects with sensible make, model, and mileage values. Keep both objects available in variables or a collection. Do not print anything. This exercise is only about creating objects.",
+              "hint": "Call `Car(...)` twice. Each constructor call creates a separate object.",
               "help": {
-                "concept": "An object represents one thing in your program. Here, one Car object represents one car, and another Car object represents a different car.",
-                "hint_1": "Create a variable such as `civic_car` and assign it `Car(\"Honda\", \"Civic\", 12000)`.",
-                "hint_2": "Create another variable for the Ford Focus. This exercise checks object creation, not output."
+                "concept": "Calling a class creates an object. Separate constructor calls create separate instances, each with its own state.",
+                "hint_1": "The provided constructor accepts a make, a model, and a starting mileage.",
+                "hint_2": "Create two `Car(...)` instances and keep both reachable. No output is required."
               },
               "starterCode": "from models.car import Car\n\n# A Car model is already provided.\n# Create two Car objects below.\n# Do not print anything yet.",
               "starterFiles": {
@@ -64,30 +64,31 @@
                 "3": {
                   "message": "Create at least two Car objects."
                 }
-              }
+              },
+              "sourceChecks": {}
             },
             "try_thinking_in_objects_sketch1": {
-              "title": "Read values from car objects",
-              "prompt": "Keep using the provided `Car` model. In `main.py`, create `Car(\"Toyota\", \"Corolla\", 22000)` and `Car(\"Mazda\", \"3\", 18000)`. Then print the first car's make on one line and the second car's miles on the next line.",
-              "hint": "After creating the objects, use dot notation to read their attributes.",
+              "title": "Read attributes from existing objects",
+              "prompt": "Two `Car` objects are already created in `main.py`. Use dot notation to print the `make` attribute directly from `corolla_car`, then print the `miles` attribute directly from `mazda_car`, each on its own line. Keep `models/car.py` unchanged.",
+              "hint": "Read each requested value from the existing object with dot notation.",
               "help": {
-                "concept": "An attribute is a value stored on an object. If `corolla_car` is a Car object, then `corolla_car.make` reads that car's make.",
-                "hint_1": "Create two variables, such as `corolla_car` and `mazda_car`.",
-                "hint_2": "Use `corolla_car.make` and `mazda_car.miles` inside `print()` calls."
+                "concept": "An attribute is state stored on an object. Dot notation reads that state from a particular instance.",
+                "hint_1": "The first value comes from `corolla_car`'s `make` attribute.",
+                "hint_2": "The second value comes from `mazda_car`'s `miles` attribute."
               },
-              "starterCode": "from models.car import Car\n\n# Create the two Car objects below.\n# Then print one attribute from each object.",
+              "starterCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\n# Print the requested attribute from each existing object.\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# Create the two Car objects below.\n# Then print one attribute from each object."
+                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\n# Print the requested attribute from each existing object.\n"
                 },
                 "models_car_py": {
                   "content": "# Keep models/car.py unchanged for this step: Read values from car objects.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)",
+              "solutionCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)"
+                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)\n"
                 },
                 "models_car_py": {
                   "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
@@ -110,16 +111,24 @@
                   "message": "Print the requested attributes on separate lines."
                 }
               },
-              "expectedOutput": "Toyota\n18000"
+              "expectedOutput": "Toyota\n18000",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print `corolla_car`'s `make` attribute directly with dot notation."
+                },
+                "1": {
+                  "message": "Print `mazda_car`'s `miles` attribute directly with dot notation."
+                }
+              }
             },
             "try_thinking_in_objects_sketch2": {
-              "title": "Call a method on one car object",
-              "prompt": "Use the provided `Car` model again. In `main.py`, create `Car(\"Kia\", \"Soul\", 30000)`. Call `drive(50)` on that car object. Then print `summary()`. Do not edit `models/car.py` yet; you are practicing how to use an object before writing the class yourself.",
-              "hint": "Create the car object, call `car.drive(50)`, then print `car.summary()`.",
+              "title": "Call methods on an existing object",
+              "prompt": "A `car` object is already created in `main.py`. Call `car.drive(50)` to change its mileage. Then print `car.summary()` directly so the output comes from the updated object. Keep `models/car.py` unchanged.",
+              "hint": "Change the existing object's state first, then ask that same object to summarize its current state.",
               "help": {
-                "concept": "A method is an action you ask an object to perform. Here, `drive(50)` changes the car object's stored miles, and `summary()` returns a readable result.",
-                "hint_1": "After creating the car object, call `car.drive(50)`.",
-                "hint_2": "Print `car.summary()` after the method call so the updated miles appear."
+                "concept": "Methods are behavior attached to objects. A method can change an object's state, and another method can report the updated state.",
+                "hint_1": "Use the existing variable `car`; do not create a replacement object.",
+                "hint_2": "Call the state-changing method before printing the summary."
               },
               "starterCode": "from models.car import Car\n\ncar = Car(\"Kia\", \"Soul\", 30000)\n\n# Drive the car 50 miles.\n# Then print the updated summary.",
               "starterFiles": {
@@ -153,7 +162,15 @@
                   "message": "Print the updated car summary."
                 }
               },
-              "expectedOutput": "Kia Soul - 30050 miles"
+              "expectedOutput": "Kia Soul - 30050 miles",
+              "sourceChecks": {
+                "0": {
+                  "message": "Call `drive(50)` on the existing `car` object."
+                },
+                "1": {
+                  "message": "Print `car.summary()` directly so the output comes from the updated object."
+                }
+              }
             }
           },
           "practice": {
@@ -190,35 +207,19 @@
               }
             },
             "fb-thinking-in-objects-method-call": {
-              "title": "Choose the method call",
-              "prompt": "Which line adds 50 miles to the existing `car` object?",
-              "hint": "Call the method on the existing object and pass `50` as the argument.",
+              "title": "Trace a method change",
+              "prompt": "A `Car` object starts with `miles = 30000`. The program calls `car.drive(50)`. What should `car.miles` be afterward?",
+              "hint": "The method adds the traveled distance to the object's current mileage.",
               "help": {
-                "concept": "A method call uses the object name, a dot, the method name, and parentheses.",
-                "hint_1": "The object is already named `car`.",
-                "hint_2": "Choose the line that calls `drive` with `50`."
+                "concept": "A state-changing method updates data stored on the object.",
+                "hint_1": "Start with 30000 and add 50.",
+                "hint_2": "The updated mileage is 30050."
               },
               "options": {
-                "a": "`car.drive(50)`",
-                "b": "`car.summary(50)`",
-                "c": "`drive.car(50)`",
-                "d": "`Car = drive(50)`"
-              }
-            },
-            "dr-thinking-in-objects-workflow": {
-              "title": "Order the object workflow",
-              "prompt": "Put these steps in the usual order for working with an object.",
-              "hint": "Start by creating the object before reading or changing it.",
-              "help": {
-                "concept": "A clear object workflow is: create an object, read attributes when needed, call methods when behavior is needed, then print or use the result.",
-                "hint_1": "An object must exist before you can read from it.",
-                "hint_2": "Printing the result comes after the object is created and updated."
-              },
-              "tokens": {
-                "t1": "Create the object with starting values",
-                "t2": "Read an attribute from the object",
-                "t3": "Call a method on that object",
-                "t4": "Print or use the object's current state"
+                "a": "30000",
+                "b": "30050",
+                "c": "50",
+                "d": "29950"
               }
             }
           }
@@ -236,15 +237,15 @@
           },
           "sketch-0": {
             "title": "Objects keep one thing together",
-            "bodyMarkdown": "Before writing class syntax, it helps to understand the problem objects solve.\n\nImagine a reading tracker. Without objects, one book might be spread across separate variables:\n\n```python\nfirst_title = \"The Hobbit\"\nfirst_author = \"J. R. R. Tolkien\"\nfirst_pages = 310\n\nsecond_title = \"Charlotte's Web\"\nsecond_author = \"E. B. White\"\nsecond_pages = 192\n```\n\nThis works for two small books, but it gets messy as the program grows. The title, author, and page count belong together, but the code stores them apart.\n\nAn **object** lets the program treat one book as one thing:\n\n```python\nfirst_book = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nsecond_book = Book(\"Charlotte's Web\", \"E. B. White\", 192)\n```\n\nYou do **not** need to know how `Book` is built yet. For now, notice the idea:\n\n- `first_book` is one book object.\n- `second_book` is another book object.\n- Each book object was created with its own title, author, and page count.\n\nWhen several values belong to the same thing, an object lets the program keep those values together."
+            "bodyMarkdown": "An object is useful when related values belong to one thing.\n\n```python\nclass Lamp:\n    pass\n\ndesk_lamp = Lamp()\ndesk_lamp.room = \"office\"\ndesk_lamp.on = False\n```\n\n`desk_lamp` carries state about one lamp. The alternative would be several loose variables such as `lamp_room` and `lamp_on` that the program must keep related by convention.\n\nAt this stage, focus on the design question: **which values describe the same thing?**"
           },
           "sketch-1": {
             "title": "Attributes are values on an object",
-            "bodyMarkdown": "After an object exists, you can read values from it.\n\nA value stored on an object is called an **attribute**.\n\n```python\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\n\nprint(book.title)\nprint(book.pages)\n```\n\nRead the dot notation out loud:\n\n- `book.title` means \"the title stored on this book object.\"\n- `book.pages` means \"the page count stored on this book object.\"\n\nDifferent objects can store different values:\n\n```python\nfirst_book = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nsecond_book = Book(\"Charlotte's Web\", \"E. B. White\", 192)\n\nprint(first_book.title)\nprint(second_book.title)\n```\n\nBoth variables hold `Book` objects, but each object keeps its own attribute values.\n\nThe design question is ownership: which values belong together, and which behavior should be responsible for changing them? Thinking in objects is useful only when that answer becomes clearer than a loose collection of variables and functions."
+            "bodyMarkdown": "Once an object owns state, code can read that state through the object.\n\n```python\nclass Backpack:\n    pass\n\nschool_bag = Backpack()\nschool_bag.owner = \"Mina\"\nschool_bag.items = 4\n\nprint(school_bag.owner)\nprint(school_bag.items)\n```\n\nThe attribute names explain what each value means in the context of that object.\n\nTwo Backpack objects can hold different values without needing separate variable naming schemes for every field."
           },
           "sketch-2": {
             "title": "Methods ask an object to do something",
-            "bodyMarkdown": "Objects can also have actions. In Python, an action that belongs to an object is called a **method**.\n\nA method call uses the object name, a dot, and the method name:\n\n```python\nbook.mark_finished()\n```\n\nRead that line out loud: ask this book object to mark itself finished.\n\nThen another method can return a readable label:\n\n```python\nbook = Book(\"Bridge to Terabithia\", \"Katherine Paterson\", 144)\nbook.mark_finished()\nprint(book.reading_label())\n```\n\nThe important beginner workflow is:\n\n1. Create one object with starting values.\n2. Read attributes from that object when you need its stored values.\n3. Call a method when you want the object to do something.\n4. Print or use the updated result.\n\nIn the next topics, you will learn how to write the class file that makes this possible.\n\nThe design question is ownership: which values belong together, and which behavior should be responsible for changing them? Thinking in objects is useful only when that answer becomes clearer than a loose collection of variables and functions."
+            "bodyMarkdown": "Objects become more useful when behavior changes or reports their own state.\n\n```python\nclass Timer:\n    def tick(self):\n        self.seconds -= 1\n\n    def status(self):\n        return f\"{self.seconds} seconds left\"\n\ntimer = Timer()\ntimer.seconds = 3\ntimer.tick()\nprint(timer.status())\n```\n\nThe caller asks the Timer to perform Timer behavior instead of manually editing its fields from outside.\n\nThat is the core object-oriented idea: keep state and the behavior responsible for that state together."
           }
         }
       }

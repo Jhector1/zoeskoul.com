@@ -523,7 +523,7 @@ export async function validateCodeProfileGolden(args: {
                     exerciseId: exercise.id,
                     message:
                         run.reason === "semantic_mismatch"
-                            ? `Exercise "${exercise.id}" solutionCode does not satisfy its semantic checks.`
+                            ? `Exercise "${exercise.id}" solutionCode does not satisfy its semantic checks: ${run.message}`
                             : `Exercise "${exercise.id}" semantic validation failed: ${run.message}`,
                 });
             }

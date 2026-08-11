@@ -2,7 +2,7 @@
   "topicId": "debugging-imports-and-state",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-10-testing-debugging-oop-projects",
-  "sectionSlug": "applied-python-projects-python-10-debugging-and-refactoring",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-debugging-and-refactoring",
   "prefix": "py10",
   "minutes": 30,
   "runtimeDefaults": {
@@ -89,13 +89,18 @@
       "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 6,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": null
+        "maxAttempts": null,
+        "exerciseKeys": [
+          "q-debugging-imports-state-single-1",
+          "q-debugging-imports-state-multi-1",
+          "q-debugging-imports-state-multi-2"
+        ]
       }
     }
   ],
@@ -179,12 +184,44 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "The Hobbit\nTolkien\n",
+            "stdout": "The Hobbit by Tolkien\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Beloved\nToni Morrison\n",
+            "stdout": "Beloved by Toni Morrison\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Dune\nFrank Herbert\n",
+            "stdout": "Dune by Frank Herbert\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionCode",
         "solutionFiles": [
           {
@@ -202,39 +239,24 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "method_returns",
-            "path": "models/book.py",
-            "className": "Book",
-            "constructorArgs": [
-              "The Hobbit",
-              "Tolkien"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "summary",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "The Hobbit by Tolkien",
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.0.message"
-          },
-          {
-            "type": "printed_line_count",
+            "type": "source_regex",
             "path": "main.py",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.1.message"
+            "pattern": "(?m)^[ \\t]*(?:from[ \\t]+models\\.book[ \\t]+import[ \\t]+Book|import[ \\t]+models\\.book(?:[ \\t]+as[ \\t]+[A-Za-z_]\\w*)?)[ \\t]*$",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.sourceChecks.0.message"
           }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "The Hobbit by Tolkien\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "main.py",
+          "pattern": "(?m)^[ \\t]*(?:from[ \\t]+models\\.book[ \\t]+import[ \\t]+Book|import[ \\t]+models\\.book(?:[ \\t]+as[ \\t]+[A-Za-z_]\\w*)?)[ \\t]*$",
+          "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-debugging-imports-and-state-sketch1",
@@ -295,12 +317,44 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/reading_list.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava\nNoah\nDune\n",
+            "stdout": "Ava: 1\nNoah: 0\nProvided: 1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Mina\nLeo\nBeloved\n",
+            "stdout": "Mina: 1\nLeo: 0\nProvided: 1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Kai\nNia\nFoundation\n",
+            "stdout": "Kai: 1\nNia: 0\nProvided: 1\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionCode",
         "solutionFiles": [
           {
@@ -318,29 +372,36 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "defines_class",
+            "type": "source_regex",
             "path": "models/reading_list.py",
-            "className": "ReadingList",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.0.message"
+            "pattern": "(?m)^[ \\t]*def[ \\t]+__init__\\(\\s*self\\s*,\\s*owner\\s*,\\s*books\\s*=\\s*None\\s*\\)[ \\t]*:",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.0.message"
           },
           {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.1.message"
+            "type": "source_regex",
+            "path": "models/reading_list.py",
+            "pattern": "(?m)^[ \\t]*(?:if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]*:|self\\.books[ \\t]*=[ \\t]*\\[\\][ \\t]+if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]+else[ \\t]+books)[ \\t]*$",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.1.message"
           }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "1\n0\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/reading_list.py",
+          "pattern": "(?m)^[ \\t]*def[ \\t]+__init__\\(\\s*self\\s*,\\s*owner\\s*,\\s*books\\s*=\\s*None\\s*\\)[ \\t]*:",
+          "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/reading_list.py",
+          "pattern": "(?m)^[ \\t]*(?:if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]*:|self\\.books[ \\t]*=[ \\t]*\\[\\][ \\t]+if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]+else[ \\t]+books)[ \\t]*$",
+          "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-debugging-imports-and-state-sketch2",
@@ -359,8 +420,8 @@
           "entry": true
         },
         {
-          "path": "models/stock_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+          "path": "models/task.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -375,8 +436,8 @@
           "entry": true
         },
         {
-          "path": "models/stock_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+          "path": "models/task.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -395,18 +456,50 @@
             "entry": true
           },
           {
-            "path": "models/stock_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ship release\n",
+            "stdout": "Ship release: False\nTrue\nShip release: True\nTrue\nShip release: True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Write tests\n",
+            "stdout": "Write tests: False\nTrue\nWrite tests: True\nTrue\nWrite tests: True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Refactor service\n",
+            "stdout": "Refactor service: False\nTrue\nRefactor service: True\nTrue\nRefactor service: True\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionCode",
         "solutionFiles": [
           {
@@ -417,80 +510,31 @@
             "entry": true
           },
           {
-            "path": "models/stock_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "method_sequence_returns",
-            "path": "models/stock_item.py",
-            "className": "StockItem",
-            "constructorArgs": [
-              "Pen",
-              5
-            ],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "sell",
-                "methodArgs": [
-                  2
-                ],
-                "methodArgKinds": []
-              }
-            ],
-            "methodName": "get_quantity",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": 3,
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.0.message"
-          },
-          {
-            "type": "method_sequence_returns",
-            "path": "models/stock_item.py",
-            "className": "StockItem",
-            "constructorArgs": [
-              "Pen",
-              5
-            ],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "sell",
-                "methodArgs": [
-                  10
-                ],
-                "methodArgKinds": []
-              }
-            ],
-            "methodName": "get_quantity",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": 5,
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.1.message"
-          },
-          {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.2.message"
+            "type": "source_regex",
+            "path": "models/task.py",
+            "pattern": "(?ms)^[ \\t]+def[ \\t]+complete\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.done[ \\t]*=[ \\t]*True[ \\t]*$",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.sourceChecks.0.message"
           }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "3\n3\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/task.py",
+          "pattern": "(?ms)^[ \\t]+def[ \\t]+complete\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.done[ \\t]*=[ \\t]*True[ \\t]*$",
+          "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "q-debugging-imports-state-single-1",
@@ -546,52 +590,6 @@
         "optionIds": [
           "a",
           "b"
-        ]
-      }
-    },
-    {
-      "id": "q-debugging-imports-state-fill-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "None"
-      }
-    },
-    {
-      "id": "q-debugging-imports-state-fill-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "book"
-      }
-    },
-    {
-      "id": "q-debugging-imports-state-order-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
         ]
       }
     }

@@ -2,9 +2,9 @@
   "topicId": "module-8-account-tracker-project",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-8-object-oriented-foundations",
-  "sectionSlug": "applied-python-projects-python-8-module-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-module-project",
   "prefix": "py8",
-  "minutes": 42,
+  "minutes": 45,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -181,25 +181,54 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
             "className": "Account",
             "constructorArgs": [],
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message"
           },
           {
             "type": "created_instances",
             "className": "Account",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message",
-            "path": "main.py"
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message"
           }
-        ]
-      }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+pass\\b",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:\\bfrom\\s+models\\.account\\s+import\\s+Account\\b|\\bimport\\s+models\\.account\\b)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.1.message"
+          }
+        ],
+        "tests": []
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+pass\\b",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:\\bfrom\\s+models\\.account\\s+import\\s+Account\\b|\\bimport\\s+models\\.account\\b)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "account-tracker-step-2-constructor-attributes",
@@ -264,8 +293,7 @@
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
+        "type": "fixed_tests",
         "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionCode",
         "solutionFiles": [
           {
@@ -283,60 +311,88 @@
             "entry": false
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "defines_class",
-            "className": "Account",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message",
-            "path": "models/account.py"
-          },
-          {
-            "type": "constructible",
-            "className": "Account",
-            "constructorArgs": [
-              "Ava",
-              125
-            ],
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message",
-            "path": "models/account.py"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Account",
-            "constructorArgs": [
-              "Ava",
-              125
-            ],
-            "attributes": [
-              "owner",
-              "balance"
-            ],
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message",
-            "path": "models/account.py"
-          },
-          {
-            "type": "created_instances",
-            "className": "Account",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message",
-            "path": "main.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 3,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message",
-            "path": "main.py"
-          }
-        ],
         "tests": [
           {
-            "stdin": "",
+            "stdin": "Ava\n125\n",
             "stdout": "Riverside Club\nAva\n125\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Luis\n0\n",
+            "stdout": "Riverside Club\nLuis\n0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Noor\n999\n",
+            "stdout": "Riverside Club\nNoor\n999\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+club_name\\s*=\\s*[\\\"']Riverside Club[\\\"']",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*owner\\s*,\\s*balance\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.owner\\s*=\\s*owner\\b",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.3.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "main.py",
+            "pattern": "\\bAccount\\s*\\(\\s*[^,()]+\\s*,\\s*[^()]+\\s*\\)",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bclass\\s+Account\\s*:\\s*\\n[ \\t]+club_name\\s*=\\s*[\\\"']Riverside Club[\\\"']",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*owner\\s*,\\s*balance\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.owner\\s*=\\s*owner\\b",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.sourceChecks.3.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "main.py",
+          "pattern": "\\bAccount\\s*\\(\\s*[^,()]+\\s*,\\s*[^()]+\\s*\\)",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+        }
+      ]
     },
     {
       "id": "account-tracker-step-3-add-methods",
@@ -436,8 +492,26 @@
             "methodArgKinds": [],
             "expected": 150,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": 125,
+            "expectedKind": "value",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message"
           },
           {
             "type": "method_sequence_returns",
@@ -463,8 +537,8 @@
             "methodArgKinds": [],
             "expected": 110,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message"
           },
           {
             "type": "method_returns",
@@ -474,32 +548,90 @@
               125
             ],
             "constructorArgKinds": [],
-            "methodName": "is_valid_amount",
+            "methodName": "withdraw",
             "methodArgs": [
-              -5
+              500
             ],
             "methodArgKinds": [],
-            "expected": false,
+            "expected": 125,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message"
           },
           {
-            "type": "printed_line_count",
-            "min": 3,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message",
-            "path": "main.py"
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Noor",
+              10
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  7
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  20
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  0
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 17,
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.4.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "150\n110\nFalse\n",
+            "stdout": "150\n110\n110\n110\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+deposit\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+withdraw\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+deposit\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+withdraw\\s*\\(\\s*self\\s*,\\s*amount\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "account-tracker-step-4-validation-summary",
@@ -585,29 +717,53 @@
         ],
         "semanticChecks": [
           {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Noor",
+              75
+            ],
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Noor",
+              75
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message"
+          },
+          {
             "type": "method_returns",
             "className": "Account",
             "constructorArgs": [
-              "Ava",
-              125
+              "Noor",
+              75
             ],
             "constructorArgKinds": [],
             "methodName": "deposit",
             "methodArgs": [
-              -5
+              25
             ],
             "methodArgKinds": [],
-            "expected": 125,
+            "expected": 100,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message",
-            "path": "models/account.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message"
           },
           {
             "type": "method_sequence_returns",
             "className": "Account",
             "constructorArgs": [
-              "Ava",
-              125
+              "Noor",
+              75
             ],
             "constructorArgKinds": [],
             "calls": [
@@ -617,46 +773,118 @@
                   25
                 ],
                 "methodArgKinds": []
-              },
-              {
-                "methodName": "withdraw",
-                "methodArgs": [
-                  40
-                ],
-                "methodArgKinds": []
-              },
-              {
-                "methodName": "withdraw",
-                "methodArgs": [
-                  500
-                ],
-                "methodArgKinds": []
               }
             ],
+            "methodName": "withdraw",
+            "methodArgs": [
+              40
+            ],
+            "methodArgKinds": [],
+            "expected": 60,
+            "expectedKind": "value",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.3.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Noor",
+              75
+            ],
+            "constructorArgKinds": [],
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Riverside Club | Ava: $110.00",
+            "expected": "Riverside Club | Noor: $75.00",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message",
-            "path": "models/account.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message",
-            "path": "main.py"
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.4.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Riverside Club | Ava: $40.00\n",
+            "stdin": "Ava\n125\n40\n-5\n",
+            "stdout": "125\n40\n40\nRiverside Club | Ava: $40.00\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Luis\n-10\n75\n-1\n",
+            "stdout": "0\n75\n75\nRiverside Club | Luis: $75.00\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Noor\n9\n0\n-3\n",
+            "stdout": "9\n0\n0\nRiverside Club | Noor: $0.00\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "@property\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "@balance\\.setter\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*,\\s*value\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\._balance\\s*=\\s*0\\b",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.3.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+            "path": "models/account.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.4.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "@property\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "@balance\\.setter\\s*\\n[ \\t]*def\\s+balance\\s*\\(\\s*self\\s*,\\s*value\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\._balance\\s*=\\s*0\\b",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.balance\\s*=\\s*balance\\b",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.3.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+          "path": "models/account.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.sourceChecks.4.message"
+        }
+      ]
     }
   ]
 }

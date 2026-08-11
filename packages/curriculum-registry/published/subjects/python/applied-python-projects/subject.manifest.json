@@ -4,8 +4,9 @@
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 2,
+    "order": 0,
     "accessPolicy": "paid",
+    "visibility": "public",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -15,21 +16,13 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": true,
+        "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.applied-python-projects.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "applied-python-projects",
-        "version": 1,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": null,
-        "supersededBy": null
       }
     }
   },
@@ -60,9 +53,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 210,
+        "estimatedMinutes": 195,
         "prereqKeys": [
-          "modules.python--python-data-functions--draft.python-8-real-world-project.title"
+          "modules.applied-python-projects.python-7.title"
         ],
         "outcomeKeys": [
           "modules.applied-python-projects.python-8-object-oriented-foundations.outcomes.0",
@@ -185,9 +178,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 210,
+        "estimatedMinutes": 178,
         "prereqKeys": [
-          "modules.applied-python-projects.python-8-object-oriented-foundations.title"
+          "modules.applied-python-projects.python-8.title"
         ],
         "outcomeKeys": [
           "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.outcomes.0",
@@ -309,9 +302,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 220,
+        "estimatedMinutes": 175,
         "prereqKeys": [
-          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.title"
+          "modules.applied-python-projects.python-9.title"
         ],
         "outcomeKeys": [
           "modules.applied-python-projects.python-10-testing-debugging-oop-projects.outcomes.0",
@@ -436,7 +429,7 @@
       "meta": {
         "estimatedMinutes": 260,
         "prereqKeys": [
-          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.title"
+          "modules.applied-python-projects.python-10.title"
         ],
         "outcomeKeys": [
           "modules.applied-python-projects.python-11-oop-capstone-project.outcomes.0",

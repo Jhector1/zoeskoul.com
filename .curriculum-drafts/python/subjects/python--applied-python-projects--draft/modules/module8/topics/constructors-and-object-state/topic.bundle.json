@@ -2,7 +2,7 @@
   "topicId": "constructors-and-object-state",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-8-object-oriented-foundations",
-  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
   "prefix": "py8",
   "minutes": 30,
   "runtimeDefaults": {
@@ -89,15 +89,14 @@
       "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "mc-constructors-and-object-state-storing-values",
           "sc-constructors-and-object-state-purpose",
-          "fb-constructors-and-object-state-init-name",
-          "dr-constructors-and-object-state-flow"
+          "fb-constructors-and-object-state-init-name"
         ],
         "allowReveal": true,
         "preferKind": null,
@@ -256,8 +255,60 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*make\\s*,\\s*model\\s*,\\s*miles\\s*\\)\\s*:",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.make\\s*=\\s*make\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.model\\s*=\\s*model\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.3.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*make\\s*,\\s*model\\s*,\\s*miles\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.make\\s*=\\s*make\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.model\\s*=\\s*model\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.3.message"
+        }
+      ]
     },
     {
       "id": "try-constructors-and-object-state-sketch1",
@@ -396,8 +447,60 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+wheels\\s*=\\s*4\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*Car\\.wheels\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*outback\\.make\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bprint\\s*\\(\\s*mini\\.make\\s*\\)",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.3.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+wheels\\s*=\\s*4\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*Car\\.wheels\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*outback\\.make\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bprint\\s*\\(\\s*mini\\.make\\s*\\)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.3.message"
+        }
+      ]
     },
     {
       "id": "try-constructors-and-object-state-sketch2",
@@ -537,8 +640,24 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+__init__\\s*\\([^)]*\\)\\s*:[\\s\\S]*?\\bself\\.service_notes\\s*=\\s*\\[\\s*\\]",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+__init__\\s*\\([^)]*\\)\\s*:[\\s\\S]*?\\bself\\.service_notes\\s*=\\s*\\[\\s*\\]",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "mc-constructors-and-object-state-storing-values",
@@ -586,29 +705,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "Car"
-      }
-    },
-    {
-      "id": "dr-constructors-and-object-state-flow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.dr-constructors-and-object-state-flow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "value": "__init__"
       }
     }
   ]

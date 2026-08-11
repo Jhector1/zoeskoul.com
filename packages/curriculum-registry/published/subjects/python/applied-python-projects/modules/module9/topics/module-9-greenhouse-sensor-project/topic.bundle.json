@@ -4,7 +4,7 @@
   "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
   "sectionSlug": "applied-python-projects-python-9-module-project",
   "prefix": "py9",
-  "minutes": 55,
+  "minutes": 50,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -50,7 +50,8 @@
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": null
+            "maxAttempts": null,
+            "carryFromPrev": false
           },
           {
             "id": "greenhouse_project_step_2_add_humidity_override",
@@ -131,6 +132,20 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_greenhouse_monitor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -158,6 +173,20 @@
         {
           "path": "models/temperature_sensor.py",
           "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -192,6 +221,64 @@
           {
             "path": "models/temperature_sensor.py",
             "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -231,71 +318,176 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "Sensor",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.0.message",
-            "path": "models/sensor.py"
-          },
-          {
-            "type": "defines_class",
-            "className": "TemperatureSensor",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.3.message",
-            "path": "models/temperature_sensor.py"
-          },
-          {
             "type": "constructible",
             "className": "TemperatureSensor",
             "constructorArgs": [
-              "North Bed",
-              21.5
+              "East Bed",
+              18.25
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.4.message",
-            "path": "models/temperature_sensor.py"
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.0.message"
           },
           {
             "type": "instance_attributes",
             "className": "TemperatureSensor",
             "constructorArgs": [
-              "North Bed",
-              21.5
+              "East Bed",
+              18.25
             ],
             "attributes": [
               "zone",
               "celsius"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
-            "path": "models/temperature_sensor.py"
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.1.message"
           },
           {
             "type": "method_returns",
             "className": "TemperatureSensor",
             "constructorArgs": [
-              "North Bed",
-              21.5
+              "East Bed",
+              18.25
             ],
             "constructorArgKinds": [],
             "methodName": "reading",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Temperature: North Bed = 21.5 C",
+            "expected": "Temperature: East Bed = 18.25 C",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
-            "path": "models/temperature_sensor.py"
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.2.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "TemperatureSensor",
+            "constructorArgs": [
+              "South Bench",
+              19.75
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Temperature: South Bench = 19.75 C",
+            "expectedKind": "value",
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.3.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
+            "stdin": "North Bed\n21.5\n",
             "stdout": "Temperature: North Bed = 21.5 C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "East Bed\n18.25\n",
+            "stdout": "Temperature: East Bed = 18.25 C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Propagation\n24\n",
+            "stdout": "Temperature: Propagation = 24.0 C\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "path": "models/sensor.py",
+            "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/sensor.py",
+            "pattern": "\\bclass\\s+Sensor\\s*\\(\\s*ABC\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/sensor.py",
+            "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/temperature_sensor.py",
+            "pattern": "\\bclass\\s+TemperatureSensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.3.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/temperature_sensor.py",
+            "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.4.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/temperature_sensor.py",
+            "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.5.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/sensor.py",
+          "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/sensor.py",
+          "pattern": "\\bclass\\s+Sensor\\s*\\(\\s*ABC\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/sensor.py",
+          "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/temperature_sensor.py",
+          "pattern": "\\bclass\\s+TemperatureSensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.3.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/temperature_sensor.py",
+          "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.4.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/temperature_sensor.py",
+          "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.sourceChecks.5.message"
+        }
+      ]
     },
     {
       "id": "greenhouse-project-step-2-add-humidity-override",
@@ -340,6 +532,13 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_greenhouse_monitor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -374,6 +573,13 @@
         {
           "path": "models/humidity_sensor.py",
           "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -415,6 +621,57 @@
           {
             "path": "models/humidity_sensor.py",
             "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -461,73 +718,149 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "HumiditySensor",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.1.message",
-            "path": "models/humidity_sensor.py"
+            "type": "method_returns",
+            "className": "TemperatureSensor",
+            "constructorArgs": [
+              "East Bed",
+              18.25
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Temperature: East Bed = 18.25 C",
+            "expectedKind": "value",
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.0.message"
           },
           {
             "type": "constructible",
             "className": "HumiditySensor",
             "constructorArgs": [
-              "Seedling Bench",
-              64
+              "Fern House",
+              72
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.2.message",
-            "path": "models/humidity_sensor.py"
-          },
-          {
-            "type": "method_returns",
-            "className": "TemperatureSensor",
-            "constructorArgs": [
-              "North Bed",
-              21.5
-            ],
-            "constructorArgKinds": [],
-            "methodName": "reading",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Temperature: North Bed = 21.5 C",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.0.message",
-            "path": "models/temperature_sensor.py"
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.1.message"
           },
           {
             "type": "instance_attributes",
             "className": "HumiditySensor",
             "constructorArgs": [
-              "Seedling Bench",
-              64
+              "Fern House",
+              72
             ],
             "attributes": [
               "zone",
               "percent"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.3.message",
-            "path": "models/humidity_sensor.py"
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.2.message"
           },
           {
             "type": "method_returns",
             "className": "HumiditySensor",
             "constructorArgs": [
-              "Seedling Bench",
-              64
+              "Fern House",
+              72
             ],
             "constructorArgKinds": [],
             "methodName": "reading",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Humidity: Seedling Bench = 64%",
+            "expected": "Humidity: Fern House = 72%",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message",
-            "path": "models/humidity_sensor.py"
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.3.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Seed Room",
+              55
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Humidity: Seed Room = 55%",
+            "expectedKind": "value",
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message"
           }
-        ]
-      }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "path": "models/humidity_sensor.py",
+            "pattern": "\\bclass\\s+HumiditySensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/humidity_sensor.py",
+            "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/humidity_sensor.py",
+            "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.2.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
+            "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "East Bed\n18.25\nFern House\n72\n",
+            "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Propagation\n24\nSeed Room\n55\n",
+            "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/humidity_sensor.py",
+          "pattern": "\\bclass\\s+HumiditySensor\\s*\\(\\s*Sensor\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/humidity_sensor.py",
+          "pattern": "\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(\\s*zone\\s*\\)",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/humidity_sensor.py",
+          "pattern": "\\bdef\\s+reading\\s*\\(\\s*self\\s*\\)\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "greenhouse-project-step-3-mixed-sensor-loop",
@@ -572,6 +905,13 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_greenhouse_monitor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -606,6 +946,13 @@
         {
           "path": "models/humidity_sensor.py",
           "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -647,6 +994,57 @@
           {
             "path": "models/humidity_sensor.py",
             "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -693,63 +1091,97 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
-            "type": "created_instances",
-            "className": "TemperatureSensor",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.0.message",
-            "path": "main.py"
-          },
-          {
-            "type": "created_instances",
-            "className": "HumiditySensor",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message",
-            "path": "main.py"
-          },
-          {
             "type": "method_returns",
             "className": "TemperatureSensor",
             "constructorArgs": [
-              "North Bed",
-              21.5
+              "Canopy",
+              19.75
             ],
             "constructorArgKinds": [],
             "methodName": "reading",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Temperature: North Bed = 21.5 C",
+            "expected": "Temperature: Canopy = 19.75 C",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.2.message",
-            "path": "models/temperature_sensor.py"
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.0.message"
           },
           {
             "type": "method_returns",
             "className": "HumiditySensor",
             "constructorArgs": [
-              "Seedling Bench",
-              64
+              "Canopy",
+              68
             ],
             "constructorArgKinds": [],
             "methodName": "reading",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Humidity: Seedling Bench = 64%",
+            "expected": "Humidity: Canopy = 68%",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.3.message",
-            "path": "models/humidity_sensor.py"
-          },
-          {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.4.message"
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message"
           }
-        ]
-      }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "path": "main.py",
+            "iterable": "sensors",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "main.py",
+            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.1.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
+            "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "East Bed\n18.25\nFern House\n72\n",
+            "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Propagation\n24\nSeed Room\n55\n",
+            "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "path": "main.py",
+          "iterable": "sensors",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "main.py",
+          "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "greenhouse-project-step-4-monitor-class-report",
@@ -894,6 +1326,50 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
         ]
       },
       "showExpectedExample": true,
@@ -947,17 +1423,11 @@
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "GreenhouseMonitor",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.0.message",
-            "path": "models/greenhouse_monitor.py"
-          },
-          {
             "type": "constructible",
             "className": "GreenhouseMonitor",
             "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.1.message",
-            "path": "models/greenhouse_monitor.py"
+            "path": "models/greenhouse_monitor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.0.message"
           },
           {
             "type": "instance_attributes",
@@ -966,19 +1436,114 @@
             "attributes": [
               "sensors"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.2.message",
-            "path": "models/greenhouse_monitor.py"
+            "path": "models/greenhouse_monitor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.1.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "TemperatureSensor",
+            "constructorArgs": [
+              "Orchid House",
+              20.5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Temperature: Orchid House = 20.5 C",
+            "expectedKind": "value",
+            "path": "models/temperature_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.2.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Orchid House",
+              70
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Humidity: Orchid House = 70%",
+            "expectedKind": "value",
+            "path": "models/humidity_sensor.py",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.3.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
+            "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
             "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "East Bed\n18.25\nFern House\n72\n",
+            "stdout": "Temperature: East Bed = 18.25 C\nHumidity: Fern House = 72%\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Propagation\n24\nSeed Room\n55\n",
+            "stdout": "Temperature: Propagation = 24.0 C\nHumidity: Seed Room = 55%\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "path": "models/greenhouse_monitor.py",
+            "pattern": "\\bclass\\s+GreenhouseMonitor\\s*:",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/greenhouse_monitor.py",
+            "pattern": "\\bself\\.sensors\\s*=\\s*\\[\\s*\\]",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/greenhouse_monitor.py",
+            "pattern": "\\bdef\\s+add_sensor\\s*\\(\\s*self\\s*,\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*?\\bself\\.sensors\\.append\\s*\\(\\s*\\1\\s*\\)",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/greenhouse_monitor.py",
+            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+print_report\\s*\\(\\s*self\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+self\\.sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.3.message"
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/greenhouse_monitor.py",
+          "pattern": "\\bclass\\s+GreenhouseMonitor\\s*:",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/greenhouse_monitor.py",
+          "pattern": "\\bself\\.sensors\\s*=\\s*\\[\\s*\\]",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/greenhouse_monitor.py",
+          "pattern": "\\bdef\\s+add_sensor\\s*\\(\\s*self\\s*,\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*?\\bself\\.sensors\\.append\\s*\\(\\s*\\1\\s*\\)",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/greenhouse_monitor.py",
+          "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+print_report\\s*\\(\\s*self\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+self\\.sensors\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.reading\\s*\\(\\s*\\)\\s*\\)",
+          "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.sourceChecks.3.message"
+        }
+      ]
     }
   ]
 }
