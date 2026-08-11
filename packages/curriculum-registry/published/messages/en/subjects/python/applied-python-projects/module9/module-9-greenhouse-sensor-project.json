@@ -4,10 +4,10 @@
       "python-9-inheritance-polymorphism-and-abstraction": {
         "module-9-greenhouse-sensor-project": {
           "label": "Module 9 Greenhouse Sensor Project",
-          "summary": "Build one cumulative greenhouse monitor that retrieves the Module 9 skills: an abstract Sensor contract, inherited setup, specialized readings, branch-free polymorphism, and collection ownership.",
+          "summary": "Build a greenhouse monitor that lets temperature and humidity sensors share one contract and one reporting flow.",
           "cards": {
             "sketch0": {
-              "title": "Project brief"
+              "title": "Project story"
             },
             "project": {
               "title": "Greenhouse Sensor Monitor"
@@ -43,20 +43,11 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\n# Create the TemperatureSensor and print its reading.\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "# Make Sensor an abstract base class with a required reading() method.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        # Reuse Sensor's zone setup, then store celsius.\n        pass\n\n    def reading(self):\n        # Return: Temperature: <zone> = <celsius> C\n        pass\n"
-                  },
-                  "models_humidity_sensor_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n",
@@ -64,20 +55,11 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
-                  },
-                  "models_humidity_sensor_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -130,9 +112,6 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -141,18 +120,12 @@
                   },
                   "models_humidity_sensor_py": {
                     "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n",
                 "solutionFiles": {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
@@ -162,9 +135,6 @@
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -211,9 +181,6 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -222,9 +189,6 @@
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
@@ -232,9 +196,6 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -243,9 +204,6 @@
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -280,9 +238,6 @@
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -300,9 +255,6 @@
                 "solutionFiles": {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(temperature_zone, celsius))\nmonitor.add_sensor(HumiditySensor(humidity_zone, percent))\nmonitor.print_report()\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
@@ -358,8 +310,8 @@
       "python-9-inheritance-polymorphism-and-abstraction": {
         "module-9-greenhouse-sensor-project": {
           "module-9-greenhouse-sensor-project-sketch-0": {
-            "title": "Project brief: one cumulative greenhouse monitor",
-            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones.\n\nThis project is a **retrieval project**. It does not introduce another OOP taxonomy. You will apply the Module 9 skills to one codebase that grows without resetting completed work.\n\nThe final file tree exists from the beginning:\n\n```text\nmain.py\nmodels/\n  __init__.py\n  sensor.py\n  temperature_sensor.py\n  humidity_sensor.py\n  greenhouse_monitor.py\n```\n\nThe milestones are cumulative:\n\n1. Build the abstract `Sensor` contract and a concrete `TemperatureSensor`.\n2. Add `HumiditySensor` without duplicating the parent setup.\n3. Put both concrete sensors in one mixed collection and use one shared `reading()` call.\n4. Move collection ownership into `GreenhouseMonitor` while keeping the same polymorphic contract.\n\nAt every handoff, the complete previous solution becomes the next starter. Finished code stays finished."
+            "title": "Project story: make new greenhouse sensors plug in cleanly",
+            "bodyMarkdown": "Sunrise Community Greenhouse monitors several growing zones. The first script handled temperature sensors only, but the staff is now adding humidity sensors. If every sensor type needs its own special branch, the monitoring code will become harder to extend every time new hardware arrives.\n\nYour job is to build a **Greenhouse Sensor Monitor** around one shared sensor contract.\n\nThe design should let the rest of the program work with a sensor through the same `reading()` behavior, whether the object measures temperature, humidity, or a future sensor type.\n\nThe workspace grows only when the next responsibility appears:\n\n```text\nMilestone 1\nmain.py\nmodels/\n  sensor.py\n  temperature_sensor.py\n\nMilestone 2 adds\nmodels/\n  humidity_sensor.py\n\nMilestone 4 adds\nmodels/\n  greenhouse_monitor.py\n```\n\nYou will:\n\n1. define the abstract `Sensor` contract and the first concrete temperature sensor;\n2. add a humidity sensor that reuses the parent setup;\n3. process mixed sensor objects through one branch-free loop;\n4. give `GreenhouseMonitor` ownership of the sensor collection and reporting flow.\n\nFinished files carry forward. Future files do not appear until the milestone that actually needs them."
           }
         }
       }

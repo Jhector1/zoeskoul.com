@@ -219,7 +219,7 @@
               "learningGoals": [
                 "Build a complete Account model in models/account.py.",
                 "Use helpers/formatting.py and data/accounts.txt with a thin main.py.",
-                "Carry each project step's full solution into the next step's starter workspace."
+                "Carry every existing file from each project solution into the next starter workspace, then add only the new files that next milestone needs."
               ],
               "practice": {
                 "tryIt": true,
@@ -617,7 +617,7 @@
               "learningGoals": [
                 "Create tests/check_*.py files for models and services.",
                 "Verify polymorphic behavior and storage loading.",
-                "Carry each project step's full solution into the next step's starter workspace."
+                "Carry every existing file from each project solution into the next starter workspace, then add only the new files that next milestone needs."
               ],
               "practice": {
                 "tryIt": true,

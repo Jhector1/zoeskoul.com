@@ -313,7 +313,7 @@
       "notes": [
         "Generate full starterFiles and solutionFiles for any code_input exercise.",
         "Embedded sketch try-it exercise IDs must be try-module-8-account-tracker-project-sketchN.",
-        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+        "This is a progressive project/capstone topic: preserve every existing file from the previous milestone, but introduce a new file only in the first milestone that needs it. Do not pre-create placeholder files for future milestones."
       ]
     },
     "inheritance-for-shared-behavior": {
@@ -413,7 +413,7 @@
       "notes": [
         "Generate full starterFiles and solutionFiles for any code_input exercise.",
         "Embedded sketch try-it exercise IDs must be try-module-10-oop-quality-project-sketchN.",
-        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+        "This is a progressive project/capstone topic: preserve every existing file from the previous milestone, but introduce a new file only in the first milestone that needs it. Do not pre-create placeholder files for future milestones."
       ]
     },
     "module-11-final-oop-capstone": {
@@ -425,7 +425,7 @@
       "notes": [
         "Generate full starterFiles and solutionFiles for any code_input exercise.",
         "Embedded sketch try-it exercise IDs must be try-module-11-final-oop-capstone-sketchN.",
-        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+        "This is a progressive project/capstone topic: preserve every existing file from the previous milestone, but introduce a new file only in the first milestone that needs it. Do not pre-create placeholder files for future milestones."
       ]
     },
     "thinking-in-objects": {
@@ -648,7 +648,7 @@
               "learningGoals": [
                 "Build a complete Account model in models/account.py.",
                 "Use helpers/formatting.py and data/accounts.txt with a thin main.py.",
-                "Carry each project step's full solution into the next step's starter workspace."
+                "Carry every existing file from each project solution into the next starter workspace, then add only the new files that next milestone needs."
               ],
               "practice": {
                 "tryIt": true,
@@ -1028,7 +1028,7 @@
               "learningGoals": [
                 "Create tests/check_*.py files for models and services.",
                 "Verify polymorphic behavior and storage loading.",
-                "Carry each project step's full solution into the next step's starter workspace."
+                "Carry every existing file from each project solution into the next starter workspace, then add only the new files that next milestone needs."
               ],
               "practice": {
                 "tryIt": true,
@@ -1217,8 +1217,8 @@
     "notes": [
       "Every topic should produce multifile practice when it is technical.",
       "Try-it cards use try-* exercise keys; regular practice can use ci-*; module project/capstone steps keep descriptive project step ids.",
-      "Full-scope solution workspace is required for every reveal and every golden validation contract.",
-      "Project and capstone solutionFiles are complete snapshots, not diffs."
+      "Each reveal and golden validation contract must include the complete workspace that exists at that milestone; future files must not be pre-created.",
+      "Project and capstone solutionFiles are complete snapshots of the files that exist at that milestone, not diffs; add new files only when that milestone first needs them."
     ]
   },
   "validationPolicy": {
