@@ -147,74 +147,11 @@
           "entry": false
         },
         {
-          "path": "services/reporting.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.services_reporting_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "storage/pet_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.storage_pet_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/pets.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.data_pets_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
           "path": "tests/check_model.py",
           "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_model_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_reporting.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_reporting_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "solutionFiles": [
@@ -240,74 +177,11 @@
           "entry": false
         },
         {
-          "path": "services/reporting.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "storage/pet_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/pets.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
           "path": "tests/check_model.py",
           "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_reporting.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "workspace": {
@@ -337,74 +211,11 @@
             "entry": false
           },
           {
-            "path": "services/reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.services_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_model_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.starterFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "solutionFiles": [
@@ -430,78 +241,15 @@
             "entry": false
           },
           {
-            "path": "services/reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -536,74 +284,11 @@
             "entry": false
           },
           {
-            "path": "services/reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.services_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_model_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_reporting.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_reporting_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "sourceChecks": [
@@ -688,20 +373,6 @@
           "entry": false
         },
         {
-          "path": "storage/pet_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.storage_pet_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/pets.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.data_pets_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
           "path": "tests/check_model.py",
           "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_model_py.content",
           "language": "python",
@@ -714,41 +385,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "solutionFiles": [
@@ -781,20 +417,6 @@
           "entry": false
         },
         {
-          "path": "storage/pet_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/pets.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
           "path": "tests/check_model.py",
           "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
           "language": "python",
@@ -807,41 +429,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_loader.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "workspace": {
@@ -878,20 +465,6 @@
             "entry": false
           },
           {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_model_py.content",
             "language": "python",
@@ -904,41 +477,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.starterFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "solutionFiles": [
@@ -971,20 +509,6 @@
             "entry": false
           },
           {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
             "language": "python",
@@ -997,45 +521,10 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -1077,20 +566,6 @@
             "entry": false
           },
           {
-            "path": "storage/pet_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.storage_pet_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "data/pets.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.data_pets_csv.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "tests/check_model.py",
             "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_model_py.content",
             "language": "python",
@@ -1103,41 +578,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_loader.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_loader_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "sourceChecks": [
@@ -1267,34 +707,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "solutionFiles": [
@@ -1360,34 +772,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_adoption.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "workspace": {
@@ -1457,34 +841,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.starterFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "solutionFiles": [
@@ -1550,38 +906,10 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -1656,34 +984,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_adoption.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_adoption_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "sourceChecks": [
@@ -1824,27 +1124,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "solutionFiles": [
@@ -1917,27 +1196,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "workspace": {
@@ -2014,27 +1272,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.starterFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "solutionFiles": [
@@ -2107,31 +1344,10 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -2213,27 +1429,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_summary_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "sourceChecks": [
@@ -2353,20 +1548,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "solutionFiles": [
@@ -2446,20 +1627,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "tests/check_regression.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "README.md",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
         }
       ],
       "workspace": {
@@ -2543,20 +1710,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.starterFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "solutionFiles": [
@@ -2636,24 +1789,10 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -2742,20 +1881,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          },
-          {
-            "path": "tests/check_regression.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.tests_check_regression_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.solutionFiles.README_md.content",
-            "language": "text",
-            "isEntry": false,
-            "entry": false
           }
         ],
         "sourceChecks": [
@@ -3175,7 +2300,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",

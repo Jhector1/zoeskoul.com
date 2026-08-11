@@ -4,10 +4,10 @@
       "python-8-object-oriented-foundations": {
         "module-8-account-tracker-project": {
           "label": "Module 8 Account Tracker Project",
-          "summary": "Build a cumulative two-file Account tracker that retrieves class files, class and instance state, instance methods, validation, a validated property, and model-vs-main responsibility.",
+          "summary": "Build Riverside Club's account tracker so each member balance has one reliable model, safe update rules, and a clear summary.",
           "cards": {
             "sketch0": {
-              "title": "Project overview"
+              "title": "Project story"
             },
             "project": {
               "title": "Account Tracker Build"
@@ -261,8 +261,8 @@
       "python-8-object-oriented-foundations": {
         "module-8-account-tracker-project": {
           "module-8-account-tracker-project-sketch-0": {
-            "title": "Build one Account model across four milestones",
-            "bodyMarkdown": "A small after-school club needs a simple account tracker. This project does not introduce a new OOP category. It asks you to combine the ideas you already practiced in Module 8.\n\nYou will carry the **same two-file workspace** forward through four milestones:\n\n1. Create the `Account` model file and import it from `main.py`.\n2. Add shared club state plus per-account owner and balance state.\n3. Add validated `deposit()` and `withdraw()` instance methods.\n4. Protect direct balance assignment with a validated property and finish a reusable `summary()` method.\n\n`models/account.py` owns one account's state and behavior. `main.py` creates objects, supplies inputs, calls public behavior, and displays returned results.\n\nEvery milestone starts from the exact workspace produced by the previous milestone."
+            "title": "Project story: replace the club's fragile balance notes",
+            "bodyMarkdown": "Riverside Club runs weekend workshops for local students. The club treasurer has been tracking member balances in a shared note, and small mistakes are starting to cause real problems: one update can overwrite another, negative balances can slip in, and nobody is sure which part of the program should be responsible for changing an account.\n\nYour job is to replace that fragile process with a small **Account Tracker**.\n\nThe application has two clear responsibilities:\n\n- `models/account.py` owns an account's state and the rules that keep a balance valid.\n- `main.py` handles input/output and calls the model's public behavior.\n\nYou will improve the same tracker across four milestones:\n\n1. Create the model boundary and use it from `main.py`.\n2. Add shared club information plus each account's owner and balance.\n3. Add safe deposit and withdrawal behavior.\n4. Protect direct balance assignment and finish a reusable account summary.\n\nThe code you finish in one milestone stays in the project. Later milestones build on it instead of starting over."
           }
         }
       }

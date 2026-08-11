@@ -8609,10 +8609,10 @@ const messages: Record<string, any> = {
         },
         "module-10-oop-quality-project": {
           "label": "Module 10 Animal Shelter Quality Project",
-          "summary": "Stabilize one cumulative shelter application by writing real regression tests, refactoring a mixed-object report, fixing import and state bugs, and finishing an end-to-end quality pass.",
+          "summary": "Stabilize Harbor Street Animal Shelter's intake app before a busy adoption weekend by adding regression tests and repairing real defects.",
           "cards": {
             "sketch0": {
-              "title": "Project brief"
+              "title": "Project story"
             },
             "project": {
               "title": "Animal Shelter Quality Pass"
@@ -8660,35 +8660,8 @@ const messages: Record<string, any> = {
                   "models_foster_pet_py": {
                     "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
-                  "services_reporting_py": {
-                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
-                  },
                   "tests_check_model_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\n# Add meaningful model/inheritance assertions here.\n\nprint(\"model tests passed\")\n"
-                  },
-                  "tests_check_reporting_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -8701,35 +8674,8 @@ const messages: Record<string, any> = {
                   "models_foster_pet_py": {
                     "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
-                  "services_reporting_py": {
-                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
-                  },
                   "tests_check_model_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
-                  },
-                  "tests_check_reporting_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n",
@@ -8770,32 +8716,11 @@ const messages: Record<string, any> = {
                   "services_reporting_py": {
                     "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
                   },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
-                  },
                   "tests_check_model_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
                     "content": "# Added in Milestone 2.\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -8811,32 +8736,11 @@ const messages: Record<string, any> = {
                   "services_reporting_py": {
                     "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
                   },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
-                  },
                   "tests_check_model_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n",
@@ -8894,18 +8798,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_loader_py": {
                     "content": "# Added in Milestone 3.\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -8935,18 +8827,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_loader_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n",
@@ -9007,15 +8887,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_adoption_py": {
                     "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -9048,15 +8919,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_adoption_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
-                  },
-                  "tests_check_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n",
@@ -9114,12 +8976,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_summary_py": {
                     "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -9155,12 +9011,6 @@ const messages: Record<string, any> = {
                   },
                   "tests_check_summary_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
-                  },
-                  "tests_check_regression_py": {
-                    "content": "# Added in Milestone 6.\n"
-                  },
-                  "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n",
@@ -10194,10 +10044,10 @@ const messages: Record<string, any> = {
         },
         "module-11-final-oop-capstone": {
           "label": "Neighborhood Pantry Request Coordinator",
-          "summary": "Build one cumulative production-shaped OOP application through six milestones: abstract models, polymorphism, a service layer, CSV storage, reports, regression tests, and a documented final handoff.",
+          "summary": "Build a pantry request coordinator that turns saved food and hygiene requests into validated objects, managed state, and a clear daily report.",
           "cards": {
             "sketch0": {
-              "title": "Final OOP Capstone"
+              "title": "Project story"
             },
             "project": {
               "title": "Neighborhood Pantry Request Coordinator"
@@ -10244,45 +10094,6 @@ const messages: Record<string, any> = {
                   },
                   "models_food_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        # TODO: reuse PantryRequest setup and validate food_type.\n        pass\n\n    # TODO: implement category() and details().\n"
-                  },
-                  "models_hygiene_request_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "services_pantry_service_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -10294,45 +10105,6 @@ const messages: Record<string, any> = {
                   },
                   "models_food_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
-                  },
-                  "models_hygiene_request_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "services_pantry_service_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\nrequest = FoodRequest(household, priority, food_type)\nprint(request.summary())\n",
@@ -10380,42 +10152,6 @@ const messages: Record<string, any> = {
                   },
                   "models_hygiene_request_py": {
                     "content": "# Added in Milestone 2.\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "services_pantry_service_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -10430,42 +10166,6 @@ const messages: Record<string, any> = {
                   },
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "services_pantry_service_py": {
-                    "content": "# Added in Milestone 3.\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\n\nrequests = [\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n]\n\nfor request in requests:\n    print(request.summary())\n",
@@ -10508,41 +10208,8 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "# Added in Milestone 3.\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -10558,41 +10225,8 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "storage_request_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "data_requests_csv": {
-                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "tests_check_storage_py": {
-                    "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n",
@@ -10638,41 +10272,17 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
                     "content": "# Added in Milestone 4.\n"
                   },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "# Added in Milestone 4.\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -10688,41 +10298,17 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
-                  },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
                     "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
-                  "reports_summary_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
-                  },
-                  "tests_check_requests_py": {
-                    "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n",
@@ -10768,20 +10354,11 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "storage_request_storage_py": {
                     "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
@@ -10789,20 +10366,11 @@ const messages: Record<string, any> = {
                   "reports_summary_py": {
                     "content": "# Added in Milestone 5.\n"
                   },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
                   },
                   "tests_check_requests_py": {
                     "content": "# Added in Milestone 5.\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
@@ -10818,20 +10386,11 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "storage_request_storage_py": {
                     "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
@@ -10839,20 +10398,11 @@ const messages: Record<string, any> = {
                   "reports_summary_py": {
                     "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
                   },
                   "tests_check_requests_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
-                  "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n",
@@ -10880,12 +10430,12 @@ const messages: Record<string, any> = {
               },
               "project_pantry_request_step_6_final_handoff": {
                 "title": "Milestone 6: Deliver the final pantry coordinator",
-                "prompt": "Continue from the exact Milestone 5 workspace. Finish only the integration handoff. In `main.py`, call both existing regression check functions without printing extra test output; create `PantryService(load_requests(\"data/requests.csv\"))`; fulfill the Rivera and Chen requests through `service.mark_fulfilled()`; add a fulfilled `HygieneRequest(\"Davis family\", \"medium\", 2, True)`; print the deterministic `build_summary(service.requests)` report; and then print exactly `PANTRY REQUEST COORDINATOR READY`. In `README.md`, explain the responsibilities of models, services, storage, reports, tests, and main.py; mention validated properties, ABC/abstract methods, inheritance/super, overriding, and polymorphism; and include the run command `python main.py`. Do not add `__all__`, `inspect.isabstract`, or rewrite earlier layers.",
-                "hint": "This is a handoff milestone: orchestrate existing behavior and document the responsibility boundaries rather than changing them.",
+                "prompt": "Continue from the Milestone 5 workspace and deliver the application the pantry team will actually run. In `main.py`, create `PantryService(load_requests(\"data/requests.csv\"))`; fulfill the Rivera and Chen requests through `service.mark_fulfilled()`; add a fulfilled `HygieneRequest(\"Davis family\", \"medium\", 2, True)`; print the deterministic `build_summary(service.requests)` report; and then print exactly `PANTRY REQUEST COORDINATOR READY`. Keep the regression files in `tests/`, but do not import test modules into production `main.py`. In `README.md`, explain the responsibilities of models, services, storage, reports, tests, and main.py; mention validated properties, ABC/abstract methods, inheritance/super, overriding, and polymorphism; and include the run command `python main.py`.",
+                "hint": "The final runner should wire together production layers only. Regression files protect the project separately.",
                 "help": {
-                  "concept": "The final deliverable proves the full architecture runs and leaves a concise explanation for the next developer.",
-                  "hint_1": "Run both regression-check functions before the final workflow.",
-                  "hint_2": "The final report should end with OPEN: 0 | FULFILLED: 4."
+                  "concept": "A production entry point orchestrates application code; test modules stay independent so they can verify the application without becoming a runtime dependency.",
+                  "hint_1": "Load the CSV into PantryService, make the required state changes, then pass `service.requests` to `build_summary()`.",
+                  "hint_2": "Document each folder's responsibility and the exact `python main.py` run command in README.md."
                 },
                 "starterCode": "from reports.summary import build_summary\nfrom storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nprint(build_summary(requests))\n",
                 "starterFiles": {
@@ -10901,20 +10451,11 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "storage_request_storage_py": {
                     "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
@@ -10922,17 +10463,11 @@ const messages: Record<string, any> = {
                   "reports_summary_py": {
                     "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
                   },
                   "tests_check_requests_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
-                  },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "README_md": {
                     "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
@@ -10940,7 +10475,7 @@ const messages: Record<string, any> = {
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\nfrom tests.check_storage import run_checks as run_storage_checks\n\nrun_storage_checks()\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n"
+                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n"
                   },
                   "models_pantry_request_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
@@ -10951,20 +10486,11 @@ const messages: Record<string, any> = {
                   "models_hygiene_request_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "services_pantry_service_py": {
                     "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
-                  "services___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "storage_request_storage_py": {
                     "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
-                  },
-                  "storage___init___py": {
-                    "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
@@ -10972,30 +10498,24 @@ const messages: Record<string, any> = {
                   "reports_summary_py": {
                     "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
-                  "reports___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "tests_check_storage_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
                   },
                   "tests_check_requests_py": {
                     "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
                   },
-                  "tests___init___py": {
-                    "content": "# Package marker for imports.\n"
-                  },
                   "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\n## Architecture\n\n- `models/` owns validated request state, the abstract `PantryRequest` contract,\n  inheritance, and request-specific behavior.\n- `services/` owns the mutable request collection and coordinates changes\n  through each request object's public methods.\n- `storage/` translates CSV rows into validated `FoodRequest` and\n  `HygieneRequest` objects.\n- `reports/` builds deterministic output from the shared request interface\n  without branching on concrete request types.\n- `tests/` protects storage, validation, abstraction, polymorphism, service\n  state changes, and report behavior.\n- `main.py` stays thin and orchestrates the completed layers.\n\n## OOP retrieval\n\nThe project uses validated `@property` properties for shared state, `ABC` and\n`@abstractmethod` for the base contract, inheritance with `super()`, overriding\nthrough `category()` and `details()`, and polymorphism through mixed request\ncollections.\n\n## Run\n\n```bash\npython main.py\n```\n\nA successful final run ends with:\n\n`PANTRY REQUEST COORDINATOR READY`\n"
+                    "content": "# Neighborhood Pantry Request Coordinator\n\n## Architecture\n\n- `models/` owns validated request state, the abstract `PantryRequest` contract,\n  inheritance, and request-specific behavior.\n- `services/` owns the mutable request collection and coordinates changes\n  through each request object's public methods.\n- `storage/` translates CSV rows into validated `FoodRequest` and\n  `HygieneRequest` objects.\n- `reports/` builds deterministic output from the shared request interface\n  without branching on concrete request types.\n- `tests/` protects storage, validation, abstraction, polymorphism, service\n  state changes, and report behavior.\n- `main.py` stays thin and orchestrates the completed layers.\n\n## OOP design\n\nThe project uses validated `@property` properties for shared state, `ABC` and\n`@abstractmethod` for the base contract, inheritance with `super()`, overriding\nthrough `category()` and `details()`, and polymorphism through mixed request\ncollections.\n\n## Run\n\n```bash\npython main.py\n```\n\nA successful final run ends with:\n\n`PANTRY REQUEST COORDINATOR READY`\n"
                   }
                 },
-                "solutionCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\nfrom tests.check_storage import run_checks as run_storage_checks\n\nrun_storage_checks()\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n",
+                "solutionCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n",
                 "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
                 "expectedOutput": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 0 | FULFILLED: 4\nPANTRY REQUEST COORDINATOR READY",
                 "sourceChecks": {
                   "0": {
-                    "message": "Run both regression checks, execute the required final state changes, and print the readiness confirmation."
+                    "message": "Keep production `main.py` independent of test modules, then load the CSV through PantryService, apply the required state changes, print the final report, and print the readiness line."
                   },
                   "1": {
                     "message": "Document the responsibility of every production/test layer."
@@ -11754,10 +11274,10 @@ const messages: Record<string, any> = {
         },
         "module-8-account-tracker-project": {
           "label": "Module 8 Account Tracker Project",
-          "summary": "Build a cumulative two-file Account tracker that retrieves class files, class and instance state, instance methods, validation, a validated property, and model-vs-main responsibility.",
+          "summary": "Build Riverside Club's account tracker so each member balance has one reliable model, safe update rules, and a clear summary.",
           "cards": {
             "sketch0": {
-              "title": "Project overview"
+              "title": "Project story"
             },
             "project": {
               "title": "Account Tracker Build"
@@ -12576,10 +12096,10 @@ const messages: Record<string, any> = {
         },
         "module-9-greenhouse-sensor-project": {
           "label": "Module 9 Greenhouse Sensor Project",
-          "summary": "Build one cumulative greenhouse monitor that retrieves the Module 9 skills: an abstract Sensor contract, inherited setup, specialized readings, branch-free polymorphism, and collection ownership.",
+          "summary": "Build a greenhouse monitor that lets temperature and humidity sensors share one contract and one reporting flow.",
           "cards": {
             "sketch0": {
-              "title": "Project brief"
+              "title": "Project story"
             },
             "project": {
               "title": "Greenhouse Sensor Monitor"
@@ -12615,20 +12135,11 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\n# Create the TemperatureSensor and print its reading.\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "# Make Sensor an abstract base class with a required reading() method.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        # Reuse Sensor's zone setup, then store celsius.\n        pass\n\n    def reading(self):\n        # Return: Temperature: <zone> = <celsius> C\n        pass\n"
-                  },
-                  "models_humidity_sensor_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n",
@@ -12636,20 +12147,11 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
-                  },
-                  "models_humidity_sensor_py": {
-                    "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -12702,9 +12204,6 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -12713,18 +12212,12 @@ const messages: Record<string, any> = {
                   },
                   "models_humidity_sensor_py": {
                     "content": "# Added in Milestone 2.\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n",
                 "solutionFiles": {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
@@ -12734,9 +12227,6 @@ const messages: Record<string, any> = {
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -12783,9 +12273,6 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -12794,9 +12281,6 @@ const messages: Record<string, any> = {
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
@@ -12804,9 +12288,6 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -12815,9 +12296,6 @@ const messages: Record<string, any> = {
                   },
                   "models_humidity_sensor_py": {
                     "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
-                  },
-                  "models_greenhouse_monitor_py": {
-                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
@@ -12852,9 +12330,6 @@ const messages: Record<string, any> = {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
-                  },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
@@ -12872,9 +12347,6 @@ const messages: Record<string, any> = {
                 "solutionFiles": {
                   "main_py": {
                     "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(temperature_zone, celsius))\nmonitor.add_sensor(HumiditySensor(humidity_zone, percent))\nmonitor.print_report()\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
                     "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
@@ -49642,8 +49114,8 @@ const messages: Record<string, any> = {
         },
         "module-10-oop-quality-project": {
           "module-10-oop-quality-project-sketch0": {
-            "title": "Project brief: protect one growing shelter codebase",
-            "bodyMarkdown": "This project is a **quality pass**, not another sequence of isolated implementation drills.\n\nYou will work in one animal-shelter codebase and accumulate a real regression suite:\n\n```text\nmain.py\nmodels/\n  shelter_pet.py\n  foster_pet.py\nservices/\n  reporting.py\nstorage/\n  pet_loader.py\ndata/\n  pets.csv\ntests/\n  check_model.py\n  check_reporting.py\n  check_loader.py\n  check_adoption.py\n  check_summary.py\n  check_regression.py\nREADME.md\n```\n\nThe production code already contains a few intentional weaknesses that are exercised only when their milestone arrives.\n\nYou will:\n\n1. write model and inheritance regression assertions;\n2. refactor list-wide reporting into a service and test a mixed collection;\n3. debug broken loader imports and test the CSV-to-object boundary;\n4. reproduce and repair an adoption state bug;\n5. build and test a cumulative shelter summary;\n6. write a final end-to-end regression check and document responsibilities.\n\nEvery milestone is cumulative. The **entire previous solution workspace becomes the next starter workspace**, and every earlier test file remains present and passing."
+            "title": "Project story: make the shelter app safe for adoption weekend",
+            "bodyMarkdown": "Harbor Street Animal Shelter is preparing for a busy adoption weekend. Its small Python intake app worked when the team handled only a few animals, but recent changes exposed several regressions: foster pets need specialized labels, collection reporting has started to spread across the runner, CSV intake can break on bad imports, and `mark_adopted()` can claim success without actually changing the pet's state.\n\nThe shelter does not need a rewrite. It needs confidence that the code it already depends on will keep working.\n\nYour job is to **stabilize the application one failure at a time**, using tests to prove each repair.\n\nThe workspace grows with the problem:\n\n```text\nMilestone 1\nmain.py\nmodels/\n  shelter_pet.py\n  foster_pet.py\ntests/\n  check_model.py\n\nMilestone 2 adds\nservices/reporting.py\ntests/check_reporting.py\n\nMilestone 3 adds\nstorage/pet_loader.py\ndata/pets.csv\ntests/check_loader.py\n\nMilestone 4 adds\ntests/check_adoption.py\n\nMilestone 5 adds\ntests/check_summary.py\n\nMilestone 6 adds\ntests/check_regression.py\nREADME.md\n```\n\nBy the end, the shelter has model, reporting, storage, state-transition, summary, and end-to-end regression coverage—and each file appears only when the project first needs it."
           }
         },
         "refactoring-oop-services": {
@@ -49708,8 +49180,8 @@ const messages: Record<string, any> = {
         },
         "module-11-final-oop-capstone": {
           "module-11-final-oop-capstone-sketch-1": {
-            "title": "Capstone brief: integrate the OOP skills you already practiced",
-            "bodyMarkdown": "The neighborhood pantry needs one coordinator for food and hygiene requests.\n\nThis is a **retrieval capstone**. Important syntax is not introduced for the first time here. You will combine skills already practiced in Modules 8–10:\n\n- validated object state with `@property`\n- inheritance and `super()`\n- `ABC` and `@abstractmethod`\n- polymorphic mixed collections\n- service ownership and thin `main.py`\n- CSV-to-object storage\n- executable regression tests\n- behavior-preserving integration and documentation\n\nThe final architecture is:\n\n```text\nmain.py\nmodels/\n  pantry_request.py\n  food_request.py\n  hygiene_request.py\n  __init__.py\nservices/\n  pantry_service.py\n  __init__.py\nstorage/\n  request_storage.py\n  __init__.py\ndata/\n  requests.csv\nreports/\n  summary.py\n  __init__.py\ntests/\n  check_storage.py\n  check_requests.py\n  __init__.py\nREADME.md\n```\n\nTwo unnecessary capstone-only requirements are deliberately absent:\n\n- no `inspect.isabstract`\n- no `__all__` requirement\n\nAbstraction is proved by the actual `ABC`/`@abstractmethod` contract and by the fact that the abstract base cannot be instantiated.\n\nEvery milestone is cumulative: the complete solution workspace from one milestone becomes the exact starter workspace for the next."
+            "title": "Capstone story: give pantry volunteers one dependable request system",
+            "bodyMarkdown": "Saturday mornings at the neighborhood pantry begin before the doors open. Volunteers unpack food, arrange hygiene supplies, and review requests from local families. A food request and a hygiene request have different details, but the team still needs one dependable way to validate them, track whether each request is fulfilled, reload saved requests, and hand the next shift a clear status report.\n\nHandwritten notes and a shared spreadsheet are no longer enough. The pantry needs a small application with clear responsibilities instead of one growing script.\n\nYour job is to build the **Neighborhood Pantry Request Coordinator** in layers.\n\nThe workspace grows as the application gains a new responsibility:\n\n```text\nMilestone 1\nmain.py\nmodels/\n  pantry_request.py\n  food_request.py\n\nMilestone 2 adds\nmodels/\n  hygiene_request.py\n\nMilestone 3 adds\nservices/\n  pantry_service.py\n\nMilestone 4 adds\nstorage/\n  request_storage.py\ndata/\n  requests.csv\ntests/\n  check_storage.py\n\nMilestone 5 adds\nreports/\n  summary.py\ntests/\n  check_requests.py\n\nMilestone 6 adds\nREADME.md\n```\n\nYou will first make the request objects trustworthy, then give a service ownership of the queue, add CSV storage, build a polymorphic daily report, protect the design with regression tests, and finish with a clean handoff for the pantry team.\n\nFiles appear when the application needs them—not before."
           }
         }
       },
@@ -49760,8 +49232,8 @@ const messages: Record<string, any> = {
         },
         "module-8-account-tracker-project": {
           "module-8-account-tracker-project-sketch-0": {
-            "title": "Build one Account model across four milestones",
-            "bodyMarkdown": "A small after-school club needs a simple account tracker. This project does not introduce a new OOP category. It asks you to combine the ideas you already practiced in Module 8.\n\nYou will carry the **same two-file workspace** forward through four milestones:\n\n1. Create the `Account` model file and import it from `main.py`.\n2. Add shared club state plus per-account owner and balance state.\n3. Add validated `deposit()` and `withdraw()` instance methods.\n4. Protect direct balance assignment with a validated property and finish a reusable `summary()` method.\n\n`models/account.py` owns one account's state and behavior. `main.py` creates objects, supplies inputs, calls public behavior, and displays returned results.\n\nEvery milestone starts from the exact workspace produced by the previous milestone."
+            "title": "Project story: replace the club's fragile balance notes",
+            "bodyMarkdown": "Riverside Club runs weekend workshops for local students. The club treasurer has been tracking member balances in a shared note, and small mistakes are starting to cause real problems: one update can overwrite another, negative balances can slip in, and nobody is sure which part of the program should be responsible for changing an account.\n\nYour job is to replace that fragile process with a small **Account Tracker**.\n\nThe application has two clear responsibilities:\n\n- `models/account.py` owns an account's state and the rules that keep a balance valid.\n- `main.py` handles input/output and calls the model's public behavior.\n\nYou will improve the same tracker across four milestones:\n\n1. Create the model boundary and use it from `main.py`.\n2. Add shared club information plus each account's owner and balance.\n3. Add safe deposit and withdrawal behavior.\n4. Protect direct balance assignment and finish a reusable account summary.\n\nThe code you finish in one milestone stays in the project. Later milestones build on it instead of starting over."
           }
         },
         "thinking-in-objects": {
@@ -49806,8 +49278,8 @@ const messages: Record<string, any> = {
         },
         "module-9-greenhouse-sensor-project": {
           "module-9-greenhouse-sensor-project-sketch-0": {
-            "title": "Project brief: one cumulative greenhouse monitor",
-            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones.\n\nThis project is a **retrieval project**. It does not introduce another OOP taxonomy. You will apply the Module 9 skills to one codebase that grows without resetting completed work.\n\nThe final file tree exists from the beginning:\n\n```text\nmain.py\nmodels/\n  __init__.py\n  sensor.py\n  temperature_sensor.py\n  humidity_sensor.py\n  greenhouse_monitor.py\n```\n\nThe milestones are cumulative:\n\n1. Build the abstract `Sensor` contract and a concrete `TemperatureSensor`.\n2. Add `HumiditySensor` without duplicating the parent setup.\n3. Put both concrete sensors in one mixed collection and use one shared `reading()` call.\n4. Move collection ownership into `GreenhouseMonitor` while keeping the same polymorphic contract.\n\nAt every handoff, the complete previous solution becomes the next starter. Finished code stays finished."
+            "title": "Project story: make new greenhouse sensors plug in cleanly",
+            "bodyMarkdown": "Sunrise Community Greenhouse monitors several growing zones. The first script handled temperature sensors only, but the staff is now adding humidity sensors. If every sensor type needs its own special branch, the monitoring code will become harder to extend every time new hardware arrives.\n\nYour job is to build a **Greenhouse Sensor Monitor** around one shared sensor contract.\n\nThe design should let the rest of the program work with a sensor through the same `reading()` behavior, whether the object measures temperature, humidity, or a future sensor type.\n\nThe workspace grows only when the next responsibility appears:\n\n```text\nMilestone 1\nmain.py\nmodels/\n  sensor.py\n  temperature_sensor.py\n\nMilestone 2 adds\nmodels/\n  humidity_sensor.py\n\nMilestone 4 adds\nmodels/\n  greenhouse_monitor.py\n```\n\nYou will:\n\n1. define the abstract `Sensor` contract and the first concrete temperature sensor;\n2. add a humidity sensor that reuses the parent setup;\n3. process mixed sensor objects through one branch-free loop;\n4. give `GreenhouseMonitor` ownership of the sensor collection and reporting flow.\n\nFinished files carry forward. Future files do not appear until the milestone that actually needs them."
           }
         },
         "overriding-and-specialization": {
