@@ -38,16 +38,13 @@
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `schedule` as a list containing the required tuple record."
-                },
-                "1": {
-                  "message": "Loop with `for name, room in schedule:` so each tuple is unpacked."
+                  "message": "Use a `for` loop over `schedule` as the prompt requests."
                 }
               }
             },
             "exercise1": {
               "title": "Expand the ordered schedule",
-              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line.",
+              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line. For this step, add the second and third workshop records to `schedule` using `append()`. Then process the completed schedule with a `for` loop over `schedule`.",
               "hint": "Read the four input values first, append two tuple records, then let the existing loop print the ordered list.",
               "help": {
                 "concept": "A list preserves workshop order, and `.append()` can add new fixed tuple records without replacing the existing schedule.",
@@ -58,19 +55,19 @@
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the second workshop as `(name2, room2)`."
+                  "message": "Append the second workshop with `schedule.append((name2, room2))`."
                 },
                 "1": {
-                  "message": "Append the third workshop as `(name3, room3)`."
+                  "message": "Append the third workshop with `schedule.append((name3, room3))`."
                 },
                 "2": {
-                  "message": "Loop through `schedule` and unpack each tuple into `name` and `room`."
+                  "message": "Keep a `for` loop over `schedule` so the finished schedule is processed in order."
                 }
               }
             },
             "exercise2": {
               "title": "Build a room lookup",
-              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop with `room_lookup[name] = room`. Then read one workshop name into `requested` and print its room using `room_lookup[requested]`.",
+              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop name as a key in `room_lookup` with its room as the corresponding value. Then read one workshop name into `requested` and look up that workshop in `room_lookup` and print the stored room.",
               "hint": "Build the dictionary from the tuple records instead of writing the room mappings by hand.",
               "help": {
                 "concept": "The ordered list remains useful for the board, while a dictionary gives direct lookup by workshop name.",
@@ -81,13 +78,10 @@
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_lookup` dictionary before filling it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store each current tuple with `room_lookup[name] = room` inside a loop."
-                },
-                "2": {
-                  "message": "Use `room_lookup[requested]` for the requested workshop instead of hard-coding a room."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -104,19 +98,10 @@
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n\nroom_sessions = {}\nfor name, room in schedule:\n    if room in room_sessions:\n        room_sessions[room].append(name)\n    else:\n        room_sessions[room] = [name]\n\nroom_query = input()\nprint(room_sessions[room_query])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_sessions` dictionary before grouping workshops."
+                  "message": "Use a `for` loop over `schedule` to process each workshop record, as the prompt requests."
                 },
                 "1": {
-                  "message": "Check whether the current `room` key already exists in `room_sessions`."
-                },
-                "2": {
-                  "message": "Append the workshop name to the existing list for that room."
-                },
-                "3": {
-                  "message": "Create a one-item list for a room the first time it appears."
-                },
-                "4": {
-                  "message": "Use `room_sessions[room_query]` to retrieve the requested room's workshop list."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }

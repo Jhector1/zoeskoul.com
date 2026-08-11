@@ -143,14 +143,9 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
+            "type": "uses_for_loop",
+            "iterable": "schedule",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -165,14 +160,9 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bschedule\\s*=\\s*\\[\\s*\\(\\s*['\\\"]Python Basics['\\\"]\\s*,\\s*['\\\"]Room A['\\\"]\\s*\\)\\s*\\]",
+          "type": "uses_for_loop",
+          "iterable": "schedule",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -246,17 +236,17 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+            "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+            "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+            "type": "uses_for_loop",
+            "iterable": "schedule",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
           }
         ]
@@ -273,17 +263,17 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
+          "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name2\\s*,\\s*room2\\s*\\)\\s*\\)",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bschedule\\.append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
+          "pattern": "\\bschedule\\s*\\.\\s*append\\s*\\(\\s*\\(\\s*name3\\s*,\\s*room3\\s*\\)\\s*\\)",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.1.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+name\\s*,\\s*room\\s+in\\s+schedule\\s*:",
+          "type": "uses_for_loop",
+          "iterable": "schedule",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.sourceChecks.2.message"
         }
       ]
@@ -358,18 +348,13 @@
         "sourceChecks": [
           {
             "type": "source_regex",
-            "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+            "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
             "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
           }
         ]
       },
@@ -385,18 +370,13 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\broom_lookup\\s*=\\s*\\{\\s*\\}",
+          "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\broom_lookup\\s*\\[\\s*name\\s*\\]\\s*=\\s*room\\b",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
           "pattern": "\\broom_lookup\\s*\\[\\s*requested\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.2.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.sourceChecks.1.message"
         }
       ]
     },
@@ -469,29 +449,14 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+            "type": "uses_for_loop",
+            "iterable": "schedule",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
-            "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
-          },
-          {
-            "type": "source_regex",
             "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
           }
         ]
       },
@@ -506,29 +471,14 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\broom_sessions\\s*=\\s*\\{\\s*\\}",
+          "type": "uses_for_loop",
+          "iterable": "schedule",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
-          "pattern": "\\bif\\s+room\\s+in\\s+room_sessions\\s*:",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\.append\\s*\\(\\s*name\\s*\\)",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\broom_sessions\\s*\\[\\s*room\\s*\\]\\s*=\\s*\\[\\s*name\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.3.message"
-        },
-        {
-          "type": "source_regex",
           "pattern": "\\broom_sessions\\s*\\[\\s*room_query\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.4.message"
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.sourceChecks.1.message"
         }
       ]
     }

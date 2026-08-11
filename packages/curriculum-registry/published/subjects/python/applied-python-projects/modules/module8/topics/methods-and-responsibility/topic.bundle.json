@@ -65,39 +65,19 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch2.title",
-      "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-methods-and-responsibility-sketch2",
-        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.title",
-        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.prompt",
-        "exerciseKey": "try-methods-and-responsibility-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "mc-methods-and-responsibility-class-jobs",
           "sc-methods-and-responsibility-main-role",
-          "fb-methods-and-responsibility-call-name",
-          "dr-methods-and-responsibility-flow"
+          "fb-methods-and-responsibility-call-name"
         ],
         "allowReveal": true,
         "preferKind": null,
@@ -117,12 +97,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-1.title",
       "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-2.title",
-      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -212,8 +186,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
@@ -223,8 +197,8 @@
               "Fit",
               10000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -239,8 +213,8 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message"
           },
           {
             "type": "method_returns",
@@ -258,25 +232,87 @@
             "methodArgKinds": [],
             "expected": 10040,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Car",
+            "constructorArgs": [
+              "Honda",
+              "Fit",
+              10000
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "miles",
+            "expected": 10040,
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Car",
+            "constructorArgs": [
+              "Mazda",
+              "3",
+              5
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  7
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "miles",
+            "expected": 12,
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.5.message"
           },
           {
             "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message",
-            "path": "main.py"
+            "min": 2,
+            "path": "main.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.6.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "10040\n",
+            "stdout": "10040\n10040\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-methods-and-responsibility-sketch1",
@@ -364,8 +400,19 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message"
+          },
+          {
+            "type": "constructible",
+            "className": "Car",
+            "constructorArgs": [
+              "Toyota",
+              "Prius",
+              62
+            ],
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message"
           },
           {
             "type": "method_returns",
@@ -381,14 +428,31 @@
             "methodArgKinds": [],
             "expected": "Toyota Prius - 62 miles",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "Car",
+            "constructorArgs": [
+              "Ford",
+              "Focus",
+              12345
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ford Focus - 12345 miles",
+            "expectedKind": "value",
+            "path": "models/car.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.3.message"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message",
-            "path": "main.py"
+            "path": "main.py",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.4.message"
           }
         ],
         "tests": [
@@ -398,157 +462,24 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
-    },
-    {
-      "id": "try-methods-and-responsibility-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
-        "starterFiles": [
+        "semanticFirst": true,
+        "sourceChecks": [
           {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.sourceChecks.0.message"
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.solutionFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "constructible",
-            "className": "Car",
-            "constructorArgs": [
-              "Toyota",
-              "RAV4",
-              15000
-            ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.0.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "method_returns",
-            "className": "Car",
-            "constructorArgs": [
-              "Toyota",
-              "RAV4",
-              15000
-            ],
-            "constructorArgKinds": [],
-            "methodName": "is_valid_miles",
-            "methodArgs": [
-              120
-            ],
-            "methodArgKinds": [],
-            "expected": true,
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.1.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "method_returns",
-            "className": "Car",
-            "constructorArgs": [
-              "Toyota",
-              "RAV4",
-              15000
-            ],
-            "constructorArgKinds": [],
-            "methodName": "is_valid_miles",
-            "methodArgs": [
-              -5
-            ],
-            "methodArgKinds": [],
-            "expected": false,
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.2.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.3.message",
-            "path": "main.py"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "True\nFalse\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "mc-methods-and-responsibility-class-jobs",
@@ -566,8 +497,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       }
     },
@@ -585,7 +515,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
@@ -597,29 +527,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "@staticmethod"
-      }
-    },
-    {
-      "id": "dr-methods-and-responsibility-flow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.dr-methods-and-responsibility-flow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "value": "10040"
       }
     }
   ]

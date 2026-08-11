@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { buildDraftPreviewReviewModule } from "@/lib/dev/curriculumDrafts/preview";
+import DraftPreviewQaBar from "@/components/dev/curriculum-drafts/DraftPreviewQaBar";
 import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 
 export const runtime = "nodejs";
@@ -1090,6 +1091,7 @@ export default async function Page({
         resolvedSearchParams,
         "progressive",
     );
+    const draftQaMode = searchParamIsTrue(resolvedSearchParams, "draftQa");
 
     const isSqlClone =
         resolvedParams.subjectSlug === "sql" ||
@@ -1184,6 +1186,8 @@ export default async function Page({
             <ReviewModulePageClient
                 canUnlockAll={Boolean(draftPreviewModule) || generatedDraftPreview || !progressiveLockMode}
                 mod={selectedModule}
+                previewMode={draftQaMode ? "draftQa" : "standard"}
+                supplementalHeader={draftQaMode ? <DraftPreviewQaBar /> : null}
             />
         </>
     );

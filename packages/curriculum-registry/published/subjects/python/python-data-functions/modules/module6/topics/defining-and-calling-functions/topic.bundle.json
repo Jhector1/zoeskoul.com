@@ -260,11 +260,6 @@
             "type": "source_regex",
             "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
           }
         ]
       },
@@ -278,11 +273,6 @@
           "type": "source_regex",
           "pattern": "\\bdef\\s+show_message\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*[\\'\\\"]Functions are reusable![\\'\\\"]\\s*\\)",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\nshow_message\\s*\\(\\s*\\)\\s*$",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -450,11 +440,6 @@
             "type": "source_regex",
             "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -468,11 +453,6 @@
           "type": "source_regex",
           "pattern": "\\bdef\\s+show_colors\\s*\\(\\s*\\)\\s*:\\s*\\n[ \\t]+colors\\s*=\\s*\\[\\s*[\\'\\\"]red[\\'\\\"]\\s*,\\s*[\\'\\\"]blue[\\'\\\"]\\s*,\\s*[\\'\\\"]green[\\'\\\"]\\s*\\]\\s*\\n[ \\t]+for\\s+color\\s+in\\s+colors\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*color\\s*\\)",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\nshow_colors\\s*\\(\\s*\\)\\s*$",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.2.message"
         }
       ]
     }

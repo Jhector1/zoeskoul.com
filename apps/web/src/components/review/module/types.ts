@@ -10,6 +10,7 @@ export type ReviewModulePageProps = {
     navigationMode?: FlowNavigationConfig;
     routePrefix?: string | null;
     supplementalHeader?: ReactNode;
+    previewMode?: "standard" | "draftQa";
     tutoringSession?: {
         id: string;
         canEdit: boolean;

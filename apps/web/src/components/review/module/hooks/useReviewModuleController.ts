@@ -7,8 +7,9 @@ import {
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
 } from "../navigation/reviewRouteTransition";
+import { buildDraftQaNavigationSearch } from "../navigation/draftQaNavigationSearch";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
-import {useParams, usePathname} from "next/navigation";
+import {useParams, usePathname, useSearchParams} from "next/navigation";
 import {useRouter} from "@/i18n/navigation";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
@@ -324,6 +325,7 @@ export function useReviewModuleController({
                                               navigationMode,
                                               routePrefix = null,
                                               tutoringSession = null,
+                                              previewMode = "standard",
                                           }: ReviewModulePageProps) {
     const params = useParams<{
         locale: string;
@@ -338,6 +340,9 @@ export function useReviewModuleController({
     }>();
     const router = useRouter();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const draftQaMode = previewMode === "draftQa";
+    const draftQaBaseNavigationSearch = draftQaMode ? searchParams.toString() : "";
     const locale = params?.locale ?? "en";
     const catalogSlug = params?.catalogSlug ?? null;
     const subjectSlug = params?.subjectSlug ?? "";
@@ -406,7 +411,7 @@ export function useReviewModuleController({
     const buildRoutePathForCurrentSurface = useCallback(
         (target: ReviewResolvedRouteTarget) => {
             if (routeFamilyRef.current === "devReviewClone") {
-                return (
+                const path = (
                     `/${encodeURIComponent(locale)}` +
                     `/dev/e2e/review-module-clone` +
                     `/${encodeURIComponent(subjectSlug)}` +
@@ -417,6 +422,31 @@ export function useReviewModuleController({
                     `/${encodeURIComponent(target.targetKind)}` +
                     `/${encodeURIComponent(target.targetSlug)}`
                 );
+
+                const draftQaDestinationTopic = (
+                    Array.isArray(mod?.topics) ? mod.topics : []
+                ).find((topic) => {
+                    const record = topic as any;
+                    return (
+                        record.id === target.topicId ||
+                        record.slug === target.topicSlug ||
+                        record.slug === target.topicId
+                    );
+                });
+
+                const draftQaNavigationSearch = buildDraftQaNavigationSearch({
+                    enabled: draftQaMode,
+                    baseSearch: draftQaBaseNavigationSearch,
+                    destinationTopicDir:
+                        typeof (draftQaDestinationTopic as any)?.draftTopicDir === "string"
+                            ? (draftQaDestinationTopic as any).draftTopicDir
+                            : null,
+                    fallbackTopicSlug: target.topicSlug,
+                });
+
+                return draftQaNavigationSearch
+                    ? `${path}?${draftQaNavigationSearch}`
+                    : path;
             }
 
             const standardPath = buildReviewRoutePath({
@@ -441,6 +471,9 @@ export function useReviewModuleController({
         },
         [
             catalogSlug,
+            draftQaBaseNavigationSearch,
+            draftQaMode,
+            mod,
             locale,
             moduleSlug,
             routePrefix,
@@ -478,9 +511,10 @@ export function useReviewModuleController({
         locale,
         firstTopicId,
         endpoint: tutoringProgressEndpoint,
-        gamificationEnabled: !isTutoringSession,
-        readOnly: !workspaceCapabilities.canMutateProgress,
+        gamificationEnabled: !draftQaMode && !isTutoringSession,
+        readOnly: draftQaMode || !workspaceCapabilities.canMutateProgress,
         followRemoteNavigation: tutoringSession?.followTutor !== false,
+        remoteSyncEnabled: !draftQaMode,
     });
     const setProgress = useCallback<React.Dispatch<React.SetStateAction<ReviewProgressState>>>(
         (update) => {
@@ -574,6 +608,22 @@ export function useReviewModuleController({
         (href: string | null = null, navigationGeneration = navigationGenerationRef.current) => {
             if (!href) return false;
 
+            // Draft QA is an authoring/test surface, not learner navigation.
+            // Publish targets immediately and let the editor bind in place.
+            // Do not put the lesson/editor behind the coordinated transition
+            // shield; a missed readiness signal would otherwise leave QA stuck
+            // on "Loading editor..." forever.
+            if (draftQaMode) {
+                clearRouteTransitionFrame();
+                routeTransitionRevisionRef.current += 1;
+                routeTransitionHrefRef.current = null;
+                routeTransitionRevealedHrefRef.current = null;
+                setRouteTransitionExerciseReady(null);
+                setRouteTransitionEditorReady(null);
+                setIsRouteTransitioning(false);
+                return false;
+            }
+
             const browserHref =
                 typeof window === "undefined"
                     ? null
@@ -603,7 +653,7 @@ export function useReviewModuleController({
             setIsRouteTransitioning(true);
             return true;
         },
-        [clearRouteTransitionFrame],
+        [clearRouteTransitionFrame, draftQaMode],
     );
 
     const cancelRouteTransition = useCallback(() => {
@@ -1079,7 +1129,7 @@ export function useReviewModuleController({
     const subjectFinish = useSubjectFinish({
         subjectSlug,
         moduleSlug,
-        enabled: !isTutoringSession && Boolean(subjectSlug && moduleSlug),
+        enabled: !draftQaMode && !isTutoringSession && Boolean(subjectSlug && moduleSlug),
         refreshKey:
             progressHydrated &&
             `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String(
@@ -1151,15 +1201,15 @@ export function useReviewModuleController({
         subjectSlug,
         moduleSlug,
         catalogSlug,
-        enabled: !isTutoringSession,
+        enabled: !draftQaMode && !isTutoringSession,
     });
 
     const canGoNextModule =
         navigationUnlockAll ||
         (moduleComplete || Boolean((progress as any)?.moduleCompleted));
 
-    const navLoading = !isTutoringSession && nav === undefined;
-    const navError = !isTutoringSession && nav === null;
+    const navLoading = !draftQaMode && !isTutoringSession && nav === undefined;
+    const navError = !draftQaMode && !isTutoringSession && nav === null;
     const [courseModulesOpen, setCourseModulesOpen] = useState(false);
 
     useEffect(() => {
@@ -1748,7 +1798,9 @@ export function useReviewModuleController({
         [topics, progress],
     );
 
-    const {summary: gamificationSummary} = useGamificationSummary();
+    const {summary: gamificationSummary} = useGamificationSummary({
+        enabled: !draftQaMode,
+    });
 
     const headerGamification = useMemo<HeaderGamificationVm | null>(() => {
         if (!gamificationSummary) return null;
@@ -2814,16 +2866,18 @@ export function useReviewModuleController({
         exerciseReady: transitionExerciseReady,
         editorReady: transitionEditorReady,
     });
+    const visibleRouteTransitioning =
+        !draftQaMode && isRouteTransitioning;
     const destinationTransitionPresentation =
         resolveReviewDestinationTransitionPresentation({
-            isTransitioning: isRouteTransitioning,
+            isTransitioning: visibleRouteTransitioning,
             destinationIdentity: pendingTransitionHref,
             destinationPublished,
             destinationReady,
         });
 
     useEffect(() => {
-        if (!isRouteTransitioning) return;
+        if (draftQaMode || !isRouteTransitioning) return;
 
         const pendingHref = routeTransitionHrefRef.current;
         if (!pendingHref || !routeTarget) return;
@@ -2925,6 +2979,7 @@ export function useReviewModuleController({
     }, [
         buildRoutePathForCurrentSurface,
         clearRouteTransitionFrame,
+        draftQaMode,
         hasExpectedExerciseSurface,
         isRouteTransitioning,
         pendingExerciseBinding,
@@ -2984,14 +3039,20 @@ export function useReviewModuleController({
         },
 
         layout: {
-            ariaBusy: showSkeleton || isRouteTransitioning || isModuleContinuePending,
+            ariaBusy:
+                showSkeleton ||
+                visibleRouteTransitioning ||
+                (!draftQaMode && isModuleContinuePending),
             reduceMotion,
             showMask: false,
             showSkeleton,
-            isNavigating: isRouteTransitioning || isModuleContinuePending,
+            isNavigating:
+                visibleRouteTransitioning ||
+                (!draftQaMode && isModuleContinuePending),
             navigationLabel: resolveReviewTransitionLabel({
-                isRouteTransitioning,
-                isModuleContinuePending,
+                isRouteTransitioning: visibleRouteTransitioning,
+                isModuleContinuePending:
+                    !draftQaMode && isModuleContinuePending,
                 saveStatus,
             }),
             leftCollapsed: panels.leftCollapsedEff,

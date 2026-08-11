@@ -75,19 +75,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and read `data/registrations.csv` with `csv.DictReader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through every row from `reader`."
-                },
-                "2": {
-                  "message": "Read the `name`, `event`, `seats`, and `email` values from the row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "cp-1-read-registration-file": {
               "title": "Clean and validate one registration",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with `strip().title()`, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted.",
+              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with whitespace trimming followed by title-case normalization, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted. Inside `clean_row(row)`, clean the required fields with the specified string methods: trim whitespace from each text field, title-case the cleaned name, lowercase the cleaned email, and convert the cleaned seat text to an integer. Catch `ValueError` when the seat conversion fails.",
               "hint": "Apply the cleaning and validation rules inside one reusable function.",
               "help": {
                 "concept": "`clean_row(row)` should return one dependable shape for valid data and `None` for every rejected registration.",
@@ -126,16 +123,28 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and clean all four named CSV fields."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject empty cleaned name, event, or email values."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the seat conversion."
+                  "message": "Use the explicitly requested dictionary field `event`."
                 },
                 "3": {
-                  "message": "Reject seat counts below 1 before returning the cleaned dictionary."
+                  "message": "Use the explicitly requested dictionary field `seats`."
+                },
+                "4": {
+                  "message": "Use the explicitly requested dictionary field `email`."
+                },
+                "5": {
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "6": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "7": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -180,19 +189,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the CSV."
-                },
-                "1": {
-                  "message": "Call `clean_row(row)` once for each CSV row."
-                },
-                "2": {
-                  "message": "Append only records that are not `None`."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
             "cp-3-skip-bad-registration-rows": {
               "title": "Move cleaning into a helper module",
-              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with `from cleaning import clean_row`. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
+              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with a from-import that brings `clean_row` in from the `cleaning` module. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
               "hint": "Move one responsibility without changing the program's behavior.",
               "help": {
                 "concept": "A sibling helper module lets `main.py` orchestrate the workflow while `cleaning.py` owns row cleaning and validation.",
@@ -234,19 +237,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_row` from the sibling `cleaning` module."
+                  "message": "Use the requested import for `clean_row` from `cleaning`."
                 },
                 "1": {
-                  "message": "Keep the complete `clean_row(row)` function in `cleaning.py`."
-                },
-                "2": {
-                  "message": "Preserve the accepted-record output from the previous step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "cp-4-move-cleaning-to-module": {
               "title": "Add summary helper functions",
-              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order.",
+              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order. In `summary.py`, compute the summary values with a `for` loop over `records`. In `main.py`, print each event/count pair with a `for` loop over the dictionary produced by the event-count helper.",
               "hint": "Use normal loops and dictionaries so the summary stays within concepts already taught.",
               "help": {
                 "concept": "Summary helpers should accept `records` and return values without reading or writing files themselves.",
@@ -294,16 +294,19 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `total_seats` and `event_counts` from sibling `summary.py`."
+                  "message": "Use the requested import involving `summary`."
                 },
                 "1": {
-                  "message": "Implement `total_seats(records)` with an explicit accumulator loop."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Implement `event_counts(records)` with a dictionary and membership check."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Print the returned total and counts without `sorted()` or comprehensions."
+                  "message": "Use a `for` loop as the prompt requests."
+                },
+                "4": {
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
@@ -363,16 +366,19 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both report helpers from sibling `reports.py`."
+                  "message": "Use the requested import involving `reports`."
                 },
                 "1": {
-                  "message": "Write `output/clean_registrations.csv` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Write `output/summary.txt` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Keep report functions free of default parameters, pathlib, and sorted output."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
+                },
+                "4": {
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             },
@@ -435,16 +441,10 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep calling both report-writing helpers before verification."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen `output/clean_registrations.csv` in read mode and print it."
-                },
-                "2": {
-                  "message": "Reopen `output/summary.txt` in read mode and print it."
-                },
-                "3": {
-                  "message": "Verify the saved artifact contents rather than reconstructing them in `main.py`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }

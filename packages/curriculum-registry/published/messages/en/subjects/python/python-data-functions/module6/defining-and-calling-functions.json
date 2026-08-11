@@ -97,13 +97,10 @@
               "solutionCode": "def show_message():\n    print(\"Functions are reusable!\")\n\nshow_message()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_message()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Put the required `print()` inside the body of `show_message()`."
-                },
-                "2": {
-                  "message": "Call `show_message()` after the definition."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -120,13 +117,13 @@
               "solutionCode": "def ring_bell():\n    print(\"Ding!\")\n\nring_bell()\nring_bell()\nring_bell()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the `ring_bell()` body and reuse it with exactly three top-level calls."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-defining-and-calling-functions-sketch2": {
               "title": "Put a loop inside a function",
-              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create `colors = [\"red\", \"blue\", \"green\"]`, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
               "hint": "The list and the `for` loop both belong inside the indented function body.",
               "help": {
                 "concept": "A function body can contain several statements, including list creation and loops you already know.",
@@ -137,13 +134,10 @@
               "solutionCode": "def show_colors():\n    colors = [\"red\", \"blue\", \"green\"]\n    for color in colors:\n        print(color)\n\nshow_colors()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_colors()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Keep the list, loop, and `print(color)` inside `show_colors()`."
-                },
-                "2": {
-                  "message": "Call `show_colors()` after defining it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -159,7 +153,7 @@
             },
             "try_defining_and_calling_functions_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Put a familiar list-and-loop task inside a function, then call that function."
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once."
             },
             "allowReveal": true
           }

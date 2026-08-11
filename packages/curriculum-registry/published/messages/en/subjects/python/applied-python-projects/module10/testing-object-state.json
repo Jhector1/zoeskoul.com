@@ -4,125 +4,128 @@
       "python-10-testing-debugging-oop-projects": {
         "testing-object-state": {
           "label": "Testing Object State",
-          "summary": "Test object state by watching one object before and after method calls, like checking a thermometer before and after changing the room temperature.",
+          "summary": "Write executable `assert` tests that prove starting state, rejected state changes, and repeated transitions on real objects.",
           "cards": {
             "sketch0": {
-              "title": "Test one state change"
+              "title": "Assert state before and after a method call"
             },
             "sketch1": {
-              "title": "Test validation rules"
+              "title": "Test both valid and rejected state"
             },
             "sketch2": {
-              "title": "Test a sequence of changes"
+              "title": "Test a sequence on the same object"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_testing_object_state_sketch0": {
-              "title": "Test a book's availability state",
-              "prompt": "The lesson used a thermostat to explain state testing. Now practice with a library object. Complete the `Book` class so a new book starts available, and `checkout()` changes only that book's `available` state to `False`.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "title": "Write a before-and-after Book state test",
+              "prompt": "`models/book.py` is already complete. In `tests/check_book.py`, use the existing `book` object to write an assertion that it starts available, call `book.checkout()`, then write an assertion that the same object's `available` state is false. Leave the model file unchanged. The test script must still finish by printing `book state tests passed`.",
+              "hint": "Use `assert` for both observable states; the method call belongs between those two claims.",
               "help": {
-                "concept": "A state test checks what the object stores before and after a method call. Here, `checkout()` should change `available` from True to False.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A state-change test proves the object's state before and after the mutating method.",
+                "hint_1": "Check `book.available` before `checkout()`.",
+                "hint_2": "Check the same attribute again after `checkout()`."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\n# Assert that the new book starts available.\n# Call checkout() on this same book.\n# Assert that the same book is now unavailable.\n\nprint(\"book state tests passed\")\n",
               "starterFiles": {
+                "tests_check_book_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\n# Assert that the new book starts available.\n# Call checkout() on this same book.\n# Assert that the same book is now unavailable.\n\nprint(\"book state tests passed\")\n"
+                },
                 "models_book_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n"
                 }
               },
-              "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False",
-              "checks": {
-                "0": {
-                  "message": "Keep the Book class defined in models/book.py."
-                },
-                "1": {
-                  "message": "Book should still be constructible with a title."
-                },
-                "2": {
-                  "message": "A Book instance should have title and available attributes."
-                },
-                "3": {
-                  "message": "A new book should start available, then become unavailable after checkout()."
-                }
-              },
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\nassert book.available is True\nbook.checkout()\nassert book.available is False\n\nprint(\"book state tests passed\")\n",
+              "checks": {},
               "solutionFiles": {
+                "tests_check_book_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\nassert book.available is True\nbook.checkout()\nassert book.available is False\n\nprint(\"book state tests passed\")\n"
+                },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n"
+                }
+              },
+              "expectedOutput": "book state tests passed",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the same Book object for a starting-state assertion, `checkout()`, and an updated-state assertion."
                 }
               }
             },
             "try_testing_object_state_sketch1": {
-              "title": "Test constructor validation for task priority",
-              "prompt": "Practice validation with a task object. Complete `Task` so the constructor stores `name` and a safe `priority`. A negative priority should become `0`; a positive priority should stay as given.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "title": "Test both sides of a validation rule",
+              "prompt": "`models/task.py` is already complete. In `tests/check_task.py`, write one assertion proving the existing `normal_task` keeps priority `2`, and another proving the existing `invalid_task` normalizes priority `-5` to `0`. Leave the model unchanged. Keep the final `task validation tests passed` print.",
+              "hint": "A validation test set needs one accepted input and one rejected or corrected input.",
               "help": {
-                "concept": "Validation is state protection. The constructor should not allow a negative priority to become object state.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
+                "concept": "Testing both branches distinguishes the validation rule from a constructor that simply stores every input unchanged.",
+                "hint_1": "The normal task should keep priority 2.",
+                "hint_2": "The invalid task should expose priority 0."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\n# Assert that the valid priority stays 2.\n# Assert that the negative priority becomes 0.\n\nprint(\"task validation tests passed\")\n",
               "starterFiles": {
+                "tests_check_task_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\n# Assert that the valid priority stays 2.\n# Assert that the negative priority becomes 0.\n\nprint(\"task validation tests passed\")\n"
+                },
                 "models_task_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        self.priority = priority if priority >= 0 else 0\n"
                 }
               },
-              "solutionCode": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\nassert normal_task.priority == 2\nassert invalid_task.priority == 0\n\nprint(\"task validation tests passed\")\n",
+              "checks": {},
+              "solutionFiles": {
+                "tests_check_task_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\nassert normal_task.priority == 2\nassert invalid_task.priority == 0\n\nprint(\"task validation tests passed\")\n"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        self.priority = priority if priority >= 0 else 0\n"
+                }
+              },
+              "expectedOutput": "task validation tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "Keep the Task class defined in models/task.py."
+                  "message": "Assert that a Task created with priority 2 still has priority 2."
                 },
                 "1": {
-                  "message": "A Task instance should store name and priority."
-                },
-                "2": {
-                  "message": "A normal priority should be stored unchanged."
-                },
-                "3": {
-                  "message": "A negative priority should be corrected to 0."
-                }
-              },
-              "solutionFiles": {
-                "models_task_py": {
-                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority"
+                  "message": "Assert that a Task created with priority -5 exposes priority 0."
                 }
               }
             },
             "try_testing_object_state_sketch2": {
-              "title": "Test repeated counter state changes",
-              "prompt": "Practice a sequence of state changes with a counter. Complete `Counter` so it starts at `0`, and every `increment()` call increases `count` by one.",
-              "hint": "Translate the question into a Python rule before selecting an answer.",
+              "title": "Write a repeated state-transition test",
+              "prompt": "`models/counter.py` is already complete. In `tests/check_counter.py`, use the existing `counter` object to assert its count is `0`, call `increment()` and assert `1`, then call `increment()` again and assert `2`. Use the same object for the whole sequence. Leave the model unchanged and keep the final `counter sequence tests passed` print.",
+              "hint": "The important part is the sequence: 0 → increment → 1 → increment → 2 on one instance.",
               "help": {
-                "concept": "Some tests check a sequence, not just one call. The expected count should move from 0 to 1 to 2 after two increments.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A repeated-transition test catches bugs that only appear after the same object changes state more than once.",
+                "hint_1": "Start with an assertion before any method call.",
+                "hint_2": "Assert again after each increment on the same counter."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\n# Assert count starts at 0.\n# Increment the same counter and assert count is 1.\n# Increment the same counter again and assert count is 2.\n\nprint(\"counter sequence tests passed\")\n",
               "starterFiles": {
+                "tests_check_counter_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\n# Assert count starts at 0.\n# Increment the same counter and assert count is 1.\n# Increment the same counter again and assert count is 2.\n\nprint(\"counter sequence tests passed\")\n"
+                },
                 "models_counter_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n"
                 }
               },
-              "solutionCode": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1",
-              "checks": {
-                "0": {
-                  "message": "Keep the Counter class defined in models/counter.py."
-                },
-                "1": {
-                  "message": "A Counter instance should have a count attribute."
-                },
-                "2": {
-                  "message": "The count should move from 0 to 1 to 2 across two increment() calls."
-                }
-              },
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\nassert counter.count == 0\ncounter.increment()\nassert counter.count == 1\ncounter.increment()\nassert counter.count == 2\n\nprint(\"counter sequence tests passed\")\n",
+              "checks": {},
               "solutionFiles": {
+                "tests_check_counter_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\nassert counter.count == 0\ncounter.increment()\nassert counter.count == 1\ncounter.increment()\nassert counter.count == 2\n\nprint(\"counter sequence tests passed\")\n"
+                },
                 "models_counter_py": {
-                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1"
+                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n"
+                }
+              },
+              "expectedOutput": "counter sequence tests passed",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the same Counter object to assert the full 0 → 1 → 2 state sequence."
                 }
               }
             }
@@ -160,39 +163,6 @@
                 "d": "`Task(\"Broken\", -5).priority == -5`"
               }
             },
-            "q-testing-object-state-fill-1": {
-              "title": "Complete an assert for starting state",
-              "prompt": "Fill in the missing value so the assertion checks that a new counter starts at zero.",
-              "hint": "A new `Counter` object should begin with no increments applied.",
-              "help": {
-                "concept": "Starting-state assertions verify what the constructor sets before any methods change the object.",
-                "hint_1": "The `count` attribute should match the constructor's initial value.",
-                "hint_2": "Choose the numeric value that represents an untouched counter."
-              },
-              "template": "assert counter.count == [blank1]",
-              "choices": [
-                "0",
-                "1",
-                "False",
-                "None"
-              ]
-            },
-            "q-testing-object-state-drag-1": {
-              "title": "Order a before-and-after state test",
-              "prompt": "Put these testing steps in the best order for checking a method that changes object state.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "Assert the starting attribute value",
-                "t2": "Create the object",
-                "t3": "Call the state-changing method",
-                "t4": "Assert the updated attribute value"
-              }
-            },
             "q-testing-object-state-multi-2": {
               "title": "Spot useful object-state edge cases",
               "prompt": "You are testing a `Counter` object with an `increment()` method. Which checks help prove repeated state changes work correctly? Choose all that apply.",
@@ -208,23 +178,6 @@
                 "c": "Only check that `increment` is spelled correctly",
                 "d": "Create two separate counters and ignore their `count` values"
               }
-            },
-            "q-testing-object-state-fill-2": {
-              "title": "Complete an assert after a checkout",
-              "prompt": "Fill in the missing value so the assertion checks the book's state after `checkout()` has already run.",
-              "hint": "After checkout, the book should no longer be available.",
-              "help": {
-                "concept": "After-method assertions should match the new stored state, not the original constructor value.",
-                "hint_1": "The `available` attribute should switch away from its starting value.",
-                "hint_2": "Choose the boolean value that represents an unavailable book."
-              },
-              "template": "assert book.available is [blank1]",
-              "choices": [
-                "True",
-                "False",
-                "0",
-                "Lesson notes panel"
-              ]
             },
             "ci-testing-object-state-debug-book-return": {
               "title": "Fix a broken return method after state changes",
@@ -284,16 +237,16 @@
       "python-10-testing-debugging-oop-projects": {
         "testing-object-state": {
           "testing-object-state-sketch-0": {
-            "title": "Test state before and after one method call",
-            "bodyMarkdown": "Object tests become easier when you ask one clear question: **what should change on this object?**\n\nImagine a thermostat object:\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nassert thermostat.temperature == 70\n```\n\nThe test creates one object, calls one method, then checks the stored state.\n\nThat is stronger than only checking printed output because it proves the object itself changed correctly.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "A state test should make an executable claim",
+            "bodyMarkdown": "A state test should make an executable claim before and after a method call.\n\n```python\nlamp = Lamp()\n\nassert lamp.on is False\n\nlamp.turn_on()\n\nassert lamp.on is True\n```\n\nThe first assertion proves the starting state. The second proves the observable state transition.\n\nA print statement can show a value, but an assertion automatically fails when the behavior is wrong."
           },
           "testing-object-state-sketch-1": {
-            "title": "Test validation by trying unsafe input",
-            "bodyMarkdown": "Validation tests should include values that the object must reject.\n\n```python\nthermostat = Thermostat(68)\nthermostat.lower_temp(-5)\nassert thermostat.temperature == 68\n```\n\nThe important check is that the bad input did **not** change the state.\n\nA good validation test usually has two parts:\n\n1. Try an invalid value.\n2. Confirm the object stayed safe.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "Validation tests need a normal case and a rejected case",
+            "bodyMarkdown": "A validation rule needs tests for both the accepted and corrected or rejected path.\n\n```python\nnormal = Score(8)\ninvalid = Score(-3)\n\nassert normal.points == 8\nassert invalid.points == 0\n```\n\nTesting only a normal value would not prove that negative input is handled correctly.\n\nChoose cases that distinguish the intended validation rule from a broken implementation."
           },
           "testing-object-state-sketch-2": {
-            "title": "Test a sequence when order matters",
-            "bodyMarkdown": "Some object bugs only appear after more than one method call.\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nthermostat.lower_temp(1)\nassert thermostat.temperature == 69\n```\n\nThis kind of test proves the object keeps the right state across a sequence.\n\nWhen a method changes state, test the story: create the object, call methods in order, then check the final state.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "Sequence tests keep checking the same object's state",
+            "bodyMarkdown": "Some state bugs appear only after the same object changes more than once.\n\n```python\nmeter = Meter()\n\nassert meter.value == 0\n\nmeter.advance()\nassert meter.value == 1\n\nmeter.advance()\nassert meter.value == 2\n```\n\nThis sequence proves that state accumulates correctly on one instance.\n\nCreating a fresh object for every assertion would miss bugs that appear only after repeated calls."
           }
         }
       }

@@ -97,10 +97,7 @@
               "solutionCode": "def normalize_city(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n\ncity = input()\nprint(normalize_city(city))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Add the requested string as the actual docstring of `normalize_city`, not as a comment or unrelated string."
-                },
-                "1": {
-                  "message": "Keep `normalize_city` returning `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -117,10 +114,7 @@
               "solutionCode": "def total_price(price, tax):\n    \"\"\"Return price plus tax.\"\"\"\n    return price + tax\n\nprice = int(input())\ntax = int(input())\nresult = total_price(price, tax)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `\"\"\"Return price plus tax.\"\"\"` as the function's docstring."
-                },
-                "1": {
-                  "message": "Make the implementation return `price + tax` instead of printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -137,10 +131,7 @@
               "solutionCode": "def is_passing(score):\n    \"\"\"Return True when score is 70 or higher.\"\"\"\n    return score >= 70\n\nscore = int(input())\nprint(is_passing(score))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the stated contract as the real docstring of `is_passing`."
-                },
-                "1": {
-                  "message": "Implement the inclusive boundary with `return score >= 70`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }

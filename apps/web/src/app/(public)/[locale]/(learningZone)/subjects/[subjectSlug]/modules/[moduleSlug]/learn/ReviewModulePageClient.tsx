@@ -16,6 +16,7 @@ export default function ReviewModulePageClient({
                                                    routePrefix = null,
                                                    tutoringSession = null,
                                                    supplementalHeader = null,
+                                                   previewMode = "standard",
                                                }: {
     canUnlockAll: boolean;
     mod: ReviewModule | null;
@@ -23,6 +24,7 @@ export default function ReviewModulePageClient({
     routePrefix?: string | null;
     tutoringSession?: ReviewModulePageProps["tutoringSession"];
     supplementalHeader?: React.ReactNode;
+    previewMode?: "standard" | "draftQa";
 }) {
     const params = useParams<{
         locale: string;
@@ -84,6 +86,7 @@ export default function ReviewModulePageClient({
                         routePrefix={routePrefix}
                         tutoringSession={tutoringSession}
                         supplementalHeader={supplementalHeader}
+                        previewMode={previewMode}
                     />
                 </div>
             </div>

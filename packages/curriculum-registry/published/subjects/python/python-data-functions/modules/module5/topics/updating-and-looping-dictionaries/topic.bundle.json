@@ -310,6 +310,11 @@
             "type": "source_regex",
             "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*stock\\s*\\)",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -318,6 +323,11 @@
           "type": "source_regex",
           "pattern": "\\bstock\\s*\\[\\s*item\\s*\\]\\s*=\\s*amount\\b",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*stock\\s*\\)",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -395,31 +405,9 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
-          }
-        ]
+        "sourceChecks": []
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\bif\\s+key\\s+in\\s+settings\\s*:",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bdel\\s+settings\\s*\\[\\s*key\\s*\\]",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.1.message"
-        }
-      ]
+      "sourceChecks": []
     },
     {
       "id": "try-updating-and-looping-dictionaries-sketch2",
@@ -492,8 +480,8 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
+            "type": "uses_for_loop",
+            "iterable": "inventory",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
           },
           {
@@ -505,8 +493,8 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+item\\s+in\\s+inventory\\s*:",
+          "type": "uses_for_loop",
+          "iterable": "inventory",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
         },
         {
@@ -592,27 +580,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+            "type": "uses_for_loop",
+            "iterable": "scores",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bscores\\s*=\\s*\\{\\s*name1\\s*:\\s*score1\\s*,\\s*name2\\s*:\\s*score2\\s*\\}",
+          "type": "uses_for_loop",
+          "iterable": "scores",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+name\\s*,\\s*score\\s+in\\s+scores\\.items\\s*\\(\\s*\\)\\s*:",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch3.sourceChecks.1.message"
         }
       ]
     },
@@ -692,37 +670,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+            "type": "uses_for_loop",
+            "iterable": "words",
             "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bwords\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*,\\s*third\\s*\\]",
+          "type": "uses_for_loop",
+          "iterable": "words",
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+word\\s+in\\s+words\\s*:",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
-          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.2.message"
         }
       ]
     }

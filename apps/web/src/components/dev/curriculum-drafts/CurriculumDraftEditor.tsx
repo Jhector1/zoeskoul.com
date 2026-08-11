@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import DiagnosticsPanel from "./DiagnosticsPanel";
 import ExerciseTable from "./ExerciseTable";
 import ExerciseJsonEditor from "./ExerciseJsonEditor";
@@ -247,6 +248,14 @@ async function readJsonResponse<T>(response: Response): Promise<T> {
 }
 
 export default function CurriculumDraftEditor() {
+  const searchParams = useSearchParams();
+  const requestedSelectionRef = useRef({
+    catalog: searchParams.get("catalog") ?? "",
+    subject: searchParams.get("subject") ?? "",
+    module: searchParams.get("module") ?? "",
+    topic: searchParams.get("topic") ?? "",
+  });
+  const autoLoadRequestedTopicRef = useRef(Boolean(requestedSelectionRef.current.topic));
   const [catalogs, setCatalogs] = useState<DraftCatalogSummary[]>([]);
   const [listDebug, setListDebug] = useState<DraftListDebug | null>(null);
   const [selectedCatalog, setSelectedCatalog] = useState("");
@@ -276,10 +285,26 @@ export default function CurriculumDraftEditor() {
         if (cancelled) return;
         setCatalogs(body.catalogs);
         setListDebug(body.debug ?? null);
-        const firstCatalog = body.catalogs[0];
-        const firstSubject = firstCatalog?.subjects[0];
-        const firstModule = firstSubject?.modules[0];
-        const firstTopic = firstModule?.topics[0];
+        const requested = requestedSelectionRef.current;
+        const firstCatalog =
+          body.catalogs.find((catalog) => catalog.catalog === requested.catalog) ??
+          body.catalogs[0];
+        const firstSubject =
+          firstCatalog?.subjects.find((subject) => subject.subject === requested.subject) ??
+          firstCatalog?.subjects[0];
+        const firstModule =
+          firstSubject?.modules.find(
+            (module) =>
+              module.moduleDir === requested.module ||
+              module.moduleSlug === requested.module,
+          ) ?? firstSubject?.modules[0];
+        const firstTopic =
+          firstModule?.topics.find(
+            (topic) =>
+              topic.topicDir === requested.topic ||
+              topic.topicSlug === requested.topic ||
+              topic.topicId === requested.topic,
+          ) ?? firstModule?.topics[0];
         if (firstCatalog && !selectedCatalog) setSelectedCatalog(firstCatalog.catalog);
         if (firstSubject && !selectedSubject) setSelectedSubject(firstSubject.subject);
         if (firstModule && !selectedModule) setSelectedModule(firstModule.moduleDir);
@@ -402,6 +427,15 @@ export default function CurriculumDraftEditor() {
   };
 
   const reloadCurrentTopic = () => loadTopic(undefined, { preserveEditorSelection: true });
+
+  useEffect(() => {
+    if (!autoLoadRequestedTopicRef.current) return;
+    if (!catalogs.length || loadedTopic || loading) return;
+    if (!selectedCatalog || !selectedSubject || !selectedModule || !selectedTopic) return;
+
+    autoLoadRequestedTopicRef.current = false;
+    void loadTopic();
+  }, [catalogs.length, loadedTopic, loading, selectedCatalog, selectedModule, selectedSubject, selectedTopic]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const saveBundle = async () => {
     if (!loadedTopic) return;
@@ -546,6 +580,7 @@ export default function CurriculumDraftEditor() {
         draftPreview: "1",
         source,
         e2eUnlockAll: "1",
+        draftQa: "1",
         ts: String(Date.now()),
       });
 
@@ -565,8 +600,8 @@ export default function CurriculumDraftEditor() {
       window.open(previewUrl, "_blank", "noopener,noreferrer");
       setStatus(
         source === "draft"
-          ? "Opened draft preview directly from saved .curriculum-drafts files."
-          : "Opened generated dev review preview. Run Gen manifests first if you changed draft files.",
+          ? "Opened draft QA preview from saved .curriculum-drafts files. Progress persistence is off; reload the preview after saving changes."
+          : "Opened generated QA preview with progress persistence off. Run Gen manifests first if you changed draft files.",
       );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to build preview URL");

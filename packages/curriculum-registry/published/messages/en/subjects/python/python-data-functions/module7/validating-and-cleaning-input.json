@@ -86,7 +86,7 @@
             },
             "try-validating-and-cleaning-input-sketch0": {
               "title": "Clean and validate a required name",
-              "prompt": "Read a name. Store `raw_name.strip().title()` in `cleaned_name`. If `cleaned_name == \"\"`, print `Missing`; otherwise print the cleaned name.",
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name.",
               "hint": "Clean the text before checking whether anything meaningful remains.",
               "help": {
                 "concept": "A spaces-only required field becomes `\"\"` after `strip()`, so validation should check the cleaned value rather than the raw input.",
@@ -107,13 +107,10 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Clean `raw_name` with both `strip()` and `title()`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Check the cleaned value against the empty string `\"\"`."
-                },
-                "2": {
-                  "message": "Print `Missing` only for the empty cleaned value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -140,19 +137,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Strip surrounding whitespace from `score_text` before conversion."
-                },
-                "1": {
-                  "message": "Catch exactly `ValueError` from an invalid integer conversion."
-                },
-                "2": {
-                  "message": "Check that `score` is in the inclusive range 0 through 100."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-validating-and-cleaning-input-sketch2": {
               "title": "Clean and validate a record",
-              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
               "hint": "Apply the rules in order: clean, check the required name, convert safely, check the range, then return the cleaned dictionary.",
               "help": {
                 "concept": "A reusable cleaning function can return `None` for rejected input and structured cleaned data for accepted input.",
@@ -173,16 +164,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define and call `clean_record(name_text, score_text)`."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name with an explicit `== \"\"` check."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -190,7 +172,7 @@
           "tryIt": {
             "try_validating_and_cleaning_input_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean a required name and detect the empty string after cleaning."
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name."
             },
             "try_validating_and_cleaning_input_sketch1": {
               "title": "Try it yourself",
@@ -198,7 +180,7 @@
             },
             "try_validating_and_cleaning_input_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Combine name cleaning and score validation in a reusable function."
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`."
             },
             "allowReveal": true
           }

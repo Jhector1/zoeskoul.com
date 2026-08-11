@@ -4,7 +4,7 @@
       "python-10-testing-debugging-oop-projects": {
         "module-10-oop-quality-project": {
           "label": "Module 10 Animal Shelter Quality Project",
-          "summary": "Stabilize a small animal-shelter intake app with model tests, a CSV loader, state-change checks, reporting helpers, and final regression coverage.",
+          "summary": "Stabilize one cumulative shelter application by writing real regression tests, refactoring a mixed-object report, fixing import and state bugs, and finishing an end-to-end quality pass.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
@@ -15,358 +15,667 @@
           },
           "projectSteps": {
             "try_module_10_oop_quality_project_sketch0": {
-              "title": "Milestone 1: Validate the pet model"
+              "title": "Milestone 1: write model regression tests"
             },
             "project_step_report_service_tests": {
-              "title": "Milestone 2: Test the shelter reporting service"
+              "title": "Milestone 2: refactor and test mixed reporting"
             },
             "project_step_storage_loader": {
-              "title": "Milestone 3: Load pets from fixture data"
+              "title": "Milestone 3: debug and test the CSV loader"
             },
             "project_step_debug_imports_state": {
-              "title": "Milestone 4: Verify adoption state changes"
+              "title": "Milestone 4: reproduce and fix adoption state"
             },
             "project_step_regression_summary": {
-              "title": "Milestone 5: Add a reusable shelter summary"
+              "title": "Milestone 5: build and test the cumulative summary"
             },
             "project_step_final_regression": {
-              "title": "Milestone 6: Finish the end-to-end regression workspace"
+              "title": "Milestone 6: finish the full regression suite"
             }
           },
           "moduleProject": {
             "steps": {
               "try_module_10_oop_quality_project_sketch0": {
-                "title": "Milestone 1: validate the shelter pet model",
-                "prompt": "Complete `ShelterPet` in `models/shelter_pet.py`. Store `name`, `species`, and `age`; reject a negative age with `ValueError`; start `adopted` as `False`; and make `is_available()` return whether the pet is still available. Keep the runnable demo in `main.py`.",
-                "hint": "Validate age before assigning the object state.",
+                "title": "Milestone 1: write model regression tests",
+                "prompt": "`ShelterPet` and `FosterPet` are supplied production classes. In `tests/check_model.py`, use the provided `pet` and `foster` fixtures to write meaningful assertions for stored pet state, initial availability, the `FosterPet` inheritance relationship, and the overridden `adoption_label()` result. Also verify that constructing a ShelterPet with age `-1` raises `ValueError`. Do not repair `mark_adopted()` yet; that intentional bug belongs to a later milestone. Keep the final `model tests passed` print.",
+                "hint": "This is a testing milestone: production models stay supplied. Assert observable state and behavior instead of rebuilding them.",
                 "help": {
-                  "concept": "Model tests should cover stored state, normal behavior, and invalid constructor input.",
-                  "hint_1": "Set `self.adopted = False` for every new pet.",
-                  "hint_2": "`is_available()` should return `not self.adopted`."
+                  "concept": "A useful model regression test protects constructor state, validation, inheritance, and an override contract.",
+                  "hint_1": "Check the supplied `pet` attributes and availability.",
+                  "hint_2": "Check that `foster` is a ShelterPet and uses its specialized label."
                 },
-                "starterCode": "# Run this provided shelter model demo.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
+                "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\n# Add meaningful model/inheritance assertions here.\n\nprint(\"model tests passed\")\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this provided shelter model demo after completing ShelterPet.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        # TODO: reject a negative age, store the three values, and start adopted as False.\n        pass\n\n    def is_available(self):\n        # TODO: return whether the pet has not been adopted.\n        pass\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
                   },
                   "tests_check_model_py": {
-                    "content": "# Add assertions for pet attributes, availability, and negative age validation.\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\n# Add meaningful model/inheritance assertions here.\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
                   },
                   "tests_check_model_py": {
-                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "model tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Store all pet attributes and the adopted state."
+                    "message": "Assert both stored model state and the new pet's initial availability."
                   },
                   "1": {
-                    "message": "A new pet should be available."
+                    "message": "Assert the FosterPet inheritance relationship and specialized adoption label."
                   },
                   "2": {
-                    "message": "Keep main.py runnable."
+                    "message": "Exercise the negative-age case and handle the expected `ValueError`."
                   }
-                },
-                "expectedOutput": "Milo\nTrue"
+                }
               },
               "project_step_report_service_tests": {
-                "title": "Milestone 2: test the shelter reporting service",
-                "prompt": "Complete `total_age(pets)` and `young_pet_names(pets, max_age)` in `services/reporting.py`. Return the sum of all ages and the names of pets at or below the age limit in their original order. Do not print inside the service.",
-                "hint": "Build the name list from each pet object instead of hard-coding the sample output.",
+                "title": "Milestone 2: refactor and test mixed reporting",
+                "prompt": "Continue from the exact Milestone 1 workspace. `main.py` currently owns a working list-wide label loop. Refactor that collection coordination into `adoption_labels(pets)` in `services/reporting.py`; it must call each object's shared `adoption_label()` method without branching on concrete types. Also implement `young_pet_names(pets, max_age)` so it returns matching names in input order. Update `main.py` to import and use `adoption_labels()` instead of keeping the old loop. Then complete `tests/check_reporting.py` with assertions for both provided mixed ShelterPet/FosterPet fixtures and both age limits. Keep `build_summary()` unfinished for Milestone 5.",
+                "hint": "The refactor moves list-wide work only. Each model already owns its own `adoption_label()` behavior.",
                 "help": {
-                  "concept": "Small pure reporting helpers are easy to test because they return values without changing state.",
-                  "hint_1": "Use each pet's `age` for the total.",
-                  "hint_2": "Include a name when `pet.age <= max_age`."
+                  "concept": "This milestone retrieves service refactoring plus regression testing of a mixed polymorphic collection.",
+                  "hint_1": "The service should call `pet.adoption_label()` uniformly.",
+                  "hint_2": "The test should compare exact ordered lists for normal and reversed mixed fixtures."
                 },
-                "starterCode": "# Run this report demo after completing services/reporting.py.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
+                "starterCode": "# Added in Milestone 2.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this report demo after completing the reporting helpers.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Validated shelter model from milestone 1.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
-                    "content": "# Add assertions for total_age() and young_pet_names().\n"
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
-                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nassert total_age(pets) == 9\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n"
-                  }
-                },
-                "solutionCode": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
-                "checks": {
-                  "0": {
-                    "message": "Return values that produce the exact two-line shelter report."
-                  }
-                },
-                "expectedOutput": "9\nMilo, Pepper"
-              },
-              "project_step_storage_loader": {
-                "title": "Milestone 3: load shelter pets from CSV",
-                "prompt": "Complete `load_pets(path)` in `storage/pet_loader.py`. Read the CSV with `csv.DictReader`, convert `age` to `int`, create `ShelterPet` objects, and return them in file order.",
-                "hint": "Create one ShelterPet for each row and append it to a list.",
-                "help": {
-                  "concept": "A storage layer translates file rows into domain objects.",
-                  "hint_1": "Open the path with `newline=\"\"`.",
-                  "hint_2": "Convert `row[\"age\"]` before calling the constructor."
-                },
-                "starterCode": "# Run this loader demo after completing storage/pet_loader.py.\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this loader demo after completing load_pets().\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "# Validated shelter model; keep it working.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "# Reporting helpers from milestone 2.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    # TODO: read the CSV, convert age to int, create ShelterPet objects, and return them.\n    pass\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
                   },
                   "tests_check_loader_py": {
-                    "content": "# Add assertions for row order, object types, and converted ages.\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\n"
-                  }
-                },
-                "solutionCode": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
-                "checks": {
-                  "0": {
-                    "message": "Load all three CSV rows as ShelterPet objects."
-                  }
-                },
-                "expectedOutput": "Milo\nLuna\nPepper"
-              },
-              "project_step_debug_imports_state": {
-                "title": "Milestone 4: validate adoption state changes",
-                "prompt": "Finish `ShelterPet.mark_adopted()` in `models/shelter_pet.py`. It should set `adopted` to `True` and return the new value. The provided main script loads Luna, marks her adopted, and confirms she is no longer available.",
-                "hint": "Change the object state before returning it.",
-                "help": {
-                  "concept": "A state-changing method should update one object and return a value that can be tested.",
-                  "hint_1": "Assign `self.adopted = True`.",
-                  "hint_2": "`is_available()` should become `False` after the change."
-                },
-                "starterCode": "# Verify one adoption state change.\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this state-change check after completing mark_adopted().\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "# Keep the report helpers unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "# Added in Milestone 3.\n"
                   },
                   "tests_check_adoption_py": {
-                    "content": "# Add assertions for mark_adopted() and is_available().\n"
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "from storage.pet_loader import load_pets\n\nluna = load_pets(\"data/pets.csv\")[1]\nassert luna.mark_adopted() is True\nassert luna.is_available() is False\n"
-                  }
-                },
-                "solutionCode": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "reporting tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "mark_adopted() should return the new adopted state."
+                    "message": "`adoption_labels(pets)` should use the shared `adoption_label()` contract without concrete-type branching."
                   },
                   "1": {
-                    "message": "Print the adopted result and the updated availability."
+                    "message": "Remove the old list loop from main.py and call `adoption_labels(pets)` instead."
+                  },
+                  "2": {
+                    "message": "Assert the ordered labels for both supplied mixed fixtures."
+                  },
+                  "3": {
+                    "message": "Assert the young-pet filtering result for both supplied fixtures."
+                  }
+                }
+              },
+              "project_step_storage_loader": {
+                "title": "Milestone 3: debug and test the CSV loader",
+                "prompt": "Continue from the exact Milestone 2 workspace. `storage/pet_loader.py` has a real import-path bug: its model imports do not match the `models/` file tree. Fix those imports without rewriting the already-complete loader body. Then complete `tests/check_loader.py` so it loads `data/pets.csv` and asserts row order, converted integer ages, ShelterPet/FosterPet object types, and Pepper's foster label. Keep every earlier test file present and unchanged.",
+                "hint": "Debug the layer that is actually broken: the loader body already works once its module paths match the file tree.",
+                "help": {
+                  "concept": "This milestone retrieves import debugging and tests the storage boundary from CSV rows to real model objects.",
+                  "hint_1": "`models/shelter_pet.py` maps to the `models.shelter_pet` module.",
+                  "hint_2": "The CSV's foster row should become a FosterPet."
+                },
+                "starterCode": "# Added in Milestone 3.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "expectedOutput": "True\nFalse"
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "loader tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Import `ShelterPet` through the `models.shelter_pet` module path."
+                  },
+                  "1": {
+                    "message": "Import `FosterPet` through the `models.foster_pet` module path."
+                  },
+                  "2": {
+                    "message": "Assert the loaded row order and converted integer ages."
+                  },
+                  "3": {
+                    "message": "Assert that the foster CSV row becomes a FosterPet with its specialized label."
+                  }
+                }
+              },
+              "project_step_debug_imports_state": {
+                "title": "Milestone 4: reproduce and fix adoption state",
+                "prompt": "Continue from the exact Milestone 3 workspace. `ShelterPet.mark_adopted()` currently returns `True` but never updates the object's `adopted` state. First complete `tests/check_adoption.py` so the supplied pet is checked before adoption, after the first `mark_adopted()` call, and after a second call. Then repair `mark_adopted()` in `models/shelter_pet.py` by setting `self.adopted = True` before returning the new value. Keep all earlier production code and tests unchanged.",
+                "hint": "A successful return value and a stored state transition are two different things. Your test should prove both.",
+                "help": {
+                  "concept": "This milestone retrieves object-state testing and debugging of a method that reports success without mutating state.",
+                  "hint_1": "The pet starts available.",
+                  "hint_2": "Repeated adoption calls should leave the pet unavailable."
+                },
+                "starterCode": "# Added in Milestone 4.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "adoption tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Update `self.adopted` inside `mark_adopted()` instead of only returning success."
+                  },
+                  "1": {
+                    "message": "Test the same pet before adoption, after the first call, and after a repeated call."
+                  }
+                }
               },
               "project_step_regression_summary": {
-                "title": "Milestone 5: build a reusable shelter summary",
-                "prompt": "Complete `build_summary(pets, max_age)` in `services/reporting.py`. Return a dictionary with `total_pets`, `available_names`, and `young_pet_count`. The main script loads the fixture, marks Luna adopted, and prints all three summary values.",
-                "hint": "Reuse `young_pet_names()` instead of duplicating the age rule.",
+                "title": "Milestone 5: build and test the cumulative summary",
+                "prompt": "Continue from the exact Milestone 4 workspace. Implement `build_summary(pets, max_age)` in `services/reporting.py`. Return a dictionary with `total_pets`, `available_labels`, and `young_pet_count`. `available_labels` must preserve input order, include only pets whose `is_available()` is true, and use each pet's own `adoption_label()` method. Compute `young_pet_count` from the existing `young_pet_names(pets, max_age)` helper instead of duplicating its age rule. Complete `tests/check_summary.py` with the supplied CSV/adoption workflow, and update `main.py` to display the same three summary values.",
+                "hint": "Reuse the contracts already protected by earlier milestones: loader objects, adoption state, polymorphic labels, and the young-pet helper.",
                 "help": {
-                  "concept": "A regression summary combines tested helpers into one stable service result.",
-                  "hint_1": "Filter availability with `pet.is_available()`.",
-                  "hint_2": "Count the list returned by `young_pet_names()`."
+                  "concept": "A cumulative integration test protects multiple already-tested boundaries without reimplementing them.",
+                  "hint_1": "Filter availability with `pet.is_available()` and format with `pet.adoption_label()`.",
+                  "hint_2": "Use `len(young_pet_names(pets, max_age))` for the count."
                 },
-                "starterCode": "# Print the cumulative shelter summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
+                "starterCode": "# Added in Milestone 5.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this cumulative summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
                   },
                   "tests_check_summary_py": {
-                    "content": "# Add assertions for every key returned by build_summary().\n"
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
                   },
                   "tests_check_summary_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nassert summary == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "summary tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Return all three shelter summary values so main.py prints the expected report."
+                    "message": "`build_summary` should reuse availability, polymorphic labels, and `young_pet_names()` rather than duplicating those rules."
+                  },
+                  "1": {
+                    "message": "Assert the complete summary produced by the supplied CSV-plus-adoption workflow."
                   }
-                },
-                "expectedOutput": "3\nMilo, Pepper\n2"
+                }
               },
               "project_step_final_regression": {
-                "title": "Milestone 6: finish the shelter regression workspace",
-                "prompt": "Finish the cumulative shelter quality workspace. Keep the validated model, CSV loader, adoption state, and summary service working; add meaningful assertions in `tests/check_regression.py`; and complete `README.md` with the responsibility of each folder. The runnable demo must print the final summary and confirmation line.",
-                "hint": "Run the complete workflow from fixture loading through the final report.",
+                "title": "Milestone 6: finish the full regression suite",
+                "prompt": "Continue from the exact Milestone 5 workspace. Keep every earlier test file and completed production layer intact. In `tests/check_regression.py`, write one end-to-end regression check that loads the CSV, verifies row order and the FosterPet subtype, checks mixed `adoption_labels()` and `young_pet_names()` results, marks Luna adopted, verifies her availability changed, and asserts the final `build_summary()` dictionary. Keep the final `regression checks passed` print. Then finish `README.md` by explaining the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py`.",
+                "hint": "The final regression should call the real completed layers; do not recreate their logic inside the test.",
                 "help": {
-                  "concept": "A final regression workspace protects the behavior that the project now promises.",
-                  "hint_1": "Assert the loaded names, adoption state, and summary dictionary.",
-                  "hint_2": "Document models, storage, services, tests, and the runner."
+                  "concept": "A final regression test protects the whole workflow while the README records the responsibility boundary each folder owns.",
+                  "hint_1": "Use `load_pets`, the reporting helpers, and the real adoption method.",
+                  "hint_2": "Document responsibilities, not implementation trivia."
                 },
-                "starterCode": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
+                "starterCode": "# Added in Milestone 6.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "# Keep the tested report service unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "# Keep the tested CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
                   },
                   "tests_check_regression_py": {
-                    "content": "# TODO: assert the full shelter workflow from CSV to summary.\n"
+                    "content": "# Added in Milestone 6.\n"
                   },
                   "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nTODO: explain the responsibility of models, storage, services, tests, and main.py.\n"
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
                   },
                   "tests_check_regression_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert pets[1].mark_adopted() is True\nassert build_summary(pets, 3) == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, build_summary, young_pet_names\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert isinstance(pets[2], FosterPet)\nassert adoption_labels(pets) == [\"Milo\", \"Luna\", \"Pepper (foster)\"]\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n\nassert pets[1].mark_adopted() is True\nassert pets[1].is_available() is False\n\nassert build_summary(pets, 3) == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"regression checks passed\")\n"
                   },
                   "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\n- `models/` owns pet state and adoption behavior.\n- `storage/` converts CSV rows into ShelterPet objects.\n- `services/` returns report data without printing.\n- `tests/` protects model, loader, state, and summary behavior.\n- `main.py` runs the final demonstration.\n"
+                    "content": "# Animal Shelter Quality Pass\n\n- `models/` owns pet state, validation, inheritance, and per-pet behavior.\n- `services/` coordinates collections and returns report data without printing.\n- `storage/` converts CSV rows into the correct model objects.\n- `tests/` protects model, service, loader, adoption-state, summary, and full-workflow behavior.\n- `main.py` is the thin runnable demonstration that wires the completed layers together.\n"
                   }
                 },
-                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, build_summary, young_pet_names\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert isinstance(pets[2], FosterPet)\nassert adoption_labels(pets) == [\"Milo\", \"Luna\", \"Pepper (foster)\"]\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n\nassert pets[1].mark_adopted() is True\nassert pets[1].is_available() is False\n\nassert build_summary(pets, 3) == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"regression checks passed\")\n",
+                "checks": {},
+                "expectedOutput": "regression checks passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Keep the full shelter report and print the regression confirmation line."
+                    "message": "Exercise the real CSV loader, FosterPet subtype, and both reporting helpers in the final regression."
+                  },
+                  "1": {
+                    "message": "Protect the adoption transition and final summary in the end-to-end regression."
+                  },
+                  "2": {
+                    "message": "Explain the responsibility of models, services, storage, tests, and main.py in README.md."
                   }
-                },
-                "expectedOutput": "3\nMilo, Pepper\n2\nregression checks passed"
+                }
               }
             }
           }
@@ -379,8 +688,8 @@
       "python-10-testing-debugging-oop-projects": {
         "module-10-oop-quality-project": {
           "module-10-oop-quality-project-sketch0": {
-            "title": "Project brief: stabilize an animal-shelter intake app",
-            "bodyMarkdown": "A neighborhood animal shelter has a small intake app, but staff do not trust it yet. Pet ages can be invalid, adoption state is not fully tested, and the CSV/report workflow needs regression coverage.\n\nThis project uses an **animal-shelter problem**, not the books, catalogs, stock items, counters, or task examples from the lessons. The coding skills transfer, but the situation is new.\n\nYou will complete six cumulative milestones:\n\n1. Validate the `ShelterPet` model and write focused assertions.\n2. Test pure reporting helpers.\n3. Load pet objects from CSV fixture data.\n4. Verify adoption state changes.\n5. Build one reusable shelter summary.\n6. Finish a documented end-to-end regression workspace.\n\nEach milestone starts from the previous working version, so the final result feels like a real quality pass rather than disconnected exercises."
+            "title": "Project brief: protect one growing shelter codebase",
+            "bodyMarkdown": "This project is a **quality pass**, not another sequence of isolated implementation drills.\n\nYou will work in one animal-shelter codebase and accumulate a real regression suite:\n\n```text\nmain.py\nmodels/\n  shelter_pet.py\n  foster_pet.py\nservices/\n  reporting.py\nstorage/\n  pet_loader.py\ndata/\n  pets.csv\ntests/\n  check_model.py\n  check_reporting.py\n  check_loader.py\n  check_adoption.py\n  check_summary.py\n  check_regression.py\nREADME.md\n```\n\nThe production code already contains a few intentional weaknesses that are exercised only when their milestone arrives.\n\nYou will:\n\n1. write model and inheritance regression assertions;\n2. refactor list-wide reporting into a service and test a mixed collection;\n3. debug broken loader imports and test the CSV-to-object boundary;\n4. reproduce and repair an adoption state bug;\n5. build and test a cumulative shelter summary;\n6. write a final end-to-end regression check and document responsibilities.\n\nEvery milestone is cumulative. The **entire previous solution workspace becomes the next starter workspace**, and every earlier test file remains present and passing."
           }
         }
       }

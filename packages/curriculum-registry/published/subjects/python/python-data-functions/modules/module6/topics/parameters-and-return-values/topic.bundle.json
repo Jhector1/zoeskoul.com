@@ -262,14 +262,9 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+            "type": "uses_call",
+            "functionName": "make_badge",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
           }
         ]
       },
@@ -280,14 +275,9 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+['\\\"]Badge:\\s['\\\"]\\s*\\+\\s*name\\b",
+          "type": "uses_call",
+          "functionName": "make_badge",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*make_badge\\s*\\(\\s*name1\\s*\\)\\s*\\)[\\s\\S]*print\\s*\\(\\s*make_badge\\s*\\(\\s*name2\\s*\\)\\s*\\)",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -372,14 +362,9 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+            "type": "uses_call",
+            "functionName": "difference",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
           }
         ]
       },
@@ -390,14 +375,9 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+high\\s*-\\s*low\\b",
+          "type": "uses_call",
+          "functionName": "difference",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*\\)",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -482,14 +462,9 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+            "type": "uses_call",
+            "functionName": "rectangle_area",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -500,14 +475,9 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\breturn\\s+width\\s*\\*\\s*height\\b",
+          "type": "uses_call",
+          "functionName": "rectangle_area",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\barea\\s*=\\s*rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.2.message"
         }
       ]
     }

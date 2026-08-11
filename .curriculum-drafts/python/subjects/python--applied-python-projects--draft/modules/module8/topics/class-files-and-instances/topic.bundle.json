@@ -2,9 +2,9 @@
   "topicId": "class-files-and-instances",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-8-object-oriented-foundations",
-  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
   "prefix": "py8",
-  "minutes": 26,
+  "minutes": 30,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -65,39 +65,19 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch2.title",
-      "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-class-files-and-instances-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.prompt",
-        "exerciseKey": "try-class-files-and-instances-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "mc-class-files-and-instances-class-role",
           "sc-class-files-and-instances-pass-meaning",
-          "fb-class-files-and-instances-import-name",
-          "dr-class-files-and-instances-order"
+          "fb-class-files-and-instances-import-name"
         ],
         "allowReveal": true,
         "preferKind": null,
@@ -117,12 +97,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.title",
       "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -222,8 +196,24 @@
             "constructorArgs": [],
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.checks.1.message"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+pass\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.sourceChecks.0.message"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+pass\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-class-files-and-instances-sketch1",
@@ -328,128 +318,24 @@
             "min": 1,
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.2.message"
           }
-        ]
-      }
-    },
-    {
-      "id": "try-class-files-and-instances-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
-        "starterFiles": [
+        ],
+        "sourceChecks": [
           {
+            "type": "source_regex",
+            "pattern": "(?:\\bfrom\\s+models\\.car\\s+import\\s+Car\\b|\\bimport\\s+models\\.car\\b)",
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/car.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.sourceChecks.0.message"
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/car.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.solutionFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "defines_class",
-            "path": "models/car.py",
-            "className": "Car",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "path": "models/car.py",
-            "className": "Car",
-            "constructorArgs": [],
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.1.message"
-          },
-          {
-            "type": "created_instances",
-            "path": "main.py",
-            "className": "Car",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.2.message"
-          },
-          {
-            "type": "printed_line_count",
-            "path": "main.py",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.3.message"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Car object ready\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?:\\bfrom\\s+models\\.car\\s+import\\s+Car\\b|\\bimport\\s+models\\.car\\b)",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "mc-class-files-and-instances-class-role",
@@ -467,7 +353,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
@@ -497,29 +383,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "Car"
-      }
-    },
-    {
-      "id": "dr-class-files-and-instances-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.dr-class-files-and-instances-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "value": "models.car"
       }
     }
   ]

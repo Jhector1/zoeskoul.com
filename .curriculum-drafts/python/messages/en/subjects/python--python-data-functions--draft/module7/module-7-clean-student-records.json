@@ -4,7 +4,7 @@
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "label": "Module Project: Clean Student Records",
-          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing.",
+          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing, while keeping row-cleaning logic in a reusable helper module.",
           "cards": {
             "sketch0": {
               "title": "A messy student export needs a reliable cleaner"
@@ -15,7 +15,7 @@
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Clean and validate each CSV row"
+              "title": "Build the cleaning helper"
             },
             "mp_2": {
               "title": "Collect only valid student records"
@@ -63,20 +63,20 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read `data/students.csv` with `csv.DictReader`."
+                  "message": "Use the requested import involving `csv`."
                 },
                 "1": {
-                  "message": "Loop through every CSV row."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "2": {
-                  "message": "Access both the `name` and `score` columns from each row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "mp-1-read-student-file": {
-              "title": "Clean and validate each CSV row",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
-              "hint": "Reuse the exact validation sequence from 7.5, but apply it to dictionary-like CSV rows.",
+              "title": "Build the cleaning helper",
+              "prompt": "Start from the CSV preview. Create a sibling helper file named `cleaning.py` and define `clean_row(row)` there. In `main.py`, import it with `from cleaning import clean_row`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
+              "hint": "Put the reusable row-cleaning function in `cleaning.py`; keep CSV orchestration in `main.py` and import the helper directly.",
               "help": {
                 "concept": "The helper should produce one dependable result: a cleaned dictionary for valid input or `None` for rejected input.",
                 "hint_1": "Check `name == \"\"` before attempting the score conversion.",
@@ -94,168 +94,189 @@
                   "content": "old export\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and read both named CSV fields from `row`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject an empty cleaned name with `name == \"\"`."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the score conversion."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "5": {
+                  "message": "Import `clean_row` from the sibling `cleaning.py` helper as the project requires."
                 }
               }
             },
             "mp-2-clean-one-row": {
               "title": "Collect only valid student records",
-              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop.",
+              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The cleaner already decides whether a row is valid; this step should only collect accepted results.",
               "help": {
                 "concept": "Separating row validation from record collection keeps each responsibility small and reusable.",
                 "hint_1": "Store the helper result in `record` instead of calling the function several times.",
                 "hint_2": "Append only when `record is not None`."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the file."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Call `clean_row(row)` inside the DictReader loop."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Append only when the returned record is not `None`."
+                  "message": "Print the completed `records` list itself after the collection loop."
+                },
+                "3": {
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-3-skip-bad-rows": {
               "title": "Write the cleaned CSV file",
-              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it.",
+              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "Use the `records` list as the source for the final file instead of cleaning the CSV a second time.",
               "help": {
                 "concept": "Write mode should replace the old export, then one `file.write(...)` call can write each cleaned record.",
                 "hint_1": "Write the header first: `name,score\\n`.",
                 "hint_2": "Loop through `records` and write each name and numeric score on one line."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `output/clean_students.csv` with mode `\"w\"`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Write the `name,score` header before the record rows."
-                },
-                "2": {
-                  "message": "Loop through `records` and write each cleaned record with `file.write()`."
-                },
-                "3": {
-                  "message": "Print the number of clean records written."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-4-write-clean-records": {
               "title": "Verify the saved clean CSV",
-              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records.",
+              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The saved file is the deliverable, so verify the artifact itself instead of trusting only the in-memory list.",
               "help": {
                 "concept": "Reopen the same path after the write block has finished.",
                 "hint_1": "Print `file.read()` with `end=\"\"` so the file contents appear exactly as saved.",
                 "hint_2": "The output file should contain only the header and accepted cleaned rows."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep writing `output/clean_students.csv` in write mode."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen the same output path in read mode after writing it."
-                },
-                "2": {
-                  "message": "Print the actual saved file contents."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             }
@@ -277,7 +298,7 @@
         "module-7-clean-student-records": {
           "sketch-1": {
             "title": "A messy student export needs a reliable cleaner",
-            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
+            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reuse Module 6 imports by creating a sibling `cleaning.py` helper and importing `clean_row` into `main.py`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
           }
         }
       }

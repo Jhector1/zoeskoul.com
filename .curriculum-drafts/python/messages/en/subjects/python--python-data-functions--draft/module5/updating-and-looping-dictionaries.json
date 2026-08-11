@@ -92,7 +92,7 @@
             },
             "try-updating-and-looping-dictionaries-sketch0": {
               "title": "Add or update stock from input",
-              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new.",
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key.",
               "hint": "Use the input variable itself as the key: `stock[item] = amount`.",
               "help": {
                 "concept": "Dictionary assignment uses the same syntax for both adding a new key and updating an existing one.",
@@ -103,7 +103,10 @@
               "solutionCode": "stock = {\"pens\": 4, \"paper\": 2}\nitem = input()\namount = int(input())\n\nstock[item] = amount\nprint(stock)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stock[item] = amount` so the same code can add a new key or update an existing one."
+                  "message": "Store the input amount with `stock[item] = amount` as requested."
+                },
+                "1": {
+                  "message": "Print the updated `stock` dictionary itself after changing it."
                 }
               }
             },
@@ -118,18 +121,11 @@
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# If key exists in settings, remove that entry with del.\n# Print the final settings dictionary.\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    del settings[key]\nprint(settings)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Check `if key in settings:` before deleting an optional key."
-                },
-                "1": {
-                  "message": "Remove the matching entry with `del settings[key]`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-updating-and-looping-dictionaries-sketch2": {
               "title": "Loop through keys and look up each value",
-              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line.",
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value.",
               "hint": "Use `for item in inventory:` and retrieve the current value with `inventory[item]`.",
               "help": {
                 "concept": "A direct dictionary loop yields keys; use the current key to look up its value.",
@@ -140,16 +136,16 @@
               "solutionCode": "inventory = {\"pens\": 3, \"markers\": 2, \"folders\": 5}\n\nfor item in inventory:\n    print(item, inventory[item])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop directly with `for item in inventory:` so `item` receives each dictionary key."
+                  "message": "Loop directly over `inventory` instead of typing the known output."
                 },
                 "1": {
-                  "message": "Use `inventory[item]` to retrieve the value for the current key."
+                  "message": "Use `inventory[item]` to retrieve each current key's value."
                 }
               }
             },
             "try-updating-and-looping-dictionaries-sketch3": {
               "title": "Print dynamic score pairs with .items()",
-              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through `scores.items()` by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
               "hint": "Build the dictionary first, then use `for name, score in scores.items():`.",
               "help": {
                 "concept": "`.items()` lets a loop work with the key and value together without a separate lookup.",
@@ -160,10 +156,7 @@
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nscores = {name1: score1, name2: score2}\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from the two input name/score pairs instead of hard-coding the output."
-                },
-                "1": {
-                  "message": "Loop with `for name, score in scores.items():` so each key-value pair is unpacked correctly."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             },
@@ -180,13 +173,7 @@
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nwords = [first, second, third]\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `words` from `first`, `second`, and `third` before the loop."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `words` so every input word is processed."
-                },
-                "2": {
-                  "message": "Store each calculated value with `lengths[word] = len(word)`."
+                  "message": "Use a `for` loop over `words` as the prompt requests."
                 }
               }
             }
@@ -194,7 +181,7 @@
           "tryIt": {
             "try_updating_and_looping_dictionaries_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use one dictionary assignment to add or update a stock count supplied as input."
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key."
             },
             "try_updating_and_looping_dictionaries_sketch1": {
               "title": "Try it yourself",
@@ -202,11 +189,11 @@
             },
             "try_updating_and_looping_dictionaries_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Loop directly through dictionary keys and use each key to retrieve its value."
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value."
             },
             "try_updating_and_looping_dictionaries_sketch3": {
               "title": "Try it yourself",
-              "prompt": "Build scores from input and unpack each key-value pair with `.items()`."
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`."
             },
             "try_updating_and_looping_dictionaries_sketch4": {
               "title": "Try it yourself",

@@ -66,6 +66,28 @@
           },
           "topics": [
             {
+              "topicId": "thinking-in-objects",
+              "title": "Thinking in Objects",
+              "summary": "Recognize when related state and behavior belong together in an object before writing full class syntax.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Recognize when related values describe one object.",
+                "Read object attributes and call object methods.",
+                "Connect object state with behavior before writing richer class definitions."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
               "topicId": "class-files-and-instances",
               "title": "Class Files and Instances",
               "summary": "Create a class in its own file, import it, and make separate objects from it.",
@@ -387,16 +409,16 @@
           },
           "topics": [
             {
-              "topicId": "module-9-catalog-polymorphism-project",
-              "title": "Module 9 Catalog Polymorphism Project",
-              "summary": "Build a multifile catalog with a base item, Book and Video subclasses, service functions, abstract fee behavior, and loaded data.",
+              "topicId": "module-9-greenhouse-sensor-project",
+              "title": "Module 9 Greenhouse Sensor Project",
+              "summary": "Build a greenhouse monitoring project with an abstract Sensor base, TemperatureSensor and HumiditySensor subclasses, polymorphic reporting, and a GreenhouseMonitor.",
               "minutes": 50,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Model shared catalog behavior with inheritance.",
-                "Use polymorphic services for mixed Book and Video objects.",
-                "Carry each project step's full solution into the next step's starter workspace."
+                "Define an abstract Sensor contract and concrete sensor subclasses.",
+                "Use inheritance, super(), overriding, and polymorphism across mixed sensor objects.",
+                "Build a GreenhouseMonitor that owns sensors and reports through shared reading() behavior."
               ],
               "practice": {
                 "tryIt": true,

@@ -282,37 +282,27 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+            "type": "uses_subscript",
+            "index": 1,
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+            "type": "uses_subscript",
+            "index": 1,
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+          "type": "uses_subscript",
+          "index": 1,
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
+          "type": "uses_subscript",
+          "index": 1,
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bstudents\\s*\\[\\s*1\\s*\\]\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.2.message"
         }
       ]
     },
@@ -390,21 +380,9 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-          }
-        ]
+        "sourceChecks": []
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\bproduct\\s*\\[\\s*['\\\"]details['\\\"]\\s*\\]\\s*\\[\\s*['\\\"]stock['\\\"]\\s*\\]\\s*=\\s*new_stock\\b",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
-        }
-      ]
+      "sourceChecks": []
     },
     {
       "id": "try-nested-data-structures-sketch2",
@@ -482,17 +460,37 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
+            "type": "uses_dict_key",
+            "key": "students",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*course\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*new_student\\s*\\)",
+          "type": "uses_dict_key",
+          "key": "students",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*course\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
         }
       ]
     },
@@ -572,47 +570,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+            "type": "uses_for_loop",
+            "iterable": "students",
             "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bstudents\\s*=\\s*\\[\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name1\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score1\\s*\\}\\s*,\\s*\\{\\s*['\\\"]name['\\\"]\\s*:\\s*name2\\s*,\\s*['\\\"]score['\\\"]\\s*:\\s*score2\\s*\\}\\s*\\]",
+          "type": "uses_for_loop",
+          "iterable": "students",
           "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bfor\\s+student\\s+in\\s+students\\s*:",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bstudent\\s*\\[\\s*['\\\"]name['\\\"]\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.2.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bstudent\\s*\\[\\s*['\\\"]score['\\\"]\\s*\\]",
-          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.3.message"
         }
       ]
     }

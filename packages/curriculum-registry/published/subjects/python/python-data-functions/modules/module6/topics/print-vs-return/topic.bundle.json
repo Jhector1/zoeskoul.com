@@ -262,8 +262,8 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+            "type": "uses_call",
+            "functionName": "show_status",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
           }
         ]
@@ -275,8 +275,8 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "(?m)^show_status\\s*\\(\\s*status\\s*\\)\\s*$",
+          "type": "uses_call",
+          "functionName": "show_status",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
         }
       ]
@@ -357,27 +357,17 @@
         ],
         "sourceChecks": [
           {
-            "type": "source_regex",
-            "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+            "type": "uses_call",
+            "functionName": "double",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "\\bresult\\s*=\\s*double\\s*\\(\\s*number\\s*\\)",
+          "type": "uses_call",
+          "functionName": "double",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*result\\s*\\+\\s*1\\s*\\)",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -462,14 +452,9 @@
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
           },
           {
-            "type": "source_regex",
-            "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+            "type": "uses_call",
+            "functionName": "make_label",
             "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -480,14 +465,9 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
         },
         {
-          "type": "source_regex",
-          "pattern": "\\blabel\\s*=\\s*make_label\\s*\\(\\s*item\\s*\\)",
+          "type": "uses_call",
+          "functionName": "make_label",
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "print\\s*\\(\\s*label\\s*\\+\\s*[\\'\\\"]![\\'\\\"]\\s*\\)",
-          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.2.message"
         }
       ]
     }

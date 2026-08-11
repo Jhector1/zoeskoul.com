@@ -458,6 +458,101 @@ export async function loadDraftTopic(ref: DraftRef): Promise<LoadedDraftTopic> {
   };
 }
 
+
+export async function loadDraftModuleAuthoredTopicOrder(args: {
+  catalog: string;
+  subject: string;
+  moduleSlug: string;
+}): Promise<string[]> {
+  const draftRoot = await findDraftRoot();
+  const manifestPath = safeJoin(
+    draftRoot,
+    args.catalog,
+    "subjects",
+    args.subject,
+    "subject.manifest.json",
+  );
+
+  if (!(await pathExists(manifestPath))) return [];
+
+  const parsed = JSON.parse(await fs.readFile(manifestPath, "utf8")) as JsonObject;
+  const modules = Array.isArray(parsed.modules) ? parsed.modules : [];
+
+  let moduleRecord: JsonObject | null = null;
+
+  for (const value of modules) {
+    const record =
+      value && typeof value === "object" && !Array.isArray(value)
+        ? (value as JsonObject)
+        : null;
+
+    if (
+      record &&
+      typeof record.slug === "string" &&
+      record.slug.trim() === args.moduleSlug
+    ) {
+      moduleRecord = record;
+      break;
+    }
+  }
+
+  if (!moduleRecord) return [];
+
+  const rawSections = Array.isArray(moduleRecord.sections)
+    ? moduleRecord.sections
+    : [];
+
+  const orderedSections: Array<{
+    record: JsonObject;
+    order: number;
+    discoveryIndex: number;
+  }> = [];
+
+  rawSections.forEach((value, discoveryIndex) => {
+    const record =
+      value && typeof value === "object" && !Array.isArray(value)
+        ? (value as JsonObject)
+        : null;
+
+    if (!record) return;
+
+    const rawOrder = record.order;
+    orderedSections.push({
+      record,
+      order:
+        typeof rawOrder === "number" && Number.isFinite(rawOrder)
+          ? rawOrder
+          : discoveryIndex + 1,
+      discoveryIndex,
+    });
+  });
+
+  orderedSections.sort(
+    (left, right) =>
+      left.order - right.order ||
+      left.discoveryIndex - right.discoveryIndex,
+  );
+
+  const topicIds: string[] = [];
+  const seen = new Set<string>();
+
+  for (const { record } of orderedSections) {
+    const topics = Array.isArray(record.topics) ? record.topics : [];
+
+    for (const value of topics) {
+      if (typeof value !== "string") continue;
+
+      const topicId = value.trim();
+      if (!topicId || seen.has(topicId)) continue;
+
+      seen.add(topicId);
+      topicIds.push(topicId);
+    }
+  }
+
+  return topicIds;
+}
+
 export async function loadDraftModuleTopics(ref: DraftRef): Promise<LoadedDraftModule> {
   const repoRoot = await findRepoRoot();
   const draftRoot = await findDraftRoot();

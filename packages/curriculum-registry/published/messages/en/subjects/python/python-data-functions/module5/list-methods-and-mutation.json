@@ -92,18 +92,21 @@
             },
             "try-list-methods-and-mutation-sketch0": {
               "title": "Correct one score",
-              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list.",
-              "hint": "The last item in this three-item list is at index `2`.",
+              "prompt": "A score was entered incorrectly. Read the corrected score from input. Use indexed assignment on the existing `scores` list to replace its last item with that value, then print the updated list.",
+              "hint": "Use list indexing on the left side of an assignment to change the final item of `scores`. Any valid index expression that selects the last item is acceptable.",
               "help": {
-                "concept": "Assigning to an indexed list position replaces the value already stored there.",
-                "hint_1": "Keep the existing list and change only its last position.",
-                "hint_2": "Use `scores[2] = corrected_score`, then print `scores`."
+                "concept": "Indexed assignment changes an existing list item in place. The index expression inside the brackets can be written in different valid ways.",
+                "hint_1": "Write an assignment to `scores[...]` where the expression inside the brackets selects the final item.",
+                "hint_2": "Assign `corrected_score` to that indexed position, then print `scores` itself."
               },
               "starterCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\n# Replace the last score with corrected_score.\n# Then print the updated list.\n",
               "solutionCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\nscores[2] = corrected_score\nprint(scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Replace the last item with `scores[2] = corrected_score` instead of creating a different final list."
+                  "message": "Use indexed assignment on the existing `scores` list: assign `corrected_score` to a `scores[...]` position that selects the last item."
+                },
+                "1": {
+                  "message": "Print the updated `scores` list itself after changing it."
                 }
               }
             },
@@ -120,7 +123,10 @@
               "solutionCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\nattendees.append(new_attendee)\nprint(attendees)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `attendees.append(new_attendee)` so the input value is added to the existing list."
+                  "message": "Use `append()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the updated `attendees` list itself after using `append()`."
                 }
               }
             },
@@ -137,13 +143,16 @@
               "solutionCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\nworkshops.remove(canceled)\nprint(workshops)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `workshops.remove(canceled)` so the program removes whichever workshop arrives as input."
+                  "message": "Use `remove()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the mutated `workshops` list itself after removing the canceled workshop."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch3": {
               "title": "Take the second ticket",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list.",
+              "prompt": " Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket.",
               "hint": "`pop(1)` removes the item at index 1 and returns that removed item.",
               "help": {
                 "concept": "`pop(index)` is useful when you know the position and also need the removed value.",
@@ -154,7 +163,13 @@
               "solutionCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\nnext_ticket = tickets.pop(1)\nprint(next_ticket)\nprint(tickets)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `next_ticket = tickets.pop(1)` instead of typing `T-105` directly."
+                  "message": "Use `pop()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print `next_ticket` itself instead of typing the known removed ticket."
+                },
+                "2": {
+                  "message": "Print the remaining `tickets` list itself after `pop()` changes it."
                 }
               }
             },
@@ -171,10 +186,10 @@
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\ntimes = [first, second, third]\ntimes.sort()\nprint(times)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `times` from `first`, `second`, and `third` instead of printing a hard-coded sorted list."
+                  "message": "Use `sort()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Call `times.sort()` so the existing list is actually sorted in place."
+                  "message": "Print the sorted `times` list itself after sorting it in place."
                 }
               }
             }
@@ -194,7 +209,7 @@
             },
             "try_list_methods_and_mutation_sketch3": {
               "title": "Try it yourself",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list."
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list. Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket."
             },
             "try_list_methods_and_mutation_sketch4": {
               "title": "Try it yourself",

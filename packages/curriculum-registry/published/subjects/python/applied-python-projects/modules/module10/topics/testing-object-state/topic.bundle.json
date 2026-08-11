@@ -89,13 +89,18 @@
       "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 6,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": null
+        "maxAttempts": null,
+        "exerciseKeys": [
+          "q-testing-object-state-single-1",
+          "q-testing-object-state-multi-1",
+          "q-testing-object-state-multi-2"
+        ]
       }
     }
   ],
@@ -130,100 +135,119 @@
       "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
       "starterFiles": [
         {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
+          "path": "tests/check_book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.tests_check_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+          "path": "tests/check_book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
         "language": "python",
-        "entryFilePath": "models/book.py",
+        "entryFilePath": "tests/check_book.py",
         "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
         "starterFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.tests_check_book_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/book.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
             "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
+            "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
       "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "book state tests passed\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
         "solutionFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.tests_check_book_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/book.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
             "language": "python",
-            "isEntry": true,
-            "entry": true
+            "isEntry": false,
+            "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "defines_class",
-            "className": "Book",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.0.message",
-            "path": "models/book.py"
-          },
-          {
-            "type": "constructible",
-            "className": "Book",
-            "constructorArgs": [
-              "Dune"
-            ],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.1.message",
-            "path": "models/book.py"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Book",
-            "constructorArgs": [
-              "Dune"
-            ],
-            "attributes": [
-              "title",
-              "available"
-            ],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.2.message",
-            "path": "models/book.py"
-          },
-          {
-            "type": "attribute_sequence_equals",
-            "className": "Book",
-            "constructorArgs": [
-              "Dune"
-            ],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "checkout",
-                "methodArgs": [],
-                "methodArgKinds": []
-              }
-            ],
-            "attributeName": "available",
-            "expected": false,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.3.message",
-            "path": "models/book.py"
+            "type": "source_regex",
+            "path": "tests/check_book.py",
+            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Book\\s*\\([^)]*\\).*?assert\\s+\\1\\.available\\s*(?:is|==)\\s*True.*?\\1\\.checkout\\s*\\(\\s*\\).*?assert\\s+(?:\\1\\.available\\s*(?:is|==)\\s*False|not\\s+\\1\\.available\\b)",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.sourceChecks.0.message"
           }
         ]
-      }
+      },
+      "entryFilePath": "tests/check_book.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "tests/check_book.py",
+          "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Book\\s*\\([^)]*\\).*?assert\\s+\\1\\.available\\s*(?:is|==)\\s*True.*?\\1\\.checkout\\s*\\(\\s*\\).*?assert\\s+(?:\\1\\.available\\s*(?:is|==)\\s*False|not\\s+\\1\\.available\\b)",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-testing-object-state-sketch1",
@@ -235,101 +259,131 @@
       "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
       "starterFiles": [
         {
-          "path": "models/task.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
+          "path": "tests/check_task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.tests_check_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "models/task.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+          "path": "tests/check_task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
         "language": "python",
-        "entryFilePath": "models/task.py",
+        "entryFilePath": "tests/check_task.py",
         "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
         "starterFiles": [
+          {
+            "path": "tests/check_task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.tests_check_task_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/task.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
             "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
+            "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
       "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "task validation tests passed\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
         "solutionFiles": [
+          {
+            "path": "tests/check_task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.tests_check_task_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/task.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
             "language": "python",
-            "isEntry": true,
-            "entry": true
+            "isEntry": false,
+            "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "defines_class",
-            "className": "Task",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.0.message",
-            "path": "models/task.py"
+            "type": "source_regex",
+            "path": "tests/check_task.py",
+            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*2\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*2\\b",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.0.message"
           },
           {
-            "type": "attribute_sequence_equals",
-            "className": "Task",
-            "constructorArgs": [
-              "Broken input",
-              -5
-            ],
-            "constructorArgKinds": [],
-            "calls": [],
-            "attributeName": "priority",
-            "expected": 0,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.3.message",
-            "path": "models/task.py"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Task",
-            "constructorArgs": [
-              "Email clients",
-              2
-            ],
-            "attributes": [
-              "name",
-              "priority"
-            ],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.1.message",
-            "path": "models/task.py"
-          },
-          {
-            "type": "attribute_sequence_equals",
-            "className": "Task",
-            "constructorArgs": [
-              "Email clients",
-              2
-            ],
-            "constructorArgKinds": [],
-            "calls": [],
-            "attributeName": "priority",
-            "expected": 2,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.2.message",
-            "path": "models/task.py"
+            "type": "source_regex",
+            "path": "tests/check_task.py",
+            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*-5\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*0\\b",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.1.message"
           }
         ]
-      }
+      },
+      "entryFilePath": "tests/check_task.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "tests/check_task.py",
+          "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*2\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*2\\b",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "tests/check_task.py",
+          "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*-5\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*0\\b",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "try-testing-object-state-sketch2",
@@ -341,91 +395,119 @@
       "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
       "starterFiles": [
         {
-          "path": "models/counter.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
+          "path": "tests/check_counter.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.tests_check_counter_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/counter.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "models/counter.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+          "path": "tests/check_counter.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "models/counter.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
         "language": "python",
-        "entryFilePath": "models/counter.py",
+        "entryFilePath": "tests/check_counter.py",
         "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
         "starterFiles": [
+          {
+            "path": "tests/check_counter.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.tests_check_counter_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/counter.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
             "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_counter.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
+            "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "models/counter.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
       "showExpectedExample": false,
       "recipe": {
-        "type": "semantic",
+        "type": "fixed_tests",
         "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "counter sequence tests passed\n",
+            "match": "exact"
+          }
+        ],
         "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
         "solutionFiles": [
+          {
+            "path": "tests/check_counter.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.tests_check_counter_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
           {
             "path": "models/counter.py",
             "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
             "language": "python",
-            "isEntry": true,
-            "entry": true
+            "isEntry": false,
+            "entry": false
           }
         ],
-        "semanticChecks": [
+        "sourceChecks": [
           {
-            "type": "defines_class",
-            "className": "Counter",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.0.message",
-            "path": "models/counter.py"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Counter",
-            "constructorArgs": [],
-            "attributes": [
-              "count"
-            ],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.1.message",
-            "path": "models/counter.py"
-          },
-          {
-            "type": "attribute_sequence_equals",
-            "className": "Counter",
-            "constructorArgs": [],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "increment",
-                "methodArgs": [],
-                "methodArgKinds": []
-              },
-              {
-                "methodName": "increment",
-                "methodArgs": [],
-                "methodArgKinds": []
-              }
-            ],
-            "attributeName": "count",
-            "expected": 2,
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.2.message",
-            "path": "models/counter.py"
+            "type": "source_regex",
+            "path": "tests/check_counter.py",
+            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Counter\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*0\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*1\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*2\\b",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.sourceChecks.0.message"
           }
         ]
-      }
+      },
+      "entryFilePath": "tests/check_counter.py",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "tests/check_counter.py",
+          "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Counter\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*0\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*1\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*2\\b",
+          "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "q-testing-object-state-single-1",
@@ -465,40 +547,6 @@
       }
     },
     {
-      "id": "q-testing-object-state-fill-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "0"
-      }
-    },
-    {
-      "id": "q-testing-object-state-drag-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-drag-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t2",
-          "t1",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
       "id": "q-testing-object-state-multi-2",
       "kind": "multi_choice",
       "purpose": "quiz",
@@ -516,18 +564,6 @@
           "a",
           "b"
         ]
-      }
-    },
-    {
-      "id": "q-testing-object-state-fill-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "False"
       }
     }
   ]

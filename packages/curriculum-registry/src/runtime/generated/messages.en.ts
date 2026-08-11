@@ -8382,235 +8382,179 @@ const messages: Record<string, any> = {
       "python-10-testing-debugging-oop-projects": {
         "debugging-imports-and-state": {
           "label": "Debugging Imports and State",
-          "summary": "Debug OOP code by tracing the path: the file Python imports, the object that owns the state, and the method that changes it.",
+          "summary": "Debug three different failure sources deliberately: a wrong module path, shared mutable constructor state, and a method that reports success without changing object state.",
           "cards": {
             "sketch0": {
-              "title": "Trace import errors to the file and name Python is actually loading"
+              "title": "Trace a broken import"
             },
             "sketch1": {
-              "title": "Watch out for shared mutable defaults"
+              "title": "Trace shared mutable state"
             },
             "sketch2": {
-              "title": "Debug object state by checking what changes after each method call"
+              "title": "Trace a missing state mutation"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_debugging_imports_and_state_sketch0": {
-              "title": "Fix the broken model import",
-              "prompt": "Fix the import in `main.py` so it imports `Book` from `models.book`, creates the provided object, and prints its summary.",
-              "hint": "Use `from models.book import Book`.",
+              "title": "Fix the module path without rewriting Book",
+              "prompt": "`models/book.py` is already correct. `main.py` fails because its import path does not match the file tree. Fix the import so the `Book` class is loaded from `models/book.py`. Leave the model unchanged. The rest of `main.py` should keep reading a title and author and printing `book.summary()`.",
+              "hint": "The folder is `models` and the file is `book.py`.",
               "help": {
-                "concept": "A multifile program must import from the module path that matches the workspace folders.",
-                "hint_1": "Use `from models.book import Book`.",
-                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
+                "concept": "The module path mirrors the folder and Python filename: `models/book.py` becomes `models.book`.",
+                "hint_1": "Do not move or duplicate the Book class.",
+                "hint_2": "Fix the import in `main.py`."
               },
-              "starterCode": "# TODO: fix this import path.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+              "starterCode": "# The Book model is correct. Debug only the import path.\nfrom book import Book\n\ntitle = input()\nauthor = input()\n\nbook = Book(title, author)\nprint(book.summary())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# TODO: fix this import path.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
-                },
-                "models_book_py": {
-                  "content": "# Keep this Book model unchanged.\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
+                  "content": "# The Book model is correct. Debug only the import path.\nfrom book import Book\n\ntitle = input()\nauthor = input()\n\nbook = Book(title, author)\nprint(book.summary())\n"
                 },
                 "models_book_py": {
                   "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n"
                 }
               },
-              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
-              "checks": {
-                "0": {
-                  "message": "Keep Book.summary() working."
+              "solutionFiles": {
+                "main_py": {
+                  "content": "# The Book model is correct. Debug only the import path.\nfrom models.book import Book\n\ntitle = input()\nauthor = input()\n\nbook = Book(title, author)\nprint(book.summary())\n"
                 },
-                "1": {
-                  "message": "Fix the import so main.py prints the summary."
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n"
                 }
               },
-              "expectedOutput": "The Hobbit by Tolkien"
+              "solutionCode": "# The Book model is correct. Debug only the import path.\nfrom models.book import Book\n\ntitle = input()\nauthor = input()\n\nbook = Book(title, author)\nprint(book.summary())\n",
+              "checks": {},
+              "expectedOutput": "The Hobbit by Tolkien",
+              "sourceChecks": {
+                "0": {
+                  "message": "Import `Book` through the `models.book` module path rather than from a nonexistent top-level `book` module."
+                }
+              }
             },
             "try_debugging_imports_and_state_sketch1": {
-              "title": "Stop objects from sharing one list",
-              "prompt": "Fix `ReadingList.__init__` in `models/reading_list.py` so each object receives its own list when no books are provided. The supplied main script adds a book to the first list and proves the second stays empty.",
-              "hint": "Use `books=None`, then create a new list inside the constructor.",
+              "title": "Stop ReadingList objects from sharing one default list",
+              "prompt": "`main.py` already reproduces the bug with two ReadingList objects. In `models/reading_list.py`, replace the mutable `books=[]` default with `books=None`. When `books is None`, create a new empty list for that instance; when a list is explicitly provided, keep that provided list. Leave `add_book()`, `count()`, and `main.py` unchanged.",
+              "hint": "The default itself must not be a list. Create the empty list inside the constructor only when no list was passed.",
               "help": {
-                "concept": "Mutable default arguments are shared between calls. Creating the list inside the constructor gives each object independent state.",
-                "hint_1": "Use `books=None`, then create a new list inside the constructor.",
-                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
+                "concept": "Mutable default arguments are shared across calls. A `None` sentinel lets each default-constructed object receive fresh state.",
+                "hint_1": "Change only the constructor logic that initializes `books`.",
+                "hint_2": "Preserve an explicitly supplied list."
               },
-              "starterCode": "# Run this provided two-object test after fixing the model.\nfrom models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n",
+              "starterCode": "from models.reading_list import ReadingList\n\nfirst_owner = input()\nsecond_owner = input()\ntitle = input()\n\nfirst = ReadingList(first_owner)\nsecond = ReadingList(second_owner)\nfirst.add_book(title)\n\nprovided = ReadingList(\"Provided\", [\"Existing\"])\n\nprint(f\"{first.owner}: {first.count()}\")\nprint(f\"{second.owner}: {second.count()}\")\nprint(f\"{provided.owner}: {provided.count()}\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided two-object test after fixing the model.\nfrom models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n"
+                  "content": "from models.reading_list import ReadingList\n\nfirst_owner = input()\nsecond_owner = input()\ntitle = input()\n\nfirst = ReadingList(first_owner)\nsecond = ReadingList(second_owner)\nfirst.add_book(title)\n\nprovided = ReadingList(\"Provided\", [\"Existing\"])\n\nprint(f\"{first.owner}: {first.count()}\")\nprint(f\"{second.owner}: {second.count()}\")\nprint(f\"{provided.owner}: {provided.count()}\")\n"
                 },
                 "models_reading_list_py": {
-                  "content": "# Starter guidance: Stop objects from sharing one list. Follow the prompt and edit the requested code below.\nclass ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
+                  "content": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n"
+                  "content": "from models.reading_list import ReadingList\n\nfirst_owner = input()\nsecond_owner = input()\ntitle = input()\n\nfirst = ReadingList(first_owner)\nsecond = ReadingList(second_owner)\nfirst.add_book(title)\n\nprovided = ReadingList(\"Provided\", [\"Existing\"])\n\nprint(f\"{first.owner}: {first.count()}\")\nprint(f\"{second.owner}: {second.count()}\")\nprint(f\"{provided.owner}: {provided.count()}\")\n"
                 },
                 "models_reading_list_py": {
-                  "content": "class ReadingList:\n    def __init__(self, owner, books=None):\n        self.owner = owner\n        self.books = [] if books is None else list(books)\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
+                  "content": "class ReadingList:\n    def __init__(self, owner, books=None):\n        if books is None:\n            books = []\n\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
                 }
               },
-              "solutionCode": "from models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n",
-              "checks": {
+              "solutionCode": "from models.reading_list import ReadingList\n\nfirst_owner = input()\nsecond_owner = input()\ntitle = input()\n\nfirst = ReadingList(first_owner)\nsecond = ReadingList(second_owner)\nfirst.add_book(title)\n\nprovided = ReadingList(\"Provided\", [\"Existing\"])\n\nprint(f\"{first.owner}: {first.count()}\")\nprint(f\"{second.owner}: {second.count()}\")\nprint(f\"{provided.owner}: {provided.count()}\")\n",
+              "checks": {},
+              "expectedOutput": "Ava: 1\nNoah: 0\nProvided: 1",
+              "sourceChecks": {
                 "0": {
-                  "message": "Keep the ReadingList class in the model file."
+                  "message": "Use `books=None` instead of a mutable list default."
                 },
                 "1": {
-                  "message": "The first list should contain one book while the second remains empty."
+                  "message": "Handle the `books is None` case inside the constructor so a fresh list is created per default-constructed object."
                 }
-              },
-              "expectedOutput": "1\n0"
+              }
             },
             "try_debugging_imports_and_state_sketch2": {
-              "title": "Validate stock before changing state",
-              "prompt": "Complete `sell(amount)` in `models/stock_item.py`. Subtract only when the amount is positive and no greater than the available quantity. Return the current quantity for both valid and invalid requests.",
-              "hint": "Check `0 < amount <= self.quantity` before subtracting.",
+              "title": "Fix a method that returns success but forgets state",
+              "prompt": "`Task.complete()` currently returns `True` but leaves `task.done` as `False`. In `models/task.py`, fix the existing `complete(self)` method so it sets `self.done = True` before returning `True`. Repeated calls must still leave the task completed. Leave `main.py` and the constructor unchanged.",
+              "hint": "The return value already says success. Repair the missing object state transition inside `complete()`.",
               "help": {
-                "concept": "Validate a requested state change before mutating the object.",
-                "hint_1": "Check `0 < amount <= self.quantity` before subtracting.",
-                "hint_2": "Edit the file named in the prompt and verify each listed responsibility there."
+                "concept": "A state-changing method must update the object's stored state, not only return a success value.",
+                "hint_1": "The attribute to change is `self.done`.",
+                "hint_2": "Set it before the existing `return True`."
               },
-              "starterCode": "# Run this provided valid-and-invalid sale test.\nfrom models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n",
+              "starterCode": "from models.task import Task\n\ntitle = input()\ntask = Task(title)\n\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided valid-and-invalid sale test.\nfrom models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n"
+                  "content": "from models.task import Task\n\ntitle = input()\ntask = Task(title)\n\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\n"
                 },
-                "models_stock_item_py": {
-                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # TODO: subtract only a positive amount that is not greater than quantity.\n        pass\n\n    def get_quantity(self):\n        return self.quantity\n"
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        # BUG: this reports success but never changes the object's state.\n        return True\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n"
+                  "content": "from models.task import Task\n\ntitle = input()\ntask = Task(title)\n\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\n"
                 },
-                "models_stock_item_py": {
-                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if 0 < amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity\n"
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n        return True\n"
                 }
               },
-              "solutionCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n",
-              "checks": {
+              "solutionCode": "from models.task import Task\n\ntitle = input()\ntask = Task(title)\n\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\nprint(task.complete())\nprint(f\"{task.title}: {task.done}\")\n",
+              "checks": {},
+              "expectedOutput": "Ship release: False\nTrue\nShip release: True\nTrue\nShip release: True",
+              "sourceChecks": {
                 "0": {
-                  "message": "A valid sale should reduce the quantity."
-                },
-                "1": {
-                  "message": "An oversized sale should leave the quantity unchanged."
-                },
-                "2": {
-                  "message": "Print both returned quantities."
+                  "message": "Update `self.done` to `True` inside `complete()` rather than only returning a success value."
                 }
-              },
-              "expectedOutput": "3\n3"
+              }
             }
           },
           "practice": {
             "q-debugging-imports-state-single-1": {
-              "title": "Spot the import mismatch",
-              "prompt": "`main.py` contains `from models.catalog_item import CatalogItem`, but the actual file is `models/item.py` and it defines `class CatalogItem`. Which change fixes the import?",
-              "hint": "Match the module name to the real file name.",
+              "title": "Locate an import-path bug",
+              "prompt": "`models/book.py` defines `Book`, but `main.py` says `from book import Book`. Which layer should you fix first?",
+              "hint": "Compare the import path with the file tree.",
               "help": {
-                "concept": "The module part of an import comes from the file path, while the imported name comes from the class or function defined inside that file.",
-                "hint_1": "The class name is already correct, so focus on the file after `models.`.",
-                "hint_2": "Use the file name without `.py` as the module name in the import path."
+                "concept": "When the class is already correct, repair the module path rather than rewriting the model.",
+                "hint_1": "The file lives inside `models/`.",
+                "hint_2": "The import should refer to that package/module path."
               },
               "options": {
-                "a": "from models.catalog_item import CatalogItem",
-                "b": "from models.item import CatalogItem",
-                "c": "from item.models import CatalogItem",
-                "d": "from CatalogItem import models.item"
+                "a": "Rewrite the Book class in main.py",
+                "b": "Fix main.py to import Book through the models.book module",
+                "c": "Delete models/book.py",
+                "d": "Rename Book to match the broken import"
               }
             },
             "q-debugging-imports-state-multi-1": {
-              "title": "Choose signs of a shared-list bug",
-              "prompt": "A class uses `def __init__(self, tags=[])`. Which outcomes are real warning signs that instances are sharing state? Choose all that apply.",
-              "hint": "Think about what happens when two objects use the same default list.",
+              "title": "Diagnose shared mutable state",
+              "prompt": "Which TWO observations strongly point to a shared mutable default argument bug?",
+              "hint": "Think about state unexpectedly appearing in another instance.",
               "help": {
-                "concept": "A mutable default can be reused across instances, so changing one object's list can unexpectedly change another object's list too.",
-                "hint_1": "Look for behavior where one instance changes even though you only called a method on another instance.",
-                "hint_2": "Pick the options that describe cross-instance list changes, not normal independent updates."
+                "concept": "A mutable default can make separately constructed objects share one list across constructor calls.",
+                "hint_1": "Look for interaction between two supposedly separate objects.",
+                "hint_2": "Look for a list literal used as a default parameter value."
               },
               "options": {
-                "a": "Adding a tag to one object makes another object's tag list grow too",
-                "b": "Two new objects start with different empty lists before any method calls",
-                "c": "Printing one object's tags shows items added through a different object",
-                "d": "A method appends to `self.tags` and only that same object changes"
+                "a": "Adding a book to one default-constructed ReadingList changes another one's count",
+                "b": "Two objects have different owner names",
+                "c": "The constructor signature uses `books=[]`",
+                "d": "A method returns the length of its own list"
               }
             },
             "q-debugging-imports-state-multi-2": {
-              "title": "Pick good state-debugging checks",
-              "prompt": "You are debugging a `borrow()` method on a `LibraryBook` object. Which checks best help you confirm whether object state changes correctly? Choose all that apply.",
-              "hint": "Look for checks that compare state before and after the method call.",
+              "title": "Debug a state-changing method",
+              "prompt": "`task.complete()` returns `True`, but `task.done` remains `False`. Which TWO checks are most useful?",
+              "hint": "Separate the method's return value from the object's stored state.",
               "help": {
-                "concept": "State debugging works best when you inspect the relevant attributes around a specific method call instead of only looking at final printed output.",
-                "hint_1": "Choose checks that verify attribute values after calling `borrow()`.",
-                "hint_2": "Good checks include the starting value, the method call, and the expected new value or unchanged value."
+                "concept": "A successful return value does not prove the object's state was updated.",
+                "hint_1": "Inspect the state after the call.",
+                "hint_2": "Inspect whether the method actually assigns the state attribute."
               },
               "options": {
-                "a": "Check whether `available` changes from `True` to `False` after one valid borrow",
-                "b": "Check whether a second borrow leaves `available` unchanged when the book is already unavailable",
-                "c": "Only check that the program prints one line somewhere",
-                "d": "Rename the class file and see whether the output panel stays blank"
-              }
-            },
-            "q-debugging-imports-state-fill-1": {
-              "title": "Complete a safe default parameter",
-              "prompt": "Fill in the missing default value so the constructor avoids a shared mutable list.",
-              "hint": "Use a non-mutable placeholder instead of `[]`.",
-              "help": {
-                "concept": "Use an immutable sentinel default, then create a new list inside the constructor so instances never share one mutable default.",
-                "hint_1": "The blank should not be a list literal.",
-                "hint_2": "Choose the special Python value commonly used to mean 'no value was passed'."
-              },
-              "template": "def __init__(self, books=[blank1]):",
-              "choices": [
-                "None",
-                "[]",
-                "{}",
-                "0"
-              ]
-            },
-            "q-debugging-imports-state-fill-2": {
-              "title": "Complete the package import",
-              "prompt": "Fill in the missing module name for this import from a `models` package.",
-              "hint": "Import from the module whose file actually defines the class named in the prompt.",
-              "help": {
-                "concept": "In `from package.module import Name`, the module part is the file name without `.py`.",
-                "hint_1": "Separate the class name from the module path: the blank belongs to the file path portion of the import.",
-                "hint_2": "For a file inside models/, the module segment matches the Python filename without the .py extension."
-              },
-              "template": "from models.[blank1] import Book",
-              "choices": [
-                "book",
-                "Lesson notes panel",
-                "models",
-                "import"
-              ]
-            },
-            "q-debugging-imports-state-order-1": {
-              "title": "Order a state-debugging workflow",
-              "prompt": "Put these steps in a sensible order for debugging a method that changes object state.",
-              "hint": "Start by observing the initial state before calling the method.",
-              "help": {
-                "concept": "A clear debugging workflow checks the starting state, performs one action, then verifies the resulting state so you can isolate where the bug appears.",
-                "hint_1": "The method call belongs in the middle, between the before-check and after-check.",
-                "hint_2": "Finish by comparing the actual new state with the expected rule for that method."
-              },
-              "tokens": {
-                "t1": "Create the object with a known starting value",
-                "t2": "Check the relevant attribute before the method call",
-                "t3": "Call the state-changing method once",
-                "t4": "Check the attribute again after the call"
+                "a": "Check `task.done` after calling `complete()`",
+                "b": "Check whether `complete()` assigns `self.done = True`",
+                "c": "Rename the Task class",
+                "d": "Change the import path even though the module loads correctly"
               }
             },
             "ci-debugging-imports-and-state-4": {
@@ -8665,7 +8609,7 @@ const messages: Record<string, any> = {
         },
         "module-10-oop-quality-project": {
           "label": "Module 10 Animal Shelter Quality Project",
-          "summary": "Stabilize a small animal-shelter intake app with model tests, a CSV loader, state-change checks, reporting helpers, and final regression coverage.",
+          "summary": "Stabilize one cumulative shelter application by writing real regression tests, refactoring a mixed-object report, fixing import and state bugs, and finishing an end-to-end quality pass.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
@@ -8676,532 +8620,798 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "try_module_10_oop_quality_project_sketch0": {
-              "title": "Milestone 1: Validate the pet model"
+              "title": "Milestone 1: write model regression tests"
             },
             "project_step_report_service_tests": {
-              "title": "Milestone 2: Test the shelter reporting service"
+              "title": "Milestone 2: refactor and test mixed reporting"
             },
             "project_step_storage_loader": {
-              "title": "Milestone 3: Load pets from fixture data"
+              "title": "Milestone 3: debug and test the CSV loader"
             },
             "project_step_debug_imports_state": {
-              "title": "Milestone 4: Verify adoption state changes"
+              "title": "Milestone 4: reproduce and fix adoption state"
             },
             "project_step_regression_summary": {
-              "title": "Milestone 5: Add a reusable shelter summary"
+              "title": "Milestone 5: build and test the cumulative summary"
             },
             "project_step_final_regression": {
-              "title": "Milestone 6: Finish the end-to-end regression workspace"
+              "title": "Milestone 6: finish the full regression suite"
             }
           },
           "moduleProject": {
             "steps": {
               "try_module_10_oop_quality_project_sketch0": {
-                "title": "Milestone 1: validate the shelter pet model",
-                "prompt": "Complete `ShelterPet` in `models/shelter_pet.py`. Store `name`, `species`, and `age`; reject a negative age with `ValueError`; start `adopted` as `False`; and make `is_available()` return whether the pet is still available. Keep the runnable demo in `main.py`.",
-                "hint": "Validate age before assigning the object state.",
+                "title": "Milestone 1: write model regression tests",
+                "prompt": "`ShelterPet` and `FosterPet` are supplied production classes. In `tests/check_model.py`, use the provided `pet` and `foster` fixtures to write meaningful assertions for stored pet state, initial availability, the `FosterPet` inheritance relationship, and the overridden `adoption_label()` result. Also verify that constructing a ShelterPet with age `-1` raises `ValueError`. Do not repair `mark_adopted()` yet; that intentional bug belongs to a later milestone. Keep the final `model tests passed` print.",
+                "hint": "This is a testing milestone: production models stay supplied. Assert observable state and behavior instead of rebuilding them.",
                 "help": {
-                  "concept": "Model tests should cover stored state, normal behavior, and invalid constructor input.",
-                  "hint_1": "Set `self.adopted = False` for every new pet.",
-                  "hint_2": "`is_available()` should return `not self.adopted`."
+                  "concept": "A useful model regression test protects constructor state, validation, inheritance, and an override contract.",
+                  "hint_1": "Check the supplied `pet` attributes and availability.",
+                  "hint_2": "Check that `foster` is a ShelterPet and uses its specialized label."
                 },
-                "starterCode": "# Run this provided shelter model demo.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
+                "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\n# Add meaningful model/inheritance assertions here.\n\nprint(\"model tests passed\")\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this provided shelter model demo after completing ShelterPet.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        # TODO: reject a negative age, store the three values, and start adopted as False.\n        pass\n\n    def is_available(self):\n        # TODO: return whether the pet has not been adopted.\n        pass\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
                   },
                   "tests_check_model_py": {
-                    "content": "# Add assertions for pet attributes, availability, and negative age validation.\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\n# Add meaningful model/inheritance assertions here.\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
                   },
                   "tests_check_model_py": {
-                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "model tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Store all pet attributes and the adopted state."
+                    "message": "Assert both stored model state and the new pet's initial availability."
                   },
                   "1": {
-                    "message": "A new pet should be available."
+                    "message": "Assert the FosterPet inheritance relationship and specialized adoption label."
                   },
                   "2": {
-                    "message": "Keep main.py runnable."
+                    "message": "Exercise the negative-age case and handle the expected `ValueError`."
                   }
-                },
-                "expectedOutput": "Milo\nTrue"
+                }
               },
               "project_step_report_service_tests": {
-                "title": "Milestone 2: test the shelter reporting service",
-                "prompt": "Complete `total_age(pets)` and `young_pet_names(pets, max_age)` in `services/reporting.py`. Return the sum of all ages and the names of pets at or below the age limit in their original order. Do not print inside the service.",
-                "hint": "Build the name list from each pet object instead of hard-coding the sample output.",
+                "title": "Milestone 2: refactor and test mixed reporting",
+                "prompt": "Continue from the exact Milestone 1 workspace. `main.py` currently owns a working list-wide label loop. Refactor that collection coordination into `adoption_labels(pets)` in `services/reporting.py`; it must call each object's shared `adoption_label()` method without branching on concrete types. Also implement `young_pet_names(pets, max_age)` so it returns matching names in input order. Update `main.py` to import and use `adoption_labels()` instead of keeping the old loop. Then complete `tests/check_reporting.py` with assertions for both provided mixed ShelterPet/FosterPet fixtures and both age limits. Keep `build_summary()` unfinished for Milestone 5.",
+                "hint": "The refactor moves list-wide work only. Each model already owns its own `adoption_label()` behavior.",
                 "help": {
-                  "concept": "Small pure reporting helpers are easy to test because they return values without changing state.",
-                  "hint_1": "Use each pet's `age` for the total.",
-                  "hint_2": "Include a name when `pet.age <= max_age`."
+                  "concept": "This milestone retrieves service refactoring plus regression testing of a mixed polymorphic collection.",
+                  "hint_1": "The service should call `pet.adoption_label()` uniformly.",
+                  "hint_2": "The test should compare exact ordered lists for normal and reversed mixed fixtures."
                 },
-                "starterCode": "# Run this report demo after completing services/reporting.py.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
+                "starterCode": "# Added in Milestone 2.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this report demo after completing the reporting helpers.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nlines = []\nfor pet in pets:\n    lines.append(pet.adoption_label())\n\nprint(\", \".join(lines))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Validated shelter model from milestone 1.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
+                    "content": "def adoption_labels(pets):\n    # Added in Milestone 2.\n    pass\n\n\ndef young_pet_names(pets, max_age):\n    # Added in Milestone 2.\n    pass\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
-                    "content": "# Add assertions for total_age() and young_pet_names().\n"
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
                   },
                   "tests_check_reporting_py": {
-                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nassert total_age(pets) == 9\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n"
-                  }
-                },
-                "solutionCode": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
-                "checks": {
-                  "0": {
-                    "message": "Return values that produce the exact two-line shelter report."
-                  }
-                },
-                "expectedOutput": "9\nMilo, Pepper"
-              },
-              "project_step_storage_loader": {
-                "title": "Milestone 3: load shelter pets from CSV",
-                "prompt": "Complete `load_pets(path)` in `storage/pet_loader.py`. Read the CSV with `csv.DictReader`, convert `age` to `int`, create `ShelterPet` objects, and return them in file order.",
-                "hint": "Create one ShelterPet for each row and append it to a list.",
-                "help": {
-                  "concept": "A storage layer translates file rows into domain objects.",
-                  "hint_1": "Open the path with `newline=\"\"`.",
-                  "hint_2": "Convert `row[\"age\"]` before calling the constructor."
-                },
-                "starterCode": "# Run this loader demo after completing storage/pet_loader.py.\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this loader demo after completing load_pets().\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "# Validated shelter model; keep it working.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "# Reporting helpers from milestone 2.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    # TODO: read the CSV, convert age to int, create ShelterPet objects, and return them.\n    pass\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
                   },
                   "tests_check_loader_py": {
-                    "content": "# Add assertions for row order, object types, and converted ages.\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
-                  },
-                  "tests_check_loader_py": {
-                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\n"
-                  }
-                },
-                "solutionCode": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
-                "checks": {
-                  "0": {
-                    "message": "Load all three CSV rows as ShelterPet objects."
-                  }
-                },
-                "expectedOutput": "Milo\nLuna\nPepper"
-              },
-              "project_step_debug_imports_state": {
-                "title": "Milestone 4: validate adoption state changes",
-                "prompt": "Finish `ShelterPet.mark_adopted()` in `models/shelter_pet.py`. It should set `adopted` to `True` and return the new value. The provided main script loads Luna, marks her adopted, and confirms she is no longer available.",
-                "hint": "Change the object state before returning it.",
-                "help": {
-                  "concept": "A state-changing method should update one object and return a value that can be tested.",
-                  "hint_1": "Assign `self.adopted = True`.",
-                  "hint_2": "`is_available()` should become `False` after the change."
-                },
-                "starterCode": "# Verify one adoption state change.\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this state-change check after completing mark_adopted().\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "# Keep the report helpers unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "# Added in Milestone 3.\n"
                   },
                   "tests_check_adoption_py": {
-                    "content": "# Add assertions for mark_adopted() and is_available().\n"
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
-                  },
-                  "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
-                  },
-                  "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
-                  },
-                  "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
-                  },
-                  "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
-                  },
-                  "tests_check_adoption_py": {
-                    "content": "from storage.pet_loader import load_pets\n\nluna = load_pets(\"data/pets.csv\")[1]\nassert luna.mark_adopted() is True\nassert luna.is_available() is False\n"
-                  }
-                },
-                "solutionCode": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "reporting tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "mark_adopted() should return the new adopted state."
+                    "message": "`adoption_labels(pets)` should use the shared `adoption_label()` contract without concrete-type branching."
                   },
                   "1": {
-                    "message": "Print the adopted result and the updated availability."
+                    "message": "Remove the old list loop from main.py and call `adoption_labels(pets)` instead."
+                  },
+                  "2": {
+                    "message": "Assert the ordered labels for both supplied mixed fixtures."
+                  },
+                  "3": {
+                    "message": "Assert the young-pet filtering result for both supplied fixtures."
+                  }
+                }
+              },
+              "project_step_storage_loader": {
+                "title": "Milestone 3: debug and test the CSV loader",
+                "prompt": "Continue from the exact Milestone 2 workspace. `storage/pet_loader.py` has a real import-path bug: its model imports do not match the `models/` file tree. Fix those imports without rewriting the already-complete loader body. Then complete `tests/check_loader.py` so it loads `data/pets.csv` and asserts row order, converted integer ages, ShelterPet/FosterPet object types, and Pepper's foster label. Keep every earlier test file present and unchanged.",
+                "hint": "Debug the layer that is actually broken: the loader body already works once its module paths match the file tree.",
+                "help": {
+                  "concept": "This milestone retrieves import debugging and tests the storage boundary from CSV rows to real model objects.",
+                  "hint_1": "`models/shelter_pet.py` maps to the `models.shelter_pet` module.",
+                  "hint_2": "The CSV's foster row should become a FosterPet."
+                },
+                "starterCode": "# Added in Milestone 3.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom shelter_pet import ShelterPet\nfrom foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "expectedOutput": "True\nFalse"
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "loader tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Import `ShelterPet` through the `models.shelter_pet` module path."
+                  },
+                  "1": {
+                    "message": "Import `FosterPet` through the `models.foster_pet` module path."
+                  },
+                  "2": {
+                    "message": "Assert the loaded row order and converted integer ages."
+                  },
+                  "3": {
+                    "message": "Assert that the foster CSV row becomes a FosterPet with its specialized label."
+                  }
+                }
+              },
+              "project_step_debug_imports_state": {
+                "title": "Milestone 4: reproduce and fix adoption state",
+                "prompt": "Continue from the exact Milestone 3 workspace. `ShelterPet.mark_adopted()` currently returns `True` but never updates the object's `adopted` state. First complete `tests/check_adoption.py` so the supplied pet is checked before adoption, after the first `mark_adopted()` call, and after a second call. Then repair `mark_adopted()` in `models/shelter_pet.py` by setting `self.adopted = True` before returning the new value. Keep all earlier production code and tests unchanged.",
+                "hint": "A successful return value and a stored state transition are two different things. Your test should prove both.",
+                "help": {
+                  "concept": "This milestone retrieves object-state testing and debugging of a method that reports success without mutating state.",
+                  "hint_1": "The pet starts available.",
+                  "hint_2": "Repeated adoption calls should leave the pet unavailable."
+                },
+                "starterCode": "# Added in Milestone 4.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        # BUG: this reports success but does not update adopted state.\n        return True\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
+                  },
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
+                  }
+                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "adoption tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Update `self.adopted` inside `mark_adopted()` instead of only returning success."
+                  },
+                  "1": {
+                    "message": "Test the same pet before adoption, after the first call, and after a repeated call."
+                  }
+                }
               },
               "project_step_regression_summary": {
-                "title": "Milestone 5: build a reusable shelter summary",
-                "prompt": "Complete `build_summary(pets, max_age)` in `services/reporting.py`. Return a dictionary with `total_pets`, `available_names`, and `young_pet_count`. The main script loads the fixture, marks Luna adopted, and prints all three summary values.",
-                "hint": "Reuse `young_pet_names()` instead of duplicating the age rule.",
+                "title": "Milestone 5: build and test the cumulative summary",
+                "prompt": "Continue from the exact Milestone 4 workspace. Implement `build_summary(pets, max_age)` in `services/reporting.py`. Return a dictionary with `total_pets`, `available_labels`, and `young_pet_count`. `available_labels` must preserve input order, include only pets whose `is_available()` is true, and use each pet's own `adoption_label()` method. Compute `young_pet_count` from the existing `young_pet_names(pets, max_age)` helper instead of duplicating its age rule. Complete `tests/check_summary.py` with the supplied CSV/adoption workflow, and update `main.py` to display the same three summary values.",
+                "hint": "Reuse the contracts already protected by earlier milestones: loader objects, adoption state, polymorphic labels, and the young-pet helper.",
                 "help": {
-                  "concept": "A regression summary combines tested helpers into one stable service result.",
-                  "hint_1": "Filter availability with `pet.is_available()`.",
-                  "hint_2": "Count the list returned by `young_pet_names()`."
+                  "concept": "A cumulative integration test protects multiple already-tested boundaries without reimplementing them.",
+                  "hint_1": "Filter availability with `pet.is_available()` and format with `pet.adoption_label()`.",
+                  "hint_2": "Use `len(young_pet_names(pets, max_age))` for the count."
                 },
-                "starterCode": "# Print the cumulative shelter summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
+                "starterCode": "# Added in Milestone 5.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this cumulative summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels\n\npets = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nprint(\", \".join(adoption_labels(pets)))\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    # Added in Milestone 5.\n    pass\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
                   },
                   "tests_check_summary_py": {
-                    "content": "# Add assertions for every key returned by build_summary().\n"
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
                   },
                   "tests_check_summary_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nassert summary == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# Added in Milestone 6.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n",
+                "checks": {},
+                "expectedOutput": "summary tests passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Return all three shelter summary values so main.py prints the expected report."
+                    "message": "`build_summary` should reuse availability, polymorphic labels, and `young_pet_names()` rather than duplicating those rules."
+                  },
+                  "1": {
+                    "message": "Assert the complete summary produced by the supplied CSV-plus-adoption workflow."
                   }
-                },
-                "expectedOutput": "3\nMilo, Pepper\n2"
+                }
               },
               "project_step_final_regression": {
-                "title": "Milestone 6: finish the shelter regression workspace",
-                "prompt": "Finish the cumulative shelter quality workspace. Keep the validated model, CSV loader, adoption state, and summary service working; add meaningful assertions in `tests/check_regression.py`; and complete `README.md` with the responsibility of each folder. The runnable demo must print the final summary and confirmation line.",
-                "hint": "Run the complete workflow from fixture loading through the final report.",
+                "title": "Milestone 6: finish the full regression suite",
+                "prompt": "Continue from the exact Milestone 5 workspace. Keep every earlier test file and completed production layer intact. In `tests/check_regression.py`, write one end-to-end regression check that loads the CSV, verifies row order and the FosterPet subtype, checks mixed `adoption_labels()` and `young_pet_names()` results, marks Luna adopted, verifies her availability changed, and asserts the final `build_summary()` dictionary. Keep the final `regression checks passed` print. Then finish `README.md` by explaining the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py`.",
+                "hint": "The final regression should call the real completed layers; do not recreate their logic inside the test.",
                 "help": {
-                  "concept": "A final regression workspace protects the behavior that the project now promises.",
-                  "hint_1": "Assert the loaded names, adoption state, and summary dictionary.",
-                  "hint_2": "Document models, storage, services, tests, and the runner."
+                  "concept": "A final regression test protects the whole workflow while the README records the responsibility boundary each folder owns.",
+                  "hint_1": "Use `load_pets`, the reporting helpers, and the real adoption method.",
+                  "hint_2": "Document responsibilities, not implementation trivia."
                 },
-                "starterCode": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
+                "starterCode": "# Added in Milestone 6.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "# Keep the tested report service unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "# Keep the tested CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
                   },
                   "tests_check_regression_py": {
-                    "content": "# TODO: assert the full shelter workflow from CSV to summary.\n"
+                    "content": "# Added in Milestone 6.\n"
                   },
                   "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\nTODO: explain the responsibility of models, storage, services, tests, and main.py.\n"
+                    "content": "# Animal Shelter Quality Pass\n\nDocument the responsibility of `models/`, `services/`, `storage/`, `tests/`, and `main.py` in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_labels\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
                   "models_shelter_pet_py": {
-                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def adoption_label(self):\n        return self.name\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "models_foster_pet_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\n\nclass FosterPet(ShelterPet):\n    def adoption_label(self):\n        return f\"{self.name} (foster)\"\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                    "content": "def adoption_labels(pets):\n    return [pet.adoption_label() for pet in pets]\n\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_labels\": [\n            pet.adoption_label()\n            for pet in pets\n            if pet.is_available()\n        ],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
                   "storage_pet_loader_py": {
-                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\n\ndef load_pets(path):\n    pets = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pet_class = FosterPet if row[\"foster\"] == \"yes\" else ShelterPet\n            pets.append(\n                pet_class(\n                    row[\"name\"],\n                    row[\"species\"],\n                    int(row[\"age\"]),\n                )\n            )\n\n    return pets\n"
                   },
                   "data_pets_csv": {
-                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                    "content": "name,species,age,foster\nMilo,cat,3,no\nLuna,dog,5,no\nPepper,rabbit,1,yes\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nfoster = FosterPet(\"Pepper\", \"rabbit\", 1)\n\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\n\nassert isinstance(foster, ShelterPet)\nassert foster.adoption_label() == \"Pepper (foster)\"\n\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n\nprint(\"model tests passed\")\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, young_pet_names\n\nmixed = [\n    ShelterPet(\"Milo\", \"cat\", 3),\n    FosterPet(\"Pepper\", \"rabbit\", 1),\n]\n\nreverse_mixed = [\n    FosterPet(\"Nova\", \"dog\", 4),\n    ShelterPet(\"Rex\", \"dog\", 2),\n]\n\nassert adoption_labels(mixed) == [\"Milo\", \"Pepper (foster)\"]\nassert adoption_labels(reverse_mixed) == [\"Nova (foster)\", \"Rex\"]\nassert young_pet_names(mixed, 2) == [\"Pepper\"]\nassert young_pet_names(reverse_mixed, 2) == [\"Rex\"]\n\nprint(\"reporting tests passed\")\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom models.shelter_pet import ShelterPet\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\nassert isinstance(pets[0], ShelterPet)\nassert isinstance(pets[1], ShelterPet)\nassert isinstance(pets[2], FosterPet)\nassert pets[2].adoption_label() == \"Pepper (foster)\"\n\nprint(\"loader tests passed\")\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Luna\", \"dog\", 5)\n\nassert pet.is_available() is True\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\nassert pet.mark_adopted() is True\nassert pet.is_available() is False\n\nprint(\"adoption tests passed\")\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\n\nsummary = build_summary(pets, 3)\n\nassert summary == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"summary tests passed\")\n"
                   },
                   "tests_check_regression_py": {
-                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert pets[1].mark_adopted() is True\nassert build_summary(pets, 3) == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, build_summary, young_pet_names\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert isinstance(pets[2], FosterPet)\nassert adoption_labels(pets) == [\"Milo\", \"Luna\", \"Pepper (foster)\"]\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n\nassert pets[1].mark_adopted() is True\nassert pets[1].is_available() is False\n\nassert build_summary(pets, 3) == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"regression checks passed\")\n"
                   },
                   "README_md": {
-                    "content": "# Animal Shelter Quality Pass\n\n- `models/` owns pet state and adoption behavior.\n- `storage/` converts CSV rows into ShelterPet objects.\n- `services/` returns report data without printing.\n- `tests/` protects model, loader, state, and summary behavior.\n- `main.py` runs the final demonstration.\n"
+                    "content": "# Animal Shelter Quality Pass\n\n- `models/` owns pet state, validation, inheritance, and per-pet behavior.\n- `services/` coordinates collections and returns report data without printing.\n- `storage/` converts CSV rows into the correct model objects.\n- `tests/` protects model, service, loader, adoption-state, summary, and full-workflow behavior.\n- `main.py` is the thin runnable demonstration that wires the completed layers together.\n"
                   }
                 },
-                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
-                "checks": {
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.foster_pet import FosterPet\nfrom services.reporting import adoption_labels, build_summary, young_pet_names\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\n\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert isinstance(pets[2], FosterPet)\nassert adoption_labels(pets) == [\"Milo\", \"Luna\", \"Pepper (foster)\"]\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n\nassert pets[1].mark_adopted() is True\nassert pets[1].is_available() is False\n\nassert build_summary(pets, 3) == {\n    \"total_pets\": 3,\n    \"available_labels\": [\"Milo\", \"Pepper (foster)\"],\n    \"young_pet_count\": 2,\n}\n\nprint(\"regression checks passed\")\n",
+                "checks": {},
+                "expectedOutput": "regression checks passed",
+                "sourceChecks": {
                   "0": {
-                    "message": "Keep the full shelter report and print the regression confirmation line."
+                    "message": "Exercise the real CSV loader, FosterPet subtype, and both reporting helpers in the final regression."
+                  },
+                  "1": {
+                    "message": "Protect the adoption transition and final summary in the end-to-end regression."
+                  },
+                  "2": {
+                    "message": "Explain the responsibility of models, services, storage, tests, and main.py in README.md."
                   }
-                },
-                "expectedOutput": "3\nMilo, Pepper\n2\nregression checks passed"
+                }
               }
             }
           }
         },
         "refactoring-oop-services": {
           "label": "Refactoring OOP Services",
-          "summary": "Refactor object programs by moving messy report and service logic into small named helpers while keeping models focused.",
+          "summary": "Refactor working OOP code by moving list-wide coordination into focused services while keeping object-specific behavior on the model and main.py thin.",
           "cards": {
             "sketch0": {
-              "title": "Why move orchestration out of main.py?"
+              "title": "Extract list-wide reporting"
             },
             "sketch1": {
-              "title": "What belongs in a service module?"
-            },
-            "sketch2": {
-              "title": "Refactor safely with imports and small steps"
+              "title": "Keep model and service responsibilities separate"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_refactoring_oop_services_sketch0": {
-              "title": "Extract report formatting into a service",
-              "prompt": "Complete `ReportService.build_book_report(books)` in `services/report_service.py`. Return one `title: $price` line per book dictionary, preserving input order.",
-              "hint": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
+              "title": "Extract a working report loop into ReportService",
+              "prompt": "`main.py` already works, and `models/book.py` already owns `Book.display_line()`. Refactor the list-wide report logic into `ReportService.build_report(self, books)` in `services/report_service.py`. The service must build the report from each Book's existing `display_line()` result and return the single newline-separated string. Then update `main.py` to import `ReportService`, remove the old report-building `for` loop, and print the value returned by `build_report(books)`. Preserve the same visible output.",
+              "hint": "Move the collection coordination, not the one-book formatting. `Book.display_line()` already owns that behavior.",
               "help": {
-                "concept": "A service method keeps reporting logic out of main.py and returns reusable data.",
-                "hint_1": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
-                "hint_2": "Use the requested file boundary as part of the solution contract."
+                "concept": "A safe refactor moves list-wide work into the service while the model keeps its per-object behavior and the output stays stable.",
+                "hint_1": "The service can collect each `book.display_line()` result.",
+                "hint_2": "After the move, main.py should call the service instead of keeping the report loop."
               },
-              "starterCode": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
+              "starterCode": "from models.book import Book\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nlines = []\nfor book in books:\n    lines.append(book.display_line())\n\nprint(\"\\n\".join(lines))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
+                  "content": "from models.book import Book\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nlines = []\nfor book in books:\n    lines.append(book.display_line())\n\nprint(\"\\n\".join(lines))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def display_line(self):\n        return f\"{self.title}: ${self.price}\"\n"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def build_book_report(self, books):\n        # TODO: return one \"title: $price\" line per dictionary.\n        pass\n"
+                  "content": "class ReportService:\n    def build_report(self, books):\n        # Move the list-wide report coordination here.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
+                  "content": "from models.book import Book\nfrom services.report_service import ReportService\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nprint(ReportService().build_report(books))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def display_line(self):\n        return f\"{self.title}: ${self.price}\"\n"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{book['title']}: ${book['price']}\" for book in books)\n"
+                  "content": "class ReportService:\n    def build_report(self, books):\n        return \"\\n\".join(book.display_line() for book in books)\n"
                 }
               },
-              "solutionCode": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
-              "checks": {
+              "solutionCode": "from models.book import Book\nfrom services.report_service import ReportService\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nprint(ReportService().build_report(books))\n",
+              "checks": {},
+              "expectedOutput": "Python Basics: $12\nDebugging Guide: $18",
+              "sourceChecks": {
                 "0": {
-                  "message": "Define ReportService in its service file."
+                  "message": "Import `ReportService` from `services.report_service` after moving the report responsibility."
                 },
                 "1": {
-                  "message": "Return both formatted lines."
+                  "message": "Remove the old collection loop from main.py and print the report returned by `ReportService.build_report(books)`."
+                },
+                "2": {
+                  "message": "`build_report(self, books)` should coordinate the collection using each Book's existing `display_line()` behavior."
                 }
-              },
-              "expectedOutput": "Python Basics: $12\nDebugging Guide: $18"
+              }
             },
             "try_refactoring_oop_services_sketch1": {
-              "title": "Move total-price logic into CatalogService",
-              "prompt": "Complete `CatalogService.total_price(books)` in `services/catalog_service.py`. Return the sum of the `price` values and do not print inside the service.",
-              "hint": "Use `sum(...)` over each dictionary's `price` value.",
+              "title": "Move collection filtering into CatalogService",
+              "prompt": "`main.py` already works, and `Book.is_affordable(max_price)` already owns the one-book affordability rule. Refactor the list-wide filtering into `CatalogService.affordable_titles(self, books, max_price)` in `services/catalog_service.py`. The service must use each Book's existing `is_affordable(max_price)` method and return the matching titles in input order. Then update `main.py` to import and call `CatalogService`, remove the old filtering `for` loop, and keep printing the returned titles joined with ` | `. Preserve the same visible behavior.",
+              "hint": "The model decides whether one book is affordable; the service decides which titles to collect from the whole list.",
               "help": {
-                "concept": "Service methods should return results so callers decide how to display them.",
-                "hint_1": "Use `sum(...)` over each dictionary's `price` value.",
-                "hint_2": "Edit the file named in the prompt and verify each listed responsibility there."
+                "concept": "A focused service coordinates a collection without stealing the object-specific rule from the model.",
+                "hint_1": "Call `book.is_affordable(max_price)` inside the service.",
+                "hint_2": "main.py should only create books, call the service, and display the returned titles."
               },
-              "starterCode": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
+              "starterCode": "from models.book import Book\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = []\nfor book in books:\n    if book.is_affordable(max_price):\n        titles.append(book.title)\n\nprint(\" | \".join(titles))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
+                  "content": "from models.book import Book\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = []\nfor book in books:\n    if book.is_affordable(max_price):\n        titles.append(book.title)\n\nprint(\" | \".join(titles))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def is_affordable(self, max_price):\n        return self.price <= max_price\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def total_price(self, books):\n        # TODO: return the sum of every book price.\n        pass\n"
+                  "content": "class CatalogService:\n    def affordable_titles(self, books, max_price):\n        # Move the list-wide filtering coordination here.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
+                  "content": "from models.book import Book\nfrom services.catalog_service import CatalogService\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = CatalogService().affordable_titles(books, max_price)\nprint(\" | \".join(titles))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def is_affordable(self, max_price):\n        return self.price <= max_price\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def total_price(self, books):\n        return sum(book[\"price\"] for book in books)\n"
+                  "content": "class CatalogService:\n    def affordable_titles(self, books, max_price):\n        titles = []\n\n        for book in books:\n            if book.is_affordable(max_price):\n                titles.append(book.title)\n\n        return titles\n"
                 }
               },
-              "solutionCode": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
-              "checks": {
+              "solutionCode": "from models.book import Book\nfrom services.catalog_service import CatalogService\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = CatalogService().affordable_titles(books, max_price)\nprint(\" | \".join(titles))\n",
+              "checks": {},
+              "expectedOutput": "Dune | Beloved",
+              "sourceChecks": {
                 "0": {
-                  "message": "Define CatalogService in the service file."
+                  "message": "Import `CatalogService` from `services.catalog_service` after moving the collection filtering responsibility."
                 },
                 "1": {
-                  "message": "Return the correct total for a list of book dictionaries."
+                  "message": "Remove the filtering loop from main.py and get `titles` from `CatalogService.affordable_titles(books, max_price)`."
                 },
                 "2": {
-                  "message": "Print the returned total from main.py."
+                  "message": "`affordable_titles` should coordinate the collection by using each Book's existing `is_affordable(max_price)` rule."
                 }
-              },
-              "expectedOutput": "40"
-            },
-            "try_refactoring_oop_services_sketch2": {
-              "title": "Refactor counting into a service method",
-              "prompt": "Complete `CatalogService.count_books(books)` so it returns the number of book dictionaries, including `0` for an empty list.",
-              "hint": "Return `len(books)`.",
-              "help": {
-                "concept": "A small service method can still make responsibilities explicit and easy to test.",
-                "hint_1": "Return `len(books)`.",
-                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
-              },
-              "starterCode": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
-                },
-                "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        # TODO: return how many book dictionaries were supplied.\n        pass\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
-                },
-                "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n"
-                }
-              },
-              "solutionCode": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
-              "checks": {
-                "0": {
-                  "message": "Return 2 for the provided two-book list."
-                },
-                "1": {
-                  "message": "Return 0 for an empty list."
-                },
-                "2": {
-                  "message": "Print both results from main.py."
-                }
-              },
-              "expectedOutput": "2\n0"
+              }
             }
           },
           "practice": {
             "mc-refactor-benefits": {
-              "title": "Benefits of moving logic into services",
-              "prompt": "Which changes are good reasons to move reporting logic from `main.py` into a service module? Choose all that apply.",
-              "hint": "Look for benefits related to testing, reuse, and keeping responsibilities separate.",
+              "title": "Recognize a successful refactor",
+              "prompt": "Which TWO outcomes show that moving report logic from `main.py` into a service was a useful refactor?",
+              "hint": "The responsibility should move while observable behavior stays stable.",
               "help": {
-                "concept": "Refactoring into services improves separation of responsibilities and makes list-wide logic easier to test and reuse.",
-                "hint_1": "A service is useful when the same report or calculation might be needed from more than one place.",
-                "hint_2": "Pick the options that reduce clutter in `main.py` or make report logic easier to test directly."
+                "concept": "Refactoring changes structure without changing the program's promised behavior.",
+                "hint_1": "The old output should still be produced.",
+                "hint_2": "The collection-wide responsibility should have one clear home."
               },
               "options": {
-                "a": "It makes report-building easier to test without running all of main.py.",
-                "b": "It gives one reusable place for list-wide formatting or totals.",
-                "c": "It forces every model class to print its own report lines.",
-                "d": "It removes the need for imports between workspace files."
+                "a": "main.py becomes thinner because the collection-wide report logic lives in a service",
+                "b": "The refactor changes the report format at the same time",
+                "c": "The same input still produces the same visible report",
+                "d": "The old loop remains duplicated in main.py and the service"
               }
-            },
-            "fb-service-home": {
-              "title": "Choose the right home for report logic",
-              "prompt": "Complete the sentence with the best word.",
-              "hint": "The blank should name the file role that coordinates multiple objects.",
-              "help": {
-                "concept": "List-wide orchestration and reporting usually belong in a service module rather than in one model object or scattered main.py code.",
-                "hint_1": "Think about the module that combines data from several objects.",
-                "hint_2": "The correct choice is the layer that builds reports and totals from object lists."
-              },
-              "template": "Catalog-wide report formatting usually belongs in a [blank1] module.",
-              "choices": [
-                "service",
-                "model",
-                "attribute",
-                "fixture"
-              ]
             },
             "ci-refactor-discount-service": {
               "title": "Create a pricing service method",
@@ -9223,37 +9433,20 @@ const messages: Record<string, any> = {
               }
             },
             "mc-safe-refactor-steps": {
-              "title": "Safe refactor habits",
-              "prompt": "Which actions help you refactor `main.py` into service files without changing behavior? Choose all that apply.",
-              "hint": "Think about small moves, updated imports, and checking that output still matches.",
+              "title": "Choose safe refactoring steps",
+              "prompt": "Which THREE actions make an OOP service refactor safer?",
+              "hint": "Move one responsibility, reconnect the caller, and verify behavior.",
               "help": {
-                "concept": "Safe refactoring keeps behavior stable while structure changes, so you move code in small steps and verify the program still works.",
-                "hint_1": "Choose actions that compare behavior before and after the move.",
-                "hint_2": "Good refactor habits include updating imports and checking output or tests after each small change."
+                "concept": "Small structural moves are safer when imports/calls are updated and behavior is checked after the move.",
+                "hint_1": "Do not mix unrelated behavior changes into the same refactor.",
+                "hint_2": "Keep a way to compare before and after behavior."
               },
               "options": {
-                "a": "Move one responsibility at a time into a service method.",
-                "b": "Update imports in the calling file after moving code.",
-                "c": "Change output format during the same step so the refactor feels more complete.",
-                "d": "Run the program or tests after each small move to confirm behavior stayed the same."
+                "a": "Move one collection-wide responsibility at a time",
+                "b": "Update the caller to import and use the new service",
+                "c": "Change output rules during the same refactor",
+                "d": "Run the program or tests again after the move"
               }
-            },
-            "fb-import-line": {
-              "title": "Complete the service import",
-              "prompt": "Fill in the missing module name for this refactor.",
-              "hint": "The class lives in the `services` folder and the file name matches the service role.",
-              "help": {
-                "concept": "After moving logic into a service file, the caller must import the class from the correct module path.",
-                "hint_1": "The import starts with `from services.` because the file is inside the services folder.",
-                "hint_2": "Use the module name that would hold `ReportService` in a file named after the service."
-              },
-              "template": "from services.[blank1] import ReportService",
-              "choices": [
-                "report_service",
-                "book",
-                "main",
-                "catalog"
-              ]
             },
             "ci-refactor-summary-service": {
               "title": "Build a one-line catalog summary service",
@@ -9275,35 +9468,19 @@ const messages: Record<string, any> = {
               }
             },
             "sc-main-role": {
-              "title": "Best role for main.py after refactoring",
-              "prompt": "After moving reporting logic into service modules, what should `main.py` mainly do?",
-              "hint": "Think about setup and calling other parts of the app, not holding all business logic itself.",
+              "title": "Keep main.py thin",
+              "prompt": "After list-wide filtering and reporting move into services, what should `main.py` mainly do?",
+              "hint": "Think about wiring pieces together rather than owning their internal logic.",
               "help": {
-                "concept": "After refactoring, `main.py` should mostly coordinate the app by creating objects, calling services, and showing results.",
-                "hint_1": "The best answer keeps `main.py` small and avoids putting all loops and formatting there.",
-                "hint_2": "Choose the option where `main.py` acts as the entry point that wires pieces together."
+                "concept": "The entry script should mainly create objects, call services, and display returned results.",
+                "hint_1": "Models and services should own the reusable behavior.",
+                "hint_2": "main.py is the coordinator at the application boundary."
               },
               "options": {
-                "a": "Create objects, call service methods, and print returned results.",
-                "b": "Store every report-building loop so imports are unnecessary.",
-                "c": "Replace model classes with plain strings to simplify output.",
-                "d": "Hold all calculations so service files stay empty."
-              }
-            },
-            "dr-refactor-order": {
-              "title": "Order the refactor steps",
-              "prompt": "Put these steps in a sensible order for moving report logic from `main.py` into a service file while preserving behavior.",
-              "hint": "Start by identifying the logic to move, then create the service, then reconnect the caller.",
-              "help": {
-                "concept": "A safe refactor follows a sequence: isolate one responsibility, move it, reconnect imports and calls, then verify behavior.",
-                "hint_1": "The caller cannot use the new service until the service method exists.",
-                "hint_2": "After updating `main.py`, the last step is to run the app or tests and compare behavior."
-              },
-              "tokens": {
-                "t1": "Identify the report-building code in main.py.",
-                "t2": "Create a service method for that logic.",
-                "t3": "Update main.py to import and call the service.",
-                "t4": "Run the program or tests to confirm the output stayed the same."
+                "a": "Create objects, call service methods, and display returned results",
+                "b": "Keep duplicate copies of every service loop as a backup",
+                "c": "Move one-book methods out of the model and into print statements",
+                "d": "Avoid imports by keeping every responsibility in main.py"
               }
             },
             "ci-refactor-filter-service": {
@@ -9329,338 +9506,297 @@ const messages: Record<string, any> = {
         },
         "testing-inheritance-and-polymorphism": {
           "label": "Testing Inheritance and Polymorphism",
-          "summary": "Test the shared promise across parent and child classes, then prove a mixed list behaves through the same method call.",
+          "summary": "Write regression tests for subclass contracts and mixed-object services without rebuilding the production classes.",
           "cards": {
             "sketch0": {
-              "title": "Test an inherited method"
+              "title": "Test a subclass contract"
             },
             "sketch1": {
-              "title": "Test mixed subclass results"
-            },
-            "sketch2": {
-              "title": "Test a defensive edge case"
+              "title": "Test a mixed polymorphic service"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_testing_inheritance_and_polymorphism_sketch0": {
-              "title": "Test a subclass override",
-              "prompt": "The lesson used notification classes to explain testing an interface. Now practice with media classes. Complete `build_book_label()` so it returns the label for `Book(\"Dune\", \"Frank Herbert\")` exactly as `Book: Dune by Frank Herbert`.",
-              "hint": "The test should prove that the Book subclass override returns the expected label.",
+              "title": "Write a subclass contract test",
+              "prompt": "`CatalogItem` and `Book` are already complete. In `tests/check_book.py`, use the existing `book` fixture to assert that it is an instance of `CatalogItem`, then assert that `book.label()` returns exactly `Book: Dune by Frank Herbert`. Leave both model files unchanged and keep the final `book inheritance tests passed` print.",
+              "hint": "One assertion checks the inheritance relationship; the other checks the subclass's specialized public behavior.",
               "help": {
-                "concept": "Testing subclass behavior means checking the exact result that the shared method should return for one concrete subclass.",
-                "hint_1": "Create the `Book` inside `build_book_label()`, then return the result of calling `label()` on that object.",
-                "hint_2": "Do not remove the existing assertion or success print line."
+                "concept": "A useful subclass regression test checks the relationship and the public contract without inspecting implementation details.",
+                "hint_1": "Use `isinstance(book, CatalogItem)`.",
+                "hint_2": "Assert the exact value returned by `book.label()`."
               },
-              "starterCode": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\n# Assert that book is a CatalogItem.\n# Assert that Book's specialized label() returns:\n# Book: Dune by Frank Herbert\n\nprint(\"book inheritance tests passed\")\n",
               "starterFiles": {
                 "tests_check_book_py": {
-                  "content": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")"
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\n# Assert that book is a CatalogItem.\n# Assert that Book's specialized label() returns:\n# Book: Dune by Frank Herbert\n\nprint(\"book inheritance tests passed\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "# Keep models/catalog_item.py unchanged for this step: Test a subclass override.\nclass CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "# Keep models/book.py unchanged for this step: Test a subclass override.\nfrom models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 }
               },
               "solutionFiles": {
                 "tests_check_book_py": {
-                  "content": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")"
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\nassert isinstance(book, CatalogItem)\nassert book.label() == \"Book: Dune by Frank Herbert\"\n\nprint(\"book inheritance tests passed\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 }
               },
-              "solutionCode": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.catalog_item import CatalogItem\nfrom models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\n\nassert isinstance(book, CatalogItem)\nassert book.label() == \"Book: Dune by Frank Herbert\"\n\nprint(\"book inheritance tests passed\")\n",
+              "checks": {},
+              "expectedOutput": "book inheritance tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "build_book_label() should return the Book label from the subclass override."
+                  "message": "Assert that the Book fixture is also a CatalogItem."
                 },
                 "1": {
-                  "message": "Keep the success message print after the assertion passes."
+                  "message": "Assert the exact specialized value returned by `book.label()`."
                 }
               }
             },
             "try_testing_inheritance_and_polymorphism_sketch1": {
-              "title": "Test a polymorphic label service",
-              "prompt": "Practice a mixed polymorphic result. Complete `build_sample_labels()` so it returns labels for a Book and a Game: `Book: Dune by Frank Herbert` and `Game: Portal 2 on PC`.",
-              "hint": "Loop through the mixed list and call the same `label()` method on each object.",
+              "title": "Write mixed-service regression tests",
+              "prompt": "`Book`, `Game`, and `build_labels(items)` are already complete. In `tests/check_catalog_report.py`, use the provided `mixed_items` fixture to assert the normal Book/Game labels in order. Then use the provided `edge_items` fixture to assert `Game: Untitled on Switch` followed by `Book: Beloved by Toni Morrison`. Do not rewrite the models or service. Keep the final `polymorphic report tests passed` print.",
+              "hint": "Call the service on each provided mixed fixture and compare the returned list with the exact expected labels.",
               "help": {
-                "concept": "A polymorphism test should prove the same method call works across different subclasses.",
-                "hint_1": "Start with an empty list, append `item.label()` for each object, and return the finished list.",
-                "hint_2": "Do not rewrite the models in `main.py`; the missing logic belongs in the service file."
+                "concept": "A polymorphic service test passes representative mixed objects through the service and checks observable results.",
+                "hint_1": "The first assertion uses `mixed_items`.",
+                "hint_2": "The second assertion retrieves the empty-title edge case through `edge_items`."
               },
-              "starterCode": "# TODO: complete this step in main.py.\n",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\n# Assert build_labels(mixed_items) returns the two normal labels in order.\n# Assert build_labels(edge_items) returns:\n# Game: Untitled on Switch\n# Book: Beloved by Toni Morrison\n\nprint(\"polymorphic report tests passed\")\n",
               "starterFiles": {
-                "main_py": {
-                  "content": "# TODO: complete this step in main.py.\n"
+                "tests_check_catalog_report_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\n# Assert build_labels(mixed_items) returns the two normal labels in order.\n# Assert build_labels(edge_items) returns:\n# Game: Untitled on Switch\n# Book: Beloved by Toni Morrison\n\nprint(\"polymorphic report tests passed\")\n"
                 },
                 "models_book_py": {
-                  "content": "# Keep models/book.py unchanged for this step: Test a polymorphic label service.\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 },
                 "models_game_py": {
-                  "content": "# Keep models/game.py unchanged for this step: Test a polymorphic label service.\nclass Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
+                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"\n"
                 },
                 "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    # Return one label() result for each item in order.\n    return []"
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 }
               },
               "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())"
+                "tests_check_catalog_report_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\nassert build_labels(mixed_items) == [\n    \"Book: Dune by Frank Herbert\",\n    \"Game: Portal 2 on PC\",\n]\n\nassert build_labels(edge_items) == [\n    \"Game: Untitled on Switch\",\n    \"Book: Beloved by Toni Morrison\",\n]\n\nprint(\"polymorphic report tests passed\")\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
                 },
                 "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
+                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"\n"
                 },
                 "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels"
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")\n"
                 }
               },
-              "solutionCode": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\nmixed_items = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\"),\n]\n\nedge_items = [\n    Game(\"\", \"Switch\"),\n    Book(\"Beloved\", \"Toni Morrison\"),\n]\n\nassert build_labels(mixed_items) == [\n    \"Book: Dune by Frank Herbert\",\n    \"Game: Portal 2 on PC\",\n]\n\nassert build_labels(edge_items) == [\n    \"Game: Untitled on Switch\",\n    \"Book: Beloved by Toni Morrison\",\n]\n\nprint(\"polymorphic report tests passed\")\n",
+              "checks": {},
+              "expectedOutput": "polymorphic report tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "build_sample_labels() should return labels from a mixed Book/Game list in order."
+                  "message": "Assert the exact ordered labels returned for `mixed_items`."
                 },
                 "1": {
-                  "message": "Print the returned label list."
-                }
-              }
-            },
-            "try_testing_inheritance_and_polymorphism_sketch2": {
-              "title": "Test validation with a fixture edge case",
-              "prompt": "Practice an edge case. Complete `build_empty_title_label()` so a game with an empty title falls back to `Untitled` and returns `Game: Untitled on Switch`.",
-              "hint": "Replace an empty incoming title before the label method uses it.",
-              "help": {
-                "concept": "A good test includes edge cases. Here, the subclass should still return a useful label when the title is missing.",
-                "hint_1": "In `__init__`, use a fallback like `\"Untitled\"` when the incoming title is empty.",
-                "hint_2": "Leave `label()` using the stored `self.title` so the validation change shows up automatically."
-              },
-              "starterCode": "# TODO: complete this step in main.py.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "# TODO: complete this step in main.py.\n"
-                },
-                "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        # Replace an empty title with \"Untitled\".\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())"
-                },
-                "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
-                }
-              },
-              "solutionCode": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
-              "checks": {
-                "0": {
-                  "message": "build_empty_title_label() should prove the empty title is sanitized before labeling."
-                },
-                "1": {
-                  "message": "Print the sanitized label for the game."
+                  "message": "Assert the exact ordered labels returned for `edge_items`."
                 }
               }
             }
           },
           "practice": {
             "policy_single_choice_1": {
-              "title": "Choose what the test should prove",
-              "prompt": "When you test `Book.label()`, what is the most useful thing to check?",
-              "hint": "Focus on the promised result of the shared method.",
+              "title": "Choose a useful subclass regression test",
+              "prompt": "Which assertion best checks the specialized public contract of `Book.label()`?",
+              "hint": "Test the result callers depend on.",
               "help": {
-                "concept": "A good inheritance test checks the behavior callers depend on, not random details around the class.",
-                "hint_1": "Look for the choice about the exact returned label.",
-                "hint_2": "The best answer checks subclass behavior through the shared method."
+                "concept": "A regression test should assert observable subclass behavior, not reimplement or inspect the method body.",
+                "hint_1": "Call the public method.",
+                "hint_2": "Compare its return value with the promised result."
               },
               "options": {
-                "a": "That `Book.label()` returns the exact expected string",
-                "b": "That the file is named `book.py`",
-                "c": "That the class uses two blank lines before each method",
-                "d": "That Python prints comments automatically"
+                "a": "`assert Book.__name__ == \"Book\"`",
+                "b": "`assert Book(\"Dune\", \"Frank Herbert\").label() == \"Book: Dune by Frank Herbert\"`",
+                "c": "`assert True`",
+                "d": "`assert \"label\" in open(\"models/book.py\").read()`"
               }
             },
             "policy_multi_choice_1": {
-              "title": "Choose good polymorphism test habits",
-              "prompt": "Which habits help when you test a mixed list of `Book` and `Game` objects?",
-              "hint": "Pick the choices that keep the test focused on the shared `label()` contract.",
+              "title": "Choose strong polymorphic-service fixtures",
+              "prompt": "Which TWO tests add meaningful coverage for a service that calls `label()` on a mixed collection?",
+              "hint": "Choose tests that exercise actual mixed objects and observable results.",
               "help": {
-                "concept": "A strong polymorphism test checks that one loop can call the same method on different object types and get the right results back.",
-                "hint_1": "Helpful habits keep the list mixed and check the returned labels in order.",
-                "hint_2": "Avoid choices that add type-checking or ignore the test output."
+                "concept": "Useful polymorphic tests vary the concrete objects or relevant edge cases while checking the shared service result.",
+                "hint_1": "A normal mixed Book/Game list is useful.",
+                "hint_2": "An edge-case object inside a mixed list adds different coverage."
               },
               "options": {
-                "a": "Build one mixed list and call `label()` on each item",
-                "b": "Check that the returned labels stay in the original order",
-                "c": "Add `if type(...)` checks before every call to `label()`",
-                "d": "Compare the test result with the exact expected labels"
-              }
-            },
-            "policy_drag_reorder_1": {
-              "title": "Order the inheritance test steps",
-              "prompt": "Put these steps in a sensible order for testing subclass behavior.",
-              "hint": "Start by creating the object, then call the method, then compare the result.",
-              "help": {
-                "concept": "A clean inheritance test creates a concrete subclass object, calls the shared method, and then checks the returned value.",
-                "hint_1": "The object must exist before you can call the method.",
-                "hint_2": "You compare the returned label after the method call."
-              },
-              "tokens": {
-                "t1": "Create a `Book` object",
-                "t2": "Call `book.label()`",
-                "t3": "Compare the returned string with the expected label"
+                "a": "Assert the labels from a mixed Book/Game list in order.",
+                "b": "Assert only that the service function's name is `build_labels`.",
+                "c": "Assert a mixed list containing a Game with an empty title uses its documented fallback.",
+                "d": "Assert `True` after importing the service."
               }
             },
             "policy_fill_blank_choice_1": {
-              "title": "Choose the parent class name",
-              "prompt": "Fill in the parent class name so `Book` inherits from the shared catalog base class.",
-              "hint": "Use the class that defines the shared `label()` contract.",
+              "title": "Name the shared behavior under test",
+              "prompt": "Complete the shared method name that both Book and Game objects provide to the report service.",
+              "hint": "It is the method the service calls on every object.",
               "help": {
-                "concept": "A subclass names its parent class inside the parentheses of the class definition.",
-                "hint_1": "Use the shared item class from this topic.",
-                "hint_2": "Do not pick a method name or a Python keyword."
+                "concept": "The shared public method is the contract the mixed-object service depends on.",
+                "hint_1": "Book and Game both expose the same method name.",
+                "hint_2": "The report service collects each object's label."
               },
-              "template": "class Book([blank1]):\n    pass",
+              "template": "item.[blank1]()",
               "choices": [
-                "CatalogItem",
                 "label",
-                "author",
-                "return"
+                "book_label",
+                "game_label",
+                "__class__"
               ]
             }
           }
         },
         "testing-object-state": {
           "label": "Testing Object State",
-          "summary": "Test object state by watching one object before and after method calls, like checking a thermometer before and after changing the room temperature.",
+          "summary": "Write executable `assert` tests that prove starting state, rejected state changes, and repeated transitions on real objects.",
           "cards": {
             "sketch0": {
-              "title": "Test one state change"
+              "title": "Assert state before and after a method call"
             },
             "sketch1": {
-              "title": "Test validation rules"
+              "title": "Test both valid and rejected state"
             },
             "sketch2": {
-              "title": "Test a sequence of changes"
+              "title": "Test a sequence on the same object"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_testing_object_state_sketch0": {
-              "title": "Test a book's availability state",
-              "prompt": "The lesson used a thermostat to explain state testing. Now practice with a library object. Complete the `Book` class so a new book starts available, and `checkout()` changes only that book's `available` state to `False`.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "title": "Write a before-and-after Book state test",
+              "prompt": "`models/book.py` is already complete. In `tests/check_book.py`, use the existing `book` object to write an assertion that it starts available, call `book.checkout()`, then write an assertion that the same object's `available` state is false. Leave the model file unchanged. The test script must still finish by printing `book state tests passed`.",
+              "hint": "Use `assert` for both observable states; the method call belongs between those two claims.",
               "help": {
-                "concept": "A state test checks what the object stores before and after a method call. Here, `checkout()` should change `available` from True to False.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A state-change test proves the object's state before and after the mutating method.",
+                "hint_1": "Check `book.available` before `checkout()`.",
+                "hint_2": "Check the same attribute again after `checkout()`."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\n# Assert that the new book starts available.\n# Call checkout() on this same book.\n# Assert that the same book is now unavailable.\n\nprint(\"book state tests passed\")\n",
               "starterFiles": {
+                "tests_check_book_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\n# Assert that the new book starts available.\n# Call checkout() on this same book.\n# Assert that the same book is now unavailable.\n\nprint(\"book state tests passed\")\n"
+                },
                 "models_book_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n"
                 }
               },
-              "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False",
-              "checks": {
-                "0": {
-                  "message": "Keep the Book class defined in models/book.py."
-                },
-                "1": {
-                  "message": "Book should still be constructible with a title."
-                },
-                "2": {
-                  "message": "A Book instance should have title and available attributes."
-                },
-                "3": {
-                  "message": "A new book should start available, then become unavailable after checkout()."
-                }
-              },
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\nassert book.available is True\nbook.checkout()\nassert book.available is False\n\nprint(\"book state tests passed\")\n",
+              "checks": {},
               "solutionFiles": {
+                "tests_check_book_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book import Book\n\nbook = Book(\"Dune\")\n\nassert book.available is True\nbook.checkout()\nassert book.available is False\n\nprint(\"book state tests passed\")\n"
+                },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n"
+                }
+              },
+              "expectedOutput": "book state tests passed",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the same Book object for a starting-state assertion, `checkout()`, and an updated-state assertion."
                 }
               }
             },
             "try_testing_object_state_sketch1": {
-              "title": "Test constructor validation for task priority",
-              "prompt": "Practice validation with a task object. Complete `Task` so the constructor stores `name` and a safe `priority`. A negative priority should become `0`; a positive priority should stay as given.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "title": "Test both sides of a validation rule",
+              "prompt": "`models/task.py` is already complete. In `tests/check_task.py`, write one assertion proving the existing `normal_task` keeps priority `2`, and another proving the existing `invalid_task` normalizes priority `-5` to `0`. Leave the model unchanged. Keep the final `task validation tests passed` print.",
+              "hint": "A validation test set needs one accepted input and one rejected or corrected input.",
               "help": {
-                "concept": "Validation is state protection. The constructor should not allow a negative priority to become object state.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
+                "concept": "Testing both branches distinguishes the validation rule from a constructor that simply stores every input unchanged.",
+                "hint_1": "The normal task should keep priority 2.",
+                "hint_2": "The invalid task should expose priority 0."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\n# Assert that the valid priority stays 2.\n# Assert that the negative priority becomes 0.\n\nprint(\"task validation tests passed\")\n",
               "starterFiles": {
+                "tests_check_task_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\n# Assert that the valid priority stays 2.\n# Assert that the negative priority becomes 0.\n\nprint(\"task validation tests passed\")\n"
+                },
                 "models_task_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        self.priority = priority if priority >= 0 else 0\n"
                 }
               },
-              "solutionCode": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority",
-              "checks": {
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\nassert normal_task.priority == 2\nassert invalid_task.priority == 0\n\nprint(\"task validation tests passed\")\n",
+              "checks": {},
+              "solutionFiles": {
+                "tests_check_task_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.task import Task\n\nnormal_task = Task(\"Email\", 2)\ninvalid_task = Task(\"Broken\", -5)\n\nassert normal_task.priority == 2\nassert invalid_task.priority == 0\n\nprint(\"task validation tests passed\")\n"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        self.priority = priority if priority >= 0 else 0\n"
+                }
+              },
+              "expectedOutput": "task validation tests passed",
+              "sourceChecks": {
                 "0": {
-                  "message": "Keep the Task class defined in models/task.py."
+                  "message": "Assert that a Task created with priority 2 still has priority 2."
                 },
                 "1": {
-                  "message": "A Task instance should store name and priority."
-                },
-                "2": {
-                  "message": "A normal priority should be stored unchanged."
-                },
-                "3": {
-                  "message": "A negative priority should be corrected to 0."
-                }
-              },
-              "solutionFiles": {
-                "models_task_py": {
-                  "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority"
+                  "message": "Assert that a Task created with priority -5 exposes priority 0."
                 }
               }
             },
             "try_testing_object_state_sketch2": {
-              "title": "Test repeated counter state changes",
-              "prompt": "Practice a sequence of state changes with a counter. Complete `Counter` so it starts at `0`, and every `increment()` call increases `count` by one.",
-              "hint": "Translate the question into a Python rule before selecting an answer.",
+              "title": "Write a repeated state-transition test",
+              "prompt": "`models/counter.py` is already complete. In `tests/check_counter.py`, use the existing `counter` object to assert its count is `0`, call `increment()` and assert `1`, then call `increment()` again and assert `2`. Use the same object for the whole sequence. Leave the model unchanged and keep the final `counter sequence tests passed` print.",
+              "hint": "The important part is the sequence: 0 → increment → 1 → increment → 2 on one instance.",
               "help": {
-                "concept": "Some tests check a sequence, not just one call. The expected count should move from 0 to 1 to 2 after two increments.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A repeated-transition test catches bugs that only appear after the same object changes state more than once.",
+                "hint_1": "Start with an assertion before any method call.",
+                "hint_2": "Assert again after each increment on the same counter."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\n# Assert count starts at 0.\n# Increment the same counter and assert count is 1.\n# Increment the same counter again and assert count is 2.\n\nprint(\"counter sequence tests passed\")\n",
               "starterFiles": {
+                "tests_check_counter_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\n# Assert count starts at 0.\n# Increment the same counter and assert count is 1.\n# Increment the same counter again and assert count is 2.\n\nprint(\"counter sequence tests passed\")\n"
+                },
                 "models_counter_py": {
-                  "content": "# Write your answer below"
+                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n"
                 }
               },
-              "solutionCode": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1",
-              "checks": {
-                "0": {
-                  "message": "Keep the Counter class defined in models/counter.py."
-                },
-                "1": {
-                  "message": "A Counter instance should have a count attribute."
-                },
-                "2": {
-                  "message": "The count should move from 0 to 1 to 2 across two increment() calls."
-                }
-              },
+              "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\nassert counter.count == 0\ncounter.increment()\nassert counter.count == 1\ncounter.increment()\nassert counter.count == 2\n\nprint(\"counter sequence tests passed\")\n",
+              "checks": {},
               "solutionFiles": {
+                "tests_check_counter_py": {
+                  "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.counter import Counter\n\ncounter = Counter()\n\nassert counter.count == 0\ncounter.increment()\nassert counter.count == 1\ncounter.increment()\nassert counter.count == 2\n\nprint(\"counter sequence tests passed\")\n"
+                },
                 "models_counter_py": {
-                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1"
+                  "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n"
+                }
+              },
+              "expectedOutput": "counter sequence tests passed",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the same Counter object to assert the full 0 → 1 → 2 state sequence."
                 }
               }
             }
@@ -9698,39 +9834,6 @@ const messages: Record<string, any> = {
                 "d": "`Task(\"Broken\", -5).priority == -5`"
               }
             },
-            "q-testing-object-state-fill-1": {
-              "title": "Complete an assert for starting state",
-              "prompt": "Fill in the missing value so the assertion checks that a new counter starts at zero.",
-              "hint": "A new `Counter` object should begin with no increments applied.",
-              "help": {
-                "concept": "Starting-state assertions verify what the constructor sets before any methods change the object.",
-                "hint_1": "The `count` attribute should match the constructor's initial value.",
-                "hint_2": "Choose the numeric value that represents an untouched counter."
-              },
-              "template": "assert counter.count == [blank1]",
-              "choices": [
-                "0",
-                "1",
-                "False",
-                "None"
-              ]
-            },
-            "q-testing-object-state-drag-1": {
-              "title": "Order a before-and-after state test",
-              "prompt": "Put these testing steps in the best order for checking a method that changes object state.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "Assert the starting attribute value",
-                "t2": "Create the object",
-                "t3": "Call the state-changing method",
-                "t4": "Assert the updated attribute value"
-              }
-            },
             "q-testing-object-state-multi-2": {
               "title": "Spot useful object-state edge cases",
               "prompt": "You are testing a `Counter` object with an `increment()` method. Which checks help prove repeated state changes work correctly? Choose all that apply.",
@@ -9746,23 +9849,6 @@ const messages: Record<string, any> = {
                 "c": "Only check that `increment` is spelled correctly",
                 "d": "Create two separate counters and ignore their `count` values"
               }
-            },
-            "q-testing-object-state-fill-2": {
-              "title": "Complete an assert after a checkout",
-              "prompt": "Fill in the missing value so the assertion checks the book's state after `checkout()` has already run.",
-              "hint": "After checkout, the book should no longer be available.",
-              "help": {
-                "concept": "After-method assertions should match the new stored state, not the original constructor value.",
-                "hint_1": "The `available` attribute should switch away from its starting value.",
-                "hint_2": "Choose the boolean value that represents an unavailable book."
-              },
-              "template": "assert book.available is [blank1]",
-              "choices": [
-                "True",
-                "False",
-                "0",
-                "Lesson notes panel"
-              ]
             },
             "ci-testing-object-state-debug-book-return": {
               "title": "Fix a broken return method after state changes",
@@ -10108,7 +10194,7 @@ const messages: Record<string, any> = {
         },
         "module-11-final-oop-capstone": {
           "label": "Neighborhood Pantry Request Coordinator",
-          "summary": "Build a neighborhood pantry application through six clearly scoped milestones, from one abstract request contract to a tested and documented final handoff.",
+          "summary": "Build one cumulative production-shaped OOP application through six milestones: abstract models, polymorphism, a service layer, CSV storage, reports, regression tests, and a documented final handoff.",
           "cards": {
             "sketch0": {
               "title": "Final OOP Capstone"
@@ -10119,387 +10205,580 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "try_module_11_final_oop_capstone_sketch0": {
-              "title": "Build the shared request foundation"
+              "title": "Milestone 1: Build the abstract request foundation"
             },
             "project_pantry_request_step_2_models": {
-              "title": "Add hygiene requests and prove polymorphism"
+              "title": "Milestone 2: Add HygieneRequest and prove polymorphism"
             },
             "project_pantry_request_step_3_service": {
-              "title": "Give the pantry service ownership of the queue"
+              "title": "Milestone 3: Give PantryService ownership of the queue"
             },
             "project_pantry_request_step_4_storage": {
-              "title": "Load saved requests back into domain objects"
+              "title": "Milestone 4: Load request objects from CSV"
             },
             "project_pantry_request_step_5_reports_tests": {
-              "title": "Create the daily report and protect the design with tests"
+              "title": "Milestone 5: Add the report and regression tests"
             },
             "project_pantry_request_step_6_final_handoff": {
-              "title": "Deliver the coordinator to the pantry team"
+              "title": "Milestone 6: Deliver the final pantry coordinator"
             }
           },
           "finalCapstone": {
             "steps": {
               "try_module_11_final_oop_capstone_sketch0": {
-                "title": "Build the shared request foundation",
-                "prompt": "The neighborhood pantry is replacing paper request notes with one consistent application. Before staff can add different request types, every request needs the same trusted foundation.\n\nComplete this milestone in four parts:\n\n1. **Build the abstract contract in `models/pantry_request.py`.** Create `PantryRequest(ABC)`. Validate a nonblank household name and a priority of `low`, `medium`, or `high`. Store fulfillment state privately, expose it through a property, and implement `mark_fulfilled()` plus `is_open()`.\n2. **Define what every subclass must provide.** Make `category` an abstract property and `details()` an abstract method. Keep `summary()` concrete in the base class so it combines shared request data with the subclass details.\n3. **Create the first real request in `models/food_request.py`.** `FoodRequest` must inherit from `PantryRequest`, validate a nonblank `food_type`, return `FOOD` from `category`, and return `food=<value>` from `details()`.\n4. **Connect the workspace.** Export `PantryRequest` and `FoodRequest` from `models/__init__.py`. Keep `main.py` runnable by creating the Rivera family food request and printing its summary.\n\nDo not implement `HygieneRequest` yet. The pantry adds that second request type in the next milestone.",
-                "hint": "Start with the base-class contract, then make `FoodRequest` satisfy that contract. The shared `summary()` should call the subclass `category` and `details()` members.",
+                "title": "Milestone 1: Build the abstract request foundation",
+                "prompt": "Build the shared pantry-request foundation. In `models/pantry_request.py`, make `PantryRequest` inherit from `ABC`; keep the allowed priorities `low`, `medium`, and `high`; validate `household` and `priority` through properties; store fulfillment state privately; expose a read-only `fulfilled` property; implement `mark_fulfilled()` and `is_open()`; and make `category(self)` and `details(self)` abstract methods. `summary()` must remain concrete and build its text from those public members. In `models/food_request.py`, keep `FoodRequest(PantryRequest)`, call `super().__init__`, validate a nonblank `food_type`, return `FOOD` from `category()`, and return `food=<value>` from `details()`. Finally, complete `main.py` so it creates a FoodRequest from the provided inputs and prints its summary. Do not implement HygieneRequest yet.",
+                "hint": "Retrieve the validated-property pattern from Module 8 and the ABC/inheritance patterns from Module 9.",
                 "help": {
-                  "concept": "An abstract base class protects the rules shared by every pantry request while forcing each concrete request type to provide its own category and detail text.",
-                  "hint_1": "In `models/pantry_request.py`, import `ABC` and `abstractmethod`, inherit from `ABC`, and mark both `category` and `details()` as abstract.",
-                  "hint_2": "In `models/food_request.py`, inherit from `PantryRequest` and implement the two abstract members. Then print one `FoodRequest.summary()` result from `main.py`."
+                  "concept": "The abstract parent owns shared validation/state while a concrete child supplies request-specific behavior.",
+                  "hint_1": "Use `ABC` plus `@abstractmethod` on `category()` and `details()`.",
+                  "hint_2": "Use `super().__init__(household, priority, fulfilled)` in FoodRequest."
                 },
-                "starterCode": "from models.food_request import FoodRequest\n\nrequest = FoodRequest(\"Rivera family\", \"high\", \"produce\")\nprint(request.summary())\n",
+                "starterCode": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\n# Create the FoodRequest and print its summary.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\n\nrequest = FoodRequest(\"Rivera family\", \"high\", \"produce\")\nprint(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\n# Create the FoodRequest and print its summary.\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\n# TODO: define PantryRequest as an abstract base class.\n# Add validated household and priority properties, fulfilled state,\n# abstract category/details members, and a concrete summary() method.\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        # TODO: route household and priority through validated properties.\n        # TODO: store fulfillment state privately.\n        pass\n\n    # TODO: add validated household and priority properties.\n\n    @property\n    def fulfilled(self):\n        # TODO: expose the private fulfillment state.\n        pass\n\n    def mark_fulfilled(self):\n        # TODO: update state and return the new fulfilled value.\n        pass\n\n    def is_open(self):\n        # TODO: return whether the request is still open.\n        pass\n\n    # TODO: make category() and details() abstract methods.\n\n    def summary(self):\n        # TODO: combine the shared state with category() and details().\n        pass\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\n# TODO: create FoodRequest as a concrete PantryRequest subclass.\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        # TODO: reuse PantryRequest setup and validate food_type.\n        pass\n\n    # TODO: implement category() and details().\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "# HygieneRequest is added in the next milestone.\n"
+                    "content": "# Added in Milestone 2.\n"
                   },
                   "models___init___py": {
-                    "content": "# TODO: export PantryRequest and FoodRequest.\n"
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "services_pantry_service_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\n\nrequest = FoodRequest(\"Rivera family\", \"high\", \"produce\")\nprint(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\nrequest = FoodRequest(household, priority, food_type)\nprint(request.summary())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "# HygieneRequest is added in the next milestone.\n"
+                    "content": "# Added in Milestone 2.\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "services_pantry_service_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.food_request import FoodRequest\n\nrequest = FoodRequest(\"Rivera family\", \"high\", \"produce\")\nprint(request.summary())\n",
-                "checks": {
-                  "0": {
-                    "message": "Create the `PantryRequest` class in `models/pantry_request.py`."
-                  },
-                  "1": {
-                    "message": "`FoodRequest.summary()` must return the Rivera family line shown in the expected example."
-                  },
-                  "2": {
-                    "message": "`main.py` must print the completed food-request summary."
-                  },
-                  "3": {
-                    "message": "Import both `ABC` and `abstractmethod` from `abc` in `models/pantry_request.py`."
-                  },
-                  "4": {
-                    "message": "Declare the base class as `class PantryRequest(ABC):`."
-                  },
-                  "5": {
-                    "message": "Mark the subclass contract with `@abstractmethod` in `models/pantry_request.py`."
-                  },
-                  "6": {
-                    "message": "Use properties to protect the request state and validation rules."
-                  },
-                  "7": {
-                    "message": "Declare `FoodRequest` as a subclass of `PantryRequest` in `models/food_request.py`."
-                  }
-                },
+                "solutionCode": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\nrequest = FoodRequest(household, priority, food_type)\nprint(request.summary())\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False"
+                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Make `PantryRequest` inherit from `ABC`."
+                  },
+                  "1": {
+                    "message": "Use a `household` property and setter for validated state."
+                  },
+                  "2": {
+                    "message": "Use a `priority` property and setter for validated state."
+                  },
+                  "3": {
+                    "message": "Make both `category(self)` and `details(self)` abstract methods."
+                  },
+                  "4": {
+                    "message": "Keep FoodRequest inheriting from PantryRequest and reuse the parent constructor with `super()`."
+                  }
+                }
               },
               "project_pantry_request_step_2_models": {
-                "title": "Add hygiene requests and prove polymorphism",
-                "prompt": "The pantry now needs to track hygiene supplies as well as food. Staff should be able to place both kinds of requests in one queue and print them without asking which concrete class each object uses.\n\nComplete this milestone in three parts:\n\n1. **Implement `HygieneRequest` in `models/hygiene_request.py`.** Inherit from `PantryRequest`, store `units` as an integer, reject values below `1`, return `HYGIENE` from `category`, and return `units=<value>` from `details()`.\n2. **Export the complete model family.** Update `models/__init__.py` so `PantryRequest`, `FoodRequest`, and `HygieneRequest` are available from the package.\n3. **Demonstrate polymorphism in `main.py`.** Build one list containing the Rivera `FoodRequest` and the Chen `HygieneRequest`. Use one `for request in requests` loop and call `request.summary()` for every object.\n\nDo not create separate food and hygiene printing branches. The point of this milestone is that both subclasses work through the same base-class interface.",
-                "hint": "Finish the second subclass first. Then use one mixed list and one `request.summary()` call inside the loop.",
+                "title": "Milestone 2: Add HygieneRequest and prove polymorphism",
+                "prompt": "Continue from the exact Milestone 1 workspace. Implement `HygieneRequest(PantryRequest)` in `models/hygiene_request.py`. Reuse the parent constructor with `super()`, convert `units` to an integer, reject values below 1, return `HYGIENE` from `category()`, and return `units=<value>` from `details()`. Then update `main.py` to build one FoodRequest and one HygieneRequest from the provided inputs, place them in one `requests` list, and use one `for` loop that calls the current object's shared `summary()` method. Do not branch with `isinstance()`, `type()`, `__class__`, or separate food/hygiene print logic. Keep the completed PantryRequest and FoodRequest unchanged.",
+                "hint": "The new subclass specializes the same abstract methods; the caller should trust the shared `summary()` interface.",
                 "help": {
-                  "concept": "Polymorphism lets `FoodRequest` and `HygieneRequest` travel through the same collection because both honor the `PantryRequest` contract.",
-                  "hint_1": "`HygieneRequest` should override `category` and `details()` and validate that `units >= 1`.",
-                  "hint_2": "In `main.py`, avoid `if` or `isinstance` branches. One loop over the mixed list should print both summaries."
+                  "concept": "This milestone retrieves inheritance, overriding, and branch-free polymorphism in one mixed collection.",
+                  "hint_1": "Use `super().__init__` in HygieneRequest.",
+                  "hint_2": "Inside the loop, call only `request.summary()`."
                 },
-                "starterCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nrequests = [\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n]\n\nfor request in requests:\n    print(request.summary())\n",
+                "starterCode": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\nrequest = FoodRequest(household, priority, food_type)\nprint(request.summary())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nrequests = [\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n]\n\nfor request in requests:\n    print(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\n\nhousehold = input()\npriority = input()\nfood_type = input()\n\nrequest = FoodRequest(household, priority, food_type)\nprint(request.summary())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "# TODO: implement HygieneRequest with validated units.\n"
+                    "content": "# Added in Milestone 2.\n"
                   },
                   "models___init___py": {
-                    "content": "# TODO: export PantryRequest, FoodRequest, and HygieneRequest.\n"
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "services_pantry_service_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nrequests = [\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n]\n\nfor request in requests:\n    print(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\n\nrequests = [\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n]\n\nfor request in requests:\n    print(request.summary())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "services_pantry_service_py": {
+                    "content": "# Added in Milestone 3.\n"
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nrequests = [\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n]\n\nfor request in requests:\n    print(request.summary())\n",
-                "checks": {
-                  "0": {
-                    "message": "Preserve the correct `FoodRequest.summary()` behavior from the previous milestone."
-                  },
-                  "1": {
-                    "message": "`HygieneRequest.summary()` must return the Chen family line shown in the expected example."
-                  },
-                  "2": {
-                    "message": "`main.py` must print both request summaries."
-                  },
-                  "3": {
-                    "message": "Declare `HygieneRequest` as a subclass of `PantryRequest`."
-                  },
-                  "4": {
-                    "message": "Use a `for` loop in `main.py` to process the mixed request list."
-                  },
-                  "5": {
-                    "message": "Call `request.summary()` inside the loop instead of branching by request type."
-                  }
-                },
+                "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\n\nrequests = [\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n]\n\nfor request in requests:\n    print(request.summary())\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False"
+                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Keep HygieneRequest inheriting from PantryRequest and reuse the shared constructor with `super()`."
+                  },
+                  "1": {
+                    "message": "Implement the required `category()` and `details()` methods."
+                  },
+                  "2": {
+                    "message": "Use one branch-free loop over `requests` and call the shared `summary()` method."
+                  }
+                }
               },
               "project_pantry_request_step_3_service": {
-                "title": "Give the pantry service ownership of the queue",
-                "prompt": "Two request types now share one interface, but the runner still manages the collection directly. The pantry coordinator needs one service object to protect the queue and control every state change.\n\nComplete this milestone in three parts:\n\n1. **Create `PantryService` in `services/pantry_service.py`.** Store requests in a private `_requests` list. Accept an optional starting collection and add each item through `add_request()`.\n2. **Protect and operate on the collection.** Expose a read-only `requests` property that returns a tuple. Make `add_request()` accept only `PantryRequest` objects. Implement `mark_fulfilled(household)`, `count_open_requests()`, and `summary_lines()` by delegating behavior to the request objects.\n3. **Keep `main.py` thin.** Create the service with the Rivera and Chen requests, mark the Rivera request fulfilled, print every line returned by `summary_lines()`, and print the remaining open count.\n\n`main.py` should coordinate the workflow; it should not reach into `_requests` or reproduce model logic.",
-                "hint": "Let the service own the mutable list. Return a tuple to callers and call each request object’s methods instead of changing its internal fields directly.",
+                "title": "Milestone 3: Give PantryService ownership of the queue",
+                "prompt": "Continue from the exact Milestone 2 workspace. Implement `PantryService` in `services/pantry_service.py`. Store the mutable collection privately in `self._requests`; accept an optional starting collection and add each item through `add_request()`; expose a read-only `requests` property that returns a tuple; reject non-PantryRequest values in `add_request()`; implement `mark_fulfilled(household)` by calling the matching request's `mark_fulfilled()` method; count open requests through `request.is_open()`; and build summary lines through `request.summary()`. Update `main.py` to create the two request objects, create the service, fulfill the household supplied by input, print the service's summary lines, and print the open count. `main.py` must not reach into `_requests` or duplicate model state logic.",
+                "hint": "The service owns collection coordination; each request object still owns its own state and summary behavior.",
                 "help": {
-                  "concept": "Encapsulation gives `PantryService` one clear responsibility: protect the request collection and coordinate changes through the model’s public methods.",
-                  "hint_1": "Initialize `self._requests = []`, add starting requests through `add_request()`, and return `tuple(self._requests)` from the property.",
-                  "hint_2": "In `mark_fulfilled()`, find the matching household and call `request.mark_fulfilled()`. In `summary_lines()`, call `request.summary()` for each object."
+                  "concept": "Encapsulation protects the mutable collection while service methods delegate behavior to the model objects.",
+                  "hint_1": "Return `tuple(self._requests)` from the property.",
+                  "hint_2": "Call `request.mark_fulfilled()`, `request.is_open()`, and `request.summary()` rather than changing model fields."
                 },
-                "starterCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nservice = PantryService([\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n])\nservice.mark_fulfilled(\"Rivera family\")\n\nfor line in service.summary_lines():\n    print(line)\nprint(\"OPEN:\", service.count_open_requests())\n",
+                "starterCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\n\nrequests = [\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n]\n\nfor request in requests:\n    print(request.summary())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nservice = PantryService([\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n])\nservice.mark_fulfilled(\"Rivera family\")\n\nfor line in service.summary_lines():\n    print(line)\nprint(\"OPEN:\", service.count_open_requests())\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\n\nrequests = [\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n]\n\nfor request in requests:\n    print(request.summary())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "# TODO: encapsulate the request collection in PantryService.\n"
+                    "content": "# Added in Milestone 3.\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nservice = PantryService([\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n])\nservice.mark_fulfilled(\"Rivera family\")\n\nfor line in service.summary_lines():\n    print(line)\nprint(\"OPEN:\", service.count_open_requests())\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
+                  },
+                  "storage_request_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "data_requests_csv": {
+                    "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nservice = PantryService([\n    FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n    HygieneRequest(\"Chen family\", \"medium\", 3),\n])\nservice.mark_fulfilled(\"Rivera family\")\n\nfor line in service.summary_lines():\n    print(line)\nprint(\"OPEN:\", service.count_open_requests())\n",
-                "checks": {
-                  "0": {
-                    "message": "Create the `PantryService` class in `services/pantry_service.py`."
-                  },
-                  "1": {
-                    "message": "A new empty `PantryService` must report `0` open requests."
-                  },
-                  "2": {
-                    "message": "`main.py` must print the two summaries and the open-request count."
-                  },
-                  "3": {
-                    "message": "Store the mutable collection in `self._requests` inside `PantryService`."
-                  },
-                  "4": {
-                    "message": "Expose the collection through a read-only property instead of returning the internal list directly."
-                  },
-                  "5": {
-                    "message": "Delegate fulfillment to `request.mark_fulfilled()` instead of changing model state from the service."
-                  },
-                  "6": {
-                    "message": "Build service summary lines by calling `request.summary()` polymorphically."
-                  }
-                },
+                "solutionCode": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nOPEN: 1"
+                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nOPEN: 1",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Keep the mutable list private and expose a tuple through a read-only property."
+                  },
+                  "1": {
+                    "message": "`add_request()` should accept only PantryRequest objects and append the validated object."
+                  },
+                  "2": {
+                    "message": "Delegate state, open-count, and summary behavior to request objects instead of duplicating it in the service."
+                  },
+                  "3": {
+                    "message": "Keep main.py outside the service's private `_requests` state."
+                  }
+                }
               },
               "project_pantry_request_step_4_storage": {
-                "title": "Load saved requests back into domain objects",
-                "prompt": "The pantry already has request records in `data/requests.csv`. Staff should be able to restart the application and recover real `FoodRequest` and `HygieneRequest` objects—not raw dictionaries that bypass the model rules.\n\nComplete this milestone in three parts:\n\n1. **Parse saved fulfillment state.** In `storage/request_storage.py`, make `parse_fulfilled(value)` treat `true`, `1`, and `yes` as fulfilled, regardless of surrounding spaces or letter case.\n2. **Implement `load_requests(path)`.** Read the CSV with `csv.DictReader`. Use the `type` column to construct `FoodRequest` or `HygieneRequest`, convert hygiene units to an integer, preserve the saved priority and fulfillment state, and raise `ValueError` for an unknown request type.\n3. **Use the loaded objects in `main.py`.** Load `data/requests.csv` and print each object through the shared `request.summary()` interface.\n\nKeep validation in the model constructors. The storage layer should translate rows into valid domain objects, not duplicate the model rules.",
-                "hint": "Read one row at a time, build the shared constructor values once, and choose the concrete subclass only where the `type` column requires it.",
+                "title": "Milestone 4: Load request objects from CSV",
+                "prompt": "Continue from the exact Milestone 3 workspace. Implement `storage/request_storage.py`. `parse_fulfilled(value)` must treat `true`, `1`, and `yes` as fulfilled regardless of surrounding spaces or letter case. `load_requests(path)` must use `csv.DictReader`, construct FoodRequest or HygieneRequest from the `type` column, convert hygiene units to an integer, preserve priority and fulfilled state through the real constructors, and raise `ValueError` for an unknown type. The supplied `tests/check_storage.py` is the executable boundary test for this milestone; do not rewrite the models or service to compensate for storage bugs.",
+                "hint": "Storage may choose which concrete class to construct; once the object exists, the rest of the application uses the shared OOP interface.",
                 "help": {
-                  "concept": "A storage adapter converts serialized CSV rows into validated domain objects so the rest of the application can continue using the same OOP interface.",
-                  "hint_1": "Use `csv.DictReader`, normalize the fulfilled text, and construct `FoodRequest` or `HygieneRequest` with the row data.",
-                  "hint_2": "Return a list of request objects. In `main.py`, loop over that list and call `request.summary()` without storage-specific or type-specific report logic."
+                  "concept": "A storage adapter translates serialized rows into validated domain objects without duplicating model/report rules.",
+                  "hint_1": "Use `csv.DictReader` and normalize the `type`/fulfilled text.",
+                  "hint_2": "Raise ValueError when the type is neither food nor hygiene."
                 },
-                "starterCode": "from storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nfor request in requests:\n    print(request.summary())\n",
+                "starterCode": "# Added in Milestone 4.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nfor request in requests:\n    print(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "# TODO: load concrete PantryRequest objects from the CSV file.\n"
+                    "content": "# Added in Milestone 4.\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "# Added in Milestone 4.\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nfor request in requests:\n    print(request.summary())\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        for row in csv.DictReader(handle):\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n            if row[\"type\"] == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif row[\"type\"] == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(f\"unknown request type: {row['type']}\")\n            requests.append(request)\n    return requests\n"
+                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "data_requests_csv": {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "tests_check_storage_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
+                  },
+                  "tests_check_requests_py": {
+                    "content": "# Added in Milestone 5.\n"
+                  },
+                  "tests___init___py": {
+                    "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nfor request in requests:\n    print(request.summary())\n",
-                "checks": {
-                  "0": {
-                    "message": "`parse_fulfilled(\"yes\")` must return `True`."
-                  },
-                  "1": {
-                    "message": "`main.py` must print the three requests loaded from the CSV file."
-                  },
-                  "2": {
-                    "message": "Import `FoodRequest` into `storage/request_storage.py` so food rows become food objects."
-                  },
-                  "3": {
-                    "message": "Import `HygieneRequest` into `storage/request_storage.py` so hygiene rows become hygiene objects."
-                  },
-                  "4": {
-                    "message": "Read the CSV with `csv.DictReader`."
-                  },
-                  "5": {
-                    "message": "Print loaded objects through `request.summary()` in `main.py`."
-                  }
-                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True"
+                "expectedOutput": "storage tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Use Python's `csv` module for the storage adapter."
+                  },
+                  "1": {
+                    "message": "Normalize surrounding spaces/case and recognize true, 1, and yes."
+                  },
+                  "2": {
+                    "message": "Read request rows with `csv.DictReader`."
+                  },
+                  "3": {
+                    "message": "Construct the two concrete request types and reject an unknown type."
+                  }
+                }
               },
               "project_pantry_request_step_5_reports_tests": {
-                "title": "Create the daily report and protect the design with tests",
-                "prompt": "The pantry team can now load requests, but the daily handoff still needs one dependable report and regression checks that catch broken OOP behavior before staff rely on the output.\n\nComplete this milestone in three parts:\n\n1. **Build `reports/summary.py`.** Implement `build_summary(requests)` with the heading `NEIGHBORHOOD PANTRY REQUESTS`, one `request.summary()` line for every object, and deterministic `OPEN` and `FULFILLED` totals based on `request.is_open()`.\n2. **Build `tests/check_requests.py`.** In `run_checks()`, prove that `PantryRequest` is abstract, a blank household is rejected, zero hygiene units are rejected, both subclasses can live in one `PantryService`, polymorphic summaries are correct, fulfillment delegation works, and the open count changes correctly.\n3. **Update `main.py`.** Load the saved requests, apply the required state changes and added Davis request, then print the report returned by `build_summary()`.\n\nThe report must not inspect food-specific or hygiene-specific fields. Each request object already knows how to describe itself.",
-                "hint": "Write the report against the shared interface, then make the tests prove the abstraction, validation, mixed collection, and service behavior.",
+                "title": "Milestone 5: Add the report and regression tests",
+                "prompt": "Continue from the exact Milestone 4 workspace. Implement `build_summary(requests)` in `reports/summary.py`: start with `NEIGHBORHOOD PANTRY REQUESTS`, append one `request.summary()` line per object, calculate open requests through `request.is_open()`, derive the fulfilled count, and return one newline-separated string. Do not branch on FoodRequest versus HygieneRequest in the report. Then complete `tests/check_requests.py`. Without using `inspect`, prove that PantryRequest cannot be instantiated while abstract; prove blank household and zero-unit validation; test a mixed PantryService; test fulfillment delegation and open count; and assert the full report for that mixed fixture. Keep the provided `run_checks()` function and final script print. Finally, update `main.py` to load the saved CSV requests and print `build_summary(requests)`.",
+                "hint": "Prove abstraction by attempting to instantiate the abstract base and catching TypeError; the report itself should use only the shared request interface.",
                 "help": {
-                  "concept": "A strong regression check protects the design contract—not only the last printed line—while a polymorphic report stays independent of concrete request types.",
-                  "hint_1": "Use `request.summary()` for report lines and `request.is_open()` for totals. Do not branch on `FoodRequest` or `HygieneRequest`.",
-                  "hint_2": "Use `inspect.isabstract(PantryRequest)` and focused assertions for invalid values, mixed service contents, fulfillment, and open counts."
+                  "concept": "Regression tests protect the architecture, while the report remains polymorphic and independent of concrete request types.",
+                  "hint_1": "Use request.summary() and request.is_open() in the report.",
+                  "hint_2": "Your tests should exercise validation, mixed objects, service state changes, and the returned report string."
                 },
-                "starterCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\n",
+                "starterCode": "# Added in Milestone 5.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\n"
+                    "content": "from models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom services.pantry_service import PantryService\n\nfood_household = input()\nfood_priority = input()\nfood_type = input()\nhygiene_household = input()\nhygiene_priority = input()\nunits = int(input())\nhousehold_to_fulfill = input()\n\nservice = PantryService([\n    FoodRequest(food_household, food_priority, food_type),\n    HygieneRequest(hygiene_household, hygiene_priority, units),\n])\n\nservice.mark_fulfilled(household_to_fulfill)\n\nfor line in service.summary_lines():\n    print(line)\n\nprint(\"OPEN:\", service.count_open_requests())\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        for row in csv.DictReader(handle):\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n            if row[\"type\"] == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif row[\"type\"] == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(f\"unknown request type: {row['type']}\")\n            requests.append(request)\n    return requests\n"
+                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
@@ -10508,42 +10787,48 @@ const messages: Record<string, any> = {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
                   "reports_summary_py": {
-                    "content": "# TODO: build one polymorphic report for every request type.\n"
+                    "content": "# Added in Milestone 5.\n"
                   },
                   "reports___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
+                  "tests_check_storage_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
+                  },
                   "tests_check_requests_py": {
-                    "content": "# TODO: add regression assertions for the OOP contract.\n"
+                    "content": "# Added in Milestone 5.\n"
                   },
                   "tests___init___py": {
                     "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\n"
+                    "content": "from reports.summary import build_summary\nfrom storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nprint(build_summary(requests))\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        for row in csv.DictReader(handle):\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n            if row[\"type\"] == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif row[\"type\"] == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(f\"unknown request type: {row['type']}\")\n            requests.append(request)\n    return requests\n"
+                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
@@ -10552,74 +10837,81 @@ const messages: Record<string, any> = {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
                   "reports_summary_py": {
-                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(request.is_open() for request in request_list)\n    fulfilled_count = len(request_list) - open_count\n    lines.append(f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\")\n    return \"\\n\".join(lines)\n"
+                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
                   "reports___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
+                  "tests_check_storage_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
+                  },
                   "tests_check_requests_py": {
-                    "content": "from inspect import isabstract\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    assert isabstract(PantryRequest)\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank households must fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units must fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert [request.category for request in service.requests] == [\"FOOD\", \"HYGIENE\"]\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
                   },
                   "tests___init___py": {
                     "content": "# Package marker for imports.\n"
+                  },
+                  "README_md": {
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
-                "solutionCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\n",
-                "checks": {
-                  "0": {
-                    "message": "`main.py` must print the complete report with its heading, request lines, and totals."
-                  },
-                  "1": {
-                    "message": "Build every report row with `request.summary()` so the report remains polymorphic."
-                  },
-                  "2": {
-                    "message": "Calculate open totals with `request.is_open()` instead of reading or duplicating internal state rules."
-                  },
-                  "3": {
-                    "message": "Assert that `PantryRequest` is abstract with `isabstract(PantryRequest)`."
-                  },
-                  "4": {
-                    "message": "Add meaningful assertions in `tests/check_requests.py` for validation and mixed-subclass service behavior."
-                  }
-                },
+                "solutionCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 1 | FULFILLED: 3"
+                "expectedOutput": "request tests passed",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Build the report from `request.summary()` and `request.is_open()` without concrete-type branches."
+                  },
+                  "1": {
+                    "message": "Prove the abstract base cannot be instantiated by catching TypeError."
+                  },
+                  "2": {
+                    "message": "Test both blank-household and zero-unit validation failures."
+                  },
+                  "3": {
+                    "message": "Add meaningful assertions for mixed summaries, fulfillment, open count, and the final report."
+                  },
+                  "4": {
+                    "message": "Keep main.py thin: load request objects and print the report."
+                  }
+                }
               },
               "project_pantry_request_step_6_final_handoff": {
-                "title": "Deliver the coordinator to the pantry team",
-                "prompt": "The application is ready for its final handoff. A new volunteer should be able to understand the design, run the checks, load the saved requests, and recognize the final readiness confirmation without reading the source first.\n\nComplete this final milestone in three parts:\n\n1. **Finish `README.md`.** Explain how the project uses abstraction, encapsulation, inheritance, overriding, and polymorphism. Name the responsibilities of the model, service, storage, report, and test layers. Include the exact run command `python main.py`.\n2. **Finish the workflow in `main.py`.** Call `run_checks()` without printing extra test output. Load `data/requests.csv`, mark the Rivera and Chen requests fulfilled through `PantryService`, add a fulfilled Davis hygiene request, and print the deterministic report.\n3. **Confirm the handoff.** After the report, print exactly `PANTRY REQUEST COORDINATOR READY`.\n\nPreserve every requirement from the earlier milestones. This final step is an integration and documentation handoff, not a rewrite of the model or service design.",
-                "hint": "Keep the runner focused on orchestration: run checks, load objects, update them through the service, build the report, and print the readiness line.",
+                "title": "Milestone 6: Deliver the final pantry coordinator",
+                "prompt": "Continue from the exact Milestone 5 workspace. Finish only the integration handoff. In `main.py`, call both existing regression check functions without printing extra test output; create `PantryService(load_requests(\"data/requests.csv\"))`; fulfill the Rivera and Chen requests through `service.mark_fulfilled()`; add a fulfilled `HygieneRequest(\"Davis family\", \"medium\", 2, True)`; print the deterministic `build_summary(service.requests)` report; and then print exactly `PANTRY REQUEST COORDINATOR READY`. In `README.md`, explain the responsibilities of models, services, storage, reports, tests, and main.py; mention validated properties, ABC/abstract methods, inheritance/super, overriding, and polymorphism; and include the run command `python main.py`. Do not add `__all__`, `inspect.isabstract`, or rewrite earlier layers.",
+                "hint": "This is a handoff milestone: orchestrate existing behavior and document the responsibility boundaries rather than changing them.",
                 "help": {
-                  "concept": "A portfolio-ready handoff combines working behavior with documentation that explains why the architecture is maintainable and how another developer can run it.",
-                  "hint_1": "In `README.md`, explicitly include the headings or terms `Abstraction` and `Polymorphism`, and include `python main.py`.",
-                  "hint_2": "In `main.py`, call `run_checks()`, perform the requested service updates, print `build_summary(service.requests)`, and end with the exact readiness text."
+                  "concept": "The final deliverable proves the full architecture runs and leaves a concise explanation for the next developer.",
+                  "hint_1": "Run both regression-check functions before the final workflow.",
+                  "hint_2": "The final report should end with OPEN: 0 | FULFILLED: 4."
                 },
-                "starterCode": "# TODO: complete the final orchestration and readiness line.\n",
+                "starterCode": "from reports.summary import build_summary\nfrom storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nprint(build_summary(requests))\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: complete the final orchestration and readiness line.\n"
+                    "content": "from reports.summary import build_summary\nfrom storage.request_storage import load_requests\n\nrequests = load_requests(\"data/requests.csv\")\nprint(build_summary(requests))\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        for row in csv.DictReader(handle):\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n            if row[\"type\"] == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif row[\"type\"] == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(f\"unknown request type: {row['type']}\")\n            requests.append(request)\n    return requests\n"
+                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
@@ -10628,45 +10920,48 @@ const messages: Record<string, any> = {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
                   "reports_summary_py": {
-                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(request.is_open() for request in request_list)\n    fulfilled_count = len(request_list) - open_count\n    lines.append(f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\")\n    return \"\\n\".join(lines)\n"
+                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
                   "reports___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
+                  "tests_check_storage_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
+                  },
                   "tests_check_requests_py": {
-                    "content": "from inspect import isabstract\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    assert isabstract(PantryRequest)\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank households must fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units must fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert [request.category for request in service.requests] == [\"FOOD\", \"HYGIENE\"]\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
                   },
                   "tests___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nTODO: explain the OOP design and how to run the project.\n"
+                    "content": "# Neighborhood Pantry Request Coordinator\n\nComplete the final architecture and handoff notes in Milestone 6.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n"
+                    "content": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\nfrom tests.check_storage import run_checks as run_storage_checks\n\nrun_storage_checks()\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n"
                   },
                   "models_pantry_request_py": {
-                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @property\n    @abstractmethod\n    def category(self):\n        \"\"\"Return the request category label.\"\"\"\n\n    @abstractmethod\n    def details(self):\n        \"\"\"Return the subclass-specific detail text.\"\"\"\n\n    def summary(self):\n        return (\n            f\"{self.category}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass PantryRequest(ABC):\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, household, priority=\"medium\", fulfilled=False):\n        self.household = household\n        self.priority = priority\n        self._fulfilled = bool(fulfilled)\n\n    @property\n    def household(self):\n        return self._household\n\n    @household.setter\n    def household(self, value):\n        cleaned = str(value).strip()\n        if not cleaned:\n            raise ValueError(\"household is required\")\n        self._household = cleaned\n\n    @property\n    def priority(self):\n        return self._priority\n\n    @priority.setter\n    def priority(self, value):\n        cleaned = str(value).strip().lower()\n        if cleaned not in self.VALID_PRIORITIES:\n            raise ValueError(\"invalid priority\")\n        self._priority = cleaned\n\n    @property\n    def fulfilled(self):\n        return self._fulfilled\n\n    def mark_fulfilled(self):\n        self._fulfilled = True\n        return self._fulfilled\n\n    def is_open(self):\n        return not self.fulfilled\n\n    @abstractmethod\n    def category(self):\n        pass\n\n    @abstractmethod\n    def details(self):\n        pass\n\n    def summary(self):\n        return (\n            f\"{self.category()}: {self.household} | \"\n            f\"priority={self.priority} | {self.details()} | \"\n            f\"fulfilled={self.fulfilled}\"\n        )\n"
                   },
                   "models_food_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.food_type = food_type\n\n    @property\n    def category(self):\n        return \"FOOD\"\n\n    @property\n    def food_type(self):\n        return self._food_type\n\n    @food_type.setter\n    def food_type(self, value):\n        cleaned = str(value).strip().lower()\n        if not cleaned:\n            raise ValueError(\"food type is required\")\n        self._food_type = cleaned\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass FoodRequest(PantryRequest):\n    def __init__(self, household, priority, food_type, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        cleaned = str(food_type).strip()\n        if not cleaned:\n            raise ValueError(\"food_type is required\")\n        self.food_type = cleaned\n\n    def category(self):\n        return \"FOOD\"\n\n    def details(self):\n        return f\"food={self.food_type}\"\n"
                   },
                   "models_hygiene_request_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n        self.units = units\n\n    @property\n    def category(self):\n        return \"HYGIENE\"\n\n    @property\n    def units(self):\n        return self._units\n\n    @units.setter\n    def units(self, value):\n        units = int(value)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self._units = units\n\n    def details(self):\n        return f\"units={self.units}\"\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass HygieneRequest(PantryRequest):\n    def __init__(self, household, priority, units, fulfilled=False):\n        super().__init__(household, priority, fulfilled)\n\n        units = int(units)\n        if units < 1:\n            raise ValueError(\"units must be at least 1\")\n        self.units = units\n\n    def category(self):\n        return \"HYGIENE\"\n\n    def details(self):\n        return f\"units={self.units}\"\n"
                   },
                   "models___init___py": {
-                    "content": "from models.pantry_request import PantryRequest\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n__all__ = [\"PantryRequest\", \"FoodRequest\", \"HygieneRequest\"]\n"
+                    "content": "# Package marker for imports.\n"
                   },
                   "services_pantry_service_py": {
-                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n        for request in requests or []:\n            self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must implement PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
+                    "content": "from models.pantry_request import PantryRequest\n\n\nclass PantryService:\n    def __init__(self, requests=None):\n        self._requests = []\n\n        if requests is not None:\n            for request in requests:\n                self.add_request(request)\n\n    @property\n    def requests(self):\n        return tuple(self._requests)\n\n    def add_request(self, request):\n        if not isinstance(request, PantryRequest):\n            raise TypeError(\"request must be a PantryRequest\")\n        self._requests.append(request)\n\n    def mark_fulfilled(self, household):\n        for request in self._requests:\n            if request.household == household:\n                request.mark_fulfilled()\n                return True\n        return False\n\n    def count_open_requests(self):\n        return sum(request.is_open() for request in self._requests)\n\n    def summary_lines(self):\n        return [request.summary() for request in self._requests]\n"
                   },
                   "services___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "storage_request_storage_py": {
-                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        for row in csv.DictReader(handle):\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n            if row[\"type\"] == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif row[\"type\"] == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(f\"unknown request type: {row['type']}\")\n            requests.append(request)\n    return requests\n"
+                    "content": "import csv\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\n\n\ndef parse_fulfilled(value):\n    return str(value).strip().lower() in {\"true\", \"1\", \"yes\"}\n\n\ndef load_requests(path):\n    requests = []\n\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            request_type = row[\"type\"].strip().lower()\n\n            common = {\n                \"household\": row[\"household\"],\n                \"priority\": row[\"priority\"],\n                \"fulfilled\": parse_fulfilled(row[\"fulfilled\"]),\n            }\n\n            if request_type == \"food\":\n                request = FoodRequest(\n                    food_type=row[\"detail\"],\n                    **common,\n                )\n            elif request_type == \"hygiene\":\n                request = HygieneRequest(\n                    units=int(row[\"detail\"]),\n                    **common,\n                )\n            else:\n                raise ValueError(\n                    f\"unknown request type: {row['type']}\"\n                )\n\n            requests.append(request)\n\n    return requests\n"
                   },
                   "storage___init___py": {
                     "content": "# Package marker for imports.\n"
@@ -10675,42 +10970,40 @@ const messages: Record<string, any> = {
                     "content": "type,household,priority,detail,fulfilled\nfood,Rivera family,high,produce,false\nhygiene,Chen family,medium,3,false\nhygiene,Morgan family,low,5,true\n"
                   },
                   "reports_summary_py": {
-                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(request.is_open() for request in request_list)\n    fulfilled_count = len(request_list) - open_count\n    lines.append(f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\")\n    return \"\\n\".join(lines)\n"
+                    "content": "def build_summary(requests):\n    request_list = list(requests)\n    lines = [\"NEIGHBORHOOD PANTRY REQUESTS\"]\n\n    for request in request_list:\n        lines.append(request.summary())\n\n    open_count = sum(\n        request.is_open()\n        for request in request_list\n    )\n    fulfilled_count = len(request_list) - open_count\n\n    lines.append(\n        f\"OPEN: {open_count} | FULFILLED: {fulfilled_count}\"\n    )\n    return \"\\n\".join(lines)\n"
                   },
                   "reports___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
+                  "tests_check_storage_py": {
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nimport tempfile\nfrom pathlib import Path\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom storage.request_storage import load_requests, parse_fulfilled\n\n\ndef run_checks():\n    assert parse_fulfilled(\" YES \") is True\n    assert parse_fulfilled(\"true\") is True\n    assert parse_fulfilled(\"1\") is True\n    assert parse_fulfilled(\"no\") is False\n\n    requests = load_requests(\"data/requests.csv\")\n\n    assert [request.household for request in requests] == [\n        \"Rivera family\",\n        \"Chen family\",\n        \"Morgan family\",\n    ]\n    assert isinstance(requests[0], FoodRequest)\n    assert isinstance(requests[1], HygieneRequest)\n    assert isinstance(requests[2], HygieneRequest)\n    assert requests[1].units == 3\n    assert requests[2].fulfilled is True\n\n    with tempfile.TemporaryDirectory() as directory:\n        bad_path = Path(directory) / \"bad.csv\"\n        bad_path.write_text(\n            \"type,household,priority,detail,fulfilled\\n\"\n            \"unknown,Test family,low,x,false\\n\"\n        )\n\n        try:\n            load_requests(str(bad_path))\n            raise AssertionError(\"unknown request type should fail\")\n        except ValueError:\n            pass\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"storage tests passed\")\n"
+                  },
                   "tests_check_requests_py": {
-                    "content": "from inspect import isabstract\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    assert isabstract(PantryRequest)\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank households must fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units must fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert [request.category for request in service.requests] == [\"FOOD\", \"HYGIENE\"]\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n"
+                    "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.food_request import FoodRequest\nfrom models.hygiene_request import HygieneRequest\nfrom models.pantry_request import PantryRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\n\n\ndef run_checks():\n    try:\n        PantryRequest(\"Test family\", \"low\")\n        raise AssertionError(\"abstract base should not instantiate\")\n    except TypeError:\n        pass\n\n    try:\n        FoodRequest(\"\", \"high\", \"produce\")\n        raise AssertionError(\"blank household should fail\")\n    except ValueError:\n        pass\n\n    try:\n        HygieneRequest(\"Chen family\", \"medium\", 0)\n        raise AssertionError(\"zero units should fail\")\n    except ValueError:\n        pass\n\n    requests = [\n        FoodRequest(\"Rivera family\", \"high\", \"produce\"),\n        HygieneRequest(\"Chen family\", \"medium\", 3),\n    ]\n    service = PantryService(requests)\n\n    assert service.summary_lines() == [\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=False\",\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\",\n    ]\n\n    assert service.mark_fulfilled(\"Rivera family\") is True\n    assert service.count_open_requests() == 1\n\n    assert build_summary(service.requests) == (\n        \"NEIGHBORHOOD PANTRY REQUESTS\\n\"\n        \"FOOD: Rivera family | priority=high | food=produce | fulfilled=True\\n\"\n        \"HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\\n\"\n        \"OPEN: 1 | FULFILLED: 1\"\n    )\n\n\nif __name__ == \"__main__\":\n    run_checks()\n    print(\"request tests passed\")\n"
                   },
                   "tests___init___py": {
                     "content": "# Package marker for imports.\n"
                   },
                   "README_md": {
-                    "content": "# Neighborhood Pantry Request Coordinator\n\nThis multi-file Python application models pantry requests with an abstract\n`PantryRequest` contract and concrete `FoodRequest` and `HygieneRequest`\nsubclasses.\n\n## OOP design\n\n- **Abstraction:** `PantryRequest` uses `ABC` and `@abstractmethod` to define\n  the category and details every request must provide.\n- **Encapsulation:** validated properties protect household names, priorities,\n  food types, units, and fulfillment state.\n- **Inheritance and overriding:** both concrete request classes inherit shared\n  behavior and override the abstract interface.\n- **Polymorphism:** services and reports process a mixed request collection by\n  calling the same methods without type-specific report branches.\n\n## Run\n\n```bash\npython main.py\n```\n\nThe runner loads `data/requests.csv`, updates request state, executes regression\nchecks, prints the final report, and confirms that the coordinator is ready.\n"
+                    "content": "# Neighborhood Pantry Request Coordinator\n\n## Architecture\n\n- `models/` owns validated request state, the abstract `PantryRequest` contract,\n  inheritance, and request-specific behavior.\n- `services/` owns the mutable request collection and coordinates changes\n  through each request object's public methods.\n- `storage/` translates CSV rows into validated `FoodRequest` and\n  `HygieneRequest` objects.\n- `reports/` builds deterministic output from the shared request interface\n  without branching on concrete request types.\n- `tests/` protects storage, validation, abstraction, polymorphism, service\n  state changes, and report behavior.\n- `main.py` stays thin and orchestrates the completed layers.\n\n## OOP retrieval\n\nThe project uses validated `@property` properties for shared state, `ABC` and\n`@abstractmethod` for the base contract, inheritance with `super()`, overriding\nthrough `category()` and `details()`, and polymorphism through mixed request\ncollections.\n\n## Run\n\n```bash\npython main.py\n```\n\nA successful final run ends with:\n\n`PANTRY REQUEST COORDINATOR READY`\n"
                   }
                 },
-                "solutionCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\n\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(HygieneRequest(\"Davis family\", \"medium\", 2, True))\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n",
-                "checks": {
-                  "0": {
-                    "message": "`main.py` must print the complete final report and the readiness confirmation."
-                  },
-                  "1": {
-                    "message": "Explain **Abstraction** in `README.md`, including the role of `PantryRequest` as the abstract contract."
-                  },
-                  "2": {
-                    "message": "Explain **Polymorphism** in `README.md`, including how mixed request types share one interface."
-                  },
-                  "3": {
-                    "message": "Include the exact run command `python main.py` in `README.md`."
-                  },
-                  "4": {
-                    "message": "Call `run_checks()` from `main.py` before the final workflow."
-                  }
-                },
+                "solutionCode": "from models.hygiene_request import HygieneRequest\nfrom reports.summary import build_summary\nfrom services.pantry_service import PantryService\nfrom storage.request_storage import load_requests\nfrom tests.check_requests import run_checks\nfrom tests.check_storage import run_checks as run_storage_checks\n\nrun_storage_checks()\nrun_checks()\n\nservice = PantryService(load_requests(\"data/requests.csv\"))\nservice.mark_fulfilled(\"Rivera family\")\nservice.mark_fulfilled(\"Chen family\")\nservice.add_request(\n    HygieneRequest(\n        \"Davis family\",\n        \"medium\",\n        2,\n        True,\n    )\n)\n\nprint(build_summary(service.requests))\nprint(\"PANTRY REQUEST COORDINATOR READY\")\n",
+                "checks": {},
                 "workspaceFiles": {},
                 "bundleMoved": {},
-                "expectedOutput": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 0 | FULFILLED: 4\nPANTRY REQUEST COORDINATOR READY"
+                "expectedOutput": "NEIGHBORHOOD PANTRY REQUESTS\nFOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\nHYGIENE: Morgan family | priority=low | units=5 | fulfilled=True\nHYGIENE: Davis family | priority=medium | units=2 | fulfilled=True\nOPEN: 0 | FULFILLED: 4\nPANTRY REQUEST COORDINATOR READY",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Run both regression checks, execute the required final state changes, and print the readiness confirmation."
+                  },
+                  "1": {
+                    "message": "Document the responsibility of every production/test layer."
+                  },
+                  "2": {
+                    "message": "Document the retrieved OOP concepts and the exact run command."
+                  }
+                }
               }
             }
           }
@@ -10719,31 +11012,28 @@ const messages: Record<string, any> = {
       "python-8-object-oriented-foundations": {
         "class-files-and-instances": {
           "label": "Class Files and Instances",
-          "summary": "Create a class shell with `pass`, import it from a model file, and make one object cleanly.",
+          "summary": "Define a minimal class in a model file, import it from `main.py`, and create an instance across that file boundary.",
           "cards": {
             "sketch0": {
-              "title": "Class shell"
+              "title": "Define the class file"
             },
             "sketch1": {
-              "title": "Import and create"
-            },
-            "sketch2": {
-              "title": "Keep files clean"
+              "title": "Import and use the class"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_class_files_and_instances_sketch0": {
-              "title": "Define the Car class shell",
-              "prompt": "In `models/car.py`, define `class Car:` with `pass` inside it. Do not add a constructor yet. Do not add attributes or methods yet. `main.py` can stay unchanged in this first step.",
-              "hint": "This step is only about making the class exist in its own file.",
+              "title": "Define a minimal Car class",
+              "prompt": "In `models/car.py`, define a class named `Car` and put `pass` in its body so the class is valid but intentionally empty. Leave `main.py` unchanged. Do not add a constructor yet.",
+              "hint": "The class definition belongs in `models/car.py`. Use `pass` as the placeholder body.",
               "help": {
-                "concept": "`pass` means the class exists, but it does not do any work yet. That is enough for the first clean class shell.",
-                "hint_1": "Write `class Car:` on one line.",
-                "hint_2": "Indent `pass` under the class name."
+                "concept": "`pass` is a placeholder statement. It lets you define a valid class before adding real behavior.",
+                "hint_1": "Start the definition with `class Car:`.",
+                "hint_2": "Indent `pass` inside the class body."
               },
               "starterCode": "# The class definition belongs in models/car.py.\n# You do not need to add code in main.py yet.",
               "starterFiles": {
@@ -10770,16 +11060,21 @@ const messages: Record<string, any> = {
                 "1": {
                   "message": "The class shell should be constructible with no arguments yet."
                 }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `Car` in `models/car.py` with `pass` in its body."
+                }
               }
             },
             "try_class_files_and_instances_sketch1": {
-              "title": "Import Car and create one object",
-              "prompt": "Keep `class Car:` with `pass` in `models/car.py`. In `main.py`, import `Car` from `models.car` and create one object with `car = Car()`. Do not add attributes or methods yet.",
-              "hint": "Use `from models.car import Car`, then call `Car()` to create one object.",
+              "title": "Import and use Car from the model file",
+              "prompt": "`models/car.py` already defines the empty `Car` class. In `main.py`, import `Car` from the `models.car` module and create one `Car` object. Keep the class definition in `models/car.py`; do not copy the class into `main.py`. No output is required.",
+              "hint": "Import the class from the model module, then call the imported class to create one object.",
               "help": {
-                "concept": "A class is a plan. Calling the class name with parentheses, like `Car()`, creates one object from that class.",
-                "hint_1": "The import line belongs at the top of `main.py`.",
-                "hint_2": "Create the object with `car = Car()`."
+                "concept": "A model file owns the class definition. Another file imports that class and can then create objects from it.",
+                "hint_1": "The module path is `models.car`.",
+                "hint_2": "After importing `Car`, call `Car()` once in `main.py`."
               },
               "starterCode": "# Import the Car class.\n# Then create one Car object.",
               "starterFiles": {
@@ -10809,67 +11104,29 @@ const messages: Record<string, any> = {
                 "2": {
                   "message": "Create one Car object in main.py."
                 }
-              }
-            },
-            "try_class_files_and_instances_sketch2": {
-              "title": "Keep the model and main script separate",
-              "prompt": "Keep the `Car` class in `models/car.py`. Keep `main.py` as the small script that imports the class and creates one object. Add `print(\"Car object ready\")` in `main.py` so the program shows that it ran.",
-              "hint": "Do not move the class into `main.py`. Import it from the model file.",
-              "help": {
-                "concept": "A clean multifile project keeps model code in a model file and keeps the main script focused on using that model.",
-                "hint_1": "`models/car.py` should contain the class.",
-                "hint_2": "`main.py` should import `Car`, create `car = Car()`, and print the ready message."
               },
-              "starterCode": "from models.car import Car\n\ncar = Car()\n\n# Print a short ready message below.",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car()\n\n# Print a short ready message below."
-                },
-                "models_car_py": {
-                  "content": "# Keep models/car.py unchanged for this step: Keep the model and main script separate.\nclass Car:\n    pass"
-                }
-              },
-              "solutionCode": "from models.car import Car\n\ncar = Car()\nprint(\"Car object ready\")",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car()\nprint(\"Car object ready\")"
-                },
-                "models_car_py": {
-                  "content": "class Car:\n    pass"
-                }
-              },
-              "checks": {
+              "sourceChecks": {
                 "0": {
-                  "message": "Keep the Car class defined in the model file."
-                },
-                "1": {
-                  "message": "Car should still be constructible with no arguments."
-                },
-                "2": {
-                  "message": "Create one Car object in main.py."
-                },
-                "3": {
-                  "message": "Print one short ready message from main.py."
+                  "message": "Import the `Car` class/module from `models.car` in `main.py`."
                 }
-              },
-              "expectedOutput": "Car object ready"
+              }
             }
           },
           "practice": {
             "mc-class-files-and-instances-class-role": {
-              "title": "What does a class do?",
-              "prompt": "Which statements correctly describe a class at this point? Choose all that apply.",
-              "hint": "Think of the class as the plan, not one finished object.",
+              "title": "Separate the two files",
+              "prompt": "Which statements keep the class definition and the script that uses it cleanly separated? Choose all that apply.",
+              "hint": "The model file owns the class definition; `main.py` imports and uses it.",
               "help": {
-                "concept": "A class is a reusable plan for making objects. One class can be used to create many objects.",
-                "hint_1": "Look for choices about plans and object creation.",
-                "hint_2": "Reject choices that say a class must immediately have many methods."
+                "concept": "A clean file boundary keeps reusable model code in the model file and keeps `main.py` focused on using that model.",
+                "hint_1": "Look for one statement about `models/car.py` and one about `main.py`.",
+                "hint_2": "Do not duplicate the class definition in `main.py`."
               },
               "options": {
-                "a": "A class is a reusable plan for creating objects.",
-                "b": "A class is always the same thing as one object.",
-                "c": "Calling a class, such as `Car()`, creates an object.",
-                "d": "A class must have a constructor before Python accepts it."
+                "a": "`models/car.py` defines the `Car` class.",
+                "b": "`main.py` imports `Car` and creates objects from it.",
+                "c": "`main.py` should copy the full `Car` class definition before using it.",
+                "d": "`models/car.py` should run the whole program and print the final output."
               }
             },
             "sc-class-files-and-instances-pass-meaning": {
@@ -10889,84 +11146,68 @@ const messages: Record<string, any> = {
               }
             },
             "fb-class-files-and-instances-import-name": {
-              "title": "Complete the import",
-              "prompt": "Fill in the class name imported from `models.car`.",
-              "hint": "Use the exact class name from `class Car:`.",
+              "title": "Complete the module path",
+              "prompt": "Complete the import so `main.py` imports `Car` from the file `models/car.py`.",
+              "hint": "Python module paths use dots instead of `/` and omit the `.py` extension.",
               "help": {
-                "concept": "When a class is defined in another file, `main.py` imports the class by name.",
-                "hint_1": "Class names use capital letters by convention.",
-                "hint_2": "The class is named `Car`."
+                "concept": "The file path `models/car.py` is imported with the module path `models.car`.",
+                "hint_1": "Replace the slash with a dot.",
+                "hint_2": "Use `models.car`."
               },
-              "template": "from models.car import [blank1]",
+              "template": "from [blank1] import Car",
               "choices": [
-                "Car",
+                "models.car",
+                "models/car.py",
                 "car",
-                "models",
-                "pass"
+                "main"
               ]
-            },
-            "dr-class-files-and-instances-order": {
-              "title": "Order the first class workflow",
-              "prompt": "Put the steps in the order you follow when creating a class in a model file.",
-              "hint": "Start with the class file before importing it.",
-              "help": {
-                "concept": "A clean first workflow is: define the class, import it, create one object, then run main.py.",
-                "hint_1": "You cannot import a class that has not been defined yet.",
-                "hint_2": "Creating the object comes after the import."
-              },
-              "tokens": {
-                "t1": "Define the class in models/car.py",
-                "t2": "Import Car in main.py",
-                "t3": "Create one object with Car()",
-                "t4": "Run main.py"
-              }
             }
           }
         },
         "constructors-and-object-state": {
           "label": "Constructors and Object State",
-          "summary": "Use `__init__` for per-object state, then compare instance variables with values shared by the class.",
+          "summary": "Use `__init__` to create per-object state, distinguish instance state from class-level state, and keep mutable lists separate between objects.",
           "cards": {
             "sketch0": {
-              "title": "Instance state"
+              "title": "Initialize object state"
             },
             "sketch1": {
-              "title": "Class variables"
+              "title": "Class state vs instance state"
             },
             "sketch2": {
-              "title": "Safe mutable state"
+              "title": "Keep mutable state per object"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_constructors_and_object_state_sketch0": {
-              "title": "Store starting values on one Car object",
-              "prompt": "In `models/car.py`, add `__init__(self, make, model, miles)`. Store the values on `self.make`, `self.model`, and `self.miles`. These are instance variables: each Car object gets its own values. In `main.py`, create `Car(\"Nissan\", \"Leaf\", 6000)`, then print the make and miles on separate lines.",
-              "hint": "The constructor receives starting values and stores them on `self`.",
+              "title": "Initialize a Car's state",
+              "prompt": "`main.py` already creates a `Car` and reads its attributes. In `models/car.py`, replace the empty class body with `__init__(self, make, model, miles)`. Store the incoming values on `self.make`, `self.model`, and `self.miles`. Leave `main.py` unchanged.",
+              "hint": "The constructor receives the three starting values and assigns each one to an attribute on `self`.",
               "help": {
-                "concept": "`__init__` runs for each new object. Assignments on `self` create instance variables that belong to that specific object.",
-                "hint_1": "Use `self.make = make`, `self.model = model`, and `self.miles = miles`.",
-                "hint_2": "After creating the car, print `car.make` and `car.miles`."
+                "concept": "`__init__` establishes instance state when an object is created.",
+                "hint_1": "Define `__init__` inside `class Car`.",
+                "hint_2": "Assign make, model, and miles to matching attributes on `self`."
               },
-              "starterCode": "from models.car import Car\n\n# After updating the constructor, create a car and print two attributes.",
+              "starterCode": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# After updating the constructor, create a car and print two attributes."
+                  "content": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)\n"
                 },
                 "models_car_py": {
-                  "content": "# TODO: Update models/car.py to complete this step: Add a Car constructor.\nclass Car:\n    pass"
+                  "content": "class Car:\n    # Add __init__ so each Car stores make, model, and miles.\n    pass\n"
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)",
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)"
+                  "content": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
                 }
               },
               "checks": {
@@ -10983,24 +11224,38 @@ const messages: Record<string, any> = {
                   "message": "Print the requested attributes on separate lines."
                 }
               },
-              "expectedOutput": "Nissan\n6000"
+              "expectedOutput": "Nissan\n6000",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `__init__(self, make, model, miles)` inside `Car`."
+                },
+                "1": {
+                  "message": "Store `make` on `self.make`."
+                },
+                "2": {
+                  "message": "Store `model` on `self.model`."
+                },
+                "3": {
+                  "message": "Store `miles` on `self.miles`."
+                }
+              }
             },
             "try_constructors_and_object_state_sketch1": {
-              "title": "Add one value shared by every Car",
-              "prompt": "In `models/car.py`, add the class variable `wheels = 4` directly inside `class Car`, above `__init__`. Keep `make`, `model`, and `miles` as instance variables on `self`. In `main.py`, create a Subaru and a Mini, then print `Car.wheels`, the Subaru make, and the Mini make on separate lines.",
-              "hint": "A class variable is indented inside the class, but it is not inside a method.",
+              "title": "Add one class-level value",
+              "prompt": "In `models/car.py`, add the class variable `wheels = 4` directly inside `class Car`, outside `__init__`. Keep `make`, `model`, and `miles` as instance variables on `self`. In `main.py`, print `Car.wheels`, then `outback.make`, then `mini.make`, each on its own line.",
+              "hint": "The shared value belongs in the class body; values that differ between cars stay on `self`.",
               "help": {
-                "concept": "A class variable belongs to the class and is shared as a default by every instance. Instance variables such as `self.make` belong to one object.",
-                "hint_1": "Place `wheels = 4` immediately under `class Car:`.",
-                "hint_2": "Read the shared value with `Car.wheels` and object-specific values with dot notation on each object."
+                "concept": "A class variable is class-level state; instance variables live on one object through `self`.",
+                "hint_1": "Put `wheels = 4` above `__init__`, not inside it.",
+                "hint_2": "Read the shared value with `Car.wheels`."
               },
-              "starterCode": "from models.car import Car\n\n# Create the two cars, then print the shared wheel count and each make.\n",
+              "starterCode": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\n# Print the class-level wheel count, then each car's make.\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# Create a Subaru Outback and a Mini Cooper.\n# Print Car.wheels, then the make from each object.\n"
+                  "content": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\n# Print the class-level wheel count, then each car's make.\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    # TODO: add the class variable wheels = 4 here.\n\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
+                  "content": "class Car:\n    # Add the class variable wheels = 4 here.\n\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\nprint(Car.wheels)\nprint(outback.make)\nprint(mini.make)\n",
@@ -11029,24 +11284,38 @@ const messages: Record<string, any> = {
                   "message": "Print the shared wheel count and the two requested makes."
                 }
               },
-              "expectedOutput": "4\nSubaru\nMini"
+              "expectedOutput": "4\nSubaru\nMini",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `wheels = 4` as a class variable directly inside `Car`."
+                },
+                "1": {
+                  "message": "Print the shared value from `Car.wheels`."
+                },
+                "2": {
+                  "message": "Print `outback.make`."
+                },
+                "3": {
+                  "message": "Print `mini.make`."
+                }
+              }
             },
             "try_constructors_and_object_state_sketch2": {
-              "title": "Give each Car its own service notes",
-              "prompt": "A list of service notes must belong to one car, not be shared by every car. In `models/car.py`, create `self.service_notes = []` inside `__init__`. In `main.py`, create two cars, append `\"oil change\"` only to the first car's list, then print both lists on separate lines.",
-              "hint": "Mutable per-object data belongs inside `__init__` on `self`.",
+              "title": "Give each Car its own mutable list",
+              "prompt": "`main.py` already creates two cars, appends one service note to the first car, and prints both lists. In `models/car.py`, create `self.service_notes = []` inside `__init__` so every `Car` gets a separate list. Leave `main.py` unchanged.",
+              "hint": "Create the empty list on `self` inside the constructor, not once in the class body.",
               "help": {
-                "concept": "A mutable class variable such as `service_notes = []` would make every object share the same list. Creating `self.service_notes = []` gives each object a separate list.",
-                "hint_1": "Add `self.service_notes = []` inside the constructor.",
-                "hint_2": "Append to `first_car.service_notes`, then print both cars' lists."
+                "concept": "Mutable per-object state should be created separately for each instance.",
+                "hint_1": "Add the list assignment inside `__init__`.",
+                "hint_2": "The required attribute is `self.service_notes`."
               },
-              "starterCode": "from models.car import Car\n\n# Create two cars. Add one note to the first car only, then print both lists.\n",
+              "starterCode": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.service_notes.append(\"oil change\")\n\nprint(first_car.service_notes)\nprint(second_car.service_notes)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# Create two cars.\n# Append \"oil change\" to the first car only.\n# Print both service_notes lists.\n"
+                  "content": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.service_notes.append(\"oil change\")\n\nprint(first_car.service_notes)\nprint(second_car.service_notes)\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    wheels = 4\n\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n        # TODO: give this object its own empty service_notes list.\n"
+                  "content": "class Car:\n    wheels = 4\n\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n        # Give each Car its own empty service_notes list.\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.service_notes.append(\"oil change\")\n\nprint(first_car.service_notes)\nprint(second_car.service_notes)\n",
@@ -11075,335 +11344,275 @@ const messages: Record<string, any> = {
                   "message": "Only the first car should contain the new service note."
                 }
               },
-              "expectedOutput": "['oil change']\n[]"
+              "expectedOutput": "['oil change']\n[]",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create `self.service_notes = []` inside `__init__`."
+                }
+              }
             }
           },
           "practice": {
             "mc-constructors-and-object-state-storing-values": {
               "title": "Class state or instance state?",
-              "prompt": "Which statements correctly describe class variables and instance variables? Choose all that apply.",
-              "hint": "Ask whether the value is shared by the class or belongs to one object.",
+              "prompt": "Which statements correctly distinguish class variables from instance variables? Choose all that apply.",
+              "hint": "Values on `self` belong to one object; values such as `Car.wheels` live at the class level.",
               "help": {
-                "concept": "Class variables are defined in the class body and shared as class-level values. Assignments on `self` create state for one instance.",
-                "hint_1": "Look for `self.` when identifying instance state.",
-                "hint_2": "A mutable list usually belongs on each instance unless sharing is intentional."
+                "concept": "Instance variables are stored on one object through `self`. Class variables are defined in the class body.",
+                "hint_1": "Look for `self.` when identifying per-object state.",
+                "hint_2": "A class-level value can be read from the class itself."
               },
               "options": {
-                "a": "`self.make` belongs to one Car object.",
-                "b": "`Car.wheels` is a value stored on the class.",
-                "c": "A list placed on the class is automatically copied for every object.",
-                "d": "Every value in a class must be shared by all objects."
+                "a": "`self.make` can differ from one `Car` object to another.",
+                "b": "`Car.wheels` is class-level state.",
+                "c": "Every value assigned on `self` is shared by all `Car` objects.",
+                "d": "A class variable is recreated separately inside every object."
               }
             },
             "sc-constructors-and-object-state-purpose": {
               "title": "Where should per-car notes live?",
-              "prompt": "Each car needs a separate list of service notes. Where should the list be created?",
-              "hint": "The list should be new for every object.",
+              "prompt": "Each `Car` needs a separate mutable list of service notes. Where should that list be created?",
+              "hint": "The list must be new for each object.",
               "help": {
                 "concept": "Create mutable per-object data inside `__init__` and assign it to `self`.",
-                "hint_1": "Avoid one list in the class body.",
-                "hint_2": "Choose the option that creates a fresh list for each car."
+                "hint_1": "Avoid one list shared in the class body.",
+                "hint_2": "Choose the option that creates a fresh list per `Car`."
               },
               "options": {
                 "a": "Inside `__init__` as `self.service_notes = []`",
                 "b": "Once in the class body as `service_notes = []`",
-                "c": "Only inside `main.py` with no object attribute",
-                "d": "Inside `print()`"
+                "c": "Only as a local list in `main.py`",
+                "d": "Inside a `print()` call"
               }
             },
             "fb-constructors-and-object-state-init-name": {
-              "title": "Read a shared class value",
-              "prompt": "Fill in the class name used to read the shared wheel count.",
-              "hint": "Use the class itself, not one particular car.",
+              "title": "Name the initializer",
+              "prompt": "Complete the method definition Python uses to initialize each new `Car` with starting state.",
+              "hint": "The special method name starts and ends with two underscores.",
               "help": {
-                "concept": "A class variable can be read directly from the class.",
-                "hint_1": "The class in this topic is Car.",
-                "hint_2": "The completed expression is `Car.wheels`."
+                "concept": "`__init__` runs when a new object is created and establishes its starting instance state.",
+                "hint_1": "The name means initialize.",
+                "hint_2": "Use `__init__`."
               },
-              "template": "[blank1].wheels",
+              "template": "def [blank1](self, make, model, miles):",
               "choices": [
-                "Car",
-                "self",
-                "car",
-                "__init__"
+                "__init__",
+                "init",
+                "constructor",
+                "self"
               ]
-            },
-            "dr-constructors-and-object-state-flow": {
-              "title": "Order the state setup",
-              "prompt": "Put these steps in a clear order.",
-              "hint": "Define shared information first, then create per-object state.",
-              "help": {
-                "concept": "The class body can hold shared values; the constructor creates each object's own state.",
-                "hint_1": "The class definition comes first.",
-                "hint_2": "Use the object after it has been created."
-              },
-              "tokens": {
-                "t1": "Define the class variable in the class body",
-                "t2": "Define `__init__` with starting values",
-                "t3": "Store per-object values on `self`",
-                "t4": "Create an object and read its state"
-              }
             }
           }
         },
         "encapsulation-and-validation": {
           "label": "Encapsulation and Validation",
-          "summary": "Let methods protect object state by ignoring unsafe values and returning a clean summary.",
+          "summary": "Protect object state by validating state-changing methods, then use a property setter when direct attribute assignment also needs one controlled validation path.",
           "cards": {
             "sketch0": {
-              "title": "Protect state"
+              "title": "Validate state-changing methods"
             },
             "sketch1": {
-              "title": "Reject invalid changes"
-            },
-            "sketch2": {
-              "title": "Clean final behavior"
+              "title": "Protect direct assignment with a property"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_encapsulation_and_validation_sketch0": {
-              "title": "Validate positive miles",
-              "prompt": "In `models/car.py`, update `drive(self, miles)` so it only changes `self.miles` when `miles > 0`. In `main.py`, create `Car(\"Honda\", \"Civic\", 100)`, print the result of `drive(10)`, then print the result of `drive(-5)`. The negative drive should leave the miles unchanged.",
-              "hint": "Wrap the update in `if miles > 0:`.",
+              "title": "Protect mileage inside drive()",
+              "prompt": "`main.py` is already complete. In `models/car.py`, update the existing `drive(self, miles)` method so it changes `self.miles` only when the requested `miles` value is greater than `0`. For zero or a negative value, leave the stored mileage unchanged. Always return the car's current mileage. Leave `main.py` unchanged.",
+              "hint": "Check the requested distance before mutating `self.miles`, then return the current mileage.",
               "help": {
-                "concept": "Validation protects object state. The object should decide whether a requested change is safe before updating itself.",
-                "hint_1": "Only add to `self.miles` when the amount is positive.",
-                "hint_2": "Always return `self.miles`, even when the value is ignored."
+                "concept": "Validation belongs next to the state change it protects. Invalid requests should not mutate the object.",
+                "hint_1": "Only positive distances are valid.",
+                "hint_2": "Return the current mileage after the validation decision."
               },
-              "starterCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\n# Print drive(10).\n# Then print drive(-5).",
+              "starterCode": "from models.car import Car\n\nstart = int(input())\nvalid_drive = int(input())\ninvalid_drive = int(input())\n\ncar = Car(\"Honda\", \"Civic\", start)\n\nprint(car.drive(valid_drive))\nprint(car.drive(invalid_drive))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\n# Print drive(10).\n# Then print drive(-5)."
+                  "content": "from models.car import Car\n\nstart = int(input())\nvalid_drive = int(input())\ninvalid_drive = int(input())\n\ncar = Car(\"Honda\", \"Civic\", start)\n\nprint(car.drive(valid_drive))\nprint(car.drive(invalid_drive))\n"
                 },
                 "models_car_py": {
-                  "content": "# TODO: Update models/car.py to complete this step: Validate positive miles.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        # Validate the requested distance before changing self.miles.\n        self.miles += miles\n        return self.miles\n"
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\nprint(car.drive(10))\nprint(car.drive(-5))",
+              "solutionCode": "from models.car import Car\n\nstart = int(input())\nvalid_drive = int(input())\ninvalid_drive = int(input())\n\ncar = Car(\"Honda\", \"Civic\", start)\n\nprint(car.drive(valid_drive))\nprint(car.drive(invalid_drive))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\nprint(car.drive(10))\nprint(car.drive(-5))"
+                  "content": "from models.car import Car\n\nstart = int(input())\nvalid_drive = int(input())\ninvalid_drive = int(input())\n\ncar = Car(\"Honda\", \"Civic\", start)\n\nprint(car.drive(valid_drive))\nprint(car.drive(invalid_drive))\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Keep the Car class defined."
+                  "message": "Keep `Car` defined in `models/car.py`."
                 },
                 "1": {
-                  "message": "drive(10) should add positive miles."
+                  "message": "`Car` should still accept make, model, and starting mileage."
                 },
                 "2": {
-                  "message": "drive(-5) should leave miles unchanged."
+                  "message": "A positive drive should update and return the new mileage."
                 },
                 "3": {
-                  "message": "Print both drive results."
+                  "message": "A negative drive must leave the mileage unchanged."
                 },
                 "4": {
-                  "message": "Print both drive results."
+                  "message": "Zero and negative requests must preserve state for other valid starting values too."
                 }
               },
-              "expectedOutput": "110\n110"
+              "expectedOutput": "110\n110",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the validation inside `drive(self, miles)` on `Car`."
+                }
+              }
             },
             "try_encapsulation_and_validation_sketch1": {
-              "title": "Keep invalid drives from changing state",
-              "prompt": "Keep the validated `drive` method. In `main.py`, create `Car(\"Ford\", \"Escape\", 130)`. Call `drive(30)`, then call `drive(-70)`, then print `car.miles`. The final miles should still be `160` because the invalid drive is ignored.",
-              "hint": "The second call should not undo or reduce the miles.",
+              "title": "Validate direct mileage assignment",
+              "prompt": "`main.py` is already complete. In `models/car.py`, keep `_miles` as the backing attribute and add a `miles` property. The `@property` getter `miles(self)` must return the backing mileage. Add a `@miles.setter` setter that changes the backing mileage only when the new value is `0` or greater. Negative assignments must leave the current mileage unchanged. Keep `__init__` routing the starting value through `self.miles = miles`. Leave `main.py` unchanged.",
+              "hint": "The getter exposes the backing value. The setter validates before replacing that value.",
               "help": {
-                "concept": "A method can protect state across a sequence of calls. Valid changes apply; invalid changes are ignored.",
-                "hint_1": "Do not subtract miles for negative input.",
-                "hint_2": "Print the final `car.miles` after both calls."
+                "concept": "A property preserves normal attribute syntax while giving the object one controlled validation path.",
+                "hint_1": "Use `@property` for the getter and `@miles.setter` for the setter.",
+                "hint_2": "Only non-negative values should replace `_miles`."
               },
-              "starterCode": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\n\n# Drive 30 miles.\n# Try to drive -70 miles.\n# Print the final miles.",
+              "starterCode": "from models.car import Car\n\nstart = int(input())\nnew_miles = int(input())\ninvalid_miles = int(input())\n\ncar = Car(\"Toyota\", \"Prius\", start)\n\nprint(car.miles)\n\ncar.miles = new_miles\nprint(car.miles)\n\ncar.miles = invalid_miles\nprint(car.miles)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\n\n# Drive 30 miles.\n# Try to drive -70 miles.\n# Print the final miles."
+                  "content": "from models.car import Car\n\nstart = int(input())\nnew_miles = int(input())\ninvalid_miles = int(input())\n\ncar = Car(\"Toyota\", \"Prius\", start)\n\nprint(car.miles)\n\ncar.miles = new_miles\nprint(car.miles)\n\ncar.miles = invalid_miles\nprint(car.miles)\n"
                 },
                 "models_car_py": {
-                  "content": "# Keep models/car.py unchanged for this step: Keep invalid drives from changing state.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self._miles = 0\n        self.miles = miles\n\n    # Add the miles property getter and setter below.\n"
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\ncar.drive(30)\ncar.drive(-70)\n\nprint(car.miles)",
+              "solutionCode": "from models.car import Car\n\nstart = int(input())\nnew_miles = int(input())\ninvalid_miles = int(input())\n\ncar = Car(\"Toyota\", \"Prius\", start)\n\nprint(car.miles)\n\ncar.miles = new_miles\nprint(car.miles)\n\ncar.miles = invalid_miles\nprint(car.miles)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\ncar.drive(30)\ncar.drive(-70)\n\nprint(car.miles)"
+                  "content": "from models.car import Car\n\nstart = int(input())\nnew_miles = int(input())\ninvalid_miles = int(input())\n\ncar = Car(\"Toyota\", \"Prius\", start)\n\nprint(car.miles)\n\ncar.miles = new_miles\nprint(car.miles)\n\ncar.miles = invalid_miles\nprint(car.miles)\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self._miles = 0\n        self.miles = miles\n\n    @property\n    def miles(self):\n        return self._miles\n\n    @miles.setter\n    def miles(self, value):\n        if value >= 0:\n            self._miles = value\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Keep the Car class defined."
+                  "message": "Keep `Car` defined in `models/car.py`."
                 },
                 "1": {
-                  "message": "A valid drive should increase miles."
+                  "message": "`Car` should remain constructible with a valid starting mileage."
                 },
                 "2": {
-                  "message": "An invalid negative drive should leave miles unchanged."
-                },
-                "3": {
-                  "message": "Print the final miles."
+                  "message": "The public `miles` attribute should still be readable."
                 }
               },
-              "expectedOutput": "160"
-            },
-            "try_encapsulation_and_validation_sketch2": {
-              "title": "Use validated behavior with a summary",
-              "prompt": "Use the final validated `Car` class. In `main.py`, create `Car(\"Honda\", \"Civic\", 0)`, call `drive(20)`, call `drive(-3)`, call `drive(50)`, then print `summary()`. The invalid call should be ignored, so the summary should show `70` miles.",
-              "hint": "The negative drive should not change the object. The two positive drives should add up to 70 miles.",
-              "help": {
-                "concept": "Encapsulation means the object protects its own state and reports a trustworthy result.",
-                "hint_1": "Call the methods in the order given.",
-                "hint_2": "Print `car.summary()` after all three calls."
-              },
-              "starterCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\n\n# Drive 20 miles, ignore -3, then drive 50 more.\n# Print the final summary.",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\n\n# Drive 20 miles, ignore -3, then drive 50 more.\n# Print the final summary."
-                },
-                "models_car_py": {
-                  "content": "# Keep models/car.py unchanged for this step: Use validated behavior with a summary.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
-                }
-              },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\ncar.drive(20)\ncar.drive(-3)\ncar.drive(50)\n\nprint(car.summary())",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\ncar.drive(20)\ncar.drive(-3)\ncar.drive(50)\n\nprint(car.summary())"
-                },
-                "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
-                }
-              },
-              "checks": {
+              "expectedOutput": "100\n150\n150",
+              "sourceChecks": {
                 "0": {
-                  "message": "The final summary should use validated miles."
+                  "message": "Define `miles` with the `@property` decorator."
                 },
                 "1": {
-                  "message": "Print one clean summary line."
+                  "message": "Define a setter for the `miles` property."
                 },
                 "2": {
-                  "message": "Print one clean summary line."
+                  "message": "Route the constructor's starting mileage through the `miles` property."
                 }
-              },
-              "expectedOutput": "Honda Civic - 70 miles"
+              }
             }
           },
           "practice": {
             "mc-encapsulation-and-validation-safe-design": {
-              "title": "What makes validation safer?",
-              "prompt": "Which statements describe good validation design? Choose all that apply.",
-              "hint": "Think about keeping unsafe state changes inside the object.",
+              "title": "Choose controlled state changes",
+              "prompt": "Which designs keep validation close to the state it protects? Choose all that apply.",
+              "hint": "Look for one controlled path that every caller uses.",
               "help": {
-                "concept": "Validation belongs near the state it protects. A method should check whether a requested change is safe before changing attributes.",
-                "hint_1": "Look for choices about protecting object state.",
-                "hint_2": "Reject choices that let random code patch values however it wants."
+                "concept": "State-changing methods and property setters can both keep a validation rule inside the object.",
+                "hint_1": "A method can validate before mutation.",
+                "hint_2": "A property setter can validate direct assignment."
               },
               "options": {
-                "a": "The object should check values before changing its own state.",
-                "b": "`main.py` should always change attributes directly to fix bad input.",
-                "c": "A method can ignore an unsafe value and return the unchanged state.",
-                "d": "Validation means deleting all methods."
+                "a": "`drive()` checks a distance before changing the car's mileage.",
+                "b": "`main.py` directly repairs `_miles` whenever a value looks wrong.",
+                "c": "A `miles` property setter validates `car.miles = value` assignments.",
+                "d": "Every caller invents its own validation rule before touching the object."
               }
             },
             "sc-encapsulation-and-validation-why-inside-class": {
-              "title": "Why validate inside the class?",
-              "prompt": "Why should the validation live inside the class method?",
-              "hint": "The method is closest to the state it changes.",
+              "title": "Why use a property setter?",
+              "prompt": "Why is a property setter useful for a value such as `miles`?",
+              "hint": "Think about normal assignment syntax plus validation.",
               "help": {
-                "concept": "Putting validation inside the method keeps rules in one reliable place.",
-                "hint_1": "Think about every caller using the same rule.",
-                "hint_2": "Choose the answer about protecting state consistently."
+                "concept": "A property setter lets callers assign normally while the object controls whether the new value is accepted.",
+                "hint_1": "The caller can still write `car.miles = value`.",
+                "hint_2": "The setter owns the validation rule."
               },
               "options": {
-                "a": "So every caller uses the same rule before the object changes state.",
-                "b": "So the object can no longer be created.",
-                "c": "So `main.py` can skip imports.",
-                "d": "So negative values always reduce miles."
+                "a": "It prevents callers from reading the attribute at all.",
+                "b": "It keeps normal assignment syntax while validating the new value inside the object.",
+                "c": "It makes every instance share one mileage value.",
+                "d": "It removes the need for an initializer."
               }
             },
             "fb-encapsulation-and-validation-condition": {
-              "title": "Complete the validation condition",
-              "prompt": "Fill in the operator that checks whether miles is positive.",
-              "hint": "The method should update only when `miles` is greater than zero.",
+              "title": "Trace a rejected assignment",
+              "prompt": "A car currently has `miles = 150`. Its property setter ignores negative values. After `car.miles = -20`, what is `car.miles`?",
+              "hint": "A rejected assignment leaves the stored state unchanged.",
               "help": {
-                "concept": "`if miles > 0:` accepts positive drive amounts and ignores zero or negative values.",
-                "hint_1": "Choose the greater-than operator.",
-                "hint_2": "The condition should reject `-5`."
+                "concept": "Validation protects the existing object state when an assignment is invalid.",
+                "hint_1": "The setter does not accept `-20`.",
+                "hint_2": "The previous value remains `150`."
               },
-              "template": "if miles [blank1] 0:",
+              "template": "car.miles == [blank1]",
               "choices": [
-                ">",
-                "<",
-                "==",
-                "<="
+                "150",
+                "-20",
+                "0",
+                "170"
               ]
-            },
-            "dr-encapsulation-and-validation-update-order": {
-              "title": "Order the safe update",
-              "prompt": "Put the validation workflow in order.",
-              "hint": "Check the value before changing the attribute.",
-              "help": {
-                "concept": "Safe methods receive a value, check it, update only if allowed, then return the current state.",
-                "hint_1": "Never update before checking.",
-                "hint_2": "Returning happens after the check/update decision."
-              },
-              "tokens": {
-                "t1": "Receive the requested value",
-                "t2": "Check whether the value is valid",
-                "t3": "Update state only when valid",
-                "t4": "Return the current state"
-              }
             }
           }
         },
         "methods-and-responsibility": {
-          "label": "Python Method Types",
-          "summary": "Choose an instance method, class method, or static method based on what the behavior needs.",
+          "label": "Methods and Responsibility",
+          "summary": "Put behavior beside the object state it uses, return useful results from model methods, and keep application-wide coordination outside the model.",
           "cards": {
             "sketch0": {
-              "title": "Instance method"
+              "title": "Behavior that belongs to one object"
             },
             "sketch1": {
-              "title": "Class method"
-            },
-            "sketch2": {
-              "title": "Static method"
+              "title": "Keep responsibilities separated"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_methods_and_responsibility_sketch0": {
-              "title": "Add an instance method that changes one car",
-              "prompt": "In `models/car.py`, add the instance method `drive(self, miles)`. It should increase `self.miles` and return the new value. In `main.py`, create `Car(\"Honda\", \"Fit\", 10000)`, call `car.drive(40)`, and print the returned value.",
-              "hint": "A method goes inside the class at the same indentation level as `__init__`.",
+              "title": "Add behavior that changes one Car",
+              "prompt": "`main.py` already creates a `Car`, calls `drive(40)`, and prints both the returned value and the car's final mileage. In `models/car.py`, define the instance method `drive(self, miles)`. It must increase `self.miles` by the given amount, update the object, and return the new mileage. Leave `main.py` unchanged.",
+              "hint": "This behavior belongs on `Car` because it changes one car's own mileage.",
               "help": {
-                "concept": "An instance method receives `self`, so it can read or change the state of the object that receives the call.",
-                "hint_1": "Inside `drive`, use `self.miles += miles`.",
-                "hint_2": "Return `self.miles` after updating it."
+                "concept": "An instance method receives `self` and can change the state stored on that object.",
+                "hint_1": "Define `drive(self, miles)` inside `class Car`.",
+                "hint_2": "Update `self.miles`, then return its new value."
               },
-              "starterCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\n# Call drive(40) and print the returned miles.",
+              "starterCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\nprint(car.drive(40))\nprint(car.miles)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\n# Call drive(40) and print the returned miles."
+                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\nprint(car.drive(40))\nprint(car.miles)\n"
                 },
                 "models_car_py": {
-                  "content": "# TODO: Update models/car.py to complete this step: Add a drive method.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # Add drive(self, miles) here.\n"
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\nprint(car.drive(40))",
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\nprint(car.drive(40))\nprint(car.miles)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\nprint(car.drive(40))"
+                  "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\nprint(car.drive(40))\nprint(car.miles)\n"
                 },
                 "models_car_py": {
                   "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
@@ -11411,178 +11620,141 @@ const messages: Record<string, any> = {
               },
               "checks": {
                 "0": {
-                  "message": "Keep the Car constructor with make, model, and miles."
+                  "message": "Keep `Car` defined in `models/car.py`."
                 },
                 "1": {
-                  "message": "Car should store make, model, and miles attributes."
+                  "message": "`Car` should still accept make, model, and miles."
                 },
                 "2": {
-                  "message": "Add a drive method that increases the miles."
+                  "message": "Keep the existing per-object state."
                 },
                 "3": {
-                  "message": "drive(40) should return 10040 for a car that starts at 10000 miles."
+                  "message": "`drive(40)` should return the updated mileage."
                 },
                 "4": {
-                  "message": "Print the returned miles value."
+                  "message": "`drive(40)` must actually update `self.miles`, not only compute a return value."
+                },
+                "5": {
+                  "message": "`drive` should work for other valid starting mileages and distances."
+                },
+                "6": {
+                  "message": "Keep the provided two-line demonstration in `main.py`."
                 }
               },
-              "expectedOutput": "10040"
+              "expectedOutput": "10040\n10040",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `drive(self, miles)` as an instance method on `Car`."
+                }
+              }
             },
             "try_methods_and_responsibility_sketch1": {
-              "title": "Build a Car with a class method",
-              "prompt": "Add `@classmethod` and `from_kilometers(cls, make, model, kilometers)` to `Car`. Convert kilometers to miles with `round(kilometers * 0.621371)`, then return `cls(make, model, miles)`. In `main.py`, create a car with `Car.from_kilometers(\"Toyota\", \"Prius\", 100)` and print its summary.",
-              "hint": "A class method receives `cls` and can return a new object by calling `cls(...)`.",
+              "title": "Return a summary of one Car",
+              "prompt": "`main.py` already creates one `Car` and prints `car.summary()`. In `models/car.py`, define the instance method `summary(self)`. Return a string in the format `MAKE MODEL - MILES miles` using that object's `make`, `model`, and `miles` attributes. The method must return the string; do not print inside `summary`. Leave `main.py` unchanged.",
+              "hint": "The summary belongs on `Car` because it reports one car's state. Return the string so `main.py` can decide to print it.",
               "help": {
-                "concept": "A class method is a natural place for an alternative constructor. It receives the class as `cls`, converts the incoming data, and creates the object.",
-                "hint_1": "Place `@classmethod` directly above the method.",
-                "hint_2": "Return `cls(make, model, miles)` after calculating miles."
+                "concept": "A model method can report one object's state while the caller remains responsible for display or application coordination.",
+                "hint_1": "Define `summary(self)` inside `Car`.",
+                "hint_2": "Build and return the string from `self.make`, `self.model`, and `self.miles`."
               },
-              "starterCode": "from models.car import Car\n\n# Create a Car from 100 kilometers, then print its summary.\n",
+              "starterCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"Prius\", 62)\n\nprint(car.summary())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# Use Car.from_kilometers(\"Toyota\", \"Prius\", 100).\n# Print the returned car's summary.\n"
+                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"Prius\", 62)\n\nprint(car.summary())\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # TODO: add @classmethod and from_kilometers(...).\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # Add summary(self) here.\n"
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncar = Car.from_kilometers(\"Toyota\", \"Prius\", 100)\nprint(car.summary())\n",
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"Prius\", 62)\n\nprint(car.summary())\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car.from_kilometers(\"Toyota\", \"Prius\", 100)\nprint(car.summary())\n"
+                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"Prius\", 62)\n\nprint(car.summary())\n"
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    @classmethod\n    def from_kilometers(cls, make, model, kilometers):\n        miles = round(kilometers * 0.621371)\n        return cls(make, model, miles)\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Keep the Car constructor working."
+                  "message": "Keep `Car` defined in `models/car.py`."
                 },
                 "1": {
-                  "message": "from_kilometers should create a Car with converted miles."
+                  "message": "`Car` should remain constructible."
                 },
                 "2": {
-                  "message": "Print the summary from the Car returned by the class method."
-                }
-              },
-              "expectedOutput": "Toyota Prius - 62 miles"
-            },
-            "try_methods_and_responsibility_sketch2": {
-              "title": "Add a static validation method",
-              "prompt": "Add `@staticmethod` and `is_valid_miles(miles)` to `Car`. It should return `True` when miles is greater than or equal to 0 and `False` otherwise. In `main.py`, call it once from the class with `120` and once from a Car object with `-5`, then print both results.",
-              "hint": "A static method uses neither `self` nor `cls`; it receives only the value it checks.",
-              "help": {
-                "concept": "A static method is useful for logic related to the class that does not need object state or the class itself.",
-                "hint_1": "Place `@staticmethod` above `def is_valid_miles(miles):`.",
-                "hint_2": "Return the Boolean expression `miles >= 0`."
-              },
-              "starterCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\n# Print the validation result from the class and from the object.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\n# Print Car.is_valid_miles(120).\n# Then print car.is_valid_miles(-5).\n"
-                },
-                "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    # TODO: add @staticmethod and is_valid_miles(miles).\n"
-                }
-              },
-              "solutionCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\nprint(Car.is_valid_miles(120))\nprint(car.is_valid_miles(-5))\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\nprint(Car.is_valid_miles(120))\nprint(car.is_valid_miles(-5))\n"
-                },
-                "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    @staticmethod\n    def is_valid_miles(miles):\n        return miles >= 0\n"
-                }
-              },
-              "checks": {
-                "0": {
-                  "message": "Keep the Car class constructible."
-                },
-                "1": {
-                  "message": "is_valid_miles should return True for a non-negative value."
-                },
-                "2": {
-                  "message": "is_valid_miles should return False for a negative value."
+                  "message": "`summary()` should return the requested text for the visible car."
                 },
                 "3": {
-                  "message": "Print both validation results."
+                  "message": "`summary()` should use the object's actual state, not hard-coded visible values."
+                },
+                "4": {
+                  "message": "Keep the provided `main.py` call that prints the returned summary."
                 }
               },
-              "expectedOutput": "True\nFalse"
+              "expectedOutput": "Toyota Prius - 62 miles",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define `summary(self)` as an instance method on `Car`."
+                }
+              }
             }
           },
           "practice": {
             "mc-methods-and-responsibility-class-jobs": {
-              "title": "Compare Python method types",
-              "prompt": "Which statements are correct? Choose all that apply.",
-              "hint": "Match `self`, `cls`, and neither with the job each method performs.",
+              "title": "Which behavior belongs on Car?",
+              "prompt": "Which behaviors naturally belong as instance methods on one `Car` object? Choose all that apply.",
+              "hint": "Choose behavior that reads or changes one car's own state.",
               "help": {
-                "concept": "Instance methods receive `self`; class methods receive `cls`; static methods receive neither automatically.",
-                "hint_1": "Alternative constructors commonly use class methods.",
-                "hint_2": "A utility that needs no object or class state can be static."
+                "concept": "An instance method is a good fit when the behavior belongs to one object's state.",
+                "hint_1": "Think about mileage and one-car summaries.",
+                "hint_2": "Fleet-wide reports and user menus coordinate more than one object or the whole application."
               },
               "options": {
-                "a": "An instance method can read or change one object through `self`.",
-                "b": "A class method can create an object through `cls(...)`.",
-                "c": "A static method is useful when the logic needs neither `self` nor `cls`.",
-                "d": "Every method must receive `self`."
+                "a": "Increase this car's mileage after it drives.",
+                "b": "Return a summary of this car's make, model, and mileage.",
+                "c": "Build a report across every car in the fleet.",
+                "d": "Ask the user which menu option to choose."
               }
             },
             "sc-methods-and-responsibility-main-role": {
-              "title": "Choose an alternative constructor",
-              "prompt": "Which method type best fits `from_kilometers(...)`, which converts input and returns a new Car?",
-              "hint": "The method needs the class so it can create an object.",
+              "title": "Keep display outside the model",
+              "prompt": "Which design keeps `Car.summary()` focused on the model's responsibility?",
+              "hint": "The method should provide the result; the caller can decide how to display it.",
               "help": {
-                "concept": "Class methods are commonly used as named alternative constructors.",
-                "hint_1": "It should receive `cls`.",
-                "hint_2": "It should return `cls(...)`."
+                "concept": "Returning a result keeps a model method reusable while `main.py` owns user-facing coordination.",
+                "hint_1": "Avoid putting the application's printing policy inside the model.",
+                "hint_2": "Choose the option where `summary()` returns and `main.py` prints."
               },
               "options": {
-                "a": "A class method",
-                "b": "A static method",
-                "c": "A property with no method",
-                "d": "A print statement in main.py"
+                "a": "`summary()` prints the text itself and returns nothing.",
+                "b": "`summary()` returns the text, and `main.py` prints the returned value.",
+                "c": "`main.py` rewrites the Car's attributes before every summary.",
+                "d": "`summary()` asks the user which car to summarize."
               }
             },
             "fb-methods-and-responsibility-call-name": {
-              "title": "Add the utility decorator",
-              "prompt": "Fill in the decorator for a method that uses neither `self` nor `cls`.",
-              "hint": "The method is attached to the class but behaves like a related utility function.",
+              "title": "Trace a state-changing method",
+              "prompt": "A car starts with `miles = 10000`. After `car.drive(40)` completes, what should `car.miles` be?",
+              "hint": "The method adds the driven distance to the object's current mileage.",
               "help": {
-                "concept": "`@staticmethod` prevents Python from binding an instance or class argument.",
-                "hint_1": "It begins with @.",
-                "hint_2": "The word describes a static method."
+                "concept": "A state-changing instance method updates the object itself.",
+                "hint_1": "Start with 10000.",
+                "hint_2": "Add 40."
               },
-              "template": "[blank1]\ndef is_valid_miles(miles):",
+              "template": "car.miles == [blank1]",
               "choices": [
-                "@staticmethod",
-                "@classmethod",
-                "self",
-                "@property"
+                "10040",
+                "10000",
+                "40",
+                "9960"
               ]
-            },
-            "dr-methods-and-responsibility-flow": {
-              "title": "Choose a method by what it needs",
-              "prompt": "Put this decision process in order.",
-              "hint": "Start by asking what data the behavior needs.",
-              "help": {
-                "concept": "The needed context determines the method type.",
-                "hint_1": "Object state points to an instance method.",
-                "hint_2": "No object or class context points to a static method."
-              },
-              "tokens": {
-                "t1": "Ask whether the behavior needs one object's state",
-                "t2": "Use an instance method when it needs `self`",
-                "t3": "Use a class method when it needs `cls` or creates objects",
-                "t4": "Use a static method when it needs neither"
-              }
             }
           }
         },
         "module-8-account-tracker-project": {
           "label": "Module 8 Account Tracker Project",
-          "summary": "Build a two-file Account tracker that uses instance state, one shared class value, instance methods, validation, and an alternative constructor.",
+          "summary": "Build a cumulative two-file Account tracker that retrieves class files, class and instance state, instance methods, validation, a validated property, and model-vs-main responsibility.",
           "cards": {
             "sketch0": {
               "title": "Project overview"
@@ -11593,187 +11765,240 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "try_module_8_account_tracker_project_sketch0": {
-              "title": "Create the Account class shell"
+              "title": "Create the Account model boundary"
             },
             "account_tracker_step_2_constructor_attributes": {
-              "title": "Add class and instance state"
+              "title": "Add shared and per-account state"
             },
             "account_tracker_step_3_add_methods": {
-              "title": "Add methods and shared validation"
+              "title": "Add validated account transactions"
             },
             "account_tracker_step_4_validation_summary": {
-              "title": "Add an alternative constructor and summary"
+              "title": "Protect balance and finish the model"
             }
           },
           "moduleProject": {
             "steps": {
               "try_module_8_account_tracker_project_sketch0": {
-                "title": "Create the Account class shell",
-                "prompt": "A small after-school club wants a tiny account tracker for member balances. Start with the smallest working version. In `models/account.py`, define an `Account` class with `pass` inside it. In `main.py`, import `Account` from `models.account` and create one object with `account = Account()`. Do not add a constructor yet. Do not print attributes yet. This first project step is only about the class file, the clean import, and creating one object.",
-                "hint": "Create the class shell first, then import it in `main.py` and create one object.",
+                "title": "Create the Account model boundary",
+                "prompt": "Start the club tracker with the smallest working model boundary. In `models/account.py`, define `class Account:` with `pass` as its body. In `main.py`, import `Account` from `models.account` and create one `Account` object. Do not add state or output yet.",
+                "hint": "Keep the reusable class definition in `models/account.py`; `main.py` only imports and uses it.",
                 "help": {
-                  "concept": "This project is independent from the lesson examples. It uses the same OOP pattern in a new real-world setting: a club account tracker.",
-                  "hint_1": "Put the class definition in `models/account.py`.",
-                  "hint_2": "Keep `main.py` focused on importing the class and creating one object."
+                  "concept": "A model file owns the reusable class; main.py imports and uses it.",
+                  "hint_1": "Define the empty class shell in models/account.py.",
+                  "hint_2": "Import Account in main.py and call Account() once."
                 },
-                "starterCode": "from models.account import Account\n\n# Step 1: create one Account object.",
+                "starterCode": "from models.account import Account\n\n# Create one Account object below.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\n# Step 1: create one Account object."
+                    "content": "from models.account import Account\n\n# Create one Account object below.\n"
                   },
                   "models_account_py": {
-                    "content": "# Step 1: define the Account class shell below.\n"
+                    "content": "# Define the Account class shell below.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account()"
+                    "content": "from models.account import Account\n\naccount = Account()\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    pass"
+                    "content": "class Account:\n    pass\n"
                   }
                 },
-                "solutionCode": "from models.account import Account\n\naccount = Account()",
+                "solutionCode": "from models.account import Account\n\naccount = Account()\n",
                 "checks": {
                   "0": {
-                    "message": "Define an Account class in models/account.py."
+                    "message": "Keep `Account` defined in `models/account.py`."
                   },
                   "1": {
-                    "message": "The class shell should still be constructible with no arguments in this step."
+                    "message": "The empty `Account` class should be constructible."
                   },
                   "2": {
-                    "message": "Create one Account object in main.py."
+                    "message": "Create at least one `Account` object in `main.py`."
+                  }
+                },
+                "sourceChecks": {
+                  "0": {
+                    "message": "Define the empty `Account` class shell with `pass` in `models/account.py`."
+                  },
+                  "1": {
+                    "message": "Import the Account model from `models.account` in `main.py`."
                   }
                 }
               },
               "account_tracker_step_2_constructor_attributes": {
-                "title": "Add class and instance state",
-                "prompt": "Continue the account tracker. Add the class variable `club_name = \"Riverside Club\"`. Then add `__init__(self, owner, balance)` and store `owner` and `balance` on the object. In `main.py`, create `Account(\"Ava\", 125)` and print the club name, owner, and balance on separate lines.",
-                "hint": "Put the shared club name in the class body and the per-account values on `self`.",
+                "title": "Add shared and per-account state",
+                "prompt": "Continue from the exact previous workspace. In `models/account.py`, replace the empty class body with the class variable `club_name = \"Riverside Club\"` and `__init__(self, owner, balance)`. Store the incoming values on `self.owner` and `self.balance`. In `main.py`, read an owner and integer balance from input, create the account, then print `Account.club_name`, `account.owner`, and `account.balance`, each on its own line.",
+                "hint": "The club name is shared class state. Owner and balance belong to each individual account.",
                 "help": {
-                  "concept": "The club name is shared by every account, while owner and balance belong to one account object.",
-                  "hint_1": "Place `club_name` above `__init__`.",
-                  "hint_2": "Use `self.owner` and `self.balance` inside the constructor."
+                  "concept": "Class variables hold shared class-level state; self stores per-object state.",
+                  "hint_1": "Put club_name directly in the class body.",
+                  "hint_2": "Store owner and balance on self inside __init__."
                 },
-                "starterCode": "from models.account import Account\n\n# Create Ava's account and print the shared club name plus the object state.\n",
+                "starterCode": "from models.account import Account\n\naccount = Account()\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\n# Create Account(\"Ava\", 125).\n# Print Account.club_name, account.owner, and account.balance.\n"
+                    "content": "from models.account import Account\n\naccount = Account()\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    # TODO: add club_name = \"Riverside Club\".\n\n    # TODO: add __init__(self, owner, balance).\n    pass\n"
+                    "content": "class Account:\n    pass\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n"
+                    "content": "from models.account import Account\n\nowner = input()\nbalance = int(input())\n\naccount = Account(owner, balance)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n"
                   },
                   "models_account_py": {
                     "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n"
                   }
                 },
-                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n",
+                "solutionCode": "from models.account import Account\n\nowner = input()\nbalance = int(input())\n\naccount = Account(owner, balance)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n",
                 "checks": {
                   "0": {
-                    "message": "Keep the Account class defined."
+                    "message": "Keep `Account` defined in the model file."
                   },
                   "1": {
-                    "message": "Account should accept owner and balance."
+                    "message": "Account should be constructible with different owners and balances."
                   },
                   "2": {
-                    "message": "Store owner and balance on each account object."
+                    "message": "Each Account should expose owner and balance state."
                   },
                   "3": {
-                    "message": "Create one Account object for Ava."
-                  },
-                  "4": {
-                    "message": "Print the shared club name, owner, and balance."
+                    "message": "Create an Account from the input values in `main.py`."
                   }
                 },
-                "expectedOutput": "Riverside Club\nAva\n125"
+                "expectedOutput": "Riverside Club\nAva\n125",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Define `club_name = \"Riverside Club\"` as class-level state on Account."
+                  },
+                  "1": {
+                    "message": "Define `__init__(self, owner, balance)` on Account."
+                  },
+                  "2": {
+                    "message": "Store the incoming owner on `self.owner`."
+                  },
+                  "3": {
+                    "message": "Store the incoming balance on `self.balance`."
+                  }
+                }
               },
               "account_tracker_step_3_add_methods": {
-                "title": "Add methods and shared validation",
-                "prompt": "Add `@staticmethod is_valid_amount(amount)` so it returns whether the amount is greater than 0. Use it inside `deposit(self, amount)` and `withdraw(self, amount)`. Deposit should add valid amounts; withdraw should subtract only a valid amount that does not exceed the balance. In `main.py`, deposit 25, withdraw 40, then print the two balances and `Account.is_valid_amount(-5)`.",
-                "hint": "Use the static validation method from both balance-changing instance methods.",
+                "title": "Add validated account transactions",
+                "prompt": "Continue from the exact previous workspace. In `models/account.py`, add the instance methods `deposit(self, amount)` and `withdraw(self, amount)`. A deposit changes the balance only when `amount > 0`. A withdrawal changes the balance only when `amount > 0` and the amount does not exceed the current balance. Both methods must always return the current balance. In `main.py`, demonstrate a valid deposit, a valid withdrawal, a negative deposit, and an overdraw attempt using the provided values in the solution behavior.",
+                "hint": "Keep each validation rule inside the method that owns that state change. Rejected transactions leave the balance unchanged.",
                 "help": {
-                  "concept": "The instance methods change one account. The static method holds related validation logic that needs neither `self` nor `cls`.",
-                  "hint_1": "Decorate `is_valid_amount` with `@staticmethod`.",
-                  "hint_2": "Call it before changing `self.balance`."
+                  "concept": "Instance methods own validated changes to one Account's balance.",
+                  "hint_1": "deposit accepts only positive amounts.",
+                  "hint_2": "withdraw also checks that the account has enough balance."
                 },
-                "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\n# Deposit, withdraw, and print the results plus one invalid-amount check.\n",
+                "starterCode": "from models.account import Account\n\nowner = input()\nbalance = int(input())\n\naccount = Account(owner, balance)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\n# Print the result of deposit(25).\n# Print the result of withdraw(40).\n# Print Account.is_valid_amount(-5).\n"
+                    "content": "from models.account import Account\n\nowner = input()\nbalance = int(input())\n\naccount = Account(owner, balance)\n\nprint(Account.club_name)\nprint(account.owner)\nprint(account.balance)\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    # TODO: add the static validation method.\n    # TODO: add deposit and withdraw instance methods.\n"
+                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(Account.is_valid_amount(-5))\n"
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(account.deposit(-5))\nprint(account.withdraw(500))\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    @staticmethod\n    def is_valid_amount(amount):\n        return amount > 0\n\n    def deposit(self, amount):\n        if self.is_valid_amount(amount):\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if self.is_valid_amount(amount) and amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n"
+                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n"
                   }
                 },
-                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(Account.is_valid_amount(-5))\n",
+                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(account.deposit(-5))\nprint(account.withdraw(500))\n",
                 "checks": {
                   "0": {
-                    "message": "deposit should return the updated balance."
+                    "message": "A valid deposit should update and return the new balance."
                   },
                   "1": {
-                    "message": "withdraw should run after the deposit and return the new balance."
+                    "message": "A negative deposit must leave the balance unchanged."
                   },
                   "2": {
-                    "message": "is_valid_amount should reject a negative amount."
+                    "message": "A valid withdrawal should update and return the remaining balance."
                   },
                   "3": {
-                    "message": "Print the deposit result, withdrawal result, and validation result."
+                    "message": "An overdraw attempt must leave the balance unchanged."
+                  },
+                  "4": {
+                    "message": "The methods should preserve correct state on other valid and invalid values too."
                   }
                 },
-                "expectedOutput": "150\n110\nFalse"
+                "expectedOutput": "150\n110\n110\n110",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Define `deposit(self, amount)` as an instance method."
+                  },
+                  "1": {
+                    "message": "Define `withdraw(self, amount)` as an instance method."
+                  }
+                }
               },
               "account_tracker_step_4_validation_summary": {
-                "title": "Add an alternative constructor and summary",
-                "prompt": "Finish the tracker with `@classmethod starter_account(cls, owner)`, which returns `cls(owner, 25)`. Add `summary(self)` so it returns `Riverside Club | Ava: $40.00`. In `main.py`, create Ava's account with `Account.starter_account(\"Ava\")`, deposit 25, withdraw 10, and print the summary.",
-                "hint": "Use `cls(owner, 25)` so the class method creates the object without hard-coding the class name.",
+                "title": "Protect balance and finish the model",
+                "prompt": "Finish the tracker from the exact previous workspace. Refactor `balance` into a validated property backed by `self._balance`. In `__init__`, start the backing value at `0` and route the incoming balance through `self.balance = balance`. Define a `@property` getter `balance(self)` that returns `_balance`, and a `@balance.setter` setter `balance(self, value)` that accepts only values `>= 0`; a negative assignment must leave the current balance unchanged. Keep `deposit()` and `withdraw()` working through the public `balance` property. Add `summary(self)` that returns `CLUB | OWNER: $BALANCE` with two decimal places. Update `main.py` to read the owner, starting balance, a new direct balance, and an invalid direct balance from input; print the starting balance, the accepted balance, the balance after the rejected assignment, then the summary.",
+                "hint": "The property gives construction, direct assignment, and the transaction methods one public balance interface while `_balance` remains internal.",
                 "help": {
-                  "concept": "The class method provides a named way to create a standard starter account. The instance methods then manage that object's balance.",
-                  "hint_1": "Place `@classmethod` above `starter_account`.",
-                  "hint_2": "Include `self.club_name` in the returned summary."
+                  "concept": "A property controls direct assignment while preserving normal attribute syntax.",
+                  "hint_1": "Initialize `_balance` before routing the constructor value through the setter.",
+                  "hint_2": "summary() returns text; main.py decides to print it."
                 },
-                "starterCode": "from models.account import Account\n\n# Create Ava's starter account, apply two valid changes, and print the summary.\n",
+                "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(account.deposit(-5))\nprint(account.withdraw(500))\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\n# Create Ava with Account.starter_account(...).\n# Deposit 25, withdraw 10, then print account.summary().\n"
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.deposit(25))\nprint(account.withdraw(40))\nprint(account.deposit(-5))\nprint(account.withdraw(500))\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    @staticmethod\n    def is_valid_amount(amount):\n        return amount > 0\n\n    def deposit(self, amount):\n        if self.is_valid_amount(amount):\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if self.is_valid_amount(amount) and amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n\n    # TODO: add starter_account(cls, owner).\n    # TODO: add summary(self).\n"
+                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account.starter_account(\"Ava\")\naccount.deposit(25)\naccount.withdraw(10)\n\nprint(account.summary())\n"
+                    "content": "from models.account import Account\n\nowner = input()\nstart_balance = int(input())\nnew_balance = int(input())\ninvalid_balance = int(input())\n\naccount = Account(owner, start_balance)\n\nprint(account.balance)\n\naccount.balance = new_balance\nprint(account.balance)\n\naccount.balance = invalid_balance\nprint(account.balance)\n\nprint(account.summary())\n"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    @staticmethod\n    def is_valid_amount(amount):\n        return amount > 0\n\n    @classmethod\n    def starter_account(cls, owner):\n        return cls(owner, 25)\n\n    def deposit(self, amount):\n        if self.is_valid_amount(amount):\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if self.is_valid_amount(amount) and amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.club_name} | {self.owner}: ${self.balance:.2f}\"\n"
+                    "content": "class Account:\n    club_name = \"Riverside Club\"\n\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = 0\n        self.balance = balance\n\n    @property\n    def balance(self):\n        return self._balance\n\n    @balance.setter\n    def balance(self, value):\n        if value >= 0:\n            self._balance = value\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance = self.balance + amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance = self.balance - amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.club_name} | {self.owner}: ${self.balance:.2f}\"\n"
                   }
                 },
-                "solutionCode": "from models.account import Account\n\naccount = Account.starter_account(\"Ava\")\naccount.deposit(25)\naccount.withdraw(10)\n\nprint(account.summary())\n",
+                "solutionCode": "from models.account import Account\n\nowner = input()\nstart_balance = int(input())\nnew_balance = int(input())\ninvalid_balance = int(input())\n\naccount = Account(owner, start_balance)\n\nprint(account.balance)\n\naccount.balance = new_balance\nprint(account.balance)\n\naccount.balance = invalid_balance\nprint(account.balance)\n\nprint(account.summary())\n",
                 "checks": {
                   "0": {
-                    "message": "The static validation method should still reject invalid amounts."
+                    "message": "Account should remain constructible after the property refactor."
                   },
                   "1": {
-                    "message": "summary should report the final valid balance."
+                    "message": "The public owner and balance state should remain readable."
                   },
                   "2": {
-                    "message": "Print the final summary from main.py."
+                    "message": "deposit() should still work after the property refactor."
+                  },
+                  "3": {
+                    "message": "withdraw() should still work through the public balance property."
+                  },
+                  "4": {
+                    "message": "summary() should use the actual account state, not the visible example values."
                   }
                 },
-                "expectedOutput": "Riverside Club | Ava: $40.00"
+                "expectedOutput": "125\n40\n40\nRiverside Club | Ava: $40.00",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Define `balance` with the `@property` decorator."
+                  },
+                  "1": {
+                    "message": "Define `balance(self, value)` as the property setter."
+                  },
+                  "2": {
+                    "message": "Initialize the internal `_balance` backing value before using the setter."
+                  },
+                  "3": {
+                    "message": "Route the constructor's incoming balance through the public property."
+                  },
+                  "4": {
+                    "message": "Define `summary(self)` on Account."
+                  }
+                }
               }
             }
           }
@@ -11795,19 +12020,19 @@ const messages: Record<string, any> = {
               "title": "Call methods"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_thinking_in_objects_sketch0": {
-              "title": "Create two car objects",
-              "prompt": "A `Car` model is already provided in `models/car.py`. You do not need to write that model yet. In `main.py`, create two car objects: `Car(\"Honda\", \"Civic\", 12000)` and `Car(\"Ford\", \"Focus\", 8000)`. Store each object in its own variable. Do not print anything yet. This first exercise is only about creating objects.",
-              "hint": "Create two variables and store one `Car(...)` object in each variable. No `print()` is needed yet.",
+              "title": "Create two objects",
+              "prompt": "A `Car` model is already provided in `models/car.py`. In `main.py`, create two separate `Car` objects with sensible make, model, and mileage values. Keep both objects available in variables or a collection. Do not print anything. This exercise is only about creating objects.",
+              "hint": "Call `Car(...)` twice. Each constructor call creates a separate object.",
               "help": {
-                "concept": "An object represents one thing in your program. Here, one Car object represents one car, and another Car object represents a different car.",
-                "hint_1": "Create a variable such as `civic_car` and assign it `Car(\"Honda\", \"Civic\", 12000)`.",
-                "hint_2": "Create another variable for the Ford Focus. This exercise checks object creation, not output."
+                "concept": "Calling a class creates an object. Separate constructor calls create separate instances, each with its own state.",
+                "hint_1": "The provided constructor accepts a make, a model, and a starting mileage.",
+                "hint_2": "Create two `Car(...)` instances and keep both reachable. No output is required."
               },
               "starterCode": "from models.car import Car\n\n# A Car model is already provided.\n# Create two Car objects below.\n# Do not print anything yet.",
               "starterFiles": {
@@ -11840,30 +12065,31 @@ const messages: Record<string, any> = {
                 "3": {
                   "message": "Create at least two Car objects."
                 }
-              }
+              },
+              "sourceChecks": {}
             },
             "try_thinking_in_objects_sketch1": {
-              "title": "Read values from car objects",
-              "prompt": "Keep using the provided `Car` model. In `main.py`, create `Car(\"Toyota\", \"Corolla\", 22000)` and `Car(\"Mazda\", \"3\", 18000)`. Then print the first car's make on one line and the second car's miles on the next line.",
-              "hint": "After creating the objects, use dot notation to read their attributes.",
+              "title": "Read attributes from existing objects",
+              "prompt": "Two `Car` objects are already created in `main.py`. Use dot notation to print the `make` attribute directly from `corolla_car`, then print the `miles` attribute directly from `mazda_car`, each on its own line. Keep `models/car.py` unchanged.",
+              "hint": "Read each requested value from the existing object with dot notation.",
               "help": {
-                "concept": "An attribute is a value stored on an object. If `corolla_car` is a Car object, then `corolla_car.make` reads that car's make.",
-                "hint_1": "Create two variables, such as `corolla_car` and `mazda_car`.",
-                "hint_2": "Use `corolla_car.make` and `mazda_car.miles` inside `print()` calls."
+                "concept": "An attribute is state stored on an object. Dot notation reads that state from a particular instance.",
+                "hint_1": "The first value comes from `corolla_car`'s `make` attribute.",
+                "hint_2": "The second value comes from `mazda_car`'s `miles` attribute."
               },
-              "starterCode": "from models.car import Car\n\n# Create the two Car objects below.\n# Then print one attribute from each object.",
+              "starterCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\n# Print the requested attribute from each existing object.\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\n# Create the two Car objects below.\n# Then print one attribute from each object."
+                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\n# Print the requested attribute from each existing object.\n"
                 },
                 "models_car_py": {
                   "content": "# Keep models/car.py unchanged for this step: Read values from car objects.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
                 }
               },
-              "solutionCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)",
+              "solutionCode": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)"
+                  "content": "from models.car import Car\n\ncorolla_car = Car(\"Toyota\", \"Corolla\", 22000)\nmazda_car = Car(\"Mazda\", \"3\", 18000)\n\nprint(corolla_car.make)\nprint(mazda_car.miles)\n"
                 },
                 "models_car_py": {
                   "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
@@ -11886,16 +12112,24 @@ const messages: Record<string, any> = {
                   "message": "Print the requested attributes on separate lines."
                 }
               },
-              "expectedOutput": "Toyota\n18000"
+              "expectedOutput": "Toyota\n18000",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print `corolla_car`'s `make` attribute directly with dot notation."
+                },
+                "1": {
+                  "message": "Print `mazda_car`'s `miles` attribute directly with dot notation."
+                }
+              }
             },
             "try_thinking_in_objects_sketch2": {
-              "title": "Call a method on one car object",
-              "prompt": "Use the provided `Car` model again. In `main.py`, create `Car(\"Kia\", \"Soul\", 30000)`. Call `drive(50)` on that car object. Then print `summary()`. Do not edit `models/car.py` yet; you are practicing how to use an object before writing the class yourself.",
-              "hint": "Create the car object, call `car.drive(50)`, then print `car.summary()`.",
+              "title": "Call methods on an existing object",
+              "prompt": "A `car` object is already created in `main.py`. Call `car.drive(50)` to change its mileage. Then print `car.summary()` directly so the output comes from the updated object. Keep `models/car.py` unchanged.",
+              "hint": "Change the existing object's state first, then ask that same object to summarize its current state.",
               "help": {
-                "concept": "A method is an action you ask an object to perform. Here, `drive(50)` changes the car object's stored miles, and `summary()` returns a readable result.",
-                "hint_1": "After creating the car object, call `car.drive(50)`.",
-                "hint_2": "Print `car.summary()` after the method call so the updated miles appear."
+                "concept": "Methods are behavior attached to objects. A method can change an object's state, and another method can report the updated state.",
+                "hint_1": "Use the existing variable `car`; do not create a replacement object.",
+                "hint_2": "Call the state-changing method before printing the summary."
               },
               "starterCode": "from models.car import Car\n\ncar = Car(\"Kia\", \"Soul\", 30000)\n\n# Drive the car 50 miles.\n# Then print the updated summary.",
               "starterFiles": {
@@ -11929,7 +12163,15 @@ const messages: Record<string, any> = {
                   "message": "Print the updated car summary."
                 }
               },
-              "expectedOutput": "Kia Soul - 30050 miles"
+              "expectedOutput": "Kia Soul - 30050 miles",
+              "sourceChecks": {
+                "0": {
+                  "message": "Call `drive(50)` on the existing `car` object."
+                },
+                "1": {
+                  "message": "Print `car.summary()` directly so the output comes from the updated object."
+                }
+              }
             }
           },
           "practice": {
@@ -11966,35 +12208,19 @@ const messages: Record<string, any> = {
               }
             },
             "fb-thinking-in-objects-method-call": {
-              "title": "Choose the method call",
-              "prompt": "Which line adds 50 miles to the existing `car` object?",
-              "hint": "Call the method on the existing object and pass `50` as the argument.",
+              "title": "Trace a method change",
+              "prompt": "A `Car` object starts with `miles = 30000`. The program calls `car.drive(50)`. What should `car.miles` be afterward?",
+              "hint": "The method adds the traveled distance to the object's current mileage.",
               "help": {
-                "concept": "A method call uses the object name, a dot, the method name, and parentheses.",
-                "hint_1": "The object is already named `car`.",
-                "hint_2": "Choose the line that calls `drive` with `50`."
+                "concept": "A state-changing method updates data stored on the object.",
+                "hint_1": "Start with 30000 and add 50.",
+                "hint_2": "The updated mileage is 30050."
               },
               "options": {
-                "a": "`car.drive(50)`",
-                "b": "`car.summary(50)`",
-                "c": "`drive.car(50)`",
-                "d": "`Car = drive(50)`"
-              }
-            },
-            "dr-thinking-in-objects-workflow": {
-              "title": "Order the object workflow",
-              "prompt": "Put these steps in the usual order for working with an object.",
-              "hint": "Start by creating the object before reading or changing it.",
-              "help": {
-                "concept": "A clear object workflow is: create an object, read attributes when needed, call methods when behavior is needed, then print or use the result.",
-                "hint_1": "An object must exist before you can read from it.",
-                "hint_2": "Printing the result comes after the object is created and updated."
-              },
-              "tokens": {
-                "t1": "Create the object with starting values",
-                "t2": "Read an attribute from the object",
-                "t3": "Call a method on that object",
-                "t4": "Print or use the object's current state"
+                "a": "30000",
+                "b": "30050",
+                "c": "50",
+                "d": "29950"
               }
             }
           }
@@ -12003,196 +12229,138 @@ const messages: Record<string, any> = {
       "python-9-inheritance-polymorphism-and-abstraction": {
         "abstraction-with-base-interfaces": {
           "label": "Abstract Base Classes and Interfaces",
-          "summary": "Use `ABC` and `@abstractmethod` to enforce a shared method, then write helpers that depend on that behavior.",
+          "summary": "Use `ABC` and `@abstractmethod` to make a shared method requirement enforceable, then make a subclass concrete by implementing that method.",
           "cards": {
             "sketch0": {
-              "title": "Define an abstract contract"
+              "title": "Define an enforceable contract"
             },
             "sketch1": {
-              "title": "Implement the abstract method"
-            },
-            "sketch2": {
-              "title": "Program to shared behavior"
+              "title": "Make a child concrete"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_abstraction_with_base_interfaces_sketch0": {
-              "title": "Make CatalogItem an abstract base class",
-              "prompt": "In `models/catalog_item.py`, import `ABC` and `abstractmethod`, make `CatalogItem` inherit from `ABC`, and decorate `label(self)` with `@abstractmethod`. Keep the constructor that stores `title`. `main.py` checks that Python refuses to create an incomplete CatalogItem.",
-              "hint": "Use `class CatalogItem(ABC):` and place `@abstractmethod` directly above `label`.",
+              "title": "Make CatalogItem an abstract contract",
+              "prompt": "`main.py` is already complete. In `models/catalog_item.py`, import `ABC` and `abstractmethod` from `abc`, make `CatalogItem` inherit from `ABC`, and decorate `label(self)` with `@abstractmethod`. Keep the existing constructor that stores `title`. Leave `main.py` unchanged.",
+              "hint": "The class must use `ABC`, and the required `label()` method needs the `@abstractmethod` decorator.",
               "help": {
-                "concept": "Python has no `interface` keyword. An abstract base class is one way to declare and enforce a shared method contract.",
-                "hint_1": "Import both names from `abc`.",
-                "hint_2": "An abstract method can use `pass`; concrete child classes must implement it."
+                "concept": "An abstract base class can enforce that related concrete subclasses implement a required method.",
+                "hint_1": "Import both `ABC` and `abstractmethod` from `abc`.",
+                "hint_2": "Place `@abstractmethod` directly above `label(self)`."
               },
-              "starterCode": "from models.catalog_item import CatalogItem\n\n# This should print only when CatalogItem is truly abstract.\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n",
+              "starterCode": "from models.catalog_item import CatalogItem\n\n\nclass IncompleteItem(CatalogItem):\n    pass\n\n\nclass CompleteItem(CatalogItem):\n    def label(self):\n        return self.title\n\n\nfor item_class, name in (\n    (CatalogItem, \"CatalogItem\"),\n    (IncompleteItem, \"IncompleteItem\"),\n):\n    try:\n        item_class(\"Blocked\")\n    except TypeError:\n        print(f\"{name} blocked\")\n\nprint(CompleteItem(\"Ready\").label())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n# This should print only when CatalogItem is truly abstract.\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass IncompleteItem(CatalogItem):\n    pass\n\n\nclass CompleteItem(CatalogItem):\n    def label(self):\n        return self.title\n\n\nfor item_class, name in (\n    (CatalogItem, \"CatalogItem\"),\n    (IncompleteItem, \"IncompleteItem\"),\n):\n    try:\n        item_class(\"Blocked\")\n    except TypeError:\n        print(f\"{name} blocked\")\n\nprint(CompleteItem(\"Ready\").label())\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "# TODO: import ABC and abstractmethod.\n\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    # TODO: make label an abstract method.\n    def label(self):\n        pass\n"
-                },
-                "models_book_py": {
-                  "content": "# Book is used in the next step; leave it unchanged for now.\n"
+                  "content": "# Import ABC and abstractmethod from abc.\n\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    # Make label() an abstract method.\n    def label(self):\n        pass\n"
                 }
               },
-              "solutionCode": "from models.catalog_item import CatalogItem\n\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n",
+              "solutionCode": "from models.catalog_item import CatalogItem\n\n\nclass IncompleteItem(CatalogItem):\n    pass\n\n\nclass CompleteItem(CatalogItem):\n    def label(self):\n        return self.title\n\n\nfor item_class, name in (\n    (CatalogItem, \"CatalogItem\"),\n    (IncompleteItem, \"IncompleteItem\"),\n):\n    try:\n        item_class(\"Blocked\")\n    except TypeError:\n        print(f\"{name} blocked\")\n\nprint(CompleteItem(\"Ready\").label())\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass IncompleteItem(CatalogItem):\n    pass\n\n\nclass CompleteItem(CatalogItem):\n    def label(self):\n        return self.title\n\n\nfor item_class, name in (\n    (CatalogItem, \"CatalogItem\"),\n    (IncompleteItem, \"IncompleteItem\"),\n):\n    try:\n        item_class(\"Blocked\")\n    except TypeError:\n        print(f\"{name} blocked\")\n\nprint(CompleteItem(\"Ready\").label())\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
-                },
-                "models_book_py": {
-                  "content": "# Book is used in the next step.\n"
+                  "content": "from abc import ABC, abstractmethod\n\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
                 }
               },
-              "checks": {
+              "checks": {},
+              "expectedOutput": "CatalogItem blocked\nIncompleteItem blocked\nReady",
+              "sourceChecks": {
                 "0": {
-                  "message": "Define CatalogItem in models/catalog_item.py."
+                  "message": "Import both `ABC` and `abstractmethod` from Python's `abc` module."
                 },
                 "1": {
-                  "message": "CatalogItem should be abstract so Python refuses to instantiate it."
-                }
-              },
-              "expectedOutput": "CatalogItem is abstract"
-            },
-            "try_abstraction_with_base_interfaces_sketch1": {
-              "title": "Implement the abstract method in each child",
-              "prompt": "`CatalogItem` is now abstract. Complete `Book.label()` and `Movie.label()` so both child classes become concrete. Each constructor can reuse the parent constructor with `super().__init__(title)`. Run `main.py` to print `Book: Dune` and `Movie: Moana`.",
-              "hint": "A concrete child must implement every abstract method before Python can create it.",
-              "help": {
-                "concept": "`@abstractmethod` makes the requirement enforceable. A child that implements `label()` can be instantiated; an incomplete child cannot.",
-                "hint_1": "Call `super().__init__(title)` in each child constructor.",
-                "hint_2": "Return the correct prefix from each `label()` implementation."
-              },
-              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
-                },
-                "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        # TODO: return Book: <title>.\n        pass\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        # TODO: return Movie: <title>.\n        pass\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
-                },
-                "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                }
-              },
-              "checks": {
-                "0": {
-                  "message": "Book.label() should return `Book: Dune`."
-                },
-                "1": {
-                  "message": "Movie.label() should return `Movie: Moana`."
+                  "message": "Make `CatalogItem` inherit from `ABC`."
                 },
                 "2": {
-                  "message": "Print both concrete labels."
+                  "message": "Decorate `label(self)` with `@abstractmethod`."
                 }
-              },
-              "expectedOutput": "Book: Dune\nMovie: Moana"
+              }
             },
-            "try_abstraction_with_base_interfaces_sketch2": {
-              "title": "Use a helper that trusts the interface",
-              "prompt": "Complete `show_labels(items)` in `services/catalog_view.py`. Return one string with each item's `label()` on its own line. The helper does not need `isinstance` checks; it depends only on the shared behavior. `main.py` is already wired to print the returned string.",
-              "hint": "Collect each `item.label()` result and join them with `\"\\n\"`.",
+            "try_abstraction_with_base_interfaces_sketch1": {
+              "title": "Fulfill the abstract contract in Book",
+              "prompt": "`CatalogItem` is already abstract and its constructor already stores `title`. In `models/book.py`, keep `Book` inheriting from `CatalogItem` and implement the required `label(self)` method so it returns `Book: ` followed by that object's title. Do not add another constructor; `Book` should inherit the parent's constructor. Leave `models/catalog_item.py` and `main.py` unchanged.",
+              "hint": "Implement the required method directly on `Book`. Once `label()` exists, Python can instantiate the child.",
               "help": {
-                "concept": "The ABC enforces the contract for this family of classes. The helper itself uses Python's duck-typing style: it only needs each object to provide `label()`.",
-                "hint_1": "Use `\"\\n\".join(...)` so there is no extra blank line.",
-                "hint_2": "Do not print inside the helper; return one string."
+                "concept": "A subclass remains abstract until it implements every required abstract method. Shared constructor setup can still be inherited.",
+                "hint_1": "Keep `class Book(CatalogItem)`.",
+                "hint_2": "Define only `label(self)` and use the inherited `self.title`."
               },
-              "starterCode": "# Run this provided script after completing show_labels.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n",
+              "starterCode": "from models.catalog_item import CatalogItem\nfrom models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n\ntry:\n    CatalogItem(title)\nexcept TypeError:\n    print(\"CatalogItem blocked\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided script after completing show_labels.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n"
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n\ntry:\n    CatalogItem(title)\nexcept TypeError:\n    print(\"CatalogItem blocked\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                  "content": "from abc import ABC, abstractmethod\n\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                },
-                "services_catalog_view_py": {
-                  "content": "def show_labels(items):\n    # TODO: return one string with each item.label() on its own line.\n    pass\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    # Implement the required label() method.\n    pass\n"
                 }
               },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n",
+              "solutionCode": "from models.catalog_item import CatalogItem\nfrom models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n\ntry:\n    CatalogItem(title)\nexcept TypeError:\n    print(\"CatalogItem blocked\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n"
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n\ntry:\n    CatalogItem(title)\nexcept TypeError:\n    print(\"CatalogItem blocked\")\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                  "content": "from abc import ABC, abstractmethod\n\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                },
-                "services_catalog_view_py": {
-                  "content": "def show_labels(items):\n    return \"\\n\".join(item.label() for item in items)\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Return both labels so main.py prints two lines."
+                  "message": "`Book.label()` should use the object's actual inherited title."
+                },
+                "1": {
+                  "message": "`Book.label()` should work for other valid titles too."
                 }
               },
-              "expectedOutput": "Book: Dune\nMovie: Moana"
+              "expectedOutput": "Book: Coraline\nCatalogItem blocked",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `Book` inheriting from the abstract `CatalogItem` contract."
+                },
+                "1": {
+                  "message": "Implement the required `label(self)` method on `Book`."
+                }
+              }
             }
           },
           "practice": {
             "sc-interface-purpose": {
-              "title": "Why use an abstract base class?",
-              "prompt": "What does `ABC` with `@abstractmethod` add to this design?",
-              "hint": "Think about what Python checks before an object can be created.",
+              "title": "What does the abstract contract enforce?",
+              "prompt": "What does `ABC` together with `@abstractmethod` add to `CatalogItem`?",
+              "hint": "Think about what Python prevents when required behavior is missing.",
               "help": {
-                "concept": "An abstract base class turns the shared method expectation into an enforceable contract.",
-                "hint_1": "Incomplete child classes cannot be instantiated.",
-                "hint_2": "Concrete children still provide their own behavior."
+                "concept": "An abstract base class can prevent incomplete classes from being instantiated.",
+                "hint_1": "The contract is about required behavior.",
+                "hint_2": "Concrete subclasses can still implement that behavior differently."
               },
               "options": {
-                "a": "Python prevents instantiation until the abstract method is implemented.",
-                "b": "Every child must return identical text.",
-                "c": "The parent class can no longer have a constructor.",
-                "d": "The helper must check every exact subclass."
+                "a": "Python blocks instantiation while a required abstract method is unresolved.",
+                "b": "Every subclass must return exactly the same label text.",
+                "c": "The abstract parent can no longer store shared state.",
+                "d": "Subclasses are no longer allowed to inherit methods."
               }
             },
             "fb-interface-method-name": {
-              "title": "Add the abstract decorator",
-              "prompt": "Fill in the decorator that marks a required method.",
-              "hint": "Import it from Python's `abc` module.",
+              "title": "Mark the required method",
+              "prompt": "Complete the decorator that marks `label()` as required.",
+              "hint": "It comes from Python's `abc` module.",
               "help": {
-                "concept": "`@abstractmethod` marks a method that concrete subclasses must implement.",
-                "hint_1": "It begins with @.",
-                "hint_2": "The word combines abstract and method."
+                "concept": "`@abstractmethod` marks behavior that concrete subclasses must implement.",
+                "hint_1": "The decorator begins with `@`.",
+                "hint_2": "Its name combines `abstract` and `method`."
               },
               "template": "[blank1]\ndef label(self):\n    pass",
               "choices": [
@@ -12202,130 +12370,122 @@ const messages: Record<string, any> = {
                 "@property"
               ]
             },
-            "dr-interface-build-order": {
-              "title": "Order the ABC workflow",
-              "prompt": "Put these steps in a clear order.",
-              "hint": "Declare the contract before creating concrete child objects.",
-              "help": {
-                "concept": "Import the ABC tools, define the abstract parent, implement the method in children, then use the objects through shared behavior.",
-                "hint_1": "Imports come first.",
-                "hint_2": "The helper comes after concrete implementations exist."
-              },
-              "tokens": {
-                "t1": "Import `ABC` and `abstractmethod`",
-                "t2": "Define the abstract method on the base class",
-                "t3": "Implement the method in each concrete child",
-                "t4": "Call the shared method from a helper"
-              }
-            },
             "sc-interface-helper-focus": {
-              "title": "Choose what the helper should care about",
-              "prompt": "When `show_labels(items)` loops through mixed objects, what should it focus on most?",
-              "hint": "Pick the shared contract, not the exact subclass.",
+              "title": "What happens to an incomplete child?",
+              "prompt": "`CatalogItem.label()` is abstract. `DraftItem(CatalogItem)` does not implement `label()`. What happens when code tries to create `DraftItem(\"Notes\")`?",
+              "hint": "The child still has an unresolved abstract method.",
               "help": {
-                "concept": "Good interface-based code depends on shared behavior instead of subclass-specific branches.",
-                "hint_1": "The helper should not care whether the object is a Book or Movie.",
-                "hint_2": "It only needs the shared method to exist."
+                "concept": "A subclass remains abstract until it implements every required abstract method.",
+                "hint_1": "Inheritance alone does not make the child concrete.",
+                "hint_2": "Python blocks construction of an incomplete child."
               },
               "options": {
-                "a": "The order the subclasses were written in the file",
-                "b": "The exact subclass name for every object",
-                "c": "Whether each object supports `label()`",
-                "d": "How many times the constructor was called"
+                "a": "Python creates the object and uses `pass` as its label.",
+                "b": "Python raises `TypeError` because the child is still abstract.",
+                "c": "Python automatically copies a `label()` implementation into the child.",
+                "d": "Python removes `CatalogItem` from the inheritance chain."
               }
             }
           }
         },
         "inheritance-for-shared-behavior": {
           "label": "Inheritance for Shared Behavior",
-          "summary": "Reuse parent setup, call it with `super()`, and extend inherited behavior without copying the parent code.",
+          "summary": "Use a parent class for genuinely shared state and behavior, then call `super().__init__` when a child constructor adds specialized state.",
           "cards": {
             "sketch0": {
-              "title": "Shared parent setup"
+              "title": "Inherit shared setup and behavior"
             },
             "sketch1": {
-              "title": "Call the parent with super()"
-            },
-            "sketch2": {
-              "title": "Extend a parent method"
+              "title": "Add child state with super()"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_inheritance_for_shared_behavior_sketch0": {
-              "title": "Build the shared CatalogItem parent",
-              "prompt": "In `models/catalog_item.py`, complete `CatalogItem` so `__init__` stores `title` on `self.title` and `label(self)` returns the title. In `main.py`, create `CatalogItem(\"Hidden Figures\")` and print its label. This gives the child classes shared setup to reuse next.",
-              "hint": "Complete the model first, then finish the small main script. The starter is intentionally unfinished.",
+              "title": "Make Book inherit shared behavior",
+              "prompt": "`CatalogItem` already owns the shared `title` constructor and `label()` method. In `models/book.py`, make `Book` inherit from `CatalogItem`. Do not add a `Book.__init__` or `Book.label()` yet; this exercise is about reusing the parent's existing setup and behavior. Leave `main.py` and `models/catalog_item.py` unchanged.",
+              "hint": "Put the parent class in parentheses in the `Book` class header.",
               "help": {
-                "concept": "A parent/base class keeps shared setup in one place. Here, CatalogItem is the parent class that future catalog types can inherit from.",
-                "hint_1": "The constructor should save the incoming `title` on `self`.",
-                "hint_2": "The `label()` method should return that stored title."
+                "concept": "A child class inherits available parent behavior. With no child constructor or label method, `Book` can use the parent's versions.",
+                "hint_1": "The parent class is `CatalogItem`.",
+                "hint_2": "Change only the `Book` class header; keep the body as `pass`."
               },
-              "starterCode": "from models.catalog_item import CatalogItem\n\n# TODO: create one CatalogItem for \"Hidden Figures\".\n# TODO: print the item label.\n",
+              "starterCode": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n# TODO: create one CatalogItem for \"Hidden Figures\".\n# TODO: print the item label.\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        # TODO: store title on this object.\n        pass\n\n    def label(self):\n        # TODO: return the stored title.\n        pass\n"
-                }
-              },
-              "solutionCode": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Hidden Figures\")\nprint(item.label())\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Hidden Figures\")\nprint(item.label())\n"
+                  "content": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n"
                 },
                 "models_catalog_item_py": {
                   "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\n# Make Book inherit from CatalogItem.\nclass Book:\n    pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Define the CatalogItem class."
+                  "message": "Keep `Book` defined in `models/book.py`."
                 },
                 "1": {
-                  "message": "CatalogItem should accept a title."
+                  "message": "The inherited parent constructor should make `Book(title)` constructible."
                 },
                 "2": {
-                  "message": "Store the title on each CatalogItem object."
+                  "message": "A `Book` should inherit the parent's `title` state."
                 },
                 "3": {
-                  "message": "label() should return the stored title."
+                  "message": "A `Book` should inherit the parent's `label()` behavior."
                 }
               },
-              "expectedOutput": "Hidden Figures"
+              "expectedOutput": "Dune",
+              "sourceChecks": {
+                "0": {
+                  "message": "Make `Book` inherit from `CatalogItem` in the class header."
+                }
+              }
             },
             "try_inheritance_for_shared_behavior_sketch1": {
-              "title": "Call the parent constructor with super()",
-              "prompt": "The `CatalogItem` parent already stores `title`. In `models/book.py`, make `Book` inherit from `CatalogItem`. Add `__init__(self, title, author)`, call `super().__init__(title)`, then store `author` on `self.author`. In `main.py`, create `Book(\"The Martian\", \"Andy Weir\")` and print the title and author on separate lines.",
-              "hint": "Use `super().__init__(title)` before storing the Book-specific attribute.",
+              "title": "Add Book-specific state with super()",
+              "prompt": "`Book` already inherits from `CatalogItem`. In `models/book.py`, define `__init__(self, title, author)`. Call `super().__init__(title)` so the parent owns the shared title setup, then store the Book-specific author on `self.author`. Do not duplicate `self.title = title` inside `Book`. Leave `main.py` and `models/catalog_item.py` unchanged.",
+              "hint": "Let the parent initialize the shared title first, then store only the child-specific author.",
               "help": {
-                "concept": "`super()` gives the child access to the next implementation in Python's inheritance chain. Calling the parent constructor avoids repeating shared setup.",
-                "hint_1": "Write `class Book(CatalogItem):`.",
-                "hint_2": "Inside Book.__init__, call `super().__init__(title)` and then assign `self.author = author`."
+                "concept": "`super().__init__` lets a child constructor reuse parent setup instead of copying the parent's initialization logic.",
+                "hint_1": "Call the parent constructor with the shared `title` value.",
+                "hint_2": "After the super call, assign `author` to `self.author`."
               },
-              "starterCode": "from models.book import Book\n\n# Create The Martian by Andy Weir, then print its title and author.\n",
+              "starterCode": "from models.book import Book\n\ntitle = input()\nauthor = input()\nbook = Book(title, author)\n\nprint(book.title)\nprint(book.author)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\n\n# Create Book(\"The Martian\", \"Andy Weir\").\n# Print the inherited title and the Book-specific author.\n"
+                  "content": "from models.book import Book\n\ntitle = input()\nauthor = input()\nbook = Book(title, author)\n\nprint(book.title)\nprint(book.author)\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n"
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        # TODO: call the parent constructor for title.\n        # TODO: store author on this Book.\n        pass\n"
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        # Call the parent constructor for the shared title setup.\n        # Then store the Book-specific author.\n        pass\n"
                 }
               },
-              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Martian\", \"Andy Weir\")\nprint(book.title)\nprint(book.author)\n",
+              "solutionCode": "from models.book import Book\n\ntitle = input()\nauthor = input()\nbook = Book(title, author)\n\nprint(book.title)\nprint(book.author)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\n\nbook = Book(\"The Martian\", \"Andy Weir\")\nprint(book.title)\nprint(book.author)\n"
+                  "content": "from models.book import Book\n\ntitle = input()\nauthor = input()\nbook = Book(title, author)\n\nprint(book.title)\nprint(book.author)\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n"
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
                   "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n"
@@ -12333,95 +12493,60 @@ const messages: Record<string, any> = {
               },
               "checks": {
                 "0": {
-                  "message": "Define Book as a child of CatalogItem."
+                  "message": "Keep `Book` defined in `models/book.py`."
                 },
                 "1": {
-                  "message": "Book should accept title and author."
+                  "message": "`Book` should accept both shared title and child-specific author state."
                 },
                 "2": {
-                  "message": "The parent constructor should provide title, and Book should store author."
+                  "message": "The finished `Book` should contain both inherited title and author state."
                 },
                 "3": {
-                  "message": "Print the title and author on separate lines."
+                  "message": "The constructor should work for other valid book data too."
+                },
+                "4": {
+                  "message": "Inherited and child-specific state should remain available on unseen data."
                 }
               },
-              "expectedOutput": "The Martian\nAndy Weir"
-            },
-            "try_inheritance_for_shared_behavior_sketch2": {
-              "title": "Extend a parent method with super()",
-              "prompt": "Add `label(self)` to `Book`. Start with `base_label = super().label()`, then return `f\"{base_label} by {self.author}\"`. In `main.py`, create `Book(\"The Hobbit\", \"J. R. R. Tolkien\")` and print its label.",
-              "hint": "Call `super().label()` to reuse the parent result before adding the author.",
-              "help": {
-                "concept": "A child can override a method and still reuse the parent implementation. `super().label()` gets the parent result; the child adds its specialized detail.",
-                "hint_1": "Keep the Book constructor that calls `super().__init__(title)`.",
-                "hint_2": "Return the parent label followed by ` by ` and the author."
-              },
-              "starterCode": "from models.book import Book\n\n# Create The Hobbit and print the extended label.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\n\n# Create Book(\"The Hobbit\", \"J. R. R. Tolkien\").\n# Print book.label().\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        # TODO: reuse the parent label and add the author.\n        pass\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\")\nprint(book.label())\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\")\nprint(book.label())\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        base_label = super().label()\n        return f\"{base_label} by {self.author}\"\n"
-                }
-              },
-              "checks": {
+              "expectedOutput": "The Martian\nAndy Weir",
+              "sourceChecks": {
                 "0": {
-                  "message": "Book should accept title and author."
+                  "message": "Keep `Book` inheriting from `CatalogItem`."
                 },
                 "1": {
-                  "message": "Book.label() should extend the parent label with the author."
+                  "message": "Call `super().__init__(title)` for the shared parent setup."
                 },
                 "2": {
-                  "message": "Create the Book object in main.py."
-                },
-                "3": {
-                  "message": "Print the extended label."
+                  "message": "Store the child-specific `author` on `self.author`."
                 }
-              },
-              "expectedOutput": "The Hobbit by J. R. R. Tolkien"
+              }
             }
           },
           "practice": {
             "sc-inheritance-shared-work": {
-              "title": "Choose why a base class helps here",
-              "prompt": "Book and Movie both need the same `title` setup. Why is a base class helpful?",
-              "hint": "Pick the answer about reusing shared code.",
+              "title": "When does a parent class help?",
+              "prompt": "When is inheritance a good fit for shared setup?",
+              "hint": "Use a parent for behavior or state that is genuinely common to related child classes.",
               "help": {
-                "concept": "Inheritance is helpful when related classes share the same core behavior.",
-                "hint_1": "Look for the choice about storing shared setup once.",
-                "hint_2": "Avoid answers about unrelated classes or identical output forever."
+                "concept": "Inheritance is useful when related classes can reuse meaningful shared state or behavior.",
+                "hint_1": "The shared code should belong naturally to the parent concept.",
+                "hint_2": "Do not introduce inheritance just to avoid a few unrelated lines."
               },
               "options": {
-                "a": "It prevents any subclass from having its own behavior.",
-                "b": "It stores shared setup once so related subclasses can reuse it.",
-                "c": "It turns every object into the same subclass.",
-                "d": "It removes the need to create objects."
+                "a": "Whenever two unrelated classes happen to contain the same number of lines.",
+                "b": "When related classes genuinely share state or behavior that belongs in one parent.",
+                "c": "Whenever every child must eventually produce identical output.",
+                "d": "Only when no objects will ever be created."
               }
             },
             "fb-inheritance-subclass-name": {
-              "title": "Call the parent constructor",
-              "prompt": "Fill in the function used to reach the parent constructor.",
-              "hint": "It returns access to the next class in the inheritance chain.",
+              "title": "Reuse the parent constructor",
+              "prompt": "Complete the child constructor so it delegates the shared `title` setup to the parent.",
+              "hint": "Use the function that gives access to the next implementation in the inheritance chain.",
               "help": {
-                "concept": "`super()` lets a child call a parent implementation without naming the parent class directly.",
-                "hint_1": "It is followed by `.__init__(title)`.",
-                "hint_2": "Include the parentheses."
+                "concept": "`super()` lets the child reuse parent initialization without naming or copying the parent implementation.",
+                "hint_1": "The call is followed by `.__init__(title)`.",
+                "hint_2": "Include the parentheses in `super()`."
               },
               "template": "[blank1].__init__(title)",
               "choices": [
@@ -12431,43 +12556,27 @@ const messages: Record<string, any> = {
                 "parent"
               ]
             },
-            "dr-inheritance-build-order": {
-              "title": "Order a child constructor",
-              "prompt": "Put these steps in a clear order.",
-              "hint": "Connect the child to the parent before adding child-only state.",
-              "help": {
-                "concept": "The child class inherits first, then its constructor calls the parent setup, then it stores specialized state.",
-                "hint_1": "The class header comes first.",
-                "hint_2": "Call super before using the completed object."
-              },
-              "tokens": {
-                "t1": "Define the child class with the parent in parentheses",
-                "t2": "Define the child constructor",
-                "t3": "Call `super().__init__(...)` for shared setup",
-                "t4": "Store the child-specific attributes"
-              }
-            },
             "sc-inheritance-method-reuse": {
-              "title": "What does super() do here?",
-              "prompt": "Inside `Book.label()`, why call `super().label()`?",
-              "hint": "The child wants to reuse the parent result and add more detail.",
+              "title": "Place shared and specialized state",
+              "prompt": "`CatalogItem` stores `title`, while only `Book` has an `author`. Which design best matches those responsibilities?",
+              "hint": "Put genuinely shared state on the parent and child-only state on the child.",
               "help": {
-                "concept": "`super()` can call the parent method as part of an override.",
-                "hint_1": "The child does not need to copy the parent logic.",
-                "hint_2": "It can extend the returned text."
+                "concept": "A parent owns shared state; a child adds only the state or behavior that makes it more specific.",
+                "hint_1": "Every catalog item needs a title.",
+                "hint_2": "Only books need the author field in this example."
               },
               "options": {
-                "a": "It gets the parent label so Book can extend it.",
-                "b": "It creates an unrelated object.",
-                "c": "It deletes the parent method.",
-                "d": "It turns label into a static method."
+                "a": "Store both title and author only on `CatalogItem`, even for non-books.",
+                "b": "Store title independently in every child and leave the parent empty.",
+                "c": "Let `CatalogItem` initialize title, then let `Book` add author after calling `super().__init__(title)`.",
+                "d": "Put both values in `main.py` and keep them off the objects."
               }
             }
           }
         },
         "module-9-greenhouse-sensor-project": {
           "label": "Module 9 Greenhouse Sensor Project",
-          "summary": "Build a greenhouse monitor with an abstract Sensor contract, child constructors that call `super()`, and one polymorphic report.",
+          "summary": "Build one cumulative greenhouse monitor that retrieves the Module 9 skills: an abstract Sensor contract, inherited setup, specialized readings, branch-free polymorphism, and collection ownership.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
@@ -12478,252 +12587,303 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "greenhouse_project_step_1_base_and_temperature": {
-              "title": "Create Sensor and TemperatureSensor"
+              "title": "Milestone 1: Build the Sensor contract"
             },
             "greenhouse_project_step_2_add_humidity_override": {
-              "title": "Add HumiditySensor and override reading()"
+              "title": "Milestone 2: Add HumiditySensor"
             },
             "greenhouse_project_step_3_mixed_sensor_loop": {
-              "title": "Build one mixed sensor list"
+              "title": "Milestone 3: Use one polymorphic sensor loop"
             },
             "greenhouse_project_step_4_monitor_class_report": {
-              "title": "Add the GreenhouseMonitor report"
+              "title": "Milestone 4: Give the monitor collection ownership"
             }
           },
           "moduleProject": {
             "steps": {
               "greenhouse_project_step_1_base_and_temperature": {
-                "title": "Create an abstract Sensor and one concrete child",
-                "prompt": "Create the shared `Sensor(ABC)` base class with a constructor that stores `zone` and an abstract `reading()` method. Then complete `TemperatureSensor`: call `super().__init__(zone)`, store `celsius`, and return `Temperature: <zone> = <value> C` from `reading()`. Run `main.py` to print the North Bed reading.",
-                "hint": "Define the abstract contract first, then make TemperatureSensor concrete by implementing reading().",
+                "title": "Milestone 1: build the abstract Sensor contract",
+                "prompt": "Complete the first greenhouse milestone. In `models/sensor.py`, make `Sensor` inherit from `ABC`, keep the constructor that stores `zone`, and make `reading(self)` an `@abstractmethod`. In `models/temperature_sensor.py`, keep `TemperatureSensor(Sensor)`, call `super().__init__(zone)`, store `celsius`, and implement `reading()` so it returns `Temperature: <zone> = <value> C`. In `main.py`, create the sensor from the provided input values and print its reading. Leave the future humidity/monitor placeholder files unchanged.",
+                "hint": "Retrieve the patterns from the inheritance and ABC lessons: the parent owns shared `zone` setup; the concrete child supplies `reading()`.",
                 "help": {
-                  "concept": "The ABC makes `reading()` a required method. `super().__init__(zone)` reuses the parent setup instead of copying it.",
-                  "hint_1": "Import `ABC` and `abstractmethod` in models/sensor.py.",
-                  "hint_2": "Implement reading() in TemperatureSensor so Python can instantiate it."
+                  "concept": "This milestone combines an enforceable abstract contract with shared parent setup and one concrete implementation.",
+                  "hint_1": "Import `ABC` and `abstractmethod` from `abc`.",
+                  "hint_2": "Use `super().__init__(zone)` instead of copying `self.zone = zone` into the child."
                 },
-                "starterCode": "# TODO: import TemperatureSensor, create the North Bed sensor, and print reading().\n",
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\n# Create the TemperatureSensor and print its reading.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: import TemperatureSensor from models.temperature_sensor.\n# Create TemperatureSensor(\"North Bed\", 21.5) and print sensor.reading().\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\n# Create the TemperatureSensor and print its reading.\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "# TODO: import ABC and abstractmethod.\n\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    # TODO: make reading an abstract method.\n    def reading(self):\n        pass\n"
+                    "content": "# Make Sensor an abstract base class with a required reading() method.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        # TODO: call the parent constructor and store celsius.\n        pass\n\n    def reading(self):\n        # TODO: return the formatted temperature reading.\n        pass\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        # Reuse Sensor's zone setup, then store celsius.\n        pass\n\n    def reading(self):\n        # Return: Temperature: <zone> = <celsius> C\n        pass\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
-                "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Define the Sensor abstract base class."
+                    "message": "TemperatureSensor should be concrete and constructible."
                   },
                   "1": {
-                    "message": "Keep Sensor abstract instead of creating Sensor objects directly."
+                    "message": "Keep shared `zone` state and child-specific `celsius` state."
                   },
                   "2": {
-                    "message": "Store the shared zone in the parent constructor."
+                    "message": "TemperatureSensor.reading() must use the object's actual state."
                   },
                   "3": {
-                    "message": "Define TemperatureSensor as a concrete Sensor child."
+                    "message": "TemperatureSensor.reading() must work for other valid readings."
+                  }
+                },
+                "expectedOutput": "Temperature: North Bed = 21.5 C",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Import both `ABC` and `abstractmethod` from `abc`."
+                  },
+                  "1": {
+                    "message": "Make `Sensor` inherit from `ABC`."
+                  },
+                  "2": {
+                    "message": "Make `reading(self)` an abstract method."
+                  },
+                  "3": {
+                    "message": "Keep `TemperatureSensor` inheriting from `Sensor`."
                   },
                   "4": {
-                    "message": "TemperatureSensor should accept zone and celsius."
+                    "message": "Reuse the parent constructor with `super().__init__(zone)`."
                   },
                   "5": {
-                    "message": "TemperatureSensor should store its state and return the expected reading."
+                    "message": "Implement the concrete `reading(self)` method."
                   }
                 }
               },
               "greenhouse_project_step_2_add_humidity_override": {
-                "title": "Add HumiditySensor and override reading()",
-                "prompt": "Continue from the working base and temperature sensor. Override `TemperatureSensor.reading()` so it returns `Temperature: <zone> = <celsius> C`. Add `HumiditySensor` with a `percent` value and its own `reading()` result: `Humidity: <zone> = <percent>%`. Print both readings from `main.py`.",
-                "hint": "Keep the shared method name `reading()` in both subclasses.",
+                "title": "Milestone 2: add a second concrete sensor",
+                "prompt": "Continue from the exact Milestone 1 workspace. Complete `models/humidity_sensor.py` with `HumiditySensor(Sensor)`. Its constructor must call `super().__init__(zone)` and store `percent`; `reading(self)` must return `Humidity: <zone> = <percent>%`. Update `main.py` to read the provided temperature and humidity values, create both sensor objects, and print both readings. Keep the existing `Sensor` and `TemperatureSensor` implementations unchanged.",
+                "hint": "HumiditySensor follows the same inherited setup contract as TemperatureSensor, but owns different child state and output.",
                 "help": {
-                  "concept": "Overriding lets each sensor type format its own reading while callers use one method name.",
-                  "hint_1": "TemperatureSensor should format its zone and celsius value.",
-                  "hint_2": "HumiditySensor should inherit Sensor, store percent, and override reading()."
+                  "concept": "Sibling subclasses can reuse the same parent setup while specializing the same required method.",
+                  "hint_1": "Use `class HumiditySensor(Sensor)`.",
+                  "hint_2": "Call `super().__init__(zone)` before storing `percent`."
                 },
-                "starterCode": "# Add HumiditySensor and print both specialized readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Import HumiditySensor, create both sensors, and print both readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\n\nzone = input()\ncelsius = float(input())\n\nsensor = TemperatureSensor(zone, celsius)\nprint(sensor.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "# Override reading() with a temperature-specific result.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        # TODO: return Temperature: <zone> = <celsius> C\n        pass\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "# Create a HumiditySensor with zone, percent, and reading().\n"
+                    "content": "# Added in Milestone 2.\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
-                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "TemperatureSensor.reading() should return the specialized temperature reading."
+                    "message": "Keep the completed TemperatureSensor behavior working."
                   },
                   "1": {
-                    "message": "Define the HumiditySensor class."
+                    "message": "HumiditySensor should be concrete and constructible."
                   },
                   "2": {
-                    "message": "HumiditySensor should accept zone and percent."
+                    "message": "Keep shared `zone` state and child-specific `percent` state."
                   },
                   "3": {
-                    "message": "HumiditySensor should store zone and percent."
+                    "message": "HumiditySensor.reading() must use the object's actual state."
                   },
                   "4": {
-                    "message": "HumiditySensor.reading() should return the specialized humidity reading."
+                    "message": "HumiditySensor.reading() must work for other valid readings."
+                  }
+                },
+                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Make `HumiditySensor` inherit from `Sensor`."
+                  },
+                  "1": {
+                    "message": "Reuse the shared parent setup with `super().__init__(zone)`."
+                  },
+                  "2": {
+                    "message": "Implement the humidity-specific `reading(self)` method."
                   }
                 }
               },
               "greenhouse_project_step_3_mixed_sensor_loop": {
-                "title": "Build one mixed sensor list",
-                "prompt": "Continue from the two working sensor classes. Put a `TemperatureSensor` and a `HumiditySensor` in one `sensors` list. Loop through the list and print `sensor.reading()` for every object. Do not branch on the sensor type.",
-                "hint": "Use one list and one loop; the shared reading() method handles both objects.",
+                "title": "Milestone 3: use one polymorphic sensor loop",
+                "prompt": "Continue from the exact Milestone 2 workspace. In `main.py`, replace the two separate sensor variables/print calls with one `sensors` list containing the `TemperatureSensor` and `HumiditySensor`. Use one `for` loop over `sensors` and call the current object's shared `reading()` method. Do not branch with `isinstance()`, `type()`, `__class__`, or separate Temperature/Humidity cases. Keep all model files unchanged.",
+                "hint": "The caller should trust the `reading()` contract instead of asking which sensor subclass it received.",
                 "help": {
-                  "concept": "This milestone applies polymorphism to a greenhouse monitoring problem that was not used in the lessons.",
-                  "hint_1": "Create both sensor objects inside `sensors = [...]`.",
-                  "hint_2": "Loop with `for sensor in sensors:` and print `sensor.reading()`."
+                  "concept": "This milestone retrieves branch-free polymorphism: different objects, one shared method contract, one caller.",
+                  "hint_1": "Create one mixed `sensors = [...]` list.",
+                  "hint_2": "Inside the loop, use `sensor.reading()`."
                 },
-                "starterCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: print every reading with one shared loop.\n",
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: loop through sensors and print sensor.reading().\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\ntemperature = TemperatureSensor(temperature_zone, celsius)\nhumidity = HumiditySensor(humidity_zone, percent)\n\nprint(temperature.reading())\nprint(humidity.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "# Temperature implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "# Humidity implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
-                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Create at least one TemperatureSensor object."
+                    "message": "Keep TemperatureSensor's specialized behavior working."
                   },
                   "1": {
-                    "message": "Create at least one HumiditySensor object."
+                    "message": "Keep HumiditySensor's specialized behavior working."
+                  }
+                },
+                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Use one `for` loop over the mixed `sensors` collection."
                   },
-                  "2": {
-                    "message": "TemperatureSensor.reading() should still return the expected reading."
-                  },
-                  "3": {
-                    "message": "HumiditySensor.reading() should still return the expected reading."
-                  },
-                  "4": {
-                    "message": "Print both readings from one shared loop."
+                  "1": {
+                    "message": "Call the shared `reading()` method inside the loop without concrete-type branching."
                   }
                 }
               },
               "greenhouse_project_step_4_monitor_class_report": {
-                "title": "Add the GreenhouseMonitor report",
-                "prompt": "Finish the greenhouse project by adding `GreenhouseMonitor`. It should own a `sensors` list, add sensors with `add_sensor(sensor)`, and print each sensor reading from `print_report()`. Keep `main.py` thin: create the monitor, add both sensors, and print the report.",
-                "hint": "The monitor should own the mixed collection instead of main.py managing the loop.",
+                "title": "Milestone 4: give GreenhouseMonitor collection ownership",
+                "prompt": "Continue from the exact Milestone 3 workspace. Complete `models/greenhouse_monitor.py`. `GreenhouseMonitor.__init__()` must create an empty `self.sensors` list; `add_sensor(self, sensor)` must append the object; and `print_report(self)` must use one loop over `self.sensors` and print each object's shared `reading()` result. Update `main.py` so it creates the monitor, adds the temperature and humidity sensors, and calls `monitor.print_report()`. Do not branch on sensor types. Keep the completed Sensor subclasses unchanged.",
+                "hint": "Retrieve the responsibility boundary from Module 8: the monitor owns the collection; each sensor still owns how its own reading is formatted.",
                 "help": {
-                  "concept": "The final milestone gives collection ownership to a dedicated class.",
-                  "hint_1": "Initialize `self.sensors` as an empty list.",
-                  "hint_2": "Append in `add_sensor()` and loop over `self.sensors` in `print_report()`."
+                  "concept": "The final class owns collection coordination while remaining polymorphic—it depends only on each object's `reading()` behavior.",
+                  "hint_1": "Initialize `self.sensors = []`.",
+                  "hint_2": "Append in `add_sensor()` and call `sensor.reading()` inside one report loop."
                 },
-                "starterCode": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nsensors = [\n    TemperatureSensor(temperature_zone, celsius),\n    HumiditySensor(humidity_zone, percent),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "# Temperature sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "# Humidity sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   },
                   "models_greenhouse_monitor_py": {
-                    "content": "class GreenhouseMonitor:\n    def __init__(self):\n        # TODO: create an empty sensors list.\n        pass\n\n    def add_sensor(self, sensor):\n        # TODO: append the sensor.\n        pass\n\n    def print_report(self):\n        # TODO: print sensor.reading() for each stored sensor.\n        pass\n"
+                    "content": "# Added in Milestone 4.\n"
                   }
                 },
-                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(temperature_zone, celsius))\nmonitor.add_sensor(HumiditySensor(humidity_zone, percent))\nmonitor.print_report()\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\ntemperature_zone = input()\ncelsius = float(input())\nhumidity_zone = input()\npercent = int(input())\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(temperature_zone, celsius))\nmonitor.add_sensor(HumiditySensor(humidity_zone, percent))\nmonitor.print_report()\n"
                   },
                   "models___init___py": {
                     "content": "# Package marker for greenhouse model imports.\n"
                   },
                   "models_sensor_py": {
-                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
+                    "content": "from abc import ABC, abstractmethod\n\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
                   "models_temperature_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
                   "models_humidity_sensor_py": {
-                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                    "content": "from models.sensor import Sensor\n\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   },
                   "models_greenhouse_monitor_py": {
                     "content": "class GreenhouseMonitor:\n    def __init__(self):\n        self.sensors = []\n\n    def add_sensor(self, sensor):\n        self.sensors.append(sensor)\n\n    def print_report(self):\n        for sensor in self.sensors:\n            print(sensor.reading())\n"
@@ -12731,281 +12891,189 @@ const messages: Record<string, any> = {
                 },
                 "checks": {
                   "0": {
-                    "message": "Define the GreenhouseMonitor class."
-                  },
-                  "1": {
                     "message": "GreenhouseMonitor should be constructible without arguments."
                   },
+                  "1": {
+                    "message": "Each monitor should own a `sensors` collection."
+                  },
                   "2": {
-                    "message": "GreenhouseMonitor should own a sensors list."
+                    "message": "Keep the temperature subclass working after the monitor refactor."
+                  },
+                  "3": {
+                    "message": "Keep the humidity subclass working after the monitor refactor."
                   }
                 },
-                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%"
+                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%",
+                "sourceChecks": {
+                  "0": {
+                    "message": "Define `GreenhouseMonitor` in its model file."
+                  },
+                  "1": {
+                    "message": "Give each monitor its own empty `sensors` list."
+                  },
+                  "2": {
+                    "message": "`add_sensor()` should append the object it receives."
+                  },
+                  "3": {
+                    "message": "`print_report()` should use one shared `reading()` call without concrete-type branching."
+                  }
+                }
               }
             }
           }
         },
         "overriding-and-specialization": {
           "label": "Overriding and Specialization",
-          "summary": "Keep one shared method name, then let each child class customize its own version of that method.",
+          "summary": "Override inherited behavior by keeping the same public method name while a subclass supplies a more specific implementation.",
           "cards": {
             "sketch0": {
-              "title": "One method name, shared by related classes"
-            },
-            "sketch1": {
-              "title": "Override the method in one subclass"
-            },
-            "sketch2": {
-              "title": "Specialize more than one subclass"
+              "title": "Override inherited behavior"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_overriding_and_specialization_sketch0": {
-              "title": "Override label() for Book",
-              "prompt": "The lesson used delivery items. Now practice with catalog media. In `models/book.py`, override `label()` so `Book(\"Project Hail Mary\")` returns `Book: Project Hail Mary`. Then finish `main.py` by creating the book and printing its label.",
-              "hint": "Use the same method name as the base class, but return a book-specific string.",
+              "title": "Override label() on Book",
+              "prompt": "`Book` already inherits from `CatalogItem`, and `main.py` is complete. In `models/book.py`, override the inherited `label(self)` method so a `Book` returns `Book: ` followed by that object's title. Keep the method name `label`, keep `Book` inheriting from `CatalogItem`, and leave `models/catalog_item.py` and `main.py` unchanged.",
+              "hint": "Define `label(self)` inside `Book`. The child method should use `self.title` and return the specialized text.",
               "help": {
-                "concept": "Overriding means a subclass writes its own version of a method with the same name. Callers still use `.label()`, but the subclass controls the result.",
-                "hint_1": "Write the method inside `Book`.",
-                "hint_2": "Return `Book: ` followed by `self.title`."
+                "concept": "An override uses the same method name as the inherited method but provides subclass-specific behavior.",
+                "hint_1": "Keep `class Book(CatalogItem)` unchanged.",
+                "hint_2": "Define `label(self)` directly inside `Book` and use `self.title`."
               },
-              "starterCode": "from models.book import Book\n\n# TODO: create Book(\"Project Hail Mary\").\n# TODO: print the book label.\n",
+              "starterCode": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\n\n# TODO: create Book(\"Project Hail Mary\").\n# TODO: print the book label.\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "# Keep models/catalog_item.py unchanged for this step: Override label() for Book.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    # TODO: override label() so it returns \"Book: <title>\".\n    pass\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\n\nbook = Book(\"Project Hail Mary\")\nprint(book.label())\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\n\nbook = Book(\"Project Hail Mary\")\nprint(book.label())\n"
+                  "content": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n"
                 },
                 "models_catalog_item_py": {
                   "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    # Override label() here.\n    pass\n"
                 }
               },
-              "checks": {
-                "0": {
-                  "message": "Book.label() should return the book-specific label."
-                }
-              },
-              "expectedOutput": "Book: Project Hail Mary"
-            },
-            "try_overriding_and_specialization_sketch1": {
-              "title": "Override label() for Movie",
-              "prompt": "Use the same overriding pattern with another catalog type. In `models/movie.py`, override `label()` so `Movie(\"Inside Out\")` returns `Movie: Inside Out`. Then finish `main.py` by creating the movie and printing its label.",
-              "hint": "Book and Movie should both use `label()`, but each one can return a different kind of label.",
-              "help": {
-                "concept": "Two subclasses can share a method name while producing different results. That sets up polymorphism in the next topic.",
-                "hint_1": "The method name should still be `label()`.",
-                "hint_2": "Return `Movie: ` followed by `self.title`."
-              },
-              "starterCode": "from models.movie import Movie\n\n# TODO: create Movie(\"Inside Out\").\n# TODO: print the movie label.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.movie import Movie\n\n# TODO: create Movie(\"Inside Out\").\n# TODO: print the movie label.\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "# Keep models/catalog_item.py unchanged for this step: Override label() for Movie.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Movie(CatalogItem):\n    # TODO: override label() so it returns \"Movie: <title>\".\n    pass\n"
-                }
-              },
-              "solutionCode": "from models.movie import Movie\n\nmovie = Movie(\"Inside Out\")\nprint(movie.label())\n",
+              "solutionCode": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.movie import Movie\n\nmovie = Movie(\"Inside Out\")\nprint(movie.label())\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                }
-              },
-              "checks": {
-                "0": {
-                  "message": "Movie.label() should return the movie-specific label."
-                }
-              },
-              "expectedOutput": "Movie: Inside Out"
-            },
-            "try_overriding_and_specialization_sketch2": {
-              "title": "Print both specialized labels",
-              "prompt": "Now use both specialized child classes. The `Book` and `Movie` classes are provided. In `main.py`, create `Book(\"Coraline\")` and `Movie(\"Coco\")`, then print each object's `label()` result on its own line.",
-              "hint": "Create one Book and one Movie. Call `.label()` on each object.",
-              "help": {
-                "concept": "The call looks the same for both objects, but each subclass decides what its own label should look like.",
-                "hint_1": "Use `book.label()` for the first line.",
-                "hint_2": "Use `movie.label()` for the second line."
-              },
-              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create a Book for \"Coraline\".\n# TODO: create a Movie for \"Coco\".\n# TODO: print each object's label on its own line.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create a Book for \"Coraline\".\n# TODO: create a Movie for \"Coco\".\n# TODO: print each object's label on its own line.\n"
-                },
-                "models_catalog_item_py": {
-                  "content": "# Keep models/catalog_item.py unchanged for this step: Print both specialized labels.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
-                },
-                "models_book_py": {
-                  "content": "# Keep models/book.py unchanged for this step: Print both specialized labels.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "# Keep models/movie.py unchanged for this step: Print both specialized labels.\nfrom models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"Coraline\")\nmovie = Movie(\"Coco\")\nprint(book.label())\nprint(movie.label())\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"Coraline\")\nmovie = Movie(\"Coco\")\nprint(book.label())\nprint(movie.label())\n"
+                  "content": "from models.book import Book\n\ntitle = input()\nbook = Book(title)\n\nprint(book.label())\n"
                 },
                 "models_catalog_item_py": {
                   "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 }
               },
               "checks": {
                 "0": {
-                  "message": "Book.label() should stay specialized."
+                  "message": "Keep the parent `CatalogItem.label()` behavior unchanged."
                 },
                 "1": {
-                  "message": "Movie.label() should stay specialized."
+                  "message": "`Book.label()` should specialize the visible title."
+                },
+                "2": {
+                  "message": "`Book.label()` should use the object's actual title, not a hard-coded example."
+                },
+                "3": {
+                  "message": "The override should work for other valid titles too."
                 }
               },
-              "expectedOutput": "Book: Coraline\nMovie: Coco"
+              "expectedOutput": "Book: Project Hail Mary",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep `Book` inheriting from `CatalogItem` so `label()` is a real override."
+                },
+                "1": {
+                  "message": "Define `label(self)` directly on `Book`."
+                }
+              }
             }
           },
           "practice": {
             "sc-overriding-purpose": {
-              "title": "Choose the reason to override",
-              "prompt": "Why would `Book` override `label()` from `CatalogItem`?",
-              "hint": "Look for the choice about changing the result while keeping the method name.",
+              "title": "Why override an inherited method?",
+              "prompt": "`CatalogItem.label()` returns only the title. Why should `Book` override `label()` instead of inventing a different method name?",
+              "hint": "The caller should keep using the same public behavior.",
               "help": {
-                "concept": "Overriding keeps a shared contract but allows subclass-specific behavior.",
-                "hint_1": "The method name stays the same.",
-                "hint_2": "The returned text becomes more specific."
+                "concept": "Overriding preserves the inherited method contract while allowing the subclass to specialize its implementation.",
+                "hint_1": "The method name stays `label`.",
+                "hint_2": "The child can return a more specific result."
               },
               "options": {
-                "a": "To remove inheritance from the program",
-                "b": "To rename the base method everywhere",
-                "c": "To keep `label()` but return a book-specific result",
-                "d": "To stop `Book` objects from having titles"
+                "a": "To stop `Book` from inheriting from `CatalogItem`",
+                "b": "To force callers to learn a new method name for every subclass",
+                "c": "To keep the `label()` contract while giving `Book` book-specific behavior",
+                "d": "To remove the title state inherited from `CatalogItem`"
               }
             },
             "fb-overriding-method-name": {
-              "title": "Fill in the overriding method name",
-              "prompt": "Complete the method name that both subclasses share.",
-              "hint": "Use the same method name from the base class.",
+              "title": "Keep the inherited method name",
+              "prompt": "Complete the method name so `Book` overrides the method it inherits from `CatalogItem`.",
+              "hint": "An override uses the same method name as the parent.",
               "help": {
-                "concept": "Overriding works when the subclass uses the same method name as the base class.",
-                "hint_1": "The method returns the display text for the item.",
-                "hint_2": "It is not the constructor name."
+                "concept": "Python recognizes the subclass implementation as an override because it uses the same method name.",
+                "hint_1": "The parent method is named `label`.",
+                "hint_2": "Do not rename it to `book_label`."
               },
-              "template": "class Movie(CatalogItem):\n    def [blank1](self):\n        return f\"Movie: {self.title}\"",
+              "template": "class Book(CatalogItem):\n    def [blank1](self):\n        return f\"Book: {self.title}\"",
               "choices": [
                 "label",
-                "movie_label",
+                "book_label",
                 "title",
                 "__init__"
               ]
             },
-            "dr-overriding-workflow": {
-              "title": "Order the override steps",
-              "prompt": "Put the beginner workflow in order.",
-              "hint": "Begin with the base method, then specialize it in subclasses.",
-              "help": {
-                "concept": "It is easiest to override after the base behavior already exists.",
-                "hint_1": "The shared method comes first.",
-                "hint_2": "Printing the result comes after the subclass method is ready."
-              },
-              "tokens": {
-                "t1": "Write `label()` in CatalogItem",
-                "t2": "Create `Book.label()` with a book-specific return value",
-                "t3": "Create `Movie.label()` with a movie-specific return value",
-                "t4": "Make objects and print both labels"
-              }
-            },
             "sc-overriding-shared-contract": {
-              "title": "Keep the shared contract",
-              "prompt": "What stays the same when `Book` and `Movie` both override `label()`?",
-              "hint": "Think about what later code can still call on both objects.",
+              "title": "Which label() runs?",
+              "prompt": "`CatalogItem.label()` returns `self.title`, while `Book.label()` returns `Book: ` plus the title. What does `Book(\"Coraline\").label()` return?",
+              "hint": "Python looks on the subclass before falling back to the parent.",
               "help": {
-                "concept": "The shared contract is the method name that every subclass supports.",
-                "hint_1": "The result can change, but the callable behavior stays aligned.",
-                "hint_2": "Look for the answer about one shared method name."
+                "concept": "When a subclass overrides a method, calls on that subclass use the subclass implementation.",
+                "hint_1": "`Book` defines its own `label()`.",
+                "hint_2": "The result includes the `Book: ` prefix."
               },
               "options": {
-                "a": "Later code can still call `label()` on both subclasses.",
-                "b": "Both subclasses must return the exact same string.",
-                "c": "Neither subclass can add its own behavior anymore.",
-                "d": "The base class stops mattering once one subclass overrides a method."
+                "a": "Coraline",
+                "b": "Book: Coraline",
+                "c": "CatalogItem: Coraline",
+                "d": "Python raises an error because both classes define `label()`"
               }
             }
           }
         },
         "polymorphic-collections": {
           "label": "Polymorphic Collections",
-          "summary": "Use one shared method call on different child objects, so a mixed list can be handled with one clean loop.",
+          "summary": "Use one shared method call across mixed objects so callers do not need type-specific branches.",
           "cards": {
             "sketch0": {
-              "title": "Put different subclasses in one list"
+              "title": "One loop, one shared method"
             },
             "sketch1": {
-              "title": "Call the shared method in a loop"
-            },
-            "sketch2": {
-              "title": "Move the loop into a helper"
+              "title": "Move the shared contract into a service"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_polymorphic_collections_sketch0": {
-              "title": "Create one mixed catalog list",
-              "prompt": "In `main.py`, create one `catalog` list containing `Book(\"A Wrinkle in Time\")` and `Movie(\"Up\")`. Do not print yet. This step is only about storing different object types in one list.",
-              "hint": "Create both objects inside the same list and keep the variable name `catalog`.",
+              "title": "Use one loop for Book and Movie",
+              "prompt": "`catalog` already contains one `Book` and one `Movie`, and both classes already provide `label()`. In `main.py`, use one `for` loop over `catalog`. Inside that loop, call the current object's shared `label()` method and print the returned label. Do not branch on the concrete type with `isinstance()`, `type()`, `__class__`, or separate Book/Movie cases.",
+              "hint": "The loop should trust the shared method. Each item can answer `label()` without the caller first asking what class it is.",
               "help": {
-                "concept": "A Python list can hold different object types. Polymorphism becomes useful because both objects provide the same `label()` method.",
-                "hint_1": "Create both objects inside the same list and keep the variable name `catalog`.",
-                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
+                "concept": "Polymorphism lets one caller use the same method on different object types. The object itself chooses the appropriate implementation.",
+                "hint_1": "Loop directly over `catalog`.",
+                "hint_2": "Inside the loop, use the current object's `label()` result."
               },
-              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create catalog with the two requested objects. Do not print yet.\n",
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook_title = input()\nmovie_title = input()\n\ncatalog = [\n    Book(book_title),\n    Movie(movie_title),\n]\n\n# Use one for loop over catalog.\n# Call the shared label() method for each item and print the result.\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create catalog with the two requested objects. Do not print yet.\n"
-                },
-                "models_book_py": {
-                  "content": "# Keep this provided Book model unchanged.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "# Keep this provided Movie model unchanged.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"A Wrinkle in Time\"), Movie(\"Up\")]\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"A Wrinkle in Time\"), Movie(\"Up\")]\n"
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nbook_title = input()\nmovie_title = input()\n\ncatalog = [\n    Book(book_title),\n    Movie(movie_title),\n]\n\n# Use one for loop over catalog.\n# Call the shared label() method for each item and print the result.\n"
                 },
                 "models_book_py": {
                   "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
@@ -13014,43 +13082,10 @@ const messages: Record<string, any> = {
                   "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 }
               },
-              "checks": {
-                "0": {
-                  "message": "Create the requested Book object in the mixed catalog."
-                },
-                "1": {
-                  "message": "Create the requested Movie object in the mixed catalog."
-                },
-                "2": {
-                  "message": "Do not print in this first step."
-                }
-              }
-            },
-            "try_polymorphic_collections_sketch1": {
-              "title": "Call the shared method in one loop",
-              "prompt": "Use the provided mixed `catalog` list. Loop through it and print each object's `label()` result. Do not branch on the object type; call the same method on every item.",
-              "hint": "Use `for item in catalog:` and print `item.label()` inside the loop.",
-              "help": {
-                "concept": "Polymorphism lets one loop use the same method name on different object types.",
-                "hint_1": "Use `for item in catalog:` and print `item.label()` inside the loop.",
-                "hint_2": "Review the file path, class or function name, and output requirements together."
-              },
-              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\n# TODO: loop through catalog and print item.label() for each item.\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\n# TODO: loop through catalog and print item.label() for each item.\n"
-                },
-                "models_book_py": {
-                  "content": "# Keep the provided Book model unchanged.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "# Keep the provided Movie model unchanged.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor item in catalog:\n    print(item.label())\n",
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook_title = input()\nmovie_title = input()\n\ncatalog = [\n    Book(book_title),\n    Movie(movie_title),\n]\n\nfor item in catalog:\n    print(item.label())\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor item in catalog:\n    print(item.label())\n"
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nbook_title = input()\nmovie_title = input()\n\ncatalog = [\n    Book(book_title),\n    Movie(movie_title),\n]\n\nfor item in catalog:\n    print(item.label())\n"
                 },
                 "models_book_py": {
                   "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
@@ -13070,36 +13105,29 @@ const messages: Record<string, any> = {
                   "message": "Print both labels from the loop."
                 }
               },
-              "expectedOutput": "Book: A Wrinkle in Time\nMovie: Up"
+              "expectedOutput": "Book: Coraline\nMovie: Arrival",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use one `for` loop over `catalog` so the same caller handles both object types."
+                },
+                "1": {
+                  "message": "Inside that loop, print the current object's `label()` result without branching on its concrete type."
+                }
+              }
             },
-            "try_polymorphic_collections_sketch2": {
-              "title": "Return labels from a helper",
-              "prompt": "Complete `build_labels(items)` in `services/catalog_report.py`. It must loop through the supplied items, collect each `item.label()` result in order, and return the list. `main.py` is already wired to print the returned labels.",
-              "hint": "Start with an empty list, append `item.label()` inside a loop, and return the finished list.",
+            "try_polymorphic_collections_sketch1": {
+              "title": "Build a polymorphic catalog-report service",
+              "prompt": "`main.py`, `Book`, and `Movie` are already complete. In `services/catalog_report.py`, complete `build_labels(items)` so it returns one list containing each object's `label()` result in the same order as the input collection. Use one `for` loop over `items` and the shared `label()` method. The service must not branch on concrete types with `isinstance()`, `type()`, `__class__`, or separate Book/Movie cases.",
+              "hint": "The service should know only that each item has `label()`. It should not need to know which concrete class supplied that method.",
               "help": {
-                "concept": "A reusable helper can depend on the shared `label()` behavior without knowing whether an item is a Book or Movie.",
-                "hint_1": "Start with an empty list, append `item.label()` inside a loop, and return the finished list.",
-                "hint_2": "Use the requested file boundary as part of the solution contract."
+                "concept": "A polymorphic service depends on shared behavior. New compatible classes can be added without adding another type-specific branch.",
+                "hint_1": "Iterate over `items` and collect each item's `label()` result.",
+                "hint_2": "Return the finished list after the loop."
               },
-              "starterCode": "# Run this provided script after completing the helper.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor label in build_labels(catalog):\n    print(label)\n",
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\nfirst_kind = input().strip().lower()\nfirst_title = input()\nsecond_title = input()\n\nif first_kind == \"movie\":\n    catalog = [Movie(first_title), Book(second_title)]\nelse:\n    catalog = [Book(first_title), Movie(second_title)]\n\nfor label in build_labels(catalog):\n    print(label)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided script after completing the helper.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor label in build_labels(catalog):\n    print(label)\n"
-                },
-                "models_book_py": {
-                  "content": "# Keep the provided Book model unchanged.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
-                },
-                "models_movie_py": {
-                  "content": "# Keep the provided Movie model unchanged.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
-                },
-                "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    # TODO: return a list containing item.label() for every item.\n    pass\n"
-                }
-              },
-              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor label in build_labels(catalog):\n    print(label)\n",
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor label in build_labels(catalog):\n    print(label)\n"
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\nfirst_kind = input().strip().lower()\nfirst_title = input()\nsecond_title = input()\n\nif first_kind == \"movie\":\n    catalog = [Movie(first_title), Book(second_title)]\nelse:\n    catalog = [Book(first_title), Movie(second_title)]\n\nfor label in build_labels(catalog):\n    print(label)\n"
                 },
                 "models_book_py": {
                   "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
@@ -13108,7 +13136,22 @@ const messages: Record<string, any> = {
                   "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 },
                 "services_catalog_report_py": {
-                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                  "content": "def build_labels(items):\n    labels = []\n\n    # Use one for loop over items.\n    # Add each object's label() result to labels.\n\n    return labels\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\nfirst_kind = input().strip().lower()\nfirst_title = input()\nsecond_title = input()\n\nif first_kind == \"movie\":\n    catalog = [Movie(first_title), Book(second_title)]\nelse:\n    catalog = [Book(first_title), Movie(second_title)]\n\nfor label in build_labels(catalog):\n    print(label)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\nfirst_kind = input().strip().lower()\nfirst_title = input()\nsecond_title = input()\n\nif first_kind == \"movie\":\n    catalog = [Movie(first_title), Book(second_title)]\nelse:\n    catalog = [Book(first_title), Movie(second_title)]\n\nfor label in build_labels(catalog):\n    print(label)\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_report_py": {
+                  "content": "def build_labels(items):\n    labels = []\n\n    for item in items:\n        labels.append(item.label())\n\n    return labels\n"
                 }
               },
               "checks": {
@@ -13116,74 +13159,63 @@ const messages: Record<string, any> = {
                   "message": "Return both labels so main.py can print two lines."
                 }
               },
-              "expectedOutput": "Book: A Wrinkle in Time\nMovie: Up"
+              "expectedOutput": "Book: Dune\nMovie: Arrival",
+              "sourceChecks": {
+                "0": {
+                  "message": "`build_labels(items)` should use one shared `label()` call inside a loop and return the collected labels without concrete-type branches."
+                }
+              }
             }
           },
           "practice": {
             "sc-polymorphism-mixed-list": {
-              "title": "Why the mixed list works",
-              "prompt": "Why can one `catalog` list hold both `Book` and `Movie` objects?",
-              "hint": "Think about what lists can store in Python.",
+              "title": "Why use the shared method?",
+              "prompt": "A list contains `Book` and `Movie` objects, and both provide `label()`. What is the main polymorphic advantage?",
+              "hint": "Think about what the caller no longer needs to know.",
               "help": {
-                "concept": "A list can store different objects, and later code can use shared behavior across them.",
-                "hint_1": "The objects do not need to be the same subclass.",
-                "hint_2": "The shared method name matters when the loop uses the list."
+                "concept": "Polymorphism lets the caller depend on shared behavior instead of branching on each concrete class.",
+                "hint_1": "The caller can make the same method call for every item.",
+                "hint_2": "The object decides which implementation runs."
               },
               "options": {
-                "a": "Because Python turns both objects into strings first",
-                "b": "Because a list can store different objects together",
-                "c": "Because Book secretly becomes Movie inside the list",
-                "d": "Because lists only allow subclasses of the same name"
+                "a": "Every object in the list must be the same concrete class",
+                "b": "One caller can use `label()` without checking whether an item is a Book or Movie",
+                "c": "Python automatically converts every object into the parent class",
+                "d": "The loop no longer needs to call any methods"
               }
             },
             "fb-polymorphism-shared-call": {
-              "title": "Choose the shared method",
-              "prompt": "Which shared method should be called on each item?",
-              "hint": "Use the method name both subclasses provide.",
+              "title": "Recognize polymorphic callers",
+              "prompt": "Which TWO designs rely on the shared `label()` behavior instead of concrete-type branching?",
+              "hint": "Choose callers that treat every compatible object through the same method.",
               "help": {
-                "concept": "Polymorphism depends on one shared method name.",
-                "hint_1": "The method returns the display text for the catalog item.",
-                "hint_2": "It is not `title` or `self`."
+                "concept": "A polymorphic caller asks for shared behavior. It does not need a separate Book path and Movie path.",
+                "hint_1": "A direct `item.label()` call is the shared contract.",
+                "hint_2": "Reject designs whose logic changes after checking the concrete class."
+              },
+              "options": {
+                "a": "Loop through `catalog` and use each item's `label()` method",
+                "b": "Use `isinstance()` to choose a Book branch or Movie branch",
+                "c": "Pass the mixed collection to a helper that calls `label()` on each item",
+                "d": "Check `type(item)` and manually build a different label for every class"
+              }
+            },
+            "sc-polymorphism-no-type-check": {
+              "title": "Complete the shared call",
+              "prompt": "Complete the method name so the same loop works for every compatible object in `catalog`.",
+              "hint": "Use the method contract shared by Book and Movie.",
+              "help": {
+                "concept": "The shared method name is what allows one loop to remain unaware of the concrete object type.",
+                "hint_1": "Both classes provide the same labeling behavior.",
+                "hint_2": "The loop should call `item.label()`."
               },
               "template": "for item in catalog:\n    print(item.[blank1]())",
               "choices": [
                 "label",
-                "title",
-                "Book",
-                "super"
+                "book_label",
+                "movie_label",
+                "__class__"
               ]
-            },
-            "dr-polymorphism-loop-order": {
-              "title": "Order the loop steps",
-              "prompt": "Put these steps in order for a polymorphic helper.",
-              "hint": "Start with the list, then loop, then call the shared method.",
-              "help": {
-                "concept": "A polymorphic helper follows a simple receive-loop-call-store pattern.",
-                "hint_1": "The list comes before the loop.",
-                "hint_2": "The append step happens after the method returns a value."
-              },
-              "tokens": {
-                "t1": "Receive the mixed items list",
-                "t2": "Loop through each item",
-                "t3": "Call `item.label()`",
-                "t4": "Add the returned label to the results list"
-              }
-            },
-            "sc-polymorphism-no-type-check": {
-              "title": "Avoid the wrong pattern",
-              "prompt": "Which approach best matches polymorphism in this module?",
-              "hint": "Pick the choice that avoids class-by-class branches.",
-              "help": {
-                "concept": "Polymorphism keeps later code generic by depending on shared method names.",
-                "hint_1": "The loop should call one shared method.",
-                "hint_2": "It should not need `if item is Book` checks."
-              },
-              "options": {
-                "a": "Write a separate loop for every subclass forever",
-                "b": "Rename the method in each subclass so they are all different",
-                "c": "Check each object type before every method call",
-                "d": "Call the same method on each object in the mixed list"
-              }
             }
           }
         }
@@ -13278,55 +13310,58 @@ const messages: Record<string, any> = {
             },
             "try-creating-and-indexing-lists-sketch0": {
               "title": "Build a list from input",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list.",
-              "hint": "Put `club1`, `club2`, and `club3` inside square brackets in the order they were read.",
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names.",
+              "hint": "Build `clubs` from the three input variables in their original order, then print `clubs`.",
               "help": {
                 "concept": "A list can collect values that are already stored in variables.",
-                "hint_1": "Read all three inputs first, then create one list from the three variables.",
-                "hint_2": "Create `clubs = [club1, club2, club3]`, then print `clubs`."
+                "hint_1": "Assign the three input variables to a list named `clubs` in their original order.",
+                "hint_2": "After creating `clubs`, print the variable itself with `print(clubs)`."
               },
               "starterCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\n# Create a list named clubs containing the three inputs.\n# Print the whole list.\n",
               "solutionCode": "club1 = input()\nclub2 = input()\nclub3 = input()\n\nclubs = [club1, club2, club3]\nprint(clubs)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `clubs` from `club1`, `club2`, and `club3` in that order instead of printing a hard-coded list."
+                  "message": "Create a variable named `clubs` as required by the prompt."
+                },
+                "1": {
+                  "message": "Print `clubs` itself after creating it."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch1": {
               "title": "Read two different positions",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line.",
-              "hint": "For a four-item list, the third item is at index 2 and the first item is at index 0.",
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names.",
+              "hint": "Use the list positions directly: the third item is `stations[2]` and the first is `stations[0]`.",
               "help": {
-                "concept": "List indexes let you read specific positions without changing the list.",
-                "hint_1": "Use one indexed expression for the third station and another for the first station.",
-                "hint_2": "Print `stations[2]` first, then `stations[0]`."
+                "concept": "This exercise practices reading values from a list by index rather than typing the known values directly.",
+                "hint_1": "Print the third item with `stations[2]`.",
+                "hint_2": "Then print the first item with `stations[0]`."
               },
               "starterCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\n\n# Print the third station.\n# Then print the first station.\n",
               "solutionCode": "stations = [\"Oak\", \"Pine\", \"Lake\", \"Hill\"]\nprint(stations[2])\nprint(stations[0])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stations[2]` to read the third station instead of typing `Lake` directly."
+                  "message": "Use `stations[2]` to read the third station instead of hard-coding `Lake`."
                 },
                 "1": {
-                  "message": "Use `stations[0]` to read the first station instead of typing `Oak` directly."
+                  "message": "Use `stations[0]` to read the first station instead of hard-coding `Oak`."
                 }
               }
             },
             "try-creating-and-indexing-lists-sketch2": {
               "title": "Use the last item after building a list",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing.",
-              "hint": "Build the list first, then use index `-1` to read its final item.",
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly.",
+              "hint": "Create `stops = [stop1, stop2, stop3, stop4]`, then use `stops[-1]`.",
               "help": {
-                "concept": "Negative indexing is useful when you want an item relative to the end of a list.",
-                "hint_1": "Create `stops` from the four input variables in their original order.",
-                "hint_2": "Print `stops[-1]` rather than printing `stop4` directly."
+                "concept": "Negative indexing reads relative to the end of a list; `-1` means the final item.",
+                "hint_1": "Build the `stops` list from all four input variables in their original order.",
+                "hint_2": "Print the final item from the list with `print(stops[-1])`, not `print(stop4)`."
               },
               "starterCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\n# Create a list named stops containing the four inputs.\n# Print the final stop using negative indexing.\n",
               "solutionCode": "stop1 = input()\nstop2 = input()\nstop3 = input()\nstop4 = input()\n\nstops = [stop1, stop2, stop3, stop4]\nprint(stops[-1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `stops` from `stop1`, `stop2`, `stop3`, and `stop4` in that order."
+                  "message": "Create `stops = [stop1, stop2, stop3, stop4]` as the prompt requires."
                 },
                 "1": {
                   "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
@@ -13337,15 +13372,15 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_creating_and_indexing_lists_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Three club names arrive as input. Store them in a list named `clubs` in the same order, then print the whole list."
+              "prompt": "Three club names arrive as input. Store them, in the same order, in a list named `clubs`, then print the list. Do not hard-code the club names."
             },
             "try_creating_and_indexing_lists_sketch1": {
               "title": "Try it yourself",
-              "prompt": "The list `stations` is already provided. Print the third station, then the first station, each on its own line."
+              "prompt": "The list `stations` is already provided. Use list indexing to print the third station first and the first station second, each on its own line. Do not hard-code the station names."
             },
             "try_creating_and_indexing_lists_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Four delivery stops arrive as input. Store them in a list named `stops`, then print only the final stop using negative indexing."
+              "prompt": "Four delivery stops arrive as input. Store them, in their original order, in a list named `stops`. Then print only the final stop by using negative indexing on that list. Do not print the fourth input variable directly."
             },
             "allowReveal": true
           }
@@ -13434,7 +13469,7 @@ const messages: Record<string, any> = {
             },
             "try-dictionary-basics-sketch0": {
               "title": "Build a profile dictionary",
-              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary.",
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys.",
               "hint": "Use a dictionary literal with two `key: value` pairs.",
               "help": {
                 "concept": "A dictionary literal uses `{}` and separates each key from its value with a colon.",
@@ -13445,7 +13480,13 @@ const messages: Record<string, any> = {
               "solutionCode": "name = input()\nage = int(input())\n\nprofile = {\"name\": name, \"age\": age}\nprint(profile)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `profile` as a dictionary that stores `name` and `age` under matching string keys."
+                  "message": "Create the requested dictionary in a variable named `profile`."
+                },
+                "1": {
+                  "message": "Include the explicitly requested `\"name\"` key in the dictionary."
+                },
+                "2": {
+                  "message": "Include the explicitly requested `\"age\"` key in the dictionary."
                 }
               }
             },
@@ -13460,11 +13501,7 @@ const messages: Record<string, any> = {
               },
               "starterCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\n# Print the value stored under the key in item.\n",
               "solutionCode": "prices = {\"notebook\": 4, \"marker\": 2, \"folder\": 3}\nitem = input()\n\nprint(prices[item])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `prices[item]` so the program looks up whichever valid key arrives as input."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-dictionary-basics-sketch2": {
               "title": "Check whether a setting exists",
@@ -13477,17 +13514,13 @@ const messages: Record<string, any> = {
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use `if key in settings:` so the program checks dictionary membership before reading anything."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_dictionary_basics_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a profile dictionary from a name and age supplied as input, then print the dictionary."
+              "prompt": "A name and age arrive as input. Create a dictionary named `profile` with the keys `\"name\"` and `\"age\"`, storing the input values under the matching keys. Then print the whole dictionary. Use a dictionary literal assigned to `profile`; the grader checks that `profile` contains the explicitly requested `\"name\"` and `\"age\"` keys."
             },
             "try_dictionary_basics_sketch1": {
               "title": "Try it yourself",
@@ -13590,18 +13623,21 @@ const messages: Record<string, any> = {
             },
             "try-list-methods-and-mutation-sketch0": {
               "title": "Correct one score",
-              "prompt": "A score was entered incorrectly. Read the corrected score from input, replace the last item in `scores` with that value, then print the updated list.",
-              "hint": "The last item in this three-item list is at index `2`.",
+              "prompt": "A score was entered incorrectly. Read the corrected score from input. Use indexed assignment on the existing `scores` list to replace its last item with that value, then print the updated list.",
+              "hint": "Use list indexing on the left side of an assignment to change the final item of `scores`. Any valid index expression that selects the last item is acceptable.",
               "help": {
-                "concept": "Assigning to an indexed list position replaces the value already stored there.",
-                "hint_1": "Keep the existing list and change only its last position.",
-                "hint_2": "Use `scores[2] = corrected_score`, then print `scores`."
+                "concept": "Indexed assignment changes an existing list item in place. The index expression inside the brackets can be written in different valid ways.",
+                "hint_1": "Write an assignment to `scores[...]` where the expression inside the brackets selects the final item.",
+                "hint_2": "Assign `corrected_score` to that indexed position, then print `scores` itself."
               },
               "starterCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\n# Replace the last score with corrected_score.\n# Then print the updated list.\n",
               "solutionCode": "corrected_score = int(input())\nscores = [12, 15, 18]\n\nscores[2] = corrected_score\nprint(scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Replace the last item with `scores[2] = corrected_score` instead of creating a different final list."
+                  "message": "Use indexed assignment on the existing `scores` list: assign `corrected_score` to a `scores[...]` position that selects the last item."
+                },
+                "1": {
+                  "message": "Print the updated `scores` list itself after changing it."
                 }
               }
             },
@@ -13618,7 +13654,10 @@ const messages: Record<string, any> = {
               "solutionCode": "new_attendee = input()\nattendees = [\"Ava\", \"Noah\"]\n\nattendees.append(new_attendee)\nprint(attendees)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `attendees.append(new_attendee)` so the input value is added to the existing list."
+                  "message": "Use `append()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the updated `attendees` list itself after using `append()`."
                 }
               }
             },
@@ -13635,13 +13674,16 @@ const messages: Record<string, any> = {
               "solutionCode": "canceled = input()\nworkshops = [\"Python\", \"Excel\", \"SQL\", \"Git\"]\n\nworkshops.remove(canceled)\nprint(workshops)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `workshops.remove(canceled)` so the program removes whichever workshop arrives as input."
+                  "message": "Use `remove()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print the mutated `workshops` list itself after removing the canceled workshop."
                 }
               }
             },
             "try-list-methods-and-mutation-sketch3": {
               "title": "Take the second ticket",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list.",
+              "prompt": " Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket.",
               "hint": "`pop(1)` removes the item at index 1 and returns that removed item.",
               "help": {
                 "concept": "`pop(index)` is useful when you know the position and also need the removed value.",
@@ -13652,7 +13694,13 @@ const messages: Record<string, any> = {
               "solutionCode": "tickets = [\"T-104\", \"T-105\", \"T-106\", \"T-107\"]\n\nnext_ticket = tickets.pop(1)\nprint(next_ticket)\nprint(tickets)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `next_ticket = tickets.pop(1)` instead of typing `T-105` directly."
+                  "message": "Use `pop()` because that method is explicitly required by the prompt."
+                },
+                "1": {
+                  "message": "Print `next_ticket` itself instead of typing the known removed ticket."
+                },
+                "2": {
+                  "message": "Print the remaining `tickets` list itself after `pop()` changes it."
                 }
               }
             },
@@ -13669,10 +13717,10 @@ const messages: Record<string, any> = {
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\ntimes = [first, second, third]\ntimes.sort()\nprint(times)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `times` from `first`, `second`, and `third` instead of printing a hard-coded sorted list."
+                  "message": "Use `sort()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Call `times.sort()` so the existing list is actually sorted in place."
+                  "message": "Print the sorted `times` list itself after sorting it in place."
                 }
               }
             }
@@ -13692,7 +13740,7 @@ const messages: Record<string, any> = {
             },
             "try_list_methods_and_mutation_sketch3": {
               "title": "Try it yourself",
-              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list."
+              "prompt": "The second ticket in `tickets` is ready to be processed. Remove that item with `pop(1)`, store the removed value in `next_ticket`, then print `next_ticket` followed by the remaining list. Use `pop()` with the index of the second item, store the removed ticket in `next_ticket`, then print the removed value. Do not hard-code the ticket."
             },
             "try_list_methods_and_mutation_sketch4": {
               "title": "Try it yourself",
@@ -13799,10 +13847,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nrooms = [first, second, third]\nfor room in rooms:\n    print(\"Room:\", room)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `rooms` from `first`, `second`, and `third` before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `rooms` instead of printing the three inputs separately."
+                  "message": "Use a `for` loop over `rooms` as the prompt requests."
                 }
               }
             },
@@ -13819,13 +13864,7 @@ const messages: Record<string, any> = {
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nminutes = [a, b, c, d]\ntotal = 0\nfor minute in minutes:\n    total += minute\nprint(total)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `minutes` from all four input variables before the loop."
-                },
-                "1": {
-                  "message": "Loop through `minutes` instead of adding the four variables manually."
-                },
-                "2": {
-                  "message": "Update `total` with the current `minute` inside the loop."
+                  "message": "Use a `for` loop over `minutes` as the prompt requests."
                 }
               }
             },
@@ -13842,13 +13881,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = int(input())\nsecond = int(input())\nthird = int(input())\n\nreadings = [first, second, third]\nadjusted = []\nfor reading in readings:\n    adjusted.append(reading + 5)\nprint(adjusted)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `readings` from the three input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `readings` so every value is transformed."
-                },
-                "2": {
-                  "message": "Use `adjusted.append(...)` inside the loop to build the result list."
+                  "message": "Use a `for` loop over `readings` as the prompt requests."
                 }
               }
             },
@@ -13865,16 +13898,7 @@ const messages: Record<string, any> = {
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\n\nscores = [a, b, c, d]\nhigh_scores = []\nfor score in scores:\n    if score >= 80:\n        high_scores.append(score)\nprint(high_scores)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from all four input variables before looping."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `scores` instead of checking each input separately."
-                },
-                "2": {
-                  "message": "Check whether the current `score` is at least 80 inside the loop."
-                },
-                "3": {
-                  "message": "Append the current `score` to `high_scores` only when it meets the condition."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             }
@@ -13935,16 +13959,13 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `schedule` as a list containing the required tuple record."
-                },
-                "1": {
-                  "message": "Loop with `for name, room in schedule:` so each tuple is unpacked."
+                  "message": "Use a `for` loop over `schedule` as the prompt requests."
                 }
               }
             },
             "exercise1": {
               "title": "Expand the ordered schedule",
-              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line.",
+              "prompt": "Step 1 of 3 starts from the working one-session preview. Read two more workshop names and rooms from input in this order: `name2`, `room2`, `name3`, `room3`. Append `(name2, room2)` and `(name3, room3)` to `schedule`. Keep the existing loop so the complete schedule prints in order as `name — room`, one workshop per line. For this step, add the second and third workshop records to `schedule` using `append()`. Then process the completed schedule with a `for` loop over `schedule`.",
               "hint": "Read the four input values first, append two tuple records, then let the existing loop print the ordered list.",
               "help": {
                 "concept": "A list preserves workshop order, and `.append()` can add new fixed tuple records without replacing the existing schedule.",
@@ -13955,19 +13976,19 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the second workshop as `(name2, room2)`."
+                  "message": "Append the second workshop with `schedule.append((name2, room2))`."
                 },
                 "1": {
-                  "message": "Append the third workshop as `(name3, room3)`."
+                  "message": "Append the third workshop with `schedule.append((name3, room3))`."
                 },
                 "2": {
-                  "message": "Loop through `schedule` and unpack each tuple into `name` and `room`."
+                  "message": "Keep a `for` loop over `schedule` so the finished schedule is processed in order."
                 }
               }
             },
             "exercise2": {
               "title": "Build a room lookup",
-              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop with `room_lookup[name] = room`. Then read one workshop name into `requested` and print its room using `room_lookup[requested]`.",
+              "prompt": "Step 2 of 3 starts from your completed ordered schedule. Keep that behavior. Create an empty dictionary named `room_lookup`, loop through `schedule`, and store each workshop name as a key in `room_lookup` with its room as the corresponding value. Then read one workshop name into `requested` and look up that workshop in `room_lookup` and print the stored room.",
               "hint": "Build the dictionary from the tuple records instead of writing the room mappings by hand.",
               "help": {
                 "concept": "The ordered list remains useful for the board, while a dictionary gives direct lookup by workshop name.",
@@ -13978,13 +13999,10 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_lookup` dictionary before filling it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store each current tuple with `room_lookup[name] = room` inside a loop."
-                },
-                "2": {
-                  "message": "Use `room_lookup[requested]` for the requested workshop instead of hard-coding a room."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -14001,19 +14019,10 @@ const messages: Record<string, any> = {
               "solutionCode": "schedule = [(\"Python Basics\", \"Room A\")]\n\nname2 = input()\nroom2 = input()\nname3 = input()\nroom3 = input()\n\nschedule.append((name2, room2))\nschedule.append((name3, room3))\n\nfor name, room in schedule:\n    print(f\"{name} — {room}\")\n\nroom_lookup = {}\nfor name, room in schedule:\n    room_lookup[name] = room\n\nrequested = input()\nprint(room_lookup[requested])\n\nroom_sessions = {}\nfor name, room in schedule:\n    if room in room_sessions:\n        room_sessions[room].append(name)\n    else:\n        room_sessions[room] = [name]\n\nroom_query = input()\nprint(room_sessions[room_query])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create an empty `room_sessions` dictionary before grouping workshops."
+                  "message": "Use a `for` loop over `schedule` to process each workshop record, as the prompt requests."
                 },
                 "1": {
-                  "message": "Check whether the current `room` key already exists in `room_sessions`."
-                },
-                "2": {
-                  "message": "Append the workshop name to the existing list for that room."
-                },
-                "3": {
-                  "message": "Create a one-item list for a room the first time it appears."
-                },
-                "4": {
-                  "message": "Use `room_sessions[room_query]` to retrieve the requested room's workshop list."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14124,13 +14133,10 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs instead of hard-coding the output."
+                  "message": "Use index `1` as requested in the prompt."
                 },
                 "1": {
-                  "message": "Use `students[1][\"name\"]` to read the second student's name."
-                },
-                "2": {
-                  "message": "Use `students[1][\"score\"]` to read the second student's score."
+                  "message": "Use index `1` as requested in the prompt."
                 }
               }
             },
@@ -14145,15 +14151,11 @@ const messages: Record<string, any> = {
               },
               "starterCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\n# Update only the nested stock value.\n# Print the updated stock value.\n",
               "solutionCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\nproduct[\"details\"][\"stock\"] = new_stock\nprint(product[\"details\"][\"stock\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Update the nested field with `product[\"details\"][\"stock\"] = new_stock`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-nested-data-structures-sketch2": {
               "title": "Add an attendee to a nested list",
-              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list.",
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list.",
               "hint": "First access the list stored under `\"students\"`, then call `.append()` on that list.",
               "help": {
                 "concept": "When a dictionary value is a list, you can access that list by key and use normal list methods on it.",
@@ -14164,7 +14166,13 @@ const messages: Record<string, any> = {
               "solutionCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\ncourse[\"students\"].append(new_student)\nprint(course[\"students\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the input value with `course[\"students\"].append(new_student)`."
+                  "message": "Access the explicitly requested `\"students\"` field from `course`."
+                },
+                "1": {
+                  "message": "Use `append()` to add the input name to the nested students list."
+                },
+                "2": {
+                  "message": "Print the updated student list stored at `course[\"students\"]` itself."
                 }
               }
             },
@@ -14181,16 +14189,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs before looping."
-                },
-                "1": {
-                  "message": "Loop with `for student in students:` so one dictionary record is processed at a time."
-                },
-                "2": {
-                  "message": "Read the current student's `\"name\"` key inside the loop."
-                },
-                "3": {
-                  "message": "Read the current student's `\"score\"` key inside the loop."
+                  "message": "Use a `for` loop over `students` as the prompt requests."
                 }
               }
             }
@@ -14206,7 +14205,7 @@ const messages: Record<string, any> = {
             },
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Append an input name to a list stored inside a dictionary."
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list."
             },
             "try_nested_data_structures_sketch3": {
               "title": "Try it yourself",
@@ -14299,7 +14298,7 @@ const messages: Record<string, any> = {
             },
             "try-tuple-records-sketch0": {
               "title": "Build and read a shipment record",
-              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line.",
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field.",
               "hint": "Create one two-field tuple from the input variables, then read its two positions.",
               "help": {
                 "concept": "A tuple can hold related fields in a fixed order, and tuple indexes work like list indexes.",
@@ -14310,19 +14309,19 @@ const messages: Record<string, any> = {
               "solutionCode": "product = input()\nquantity = int(input())\n\nshipment = (product, quantity)\nprint(shipment[0])\nprint(shipment[1])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create `shipment` as the tuple `(product, quantity)` instead of printing the inputs directly."
+                  "message": "Create `shipment` as the tuple `(product, quantity)`."
                 },
                 "1": {
-                  "message": "Read the product from `shipment[0]`."
+                  "message": "Use index `0` to read the first tuple field."
                 },
                 "2": {
-                  "message": "Read the quantity from `shipment[1]`."
+                  "message": "Use index `1` to read the second tuple field."
                 }
               }
             },
             "try-tuple-unpacking-sketch1": {
               "title": "Unpack a booking record",
-              "prompt": "A booking record is already stored as `booking = (\"Workshop\", 24, \"Friday\")`. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order.",
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output.",
               "hint": "The tuple has three fields, so use three target names on the left side of one assignment.",
               "help": {
                 "concept": "Unpacking replaces positional lookups with meaningful variable names.",
@@ -14333,7 +14332,7 @@ const messages: Record<string, any> = {
               "solutionCode": "booking = (\"Workshop\", 24, \"Friday\")\n\ntitle, seats, day = booking\nprint(title)\nprint(seats)\nprint(day)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Unpack all three fields with `title, seats, day = booking`."
+                  "message": "Unpack the tuple with `title, seats, day = booking` before printing the fields."
                 }
               }
             },
@@ -14350,10 +14349,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nseats1 = int(input())\nname2 = input()\nseats2 = int(input())\n\nregistrations = [(name1, seats1), (name2, seats2)]\nfor name, seats in registrations:\n    print(name, seats)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `registrations` from the two input name/seat pairs instead of hard-coding the final output."
-                },
-                "1": {
-                  "message": "Unpack each tuple in the loop with `for name, seats in registrations:`."
+                  "message": "Use a `for` loop over `registrations` as the prompt requests."
                 }
               }
             }
@@ -14361,11 +14357,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_tuple_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build a two-field shipment tuple from input, then read and print both fields by index."
+              "prompt": "A product name and quantity arrive as input. Create a tuple named `shipment` containing `product` first and `quantity` second. Then print the product using index `0` and the quantity using index `1`, each on its own line. Create a tuple named `shipment` containing `product` first and `quantity` second. Then use tuple indexing to read and print the first field followed by the second field."
             },
             "try_tuple_unpacking_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Unpack a three-field booking tuple into meaningful names and print the fields."
+              "prompt": "A booking record is already stored as the provided `booking` value is a three-field tuple containing a workshop title, seat count, and day. Unpack the tuple into `title`, `seats`, and `day` in one assignment. Print the three variables on separate lines in that order. Unpack `booking` into the variables `title`, `seats`, and `day` in that order before printing the three values. Do not hard-code the known output."
             },
             "try_tuple_loop_sketch2": {
               "title": "Try it yourself",
@@ -14464,7 +14460,7 @@ const messages: Record<string, any> = {
             },
             "try-updating-and-looping-dictionaries-sketch0": {
               "title": "Add or update stock from input",
-              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new.",
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key.",
               "hint": "Use the input variable itself as the key: `stock[item] = amount`.",
               "help": {
                 "concept": "Dictionary assignment uses the same syntax for both adding a new key and updating an existing one.",
@@ -14475,7 +14471,10 @@ const messages: Record<string, any> = {
               "solutionCode": "stock = {\"pens\": 4, \"paper\": 2}\nitem = input()\namount = int(input())\n\nstock[item] = amount\nprint(stock)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Use `stock[item] = amount` so the same code can add a new key or update an existing one."
+                  "message": "Store the input amount with `stock[item] = amount` as requested."
+                },
+                "1": {
+                  "message": "Print the updated `stock` dictionary itself after changing it."
                 }
               }
             },
@@ -14490,18 +14489,11 @@ const messages: Record<string, any> = {
               },
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# If key exists in settings, remove that entry with del.\n# Print the final settings dictionary.\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    del settings[key]\nprint(settings)\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Check `if key in settings:` before deleting an optional key."
-                },
-                "1": {
-                  "message": "Remove the matching entry with `del settings[key]`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-updating-and-looping-dictionaries-sketch2": {
               "title": "Loop through keys and look up each value",
-              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line.",
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value.",
               "hint": "Use `for item in inventory:` and retrieve the current value with `inventory[item]`.",
               "help": {
                 "concept": "A direct dictionary loop yields keys; use the current key to look up its value.",
@@ -14512,16 +14504,16 @@ const messages: Record<string, any> = {
               "solutionCode": "inventory = {\"pens\": 3, \"markers\": 2, \"folders\": 5}\n\nfor item in inventory:\n    print(item, inventory[item])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Loop directly with `for item in inventory:` so `item` receives each dictionary key."
+                  "message": "Loop directly over `inventory` instead of typing the known output."
                 },
                 "1": {
-                  "message": "Use `inventory[item]` to retrieve the value for the current key."
+                  "message": "Use `inventory[item]` to retrieve each current key's value."
                 }
               }
             },
             "try-updating-and-looping-dictionaries-sketch3": {
               "title": "Print dynamic score pairs with .items()",
-              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through `scores.items()` by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`.",
               "hint": "Build the dictionary first, then use `for name, score in scores.items():`.",
               "help": {
                 "concept": "`.items()` lets a loop work with the key and value together without a separate lookup.",
@@ -14532,10 +14524,7 @@ const messages: Record<string, any> = {
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nscores = {name1: score1, name2: score2}\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `scores` from the two input name/score pairs instead of hard-coding the output."
-                },
-                "1": {
-                  "message": "Loop with `for name, score in scores.items():` so each key-value pair is unpacked correctly."
+                  "message": "Use a `for` loop over `scores` as the prompt requests."
                 }
               }
             },
@@ -14552,13 +14541,7 @@ const messages: Record<string, any> = {
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nwords = [first, second, third]\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `words` from `first`, `second`, and `third` before the loop."
-                },
-                "1": {
-                  "message": "Use a `for` loop over `words` so every input word is processed."
-                },
-                "2": {
-                  "message": "Store each calculated value with `lengths[word] = len(word)`."
+                  "message": "Use a `for` loop over `words` as the prompt requests."
                 }
               }
             }
@@ -14566,7 +14549,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_updating_and_looping_dictionaries_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use one dictionary assignment to add or update a stock count supplied as input."
+              "prompt": "The dictionary `stock` already contains counts for pens and paper. Read an item name and an integer amount from input. Store `amount` under the key in `item` using dictionary assignment, then print the updated dictionary. Your code must work whether the input key already exists or is new. Update `stock` by using the value in `item` as the dictionary key and the value in `amount` as that key's value. This exercise is specifically about dictionary assignment by key."
             },
             "try_updating_and_looping_dictionaries_sketch1": {
               "title": "Try it yourself",
@@ -14574,11 +14557,11 @@ const messages: Record<string, any> = {
             },
             "try_updating_and_looping_dictionaries_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Loop directly through dictionary keys and use each key to retrieve its value."
+              "prompt": "The dictionary `inventory` is already defined. Loop directly through `inventory` so the loop variable receives one key at a time. For each key, print the key and its matching value on one line. Use a `for` loop directly over `inventory`. For each key produced by the loop, use dictionary indexing to retrieve and print its matching value."
             },
             "try_updating_and_looping_dictionaries_sketch3": {
               "title": "Try it yourself",
-              "prompt": "Build scores from input and unpack each key-value pair with `.items()`."
+              "prompt": "Two student names and scores arrive as input. Build a dictionary named `scores` from those two pairs. Then loop through the dictionary's `items()` method by unpacking each pair into `name` and `score`. Print each entry exactly as `name: score`."
             },
             "try_updating_and_looping_dictionaries_sketch4": {
               "title": "Try it yourself",
@@ -14673,7 +14656,7 @@ const messages: Record<string, any> = {
             },
             "try-decomposition-and-refactoring-sketch0": {
               "title": "Refactor repeated name cleanup",
-              "prompt": "This program already produces the correct output, but it repeats `strip().title()` for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
               "hint": "The finished program should still print the same two cleaned names; only the structure changes.",
               "help": {
                 "concept": "A refactor can preserve output while moving repeated logic into one reusable helper.",
@@ -14684,13 +14667,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\nfirst = input()\nsecond = input()\n\nfirst_clean = clean_name(first)\nsecond_clean = clean_name(second)\n\nprint(first_clean)\nprint(second_clean)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the repeated cleanup into `clean_name(name)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `clean_name(first)` for the first input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(second)` for the second input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -14707,10 +14690,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def word_count(text):\n    return len(text.split())\n\ntext = input()\ncount = word_count(text)\nprint(f\"Words: {count}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the counting responsibility into `word_count(text)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `count = word_count(text)` in the main flow."
+                  "message": "Call `word_count(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -14727,10 +14710,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\ndef build_badge(name):\n    nice_name = clean_name(name)\n    return \"Badge: \" + nice_name\n\nname = input()\nprint(build_badge(name))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Call `clean_name(name)` inside `build_badge` instead of duplicating its cleanup logic."
-                },
-                "1": {
-                  "message": "Return the badge using the cleaned `nice_name` value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14738,7 +14718,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_decomposition_and_refactoring_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Extract repeated cleanup into one helper while preserving the program's output."
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`."
             },
             "try_decomposition_and_refactoring_sketch1": {
               "title": "Try it yourself",
@@ -14846,13 +14826,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_message():\n    print(\"Functions are reusable!\")\n\nshow_message()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_message()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Put the required `print()` inside the body of `show_message()`."
-                },
-                "2": {
-                  "message": "Call `show_message()` after the definition."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -14869,13 +14846,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def ring_bell():\n    print(\"Ding!\")\n\nring_bell()\nring_bell()\nring_bell()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the `ring_bell()` body and reuse it with exactly three top-level calls."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-defining-and-calling-functions-sketch2": {
               "title": "Put a loop inside a function",
-              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create `colors = [\"red\", \"blue\", \"green\"]`, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once.",
               "hint": "The list and the `for` loop both belong inside the indented function body.",
               "help": {
                 "concept": "A function body can contain several statements, including list creation and loops you already know.",
@@ -14886,13 +14863,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_colors():\n    colors = [\"red\", \"blue\", \"green\"]\n    for color in colors:\n        print(color)\n\nshow_colors()\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define a no-argument function named `show_colors()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Keep the list, loop, and `print(color)` inside `show_colors()`."
-                },
-                "2": {
-                  "message": "Call `show_colors()` after defining it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -14908,7 +14882,7 @@ const messages: Record<string, any> = {
             },
             "try_defining_and_calling_functions_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Put a familiar list-and-loop task inside a function, then call that function."
+              "prompt": "Define a no-argument function named `show_colors()`. Inside it, create a list named `colors` containing `red`, `blue`, and `green` in that order, loop through `colors`, and print each color. After the definition, call `show_colors()` once."
             },
             "allowReveal": true
           }
@@ -15008,10 +14982,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def normalize_city(text):\n    \"\"\"Return text stripped and title-cased.\"\"\"\n    return text.strip().title()\n\ncity = input()\nprint(normalize_city(city))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Add the requested string as the actual docstring of `normalize_city`, not as a comment or unrelated string."
-                },
-                "1": {
-                  "message": "Keep `normalize_city` returning `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15028,10 +14999,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def total_price(price, tax):\n    \"\"\"Return price plus tax.\"\"\"\n    return price + tax\n\nprice = int(input())\ntax = int(input())\nresult = total_price(price, tax)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `\"\"\"Return price plus tax.\"\"\"` as the function's docstring."
-                },
-                "1": {
-                  "message": "Make the implementation return `price + tax` instead of printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15048,10 +15016,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def is_passing(score):\n    \"\"\"Return True when score is 70 or higher.\"\"\"\n    return score >= 70\n\nscore = int(input())\nprint(is_passing(score))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the stated contract as the real docstring of `is_passing`."
-                },
-                "1": {
-                  "message": "Implement the inclusive boundary with `return score >= 70`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -15121,13 +15086,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Make `clean_name(text)` return `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-1-move-name-helper": {
               "title": "Move name cleanup into names.py",
-              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`. Keep `make_badge` in `main.py` for this step.",
+              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module. Keep `make_badge` in `main.py` for this step.",
               "hint": "Only the name-cleaning responsibility moves in this step.",
               "help": {
                 "concept": "A refactor can move one helper into its own module while preserving the app's existing behavior.",
@@ -15151,19 +15116,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`."
-                },
-                "2": {
-                  "message": "Keep `make_badge(name, role)` in `main.py` until the next project step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-2-move-badge-helper": {
               "title": "Move badge formatting into badges.py",
-              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with `from badges import make_badge`, and keep the same badge output.",
+              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with a from-import that brings `make_badge` in from the `badges` module, and keep the same badge output.",
               "hint": "After this step, `main.py` should coordinate the two imported helpers instead of defining either one.",
               "help": {
                 "concept": "Different sibling modules can own different responsibilities while `main.py` connects their returned values.",
@@ -15193,13 +15155,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `make_badge` from sibling module `badges` in `main.py`."
+                  "message": "Use the requested import for `make_badge` from `badges`."
                 },
                 "1": {
-                  "message": "Define `make_badge(name, role)` in `badges.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(raw_name)` and `make_badge(name, role)` from `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15238,13 +15200,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Add the required real docstring to `clean_name` in `names.py`."
-                },
-                "1": {
-                  "message": "Add the required real docstring to `make_badge` in `badges.py`."
-                },
-                "2": {
-                  "message": "Use local variable `clean_role = role.strip().upper()` inside `make_badge`."
+                  "message": "Use `upper()` because that method is explicitly required by the prompt."
                 }
               }
             },
@@ -15286,13 +15242,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `welcome_message` from sibling module `messages` in `main.py`."
-                },
-                "1": {
-                  "message": "Define documented `welcome_message(badge)` in `messages.py`."
-                },
-                "2": {
-                  "message": "Return `\"Welcome! \" + badge` from `welcome_message`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -15400,13 +15350,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_badge(name):\n    return \"Badge: \" + name\n\nname1 = input()\nname2 = input()\nprint(make_badge(name1))\nprint(make_badge(name2))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `make_badge` with exactly one parameter named `name`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return the badge text from the function using the `name` parameter."
-                },
-                "2": {
-                  "message": "Call `make_badge` with both input variables instead of hard-coding the names."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15423,13 +15370,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def difference(high, low):\n    return high - low\n\nhigh = int(input())\nlow = int(input())\nprint(difference(high, low))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `difference` with parameters `high` and `low` in that order."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `high - low` from the function."
-                },
-                "2": {
-                  "message": "Pass the two input values to `difference(high, low)` in the same order."
+                  "message": "Call `difference(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15446,13 +15390,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def rectangle_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\narea = rectangle_area(width, height)\nprint(area)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Define `rectangle_area` with `width` and `height` parameters."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Return `width * height` from the function."
-                },
-                "2": {
-                  "message": "Store the function's returned value in `area` before printing it."
+                  "message": "Call `rectangle_area(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15568,10 +15509,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def show_status(text):\n    print(text)\n\nstatus = input()\nshow_status(status)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `show_status` as a display-only function that prints `text`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Call `show_status(status)` directly instead of printing the call's `None` result."
+                  "message": "Call `show_status(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15588,10 +15529,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def double(number):\n    return number * 2\n\nnumber = int(input())\nresult = double(number)\nprint(result + 1)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Store the returned value with `result = double(number)`."
-                },
-                "1": {
-                  "message": "Use the stored result in the later expression `result + 1`."
+                  "message": "Call `double(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -15608,13 +15546,10 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_label(item):\n    return \"Item: \" + item\n\nitem = input()\nlabel = make_label(item)\nprint(label + \"!\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the label string from `make_label` instead of printing it inside the function."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Store the returned label with `label = make_label(item)`."
-                },
-                "2": {
-                  "message": "Use the stored label in `print(label + \"!\")`."
+                  "message": "Call `make_label(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15719,7 +15654,7 @@ const messages: Record<string, any> = {
             },
             "try-scope-and-local-variables-sketch0": {
               "title": "Create and return a local calculation",
-              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable `total = price + 3`, then return `total`. The caller already reads a price and prints the returned result.",
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result.",
               "hint": "Both the `total` assignment and `return total` belong inside the function body.",
               "help": {
                 "concept": "A local variable can hold an intermediate result while the function is running.",
@@ -15730,16 +15665,13 @@ const messages: Record<string, any> = {
               "solutionCode": "def add_fee(price):\n    total = price + 3\n    return total\n\nprice = int(input())\nprint(add_fee(price))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Create the local assignment `total = price + 3` inside `add_fee`."
-                },
-                "1": {
-                  "message": "Return the local variable with `return total`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-scope-and-local-variables-sketch1": {
               "title": "Keep an outside value separate from a parameter",
-              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable `updated = count + 1` and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged.",
               "hint": "The parameter named `count` is local to `next_count`; calculate a new local `updated` value instead of changing the outside assignment.",
               "help": {
                 "concept": "A parameter can have the same name as an outside variable without turning that outside variable into the function's local storage.",
@@ -15750,13 +15682,10 @@ const messages: Record<string, any> = {
               "solutionCode": "count = int(input())\n\ndef next_count(count):\n    updated = count + 1\n    return updated\n\nprint(next_count(count))\nprint(count)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep `count` as the function parameter in `next_count(count)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Create local variable `updated = count + 1` inside the function."
-                },
-                "2": {
-                  "message": "Return `updated` instead of trying to change the outside `count`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15773,13 +15702,7 @@ const messages: Record<string, any> = {
               "solutionCode": "def make_message(name):\n    message = \"Hello, \" + name\n    return message\n\nname = input()\nresult = make_message(name)\nprint(result)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Return the local variable with `return message` inside `make_message`."
-                },
-                "1": {
-                  "message": "Store the returned value in caller-side variable `result`."
-                },
-                "2": {
-                  "message": "Print the caller-side `result`, not the function's local variable `message`."
+                  "message": "Call `make_message(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -15787,11 +15710,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_scope_and_local_variables_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Create a local intermediate value inside a function and return it."
+              "prompt": "Complete `add_fee(price)`. Inside the function, create the local variable a local variable named `total` that stores the result of increasing `price` by 3, then return `total`. The caller already reads a price and prints the returned result."
             },
             "try_scope_and_local_variables_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use a local parameter without changing a same-named value outside the function."
+              "prompt": "The program reads an outside variable named `count`. Complete `next_count(count)` so it creates local variable a local variable named `updated` that stores `count` increased by 1 and returns `updated`. The program must print the returned next count and then print the original outside `count`, which should remain unchanged."
             },
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",
@@ -15884,7 +15807,7 @@ const messages: Record<string, any> = {
             },
             "try-using-imports-and-helper-files-sketch0": {
               "title": "Move a helper into names.py",
-              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`.",
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module.",
               "hint": "The function body moves to `names.py`; `main.py` keeps the input and output flow.",
               "help": {
                 "concept": "A Python helper file becomes a module that another file can import.",
@@ -15908,19 +15831,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`, not in `main.py`."
-                },
-                "2": {
-                  "message": "Keep the name-cleaning behavior inside `names.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-using-imports-and-helper-files-sketch1": {
               "title": "Move related helpers into text_tools.py",
-              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with `from text_tools import clean_word, make_label`.",
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module.",
               "hint": "Both related helper functions move to the same module; the input and print stay in `main.py`.",
               "help": {
                 "concept": "One module can expose several related helper functions.",
@@ -15944,13 +15864,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both `clean_word` and `make_label` from `text_tools` in `main.py`."
+                  "message": "Use the requested import for `clean_word` from `text_tools`."
                 },
                 "1": {
-                  "message": "Define `clean_word(text)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Define `make_label(word)` in `text_tools.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -15989,16 +15909,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from `names` in `main.py`."
+                  "message": "Import the sibling `names` helper module in `main.py` as the prompt requires."
                 },
                 "1": {
-                  "message": "Import `make_badge` from `badges` in `main.py`."
+                  "message": "Import the sibling `badges` helper module in `main.py` as the prompt requires."
                 },
                 "2": {
-                  "message": "Call `clean_name(raw_name)` in `main.py`."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "3": {
-                  "message": "Call `make_badge(name, role)` in `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             }
@@ -16006,11 +15926,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_using_imports_and_helper_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Move one working helper out of `main.py` into `names.py` and import it back."
+              "prompt": "This program already works, but `clean_name` is still defined inside `main.py`. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module."
             },
             "try_using_imports_and_helper_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Move two related helpers into one module and import both function names."
+              "prompt": "This working program defines two related text helpers in `main.py`. Refactor it without changing the output: move both `clean_word(text)` and `make_label(word)` into a sibling file named `text_tools.py`. In `main.py`, import both functions with one from-import that brings both `clean_word` and `make_label` in from the `text_tools` module."
             },
             "try_using_imports_and_helper_files_sketch2": {
               "title": "Try it yourself",
@@ -16023,7 +15943,7 @@ const messages: Record<string, any> = {
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "label": "Module Project: Clean Student Records",
-          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing.",
+          "summary": "Turn a messy student CSV export into a validated clean CSV by combining DictReader, cleaning functions, specific exception handling, lists, and text-file writing, while keeping row-cleaning logic in a reusable helper module.",
           "cards": {
             "sketch0": {
               "title": "A messy student export needs a reliable cleaner"
@@ -16034,7 +15954,7 @@ const messages: Record<string, any> = {
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Clean and validate each CSV row"
+              "title": "Build the cleaning helper"
             },
             "mp_2": {
               "title": "Collect only valid student records"
@@ -16082,20 +16002,20 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read `data/students.csv` with `csv.DictReader`."
+                  "message": "Use the requested import involving `csv`."
                 },
                 "1": {
-                  "message": "Loop through every CSV row."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "2": {
-                  "message": "Access both the `name` and `score` columns from each row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "mp-1-read-student-file": {
-              "title": "Clean and validate each CSV row",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
-              "hint": "Reuse the exact validation sequence from 7.5, but apply it to dictionary-like CSV rows.",
+              "title": "Build the cleaning helper",
+              "prompt": "Start from the CSV preview. Create a sibling helper file named `cleaning.py` and define `clean_row(row)` there. In `main.py`, import it with `from cleaning import clean_row`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. Then print `clean_row(row)` for every imported row so you can inspect which rows are accepted or rejected.",
+              "hint": "Put the reusable row-cleaning function in `cleaning.py`; keep CSV orchestration in `main.py` and import the helper directly.",
               "help": {
                 "concept": "The helper should produce one dependable result: a cleaned dictionary for valid input or `None` for rejected input.",
                 "hint_1": "Check `name == \"\"` before attempting the score conversion.",
@@ -16113,168 +16033,189 @@ const messages: Record<string, any> = {
                   "content": "old export\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and read both named CSV fields from `row`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject an empty cleaned name with `name == \"\"`."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the score conversion."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "5": {
+                  "message": "Import `clean_row` from the sibling `cleaning.py` helper as the project requires."
                 }
               }
             },
             "mp-2-clean-one-row": {
               "title": "Collect only valid student records",
-              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop.",
+              "prompt": "Keep `clean_row(row)` exactly as it works now. Replace the row-by-row preview with a `records` list. Loop through `csv.DictReader`, call `clean_row(row)` once per row, and append only results that are not `None`. Print `records` after the loop. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The cleaner already decides whether a row is valid; this step should only collect accepted results.",
               "help": {
                 "concept": "Separating row validation from record collection keeps each responsibility small and reusable.",
                 "hint_1": "Store the helper result in `record` instead of calling the function several times.",
                 "hint_2": "Append only when `record is not None`."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(clean_row(row))\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the file."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Call `clean_row(row)` inside the DictReader loop."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Append only when the returned record is not `None`."
+                  "message": "Print the completed `records` list itself after the collection loop."
+                },
+                "3": {
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-3-skip-bad-rows": {
               "title": "Write the cleaned CSV file",
-              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it.",
+              "prompt": "Keep the valid-record builder. Replace the list preview with a deliverable file. Open `output/clean_students.csv` in write mode, write the header `name,score`, then write one cleaned `name,score` line for every record. Finally print `Wrote <count> clean records`. The supplied output file contains old text so write mode must replace it. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "Use the `records` list as the source for the final file instead of cleaning the CSV a second time.",
               "help": {
                 "concept": "Write mode should replace the old export, then one `file.write(...)` call can write each cleaned record.",
                 "hint_1": "Write the header first: `name,score\\n`.",
                 "hint_2": "Loop through `records` and write each name and numeric score on one line."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nprint(records)\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `output/clean_students.csv` with mode `\"w\"`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Write the `name,score` header before the record rows."
-                },
-                "2": {
-                  "message": "Loop through `records` and write each cleaned record with `file.write()`."
-                },
-                "3": {
-                  "message": "Print the number of clean records written."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             },
             "mp-4-write-clean-records": {
               "title": "Verify the saved clean CSV",
-              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records.",
+              "prompt": "Keep the working cleaner and output writer. After the completion message, reopen `output/clean_students.csv` in read mode and print exactly what was saved. The final output should show the completion message followed by the header and the three accepted records. Keep `clean_row(row)` in the sibling `cleaning.py` file and keep importing it into `main.py`; do not copy the helper back into the entry file.",
               "hint": "The saved file is the deliverable, so verify the artifact itself instead of trusting only the in-memory list.",
               "help": {
                 "concept": "Reopen the same path after the write block has finished.",
                 "hint_1": "Print `file.read()` with `end=\"\"` so the file contents appear exactly as saved.",
                 "hint_2": "The output file should contain only the header and accepted cleaned rows."
               },
-              "starterCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
+              "starterCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
-              "solutionCode": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
+              "solutionCode": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n",
               "solutionFiles": {
                 "main_py": {
-                  "content": "import csv\n\ndef clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
+                  "content": "import csv\nfrom cleaning import clean_row\n\nrecords = []\n\nwith open(\"data/students.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        record = clean_row(row)\n        if record is not None:\n            records.append(record)\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    file.write(\"name,score\\n\")\n    for record in records:\n        file.write(record[\"name\"] + \",\" + str(record[\"score\"]) + \"\\n\")\n\nprint(\"Wrote \" + str(len(records)) + \" clean records\")\n\nwith open(\"output/clean_students.csv\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 },
                 "data_students_csv": {
                   "content": "name,score\n Ava ,92\nMia,not-a-score\n   ,75\nZoe,87\n  leo  ,74\nNia,105\n"
                 },
                 "output_clean_students_csv": {
                   "content": "old export\n"
+                },
+                "cleaning_py": {
+                  "content": "def clean_row(row):\n    name = row[\"name\"].strip().title()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    if score < 0 or score > 100:\n        return None\n\n    return {\"name\": name, \"score\": score}\n"
                 }
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep writing `output/clean_students.csv` in write mode."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen the same output path in read mode after writing it."
-                },
-                "2": {
-                  "message": "Print the actual saved file contents."
+                  "message": "Keep the required `clean_row(row)` function in `cleaning.py`."
                 }
               }
             }
@@ -16371,7 +16312,7 @@ const messages: Record<string, any> = {
             },
             "try-reading-text-files-sketch0": {
               "title": "Read the whole message file",
-              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file.",
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents.",
               "hint": "Use `with open(\"message.txt\", \"r\") as file:` and `message = file.read()`.",
               "help": {
                 "concept": "Use `.read()` when you want the complete text file as one string.",
@@ -16398,19 +16339,22 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `message.txt` with a `with open(..., \"r\") as file:` block."
+                  "message": "Read from the supplied `message.txt` file."
                 },
                 "1": {
-                  "message": "Use `file.read()` to read the whole file."
+                  "message": "Use `read()` to obtain the file's text."
                 },
                 "2": {
-                  "message": "Store the result of `file.read()` in `message` before printing it."
+                  "message": "Store the result of `file.read()` in the explicitly requested variable `message`."
+                },
+                "3": {
+                  "message": "Print the `message` variable itself after reading the file into it."
                 }
               }
             },
             "try-reading-text-files-sketch1": {
               "title": "Process names one line at a time",
-              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with `for line in file:` and print each name with surrounding whitespace removed.",
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed.",
               "hint": "Inside the `with` block, use `for line in file:` and `print(line.strip())`.",
               "help": {
                 "concept": "Iterating over an open file lets you process one line at a time without first reading the whole file into one string.",
@@ -16437,19 +16381,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `names.txt` in read mode with a `with` block."
-                },
-                "1": {
-                  "message": "Loop directly through the open `file` one line at a time."
-                },
-                "2": {
-                  "message": "Strip each line before printing it."
+                  "message": "Use a `for` loop over `file` as the prompt requests."
                 }
               }
             },
             "try-reading-text-files-sketch2": {
               "title": "Read and clean text from a data folder",
-              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name.",
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name.",
               "hint": "Open `data/city.txt`, then use `.read().strip().title()` on the open file.",
               "help": {
                 "concept": "A relative path can point to a file inside a workspace folder, and the string returned by `.read()` can be processed like any other string.",
@@ -16476,16 +16414,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open the relative path `data/city.txt` in read mode."
+                  "message": "Open the supplied relative path `data/city.txt`."
                 },
                 "1": {
-                  "message": "Read the city text from the file instead of hard-coding a city name."
+                  "message": "Read the city text from the file with `read()`."
                 },
                 "2": {
-                  "message": "Remove surrounding whitespace from the text read from the file."
+                  "message": "Remove surrounding whitespace with `strip()`."
                 },
                 "3": {
-                  "message": "Convert the city text to title case."
+                  "message": "Convert the cleaned city text to title case with `title()`."
                 }
               }
             }
@@ -16493,15 +16431,15 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_reading_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a complete text file into one string and print the value you read."
+              "prompt": "Open `message.txt` in read mode. Read all of its text into a variable named `message`, then print `message`. Print only the text that came from the file. Read the entire file with the `read()` method, store the returned text in a variable named `message`, and print that variable. Do not hard-code the file contents."
             },
             "try_reading_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Process an open text file one line at a time."
+              "prompt": "Open `names.txt` in read mode. Loop directly through the open file with a `for` loop that iterates directly over the opened file object and print each name with surrounding whitespace removed."
             },
             "try_reading_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Read text from a relative path and use the returned string."
+              "prompt": "The file `data/city.txt` contains one city name with inconsistent spaces and capitalization. Open that relative path in read mode, read the file text, remove surrounding whitespace, convert it to title case, and print the cleaned city name. Read the text from `data/city.txt`, remove surrounding whitespace with `strip()`, then convert the cleaned city text to title case with `title()`. Do not hard-code the cleaned city name."
             },
             "allowReveal": true
           }
@@ -16590,7 +16528,7 @@ const messages: Record<string, any> = {
             },
             "try-simple-csv-processing-sketch0": {
               "title": "Read rows by header name",
-              "prompt": "Read a CSV filename from input and build `path = \"data/\" + filename`. Open that file in read mode, create `csv.DictReader(file)`, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`.",
               "hint": "Use the CSV header names instead of splitting each line manually.",
               "help": {
                 "concept": "`csv.DictReader` turns each data row into a dictionary-like object whose keys come from the header row.",
@@ -16623,19 +16561,22 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and create `csv.DictReader(file)`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through `reader` instead of hard-coding the rows."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "2": {
-                  "message": "Access both `row[\"name\"]` and `row[\"score\"]`."
+                  "message": "Use the explicitly requested dictionary field `name`."
+                },
+                "3": {
+                  "message": "Use the explicitly requested dictionary field `score`."
                 }
               }
             },
             "try-simple-csv-processing-sketch1": {
               "title": "Clean and convert CSV fields",
-              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with `.strip().title()`, clean and convert the score with `int(row[\"score\"].strip())`, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization.",
               "hint": "CSV field values are strings, so clean the text before converting the score.",
               "help": {
                 "concept": "This step combines named-column access with the cleaning and integer-conversion skills you already know.",
@@ -16668,13 +16609,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read rows with `csv.DictReader` and loop through `reader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Clean each `name` field with both `strip()` and `title()`."
+                  "message": "Use the explicitly requested dictionary field `score`."
                 },
                 "2": {
-                  "message": "Convert the cleaned `score` field with `int(...)`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "3": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "4": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -16713,16 +16660,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Read every row with `csv.DictReader` and a `for row in reader:` loop."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name before counting the row."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Count and sum only scores in the inclusive range 0 through 100."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }
@@ -16730,11 +16668,11 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_simple_csv_processing_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Read a selected CSV file with `csv.DictReader` and use named columns."
+              "prompt": "Read a CSV filename from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Open that file in read mode, create a `csv.DictReader` created for the opened file, loop through every row, and print each row as `name:score` using `row[\"name\"]` and `row[\"score\"]`. The workspace provides `data/class_a.csv` and `data/class_b.csv`."
             },
             "try_simple_csv_processing_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Clean CSV text values and convert a numeric column."
+              "prompt": "Read a CSV filename from input. Open `data/<filename>` with `csv.DictReader`. For every row, clean the name with whitespace trimming followed by title-case normalization, clean and convert the score with integer conversion of the `score` field after removing its surrounding whitespace, then print `Name:score`. The supplied files contain valid numeric score text with inconsistent whitespace and capitalization."
             },
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",
@@ -16848,19 +16786,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the integer conversion inside a `try` block."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Catch exactly `ValueError` for invalid integer text."
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Print the converted number on the success path and `Invalid number` on the failure path."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-try-except-basics-sketch1": {
               "title": "Handle a missing data file",
-              "prompt": "Read a file name from input and build `path = \"data/\" + filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`.",
               "hint": "The risky operation is opening the selected path for reading.",
               "help": {
                 "concept": "A missing read path raises `FileNotFoundError`, which is different from the `ValueError` raised by a bad integer conversion.",
@@ -16887,13 +16825,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Put the file-open/read operation inside a `try` block."
-                },
-                "1": {
-                  "message": "Catch exactly `FileNotFoundError` for a missing selected file."
-                },
-                "2": {
-                  "message": "Print the selected file text on success and `Missing file` when the file is absent."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -16932,13 +16864,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Loop through `[first, second]` instead of handling only one filename."
+                  "message": "Use a `for` loop as the prompt requests."
                 },
                 "1": {
-                  "message": "Put the file operation inside a `try` block within the loop."
-                },
-                "2": {
-                  "message": "Catch exactly `FileNotFoundError` and print `Missing: <filename>`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -16950,7 +16879,7 @@ const messages: Record<string, any> = {
             },
             "try_try_except_basics_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Open a selected data file safely with `except FileNotFoundError`."
+              "prompt": "Read a file name from input and build a path stored in `path` by concatenating the `data/` prefix with `filename`. Try to open that path in read mode and print its stripped text. Catch exactly `FileNotFoundError` and print `Missing file` when the selected file does not exist. The workspace provides `data/note.txt`."
             },
             "try_try_except_basics_sketch2": {
               "title": "Try it yourself",
@@ -17043,7 +16972,7 @@ const messages: Record<string, any> = {
             },
             "try-validating-and-cleaning-input-sketch0": {
               "title": "Clean and validate a required name",
-              "prompt": "Read a name. Store `raw_name.strip().title()` in `cleaned_name`. If `cleaned_name == \"\"`, print `Missing`; otherwise print the cleaned name.",
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name.",
               "hint": "Clean the text before checking whether anything meaningful remains.",
               "help": {
                 "concept": "A spaces-only required field becomes `\"\"` after `strip()`, so validation should check the cleaned value rather than the raw input.",
@@ -17064,13 +16993,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Clean `raw_name` with both `strip()` and `title()`."
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Check the cleaned value against the empty string `\"\"`."
-                },
-                "2": {
-                  "message": "Print `Missing` only for the empty cleaned value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
@@ -17097,19 +17023,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Strip surrounding whitespace from `score_text` before conversion."
-                },
-                "1": {
-                  "message": "Catch exactly `ValueError` from an invalid integer conversion."
-                },
-                "2": {
-                  "message": "Check that `score` is in the inclusive range 0 through 100."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "try-validating-and-cleaning-input-sketch2": {
               "title": "Clean and validate a record",
-              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with `strip().title()` and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`.",
               "hint": "Apply the rules in order: clean, check the required name, convert safely, check the range, then return the cleaned dictionary.",
               "help": {
                 "concept": "A reusable cleaning function can return `None` for rejected input and structured cleaned data for accepted input.",
@@ -17130,16 +17050,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define and call `clean_record(name_text, score_text)`."
-                },
-                "1": {
-                  "message": "Reject an empty cleaned name with an explicit `== \"\"` check."
-                },
-                "2": {
-                  "message": "Catch exactly `ValueError` when converting the cleaned score text."
-                },
-                "3": {
-                  "message": "Reject scores outside 0 through 100 before returning the dictionary."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -17147,7 +17058,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_validating_and_cleaning_input_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean a required name and detect the empty string after cleaning."
+              "prompt": "Read a name. Store a cleaned version of `raw_name` with surrounding whitespace removed and title case applied in `cleaned_name`. If an explicit comparison between `cleaned_name` and the empty string, print `Missing`; otherwise print the cleaned name."
             },
             "try_validating_and_cleaning_input_sketch1": {
               "title": "Try it yourself",
@@ -17155,7 +17066,7 @@ const messages: Record<string, any> = {
             },
             "try_validating_and_cleaning_input_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Combine name cleaning and score validation in a reusable function."
+              "prompt": "Complete `clean_record(name_text, score_text)`. Clean the name with whitespace trimming followed by title-case normalization and the score text with `strip()`. Return `None` for an empty cleaned name, invalid integer score text, or a score outside 0 through 100. Otherwise return `{\"name\": name, \"score\": score}`. The caller should print `Rejected` for `None`; otherwise print `Name:score`."
             },
             "allowReveal": true
           }
@@ -17244,7 +17155,7 @@ const messages: Record<string, any> = {
             },
             "try-working-with-paths-sketch0": {
               "title": "Build a relative path from input",
-              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`.",
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable.",
               "hint": "Use both variables instead of typing a completed path.",
               "help": {
                 "concept": "A path string can be assembled from folder and file-name pieces that are already stored in variables.",
@@ -17265,10 +17176,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Build `path` from `folder + \"/\" + filename`."
+                  "message": "Build `path` from the two input variables with `folder + \"/\" + filename`."
                 },
                 "1": {
-                  "message": "Print the `path` variable after building it."
+                  "message": "Print the `path` variable itself."
                 }
               }
             },
@@ -17295,19 +17206,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
+                  "message": "Call `Path(...)` because that function call is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Build the path with `Path(folder) / filename`."
-                },
-                "2": {
-                  "message": "Print the resulting `path` object."
+                  "message": "Print the constructed `path` object itself."
                 }
               }
             },
             "try-working-with-paths-sketch2": {
               "title": "Open a file through a Path object",
-              "prompt": "Read a file name from input. Build `path = Path(\"data\") / filename`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
               "hint": "Build the path first, then pass the `path` variable directly to `open`.",
               "help": {
                 "concept": "A `Path` object can represent the nested relative location and can be passed directly to `open(...)`.",
@@ -17340,16 +17248,7 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
-                },
-                "1": {
-                  "message": "Build `path` with `Path(\"data\") / filename`."
-                },
-                "2": {
-                  "message": "Open the `path` variable in read mode."
-                },
-                "3": {
-                  "message": "Read and strip the selected file text before printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -17357,7 +17256,7 @@ const messages: Record<string, any> = {
           "tryIt": {
             "try_working_with_paths_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build and print a relative path string from folder and file-name input."
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable."
             },
             "try_working_with_paths_sketch1": {
               "title": "Try it yourself",
@@ -17365,7 +17264,7 @@ const messages: Record<string, any> = {
             },
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Build a `Path` to a supplied data file and open that path."
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`."
             },
             "allowReveal": true
           }
@@ -17454,7 +17353,7 @@ const messages: Record<string, any> = {
             },
             "try-writing-text-files-sketch0": {
               "title": "Replace an old status with fresh input",
-              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with `.strip().title()`, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved.",
               "hint": "Write mode should replace the supplied old contents, not add after them.",
               "help": {
                 "concept": "Use mode `\"w\"` when the new text should replace whatever the file contained before.",
@@ -17479,21 +17378,11 @@ const messages: Record<string, any> = {
                   "content": "Old status\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Open `status.txt` with mode `\"w\"` so the old contents are replaced."
-                },
-                "1": {
-                  "message": "Write the cleaned `status` value to the file."
-                },
-                "2": {
-                  "message": "Reopen `status.txt` in read mode and print the saved contents."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-writing-text-files-sketch1": {
               "title": "Append a new log entry",
-              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log.",
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file.",
               "hint": "Append mode should preserve `Start shift` and add the new entry after it.",
               "help": {
                 "concept": "Use mode `\"a\"` when existing text must remain and the new text belongs at the end.",
@@ -17520,19 +17409,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Open `log.txt` with mode `\"a\"` so the existing first line is preserved."
+                  "message": "Open `log.txt` in append mode `\"a\"` so the existing line is preserved."
                 },
                 "1": {
-                  "message": "Append the cleaned `entry` followed by a newline."
+                  "message": "Write the new entry to the file with `write()`."
                 },
                 "2": {
-                  "message": "Reopen `log.txt` in read mode and print the complete saved log."
+                  "message": "Read the saved file back with `read()` before displaying the complete log."
                 }
               }
             },
             "try-writing-text-files-sketch2": {
               "title": "Create a two-line report",
-              "prompt": "Read a name and a score from input. Clean the name with `.strip().title()` and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved.",
               "hint": "Use two `file.write(...)` calls so each report line ends with `\\n`.",
               "help": {
                 "concept": "Several calls to `file.write()` can build a multi-line text file deliberately.",
@@ -17551,34 +17440,21 @@ const messages: Record<string, any> = {
                   "content": "name = input().strip().title()\nscore = input().strip()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score + \"\\n\")\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read(), end=\"\")\n"
                 }
               },
-              "sourceChecks": {
-                "0": {
-                  "message": "Create `report.txt` with mode `\"w\"`."
-                },
-                "1": {
-                  "message": "Write the report text with `file.write()`."
-                },
-                "2": {
-                  "message": "Use newline characters so the report has two separate lines."
-                },
-                "3": {
-                  "message": "Reopen `report.txt` in read mode and print the saved file."
-                }
-              }
+              "sourceChecks": {}
             }
           },
           "tryIt": {
             "try_writing_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Replace an existing file with fresh input using write mode."
+              "prompt": "`status.txt` already contains old text. Read one status from input, clean it with whitespace trimming followed by title-case normalization, open `status.txt` with mode `\"w\"`, and write the cleaned status followed by a newline. Then reopen `status.txt` in read mode and print exactly what is saved."
             },
             "try_writing_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Preserve existing text and add a new line with append mode."
+              "prompt": "`log.txt` already contains `Start shift` on its first line. Read one new entry from input, remove surrounding whitespace, append that entry plus a newline with mode `\"a\"`, then reopen the file and print the complete log. Open `log.txt` in append mode inside a `with` block, write the cleaned entry followed by a newline, then reopen the file for reading and use `read()` to print the complete saved contents. After appending the new line, reopen `log.txt` for reading and use `file.read()` to print the complete saved file."
             },
             "try_writing_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Create a multi-line text report and verify the saved contents."
+              "prompt": "Read a name and a score from input. Clean the name with whitespace trimming followed by title-case normalization and the score with `.strip()`. Create `report.txt` with mode `\"w\"`. Write exactly two lines: `Name: <name>` and `Score: <score>`, each ending with `\\n`. Reopen the file and print exactly what was saved."
             },
             "allowReveal": true
           }
@@ -17658,19 +17534,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `csv` and read `data/registrations.csv` with `csv.DictReader`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Loop through every row from `reader`."
-                },
-                "2": {
-                  "message": "Read the `name`, `event`, `seats`, and `email` values from the row."
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
             "cp-1-read-registration-file": {
               "title": "Clean and validate one registration",
-              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with `strip().title()`, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted.",
+              "prompt": "Start from the CSV preview. Add `clean_row(row)`. Clean `name` with whitespace trimming followed by title-case normalization, strip `event`, strip and lowercase `email`, and strip the seat text before conversion. Return `None` when the cleaned name, event, or email is empty, when seats cannot convert with `int()`, or when seats is less than 1. Otherwise return a dictionary with keys `name`, `event`, `seats`, and `email`. Print `clean_row(row)` for every CSV row so you can see which rows are accepted. Inside `clean_row(row)`, clean the required fields with the specified string methods: trim whitespace from each text field, title-case the cleaned name, lowercase the cleaned email, and convert the cleaned seat text to an integer. Catch `ValueError` when the seat conversion fails.",
               "hint": "Apply the cleaning and validation rules inside one reusable function.",
               "help": {
                 "concept": "`clean_row(row)` should return one dependable shape for valid data and `None` for every rejected registration.",
@@ -17709,16 +17582,28 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Define `clean_row(row)` and clean all four named CSV fields."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Reject empty cleaned name, event, or email values."
+                  "message": "Use the explicitly requested dictionary field `name`."
                 },
                 "2": {
-                  "message": "Catch exactly `ValueError` from the seat conversion."
+                  "message": "Use the explicitly requested dictionary field `event`."
                 },
                 "3": {
-                  "message": "Reject seat counts below 1 before returning the cleaned dictionary."
+                  "message": "Use the explicitly requested dictionary field `seats`."
+                },
+                "4": {
+                  "message": "Use the explicitly requested dictionary field `email`."
+                },
+                "5": {
+                  "message": "Use `strip()` because that method is explicitly required by the prompt."
+                },
+                "6": {
+                  "message": "Use `title()` because that method is explicitly required by the prompt."
+                },
+                "7": {
+                  "message": "Call `int(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -17763,19 +17648,13 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Create `records = []` before reading the CSV."
-                },
-                "1": {
-                  "message": "Call `clean_row(row)` once for each CSV row."
-                },
-                "2": {
-                  "message": "Append only records that are not `None`."
+                  "message": "Call `clean_row(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
             "cp-3-skip-bad-registration-rows": {
               "title": "Move cleaning into a helper module",
-              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with `from cleaning import clean_row`. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
+              "prompt": "Keep the same accepted `records` behavior, but move the complete `clean_row(row)` function out of `main.py` into a new sibling file named `cleaning.py`. Import it with a from-import that brings `clean_row` in from the `cleaning` module. Do not create a package or `__init__.py`; Module 6 used direct sibling helper modules.",
               "hint": "Move one responsibility without changing the program's behavior.",
               "help": {
                 "concept": "A sibling helper module lets `main.py` orchestrate the workflow while `cleaning.py` owns row cleaning and validation.",
@@ -17817,19 +17696,16 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_row` from the sibling `cleaning` module."
+                  "message": "Use the requested import for `clean_row` from `cleaning`."
                 },
                 "1": {
-                  "message": "Keep the complete `clean_row(row)` function in `cleaning.py`."
-                },
-                "2": {
-                  "message": "Preserve the accepted-record output from the previous step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "cp-4-move-cleaning-to-module": {
               "title": "Add summary helper functions",
-              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order.",
+              "prompt": "Create a new sibling file named `summary.py` with `total_seats(records)` and `event_counts(records)`. `total_seats` should use a normal loop to add each record's seats. `event_counts` should build a dictionary by incrementing each event name. Import both helpers in `main.py`, then print `Total seats: <total>` followed by each `event: count` in the dictionary's first-seen event order. In `summary.py`, compute the summary values with a `for` loop over `records`. In `main.py`, print each event/count pair with a `for` loop over the dictionary produced by the event-count helper.",
               "hint": "Use normal loops and dictionaries so the summary stays within concepts already taught.",
               "help": {
                 "concept": "Summary helpers should accept `records` and return values without reading or writing files themselves.",
@@ -17877,16 +17753,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `total_seats` and `event_counts` from sibling `summary.py`."
+                  "message": "Use the requested import involving `summary`."
                 },
                 "1": {
-                  "message": "Implement `total_seats(records)` with an explicit accumulator loop."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Implement `event_counts(records)` with a dictionary and membership check."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Print the returned total and counts without `sorted()` or comprehensions."
+                  "message": "Use a `for` loop as the prompt requests."
+                },
+                "4": {
+                  "message": "Use a `for` loop as the prompt requests."
                 }
               }
             },
@@ -17946,16 +17825,19 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import both report helpers from sibling `reports.py`."
+                  "message": "Use the requested import involving `reports`."
                 },
                 "1": {
-                  "message": "Write `output/clean_registrations.csv` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Write `output/summary.txt` in write mode from `reports.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "3": {
-                  "message": "Keep report functions free of default parameters, pathlib, and sorted output."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
+                },
+                "4": {
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             },
@@ -18018,16 +17900,10 @@ const messages: Record<string, any> = {
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Keep calling both report-writing helpers before verification."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 },
                 "1": {
-                  "message": "Reopen `output/clean_registrations.csv` in read mode and print it."
-                },
-                "2": {
-                  "message": "Reopen `output/summary.txt` in read mode and print it."
-                },
-                "3": {
-                  "message": "Verify the saved artifact contents rather than reconstructing them in `main.py`."
+                  "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
             }
@@ -49752,64 +49628,56 @@ const messages: Record<string, any> = {
       "python-10-testing-debugging-oop-projects": {
         "debugging-imports-and-state": {
           "debugging-imports-and-state-sketch-1": {
-            "title": "Trace the import path before changing code randomly",
-            "bodyMarkdown": "Import errors are easier to fix when you read the path carefully.\n\nImagine this file layout:\n\n```text\nmodels/\n  shipment.py\nmain.py\n```\n\nIf `shipment.py` defines `class Shipment`, the import should name both the package path and the class:\n\n```python\nfrom models.shipment import Shipment\n```\n\nWhen an import breaks, check three things in order:\n\n1. Does the folder name match?\n2. Does the file name match?\n3. Does the class or function name inside the file match?\n\nDo that before rewriting the model.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
+            "title": "Read the file tree before changing the model",
+            "bodyMarkdown": "An import error can come from the module path even when the function itself is correct.\n\nGiven:\n\n```text\nmain.py\nformatters/\n  slug.py\n```\n\nand `formatters/slug.py` defines `slugify`, the matching import is:\n\n```python\nfrom formatters.slug import slugify\n```\n\nWhen debugging an import, compare the package name, module filename, and imported symbol separately.\n\nDo not rewrite working code in the target module just to compensate for a wrong path."
           },
           "debugging-imports-and-state-sketch-2": {
-            "title": "Shared mutable defaults make objects leak state",
-            "bodyMarkdown": "A sneaky object bug happens when separate objects accidentally share one list.\n\n```python\nclass TeamRoster:\n    def __init__(self, players=[]):\n        self.players = players\n```\n\nThat default list is created once, so two rosters can accidentally point at the same list.\n\nSafer pattern:\n\n```python\nclass TeamRoster:\n    def __init__(self, players=None):\n        self.players = [] if players is None else players\n```\n\nNow each new object gets its own list unless a list is passed in intentionally.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
+            "title": "Two objects can reveal one shared mutable default",
+            "bodyMarkdown": "Shared mutable state can come from a mutable default argument.\n\n```python\nclass Playlist:\n    def __init__(self, songs=[]):\n        self.songs = songs\n```\n\nTwo default-constructed Playlist objects can share that same list.\n\nUse a sentinel instead:\n\n```python\ndef __init__(self, songs=None):\n    if songs is None:\n        songs = []\n    self.songs = songs\n```\n\nThe debugging clue is unexpected state appearing in a different object."
           },
           "debugging-imports-and-state-sketch-3": {
-            "title": "Debug state by checking each change",
-            "bodyMarkdown": "When a method changes object state, inspect the state after each call.\n\n```python\nitem = VendingItem(\"Water\", 5)\nprint(item.quantity)\nitem.sell(2)\nprint(item.quantity)\nitem.sell(10)\nprint(item.quantity)\n```\n\nThis tells the story of the object: starting value, valid change, invalid change.\n\nIf the final value is wrong, the step-by-step checks show which method call caused the problem.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
+            "title": "A successful return value is not the same as a state change",
+            "bodyMarkdown": "A method can report success without actually changing the object's state.\n\n```python\nclass Door:\n    def __init__(self):\n        self.locked = False\n\n    def lock(self):\n        return True\n```\n\nThe return value says success, but `door.locked` is still `False`.\n\nThe repair belongs in the state-changing method:\n\n```python\ndef lock(self):\n    self.locked = True\n    return True\n```\n\nCheck return values and stored state separately when debugging mutations."
           }
         },
         "module-10-oop-quality-project": {
           "module-10-oop-quality-project-sketch0": {
-            "title": "Project brief: stabilize an animal-shelter intake app",
-            "bodyMarkdown": "A neighborhood animal shelter has a small intake app, but staff do not trust it yet. Pet ages can be invalid, adoption state is not fully tested, and the CSV/report workflow needs regression coverage.\n\nThis project uses an **animal-shelter problem**, not the books, catalogs, stock items, counters, or task examples from the lessons. The coding skills transfer, but the situation is new.\n\nYou will complete six cumulative milestones:\n\n1. Validate the `ShelterPet` model and write focused assertions.\n2. Test pure reporting helpers.\n3. Load pet objects from CSV fixture data.\n4. Verify adoption state changes.\n5. Build one reusable shelter summary.\n6. Finish a documented end-to-end regression workspace.\n\nEach milestone starts from the previous working version, so the final result feels like a real quality pass rather than disconnected exercises."
+            "title": "Project brief: protect one growing shelter codebase",
+            "bodyMarkdown": "This project is a **quality pass**, not another sequence of isolated implementation drills.\n\nYou will work in one animal-shelter codebase and accumulate a real regression suite:\n\n```text\nmain.py\nmodels/\n  shelter_pet.py\n  foster_pet.py\nservices/\n  reporting.py\nstorage/\n  pet_loader.py\ndata/\n  pets.csv\ntests/\n  check_model.py\n  check_reporting.py\n  check_loader.py\n  check_adoption.py\n  check_summary.py\n  check_regression.py\nREADME.md\n```\n\nThe production code already contains a few intentional weaknesses that are exercised only when their milestone arrives.\n\nYou will:\n\n1. write model and inheritance regression assertions;\n2. refactor list-wide reporting into a service and test a mixed collection;\n3. debug broken loader imports and test the CSV-to-object boundary;\n4. reproduce and repair an adoption state bug;\n5. build and test a cumulative shelter summary;\n6. write a final end-to-end regression check and document responsibilities.\n\nEvery milestone is cumulative. The **entire previous solution workspace becomes the next starter workspace**, and every earlier test file remains present and passing."
           }
         },
         "refactoring-oop-services": {
           "refactoring-oop-services-sketch-0": {
-            "title": "Move report logic out of main.py",
-            "bodyMarkdown": "A crowded `main.py` usually mixes too many jobs: creating data, calculating values, formatting output, and printing.\n\nImagine a lunch-order app with report code directly in the script:\n\n```python\nfor order in orders:\n    print(f\"{order['name']}: ${order['price']}\")\n```\n\nThat is fine once, but it becomes hard to test and reuse. A service can own the report logic:\n\n```python\nclass LunchReportService:\n    def build_report(self, orders):\n        lines = []\n        for order in orders:\n            lines.append(f\"{order['name']}: ${order['price']}\")\n        return \"\\n\".join(lines)\n```\n\n`main.py` can then stay thin.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
+            "title": "A refactor moves responsibility without changing behavior",
+            "bodyMarkdown": "Start with working code, then move the collection-wide responsibility without changing behavior.\n\nSuppose an Order already owns the calculation for one order line:\n\n```python\nclass Order:\n    def line_total(self):\n        return self.quantity * self.unit_price\n```\n\nA crowded caller might build receipt lines itself:\n\n```python\nlines = []\nfor order in orders:\n    lines.append(f\"${order.line_total()}\")\n```\n\nThat coordination can move into a service:\n\n```python\nclass ReceiptService:\n    def build_receipt(self, orders):\n        return \"\\n\".join(\n            f\"${order.line_total()}\"\n            for order in orders\n        )\n```\n\nThe model keeps one-order behavior; the service coordinates the collection; the caller becomes thinner. The observable result should stay the same."
           },
           "refactoring-oop-services-sketch-1": {
-            "title": "Give each service one clear responsibility",
-            "bodyMarkdown": "A service should have a focused job.\n\nFor example, one method can calculate the total price of orders:\n\n```python\nclass LunchReportService:\n    def total_price(self, orders):\n        total = 0\n        for order in orders:\n            total += order[\"price\"]\n        return total\n```\n\nThis keeps calculation logic in one place. It also makes the behavior easy to test without running the whole app.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
-          },
-          "refactoring-oop-services-sketch-2": {
-            "title": "Keep the model, service, and main script separated",
-            "bodyMarkdown": "A clean OOP app usually separates jobs:\n\n- model classes store object state and object behavior\n- service classes handle app-level work like reports or totals\n- `main.py` wires the pieces together\n\nThat separation is not about adding files for fun. It is about making each file easier to read, test, and change.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
+            "title": "Keep object rules on the model and collection rules in the service",
+            "bodyMarkdown": "A service should coordinate many objects without stealing an object-specific rule from the model.\n\n```python\nclass Product:\n    def is_available(self):\n        return self.stock > 0\n```\n\nThe collection rule can live in a service:\n\n```python\nclass ShelfAvailabilityService:\n    def available_names(self, products):\n        names = []\n\n        for product in products:\n            if product.is_available():\n                names.append(product.name)\n\n        return names\n```\n\n`Product` owns the rule about one product. `ShelfAvailabilityService` owns the work across many products.\n\nA good refactor moves responsibility instead of duplicating the old logic in both places."
           }
         },
         "testing-inheritance-and-polymorphism": {
           "testing-inheritance-and-polymorphism-sketch-0": {
-            "title": "Test the contract, not every implementation detail",
-            "bodyMarkdown": "When classes share a method, tests should focus on the behavior promised by that method.\n\nImagine notification classes:\n\n```python\nemail = EmailNotification(\"Welcome\")\nassert email.message() == \"Email: Welcome\"\n```\n\nThe test does not need to inspect every line inside the class. It checks the result that callers depend on.\n\nThat makes the test useful even if the internal code changes later.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
+            "title": "Test the inherited relationship and the specialized result",
+            "bodyMarkdown": "A subclass regression test can protect both the inheritance relationship and specialized public behavior.\n\n```python\ndog = Dog(\"Mochi\")\n\nassert isinstance(dog, Animal)\nassert dog.sound() == \"woof\"\n```\n\nThose assertions answer different questions: is Dog part of the expected hierarchy, and does its override satisfy the promised result?\n\nThe test imports production classes; it does not rebuild them."
           },
           "testing-inheritance-and-polymorphism-sketch-1": {
-            "title": "Test a mixed list through the shared method",
-            "bodyMarkdown": "Polymorphism matters most when a helper works with mixed objects.\n\n```python\nnotifications = [\n    EmailNotification(\"Welcome\"),\n    SmsNotification(\"Code sent\"),\n]\n\nmessages = [note.message() for note in notifications]\nassert messages == [\"Email: Welcome\", \"SMS: Code sent\"]\n```\n\nThe test proves one loop can trust the shared method name.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
-          },
-          "testing-inheritance-and-polymorphism-sketch-2": {
-            "title": "Test edge cases near the shared behavior",
-            "bodyMarkdown": "A subclass should still behave clearly when the input is awkward.\n\n```python\nmessage = SmsNotification(\"\")\nassert message.message() == \"SMS: Untitled\"\n```\n\nThis kind of test protects the interface. It says, \"even when data is missing, this object still returns a predictable label.\"\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
+            "title": "Test polymorphism at the service boundary",
+            "bodyMarkdown": "A polymorphic service is best tested with a mixed collection.\n\n```python\nnotices = [\n    EmailNotice(\"Welcome\"),\n    SmsNotice(\"Code ready\"),\n]\n\nassert render_notices(notices) == [\n    \"EMAIL: Welcome\",\n    \"SMS: Code ready\",\n]\n```\n\nThe test passes representative concrete objects through the real service and checks the returned result.\n\nIt should not copy the service loop or branch on concrete types inside the test."
           }
         },
         "testing-object-state": {
           "testing-object-state-sketch-0": {
-            "title": "Test state before and after one method call",
-            "bodyMarkdown": "Object tests become easier when you ask one clear question: **what should change on this object?**\n\nImagine a thermostat object:\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nassert thermostat.temperature == 70\n```\n\nThe test creates one object, calls one method, then checks the stored state.\n\nThat is stronger than only checking printed output because it proves the object itself changed correctly.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "A state test should make an executable claim",
+            "bodyMarkdown": "A state test should make an executable claim before and after a method call.\n\n```python\nlamp = Lamp()\n\nassert lamp.on is False\n\nlamp.turn_on()\n\nassert lamp.on is True\n```\n\nThe first assertion proves the starting state. The second proves the observable state transition.\n\nA print statement can show a value, but an assertion automatically fails when the behavior is wrong."
           },
           "testing-object-state-sketch-1": {
-            "title": "Test validation by trying unsafe input",
-            "bodyMarkdown": "Validation tests should include values that the object must reject.\n\n```python\nthermostat = Thermostat(68)\nthermostat.lower_temp(-5)\nassert thermostat.temperature == 68\n```\n\nThe important check is that the bad input did **not** change the state.\n\nA good validation test usually has two parts:\n\n1. Try an invalid value.\n2. Confirm the object stayed safe.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "Validation tests need a normal case and a rejected case",
+            "bodyMarkdown": "A validation rule needs tests for both the accepted and corrected or rejected path.\n\n```python\nnormal = Score(8)\ninvalid = Score(-3)\n\nassert normal.points == 8\nassert invalid.points == 0\n```\n\nTesting only a normal value would not prove that negative input is handled correctly.\n\nChoose cases that distinguish the intended validation rule from a broken implementation."
           },
           "testing-object-state-sketch-2": {
-            "title": "Test a sequence when order matters",
-            "bodyMarkdown": "Some object bugs only appear after more than one method call.\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nthermostat.lower_temp(1)\nassert thermostat.temperature == 69\n```\n\nThis kind of test proves the object keeps the right state across a sequence.\n\nWhen a method changes state, test the story: create the object, call methods in order, then check the final state.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
+            "title": "Sequence tests keep checking the same object's state",
+            "bodyMarkdown": "Some state bugs appear only after the same object changes more than once.\n\n```python\nmeter = Meter()\n\nassert meter.value == 0\n\nmeter.advance()\nassert meter.value == 1\n\nmeter.advance()\nassert meter.value == 2\n```\n\nThis sequence proves that state accumulates correctly on one instance.\n\nCreating a fresh object for every assertion would miss bugs that appear only after repeated calls."
           }
         }
       },
@@ -49840,72 +49708,60 @@ const messages: Record<string, any> = {
         },
         "module-11-final-oop-capstone": {
           "module-11-final-oop-capstone-sketch-1": {
-            "title": "A neighborhood pantry needs a better system",
-            "bodyMarkdown": "Saturday mornings at the neighborhood pantry begin before the doors open. Volunteers unpack food, arrange hygiene supplies, and prepare to welcome families who may need very different kinds of help. One household might request fresh produce. Another may need soap, toothpaste, or diapers. Every request matters, and the team needs a reliable way to keep track of each one.\n\nFor a while, handwritten notes and a small spreadsheet were enough. As the pantry grew, that system became harder to trust. Names were entered differently, priorities were easy to miss, and volunteers could not always tell whether a request had already been fulfilled. When the application restarted, yesterday's records also had to be rebuilt by hand.\n\nThe pantry has asked you to create the **Neighborhood Pantry Request Coordinator**. The program will represent every request as an object, protect the information each request needs, and let the rest of the application work with food and hygiene requests in a consistent way.\n\nBy the time the coordinator is complete, volunteers will be able to:\n\n- record food and hygiene requests\n- validate household names and priority levels\n- mark requests as fulfilled\n- save requests to a CSV file and load them again later\n- create one daily report from different request types\n- run tests that protect the application as it changes\n\nYou will build the coordinator in stages. The first version begins with the common rules every pantry request must follow. From there, the application will grow to support specialized request types, a service that manages the queue, persistent storage, reporting, and tests. Each stage continues from the working application you completed before it.\n\nYour first task is to design the shared request foundation that every future request type can trust."
+            "title": "Capstone brief: integrate the OOP skills you already practiced",
+            "bodyMarkdown": "The neighborhood pantry needs one coordinator for food and hygiene requests.\n\nThis is a **retrieval capstone**. Important syntax is not introduced for the first time here. You will combine skills already practiced in Modules 8–10:\n\n- validated object state with `@property`\n- inheritance and `super()`\n- `ABC` and `@abstractmethod`\n- polymorphic mixed collections\n- service ownership and thin `main.py`\n- CSV-to-object storage\n- executable regression tests\n- behavior-preserving integration and documentation\n\nThe final architecture is:\n\n```text\nmain.py\nmodels/\n  pantry_request.py\n  food_request.py\n  hygiene_request.py\n  __init__.py\nservices/\n  pantry_service.py\n  __init__.py\nstorage/\n  request_storage.py\n  __init__.py\ndata/\n  requests.csv\nreports/\n  summary.py\n  __init__.py\ntests/\n  check_storage.py\n  check_requests.py\n  __init__.py\nREADME.md\n```\n\nTwo unnecessary capstone-only requirements are deliberately absent:\n\n- no `inspect.isabstract`\n- no `__all__` requirement\n\nAbstraction is proved by the actual `ABC`/`@abstractmethod` contract and by the fact that the abstract base cannot be instantiated.\n\nEvery milestone is cumulative: the complete solution workspace from one milestone becomes the exact starter workspace for the next."
           }
         }
       },
       "python-8-object-oriented-foundations": {
         "class-files-and-instances": {
           "sketch-0": {
-            "title": "Start with a class shell",
-            "bodyMarkdown": "A **class** is a reusable plan for making objects.\n\nAn **object** is one thing created from that class. Python also calls that object an **instance**.\n\nFor example, a `Book` class can be the plan, and `Book()` can create one book object.\n\nThe smallest class shell looks like this:\n\n```python\nclass Book:\n    pass\n```\n\nFollow the execution: - `class Book:` starts the class definition.\n- `pass` means \"nothing goes here yet.\"\n- The class exists, even though it does not store values or do actions yet.\n\nStarting with a shell keeps the first step simple. You learn how a class exists before adding a constructor, attributes, or methods.\n\nA class file defines the reusable blueprint; each instance receives its own state at runtime. Keeping the model in its own file also creates a stable import boundary that later services and tests can depend on."
+            "title": "Define a class in its model file",
+            "bodyMarkdown": "A class can live in the file that owns that model.\n\n```text\nmodels/\n  recipe.py\nmain.py\n```\n\n`models/recipe.py`:\n\n```python\nclass Recipe:\n    pass\n```\n\nA small class file gives the model a clear home. `main.py` does not need to contain every class definition in the application."
           },
           "sketch-1": {
-            "title": "Create one object from the class",
-            "bodyMarkdown": "After a class exists, you can create an object from it.\n\n```python\nclass Book:\n    pass\n\nbook = Book()\n```\n\n`Book` is the class.\n\n`Book()` creates one object from that class.\n\n`book` is the variable that stores the object.\n\nThis is the core class/object pattern:\n\n```text\nClass plan  ->  call the class  ->  object stored in a variable\n```\n\nYou will use this pattern again when the class becomes more useful.\n\nA class file defines the reusable blueprint; each instance receives its own state at runtime. Keeping the model in its own file also creates a stable import boundary that later services and tests can depend on."
-          },
-          "sketch-2": {
-            "title": "Keep the class in its own file",
-            "bodyMarkdown": "Real projects usually separate the class from the script that uses it.\n\nThe class can live in a model file:\n\n```python\n# models/book.py\nclass Book:\n    pass\n```\n\nThen `main.py` imports and uses it:\n\n```python\n# main.py\nfrom models.book import Book\n\nbook = Book()\n```\n\nThis keeps the project easier to read:\n\n- `models/book.py` defines what a book is.\n- `main.py` creates and uses book objects.\n\nThat separation matters more as the class grows.\n\nA class file defines the reusable blueprint; each instance receives its own state at runtime. Keeping the model in its own file also creates a stable import boundary that later services and tests can depend on."
+            "title": "Import a class across the file boundary",
+            "bodyMarkdown": "Once the class has its own module, another file imports it before creating objects.\n\n```python\nfrom models.recipe import Recipe\n\nbreakfast = Recipe()\ndinner = Recipe()\n\nprint(type(breakfast).__name__)\n```\n\nThe module path follows the folder and filename: `models/recipe.py` becomes `models.recipe`.\n\nThe important boundary is **define the model in its module; import and use it elsewhere**."
           }
         },
         "constructors-and-object-state": {
           "sketch-0": {
-            "title": "Instance variables belong to one object",
-            "bodyMarkdown": "`__init__` runs each time Python creates an object. Assignments on `self` become **instance variables**.\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n```\n\nEach `Student` receives its own `name`. Changing one student does not change another.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
+            "title": "Use __init__ to establish instance state",
+            "bodyMarkdown": "A constructor gives each new object its starting instance state.\n\n```python\nclass Movie:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\nfilm = Movie(\"Arrival\", 2016)\n```\n\n`self.title` and `self.year` belong to that particular Movie instance.\n\nA second Movie can start with different values while using the same constructor."
           },
           "sketch-1": {
-            "title": "Class variables hold shared class-level values",
-            "bodyMarkdown": "A **class variable** is written in the class body, outside every method.\n\n```python\nclass Student:\n    school_name = \"Zoeskoul\"\n\n    def __init__(self, name):\n        self.name = name\n```\n\n`Student.school_name` is shared at the class level. `student.name` belongs to one object. Use a class variable for information that is intentionally common to the whole class.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
+            "title": "Separate class-level values from per-object values",
+            "bodyMarkdown": "Class state belongs to the class; instance state can differ from object to object.\n\n```python\nclass Bicycle:\n    wheels = 2\n\n    def __init__(self, color):\n        self.color = color\n\nblue_bike = Bicycle(\"blue\")\nred_bike = Bicycle(\"red\")\n```\n\nBoth bicycles share `wheels == 2`, but each object owns its own `color`.\n\nUse class attributes for genuinely shared facts, not values that should vary per instance."
           },
           "sketch-2": {
-            "title": "Mutable values usually belong on the instance",
-            "bodyMarkdown": "Be careful with lists and dictionaries. This creates one list shared by every object:\n\n```python\nclass Student:\n    courses = []  # shared list\n```\n\nFor a separate list per student, create it in `__init__`:\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n        self.courses = []\n```\n\nNow adding a course to one student does not change the others.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
+            "title": "Create mutable state separately for each object",
+            "bodyMarkdown": "Mutable instance state should be created separately for each object.\n\n```python\nclass Notebook:\n    def __init__(self, owner):\n        self.owner = owner\n        self.tags = []\n\nfirst = Notebook(\"Ari\")\nsecond = Notebook(\"Noor\")\n\nfirst.tags.append(\"school\")\n```\n\n`second.tags` is still empty because every constructor call created a fresh list.\n\nThis pattern prevents unrelated objects from accidentally sharing mutable state."
           }
         },
         "encapsulation-and-validation": {
           "sketch-0": {
-            "title": "Objects should protect their own state",
-            "bodyMarkdown": "Methods should not blindly accept every value.\n\nImagine a `Book` method that updates reading progress. A negative page count should not move progress backward by accident.\n\nThe same idea applies to any object with important state: the method should check the value before changing the object.\n\n```python\ndef read_pages(self, pages):\n    if pages > 0:\n        self.pages_read += pages\n    return self.pages_read\n```\n\nThe rule lives inside the method because the method is responsible for changing the object.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
+            "title": "Reject invalid changes before mutating state",
+            "bodyMarkdown": "A state-changing method should reject changes that would make the object invalid.\n\n```python\nclass Wallet:\n    def withdraw(self, amount):\n        if amount <= 0 or amount > self.balance:\n            return False\n\n        self.balance -= amount\n        return True\n```\n\nThe method protects the Wallet's state instead of trusting every caller to repeat the validation correctly.\n\nA rejected operation should leave the stored state unchanged."
           },
           "sketch-1": {
-            "title": "Invalid changes should be ignored",
-            "bodyMarkdown": "Validation keeps the object trustworthy across many method calls.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\n```\n\nThe first call is valid, so it updates the object.\n\nThe second call is invalid, so the method leaves the object unchanged.\n\nThat is the core encapsulation idea for beginners: outside code asks for a change, but the object decides whether that change is safe.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
-          },
-          "sketch-2": {
-            "title": "A clean method reports a safe final state",
-            "bodyMarkdown": "After validation is inside the class, `main.py` can stay simple.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\nprint(book.summary())\n```\n\n`main.py` does not need to know every internal rule. It uses the object, and the object protects itself.\n\nThis is why validation and methods belong together: the method owns the behavior, and the object owns the state.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
+            "title": "Use a property when assignment needs validation too",
+            "bodyMarkdown": "A property is useful when direct assignment also needs one controlled validation path.\n\n```python\nclass Thermostat:\n    @property\n    def temperature(self):\n        return self._temperature\n\n    @temperature.setter\n    def temperature(self, value):\n        if value < 5:\n            value = 5\n        self._temperature = value\n```\n\nCallers still write `thermostat.temperature = value`, but the setter controls what is actually stored.\n\nThe backing attribute keeps the validation logic from recursively assigning the property to itself."
           }
         },
         "methods-and-responsibility": {
           "sketch-0": {
-            "title": "Instance methods work with one object",
-            "bodyMarkdown": "An **instance method** receives `self`. Use it when behavior reads or changes one object.\n\n```python\nclass Counter:\n    def __init__(self, value=0):\n        self.value = value\n\n    def increment(self):\n        self.value += 1\n        return self.value\n```\n\n`counter.increment()` updates that counter object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
+            "title": "Instance methods own one object's behavior",
+            "bodyMarkdown": "An instance method can own a state change that belongs to one object.\n\n```python\nclass Thermostat:\n    def warm_by(self, degrees):\n        self.temperature += degrees\n        return self.temperature\n```\n\nThe caller does not need to know how the Thermostat stores or updates its temperature. It asks the object to perform the behavior.\n\nMethods are most useful when the behavior naturally belongs to the object's state."
           },
           "sketch-1": {
-            "title": "Class methods work with the class",
-            "bodyMarkdown": "A **class method** receives `cls` instead of `self`. A common use is an alternative constructor.\n\n```python\nclass Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    @classmethod\n    def from_fahrenheit(cls, fahrenheit):\n        celsius = (fahrenheit - 32) * 5 / 9\n        return cls(celsius)\n```\n\n`Temperature.from_fahrenheit(68)` converts the input and returns a new Temperature object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
-          },
-          "sketch-2": {
-            "title": "Static methods are related utilities",
-            "bodyMarkdown": "A **static method** receives neither `self` nor `cls`. Use it for logic that belongs near the class but does not need object or class state.\n\n```python\nclass Temperature:\n    @staticmethod\n    def is_valid(celsius):\n        return celsius >= -273.15\n```\n\nYou can call it as `Temperature.is_valid(20)`. Keep a method as an instance method when it needs `self`, a class method when it needs `cls`, and a static method when it needs neither.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
+            "title": "Keep model behavior separate from coordination",
+            "bodyMarkdown": "A model method can return useful data while the application decides how to display it.\n\n```python\nclass Invoice:\n    def total(self):\n        return self.subtotal + self.tax\n\ninvoice = Invoice()\ninvoice.subtotal = 40\ninvoice.tax = 3\n\nprint(invoice.total())\n```\n\n`Invoice.total()` owns the invoice calculation. The outer program owns presentation such as `print()`.\n\nThat separation keeps model behavior reusable in a terminal program, web page, test, or report."
           }
         },
         "module-8-account-tracker-project": {
           "module-8-account-tracker-project-sketch-0": {
-            "title": "A club account tracker project",
-            "bodyMarkdown": "A small after-school club needs one clean object to track a member balance. This project transfers the Python OOP tools from the lessons into a new problem.\n\nYou will build it in four cumulative steps:\n\n1. Create the `Account` class shell.\n2. Add the shared `club_name` class variable and per-account instance state.\n3. Add deposit and withdraw instance methods plus a static amount validator.\n4. Add a class-method starter constructor and a readable summary.\n\n`models/account.py` owns the Account behavior. `main.py` stays small and uses the public methods."
+            "title": "Build one Account model across four milestones",
+            "bodyMarkdown": "A small after-school club needs a simple account tracker. This project does not introduce a new OOP category. It asks you to combine the ideas you already practiced in Module 8.\n\nYou will carry the **same two-file workspace** forward through four milestones:\n\n1. Create the `Account` model file and import it from `main.py`.\n2. Add shared club state plus per-account owner and balance state.\n3. Add validated `deposit()` and `withdraw()` instance methods.\n4. Protect direct balance assignment with a validated property and finish a reusable `summary()` method.\n\n`models/account.py` owns one account's state and behavior. `main.py` creates objects, supplies inputs, calls public behavior, and displays returned results.\n\nEvery milestone starts from the exact workspace produced by the previous milestone."
           }
         },
         "thinking-in-objects": {
@@ -49915,79 +49771,59 @@ const messages: Record<string, any> = {
           },
           "sketch-0": {
             "title": "Objects keep one thing together",
-            "bodyMarkdown": "Before writing class syntax, it helps to understand the problem objects solve.\n\nImagine a reading tracker. Without objects, one book might be spread across separate variables:\n\n```python\nfirst_title = \"The Hobbit\"\nfirst_author = \"J. R. R. Tolkien\"\nfirst_pages = 310\n\nsecond_title = \"Charlotte's Web\"\nsecond_author = \"E. B. White\"\nsecond_pages = 192\n```\n\nThis works for two small books, but it gets messy as the program grows. The title, author, and page count belong together, but the code stores them apart.\n\nAn **object** lets the program treat one book as one thing:\n\n```python\nfirst_book = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nsecond_book = Book(\"Charlotte's Web\", \"E. B. White\", 192)\n```\n\nYou do **not** need to know how `Book` is built yet. For now, notice the idea:\n\n- `first_book` is one book object.\n- `second_book` is another book object.\n- Each book object was created with its own title, author, and page count.\n\nWhen several values belong to the same thing, an object lets the program keep those values together."
+            "bodyMarkdown": "An object is useful when related values belong to one thing.\n\n```python\nclass Lamp:\n    pass\n\ndesk_lamp = Lamp()\ndesk_lamp.room = \"office\"\ndesk_lamp.on = False\n```\n\n`desk_lamp` carries state about one lamp. The alternative would be several loose variables such as `lamp_room` and `lamp_on` that the program must keep related by convention.\n\nAt this stage, focus on the design question: **which values describe the same thing?**"
           },
           "sketch-1": {
             "title": "Attributes are values on an object",
-            "bodyMarkdown": "After an object exists, you can read values from it.\n\nA value stored on an object is called an **attribute**.\n\n```python\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\n\nprint(book.title)\nprint(book.pages)\n```\n\nRead the dot notation out loud:\n\n- `book.title` means \"the title stored on this book object.\"\n- `book.pages` means \"the page count stored on this book object.\"\n\nDifferent objects can store different values:\n\n```python\nfirst_book = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nsecond_book = Book(\"Charlotte's Web\", \"E. B. White\", 192)\n\nprint(first_book.title)\nprint(second_book.title)\n```\n\nBoth variables hold `Book` objects, but each object keeps its own attribute values.\n\nThe design question is ownership: which values belong together, and which behavior should be responsible for changing them? Thinking in objects is useful only when that answer becomes clearer than a loose collection of variables and functions."
+            "bodyMarkdown": "Once an object owns state, code can read that state through the object.\n\n```python\nclass Backpack:\n    pass\n\nschool_bag = Backpack()\nschool_bag.owner = \"Mina\"\nschool_bag.items = 4\n\nprint(school_bag.owner)\nprint(school_bag.items)\n```\n\nThe attribute names explain what each value means in the context of that object.\n\nTwo Backpack objects can hold different values without needing separate variable naming schemes for every field."
           },
           "sketch-2": {
             "title": "Methods ask an object to do something",
-            "bodyMarkdown": "Objects can also have actions. In Python, an action that belongs to an object is called a **method**.\n\nA method call uses the object name, a dot, and the method name:\n\n```python\nbook.mark_finished()\n```\n\nRead that line out loud: ask this book object to mark itself finished.\n\nThen another method can return a readable label:\n\n```python\nbook = Book(\"Bridge to Terabithia\", \"Katherine Paterson\", 144)\nbook.mark_finished()\nprint(book.reading_label())\n```\n\nThe important beginner workflow is:\n\n1. Create one object with starting values.\n2. Read attributes from that object when you need its stored values.\n3. Call a method when you want the object to do something.\n4. Print or use the updated result.\n\nIn the next topics, you will learn how to write the class file that makes this possible.\n\nThe design question is ownership: which values belong together, and which behavior should be responsible for changing them? Thinking in objects is useful only when that answer becomes clearer than a loose collection of variables and functions."
+            "bodyMarkdown": "Objects become more useful when behavior changes or reports their own state.\n\n```python\nclass Timer:\n    def tick(self):\n        self.seconds -= 1\n\n    def status(self):\n        return f\"{self.seconds} seconds left\"\n\ntimer = Timer()\ntimer.seconds = 3\ntimer.tick()\nprint(timer.status())\n```\n\nThe caller asks the Timer to perform Timer behavior instead of manually editing its fields from outside.\n\nThat is the core object-oriented idea: keep state and the behavior responsible for that state together."
           }
         }
       },
       "python-9-inheritance-polymorphism-and-abstraction": {
         "abstraction-with-base-interfaces": {
           "sketch-0": {
-            "title": "Python can enforce a shared method contract",
-            "bodyMarkdown": "Python has no dedicated `interface` keyword. One clear way to describe a required method is an **abstract base class**.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass NotificationChannel(ABC):\n    @abstractmethod\n    def message(self):\n        pass\n```\n\n`ABC` marks the class as abstract. `@abstractmethod` tells Python that concrete child classes must implement `message()`.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
+            "title": "ABC turns a shared method into an enforceable contract",
+            "bodyMarkdown": "An abstract base class can make a required behavior explicit.\n\n```python\nfrom abc import ABC, abstractmethod\n\n\nclass PaymentMethod(ABC):\n    @abstractmethod\n    def pay(self, amount):\n        pass\n```\n\n`PaymentMethod` describes the contract but is not a complete payment object.\n\nA subclass that does not implement `pay()` remains abstract and cannot be instantiated."
           },
           "sketch-1": {
-            "title": "Concrete children implement the abstract method",
-            "bodyMarkdown": "A child becomes concrete when it implements the required method.\n\n```python\nclass EmailChannel(NotificationChannel):\n    def message(self):\n        return \"Email message\"\n\nclass SmsChannel(NotificationChannel):\n    def message(self):\n        return \"SMS message\"\n```\n\nPython can create `EmailChannel()` and `SmsChannel()`. It refuses to create an incomplete child that still has an unimplemented abstract method.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
-          },
-          "sketch-2": {
-            "title": "Helpers can depend on shared behavior",
-            "bodyMarkdown": "A helper can work with any object that provides the expected method.\n\n```python\ndef collect_messages(channels):\n    return [channel.message() for channel in channels]\n```\n\nThe ABC enforces the contract for related classes. The helper then follows Python's duck-typing style: it calls `message()` without branching on exact class names.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
+            "title": "A subclass becomes concrete when it fulfills the contract",
+            "bodyMarkdown": "A concrete subclass satisfies the abstract contract by implementing the required behavior.\n\n```python\nclass CashPayment(PaymentMethod):\n    def pay(self, amount):\n        return f\"Paid ${amount} in cash\"\n```\n\nNow CashPayment can be instantiated because it supplies the required `pay()` method.\n\nThe abstract parent defines what callers may rely on; the concrete child decides how that behavior works."
           }
         },
         "inheritance-for-shared-behavior": {
           "sketch-0": {
-            "title": "Put shared setup in the parent",
-            "bodyMarkdown": "Inheritance is useful when related classes share state or behavior.\n\n```python\nclass Vehicle:\n    def __init__(self, make):\n        self.make = make\n```\n\nThe parent owns the setup every child needs. Child classes can add only what makes them different.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
+            "title": "Inherit behavior instead of copying it",
+            "bodyMarkdown": "Inheritance is useful when a child really shares state and behavior with a parent.\n\n```python\nclass Employee:\n    def __init__(self, name):\n        self.name = name\n\n    def badge(self):\n        return f\"Employee: {self.name}\"\n\n\nclass Manager(Employee):\n    pass\n```\n\n`Manager` receives the inherited constructor and `badge()` behavior without copying them.\n\nIntroduce a parent only for behavior that is genuinely shared."
           },
           "sketch-1": {
-            "title": "Use super() to run the parent constructor",
-            "bodyMarkdown": "When a child defines its own constructor, call the parent constructor for the shared part.\n\n```python\nclass ElectricCar(Vehicle):\n    def __init__(self, make, battery_level):\n        super().__init__(make)\n        self.battery_level = battery_level\n```\n\n`super().__init__(make)` runs the next constructor in Python's inheritance chain. The child avoids copying `self.make = make`.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
-          },
-          "sketch-2": {
-            "title": "A child can extend a parent method",
-            "bodyMarkdown": "A child can override a method and still build on the parent implementation.\n\n```python\nclass Vehicle:\n    def description(self):\n        return self.make\n\nclass ElectricCar(Vehicle):\n    def description(self):\n        base = super().description()\n        return f\"{base} - electric\"\n```\n\nThis keeps shared behavior in one place while the child adds its own detail.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
+            "title": "Call the parent constructor when the child adds state",
+            "bodyMarkdown": "When a child adds its own state, `super()` can reuse the parent's setup.\n\n```python\nclass Ticket:\n    def __init__(self, event):\n        self.event = event\n\n\nclass ConcertTicket(Ticket):\n    def __init__(self, event, seat):\n        super().__init__(event)\n        self.seat = seat\n```\n\nThe parent remains responsible for shared `event` state. The child adds only the `seat` state that is specific to ConcertTicket.\n\nThis avoids duplicating the parent's constructor logic."
           }
         },
         "module-9-greenhouse-sensor-project": {
           "module-9-greenhouse-sensor-project-sketch-0": {
-            "title": "Project brief: greenhouse sensor monitor",
-            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones. The staff want one program that can read every sensor through the same method.\n\nThis project uses a fresh greenhouse problem while applying the Python tools from the lessons:\n\n1. Define an abstract `Sensor` contract and build `TemperatureSensor` with `super()`.\n2. Add `HumiditySensor`, again reusing the parent constructor.\n3. Put both concrete sensor types in one list and call `reading()` in one loop.\n4. Add `GreenhouseMonitor` to own the collection and print the report.\n\nThe result combines an enforceable ABC, shared parent setup, concrete overrides, and polymorphism."
+            "title": "Project brief: one cumulative greenhouse monitor",
+            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones.\n\nThis project is a **retrieval project**. It does not introduce another OOP taxonomy. You will apply the Module 9 skills to one codebase that grows without resetting completed work.\n\nThe final file tree exists from the beginning:\n\n```text\nmain.py\nmodels/\n  __init__.py\n  sensor.py\n  temperature_sensor.py\n  humidity_sensor.py\n  greenhouse_monitor.py\n```\n\nThe milestones are cumulative:\n\n1. Build the abstract `Sensor` contract and a concrete `TemperatureSensor`.\n2. Add `HumiditySensor` without duplicating the parent setup.\n3. Put both concrete sensors in one mixed collection and use one shared `reading()` call.\n4. Move collection ownership into `GreenhouseMonitor` while keeping the same polymorphic contract.\n\nAt every handoff, the complete previous solution becomes the next starter. Finished code stays finished."
           }
         },
         "overriding-and-specialization": {
           "sketch-0": {
-            "title": "Children can share the same method name",
-            "bodyMarkdown": "In a family, siblings can share the same last name but still have their own personality. In code, related child classes can share the same method name but return different details.\n\nStart with a parent class:\n\n```python\nclass DeliveryItem:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return self.name\n```\n\nEvery delivery item has a `label()` method. That shared name is important because the rest of the program can call `.label()` without learning a new method name for every child class.\n\nAn override keeps the same public method contract while changing the implementation for one subclass. Callers should be able to ask every object the same question without knowing which concrete class answered it."
-          },
-          "sketch-1": {
-            "title": "A child class can replace the parent method",
-            "bodyMarkdown": "Sometimes the parent method is too plain for a child class.\n\n```python\nclass DeliveryTruck(DeliveryItem):\n    def label(self):\n        return f\"Truck: {self.name}\"\n```\n\nThis is called **overriding**.\n\nThe child class writes a method with the same name as the parent method. Python uses the child version first.\n\nThe mental model:\n\n- Parent gives the default behavior.\n- Child can keep it.\n- Child can also replace it when it needs a more specific result.\n\nAn override keeps the same public method contract while changing the implementation for one subclass. Callers should be able to ask every object the same question without knowing which concrete class answered it."
-          },
-          "sketch-2": {
-            "title": "Different children can customize the same promise",
-            "bodyMarkdown": "More than one child class can override the same method name.\n\n```python\nclass DeliveryTruck(DeliveryItem):\n    def label(self):\n        return f\"Truck: {self.name}\"\n\nclass DeliveryBike(DeliveryItem):\n    def label(self):\n        return f\"Bike: {self.name}\"\n```\n\nBoth classes still answer the same question: `label()`.\n\nBut each child gives an answer that fits its own kind. That is what makes the next idea, polymorphism, possible.\n\nAn override keeps the same public method contract while changing the implementation for one subclass. Callers should be able to ask every object the same question without knowing which concrete class answered it."
+            "title": "Replace inherited behavior with the same method name",
+            "bodyMarkdown": "A child overrides a method when it supports the same public behavior but needs a specialized result.\n\n```python\nclass Notification:\n    def message(self):\n        return \"New notification\"\n\n\nclass EmailNotification(Notification):\n    def message(self):\n        return \"New email notification\"\n```\n\nBoth objects answer the same `message()` call. The subclass changes the implementation, not the caller's method name.\n\nOverride only the behavior that actually needs specialization."
           }
         },
         "polymorphic-collections": {
           "sketch-0": {
-            "title": "A mixed list works when the objects share a promise",
-            "bodyMarkdown": "Polymorphism sounds fancy, but the everyday idea is simple.\n\nThink about a TV remote. The power button works on different TVs because every TV agrees to understand the same button.\n\nIn Python, different objects can agree to answer the same method call:\n\n```python\nitems = [\n    DeliveryTruck(\"North route\"),\n    DeliveryBike(\"Campus route\"),\n]\n```\n\nThe objects are different kinds, but they both have `label()`. That shared method is the button the rest of the code can press.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
+            "title": "Different objects can answer the same call",
+            "bodyMarkdown": "Polymorphism lets one caller use the same behavior across different object types.\n\n```python\nalerts = [\n    EmailAlert(\"Server restarted\"),\n    SmsAlert(\"Build finished\"),\n]\n\nfor alert in alerts:\n    print(alert.send())\n```\n\nThe useful part is not merely that the list is mixed. The caller uses one `send()` contract for every object and does not ask which concrete class it received.\n\nDifferent objects, one method contract, one caller."
           },
           "sketch-1": {
-            "title": "One loop can use the shared method",
-            "bodyMarkdown": "Once every object in the list has the same method name, the loop can stay simple:\n\n```python\nfor item in items:\n    print(item.label())\n```\n\nThe loop does not ask, \"Are you a truck or a bike?\" It just trusts that each object knows how to answer `label()`.\n\nThat is the heart of polymorphism: different objects, same method call, correct result for each object.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
-          },
-          "sketch-2": {
-            "title": "A helper can depend on the shared behavior",
-            "bodyMarkdown": "The same idea works inside a helper function:\n\n```python\ndef build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n```\n\nThe helper does not care about the exact child class. It only cares that each object has the method it needs.\n\nThat keeps the code open to new child classes later without rewriting the loop every time.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
+            "title": "A service can depend on behavior instead of concrete classes",
+            "bodyMarkdown": "A reusable service can depend on shared behavior instead of concrete classes.\n\n```python\ndef deliver_messages(alerts):\n    messages = []\n\n    for alert in alerts:\n        messages.append(alert.send())\n\n    return messages\n```\n\nThe service does not need `isinstance()` branches for EmailAlert and SmsAlert. Any future object that provides the same `send()` behavior can participate.\n\nThat keeps the service focused on what objects **can do**, not what exact class they are."
           }
         }
       }
@@ -50237,7 +50073,7 @@ const messages: Record<string, any> = {
         "module-7-clean-student-records": {
           "sketch-1": {
             "title": "A messy student export needs a reliable cleaner",
-            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
+            "bodyMarkdown": "A student group exported `data/students.csv`. The header is useful, but the rows are inconsistent: some names have extra spaces, one name is missing, one score is not numeric, and one score is outside the allowed range.\n\nYour job is to turn that file into `output/clean_students.csv` without losing the good records.\n\nThe project deliberately combines skills from this module:\n\n- read a CSV file with `csv.DictReader`\n- clean text with `strip()` and `title()`\n- validate required text and score ranges\n- catch `ValueError` from bad integer text\n- collect accepted dictionaries in a list\n- write a new text file with `file.write()`\n- reuse Module 6 imports by creating a sibling `cleaning.py` helper and importing `clean_row` into `main.py`\n- reopen the saved file to verify the deliverable\n\nEach project starter is exactly the previous canonical solution. You will extend one working cleaner instead of restarting from scratch."
           }
         },
         "reading-text-files": {
@@ -52742,8 +52578,8 @@ const messages: Record<string, any> = {
     },
     "applied-python-projects": {
       "title": "Applied Python Projects: Object-Oriented Apps",
-      "description": "Build maintainable Python applications across multiple files. You will model state with classes, protect that state with validation, share behavior through inheritance and abstraction, test object interactions, debug package boundaries, and finish with a complete neighborhood-pantry application that includes storage, reports, tests, and documentation.",
-      "moreComingSoon": ""
+      "description": "A cumulative, project-first Python course where learners build object-oriented apps across multiple files and finish with a complete OOP capstone.",
+      "moreComingSoon": "More Applied Python Projects: Object-Oriented Apps lessons are coming soon."
     },
     "python-data-functions": {
       "title": "Python Data and Functions",
@@ -52967,54 +52803,54 @@ const messages: Record<string, any> = {
     "applied-python-projects": {
       "python-8-object-oriented-foundations": {
         "title": "Object-Oriented Foundations",
-        "description": "Model a small application with class files, constructors, state-changing methods, validation, and clear object responsibilities.",
+        "description": "Build class files, constructors, methods, and encapsulated object state across a small multifile app.",
         "outcomes": [
           "Define classes in dedicated model files and import them into main.py.",
           "Use constructors, attributes, and methods to keep object behavior with object state.",
           "Apply encapsulation with validation and helper/service files."
         ],
         "why": [
-          "Objects keep related state and behavior together instead of scattering rules across unrelated functions.",
-          "Strong class boundaries make the later inheritance and testing work easier to extend safely."
+          "Builds confidence with object-oriented foundations.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-9-inheritance-polymorphism-and-abstraction": {
         "title": "Inheritance, Polymorphism, and Abstraction",
-        "description": "Share behavior through base classes, specialize it through overrides, and let services work with mixed objects through a common contract.",
+        "description": "Extend the object model with shared base classes, overrides, mixed collections, and simple interface thinking.",
         "outcomes": [
           "Use inheritance to share behavior across related classes.",
           "Override methods when subclasses need specialized behavior.",
           "Use polymorphism and simple abstraction so services can work with mixed object types."
         ],
         "why": [
-          "Inheritance is useful only when it removes real duplication without hiding what each subclass owns.",
-          "Polymorphism lets a service depend on behavior rather than a growing chain of type checks."
+          "Builds confidence with inheritance, polymorphism, and abstraction.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-10-testing-debugging-oop-projects": {
         "title": "Testing and Debugging OOP Projects",
-        "description": "Verify object state and subclass behavior, trace import and mutation bugs, and refactor services without changing public behavior.",
+        "description": "Test object state, subclass behavior, polymorphic services, imports, fixtures, and refactors in multifile apps.",
         "outcomes": [
           "Write tests for object state changes, validation rules, and subclass overrides.",
           "Debug import errors and object-state bugs in multifile workspaces.",
           "Refactor main.py into model/service/test files while preserving behavior."
         ],
         "why": [
-          "Tests make state changes and validation rules visible before a refactor can silently break them.",
-          "Debugging package boundaries prepares you to maintain the larger capstone workspace with confidence."
+          "Builds confidence with testing and debugging oop projects.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-11-oop-capstone-project": {
         "title": "Final OOP Capstone Project",
         "description": "Deliver one cumulative OOP capstone that proves abstraction, encapsulation, inheritance, overriding, polymorphism, storage, reporting, testing, and documentation.",
         "outcomes": [
-          "Design an abstract request contract with validated shared state.",
-          "Use concrete subclasses and polymorphic collections without duplicating report logic.",
-          "Integrate an encapsulated service, CSV storage, deterministic reports, regression tests, and a clear handoff."
+          "Design a clear file architecture for a multifile OOP application.",
+          "Use encapsulation, inheritance, and polymorphism in one coherent request-management domain.",
+          "Add CSV storage, services, reports, regression checks, and documentation to finish a polished capstone."
         ],
         "why": [
-          "The capstone proves that object-oriented design is more than writing classes: the objects must cooperate through clear contracts.",
-          "One cumulative project makes every architectural decision visible from the abstract model through the final tested application."
+          "Builds confidence with final oop capstone project.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     },
@@ -53763,8 +53599,8 @@ const messages: Record<string, any> = {
     "applied-python-projects": {
       "python-8-object-oriented-foundations": {
         "applied-python-projects-python-8-object-foundations": {
-          "title": "Object and Class Foundations",
-          "description": "Move from object vocabulary to real class files, instances, constructors, and state that belongs to each object.",
+          "title": "Object Foundations",
+          "description": "Start with classes in separate files, object instances, constructors, and state.",
           "weeks": null,
           "bullets": [
             "Thinking in Objects",
@@ -53773,8 +53609,8 @@ const messages: Record<string, any> = {
           ]
         },
         "applied-python-projects-python-8-encapsulation-and-services": {
-          "title": "Methods and Validation",
-          "description": "Place behavior beside the state it changes and reject invalid operations before they can corrupt the object.",
+          "title": "Encapsulation and Services",
+          "description": "Add methods, validation, and helper files so each object owns its behavior.",
           "weeks": null,
           "bullets": [
             "Methods and Responsibility",
@@ -53783,7 +53619,7 @@ const messages: Record<string, any> = {
         },
         "applied-python-projects-python-8-module-project": {
           "title": "Module Project",
-          "description": "Build an account tracker whose model protects balances while the runner coordinates the user-facing workflow.",
+          "description": "Build an account tracker one cumulative step at a time.",
           "weeks": null,
           "bullets": [
             "Module 8 Account Tracker Project"
@@ -53793,7 +53629,7 @@ const messages: Record<string, any> = {
       "python-9-inheritance-polymorphism-and-abstraction": {
         "applied-python-projects-python-9-inheritance-and-overrides": {
           "title": "Inheritance and Overrides",
-          "description": "Extract genuinely shared behavior into a base class, then override only the parts that differ for each sensor type.",
+          "description": "Use parent classes for shared behavior and subclasses for specialization.",
           "weeks": null,
           "bullets": [
             "Inheritance for Shared Behavior",
@@ -53802,7 +53638,7 @@ const messages: Record<string, any> = {
         },
         "applied-python-projects-python-9-polymorphism-and-abstraction": {
           "title": "Polymorphism and Abstraction",
-          "description": "Use one method contract across mixed objects and make the base interface explicit when every subclass must provide the behavior.",
+          "description": "Use common method names and base-class contracts to keep services flexible.",
           "weeks": null,
           "bullets": [
             "Polymorphic Collections",
@@ -53811,7 +53647,7 @@ const messages: Record<string, any> = {
         },
         "applied-python-projects-python-9-module-project": {
           "title": "Module Project",
-          "description": "Build a greenhouse monitor whose reporting service works with multiple sensor subclasses without type-specific branching.",
+          "description": "Build a polymorphic catalog one cumulative step at a time.",
           "weeks": null,
           "bullets": [
             "Module 9 Greenhouse Sensor Project"
@@ -53821,7 +53657,7 @@ const messages: Record<string, any> = {
       "python-10-testing-debugging-oop-projects": {
         "applied-python-projects-python-10-testing-oop-behavior": {
           "title": "Testing OOP Behavior",
-          "description": "Test what an object remembers after a method call and verify that subclass overrides still satisfy the shared contract.",
+          "description": "Write tests for methods, state changes, subclass overrides, and polymorphic loops.",
           "weeks": null,
           "bullets": [
             "Testing Object State",
@@ -53830,7 +53666,7 @@ const messages: Record<string, any> = {
         },
         "applied-python-projects-python-10-debugging-and-refactoring": {
           "title": "Debugging and Refactoring",
-          "description": "Trace imports and shared state to their source, then move orchestration into services while tests protect behavior.",
+          "description": "Fix import/state problems and move code into services without changing behavior.",
           "weeks": null,
           "bullets": [
             "Debugging Imports and State",
@@ -53839,17 +53675,17 @@ const messages: Record<string, any> = {
         },
         "applied-python-projects-python-10-module-project": {
           "title": "Module Project",
-          "description": "Harden an animal-shelter intake app with regression tests, storage checks, and deliberate state transitions.",
+          "description": "Harden an OOP project with tests, storage, and regression coverage.",
           "weeks": null,
           "bullets": [
-            "Module 10 Animal Shelter Quality Project"
+            "Module 10 OOP Quality Project"
           ]
         }
       },
       "python-11-oop-capstone-project": {
         "applied-python-projects-python-11-final-capstone": {
           "title": "Final OOP Capstone",
-          "description": "Complete one portfolio-ready application through six cumulative milestones inside a single capstone topic.",
+          "description": "Complete one portfolio-ready OOP application through six cumulative milestones inside a single topic.",
           "weeks": null,
           "bullets": [
             "Neighborhood Pantry Request Coordinator"

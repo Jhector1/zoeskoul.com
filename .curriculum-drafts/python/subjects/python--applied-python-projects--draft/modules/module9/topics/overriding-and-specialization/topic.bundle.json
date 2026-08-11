@@ -2,9 +2,9 @@
   "topicId": "overriding-and-specialization",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
-  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
+  "sectionSlug": "python--applied-python-projects--draft-python-9-inheritance-and-overrides",
   "prefix": "py9",
-  "minutes": 30,
+  "minutes": 32,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -46,57 +46,18 @@
       }
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch1.title",
-      "sketchId": "sketch-1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-overriding-and-specialization-sketch1",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.prompt",
-        "exerciseKey": "try-overriding-and-specialization-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch2.title",
-      "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-overriding-and-specialization-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.prompt",
-        "exerciseKey": "try-overriding-and-specialization-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "sc-overriding-purpose",
           "fb-overriding-method-name",
-          "dr-overriding-workflow",
           "sc-overriding-shared-contract"
         ],
         "allowReveal": true,
@@ -111,18 +72,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-0.title",
       "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-0.bodyMarkdown"
-    },
-    {
-      "id": "sketch-1",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-1.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -239,6 +188,21 @@
         "semanticChecks": [
           {
             "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Atlas"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Atlas",
+            "expectedKind": "value",
+            "path": "models/catalog_item.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.0.message"
+          },
+          {
+            "type": "method_returns",
             "className": "Book",
             "constructorArgs": [
               "Project Hail Mary"
@@ -249,296 +213,9 @@
             "methodArgKinds": [],
             "expected": "Book: Project Hail Mary",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.0.message",
-            "path": "models/book.py"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Book: Project Hail Mary\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
-    },
-    {
-      "id": "try-overriding-and-specialization-sketch1",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1",
-      "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "method_returns",
-            "className": "Movie",
-            "constructorArgs": [
-              "Inside Out"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Movie: Inside Out",
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.checks.0.message",
-            "path": "models/movie.py"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Movie: Inside Out\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
-    },
-    {
-      "id": "try-overriding-and-specialization-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.1.message"
           },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
           {
             "type": "method_returns",
             "className": "Book",
@@ -551,34 +228,72 @@
             "methodArgKinds": [],
             "expected": "Book: Coraline",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.checks.0.message",
-            "path": "models/book.py"
+            "path": "models/book.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.2.message"
           },
           {
             "type": "method_returns",
-            "className": "Movie",
+            "className": "Book",
             "constructorArgs": [
-              "Coco"
+              "The Left Hand of Darkness"
             ],
             "constructorArgKinds": [],
             "methodName": "label",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Movie: Coco",
+            "expected": "Book: The Left Hand of Darkness",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.checks.1.message",
-            "path": "models/movie.py"
+            "path": "models/book.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.3.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Book: Coraline\nMovie: Coco\n",
+            "stdin": "Project Hail Mary\n",
+            "stdout": "Book: Project Hail Mary\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Coraline\n",
+            "stdout": "Book: Coraline\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "The Left Hand of Darkness\n",
+            "stdout": "Book: The Left Hand of Darkness\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+            "path": "models/book.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+            "path": "models/book.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+          "path": "models/book.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
+          "path": "models/book.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "sc-overriding-purpose",
@@ -610,28 +325,6 @@
       }
     },
     {
-      "id": "dr-overriding-workflow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.dr-overriding-workflow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
       "id": "sc-overriding-shared-contract",
       "kind": "single_choice",
       "purpose": "quiz",
@@ -645,7 +338,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     }
   ]

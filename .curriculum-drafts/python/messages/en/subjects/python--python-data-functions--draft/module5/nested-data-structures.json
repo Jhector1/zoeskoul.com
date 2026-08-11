@@ -100,13 +100,10 @@
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs instead of hard-coding the output."
+                  "message": "Use index `1` as requested in the prompt."
                 },
                 "1": {
-                  "message": "Use `students[1][\"name\"]` to read the second student's name."
-                },
-                "2": {
-                  "message": "Use `students[1][\"score\"]` to read the second student's score."
+                  "message": "Use index `1` as requested in the prompt."
                 }
               }
             },
@@ -121,15 +118,11 @@
               },
               "starterCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\n# Update only the nested stock value.\n# Print the updated stock value.\n",
               "solutionCode": "product = {\n    \"name\": \"Notebook\",\n    \"details\": {\"price\": 4, \"stock\": 12}\n}\nnew_stock = int(input())\n\nproduct[\"details\"][\"stock\"] = new_stock\nprint(product[\"details\"][\"stock\"])\n",
-              "sourceChecks": {
-                "0": {
-                  "message": "Update the nested field with `product[\"details\"][\"stock\"] = new_stock`."
-                }
-              }
+              "sourceChecks": {}
             },
             "try-nested-data-structures-sketch2": {
               "title": "Add an attendee to a nested list",
-              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list.",
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list.",
               "hint": "First access the list stored under `\"students\"`, then call `.append()` on that list.",
               "help": {
                 "concept": "When a dictionary value is a list, you can access that list by key and use normal list methods on it.",
@@ -140,7 +133,13 @@
               "solutionCode": "course = {\"title\": \"Python\", \"students\": [\"Ava\"]}\nnew_student = input()\n\ncourse[\"students\"].append(new_student)\nprint(course[\"students\"])\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Append the input value with `course[\"students\"].append(new_student)`."
+                  "message": "Access the explicitly requested `\"students\"` field from `course`."
+                },
+                "1": {
+                  "message": "Use `append()` to add the input name to the nested students list."
+                },
+                "2": {
+                  "message": "Print the updated student list stored at `course[\"students\"]` itself."
                 }
               }
             },
@@ -157,16 +156,7 @@
               "solutionCode": "name1 = input()\nscore1 = int(input())\nname2 = input()\nscore2 = int(input())\n\nstudents = [\n    {\"name\": name1, \"score\": score1},\n    {\"name\": name2, \"score\": score2}\n]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Build `students` from the two input name/score pairs before looping."
-                },
-                "1": {
-                  "message": "Loop with `for student in students:` so one dictionary record is processed at a time."
-                },
-                "2": {
-                  "message": "Read the current student's `\"name\"` key inside the loop."
-                },
-                "3": {
-                  "message": "Read the current student's `\"score\"` key inside the loop."
+                  "message": "Use a `for` loop over `students` as the prompt requests."
                 }
               }
             }
@@ -182,7 +172,7 @@
             },
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Append an input name to a list stored inside a dictionary."
+              "prompt": "The dictionary `course` stores a list of student names under the key `\"students\"`. Read one new name from input, append that name to `course[\"students\"]`, then print the updated list. Access the student list stored inside `course` under the `students` key, then use `append()` to add `new_student` to that nested list."
             },
             "try_nested_data_structures_sketch3": {
               "title": "Try it yourself",

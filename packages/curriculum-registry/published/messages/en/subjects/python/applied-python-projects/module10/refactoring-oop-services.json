@@ -4,174 +4,131 @@
       "python-10-testing-debugging-oop-projects": {
         "refactoring-oop-services": {
           "label": "Refactoring OOP Services",
-          "summary": "Refactor object programs by moving messy report and service logic into small named helpers while keeping models focused.",
+          "summary": "Refactor working OOP code by moving list-wide coordination into focused services while keeping object-specific behavior on the model and main.py thin.",
           "cards": {
             "sketch0": {
-              "title": "Why move orchestration out of main.py?"
+              "title": "Extract list-wide reporting"
             },
             "sketch1": {
-              "title": "What belongs in a service module?"
-            },
-            "sketch2": {
-              "title": "Refactor safely with imports and small steps"
+              "title": "Keep model and service responsibilities separate"
             },
             "quiz": {
-              "title": "Practice"
+              "title": "Check your understanding"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_refactoring_oop_services_sketch0": {
-              "title": "Extract report formatting into a service",
-              "prompt": "Complete `ReportService.build_book_report(books)` in `services/report_service.py`. Return one `title: $price` line per book dictionary, preserving input order.",
-              "hint": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
+              "title": "Extract a working report loop into ReportService",
+              "prompt": "`main.py` already works, and `models/book.py` already owns `Book.display_line()`. Refactor the list-wide report logic into `ReportService.build_report(self, books)` in `services/report_service.py`. The service must build the report from each Book's existing `display_line()` result and return the single newline-separated string. Then update `main.py` to import `ReportService`, remove the old report-building `for` loop, and print the value returned by `build_report(books)`. Preserve the same visible output.",
+              "hint": "Move the collection coordination, not the one-book formatting. `Book.display_line()` already owns that behavior.",
               "help": {
-                "concept": "A service method keeps reporting logic out of main.py and returns reusable data.",
-                "hint_1": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
-                "hint_2": "Use the requested file boundary as part of the solution contract."
+                "concept": "A safe refactor moves list-wide work into the service while the model keeps its per-object behavior and the output stays stable.",
+                "hint_1": "The service can collect each `book.display_line()` result.",
+                "hint_2": "After the move, main.py should call the service instead of keeping the report loop."
               },
-              "starterCode": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
+              "starterCode": "from models.book import Book\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nlines = []\nfor book in books:\n    lines.append(book.display_line())\n\nprint(\"\\n\".join(lines))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
+                  "content": "from models.book import Book\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nlines = []\nfor book in books:\n    lines.append(book.display_line())\n\nprint(\"\\n\".join(lines))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def display_line(self):\n        return f\"{self.title}: ${self.price}\"\n"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def build_book_report(self, books):\n        # TODO: return one \"title: $price\" line per dictionary.\n        pass\n"
+                  "content": "class ReportService:\n    def build_report(self, books):\n        # Move the list-wide report coordination here.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
+                  "content": "from models.book import Book\nfrom services.report_service import ReportService\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nprint(ReportService().build_report(books))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def display_line(self):\n        return f\"{self.title}: ${self.price}\"\n"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{book['title']}: ${book['price']}\" for book in books)\n"
+                  "content": "class ReportService:\n    def build_report(self, books):\n        return \"\\n\".join(book.display_line() for book in books)\n"
                 }
               },
-              "solutionCode": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
-              "checks": {
+              "solutionCode": "from models.book import Book\nfrom services.report_service import ReportService\n\nfirst_title = input()\nfirst_price = int(input())\nsecond_title = input()\nsecond_price = int(input())\n\nbooks = [\n    Book(first_title, first_price),\n    Book(second_title, second_price),\n]\n\nprint(ReportService().build_report(books))\n",
+              "checks": {},
+              "expectedOutput": "Python Basics: $12\nDebugging Guide: $18",
+              "sourceChecks": {
                 "0": {
-                  "message": "Define ReportService in its service file."
+                  "message": "Import `ReportService` from `services.report_service` after moving the report responsibility."
                 },
                 "1": {
-                  "message": "Return both formatted lines."
+                  "message": "Remove the old collection loop from main.py and print the report returned by `ReportService.build_report(books)`."
+                },
+                "2": {
+                  "message": "`build_report(self, books)` should coordinate the collection using each Book's existing `display_line()` behavior."
                 }
-              },
-              "expectedOutput": "Python Basics: $12\nDebugging Guide: $18"
+              }
             },
             "try_refactoring_oop_services_sketch1": {
-              "title": "Move total-price logic into CatalogService",
-              "prompt": "Complete `CatalogService.total_price(books)` in `services/catalog_service.py`. Return the sum of the `price` values and do not print inside the service.",
-              "hint": "Use `sum(...)` over each dictionary's `price` value.",
+              "title": "Move collection filtering into CatalogService",
+              "prompt": "`main.py` already works, and `Book.is_affordable(max_price)` already owns the one-book affordability rule. Refactor the list-wide filtering into `CatalogService.affordable_titles(self, books, max_price)` in `services/catalog_service.py`. The service must use each Book's existing `is_affordable(max_price)` method and return the matching titles in input order. Then update `main.py` to import and call `CatalogService`, remove the old filtering `for` loop, and keep printing the returned titles joined with ` | `. Preserve the same visible behavior.",
+              "hint": "The model decides whether one book is affordable; the service decides which titles to collect from the whole list.",
               "help": {
-                "concept": "Service methods should return results so callers decide how to display them.",
-                "hint_1": "Use `sum(...)` over each dictionary's `price` value.",
-                "hint_2": "Edit the file named in the prompt and verify each listed responsibility there."
+                "concept": "A focused service coordinates a collection without stealing the object-specific rule from the model.",
+                "hint_1": "Call `book.is_affordable(max_price)` inside the service.",
+                "hint_2": "main.py should only create books, call the service, and display the returned titles."
               },
-              "starterCode": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
+              "starterCode": "from models.book import Book\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = []\nfor book in books:\n    if book.is_affordable(max_price):\n        titles.append(book.title)\n\nprint(\" | \".join(titles))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
+                  "content": "from models.book import Book\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = []\nfor book in books:\n    if book.is_affordable(max_price):\n        titles.append(book.title)\n\nprint(\" | \".join(titles))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def is_affordable(self, max_price):\n        return self.price <= max_price\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def total_price(self, books):\n        # TODO: return the sum of every book price.\n        pass\n"
+                  "content": "class CatalogService:\n    def affordable_titles(self, books, max_price):\n        # Move the list-wide filtering coordination here.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
+                  "content": "from models.book import Book\nfrom services.catalog_service import CatalogService\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = CatalogService().affordable_titles(books, max_price)\nprint(\" | \".join(titles))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def is_affordable(self, max_price):\n        return self.price <= max_price\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def total_price(self, books):\n        return sum(book[\"price\"] for book in books)\n"
+                  "content": "class CatalogService:\n    def affordable_titles(self, books, max_price):\n        titles = []\n\n        for book in books:\n            if book.is_affordable(max_price):\n                titles.append(book.title)\n\n        return titles\n"
                 }
               },
-              "solutionCode": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
-              "checks": {
+              "solutionCode": "from models.book import Book\nfrom services.catalog_service import CatalogService\n\nmax_price = int(input())\n\nbooks = [\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n    Book(input(), int(input())),\n]\n\ntitles = CatalogService().affordable_titles(books, max_price)\nprint(\" | \".join(titles))\n",
+              "checks": {},
+              "expectedOutput": "Dune | Beloved",
+              "sourceChecks": {
                 "0": {
-                  "message": "Define CatalogService in the service file."
+                  "message": "Import `CatalogService` from `services.catalog_service` after moving the collection filtering responsibility."
                 },
                 "1": {
-                  "message": "Return the correct total for a list of book dictionaries."
+                  "message": "Remove the filtering loop from main.py and get `titles` from `CatalogService.affordable_titles(books, max_price)`."
                 },
                 "2": {
-                  "message": "Print the returned total from main.py."
+                  "message": "`affordable_titles` should coordinate the collection by using each Book's existing `is_affordable(max_price)` rule."
                 }
-              },
-              "expectedOutput": "40"
-            },
-            "try_refactoring_oop_services_sketch2": {
-              "title": "Refactor counting into a service method",
-              "prompt": "Complete `CatalogService.count_books(books)` so it returns the number of book dictionaries, including `0` for an empty list.",
-              "hint": "Return `len(books)`.",
-              "help": {
-                "concept": "A small service method can still make responsibilities explicit and easy to test.",
-                "hint_1": "Return `len(books)`.",
-                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
-              },
-              "starterCode": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
-              "starterFiles": {
-                "main_py": {
-                  "content": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
-                },
-                "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        # TODO: return how many book dictionaries were supplied.\n        pass\n"
-                }
-              },
-              "solutionFiles": {
-                "main_py": {
-                  "content": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
-                },
-                "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n"
-                }
-              },
-              "solutionCode": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
-              "checks": {
-                "0": {
-                  "message": "Return 2 for the provided two-book list."
-                },
-                "1": {
-                  "message": "Return 0 for an empty list."
-                },
-                "2": {
-                  "message": "Print both results from main.py."
-                }
-              },
-              "expectedOutput": "2\n0"
+              }
             }
           },
           "practice": {
             "mc-refactor-benefits": {
-              "title": "Benefits of moving logic into services",
-              "prompt": "Which changes are good reasons to move reporting logic from `main.py` into a service module? Choose all that apply.",
-              "hint": "Look for benefits related to testing, reuse, and keeping responsibilities separate.",
+              "title": "Recognize a successful refactor",
+              "prompt": "Which TWO outcomes show that moving report logic from `main.py` into a service was a useful refactor?",
+              "hint": "The responsibility should move while observable behavior stays stable.",
               "help": {
-                "concept": "Refactoring into services improves separation of responsibilities and makes list-wide logic easier to test and reuse.",
-                "hint_1": "A service is useful when the same report or calculation might be needed from more than one place.",
-                "hint_2": "Pick the options that reduce clutter in `main.py` or make report logic easier to test directly."
+                "concept": "Refactoring changes structure without changing the program's promised behavior.",
+                "hint_1": "The old output should still be produced.",
+                "hint_2": "The collection-wide responsibility should have one clear home."
               },
               "options": {
-                "a": "It makes report-building easier to test without running all of main.py.",
-                "b": "It gives one reusable place for list-wide formatting or totals.",
-                "c": "It forces every model class to print its own report lines.",
-                "d": "It removes the need for imports between workspace files."
+                "a": "main.py becomes thinner because the collection-wide report logic lives in a service",
+                "b": "The refactor changes the report format at the same time",
+                "c": "The same input still produces the same visible report",
+                "d": "The old loop remains duplicated in main.py and the service"
               }
-            },
-            "fb-service-home": {
-              "title": "Choose the right home for report logic",
-              "prompt": "Complete the sentence with the best word.",
-              "hint": "The blank should name the file role that coordinates multiple objects.",
-              "help": {
-                "concept": "List-wide orchestration and reporting usually belong in a service module rather than in one model object or scattered main.py code.",
-                "hint_1": "Think about the module that combines data from several objects.",
-                "hint_2": "The correct choice is the layer that builds reports and totals from object lists."
-              },
-              "template": "Catalog-wide report formatting usually belongs in a [blank1] module.",
-              "choices": [
-                "service",
-                "model",
-                "attribute",
-                "fixture"
-              ]
             },
             "ci-refactor-discount-service": {
               "title": "Create a pricing service method",
@@ -193,37 +150,20 @@
               }
             },
             "mc-safe-refactor-steps": {
-              "title": "Safe refactor habits",
-              "prompt": "Which actions help you refactor `main.py` into service files without changing behavior? Choose all that apply.",
-              "hint": "Think about small moves, updated imports, and checking that output still matches.",
+              "title": "Choose safe refactoring steps",
+              "prompt": "Which THREE actions make an OOP service refactor safer?",
+              "hint": "Move one responsibility, reconnect the caller, and verify behavior.",
               "help": {
-                "concept": "Safe refactoring keeps behavior stable while structure changes, so you move code in small steps and verify the program still works.",
-                "hint_1": "Choose actions that compare behavior before and after the move.",
-                "hint_2": "Good refactor habits include updating imports and checking output or tests after each small change."
+                "concept": "Small structural moves are safer when imports/calls are updated and behavior is checked after the move.",
+                "hint_1": "Do not mix unrelated behavior changes into the same refactor.",
+                "hint_2": "Keep a way to compare before and after behavior."
               },
               "options": {
-                "a": "Move one responsibility at a time into a service method.",
-                "b": "Update imports in the calling file after moving code.",
-                "c": "Change output format during the same step so the refactor feels more complete.",
-                "d": "Run the program or tests after each small move to confirm behavior stayed the same."
+                "a": "Move one collection-wide responsibility at a time",
+                "b": "Update the caller to import and use the new service",
+                "c": "Change output rules during the same refactor",
+                "d": "Run the program or tests again after the move"
               }
-            },
-            "fb-import-line": {
-              "title": "Complete the service import",
-              "prompt": "Fill in the missing module name for this refactor.",
-              "hint": "The class lives in the `services` folder and the file name matches the service role.",
-              "help": {
-                "concept": "After moving logic into a service file, the caller must import the class from the correct module path.",
-                "hint_1": "The import starts with `from services.` because the file is inside the services folder.",
-                "hint_2": "Use the module name that would hold `ReportService` in a file named after the service."
-              },
-              "template": "from services.[blank1] import ReportService",
-              "choices": [
-                "report_service",
-                "book",
-                "main",
-                "catalog"
-              ]
             },
             "ci-refactor-summary-service": {
               "title": "Build a one-line catalog summary service",
@@ -245,35 +185,19 @@
               }
             },
             "sc-main-role": {
-              "title": "Best role for main.py after refactoring",
-              "prompt": "After moving reporting logic into service modules, what should `main.py` mainly do?",
-              "hint": "Think about setup and calling other parts of the app, not holding all business logic itself.",
+              "title": "Keep main.py thin",
+              "prompt": "After list-wide filtering and reporting move into services, what should `main.py` mainly do?",
+              "hint": "Think about wiring pieces together rather than owning their internal logic.",
               "help": {
-                "concept": "After refactoring, `main.py` should mostly coordinate the app by creating objects, calling services, and showing results.",
-                "hint_1": "The best answer keeps `main.py` small and avoids putting all loops and formatting there.",
-                "hint_2": "Choose the option where `main.py` acts as the entry point that wires pieces together."
+                "concept": "The entry script should mainly create objects, call services, and display returned results.",
+                "hint_1": "Models and services should own the reusable behavior.",
+                "hint_2": "main.py is the coordinator at the application boundary."
               },
               "options": {
-                "a": "Create objects, call service methods, and print returned results.",
-                "b": "Store every report-building loop so imports are unnecessary.",
-                "c": "Replace model classes with plain strings to simplify output.",
-                "d": "Hold all calculations so service files stay empty."
-              }
-            },
-            "dr-refactor-order": {
-              "title": "Order the refactor steps",
-              "prompt": "Put these steps in a sensible order for moving report logic from `main.py` into a service file while preserving behavior.",
-              "hint": "Start by identifying the logic to move, then create the service, then reconnect the caller.",
-              "help": {
-                "concept": "A safe refactor follows a sequence: isolate one responsibility, move it, reconnect imports and calls, then verify behavior.",
-                "hint_1": "The caller cannot use the new service until the service method exists.",
-                "hint_2": "After updating `main.py`, the last step is to run the app or tests and compare behavior."
-              },
-              "tokens": {
-                "t1": "Identify the report-building code in main.py.",
-                "t2": "Create a service method for that logic.",
-                "t3": "Update main.py to import and call the service.",
-                "t4": "Run the program or tests to confirm the output stayed the same."
+                "a": "Create objects, call service methods, and display returned results",
+                "b": "Keep duplicate copies of every service loop as a backup",
+                "c": "Move one-book methods out of the model and into print statements",
+                "d": "Avoid imports by keeping every responsibility in main.py"
               }
             },
             "ci-refactor-filter-service": {
@@ -305,16 +229,12 @@
       "python-10-testing-debugging-oop-projects": {
         "refactoring-oop-services": {
           "refactoring-oop-services-sketch-0": {
-            "title": "Move report logic out of main.py",
-            "bodyMarkdown": "A crowded `main.py` usually mixes too many jobs: creating data, calculating values, formatting output, and printing.\n\nImagine a lunch-order app with report code directly in the script:\n\n```python\nfor order in orders:\n    print(f\"{order['name']}: ${order['price']}\")\n```\n\nThat is fine once, but it becomes hard to test and reuse. A service can own the report logic:\n\n```python\nclass LunchReportService:\n    def build_report(self, orders):\n        lines = []\n        for order in orders:\n            lines.append(f\"{order['name']}: ${order['price']}\")\n        return \"\\n\".join(lines)\n```\n\n`main.py` can then stay thin.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
+            "title": "A refactor moves responsibility without changing behavior",
+            "bodyMarkdown": "Start with working code, then move the collection-wide responsibility without changing behavior.\n\nSuppose an Order already owns the calculation for one order line:\n\n```python\nclass Order:\n    def line_total(self):\n        return self.quantity * self.unit_price\n```\n\nA crowded caller might build receipt lines itself:\n\n```python\nlines = []\nfor order in orders:\n    lines.append(f\"${order.line_total()}\")\n```\n\nThat coordination can move into a service:\n\n```python\nclass ReceiptService:\n    def build_receipt(self, orders):\n        return \"\\n\".join(\n            f\"${order.line_total()}\"\n            for order in orders\n        )\n```\n\nThe model keeps one-order behavior; the service coordinates the collection; the caller becomes thinner. The observable result should stay the same."
           },
           "refactoring-oop-services-sketch-1": {
-            "title": "Give each service one clear responsibility",
-            "bodyMarkdown": "A service should have a focused job.\n\nFor example, one method can calculate the total price of orders:\n\n```python\nclass LunchReportService:\n    def total_price(self, orders):\n        total = 0\n        for order in orders:\n            total += order[\"price\"]\n        return total\n```\n\nThis keeps calculation logic in one place. It also makes the behavior easy to test without running the whole app.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
-          },
-          "refactoring-oop-services-sketch-2": {
-            "title": "Keep the model, service, and main script separated",
-            "bodyMarkdown": "A clean OOP app usually separates jobs:\n\n- model classes store object state and object behavior\n- service classes handle app-level work like reports or totals\n- `main.py` wires the pieces together\n\nThat separation is not about adding files for fun. It is about making each file easier to read, test, and change.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
+            "title": "Keep object rules on the model and collection rules in the service",
+            "bodyMarkdown": "A service should coordinate many objects without stealing an object-specific rule from the model.\n\n```python\nclass Product:\n    def is_available(self):\n        return self.stock > 0\n```\n\nThe collection rule can live in a service:\n\n```python\nclass ShelfAvailabilityService:\n    def available_names(self, products):\n        names = []\n\n        for product in products:\n            if product.is_available():\n                names.append(product.name)\n\n        return names\n```\n\n`Product` owns the rule about one product. `ShelfAvailabilityService` owns the work across many products.\n\nA good refactor moves responsibility instead of duplicating the old logic in both places."
           }
         }
       }

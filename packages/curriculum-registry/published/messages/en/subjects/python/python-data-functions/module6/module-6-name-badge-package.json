@@ -51,13 +51,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Make `clean_name(text)` return `text.strip().title()`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-1-move-name-helper": {
               "title": "Move name cleanup into names.py",
-              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with `from names import clean_name`. Keep `make_badge` in `main.py` for this step.",
+              "prompt": "Start from the working single-file badge program. Refactor it without changing the output: move `clean_name(text)` into a new sibling file named `names.py`, then import it in `main.py` with a from-import that brings `clean_name` in from the `names` module. Keep `make_badge` in `main.py` for this step.",
               "hint": "Only the name-cleaning responsibility moves in this step.",
               "help": {
                 "concept": "A refactor can move one helper into its own module while preserving the app's existing behavior.",
@@ -81,19 +81,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `clean_name` from sibling module `names` in `main.py`."
+                  "message": "Use the requested import for `clean_name` from `names`."
                 },
                 "1": {
-                  "message": "Define `clean_name(text)` in `names.py`."
-                },
-                "2": {
-                  "message": "Keep `make_badge(name, role)` in `main.py` until the next project step."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             },
             "mp-2-move-badge-helper": {
               "title": "Move badge formatting into badges.py",
-              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with `from badges import make_badge`, and keep the same badge output.",
+              "prompt": "Continue from the previous exact project state. Move `make_badge(name, role)` out of `main.py` into a new sibling file `badges.py`, import it with a from-import that brings `make_badge` in from the `badges` module, and keep the same badge output.",
               "hint": "After this step, `main.py` should coordinate the two imported helpers instead of defining either one.",
               "help": {
                 "concept": "Different sibling modules can own different responsibilities while `main.py` connects their returned values.",
@@ -123,13 +120,13 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `make_badge` from sibling module `badges` in `main.py`."
+                  "message": "Use the requested import for `make_badge` from `badges`."
                 },
                 "1": {
-                  "message": "Define `make_badge(name, role)` in `badges.py`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(raw_name)` and `make_badge(name, role)` from `main.py`."
+                  "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -168,13 +165,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Add the required real docstring to `clean_name` in `names.py`."
-                },
-                "1": {
-                  "message": "Add the required real docstring to `make_badge` in `badges.py`."
-                },
-                "2": {
-                  "message": "Use local variable `clean_role = role.strip().upper()` inside `make_badge`."
+                  "message": "Use `upper()` because that method is explicitly required by the prompt."
                 }
               }
             },
@@ -216,13 +207,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `welcome_message` from sibling module `messages` in `main.py`."
-                },
-                "1": {
-                  "message": "Define documented `welcome_message(badge)` in `messages.py`."
-                },
-                "2": {
-                  "message": "Return `\"Welcome! \" + badge` from `welcome_message`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }

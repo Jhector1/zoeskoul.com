@@ -2,7 +2,7 @@
   "topicId": "encapsulation-and-validation",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-8-object-oriented-foundations",
-  "sectionSlug": "applied-python-projects-python-8-encapsulation-and-services",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-encapsulation-and-services",
   "prefix": "py8",
   "minutes": 30,
   "runtimeDefaults": {
@@ -65,39 +65,19 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch2.title",
-      "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-encapsulation-and-validation-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.prompt",
-        "exerciseKey": "try-encapsulation-and-validation-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
+        "n": 3,
+        "min": 3,
+        "max": 3,
         "selectionMode": "random",
         "exerciseKeys": [
           "mc-encapsulation-and-validation-safe-design",
           "sc-encapsulation-and-validation-why-inside-class",
-          "fb-encapsulation-and-validation-condition",
-          "dr-encapsulation-and-validation-update-order"
+          "fb-encapsulation-and-validation-condition"
         ],
         "allowReveal": true,
         "preferKind": null,
@@ -117,12 +97,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-1.title",
       "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-1.bodyMarkdown"
-    },
-    {
-      "id": "sketch-2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -212,8 +186,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.0.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
@@ -223,27 +197,8 @@
               "Civic",
               100
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.1.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "method_returns",
-            "className": "Car",
-            "constructorArgs": [
-              "Honda",
-              "Civic",
-              100
-            ],
-            "constructorArgKinds": [],
-            "methodName": "drive",
-            "methodArgs": [
-              -5
-            ],
-            "methodArgKinds": [],
-            "expected": 100,
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.1.message"
           },
           {
             "type": "method_returns",
@@ -261,25 +216,110 @@
             "methodArgKinds": [],
             "expected": 110,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message"
           },
           {
-            "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.4.message",
-            "path": "main.py"
+            "type": "method_sequence_returns",
+            "className": "Car",
+            "constructorArgs": [
+              "Honda",
+              "Civic",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  10
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "drive",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": 110,
+            "expectedKind": "value",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Car",
+            "constructorArgs": [
+              "Mazda",
+              "3",
+              5
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  7
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  0
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "drive",
+                "methodArgs": [
+                  -9
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "miles",
+            "expected": 12,
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.4.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
+            "stdin": "100\n10\n-5\n",
             "stdout": "110\n110\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n7\n0\n",
+            "stdout": "12\n12\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "40\n3\n-9\n",
+            "stdout": "43\n43\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
+        "semanticFirst": true,
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "try-encapsulation-and-validation-sketch1",
@@ -367,218 +407,96 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.0.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.0.message"
           },
           {
-            "type": "method_sequence_returns",
+            "type": "constructible",
             "className": "Car",
             "constructorArgs": [
-              "Ford",
-              "Escape",
-              130
+              "Toyota",
+              "Prius",
+              100
             ],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "drive",
-                "methodArgs": [
-                  30
-                ],
-                "methodArgKinds": []
-              }
-            ],
-            "methodName": "drive",
-            "methodArgs": [
-              -70
-            ],
-            "methodArgKinds": [],
-            "expected": 160,
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.2.message",
-            "path": "models/car.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message"
           },
           {
-            "type": "method_returns",
+            "type": "instance_attributes",
             "className": "Car",
             "constructorArgs": [
-              "Ford",
-              "Escape",
-              130
+              "Toyota",
+              "Prius",
+              100
             ],
-            "constructorArgKinds": [],
-            "methodName": "drive",
-            "methodArgs": [
-              30
+            "attributes": [
+              "make",
+              "model",
+              "miles"
             ],
-            "methodArgKinds": [],
-            "expected": 160,
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.3.message",
-            "path": "main.py"
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.2.message"
           }
         ],
         "tests": [
           {
-            "stdin": "",
-            "stdout": "160\n",
+            "stdin": "100\n150\n-20\n",
+            "stdout": "100\n150\n150\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n9\n-1\n",
+            "stdout": "5\n9\n9\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-5\n12\n-7\n",
+            "stdout": "0\n12\n12\n",
             "match": "exact"
           }
         ],
-        "semanticFirst": true
-      }
-    },
-    {
-      "id": "try-encapsulation-and-validation-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2",
-      "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
-        "starterFiles": [
+        "semanticFirst": true,
+        "sourceChecks": [
           {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
+            "type": "source_regex",
+            "pattern": "@property\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*\\)\\s*:",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.0.message"
           },
           {
+            "type": "source_regex",
+            "pattern": "@miles\\.setter\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*,\\s*[A-Za-z_]\\w*\\s*\\)\\s*:",
             "path": "models/car.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+            "path": "models/car.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.2.message"
           }
         ]
       },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/car.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.solutionFiles.models_car_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "defines_class",
-            "className": "Car",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.0.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "method_sequence_returns",
-            "className": "Car",
-            "constructorArgs": [
-              "Honda",
-              "Civic",
-              0
-            ],
-            "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "drive",
-                "methodArgs": [
-                  20
-                ],
-                "methodArgKinds": []
-              },
-              {
-                "methodName": "drive",
-                "methodArgs": [
-                  -3
-                ],
-                "methodArgKinds": []
-              },
-              {
-                "methodName": "drive",
-                "methodArgs": [
-                  50
-                ],
-                "methodArgKinds": []
-              }
-            ],
-            "methodName": "summary",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Honda Civic - 70 miles",
-            "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.1.message",
-            "path": "models/car.py"
-          },
-          {
-            "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.2.message",
-            "path": "main.py"
-          }
-        ],
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Honda Civic - 70 miles\n",
-            "match": "exact"
-          }
-        ],
-        "semanticFirst": true
-      }
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "@property\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "@miles\\.setter\\s*\\n[ \\t]*def\\s+miles\\s*\\(\\s*self\\s*,\\s*[A-Za-z_]\\w*\\s*\\)\\s*:",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
+          "path": "models/car.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "mc-encapsulation-and-validation-safe-design",
@@ -614,7 +532,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
@@ -626,29 +544,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": ">"
-      }
-    },
-    {
-      "id": "dr-encapsulation-and-validation-update-order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.dr-encapsulation-and-validation-update-order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "value": "150"
       }
     }
   ]

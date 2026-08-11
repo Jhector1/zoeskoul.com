@@ -86,7 +86,7 @@
             },
             "try-working-with-paths-sketch0": {
               "title": "Build a relative path from input",
-              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`.",
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable.",
               "hint": "Use both variables instead of typing a completed path.",
               "help": {
                 "concept": "A path string can be assembled from folder and file-name pieces that are already stored in variables.",
@@ -107,10 +107,10 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Build `path` from `folder + \"/\" + filename`."
+                  "message": "Build `path` from the two input variables with `folder + \"/\" + filename`."
                 },
                 "1": {
-                  "message": "Print the `path` variable after building it."
+                  "message": "Print the `path` variable itself."
                 }
               }
             },
@@ -137,19 +137,16 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
+                  "message": "Call `Path(...)` because that function call is explicitly required by the prompt."
                 },
                 "1": {
-                  "message": "Build the path with `Path(folder) / filename`."
-                },
-                "2": {
-                  "message": "Print the resulting `path` object."
+                  "message": "Print the constructed `path` object itself."
                 }
               }
             },
             "try-working-with-paths-sketch2": {
               "title": "Open a file through a Path object",
-              "prompt": "Read a file name from input. Build `path = Path(\"data\") / filename`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`.",
               "hint": "Build the path first, then pass the `path` variable directly to `open`.",
               "help": {
                 "concept": "A `Path` object can represent the nested relative location and can be passed directly to `open(...)`.",
@@ -182,16 +179,7 @@
               },
               "sourceChecks": {
                 "0": {
-                  "message": "Import `Path` from `pathlib`."
-                },
-                "1": {
-                  "message": "Build `path` with `Path(\"data\") / filename`."
-                },
-                "2": {
-                  "message": "Open the `path` variable in read mode."
-                },
-                "3": {
-                  "message": "Read and strip the selected file text before printing it."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -199,7 +187,7 @@
           "tryIt": {
             "try_working_with_paths_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Build and print a relative path string from folder and file-name input."
+              "prompt": "Read a folder name and a file name from input. Build the relative path from those two variables using `folder + \"/\" + filename`, store it in `path`, and print `path`. Build a path string by concatenating `folder`, a forward slash, and `filename` in that order. Store the result in a variable named `path`, then print that variable."
             },
             "try_working_with_paths_sketch1": {
               "title": "Try it yourself",
@@ -207,7 +195,7 @@
             },
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Build a `Path` to a supplied data file and open that path."
+              "prompt": "Read a file name from input. Build a `Path` built from the `data` directory and `filename` with pathlib's path-join operator, stored in `path`, open that `path` in read mode, read the text, remove surrounding whitespace, and print it. The workspace provides `data/welcome.txt` and `data/reminder.txt`."
             },
             "allowReveal": true
           }

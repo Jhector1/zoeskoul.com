@@ -86,7 +86,7 @@
             },
             "try-decomposition-and-refactoring-sketch0": {
               "title": "Refactor repeated name cleanup",
-              "prompt": "This program already produces the correct output, but it repeats `strip().title()` for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`.",
               "hint": "The finished program should still print the same two cleaned names; only the structure changes.",
               "help": {
                 "concept": "A refactor can preserve output while moving repeated logic into one reusable helper.",
@@ -97,13 +97,13 @@
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\nfirst = input()\nsecond = input()\n\nfirst_clean = clean_name(first)\nsecond_clean = clean_name(second)\n\nprint(first_clean)\nprint(second_clean)\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the repeated cleanup into `clean_name(name)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `clean_name(first)` for the first input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 },
                 "2": {
-                  "message": "Use `clean_name(second)` for the second input."
+                  "message": "Call `clean_name(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -120,10 +120,10 @@
               "solutionCode": "def word_count(text):\n    return len(text.split())\n\ntext = input()\ncount = word_count(text)\nprint(f\"Words: {count}\")\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Extract the counting responsibility into `word_count(text)`."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 },
                 "1": {
-                  "message": "Use `count = word_count(text)` in the main flow."
+                  "message": "Call `word_count(...)` because that function call is explicitly required by the prompt."
                 }
               }
             },
@@ -140,10 +140,7 @@
               "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\ndef build_badge(name):\n    nice_name = clean_name(name)\n    return \"Badge: \" + nice_name\n\nname = input()\nprint(build_badge(name))\n",
               "sourceChecks": {
                 "0": {
-                  "message": "Call `clean_name(name)` inside `build_badge` instead of duplicating its cleanup logic."
-                },
-                "1": {
-                  "message": "Return the badge using the cleaned `nice_name` value."
+                  "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
             }
@@ -151,7 +148,7 @@
           "tryIt": {
             "try_decomposition_and_refactoring_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Extract repeated cleanup into one helper while preserving the program's output."
+              "prompt": "This program already produces the correct output, but it repeats whitespace trimming followed by title-case normalization for both names. Refactor it without changing the output: define `clean_name(name)` so it returns the cleaned name, then replace both repeated cleanup expressions with calls to `clean_name`."
             },
             "try_decomposition_and_refactoring_sketch1": {
               "title": "Try it yourself",
