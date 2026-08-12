@@ -42,6 +42,16 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         fixedSqlDialect,
     });
 
+    const sourceChecks = Array.isArray((recipe as any)?.sourceChecks)
+        ? (recipe as any).sourceChecks
+        : Array.isArray((def as any).sourceChecks)
+            ? (def as any).sourceChecks
+            : undefined;
+    const expectedWithSourceChecks = {
+        ...(expected as any),
+        ...(sourceChecks?.length ? { sourceChecks } : {}),
+    };
+
     const resolvedSql = resolveSqlRunnerConfig({
         language: "sql",
         sqlDialect: fixedSqlDialect,
@@ -100,7 +110,7 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
             resultShape,
         },
         topicRuntimeDefaults: (def as any).topicRuntimeDefaults ?? null,
-        expected: expected as any,
+        expected: expectedWithSourceChecks as any,
         expectedExample,
         ideConfig: def.serviceOverrides ?? null,
     });
