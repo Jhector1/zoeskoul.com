@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
-cd "$(dirname "$0")"
+
+cd "$(dirname "$0")" || exit 1
 
 if [ ! -f .env ]; then
   echo "Missing .env" >&2
@@ -11,24 +11,35 @@ set -a
 . ./.env
 set +a
 
+RUNNER_PUBLIC_SCHEME="${RUNNER_PUBLIC_SCHEME:-https}"
+JUDGE0_PUBLIC_SCHEME="${JUDGE0_PUBLIC_SCHEME:-https}"
+EXEC_DOCKER_SOCKET="${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}"
+
+if [ ! -S "$EXEC_DOCKER_SOCKET" ]; then
+  echo "ERROR: rootless execution Docker socket is unavailable: ${EXEC_DOCKER_SOCKET}" >&2
+  exit 1
+fi
+
 echo "Checking docker services..."
 docker compose ps
 
 echo "Checking runner health internally..."
 docker compose exec -T runner node -e "const http=require('http'); const req=http.get('http://127.0.0.1:4001/healthz',res=>process.exit(res.statusCode===200?0:1)); req.on('error',()=>process.exit(1)); req.setTimeout(3000,()=>{req.destroy();process.exit(1)});"
 
-echo "Checking runner public HTTPS..."
-curl -fsSIL "https://${RUNNER_DOMAIN}/healthz" | head -20
+echo "Checking runner public endpoint..."
+RUNNER_PUBLIC_URL="${RUNNER_PUBLIC_SCHEME}://${RUNNER_DOMAIN}"
+curl -fsSIL "${RUNNER_PUBLIC_URL}/healthz" | head -20
 
-echo "Checking Judge0 public HTTPS without token should be 403..."
-status="$(curl -sS -o /dev/null -w '%{http_code}' "https://${JUDGE0_DOMAIN}/about")"
+echo "Checking Judge0 public endpoint without token should be 403..."
+JUDGE0_PUBLIC_URL="${JUDGE0_PUBLIC_SCHEME}://${JUDGE0_DOMAIN}"
+status="$(curl -sS -o /dev/null -w '%{http_code}' "${JUDGE0_PUBLIC_URL}/about")"
 if [ "$status" != "403" ]; then
-  echo "ERROR: expected https://${JUDGE0_DOMAIN}/about without token to return 403, got $status" >&2
+  echo "ERROR: expected ${JUDGE0_PUBLIC_URL}/about without token to return 403, got $status" >&2
   exit 1
 fi
 
-echo "Checking Judge0 public HTTPS with token..."
-curl -fsS -H "${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}" "https://${JUDGE0_DOMAIN}/about" >/dev/null
+echo "Checking Judge0 public endpoint with token..."
+curl -fsS -H "${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}" "${JUDGE0_PUBLIC_URL}/about" >/dev/null
 
 echo "Checking raw runner port is not published by Docker compose..."
 if docker compose port runner 4001 >/dev/null 2>&1; then
@@ -46,13 +57,8 @@ echo "Checking Docker socket visible to runner..."
 docker compose exec -T runner sh -lc 'test -S "${DOCKER_SOCKET:-/docker.sock}" && echo socket-ok'
 
 RUNTIME_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:${IMAGE_TAG:-prod}"
-EXEC_DOCKER_SOCKET="${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}"
-echo "Checking sandbox runtime image exists in execution Docker daemon: ${RUNTIME_IMAGE}"
-if [ -S "$EXEC_DOCKER_SOCKET" ]; then
-  DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker image inspect "$RUNTIME_IMAGE" >/dev/null
-else
-  docker image inspect "$RUNTIME_IMAGE" >/dev/null
-fi
+echo "Checking sandbox runtime image exists in rootless execution Docker daemon: ${RUNTIME_IMAGE}"
+DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker image inspect "$RUNTIME_IMAGE" >/dev/null || exit 1
 
 echo "Checking Caddy logs for leaked websocket tokens..."
 if docker compose logs caddy 2>/dev/null | grep -q 'token='; then
@@ -61,6 +67,41 @@ if docker compose logs caddy 2>/dev/null | grep -q 'token='; then
 fi
 
 
+
+echo "Checking canonical /runs Python execution..."
+RUNNER_RUNS_RESULT="$(
+  docker compose exec -T runner node <<'NODE'
+const response = await fetch("http://127.0.0.1:4001/runs", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+    "x-runner-secret": process.env.RUNNER_SHARED_SECRET,
+    "x-actor-key": "smoke:runner",
+  },
+  body: JSON.stringify({
+    kind: "code",
+    language: "python",
+    code: "print(42)",
+  }),
+});
+
+const body = await response.json();
+console.log(JSON.stringify({ httpStatus: response.status, ...body }));
+NODE
+)"
+
+echo "$RUNNER_RUNS_RESULT" | jq
+
+runs_http="$(printf '%s' "$RUNNER_RUNS_RESULT" | jq -r '.httpStatus')"
+runs_ok="$(printf '%s' "$RUNNER_RUNS_RESULT" | jq -r '.ok')"
+runs_stdout="$(printf '%s' "$RUNNER_RUNS_RESULT" | jq -r '.stdout // empty')"
+
+if [ "$runs_http" != "200" ] || [ "$runs_ok" != "true" ] || [ "$runs_stdout" != "42" ]; then
+  echo "ERROR: canonical /runs Python execution failed" >&2
+  exit 1
+fi
+
+echo "Canonical /runs Python execution OK."
 
 echo "Checking Judge0 Python execution..."
 CODE_B64="$(printf 'print(90)\n' | base64 -w0)"

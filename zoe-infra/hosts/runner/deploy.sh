@@ -63,29 +63,52 @@ pull_with_retry() {
 sudo mkdir -p /var/lib/zoeskoul-runner/workspaces || exit 1
 sudo chown -R "${USER}:${USER}" /var/lib/zoeskoul-runner || exit 1
 
-if [ ! -S "${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}" ]; then
-  echo "WARNING: Docker socket not found: ${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}" >&2
-  echo "Run ../../scripts/install-rootless-docker.sh or adjust RUNNER_DOCKER_SOCKET_HOST in .env." >&2
-fi
-
 RUNNER_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runner:${IMAGE_TAG}"
 RUNTIME_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:${IMAGE_TAG}"
 EXEC_DOCKER_SOCKET="${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}"
+
+ensure_execution_docker() {
+  if [ -S "$EXEC_DOCKER_SOCKET" ]; then
+    return 0
+  fi
+
+  if [ -e "$EXEC_DOCKER_SOCKET" ]; then
+    echo "ERROR: execution Docker path exists but is not a Unix socket: ${EXEC_DOCKER_SOCKET}" >&2
+    echo "Remove the stale path and restart the rootless Docker user service before deploying." >&2
+    return 1
+  fi
+
+  echo "Rootless Docker socket is not ready: ${EXEC_DOCKER_SOCKET}" >&2
+  echo "Attempting to start the rootless Docker user service..." >&2
+
+  if command -v systemctl >/dev/null 2>&1; then
+    timeout 15s systemctl --user start docker.service >/dev/null 2>&1 || true
+  fi
+
+  for _attempt in 1 2 3 4 5; do
+    if [ -S "$EXEC_DOCKER_SOCKET" ]; then
+      return 0
+    fi
+    sleep 1
+  done
+
+  echo "ERROR: rootless Docker socket is unavailable: ${EXEC_DOCKER_SOCKET}" >&2
+  echo "Learner execution requires rootless Docker; deployment aborted." >&2
+  echo "Check: systemctl --user status docker.service --no-pager -l" >&2
+  return 1
+}
+
+if ! ensure_execution_docker; then
+  exit 1
+fi
 
 echo "Deployment mode: ${DEPLOY_MODE}"
 echo "Runner image:     ${RUNNER_IMAGE}"
 echo "Runtime image:    ${RUNTIME_IMAGE}"
 
-echo "Pulling sandbox runtime image into the execution Docker daemon..."
-if [ -S "$EXEC_DOCKER_SOCKET" ]; then
-  if ! pull_with_retry env DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker pull "$RUNTIME_IMAGE"; then
-    exit 1
-  fi
-else
-  echo "WARNING: execution Docker socket not found, falling back to default Docker daemon for runtime image pull." >&2
-  if ! pull_with_retry docker pull "$RUNTIME_IMAGE"; then
-    exit 1
-  fi
+echo "Pulling sandbox runtime image into the rootless execution Docker daemon..."
+if ! pull_with_retry env DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker pull "$RUNTIME_IMAGE"; then
+  exit 1
 fi
 
 echo "Pulling runner stack images..."
