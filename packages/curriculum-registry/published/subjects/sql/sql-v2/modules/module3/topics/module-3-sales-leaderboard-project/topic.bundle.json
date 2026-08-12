@@ -104,11 +104,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+        "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+            "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -131,7 +131,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -203,11 +203,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+        "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+            "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -230,7 +230,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -302,11 +302,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+        "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+            "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -329,7 +329,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true

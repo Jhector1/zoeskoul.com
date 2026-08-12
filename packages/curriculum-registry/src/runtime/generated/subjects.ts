@@ -4666,8 +4666,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "profileId": "sql",
       "catalogSlug": "sql",
       "genKey": "sql_for_beginners",
-      "order": 0,
+      "order": 1,
       "accessPolicy": "paid",
+      "visibility": "public",
       "status": "active",
       "imagePublicId": null,
       "imageAlt": null,
@@ -4677,18 +4678,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 6,
-          "isTerminalRelease": true,
-          "qualityPass": {
-            "name": "sql-v2-module0-legacy-preserved-images",
-            "appliedAt": "2026-06-26T22:04:58.881199+00:00",
-            "normalizations": [
-              "module 0 replaced with legacy four-topic introduction",
-              "all legacy image tags preserved in sketch bodyMarkdown",
-              "each legacy sketch card has a Try it yourself code_input",
-              "SQL code_input exercises use literal starterCode, starterFiles, workspace, and solutionFiles",
-              "module project kept as the single official module project"
-            ]
-          }
+          "isTerminalRelease": false,
+          "moreComingMessageKey": "subjects.sql-v2.moreComingSoon"
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,
@@ -4697,10 +4688,10 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "versioning": {
           "family": "sql",
-          "version": 1,
+          "version": 2,
           "status": "active",
           "defaultForNewEnrollments": true,
-          "supersedes": null,
+          "supersedes": "sql",
           "supersededBy": null
         }
       }
@@ -4718,8 +4709,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -4729,7 +4720,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 110,
+          "estimatedMinutes": 82,
           "prereqKeys": [],
           "outcomeKeys": [
             "modules.sql-v2.sql-v2-0.outcomes.0",
@@ -4826,6 +4817,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           {
             "slug": "sql-v2-sql-v2-0-module-project",
             "order": 5,
+            "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.description",
             "meta": {
@@ -4834,7 +4826,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
               "bulletKeys": [
                 "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.0",
                 "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.1",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.2"
+                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.2",
+                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -4856,8 +4849,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -4867,7 +4860,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 88,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-0.title"
           ],
@@ -4998,8 +4991,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -5009,7 +5002,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 168,
+          "estimatedMinutes": 144,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-1.title"
           ],
@@ -5143,8 +5136,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -5154,7 +5147,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 108,
+          "estimatedMinutes": 92,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-2.title"
           ],
@@ -5285,8 +5278,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -5296,7 +5289,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 152,
+          "estimatedMinutes": 126,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-3.title"
           ],
@@ -5430,12 +5423,12 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
-          "datasetId": "customers_cleanup",
+          "datasetId": "sales_kpi",
           "fixedSqlDialect": "sqlite",
           "resultShape": "table"
         },
@@ -119051,18 +119044,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "tools": {
             "defaultVisible": true,
             "allowOpen": true
-          },
-          "tryIt": {
-            "id": "try-what_sql_is-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.tryIt.try_what_sql_is_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-0.what_sql_is.tryIt.try_what_sql_is_sketch0.prompt",
-            "exerciseKey": "try-what_sql_is-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
           }
         },
         {
@@ -119106,7 +119087,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -119260,122 +119241,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "try-what_sql_is-sketch0",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.try-what_sql_is-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.quiz.try-what_sql_is-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false,
-            "datasetId": "students_intro",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table"
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "students_intro",
-            "resultShape": "table",
-            "solutionCode": "SELECT name\nFROM students;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.quiz.try-what_sql_is-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name\nFROM students;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.quiz.try-what_sql_is-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.quiz.try-what_sql_is-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_sql_stands_for",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_sql_stands_for",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "m0_s01_sql_main_purpose",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -119398,57 +119263,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "purpose": "quiz",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_database_definition",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "m0_s01_database_vs_table",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_database_vs_table",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "m0_s01_table_shape",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_table_shape",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s01_sql_command_recognition",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_sql_command_recognition",
           "optionIds": [
             "a",
             "b",
@@ -119492,222 +119306,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s01_select_all_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_select_all_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_sql_name",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_sql_name",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_select_meaning",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_select_meaning",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_database_picture",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_database_picture",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_sql_workflow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_sql_workflow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_real_system",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_real_system",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_reorder_table_meaning",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_reorder_table_meaning",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s01_fill_sql_full_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_sql_full_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Query"
-          }
-        },
-        {
-          "id": "m0_s01_fill_database_contains",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_database_contains",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "tables"
-          }
-        },
-        {
-          "id": "m0_s01_fill_row_meaning",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_row_meaning",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "record"
-          }
-        },
-        {
-          "id": "m0_s01_fill_select_meaning",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_select_meaning",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "show"
-          }
-        },
-        {
-          "id": "m0_s01_fill_sql_action",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_sql_action",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "filter"
-          }
-        },
-        {
-          "id": "m0_s01_fill_store_example",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_fill_store_example",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "orders"
           }
         }
       ]
@@ -119788,7 +119386,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -119897,40 +119495,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "m0_s02_field_definition",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_field_definition",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s02_names_matter",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_names_matter",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "m0_s02_reading_order",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -119945,209 +119509,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s02_select_all_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_select_all_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_table_reading_flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_table_reading_flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_row_column_meaning",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_row_column_meaning",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_record_field_relationship",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_record_field_relationship",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_good_naming_logic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_good_naming_logic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_read_table_steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_read_table_steps",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_reorder_student_row_interpretation",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reorder_student_row_interpretation",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s02_fill_row_direction",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_fill_row_direction",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "across"
-          }
-        },
-        {
-          "id": "m0_s02_fill_column_purpose",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_fill_column_purpose",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "information"
-          }
-        },
-        {
-          "id": "m0_s02_fill_record_meaning",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_fill_record_meaning",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "row"
-          }
-        },
-        {
-          "id": "m0_s02_fill_field_meaning",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_fill_field_meaning",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "value"
-          }
-        },
-        {
-          "id": "m0_s02_fill_reading_first_step",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_fill_reading_first_step",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "table name"
           }
         }
       ]
@@ -120228,7 +119589,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -120343,23 +119704,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "m0_s03_key_purpose",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_key_purpose",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "m0_s03_name_vs_id",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -120374,188 +119718,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s03_select_all_foundations",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_select_all_foundations",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_reorder_question_flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_reorder_question_flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_reorder_structure_logic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_reorder_structure_logic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_reorder_key_reasoning",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_reorder_key_reasoning",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_reorder_table_focus",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_reorder_table_focus",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_reorder_key_to_relationships",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_reorder_key_to_relationships",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s03_fill_database_goal",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_fill_database_goal",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "answers"
-          }
-        },
-        {
-          "id": "m0_s03_fill_structure_value",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_fill_structure_value",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "understand"
-          }
-        },
-        {
-          "id": "m0_s03_fill_key_meaning",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_fill_key_meaning",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "row"
-          }
-        },
-        {
-          "id": "m0_s03_fill_name_problem",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_fill_name_problem",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "repeat"
-          }
-        },
-        {
-          "id": "m0_s03_fill_future_keys",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_fill_future_keys",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "connect"
           }
         }
       ]
@@ -120589,38 +119751,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch0.title",
           "sketchId": "where_sql_runs",
-          "height": 420,
-          "tryIt": {
-            "id": "try-first_sql_environment-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch0.prompt",
-            "exerciseKey": "try-first_sql_environment-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch1.title",
           "sketchId": "sql_editor_basics",
-          "height": 420,
-          "tryIt": {
-            "id": "try-first_sql_environment-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch1.prompt",
-            "exerciseKey": "try-first_sql_environment-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "sketch2",
@@ -120646,19 +119784,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch3.title",
           "sketchId": "reading_query_results",
-          "height": 420,
-          "tryIt": {
-            "id": "try-first_sql_environment-sketch3",
-            "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch3.title",
-            "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch3.prompt",
-            "exerciseKey": "try-first_sql_environment-sketch3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -120668,7 +119794,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -120718,204 +119844,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "try-first_sql_environment-sketch0",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false,
-            "datasetId": "students_intro",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table"
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "students_intro",
-            "resultShape": "table",
-            "solutionCode": "SELECT grade, city\nFROM students;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT grade, city\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT grade, city\nFROM students;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT grade, city\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "try-first_sql_environment-sketch1",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false,
-            "datasetId": "students_intro",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table"
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "students_intro",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, age\nFROM students;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, age\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, age\nFROM students;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, age\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
           "id": "try-first_sql_environment-sketch2",
           "kind": "code_input",
           "purpose": "project",
@@ -120940,11 +119868,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "students_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT 'Ready to query' AS status;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT 'Ready to query' AS status;",
+                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120968,7 +119896,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT 'Ready to query' AS status;",
+              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -120990,106 +119918,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT 'Ready to query' AS status;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "try-first_sql_environment-sketch3",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false,
-            "datasetId": "students_intro",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table"
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "students_intro",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, city\nFROM students;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, city\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, city\nFROM students;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, city\nFROM students;",
+                "content": "SELECT 'Practice ready' AS check_in;",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121119,23 +119948,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "purpose": "quiz",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_where_sql_runs",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s04_editor_purpose",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_editor_purpose",
           "optionIds": [
             "a",
             "b",
@@ -121196,307 +120008,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s04_workspace_parts_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_workspace_parts_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_hello_query_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_hello_query_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "e"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_select_star_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_select_star_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "e"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_results_headers_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_results_headers_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "e"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_interaction_flow_true",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_interaction_flow_true",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_workspace_loop",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_workspace_loop",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_editor_focus",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_editor_focus",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_first_query_flow",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_first_query_flow",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_hello_query_meaning",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_hello_query_meaning",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_results_reading",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_results_reading",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_reorder_workspace_parts",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_workspace_parts",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "m0_s04_fill_workspace_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_workspace_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "SQL"
-          }
-        },
-        {
-          "id": "m0_s04_fill_run_action",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_run_action",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Run"
-          }
-        },
-        {
-          "id": "m0_s04_fill_results_tab_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_results_tab_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Results"
-          }
-        },
-        {
-          "id": "m0_s04_fill_hello_column_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_hello_column_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "message"
-          }
-        },
-        {
-          "id": "m0_s04_fill_tables_tab_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_tables_tab_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Tables"
           }
         }
       ]
@@ -121559,15 +120070,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "preferKind": "code_input",
                 "seedPolicy": "global",
                 "maxAttempts": null
-              },
-              {
-                "id": "mp_3",
-                "titleKey": "topics.sql-v2.sql-v2-0.module-0-student-roster-project.projectSteps.mp_3.title",
-                "exerciseKey": "mp-3-finish-student-roster",
-                "difficulty": "easy",
-                "preferKind": "code_input",
-                "seedPolicy": "global",
-                "maxAttempts": null
               }
             ]
           }
@@ -121607,11 +120109,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "students_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+                "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121635,7 +120137,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+              "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -121657,7 +120159,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+                "content": "SELECT 'Roster check started' AS status;",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121707,11 +120209,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "students_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+                "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121735,7 +120237,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+              "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -121757,107 +120259,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "mp-3-finish-student-roster",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "students_intro",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "students_intro",
-            "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
+                "content": "SELECT *\nFROM students;",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121890,7 +120292,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-1",
       "sectionSlug": "sql-v2-sql-v2-1-1",
       "prefix": "sqlv2_1",
-      "minutes": 18,
+      "minutes": 12,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -121932,19 +120334,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-1.what_select_does.cards.sketch1.title",
           "sketchId": "from_source_table",
-          "height": 420,
-          "tryIt": {
-            "id": "try-what_select_does-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-1.what_select_does.tryIt.try_what_select_does_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.what_select_does.tryIt.try_what_select_does_sketch2.prompt",
-            "exerciseKey": "try-what_select_does-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -121954,7 +120344,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -121995,23 +120385,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_select_star_meaning",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.sc_select_star_meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
           "id": "mc_valid_select_parts",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -122028,26 +120401,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "optionIds": [
               "a",
               "c"
-            ]
-          }
-        },
-        {
-          "id": "mc_columns_returned",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.mc_columns_returned",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
             ]
           }
         },
@@ -122074,28 +120427,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr_query_order_two_columns",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.dr_query_order_two_columns",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t3",
-              "t4",
-              "t1",
-              "t2"
-            ]
-          }
-        },
-        {
           "id": "fb_from_table_name",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -122105,18 +120436,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "products"
-          }
-        },
-        {
-          "id": "fb_select_column_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.fb_select_column_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "name"
           }
         },
         {
@@ -122144,11 +120463,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT id, stock\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, stock\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122172,7 +120491,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, stock\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122218,106 +120537,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-what_select_does-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT category, stock\nFROM products;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT category, stock\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT category, stock\nFROM products;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT category, stock\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -122327,7 +120546,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-1",
       "sectionSlug": "sql-v2-sql-v2-1-2",
       "prefix": "sqlv2_1",
-      "minutes": 20,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -122352,25 +120571,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "select_all_columns",
           "height": 420,
           "tryIt": {
-            "id": "try-selecting_specific_columns-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch0.prompt",
-            "exerciseKey": "try-selecting_specific_columns-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.sketch1.title",
-          "sketchId": "select_explicit_columns",
-          "height": 420,
-          "tryIt": {
             "id": "try-selecting_specific_columns-sketch2",
             "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch2.title",
             "promptKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch2.prompt",
@@ -122384,6 +120584,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.sketch1.title",
+          "sketchId": "select_explicit_columns",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.quiz.title",
@@ -122391,7 +120598,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -122468,27 +120675,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_columns_in_products_table",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.mc_columns_in_products_table",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
           "id": "dr_build_two_column_query",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -122509,156 +120695,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t3",
               "t4",
               "t5"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_three_column_query",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.dr_build_three_column_query",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5",
-              "t6"
-            ]
-          }
-        },
-        {
-          "id": "fb_missing_column_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.fb_missing_column_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "name"
-          }
-        },
-        {
-          "id": "fb_missing_table_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.fb_missing_table_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "products"
-          }
-        },
-        {
-          "id": "try-selecting_specific_columns-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT *\nFROM products;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT *\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT *\nFROM products;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT *\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
             ]
           }
         },
@@ -122687,11 +120723,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT category, created_at\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT category, created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122715,7 +120751,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT category, created_at\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122770,7 +120806,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-1",
       "sectionSlug": "sql-v2-sql-v2-1-3",
       "prefix": "sqlv2_1",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -122795,25 +120831,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "column_sequence",
           "height": 420,
           "tryIt": {
-            "id": "try-query_multiple_columns-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch0.prompt",
-            "exerciseKey": "try-query_multiple_columns-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch1.title",
-          "sketchId": "readable_formatting",
-          "height": 420,
-          "tryIt": {
             "id": "try-query_multiple_columns-sketch2",
             "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.title",
             "promptKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.prompt",
@@ -122827,6 +120844,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch1.title",
+          "sketchId": "readable_formatting",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.quiz.title",
@@ -122834,7 +120858,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -122911,51 +120935,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_columns_in_products",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.mc_columns_in_products",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_structure_two_columns",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.dr_query_structure_two_columns",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
           "id": "dr_query_structure_three_columns",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -122978,130 +120957,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t6",
               "t1",
               "t2"
-            ]
-          }
-        },
-        {
-          "id": "fb_missing_column_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.fb_missing_column_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "price"
-          }
-        },
-        {
-          "id": "fb_missing_table_name",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.fb_missing_table_name",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "products"
-          }
-        },
-        {
-          "id": "try-query_multiple_columns-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT price, name\nFROM products;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT price, name\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT price, name\nFROM products;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT price, name\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
             ]
           }
         },
@@ -123130,11 +120985,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123158,7 +121013,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -123213,7 +121068,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-1",
       "sectionSlug": "sql-v2-sql-v2-1-4",
       "prefix": "sqlv2_1",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -123238,25 +121093,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "predict_result_shape",
           "height": 420,
           "tryIt": {
-            "id": "try-common_beginner_syntax_mistakes-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.tryIt.try_common_beginner_syntax_mistakes_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.tryIt.try_common_beginner_syntax_mistakes_sketch0.prompt",
-            "exerciseKey": "try-common_beginner_syntax_mistakes-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.cards.sketch1.title",
-          "sketchId": "syntax_checklist",
-          "height": 420,
-          "tryIt": {
             "id": "try-common_beginner_syntax_mistakes-sketch1",
             "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.tryIt.try_common_beginner_syntax_mistakes_sketch1.title",
             "promptKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.tryIt.try_common_beginner_syntax_mistakes_sketch1.prompt",
@@ -123270,6 +121106,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.cards.sketch1.title",
+          "sketchId": "syntax_checklist",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.cards.quiz.title",
@@ -123277,7 +121120,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -123318,23 +121161,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_real_column_name",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.sc_real_column_name",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
           "id": "mc_common_select_mistakes",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -123352,78 +121178,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "a",
               "b",
               "c"
-            ]
-          }
-        },
-        {
-          "id": "mc_valid_query_parts",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.mc_valid_query_parts",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_basic_query_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.dr_basic_query_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t3",
-              "t4",
-              "t5",
-              "t1",
-              "t2"
-            ]
-          }
-        },
-        {
-          "id": "dr_select_two_columns",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.dr_select_two_columns",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6",
-            "t7"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t7",
-              "t6",
-              "t5",
-              "t1",
-              "t2",
-              "t4",
-              "t3"
             ]
           }
         },
@@ -123452,106 +121206,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-common_beginner_syntax_mistakes-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, category, stock\nFROM products;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, category, stock\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, category, stock\nFROM products;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, category, stock\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
           "id": "try-common_beginner_syntax_mistakes-sketch1",
           "kind": "code_input",
           "purpose": "try_it",
@@ -123576,11 +121230,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, created_at\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123604,7 +121258,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, created_at\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -123711,15 +121365,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "preferKind": "code_input",
                 "seedPolicy": "global",
                 "maxAttempts": null
-              },
-              {
-                "id": "mp_3",
-                "titleKey": "topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.projectSteps.mp_3.title",
-                "exerciseKey": "mp-3-finish-product-starter-sheet",
-                "difficulty": "easy",
-                "preferKind": "code_input",
-                "seedPolicy": "global",
-                "maxAttempts": null
               }
             ]
           }
@@ -123759,11 +121404,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  category\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123787,7 +121432,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  category\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -123809,7 +121454,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category\nFROM products;",
+                "content": "SELECT\n  name,\n  category,\n  price\nFROM products;",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123859,11 +121504,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  category,\n  price\nFROM products;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category,\n  price\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123887,7 +121532,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  category,\n  price\nFROM products;",
+              "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -123901,106 +121546,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "query.sql",
                 "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category,\n  price\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "mp-3-finish-product-starter-sheet",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -124042,7 +121587,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-1",
       "prefix": "sqlv2_2",
-      "minutes": 18,
+      "minutes": 12,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -124067,25 +121612,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "where_changes_rows",
           "height": 420,
           "tryIt": {
-            "id": "try-why_filtering_matters-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.tryIt.try_why_filtering_matters_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.tryIt.try_why_filtering_matters_sketch2.prompt",
-            "exerciseKey": "try-why_filtering_matters-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.cards.sketch1.title",
-          "sketchId": "where_clause_order",
-          "height": 420,
-          "tryIt": {
             "id": "try-why_filtering_matters-sketch0",
             "titleKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.tryIt.try_why_filtering_matters_sketch0.title",
             "promptKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.tryIt.try_why_filtering_matters_sketch0.prompt",
@@ -124099,6 +121625,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.cards.sketch1.title",
+          "sketchId": "where_clause_order",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-2.why_filtering_matters.cards.quiz.title",
@@ -124106,7 +121639,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -124185,26 +121718,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_2",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.mc_2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
           "id": "dr_1",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -124222,50 +121735,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3"
             ]
-          }
-        },
-        {
-          "id": "dr_2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.dr_2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.fb_1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "WHERE"
-          }
-        },
-        {
-          "id": "fb_2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.fb_2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Art"
           }
         },
         {
@@ -124293,11 +121762,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -124321,7 +121790,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -124344,106 +121813,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "query.sql",
                 "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "try-why_filtering_matters-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -124501,25 +121870,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "equals_exact_value",
           "height": 420,
           "tryIt": {
-            "id": "try-equals_comparison-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.prompt",
-            "exerciseKey": "try-equals_comparison-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch1.title",
-          "sketchId": "not_equal_value",
-          "height": 420,
-          "tryIt": {
             "id": "try-equals_comparison-sketch0",
             "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.title",
             "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.prompt",
@@ -124533,6 +121883,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch1.title",
+          "sketchId": "not_equal_value",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.quiz.title",
@@ -124540,7 +121897,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -124581,48 +121938,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "eq-sc-2",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-sc-2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "eq-mc-1",
           "kind": "multi_choice",
           "purpose": "quiz",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-mc-1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "eq-mc-2",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-mc-2",
           "optionIds": [
             "a",
             "b",
@@ -124655,38 +121975,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3"
             ]
-          }
-        },
-        {
-          "id": "eq-dr-2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-dr-2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "eq-fb-1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-fb-1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Stationery"
           }
         },
         {
@@ -124726,11 +122014,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+                "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -124754,7 +122042,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+              "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -124800,106 +122088,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-equals_comparison-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -124909,7 +122097,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-2",
       "prefix": "sqlv2_2",
-      "minutes": 22,
+      "minutes": 20,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -124934,25 +122122,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "strict_numeric_comparisons",
           "height": 420,
           "tryIt": {
-            "id": "try-greater_than_comparison-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch2.prompt",
-            "exerciseKey": "try-greater_than_comparison-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.sketch1.title",
-          "sketchId": "inclusive_boundaries",
-          "height": 420,
-          "tryIt": {
             "id": "try-greater_than_comparison-sketch1",
             "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch1.title",
             "promptKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch1.prompt",
@@ -124966,6 +122135,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.sketch1.title",
+          "sketchId": "inclusive_boundaries",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.quiz.title",
@@ -124973,7 +122149,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -125031,72 +122207,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "gt-mc-matching-prices",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-mc-matching-prices",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "gt-mc-valid-where-clauses",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-mc-valid-where-clauses",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
           "id": "gt-order-query-parts",
           "kind": "drag_reorder",
           "purpose": "quiz",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-order-query-parts",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "gt-order-evaluate-stock",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-order-evaluate-stock",
           "tokenIds": [
             "t1",
             "t2",
@@ -125124,18 +122239,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "gt-fb-column-choice",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-fb-column-choice",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "stock"
-          }
-        },
-        {
           "id": "try-greater_than_comparison-sketch1",
           "kind": "code_input",
           "purpose": "try_it",
@@ -125160,11 +122263,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -125188,7 +122291,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+              "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -125234,106 +122337,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-greater_than_comparison-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, name, stock\nFROM products\nWHERE stock > 20;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, stock\nFROM products\nWHERE stock > 20;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, name, stock\nFROM products\nWHERE stock > 20;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, stock\nFROM products\nWHERE stock > 20;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -125343,7 +122346,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-2",
       "prefix": "sqlv2_2",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -125385,19 +122388,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.cards.sketch1.title",
           "sketchId": "operator_language",
-          "height": 420,
-          "tryIt": {
-            "id": "try-filtering_numbers_and_text-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.tryIt.try_filtering_numbers_and_text_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.tryIt.try_filtering_numbers_and_text_sketch1.prompt",
-            "exerciseKey": "try-filtering_numbers_and_text-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -125407,7 +122398,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -125484,67 +122475,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_rows_matching_conditions",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.mc_rows_matching_conditions",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_basic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.dr_query_order_basic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_and",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.dr_query_order_and",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
           "id": "fb_text_quotes",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -125554,18 +122484,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "Home"
-          }
-        },
-        {
-          "id": "fb_numeric_value",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.fb_numeric_value",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "20"
           }
         },
         {
@@ -125593,11 +122511,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+                "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -125621,7 +122539,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+              "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -125667,106 +122585,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-filtering_numbers_and_text-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, price\nFROM products\nWHERE price >= 25;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nWHERE price >= 25;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, price\nFROM products\nWHERE price >= 25;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nWHERE price >= 25;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -125776,7 +122594,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-3",
       "prefix": "sqlv2_2",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -125818,19 +122636,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.cards.sketch1.title",
           "sketchId": "or_alternatives",
-          "height": 420,
-          "tryIt": {
-            "id": "try-and_conditions-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.tryIt.try_and_conditions_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.and_conditions.tryIt.try_and_conditions_sketch0.prompt",
-            "exerciseKey": "try-and_conditions-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -125840,7 +122646,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -125881,23 +122687,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_and_result_example",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.sc_and_result_example",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
           "id": "mc_rows_match_art_and_price",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -125918,52 +122707,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_conditions_true_for_notebook",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.mc_conditions_true_for_notebook",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
           "id": "dr_build_and_query",
           "kind": "drag_reorder",
           "purpose": "quiz",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.dr_build_and_query",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr_read_filter_steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.dr_read_filter_steps",
           "tokenIds": [
             "t1",
             "t2",
@@ -125991,118 +122739,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "fb_missing_column",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fb_missing_column",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "stock"
-          }
-        },
-        {
-          "id": "try-and_conditions-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Home'\n   OR price < 10;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Home'\n   OR price < 10;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Home'\n   OR price < 10;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Home'\n   OR price < 10;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
           "id": "try-and_conditions-sketch1",
           "kind": "code_input",
           "purpose": "try_it",
@@ -126127,11 +122763,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -126155,7 +122791,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -126210,7 +122846,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-3",
       "prefix": "sqlv2_2",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -126252,19 +122888,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch1.title",
           "sketchId": "not_reverses_condition",
-          "height": 420,
-          "tryIt": {
-            "id": "try-combining_conditions_safely-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.prompt",
-            "exerciseKey": "try-combining_conditions_safely-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -126274,7 +122898,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -126298,23 +122922,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "sc_and_requires_both",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.sc_and_requires_both",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "sc_parentheses_clarity",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -126329,26 +122936,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_queries_with_or",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.mc_queries_with_or",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
           }
         },
         {
@@ -126426,30 +123013,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "fb_and_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.fb_and_keyword",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "AND"
-          }
-        },
-        {
-          "id": "fb_parenthesis_open",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.fb_parenthesis_open",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "("
-          }
-        },
-        {
           "id": "try-combining_conditions_safely-sketch0",
           "kind": "code_input",
           "purpose": "try_it",
@@ -126474,11 +123037,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+                "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -126502,7 +123065,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+              "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -126548,106 +123111,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-combining_conditions_safely-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home')\n  AND price < 20;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home')\n  AND price < 20;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home')\n  AND price < 20;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home')\n  AND price < 20;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -126657,7 +123120,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-2",
       "sectionSlug": "sql-v2-sql-v2-2-4",
       "prefix": "sqlv2_2",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -126682,25 +123145,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "filter_requirement_check",
           "height": 420,
           "tryIt": {
-            "id": "try-avoiding_filtering_mistakes-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.prompt",
-            "exerciseKey": "try-avoiding_filtering_mistakes-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch1.title",
-          "sketchId": "filter_debug_steps",
-          "height": 420,
-          "tryIt": {
             "id": "try-avoiding_filtering_mistakes-sketch0",
             "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.title",
             "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.prompt",
@@ -126714,6 +123158,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch1.title",
+          "sketchId": "filter_debug_steps",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.quiz.title",
@@ -126721,7 +123172,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -126759,21 +123210,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_text_quotes",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.sc_text_quotes",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
           }
         },
         {
@@ -126817,60 +123253,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr_build_basic_filter",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.dr_build_basic_filter",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_sorted_filter",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.dr_build_sorted_filter",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb_choose_and",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.fb_choose_and",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "AND"
-          }
-        },
-        {
           "id": "fb_choose_quoted_text",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -126907,11 +123289,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+                "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -126935,7 +123317,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+              "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -126958,106 +123340,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "path": "query.sql",
                 "content": "SELECT name, price\nFROM products\nWHERE price >= 20;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
-        },
-        {
-          "id": "try-avoiding_filtering_mistakes-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, name, created_at\nFROM products\nWHERE created_at >= '2026-01-25';",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, created_at\nFROM products\nWHERE created_at >= '2026-01-25';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, name, created_at\nFROM products\nWHERE created_at >= '2026-01-25';",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, created_at\nFROM products\nWHERE created_at >= '2026-01-25';",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -127190,11 +123472,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -127218,7 +123500,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+              "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -127290,11 +123572,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -127318,7 +123600,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+              "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -127390,11 +123672,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -127418,7 +123700,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+              "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -127473,7 +123755,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-3",
       "sectionSlug": "sql-v2-sql-v2-3-1",
       "prefix": "sqlv2_3",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -127515,19 +123797,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-3.order_by.cards.sketch1.title",
           "sketchId": "order_by_clause_position",
-          "height": 420,
-          "tryIt": {
-            "id": "try-order_by-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-3.order_by.tryIt.try_order_by_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.order_by.tryIt.try_order_by_sketch1.prompt",
-            "exerciseKey": "try-order_by-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -127537,7 +123807,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -127575,43 +123845,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_desc_direction",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.sc_desc_direction",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
-          "id": "mc_order_by_examples",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.mc_order_by_examples",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
           }
         },
         {
@@ -127655,28 +123888,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr_order_by_limit_sequence",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.dr_order_by_limit_sequence",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "fb_default_direction",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -127686,18 +123897,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "ASC"
-          }
-        },
-        {
-          "id": "fb_desc_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.fb_desc_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "DESC"
           }
         },
         {
@@ -127725,11 +123924,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -127752,7 +123951,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -127798,105 +123997,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-order_by-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Art'\nORDER BY price ASC;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Art'\nORDER BY price ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ]
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Art'\nORDER BY price ASC;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Art'\nORDER BY price ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -127906,7 +124006,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-3",
       "sectionSlug": "sql-v2-sql-v2-3-2",
       "prefix": "sqlv2_3",
-      "minutes": 20,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -127931,25 +124031,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "ascending_examples",
           "height": 420,
           "tryIt": {
-            "id": "try-ascending_order-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch0.prompt",
-            "exerciseKey": "try-ascending_order-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.sketch1.title",
-          "sketchId": "descending_examples",
-          "height": 420,
-          "tryIt": {
             "id": "try-ascending_order-sketch1",
             "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch1.title",
             "promptKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch1.prompt",
@@ -127963,6 +124044,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.sketch1.title",
+          "sketchId": "descending_examples",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.quiz.title",
@@ -127970,7 +124058,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -128028,28 +124116,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_columns_for_asc",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.mc_columns_for_asc",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
           "id": "mc_asc_examples",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -128070,48 +124136,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr_query_order_basic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.dr_query_order_basic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_limit",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.dr_query_order_limit",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "fb_sort_keyword",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -128121,117 +124145,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "ASC"
-          }
-        },
-        {
-          "id": "fb_column_choice",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.fb_column_choice",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "stock"
-          }
-        },
-        {
-          "id": "try-ascending_order-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ]
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
           }
         },
         {
@@ -128259,11 +124172,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+                "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -128286,7 +124199,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+              "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -128341,7 +124254,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-3",
       "sectionSlug": "sql-v2-sql-v2-3-3",
       "prefix": "sqlv2_3",
-      "minutes": 20,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -128366,25 +124279,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "primary_sort_column",
           "height": 420,
           "tryIt": {
-            "id": "try-primary_sort-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch0.prompt",
-            "exerciseKey": "try-primary_sort-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.sketch1.title",
-          "sketchId": "secondary_tie_breaker",
-          "height": 420,
-          "tryIt": {
             "id": "try-primary_sort-sketch2",
             "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch2.title",
             "promptKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch2.prompt",
@@ -128398,6 +124292,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.sketch1.title",
+          "sketchId": "secondary_tie_breaker",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.quiz.title",
@@ -128405,7 +124306,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -128429,23 +124330,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "sc_primary_sort_goal_price",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.sc_primary_sort_goal_price",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
           "id": "sc_primary_sort_first_column",
           "kind": "single_choice",
           "purpose": "quiz",
@@ -128460,27 +124344,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_primary_sort_good_matches",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.mc_primary_sort_good_matches",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
           }
         },
         {
@@ -128524,38 +124387,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "dr_primary_sort_reasoning_steps",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.dr_primary_sort_reasoning_steps",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_primary_sort_desc",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.fb_primary_sort_desc",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "DESC"
-          }
-        },
-        {
           "id": "fb_primary_sort_column",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -128565,105 +124396,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "name"
-          }
-        },
-        {
-          "id": "try-primary_sort-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nORDER BY category DESC, price ASC;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nORDER BY category DESC, price ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ]
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nORDER BY category DESC, price ASC;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nORDER BY category DESC, price ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
           }
         },
         {
@@ -128691,11 +124423,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -128718,7 +124450,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+              "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -128773,7 +124505,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-3",
       "sectionSlug": "sql-v2-sql-v2-3-4",
       "prefix": "sqlv2_3",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -128798,25 +124530,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "limit_first_rows",
           "height": 420,
           "tryIt": {
-            "id": "try-combining_order_by_with_limit-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.tryIt.try_combining_order_by_with_limit_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.tryIt.try_combining_order_by_with_limit_sketch0.prompt",
-            "exerciseKey": "try-combining_order_by_with_limit-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.cards.sketch1.title",
-          "sketchId": "rank_then_limit",
-          "height": 420,
-          "tryIt": {
             "id": "try-combining_order_by_with_limit-sketch1",
             "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.tryIt.try_combining_order_by_with_limit_sketch1.title",
             "promptKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.tryIt.try_combining_order_by_with_limit_sketch1.prompt",
@@ -128830,6 +124543,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.cards.sketch1.title",
+          "sketchId": "rank_then_limit",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.cards.quiz.title",
@@ -128837,7 +124557,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -128915,48 +124635,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_queries_for_cheapest_two",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.mc_queries_for_cheapest_two",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_clause_order_basic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.dr_query_clause_order_basic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "dr_ranked_filtered_query_order",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -128977,130 +124655,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t3",
               "t4",
               "t5"
-            ]
-          }
-        },
-        {
-          "id": "fb_limit_number",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.fb_limit_number",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "2"
-          }
-        },
-        {
-          "id": "fb_sort_direction",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.fb_sort_direction",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "DESC"
-          }
-        },
-        {
-          "id": "try-combining_order_by_with_limit-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "products_catalog",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "products_catalog",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, name\nFROM products\nLIMIT 4;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name\nFROM products\nLIMIT 4;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, name\nFROM products\nLIMIT 4;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, name\nFROM products\nLIMIT 4;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
             ]
           }
         },
@@ -129129,11 +124683,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -129156,7 +124710,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -129311,11 +124865,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -129338,7 +124892,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+              "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -129410,11 +124964,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -129437,7 +124991,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+              "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -129509,11 +125063,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -129536,7 +125090,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+              "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -129591,7 +125145,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-1",
       "prefix": "sqlv2_4",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -129633,19 +125187,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-4.intro_to_like.cards.sketch1.title",
           "sketchId": "percent_wildcard_patterns",
-          "height": 420,
-          "tryIt": {
-            "id": "try-intro_to_like-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-4.intro_to_like.tryIt.try_intro_to_like_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.intro_to_like.tryIt.try_intro_to_like_sketch1.prompt",
-            "exerciseKey": "try-intro_to_like-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -129655,7 +125197,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -129696,23 +125238,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_like_single_char",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.sc_like_single_char",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
           "id": "mc_like_true_patterns",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -129728,27 +125253,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "kind": "multi_choice",
             "optionIds": [
               "a",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "mc_like_dataset_matches",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.mc_like_dataset_matches",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c",
               "d"
             ]
           }
@@ -129771,38 +125275,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3"
             ]
-          }
-        },
-        {
-          "id": "dr_pattern_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.dr_pattern_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_like_suffix",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.fb_like_suffix",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "'%@example.com'"
           }
         },
         {
@@ -129842,11 +125314,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE 'M%';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE 'M%';",
+                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -129870,7 +125342,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE 'M%';",
+              "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -129916,106 +125388,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-intro_to_like-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE '%o%';",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE '%o%';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE '%o%';",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE '%o%';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -130025,7 +125397,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-1",
       "prefix": "sqlv2_4",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -130067,19 +125439,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch1.title",
           "sketchId": "mixed_wildcards",
-          "height": 420,
-          "tryIt": {
-            "id": "try-underscore_wildcard-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.prompt",
-            "exerciseKey": "try-underscore_wildcard-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -130089,7 +125449,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -130130,23 +125490,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_2",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.sc_2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
           "id": "mc_1",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -130164,26 +125507,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "a",
               "b",
               "d"
-            ]
-          }
-        },
-        {
-          "id": "mc_2",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.mc_2",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
             ]
           }
         },
@@ -130207,40 +125530,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t3",
               "t4"
             ]
-          }
-        },
-        {
-          "id": "dr_2",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.dr_2",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb_1",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.fb_1",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "_"
           }
         },
         {
@@ -130280,11 +125569,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'H_uston';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'H_uston';",
+                "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -130308,7 +125597,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'H_uston';",
+              "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -130354,106 +125643,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-underscore_wildcard-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city LIKE '_____';",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city LIKE '_____';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, full_name, city\nFROM customers\nWHERE city LIKE '_____';",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city LIKE '_____';",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -130463,7 +125652,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-2",
       "prefix": "sqlv2_4",
-      "minutes": 20,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -130505,19 +125694,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-4.in_list_filter.cards.sketch1.title",
           "sketchId": "not_in_value_list",
-          "height": 420,
-          "tryIt": {
-            "id": "try-in_list_filter-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-4.in_list_filter.tryIt.try_in_list_filter_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.in_list_filter.tryIt.try_in_list_filter_sketch1.prompt",
-            "exerciseKey": "try-in_list_filter-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -130527,7 +125704,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -130605,47 +125782,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_not_in_examples",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.mc_not_in_examples",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_in",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.dr_query_order_in",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
           "id": "dr_where_in_logic",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -130663,30 +125799,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3"
             ]
-          }
-        },
-        {
-          "id": "fb_in_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.fb_in_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "IN"
-          }
-        },
-        {
-          "id": "fb_not_in_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.fb_not_in_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "NOT IN"
           }
         },
         {
@@ -130714,11 +125826,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -130742,7 +125854,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -130788,106 +125900,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-in_list_filter-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -130897,7 +125909,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-2",
       "prefix": "sqlv2_4",
-      "minutes": 18,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -130939,19 +125951,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.cards.sketch1.title",
           "sketchId": "between_with_condition",
-          "height": 420,
-          "tryIt": {
-            "id": "try-between_range_filter-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.tryIt.try_between_range_filter_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.between_range_filter.tryIt.try_between_range_filter_sketch1.prompt",
-            "exerciseKey": "try-between_range_filter-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -130961,7 +125961,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -131040,46 +126040,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_good_between_uses",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.mc_good_between_uses",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_between_query",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.dr_build_between_query",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
           "id": "dr_between_with_order",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -131099,30 +126059,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t4",
               "t1"
             ]
-          }
-        },
-        {
-          "id": "fb_between_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.fb_between_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "BETWEEN"
-          }
-        },
-        {
-          "id": "fb_between_end_value",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.fb_between_end_value",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "'2026-01-22'"
           }
         },
         {
@@ -131150,11 +126086,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+                "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -131178,7 +126114,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+              "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -131224,105 +126160,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-between_range_filter-sketch1",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch1",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch1.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ]
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch1.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch1.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch1.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -131332,7 +126169,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-3",
       "prefix": "sqlv2_4",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -131374,19 +126211,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-4.what_null_means.cards.sketch1.title",
           "sketchId": "is_null_syntax",
-          "height": 420,
-          "tryIt": {
-            "id": "try-what_null_means-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-4.what_null_means.tryIt.try_what_null_means_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.what_null_means.tryIt.try_what_null_means_sketch2.prompt",
-            "exerciseKey": "try-what_null_means-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -131396,7 +126221,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -131473,46 +126298,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_dataset_null_columns",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.mc_dataset_null_columns",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_null_query_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.dr_null_query_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
           "id": "dr_not_null_query_order",
           "kind": "drag_reorder",
           "purpose": "quiz",
@@ -131530,30 +126315,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3"
             ]
-          }
-        },
-        {
-          "id": "fb_null_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.fb_null_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "IS"
-          }
-        },
-        {
-          "id": "fb_not_null_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.fb_not_null_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "NOT"
           }
         },
         {
@@ -131581,11 +126342,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -131609,7 +126370,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -131655,106 +126416,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           }
-        },
-        {
-          "id": "try-what_null_means-sketch2",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch2",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
-            ]
-          }
         }
       ]
     },
@@ -131764,7 +126425,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "sql-v2-4",
       "sectionSlug": "sql-v2-sql-v2-4-4",
       "prefix": "sqlv2_4",
-      "minutes": 22,
+      "minutes": 16,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -131789,25 +126450,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sketchId": "is_not_null_present_value",
           "height": 420,
           "tryIt": {
-            "id": "try-combine_text_and_null_filters-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch0.prompt",
-            "exerciseKey": "try-combine_text_and_null_filters-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.sketch1.title",
-          "sketchId": "cleanup_filter_combination",
-          "height": 420,
-          "tryIt": {
             "id": "try-combine_text_and_null_filters-sketch1",
             "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch1.title",
             "promptKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch1.prompt",
@@ -131821,6 +126463,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.sketch1.title",
+          "sketchId": "cleanup_filter_combination",
+          "height": 420
+        },
+        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.quiz.title",
@@ -131828,7 +126477,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -131886,27 +126535,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_find_suspicious_rows",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.mc_find_suspicious_rows",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c",
-              "d"
-            ]
-          }
-        },
-        {
           "id": "mc_valid_combined_filters",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -131923,26 +126551,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "optionIds": [
               "a",
               "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_basic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.dr_query_order_basic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
             ]
           }
         },
@@ -131965,130 +126573,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "t2",
               "t3",
               "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb_like_wildcard",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.fb_like_wildcard",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "%Test%"
-          }
-        },
-        {
-          "id": "fb_null_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.fb_null_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "NULL"
-          }
-        },
-        {
-          "id": "try-combine_text_and_null_filters-sketch0",
-          "kind": "code_input",
-          "purpose": "try_it",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch0",
-          "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch0.starterCode",
-          "fixedSqlDialect": "sqlite",
-          "runtime": {
-            "kind": "sql",
-            "datasetId": "customers_cleanup",
-            "fixedSqlDialect": "sqlite",
-            "resultShape": "table",
-            "showSchema": true,
-            "showErd": false,
-            "showChen": false,
-            "supportsTerminal": false,
-            "supportsMultiFile": false,
-            "supportsFileSystem": false
-          },
-          "recipe": {
-            "type": "sql_query",
-            "datasetId": "customers_cleanup",
-            "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city IS NOT NULL;",
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city IS NOT NULL;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "sqlFileOrder": [
-              "query.sql"
-            ],
-            "ignoreRowOrder": true
-          },
-          "entryFilePath": "query.sql",
-          "starterFiles": [
-            {
-              "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch0.starterCode",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "query.sql",
-              "content": "SELECT id, full_name, city\nFROM customers\nWHERE city IS NOT NULL;",
-              "language": "sql",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "workspace": {
-            "language": "sql",
-            "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch0.starterCode",
-            "starterFiles": [
-              {
-                "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch0.starterCode",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "solutionFiles": [
-              {
-                "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE city IS NOT NULL;",
-                "language": "sql",
-                "isEntry": true,
-                "entry": true
-              }
-            ],
-            "openTabs": [
-              "query.sql"
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "query.sql"
-              ]
-            }
-          },
-          "showExpectedExample": true,
-          "sqlFileOrder": [
-            "query.sql"
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "query.sql"
             ]
           }
         },
@@ -132117,11 +126601,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE email IS NOT NULL\n  AND status = 'active';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, email, status\nFROM customers\nWHERE email IS NOT NULL\n  AND status = 'active';",
+                "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132145,7 +126629,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT id, full_name, email, status\nFROM customers\nWHERE email IS NOT NULL\n  AND status = 'active';",
+              "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132167,7 +126651,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, email, status\nFROM customers\nWHERE email IS NOT NULL\n  AND status = 'active';",
+                "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132300,11 +126784,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132328,7 +126812,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+              "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132400,11 +126884,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132428,7 +126912,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+              "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132500,11 +126984,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-3-finish-cleanup-report.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-3-finish-cleanup-report.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132528,7 +127012,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
+              "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-3-finish-cleanup-report.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132692,11 +127176,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132720,7 +127204,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132792,11 +127276,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132820,7 +127304,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132892,11 +127376,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -132920,7 +127404,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -132992,11 +127476,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -133004,7 +127488,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "sqlFileOrder": [
               "query.sql"
-            ]
+            ],
+            "ignoreRowOrder": false
           },
           "entryFilePath": "query.sql",
           "starterFiles": [
@@ -133019,7 +127504,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true

@@ -4,7 +4,7 @@
       "sql-v2-2": {
         "filtering_numbers_and_text": {
           "label": "Choosing Comparisons for Numbers and Text",
-          "summary": "Match the comparison operator and literal format to the type of value being filtered.",
+          "summary": "Match the operator and literal format to the type of value being filtered.",
           "cards": {
             "sketch0": {
               "title": "Numbers and Text Use Different Literals"
@@ -64,52 +64,6 @@
                 "d": "WHERE product_name = 'Notebook'"
               }
             },
-            "mc_rows_matching_conditions": {
-              "title": "Find matching products",
-              "prompt": "Based on the dataset, which products match `WHERE price < 20`? Choose all matching answers.",
-              "hint": "Compare each listed product's price to 20.",
-              "help": {
-                "concept": "A numeric WHERE filter keeps rows whose values satisfy the comparison for that column.",
-                "hint_1": "Products priced 12.99, 6.75, and 18.00 should stay.",
-                "hint_2": "Products priced 24.50, 39.99, and 129.00 should not stay."
-              },
-              "options": {
-                "a": "Sketchbook",
-                "b": "Notebook",
-                "c": "Fountain Pen",
-                "d": "Desk Lamp"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build a filtered query",
-              "prompt": "Put the SQL parts in the correct order to show product names from the Art category.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Art';"
-              }
-            },
-            "dr_query_order_and": {
-              "title": "Order a query with AND",
-              "prompt": "Arrange the parts to create a query that shows names of Stationery products cheaper than 10.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Stationery' AND price < 10;"
-              }
-            },
             "fb_text_quotes": {
               "title": "Complete a text filter",
               "prompt": "Fill in the missing value to keep only Home products.",
@@ -127,110 +81,28 @@
                 "Notebook"
               ]
             },
-            "fb_numeric_value": {
-              "title": "Complete a numeric filter",
-              "prompt": "Fill in the missing number so the condition keeps products with price greater than 20.",
-              "hint": "The missing part is the number being compared, not a column name.",
-              "help": {
-                "concept": "A numeric WHERE condition compares a number column to a numeric value without quotes.",
-                "hint_1": "The operator is already `>`, so you only need the threshold value.",
-                "hint_2": "Choose the number that would include 24.50 and 39.99 but exclude 18.00."
-              },
-              "template": "WHERE price > [blank1]",
-              "choices": [
-                "Art",
-                "20",
-                "price",
-                "Home"
-              ]
-            },
-            "ci_price_over_20": {
-              "title": "Query products with higher prices",
-              "prompt": "Write a query that shows the `name` and `price` columns for products where `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price columns for products where price is greater than 20.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_stationery_under_10": {
-              "title": "Filter by text and number together",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products where the category is `Stationery` and the price is less than 10. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products where the category is Stationery and the price is less than 10.\nSELECT name, category, price\nFROM products\nWHERE ;"
-            },
-            "ci_name_like_book": {
-              "title": "Find names with matching text",
-              "prompt": "Write a query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name column for products whose name contains the text book.\nSELECT name\nFROM products\nWHERE name LIKE ;"
-            },
             "try-filtering_numbers_and_text-sketch0": {
-              "title": "Compare a Text Category",
-              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
-              "hint": "Text values such as Home need single quotes.",
+              "title": "Compare a Text Category Correctly",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products whose category is exactly `Home`.",
+              "hint": "Home is text, so write the value in single quotes.",
               "help": {
-                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
-                "hint_1": "Text values such as Home need single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Home is text, so write the value in single quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT id, name, category\nFROM products\n-- Match the Home category"
-            },
-            "try-filtering_numbers_and_text-sketch1": {
-              "title": "Translate “At Least” into SQL",
-              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
-              "hint": "Translate “at least 25” to >= 25.",
-              "help": {
-                "concept": "Business words such as “at least” map to specific comparison operators.",
-                "hint_1": "Translate “at least 25” to >= 25.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, price\nFROM products\n-- Keep prices of at least 25"
-            },
-            "try-filtering_numbers_and_text-sketch2": {
-              "title": "Find names with matching text",
-              "prompt": "Create a focused inventory query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name column for products whose name contains the text book.\nSELECT name\nFROM products\nWHERE name LIKE ;"
+              "starterCode": "-- Match the Home text value exactly.\nSELECT id, name, category\nFROM products\nWHERE category ="
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_filtering_numbers_and_text_sketch0": {
-              "title": "Compare a Text Category",
-              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
-              "hint": "Text values such as Home need single quotes.",
+              "title": "Compare a Text Category Correctly",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products whose category is exactly `Home`.",
+              "hint": "Home is text, so write the value in single quotes.",
               "help": {
-                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
-                "hint_1": "Text values such as Home need single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_filtering_numbers_and_text_sketch1": {
-              "title": "Translate “At Least” into SQL",
-              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
-              "hint": "Translate “at least 25” to >= 25.",
-              "help": {
-                "concept": "Business words such as “at least” map to specific comparison operators.",
-                "hint_1": "Translate “at least 25” to >= 25.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Home is text, so write the value in single quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
@@ -243,12 +115,12 @@
       "sql-v2-2": {
         "filtering_numbers_and_text": {
           "numeric_and_text_literals": {
-            "title": "Numbers and Text Use Different Literals",
-            "bodyMarkdown": "Numeric values are written without quotes, while text values are normally written inside single quotes.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 30;\n```\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Art';\n```\n\nThe first condition compares numbers. The second compares text. Using the correct literal form makes the intention clear and avoids accidental type conversion."
+            "title": "Write Numbers and Text Differently",
+            "bodyMarkdown": "Numeric literals are written without quotes. Text literals are normally written inside single quotes.\n\n```sql\nSELECT order_id, total\nFROM orders\nWHERE total <= 100;\n```\n\n```sql\nSELECT order_id, status\nFROM orders\nWHERE status = 'Pending';\n```\n\nThe first condition compares numbers. The second compares text. Identify the column's kind of value before writing the literal."
           },
           "operator_language": {
             "title": "Translate Requirement Words into Operators",
-            "bodyMarkdown": "Choose the operator from the wording of the request:\n\n- “exactly” → `=`\n- “not” or “anything except” → `<>`\n- “more than” → `>`\n- “less than” → `<`\n- “at least” → `>=`\n- “at most” → `<=`\n\nFor example, “at least 15 units” includes the boundary:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock >= 15;\n```\n\nFirst identify the column, then the value type, then the boundary rule. Do not choose an operator only because it appeared in the previous example."
+            "bodyMarkdown": "Map the wording of the request to the comparison:\n\n- “exactly” → `=`\n- “anything except” → `<>`\n- “more than” → `>`\n- “less than” → `<`\n- “at least” → `>=`\n- “at most” → `<=`\n\nFor example:\n\n```sql\nSELECT order_id, item_count\nFROM orders\nWHERE item_count >= 5;\n```\n\nFirst identify the column, then the literal type, then whether the boundary is strict or inclusive."
           }
         }
       }

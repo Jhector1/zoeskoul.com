@@ -3,60 +3,60 @@
     "sql-v2": {
       "sql-v2-2": {
         "module-2-inventory-watchlist-project": {
-          "label": "Module 2 Inventory Watchlist Project",
-          "summary": "Build an inventory watchlist with practical filters that narrow the list step by step.",
+          "label": "Module 2 Restock Watchlist Project",
+          "summary": "Build one restock query that narrows affordable products into an actionable low-stock stationery watchlist.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Inventory watchlist"
+              "title": "Friday restock watchlist"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Find budget products"
+              "title": "Start with affordable products"
             },
             "mp_2": {
-              "title": "Focus on the stationery items"
+              "title": "Narrow the list to stationery"
             },
             "mp_3": {
-              "title": "Finish the low-stock watchlist"
+              "title": "Flag the low-stock items"
             }
           },
           "quiz": {
             "mp-1-find-budget-products": {
-              "title": "Find budget products",
-              "prompt": "Start the watchlist by returning `id`, `name`, and `price` from `products` where `price` is less than 20.",
-              "hint": "Adjust the comparison so the watchlist keeps products under 20.",
+              "title": "Start with affordable products",
+              "prompt": "The buyer first needs products priced below `20`. Return `id`, `name`, and `price` from `products`, in that order.",
+              "hint": "Start from the product columns, then add one strict price condition.",
               "help": {
-                "concept": "Start broad, then tighten the watchlist with the right filter.",
-                "hint_1": "Use `price < 20` in the WHERE clause.",
-                "hint_2": "Run the query and confirm the results table shows only cheaper products."
+                "concept": "Begin a cumulative filter with the broadest approved rule.",
+                "hint_1": "Add a WHERE clause that keeps prices strictly below 20.",
+                "hint_2": "The boundary value 20 should not be included."
               },
-              "starterCode": "-- Returning id, name, and price from products where price is less than 20.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price <= 10;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products;"
             },
             "mp-2-focus-on-stationery": {
-              "title": "Focus on the stationery items",
-              "prompt": "Add a second rule so the watchlist only keeps products in the `Stationery` category.",
-              "hint": "Use AND to keep both rules true at the same time.",
+              "title": "Narrow the list to stationery",
+              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and also require `category = 'Stationery'`.",
+              "hint": "Preserve the working budget query and connect the category rule with AND.",
               "help": {
-                "concept": "Multiple conditions narrow the result set one rule at a time.",
-                "hint_1": "Keep `price < 20` exactly as it is.",
-                "hint_2": "Add `AND category = 'Stationery'`, then rerun the query."
+                "concept": "AND extends a working filter when every approved rule must remain true.",
+                "hint_1": "Do not replace the price rule; add the category rule to it.",
+                "hint_2": "Both conditions must pass for a row to remain."
               },
-              "starterCode": "-- Keep the budget filter above.\n-- Add a category filter for Stationery.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
             },
             "mp-3-finish-watchlist": {
-              "title": "Finish the low-stock watchlist",
-              "prompt": "Add `stock` to the result and one more rule so the final query only keeps products where `stock` is less than or equal to `15`.",
-              "hint": "Add `stock` to the selected columns, then keep values at or below `15`.",
+              "title": "Flag the low-stock items",
+              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only rows with `stock <= 15`, while preserving both earlier rules.",
+              "hint": "Start from the approved stationery query, add stock to SELECT, then add one inclusive stock condition.",
               "help": {
-                "concept": "The final step preserves the budget and category rules, then adds a stock threshold that returns a real watchlist.",
-                "hint_1": "Add `stock` to the SELECT list.",
-                "hint_2": "Use `AND stock <= 10` in the WHERE clause, then rerun the query."
+                "concept": "A cumulative project extends the same working query instead of restarting each milestone.",
+                "hint_1": "Keep the price and category conditions exactly as they are.",
+                "hint_2": "Add stock to the SELECT list and require stock to be at most 15."
               },
-              "starterCode": "-- Keep the filters above.\n-- Add stock and a low-stock rule for products with stock <= 15.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
             },
             "try-module-2-inventory-watchlist-project-sketch0": {
               "title": "Preview Budget Products",
@@ -87,7 +87,7 @@
         "module-2-inventory-watchlist-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A restocking review needs a short watchlist of affordable stationery with limited inventory.\n\nStart with budget products, narrow the category, then add the stock threshold.\n\nThe finished query should surface a small, actionable list instead of an empty report."
+            "bodyMarkdown": "A neighborhood office-supply shop is preparing its Friday restock order.\n\nThe buyer wants to begin with affordable products, then narrow the list to stationery. Warehouse staff will take that approved query and add one final rule so only low-stock items remain.\n\nBuild one watchlist that becomes more useful at each handoff. Do not restart from a blank query between milestones."
           }
         }
       }

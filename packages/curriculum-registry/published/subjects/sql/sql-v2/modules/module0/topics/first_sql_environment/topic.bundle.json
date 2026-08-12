@@ -27,38 +27,14 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch0.title",
       "sketchId": "where_sql_runs",
-      "height": 420,
-      "tryIt": {
-        "id": "try-first_sql_environment-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch0.prompt",
-        "exerciseKey": "try-first_sql_environment-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch1.title",
       "sketchId": "sql_editor_basics",
-      "height": 420,
-      "tryIt": {
-        "id": "try-first_sql_environment-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch1.prompt",
-        "exerciseKey": "try-first_sql_environment-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch2",
@@ -84,19 +60,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch3.title",
       "sketchId": "reading_query_results",
-      "height": 420,
-      "tryIt": {
-        "id": "try-first_sql_environment-sketch3",
-        "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch3.title",
-        "promptKey": "topics.sql-v2.sql-v2-0.first_sql_environment.tryIt.try_first_sql_environment_sketch3.prompt",
-        "exerciseKey": "try-first_sql_environment-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -106,7 +70,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -156,204 +120,6 @@
   ],
   "exercises": [
     {
-      "id": "try-first_sql_environment-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "students_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT grade, city\nFROM students;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT grade, city\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sqlFileOrder": [
-          "query.sql"
-        ],
-        "ignoreRowOrder": true
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT grade, city\nFROM students;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch0.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT grade, city\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "openTabs": [
-          "query.sql"
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "query.sql"
-          ]
-        }
-      },
-      "sqlFileOrder": [
-        "query.sql"
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "query.sql"
-        ]
-      }
-    },
-    {
-      "id": "try-first_sql_environment-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "students_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, age\nFROM students;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, age\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sqlFileOrder": [
-          "query.sql"
-        ],
-        "ignoreRowOrder": true
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, age\nFROM students;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch1.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, age\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "openTabs": [
-          "query.sql"
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "query.sql"
-          ]
-        }
-      },
-      "sqlFileOrder": [
-        "query.sql"
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "query.sql"
-        ]
-      }
-    },
-    {
       "id": "try-first_sql_environment-sketch2",
       "kind": "code_input",
       "purpose": "project",
@@ -378,11 +144,11 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT 'Ready to query' AS status;",
+        "solutionCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Ready to query' AS status;",
+            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -406,7 +172,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT 'Ready to query' AS status;",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -428,106 +194,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Ready to query' AS status;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "openTabs": [
-          "query.sql"
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "query.sql"
-          ]
-        }
-      },
-      "sqlFileOrder": [
-        "query.sql"
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "query.sql"
-        ]
-      }
-    },
-    {
-      "id": "try-first_sql_environment-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "students_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, city\nFROM students;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, city\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sqlFileOrder": [
-          "query.sql"
-        ],
-        "ignoreRowOrder": true
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT name, city\nFROM students;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch3.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, city\nFROM students;",
+            "content": "SELECT 'Practice ready' AS check_in;",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -557,23 +224,6 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_where_sql_runs",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "m0_s04_editor_purpose",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_editor_purpose",
       "optionIds": [
         "a",
         "b",
@@ -634,307 +284,6 @@
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
-      }
-    },
-    {
-      "id": "m0_s04_workspace_parts_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_workspace_parts_true",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_hello_query_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_hello_query_true",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
-          "e"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_select_star_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_select_star_true",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
-          "e"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_results_headers_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_results_headers_true",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
-          "e"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_interaction_flow_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_interaction_flow_true",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_workspace_loop",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_workspace_loop",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_editor_focus",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_editor_focus",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_first_query_flow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_first_query_flow",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_hello_query_meaning",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_hello_query_meaning",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_results_reading",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_results_reading",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_reorder_workspace_parts",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_reorder_workspace_parts",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "m0_s04_fill_workspace_name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_workspace_name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "SQL"
-      }
-    },
-    {
-      "id": "m0_s04_fill_run_action",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_run_action",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Run"
-      }
-    },
-    {
-      "id": "m0_s04_fill_results_tab_name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_results_tab_name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Results"
-      }
-    },
-    {
-      "id": "m0_s04_fill_hello_column_name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_hello_column_name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "message"
-      }
-    },
-    {
-      "id": "m0_s04_fill_tables_tab_name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.m0_s04_fill_tables_tab_name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Tables"
       }
     }
   ]

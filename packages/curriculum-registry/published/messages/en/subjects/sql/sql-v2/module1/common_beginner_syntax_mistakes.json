@@ -4,7 +4,7 @@
       "sql-v2-1": {
         "common_beginner_syntax_mistakes": {
           "label": "Predicting Results and Fixing Syntax",
-          "summary": "Predict a query result and repair common SELECT, comma, table-name, and semicolon mistakes.",
+          "summary": "Predict a result shape, then diagnose and repair common SELECT, comma, and FROM mistakes.",
           "cards": {
             "sketch0": {
               "title": "Predict the Result Before Running"
@@ -33,22 +33,6 @@
                 "d": "products FROM SELECT name;"
               }
             },
-            "sc_real_column_name": {
-              "title": "Choose the real column name",
-              "prompt": "Which column name actually exists in the `products` table?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "product_name",
-                "b": "item_price",
-                "c": "name",
-                "d": "stock_count"
-              }
-            },
             "mc_common_select_mistakes": {
               "title": "Find the syntax mistakes",
               "prompt": "Which of these are common beginner mistakes in a simple `SELECT` query? Choose all that apply.",
@@ -63,58 +47,6 @@
                 "b": "Leaving out commas between selected columns",
                 "c": "Using a column name like `product_name` when the table has `name`",
                 "d": "Ending the query with a semicolon"
-              }
-            },
-            "mc_valid_query_parts": {
-              "title": "Choose the valid parts",
-              "prompt": "Which pieces can appear in a correct beginner query that reads from this dataset? Choose all that apply.",
-              "hint": "Use the real table and column names from the schema.",
-              "help": {
-                "concept": "A valid beginner query uses real schema names and standard `SELECT ... FROM ...` syntax.",
-                "hint_1": "The table is named `products`, and columns include `name`, `category`, `price`, `stock`, and `created_at`.",
-                "hint_2": "Pick the pieces that match those exact names and avoid invented names."
-              },
-              "options": {
-                "a": "`FROM products`",
-                "b": "`SELECT name, price`",
-                "c": "`FROM product_list`",
-                "d": "`SELECT product_name`"
-              }
-            },
-            "dr_basic_query_order": {
-              "title": "Order a basic query",
-              "prompt": "Arrange these tokens to build a correct query that selects the `name` column from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "products",
-                "t2": ";",
-                "t3": "SELECT",
-                "t4": "name",
-                "t5": "FROM"
-              }
-            },
-            "dr_select_two_columns": {
-              "title": "Order a two-column query",
-              "prompt": "Arrange these tokens to build a correct query that selects `name` and `price` from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "price",
-                "t2": "FROM",
-                "t3": ";",
-                "t4": "products",
-                "t5": ",",
-                "t6": "name",
-                "t7": "SELECT"
               }
             },
             "fb_missing_keyword": {
@@ -151,93 +83,28 @@
                 "items"
               ]
             },
-            "ci_fix_missing_comma": {
-              "title": "Fix a missing comma",
-              "prompt": "Write a query that returns the `name` and `price` columns from the `products` table. A common beginner mistake here is forgetting the comma between column names. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and price columns from the products table.\nSELECT name price\nFROM products;"
-            },
-            "ci_fix_clause_order": {
-              "title": "Fix the clause order",
-              "prompt": "Write a correct query that returns the `id` and `name` columns from `products`. This exercise targets the common mistake of putting `FROM` before `SELECT`. Write the corrected query in the SQL editor and run it.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the id and name columns from products.\nFROM products\nSELECT id, name;"
-            },
-            "ci_fix_wrong_column_name": {
-              "title": "Fix the wrong column name",
-              "prompt": "Write a query that returns the `name` and `stock` columns from `products`. A common beginner mistake is using a made-up column like `product_name` instead of the real schema name. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and stock columns from products.\nSELECT product_name, stock\nFROM products;"
-            },
-            "try-common_beginner_syntax_mistakes-sketch0": {
-              "title": "Predict a Three-Column Result",
-              "prompt": "Before sharing the query, build a three-column inventory snapshot with `id`, `category`, and `stock` from `products`, in that order. Predict the result shape before you run it.",
-              "hint": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-              "help": {
-                "concept": "Predicting the result shape helps you catch missing or misplaced columns before execution.",
-                "hint_1": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return id, category, and stock\nSELECT\nFROM products;"
-            },
             "try-common_beginner_syntax_mistakes-sketch1": {
-              "title": "Repair a Broken SELECT Query",
-              "prompt": "The editor contains an unfinished product-date query. Repair it so the result shows `name` and `created_at` from `products`.",
-              "hint": "Add the missing comma and FROM keyword while keeping the requested column order.",
+              "title": "Repair a Broken Product-Date Query",
+              "prompt": "The editor contains a broken query. Repair it so the result returns `name` and `created_at` from `products`, in that order.",
+              "hint": "Check the comma between selected columns and make sure FROM appears before the table name.",
               "help": {
-                "concept": "A SELECT query needs commas between columns and a FROM clause before the table name.",
-                "hint_1": "Add the missing comma and FROM keyword while keeping the requested column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A basic SELECT query needs valid column separators and a FROM clause before its source table.",
+                "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Fix the syntax without changing the requested columns\nSELECT name created_at\nproducts;"
-            },
-            "try-common_beginner_syntax_mistakes-sketch2": {
-              "title": "Query name and stock from products",
-              "prompt": "Build a product-catalog query that returns `name`, `stock` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return name, stock from the products table.\nSELECT product_name, stock\nFROM products;"
+              "starterCode": "-- Repair the broken query below.\nSELECT\n    name\n    created_at,\nproducts;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_common_beginner_syntax_mistakes_sketch0": {
-              "title": "Predict a Three-Column Result",
-              "prompt": "Before sharing the query, build a three-column inventory snapshot with `id`, `category`, and `stock` from `products`, in that order. Predict the result shape before you run it.",
-              "hint": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-              "help": {
-                "concept": "Predicting the result shape helps you catch missing or misplaced columns before execution.",
-                "hint_1": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_common_beginner_syntax_mistakes_sketch1": {
-              "title": "Repair a Broken SELECT Query",
-              "prompt": "The editor contains an unfinished product-date query. Repair it so the result shows `name` and `created_at` from `products`.",
-              "hint": "Add the missing comma and FROM keyword while keeping the requested column order.",
+              "title": "Repair a Broken Product-Date Query",
+              "prompt": "The editor contains a broken query. Repair it so the result returns `name` and `created_at` from `products`, in that order.",
+              "hint": "Check the comma between selected columns and make sure FROM appears before the table name.",
               "help": {
-                "concept": "A SELECT query needs commas between columns and a FROM clause before the table name.",
-                "hint_1": "Add the missing comma and FROM keyword while keeping the requested column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A basic SELECT query needs valid column separators and a FROM clause before its source table.",
+                "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -250,12 +117,12 @@
       "sql-v2-1": {
         "common_beginner_syntax_mistakes": {
           "predict_result_shape": {
-            "title": "Predict the Result Before Running",
-            "bodyMarkdown": "Before running a query, predict its result shape. This catches many mistakes early.\n\n```sql\nSELECT\n    name,\n    stock\nFROM products;\n```\n\nThe result should have two columns named `name` and `stock`, with one result row for each source row because there is no filter yet. If the actual result has different columns, the `SELECT` list is wrong. If SQL reports that a table or column does not exist, compare the spelling with the Tables panel.\n\nPrediction turns running a query into a check of your reasoning rather than a guess-and-retry cycle."
+            "title": "Predict the Result Before You Run",
+            "bodyMarkdown": "Before running a query, predict its result shape.\n\n```sql\nSELECT\n    customer_name,\n    city\nFROM customers;\n```\n\nYou should expect two result columns, `customer_name` and `city`. With no filter, the query attempts to return one result row for each source row.\n\nPrediction gives you something concrete to compare with the actual result. If the returned columns differ, inspect the SELECT list. If SQL cannot find a table or column, compare the spelling with the schema."
           },
           "syntax_checklist": {
-            "title": "Use a Small Syntax Checklist",
-            "bodyMarkdown": "Use this checklist when a basic query fails:\n\n1. Does the statement begin with `SELECT`?\n2. Are selected columns separated by commas?\n3. Does `FROM` come after the column list?\n4. Is the table name exactly `products`?\n5. Is there an extra comma before `FROM`?\n\nCorrect:\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nIncorrect forms such as `SELECT id name`, `FROM products SELECT name`, or `SELECT name, FROM products` break the query structure. Fix one clause at a time, then run again."
+            "title": "Use a Small Debugging Checklist",
+            "bodyMarkdown": "When a simple retrieval query fails, check the structure instead of guessing.\n\n1. Does the statement begin with `SELECT`?\n2. Are selected columns separated by commas?\n3. Does `FROM` come after the full column list?\n4. Do the table and column names match the schema?\n5. Is there an accidental comma immediately before `FROM`?\n\nCorrect:\n\n```sql\nSELECT\n    order_id,\n    total\nFROM orders;\n```\n\nFix one structural problem at a time, then run the query again."
           }
         }
       }

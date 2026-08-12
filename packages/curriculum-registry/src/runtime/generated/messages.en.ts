@@ -33758,7 +33758,7 @@ const messages: Record<string, any> = {
       "sql-v2-0": {
         "database_thinking": {
           "label": "Database Thinking",
-          "summary": "Database thinking means organizing data clearly so you can ask useful questions and identify records correctly.",
+          "summary": "Think about the question, the structure of the data, and how one record can be identified reliably.",
           "cards": {
             "sketch0": {
               "title": "Why does database thinking matter?"
@@ -33777,50 +33777,6 @@ const messages: Record<string, any> = {
             }
           },
           "quiz": {
-            "try-database_thinking-sketch0": {
-              "title": "Try it yourself: Why does database thinking matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show id, city, and grade so the question has useful structure\nSELECT \nFROM students;"
-            },
-            "try-database_thinking-sketch1": {
-              "title": "Try it yourself: How do questions turn into answers?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show students with grade A so the question turns into a result\nSELECT \nFROM students\nWHERE ;"
-            },
-            "try-database_thinking-sketch2": {
-              "title": "Try it yourself: Why does structure matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show id, name, and city so the structure is easy to read\nSELECT \nFROM students;"
-            },
-            "try-database_thinking-sketch3": {
-              "title": "Try it yourself: What is a key?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show id and name from students\nSELECT \nFROM students;"
-            },
             "m0_s03_database_thinking_focus": {
               "title": "What is database thinking mostly about?",
               "prompt": "Which choice best describes database thinking?",
@@ -33869,22 +33825,6 @@ const messages: Record<string, any> = {
                 "d": "It turns all rows into formulas"
               }
             },
-            "m0_s03_key_purpose": {
-              "title": "What is a key used for?",
-              "prompt": "In database design, what is a key mainly used for?",
-              "help": {
-                "concept": "A key helps identify a specific row or record in a table.",
-                "hint_1": "Think about an `id` column.",
-                "hint_2": "The best answer is about identification."
-              },
-              "hint": "A key points to the right record.",
-              "options": {
-                "a": "To identify a specific row",
-                "b": "To color a table",
-                "c": "To rename SQL",
-                "d": "To hide all columns"
-              }
-            },
             "m0_s03_name_vs_id": {
               "title": "Why is an id often better than a name?",
               "prompt": "Why is a key like `student_id` often more useful than using a name alone?",
@@ -33900,258 +33840,41 @@ const messages: Record<string, any> = {
                 "c": "Because names cannot be stored in tables",
                 "d": "Because ids remove the need for columns"
               }
-            },
-            "m0_s03_select_all_foundations": {
-              "title": "Which database thinking statements are true?",
-              "prompt": "Select all true statements.",
-              "help": {
-                "concept": "This checks the core ideas of database thinking: useful questions, clean structure, and keys for identification.",
-                "hint_1": "Choose statements that match organization, clarity, and identification.",
-                "hint_2": "Avoid choices that sound random or unrelated to data design."
-              },
-              "hint": "Match each option to the main ideas from the lesson.",
-              "options": {
-                "a": "A database should help answer questions.",
-                "b": "Good structure makes queries easier.",
-                "c": "A key can identify a specific row.",
-                "d": "Messy tables always improve accuracy.",
-                "e": "Names never repeat, so ids are unnecessary."
-              }
-            },
-            "m0_s03_reorder_question_flow": {
-              "title": "Question to answer flow",
-              "prompt": "Reorder the ideas to match the database thinking flow.",
-              "hint": "Start with storing, then questioning, then results.",
-              "concept": "A database stores information so you can ask questions and get answers.",
-              "hint_1": "Data comes before the question.",
-              "hint_2": "An answer appears after the question is asked.",
-              "tokens": {
-                "t1": "store information",
-                "t2": "ask a question",
-                "t3": "get an answer"
-              }
-            },
-            "m0_s03_reorder_structure_logic": {
-              "title": "Why structure helps",
-              "prompt": "Put these ideas in the best logical order.",
-              "hint": "Good structure comes before clear queries.",
-              "concept": "Organized data makes accurate questions and results easier.",
-              "hint_1": "Organization comes first.",
-              "hint_2": "Good answers come after good questions.",
-              "tokens": {
-                "t1": "organize the data clearly",
-                "t2": "ask a clearer question",
-                "t3": "get a cleaner result"
-              }
-            },
-            "m0_s03_reorder_key_reasoning": {
-              "title": "Why keys matter",
-              "prompt": "Reorder these statements so they explain why a key is useful.",
-              "hint": "Start with repeated names, then the problem, then the solution.",
-              "concept": "Keys help when ordinary values like names are not enough to identify one record.",
-              "hint_1": "Names can repeat first.",
-              "hint_2": "The key solves the identification problem.",
-              "tokens": {
-                "t1": "names can repeat",
-                "t2": "that can cause confusion",
-                "t3": "a key identifies the correct row"
-              }
-            },
-            "m0_s03_reorder_table_focus": {
-              "title": "Keep tables focused",
-              "prompt": "Reorder the ideas to show a healthy table design mindset.",
-              "hint": "Start with one subject, then clear columns, then easier querying.",
-              "concept": "Focused tables are easier to understand and use.",
-              "hint_1": "A table should begin with one main subject.",
-              "hint_2": "Better clarity leads to easier querying.",
-              "tokens": {
-                "t1": "keep one main subject per table",
-                "t2": "use clear columns",
-                "t3": "make questions easier to answer"
-              }
-            },
-            "m0_s03_reorder_key_to_relationships": {
-              "title": "From keys to connections",
-              "prompt": "Reorder these ideas in the best learning order.",
-              "hint": "Identify first, connect later.",
-              "concept": "You first learn keys as identifiers, then later as connectors between tables.",
-              "hint_1": "The first use of a key is identifying a row.",
-              "hint_2": "Connections between tables come later.",
-              "tokens": {
-                "t1": "a key identifies one row",
-                "t2": "each record stays clear",
-                "t3": "later keys can connect tables"
-              }
-            },
-            "m0_s03_fill_database_goal": {
-              "title": "Main goal of a database",
-              "prompt": "Fill in the blank with the best answer.",
-              "help": {
-                "concept": "A database is useful when it helps answer questions about stored information.",
-                "hint_1": "Think about usefulness, not just storage.",
-                "hint_2": "The missing word is what you want from a query."
-              },
-              "hint": "Databases help you get ____.",
-              "template": "A good database helps turn stored data into useful ____.",
-              "choices": [
-                "answers",
-                "colors",
-                "stickers",
-                "batteries"
-              ]
-            },
-            "m0_s03_fill_structure_value": {
-              "title": "Why structure matters",
-              "prompt": "Choose the word that makes the sentence true.",
-              "help": {
-                "concept": "Clear structure reduces confusion and makes data easier to use.",
-                "hint_1": "Messy data creates the opposite of this.",
-                "hint_2": "The missing word is about being easy to understand."
-              },
-              "hint": "Good structure adds clarity.",
-              "template": "Good database structure makes data easier to ____.",
-              "choices": [
-                "understand",
-                "erase",
-                "hide",
-                "ignore"
-              ]
-            },
-            "m0_s03_fill_key_meaning": {
-              "title": "Meaning of a key",
-              "prompt": "Complete the sentence with the best answer.",
-              "help": {
-                "concept": "A key helps identify a specific record in a table.",
-                "hint_1": "Think about `student_id`.",
-                "hint_2": "The missing word is about finding the right row."
-              },
-              "hint": "A key helps you identify one ____.",
-              "template": "A key is used to identify one specific ____ in a table.",
-              "choices": [
-                "row",
-                "screen",
-                "query",
-                "keyboard"
-              ]
-            },
-            "m0_s03_fill_name_problem": {
-              "title": "Why names are not always enough",
-              "prompt": "Pick the best word to complete the sentence.",
-              "help": {
-                "concept": "Names can repeat, so they are not always reliable for unique identification.",
-                "hint_1": "Two students may share the same one of these.",
-                "hint_2": "That is why ids matter."
-              },
-              "hint": "People can share the same ____.",
-              "template": "A name alone may not be enough because names can ____.",
-              "choices": [
-                "repeat",
-                "sort",
-                "delete",
-                "connect"
-              ]
-            },
-            "m0_s03_fill_future_keys": {
-              "title": "What keys help with later",
-              "prompt": "Fill in the blank with the best answer.",
-              "help": {
-                "concept": "After learning that keys identify rows, you later learn they can help connect tables.",
-                "hint_1": "This comes after the idea of identification.",
-                "hint_2": "The missing word is about tables working together."
-              },
-              "hint": "Keys later help tables ____.",
-              "template": "Later, keys can also help ____ one table to another.",
-              "choices": [
-                "connect",
-                "paint",
-                "freeze",
-                "rotate"
-              ]
-            }
-          },
-          "tryIt": {
-            "try_database_thinking_sketch0": {
-              "title": "Try it yourself: Why does database thinking matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_database_thinking_sketch1": {
-              "title": "Try it yourself: How do questions turn into answers?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_database_thinking_sketch2": {
-              "title": "Try it yourself: Why does structure matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_database_thinking_sketch3": {
-              "title": "Try it yourself: What is a key?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
             }
           }
         },
         "first_sql_environment": {
           "label": "First SQL Environment",
-          "summary": "This SQL workspace lets you type queries, run them, and inspect the answers.",
+          "summary": "Use the SQL editor, Run button, Results view, and Tables view without learning extra query syntax too early.",
           "cards": {
             "sketch0": {
-              "title": "Where will you run SQL in this course?"
+              "title": "Where will you run SQL?"
             },
             "sketch1": {
-              "title": "What parts of the SQL workspace matter most?"
+              "title": "Which workspace parts matter first?"
             },
             "sketch2": {
-              "title": "How do you run your first query here?"
+              "title": "How do you run a tiny query?"
             },
             "sketch3": {
-              "title": "How do you read the results and tables?"
+              "title": "How do you read what came back?"
             },
             "quiz": {
               "title": "Quiz: First SQL Environment"
             }
           },
           "quiz": {
-            "try-first_sql_environment-sketch0": {
-              "title": "Return Grade and City",
-              "prompt": "Return `grade, city` from `students` in that column order.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `grade, city` from `students` in that column order."
-              },
-              "starterCode": "-- Show the grade and city columns from the students table\nSELECT \nFROM students;"
-            },
-            "try-first_sql_environment-sketch1": {
-              "title": "Return Id and Age",
-              "prompt": "Return `id, age` from `students` in that column order.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, age` from `students` in that column order."
-              },
-              "starterCode": "-- Show the id and age columns from the students table\nSELECT \nFROM students;"
-            },
             "try-first_sql_environment-sketch2": {
-              "title": "First Sql Environment",
-              "prompt": "Return the expression `'Ready to query' AS status` as a one-row result.",
-              "hint": "Use the pattern shown in the lesson card.",
+              "title": "Run a different one-row query",
+              "prompt": "Return the expression `'Practice ready' AS check_in` as a one-row result. Run it, then verify the Results table has the `check_in` column.",
+              "hint": "Follow the same one-row SELECT pattern, but use the value and column name requested here.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return the expression `'Ready to query' AS status` as a one-row result."
+                "concept": "This Try-It checks the write → run → inspect workflow, not multi-column table querying.",
+                "hint_1": "The quoted text is the returned value.",
+                "hint_2": "Use `AS check_in` so the result column has the requested name."
               },
-              "starterCode": "-- Return a short readiness message with the heading status\nSELECT "
-            },
-            "try-first_sql_environment-sketch3": {
-              "title": "Return Name and City",
-              "prompt": "Return `name, city` from `students` in that column order.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `name, city` from `students` in that column order."
-              },
-              "starterCode": "-- Show each student's name and city\nSELECT \nFROM students;"
+              "starterCode": "-- Return the requested practice message with the heading check_in\nSELECT ",
+              "solutionCode": "SELECT 'Practice ready' AS check_in;"
             },
             "m0_s04_where_sql_runs": {
               "title": "Where will you run SQL here?",
@@ -34167,22 +33890,6 @@ const messages: Record<string, any> = {
                 "b": "Only inside a paint app",
                 "c": "Only on paper",
                 "d": "Inside a music player"
-              }
-            },
-            "m0_s04_editor_purpose": {
-              "title": "What is the dark editor for?",
-              "prompt": "What do you mainly use the dark editor area for?",
-              "help": {
-                "concept": "The editor is where SQL is written before running it.",
-                "hint_1": "Think about where the query text goes.",
-                "hint_2": "The answer appears below after running."
-              },
-              "hint": "It is where you type.",
-              "options": {
-                "a": "Writing SQL queries",
-                "b": "Only drawing diagrams",
-                "c": "Only reading quiz answers",
-                "d": "Changing computer volume"
               }
             },
             "m0_s04_run_button": {
@@ -34232,287 +33939,13 @@ const messages: Record<string, any> = {
                 "c": "Only read the last row",
                 "d": "Only read the border"
               }
-            },
-            "m0_s04_workspace_parts_true": {
-              "title": "Which parts belong to the SQL workspace?",
-              "prompt": "Select all parts that belong to the SQL workspace.",
-              "help": {
-                "concept": "This checks recognition of the main UI pieces you will use.",
-                "hint_1": "Think editor, running, and reading results.",
-                "hint_2": "Pick the parts that support writing and inspecting queries."
-              },
-              "hint": "Think editor, Run, Results, Tables.",
-              "options": {
-                "a": "A SQL editor area",
-                "b": "A Run button",
-                "c": "A Results tab",
-                "d": "A Tables tab",
-                "e": "A bicycle speedometer"
-              }
-            },
-            "m0_s04_hello_query_true": {
-              "title": "What is true about the hello query?",
-              "prompt": "Select all true statements about this query:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~",
-              "help": {
-                "concept": "This checks whether you can read a tiny query result correctly.",
-                "hint_1": "The query returns one value with a named column.",
-                "hint_2": "Focus on the quoted text and `AS message`."
-              },
-              "hint": "Think one value, one named column.",
-              "options": {
-                "a": "It returns a value without needing a table.",
-                "b": "The result column is named `message`.",
-                "c": "It can show `Hello SQL` in the Results tab.",
-                "d": "It deletes the `students` table.",
-                "e": "It is a valid first practice query."
-              }
-            },
-            "m0_s04_select_star_true": {
-              "title": "What is true about `SELECT * FROM students;`?",
-              "prompt": "Select all true statements about this query:\n\n~~~sql\nSELECT * FROM students;\n~~~",
-              "help": {
-                "concept": "This checks the meaning of `SELECT *`.",
-                "hint_1": "The `*` means all columns.",
-                "hint_2": "It is about reading from the `students` table."
-              },
-              "hint": "Think all columns from students.",
-              "options": {
-                "a": "It asks to show data from `students`.",
-                "b": "The `*` means all columns.",
-                "c": "It is a reading query.",
-                "d": "It means delete every row in `students`.",
-                "e": "It can return a result table."
-              }
-            },
-            "m0_s04_results_headers_true": {
-              "title": "Why do result headers matter?",
-              "prompt": "Select all true statements about column names in query results.",
-              "help": {
-                "concept": "Column names help you understand what each returned value means.",
-                "hint_1": "Headers are labels for the values below them.",
-                "hint_2": "They help you read the answer correctly."
-              },
-              "hint": "Think labels and meaning.",
-              "options": {
-                "a": "They help explain what each value means.",
-                "b": "They make the result easier to read.",
-                "c": "They help match values to categories.",
-                "d": "They are always useless.",
-                "e": "They are part of understanding the answer."
-              }
-            },
-            "m0_s04_interaction_flow_true": {
-              "title": "What matches the right workflow?",
-              "prompt": "Select all statements that match the right workflow in this SQL tool.",
-              "help": {
-                "concept": "This checks the intended habit for using the workspace.",
-                "hint_1": "The learner should actively interact with the tool.",
-                "hint_2": "Think type, run, inspect, repeat."
-              },
-              "hint": "Type, run, read, repeat.",
-              "options": {
-                "a": "Type a query in the editor.",
-                "b": "Click Run.",
-                "c": "Read the Results tab.",
-                "d": "Try another small query.",
-                "e": "Skip running and guess everything."
-              }
-            },
-            "m0_s04_reorder_workspace_loop": {
-              "title": "Use the SQL workspace",
-              "prompt": "Reorder the workspace loop.",
-              "help": {
-                "concept": "The main workflow is type, run, inspect.",
-                "hint_1": "Typing comes first.",
-                "hint_2": "Results come after running."
-              },
-              "hint": "Type first, inspect last.",
-              "tokens": {
-                "t1": "type a query",
-                "t2": "click Run",
-                "t3": "inspect the answer"
-              }
-            },
-            "m0_s04_reorder_editor_focus": {
-              "title": "Know the main workspace parts",
-              "prompt": "Put these workspace ideas in the most useful order.",
-              "help": {
-                "concept": "Focus on the editor, Run button, Results, and Tables.",
-                "hint_1": "Start with where you write.",
-                "hint_2": "Then run, then inspect."
-              },
-              "hint": "Write first, run second, inspect after.",
-              "tokens": {
-                "t1": "write SQL in the editor",
-                "t2": "use Run to execute it",
-                "t3": "read the Results tab",
-                "t4": "check Tables when needed"
-              }
-            },
-            "m0_s04_reorder_first_query_flow": {
-              "title": "Run your first query",
-              "prompt": "Reorder the steps for running your first query.",
-              "help": {
-                "concept": "Even a tiny query follows a clear flow in the workspace.",
-                "hint_1": "Type before you click Run.",
-                "hint_2": "Open Results after running."
-              },
-              "hint": "Editor, Run, Results.",
-              "tokens": {
-                "t1": "type the query in the editor",
-                "t2": "click Run",
-                "t3": "open the Results tab",
-                "t4": "look at the returned value"
-              }
-            },
-            "m0_s04_reorder_hello_query_meaning": {
-              "title": "Read the hello query",
-              "prompt": "Reorder the ideas to explain this query result.\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~",
-              "help": {
-                "concept": "This query returns one value and gives the result column a name.",
-                "hint_1": "The column name comes from `AS message`.",
-                "hint_2": "The returned value is `Hello SQL`."
-              },
-              "hint": "Column name first, value second.",
-              "tokens": {
-                "t1": "`message` is the column name",
-                "t2": "`Hello SQL` is the returned value",
-                "t3": "the query gives one simple result"
-              }
-            },
-            "m0_s04_reorder_results_reading": {
-              "title": "How to read results",
-              "prompt": "Put the result-reading steps in order.",
-              "help": {
-                "concept": "A good habit is to read headers first and then the rows.",
-                "hint_1": "Start with column names.",
-                "hint_2": "Then inspect the values under them."
-              },
-              "hint": "Headers before rows.",
-              "tokens": {
-                "t1": "look at the column names first",
-                "t2": "read the rows underneath",
-                "t3": "match each value to its column"
-              }
-            },
-            "m0_s04_reorder_workspace_parts": {
-              "title": "Core parts of the SQL tool",
-              "prompt": "Reorder the core parts of the SQL tool from writing to reading.",
-              "help": {
-                "concept": "The SQL tool supports writing, running, and reading queries.",
-                "hint_1": "Begin with the editor.",
-                "hint_2": "Results come after Run."
-              },
-              "hint": "Think write, run, read, explore.",
-              "tokens": {
-                "t1": "SQL editor",
-                "t2": "Run button",
-                "t3": "Results tab",
-                "t4": "Tables tab"
-              }
-            },
-            "m0_s04_fill_workspace_name": {
-              "title": "Name the workspace language",
-              "prompt": "Fill in the blank with the correct word.",
-              "help": {
-                "concept": "This lesson uses a SQL workspace where you type and run SQL queries.",
-                "hint_1": "It is the same language shown in the editor.",
-                "hint_2": "The lesson is about SQL."
-              },
-              "hint": "Think about the language you are practicing.",
-              "template": "This course gives you a real ____ workspace.",
-              "choices": [
-                "SQL",
-                "HTML",
-                "CSS",
-                "Music"
-              ]
-            },
-            "m0_s04_fill_run_action": {
-              "title": "Run the query",
-              "prompt": "Choose the word that completes the sentence.",
-              "help": {
-                "concept": "After typing a query, you click Run to execute it.",
-                "hint_1": "It is the main action button.",
-                "hint_2": "You click this after typing the query."
-              },
-              "hint": "Think about the execution button.",
-              "template": "After typing a query, click ____.",
-              "choices": [
-                "Run",
-                "Paint",
-                "Sleep",
-                "Erase"
-              ]
-            },
-            "m0_s04_fill_results_tab_name": {
-              "title": "Where answers appear",
-              "prompt": "Fill in the blank with the correct tab name.",
-              "help": {
-                "concept": "The Results tab is where returned rows and columns appear.",
-                "hint_1": "It shows the query answer.",
-                "hint_2": "It is not the Tables tab."
-              },
-              "hint": "Think about the answer tab.",
-              "template": "After running a query, the answer usually appears in the ____ tab.",
-              "choices": [
-                "Results",
-                "Profile",
-                "Themes",
-                "Audio"
-              ]
-            },
-            "m0_s04_fill_hello_column_name": {
-              "title": "Read the hello query",
-              "prompt": "Complete the sentence with the correct column name.",
-              "help": {
-                "concept": "In `SELECT 'Hello SQL' AS message;`, `AS message` names the result column.",
-                "hint_1": "Look after `AS`.",
-                "hint_2": "The column name is `message`."
-              },
-              "hint": "Look at the alias after `AS`.",
-              "template": "In `SELECT 'Hello SQL' AS message;`, the column name is ____.",
-              "choices": [
-                "message",
-                "students",
-                "grade",
-                "Results"
-              ]
-            },
-            "m0_s04_fill_tables_tab_name": {
-              "title": "See available tables",
-              "prompt": "Choose the correct tab name.",
-              "help": {
-                "concept": "The Tables tab helps you see which tables are available in the workspace.",
-                "hint_1": "It helps you inspect available tables.",
-                "hint_2": "It is named after what it shows."
-              },
-              "hint": "Think about the tab that lists tables.",
-              "template": "You can click ____ to see what tables exist.",
-              "choices": [
-                "Tables",
-                "Volume",
-                "Search",
-                "Brush"
-              ]
             }
           },
           "tryIt": {
-            "try_first_sql_environment_sketch0": {
-              "title": "Try it yourself: Where will you run SQL in this course?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_first_sql_environment_sketch1": {
-              "title": "Try it yourself: What parts of the SQL workspace matter most?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
+            "allowReveal": true,
             "try_first_sql_environment_sketch2": {
-              "title": "Try it yourself: How do you run your first query here?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_first_sql_environment_sketch3": {
-              "title": "Try it yourself: How do you read the results and tables?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+              "title": "Run a different one-row query",
+              "prompt": "Return `'Practice ready' AS check_in`, run the query, and confirm the result has one `check_in` column."
             }
           }
         },
@@ -34594,7 +34027,7 @@ const messages: Record<string, any> = {
         },
         "understanding_tables": {
           "label": "Understanding Tables",
-          "summary": "Tables organize data into rows and columns so it is easy to read.",
+          "summary": "Read a table by separating its columns, rows, records, and fields.",
           "cards": {
             "sketch0": {
               "title": "What do rows and columns do?"
@@ -34613,50 +34046,6 @@ const messages: Record<string, any> = {
             }
           },
           "quiz": {
-            "try-understanding_tables-sketch0": {
-              "title": "Try it yourself: What do rows and columns do?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show the student's id, name, and grade columns\nSELECT \nFROM students;"
-            },
-            "try-understanding_tables-sketch1": {
-              "title": "Try it yourself: What is a record and what is a field?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show each student's name and city\nSELECT \nFROM students;"
-            },
-            "try-understanding_tables-sketch2": {
-              "title": "Try it yourself: Why do table names and column names matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show the id and city columns so the labels stay clear\nSELECT \nFROM students;"
-            },
-            "try-understanding_tables-sketch3": {
-              "title": "Try it yourself: How do you read a table like a spreadsheet?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show the full student roster so you can read each column and row\nSELECT \nFROM students;"
-            },
             "m0_s02_rows_go_across": {
               "title": "What direction does a row go?",
               "prompt": "In a table, which statement is true about a row?",
@@ -34705,38 +34094,6 @@ const messages: Record<string, any> = {
                 "d": "A sort button"
               }
             },
-            "m0_s02_field_definition": {
-              "title": "What is a field?",
-              "prompt": "Which choice best describes a field?",
-              "help": {
-                "concept": "A field is one small piece of data inside a record.",
-                "hint_1": "It is smaller than a full record.",
-                "hint_2": "It is one value under one column."
-              },
-              "hint": "Think of one box inside a row.",
-              "options": {
-                "a": "One value in a row",
-                "b": "Every row together",
-                "c": "The whole table",
-                "d": "A database server"
-              }
-            },
-            "m0_s02_names_matter": {
-              "title": "Why are table and column names useful?",
-              "prompt": "Why do table names and column names matter?",
-              "help": {
-                "concept": "Names help explain what the data means.",
-                "hint_1": "Think about clarity.",
-                "hint_2": "A table without labels would be confusing."
-              },
-              "hint": "Think about clarity and meaning.",
-              "options": {
-                "a": "They help explain what the data is",
-                "b": "They make rows disappear",
-                "c": "They turn tables into charts",
-                "d": "They remove the need for data"
-              }
-            },
             "m0_s02_reading_order": {
               "title": "What is a smart way to read a table?",
               "prompt": "Which order is most helpful when reading a table for the first time?",
@@ -34752,300 +34109,30 @@ const messages: Record<string, any> = {
                 "c": "Only the last row",
                 "d": "Only the table border"
               }
-            },
-            "m0_s02_select_all_true": {
-              "title": "Which table facts are true?",
-              "prompt": "Select all true statements about tables.",
-              "help": {
-                "concept": "This combines the main ideas of rows, columns, records, fields, and labels.",
-                "hint_1": "Match each choice to the core table ideas.",
-                "hint_2": "Watch for anything that confuses the whole entry with one small value."
-              },
-              "hint": "Look for statements that fit normal table structure.",
-              "options": {
-                "a": "A row usually represents one entry.",
-                "b": "A column usually represents one type of data.",
-                "c": "A field is one value inside a record.",
-                "d": "Column names help explain the meaning of the data.",
-                "e": "A table name is the same thing as every row combined."
-              }
-            },
-            "m0_s02_reorder_table_reading_flow": {
-              "title": "Build the basic table idea",
-              "prompt": "Reorder the ideas to explain how a table works.",
-              "help": {
-                "concept": "A table organizes information using columns and rows.",
-                "hint_1": "Columns describe the kind of data.",
-                "hint_2": "Rows hold the entries."
-              },
-              "hint": "Think columns first, then rows, then entries.",
-              "tokens": {
-                "t1": "columns describe one type of information",
-                "t2": "rows hold actual entries",
-                "t3": "a table organizes data clearly"
-              }
-            },
-            "m0_s02_reorder_row_column_meaning": {
-              "title": "Match rows and columns",
-              "prompt": "Put these ideas in the correct order.",
-              "help": {
-                "concept": "Rows go across and columns go down in a table.",
-                "hint_1": "A row is horizontal.",
-                "hint_2": "A column is vertical."
-              },
-              "hint": "Across comes before down here.",
-              "tokens": {
-                "t1": "a row goes across",
-                "t2": "a column goes down",
-                "t3": "together they organize the table"
-              }
-            },
-            "m0_s02_reorder_record_field_relationship": {
-              "title": "Record and field",
-              "prompt": "Reorder the ideas to explain record and field correctly.",
-              "help": {
-                "concept": "A record is one full row, and a field is one value inside it.",
-                "hint_1": "Start with the bigger thing.",
-                "hint_2": "Then move to the smaller value."
-              },
-              "hint": "Whole row first, single value second.",
-              "tokens": {
-                "t1": "a record is one full row",
-                "t2": "a field is one value inside that row",
-                "t3": "fields live inside a record"
-              }
-            },
-            "m0_s02_reorder_good_naming_logic": {
-              "title": "Why names matter",
-              "prompt": "Reorder the ideas to explain why table and column names matter.",
-              "help": {
-                "concept": "Good names make tables easier to understand.",
-                "hint_1": "Table name gives the big context.",
-                "hint_2": "Column names explain the pieces."
-              },
-              "hint": "Think table first, then columns, then clarity.",
-              "tokens": {
-                "t1": "the table name tells what kind of data it holds",
-                "t2": "column names explain what each value means",
-                "t3": "clear names make data easier to read"
-              }
-            },
-            "m0_s02_reorder_read_table_steps": {
-              "title": "How to read a table",
-              "prompt": "Put the reading steps in order.",
-              "help": {
-                "concept": "A useful reading flow starts broad and becomes more detailed.",
-                "hint_1": "Start with the table name.",
-                "hint_2": "Then check columns before rows."
-              },
-              "hint": "Go from labels to entries.",
-              "tokens": {
-                "t1": "look at the table name",
-                "t2": "look at the column names",
-                "t3": "read the rows underneath"
-              }
-            },
-            "m0_s02_reorder_student_row_interpretation": {
-              "title": "Read one student row",
-              "prompt": "Reorder the ideas to explain how one row is interpreted.",
-              "help": {
-                "concept": "Each row is one entry, and the columns explain each value.",
-                "hint_1": "First identify the row as one student.",
-                "hint_2": "Then match values to columns."
-              },
-              "hint": "One row, then meanings, then interpretation.",
-              "tokens": {
-                "t1": "each row represents one student",
-                "t2": "the columns explain what each value means",
-                "t3": "together the row tells you that student's data"
-              }
-            },
-            "m0_s02_fill_row_direction": {
-              "title": "Row direction",
-              "prompt": "Fill in the blank with the correct word.",
-              "help": {
-                "concept": "A row is the horizontal part of a table.",
-                "hint_1": "It moves left to right.",
-                "hint_2": "A row goes across."
-              },
-              "hint": "Think horizontal.",
-              "template": "In a table, a row goes ____.",
-              "choices": [
-                "across",
-                "down",
-                "outside",
-                "backward"
-              ]
-            },
-            "m0_s02_fill_column_purpose": {
-              "title": "What columns describe",
-              "prompt": "Choose the word that completes the sentence.",
-              "help": {
-                "concept": "A column groups one kind of data such as name, price, or grade.",
-                "hint_1": "Columns describe the kind of data.",
-                "hint_2": "They describe one type of information."
-              },
-              "hint": "Think data category.",
-              "template": "Each column describes one type of ____.",
-              "choices": [
-                "information",
-                "database",
-                "password",
-                "button"
-              ]
-            },
-            "m0_s02_fill_record_meaning": {
-              "title": "Meaning of record",
-              "prompt": "Fill in the blank with the best answer.",
-              "help": {
-                "concept": "A record is one full entry in a table.",
-                "hint_1": "It is the whole horizontal entry.",
-                "hint_2": "A record is one full row."
-              },
-              "hint": "Think full entry.",
-              "template": "A record is one full ____ in a table.",
-              "choices": [
-                "row",
-                "column",
-                "database",
-                "server"
-              ]
-            },
-            "m0_s02_fill_field_meaning": {
-              "title": "Meaning of field",
-              "prompt": "Complete the sentence with the best word.",
-              "help": {
-                "concept": "A field is one small piece of data inside a record.",
-                "hint_1": "It is smaller than a full row.",
-                "hint_2": "A field is one value."
-              },
-              "hint": "Think one box in a row.",
-              "template": "A field is one ____ inside a record.",
-              "choices": [
-                "value",
-                "table",
-                "query",
-                "diagram"
-              ]
-            },
-            "m0_s02_fill_reading_first_step": {
-              "title": "First reading step",
-              "prompt": "Choose the best phrase to complete the sentence.",
-              "help": {
-                "concept": "A useful reading flow starts with the table name, then column names, then rows.",
-                "hint_1": "Start with the broad label.",
-                "hint_2": "The first thing to inspect is the table name."
-              },
-              "hint": "Start broad.",
-              "template": "A smart way to read a table starts with the ____.",
-              "choices": [
-                "table name",
-                "last row",
-                "table border",
-                "keyboard"
-              ]
-            }
-          },
-          "tryIt": {
-            "try_understanding_tables_sketch0": {
-              "title": "Try it yourself: What do rows and columns do?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_understanding_tables_sketch1": {
-              "title": "Try it yourself: What is a record and what is a field?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_understanding_tables_sketch2": {
-              "title": "Try it yourself: Why do table names and column names matter?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_understanding_tables_sketch3": {
-              "title": "Try it yourself: How do you read a table like a spreadsheet?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
             }
           }
         },
         "what_sql_is": {
           "label": "What SQL Is",
-          "summary": "SQL is a language for working with organized data in databases.",
+          "summary": "Meet SQL as a language for asking useful questions of organized data.",
           "cards": {
             "sketch0": {
-              "title": "What does SQL mean?"
+              "title": "What is SQL for?"
             },
             "sketch1": {
               "title": "What is a database?"
             },
             "sketch2": {
-              "title": "Why is SQL useful?"
+              "title": "How does SQL turn questions into answers?"
             },
             "sketch3": {
-              "title": "Where do databases appear in real life?"
+              "title": "Where is database data used?"
             },
             "quiz": {
               "title": "Quiz: What SQL Is"
             }
           },
           "quiz": {
-            "try-what_sql_is-sketch0": {
-              "title": "Return Name",
-              "prompt": "Return `name` from `students` in that column order.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `name` from `students` in that column order."
-              },
-              "starterCode": "-- Show the names in the students table\nSELECT \nFROM students;"
-            },
-            "try-what_sql_is-sketch1": {
-              "title": "Try it yourself: What is a database?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show each student's name and grade\nSELECT \nFROM students;"
-            },
-            "try-what_sql_is-sketch2": {
-              "title": "Try it yourself: Why is SQL useful?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show the cities stored in the students table\nSELECT \nFROM students;"
-            },
-            "try-what_sql_is-sketch3": {
-              "title": "Try it yourself: Where do databases appear in real life?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
-              "hint": "Use the pattern shown in the lesson card.",
-              "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
-              },
-              "starterCode": "-- Show the cities stored in the students table\nSELECT \nFROM students;"
-            },
-            "m0_s01_sql_stands_for": {
-              "title": "What does SQL stand for?",
-              "prompt": "What does SQL stand for?",
-              "help": {
-                "concept": "This checks the full name behind the abbreviation.",
-                "hint_1": "One word refers to asking for data.",
-                "hint_2": "Choose the formal language name."
-              },
-              "hint": "Think of the full expanded name.",
-              "options": {
-                "a": "Structured Query Language",
-                "b": "Simple Question Language",
-                "c": "Structured Quick Logic",
-                "d": "System Query Logic"
-              }
-            },
             "m0_s01_sql_main_purpose": {
               "title": "What is SQL mainly used for?",
               "prompt": "Which choice best describes what SQL is mainly used for?",
@@ -35076,54 +34163,6 @@ const messages: Record<string, any> = {
                 "b": "An organized collection of data",
                 "c": "Only a spreadsheet program",
                 "d": "A type of keyboard shortcut"
-              }
-            },
-            "m0_s01_database_vs_table": {
-              "title": "How is a database different from a table?",
-              "prompt": "Which statement is true?",
-              "help": {
-                "concept": "This checks the relationship between the larger container and the pieces inside it.",
-                "hint_1": "One is broader than the other.",
-                "hint_2": "Tables live inside something larger."
-              },
-              "hint": "One is broader than the other.",
-              "options": {
-                "a": "A table contains many databases",
-                "b": "A database can contain multiple tables",
-                "c": "A database and a table are always the same thing",
-                "d": "SQL works only without tables"
-              }
-            },
-            "m0_s01_table_shape": {
-              "title": "What does a row usually represent?",
-              "prompt": "In a table, what does a row usually represent?",
-              "help": {
-                "concept": "This checks the basic shape of tabular data.",
-                "hint_1": "Think about one student in a students table.",
-                "hint_2": "Look for one item or entry."
-              },
-              "hint": "Think of one line in a table.",
-              "options": {
-                "a": "One record",
-                "b": "One whole database",
-                "c": "Only the table name",
-                "d": "A programming loop"
-              }
-            },
-            "m0_s01_sql_command_recognition": {
-              "title": "What does SELECT do?",
-              "prompt": "Look at this command:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nWhat does `SELECT` most directly mean here?",
-              "help": {
-                "concept": "This checks the role of a common SQL keyword.",
-                "hint_1": "The command reads data.",
-                "hint_2": "Choose the option about showing information."
-              },
-              "hint": "Think about reading data.",
-              "options": {
-                "a": "Delete this data",
-                "b": "Show me data",
-                "c": "Rename the table",
-                "d": "Close the database"
               }
             },
             "m0_s01_why_sql_useful": {
@@ -35157,222 +34196,6 @@ const messages: Record<string, any> = {
                 "c": "A flashlight with no memory",
                 "d": "A ruler"
               }
-            },
-            "m0_s01_select_all_true": {
-              "title": "Which foundation statements are true?",
-              "prompt": "Select all true statements about SQL and databases.",
-              "help": {
-                "concept": "This combines the main ideas from the section.",
-                "hint_1": "Match each choice to the core definitions.",
-                "hint_2": "Ignore unrelated tools or wrong definitions."
-              },
-              "hint": "Match each statement to the core ideas.",
-              "options": {
-                "a": "SQL is used to work with stored data.",
-                "b": "A database can contain tables.",
-                "c": "A row usually represents one record.",
-                "d": "SQL is only for drawing user interfaces.",
-                "e": "A database is the same thing as one single column."
-              }
-            },
-            "m0_s01_reorder_sql_name": {
-              "title": "Build the full name of SQL",
-              "prompt": "Reorder the parts to form the full expanded name of SQL.",
-              "hint": "SQL expands into three words.",
-              "concept": "Put the three words of SQL in order.",
-              "hint_1": "The first word is Structured.",
-              "hint_2": "The middle word is Query.",
-              "tokens": {
-                "t1": "Structured",
-                "t2": "Query",
-                "t3": "Language"
-              }
-            },
-            "m0_s01_reorder_select_meaning": {
-              "title": "What does this query mean?",
-              "prompt": "Put the ideas in order to match what this SQL query is saying.\n\n~~~sql\nSELECT * FROM students;\n~~~",
-              "hint": "Start with the action, then all data, then the table.",
-              "concept": "This query reads data from the students table.",
-              "hint_1": "SELECT means show.",
-              "hint_2": "* means all columns.",
-              "tokens": {
-                "t1": "show",
-                "t2": "all columns",
-                "t3": "from students"
-              }
-            },
-            "m0_s01_reorder_database_picture": {
-              "title": "Organize the big picture",
-              "prompt": "Reorder these from biggest container to smallest table idea.",
-              "hint": "A database holds tables. Tables contain rows and columns.",
-              "concept": "Think from the large data container to smaller table pieces.",
-              "hint_1": "Database comes before table.",
-              "hint_2": "Columns and rows belong inside a table.",
-              "tokens": {
-                "t1": "database",
-                "t2": "table",
-                "t3": "column",
-                "t4": "row"
-              }
-            },
-            "m0_s01_reorder_sql_workflow": {
-              "title": "SQL learning flow",
-              "prompt": "Reorder the steps in the usual SQL workflow.",
-              "hint": "You ask first, then run, then read the result.",
-              "concept": "SQL usually follows a question, run, result cycle.",
-              "hint_1": "A question comes first.",
-              "hint_2": "You see the result after running the query.",
-              "tokens": {
-                "t1": "ask a question",
-                "t2": "run the query",
-                "t3": "see the result"
-              }
-            },
-            "m0_s01_reorder_real_system": {
-              "title": "How a real system uses a database",
-              "prompt": "Put these ideas in the most logical order.",
-              "hint": "First information is stored, then organized, then queried.",
-              "concept": "Real software stores data before asking SQL questions about it.",
-              "hint_1": "Data must exist before you query it.",
-              "hint_2": "Tables organize the information before SQL asks questions.",
-              "tokens": {
-                "t1": "store information",
-                "t2": "organize it in tables",
-                "t3": "use SQL to ask questions"
-              }
-            },
-            "m0_s01_reorder_table_meaning": {
-              "title": "Understand a table",
-              "prompt": "Reorder the statements so they explain a table clearly.",
-              "hint": "Start with columns, then rows, then what a row represents.",
-              "concept": "Columns describe data types, rows hold entries, and a row is usually one record.",
-              "hint_1": "Columns explain what kind of data each part stores.",
-              "hint_2": "A row is usually one full item.",
-              "tokens": {
-                "t1": "columns describe types of information",
-                "t2": "rows hold actual entries",
-                "t3": "one row usually represents one record"
-              }
-            },
-            "m0_s01_fill_sql_full_name": {
-              "title": "Complete the SQL name",
-              "prompt": "Fill in the blank with the correct word.",
-              "help": {
-                "concept": "SQL stands for Structured Query Language.",
-                "hint_1": "The missing word is about asking for data.",
-                "hint_2": "The full phrase is Structured Query Language."
-              },
-              "hint": "Think about the Q in SQL.",
-              "template": "SQL stands for Structured ____ Language.",
-              "choices": [
-                "Query",
-                "Quick",
-                "Question",
-                "Queue"
-              ]
-            },
-            "m0_s01_fill_database_contains": {
-              "title": "What can a database contain?",
-              "prompt": "Choose the word that correctly completes the sentence.",
-              "help": {
-                "concept": "A database is the larger container.",
-                "hint_1": "It can hold more than one of these.",
-                "hint_2": "Tables live inside a database."
-              },
-              "hint": "Think about the bigger container.",
-              "template": "A database can contain multiple ____.",
-              "choices": [
-                "tables",
-                "batteries",
-                "monitors",
-                "rulers"
-              ]
-            },
-            "m0_s01_fill_row_meaning": {
-              "title": "What does a row represent?",
-              "prompt": "Fill in the blank with the best answer.",
-              "help": {
-                "concept": "In a table, a row usually holds one full item or entry.",
-                "hint_1": "Think about one student in a students table.",
-                "hint_2": "A row usually means one full record."
-              },
-              "hint": "One horizontal entry = one ____.",
-              "template": "In a table, one row usually represents one ____.",
-              "choices": [
-                "record",
-                "database",
-                "keyboard",
-                "loop"
-              ]
-            },
-            "m0_s01_fill_select_meaning": {
-              "title": "Meaning of SELECT",
-              "prompt": "Complete the sentence using the correct word.",
-              "help": {
-                "concept": "SELECT is used when you want to read or display data.",
-                "hint_1": "It does not delete or rename anything.",
-                "hint_2": "SELECT means show data."
-              },
-              "hint": "Think about reading data.",
-              "template": "In SQL, SELECT usually means ____ data.",
-              "choices": [
-                "show",
-                "delete",
-                "rename",
-                "close"
-              ]
-            },
-            "m0_s01_fill_sql_action": {
-              "title": "One common SQL action",
-              "prompt": "Pick the word that makes the sentence true.",
-              "help": {
-                "concept": "SQL can read, sort, filter, and summarize data.",
-                "hint_1": "This action helps narrow results.",
-                "hint_2": "You use this when you only want some rows."
-              },
-              "hint": "Think about narrowing data down.",
-              "template": "SQL can help you ____ data to find only what you need.",
-              "choices": [
-                "filter",
-                "paint",
-                "charge",
-                "repair"
-              ]
-            },
-            "m0_s01_fill_store_example": {
-              "title": "Real database example",
-              "prompt": "Complete the sentence with the best real-world answer.",
-              "help": {
-                "concept": "Online stores often save products, customers, and orders in a database.",
-                "hint_1": "This is something customers place.",
-                "hint_2": "Stores often track products and orders."
-              },
-              "hint": "Think about shopping data.",
-              "template": "An online store database may track products and ____.",
-              "choices": [
-                "orders",
-                "pillows",
-                "flashlights",
-                "rulers"
-              ]
-            }
-          },
-          "tryIt": {
-            "try_what_sql_is_sketch0": {
-              "title": "Try it yourself: What does SQL mean?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_what_sql_is_sketch1": {
-              "title": "Try it yourself: What is a database?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_what_sql_is_sketch2": {
-              "title": "Try it yourself: Why is SQL useful?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
-            },
-            "try_what_sql_is_sketch3": {
-              "title": "Try it yourself: Where do databases appear in real life?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
             }
           }
         }
@@ -35609,7 +34432,7 @@ const messages: Record<string, any> = {
         },
         "common_beginner_syntax_mistakes": {
           "label": "Predicting Results and Fixing Syntax",
-          "summary": "Predict a query result and repair common SELECT, comma, table-name, and semicolon mistakes.",
+          "summary": "Predict a result shape, then diagnose and repair common SELECT, comma, and FROM mistakes.",
           "cards": {
             "sketch0": {
               "title": "Predict the Result Before Running"
@@ -35638,22 +34461,6 @@ const messages: Record<string, any> = {
                 "d": "products FROM SELECT name;"
               }
             },
-            "sc_real_column_name": {
-              "title": "Choose the real column name",
-              "prompt": "Which column name actually exists in the `products` table?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "product_name",
-                "b": "item_price",
-                "c": "name",
-                "d": "stock_count"
-              }
-            },
             "mc_common_select_mistakes": {
               "title": "Find the syntax mistakes",
               "prompt": "Which of these are common beginner mistakes in a simple `SELECT` query? Choose all that apply.",
@@ -35668,58 +34475,6 @@ const messages: Record<string, any> = {
                 "b": "Leaving out commas between selected columns",
                 "c": "Using a column name like `product_name` when the table has `name`",
                 "d": "Ending the query with a semicolon"
-              }
-            },
-            "mc_valid_query_parts": {
-              "title": "Choose the valid parts",
-              "prompt": "Which pieces can appear in a correct beginner query that reads from this dataset? Choose all that apply.",
-              "hint": "Use the real table and column names from the schema.",
-              "help": {
-                "concept": "A valid beginner query uses real schema names and standard `SELECT ... FROM ...` syntax.",
-                "hint_1": "The table is named `products`, and columns include `name`, `category`, `price`, `stock`, and `created_at`.",
-                "hint_2": "Pick the pieces that match those exact names and avoid invented names."
-              },
-              "options": {
-                "a": "`FROM products`",
-                "b": "`SELECT name, price`",
-                "c": "`FROM product_list`",
-                "d": "`SELECT product_name`"
-              }
-            },
-            "dr_basic_query_order": {
-              "title": "Order a basic query",
-              "prompt": "Arrange these tokens to build a correct query that selects the `name` column from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "products",
-                "t2": ";",
-                "t3": "SELECT",
-                "t4": "name",
-                "t5": "FROM"
-              }
-            },
-            "dr_select_two_columns": {
-              "title": "Order a two-column query",
-              "prompt": "Arrange these tokens to build a correct query that selects `name` and `price` from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "price",
-                "t2": "FROM",
-                "t3": ";",
-                "t4": "products",
-                "t5": ",",
-                "t6": "name",
-                "t7": "SELECT"
               }
             },
             "fb_missing_keyword": {
@@ -35756,93 +34511,28 @@ const messages: Record<string, any> = {
                 "items"
               ]
             },
-            "ci_fix_missing_comma": {
-              "title": "Fix a missing comma",
-              "prompt": "Write a query that returns the `name` and `price` columns from the `products` table. A common beginner mistake here is forgetting the comma between column names. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and price columns from the products table.\nSELECT name price\nFROM products;"
-            },
-            "ci_fix_clause_order": {
-              "title": "Fix the clause order",
-              "prompt": "Write a correct query that returns the `id` and `name` columns from `products`. This exercise targets the common mistake of putting `FROM` before `SELECT`. Write the corrected query in the SQL editor and run it.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the id and name columns from products.\nFROM products\nSELECT id, name;"
-            },
-            "ci_fix_wrong_column_name": {
-              "title": "Fix the wrong column name",
-              "prompt": "Write a query that returns the `name` and `stock` columns from `products`. A common beginner mistake is using a made-up column like `product_name` instead of the real schema name. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and stock columns from products.\nSELECT product_name, stock\nFROM products;"
-            },
-            "try-common_beginner_syntax_mistakes-sketch0": {
-              "title": "Predict a Three-Column Result",
-              "prompt": "Before sharing the query, build a three-column inventory snapshot with `id`, `category`, and `stock` from `products`, in that order. Predict the result shape before you run it.",
-              "hint": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-              "help": {
-                "concept": "Predicting the result shape helps you catch missing or misplaced columns before execution.",
-                "hint_1": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return id, category, and stock\nSELECT\nFROM products;"
-            },
             "try-common_beginner_syntax_mistakes-sketch1": {
-              "title": "Repair a Broken SELECT Query",
-              "prompt": "The editor contains an unfinished product-date query. Repair it so the result shows `name` and `created_at` from `products`.",
-              "hint": "Add the missing comma and FROM keyword while keeping the requested column order.",
+              "title": "Repair a Broken Product-Date Query",
+              "prompt": "The editor contains a broken query. Repair it so the result returns `name` and `created_at` from `products`, in that order.",
+              "hint": "Check the comma between selected columns and make sure FROM appears before the table name.",
               "help": {
-                "concept": "A SELECT query needs commas between columns and a FROM clause before the table name.",
-                "hint_1": "Add the missing comma and FROM keyword while keeping the requested column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A basic SELECT query needs valid column separators and a FROM clause before its source table.",
+                "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Fix the syntax without changing the requested columns\nSELECT name created_at\nproducts;"
-            },
-            "try-common_beginner_syntax_mistakes-sketch2": {
-              "title": "Query name and stock from products",
-              "prompt": "Build a product-catalog query that returns `name`, `stock` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return name, stock from the products table.\nSELECT product_name, stock\nFROM products;"
+              "starterCode": "-- Repair the broken query below.\nSELECT\n    name\n    created_at,\nproducts;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_common_beginner_syntax_mistakes_sketch0": {
-              "title": "Predict a Three-Column Result",
-              "prompt": "Before sharing the query, build a three-column inventory snapshot with `id`, `category`, and `stock` from `products`, in that order. Predict the result shape before you run it.",
-              "hint": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-              "help": {
-                "concept": "Predicting the result shape helps you catch missing or misplaced columns before execution.",
-                "hint_1": "Three selected columns should produce three result columns; FROM products supplies the rows.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_common_beginner_syntax_mistakes_sketch1": {
-              "title": "Repair a Broken SELECT Query",
-              "prompt": "The editor contains an unfinished product-date query. Repair it so the result shows `name` and `created_at` from `products`.",
-              "hint": "Add the missing comma and FROM keyword while keeping the requested column order.",
+              "title": "Repair a Broken Product-Date Query",
+              "prompt": "The editor contains a broken query. Repair it so the result returns `name` and `created_at` from `products`, in that order.",
+              "hint": "Check the comma between selected columns and make sure FROM appears before the table name.",
               "help": {
-                "concept": "A SELECT query needs commas between columns and a FROM clause before the table name.",
-                "hint_1": "Add the missing comma and FROM keyword while keeping the requested column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A basic SELECT query needs valid column separators and a FROM clause before its source table.",
+                "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -36079,71 +34769,46 @@ const messages: Record<string, any> = {
           }
         },
         "module-1-product-starter-sheet-project": {
-          "label": "Module 1 Product Starter Sheet Project",
-          "summary": "Build a simple product starter sheet that becomes clearer with each step.",
+          "label": "Module 1 Product Handoff Project",
+          "summary": "Build one product query that grows from a merchandising review into an operations-ready handoff.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Starter product sheet"
+              "title": "Product handoff sheet"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Preview the core product fields"
+              "title": "Prepare the merchandising view"
             },
             "mp_2": {
-              "title": "Add the pricing field"
-            },
-            "mp_3": {
-              "title": "Finish the starter sheet"
+              "title": "Prepare the operations handoff"
             }
           },
           "quiz": {
             "mp-1-preview-product-sheet": {
-              "title": "Preview the core product fields",
-              "prompt": "Start the product sheet by returning `id`, `name`, and `category` from the `products` table.",
-              "hint": "Add one more field to the working SELECT list.",
+              "title": "Prepare the merchandising view",
+              "prompt": "The merchandising team needs a compact review sheet. Return `name`, `category`, and `price` from `products`, in that order.",
+              "hint": "Choose only the three fields the merchandising reviewer needs.",
               "help": {
-                "concept": "This step shapes the product sheet into a clearer report.",
-                "hint_1": "Keep `id` and `name`, then add `category` before `FROM products`.",
-                "hint_2": "Run the query and make sure the result shows the three requested columns."
+                "concept": "A focused SELECT list should match the reader's immediate information needs.",
+                "hint_1": "Keep `name` and `category`, then add `price` before FROM products.",
+                "hint_2": "Run the query and confirm the result columns appear as name, category, price."
               },
-              "starterCode": "-- Returning id, name, and category from the products table.\nSELECT\n  id,\n  name\nFROM products;"
+              "starterCode": "-- Build the first merchandising view.\nSELECT\n  name,\n  category\nFROM products;"
             },
             "mp-2-add-pricing-columns": {
-              "title": "Add the pricing field",
-              "prompt": "Add `price` so the report shows category and price together.",
-              "hint": "Extend the same query instead of rewriting it.",
+              "title": "Prepare the operations handoff",
+              "prompt": "Warehouse operations will use the approved sheet next. Extend the same query so it returns `id`, `name`, `category`, `price`, and `stock` from `products`, in that order.",
+              "hint": "Keep the approved merchandising fields, place `id` first, and add `stock` last.",
               "help": {
-                "concept": "Add the new field while keeping the parts of the sheet that already read well.",
-                "hint_1": "Leave `id`, `name`, and `category` in place.",
-                "hint_2": "Add `price` before `FROM products`, then rerun the query."
+                "concept": "A cumulative project keeps the working query and extends it for the next stakeholder.",
+                "hint_1": "Start from the working merchandising query without deleting its three fields.",
+                "hint_2": "Add `id` at the beginning of the SELECT list and `stock` at the end."
               },
-              "starterCode": "-- Keep the working query above.\n-- Add price before FROM.\nSELECT\n  id,\n  name,\n  category\nFROM products;"
-            },
-            "mp-3-finish-product-starter-sheet": {
-              "title": "Finish the starter sheet",
-              "prompt": "Add `stock` so the final query returns `id`, `name`, `category`, `price`, and `stock`.",
-              "hint": "Insert the final field into the same SELECT list.",
-              "help": {
-                "concept": "This last step finishes the starter sheet with the final missing field.",
-                "hint_1": "Do not remove any fields you already added.",
-                "hint_2": "Add `stock` after `price`, then rerun the query."
-              },
-              "starterCode": "-- Keep the working query above.\n-- Add stock after price.\nSELECT\n  id,\n  name,\n  category,\n  price\nFROM products;"
-            },
-            "try-module-1-product-starter-sheet-project-sketch0": {
-              "title": "Preview the Product Sheet Fields",
-              "prompt": "Before building the product sheet, create its base catalog view. Return `id`, `name`, and `category` from `products`.",
-              "hint": "Select the three requested columns in the stated order from `products`.",
-              "help": {
-                "concept": "This warm-up establishes the base columns used by the product-sheet project.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, category from the products table.\nSELECT\n  id,\n  name\nFROM products;"
+              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products;"
             }
           },
           "tryIt": {
@@ -36387,7 +35052,7 @@ const messages: Record<string, any> = {
         },
         "query_multiple_columns": {
           "label": "Writing Clear Multi-Column Queries",
-          "summary": "Format and order several selected columns so a result is easy to understand.",
+          "summary": "Separate, order, and format several selected columns so the result is easy to read and review.",
           "cards": {
             "sketch0": {
               "title": "Build a Useful Column Sequence"
@@ -36447,39 +35112,6 @@ const messages: Record<string, any> = {
                 "d": "FROM products SELECT name, created_at;"
               }
             },
-            "mc_columns_in_products": {
-              "title": "Columns you can select",
-              "prompt": "Which of these are real column names in the `products` table? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "category",
-                "c": "brand",
-                "d": "created_at"
-              }
-            },
-            "dr_query_structure_two_columns": {
-              "title": "Build a two-column query",
-              "prompt": "Arrange the tokens to form a correct query that selects `name` and `category` from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "name,",
-                "t3": "category",
-                "t4": "FROM",
-                "t5": "products;"
-              }
-            },
             "dr_query_structure_three_columns": {
               "title": "Order a three-column query",
               "prompt": "Arrange the tokens to form a correct query that selects `id`, `name`, and `price` from `products`.",
@@ -36498,127 +35130,28 @@ const messages: Record<string, any> = {
                 "t6": "price"
               }
             },
-            "fb_missing_column_name": {
-              "title": "Complete the SELECT list",
-              "prompt": "Choose the missing column name to complete the query.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT name, [blank1] FROM products;",
-              "choices": [
-                "price",
-                "products",
-                "SELECT",
-                "brand"
-              ]
-            },
-            "fb_missing_table_name": {
-              "title": "Complete the FROM clause",
-              "prompt": "Choose the missing table name to complete the query.",
-              "hint": "This lesson uses one table named `the blank`.",
-              "help": {
-                "concept": "The `FROM` clause tells SQL which table contains the columns named in the `SELECT` clause.",
-                "hint_1": "The columns `id` and `name` both come from the same table used throughout this topic.",
-                "hint_2": "Use the table name shown in the schema for this lesson, not a column name."
-              },
-              "template": "SELECT id, name FROM [blank1];",
-              "choices": [
-                "price",
-                "products",
-                "category",
-                "created_at"
-              ]
-            },
-            "ci_select_name_category": {
-              "title": "Show names and categories",
-              "prompt": "Write a query that returns the `name` and `category` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and category columns from products\n-- add columns here\nSELECT\nFROM products;"
-            },
-            "ci_select_three_columns": {
-              "title": "Show three useful columns",
-              "prompt": "Write a query that returns the `id`, `name`, and `price` columns from the `products` table, in that order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, name, and price from products\n-- add three columns here\nSELECT\nFROM products;"
-            },
-            "ci_select_category_stock_created": {
-              "title": "Choose a different set of columns",
-              "prompt": "Write a query that returns the `category`, `stock`, and `created_at` columns from the `products` table. Keep the columns in that exact order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return category, stock, and created_at from products\n-- add the three columns here\nSELECT\nFROM products;"
-            },
-            "try-query_multiple_columns-sketch0": {
-              "title": "Control the Result Column Order",
-              "prompt": "A price-first export should place amounts before product labels. Return `price` first and `name` second from `products`.",
-              "hint": "The left-to-right order after SELECT becomes the result-column order.",
-              "help": {
-                "concept": "A useful column sequence follows the way the reader will interpret the result.",
-                "hint_1": "The left-to-right order after SELECT becomes the result-column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Put price first, then name\nSELECT\nFROM products;"
-            },
-            "try-query_multiple_columns-sketch1": {
-              "title": "Query id and name from products",
-              "prompt": "Build a product-catalog query that returns `id`, `name`, `price` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, and price from products\n-- add three columns here\nSELECT\nFROM products;"
-            },
             "try-query_multiple_columns-sketch2": {
               "title": "Format a Three-Column Inventory View",
-              "prompt": "Prepare a readable inventory extract. Select `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
-              "hint": "Separate the three selected columns with commas and keep FROM products after the list.",
+              "prompt": "Prepare a readable inventory extract. Return `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
+              "hint": "Separate selected columns with commas and keep FROM products after the complete list.",
               "help": {
                 "concept": "Readable formatting makes a longer SELECT list easier to scan without changing the result.",
-                "hint_1": "Separate the three selected columns with commas and keep FROM products after the list.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Separate selected columns with commas and keep FROM products after the complete list.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Add the requested columns on separate lines\nSELECT\nFROM products;"
+              "starterCode": "-- Build a readable three-column product query.\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_query_multiple_columns_sketch2": {
               "title": "Format a Three-Column Inventory View",
-              "prompt": "Prepare a readable inventory extract. Select `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
-              "hint": "Separate the three selected columns with commas and keep FROM products after the list.",
+              "prompt": "Prepare a readable inventory extract. Return `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
+              "hint": "Separate selected columns with commas and keep FROM products after the complete list.",
               "help": {
                 "concept": "Readable formatting makes a longer SELECT list easier to scan without changing the result.",
-                "hint_1": "Separate the three selected columns with commas and keep FROM products after the list.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_query_multiple_columns_sketch0": {
-              "title": "Control the Result Column Order",
-              "prompt": "A price-first export should place amounts before product labels. Return `price` first and `name` second from `products`.",
-              "hint": "The left-to-right order after SELECT becomes the result-column order.",
-              "help": {
-                "concept": "A useful column sequence follows the way the reader will interpret the result.",
-                "hint_1": "The left-to-right order after SELECT becomes the result-column order.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Separate selected columns with commas and keep FROM products after the complete list.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -37317,7 +35850,7 @@ const messages: Record<string, any> = {
         },
         "selecting_specific_columns": {
           "label": "Selecting All or Specific Columns",
-          "summary": "Choose between SELECT * and an explicit column list based on the purpose of the result.",
+          "summary": "Choose between SELECT * and an explicit column list based on what the reader actually needs.",
           "cards": {
             "sketch0": {
               "title": "When SELECT * Is Useful"
@@ -37377,22 +35910,6 @@ const messages: Record<string, any> = {
                 "c": "SELECT products FROM name;"
               }
             },
-            "mc_columns_in_products_table": {
-              "title": "Real columns in the table",
-              "prompt": "Which of these are actual columns in the `products` table? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "price",
-                "c": "description",
-                "d": "stock"
-              }
-            },
             "dr_build_two_column_query": {
               "title": "Build a two-column query",
               "prompt": "Arrange the tokens to make a query that returns the `name` and `category` columns from `products`.",
@@ -37410,152 +35927,35 @@ const messages: Record<string, any> = {
                 "t5": "products;"
               }
             },
-            "dr_build_three_column_query": {
-              "title": "Order the parts of the query",
-              "prompt": "Arrange the tokens to make a query that returns `id`, `name`, and `stock` from `products`.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "id,",
-                "t3": "name,",
-                "t4": "stock",
-                "t5": "FROM",
-                "t6": "products;"
-              }
-            },
-            "fb_missing_column_name": {
-              "title": "Fill in the missing column",
-              "prompt": "Complete the query so it returns the product name and price.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT [blank1], price FROM products;",
-              "choices": [
-                "name",
-                "stock",
-                "created_at",
-                "products"
-              ]
-            },
-            "fb_missing_table_name": {
-              "title": "Fill in the missing table",
-              "prompt": "Complete the query so it reads from the correct table.",
-              "hint": "This lesson uses one table that stores product records.",
-              "help": {
-                "concept": "The FROM clause names the table that contains the columns you want to return.",
-                "hint_1": "The columns `id` and `name` come from the table used throughout this topic.",
-                "hint_2": "Think of the table that contains rows like `Sketchbook` and `Notebook`."
-              },
-              "template": "SELECT id, name FROM [blank1];",
-              "choices": [
-                "price",
-                "products",
-                "category",
-                "stock"
-              ]
-            },
-            "ci_select_name_price": {
-              "title": "Query product names and prices",
-              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the name and price columns from the products table.\nSELECT\nFROM products;"
-            },
-            "ci_select_id_name_stock": {
-              "title": "Show id, name, and stock",
-              "prompt": "Write a query that returns the `id`, `name`, and `stock` columns from the `products` table. Use the SQL editor, click Run query, and confirm the results table shows those three columns in that order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the id, name, and stock columns from the products table.\nSELECT\n  id\nFROM products;"
-            },
-            "ci_select_category_created_at": {
-              "title": "Return category and created date",
-              "prompt": "Write a query that returns only the `category` and `created_at` columns from the `products` table. Write the query in the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the category and created_at columns from the products table.\nSELECT category\nFROM products;"
-            },
-            "try-selecting_specific_columns-sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return every column from products\nSELECT\nFROM products;"
-            },
-            "try-selecting_specific_columns-sketch1": {
-              "title": "Query id and name from products",
-              "prompt": "Build a product-catalog query that returns `id`, `name`, `stock` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, stock from the products table.\nSELECT\n  id\nFROM products;"
-            },
             "try-selecting_specific_columns-sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
                 "concept": "Explicit column lists keep a result focused and make its column order intentional.",
-                "hint_1": "Name only the two requested columns instead of using *.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return only category and created_at\nSELECT\nFROM products;"
+              "starterCode": "-- Return only category and created_at from products.\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_selecting_specific_columns_sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
                 "concept": "Explicit column lists keep a result focused and make its column order intentional.",
-                "hint_1": "Name only the two requested columns instead of using *.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_selecting_specific_columns_sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
         },
         "what_select_does": {
           "label": "SELECT and FROM: Building a Query",
-          "summary": "Build a complete single-table query and understand how SELECT and FROM work together.",
+          "summary": "Build a complete single-table query by choosing result columns and naming the table that supplies them.",
           "cards": {
             "sketch0": {
               "title": "Choose What the Result Should Show"
@@ -37584,22 +35984,6 @@ const messages: Record<string, any> = {
                 "d": "It renames a column permanently"
               }
             },
-            "sc_select_star_meaning": {
-              "title": "Meaning of the star",
-              "prompt": "In the query `SELECT * FROM products;`, what does `*` mean?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "Only the first column",
-                "b": "All columns",
-                "c": "Only numeric columns",
-                "d": "A random row"
-              }
-            },
             "mc_valid_select_parts": {
               "title": "Valid beginner SELECT queries",
               "prompt": "Which queries correctly retrieve data from the `products` table? Choose all that apply.",
@@ -37616,22 +36000,6 @@ const messages: Record<string, any> = {
                 "d": "products FROM SELECT name;"
               }
             },
-            "mc_columns_returned": {
-              "title": "Columns shown by a query",
-              "prompt": "If you run `SELECT name, price FROM products;`, which columns will appear in the results table? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "price",
-                "c": "stock",
-                "d": "created_at"
-              }
-            },
             "dr_query_order_basic": {
               "title": "Build a basic query",
               "prompt": "Arrange the tokens to make a valid query that shows the `name` column from the `products` table.",
@@ -37646,22 +36014,6 @@ const messages: Record<string, any> = {
                 "t2": "name",
                 "t3": "FROM",
                 "t4": "products;"
-              }
-            },
-            "dr_query_order_two_columns": {
-              "title": "Order a two-column query",
-              "prompt": "Arrange the tokens to make a valid query that shows `name` and `category` from `products`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "FROM",
-                "t2": "products;",
-                "t3": "SELECT",
-                "t4": "name, category"
               }
             },
             "fb_from_table_name": {
@@ -37681,110 +36033,28 @@ const messages: Record<string, any> = {
                 "category"
               ]
             },
-            "fb_select_column_name": {
-              "title": "Complete the column list",
-              "prompt": "Fill in the missing column so the query shows product names.",
-              "hint": "Use the column that stores values like Sketchbook and Notebook.",
-              "help": {
-                "concept": "The column list after `SELECT` tells SQL which data to return.",
-                "hint_1": "You want the text values that identify each product.",
-                "hint_2": "Choose the column whose entries include product labels rather than prices or stock counts."
-              },
-              "template": "SELECT [blank1] FROM products;",
-              "choices": [
-                "name",
-                "stock",
-                "created_at",
-                "id"
-              ]
-            },
-            "ci_select_all_products": {
-              "title": "Show every column from products",
-              "prompt": "Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
-            },
-            "ci_select_name_price": {
-              "title": "Show product names and prices",
-              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check that the results table has exactly those two columns.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the name and price columns from the products table.\nSELECT \nFROM products;"
-            },
-            "ci_select_category_stock": {
-              "title": "Show categories and stock counts",
-              "prompt": "Write a query that returns the `category` and `stock` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the category and stock columns from the products table.\nSELECT \nFROM products;"
-            },
             "try-what_select_does-sketch0": {
-              "title": "Choose a Two-Column Result",
-              "prompt": "Build a compact stock reference that places each product's `id` beside its `stock` value. Return those two columns from `products`, in that order.",
-              "hint": "List `id` and `stock` after SELECT, then name `products` after FROM.",
+              "title": "Build a Two-Column Stock Reference",
+              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
+              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "List `id` and `stock` after SELECT, then name `products` after FROM.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return only id and stock from products\nSELECT\nFROM products;"
-            },
-            "try-what_select_does-sketch1": {
-              "title": "Query name and price from products",
-              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return name, price from the products table.\nSELECT \nFROM products;"
-            },
-            "try-what_select_does-sketch2": {
-              "title": "Read Two Fields from the Product Table",
-              "prompt": "A buyer wants a quick view of what each product category has on hand. Return `category` and `stock` from `products`, in that order.",
-              "hint": "Put both columns in the SELECT list and use products as the source table.",
-              "help": {
-                "concept": "A complete read query needs both a result list and a source table.",
-                "hint_1": "Put both columns in the SELECT list and use products as the source table.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return category and stock from products\nSELECT\nFROM products;"
+              "starterCode": "-- Return id and stock from products.\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_what_select_does_sketch2": {
-              "title": "Read Two Fields from the Product Table",
-              "prompt": "A buyer wants a quick view of what each product category has on hand. Return `category` and `stock` from `products`, in that order.",
-              "hint": "Put both columns in the SELECT list and use products as the source table.",
-              "help": {
-                "concept": "A complete read query needs both a result list and a source table.",
-                "hint_1": "Put both columns in the SELECT list and use products as the source table.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_what_select_does_sketch0": {
-              "title": "Choose a Two-Column Result",
-              "prompt": "Build a compact stock reference that places each product's `id` beside its `stock` value. Return those two columns from `products`, in that order.",
-              "hint": "List `id` and `stock` after SELECT, then name `products` after FROM.",
+              "title": "Build a Two-Column Stock Reference",
+              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
+              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "List `id` and `stock` after SELECT, then name `products` after FROM.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -38026,7 +36296,7 @@ const messages: Record<string, any> = {
       "sql-v2-2": {
         "and_conditions": {
           "label": "Combining Conditions with AND and OR",
-          "summary": "Use AND when every rule must pass and OR when any listed rule may pass.",
+          "summary": "Use AND for simultaneous requirements and OR for acceptable alternatives.",
           "cards": {
             "sketch0": {
               "title": "AND Requires Every Condition"
@@ -38055,22 +36325,6 @@ const messages: Record<string, any> = {
                 "d": "It selects every column in the table."
               }
             },
-            "sc_and_result_example": {
-              "title": "Find the matching row",
-              "prompt": "Which product matches `WHERE category = 'Home' AND stock > 5`?",
-              "hint": "Check both the category and the stock value.",
-              "help": {
-                "concept": "To satisfy an `AND` filter, a row must match the text condition and the numeric condition together.",
-                "hint_1": "Look at the `Home` products first, then compare their stock values to 5.",
-                "hint_2": "There are two `Home` products in the dataset, but only one has stock greater than 5."
-              },
-              "options": {
-                "a": "Sketchbook",
-                "b": "Desk Lamp",
-                "c": "Fountain Pen",
-                "d": "Office Chair"
-              }
-            },
             "mc_rows_match_art_and_price": {
               "title": "Choose all matching Art products",
               "prompt": "Which products match `WHERE category = 'Art' AND price < 30`? Choose all that apply.",
@@ -38087,22 +36341,6 @@ const messages: Record<string, any> = {
                 "d": "Office Chair"
               }
             },
-            "mc_conditions_true_for_notebook": {
-              "title": "Identify true conditions",
-              "prompt": "For the `Notebook` row, which conditions are true? Choose all that apply.",
-              "hint": "Use the Notebook values: category `Stationery`, price `6.75`, stock `50`.",
-              "help": {
-                "concept": "A multi-condition check is easier when you compare one row's actual values against each condition one by one.",
-                "hint_1": "Test each statement against Notebook's category, price, and stock separately.",
-                "hint_2": "Notebook is in `Stationery`, costs less than 10, and has stock greater than 20."
-              },
-              "options": {
-                "a": "category = 'Stationery'",
-                "b": "price < 10",
-                "c": "stock > 20",
-                "d": "category = 'Home'"
-              }
-            },
             "dr_build_and_query": {
               "title": "Build a query with AND",
               "prompt": "Arrange the SQL parts to query product names where the category is `Stationery` and stock is at least 15.",
@@ -38116,21 +36354,6 @@ const messages: Record<string, any> = {
                 "t1": "SELECT name",
                 "t2": "FROM products",
                 "t3": "WHERE category = 'Stationery' AND stock >= 15;"
-              }
-            },
-            "dr_read_filter_steps": {
-              "title": "Order the filtering steps",
-              "prompt": "Put these steps in the order you would use to understand `WHERE category = 'Art' AND price < 20`.",
-              "hint": "First find the relevant rows, then test the second condition, then keep only rows that pass both.",
-              "help": {
-                "concept": "Reading an `AND` filter step by step helps you avoid mistakes: inspect one condition, inspect the next, then combine the results.",
-                "hint_1": "Begin by checking which rows are in the `Art` category.",
-                "hint_2": "After that, compare the prices of those rows to 20, then keep only the rows that satisfy both checks."
-              },
-              "tokens": {
-                "t1": "Find the rows where category is 'Art'",
-                "t2": "Check which of those rows have price less than 20",
-                "t3": "Keep only the rows that pass both conditions"
               }
             },
             "fb_and_keyword": {
@@ -38150,117 +36373,35 @@ const messages: Record<string, any> = {
                 "ORDER BY"
               ]
             },
-            "fb_missing_column": {
-              "title": "Choose the right column",
-              "prompt": "Fill in the missing column name to filter by inventory amount.",
-              "hint": "Use the column that stores how many items are available.",
-              "help": {
-                "concept": "To write a correct condition, you must use the real column name from the table schema that matches the value you want to test.",
-                "hint_1": "In the `products` table, the inventory count column is an integer field.",
-                "hint_2": "The schema includes `price` for cost and another column for quantity on hand."
-              },
-              "template": "SELECT name FROM products WHERE [blank1] >= 10 AND category = 'Stationery';",
-              "choices": [
-                "stock",
-                "name",
-                "created_at",
-                "id"
-              ]
-            },
-            "ci_art_under_20": {
-              "title": "Query Art products under 20",
-              "prompt": "Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of products in the Art category with a price less than 20.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_stationery_stock_15": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name, category, and stock for products where the category is Stationery and the stock is at least 15.\nSELECT name, category, stock\nFROM products\nWHERE category = '' ;"
-            },
-            "ci_home_price_under_100": {
-              "title": "Find affordable Home products",
-              "prompt": "Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT name, price\nFROM products\nWHERE category = 'Home'"
-            },
-            "try-and_conditions-sketch0": {
-              "title": "Allow Either of Two Product Rules",
-              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Show `name`, `category`, and `price` from `products`.",
-              "hint": "Connect the two alternative conditions with OR.",
-              "help": {
-                "concept": "OR keeps a row when at least one connected condition is true.",
-                "hint_1": "Connect the two alternative conditions with OR.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Allow either rule"
-            },
             "try-and_conditions-sketch1": {
               "title": "Require Category and Stock Together",
-              "prompt": "Prepare a bulk-order list of stationery items. Show `name`, `category`, and `stock` from `products` where the category is `Stationery` and stock is at least `15`.",
-              "hint": "Join the exact category test and the inclusive stock test with AND.",
+              "prompt": "Prepare a bulk-order list. Return `name`, `category`, and `stock` from `products`, in that order. Keep only `Stationery` products with stock of at least `15`.",
+              "hint": "Write one category condition and one stock condition, then connect them with AND.",
               "help": {
                 "concept": "AND keeps a row only when every connected condition is true.",
-                "hint_1": "Join the exact category test and the inclusive stock test with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT name, category, stock\nFROM products\n-- Require both business rules"
-            },
-            "try-and_conditions-sketch2": {
-              "title": "Find affordable Home products",
-              "prompt": "Create a focused inventory query that shows `name` and `price` for products in the `Home` category with a price below 100. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT name, price\nFROM products\nWHERE category = 'Home'"
+              "starterCode": "-- Require both the category and stock rules.\nSELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_and_conditions_sketch1": {
               "title": "Require Category and Stock Together",
-              "prompt": "Prepare a bulk-order list of stationery items. Show `name`, `category`, and `stock` from `products` where the category is `Stationery` and stock is at least `15`.",
-              "hint": "Join the exact category test and the inclusive stock test with AND.",
+              "prompt": "Prepare a bulk-order list. Return `name`, `category`, and `stock` from `products`, in that order. Keep only `Stationery` products with stock of at least `15`.",
+              "hint": "Write one category condition and one stock condition, then connect them with AND.",
               "help": {
                 "concept": "AND keeps a row only when every connected condition is true.",
-                "hint_1": "Join the exact category test and the inclusive stock test with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_and_conditions_sketch0": {
-              "title": "Allow Either of Two Product Rules",
-              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Show `name`, `category`, and `price` from `products`.",
-              "hint": "Connect the two alternative conditions with OR.",
-              "help": {
-                "concept": "OR keeps a row when at least one connected condition is true.",
-                "hint_1": "Connect the two alternative conditions with OR.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
         },
         "avoiding_filtering_mistakes": {
           "label": "Finding and Fixing Filter Mistakes",
-          "summary": "Debug incorrect values, quoting, operators, and clause order in WHERE queries.",
+          "summary": "Debug operator, quoting, logic, and clause mistakes by comparing the query with the requirement.",
           "cards": {
             "sketch0": {
               "title": "Check the Condition Against the Requirement"
@@ -38287,20 +36428,6 @@ const messages: Record<string, any> = {
                 "b": "price < 20",
                 "c": "price = 20",
                 "d": "price <= 20"
-              }
-            },
-            "sc_text_quotes": {
-              "title": "Filter text values correctly",
-              "prompt": "Which condition correctly filters the products table to only rows in the Art category?",
-              "hint": "Text values in SQL conditions should be written as quoted strings.",
-              "help": {
-                "concept": "Text comparisons in SQL use string literals, and string literals need quotes. Column names are not quoted the same way as text values.",
-                "hint_1": "The column is `category`, and the value you are matching is the text Art.",
-                "hint_2": "Look for the option that compares the column to a quoted text value."
-              },
-              "options": {
-                "a": "category = Art",
-                "b": "category = 'Art'"
               }
             },
             "mc_and_vs_or": {
@@ -38335,54 +36462,6 @@ const messages: Record<string, any> = {
                 "d": "The query used `ORDER BY name`."
               }
             },
-            "dr_build_basic_filter": {
-              "title": "Build a simple filtered query",
-              "prompt": "Arrange the SQL parts to create a query that shows product names from the products table where stock is greater than 10.",
-              "hint": "Start with SELECT, then FROM, then WHERE.",
-              "help": {
-                "concept": "A basic filtered SELECT query follows the order SELECT columns, FROM table, then WHERE condition.",
-                "hint_1": "The column list comes right after SELECT, and the table name comes right after FROM.",
-                "hint_2": "The condition `stock > 10` belongs after the WHERE keyword."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE stock > 10"
-              }
-            },
-            "dr_build_sorted_filter": {
-              "title": "Order the clauses correctly",
-              "prompt": "Arrange the SQL parts to query product names and prices for products under 20, sorted by price from low to high.",
-              "hint": "Filtering happens before sorting in the query structure.",
-              "help": {
-                "concept": "In SQL, the written clause order is SELECT, FROM, WHERE, then ORDER BY. ASC sorts from low to high.",
-                "hint_1": "Put the table clause before the filter clause.",
-                "hint_2": "The sorting clause should come last, after the condition `price < 20`."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "WHERE price < 20",
-                "t4": "ORDER BY price ASC"
-              }
-            },
-            "fb_choose_and": {
-              "title": "Pick the right logical operator",
-              "prompt": "Complete the query so it keeps only Art products with stock of at least 10.",
-              "hint": "Both conditions must be true together.",
-              "help": {
-                "concept": "Use the blank when a row must satisfy two conditions at the same time.",
-                "hint_1": "The query should keep rows only when the category matches the blank the stock rule also matches.",
-                "hint_2": "Choose the operator that is stricter than OR because it requires both tests."
-              },
-              "template": "SELECT name FROM products WHERE category = 'Art' [blank1] stock >= 10;",
-              "choices": [
-                "AND",
-                "OR",
-                "NOT IN",
-                "LIKE"
-              ]
-            },
             "fb_choose_quoted_text": {
               "title": "Complete the text filter",
               "prompt": "Fill in the missing value so the query returns only Home products.",
@@ -38400,93 +36479,28 @@ const messages: Record<string, any> = {
                 "'products'"
               ]
             },
-            "ci_filter_expensive_products": {
-              "title": "Query products above a price threshold",
-              "prompt": "Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
-            },
-            "ci_filter_category_and_stock": {
-              "title": "Find well-stocked stationery items",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
-            },
-            "ci_filter_recent_products": {
-              "title": "Show recently created products",
-              "prompt": "Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
-            },
             "try-avoiding_filtering_mistakes-sketch0": {
               "title": "Repair an Invalid Comparison Operator",
-              "prompt": "The starter query has a broken price comparison. Repair it so the result shows `name` and `price` from `products` for items priced at least `20`.",
-              "hint": "SQL writes the inclusive greater-than operator as >=, not =>.",
+              "prompt": "The starter query contains an invalid comparison operator. Repair it so the result returns `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
               "help": {
-                "concept": "Debugging one clause at a time makes small operator mistakes easier to isolate.",
-                "hint_1": "SQL writes the inclusive greater-than operator as >=, not =>.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A valid inclusive greater-than comparison uses >=, not =>.",
+                "hint_1": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
               "starterCode": "SELECT name, price\nFROM products\nWHERE price => 20;"
-            },
-            "try-avoiding_filtering_mistakes-sketch1": {
-              "title": "Find well-stocked stationery items",
-              "prompt": "Create a focused inventory query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
-            },
-            "try-avoiding_filtering_mistakes-sketch2": {
-              "title": "Check a Date Boundary Carefully",
-              "prompt": "Audit the newest catalog entries. Show `id`, `name`, and `created_at` from `products` for items added on or after `2026-01-25`.",
-              "hint": "“On or after” requires >=, and the date must be in single quotes.",
-              "help": {
-                "concept": "Checking the requirement word by word helps prevent the wrong boundary operator.",
-                "hint_1": "“On or after” requires >=, and the date must be in single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, name, created_at\nFROM products\n-- Keep dates on or after 2026-01-25"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_avoiding_filtering_mistakes_sketch2": {
-              "title": "Check a Date Boundary Carefully",
-              "prompt": "Audit the newest catalog entries. Show `id`, `name`, and `created_at` from `products` for items added on or after `2026-01-25`.",
-              "hint": "“On or after” requires >=, and the date must be in single quotes.",
-              "help": {
-                "concept": "Checking the requirement word by word helps prevent the wrong boundary operator.",
-                "hint_1": "“On or after” requires >=, and the date must be in single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_avoiding_filtering_mistakes_sketch0": {
               "title": "Repair an Invalid Comparison Operator",
-              "prompt": "The starter query has a broken price comparison. Repair it so the result shows `name` and `price` from `products` for items priced at least `20`.",
-              "hint": "SQL writes the inclusive greater-than operator as >=, not =>.",
+              "prompt": "The starter query contains an invalid comparison operator. Repair it so the result returns `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
               "help": {
-                "concept": "Debugging one clause at a time makes small operator mistakes easier to isolate.",
-                "hint_1": "SQL writes the inclusive greater-than operator as >=, not =>.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A valid inclusive greater-than comparison uses >=, not =>.",
+                "hint_1": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
@@ -38720,7 +36734,7 @@ const messages: Record<string, any> = {
         },
         "combining_conditions_safely": {
           "label": "Using Parentheses and NOT Safely",
-          "summary": "Group mixed AND/OR logic with parentheses and use NOT to reverse a condition deliberately.",
+          "summary": "Group mixed AND/OR logic with parentheses and use NOT only when its scope is clear.",
           "cards": {
             "sketch0": {
               "title": "Parentheses Make Mixed Logic Explicit"
@@ -38733,22 +36747,6 @@ const messages: Record<string, any> = {
             }
           },
           "quiz": {
-            "sc_and_requires_both": {
-              "title": "AND keeps rows that satisfy both checks",
-              "prompt": "Which statement correctly describes `WHERE category = 'Art' AND price < 20`?",
-              "hint": "Think about what `AND` requires for a row to stay in the results.",
-              "help": {
-                "concept": "`AND` is true only when both conditions are true for the same row.",
-                "hint_1": "A row must match the category test and the price test at the same time.",
-                "hint_2": "If a product is `Art` but its price is 24.50, it would not pass this filter."
-              },
-              "options": {
-                "a": "It returns rows that are in Art and also cost less than 20.",
-                "b": "It returns rows that are in Art or cost less than 20.",
-                "c": "It returns all rows except Art products under 20.",
-                "d": "It sorts Art products by price."
-              }
-            },
             "sc_parentheses_clarity": {
               "title": "Parentheses make mixed logic clearer",
               "prompt": "Why is `WHERE (category = 'Art' OR category = 'Stationery') AND stock > 20` safer to read than leaving out the parentheses?",
@@ -38763,22 +36761,6 @@ const messages: Record<string, any> = {
                 "b": "It automatically sorts the results by stock.",
                 "c": "It changes text values into numbers before filtering.",
                 "d": "It removes duplicate rows from the table."
-              }
-            },
-            "mc_queries_with_or": {
-              "title": "Find filters that use OR correctly",
-              "prompt": "Which queries would return products that are either in `Art` or in `Stationery`? Choose all that apply.",
-              "hint": "Look for conditions that accept either category value.",
-              "help": {
-                "concept": "`OR` keeps rows when at least one of the listed conditions is true.",
-                "hint_1": "A correct filter must allow `Art` rows and also allow `Stationery` rows.",
-                "hint_2": "Check whether each option compares `category` to both values with `OR`, or uses an equivalent form."
-              },
-              "options": {
-                "a": "WHERE category = 'Art' OR category = 'Stationery'",
-                "b": "WHERE category IN ('Art', 'Stationery')",
-                "c": "WHERE category = 'Art' AND category = 'Stationery'",
-                "d": "WHERE NOT category = 'Home'"
               }
             },
             "mc_parentheses_same_meaning": {
@@ -38834,132 +36816,35 @@ const messages: Record<string, any> = {
                 "t5": ")"
               }
             },
-            "fb_and_keyword": {
-              "title": "Complete a two-part filter",
-              "prompt": "Fill in the missing keyword to keep only Stationery products that also cost less than 10.",
-              "hint": "You need the keyword that requires both conditions to be true.",
-              "help": {
-                "concept": "Use `the blank` when both conditions must match for the same row.",
-                "hint_1": "The query is combining a category check with a price check.",
-                "hint_2": "The missing word should make SQL require both the Stationery condition the blank the price condition."
-              },
-              "template": "WHERE category = 'Stationery' [blank1] price < 10",
-              "choices": [
-                "AND",
-                "OR",
-                "NOT"
-              ]
-            },
-            "fb_parenthesis_open": {
-              "title": "Complete the grouped condition",
-              "prompt": "Fill in the missing token so the category conditions are grouped before `AND stock > 20`.",
-              "hint": "The missing token starts the grouped part of the WHERE clause.",
-              "help": {
-                "concept": "Parentheses group conditions so SQL treats them as one logical unit.",
-                "hint_1": "The category checks should be enclosed before the stock condition is applied.",
-                "hint_2": "You need the symbol that opens a parenthesized group."
-              },
-              "template": "WHERE [blank1] category = 'Art' OR category = 'Stationery') AND stock > 20",
-              "choices": [
-                "(",
-                "AND",
-                "NOT"
-              ]
-            },
-            "ci_art_or_stationery_stock": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Art or Stationery and have stock > 20.\nSELECT name, category, stock\nFROM products\nWHERE ;"
-            },
-            "ci_not_home_under_20": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products that are not in the Home category and have price < 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
-            },
-            "ci_stationery_or_low_stock": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Stationery or have stock < 5.\nSELECT name, category, stock\nFROM products\nWHERE ;"
-            },
             "try-combining_conditions_safely-sketch0": {
-              "title": "Group Alternative Categories Before Filtering Price",
-              "prompt": "Build a budget collection from the `Home` and `Art` categories. Show `name`, `category`, and `price` from `products` when the category is either one and the price is at most `30`.",
-              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+              "title": "Group Alternative Categories Before the Price Rule",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep `Home` or `Art` products, and require every kept product to cost at most `30`.",
+              "hint": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
               "help": {
-                "concept": "Parentheses make the intended grouping explicit when AND and OR appear together.",
-                "hint_1": "Put the two category alternatives in parentheses, then join the price rule with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Parentheses keep an OR group together so a following AND rule applies to every alternative.",
+                "hint_1": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Group the category alternatives first"
-            },
-            "try-combining_conditions_safely-sketch1": {
-              "title": "Reverse a Category Test with NOT",
-              "prompt": "Create a low-cost campaign list that excludes `Home`. Show `name`, `category`, and `price` from `products` where the category is not `Home` and the price is below `20`.",
-              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
-              "help": {
-                "concept": "NOT reverses the truth of the condition that follows it.",
-                "hint_1": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Exclude Home and keep prices below 20"
-            },
-            "try-combining_conditions_safely-sketch2": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Create a focused inventory query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Stationery or have stock < 5.\nSELECT name, category, stock\nFROM products\nWHERE ;"
+              "starterCode": "-- Group the two acceptable categories before applying the price rule.\nSELECT name, category, price\nFROM products\nWHERE"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_combining_conditions_safely_sketch0": {
-              "title": "Group Alternative Categories Before Filtering Price",
-              "prompt": "Build a budget collection from the `Home` and `Art` categories. Show `name`, `category`, and `price` from `products` when the category is either one and the price is at most `30`.",
-              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+              "title": "Group Alternative Categories Before the Price Rule",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep `Home` or `Art` products, and require every kept product to cost at most `30`.",
+              "hint": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
               "help": {
-                "concept": "Parentheses make the intended grouping explicit when AND and OR appear together.",
-                "hint_1": "Put the two category alternatives in parentheses, then join the price rule with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_combining_conditions_safely_sketch1": {
-              "title": "Reverse a Category Test with NOT",
-              "prompt": "Create a low-cost campaign list that excludes `Home`. Show `name`, `category`, and `price` from `products` where the category is not `Home` and the price is below `20`.",
-              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
-              "help": {
-                "concept": "NOT reverses the truth of the condition that follows it.",
-                "hint_1": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Parentheses keep an OR group together so a following AND rule applies to every alternative.",
+                "hint_1": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
         },
         "equals_comparison": {
           "label": "Exact and Not-Equal Comparisons",
-          "summary": "Use = to match an exact value and <> to exclude an exact value.",
+          "summary": "Use = for one exact value and <> when one exact value must be excluded.",
           "cards": {
             "sketch0": {
               "title": "Match an Exact Value with ="
@@ -38988,22 +36873,6 @@ const messages: Record<string, any> = {
                 "d": "It checks whether a value is between two numbers."
               }
             },
-            "eq-sc-2": {
-              "title": "Which query finds id 4?",
-              "prompt": "Which query returns the row whose `id` is exactly 4?",
-              "hint": "Look for a WHERE clause that compares the `id` column to the number 4.",
-              "help": {
-                "concept": "To match one numeric value, use `WHERE column = number`.",
-                "hint_1": "The correct query filters on `id`, not on `name` or `category`.",
-                "hint_2": "Because `id` is numeric here, the comparison should use the number 4 directly."
-              },
-              "options": {
-                "a": "SELECT * FROM products WHERE id = 4;",
-                "b": "SELECT * FROM products WHERE id > 4;",
-                "c": "SELECT * FROM products WHERE name = 4;",
-                "d": "SELECT * FROM products ORDER BY id = 4;"
-              }
-            },
             "eq-mc-1": {
               "title": "Exact-match queries",
               "prompt": "Which queries use `=` to check for an exact match? Choose all that apply.",
@@ -39020,22 +36889,6 @@ const messages: Record<string, any> = {
                 "d": "SELECT * FROM products;"
               }
             },
-            "eq-mc-2": {
-              "title": "Queries that return one known row",
-              "prompt": "Based on the table data in this lesson, which queries return exactly one row? Choose all that apply.",
-              "hint": "Use the sample rows: only some values appear once in the products table.",
-              "help": {
-                "concept": "A query returns exactly one row when only one record in the table has the matching value.",
-                "hint_1": "Check how many rows match each value: `id = 6`, `stock = 50`, `category = 'Art'`, and `category = 'Stationery'`.",
-                "hint_2": "Two of these values are unique in the sample data, while two category values appear more than once."
-              },
-              "options": {
-                "a": "SELECT * FROM products WHERE id = 6;",
-                "b": "SELECT * FROM products WHERE stock = 50;",
-                "c": "SELECT * FROM products WHERE category = 'Art';",
-                "d": "SELECT * FROM products WHERE category = 'Stationery';"
-              }
-            },
             "eq-dr-1": {
               "title": "Build a basic exact-match query",
               "prompt": "Put the SQL parts in order to query the name of products whose category is exactly 'Art'.",
@@ -39050,38 +36903,6 @@ const messages: Record<string, any> = {
                 "t2": "FROM products",
                 "t3": "WHERE category = 'Art';"
               }
-            },
-            "eq-dr-2": {
-              "title": "Order the filter for a price match",
-              "prompt": "Arrange the parts to create a query that shows `name` and `price` for the product priced exactly 39.99.",
-              "hint": "Keep the same SQL clause order as other SELECT queries with WHERE.",
-              "help": {
-                "concept": "When filtering by an exact numeric value, the query still follows `SELECT`, `FROM`, then `WHERE`.",
-                "hint_1": "The selected columns come first, then the table name, then the price comparison.",
-                "hint_2": "The `price = 39.99` condition should be the last clause in this query."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "WHERE price = 39.99;"
-              }
-            },
-            "eq-fb-1": {
-              "title": "Fill the exact category value",
-              "prompt": "Choose the value that completes the query so it returns only Stationery products.",
-              "hint": "The missing part is the text value for the category column.",
-              "help": {
-                "concept": "Text comparisons with `=` use the exact text value from the table.",
-                "hint_1": "Look at the category names in the products data: Art, Home, and the blank.",
-                "hint_2": "The matching choice is the category used by Notebook and Fountain Pen."
-              },
-              "template": "SELECT name FROM products WHERE category = '[blank1]';",
-              "choices": [
-                "Home",
-                "Stationery",
-                "price",
-                "10"
-              ]
             },
             "eq-fb-2": {
               "title": "Choose the matching column",
@@ -39100,100 +36921,35 @@ const messages: Record<string, any> = {
                 "created_at"
               ]
             },
-            "eq-code-1": {
-              "title": "Find all Art products",
-              "prompt": "Write a query that shows the `id`, `name`, and `category` columns for products whose category is exactly `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the id, name, and category columns for products whose category is exactly Art.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "eq-code-2": {
-              "title": "Find the product with stock 3",
-              "prompt": "Write a query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and stock columns for the product whose stock is exactly 3.\nSELECT name\nFROM products\nWHERE stock = ;"
-            },
-            "eq-code-3": {
-              "title": "Match one exact product name",
-              "prompt": "Write a query that shows all columns for the product whose name is exactly `Desk Lamp`. Write the query in the SQL editor, click Run query, and confirm that the results table shows one matching row.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show all columns for the product whose name is exactly Desk Lamp.\nSELECT *\nFROM products\nWHERE ;"
-            },
             "try-equals_comparison-sketch0": {
               "title": "Exclude One Product Category",
-              "prompt": "A campaign will feature everything except the `Home` category. Show `id`, `name`, and `category` from `products` while excluding `Home` rows.",
-              "hint": "Use the not-equal operator <> with the quoted category.",
+              "prompt": "A campaign will feature every product except the `Home` category. Return `id`, `name`, and `category` from `products`, in that order.",
+              "hint": "Use the not-equal operator with the quoted text value Home.",
               "help": {
-                "concept": "The <> operator keeps rows whose value is different from the comparison value.",
-                "hint_1": "Use the not-equal operator <> with the quoted category.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "<> excludes rows whose value exactly matches the value on the right.",
+                "hint_1": "Use the not-equal operator with the quoted text value Home.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT id, name, category\nFROM products\n-- Exclude the Home category"
-            },
-            "try-equals_comparison-sketch1": {
-              "title": "Find the product with stock 3",
-              "prompt": "Create a focused inventory query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and stock columns for the product whose stock is exactly 3.\nSELECT name\nFROM products\nWHERE stock = ;"
-            },
-            "try-equals_comparison-sketch2": {
-              "title": "Match One Product Name Exactly",
-              "prompt": "Customer support is investigating the `Desk Lamp` listing. Find that exact product by name and show its complete row from `products`.",
-              "hint": "Use = with the quoted product name.",
-              "help": {
-                "concept": "The equals operator keeps rows whose value exactly matches the comparison value.",
-                "hint_1": "Use = with the quoted product name.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT *\nFROM products\n-- Match Desk Lamp exactly"
+              "starterCode": "-- Exclude the Home category.\nSELECT id, name, category\nFROM products\nWHERE category"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_equals_comparison_sketch2": {
-              "title": "Match One Product Name Exactly",
-              "prompt": "Customer support is investigating the `Desk Lamp` listing. Find that exact product by name and show its complete row from `products`.",
-              "hint": "Use = with the quoted product name.",
-              "help": {
-                "concept": "The equals operator keeps rows whose value exactly matches the comparison value.",
-                "hint_1": "Use = with the quoted product name.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_equals_comparison_sketch0": {
               "title": "Exclude One Product Category",
-              "prompt": "A campaign will feature everything except the `Home` category. Show `id`, `name`, and `category` from `products` while excluding `Home` rows.",
-              "hint": "Use the not-equal operator <> with the quoted category.",
+              "prompt": "A campaign will feature every product except the `Home` category. Return `id`, `name`, and `category` from `products`, in that order.",
+              "hint": "Use the not-equal operator with the quoted text value Home.",
               "help": {
-                "concept": "The <> operator keeps rows whose value is different from the comparison value.",
-                "hint_1": "Use the not-equal operator <> with the quoted category.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "<> excludes rows whose value exactly matches the value on the right.",
+                "hint_1": "Use the not-equal operator with the quoted text value Home.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
         },
         "filtering_numbers_and_text": {
           "label": "Choosing Comparisons for Numbers and Text",
-          "summary": "Match the comparison operator and literal format to the type of value being filtered.",
+          "summary": "Match the operator and literal format to the type of value being filtered.",
           "cards": {
             "sketch0": {
               "title": "Numbers and Text Use Different Literals"
@@ -39253,52 +37009,6 @@ const messages: Record<string, any> = {
                 "d": "WHERE product_name = 'Notebook'"
               }
             },
-            "mc_rows_matching_conditions": {
-              "title": "Find matching products",
-              "prompt": "Based on the dataset, which products match `WHERE price < 20`? Choose all matching answers.",
-              "hint": "Compare each listed product's price to 20.",
-              "help": {
-                "concept": "A numeric WHERE filter keeps rows whose values satisfy the comparison for that column.",
-                "hint_1": "Products priced 12.99, 6.75, and 18.00 should stay.",
-                "hint_2": "Products priced 24.50, 39.99, and 129.00 should not stay."
-              },
-              "options": {
-                "a": "Sketchbook",
-                "b": "Notebook",
-                "c": "Fountain Pen",
-                "d": "Desk Lamp"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build a filtered query",
-              "prompt": "Put the SQL parts in the correct order to show product names from the Art category.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Art';"
-              }
-            },
-            "dr_query_order_and": {
-              "title": "Order a query with AND",
-              "prompt": "Arrange the parts to create a query that shows names of Stationery products cheaper than 10.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Stationery' AND price < 10;"
-              }
-            },
             "fb_text_quotes": {
               "title": "Complete a text filter",
               "prompt": "Fill in the missing value to keep only Home products.",
@@ -39316,117 +37026,35 @@ const messages: Record<string, any> = {
                 "Notebook"
               ]
             },
-            "fb_numeric_value": {
-              "title": "Complete a numeric filter",
-              "prompt": "Fill in the missing number so the condition keeps products with price greater than 20.",
-              "hint": "The missing part is the number being compared, not a column name.",
-              "help": {
-                "concept": "A numeric WHERE condition compares a number column to a numeric value without quotes.",
-                "hint_1": "The operator is already `>`, so you only need the threshold value.",
-                "hint_2": "Choose the number that would include 24.50 and 39.99 but exclude 18.00."
-              },
-              "template": "WHERE price > [blank1]",
-              "choices": [
-                "Art",
-                "20",
-                "price",
-                "Home"
-              ]
-            },
-            "ci_price_over_20": {
-              "title": "Query products with higher prices",
-              "prompt": "Write a query that shows the `name` and `price` columns for products where `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price columns for products where price is greater than 20.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_stationery_under_10": {
-              "title": "Filter by text and number together",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products where the category is `Stationery` and the price is less than 10. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products where the category is Stationery and the price is less than 10.\nSELECT name, category, price\nFROM products\nWHERE ;"
-            },
-            "ci_name_like_book": {
-              "title": "Find names with matching text",
-              "prompt": "Write a query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name column for products whose name contains the text book.\nSELECT name\nFROM products\nWHERE name LIKE ;"
-            },
             "try-filtering_numbers_and_text-sketch0": {
-              "title": "Compare a Text Category",
-              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
-              "hint": "Text values such as Home need single quotes.",
+              "title": "Compare a Text Category Correctly",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products whose category is exactly `Home`.",
+              "hint": "Home is text, so write the value in single quotes.",
               "help": {
-                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
-                "hint_1": "Text values such as Home need single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Home is text, so write the value in single quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT id, name, category\nFROM products\n-- Match the Home category"
-            },
-            "try-filtering_numbers_and_text-sketch1": {
-              "title": "Translate “At Least” into SQL",
-              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
-              "hint": "Translate “at least 25” to >= 25.",
-              "help": {
-                "concept": "Business words such as “at least” map to specific comparison operators.",
-                "hint_1": "Translate “at least 25” to >= 25.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, price\nFROM products\n-- Keep prices of at least 25"
-            },
-            "try-filtering_numbers_and_text-sketch2": {
-              "title": "Find names with matching text",
-              "prompt": "Create a focused inventory query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name column for products whose name contains the text book.\nSELECT name\nFROM products\nWHERE name LIKE ;"
+              "starterCode": "-- Match the Home text value exactly.\nSELECT id, name, category\nFROM products\nWHERE category ="
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_filtering_numbers_and_text_sketch0": {
-              "title": "Compare a Text Category",
-              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
-              "hint": "Text values such as Home need single quotes.",
+              "title": "Compare a Text Category Correctly",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products whose category is exactly `Home`.",
+              "hint": "Home is text, so write the value in single quotes.",
               "help": {
-                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
-                "hint_1": "Text values such as Home need single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_filtering_numbers_and_text_sketch1": {
-              "title": "Translate “At Least” into SQL",
-              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
-              "hint": "Translate “at least 25” to >= 25.",
-              "help": {
-                "concept": "Business words such as “at least” map to specific comparison operators.",
-                "hint_1": "Translate “at least 25” to >= 25.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Home is text, so write the value in single quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
         },
         "greater_than_comparison": {
           "label": "Numeric Comparisons and Boundaries",
-          "summary": "Choose strict or inclusive comparison operators for numeric thresholds.",
+          "summary": "Choose strict or inclusive comparison operators by checking whether the boundary value should count.",
           "cards": {
             "sketch0": {
               "title": "Strict Comparisons Exclude the Boundary"
@@ -39471,38 +37099,6 @@ const messages: Record<string, any> = {
                 "d": "No, because WHERE cannot compare numbers"
               }
             },
-            "gt-mc-matching-prices": {
-              "title": "Rows that match price > 20",
-              "prompt": "Choose all products from the lesson dataset that match `WHERE price > 20`.",
-              "hint": "Check each product price and keep only values above 20.",
-              "help": {
-                "concept": "To evaluate `price > 20`, compare each row's price to 20 and include only rows with a larger number.",
-                "hint_1": "Prices above 20 in the dataset include 24.50, 39.99, and 129.00.",
-                "hint_2": "Rows priced 12.99, 6.75, and 18.00 do not qualify because they are not above 20."
-              },
-              "options": {
-                "a": "Acrylic Paint Set",
-                "b": "Desk Lamp",
-                "c": "Notebook",
-                "d": "Office Chair"
-              }
-            },
-            "gt-mc-valid-where-clauses": {
-              "title": "Valid greater-than filters",
-              "prompt": "Choose all WHERE clauses that correctly use `>` to filter the `products` table by a numeric column.",
-              "hint": "Look for numeric columns in this dataset, such as price and stock.",
-              "help": {
-                "concept": "A greater-than comparison is commonly used with numeric columns to keep rows above a threshold.",
-                "hint_1": "In this table, `price` and `stock` are numeric columns that work naturally with `>`.",
-                "hint_2": "Clauses using equality or a text-only comparison are not examples of the greater-than numeric filter asked for here."
-              },
-              "options": {
-                "a": "WHERE price > 20",
-                "b": "WHERE stock > 10",
-                "c": "WHERE category = 'Art'",
-                "d": "WHERE name > 'Notebook'"
-              }
-            },
             "gt-order-query-parts": {
               "title": "Build a greater-than query",
               "prompt": "Arrange the SQL parts to create a query that shows product names with price greater than 20.",
@@ -39516,21 +37112,6 @@ const messages: Record<string, any> = {
                 "t1": "SELECT name",
                 "t2": "FROM products",
                 "t3": "WHERE price > 20;"
-              }
-            },
-            "gt-order-evaluate-stock": {
-              "title": "Reason through stock > 10",
-              "prompt": "Put these steps in order for checking whether a row matches `WHERE stock > 10`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "Read the row's stock value",
-                "t2": "Compare it with 10 using >",
-                "t3": "Keep the row only if the value is larger"
               }
             },
             "gt-fb-price-threshold": {
@@ -39550,110 +37131,28 @@ const messages: Record<string, any> = {
                 "price"
               ]
             },
-            "gt-fb-column-choice": {
-              "title": "Complete the stock query",
-              "prompt": "Fill in the missing column name so the query keeps products with stock greater than 10.",
-              "hint": "Use the numeric column that counts how many items are available.",
-              "help": {
-                "concept": "The left side of a greater-than comparison should be the column whose numeric values you want to test.",
-                "hint_1": "In the `products` table, the quantity-on-hand column is not `price` or `category`.",
-                "hint_2": "Choose the column that stores values like 25, 10, 8, 50, 15, and 3."
-              },
-              "template": "SELECT name FROM products WHERE [blank1] > 10;",
-              "choices": [
-                "category",
-                "name",
-                "stock",
-                "created_at"
-              ]
-            },
-            "gt-code-price-over-20": {
-              "title": "Query products priced above 20",
-              "prompt": "Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of all products whose price is greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "gt-code-stock-over-10": {
-              "title": "Query products with stock above 10",
-              "prompt": "Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add a WHERE clause here\nSELECT name, stock\nFROM products"
-            },
-            "gt-code-home-price-over-30": {
-              "title": "Filter Home products above 30",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products in the Home category whose price is greater than 30.\nSELECT name, category, price\nFROM products\nWHERE category = 'Home'\n  AND ;"
-            },
-            "try-greater_than_comparison-sketch0": {
-              "title": "Query products priced above 20",
-              "prompt": "Create a focused inventory query that shows the `name` and `price` of all products whose `price` is greater than 20. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of all products whose price is greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
             "try-greater_than_comparison-sketch1": {
               "title": "Include the Restock Boundary",
-              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Show `name` and `stock` from `products` that qualify.",
-              "hint": "At least means use >= so 15 remains in the result.",
+              "prompt": "Return `name` and `stock` from `products`, in that order. Keep products with at least `15` units in stock, including products with exactly `15`.",
+              "hint": "The boundary value must count, so use an inclusive greater-than comparison.",
               "help": {
-                "concept": "An inclusive comparison keeps rows at the boundary as well as rows above it.",
-                "hint_1": "At least means use >= so 15 remains in the result.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": ">= means greater than or equal to, so the boundary itself passes.",
+                "hint_1": "The boundary value must count, so use an inclusive greater-than comparison.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT name, stock\nFROM products\n-- Keep stock of 15 or more"
-            },
-            "try-greater_than_comparison-sketch2": {
-              "title": "Find Stock Above a Strict Threshold",
-              "prompt": "Find products that have more than `20` units available for a large-order list. Show `id`, `name`, and `stock` from `products`.",
-              "hint": "Use > because a stock value of exactly 20 should not be included.",
-              "help": {
-                "concept": "A strict comparison excludes the boundary value itself.",
-                "hint_1": "Use > because a stock value of exactly 20 should not be included.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, name, stock\nFROM products\n-- Keep stock strictly above 20"
+              "starterCode": "-- Include items with at least 15 units.\nSELECT name, stock\nFROM products\nWHERE stock"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_greater_than_comparison_sketch2": {
-              "title": "Find Stock Above a Strict Threshold",
-              "prompt": "Find products that have more than `20` units available for a large-order list. Show `id`, `name`, and `stock` from `products`.",
-              "hint": "Use > because a stock value of exactly 20 should not be included.",
-              "help": {
-                "concept": "A strict comparison excludes the boundary value itself.",
-                "hint_1": "Use > because a stock value of exactly 20 should not be included.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_greater_than_comparison_sketch1": {
               "title": "Include the Restock Boundary",
-              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Show `name` and `stock` from `products` that qualify.",
-              "hint": "At least means use >= so 15 remains in the result.",
+              "prompt": "Return `name` and `stock` from `products`, in that order. Keep products with at least `15` units in stock, including products with exactly `15`.",
+              "hint": "The boundary value must count, so use an inclusive greater-than comparison.",
               "help": {
-                "concept": "An inclusive comparison keeps rows at the boundary as well as rows above it.",
-                "hint_1": "At least means use >= so 15 remains in the result.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": ">= means greater than or equal to, so the boundary itself passes.",
+                "hint_1": "The boundary value must count, so use an inclusive greater-than comparison.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
@@ -40117,60 +37616,60 @@ const messages: Record<string, any> = {
           }
         },
         "module-2-inventory-watchlist-project": {
-          "label": "Module 2 Inventory Watchlist Project",
-          "summary": "Build an inventory watchlist with practical filters that narrow the list step by step.",
+          "label": "Module 2 Restock Watchlist Project",
+          "summary": "Build one restock query that narrows affordable products into an actionable low-stock stationery watchlist.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Inventory watchlist"
+              "title": "Friday restock watchlist"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Find budget products"
+              "title": "Start with affordable products"
             },
             "mp_2": {
-              "title": "Focus on the stationery items"
+              "title": "Narrow the list to stationery"
             },
             "mp_3": {
-              "title": "Finish the low-stock watchlist"
+              "title": "Flag the low-stock items"
             }
           },
           "quiz": {
             "mp-1-find-budget-products": {
-              "title": "Find budget products",
-              "prompt": "Start the watchlist by returning `id`, `name`, and `price` from `products` where `price` is less than 20.",
-              "hint": "Adjust the comparison so the watchlist keeps products under 20.",
+              "title": "Start with affordable products",
+              "prompt": "The buyer first needs products priced below `20`. Return `id`, `name`, and `price` from `products`, in that order.",
+              "hint": "Start from the product columns, then add one strict price condition.",
               "help": {
-                "concept": "Start broad, then tighten the watchlist with the right filter.",
-                "hint_1": "Use `price < 20` in the WHERE clause.",
-                "hint_2": "Run the query and confirm the results table shows only cheaper products."
+                "concept": "Begin a cumulative filter with the broadest approved rule.",
+                "hint_1": "Add a WHERE clause that keeps prices strictly below 20.",
+                "hint_2": "The boundary value 20 should not be included."
               },
-              "starterCode": "-- Returning id, name, and price from products where price is less than 20.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price <= 10;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products;"
             },
             "mp-2-focus-on-stationery": {
-              "title": "Focus on the stationery items",
-              "prompt": "Add a second rule so the watchlist only keeps products in the `Stationery` category.",
-              "hint": "Use AND to keep both rules true at the same time.",
+              "title": "Narrow the list to stationery",
+              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and also require `category = 'Stationery'`.",
+              "hint": "Preserve the working budget query and connect the category rule with AND.",
               "help": {
-                "concept": "Multiple conditions narrow the result set one rule at a time.",
-                "hint_1": "Keep `price < 20` exactly as it is.",
-                "hint_2": "Add `AND category = 'Stationery'`, then rerun the query."
+                "concept": "AND extends a working filter when every approved rule must remain true.",
+                "hint_1": "Do not replace the price rule; add the category rule to it.",
+                "hint_2": "Both conditions must pass for a row to remain."
               },
-              "starterCode": "-- Keep the budget filter above.\n-- Add a category filter for Stationery.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
             },
             "mp-3-finish-watchlist": {
-              "title": "Finish the low-stock watchlist",
-              "prompt": "Add `stock` to the result and one more rule so the final query only keeps products where `stock` is less than or equal to `15`.",
-              "hint": "Add `stock` to the selected columns, then keep values at or below `15`.",
+              "title": "Flag the low-stock items",
+              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only rows with `stock <= 15`, while preserving both earlier rules.",
+              "hint": "Start from the approved stationery query, add stock to SELECT, then add one inclusive stock condition.",
               "help": {
-                "concept": "The final step preserves the budget and category rules, then adds a stock threshold that returns a real watchlist.",
-                "hint_1": "Add `stock` to the SELECT list.",
-                "hint_2": "Use `AND stock <= 10` in the WHERE clause, then rerun the query."
+                "concept": "A cumulative project extends the same working query instead of restarting each milestone.",
+                "hint_1": "Keep the price and category conditions exactly as they are.",
+                "hint_2": "Add stock to the SELECT list and require stock to be at most 15."
               },
-              "starterCode": "-- Keep the filters above.\n-- Add stock and a low-stock rule for products with stock <= 15.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
             },
             "try-module-2-inventory-watchlist-project-sketch0": {
               "title": "Preview Budget Products",
@@ -41114,7 +38613,7 @@ const messages: Record<string, any> = {
         },
         "why_filtering_matters": {
           "label": "Filtering Rows with WHERE",
-          "summary": "Use WHERE to keep only source rows that satisfy a condition.",
+          "summary": "Use WHERE to keep only source rows that satisfy a clear condition.",
           "cards": {
             "sketch0": {
               "title": "A Filter Changes Which Rows Remain"
@@ -41175,22 +38674,6 @@ const messages: Record<string, any> = {
                 "d": "Show only products with stock less than 10"
               }
             },
-            "mc_2": {
-              "title": "Rows that match a condition",
-              "prompt": "In the `products` table, which rows would match `WHERE category = 'Stationery'`? Choose all that apply.",
-              "hint": "Check the category value for each product name in the dataset.",
-              "help": {
-                "concept": "A text comparison in `WHERE` keeps rows whose column value exactly matches the given text.",
-                "hint_1": "Look for products whose category is exactly `Stationery`, not `Art` or `Home`.",
-                "hint_2": "Two products in the sample data belong to `Stationery`."
-              },
-              "options": {
-                "a": "Notebook",
-                "b": "Fountain Pen",
-                "c": "Desk Lamp",
-                "d": "Sketchbook"
-              }
-            },
             "dr_1": {
               "title": "Build a basic filtered query",
               "prompt": "Put these SQL parts in the correct order to make a query that filters rows.",
@@ -41206,142 +38689,28 @@ const messages: Record<string, any> = {
                 "t3": "WHERE price < 20"
               }
             },
-            "dr_2": {
-              "title": "How filtering works",
-              "prompt": "Order these steps to show what SQL does when it applies a `WHERE` clause.",
-              "hint": "Think about reading rows first, then checking the condition, then keeping matches.",
-              "help": {
-                "concept": "SQL processes filtering by reading rows, testing the condition on each row, and returning only matches.",
-                "hint_1": "A row cannot be kept or removed until SQL has checked the condition.",
-                "hint_2": "Put the action of evaluating the condition before the action of showing the final result."
-              },
-              "tokens": {
-                "t1": "Read rows from the table",
-                "t2": "Check the `WHERE` condition for each row",
-                "t3": "Keep only matching rows in the result"
-              }
-            },
-            "fb_1": {
-              "title": "Complete the filter keyword",
-              "prompt": "Fill in the missing SQL keyword.",
-              "hint": "This keyword comes after `FROM products` when you want to filter rows.",
-              "help": {
-                "concept": "The `the blank` keyword introduces the condition that filters rows in a query.",
-                "hint_1": "It is the clause used before a condition like `price < 20`.",
-                "hint_2": "It is not `SELECT` or `FROM`; it is the filtering clause."
-              },
-              "template": "SELECT name FROM products [blank1] price < 20;",
-              "choices": [
-                "WHERE",
-                "ORDER BY",
-                "LIMIT",
-                "FROM"
-              ]
-            },
-            "fb_2": {
-              "title": "Complete the matching value",
-              "prompt": "Choose the value that makes this query return only Art products.",
-              "hint": "Look at the exact category text used in the dataset.",
-              "help": {
-                "concept": "A text filter compares a column to an exact text value, such as a category name.",
-                "hint_1": "The `products` table includes categories like `the blank`, `Home`, and `Stationery`.",
-                "hint_2": "Pick the category value that matches Sketchbook and Acrylic Paint Set."
-              },
-              "template": "SELECT name FROM products WHERE category = '[blank1]';",
-              "choices": [
-                "Home",
-                "Art",
-                "price",
-                "stock"
-              ]
-            },
-            "ci_1": {
-              "title": "Show only Art products",
-              "prompt": "Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and category columns for products in the Art category only.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_2": {
-              "title": "Find lower-priced products",
-              "prompt": "Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products with a price less than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "ci_3": {
-              "title": "Find low-stock items",
-              "prompt": "Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and stock for products with stock less than 10.\nSELECT name, stock\nFROM products\nWHERE stock ;"
-            },
             "try-why_filtering_matters-sketch0": {
-              "title": "Place an Exact Category Filter",
-              "prompt": "Create a stationery-only inventory slice. Show `id`, `name`, and `category` from `products` where `category` is exactly `Stationery`.",
-              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
+              "title": "Create a Stationery-Only Inventory View",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
+              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
               "help": {
-                "concept": "The WHERE clause follows FROM and states which rows are allowed to remain.",
-                "hint_1": "Place WHERE after FROM products and put the text value in single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "WHERE filters source rows by a condition without changing the stored table.",
+                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "SELECT id, name, category\nFROM products\n-- Keep only Stationery rows"
-            },
-            "try-why_filtering_matters-sketch1": {
-              "title": "Find lower-priced products",
-              "prompt": "Create a focused inventory query that returns `name` and `price` for products with a price less than 20. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products with a price less than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "try-why_filtering_matters-sketch2": {
-              "title": "Keep Products with Low Stock",
-              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Show `name` and `stock` from `products`.",
-              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
-              "help": {
-                "concept": "WHERE removes rows that do not satisfy the business condition.",
-                "hint_1": "Add a WHERE condition after FROM products and compare stock with 10.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, stock\nFROM products\n-- Add the low-stock filter"
+              "starterCode": "-- Return only Stationery products.\nSELECT id, name, category\nFROM products\nWHERE"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_filtering_matters_sketch0": {
-              "title": "Place an Exact Category Filter",
-              "prompt": "Create a stationery-only inventory slice. Show `id`, `name`, and `category` from `products` where `category` is exactly `Stationery`.",
-              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
+              "title": "Create a Stationery-Only Inventory View",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
+              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
               "help": {
-                "concept": "The WHERE clause follows FROM and states which rows are allowed to remain.",
-                "hint_1": "Place WHERE after FROM products and put the text value in single quotes.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_why_filtering_matters_sketch2": {
-              "title": "Keep Products with Low Stock",
-              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Show `name` and `stock` from `products`.",
-              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
-              "help": {
-                "concept": "WHERE removes rows that do not satisfy the business condition.",
-                "hint_1": "Add a WHERE condition after FROM products and compare stock with 10.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "WHERE filters source rows by a condition without changing the stored table.",
+                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
           }
@@ -41349,8 +38718,8 @@ const messages: Record<string, any> = {
       },
       "sql-v2-3": {
         "ascending_order": {
-          "label": "Ascending and Descending Sorts",
-          "summary": "Choose ASC or DESC for text, numeric, and date columns.",
+          "label": "Choosing ASC or DESC",
+          "summary": "Choose ascending or descending direction from the business meaning of first, last, smallest, largest, earliest, or latest.",
           "cards": {
             "sketch0": {
               "title": "ASC Moves from Smaller to Larger"
@@ -41395,22 +38764,6 @@ const messages: Record<string, any> = {
                 "d": "It sorts randomly."
               }
             },
-            "mc_columns_for_asc": {
-              "title": "Columns that can use ascending order",
-              "prompt": "Which columns from the `products` table can be meaningfully sorted with `ORDER BY ... ASC`? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "price",
-                "c": "stock",
-                "d": "created_at"
-              }
-            },
             "mc_asc_examples": {
               "title": "Queries that sort ascending",
               "prompt": "Which queries sort the `products` rows in ascending order? Choose all that apply.",
@@ -41425,37 +38778,6 @@ const messages: Record<string, any> = {
                 "b": "SELECT name, price FROM products ORDER BY price;",
                 "c": "SELECT name, price FROM products ORDER BY price DESC;",
                 "d": "SELECT name, price FROM products WHERE price ASC;"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build an ascending sort query",
-              "prompt": "Arrange the SQL parts to create a query that shows product names and prices sorted by price from lowest to highest.",
-              "hint": "Start with `SELECT`, then the table, then the sort clause.",
-              "help": {
-                "concept": "A basic SQL query follows a clause order: `SELECT`, `FROM`, then `ORDER BY`.",
-                "hint_1": "The sorting clause comes after the table name.",
-                "hint_2": "The last part should mention `price ASC` to set the direction."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "ORDER BY price ASC;"
-              }
-            },
-            "dr_query_order_limit": {
-              "title": "Build a cheapest-products query",
-              "prompt": "Arrange the SQL parts to return the 2 cheapest products by price.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "ORDER BY price ASC",
-                "t4": "LIMIT 2;"
               }
             },
             "fb_sort_keyword": {
@@ -41475,110 +38797,28 @@ const messages: Record<string, any> = {
                 "LIMIT"
               ]
             },
-            "fb_column_choice": {
-              "title": "Choose the sorted column",
-              "prompt": "Fill in the missing column so the query sorts products by stock from smallest to largest.",
-              "hint": "Use the column that stores how many items are available.",
-              "help": {
-                "concept": "The column named in `ORDER BY` is the one SQL uses to arrange the rows.",
-                "hint_1": "In this table, the quantity on hand is stored in `the blank`.",
-                "hint_2": "Choose the column with values like 25, 10, 8, 50, 15, and 3."
-              },
-              "template": "SELECT name, stock FROM products ORDER BY [blank1] ASC;",
-              "choices": [
-                "category",
-                "created_at",
-                "stock",
-                "name"
-              ]
-            },
-            "ci_sort_prices_asc": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from the products table, sorted by price in ascending order.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_oldest_products": {
-              "title": "Show oldest products first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the earliest created_at date appears first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "ci_cheapest_three": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
-            "try-ascending_order-sketch0": {
-              "title": "Sort Stock from Low to High",
-              "prompt": "Sort the catalog so the scarcest items appear first. Show `id`, `name`, and `stock` from `products`, ordered from the lowest stock value to the highest.",
-              "hint": "Use ORDER BY stock ASC.",
-              "help": {
-                "concept": "Ascending numeric order moves from smaller values to larger values.",
-                "hint_1": "Use ORDER BY stock ASC.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, name, stock\nFROM products\n-- Sort stock low to high"
-            },
             "try-ascending_order-sketch1": {
-              "title": "Show Highest Prices First",
-              "prompt": "Build a premium-first catalog view. Show `name` and `price` from `products`, with the highest-priced products appearing first.",
-              "hint": "Use ORDER BY price DESC.",
+              "title": "Put the Highest Prices First",
+              "prompt": "Return `name` and `price` from `products`, in that order. Sort the result so the highest price appears first.",
+              "hint": "Highest first means descending order.",
               "help": {
-                "concept": "Descending numeric order moves from larger values to smaller values.",
-                "hint_1": "Use ORDER BY price DESC.",
-                "hint_2": "Run the query and verify that the highest price appears first."
+                "concept": "DESC puts larger numeric values before smaller ones.",
+                "hint_1": "Highest first means descending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "SELECT name, price\nFROM products\n-- Sort highest price to lowest price"
-            },
-            "try-ascending_order-sketch2": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Build a ranking query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
+              "starterCode": "-- Put the highest prices first.\nSELECT name, price\nFROM products\nORDER BY price"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_ascending_order_sketch0": {
-              "title": "Sort Stock from Low to High",
-              "prompt": "Sort the catalog so the scarcest items appear first. Show `id`, `name`, and `stock` from `products`, ordered from the lowest stock value to the highest.",
-              "hint": "Use ORDER BY stock ASC.",
-              "help": {
-                "concept": "Ascending numeric order moves from smaller values to larger values.",
-                "hint_1": "Use ORDER BY stock ASC.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_ascending_order_sketch1": {
-              "title": "Show Highest Prices First",
-              "prompt": "Build a premium-first catalog view. Show `name` and `price` from `products`, with the highest-priced products appearing first.",
-              "hint": "Use ORDER BY price DESC.",
+              "title": "Put the Highest Prices First",
+              "prompt": "Return `name` and `price` from `products`, in that order. Sort the result so the highest price appears first.",
+              "hint": "Highest first means descending order.",
               "help": {
-                "concept": "Descending numeric order moves from larger values to smaller values.",
-                "hint_1": "Use ORDER BY price DESC.",
-                "hint_2": "Run the query and verify that the highest price appears first."
+                "concept": "DESC puts larger numeric values before smaller ones.",
+                "hint_1": "Highest first means descending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
           }
@@ -41814,8 +39054,8 @@ const messages: Record<string, any> = {
           }
         },
         "combining_order_by_with_limit": {
-          "label": "LIMIT and Useful Ranked Results",
-          "summary": "Sort first, then use LIMIT to return a meaningful top or bottom subset.",
+          "label": "Building Ranked Top-N Results with LIMIT",
+          "summary": "Sort first when a request asks for top, bottom, cheapest, newest, or similar ranked rows, then limit that ordered result.",
           "cards": {
             "sketch0": {
               "title": "LIMIT Keeps Only the First Result Rows"
@@ -41876,38 +39116,6 @@ const messages: Record<string, any> = {
                 "d": "`ORDER BY` changes the number of rows returned even without LIMIT"
               }
             },
-            "mc_queries_for_cheapest_two": {
-              "title": "Find the cheapest two products",
-              "prompt": "Choose all query patterns that would correctly return the two cheapest products from `products`.",
-              "hint": "Cheapest means lowest prices first, then keep two rows.",
-              "help": {
-                "concept": "To get the cheapest rows, sort `price` in ascending order and then apply `LIMIT 2`.",
-                "hint_1": "Any correct option must include both the `price` column and a way to keep only two rows.",
-                "hint_2": "Look for ascending order on `price` together with `LIMIT 2`, even if the selected columns differ."
-              },
-              "options": {
-                "a": "SELECT name, price FROM products ORDER BY price ASC LIMIT 2;",
-                "b": "SELECT * FROM products ORDER BY price ASC LIMIT 2;",
-                "c": "SELECT name FROM products ORDER BY price DESC LIMIT 2;",
-                "d": "SELECT name, price FROM products LIMIT 2;"
-              }
-            },
-            "dr_query_clause_order_basic": {
-              "title": "Build the clause order",
-              "prompt": "Arrange these SQL clauses into the correct order for a query that selects rows, sorts by price, and limits the result.",
-              "hint": "Start with selecting columns, then name the table, then sort, then limit.",
-              "help": {
-                "concept": "In beginner SQL queries here, the usual clause order is `SELECT`, `FROM`, `ORDER BY`, then `LIMIT`.",
-                "hint_1": "The table name comes before sorting, and sorting comes before limiting.",
-                "hint_2": "Put the clause that chooses columns first and the clause that cuts the row count last."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "ORDER BY price DESC",
-                "t4": "LIMIT 3"
-              }
-            },
             "dr_ranked_filtered_query_order": {
               "title": "Order a filtered ranked query",
               "prompt": "Arrange these parts into the correct order for a query that shows stationery products, sorted by newest first, with only two rows returned.",
@@ -41925,116 +39133,28 @@ const messages: Record<string, any> = {
                 "t5": "LIMIT 2"
               }
             },
-            "fb_limit_number": {
-              "title": "Complete the row limit",
-              "prompt": "Fill in the missing value to return only two rows.",
-              "hint": "The blank should be the number of rows you want to keep.",
-              "help": {
-                "concept": "`LIMIT` uses a number to say how many rows should appear in the final result.",
-                "hint_1": "If the goal is exactly two rows, the blank should be a numeric value, not a column name or keyword.",
-                "hint_2": "Choose the number that matches the requested row count."
-              },
-              "template": "SELECT name FROM products ORDER BY price ASC LIMIT [blank1];",
-              "choices": [
-                "1",
-                "2",
-                "price",
-                "DESC"
-              ]
-            },
-            "fb_sort_direction": {
-              "title": "Complete the sort direction",
-              "prompt": "Fill in the missing keyword so the highest prices appear first.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT name, price FROM products ORDER BY price [blank1] LIMIT 3;",
-              "choices": [
-                "ASC",
-                "DESC",
-                "WHERE",
-                "FROM"
-              ]
-            },
-            "ci_top_three_expensive": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and price of the 3 most expensive products from products. Sort so the highest price appears first.\nSELECT \nFROM products\nORDER BY \nLIMIT ;"
-            },
-            "ci_two_cheapest_stationery": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name, category, and price of the 2 cheapest products in the Stationery category. Sort by price from lowest to highest.\nSELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
-            },
-            "ci_newest_home_item": {
-              "title": "Newest home product",
-              "prompt": "Write a query that returns the `name` and `created_at` of the newest product in the `Home` category. Sort by `created_at` so the newest date comes first, then return only one row. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and created_at of the newest product in the Home category. Sort by created_at so the newest date comes first, then return only one row.\nSELECT name, created_at\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
-            },
-            "try-combining_order_by_with_limit-sketch0": {
-              "title": "Keep the First Four Product Rows",
-              "prompt": "A dashboard preview has room for only four product records. Show `id` and `name` from `products`, keeping only the first `4` result rows.",
-              "hint": "Add LIMIT 4 after FROM products.",
-              "help": {
-                "concept": "LIMIT keeps a fixed number of rows from the result order currently produced.",
-                "hint_1": "Add LIMIT 4 after FROM products.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, name\nFROM products\n-- Keep only four rows"
-            },
             "try-combining_order_by_with_limit-sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
-              "prompt": "A buyer needs the two cheapest stationery options. Show `name`, `category`, and `price` from `products` for `Stationery` items, sort prices from low to high, and keep only `2` rows.",
-              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
+              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
               "help": {
-                "concept": "ORDER BY defines which rows count as “first” before LIMIT trims the result.",
-                "hint_1": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
+                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Filter, rank, and keep two rows"
+              "starterCode": "-- Find the two lowest-priced Stationery products.\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery'"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_combining_order_by_with_limit_sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
-              "prompt": "A buyer needs the two cheapest stationery options. Show `name`, `category`, and `price` from `products` for `Stationery` items, sort prices from low to high, and keep only `2` rows.",
-              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
+              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
               "help": {
-                "concept": "ORDER BY defines which rows count as “first” before LIMIT trims the result.",
-                "hint_1": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_combining_order_by_with_limit_sketch0": {
-              "title": "Keep the First Four Product Rows",
-              "prompt": "A dashboard preview has room for only four product records. Show `id` and `name` from `products`, keeping only the first `4` result rows.",
-              "hint": "Add LIMIT 4 after FROM products.",
-              "help": {
-                "concept": "LIMIT keeps a fixed number of rows from the result order currently produced.",
-                "hint_1": "Add LIMIT 4 after FROM products.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
+                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
           }
@@ -42501,60 +39621,60 @@ const messages: Record<string, any> = {
           }
         },
         "module-3-sales-leaderboard-project": {
-          "label": "Module 3 Sales Leaderboard Project",
-          "summary": "Turn a rough ranking query into a clean leaderboard.",
+          "label": "Module 3 Premium Product Leaderboard",
+          "summary": "Build one ranked premium-product report, add a scarcity tie-breaker, then trim it to the top five rows.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Sales leaderboard"
+              "title": "Premium product leaderboard"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Rank the products by price"
+              "title": "Rank premium products by price"
             },
             "mp_2": {
-              "title": "Add a stock tiebreaker"
+              "title": "Add a low-stock tie-breaker"
             },
             "mp_3": {
-              "title": "Finish the top-five leaderboard"
+              "title": "Publish the top-five list"
             }
           },
           "quiz": {
             "mp-1-rank-by-price": {
-              "title": "Rank the products by price",
-              "prompt": "Start the leaderboard by returning `name` and `price` from `products`, ordered so the most expensive products appear first.",
-              "hint": "Use DESC instead of ASC for the price sort.",
+              "title": "Rank premium products by price",
+              "prompt": "The sales team is preparing a premium-product review. Return `name` and `price` from `products`, in that order, with the highest price first.",
+              "hint": "Sort price in descending order.",
               "help": {
-                "concept": "Ranking queries become easier to read when the most important rows appear first.",
-                "hint_1": "Keep the selected columns the same.",
-                "hint_2": "Sort with `ORDER BY price DESC`, then rerun the query."
+                "concept": "The primary sort defines the main ranking.",
+                "hint_1": "Add ORDER BY after FROM products.",
+                "hint_2": "Highest price first requires DESC."
               },
-              "starterCode": "-- Returning name and price from products, ordered so the most expensive products appear first.\nSELECT\n  name,\n  price\nFROM products\nORDER BY price ASC;"
+              "starterCode": "SELECT\n  name,\n  price\nFROM products;"
             },
             "mp-2-add-stock-tiebreaker": {
-              "title": "Add a stock tiebreaker",
-              "prompt": "Add `stock` to the result, and sort by `price` descending with `stock` ascending as the second sort.",
-              "hint": "Use two columns in the ORDER BY clause.",
+              "title": "Add a low-stock tie-breaker",
+              "prompt": "Operations wants lower-stock items to appear first when two products share the same price. Add `stock` to the result and keep `price DESC` as the primary sort, then use `stock ASC` as the tie-breaker.",
+              "hint": "Keep the approved ranking and add stock as the second ORDER BY expression.",
               "help": {
-                "concept": "A secondary sort helps you break ties or make a leaderboard easier to scan.",
-                "hint_1": "Add `stock` to the SELECT list first.",
-                "hint_2": "Use `ORDER BY price DESC, stock ASC`, then rerun the query."
+                "concept": "A secondary sort changes order only inside rows tied on the primary sort.",
+                "hint_1": "Do not replace price DESC.",
+                "hint_2": "Add stock to SELECT and stock ASC after a comma in ORDER BY."
               },
-              "starterCode": "-- Keep the ranking above.\n-- Add stock to the result and sort stock ASC after price DESC.\nSELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;"
+              "starterCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;"
             },
             "mp-3-finish-leaderboard": {
-              "title": "Finish the top-five leaderboard",
-              "prompt": "Limit the ranked report to the top 5 rows.",
-              "hint": "Add one LIMIT line after the ORDER BY clause.",
+              "title": "Publish the top-five list",
+              "prompt": "The campaign has room for five products. Keep the approved price and stock ranking, then return only the first `5` rows.",
+              "hint": "Preserve the complete ranking and add LIMIT 5 after ORDER BY.",
               "help": {
-                "concept": "A limit turns a broad ranking into a short report someone can scan quickly.",
-                "hint_1": "Do not change the selected columns or the sort order.",
-                "hint_2": "Add `LIMIT 5;` at the end of the query, then rerun it."
+                "concept": "LIMIT keeps the first rows of an already ranked result.",
+                "hint_1": "Do not change the two sort expressions.",
+                "hint_2": "Add LIMIT 5 after the ORDER BY clause."
               },
-              "starterCode": "-- Keep the ranking above.\n-- Limit the leaderboard to 5 rows.\nSELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;"
+              "starterCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;"
             },
             "try-module-3-sales-leaderboard-project-sketch0": {
               "title": "Preview the Price Ranking",
@@ -42567,18 +39687,11 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Return name, price from the products table.\nSELECT\n  name,\n  price\nFROM products\nORDER BY price ASC;"
             }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_module_3_sales_leaderboard_project_sketch0": {
-              "title": "Preview the Price Ranking",
-              "prompt": "Before adding a tie-breaker and row limit, preview the main ranking. Return `name` and `price` from `products`, ordered from the highest price to the lowest."
-            }
           }
         },
         "order_by": {
-          "label": "Why and How ORDER BY Works",
-          "summary": "Sort a completed result by one selected or source column without changing which rows are returned.",
+          "label": "Sorting a Result with ORDER BY",
+          "summary": "Use ORDER BY after row selection to change result order without changing which rows belong in the result.",
           "cards": {
             "sketch0": {
               "title": "Sorting Changes Order, Not Membership"
@@ -42605,38 +39718,6 @@ const messages: Record<string, any> = {
                 "b": "It creates a new table",
                 "c": "It removes duplicate rows",
                 "d": "It filters rows by a condition"
-              }
-            },
-            "sc_desc_direction": {
-              "title": "Meaning of DESC",
-              "prompt": "In `ORDER BY price DESC`, what does `DESC` mean?",
-              "hint": "Think about whether the largest or smallest price appears first.",
-              "help": {
-                "concept": "`DESC` means descending order, so higher values come before lower values.",
-                "hint_1": "If prices are sorted with `DESC`, the most expensive item appears near the top.",
-                "hint_2": "Choose the option that means highest-to-lowest."
-              },
-              "options": {
-                "a": "Alphabetical order only",
-                "b": "Lowest to highest",
-                "c": "Highest to lowest",
-                "d": "Random order"
-              }
-            },
-            "mc_order_by_examples": {
-              "title": "Queries that use ORDER BY correctly",
-              "prompt": "Which queries correctly use `ORDER BY` to sort rows from the `products` table? Choose all that apply.",
-              "hint": "Check whether `ORDER BY` comes after `FROM` and names a real column.",
-              "help": {
-                "concept": "A valid `ORDER BY` query must select from a table and then sort by an existing column, optionally with `ASC` or `DESC`.",
-                "hint_1": "Look for statements that follow the pattern `SELECT ... FROM products ORDER BY column`.",
-                "hint_2": "Reject options that place `ORDER BY` in the wrong spot or use it like a filter."
-              },
-              "options": {
-                "a": "SELECT name, price FROM products ORDER BY price DESC;",
-                "b": "SELECT name FROM products ORDER BY name ASC;",
-                "c": "SELECT name ORDER BY price FROM products;",
-                "d": "SELECT name, price FROM products WHERE ORDER BY price;"
               }
             },
             "mc_order_by_true_statements": {
@@ -42670,22 +39751,6 @@ const messages: Record<string, any> = {
                 "t3": "ORDER BY price ASC"
               }
             },
-            "dr_order_by_limit_sequence": {
-              "title": "Sort then limit",
-              "prompt": "Arrange these parts to create a query that shows the 2 most expensive products.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "ORDER BY price DESC",
-                "t4": "LIMIT 2"
-              }
-            },
             "fb_default_direction": {
               "title": "Default sort direction",
               "prompt": "Complete the statement.",
@@ -42703,117 +39768,35 @@ const messages: Record<string, any> = {
                 "LIMIT"
               ]
             },
-            "fb_desc_keyword": {
-              "title": "Keyword for highest first",
-              "prompt": "Fill in the missing keyword.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT name, stock FROM products ORDER BY stock [blank1];",
-              "choices": [
-                "ASC",
-                "DESC",
-                "FROM",
-                "LIKE"
-              ]
-            },
-            "ci_sort_by_price_low_high": {
-              "title": "Sort products by price",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_newest_products": {
-              "title": "Show newest products first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "ci_top_3_expensive": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest price first\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
             "try-order_by-sketch0": {
-              "title": "Sort Products by Category",
-              "prompt": "Organize the catalog into easy-to-scan category groups. Show `id`, `name`, and `category` from `products`, with categories sorted from A to Z.",
-              "hint": "Use ORDER BY category ASC after FROM products.",
+              "title": "Sort the Catalog by Category",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Sort the result by `category` from A to Z.",
+              "hint": "Add ORDER BY after FROM and sort category in ascending order.",
               "help": {
-                "concept": "ORDER BY changes row sequence without changing which rows belong in the result.",
-                "hint_1": "Use ORDER BY category ASC after FROM products.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "ORDER BY changes row sequence without changing which source rows are returned.",
+                "hint_1": "Add ORDER BY after FROM and sort category in ascending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "SELECT id, name, category\nFROM products\n-- Sort category A to Z"
-            },
-            "try-order_by-sketch1": {
-              "title": "Filter First, Then Sort",
-              "prompt": "An art buyer wants a lowest-price-first list for one category. Show `name`, `category`, and `price` from `products` for `Art` items, sorted by price from low to high.",
-              "hint": "Put WHERE before ORDER BY, then sort price with ASC.",
-              "help": {
-                "concept": "SQL filters rows before applying the final result ordering.",
-                "hint_1": "Put WHERE before ORDER BY, then sort price with ASC.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Keep Art products, then sort by price"
-            },
-            "try-order_by-sketch2": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest price first\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+              "starterCode": "-- Sort the result by category from A to Z.\nSELECT id, name, category\nFROM products"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_order_by_sketch0": {
-              "title": "Sort Products by Category",
-              "prompt": "Organize the catalog into easy-to-scan category groups. Show `id`, `name`, and `category` from `products`, with categories sorted from A to Z.",
-              "hint": "Use ORDER BY category ASC after FROM products.",
+              "title": "Sort the Catalog by Category",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Sort the result by `category` from A to Z.",
+              "hint": "Add ORDER BY after FROM and sort category in ascending order.",
               "help": {
-                "concept": "ORDER BY changes row sequence without changing which rows belong in the result.",
-                "hint_1": "Use ORDER BY category ASC after FROM products.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_order_by_sketch1": {
-              "title": "Filter First, Then Sort",
-              "prompt": "An art buyer wants a lowest-price-first list for one category. Show `name`, `category`, and `price` from `products` for `Art` items, sorted by price from low to high.",
-              "hint": "Put WHERE before ORDER BY, then sort price with ASC.",
-              "help": {
-                "concept": "SQL filters rows before applying the final result ordering.",
-                "hint_1": "Put WHERE before ORDER BY, then sort price with ASC.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "ORDER BY changes row sequence without changing which source rows are returned.",
+                "hint_1": "Add ORDER BY after FROM and sort category in ascending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
           }
         },
         "primary_sort": {
-          "label": "Primary and Secondary Sorts",
-          "summary": "Sort by more than one column so ties have a clear and deterministic order.",
+          "label": "Primary Sorts and Tie-Breakers",
+          "summary": "Use a second ORDER BY column to create a predictable order inside rows that share the same primary value.",
           "cards": {
             "sketch0": {
               "title": "The First Sort Column Creates the Main Groups"
@@ -42826,22 +39809,6 @@ const messages: Record<string, any> = {
             }
           },
           "quiz": {
-            "sc_primary_sort_goal_price": {
-              "title": "Pick the best primary sort",
-              "prompt": "You want to see the most expensive products first. Which column should be the primary sort?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "category",
-                "c": "price",
-                "d": "stock"
-              }
-            },
             "sc_primary_sort_first_column": {
               "title": "Identify the primary sort column",
               "prompt": "In `ORDER BY category ASC, price DESC`, which column is the primary sort?",
@@ -42856,22 +39823,6 @@ const messages: Record<string, any> = {
                 "b": "price",
                 "c": "name",
                 "d": "created_at"
-              }
-            },
-            "mc_primary_sort_good_matches": {
-              "title": "Match goals to primary sorts",
-              "prompt": "Which choices use a sensible primary sort for the goal? Choose all that apply.",
-              "hint": "Check whether the first sort column matches the main question.",
-              "help": {
-                "concept": "A sensible primary sort uses the first ORDER BY column to answer the main need, such as price for cost, name for alphabetical order, or created_at for newest items.",
-                "hint_1": "Look for choices where the sort column directly represents the thing being compared.",
-                "hint_2": "Alphabetical lists should start with a text label like name, while newest or oldest lists should start with a date column."
-              },
-              "options": {
-                "a": "To list products alphabetically, use name as the primary sort.",
-                "b": "To show newest products first, use created_at as the primary sort.",
-                "c": "To show the most expensive products first, use price as the primary sort.",
-                "d": "To show the most expensive products first, use category as the primary sort."
               }
             },
             "mc_primary_sort_true_statements": {
@@ -42905,38 +39856,6 @@ const messages: Record<string, any> = {
                 "t3": "ORDER BY price DESC"
               }
             },
-            "dr_primary_sort_reasoning_steps": {
-              "title": "Order the sorting decisions",
-              "prompt": "Arrange these steps in a sensible order for choosing a primary sort.",
-              "hint": "First decide the goal, then pick the matching column, then write ORDER BY.",
-              "help": {
-                "concept": "Choosing a primary sort is a reasoning process: identify the question, match it to the right column, and then write the ORDER BY clause using that column first.",
-                "hint_1": "You should not write the SQL before deciding what the result needs to show first.",
-                "hint_2": "The matching column comes after the goal, and the final step is writing the clause."
-              },
-              "tokens": {
-                "t1": "Decide what should appear first in the results",
-                "t2": "Choose the column that represents that idea",
-                "t3": "Write that column first in ORDER BY"
-              }
-            },
-            "fb_primary_sort_desc": {
-              "title": "Complete a descending sort",
-              "prompt": "Fill in the missing keyword to sort prices from highest to lowest.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT name, price FROM products ORDER BY price [blank1];",
-              "choices": [
-                "ASC",
-                "DESC",
-                "FROM",
-                "WHERE"
-              ]
-            },
             "fb_primary_sort_column": {
               "title": "Complete the primary sort column",
               "prompt": "Fill in the missing column so the query sorts products alphabetically by name.",
@@ -42954,93 +39873,28 @@ const messages: Record<string, any> = {
                 "created_at"
               ]
             },
-            "ci_primary_sort_price_desc": {
-              "title": "Sort by price descending",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from products, sorted by price from highest to lowest.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_primary_sort_name_asc": {
-              "title": "Sort names alphabetically",
-              "prompt": "Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and category from products, sorted alphabetically by name from A to Z.\nSELECT name, category\nFROM products\n;"
-            },
-            "ci_primary_sort_newest_first": {
-              "title": "Sort by newest date first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-primary_sort-sketch0": {
-              "title": "Create Category Groups with a Price Order",
-              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Show `name`, `category`, and `price` from `products`, sorting prices low to high within each category.",
-              "hint": "List category DESC first and price ASC second in ORDER BY.",
-              "help": {
-                "concept": "The first ORDER BY column creates the primary groups; later columns order rows inside those groups.",
-                "hint_1": "List category DESC first and price ASC second in ORDER BY.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT name, category, price\nFROM products\n-- Add the primary and secondary sorts"
-            },
-            "try-primary_sort-sketch1": {
-              "title": "Sort names alphabetically",
-              "prompt": "Build a ranking query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and category from products, sorted alphabetically by name from A to Z.\nSELECT name, category\nFROM products\n;"
-            },
             "try-primary_sort-sketch2": {
-              "title": "Add a Stable Name Tie-Breaker",
-              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Show `name`, `category`, and `stock` from `products`, sorting by category A to Z and then by name A to Z.",
-              "hint": "Use category ASC as the first sort and name ASC as the second.",
+              "title": "Group Categories and Alphabetize Products",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, in that order. Sort by `category ASC`, then use `name ASC` to order products inside each category.",
+              "hint": "List both sort expressions after one ORDER BY, separated by a comma.",
               "help": {
-                "concept": "A secondary sort makes the order inside each primary group predictable.",
-                "hint_1": "Use category ASC as the first sort and name ASC as the second.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "The first ORDER BY expression controls the main order; later expressions break ties inside it.",
+                "hint_1": "List both sort expressions after one ORDER BY, separated by a comma.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "SELECT name, category, stock\nFROM products\n-- Sort by category, then name"
+              "starterCode": "-- Group by category, then alphabetize names inside each category.\nSELECT name, category, stock\nFROM products\nORDER BY"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_primary_sort_sketch2": {
-              "title": "Add a Stable Name Tie-Breaker",
-              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Show `name`, `category`, and `stock` from `products`, sorting by category A to Z and then by name A to Z.",
-              "hint": "Use category ASC as the first sort and name ASC as the second.",
+              "title": "Group Categories and Alphabetize Products",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, in that order. Sort by `category ASC`, then use `name ASC` to order products inside each category.",
+              "hint": "List both sort expressions after one ORDER BY, separated by a comma.",
               "help": {
-                "concept": "A secondary sort makes the order inside each primary group predictable.",
-                "hint_1": "Use category ASC as the first sort and name ASC as the second.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_primary_sort_sketch0": {
-              "title": "Create Category Groups with a Price Order",
-              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Show `name`, `category`, and `price` from `products`, sorting prices low to high within each category.",
-              "hint": "List category DESC first and price ASC second in ORDER BY.",
-              "help": {
-                "concept": "The first ORDER BY column creates the primary groups; later columns order rows inside those groups.",
-                "hint_1": "List category DESC first and price ASC second in ORDER BY.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "The first ORDER BY expression controls the main order; later expressions break ties inside it.",
+                "hint_1": "List both sort expressions after one ORDER BY, separated by a comma.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
           }
@@ -43949,13 +40803,13 @@ const messages: Record<string, any> = {
       "sql-v2-4": {
         "between_range_filter": {
           "label": "Filtering Inclusive Ranges with BETWEEN",
-          "summary": "Use BETWEEN when both the lower and upper boundaries should be included.",
+          "summary": "Use BETWEEN for an inclusive lower-and-upper range, and combine it with other conditions when needed.",
           "cards": {
             "sketch0": {
               "title": "BETWEEN Includes Both Endpoints"
             },
             "sketch1": {
-              "title": "Combine a Range with Other Conditions"
+              "title": "Combine a Range with Another Business Rule"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -44010,37 +40864,6 @@ const messages: Record<string, any> = {
                 "d": "Olivia Chen"
               }
             },
-            "mc_good_between_uses": {
-              "title": "Good uses for BETWEEN",
-              "prompt": "Which filters are good beginner uses of `BETWEEN` in this dataset? Choose all that apply.",
-              "hint": "Think about columns where a clear start and end value make sense.",
-              "help": {
-                "concept": "BETWEEN is most readable when values have a natural ordered range, such as dates or numbers, and can also work with ordered text values.",
-                "hint_1": "A signup date range is a strong fit because dates have a clear order.",
-                "hint_2": "Status values can be alphabetically compared, but exact category matching is often clearer with IN than with a text range."
-              },
-              "options": {
-                "a": "Filter `signup_date` from `2026-01-10` to `2026-01-25`",
-                "b": "Filter `id` from 2 to 6",
-                "c": "Filter `status` to exactly `active` or `inactive` using a text range instead of a list",
-                "d": "Filter `city` to rows where the value is NULL"
-              }
-            },
-            "dr_build_between_query": {
-              "title": "Build a BETWEEN query",
-              "prompt": "Put the SQL parts in order to return `full_name` and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-22`.",
-              "hint": "Start with SELECT, then FROM, then the WHERE range filter.",
-              "help": {
-                "concept": "A basic SQL query follows a clause order: SELECT columns, FROM table, then WHERE conditions.",
-                "hint_1": "The column list comes right after SELECT.",
-                "hint_2": "The BETWEEN condition belongs in the WHERE clause after the table name."
-              },
-              "tokens": {
-                "t1": "SELECT full_name, signup_date",
-                "t2": "FROM customers",
-                "t3": "WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-22'"
-              }
-            },
             "dr_between_with_order": {
               "title": "Add sorting after the range filter",
               "prompt": "Arrange the SQL clauses to show `id`, `full_name`, and `signup_date` for rows in the date range, sorted from earliest signup to latest.",
@@ -44057,140 +40880,41 @@ const messages: Record<string, any> = {
                 "t4": "WHERE signup_date BETWEEN '2026-01-10' AND '2026-01-25'"
               }
             },
-            "fb_between_keyword": {
-              "title": "Complete the range filter keyword",
-              "prompt": "Fill in the missing SQL keyword.",
-              "hint": "Use the keyword that checks whether a value falls inside a start and end range.",
-              "help": {
-                "concept": "the blank is the SQL keyword used to test whether a value is within an inclusive range.",
-                "hint_1": "This keyword is paired with `AND` to give the start and end values.",
-                "hint_2": "It is commonly used in a WHERE clause for date or number ranges."
-              },
-              "template": "WHERE signup_date [blank1] '2026-01-12' AND '2026-01-22'",
-              "choices": [
-                "BETWEEN",
-                "IN",
-                "LIKE",
-                "ORDER BY"
-              ]
-            },
-            "fb_between_end_value": {
-              "title": "Choose the ending boundary",
-              "prompt": "Fill in the missing end value so the query includes signups through January 22, 2026.",
-              "hint": "The blank should be the last date in the inclusive range.",
-              "help": {
-                "concept": "In a BETWEEN condition, the second value is the upper boundary of the inclusive range.",
-                "hint_1": "The prompt says the range should go through January 22, 2026.",
-                "hint_2": "Use the date in the same `YYYY-MM-DD` format as the table values."
-              },
-              "template": "WHERE signup_date BETWEEN '2026-01-12' AND [blank1]",
-              "choices": [
-                "'2026-01-10'",
-                "'2026-01-18'",
-                "'2026-01-22'",
-                "'2026-02-01'"
-              ]
-            },
-            "ci_between_january_window": {
-              "title": "Query customers in a signup date range",
-              "prompt": "Write a query that returns `id`, `full_name`, and `signup_date` from `customers` for rows where `signup_date` is between `2026-01-12` and `2026-01-25`, inclusive. Sort the results by `signup_date` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add sorting here\nSELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\n;"
-            },
-            "ci_between_ids_non_test": {
-              "title": "Filter a numeric range and exclude test rows",
-              "prompt": "Write a query that returns `id`, `full_name`, and `is_test` from `customers` for rows where `id` is between 2 and 7, inclusive, and `is_test` is 0. Sort by `id` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and is_test from customers for rows where id is between 2 and 7, inclusive, and is_test is 0. Sort by id in ascending order.\nSELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND \nORDER BY id ASC;"
-            },
-            "ci_between_active_signups": {
-              "title": "Combine BETWEEN with another filter",
-              "prompt": "Write a query that returns `full_name`, `status`, and `signup_date` from `customers` for rows where `signup_date` is between `2026-01-10` and `2026-02-01`, inclusive, and `status` is `active`. Sort by `signup_date` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\nORDER BY signup_date ASC;"
-            },
             "try-between_range_filter-sketch0": {
               "title": "Filter a Signup-Date Window",
-              "prompt": "Prepare a signup cohort covering `2026-01-12` through `2026-01-25`, including both boundary dates. Show `id`, `full_name`, and `signup_date` from `customers`.",
-              "hint": "Use BETWEEN with the earlier date first and the later date second.",
+              "prompt": "Return `id`, `full_name`, and `signup_date` from `customers`, in that order. Use `BETWEEN` to keep signups from `2026-01-12` through `2026-01-25`, including both boundary dates.",
+              "hint": "Put the earlier date first and the later date second; BETWEEN includes both.",
               "help": {
-                "concept": "BETWEEN includes both endpoints of the requested range.",
-                "hint_1": "Use BETWEEN with the earlier date first and the later date second.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "BETWEEN represents an inclusive lower-and-upper boundary check.",
+                "hint_1": "Put the earlier date first and the later date second; BETWEEN includes both.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT id, full_name, signup_date\nFROM customers\n-- Keep the inclusive date window"
-            },
-            "try-between_range_filter-sketch1": {
-              "title": "Combine an ID Range with a Test-Account Rule",
-              "prompt": "QA needs genuine customer records from IDs `2` through `7`. Show `id`, `full_name`, and `is_test` from `customers` where the ID is in that inclusive range and `is_test` equals `0`, sorted by ID ascending.",
-              "hint": "Write the BETWEEN condition first, connect is_test = 0 with AND, then order by id.",
-              "help": {
-                "concept": "A range can be combined with another condition to match the complete business rule.",
-                "hint_1": "Write the BETWEEN condition first, connect is_test = 0 with AND, then order by id.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, is_test\nFROM customers\n-- Add the range, account rule, and sort"
-            },
-            "try-between_range_filter-sketch2": {
-              "title": "Combine BETWEEN with another filter",
-              "prompt": "Create a customer-cleanup query that returns `full_name`, `status`, and `signup_date` from `customers` for rows where `signup_date` is between `2026-01-10` and `2026-02-01`, inclusive, and `status` is `active`. Sort by `signup_date` in ascending order. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\nORDER BY signup_date ASC;"
+              "starterCode": "-- Keep the inclusive signup window.\nSELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '' AND '';"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_between_range_filter_sketch1": {
-              "title": "Combine an ID Range with a Test-Account Rule",
-              "prompt": "QA needs genuine customer records from IDs `2` through `7`. Show `id`, `full_name`, and `is_test` from `customers` where the ID is in that inclusive range and `is_test` equals `0`, sorted by ID ascending.",
-              "hint": "Write the BETWEEN condition first, connect is_test = 0 with AND, then order by id.",
-              "help": {
-                "concept": "A range can be combined with another condition to match the complete business rule.",
-                "hint_1": "Write the BETWEEN condition first, connect is_test = 0 with AND, then order by id.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_between_range_filter_sketch0": {
               "title": "Filter a Signup-Date Window",
-              "prompt": "Prepare a signup cohort covering `2026-01-12` through `2026-01-25`, including both boundary dates. Show `id`, `full_name`, and `signup_date` from `customers`.",
-              "hint": "Use BETWEEN with the earlier date first and the later date second.",
+              "prompt": "Return `id`, `full_name`, and `signup_date` from `customers`, in that order. Use `BETWEEN` to keep signups from `2026-01-12` through `2026-01-25`, including both boundary dates.",
+              "hint": "Put the earlier date first and the later date second; BETWEEN includes both.",
               "help": {
-                "concept": "BETWEEN includes both endpoints of the requested range.",
-                "hint_1": "Use BETWEEN with the earlier date first and the later date second.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "BETWEEN represents an inclusive lower-and-upper boundary check.",
+                "hint_1": "Put the earlier date first and the later date second; BETWEEN includes both.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
         },
         "combine_text_and_null_filters": {
-          "label": "IS NOT NULL and Cleanup Filters",
-          "summary": "Require present values and combine text patterns, statuses, and missing-data rules in cleanup queries.",
+          "label": "Combining Text and Missing-Value Rules",
+          "summary": "Combine LIKE, NULL checks, AND, OR, and parentheses to express practical cleanup rules clearly.",
           "cards": {
             "sketch0": {
-              "title": "IS NOT NULL Requires a Present Value"
+              "title": "Text and NULL Checks Answer Different Questions"
             },
             "sketch1": {
-              "title": "Combine Presence Checks with Business Rules"
+              "title": "Use Parentheses When OR Is Part of a Larger Rule"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -44229,22 +40953,6 @@ const messages: Record<string, any> = {
                 "d": "ORDER BY"
               }
             },
-            "mc_find_suspicious_rows": {
-              "title": "Rows that match a combined filter",
-              "prompt": "Choose all rows that would match this condition: `email IS NULL OR full_name LIKE '%Test%'`",
-              "hint": "A row matches if it has a missing email, a name containing `Test`, or both.",
-              "help": {
-                "concept": "An `OR` condition includes every row that satisfies at least one side of the condition.",
-                "hint_1": "Check the sample rows for `NULL` emails and for names containing the word `Test`.",
-                "hint_2": "Two rows match because of missing email, and one different row matches because of the name text."
-              },
-              "options": {
-                "a": "Leo Grant",
-                "b": "Emma Reed",
-                "c": "Liam Scott",
-                "d": "Test Account"
-              }
-            },
             "mc_valid_combined_filters": {
               "title": "Useful cleanup filters",
               "prompt": "Which WHERE conditions are valid ways to combine text and NULL filtering on this dataset? Choose all that apply.",
@@ -44259,21 +40967,6 @@ const messages: Record<string, any> = {
                 "b": "full_name LIKE '%Test%' AND email IS NOT NULL",
                 "c": "email = NULL AND status = 'active'",
                 "d": "city LIKE NULL OR is_test = 1"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build a combined filter query",
-              "prompt": "Put these SQL parts in the correct order to query customer names and emails for rows with missing email values.",
-              "hint": "Start with `SELECT`, then name the table, then add the filter.",
-              "help": {
-                "concept": "A basic SQL query follows the structure `SELECT ... FROM ... WHERE ...`.",
-                "hint_1": "The column list comes right after `SELECT`.",
-                "hint_2": "The filtering condition belongs after the `WHERE` keyword."
-              },
-              "tokens": {
-                "t1": "SELECT full_name, email",
-                "t2": "FROM customers",
-                "t3": "WHERE email IS NULL"
               }
             },
             "dr_query_order_grouped": {
@@ -44292,127 +40985,28 @@ const messages: Record<string, any> = {
                 "t4": "AND is_test = 1"
               }
             },
-            "fb_like_wildcard": {
-              "title": "Complete a text pattern",
-              "prompt": "Fill in the missing pattern piece to find names containing the word `Test` anywhere in the text.",
-              "hint": "Use `%` on both sides of the word when it can appear anywhere.",
-              "help": {
-                "concept": "In a `LIKE` pattern, `%` matches any number of characters before or after the text you care about.",
-                "hint_1": "A contains search needs a wildcard before and after `Test`.",
-                "hint_2": "Choose the pattern that would match a value like `Test Account`, not only an exact match."
-              },
-              "template": "full_name LIKE '[blank1]'",
-              "choices": [
-                "Test",
-                "%Test%",
-                "Test%",
-                "%Test"
-              ]
-            },
-            "fb_null_keyword": {
-              "title": "Complete the NULL check",
-              "prompt": "Fill in the missing keyword to complete this condition for missing cities.",
-              "hint": "Missing values use a special keyword after `IS`.",
-              "help": {
-                "concept": "SQL uses `IS the blank` to test whether a column has no stored value.",
-                "hint_1": "The condition is not checking text like `'the blank'`; it is checking the missing-value marker.",
-                "hint_2": "Choose the keyword that completes `city IS ...` for a missing city."
-              },
-              "template": "city IS [blank1]",
-              "choices": [
-                "EMPTY",
-                "NONE",
-                "NULL",
-                "MISSING"
-              ]
-            },
-            "ci_missing_or_test_accounts": {
-              "title": "Find missing emails or test-like names",
-              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and email from customers for rows where the email is missing or the full name contains Test.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_active_example_emails": {
-              "title": "Find active example.com customers",
-              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, email, and status for customers whose email ends with @example.com and whose status is active.\nSELECT id, full_name, email, status\nFROM customers\nWHERE ;"
-            },
-            "ci_grouped_test_email_filter": {
-              "title": "Use grouped conditions for test records",
-              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, email, and is_test for rows where the email is missing or contains test, but only when is_test = 1. Use parentheses so the email conditions are grouped together.\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
-            },
-            "try-combine_text_and_null_filters-sketch0": {
-              "title": "Keep Customers with a Known City",
-              "prompt": "Build a location-ready customer list containing only records with a known city. Show `id`, `full_name`, and `city` from `customers` where `city` is present.",
-              "hint": "Use city IS NOT NULL.",
-              "help": {
-                "concept": "IS NOT NULL keeps rows where a value is present rather than missing.",
-                "hint_1": "Use city IS NOT NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Keep rows with a known city"
-            },
             "try-combine_text_and_null_filters-sketch1": {
-              "title": "Build an Active Contact List",
-              "prompt": "Prepare an outreach list of active customers who can actually be contacted by email. Show `id`, `full_name`, `email`, and `status` from `customers` where `email` is present and `status` is `active`.",
-              "hint": "Combine email IS NOT NULL with status = 'active' using AND.",
+              "title": "Build a Customer Cleanup Queue",
+              "prompt": "Return `id`, `full_name`, and `email` from `customers`, in that order. Keep rows where the email is missing **or** the full name contains `Test` anywhere.",
+              "hint": "Join an IS NULL condition and a contains-pattern condition with OR.",
               "help": {
-                "concept": "A cleanup filter can require both usable contact data and the intended business status.",
-                "hint_1": "Combine email IS NOT NULL with status = 'active' using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "OR keeps a row when either cleanup condition is true, while LIKE and IS NULL test different kinds of problems.",
+                "hint_1": "Join an IS NULL condition and a contains-pattern condition with OR.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT id, full_name, email, status\nFROM customers\n-- Require a present email and active status"
-            },
-            "try-combine_text_and_null_filters-sketch2": {
-              "title": "Use grouped conditions for test records",
-              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, email, and is_test for rows where the email is missing or contains test, but only when is_test = 1.\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
+              "starterCode": "-- Find rows needing cleanup because email is missing or the name contains Test.\nSELECT id, full_name, email\nFROM customers\nWHERE ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_combine_text_and_null_filters_sketch1": {
-              "title": "Build an Active Contact List",
-              "prompt": "Prepare an outreach list of active customers who can actually be contacted by email. Show `id`, `full_name`, `email`, and `status` from `customers` where `email` is present and `status` is `active`.",
-              "hint": "Combine email IS NOT NULL with status = 'active' using AND.",
+              "title": "Build a Customer Cleanup Queue",
+              "prompt": "Return `id`, `full_name`, and `email` from `customers`, in that order. Keep rows where the email is missing **or** the full name contains `Test` anywhere.",
+              "hint": "Join an IS NULL condition and a contains-pattern condition with OR.",
               "help": {
-                "concept": "A cleanup filter can require both usable contact data and the intended business status.",
-                "hint_1": "Combine email IS NOT NULL with status = 'active' using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_combine_text_and_null_filters_sketch0": {
-              "title": "Keep Customers with a Known City",
-              "prompt": "Build a location-ready customer list containing only records with a known city. Show `id`, `full_name`, and `city` from `customers` where `city` is present.",
-              "hint": "Use city IS NOT NULL.",
-              "help": {
-                "concept": "IS NOT NULL keeps rows where a value is present rather than missing.",
-                "hint_1": "Use city IS NOT NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "OR keeps a row when either cleanup condition is true, while LIKE and IS NULL test different kinds of problems.",
+                "hint_1": "Join an IS NULL condition and a contains-pattern condition with OR.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
@@ -44646,11 +41240,11 @@ const messages: Record<string, any> = {
           }
         },
         "in_list_filter": {
-          "label": "Filtering Lists with IN and NOT IN",
-          "summary": "Match or exclude several exact values without repeating the same column comparison.",
+          "label": "Filtering Exact Sets with IN and NOT IN",
+          "summary": "Use IN for several allowed exact values and NOT IN for several excluded exact values.",
           "cards": {
             "sketch0": {
-              "title": "IN Matches Any Value in a List"
+              "title": "IN Matches Any Exact Value in a List"
             },
             "sketch1": {
               "title": "NOT IN Excludes Every Listed Value"
@@ -44708,37 +41302,6 @@ const messages: Record<string, any> = {
                 "d": "city = 'Miami' OR city = 'Chicago'"
               }
             },
-            "mc_not_in_examples": {
-              "title": "Rows excluded by NOT IN",
-              "prompt": "Choose all customers that would be excluded by `WHERE status NOT IN ('draft', 'inactive')`.",
-              "hint": "Excluded rows are the ones whose status is in the listed set.",
-              "help": {
-                "concept": "When a query uses `NOT IN`, rows with listed values are filtered out rather than kept.",
-                "hint_1": "Find customers whose status is exactly `draft` or exactly `inactive`.",
-                "hint_2": "There are four such rows in this dataset: two inactive customers and two draft customers."
-              },
-              "options": {
-                "a": "Leo Grant",
-                "b": "Noah Kim",
-                "c": "Mia Lopez",
-                "d": "Liam Scott"
-              }
-            },
-            "dr_query_order_in": {
-              "title": "Build an IN query",
-              "prompt": "Arrange the SQL parts to query customer names from Chicago or Miami.",
-              "hint": "Start with SELECT, then FROM, then the WHERE condition.",
-              "help": {
-                "concept": "A basic SQL query follows the order SELECT, FROM, then WHERE.",
-                "hint_1": "The column list comes right after `SELECT`.",
-                "hint_2": "The filter using `IN` belongs after the table name."
-              },
-              "tokens": {
-                "t1": "SELECT full_name",
-                "t2": "FROM customers",
-                "t3": "WHERE city IN ('Chicago', 'Miami')"
-              }
-            },
             "dr_where_in_logic": {
               "title": "Read the filter in order",
               "prompt": "Arrange these pieces to form a valid WHERE condition that keeps active or draft customers.",
@@ -44754,140 +41317,41 @@ const messages: Record<string, any> = {
                 "t3": "('active', 'draft')"
               }
             },
-            "fb_in_keyword": {
-              "title": "Complete the list filter",
-              "prompt": "Fill in the missing SQL keyword.",
-              "hint": "Focus on the missing concept rather than the exact missing term.",
-              "help": {
-                "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the term that best completes the meaning of the statement."
-              },
-              "template": "WHERE city [blank1] ('Chicago', 'Miami')",
-              "choices": [
-                "IN",
-                "BETWEEN",
-                "LIKE",
-                "FROM"
-              ]
-            },
-            "fb_not_in_keyword": {
-              "title": "Complete the exclusion filter",
-              "prompt": "Fill in the missing SQL phrase.",
-              "hint": "Use the phrase that excludes rows whose value appears in the list.",
-              "help": {
-                "concept": "`the blank` is used to remove rows whose value matches any item in a listed set.",
-                "hint_1": "This phrase is built from `NOT` plus the list-matching keyword.",
-                "hint_2": "It is the exclusion version of `IN`."
-              },
-              "template": "WHERE status [blank1] ('draft', 'inactive')",
-              "choices": [
-                "IN",
-                "NOT IN",
-                "IS NULL",
-                "ORDER BY"
-              ]
-            },
-            "ci_active_or_draft_names": {
-              "title": "Query active or draft customers",
-              "prompt": "Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name and status from customers for rows where status is either active or draft. Keep the results in the table's default order.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_not_in_cities": {
-              "title": "Exclude two cities",
-              "prompt": "Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and city for customers whose city is not Chicago and not Miami. Use NOT IN. Keep rows in the table's default order.\nSELECT id, full_name, city\nFROM customers\nWHERE city ;"
-            },
-            "ci_in_with_and": {
-              "title": "Combine IN with another filter",
-              "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name, city, and status for customers who are in Chicago or Seattle and also have status = 'active'. Keep rows in the table's default order.\nSELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
-            },
             "try-in_list_filter-sketch0": {
-              "title": "Keep Two Allowed Statuses",
-              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Show `id`, `full_name`, and `status` from `customers`.",
-              "hint": "Use IN with the two quoted status values inside parentheses.",
+              "title": "Keep Two Allowed Customer Statuses",
+              "prompt": "Build a review queue that returns `id`, `full_name`, and `status` from `customers`, in that order. Use `IN` to keep only `active` or `draft` statuses.",
+              "hint": "Put both quoted status values inside the IN parentheses.",
               "help": {
-                "concept": "IN is a compact exact-match test for any value in a list.",
-                "hint_1": "Use IN with the two quoted status values inside parentheses.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "IN keeps a row when the column matches any one exact value in the list.",
+                "hint_1": "Put both quoted status values inside the IN parentheses.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Keep active or draft"
-            },
-            "try-in_list_filter-sketch1": {
-              "title": "Exclude Two Cities",
-              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Show `id`, `full_name`, and `city` from `customers` for everyone outside those two cities.",
-              "hint": "Use NOT IN with both quoted city names.",
-              "help": {
-                "concept": "NOT IN removes rows matching any value in the exclusion list.",
-                "hint_1": "Use NOT IN with both quoted city names.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Exclude Chicago and Miami"
-            },
-            "try-in_list_filter-sketch2": {
-              "title": "Combine IN with another filter",
-              "prompt": "Create a customer-cleanup query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name, city, and status for customers who are in Chicago or Seattle and also have status = 'active.\nSELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
+              "starterCode": "-- Keep only active or draft customers.\nSELECT id, full_name, status\nFROM customers\nWHERE status IN ();"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_in_list_filter_sketch0": {
-              "title": "Keep Two Allowed Statuses",
-              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Show `id`, `full_name`, and `status` from `customers`.",
-              "hint": "Use IN with the two quoted status values inside parentheses.",
+              "title": "Keep Two Allowed Customer Statuses",
+              "prompt": "Build a review queue that returns `id`, `full_name`, and `status` from `customers`, in that order. Use `IN` to keep only `active` or `draft` statuses.",
+              "hint": "Put both quoted status values inside the IN parentheses.",
               "help": {
-                "concept": "IN is a compact exact-match test for any value in a list.",
-                "hint_1": "Use IN with the two quoted status values inside parentheses.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_in_list_filter_sketch1": {
-              "title": "Exclude Two Cities",
-              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Show `id`, `full_name`, and `city` from `customers` for everyone outside those two cities.",
-              "hint": "Use NOT IN with both quoted city names.",
-              "help": {
-                "concept": "NOT IN removes rows matching any value in the exclusion list.",
-                "hint_1": "Use NOT IN with both quoted city names.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "IN keeps a row when the column matches any one exact value in the list.",
+                "hint_1": "Put both quoted status values inside the IN parentheses.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
         },
         "intro_to_like": {
-          "label": "Searching Text with LIKE and %",
+          "label": "Matching Text with LIKE and %",
           "summary": "Use LIKE with the percent wildcard to match text prefixes, suffixes, and contained fragments.",
           "cards": {
             "sketch0": {
               "title": "LIKE Matches a Text Pattern"
             },
             "sketch1": {
-              "title": "% Represents Any Number of Characters"
+              "title": "% Can Match Text Before, After, or on Both Sides"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -44910,22 +41374,6 @@ const messages: Record<string, any> = {
                 "d": "LIKE '%Chi%'"
               }
             },
-            "sc_like_single_char": {
-              "title": "Wildcard for one character",
-              "prompt": "In a `LIKE` pattern, which symbol matches exactly one character?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "%",
-                "b": "_",
-                "c": "*",
-                "d": "#"
-              }
-            },
             "mc_like_true_patterns": {
               "title": "Patterns that contain text anywhere",
               "prompt": "Choose all patterns that would match a value containing the text `test` anywhere inside it.",
@@ -44942,22 +41390,6 @@ const messages: Record<string, any> = {
                 "d": "'abc%test%xyz'"
               }
             },
-            "mc_like_dataset_matches": {
-              "title": "Rows matched by an email pattern",
-              "prompt": "Based on the seeded `customers` table, which rows would match `WHERE email LIKE '%@example.com'`? Choose all that apply.",
-              "hint": "Look for emails that end exactly with `@example.com`.",
-              "help": {
-                "concept": "A pattern ending with fixed text and starting with `%` matches any value whose ending is that fixed text.",
-                "hint_1": "Check the email values row by row and ignore NULLs because NULL does not match a `LIKE` pattern.",
-                "hint_2": "The matching rows are the ones with emails from the `example.com` domain, not the test or internal domain."
-              },
-              "options": {
-                "a": "Mia Lopez",
-                "b": "Noah Kim",
-                "c": "Emma Reed",
-                "d": "Olivia Chen"
-              }
-            },
             "dr_like_query_order": {
               "title": "Build a LIKE query",
               "prompt": "Put these SQL parts in the correct order to query customer names and emails where the email ends with `@example.com`.",
@@ -44972,38 +41404,6 @@ const messages: Record<string, any> = {
                 "t2": "FROM customers",
                 "t3": "WHERE email LIKE '%@example.com'"
               }
-            },
-            "dr_pattern_order": {
-              "title": "Assemble the correct pattern",
-              "prompt": "Arrange these tokens to make a pattern that matches names ending with `Chen`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "'",
-                "t2": "%",
-                "t3": "Chen"
-              }
-            },
-            "fb_like_suffix": {
-              "title": "Complete an ending match",
-              "prompt": "Fill in the missing pattern piece.",
-              "hint": "To match values that end with `@example.com`, allow any text before it.",
-              "help": {
-                "concept": "A suffix match uses `%` before the fixed ending text so any earlier characters are allowed.",
-                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
-                "hint_2": "Choose the option that keeps `@example.com` fixed at the end of the pattern."
-              },
-              "template": "WHERE email LIKE [blank1]",
-              "choices": [
-                "'%@example.com'",
-                "'@example.com%'",
-                "'_@example.com'",
-                "'example.com'"
-              ]
             },
             "fb_like_contains": {
               "title": "Complete a contains pattern",
@@ -45022,93 +41422,28 @@ const messages: Record<string, any> = {
                 "'_a_'"
               ]
             },
-            "ci_like_city_prefix": {
-              "title": "Find cities starting with Chi",
-              "prompt": "Write a query that shows `full_name` and `city` for customers whose `city` starts with `Chi`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name and city for customers whose city starts with Chi. Use the customers table.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_like_email_domain": {
-              "title": "Find example.com emails",
-              "prompt": "Write a query that shows `full_name` and `email` for customers whose email ends with `@example.com`. Exclude rows where `email` is NULL by relying on the pattern match. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name and email for customers whose email ends with @example.com. Exclude rows where email is NULL by relying on the pattern match.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_like_active_name_contains": {
-              "title": "Find active customers with a in the name",
-              "prompt": "Write a query that shows `full_name` and `status` for customers whose `full_name` contains the letter `a` anywhere and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name and status for customers whose full_name contains the letter a anywhere and whose status is active.\nSELECT \nFROM customers\nWHERE ;"
-            },
             "try-intro_to_like-sketch0": {
-              "title": "Find Customer Names That Start with M",
-              "prompt": "Prepare an alphabetical outreach slice. Show `id`, `full_name`, and `city` from `customers` for people whose names begin with `M`.",
-              "hint": "Use `LIKE 'M%'` so any characters may follow `M`.",
+              "title": "Find Customer Names Beginning with M",
+              "prompt": "Prepare an alphabetical outreach slice. Return `id`, `full_name`, and `city` from `customers`, in that order. Use `LIKE` so only names beginning with `M` remain.",
+              "hint": "For a prefix match, place the fixed starting text before `%`.",
               "help": {
-                "concept": "LIKE compares text with a pattern instead of requiring one exact value.",
-                "hint_1": "Use `LIKE 'M%'` so any characters may follow `M`.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A trailing percent wildcard lets a LIKE pattern keep any text that begins with the required prefix.",
+                "hint_1": "For a prefix match, place the fixed starting text before `%`.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Match names that start with M"
-            },
-            "try-intro_to_like-sketch1": {
-              "title": "Find Cities Containing the Letter o",
-              "prompt": "Find customers in cities whose names contain the letter `o` anywhere. Show `full_name` and `city` from `customers`.",
-              "hint": "Put % on both sides of o: LIKE '%o%'.",
-              "help": {
-                "concept": "The percent wildcard can represent any number of characters before or after the known text.",
-                "hint_1": "Put % on both sides of o: LIKE '%o%'.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT full_name, city\nFROM customers\n-- Match cities containing o"
-            },
-            "try-intro_to_like-sketch2": {
-              "title": "Find active customers with a in the name",
-              "prompt": "Create a customer-cleanup query that shows `full_name` and `status` for customers whose `full_name` contains the letter `a` anywhere and whose `status` is `active`. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name and status for customers whose full_name contains the letter a anywhere and whose status is active.\nSELECT \nFROM customers\nWHERE ;"
+              "starterCode": "-- Find customers whose full name begins with M.\nSELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE '';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_intro_to_like_sketch0": {
-              "title": "Find Customer Names That Start with M",
-              "prompt": "Prepare an alphabetical outreach slice. Show `id`, `full_name`, and `city` from `customers` for people whose names begin with `M`.",
-              "hint": "Use `LIKE 'M%'` so any characters may follow `M`.",
+              "title": "Find Customer Names Beginning with M",
+              "prompt": "Prepare an alphabetical outreach slice. Return `id`, `full_name`, and `city` from `customers`, in that order. Use `LIKE` so only names beginning with `M` remain.",
+              "hint": "For a prefix match, place the fixed starting text before `%`.",
               "help": {
-                "concept": "LIKE compares text with a pattern instead of requiring one exact value.",
-                "hint_1": "Use `LIKE 'M%'` so any characters may follow `M`.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_intro_to_like_sketch1": {
-              "title": "Find Cities Containing the Letter o",
-              "prompt": "Find customers in cities whose names contain the letter `o` anywhere. Show `full_name` and `city` from `customers`.",
-              "hint": "Put % on both sides of o: LIKE '%o%'.",
-              "help": {
-                "concept": "The percent wildcard can represent any number of characters before or after the known text.",
-                "hint_1": "Put % on both sides of o: LIKE '%o%'.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "A trailing percent wildcard lets a LIKE pattern keep any text that begins with the required prefix.",
+                "hint_1": "For a prefix match, place the fixed starting text before `%`.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
@@ -45571,77 +41906,59 @@ const messages: Record<string, any> = {
         },
         "module-4-customer-cleanup-project": {
           "label": "Module 4 Customer Cleanup Project",
-          "summary": "Build a customer cleanup worksheet with text, list, and NULL checks.",
+          "summary": "Build one data-quality report that starts with missing emails, narrows to inactive follow-ups, and finishes with real H-city records.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Customer cleanup worksheet"
+              "title": "Customer cleanup handoff"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Find the missing email records"
+              "title": "Flag missing-email records"
             },
             "mp_2": {
-              "title": "Keep the Inactive Follow-Ups"
+              "title": "Narrow to inactive follow-ups"
             },
             "mp_3": {
-              "title": "Finish the cleanup report"
+              "title": "Publish the real H-city cleanup queue"
             }
           },
           "quiz": {
             "mp-1-find-missing-emails": {
-              "title": "Find the missing email records",
-              "prompt": "Start the cleanup report by returning `id`, `full_name`, and `email` from `customers` where `email` is NULL.",
-              "hint": "Switch the NULL check so it keeps the missing values.",
+              "title": "Flag missing-email records",
+              "prompt": "Data operations needs the first cleanup slice. Return `id`, `full_name`, and `email` from `customers`, in that order, keeping only rows where `email` is missing.",
+              "hint": "The starter uses the opposite NULL condition; change it so missing values remain.",
               "help": {
-                "concept": "Cleanup queries often start by isolating the rows that are missing required information.",
-                "hint_1": "Use `WHERE email IS NULL`.",
-                "hint_2": "Run the query and confirm the results table shows only customers without email values."
+                "concept": "Missing values are tested with IS NULL.",
+                "hint_1": "Keep the selected columns and table unchanged.",
+                "hint_2": "Change only the NULL condition so the result keeps missing emails."
               },
-              "starterCode": "-- Returning id, full_name, and email from customers where email is NULL.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+              "starterCode": "-- The current NULL check keeps present emails. Fix it to keep missing emails.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
             },
             "mp-2-keep-real-follow-ups": {
-              "title": "Keep the Inactive Follow-Ups",
-              "prompt": "Add `status` to the result, and keep only customers whose status is `inactive`.",
-              "hint": "Add an exact status condition for `inactive`.",
+              "title": "Narrow to inactive follow-ups",
+              "prompt": "The support team will follow up only on inactive customers from the approved missing-email slice. Add `status` to the result and require `status = 'inactive'`.",
+              "hint": "Keep the missing-email condition and add the inactive status rule with AND.",
               "help": {
-                "concept": "The status rule should preserve the missing-email records that still require cleanup.",
-                "hint_1": "Keep the `email IS NULL` condition.",
-                "hint_2": "Add `status` to the SELECT list and `status IN ('active', 'draft')` to the WHERE clause."
+                "concept": "A cumulative project extends the working filter instead of replacing it.",
+                "hint_1": "Keep email IS NULL.",
+                "hint_2": "Add status to SELECT and add the inactive condition with AND."
               },
-              "starterCode": "-- Keep the missing-email rule above.\n-- Add status and keep inactive customers.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;"
+              "starterCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;"
             },
             "mp-3-finish-cleanup-report": {
-              "title": "Finish the cleanup report",
-              "prompt": "Add `city` to the result, exclude test rows, and keep only customers whose city starts with `H`.",
-              "hint": "Add `city`, keep cities beginning with `H`, and require `is_test = 0`.",
+              "title": "Publish the real H-city cleanup queue",
+              "prompt": "Before handoff, operations wants only real customer records from cities beginning with `H`. Add `city` to the result, keep the approved missing-email and inactive rules, require `city LIKE 'H%'`, and exclude test rows with `is_test = 0`.",
+              "hint": "Keep every approved condition, then add the H-city pattern and non-test rule.",
               "help": {
-                "concept": "The final step combines missing-data, status, text-pattern, and test-record checks in one query.",
-                "hint_1": "Add `city` to the SELECT list.",
-                "hint_2": "Use `city LIKE 'Chi%'` and `is_test = 0` while keeping the earlier conditions."
+                "concept": "The final report combines missing-value, exact-value, text-pattern, and test-record rules.",
+                "hint_1": "Do not remove email IS NULL or status = 'inactive'.",
+                "hint_2": "Add city to SELECT, then add the LIKE and is_test conditions."
               },
-              "starterCode": "-- Keep the filters above.\n-- Add city, exclude test rows, and keep only cities that start with H.\nSELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';"
-            },
-            "try-module-4-customer-cleanup-project-sketch0": {
-              "title": "Preview Missing-Email Records",
-              "prompt": "Before adding the remaining cleanup rules, find the records with no stored email. Return `id`, `full_name`, and `email` from `customers` where `email` is NULL.",
-              "hint": "Use `IS NULL` so the preview keeps records with a missing email.",
-              "help": {
-                "concept": "This warm-up isolates the missing-email records that the cleanup project will refine.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, full_name, email from the customers table.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_module_4_customer_cleanup_project_sketch0": {
-              "title": "Preview Missing-Email Records",
-              "prompt": "Before adding the remaining cleanup rules, find the records with no stored email. Return `id`, `full_name`, and `email` from `customers` where `email` is NULL."
+              "starterCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';"
             }
           }
         },
@@ -46564,14 +42881,14 @@ const messages: Record<string, any> = {
           }
         },
         "underscore_wildcard": {
-          "label": "Matching One Character with _",
-          "summary": "Use the underscore wildcard when each missing position must represent exactly one character.",
+          "label": "Matching Exact Character Positions with _",
+          "summary": "Use the underscore wildcard when a pattern needs exactly one character in a specific position.",
           "cards": {
             "sketch0": {
               "title": "_ Matches Exactly One Character"
             },
             "sketch1": {
-              "title": "Combine _ and % for Precise Patterns"
+              "title": "Combine _ and % When Some Positions Are Fixed"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -46594,22 +42911,6 @@ const messages: Record<string, any> = {
                 "d": "Only a number"
               }
             },
-            "sc_2": {
-              "title": "Pattern for a 4-letter first name",
-              "prompt": "Which pattern matches a full name where the first name has exactly 4 letters, followed by a space and then anything else?",
-              "hint": "Count the characters before the space.",
-              "help": {
-                "concept": "Each underscore matches one character, so the number of underscores controls exact text length in that part of the pattern.",
-                "hint_1": "You need four character slots before the space, not three and not any length.",
-                "hint_2": "Look for a pattern with four underscores, then a space, then a wildcard for the rest."
-              },
-              "options": {
-                "a": "`LIKE '____ %'`",
-                "b": "`LIKE '% %'`",
-                "c": "`LIKE '___ %'`",
-                "d": "`LIKE '_% %'`"
-              }
-            },
             "mc_1": {
               "title": "Queries that can match Miami",
               "prompt": "Choose all `LIKE` patterns that could match the city `Miami`.",
@@ -46624,22 +42925,6 @@ const messages: Record<string, any> = {
                 "b": "`LIKE '_____'`",
                 "c": "`LIKE 'M___'`",
                 "d": "`LIKE '%ami%'`"
-              }
-            },
-            "mc_2": {
-              "title": "Rows matched by a name pattern",
-              "prompt": "Using the `customers` table, which full names would match `LIKE '___ %'`? Choose all that apply.",
-              "hint": "The pattern requires exactly 3 characters before the space.",
-              "help": {
-                "concept": "A pattern like `___ %` checks the exact length of the first word before the space, then allows any remaining characters after the space.",
-                "hint_1": "Look for first names with exactly 3 letters.",
-                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
-              },
-              "options": {
-                "a": "Mia Lopez",
-                "b": "Leo Grant",
-                "c": "Emma Reed",
-                "d": "Liam Scott"
               }
             },
             "dr_1": {
@@ -46658,39 +42943,6 @@ const messages: Record<string, any> = {
                 "t4": "WHERE full_name LIKE '___ %';"
               }
             },
-            "dr_2": {
-              "title": "Read a pattern from left to right",
-              "prompt": "Arrange these explanations in the order they describe the pattern `M____`.",
-              "hint": "Read the pattern from left to right.",
-              "help": {
-                "concept": "A `LIKE` pattern is interpreted in sequence, so each literal character and wildcard is read from left to right.",
-                "hint_1": "The first character is a fixed letter, and the remaining symbols are single-character wildcards.",
-                "hint_2": "Start with the exact starting letter, then account for each underscore one by one."
-              },
-              "tokens": {
-                "t1": "The text must start with `M`.",
-                "t2": "The next character can be anything.",
-                "t3": "The next three characters can also be anything.",
-                "t4": "The total length must be 5 characters."
-              }
-            },
-            "fb_1": {
-              "title": "Complete the wildcard symbol",
-              "prompt": "Fill in the blank to make a pattern that matches exactly one character.",
-              "hint": "This is the single-character wildcard used with `LIKE`.",
-              "help": {
-                "concept": "In SQL `LIKE`, `the blank` is the wildcard for exactly one character, while `%` is for any number of characters.",
-                "hint_1": "You need the symbol that stands for one character, not many.",
-                "hint_2": "It is the shorter wildcard symbol, not the percent sign."
-              },
-              "template": "WHERE city LIKE '[blank1]hicago';",
-              "choices": [
-                "_",
-                "%",
-                "*",
-                "#"
-              ]
-            },
             "fb_2": {
               "title": "Choose the exact-length pattern",
               "prompt": "Fill in the blank to match emails with exactly 4 characters before `@example.com`.",
@@ -46708,106 +42960,41 @@ const messages: Record<string, any> = {
                 "_%"
               ]
             },
-            "code_1": {
-              "title": "Find 3-letter first names",
-              "prompt": "Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the full_name column from customers for rows where the first name has exactly 3 letters, followed by a space and the rest of the name.\nSELECT full_name\nFROM customers\nWHERE ;"
-            },
-            "code_2": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the city column from customers for cities that start with M and have exactly 5 total characters.\nSELECT city\nFROM customers\nWHERE city LIKE '';"
-            },
-            "code_3": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return email from customers where the email ends with @example.com and has exactly 4 characters before the @.\nSELECT email\nFROM customers\nWHERE email LIKE ;"
-            },
             "try-underscore_wildcard-sketch0": {
               "title": "Match Houston with One Unknown Character",
-              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Show `full_name` and `city` from `customers` for the matching records.",
-              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+              "prompt": "Return `full_name` and `city` from `customers`, in that order. Use the one-character wildcard so the pattern has `H`, exactly one unknown character, then `uston`.",
+              "hint": "Use `_` for the single unknown character between `H` and `uston`.",
               "help": {
-                "concept": "The underscore wildcard stands for exactly one character in a LIKE pattern.",
-                "hint_1": "Use the pattern `H_uston`; the underscore represents exactly one character.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Each underscore in a LIKE pattern requires exactly one character.",
+                "hint_1": "Use `_` for the single unknown character between `H` and `uston`.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT full_name, city\nFROM customers\n-- Use one-character wildcard inside Houston"
-            },
-            "try-underscore_wildcard-sketch1": {
-              "title": "Find Five-Character City Names",
-              "prompt": "Find customers whose city names are exactly five characters long. Show `id`, `full_name`, and `city` from `customers`.",
-              "hint": "Use five underscore characters and no percent wildcard.",
-              "help": {
-                "concept": "A sequence of underscores can require an exact text length.",
-                "hint_1": "Use five underscore characters and no percent wildcard.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Match exactly five characters"
-            },
-            "try-underscore_wildcard-sketch2": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Create a customer-cleanup query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return email from customers where the email ends with `@example.\nSELECT email\nFROM customers\nWHERE email LIKE ;"
+              "starterCode": "-- Match one unknown character inside Houston.\nSELECT full_name, city\nFROM customers\nWHERE city LIKE '';"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_underscore_wildcard_sketch1": {
-              "title": "Find Five-Character City Names",
-              "prompt": "Find customers whose city names are exactly five characters long. Show `id`, `full_name`, and `city` from `customers`.",
-              "hint": "Use five underscore characters and no percent wildcard.",
-              "help": {
-                "concept": "A sequence of underscores can require an exact text length.",
-                "hint_1": "Use five underscore characters and no percent wildcard.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_underscore_wildcard_sketch0": {
               "title": "Match Houston with One Unknown Character",
-              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Show `full_name` and `city` from `customers` for the matching records.",
-              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+              "prompt": "Return `full_name` and `city` from `customers`, in that order. Use the one-character wildcard so the pattern has `H`, exactly one unknown character, then `uston`.",
+              "hint": "Use `_` for the single unknown character between `H` and `uston`.",
               "help": {
-                "concept": "The underscore wildcard stands for exactly one character in a LIKE pattern.",
-                "hint_1": "Use the pattern `H_uston`; the underscore represents exactly one character.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "Each underscore in a LIKE pattern requires exactly one character.",
+                "hint_1": "Use `_` for the single unknown character between `H` and `uston`.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
         },
         "what_null_means": {
-          "label": "Understanding NULL and IS NULL",
-          "summary": "Distinguish missing data from ordinary values and test it with IS NULL.",
+          "label": "Understanding NULL and Missing Values",
+          "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
           "cards": {
             "sketch0": {
-              "title": "NULL Means the Value Is Missing or Unknown"
+              "title": "NULL Means a Value Is Missing or Unknown"
             },
             "sketch1": {
-              "title": "Use IS NULL, Not = NULL"
+              "title": "Use IS NULL and IS NOT NULL"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -46861,37 +43048,6 @@ const messages: Record<string, any> = {
                 "d": "`email = NULL` is the standard way to find missing emails"
               }
             },
-            "mc_dataset_null_columns": {
-              "title": "Columns with missing values",
-              "prompt": "Based on the `customers` dataset, which columns contain at least one `NULL` value?",
-              "hint": "Check the sample rows for missing entries.",
-              "help": {
-                "concept": "A column contains NULL when at least one row has a missing value in that column.",
-                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
-                "hint_2": "Pick the columns where the sample data shows blank missing entries, not columns filled in for every row."
-              },
-              "options": {
-                "a": "email",
-                "b": "city",
-                "c": "status",
-                "d": "signup_date"
-              }
-            },
-            "dr_null_query_order": {
-              "title": "Build a NULL filter query",
-              "prompt": "Arrange these SQL parts to make a query that shows `id` and `full_name` for customers with missing email values.",
-              "hint": "Start with SELECT, then FROM, then the NULL condition.",
-              "help": {
-                "concept": "A basic SQL query follows the order SELECT, FROM, then WHERE with the correct NULL test.",
-                "hint_1": "The column list comes first, the table name comes next, and the filter comes last.",
-                "hint_2": "Use the token with `email IS NULL` at the end because it is the WHERE condition."
-              },
-              "tokens": {
-                "t1": "SELECT id, full_name",
-                "t2": "FROM customers",
-                "t3": "WHERE email IS NULL"
-              }
-            },
             "dr_not_null_query_order": {
               "title": "Order a query with IS NOT NULL",
               "prompt": "Arrange these parts to make a query that shows customer names and cities where the city value exists.",
@@ -46907,127 +43063,28 @@ const messages: Record<string, any> = {
                 "t3": "WHERE city IS NOT NULL"
               }
             },
-            "fb_null_keyword": {
-              "title": "Complete the NULL check",
-              "prompt": "Fill in the missing SQL keyword to find rows where `email` is missing.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "template": "WHERE email [blank1] NULL",
-              "choices": [
-                "IS",
-                "=",
-                "LIKE",
-                "IN"
-              ]
-            },
-            "fb_not_null_keyword": {
-              "title": "Complete the present-value check",
-              "prompt": "Fill in the missing word so the condition keeps rows where `city` has a value.",
-              "hint": "This phrase is the opposite of `IS NULL`.",
-              "help": {
-                "concept": "IS the blank NULL checks that a column contains a value instead of a missing entry.",
-                "hint_1": "Only one word is missing between `IS` and `NULL`.",
-                "hint_2": "Choose the word that turns the condition into the opposite of a missing-value test."
-              },
-              "template": "WHERE city IS [blank1] NULL",
-              "choices": [
-                "NOT",
-                "AND",
-                "OR",
-                "LIKE"
-              ]
-            },
-            "code_missing_emails": {
-              "title": "Find customers with missing emails",
-              "prompt": "Write a query that shows `id`, `full_name`, and `email` for customers whose `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show id, full_name, and email for customers whose email is missing.\nSELECT id, full_name, email\nFROM customers\nWHERE ;"
-            },
-            "code_present_cities_real_customers": {
-              "title": "Show real customers with a city",
-              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose `city` is present and whose `is_test` value is `0`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name, city, and status for customers whose city is present and whose is_test value is 0.\nSELECT full_name, city, status\nFROM customers\nWHERE ;"
-            },
-            "code_inactive_missing_email": {
-              "title": "Find inactive customers missing email",
-              "prompt": "Write a query that shows `id`, `full_name`, and `status` for customers who are `inactive` and have no email value. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show id, full_name, and status for customers who are inactive and have no email value.\nSELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive' AND ;"
-            },
             "try-what_null_means-sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Show `full_name` and `status` from `customers` where `email` is missing.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "NULL represents a missing or unknown value and requires a NULL-specific test.",
-                "hint_1": "Test the email column with IS NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT full_name, status\nFROM customers\n-- Keep rows with no email"
-            },
-            "try-what_null_means-sketch1": {
-              "title": "Show real customers with a city",
-              "prompt": "Create a customer-cleanup query that shows `full_name`, `city`, and `status` for customers whose `city` is present and whose `is_test` value is `0`. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name, city, and status for customers whose city is present and whose is_test value is 0.\nSELECT full_name, city, status\nFROM customers\nWHERE ;"
-            },
-            "try-what_null_means-sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Show `id`, `full_name`, and `status` from `customers` where `status` is `inactive` and `email` is NULL.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "IS NULL can be combined with ordinary comparisons to express a complete cleanup rule.",
-                "hint_1": "Combine status = 'inactive' with email IS NULL using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Require inactive status and a missing email"
+              "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_what_null_means_sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Show `id`, `full_name`, and `status` from `customers` where `status` is `inactive` and `email` is NULL.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "IS NULL can be combined with ordinary comparisons to express a complete cleanup rule.",
-                "hint_1": "Combine status = 'inactive' with email IS NULL using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_what_null_means_sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Show `full_name` and `status` from `customers` where `email` is missing.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "NULL represents a missing or unknown value and requires a NULL-specific test.",
-                "hint_1": "Test the email column with IS NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
@@ -47036,91 +43093,73 @@ const messages: Record<string, any> = {
       "sql-v2-5": {
         "module-5-customer-follow-up-capstone": {
           "label": "Module 5 Customer Follow-Up Capstone",
-          "summary": "Build a final customer follow-up report that reads like a polished handoff.",
+          "summary": "Build a production-ready follow-up report by carrying one SQL query through status, contactability, location/date, pattern, sorting, and row-limit requirements.",
           "cards": {
             "sketch0": {
-              "title": "Project brief"
+              "title": "Final stakeholder brief"
             },
             "project": {
-              "title": "Customer follow-up capstone"
+              "title": "Customer follow-up report"
             }
           },
           "projectSteps": {
             "cp_1": {
-              "title": "Start the follow-up slice"
+              "title": "Build the eligible-status slice"
             },
             "cp_2": {
               "title": "Keep real contactable customers"
             },
             "cp_3": {
-              "title": "Add the city and date focus"
+              "title": "Add location and signup-date focus"
             },
             "cp_4": {
-              "title": "Finish the capstone report"
+              "title": "Deliver the ranked final handoff"
             }
           },
           "quiz": {
             "cp-1-start-follow-up-slice": {
-              "title": "Start the follow-up slice",
-              "prompt": "Start the capstone report by returning `full_name`, `city`, and `status` from `customers` where `status` is either `active` or `draft`.",
-              "hint": "Use IN so the query keeps both statuses.",
+              "title": "Build the eligible-status slice",
+              "prompt": "Lifecycle operations wants a follow-up candidate list. Return `full_name`, `city`, and `status` from `customers`, in that order. Keep customers whose status is either `active` or `draft`.",
+              "hint": "The starter keeps only one status. Replace that single-value filter with the list operator that accepts either approved status.",
               "help": {
-                "concept": "The capstone starts with a broad but realistic customer slice you can refine step by step.",
-                "hint_1": "Keep the selected columns the same.",
-                "hint_2": "Use `status IN ('active', 'draft')`, then rerun the query."
+                "concept": "IN is a concise exact-value filter when any value from a short approved list may match.",
+                "hint_1": "Keep the selected columns and table unchanged.",
+                "hint_2": "Change only the status condition so both approved statuses qualify."
               },
-              "starterCode": "-- Returning full_name, city, and status from customers where status is either active or draft.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';"
+              "starterCode": "-- The starter keeps only active customers.\n-- Expand the filter so active and draft customers are both eligible.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';"
             },
             "cp-2-keep-real-contactable-customers": {
               "title": "Keep real contactable customers",
-              "prompt": "Add `email` to the result, keep only customers whose `email` is not NULL, and exclude test rows.",
-              "hint": "You need one extra result column and two extra filters.",
+              "prompt": "The outreach system can only use real records with an email address. Carry the approved status slice forward, add `email` to the result, require a present email value, and exclude test rows.",
+              "hint": "Keep the status rule from the previous milestone, then add one presence check and one test-record condition.",
               "help": {
-                "concept": "A useful follow-up report keeps only records that are complete enough for real outreach.",
-                "hint_1": "Add `email` to the SELECT list.",
-                "hint_2": "Keep the earlier status condition, then add `email IS NOT NULL` and `is_test = 0`."
+                "concept": "Cumulative SQL work preserves approved logic and adds only the new business rules.",
+                "hint_1": "Do not replace the IN filter from milestone 1.",
+                "hint_2": "Add email to SELECT, then require a present email and is_test = 0."
               },
-              "starterCode": "-- Keep the status filter above.\n-- Add email to the result, keep only real rows, and require a real email.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');"
+              "starterCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');"
             },
             "cp-3-add-city-and-date-focus": {
-              "title": "Add the city and date focus",
-              "prompt": "Add `signup_date` to the result, and keep only Chicago or Seattle customers whose `signup_date` is between `2026-01-10` and `2026-02-05`.",
-              "hint": "Use both IN and BETWEEN in the same query.",
+              "title": "Add location and signup-date focus",
+              "prompt": "Regional operations is running this follow-up only for Chicago or Seattle customers who signed up from `2026-01-10` through `2026-02-05`, inclusive. Carry the approved query forward, add `signup_date`, and apply both the city list and date-window requirements.",
+              "hint": "Use one exact-value list for the two cities and one inclusive range for signup_date.",
               "help": {
-                "concept": "This step narrows a broad follow-up list into a region-and-time-specific report.",
-                "hint_1": "Add `signup_date` to the SELECT list.",
-                "hint_2": "Use `city IN ('Chicago', 'Seattle')` and `signup_date BETWEEN '2026-01-10' AND '2026-02-05'` while keeping the earlier filters."
+                "concept": "IN handles the approved city set; BETWEEN handles an inclusive lower-and-upper date boundary.",
+                "hint_1": "Preserve the status, email-presence, and non-test requirements.",
+                "hint_2": "Add signup_date to SELECT, then add the city and date filters with AND."
               },
-              "starterCode": "-- Keep the follow-up slice above.\n-- Add signup_date and focus on Chicago or Seattle customers in the January 10 to February 05 range.\nSELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
+              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
             },
             "cp-4-finish-capstone-report": {
-              "title": "Finish the capstone report",
-              "prompt": "Keep only names that contain the letter `a`, order the results by `signup_date` ascending, and limit the final handoff to 5 rows.",
-              "hint": "Use LIKE, ORDER BY, and LIMIT together.",
+              "title": "Deliver the ranked final handoff",
+              "prompt": "For the final handoff, keep only names containing the letter `a`. Sort the approved records by `signup_date` from earliest to latest and return only the first five rows. Do not remove any requirement from the previous milestone.",
+              "hint": "Add a contains-pattern filter, then place ORDER BY after WHERE and LIMIT after ORDER BY.",
               "help": {
-                "concept": "The final capstone step combines the core SQL foundations skills into one polished report.",
-                "hint_1": "Keep all of the earlier filters and selected columns.",
-                "hint_2": "Add `full_name LIKE '%a%'`, then `ORDER BY signup_date ASC` and `LIMIT 5;`."
+                "concept": "The final report combines filtering with deterministic ordering before LIMIT chooses the first rows.",
+                "hint_1": "Keep every filter already approved in milestone 3.",
+                "hint_2": "Add the name LIKE condition, ORDER BY signup_date ASC, then LIMIT 5."
               },
-              "starterCode": "-- Keep the follow-up slice above.\n-- Keep only names that contain the letter a, then order by signup_date and limit to 5 rows.\nSELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';"
-            },
-            "try-module-5-customer-follow-up-capstone-sketch0": {
-              "title": "Preview the Active Follow-Up List",
-              "prompt": "Before starting the capstone, preview the customers who are ready for immediate follow-up. Return `full_name`, `city`, and `status` from the `customers` table, keeping only rows where `status` is `active`.",
-              "hint": "Add a WHERE condition that keeps only `active` customers.",
-              "help": {
-                "concept": "This warm-up creates the active-customer query that becomes the starting point for the first capstone step.",
-                "hint_1": "Keep `full_name`, `city`, and `status` in the SELECT list.",
-                "hint_2": "After `FROM customers`, add `WHERE status = 'active';`."
-              },
-              "starterCode": "-- Preview the customers who are ready for immediate follow-up.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers;"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_module_5_customer_follow_up_capstone_sketch0": {
-              "title": "Preview the Active Follow-Up List",
-              "prompt": "Before starting the capstone, preview the customers who are ready for immediate follow-up. Return `full_name`, `city`, and `status` from the `customers` table, keeping only rows where `status` is `active`."
+              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';"
             }
           }
         }
@@ -50932,37 +46971,37 @@ const messages: Record<string, any> = {
         "database_thinking": {
           "why_database_thinking_matters": {
             "title": "Good structure makes data useful.",
-            "bodyMarkdown": "A database is helpful because it can answer questions.\n\n[[image:question_to_table_answer]]\n\nYou do not store data just to keep it.\nYou store it so you can **use it**.\n\nExamples:\n\n- Which students got an A?\n- How many courses are there?\n- Which products are out of stock?\n\nSo database thinking starts with one core idea:\n\n> organize data so questions are easier to answer"
+            "bodyMarkdown": "A database is valuable when its data can answer real questions.\n\n[[image:question_to_table_answer]]\n\nInstead of starting with “What SQL should I type?”, start with:\n\n> What do I need to know?\n\nA clear question tells you what information matters and helps you avoid pulling unrelated data."
           },
           "questions_turn_into_answers": {
             "title": "A database should help you ask clear questions.",
-            "bodyMarkdown": "When data is organized well, you can ask better questions.\n\n[[image:data_question_flow]]\n\nThat is the mindset behind SQL:\n\n> ask a question, get an answer\n\nA messy system makes questions harder.\nA clear system makes questions easier.\n\nSo database thinking is not only about storing data.\nIt is also about preparing data for future questions."
+            "bodyMarkdown": "Database work connects three things:\n\n1. a real question;\n2. organized data that contains the needed facts;\n3. a result you can interpret.\n\n[[image:data_question_flow]]\n\nSQL is the tool between the question and the result. Good database thinking begins before the query: understand what the question is asking for."
           },
           "why_structure_matters": {
             "title": "Clear tables reduce confusion.",
-            "bodyMarkdown": "Good database design keeps information organized.\n\n[[image:organized_vs_messy_table]]\n\nThat usually means:\n\n- one table focuses on one main subject\n- columns are clear\n- repeated information is reduced when possible\n\nIf structure is messy, mistakes become more likely.\n\nFor example:\n\n- duplicate data is harder to update\n- mixed meanings confuse queries\n- unclear columns create bad results\n\nSo strong structure makes the database easier to read, search, and maintain."
+            "bodyMarkdown": "Clear structure makes records easier to understand and maintain.\n\n[[image:organized_vs_messy_table]]\n\nUseful structure means that:\n\n- a table has a clear subject;\n- columns have clear meanings;\n- each row follows the same shape.\n\nWhen those basics are unclear, even a correct query can produce a result that is hard to trust."
           },
           "what_a_key_is": {
             "title": "A key helps identify the right row.",
-            "bodyMarkdown": "A **key** is a value used to identify something important in a table.\n\n[[image:primary_key_simple_example]]\n\nA common example is an `id`.\n\nExample:\n\n| student_id | name |\n|---|---|\n| 1 | Mia |\n| 2 | Leo |\n\nHere, `student_id` helps identify each student separately.\n\nKeys matter because names can repeat, but a key should point to one specific row.\n\nLater, keys also help connect one table to another."
+            "bodyMarkdown": "Sometimes two records can have the same visible name. A stable identifier helps distinguish them.\n\n[[image:primary_key_simple_example]]\n\nFor example:\n\n| book_id | title |\n|---|---|\n| 41 | North Wind |\n| 42 | North Wind |\n\nThe titles repeat, but `book_id` identifies each record separately.\n\nFor now, remember:\n\n> an identifier should let you point to one specific record reliably.\n\nLater courses will use keys for more advanced table relationships."
           }
         },
         "first_sql_environment": {
           "where_sql_runs": {
             "title": "You will practice SQL in the Tools panel on the right.",
-            "bodyMarkdown": "This course gives you a real **SQL workspace**.\n\nOn the right side, you will see a **Run SQL** tool.\nThat is where you will practice.\n\nInside it, you can:\n\n- type SQL in the editor\n- click **Run**\n- read the result below\n\n[[image:sql_workspace_overview]]\n\nSo the main loop is:\n\n1. type a query\n2. click **Run**\n3. inspect the answer"
+            "bodyMarkdown": "This course gives you a real **SQL workspace**.\n\n[[image:sql_workspace_overview]]\n\nYour basic loop is:\n\n1. write SQL in the editor;\n2. click **Run**;\n3. inspect the result.\n\nYou will use that same loop throughout the course. The queries will become more capable, but the workspace habit stays the same."
           },
           "sql_editor_basics": {
             "title": "The dark editor is where you write your SQL.",
-            "bodyMarkdown": "The big dark box is your **SQL editor**.\n\nThat is where your query goes.\n\nAround it, you will usually see:\n\n- a **Run** button\n- a **Reset** button\n- the language set to **SQL**\n- the dialect set to **SQLite**\n\nUnder the editor, you may see tabs like:\n\n- **Results** → the answer from your query\n- **Tables** → the tables currently available\n- **ERD** and **Chen** → visual views you will explore later\n\nFor now, focus mostly on:\n\n> Editor + Run + Results + Tables"
+            "bodyMarkdown": "The editor is where you write SQL before running it.\n\nFor now, focus on four parts of the workspace:\n\n- **Editor** — where the query is written;\n- **Run** — executes the query;\n- **Results** — shows what the query returned;\n- **Tables** — shows the tables available in the dataset.\n\nOther views can wait until a later module. You do not need to understand every control before running your first query."
           },
           "running_your_first_query": {
             "title": "Your first query can be tiny and still feel exciting.",
-            "bodyMarkdown": "A fun first query is:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~\n\nTry this flow:\n\n1. type the query in the editor\n2. click **Run**\n3. open the **Results** tab\n4. look at the returned value\n\nYou should see one column named `message` and one row with `Hello SQL`.\n\n[[image:first_query_in_workspace]]\n\nThat first run proves something important:\n\n> you can already talk to the database tool"
+            "bodyMarkdown": "Your first query does not need a table. Run this tiny expression:\n\n~~~sql\nSELECT 'Workspace online' AS status;\n~~~\n\nThen click **Run**.\n\n[[image:first_query_in_workspace]]\n\nYou should get one row and one column named `status`.\n\nThe point is not to memorize syntax yet. The point is to complete the full cycle once:\n\n> write → run → inspect"
           },
           "reading_query_results": {
             "title": "Read results by checking the headers first, then the rows.",
-            "bodyMarkdown": "After you run a query, the answer appears below the editor.\n\nIn the **Results** tab, look at:\n\n1. the **column names**\n2. the **rows** underneath\n\nIf you run:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~\n\nthen:\n\n- `message` is the column name\n- `Hello SQL` is the returned value\n\nIf you run a table query like:\n\n~~~sql\nSELECT name, age, city\nFROM students;\n~~~\n\nthen each row is one student, and each column tells you what kind of value you are seeing.\n\nYou can also click **Tables** to see what tables exist.\n\nSo the habit is:\n\n> run the query, then read the answer carefully"
+            "bodyMarkdown": "After a query runs, start with the **column headers**, then read the values underneath them.\n\nFor example, if a result shows:\n\n| check |\n|---|\n| connected |\n\nthen `check` is the column name and `connected` is the returned value.\n\nUse the **Tables** view when you need to see which tables are available. Use **Results** when you need to inspect the answer from the query you just ran.\n\nThe habit is simple:\n\n> do not stop at “the query ran” — read what it returned."
           }
         },
         "module-0-student-roster-project": {
@@ -50974,37 +47013,37 @@ const messages: Record<string, any> = {
         "understanding_tables": {
           "rows_and_columns": {
             "title": "Tables use rows and columns to organize data.",
-            "bodyMarkdown": "A table is made of **rows** and **columns**.\n\nThink of it like a spreadsheet.\n\n- a **row** goes across\n- a **column** goes down\n\nEach column describes one type of information.\nEach row holds one entry.\n\n[[image:table_row_column_labels]]\n\nHere:\n\n- `name` and `grade` are columns\n- `Mia | A` is part of one row\n\nSo the main idea is:\n\n> columns describe the data, and rows hold the entries."
+            "bodyMarkdown": "A table arranges information in **columns** and **rows**.\n\n[[image:table_row_column_labels]]\n\n- A **column** describes one kind of information, such as `name` or `grade`.\n- A **row** contains the values for one item, such as one student.\n\nA useful reading habit is:\n\n> read the column names first, then use them to interpret each row."
           },
           "records_and_fields": {
             "title": "A record is one full entry, and a field is one piece of it.",
-            "bodyMarkdown": "Two words often appear when talking about tables:\n\n- **record** = one full row\n- **field** = one value inside that row\n\n[[image:row_records_fields]]\n\nThe whole row is one **record**.\nInside that record, each value is a **field**.\n\nA simple way to remember it:\n\n> record = the whole row\n> field = one value in it"
+            "bodyMarkdown": "Database vocabulary often uses two more words:\n\n- a **record** is one complete row;\n- a **field** is one value inside that record.\n\n[[image:row_records_fields]]\n\nIf a row represents one student, the whole row is the student's record. The value under `grade` is one field in that record.\n\nThe words describe the same table at two different levels: whole row versus one value."
           },
           "table_names_and_column_names": {
             "title": "Good names make data easier to understand.",
-            "bodyMarkdown": "Tables and columns need names so you know what you are reading.\n\nA table name tells you **what kind of data** is inside.\n\nExamples:\n\n- `students`\n- `products`\n- `orders`\n\nColumn names tell you **what each piece means**.\n\nExamples inside `students`:\n\n- `student_id`\n- `name`\n- `grade`\n\nClear names help you quickly understand what table you are looking at and what each column means."
+            "bodyMarkdown": "Names tell you what a table means before you read its values.\n\nA table named `students` suggests that each row describes a student. Columns such as `id`, `name`, and `grade` tell you what each field represents.\n\nClear names reduce guessing. Before reading data, ask:\n\n1. What does this table represent?\n2. What does each column represent?"
           },
           "reading_data_like_a_spreadsheet": {
             "title": "You can read a table by scanning columns first, then rows.",
-            "bodyMarkdown": "A table is easiest to read in this order:\n\n1. look at the **table name**\n2. look at the **column names**\n3. read the rows underneath\n\n[[image:reading_table_flow]]\n\nThat helps you connect each value to its meaning.\n\nSo if one row shows Leo with grade B, the columns tell you exactly what those values represent."
+            "bodyMarkdown": "When you open an unfamiliar table, do not start by scanning random values.\n\n[[image:reading_table_flow]]\n\nUse this order:\n\n1. identify the table;\n2. read the column names;\n3. read one row across;\n4. match each value to its column.\n\nThat small habit becomes important when query results contain many columns or many rows."
           }
         },
         "what_sql_is": {
           "what_sql_means": {
-            "title": "SQL is a language for data.",
-            "bodyMarkdown": "Welcome to SQL Foundations. You do not need previous database experience for this course. You will begin by learning how tables organize information, then write small queries that select columns, filter rows, sort results, and handle missing values. Each new idea adds one clear piece to the same reading workflow, and the final capstone combines those pieces into a useful customer report.\n\nSQL is used to work with data in a database.\n\n[[image:sql_language_overview]]\n\nIt stands for **Structured Query Language**.\n\nThe idea is simple:\n\n> SQL helps you retrieve data, sort it, filter it, and sometimes change it.\n\n[[image:sql_question_to_data_flow]]\n\nIf you had a table of students, SQL could help answer questions like:\n\n- Who got an A?\n- How many students are there?\n- What are all the names?\n\n[[image:students_table_example]]\n\nA simple preview query looks like this:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nWhen you run a query like this, SQL returns a table with student information.\n\n[[image:select_from_breakdown]]\n\nFor now, just notice:\n\n- `SELECT` = show data\n- `FROM students` = from the students table\n\nSo SQL is a way to **talk to stored information**.\n\n---\n\n## Big idea\n\nMany languages focus on steps.\nSQL often focuses on the result:\n\n> What data do you want?\n\n[[image:sql_result_focus]]"
+            "title": "SQL is a language for working with stored data.",
+            "bodyMarkdown": "Welcome to SQL Foundations. You do not need database experience before this course.\n\nSQL stands for **Structured Query Language**. It is a language for working with information stored in a database.\n\n[[image:sql_language_overview]]\n\nPeople use SQL to answer questions such as:\n\n- Which students are enrolled?\n- Which products are low in stock?\n- Which orders were placed today?\n\n[[image:sql_question_to_data_flow]]\n\nYou will learn the query syntax step by step in the next module. For now, focus on the purpose:\n\n> SQL lets you ask a database for the data you need.\n\n[[image:sql_result_focus]]"
           },
           "what_a_database_is": {
-            "title": "A database stores organized information.",
-            "bodyMarkdown": "A **database** is an organized collection of data.\n\n[[image:database_overview]]\n\nInstead of scattered notes or random files, it keeps information structured so it can be searched, updated, and reused.\n\n[[image:messy_vs_structured_data]]\n\nA database might store:\n\n- students and grades\n- customers and orders\n- products and prices\n- employees and departments\n\n[[image:database_real_examples]]\n\nA simple way to picture a database is as a group of **tables**.\n\n[[image:database_contains_tables]][[image:table_row_column_labels]]\n\nIn a table:\n\n- a **row** is one record\n- a **column** is one kind of information\n\n[[image:row_vs_column_highlight]]\n\nA useful summary is:\n\n> a database holds tables\n\n[[image:database_container_model]]"
+            "title": "A database keeps related information organized.",
+            "bodyMarkdown": "A **database** is an organized collection of data that a system can store, find, and update.\n\n[[image:database_overview]]\n\nA school might keep students, courses, and grades in one database. An online store might keep products, customers, and orders in another.\n\n[[image:database_real_examples]]\n\nDatabases commonly organize information into **tables**. You will examine rows and columns closely in the next lesson.\n\n[[image:database_contains_tables]]\n\nThe important idea here is simple:\n\n> a database gives related information a structure that software can work with."
           },
           "why_sql_is_useful": {
-            "title": "SQL helps turn data into answers.",
-            "bodyMarkdown": "SQL is useful because data is everywhere.\n\n[[image:data_everywhere]]\n\nApps, stores, schools, and websites all save information. SQL helps you do something with that information.\n\nWith SQL, you can:\n\n- read data\n- filter data\n- sort data\n- summarize data\n- add or change records\n\n[[image:sql_actions_overview]]\n\nThat means SQL is useful for both building software and understanding information.\n\nFor example, SQL can help answer:\n\n- Which products cost more than 20?\n- How many students passed?\n- What is the highest price?\n\n[[image:sql_questions_and_answers]]\n\nA common pattern is:\n\n1. Ask a question\n2. Run the query\n3. See the result\n\n[[image:ask_run_result_cycle]]"
+            "title": "SQL connects a question to a result.",
+            "bodyMarkdown": "Stored data becomes useful when you can ask a clear question and get a clear answer.\n\n[[image:data_everywhere]]\n\nWith SQL, analysts and developers can read, filter, sort, summarize, and later change stored data.\n\n[[image:sql_actions_overview]]\n\nThe basic workflow is:\n\n1. decide what you want to know;\n2. write a query that asks for it;\n3. run the query;\n4. inspect the returned result.\n\n[[image:ask_run_result_cycle]]\n\nYou do not need to memorize every SQL command at once. Each module will add one part of this workflow."
           },
           "real_world_examples_of_databases": {
-            "title": "Databases appear in many everyday systems.",
-            "bodyMarkdown": "Databases are everywhere.\n\n[[image:databases_in_daily_life]]\n\nAny system that needs to remember information probably uses one.\n\n### School system\nA school may store:\n\n- students\n- teachers\n- courses\n- grades\n\n[[image:school_database_example]]\n\n### Online store\nA store may store:\n\n- products\n- customers\n- orders\n- inventory\n\n[[image:store_database_example]]\n\n### Music or movie app\nA media app may store:\n\n- users\n- songs or movies\n- playlists\n- favorites\n\n[[image:media_database_example]]\n\n### Hospital or clinic\nA healthcare system may store:\n\n- patients\n- doctors\n- appointments\n- prescriptions\n\n[[image:hospital_database_example]]\n\nEven though these systems are different, the pattern is the same:\n\n1. store information in tables\n2. keep it organized\n3. use SQL to ask questions about it\n\n[[image:shared_database_pattern]]"
+            "title": "Different systems store different records.",
+            "bodyMarkdown": "Databases sit behind many systems you already use.\n\n[[image:databases_in_daily_life]]\n\nA school may track students and courses. A store may track products and orders. A media app may track users and playlists. A clinic may track patients and appointments.\n\n[[image:school_database_example]]\n[[image:store_database_example]]\n[[image:media_database_example]]\n[[image:hospital_database_example]]\n\nThe details change, but the pattern does not:\n\n> the system stores organized records, and SQL helps people work with those records.\n\n[[image:shared_database_pattern]]"
           }
         }
       },
@@ -51025,12 +47064,12 @@ const messages: Record<string, any> = {
         },
         "common_beginner_syntax_mistakes": {
           "predict_result_shape": {
-            "title": "Predict the Result Before Running",
-            "bodyMarkdown": "Before running a query, predict its result shape. This catches many mistakes early.\n\n```sql\nSELECT\n    name,\n    stock\nFROM products;\n```\n\nThe result should have two columns named `name` and `stock`, with one result row for each source row because there is no filter yet. If the actual result has different columns, the `SELECT` list is wrong. If SQL reports that a table or column does not exist, compare the spelling with the Tables panel.\n\nPrediction turns running a query into a check of your reasoning rather than a guess-and-retry cycle."
+            "title": "Predict the Result Before You Run",
+            "bodyMarkdown": "Before running a query, predict its result shape.\n\n```sql\nSELECT\n    customer_name,\n    city\nFROM customers;\n```\n\nYou should expect two result columns, `customer_name` and `city`. With no filter, the query attempts to return one result row for each source row.\n\nPrediction gives you something concrete to compare with the actual result. If the returned columns differ, inspect the SELECT list. If SQL cannot find a table or column, compare the spelling with the schema."
           },
           "syntax_checklist": {
-            "title": "Use a Small Syntax Checklist",
-            "bodyMarkdown": "Use this checklist when a basic query fails:\n\n1. Does the statement begin with `SELECT`?\n2. Are selected columns separated by commas?\n3. Does `FROM` come after the column list?\n4. Is the table name exactly `products`?\n5. Is there an extra comma before `FROM`?\n\nCorrect:\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nIncorrect forms such as `SELECT id name`, `FROM products SELECT name`, or `SELECT name, FROM products` break the query structure. Fix one clause at a time, then run again."
+            "title": "Use a Small Debugging Checklist",
+            "bodyMarkdown": "When a simple retrieval query fails, check the structure instead of guessing.\n\n1. Does the statement begin with `SELECT`?\n2. Are selected columns separated by commas?\n3. Does `FROM` come after the full column list?\n4. Do the table and column names match the schema?\n5. Is there an accidental comma immediately before `FROM`?\n\nCorrect:\n\n```sql\nSELECT\n    order_id,\n    total\nFROM orders;\n```\n\nFix one structural problem at a time, then run the query again."
           }
         },
         "from_and_table_names": {
@@ -51050,7 +47089,7 @@ const messages: Record<string, any> = {
         "module-1-product-starter-sheet-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A storefront catalog export needs a compact product sheet that is easy to scan.\n\nBegin with the core product fields, then add the details needed for a useful catalog reference.\n\nThe finished query should produce a clean product overview ready for review."
+            "bodyMarkdown": "A small online store is preparing a product sheet for two teams.\n\nFirst, merchandising needs a compact view for a catalog review: the product name, category, and price. Once that view is approved, warehouse operations needs the same working query expanded with the stable product id and current stock count.\n\nYou are not writing two unrelated queries. Build one useful result, keep it working, and extend it for the handoff."
           }
         },
         "predicting_result_output": {
@@ -51070,11 +47109,11 @@ const messages: Record<string, any> = {
         "query_multiple_columns": {
           "column_sequence": {
             "title": "Build a Useful Column Sequence",
-            "bodyMarkdown": "A multi-column query should present information in a useful sequence. Put identifiers and labels first, then the details that describe them.\n\n```sql\nSELECT\n    id,\n    name,\n    category,\n    stock\nFROM products;\n```\n\nThis result is easy to scan: the row begins with the product identity, then shows its category and inventory count. SQL does not decide this order for you—the order of the selected columns becomes the order of the result.\n\nWhen planning a report, imagine reading one row from left to right. Arrange the columns so the row tells a clear story."
+            "bodyMarkdown": "When a query returns several fields, commas separate the selected columns and their order controls the result.\n\n```sql\nSELECT\n    city,\n    venue,\n    event_date\nFROM events;\n```\n\nThe reader sees `city` first, then `venue`, then `event_date`. That sequence is a design choice, not an accident.\n\nPut columns in the order that makes the result easiest to scan for the task at hand."
           },
           "readable_formatting": {
-            "title": "Format the Query for Easy Review",
-            "bodyMarkdown": "SQL ignores most whitespace, so formatting is for people. Put each selected column on its own line when the list grows.\n\n```sql\nSELECT\n    name,\n    price,\n    created_at\nFROM products;\n```\n\nThe commas separate columns; the final selected column has no trailing comma. `FROM` begins on a new line so the source is easy to find.\n\nReadable formatting makes missing commas, misspelled columns, and incorrect clause order easier to spot. A query should be understandable before it is run."
+            "title": "Format Longer SELECT Lists for Review",
+            "bodyMarkdown": "SQL does not require one selected column per line, but readable formatting helps when a query grows.\n\n```sql\nSELECT\n    last_name,\n    department,\n    hire_date\nFROM employees;\n```\n\nCommas still separate the columns; line breaks only make the statement easier to inspect. A clean layout makes missing commas and accidental column-order changes easier to spot.\n\nFormatting should clarify the query without changing what it returns."
           }
         },
         "query_one_column": {
@@ -51121,22 +47160,22 @@ const messages: Record<string, any> = {
         },
         "selecting_specific_columns": {
           "select_all_columns": {
-            "title": "When SELECT * Is Useful",
-            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring an unfamiliar table and want to see its full shape.\n\n```sql\nSELECT *\nFROM products;\n```\n\nThis query is quick, but the result may contain more information than the task needs. If the table later gains new columns, `SELECT *` will return those too. That can make a saved report change unexpectedly.\n\nUse `SELECT *` for exploration, quick checks, and very small tables. For a report or exercise with a clear requirement, prefer an explicit column list."
+            "title": "Explore Everything, Then Narrow the Result",
+            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring a small unfamiliar table.\n\n```sql\nSELECT *\nFROM movies;\n```\n\nA full-table view helps you learn what fields are available. But a saved report usually should not return every field just because it can.\n\nOnce you know the table, choose only the columns the reader needs. Exploration and reporting are different jobs."
           },
           "select_explicit_columns": {
-            "title": "Why Explicit Columns Make Better Reports",
-            "bodyMarkdown": "An explicit column list makes the query’s purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nThe result contains exactly three columns, in exactly that order. The order after `SELECT` is also the left-to-right order in the results table.\n\nBefore writing the query, ask what the reader actually needs. A pricing view may need `name` and `price`; an inventory view may need `name` and `stock`. Choosing columns is part of designing the report, not merely SQL syntax."
+            "title": "Use Explicit Columns for Purposeful Results",
+            "bodyMarkdown": "An explicit column list makes a query's purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    title,\n    rating\nFROM movies;\n```\n\nThe result contains exactly two columns, in exactly that order. If the table later gains another field, this report still returns only `title` and `rating`.\n\nChoosing columns is part of designing the result: a reader should see the information needed for the task without unrelated fields getting in the way."
           }
         },
         "what_select_does": {
           "select_result_list": {
             "title": "Choose What the Result Should Show",
-            "bodyMarkdown": "A basic SQL query answers two questions: **what should the result show**, and **where should those values come from**? `SELECT` answers the first question. The column list after it becomes the shape of the results table.\n\n```sql\nSELECT\n    name,\n    price\nFROM products;\n```\n\nHere, `name` and `price` are the only result columns. SQL reads every row in `products`, takes those two values from each row, and returns them in the same order they appear after `SELECT`.\n\nStart by describing the result you want in plain language: “Show each product name and price.” Then translate that request into the column list. This habit keeps beginner queries focused and prevents extra columns from making the result harder to read."
+            "bodyMarkdown": "A basic SQL query answers two questions: **what should the result show**, and **where should those values come from**?\n\n`SELECT` answers the first question. The column list after it becomes the left-to-right shape of the result.\n\n```sql\nSELECT\n    title,\n    author\nFROM books;\n```\n\nThis result has two columns: `title` and `author`. The example uses a `books` table so you can focus on the idea rather than memorize the product dataset used in practice.\n\nBefore writing SQL, say the request in plain language: “Show each book title and author.” Then translate only those requested fields into the `SELECT` list."
           },
           "from_source_table": {
             "title": "Name the Table That Supplies the Rows",
-            "bodyMarkdown": "`FROM` identifies the source table. A column name is meaningful only when SQL knows which table contains it.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products;\n```\n\nRead the query from top to bottom when writing it: select the three columns, then read them from `products`. Read it from `FROM` upward when checking the logic: SQL first has access to the rows in `products`, then it builds the requested result columns.\n\nA complete beginner retrieval query therefore needs both parts:\n\n```text\nSELECT requested_columns\nFROM source_table;\n```\n\nThe semicolon closes the statement. Uppercase keywords are a readability convention, not a requirement."
+            "bodyMarkdown": "`FROM` identifies the source table.\n\n```sql\nSELECT\n    event_name,\n    event_date\nFROM events;\n```\n\nThe selected columns describe the result, while `events` tells SQL where those values live. A complete beginner read query therefore has two essential parts:\n\n```text\nSELECT requested_columns\nFROM source_table;\n```\n\nThe semicolon closes the statement. Uppercase keywords are a readability convention, not a requirement."
           }
         },
         "writing_simple_readable_queries": {
@@ -51157,22 +47196,22 @@ const messages: Record<string, any> = {
       "sql-v2-2": {
         "and_conditions": {
           "and_all_rules": {
-            "title": "AND Requires Every Condition",
-            "bodyMarkdown": "Use `AND` when every condition must be true for a row to remain.\n\n```sql\nSELECT\n    name,\n    price,\n    stock\nFROM products\nWHERE price < 25\n  AND stock > 0;\n```\n\nA row passes only when its price is below 25 **and** its stock is above zero. If either test is false, the row is excluded.\n\nBreak a multi-rule request into separate yes-or-no questions, then connect them with `AND`."
+            "title": "AND Requires Every Rule to Pass",
+            "bodyMarkdown": "Use `AND` when every condition must be true.\n\n```sql\nSELECT\n    application_id,\n    role,\n    years_experience\nFROM job_applications\nWHERE role = 'Analyst'\n  AND years_experience >= 2;\n```\n\nA row remains only if both tests pass. Break the requirement into separate yes-or-no questions, then connect the simultaneous requirements with `AND`."
           },
           "or_alternatives": {
-            "title": "OR Allows Alternative Conditions",
-            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Home'\n   OR category = 'Art';\n```\n\nA product can belong to either category. It does not need to satisfy both comparisons.\n\nChoose `AND` for simultaneous requirements and `OR` for alternatives. Mixing them without parentheses can change the meaning, which the next lesson addresses."
+            "title": "OR Allows Acceptable Alternatives",
+            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    application_id,\n    city\nFROM job_applications\nWHERE city = 'Austin'\n   OR city = 'Dallas';\n```\n\nA row can match either city. It does not need to satisfy both comparisons.\n\nUse `AND` for “this **and** that”; use `OR` for “this **or** that.” Mixed logic needs extra care, which the next lesson handles."
           }
         },
         "avoiding_filtering_mistakes": {
           "filter_requirement_check": {
-            "title": "Check the Condition Against the Requirement",
-            "bodyMarkdown": "A query can run successfully and still answer the wrong question. Compare each part of the condition with the requirement.\n\n```sql\nSELECT\n    id,\n    name,\n    created_at\nFROM products\nWHERE created_at < '2026-02-01';\n```\n\nThe date is text in ISO order, so quoting it is appropriate. The strict `<` excludes February 1 itself. If the request says “on or before,” the operator must be `<=` instead.\n\nSuccessful execution proves the syntax is valid; it does not prove the logic is correct."
+            "title": "A Query Can Run and Still Answer the Wrong Question",
+            "bodyMarkdown": "Successful execution proves that SQL understood the syntax; it does not prove that the filter matches the requirement.\n\nSuppose the requirement is “invoices due on or before August 15”:\n\n```sql\nSELECT invoice_id, due_date\nFROM invoices\nWHERE due_date < '2026-08-15';\n```\n\nThe query runs, but it wrongly excludes August 15. The intended boundary requires `<=`.\n\nCompare each condition with the words of the requirement, especially strict versus inclusive boundaries."
           },
           "filter_debug_steps": {
             "title": "Debug One Part at a Time",
-            "bodyMarkdown": "When a filter fails, reduce it to one small working query:\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products\nWHERE price >= 20;\n```\n\nThen debug in order:\n\n1. Confirm the table and selected columns.\n2. Test one condition.\n3. Check quotes around text or dates.\n4. Verify the strict or inclusive boundary.\n5. Add additional conditions one at a time.\n\nAvoid common mistakes such as `= NULL`, unquoted text, `WHERE` before `FROM`, or using `AND` when the requirement describes alternatives."
+            "bodyMarkdown": "When a filtered query fails, reduce the problem instead of changing everything at once.\n\n```sql\nSELECT invoice_id, status\nFROM invoices\nWHERE status = 'Overdue';\n```\n\nCheck in this order:\n\n1. Table and selected column names.\n2. `SELECT` → `FROM` → `WHERE` clause order.\n3. Quotes around text or date values.\n4. The comparison operator and boundary.\n5. `AND` versus `OR`.\n6. Parentheses around mixed logic.\n\nFix one problem, run again, and compare the result with the requirement."
           }
         },
         "choosing_the_right_comparison": {
@@ -51191,42 +47230,42 @@ const messages: Record<string, any> = {
         },
         "combining_conditions_safely": {
           "parentheses_mixed_logic": {
-            "title": "Parentheses Make Mixed Logic Explicit",
-            "bodyMarkdown": "When a filter contains both `AND` and `OR`, parentheses show which choices belong together.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price < 35;\n```\n\nSQL first accepts either category inside the parentheses. It then applies the price rule to those rows. Without the parentheses, the price limit might apply to only one side of the `OR`.\n\nWrite the grouped business idea first: “Home or Art products, and all of them must be under 35.”"
+            "title": "Use Parentheses to Show Mixed Logic",
+            "bodyMarkdown": "When a condition mixes `AND` and `OR`, parentheses make the intended group explicit.\n\n```sql\nSELECT\n    lead_id,\n    source,\n    score\nFROM customer_leads\nWHERE (source = 'Referral' OR source = 'Web')\n  AND score >= 80;\n```\n\nThe source alternatives are evaluated as one group, then the score rule applies to both. Write the grouped business idea first before translating it to SQL."
           },
           "not_reverses_condition": {
-            "title": "NOT Reverses the Test That Follows",
-            "bodyMarkdown": "`NOT` reverses the truth of a condition.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE NOT (category = 'Office');\n```\n\nRows in the Office category fail; other known categories pass. Parentheses make the scope of `NOT` visible and become especially useful when the reversed test contains multiple conditions.\n\nPrefer the clearest equivalent expression. For one exact exclusion, `category <> 'Office'` is simpler; `NOT` becomes more valuable for grouped logic."
+            "title": "Use NOT When the Reversed Scope Is Clear",
+            "bodyMarkdown": "`NOT` reverses the condition that follows it.\n\n```sql\nSELECT\n    lead_id,\n    source\nFROM customer_leads\nWHERE NOT (source = 'Cold Call');\n```\n\nParentheses make the scope visible. For one simple exact exclusion, `source <> 'Cold Call'` is often clearer. `NOT` becomes more useful when you need to reverse a grouped condition.\n\nPrefer the clearest equivalent expression rather than the most complicated one."
           }
         },
         "equals_comparison": {
           "equals_exact_value": {
-            "title": "Match an Exact Value with =",
-            "bodyMarkdown": "Use `=` when a row must contain one exact value.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products\nWHERE category = 'Home';\n```\n\nText values are written inside single quotes. The column name is not quoted. This condition keeps products whose category is exactly `Home`; it does not match similar words or partial text.\n\nExact matching is appropriate for controlled values such as a known category, status, or identifier."
+            "title": "Match One Exact Value with =",
+            "bodyMarkdown": "Use `=` when a row must contain one exact value.\n\n```sql\nSELECT\n    ticket_id,\n    subject,\n    status\nFROM support_tickets\nWHERE status = 'Open';\n```\n\nText values are written inside single quotes. The column name is not quoted.\n\nExact matching is useful for controlled values such as a status, category, code, or known identifier."
           },
           "not_equal_value": {
-            "title": "Exclude an Exact Value with <>",
-            "bodyMarkdown": "Use `<>` when a row must not contain one exact value.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products\nWHERE category <> 'Stationery';\n```\n\nEvery row whose category is different from `Stationery` remains. This is different from asking whether a value is missing; missing data uses `IS NULL`, which is taught later.\n\nRead `<>` as “not equal to.” Keep the comparison aligned with the request instead of using a more complicated condition than necessary."
+            "title": "Exclude One Exact Value with <>",
+            "bodyMarkdown": "Use `<>` when one exact value should be excluded.\n\n```sql\nSELECT\n    ticket_id,\n    subject,\n    priority\nFROM support_tickets\nWHERE priority <> 'Low';\n```\n\nRead `<>` as “not equal to.” It is different from asking whether a value is missing; missing values use `NULL` rules later in the course.\n\nChoose `=` or `<>` from the business meaning, not from whichever operator appeared in the previous example."
           }
         },
         "filtering_numbers_and_text": {
           "numeric_and_text_literals": {
-            "title": "Numbers and Text Use Different Literals",
-            "bodyMarkdown": "Numeric values are written without quotes, while text values are normally written inside single quotes.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 30;\n```\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Art';\n```\n\nThe first condition compares numbers. The second compares text. Using the correct literal form makes the intention clear and avoids accidental type conversion."
+            "title": "Write Numbers and Text Differently",
+            "bodyMarkdown": "Numeric literals are written without quotes. Text literals are normally written inside single quotes.\n\n```sql\nSELECT order_id, total\nFROM orders\nWHERE total <= 100;\n```\n\n```sql\nSELECT order_id, status\nFROM orders\nWHERE status = 'Pending';\n```\n\nThe first condition compares numbers. The second compares text. Identify the column's kind of value before writing the literal."
           },
           "operator_language": {
             "title": "Translate Requirement Words into Operators",
-            "bodyMarkdown": "Choose the operator from the wording of the request:\n\n- “exactly” → `=`\n- “not” or “anything except” → `<>`\n- “more than” → `>`\n- “less than” → `<`\n- “at least” → `>=`\n- “at most” → `<=`\n\nFor example, “at least 15 units” includes the boundary:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock >= 15;\n```\n\nFirst identify the column, then the value type, then the boundary rule. Do not choose an operator only because it appeared in the previous example."
+            "bodyMarkdown": "Map the wording of the request to the comparison:\n\n- “exactly” → `=`\n- “anything except” → `<>`\n- “more than” → `>`\n- “less than” → `<`\n- “at least” → `>=`\n- “at most” → `<=`\n\nFor example:\n\n```sql\nSELECT order_id, item_count\nFROM orders\nWHERE item_count >= 5;\n```\n\nFirst identify the column, then the literal type, then whether the boundary is strict or inclusive."
           }
         },
         "greater_than_comparison": {
           "strict_numeric_comparisons": {
             "title": "Strict Comparisons Exclude the Boundary",
-            "bodyMarkdown": "`>` and `<` are strict comparisons. The boundary value itself does not pass.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price > 25;\n```\n\nA product priced exactly `25` is excluded because the request says greater than, not greater than or equal to. Likewise, `price < 25` excludes exactly `25`.\n\nUnderline words such as “more than,” “above,” “less than,” and “below” before choosing the operator."
+            "bodyMarkdown": "`>` and `<` are strict comparisons: the boundary value itself does not pass.\n\n```sql\nSELECT\n    shipment_id,\n    weight_kg\nFROM shipments\nWHERE weight_kg > 25;\n```\n\nA shipment weighing exactly `25` kilograms is excluded. Likewise, `< 25` excludes exactly `25`.\n\nWords such as “more than,” “above,” “less than,” and “below” usually signal a strict comparison."
           },
           "inclusive_boundaries": {
             "title": "Inclusive Comparisons Keep the Boundary",
-            "bodyMarkdown": "`>=` and `<=` include the boundary.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 20;\n```\n\nA price of exactly `20` passes. These operators match phrases such as “at most 20,” “20 or less,” “at least 10,” and “10 or more.”\n\nWhen a filter seems off by one boundary row, compare the requirement with the operator. The difference between `<` and `<=` is small in syntax but important in meaning."
+            "bodyMarkdown": "`>=` and `<=` include the boundary.\n\n```sql\nSELECT\n    shipment_id,\n    boxes\nFROM shipments\nWHERE boxes <= 10;\n```\n\nA shipment with exactly `10` boxes passes. Phrases such as “at least,” “or more,” “at most,” and “or less” usually signal an inclusive operator.\n\nWhen a result is wrong by one boundary case, compare the requirement with the operator first."
           }
         },
         "greater_than_or_equal_and_less_than_or_equal": {
@@ -51260,7 +47299,7 @@ const messages: Record<string, any> = {
         "module-2-inventory-watchlist-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A restocking review needs a short watchlist of affordable stationery with limited inventory.\n\nStart with budget products, narrow the category, then add the stock threshold.\n\nThe finished query should surface a small, actionable list instead of an empty report."
+            "bodyMarkdown": "A neighborhood office-supply shop is preparing its Friday restock order.\n\nThe buyer wants to begin with affordable products, then narrow the list to stationery. Warehouse staff will take that approved query and add one final rule so only low-stock items remain.\n\nBuild one watchlist that becomes more useful at each handoff. Do not restart from a blank query between milestones."
           }
         },
         "not_conditions": {
@@ -51321,24 +47360,24 @@ const messages: Record<string, any> = {
         },
         "why_filtering_matters": {
           "where_changes_rows": {
-            "title": "A Filter Changes Which Rows Remain",
-            "bodyMarkdown": "A `SELECT` query without a filter returns every source row. `WHERE` narrows that result to the rows that satisfy a condition.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products\nWHERE price < 20;\n```\n\nSQL checks the `price < 20` condition for each product. Rows where the condition is true remain; rows where it is false do not appear. The filter does not change the stored table—it changes only this query result.\n\nTranslate the business request into a yes-or-no test: “Is this product’s price below 20?” That test becomes the `WHERE` condition."
+            "title": "Filter the Rows, Not the Stored Table",
+            "bodyMarkdown": "A query without `WHERE` can return every source row. `WHERE` keeps only rows that pass a yes-or-no test.\n\n```sql\nSELECT\n    employee_id,\n    name,\n    department\nFROM employees\nWHERE department = 'Support';\n```\n\nSQL checks the condition for each employee row. Rows in Support remain in the result; the others do not. The stored `employees` table is unchanged.\n\nTranslate the request into a test first: “Is this employee in Support?” Then write that test after `WHERE`."
           },
           "where_clause_order": {
-            "title": "Place WHERE After FROM",
-            "bodyMarkdown": "Clause order matters. Start with the result columns, name the source table, then add the row condition.\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock < 10;\n```\n\n`WHERE` belongs after `FROM` because SQL needs a source row before it can test the row. Keep the condition focused on the requirement; sorting and limiting belong to later clauses."
+            "title": "Place the Filter After the Source Table",
+            "bodyMarkdown": "A basic filtered query follows this shape:\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    event_name,\n    seats_left\nFROM events\nWHERE seats_left < 20;\n```\n\n`SELECT` shapes the result, `FROM` names the source, and `WHERE` decides which source rows remain. Keep those jobs separate when you read or debug a query."
           }
         }
       },
       "sql-v2-3": {
         "ascending_order": {
           "ascending_examples": {
-            "title": "ASC Moves from Smaller to Larger",
-            "bodyMarkdown": "`ASC` sorts values in ascending order. For text, that is alphabetical order; for numbers, lowest to highest; for ISO dates, earliest to latest.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY name ASC;\n```\n\nThe product names appear alphabetically. Although `ASC` is the default, writing it can make the intention clearer while learning."
+            "title": "ASC Moves from Smaller or Earlier to Larger or Later",
+            "bodyMarkdown": "`ASC` means ascending order.\n\n```sql\nSELECT\n    event_name,\n    event_date\nFROM events\nORDER BY event_date ASC;\n```\n\nFor dates, the earliest event appears first. For numbers, lower values appear first. For text, values move alphabetically from A toward Z.\n\n`ASC` is also the default direction when no direction keyword is written, but writing it explicitly can make an exercise or report easier to read."
           },
           "descending_examples": {
-            "title": "DESC Reverses the Sequence",
-            "bodyMarkdown": "`DESC` sorts in the reverse direction.\n\n```sql\nSELECT\n    name,\n    created_at\nFROM products\nORDER BY created_at DESC;\n```\n\nThe newest date appears first. Choose the direction from the business question: “cheapest first” uses ascending price, “newest first” uses descending date, and “highest stock first” uses descending stock."
+            "title": "DESC Reverses the Direction",
+            "bodyMarkdown": "`DESC` means descending order.\n\n```sql\nSELECT\n    employee_name,\n    hire_date\nFROM employees\nORDER BY hire_date DESC;\n```\n\nThe newest hire appears first because later dates sort ahead of earlier dates.\n\nTranslate the request before choosing a direction: “highest first” and “newest first” suggest `DESC`; “lowest first” and “earliest first” suggest `ASC`."
           }
         },
         "build_clear_result_sets": {
@@ -51357,12 +47396,12 @@ const messages: Record<string, any> = {
         },
         "combining_order_by_with_limit": {
           "limit_first_rows": {
-            "title": "LIMIT Keeps Only the First Result Rows",
-            "bodyMarkdown": "`LIMIT` keeps only the first number of rows from the completed result.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nLIMIT 3;\n```\n\nThis returns three rows, but without `ORDER BY` those rows do not represent the cheapest, most expensive, oldest, or newest products. `LIMIT` controls quantity; it does not define rank."
+            "title": "LIMIT Keeps Rows; It Does Not Define Their Ranking",
+            "bodyMarkdown": "`LIMIT` keeps only the first requested number of result rows.\n\n```sql\nSELECT\n    ticket_id,\n    subject\nFROM support_tickets\nLIMIT 5;\n```\n\nThat query returns five rows, but it does **not** mean “five newest,” “five oldest,” or “five highest priority” because no ranking was defined.\n\nUse bare `LIMIT` only when the request truly means “some first rows.” A ranked request needs `ORDER BY` first."
           },
           "rank_then_limit": {
-            "title": "ORDER BY Gives LIMIT a Meaningful Order",
-            "bodyMarkdown": "Sort the result before limiting it when the request asks for a top or bottom list.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nSQL orders all products from highest price to lowest, then keeps the first three. To find the three cheapest, change the direction to `ASC`.\n\nThe dependable pattern is:\n\n```text\nWHERE filters rows\nORDER BY ranks the remaining rows\nLIMIT keeps the requested number\n```"
+            "title": "ORDER BY Gives a Top-N Request Meaning",
+            "bodyMarkdown": "Sort the completed result before limiting it when the request asks for a ranked subset.\n\n```sql\nSELECT\n    ticket_id,\n    priority_score\nFROM support_tickets\nORDER BY priority_score DESC\nLIMIT 3;\n```\n\nNow “first three rows” has a clear meaning: the three highest priority scores.\n\nThe clause order is:\n\n```text\nSELECT → FROM → WHERE → ORDER BY → LIMIT\n```\n\nFiltering narrows the candidates, sorting ranks them, and `LIMIT` keeps the requested number."
           }
         },
         "descending_order": {
@@ -51396,27 +47435,27 @@ const messages: Record<string, any> = {
         "module-3-sales-leaderboard-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A weekly catalog dashboard needs a concise ranking of the highest-priced products.\n\nStart with the primary sort, add a stable tie-breaker, then limit the result.\n\nThe finished query should read like a clear top-five leaderboard."
+            "bodyMarkdown": "The sales team is choosing premium products for a limited campaign.\n\nStart by ranking every product from highest price to lowest. Operations then wants a consistent tie-breaker: when products share the same price, show the lower-stock item first so scarcity is visible. Finally, the campaign can feature only five products.\n\nBuild one leaderboard and carry the approved query forward at each milestone instead of starting over."
           }
         },
         "order_by": {
           "sorting_changes_order": {
-            "title": "Sorting Changes Order, Not Membership",
-            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows. It does not add rows, remove rows, or change stored data.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY price DESC;\n```\n\nThe result contains the same products as an unsorted query, but the highest prices appear first. `DESC` means descending order. If no direction is written, SQL uses ascending order by default.\n\nSorting makes comparisons easier because related values appear in a predictable sequence."
+            "title": "Sorting Changes Sequence, Not Membership",
+            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows. It does not add rows, remove rows, or modify stored data.\n\n```sql\nSELECT\n    title,\n    author\nFROM books\nORDER BY title ASC;\n```\n\nThe same book rows are still present; they are simply arranged alphabetically by title.\n\nThink of sorting as the final presentation order of rows that the query has already selected."
           },
           "order_by_clause_position": {
-            "title": "Place ORDER BY After Filtering",
-            "bodyMarkdown": "`ORDER BY` belongs after `WHERE` because SQL first decides which rows remain, then sorts those rows.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nWHERE category = 'Home'\nORDER BY price DESC;\n```\n\nRead the request in two parts: keep the Home products, then rank the remaining rows by price. This separation helps prevent placing clauses in the wrong order."
+            "title": "Filter First, Then Sort the Remaining Rows",
+            "bodyMarkdown": "`ORDER BY` comes after `WHERE` because filtering decides which rows remain before sorting decides their sequence.\n\n```sql\nSELECT\n    invoice_id,\n    customer,\n    total\nFROM invoices\nWHERE total >= 100\nORDER BY total ASC;\n```\n\nRead the query in jobs: select columns, choose the source, keep qualifying rows, then sort the result.\n\nFor now, focus on one sort column. Multi-column ranking comes later in this module."
           }
         },
         "primary_sort": {
           "primary_sort_column": {
-            "title": "The First Sort Column Creates the Main Groups",
-            "bodyMarkdown": "When `ORDER BY` lists more than one column, the first column is the primary sort.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nSQL groups the rows alphabetically by category first. Price does not override that grouping; it is used only within each category."
+            "title": "The First Sort Column Controls the Main Order",
+            "bodyMarkdown": "When `ORDER BY` lists more than one column, the first column is the primary sort.\n\n```sql\nSELECT\n    team,\n    player_name,\n    score\nFROM tournament_scores\nORDER BY team ASC, score DESC;\n```\n\nRows are grouped by `team` first. The later sort does not replace that main grouping.\n\nChoose the primary sort from the most important organizing rule in the request."
           },
           "secondary_tie_breaker": {
-            "title": "A Secondary Sort Breaks Ties",
-            "bodyMarkdown": "The second sort column orders rows that share the same primary value.\n\n```sql\nSELECT\n    name,\n    category,\n    stock\nFROM products\nORDER BY category ASC, stock ASC;\n```\n\nProducts in the same category are arranged from lowest stock to highest. Adding a final stable tie-breaker such as `name ASC` can make repeated results completely deterministic.\n\nRead a multi-column sort from left to right: main order first, tie-breaker second."
+            "title": "A Secondary Sort Orders Rows That Tie",
+            "bodyMarkdown": "A second sort column applies when rows share the same primary value.\n\n```sql\nSELECT\n    team,\n    player_name,\n    score\nFROM tournament_scores\nORDER BY score DESC, player_name ASC;\n```\n\nThe highest score comes first. If two players share a score, their names determine the order between those tied rows.\n\nA useful tie-breaker makes repeated runs easier to read and can make rankings deterministic when the primary value is not unique."
           }
         },
         "secondary_sort": {
@@ -51476,21 +47515,21 @@ const messages: Record<string, any> = {
         "between_range_filter": {
           "between_inclusive_range": {
             "title": "BETWEEN Includes Both Endpoints",
-            "bodyMarkdown": "`BETWEEN` keeps values from a lower boundary through an upper boundary, including both endpoints.\n\n```sql\nSELECT\n    id,\n    full_name\nFROM customers\nWHERE id BETWEEN 3 AND 6;\n```\n\nRows with IDs 3, 4, 5, and 6 can pass. The same rule could be written as `id >= 3 AND id <= 6`, but `BETWEEN` states the range more directly."
+            "bodyMarkdown": "`BETWEEN` checks a lower and upper boundary and includes both ends.\n\n```sql\nSELECT\n    event_name,\n    event_date\nFROM events\nWHERE event_date BETWEEN '2026-04-01' AND '2026-04-07';\n```\n\nAn event on April 1 or April 7 qualifies, along with dates in between.\n\nFor dates, write comparable ISO-style values consistently so the boundaries are easy to read and review."
           },
           "between_with_condition": {
-            "title": "Combine a Range with Other Conditions",
-            "bodyMarkdown": "A range can be combined with another condition.\n\n```sql\nSELECT\n    id,\n    full_name,\n    status\nFROM customers\nWHERE id BETWEEN 3 AND 8\n  AND status = 'active';\n```\n\nSQL first requires the ID to be inside the inclusive range and also requires the active status. Keep the lower boundary first and the upper boundary second."
+            "title": "Combine a Range with Another Business Rule",
+            "bodyMarkdown": "A range can be one part of a larger filter.\n\n```sql\nSELECT\n    invoice_id,\n    total,\n    status\nFROM invoices\nWHERE total BETWEEN 100 AND 500\n  AND status = 'open';\n```\n\nFirst the amount must fall inside the inclusive range. Then the status condition must also be true.\n\nRead each condition separately before combining them with `AND`."
           }
         },
         "combine_text_and_null_filters": {
           "is_not_null_present_value": {
-            "title": "IS NOT NULL Requires a Present Value",
-            "bodyMarkdown": "Use `IS NOT NULL` when a report requires a stored value.\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NOT NULL;\n```\n\nRows with a missing email are removed. This check says only that a value is present; it does not prove that the value has the right format or belongs to a particular domain."
+            "title": "Text and NULL Checks Answer Different Questions",
+            "bodyMarkdown": "Pattern matching and missing-value checks solve different problems.\n\n```sql\nSELECT\n    ticket_id,\n    requester_email\nFROM support_tickets\nWHERE requester_email IS NULL\n   OR requester_email LIKE '%example.org';\n```\n\nThe first condition finds missing emails. The second finds present text with a particular pattern.\n\nChoose the operator from the data question: `LIKE` for text shape, `IS NULL` or `IS NOT NULL` for presence."
           },
           "cleanup_filter_combination": {
-            "title": "Combine Presence Checks with Business Rules",
-            "bodyMarkdown": "Cleanup reports often combine presence checks with exact or pattern filters.\n\n```sql\nSELECT\n    id,\n    full_name,\n    email,\n    city\nFROM customers\nWHERE email IS NOT NULL\n  AND city LIKE 'C%';\n```\n\nA row must have an email and a city beginning with `C`. Each condition answers a different question: is the required value present, and does another field match the business rule?\n\nWrite one condition per line so the cleanup logic is easy to review."
+            "title": "Use Parentheses When OR Is Part of a Larger Rule",
+            "bodyMarkdown": "When a cleanup rule mixes `OR` with another requirement, group the alternatives.\n\n```sql\nSELECT\n    vendor_name,\n    contact_email,\n    status\nFROM vendors\nWHERE (contact_email IS NULL OR contact_email LIKE '%test%')\n  AND status = 'review';\n```\n\nThe parentheses make the intended logic explicit: either email problem is acceptable, but every returned row must also have `review` status.\n\nBuild the grouped alternatives first, then add the condition that must apply to all of them."
           }
         },
         "common_null_mistakes": {
@@ -51509,22 +47548,22 @@ const messages: Record<string, any> = {
         },
         "in_list_filter": {
           "in_value_list": {
-            "title": "IN Matches Any Value in a List",
-            "bodyMarkdown": "`IN` is a compact way to accept any value from a list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city IN ('Chicago', 'Boston');\n```\n\nA row passes when its city equals either listed value. This is equivalent to connecting two exact comparisons with `OR`, but the list is easier to scan and extend."
+            "title": "IN Matches Any Exact Value in a List",
+            "bodyMarkdown": "`IN` is a compact way to keep rows whose column equals any value in a list.\n\n```sql\nSELECT\n    order_id,\n    status\nFROM orders\nWHERE status IN ('paid', 'refunded');\n```\n\nA row qualifies if its status is `paid` **or** `refunded`. It does not need to match every item.\n\n`IN` is often clearer than repeating the same column with several `OR` comparisons."
           },
           "not_in_value_list": {
             "title": "NOT IN Excludes Every Listed Value",
-            "bodyMarkdown": "`NOT IN` excludes every value in the list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    status\nFROM customers\nWHERE status NOT IN ('inactive', 'archived');\n```\n\nKnown statuses outside the list remain. Missing values need separate attention because `NULL` does not behave like an ordinary value in comparisons.\n\nUse `IN` and `NOT IN` for several exact choices; use `LIKE` for patterns."
+            "bodyMarkdown": "`NOT IN` removes rows whose value appears in the listed set.\n\n```sql\nSELECT\n    shipment_id,\n    carrier\nFROM shipments\nWHERE carrier NOT IN ('Internal', 'Test');\n```\n\nRows using either excluded carrier are removed; other non-NULL carrier values remain.\n\nUse a list when the rule is about several exact values. Pattern matching and missing-value checks solve different problems."
           }
         },
         "intro_to_like": {
           "like_text_pattern": {
             "title": "LIKE Matches a Text Pattern",
-            "bodyMarkdown": "Use `LIKE` when an exact `=` comparison is too strict and the request describes a text pattern.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city LIKE 'Chi%';\n```\n\nThe pattern begins with `Chi`. The `%` allows any remaining characters, so values such as `Chicago` match. A city that does not begin with those letters does not pass."
+            "bodyMarkdown": "`LIKE` compares text with a pattern instead of requiring one exact value.\n\n```sql\nSELECT\n    title,\n    author\nFROM books\nWHERE title LIKE 'Data%';\n```\n\n`'Data%'` means the text must begin with `Data`, while `%` may stand for any number of characters after it.\n\nUse `LIKE` when the request is about the shape of text—starts with, ends with, or contains—not when you already know one exact value."
           },
           "percent_wildcard_patterns": {
-            "title": "% Represents Any Number of Characters",
-            "bodyMarkdown": "The position of `%` changes the search.\n\nThis complete query finds email addresses ending with `@example.com`:\n\n```sql\nSELECT\n    full_name,\n    email\nFROM customers\nWHERE email LIKE '%@example.com';\n```\n\nThis one finds names containing `ia` anywhere:\n\n```sql\nSELECT\n    full_name\nFROM customers\nWHERE full_name LIKE '%ia%';\n```\n\nUse a leading percent for “ends with,” a trailing percent for “starts with,” and percents on both sides for “contains.” Pattern matching can be case-sensitive or case-insensitive depending on the database and configuration, so follow the course dataset behavior."
+            "title": "% Can Match Text Before, After, or on Both Sides",
+            "bodyMarkdown": "The location of `%` changes what the pattern means.\n\n```sql\nSELECT\n    ticket_id,\n    subject\nFROM support_tickets\nWHERE subject LIKE '%password%';\n```\n\nThis pattern allows any text before and after `password`, so the word may appear anywhere inside the subject.\n\nRead common patterns from left to right:\n\n- `'ABC%'` → starts with `ABC`\n- `'%ABC'` → ends with `ABC`\n- `'%ABC%'` → contains `ABC`\n\nThe fixed text is the part that must match; `%` supplies the flexible portion."
           }
         },
         "is_not_null": {
@@ -51558,7 +47597,7 @@ const messages: Record<string, any> = {
         "module-4-customer-cleanup-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A customer-data audit needs a short worksheet of records with missing contact information.\n\nStart with missing emails, confirm the unresolved status, then narrow the list by location and test-data rules.\n\nThe finished query should return a real cleanup target instead of an empty result."
+            "bodyMarkdown": "The data-operations team is cleaning a customer follow-up list before it goes to support.\n\nStart by identifying records with no stored email. Support then narrows that approved result to inactive customers who need a different follow-up channel. Before the final handoff, operations wants only real customer records from cities beginning with `H`, with test rows excluded.\n\nBuild one query through three milestones. Each milestone should preserve the working rules from the previous step and add only the newly approved requirement."
           }
         },
         "not_in_list_filter": {
@@ -51620,29 +47659,29 @@ const messages: Record<string, any> = {
         "underscore_wildcard": {
           "underscore_one_character": {
             "title": "_ Matches Exactly One Character",
-            "bodyMarkdown": "The underscore wildcard `_` represents exactly one character.\n\n```sql\nSELECT\n    id,\n    full_name\nFROM customers\nWHERE full_name LIKE 'M_a%';\n```\n\n`M` is fixed, `_` accepts exactly one character, `a` must follow, and `%` allows the rest of the name. `Mia Lopez` matches because the underscore accounts for `i`."
+            "bodyMarkdown": "Inside a `LIKE` pattern, `_` stands for exactly one character.\n\n```sql\nSELECT\n    room_code\nFROM rooms\nWHERE room_code LIKE 'A_2';\n```\n\nThat pattern can match `AB2` or `A72`, but not `A102` because the underscore provides only one character slot.\n\nUse `_` when the position matters and the length at that position is fixed."
           },
           "mixed_wildcards": {
-            "title": "Combine _ and % for Precise Patterns",
-            "bodyMarkdown": "Use one underscore for each required character position.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city LIKE '_____';\n```\n\nFive underscores match city values with exactly five characters, such as `Miami`. Unlike `%`, an underscore cannot represent zero characters or several characters.\n\nChoose `_` when length and position matter; choose `%` when the number of characters may vary."
+            "title": "Combine _ and % When Some Positions Are Fixed",
+            "bodyMarkdown": "You can combine `_` and `%` in one pattern.\n\n```sql\nSELECT\n    badge_code\nFROM badges\nWHERE badge_code LIKE 'HR___%';\n```\n\nThe text must begin with `HR`, then contain at least three more characters because of the three underscores. `%` allows anything after those required positions.\n\nUse underscores to count exact character slots and `%` for a variable-length remainder."
           }
         },
         "what_null_means": {
           "null_missing_value": {
-            "title": "NULL Means the Value Is Missing or Unknown",
-            "bodyMarkdown": "`NULL` represents a missing or unknown value. It is not an empty string, zero, or the word “NULL.”\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nThis query finds rows where no email value is stored. A row with an empty text value would be a different data condition."
+            "title": "NULL Means a Value Is Missing or Unknown",
+            "bodyMarkdown": "`NULL` is a marker for missing or unknown data. It is not the empty string, the number zero, or the word `\"NULL\"`.\n\n```sql\nSELECT\n    employee_name,\n    manager_email\nFROM employees\nWHERE manager_email IS NULL;\n```\n\nThis query finds employees with no stored manager email.\n\nWhen reading a table, separate “a value exists and happens to be empty-looking” from “no value is known.” SQL represents the second case with `NULL`."
           },
           "is_null_syntax": {
-            "title": "Use IS NULL, Not = NULL",
-            "bodyMarkdown": "Use `IS NULL` and `IS NOT NULL` for missing-value checks.\n\nThis complete query uses an ordinary equality comparison incorrectly and returns no matches:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email = NULL;\n```\n\nUse the dedicated missing-value test instead:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nAn ordinary equality comparison asks whether two known values are equal. `NULL` means the value is unknown, so SQL provides the special `IS NULL` test."
+            "title": "Use IS NULL and IS NOT NULL",
+            "bodyMarkdown": "Normal equality does not test for missing values. Use the dedicated NULL syntax.\n\n```sql\nSELECT\n    applicant_name,\n    portfolio_url\nFROM applications\nWHERE portfolio_url IS NOT NULL;\n```\n\n`IS NULL` keeps missing values. `IS NOT NULL` keeps rows where a value is present.\n\nAvoid `= NULL` and `<> NULL`; they do not behave like ordinary value comparisons."
           }
         }
       },
       "sql-v2-5": {
         "module-5-customer-follow-up-capstone": {
           "sketch_project_brief": {
-            "title": "Project brief",
-            "bodyMarkdown": "A follow-up campaign needs a concise contact report built from the customer table.\n\nStart with eligible statuses, then add contactability, location, date, name-pattern, ordering, and row-limit rules.\n\nThe finished query should be focused enough to use as a real outreach list."
+            "title": "Final stakeholder brief",
+            "bodyMarkdown": "The lifecycle-operations team needs a final customer follow-up report that can be handed directly to outreach.\n\nYou will build one query through four approvals:\n\n1. identify customers in the eligible status set;\n2. keep only real records that can be contacted by email;\n3. focus the report on the approved cities and signup window;\n4. apply the final name pattern, sort the result deterministically, and limit the handoff to five rows.\n\nEach milestone starts from the exact approved query from the previous milestone. Preserve working requirements as the stakeholder adds the next rule."
           }
         }
       }
@@ -52090,7 +48129,8 @@ const messages: Record<string, any> = {
     },
     "sql-v2": {
       "title": "SQL Foundations",
-      "description": "Learn SQL from the beginning by reading tables, selecting useful columns, filtering rows, sorting results, handling missing data, and combining those skills in a focused customer-report capstone."
+      "description": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
+      "moreComingSoon": "More SQL Foundations lessons are coming soon."
     },
     "sql": {
       "title": "SQL for beginners",
@@ -52716,7 +48756,7 @@ const messages: Record<string, any> = {
     "sql-v2": {
       "sql-v2-0": {
         "title": "Getting Started with SQL and Databases",
-        "description": "Understand what databases store, how tables organize records, and how the SQL workspace turns a question into a result.",
+        "description": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
         "outcomes": [
           "Explain what SQL is used for in real applications.",
           "Identify tables, rows, columns, records, and fields.",
@@ -52724,13 +48764,13 @@ const messages: Record<string, any> = {
           "Use the browser SQL workspace to run a beginner query."
         ],
         "why": [
-          "Understand what databases store, how tables organize records, and how the SQL workspace turns a question into a result.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with getting started with sql and databases.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-1": {
         "title": "Your First Queries with SELECT",
-        "description": "Build readable SELECT statements by choosing columns deliberately and reading one table at a time.",
+        "description": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
         "outcomes": [
           "Write SELECT queries that retrieve data from one table.",
           "Choose specific columns instead of always selecting every column.",
@@ -52738,13 +48778,13 @@ const messages: Record<string, any> = {
           "Read a query result table and explain what was returned."
         ],
         "why": [
-          "Build readable SELECT statements by choosing columns deliberately and reading one table at a time.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with your first queries with select.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-2": {
         "title": "Filtering Data with WHERE",
-        "description": "Filter rows with comparison operators, logical conditions, ranges, and exact text rules.",
+        "description": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
         "outcomes": [
           "Use WHERE to return only rows that match a condition.",
           "Compare text and numbers with beginner SQL operators.",
@@ -52752,13 +48792,13 @@ const messages: Record<string, any> = {
           "Debug common filtering mistakes in simple SQL queries."
         ],
         "why": [
-          "Filter rows with comparison operators, logical conditions, ranges, and exact text rules.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with filtering data with where.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-3": {
         "title": "Sorting and Limiting Results",
-        "description": "Sort results predictably, add tie-breakers, and limit a report to the rows that matter most.",
+        "description": "Help beginners control output so answers are easier to read, rank, and compare.",
         "outcomes": [
           "Sort query results with ORDER BY.",
           "Use ASC and DESC to control sort direction.",
@@ -52766,13 +48806,13 @@ const messages: Record<string, any> = {
           "Combine filtering, sorting, and limiting in one query."
         ],
         "why": [
-          "Sort results predictably, add tie-breakers, and limit a report to the rows that matter most.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with sorting and limiting results.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-4": {
         "title": "Working with Text, Lists, Ranges, and NULL",
-        "description": "Work with text patterns and missing values without confusing NULL with an empty string.",
+        "description": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
         "outcomes": [
           "Search partial text with LIKE and wildcards.",
           "Filter multiple values with IN and NOT IN.",
@@ -52780,21 +48820,21 @@ const messages: Record<string, any> = {
           "Find missing and present values with IS NULL and IS NOT NULL."
         ],
         "why": [
-          "Work with text patterns and missing values without confusing NULL with an empty string.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with working with text, lists, ranges, and null.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-5": {
         "title": "Capstone: Customer Follow-Up Report",
-        "description": "Combine selection, filtering, pattern matching, NULL handling, sorting, and limiting in one customer follow-up capstone.",
+        "description": "Pull the course skills together in one final reporting task that feels like a beginner analyst handoff.",
         "outcomes": [
           "Combine selection, filtering, ordering, and limiting in one practical query flow.",
           "Revise a working query without losing earlier progress.",
           "Build a clean report that highlights real customer follow-up needs."
         ],
         "why": [
-          "Combine selection, filtering, pattern matching, NULL handling, sorting, and limiting in one customer follow-up capstone.",
-          "The final work demonstrates the complete course workflow."
+          "Builds confidence with capstone: customer follow-up report.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     },
@@ -53823,102 +49863,76 @@ const messages: Record<string, any> = {
       "sql-v2-0": {
         "sql-v2-sql-v2-0-1": {
           "title": "What SQL Is",
-          "description": "Understand what SQL means, what databases are, and why SQL is useful.",
+          "description": "Learn what sql is through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "SQL means Structured Query Language",
-            "Databases store organized data",
-            "SQL helps answer questions about data",
-            "Real systems use databases every day"
+            "What SQL Is"
           ]
         },
         "sql-v2-sql-v2-0-2": {
           "title": "Understanding Tables",
-          "description": "Learn how rows, columns, records, fields, and names make table data readable.",
+          "description": "Learn understanding tables through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Rows and columns organize data",
-            "Records are full entries",
-            "Fields are individual values",
-            "Names help you understand the table"
+            "Understanding Tables"
           ]
         },
         "sql-v2-sql-v2-0-3": {
           "title": "Database Thinking",
-          "description": "Practice thinking about data as questions, structure, and reliable identifiers.",
+          "description": "Learn database thinking through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Good structure makes questions easier",
-            "Tables should support future answers",
-            "Keys identify specific rows",
-            "Clear data design reduces confusion"
+            "Database Thinking"
           ]
         },
         "sql-v2-sql-v2-0-4": {
           "title": "First SQL Environment",
-          "description": "Use the Zoeskoul SQL workspace to run queries and read result tables.",
+          "description": "Learn first sql environment through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Type SQL in the editor",
-            "Run a query",
-            "Read the Results tab",
-            "Use the Tables view as support"
+            "First SQL Environment"
           ]
         },
         "sql-v2-sql-v2-0-module-project": {
           "title": "Module Project",
-          "description": "Apply the module introduction by exploring a student roster.",
+          "description": "Learn module 0 student roster project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Run simple SQL queries",
-            "Read result tables",
-            "Make a clean first report"
+            "Module 0 Student Roster Project"
           ]
         }
       },
       "sql-v2-1": {
         "sql-v2-sql-v2-1-1": {
-          "title": "SELECT and FROM",
-          "description": "Build complete single-table queries by choosing result columns and naming the source table.",
+          "title": "Intro to SELECT",
+          "description": "Learn what select does through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Use SELECT to define result columns",
-            "Use FROM to identify the source table",
-            "Read a basic query confidently",
-            "Run a focused retrieval query"
+            "What SELECT Does"
           ]
         },
         "sql-v2-sql-v2-1-2": {
-          "title": "Choosing Result Columns",
-          "description": "Choose between every column and a focused explicit column list.",
+          "title": "Reading Data from a Table",
+          "description": "Learn selecting specific columns through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Explore a table with SELECT *",
-            "Choose only required columns",
-            "Control result-column order",
-            "Design a focused report"
+            "Selecting Specific Columns"
           ]
         },
         "sql-v2-sql-v2-1-3": {
-          "title": "Readable Multi-Column Queries",
-          "description": "Arrange and format several selected columns for a clear result.",
+          "title": "SQL Syntax Basics",
+          "description": "Learn query multiple columns through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Order columns for the reader",
-            "Separate columns with commas",
-            "Format one column per line",
-            "Review the result shape before running"
+            "Query Multiple Columns"
           ]
         },
         "sql-v2-sql-v2-1-4": {
-          "title": "Predicting and Debugging",
-          "description": "Predict what a query will return and repair common syntax mistakes.",
+          "title": "Practice with Basic Queries",
+          "description": "Learn common beginner syntax mistakes through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Predict columns and row count",
-            "Check keyword and clause order",
-            "Find comma and table-name errors",
-            "Use a repeatable debugging checklist"
+            "Common Beginner Syntax Mistakes"
           ]
         },
         "sql-v2-sql-v2-1-module-project": {
@@ -53926,56 +49940,44 @@ const messages: Record<string, any> = {
           "description": "Learn module 1 product starter sheet project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Choose only the product columns needed for a clear starter report.",
-            "Arrange selected columns in an intentional, readable order.",
-            "Write a complete SELECT and FROM query without syntax errors.",
-            "Deliver the Module 1 Product Starter Sheet."
+            "Module 1 Product Starter Sheet Project"
           ]
         }
       },
       "sql-v2-2": {
         "sql-v2-sql-v2-2-1": {
-          "title": "WHERE and Exact Matching",
-          "description": "Filter source rows and use exact or not-equal comparisons.",
+          "title": "Intro to Filtering",
+          "description": "Learn why filtering matters, equals comparison through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Understand what WHERE changes",
-            "Place WHERE after FROM",
-            "Match exact values with =",
-            "Exclude exact values with <>"
+            "Why Filtering Matters",
+            "Equals Comparison"
           ]
         },
         "sql-v2-sql-v2-2-2": {
-          "title": "Numeric and Typed Comparisons",
-          "description": "Choose strict or inclusive boundaries and match the value type.",
+          "title": "Comparison Operators",
+          "description": "Learn greater-than comparison, filtering numbers and text through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Use > and < for strict boundaries",
-            "Use >= and <= for inclusive boundaries",
-            "Quote text and dates correctly",
-            "Translate requirement words into operators"
+            "Greater-Than Comparison",
+            "Filtering Numbers and Text"
           ]
         },
         "sql-v2-sql-v2-2-3": {
-          "title": "Combining Conditions",
-          "description": "Use AND, OR, NOT, and parentheses without changing the intended logic.",
+          "title": "Filtering with Multiple Conditions",
+          "description": "Learn and conditions, combining conditions safely through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Require every rule with AND",
-            "Allow alternatives with OR",
-            "Group mixed logic with parentheses",
-            "Reverse conditions deliberately with NOT"
+            "AND Conditions",
+            "Combining Conditions Safely"
           ]
         },
         "sql-v2-sql-v2-2-4": {
-          "title": "Filtering Debugging",
-          "description": "Test filter logic and repair common condition mistakes.",
+          "title": "Beginner Filtering Practice",
+          "description": "Learn avoiding filtering mistakes through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Verify the request and boundary",
-            "Check quoted values",
-            "Add conditions one at a time",
-            "Distinguish valid syntax from correct logic"
+            "Avoiding Filtering Mistakes"
           ]
         },
         "sql-v2-sql-v2-2-module-project": {
@@ -53983,56 +49985,41 @@ const messages: Record<string, any> = {
           "description": "Learn module 2 inventory watchlist project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Filter product rows with exact, boundary, text, number, and date comparisons.",
-            "Combine business rules with AND, OR, parentheses, and NOT.",
-            "Debug clause-order and comparison-operator mistakes.",
-            "Deliver the Module 2 Inventory Watchlist."
+            "Module 2 Inventory Watchlist Project"
           ]
         }
       },
       "sql-v2-3": {
         "sql-v2-sql-v2-3-1": {
-          "title": "ORDER BY Fundamentals",
-          "description": "Understand what sorting changes and where ORDER BY belongs.",
+          "title": "Sorting Data",
+          "description": "Learn sorting a result with order by through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Sort without changing row membership",
-            "Choose a sort column",
-            "Place ORDER BY after filtering",
-            "Read a sorted result"
+            "Sorting a Result with ORDER BY"
           ]
         },
         "sql-v2-sql-v2-3-2": {
-          "title": "Sort Directions",
-          "description": "Use ASC and DESC with text, numeric, and date values.",
+          "title": "Sorting by Multiple Columns",
+          "description": "Learn choosing asc or desc through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Sort text alphabetically",
-            "Sort numbers low-to-high or high-to-low",
-            "Sort dates oldest-to-newest or newest-to-oldest",
-            "Choose direction from the reporting goal"
+            "Choosing ASC or DESC"
           ]
         },
         "sql-v2-sql-v2-3-3": {
-          "title": "Multi-Column Sorting",
-          "description": "Use primary and secondary sort columns to make ties predictable.",
+          "title": "Limiting Output",
+          "description": "Learn primary sorts and tie-breakers through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Define the main sort",
-            "Add a tie-breaker",
-            "Read sort columns left to right",
-            "Create deterministic results"
+            "Primary Sorts and Tie-Breakers"
           ]
         },
         "sql-v2-sql-v2-3-4": {
-          "title": "Ranked and Limited Results",
-          "description": "Combine filtering, sorting, and LIMIT to build useful top or bottom lists.",
+          "title": "Practice with Output Control",
+          "description": "Learn building ranked top-n results with limit through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Understand what LIMIT keeps",
-            "Sort before limiting ranked results",
-            "Use the correct clause order",
-            "Build a focused leaderboard"
+            "Building Ranked Top-N Results with LIMIT"
           ]
         },
         "sql-v2-sql-v2-3-module-project": {
@@ -54040,56 +50027,43 @@ const messages: Record<string, any> = {
           "description": "Learn module 3 sales leaderboard project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Sort results in ascending or descending order for the reporting goal.",
-            "Use primary and secondary sort keys for predictable output.",
-            "Combine ORDER BY and LIMIT to create a useful ranking.",
-            "Deliver the Module 3 Sales Leaderboard."
+            "Module 3 Sales Leaderboard Project"
           ]
         }
       },
       "sql-v2-4": {
         "sql-v2-sql-v2-4-1": {
-          "title": "Text Patterns",
-          "description": "Search prefixes, suffixes, fragments, and fixed character positions.",
+          "title": "Text Matching",
+          "description": "Learn matching text with like and %, matching exact character positions with _ through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Use LIKE for patterns",
-            "Use % for variable-length text",
-            "Use _ for exactly one character",
-            "Choose the wildcard that matches the requirement"
+            "Matching Text with LIKE and %",
+            "Matching Exact Character Positions with _"
           ]
         },
         "sql-v2-sql-v2-4-2": {
           "title": "Lists and Ranges",
-          "description": "Filter several exact choices and inclusive ranges.",
+          "description": "Learn filtering exact sets with in and not in, filtering inclusive ranges with between through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Match lists with IN",
-            "Exclude lists with NOT IN",
-            "Use inclusive BETWEEN boundaries",
-            "Combine list or range filters with other rules"
+            "Filtering Exact Sets with IN and NOT IN",
+            "Filtering Inclusive Ranges with BETWEEN"
           ]
         },
         "sql-v2-sql-v2-4-3": {
-          "title": "Missing Values",
-          "description": "Understand NULL and test missing values correctly.",
+          "title": "Missing Data",
+          "description": "Learn understanding null and missing values through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Distinguish NULL from zero or empty text",
-            "Find missing values with IS NULL",
-            "Avoid = NULL",
-            "Explain what a missing value means"
+            "Understanding NULL and Missing Values"
           ]
         },
         "sql-v2-sql-v2-4-4": {
-          "title": "Cleanup Filters",
-          "description": "Require present values and combine text, status, and missing-data rules.",
+          "title": "Search and Cleanup Practice",
+          "description": "Learn combining text and missing-value rules through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Use IS NOT NULL",
-            "Combine conditions with AND",
-            "Apply text patterns to present values",
-            "Build a review-ready cleanup result"
+            "Combining Text and Missing-Value Rules"
           ]
         },
         "sql-v2-sql-v2-4-module-project": {
@@ -54097,10 +50071,7 @@ const messages: Record<string, any> = {
           "description": "Learn module 4 customer cleanup project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Search text with LIKE, percent, and underscore patterns.",
-            "Filter value lists and inclusive ranges with IN, NOT IN, and BETWEEN.",
-            "Handle missing values with IS NULL and IS NOT NULL.",
-            "Deliver the Module 4 Customer Cleanup report."
+            "Module 4 Customer Cleanup Project"
           ]
         }
       },
@@ -54110,10 +50081,7 @@ const messages: Record<string, any> = {
           "description": "Learn module 5 customer follow-up capstone through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Translate a stakeholder request into the required result columns and filters.",
-            "Combine list, range, text-pattern, and NULL checks in one query.",
-            "Sort and limit the result into a usable customer follow-up queue.",
-            "Deliver the final Customer Follow-Up Capstone report."
+            "Module 5 Customer Follow-Up Capstone"
           ]
         }
       }

@@ -4,8 +4,9 @@
     "profileId": "sql",
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
-    "order": 0,
+    "order": 1,
     "accessPolicy": "paid",
+    "visibility": "public",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -15,18 +16,8 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 6,
-        "isTerminalRelease": true,
-        "qualityPass": {
-          "name": "sql-v2-module0-legacy-preserved-images",
-          "appliedAt": "2026-06-26T22:04:58.881199+00:00",
-          "normalizations": [
-            "module 0 replaced with legacy four-topic introduction",
-            "all legacy image tags preserved in sketch bodyMarkdown",
-            "each legacy sketch card has a Try it yourself code_input",
-            "SQL code_input exercises use literal starterCode, starterFiles, workspace, and solutionFiles",
-            "module project kept as the single official module project"
-          ]
-        }
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql-v2.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -35,10 +26,10 @@
       },
       "versioning": {
         "family": "sql",
-        "version": 1,
+        "version": 2,
         "status": "active",
         "defaultForNewEnrollments": true,
-        "supersedes": null,
+        "supersedes": "sql",
         "supersededBy": null
       }
     }
@@ -56,8 +47,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -67,7 +58,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 110,
+        "estimatedMinutes": 82,
         "prereqKeys": [],
         "outcomeKeys": [
           "modules.sql-v2.sql-v2-0.outcomes.0",
@@ -164,6 +155,7 @@
         {
           "slug": "sql-v2-sql-v2-0-module-project",
           "order": 5,
+          "role": "module_project",
           "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.title",
           "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.description",
           "meta": {
@@ -172,7 +164,8 @@
             "bulletKeys": [
               "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.0",
               "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.2"
+              "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.2",
+              "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -194,8 +187,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -205,7 +198,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 88,
         "prereqKeys": [
           "modules.sql-v2.sql-v2-0.title"
         ],
@@ -336,8 +329,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -347,7 +340,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 168,
+        "estimatedMinutes": 144,
         "prereqKeys": [
           "modules.sql-v2.sql-v2-1.title"
         ],
@@ -481,8 +474,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -492,7 +485,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 108,
+        "estimatedMinutes": 92,
         "prereqKeys": [
           "modules.sql-v2.sql-v2-2.title"
         ],
@@ -623,8 +616,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -634,7 +627,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 152,
+        "estimatedMinutes": 126,
         "prereqKeys": [
           "modules.sql-v2.sql-v2-3.title"
         ],
@@ -768,12 +761,12 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
-        "datasetId": "customers_cleanup",
+        "datasetId": "sales_kpi",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
