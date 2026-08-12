@@ -11,7 +11,6 @@ import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 
-import { executeRunRoute } from "./routes/runs.execute.js";
 export const app = express();
 
 app.disable("x-powered-by");
@@ -36,7 +35,6 @@ app.get("/metrics", (_req, res) => {
   res.status(200).json({ ok: true, stats: getSessionStats() });
 });
 
-app.post("/runs", executeRunRoute);
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);

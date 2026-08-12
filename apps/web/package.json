@@ -87,7 +87,6 @@
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
-    "@zoeskoul/runner-client": "workspace:*",
     "@zoeskoul/workspace-contracts": "workspace:*",
     "better-sqlite3": "^12.8.0",
     "clsx": "^2.1.1",

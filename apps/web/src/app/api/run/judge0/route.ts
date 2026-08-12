@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { executeWebBatchRun } from "@/lib/server/executeWebBatchRun";
+import { submitRun } from "@/lib/code/runCode";
 import { parseRunReq } from "@/lib/code/api/parseRunReq";
 import {checkIdeCapability} from "@/lib/access/ideCapabilityServer";
 import { actorKeyOf, ensureGuestId, getActor } from "@/lib/practice/actor";
@@ -123,14 +123,9 @@ export async function POST(req: Request) {
         );
       }
     }
-    const result = await executeWebBatchRun(body, actorKey);
-    const out = {
-      ok: true as const,
-      mode: "immediate" as const,
-      result,
-    };
+    const out = await submitRun(body);
 
-    return jsonNoStore(out, 200);
+    return jsonNoStore(out, out.ok ? 200 : 502);
   } catch (e: any) {
     const message = e?.message ?? "Run submission failed";
     const badRequest =

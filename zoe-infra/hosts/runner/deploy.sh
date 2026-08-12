@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-cd "$(dirname "$0")" || exit 1
+cd "$(dirname "$0")"
 
 if [ ! -f .env ]; then
   echo "Missing .env. Copy .env.example to .env and edit it first." >&2
@@ -9,8 +10,6 @@ fi
 
 if [ "$#" -gt 1 ]; then
   echo "Usage: $0 [image-tag]" >&2
-  echo "  no argument  Deploy the CI-managed prod tag (normal deployment)" >&2
-  echo "  image-tag    Deploy an explicit immutable tag/SHA (rollback or pin)" >&2
   exit 2
 fi
 
@@ -19,28 +18,11 @@ set -a
 . ./.env
 set +a
 
-if [ -z "${GHCR_OWNER:-}" ]; then
-  echo "GHCR_OWNER is required in .env." >&2
-  exit 1
-fi
+: "${GHCR_OWNER:?required}"
 
-ENV_IMAGE_TAG="${IMAGE_TAG:-}"
-
-# Normal deployments follow the mutable production tag published only by the
-# successful production-image workflow. An explicit argument is the only way
-# to pin/rollback to an immutable commit SHA.
-if [ "$#" -eq 1 ]; then
-  IMAGE_TAG="$1"
-  DEPLOY_MODE="pinned"
-else
-  IMAGE_TAG="prod"
-  DEPLOY_MODE="automatic"
-
-  if [ -n "$ENV_IMAGE_TAG" ] && [ "$ENV_IMAGE_TAG" != "prod" ]; then
-    echo "Ignoring stale .env IMAGE_TAG=${ENV_IMAGE_TAG}; automatic deployment follows prod."
-  fi
-fi
-export IMAGE_TAG
+# A normal deployment always follows the mutable production tag. Pass an
+# immutable commit SHA explicitly only for a rollback or pinned deployment.
+export IMAGE_TAG="${1:-prod}"
 
 pull_with_retry() {
   local attempt
@@ -60,85 +42,45 @@ pull_with_retry() {
   done
 }
 
-sudo mkdir -p /var/lib/zoeskoul-runner/workspaces || exit 1
-sudo chown -R "${USER}:${USER}" /var/lib/zoeskoul-runner || exit 1
+sudo mkdir -p /var/lib/zoeskoul-runner/workspaces
+sudo chown -R "${USER}:${USER}" /var/lib/zoeskoul-runner
 
-RUNNER_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runner:${IMAGE_TAG}"
+if [ ! -S "${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}" ]; then
+  echo "WARNING: Docker socket not found: ${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}" >&2
+  echo "Run ../../scripts/install-rootless-docker.sh or adjust RUNNER_DOCKER_SOCKET_HOST in .env." >&2
+fi
+
 RUNTIME_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:${IMAGE_TAG}"
 EXEC_DOCKER_SOCKET="${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}"
 
-ensure_execution_docker() {
-  if [ -S "$EXEC_DOCKER_SOCKET" ]; then
-    return 0
-  fi
-
-  if [ -e "$EXEC_DOCKER_SOCKET" ]; then
-    echo "ERROR: execution Docker path exists but is not a Unix socket: ${EXEC_DOCKER_SOCKET}" >&2
-    echo "Remove the stale path and restart the rootless Docker user service before deploying." >&2
-    return 1
-  fi
-
-  echo "Rootless Docker socket is not ready: ${EXEC_DOCKER_SOCKET}" >&2
-  echo "Attempting to start the rootless Docker user service..." >&2
-
-  if command -v systemctl >/dev/null 2>&1; then
-    timeout 15s systemctl --user start docker.service >/dev/null 2>&1 || true
-  fi
-
-  for _attempt in 1 2 3 4 5; do
-    if [ -S "$EXEC_DOCKER_SOCKET" ]; then
-      return 0
-    fi
-    sleep 1
-  done
-
-  echo "ERROR: rootless Docker socket is unavailable: ${EXEC_DOCKER_SOCKET}" >&2
-  echo "Learner execution requires rootless Docker; deployment aborted." >&2
-  echo "Check: systemctl --user status docker.service --no-pager -l" >&2
-  return 1
-}
-
-if ! ensure_execution_docker; then
-  exit 1
-fi
-
-echo "Deployment mode: ${DEPLOY_MODE}"
-echo "Runner image:     ${RUNNER_IMAGE}"
-echo "Runtime image:    ${RUNTIME_IMAGE}"
-
-echo "Pulling sandbox runtime image into the rootless execution Docker daemon..."
-if ! pull_with_retry env DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker pull "$RUNTIME_IMAGE"; then
-  exit 1
+echo "Deploying ZoeSkoul Runner image tag: ${IMAGE_TAG}"
+echo "Pulling sandbox runtime image into the execution Docker daemon: ${RUNTIME_IMAGE}"
+if [ -S "$EXEC_DOCKER_SOCKET" ]; then
+  pull_with_retry env DOCKER_HOST="unix://${EXEC_DOCKER_SOCKET}" docker pull "$RUNTIME_IMAGE"
+else
+  echo "WARNING: execution Docker socket not found, falling back to default Docker daemon for runtime image pull." >&2
+  pull_with_retry docker pull "$RUNTIME_IMAGE"
 fi
 
 echo "Pulling runner stack images..."
-if ! pull_with_retry docker compose pull; then
-  exit 1
-fi
+pull_with_retry docker compose pull
 
 echo "Starting/recreating runner stack..."
 # Compose recreates services whose pulled image digest changed. --wait keeps
 # deploy.sh attached until the runner and Judge0 health checks are ready.
-if ! docker compose up \
+docker compose up \
   -d \
   --remove-orphans \
   --wait \
-  --wait-timeout 300; then
-  echo "Runner stack failed to become healthy." >&2
-  exit 1
-fi
+  --wait-timeout 300
 
 echo "Current services:"
-docker compose ps || exit 1
+docker compose ps
 
 echo "Running smoke tests..."
-if ! ./smoke-test.sh; then
-  echo "Smoke tests failed; deployment is not considered successful." >&2
-  exit 1
-fi
+./smoke-test.sh
 
 echo "Pruning unused images..."
 docker image prune -f >/dev/null || true
 
 echo "ZoeSkoul Runner deployment completed successfully."
-echo "Deployed image tag: ${IMAGE_TAG}"
