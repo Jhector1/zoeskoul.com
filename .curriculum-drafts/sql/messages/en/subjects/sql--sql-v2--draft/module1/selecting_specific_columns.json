@@ -4,7 +4,7 @@
       "sql--sql-v2--draft-1": {
         "selecting_specific_columns": {
           "label": "Selecting All or Specific Columns",
-          "summary": "Choose between SELECT * and an explicit column list based on the purpose of the result.",
+          "summary": "Choose between SELECT * and an explicit column list based on what the reader actually needs.",
           "cards": {
             "sketch0": {
               "title": "When SELECT * Is Useful"
@@ -64,22 +64,6 @@
                 "c": "SELECT products FROM name;"
               }
             },
-            "mc_columns_in_products_table": {
-              "title": "Real columns in the table",
-              "prompt": "Which of these are actual columns in the `products` table? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "price",
-                "c": "description",
-                "d": "stock"
-              }
-            },
             "dr_build_two_column_query": {
               "title": "Build a two-column query",
               "prompt": "Arrange the tokens to make a query that returns the `name` and `category` columns from `products`.",
@@ -97,101 +81,29 @@
                 "t5": "products;"
               }
             },
-            "dr_build_three_column_query": {
-              "title": "Order the parts of the query",
-              "prompt": "Arrange the tokens to make a query that returns `id`, `name`, and `stock` from `products`.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "id,",
-                "t3": "name,",
-                "t4": "stock",
-                "t5": "FROM",
-                "t6": "products;"
-              }
-            },
-            "fb_missing_column_name": {
-              "title": "Fill in the missing column",
-              "prompt": "Complete the query so it returns the product name and price.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT [blank1], price FROM products;",
-              "choices": [
-                "name",
-                "stock",
-                "created_at",
-                "products"
-              ]
-            },
-            "fb_missing_table_name": {
-              "title": "Fill in the missing table",
-              "prompt": "Complete the query so it reads from the correct table.",
-              "hint": "This lesson uses one table that stores product records.",
-              "help": {
-                "concept": "The FROM clause names the table that contains the columns you want to return.",
-                "hint_1": "The columns `id` and `name` come from the table used throughout this topic.",
-                "hint_2": "Think of the table that contains rows like `Sketchbook` and `Notebook`."
-              },
-              "template": "SELECT id, name FROM [blank1];",
-              "choices": [
-                "price",
-                "products",
-                "category",
-                "stock"
-              ]
-            },
-            "try-selecting_specific_columns-sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return every column from products\nSELECT\nFROM products;"
-            },
             "try-selecting_specific_columns-sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order. Return `category, created_at` from `products` in that column order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `category, created_at` from `products` in that column order."
+                "concept": "Explicit column lists keep a result focused and make its column order intentional.",
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return only category and created_at\nSELECT\nFROM products;"
+              "starterCode": "-- Return only category and created_at from products.\nSELECT\nFROM products;",
+              "solutionCode": "SELECT category, created_at\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_selecting_specific_columns_sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
                 "concept": "Explicit column lists keep a result focused and make its column order intentional.",
-                "hint_1": "Name only the two requested columns instead of using *.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_selecting_specific_columns_sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -200,7 +112,7 @@
       "sql-v2-1": {
         "selecting_specific_columns": {
           "label": "Selecting All or Specific Columns",
-          "summary": "Choose between SELECT * and an explicit column list based on the purpose of the result.",
+          "summary": "Choose between SELECT * and an explicit column list based on what the reader actually needs.",
           "cards": {
             "sketch0": {
               "title": "When SELECT * Is Useful"
@@ -260,22 +172,6 @@
                 "c": "SELECT products FROM name;"
               }
             },
-            "mc_columns_in_products_table": {
-              "title": "Real columns in the table",
-              "prompt": "Which of these are actual columns in the `products` table? Choose all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "options": {
-                "a": "name",
-                "b": "price",
-                "c": "description",
-                "d": "stock"
-              }
-            },
             "dr_build_two_column_query": {
               "title": "Build a two-column query",
               "prompt": "Arrange the tokens to make a query that returns the `name` and `category` columns from `products`.",
@@ -293,145 +189,28 @@
                 "t5": "products;"
               }
             },
-            "dr_build_three_column_query": {
-              "title": "Order the parts of the query",
-              "prompt": "Arrange the tokens to make a query that returns `id`, `name`, and `stock` from `products`.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "id,",
-                "t3": "name,",
-                "t4": "stock",
-                "t5": "FROM",
-                "t6": "products;"
-              }
-            },
-            "fb_missing_column_name": {
-              "title": "Fill in the missing column",
-              "prompt": "Complete the query so it returns the product name and price.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT [blank1], price FROM products;",
-              "choices": [
-                "name",
-                "stock",
-                "created_at",
-                "products"
-              ]
-            },
-            "fb_missing_table_name": {
-              "title": "Fill in the missing table",
-              "prompt": "Complete the query so it reads from the correct table.",
-              "hint": "This lesson uses one table that stores product records.",
-              "help": {
-                "concept": "The FROM clause names the table that contains the columns you want to return.",
-                "hint_1": "The columns `id` and `name` come from the table used throughout this topic.",
-                "hint_2": "Think of the table that contains rows like `Sketchbook` and `Notebook`."
-              },
-              "template": "SELECT id, name FROM [blank1];",
-              "choices": [
-                "price",
-                "products",
-                "category",
-                "stock"
-              ]
-            },
-            "ci_select_name_price": {
-              "title": "Query product names and prices",
-              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the name and price columns from the products table.\nSELECT\nFROM products;"
-            },
-            "ci_select_id_name_stock": {
-              "title": "Show id, name, and stock",
-              "prompt": "Write a query that returns the `id`, `name`, and `stock` columns from the `products` table. Use the SQL editor, click Run query, and confirm the results table shows those three columns in that order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the id, name, and stock columns from the products table.\nSELECT\n  id\nFROM products;"
-            },
-            "ci_select_category_created_at": {
-              "title": "Return category and created date",
-              "prompt": "Write a query that returns only the `category` and `created_at` columns from the `products` table. Write the query in the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the category and created_at columns from the products table.\nSELECT category\nFROM products;"
-            },
-            "try-selecting_specific_columns-sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "-- Return every column from products\nSELECT\nFROM products;"
-            },
-            "try-selecting_specific_columns-sketch1": {
-              "title": "Query id and name from products",
-              "prompt": "Build a product-catalog query that returns `id`, `name`, `stock` from the `products` table. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, stock from the products table.\nSELECT\n  id\nFROM products;"
-            },
             "try-selecting_specific_columns-sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
                 "concept": "Explicit column lists keep a result focused and make its column order intentional.",
-                "hint_1": "Name only the two requested columns instead of using *.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return only category and created_at\nSELECT\nFROM products;"
+              "starterCode": "-- Return only category and created_at from products.\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_selecting_specific_columns_sketch2": {
               "title": "Build a Focused Product View",
-              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
-              "hint": "Name only the two requested columns instead of using *.",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
               "help": {
                 "concept": "Explicit column lists keep a result focused and make its column order intentional.",
-                "hint_1": "Name only the two requested columns instead of using *.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
-            "try_selecting_specific_columns_sketch0": {
-              "title": "Inspect Every Product Column",
-              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
-              "hint": "Use the all-columns wildcard after SELECT.",
-              "help": {
-                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
-                "hint_1": "Use the all-columns wildcard after SELECT.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
           }
@@ -444,24 +223,24 @@
       "sql--sql-v2--draft-1": {
         "selecting_specific_columns": {
           "select_all_columns": {
-            "title": "When SELECT * Is Useful",
-            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring an unfamiliar table and want to see its full shape.\n\n```sql\nSELECT *\nFROM products;\n```\n\nThis query is quick, but the result may contain more information than the task needs. If the table later gains new columns, `SELECT *` will return those too. That can make a saved report change unexpectedly.\n\nUse `SELECT *` for exploration, quick checks, and very small tables. For a report or exercise with a clear requirement, prefer an explicit column list."
+            "title": "Explore Everything, Then Narrow the Result",
+            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring a small unfamiliar table.\n\n```sql\nSELECT *\nFROM movies;\n```\n\nA full-table view helps you learn what fields are available. But a saved report usually should not return every field just because it can.\n\nOnce you know the table, choose only the columns the reader needs. Exploration and reporting are different jobs."
           },
           "select_explicit_columns": {
-            "title": "Why Explicit Columns Make Better Reports",
-            "bodyMarkdown": "An explicit column list makes the query’s purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nThe result contains exactly three columns, in exactly that order. The order after `SELECT` is also the left-to-right order in the results table.\n\nBefore writing the query, ask what the reader actually needs. A pricing view may need `name` and `price`; an inventory view may need `name` and `stock`. Choosing columns is part of designing the report, not merely SQL syntax."
+            "title": "Use Explicit Columns for Purposeful Results",
+            "bodyMarkdown": "An explicit column list makes a query's purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    title,\n    rating\nFROM movies;\n```\n\nThe result contains exactly two columns, in exactly that order. If the table later gains another field, this report still returns only `title` and `rating`.\n\nChoosing columns is part of designing the result: a reader should see the information needed for the task without unrelated fields getting in the way."
           }
         }
       },
       "sql-v2-1": {
         "selecting_specific_columns": {
           "select_all_columns": {
-            "title": "When SELECT * Is Useful",
-            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring an unfamiliar table and want to see its full shape.\n\n```sql\nSELECT *\nFROM products;\n```\n\nThis query is quick, but the result may contain more information than the task needs. If the table later gains new columns, `SELECT *` will return those too. That can make a saved report change unexpectedly.\n\nUse `SELECT *` for exploration, quick checks, and very small tables. For a report or exercise with a clear requirement, prefer an explicit column list."
+            "title": "Explore Everything, Then Narrow the Result",
+            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring a small unfamiliar table.\n\n```sql\nSELECT *\nFROM movies;\n```\n\nA full-table view helps you learn what fields are available. But a saved report usually should not return every field just because it can.\n\nOnce you know the table, choose only the columns the reader needs. Exploration and reporting are different jobs."
           },
           "select_explicit_columns": {
-            "title": "Why Explicit Columns Make Better Reports",
-            "bodyMarkdown": "An explicit column list makes the query’s purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nThe result contains exactly three columns, in exactly that order. The order after `SELECT` is also the left-to-right order in the results table.\n\nBefore writing the query, ask what the reader actually needs. A pricing view may need `name` and `price`; an inventory view may need `name` and `stock`. Choosing columns is part of designing the report, not merely SQL syntax."
+            "title": "Use Explicit Columns for Purposeful Results",
+            "bodyMarkdown": "An explicit column list makes a query's purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    title,\n    rating\nFROM movies;\n```\n\nThe result contains exactly two columns, in exactly that order. If the table later gains another field, this report still returns only `title` and `rating`.\n\nChoosing columns is part of designing the result: a reader should see the information needed for the task without unrelated fields getting in the way."
           }
         }
       }

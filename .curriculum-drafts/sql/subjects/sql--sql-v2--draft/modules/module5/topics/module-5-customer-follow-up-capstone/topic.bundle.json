@@ -113,11 +113,11 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -141,7 +141,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -213,11 +213,11 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -241,7 +241,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -313,11 +313,11 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -341,7 +341,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -413,11 +413,11 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -425,7 +425,8 @@
         ],
         "sqlFileOrder": [
           "query.sql"
-        ]
+        ],
+        "ignoreRowOrder": false
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -440,7 +441,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true

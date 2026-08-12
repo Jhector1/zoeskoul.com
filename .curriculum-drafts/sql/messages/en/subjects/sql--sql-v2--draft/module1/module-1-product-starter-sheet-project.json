@@ -3,60 +3,48 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-1": {
         "module-1-product-starter-sheet-project": {
-          "label": "Module 1 Product Starter Sheet Project",
-          "summary": "Build a simple product starter sheet that becomes clearer with each step.",
+          "label": "Module 1 Product Handoff Project",
+          "summary": "Build one product query that grows from a merchandising review into an operations-ready handoff.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Starter product sheet"
+              "title": "Product handoff sheet"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Preview the core product fields"
+              "title": "Prepare the merchandising view"
             },
             "mp_2": {
-              "title": "Add the pricing field"
-            },
-            "mp_3": {
-              "title": "Finish the starter sheet"
+              "title": "Prepare the operations handoff"
             }
           },
           "quiz": {
             "mp-1-preview-product-sheet": {
-              "title": "Preview the core product fields",
-              "prompt": "Begin the Module 1 Product Starter Sheet Project. Return `id, name, category` from `products` in that column order.",
-              "hint": "Add one more field to the working SELECT list.",
+              "title": "Prepare the merchandising view",
+              "prompt": "The merchandising team needs a compact review sheet. Return `name`, `category`, and `price` from `products`, in that order.",
+              "hint": "Choose only the three fields the merchandising reviewer needs.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, category` from `products` in that column order."
+                "concept": "A focused SELECT list should match the reader's immediate information needs.",
+                "hint_1": "Keep `name` and `category`, then add `price` before FROM products.",
+                "hint_2": "Run the query and confirm the result columns appear as name, category, price."
               },
-              "starterCode": "-- Returning id, name, and category from the products table.\nSELECT\n  id,\n  name\nFROM products;"
+              "starterCode": "-- Build the first merchandising view.\nSELECT\n  name,\n  category\nFROM products;",
+              "solutionCode": "SELECT\n  name,\n  category,\n  price\nFROM products;"
             },
             "mp-2-add-pricing-columns": {
-              "title": "Add the pricing field",
-              "prompt": "Extend the Module 1 Product Starter Sheet Project with the next approved requirement. Return `id, name, category, price` from `products` in that column order.",
-              "hint": "Extend the same query instead of rewriting it.",
+              "title": "Prepare the operations handoff",
+              "prompt": "Warehouse operations will use the approved sheet next. Extend the same query so it returns `id`, `name`, `category`, `price`, and `stock` from `products`, in that order.",
+              "hint": "Keep the approved merchandising fields, place `id` first, and add `stock` last.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, category, price` from `products` in that column order."
+                "concept": "A cumulative project keeps the working query and extends it for the next stakeholder.",
+                "hint_1": "Start from the working merchandising query without deleting its three fields.",
+                "hint_2": "Add `id` at the beginning of the SELECT list and `stock` at the end."
               },
-              "starterCode": "-- Keep the working query above.\n-- Add price before FROM.\nSELECT\n  id,\n  name,\n  category\nFROM products;"
-            },
-            "mp-3-finish-product-starter-sheet": {
-              "title": "Finish the starter sheet",
-              "prompt": "Complete the Module 1 Product Starter Sheet Project. Return `id, name, category, price, stock` from `products` in that column order.",
-              "hint": "Insert the final field into the same SELECT list.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, category, price, stock` from `products` in that column order."
-              },
-              "starterCode": "-- Keep the working query above.\n-- Add stock after price.\nSELECT\n  id,\n  name,\n  category,\n  price\nFROM products;"
+              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;"
             }
           },
           "tryIt": {
@@ -70,71 +58,46 @@
       },
       "sql-v2-1": {
         "module-1-product-starter-sheet-project": {
-          "label": "Module 1 Product Starter Sheet Project",
-          "summary": "Build a simple product starter sheet that becomes clearer with each step.",
+          "label": "Module 1 Product Handoff Project",
+          "summary": "Build one product query that grows from a merchandising review into an operations-ready handoff.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Starter product sheet"
+              "title": "Product handoff sheet"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Preview the core product fields"
+              "title": "Prepare the merchandising view"
             },
             "mp_2": {
-              "title": "Add the pricing field"
-            },
-            "mp_3": {
-              "title": "Finish the starter sheet"
+              "title": "Prepare the operations handoff"
             }
           },
           "quiz": {
             "mp-1-preview-product-sheet": {
-              "title": "Preview the core product fields",
-              "prompt": "Start the product sheet by returning `id`, `name`, and `category` from the `products` table.",
-              "hint": "Add one more field to the working SELECT list.",
+              "title": "Prepare the merchandising view",
+              "prompt": "The merchandising team needs a compact review sheet. Return `name`, `category`, and `price` from `products`, in that order.",
+              "hint": "Choose only the three fields the merchandising reviewer needs.",
               "help": {
-                "concept": "This step shapes the product sheet into a clearer report.",
-                "hint_1": "Keep `id` and `name`, then add `category` before `FROM products`.",
-                "hint_2": "Run the query and make sure the result shows the three requested columns."
+                "concept": "A focused SELECT list should match the reader's immediate information needs.",
+                "hint_1": "Keep `name` and `category`, then add `price` before FROM products.",
+                "hint_2": "Run the query and confirm the result columns appear as name, category, price."
               },
-              "starterCode": "-- Returning id, name, and category from the products table.\nSELECT\n  id,\n  name\nFROM products;"
+              "starterCode": "-- Build the first merchandising view.\nSELECT\n  name,\n  category\nFROM products;"
             },
             "mp-2-add-pricing-columns": {
-              "title": "Add the pricing field",
-              "prompt": "Add `price` so the report shows category and price together.",
-              "hint": "Extend the same query instead of rewriting it.",
+              "title": "Prepare the operations handoff",
+              "prompt": "Warehouse operations will use the approved sheet next. Extend the same query so it returns `id`, `name`, `category`, `price`, and `stock` from `products`, in that order.",
+              "hint": "Keep the approved merchandising fields, place `id` first, and add `stock` last.",
               "help": {
-                "concept": "Add the new field while keeping the parts of the sheet that already read well.",
-                "hint_1": "Leave `id`, `name`, and `category` in place.",
-                "hint_2": "Add `price` before `FROM products`, then rerun the query."
+                "concept": "A cumulative project keeps the working query and extends it for the next stakeholder.",
+                "hint_1": "Start from the working merchandising query without deleting its three fields.",
+                "hint_2": "Add `id` at the beginning of the SELECT list and `stock` at the end."
               },
-              "starterCode": "-- Keep the working query above.\n-- Add price before FROM.\nSELECT\n  id,\n  name,\n  category\nFROM products;"
-            },
-            "mp-3-finish-product-starter-sheet": {
-              "title": "Finish the starter sheet",
-              "prompt": "Add `stock` so the final query returns `id`, `name`, `category`, `price`, and `stock`.",
-              "hint": "Insert the final field into the same SELECT list.",
-              "help": {
-                "concept": "This last step finishes the starter sheet with the final missing field.",
-                "hint_1": "Do not remove any fields you already added.",
-                "hint_2": "Add `stock` after `price`, then rerun the query."
-              },
-              "starterCode": "-- Keep the working query above.\n-- Add stock after price.\nSELECT\n  id,\n  name,\n  category,\n  price\nFROM products;"
-            },
-            "try-module-1-product-starter-sheet-project-sketch0": {
-              "title": "Preview the Product Sheet Fields",
-              "prompt": "Before building the product sheet, create its base catalog view. Return `id`, `name`, and `category` from `products`.",
-              "hint": "Select the three requested columns in the stated order from `products`.",
-              "help": {
-                "concept": "This warm-up establishes the base columns used by the product-sheet project.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, category from the products table.\nSELECT\n  id,\n  name\nFROM products;"
+              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products;"
             }
           },
           "tryIt": {
@@ -154,7 +117,7 @@
         "module-1-product-starter-sheet-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A storefront catalog export needs a compact product sheet that is easy to scan.\n\nBegin with the core product fields, then add the details needed for a useful catalog reference.\n\nThe finished query should produce a clean product overview ready for review."
+            "bodyMarkdown": "A small online store is preparing a product sheet for two teams.\n\nFirst, merchandising needs a compact view for a catalog review: the product name, category, and price. Once that view is approved, warehouse operations needs the same working query expanded with the stable product id and current stock count.\n\nYou are not writing two unrelated queries. Build one useful result, keep it working, and extend it for the handoff."
           }
         }
       },
@@ -162,7 +125,7 @@
         "module-1-product-starter-sheet-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A storefront catalog export needs a compact product sheet that is easy to scan.\n\nBegin with the core product fields, then add the details needed for a useful catalog reference.\n\nThe finished query should produce a clean product overview ready for review."
+            "bodyMarkdown": "A small online store is preparing a product sheet for two teams.\n\nFirst, merchandising needs a compact view for a catalog review: the product name, category, and price. Once that view is approved, warehouse operations needs the same working query expanded with the stable product id and current stock count.\n\nYou are not writing two unrelated queries. Build one useful result, keep it working, and extend it for the handoff."
           }
         }
       }

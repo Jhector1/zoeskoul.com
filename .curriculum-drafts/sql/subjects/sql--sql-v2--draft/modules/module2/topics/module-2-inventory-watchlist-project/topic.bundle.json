@@ -104,11 +104,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -132,7 +132,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -204,11 +204,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -232,7 +232,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -304,11 +304,11 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -332,7 +332,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true

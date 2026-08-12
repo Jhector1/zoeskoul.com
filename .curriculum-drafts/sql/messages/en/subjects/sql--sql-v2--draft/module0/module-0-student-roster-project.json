@@ -3,67 +3,48 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-0": {
         "module-0-student-roster-project": {
-          "label": "Module 0 Student Roster Project",
-          "summary": "Build a simple student roster that becomes more useful with each step.",
+          "label": "Module 0 First-Week Roster Check",
+          "summary": "Verify that the school roster workspace responds and that the imported student table can be inspected before staff rely on it.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Student roster build"
+              "title": "First-week roster verification"
             }
           },
           "projectSteps": {
             "mp_1": {
-              "title": "Preview the roster columns"
+              "title": "Confirm the SQL workspace responds"
             },
             "mp_2": {
-              "title": "Add each student's city"
-            },
-            "mp_3": {
-              "title": "Finish the full roster view"
+              "title": "Inspect the imported roster"
             }
           },
           "quiz": {
             "mp-1-preview-student-roster": {
-              "title": "Preview the roster columns",
-              "prompt": "Begin the Module 0 Student Roster Project. Return `id, name, grade` from `students` in that column order.",
-              "hint": "Add the missing field in the SELECT list.",
+              "title": "Confirm the SQL workspace responds",
+              "prompt": "The roster check is starting. Return `'Roster check started' AS status` as a one-row result. Run it and confirm the `status` column appears.",
+              "hint": "Use the one-row SELECT pattern from the environment lesson, with the new value requested here.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, grade` from `students` in that column order."
+                "concept": "Before checking imported data, verify that the SQL workspace can execute a query and return a readable result.",
+                "hint_1": "This step does not use a table.",
+                "hint_2": "Return the text `Roster check started` with the column name `status`."
               },
-              "starterCode": "-- Returning id, name, and grade from the students table.\nSELECT\n  id,\n  name\nFROM students;"
+              "starterCode": "-- Confirm that the SQL workspace is responding.\nSELECT ",
+              "solutionCode": "SELECT 'Roster check started' AS status;"
             },
             "mp-2-add-city-to-roster": {
-              "title": "Add each student's city",
-              "prompt": "Extend the Module 0 Student Roster Project with the next approved requirement. Return `id, name, grade, city` from `students` in that column order.",
-              "hint": "Extend the SELECT list instead of starting over.",
+              "title": "Inspect the imported roster",
+              "prompt": "The workspace is responding. Now inspect the imported roster by returning every available column from the `students` table.",
+              "hint": "Use the all-columns form shown as a preview earlier in the module.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, grade, city` from `students` in that column order."
+                "concept": "This step checks that the imported `students` table is visible and readable before staff rely on it.",
+                "hint_1": "You need the full table, not a hand-picked column list.",
+                "hint_2": "Use `*` to inspect every available column from `students`."
               },
-              "starterCode": "-- Keep the roster fields above.\n-- Add city before FROM students.\nSELECT\n  id,\n  name,\n  grade\nFROM students;"
-            },
-            "mp-3-finish-student-roster": {
-              "title": "Finish the full roster view",
-              "prompt": "Complete the Module 0 Student Roster Project. Return `id, name, grade, age, city` from `students` in that column order.",
-              "hint": "Insert one more field into the SELECT list.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, name, grade, age, city` from `students` in that column order."
-              },
-              "starterCode": "-- Keep the roster fields above.\n-- Add age between grade and city.\nSELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_module_0_student_roster_project_sketch0": {
-              "title": "Preview id and name from students",
-              "prompt": "Scenario: The school office is learning how to read its student roster database. Write a query that returns `id` and `name` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "starterCode": "-- Inspect every available column in the imported students table.\nSELECT \nFROM students;",
+              "solutionCode": "SELECT *\nFROM students;"
             }
           }
         }
@@ -153,8 +134,8 @@
       "sql--sql-v2--draft-0": {
         "module-0-student-roster-project": {
           "sketch_project_brief": {
-            "title": "Project brief",
-            "bodyMarkdown": "The school office is preparing a roster snapshot for the first week of classes.\n\nStart with a simple student list, then add the details that make the roster useful at a glance.\n\nThe finished result should present each student's key information in one clean view."
+            "title": "The roster import needs a quick verification.",
+            "bodyMarkdown": "It is Monday morning before the first week of classes. The school office has imported its student roster, but nobody wants to hand it to staff until someone confirms that the SQL workspace is responding and the roster table is actually readable.\n\nYou are doing that first verification.\n\nYou will not build a report yet. That comes in the next module, after you learn how to choose specific columns deliberately.\n\nFor this project you will:\n\n1. run a small status query to prove the SQL workspace responds;\n2. inspect the complete `students` table so you can confirm the imported roster is visible.\n\nThe goal is a trustworthy first check, not a long query."
           }
         }
       },

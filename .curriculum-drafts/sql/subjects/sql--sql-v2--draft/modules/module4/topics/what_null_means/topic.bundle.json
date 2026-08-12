@@ -4,7 +4,7 @@
   "moduleSlug": "sql-v2-4",
   "sectionSlug": "sql--sql-v2--draft-sql-v2-4-3",
   "prefix": "sqlv2_4",
-  "minutes": 22,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
@@ -46,19 +46,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.cards.sketch1.title",
       "sketchId": "is_null_syntax",
-      "height": 420,
-      "tryIt": {
-        "id": "try-what_null_means-sketch2",
-        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.tryIt.try_what_null_means_sketch2.title",
-        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.tryIt.try_what_null_means_sketch2.prompt",
-        "exerciseKey": "try-what_null_means-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -68,7 +56,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -145,46 +133,6 @@
       }
     },
     {
-      "id": "mc_dataset_null_columns",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.mc_dataset_null_columns",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "dr_null_query_order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.dr_null_query_order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
       "id": "dr_not_null_query_order",
       "kind": "drag_reorder",
       "purpose": "quiz",
@@ -202,30 +150,6 @@
           "t2",
           "t3"
         ]
-      }
-    },
-    {
-      "id": "fb_null_keyword",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.fb_null_keyword",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "IS"
-      }
-    },
-    {
-      "id": "fb_not_null_keyword",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.fb_not_null_keyword",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "NOT"
       }
     },
     {
@@ -253,11 +177,11 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -281,7 +205,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -304,106 +228,6 @@
           {
             "path": "query.sql",
             "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "openTabs": [
-          "query.sql"
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "query.sql"
-          ]
-        }
-      },
-      "showExpectedExample": true,
-      "sqlFileOrder": [
-        "query.sql"
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "query.sql"
-        ]
-      }
-    },
-    {
-      "id": "try-what_null_means-sketch2",
-      "kind": "code_input",
-      "purpose": "try_it",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch2",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sqlFileOrder": [
-          "query.sql"
-        ],
-        "ignoreRowOrder": true
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.try-what_null_means-sketch2.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive'\n  AND email IS NULL;",
             "language": "sql",
             "isEntry": true,
             "entry": true

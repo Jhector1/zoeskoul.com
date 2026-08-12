@@ -56,15 +56,6 @@
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
-          },
-          {
-            "id": "mp_3",
-            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.projectSteps.mp_3.title",
-            "exerciseKey": "mp-3-finish-student-roster",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
           }
         ]
       }
@@ -104,11 +95,11 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -132,7 +123,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -154,7 +145,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+            "content": "SELECT 'Roster check started' AS status;",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -204,11 +195,11 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -232,7 +223,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -254,107 +245,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "openTabs": [
-          "query.sql"
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "query.sql"
-          ]
-        }
-      },
-      "showExpectedExample": true,
-      "sqlFileOrder": [
-        "query.sql"
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "query.sql"
-        ]
-      }
-    },
-    {
-      "id": "mp-3-finish-student-roster",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "students_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sqlFileOrder": [
-          "query.sql"
-        ],
-        "ignoreRowOrder": true
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-0.module-0-student-roster-project.quiz.mp-3-finish-student-roster.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  grade,\n  age,\n  city\nFROM students;",
+            "content": "SELECT *\nFROM students;",
             "language": "sql",
             "isEntry": true,
             "entry": true

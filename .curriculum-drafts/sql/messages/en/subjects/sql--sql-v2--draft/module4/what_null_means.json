@@ -3,14 +3,14 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "what_null_means": {
-          "label": "Understanding NULL and IS NULL",
-          "summary": "Distinguish missing data from ordinary values and test it with IS NULL.",
+          "label": "Understanding NULL and Missing Values",
+          "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
           "cards": {
             "sketch0": {
-              "title": "NULL Means the Value Is Missing or Unknown"
+              "title": "NULL Means a Value Is Missing or Unknown"
             },
             "sketch1": {
-              "title": "Use IS NULL, Not = NULL"
+              "title": "Use IS NULL and IS NOT NULL"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -64,37 +64,6 @@
                 "d": "`email = NULL` is the standard way to find missing emails"
               }
             },
-            "mc_dataset_null_columns": {
-              "title": "Columns with missing values",
-              "prompt": "Based on the `customers` dataset, which columns contain at least one `NULL` value?",
-              "hint": "Check the sample rows for missing entries.",
-              "help": {
-                "concept": "A column contains NULL when at least one row has a missing value in that column.",
-                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
-                "hint_2": "Pick the columns where the sample data shows blank missing entries, not columns filled in for every row."
-              },
-              "options": {
-                "a": "email",
-                "b": "city",
-                "c": "status",
-                "d": "signup_date"
-              }
-            },
-            "dr_null_query_order": {
-              "title": "Build a NULL filter query",
-              "prompt": "Arrange these SQL parts to make a query that shows `id` and `full_name` for customers with missing email values.",
-              "hint": "Start with SELECT, then FROM, then the NULL condition.",
-              "help": {
-                "concept": "A basic SQL query follows the order SELECT, FROM, then WHERE with the correct NULL test.",
-                "hint_1": "The column list comes first, the table name comes next, and the filter comes last.",
-                "hint_2": "Use the token with `email IS NULL` at the end because it is the WHERE condition."
-              },
-              "tokens": {
-                "t1": "SELECT id, full_name",
-                "t2": "FROM customers",
-                "t3": "WHERE email IS NULL"
-              }
-            },
             "dr_not_null_query_order": {
               "title": "Order a query with IS NOT NULL",
               "prompt": "Arrange these parts to make a query that shows customer names and cities where the city value exists.",
@@ -110,83 +79,29 @@
                 "t3": "WHERE city IS NOT NULL"
               }
             },
-            "fb_null_keyword": {
-              "title": "Complete the NULL check",
-              "prompt": "Fill in the missing SQL keyword to find rows where `email` is missing.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "template": "WHERE email [blank1] NULL",
-              "choices": [
-                "IS",
-                "=",
-                "LIKE",
-                "IN"
-              ]
-            },
-            "fb_not_null_keyword": {
-              "title": "Complete the present-value check",
-              "prompt": "Fill in the missing word so the condition keeps rows where `city` has a value.",
-              "hint": "This phrase is the opposite of `IS NULL`.",
-              "help": {
-                "concept": "IS the blank NULL checks that a column contains a value instead of a missing entry.",
-                "hint_1": "Only one word is missing between `IS` and `NULL`.",
-                "hint_2": "Choose the word that turns the condition into the opposite of a missing-value test."
-              },
-              "template": "WHERE city IS [blank1] NULL",
-              "choices": [
-                "NOT",
-                "AND",
-                "OR",
-                "LIKE"
-              ]
-            },
             "try-what_null_means-sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Return `full_name, status` from `customers` in that column order. Keep only rows where `email IS NULL`.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `full_name, status` from `customers` in that column order. Keep only rows where `email IS NULL`."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT full_name, status\nFROM customers\n-- Keep rows with no email"
-            },
-            "try-what_null_means-sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status = 'inactive' AND email IS NULL`.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status = 'inactive' AND email IS NULL`."
-              },
-              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Require inactive status and a missing email"
+              "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;",
+              "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_what_null_means_sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Show `id`, `full_name`, and `status` from `customers` where `status` is `inactive` and `email` is NULL.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "IS NULL can be combined with ordinary comparisons to express a complete cleanup rule.",
-                "hint_1": "Combine status = 'inactive' with email IS NULL using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_what_null_means_sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Show `full_name` and `status` from `customers` where `email` is missing.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "NULL represents a missing or unknown value and requires a NULL-specific test.",
-                "hint_1": "Test the email column with IS NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
@@ -194,14 +109,14 @@
       },
       "sql-v2-4": {
         "what_null_means": {
-          "label": "Understanding NULL and IS NULL",
-          "summary": "Distinguish missing data from ordinary values and test it with IS NULL.",
+          "label": "Understanding NULL and Missing Values",
+          "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
           "cards": {
             "sketch0": {
-              "title": "NULL Means the Value Is Missing or Unknown"
+              "title": "NULL Means a Value Is Missing or Unknown"
             },
             "sketch1": {
-              "title": "Use IS NULL, Not = NULL"
+              "title": "Use IS NULL and IS NOT NULL"
             },
             "quiz": {
               "title": "Check Your Understanding"
@@ -255,37 +170,6 @@
                 "d": "`email = NULL` is the standard way to find missing emails"
               }
             },
-            "mc_dataset_null_columns": {
-              "title": "Columns with missing values",
-              "prompt": "Based on the `customers` dataset, which columns contain at least one `NULL` value?",
-              "hint": "Check the sample rows for missing entries.",
-              "help": {
-                "concept": "A column contains NULL when at least one row has a missing value in that column.",
-                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
-                "hint_2": "Pick the columns where the sample data shows blank missing entries, not columns filled in for every row."
-              },
-              "options": {
-                "a": "email",
-                "b": "city",
-                "c": "status",
-                "d": "signup_date"
-              }
-            },
-            "dr_null_query_order": {
-              "title": "Build a NULL filter query",
-              "prompt": "Arrange these SQL parts to make a query that shows `id` and `full_name` for customers with missing email values.",
-              "hint": "Start with SELECT, then FROM, then the NULL condition.",
-              "help": {
-                "concept": "A basic SQL query follows the order SELECT, FROM, then WHERE with the correct NULL test.",
-                "hint_1": "The column list comes first, the table name comes next, and the filter comes last.",
-                "hint_2": "Use the token with `email IS NULL` at the end because it is the WHERE condition."
-              },
-              "tokens": {
-                "t1": "SELECT id, full_name",
-                "t2": "FROM customers",
-                "t3": "WHERE email IS NULL"
-              }
-            },
             "dr_not_null_query_order": {
               "title": "Order a query with IS NOT NULL",
               "prompt": "Arrange these parts to make a query that shows customer names and cities where the city value exists.",
@@ -301,127 +185,28 @@
                 "t3": "WHERE city IS NOT NULL"
               }
             },
-            "fb_null_keyword": {
-              "title": "Complete the NULL check",
-              "prompt": "Fill in the missing SQL keyword to find rows where `email` is missing.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
-              "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
-              },
-              "template": "WHERE email [blank1] NULL",
-              "choices": [
-                "IS",
-                "=",
-                "LIKE",
-                "IN"
-              ]
-            },
-            "fb_not_null_keyword": {
-              "title": "Complete the present-value check",
-              "prompt": "Fill in the missing word so the condition keeps rows where `city` has a value.",
-              "hint": "This phrase is the opposite of `IS NULL`.",
-              "help": {
-                "concept": "IS the blank NULL checks that a column contains a value instead of a missing entry.",
-                "hint_1": "Only one word is missing between `IS` and `NULL`.",
-                "hint_2": "Choose the word that turns the condition into the opposite of a missing-value test."
-              },
-              "template": "WHERE city IS [blank1] NULL",
-              "choices": [
-                "NOT",
-                "AND",
-                "OR",
-                "LIKE"
-              ]
-            },
-            "code_missing_emails": {
-              "title": "Find customers with missing emails",
-              "prompt": "Write a query that shows `id`, `full_name`, and `email` for customers whose `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show id, full_name, and email for customers whose email is missing.\nSELECT id, full_name, email\nFROM customers\nWHERE ;"
-            },
-            "code_present_cities_real_customers": {
-              "title": "Show real customers with a city",
-              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose `city` is present and whose `is_test` value is `0`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name, city, and status for customers whose city is present and whose is_test value is 0.\nSELECT full_name, city, status\nFROM customers\nWHERE ;"
-            },
-            "code_inactive_missing_email": {
-              "title": "Find inactive customers missing email",
-              "prompt": "Write a query that shows `id`, `full_name`, and `status` for customers who are `inactive` and have no email value. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show id, full_name, and status for customers who are inactive and have no email value.\nSELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive' AND ;"
-            },
             "try-what_null_means-sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Show `full_name` and `status` from `customers` where `email` is missing.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "NULL represents a missing or unknown value and requires a NULL-specific test.",
-                "hint_1": "Test the email column with IS NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "SELECT full_name, status\nFROM customers\n-- Keep rows with no email"
-            },
-            "try-what_null_means-sketch1": {
-              "title": "Show real customers with a city",
-              "prompt": "Create a customer-cleanup query that shows `full_name`, `city`, and `status` for customers whose `city` is present and whose `is_test` value is `0`. Run it and compare the result with the expected table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show full_name, city, and status for customers whose city is present and whose is_test value is 0.\nSELECT full_name, city, status\nFROM customers\nWHERE ;"
-            },
-            "try-what_null_means-sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Show `id`, `full_name`, and `status` from `customers` where `status` is `inactive` and `email` is NULL.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "IS NULL can be combined with ordinary comparisons to express a complete cleanup rule.",
-                "hint_1": "Combine status = 'inactive' with email IS NULL using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              },
-              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Require inactive status and a missing email"
+              "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_what_null_means_sketch2": {
-              "title": "Find Inactive Customers Missing an Email",
-              "prompt": "Prioritize inactive customers who also have no email address. Show `id`, `full_name`, and `status` from `customers` where `status` is `inactive` and `email` is NULL.",
-              "hint": "Combine status = 'inactive' with email IS NULL using AND.",
-              "help": {
-                "concept": "IS NULL can be combined with ordinary comparisons to express a complete cleanup rule.",
-                "hint_1": "Combine status = 'inactive' with email IS NULL using AND.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
-              }
-            },
             "try_what_null_means_sketch0": {
               "title": "Find Customers Missing an Email",
-              "prompt": "Find customer records that cannot be emailed. Show `full_name` and `status` from `customers` where `email` is missing.",
-              "hint": "Test the email column with IS NULL.",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Keep only rows where the email value is missing.",
+              "hint": "Use the dedicated missing-value check on the email column.",
               "help": {
-                "concept": "NULL represents a missing or unknown value and requires a NULL-specific test.",
-                "hint_1": "Test the email column with IS NULL.",
-                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+                "concept": "SQL uses IS NULL, not ordinary equality, to test for a missing value.",
+                "hint_1": "Use the dedicated missing-value check on the email column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
           }
@@ -434,24 +219,24 @@
       "sql--sql-v2--draft-4": {
         "what_null_means": {
           "null_missing_value": {
-            "title": "NULL Means the Value Is Missing or Unknown",
-            "bodyMarkdown": "`NULL` represents a missing or unknown value. It is not an empty string, zero, or the word “NULL.”\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nThis query finds rows where no email value is stored. A row with an empty text value would be a different data condition."
+            "title": "NULL Means a Value Is Missing or Unknown",
+            "bodyMarkdown": "`NULL` is a marker for missing or unknown data. It is not the empty string, the number zero, or the word `\"NULL\"`.\n\n```sql\nSELECT\n    employee_name,\n    manager_email\nFROM employees\nWHERE manager_email IS NULL;\n```\n\nThis query finds employees with no stored manager email.\n\nWhen reading a table, separate “a value exists and happens to be empty-looking” from “no value is known.” SQL represents the second case with `NULL`."
           },
           "is_null_syntax": {
-            "title": "Use IS NULL, Not = NULL",
-            "bodyMarkdown": "Use `IS NULL` and `IS NOT NULL` for missing-value checks.\n\nThis complete query uses an ordinary equality comparison incorrectly and returns no matches:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email = NULL;\n```\n\nUse the dedicated missing-value test instead:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nAn ordinary equality comparison asks whether two known values are equal. `NULL` means the value is unknown, so SQL provides the special `IS NULL` test."
+            "title": "Use IS NULL and IS NOT NULL",
+            "bodyMarkdown": "Normal equality does not test for missing values. Use the dedicated NULL syntax.\n\n```sql\nSELECT\n    applicant_name,\n    portfolio_url\nFROM applications\nWHERE portfolio_url IS NOT NULL;\n```\n\n`IS NULL` keeps missing values. `IS NOT NULL` keeps rows where a value is present.\n\nAvoid `= NULL` and `<> NULL`; they do not behave like ordinary value comparisons."
           }
         }
       },
       "sql-v2-4": {
         "what_null_means": {
           "null_missing_value": {
-            "title": "NULL Means the Value Is Missing or Unknown",
-            "bodyMarkdown": "`NULL` represents a missing or unknown value. It is not an empty string, zero, or the word “NULL.”\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nThis query finds rows where no email value is stored. A row with an empty text value would be a different data condition."
+            "title": "NULL Means a Value Is Missing or Unknown",
+            "bodyMarkdown": "`NULL` is a marker for missing or unknown data. It is not the empty string, the number zero, or the word `\"NULL\"`.\n\n```sql\nSELECT\n    employee_name,\n    manager_email\nFROM employees\nWHERE manager_email IS NULL;\n```\n\nThis query finds employees with no stored manager email.\n\nWhen reading a table, separate “a value exists and happens to be empty-looking” from “no value is known.” SQL represents the second case with `NULL`."
           },
           "is_null_syntax": {
-            "title": "Use IS NULL, Not = NULL",
-            "bodyMarkdown": "Use `IS NULL` and `IS NOT NULL` for missing-value checks.\n\nThis complete query uses an ordinary equality comparison incorrectly and returns no matches:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email = NULL;\n```\n\nUse the dedicated missing-value test instead:\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NULL;\n```\n\nAn ordinary equality comparison asks whether two known values are equal. `NULL` means the value is unknown, so SQL provides the special `IS NULL` test."
+            "title": "Use IS NULL and IS NOT NULL",
+            "bodyMarkdown": "Normal equality does not test for missing values. Use the dedicated NULL syntax.\n\n```sql\nSELECT\n    applicant_name,\n    portfolio_url\nFROM applications\nWHERE portfolio_url IS NOT NULL;\n```\n\n`IS NULL` keeps missing values. `IS NOT NULL` keeps rows where a value is present.\n\nAvoid `= NULL` and `<> NULL`; they do not behave like ordinary value comparisons."
           }
         }
       }
