@@ -42,14 +42,18 @@ echo "Checking Judge0 public endpoint with token..."
 curl -fsS -H "${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}" "${JUDGE0_PUBLIC_URL}/about" >/dev/null
 
 echo "Checking raw runner port is not published by Docker compose..."
-if docker compose port runner 4001 >/dev/null 2>&1; then
-  echo "ERROR: runner service has a published host port. It should only be exposed behind Caddy." >&2
+runner_published_port="$(docker compose port runner 4001 2>/dev/null || true)"
+if [ -n "$runner_published_port" ]; then
+  echo "ERROR: runner service has a published host port: ${runner_published_port}" >&2
+  echo "It should only be exposed behind Caddy." >&2
   exit 1
 fi
 
 echo "Checking raw Judge0 port is not published by Docker compose..."
-if docker compose port judge0 2358 >/dev/null 2>&1; then
-  echo "ERROR: judge0 service has a published host port. It should only be exposed behind Caddy." >&2
+judge0_published_port="$(docker compose port judge0 2358 2>/dev/null || true)"
+if [ -n "$judge0_published_port" ]; then
+  echo "ERROR: judge0 service has a published host port: ${judge0_published_port}" >&2
+  echo "It should only be exposed behind Caddy." >&2
   exit 1
 fi
 
