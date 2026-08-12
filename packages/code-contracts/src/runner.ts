@@ -279,3 +279,109 @@ export type RunSessionSummary =
 export type SessionStatusResult =
     | { ok: true; session: RunSessionSummary }
     | { ok: false; error: string };
+
+/**
+ * Canonical one-shot execution contract.
+ *
+ * Interactive terminal sessions continue to use InteractiveRunReq. Every
+ * non-interactive learner execution path (Run, Check, Draft QA, goldens,
+ * semantic runtime checks) should converge on this batch contract.
+ */
+export const batchCodeRunReqSchema = z
+    .object({
+        kind: z.literal("code"),
+        language: z.enum(RUNNER_CODE_LANGUAGES),
+        code: z.string().optional(),
+        entry: z.string().min(1).optional(),
+        files: z.union([
+            z.array(workspaceSyncEntrySchema),
+            z.record(z.string(), z.string()),
+        ]).optional(),
+        stdin: z.string().optional(),
+        captureWorkspace: z.boolean().optional(),
+        wallTimeoutMs: z.number().int().positive().max(60_000).optional(),
+    })
+    .superRefine((value, ctx) => {
+        const hasCode = typeof value.code === "string";
+        const hasFiles = value.files != null;
+        if (!hasCode && !hasFiles) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Code batch runs require code or files.",
+            });
+        }
+        if (hasFiles && !value.entry) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: ["entry"],
+                message: "Project batch runs require an entry file.",
+            });
+        }
+    });
+
+export const batchSqlRunReqSchema = z.object({
+    kind: z.literal("sql"),
+    language: z.literal("sql"),
+    dialect: z.string().min(1).default("sqlite"),
+    code: z.string(),
+    resultShape: z.literal("table").optional(),
+    checkSql: z.string().optional(),
+    schemaSql: z.string().optional(),
+    seedSql: z.string().optional(),
+    datasetId: z.string().optional(),
+    limits: z.object({
+        statementTimeoutMs: z.number().int().positive().max(60_000).optional(),
+        maxRows: z.number().int().positive().max(10_000).optional(),
+        maxBytes: z.number().int().positive().max(2_000_000).optional(),
+    }).optional(),
+});
+
+export const batchRunReqSchema = z.union([
+    batchCodeRunReqSchema,
+    batchSqlRunReqSchema,
+]);
+
+export type BatchCodeRunReq = z.infer<typeof batchCodeRunReqSchema>;
+export type BatchSqlRunReq = z.infer<typeof batchSqlRunReqSchema>;
+export type BatchRunReq = z.infer<typeof batchRunReqSchema>;
+
+export type BatchCodeRunResult = {
+    kind: "code";
+    ok: boolean;
+    status: "Accepted" | "Error" | "Timeout" | "Canceled";
+    stdout?: string | null;
+    stderr?: string | null;
+    compile_output?: string | null;
+    message?: string | null;
+    exitCode?: number | null;
+    error?: string;
+    timedOut?: boolean;
+    workspaceFiles?: WorkspaceSyncEntry[];
+};
+
+export type BatchSqlColumn = {
+    name: string;
+    type?: string | null;
+};
+
+export type BatchSqlScalar = string | number | boolean | null;
+
+export type BatchSqlRunResult = {
+    kind: "sql";
+    ok: boolean;
+    status: "Accepted" | "Error" | "Timeout" | "Canceled";
+    dialect: string;
+    columns?: BatchSqlColumn[];
+    rows?: BatchSqlScalar[][];
+    rowCount?: number;
+    affectedRows?: number;
+    notices?: string[];
+    stdout?: string | null;
+    stderr?: string | null;
+    message?: string | null;
+    error?: string;
+    time?: string | null;
+    tableSnapshots?: Record<string, unknown>;
+};
+
+export type BatchRunResult = BatchCodeRunResult | BatchSqlRunResult;

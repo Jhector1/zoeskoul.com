@@ -417,6 +417,9 @@ importers:
       '@zoeskoul/pty-auth':
         specifier: workspace:*
         version: link:../../packages/pty-auth
+      '@zoeskoul/runner-client':
+        specifier: workspace:*
+        version: link:../../packages/runner-client
       '@zoeskoul/workspace-contracts':
         specifier: workspace:*
         version: link:../../packages/workspace-contracts
@@ -1015,6 +1018,16 @@ importers:
       typescript:
         specifier: ^5.0.0
         version: 5.9.3
+
+  packages/runner-client:
+    dependencies:
+      '@zoeskoul/code-contracts':
+        specifier: workspace:*
+        version: link:../code-contracts
+    devDependencies:
+      '@types/node':
+        specifier: ^20.19.37
+        version: 20.19.39
 
   packages/workspace-contracts:
     dependencies:

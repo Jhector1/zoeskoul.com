@@ -52,8 +52,10 @@ RUN mkdir -p /opt/runner /workspace /tmp \
 WORKDIR /workspace
 
 COPY --chown=1000:1000 apps/runner/pty-runner.py /opt/runner/pty-runner.py
+COPY --chown=1000:1000 apps/runner/batch-runner.py /opt/runner/batch-runner.py
 
 RUN chmod 0555 /opt/runner/pty-runner.py \
+ && chmod 0555 /opt/runner/batch-runner.py \
  && Rscript --version \
  && test "$(Rscript --vanilla -e 'cat(mean(c(2, 4, 6)))')" = "4"
 
